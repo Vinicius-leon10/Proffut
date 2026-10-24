@@ -24,8 +24,14 @@ O save fica guardado **no próprio celular** e é feito sozinho a cada ação. P
 - Classificação com zonas, jogos rodada a rodada e artilharia.
 - Mercado: comprar, vender (as propostas chegam nas mensagens), contratar livres, dispensar.
 - Finanças: bilheteria (você define o ingresso), TV, patrocínio, salários e extrato.
+- Estádio: ampliar a capacidade ou modernizar (mais conforto, mais público), com custo, tempo de obra e renda extra estimada.
 - Objetivo da diretoria e confiança da diretoria e da torcida.
 - Virada de temporada: acesso e rebaixamento, premiação, evolução e aposentadoria dos jogadores, jovens da base. A carreira não tem fim.
+
+## Checagem automática
+
+- **No aparelho (funciona sem internet):** toda vez que um jogo é aberto, o save é verificado e o que for seguro corrigir é corrigido sozinho. Em **Configurações → Checagem do jogo** dá para ver tudo: jogo guardado para abrir sem internet, salvamento, proteção do save, espaço, integridade do save e uma partida de teste.
+- **No GitHub:** um robô (`npm run checagem`) abre o jogo num navegador com tela de iPhone, joga uma partida, roda a checagem do app, exporta o save, **joga sem internet**, recarrega sem internet e importa o save. Ele roda a cada alteração, antes de publicar (se falhar, o site não é atualizado) e **todo dia** no site publicado (`.github/workflows/checagem-diaria.yml`). Se falhar, o GitHub avisa por e-mail. O relatório e as capturas ficam em Actions → execução → Artifacts.
 
 ## Publicação
 
@@ -40,7 +46,7 @@ npm run dev        # site local em http://localhost:5173
 npm test           # testes do motor
 npm run sim        # simula temporadas e mostra as estatísticas de calibragem
 npm run build      # gera o site em dist/
-npx vite preview --port 4173 & npm run e2e   # joga no navegador com tela de iPhone e tira capturas
+npm run checagem   # robô no navegador com tela de iPhone, inclusive sem internet (relatório em tools/checagem/resultado/)
 ```
 
 | Pasta | Conteúdo |

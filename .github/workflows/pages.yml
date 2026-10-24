@@ -1,6 +1,7 @@
 name: Publicar site
 
-# A cada alteração na main: testa, gera o site e publica na branch gh-pages,
+# A cada alteração na main: testa, gera o site, joga no navegador (inclusive sem
+# internet) e só então publica na branch gh-pages,
 # que o GitHub Pages serve em https://<usuário>.github.io/Proffut/.
 on:
   push:
@@ -26,6 +27,9 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Checagem no navegador antes de publicar
+        run: npm run checagem
       - name: Publicar na branch gh-pages
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}

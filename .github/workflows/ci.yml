@@ -17,3 +17,11 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Checagem no navegador (inclusive sem internet)
+        run: npm run checagem
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: checagem
+          path: tools/checagem/resultado/

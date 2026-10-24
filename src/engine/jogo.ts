@@ -16,6 +16,7 @@ import {
   disputarPenaltis, eventosParaGuardar, iniciarPartida, montarLado, simularAteOFim, type PartidaViva,
 } from "./partida";
 import { criarRng, rngPara } from "./rng";
+import { concluirObras } from "./estadio";
 import { encerrarTemporada } from "./temporada";
 import type { Clube, Estilo, EstadoJogo, Formacao, Partida, SerieClube, Tatica } from "./tipos";
 
@@ -157,6 +158,7 @@ function processarDias(estado: EstadoJogo, ate: string) {
       }
     }
     if (mudouMes) processarMes(estado, dia);
+    concluirObras(estado, dia);
     gerarPropostas(estado, dia);
     if (dia.endsWith("-07-01") || dia.endsWith("-07-15")) {
       const noticias = transferenciasDaIa(estado, dia);

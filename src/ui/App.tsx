@@ -1,6 +1,7 @@
 import { Aviso } from "./componentes";
 import { useLoja } from "./store";
 import { AoVivo } from "./telas/AoVivo";
+import { Checagem } from "./telas/Checagem";
 import { Config } from "./telas/Config";
 import { FimTemporada } from "./telas/FimTemporada";
 import { Financas } from "./telas/Financas";
@@ -21,6 +22,7 @@ function Sobreposta() {
     case "financas": return <Financas />;
     case "historico": return <Historico />;
     case "config": return <Config />;
+    case "checagem": return <Checagem />;
     case "mensagens": return <Mensagens />;
   }
 }

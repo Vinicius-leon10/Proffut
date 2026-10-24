@@ -189,3 +189,62 @@ describe("escalação depois da virada", () => {
     }
   });
 });
+
+describe("checagem do save", () => {
+  it("um jogo novo passa sem problemas e a partida de teste roda sem mexer no save", async () => {
+    const { checarEstado, testarPartida } = await import("./checagem");
+    const estado = novoJogo({ nomeTecnico: "T", clubeId: "bahia", semente: 21 });
+    expect(checarEstado(estado)).toEqual([]);
+    const antes = JSON.stringify(estado);
+    expect(testarPartida(estado).ok).toBe(true);
+    expect(JSON.stringify(estado)).toBe(antes);
+  });
+
+  it("encontra e corrige problemas", async () => {
+    const { checarEstado, repararEstado } = await import("./checagem");
+    const estado = novoJogo({ nomeTecnico: "T", clubeId: "bahia", semente: 22 });
+    const [a, b] = elencoDe(estado, "bahia");
+    a.clubeId = "clube-que-nao-existe";
+    b.energia = Number.NaN;
+    estado.clubes.bahia.escalacao.titulares[0] = 999_999;
+    estado.proximoIdJogador = 1;
+    const problemas = checarEstado(estado);
+    expect(problemas.length).toBeGreaterThanOrEqual(4);
+    expect(problemas.every((p) => p.reparavel)).toBe(true);
+    expect(repararEstado(estado).length).toBeGreaterThan(0);
+    expect(checarEstado(estado)).toEqual([]);
+  });
+});
+
+describe("estádio", () => {
+  it("ampliação e modernização: custo, obra e entrega", async () => {
+    const { ampliarEstadio, modernizarEstadio, concluirObras, custoAmpliacao, impactoModernizacao } = await import("./estadio");
+    const { somarDias } = await import("./calendario");
+    const estado = novoJogo({ nomeTecnico: "T", clubeId: "vasco", semente: 31 });
+    const clube = estado.clubes.vasco;
+    clube.caixa = 100_000_000;
+    const capacidade = clube.estadio.capacidade;
+    expect(ampliarEstadio(estado, 100_000).ok).toBe(false); // passa do limite
+    const r = ampliarEstadio(estado, 2_000);
+    expect(r.ok).toBe(true);
+    expect(clube.caixa).toBe(100_000_000 - custoAmpliacao(clube, 2_000));
+    expect(modernizarEstadio(estado).ok).toBe(false); // já tem obra
+    concluirObras(estado, somarDias(estado.data, 7));
+    expect(clube.estadio.capacidade).toBe(capacidade); // ainda em obra
+    concluirObras(estado, clube.estadio.obra!.terminaEm);
+    expect(clube.estadio.capacidade).toBe(capacidade + 2_000);
+    expect(clube.estadio.obra).toBeUndefined();
+    expect(impactoModernizacao(clube).publicoDepois).toBeGreaterThanOrEqual(impactoModernizacao(clube).publicoAntes);
+    expect(modernizarEstadio(estado).ok).toBe(true);
+    concluirObras(estado, clube.estadio.obra!.terminaEm);
+    expect(clube.estadio.conforto).toBe(1);
+  });
+
+  it("sem dinheiro não começa a obra", async () => {
+    const { ampliarEstadio } = await import("./estadio");
+    const estado = novoJogo({ nomeTecnico: "T", clubeId: "brusque", semente: 32 });
+    estado.clubes.brusque.caixa = 1_000;
+    expect(ampliarEstadio(estado, 2_000).ok).toBe(false);
+    expect(estado.clubes.brusque.estadio.obra).toBeUndefined();
+  });
+});

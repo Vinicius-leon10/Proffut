@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "sim": "tsx tools/sim/simular.ts",
     "icones": "node tools/icones/gerar.mjs",
-    "e2e": "node tools/e2e/jogar.mjs"
+    "e2e": "node tools/e2e/jogar.mjs",
+    "checagem": "node tools/checagem/checar.mjs"
   },
   "dependencies": {
     "idb-keyval": "^6.3.0",
@@ -25,6 +26,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
+    "playwright": "^1.63.0",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3",
     "vite": "^8.3.5",

@@ -5,7 +5,7 @@ import { useJogo, useLoja } from "../store";
 
 export function Config() {
   const estado = useJogo();
-  const { fechar, atualizar, avisar, sair, iniciar } = useLoja();
+  const { fechar, atualizar, avisar, sair, iniciar, abrir } = useLoja();
   const [persistente, setPersistente] = useState<boolean | null>(null);
   const arquivo = useRef<HTMLInputElement>(null);
 
@@ -76,6 +76,13 @@ export function Config() {
             <button className="botao cheio" onClick={() => arquivo.current?.click()}>Importar save</button>
             <input ref={arquivo} type="file" className="oculto" onChange={(e) => importar(e.target.files?.[0])} />
           </div>
+        </Cartao>
+
+        <Cartao titulo="Checagem do jogo">
+          <p className="pequeno fraco" style={{ marginBottom: 8 }}>
+            Confere se o jogo está guardado para abrir sem internet, se o salvamento funciona e se o save está íntegro. Funciona sem internet.
+          </p>
+          <button className="botao cheio" onClick={() => abrir({ tipo: "checagem" })}>Verificar o jogo</button>
         </Cartao>
 
         <Cartao titulo="Armazenamento">

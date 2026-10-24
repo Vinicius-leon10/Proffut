@@ -59,6 +59,19 @@ function migrar(estado: EstadoJogo): EstadoJogo {
   return estado;
 }
 
+/** Grava e lê um valor de teste no banco do aparelho. */
+export async function testarSalvamento(): Promise<boolean> {
+  const valor = `teste-${Date.now()}`;
+  try {
+    await set("checagem", valor, banco);
+    const lido = await get<string>("checagem", banco);
+    await del("checagem", banco);
+    return lido === valor;
+  } catch {
+    return false;
+  }
+}
+
 /** Pede ao navegador para não apagar os dados do jogo. */
 export async function pedirArmazenamentoPersistente(): Promise<boolean> {
   try {

@@ -31,7 +31,8 @@ export function serieDoClube(clube: Clube): SerieId {
 /** Público esperado (sem sorteio), usado também na tela de finanças. */
 export function publicoEsperado(clube: Clube, preco = clube.precoIngresso, classico = false): number {
   const serie = serieDoClube(clube);
-  const demanda = clube.torcida * PUBLICO_POR_TORCIDA * (0.75 + 0.5 * (clube.moral / 100)) * Math.pow(PRECO_REFERENCIA[serie] / Math.max(5, preco), 1.2) * (classico ? 1.3 : 1);
+  const conforto = 1 + 0.1 * (clube.estadio.conforto ?? 0);
+  const demanda = clube.torcida * PUBLICO_POR_TORCIDA * conforto * (0.75 + 0.5 * (clube.moral / 100)) * Math.pow(PRECO_REFERENCIA[serie] / Math.max(5, preco), 1.2) * (classico ? 1.3 : 1);
   return Math.round(Math.min(clube.estadio.capacidade, Math.max(300, demanda)));
 }
 

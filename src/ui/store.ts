@@ -3,6 +3,7 @@
 import { create } from "zustand";
 import type { PartidaViva } from "../engine/partida";
 import type { EstadoJogo, Partida } from "../engine/tipos";
+import { checarEstado, repararEstado } from "../engine/checagem";
 import { salvar } from "../save/salvamento";
 
 export type Tela = "inicio" | "novo" | "jogo";
@@ -14,6 +15,7 @@ export type Sobreposta =
   | { tipo: "financas" }
   | { tipo: "historico" }
   | { tipo: "config" }
+  | { tipo: "checagem" }
   | { tipo: "mensagens" };
 
 interface Loja {
@@ -46,8 +48,17 @@ export const useLoja = create<Loja>((set, getLoja) => ({
   aviso: null,
   salvando: false,
   iniciar: (estado) => {
+    // Checagem automática a cada jogo aberto: corrige sozinha o que é seguro corrigir.
+    const problemas = checarEstado(estado);
+    const corrigido = problemas.some((p) => p.reparavel) ? repararEstado(estado) : [];
     set({ estado, tela: "jogo", aba: "clube", sobreposta: null, versao: getLoja().versao + 1 });
     void salvar("auto", estado);
+    const restantes = corrigido.length ? checarEstado(estado) : problemas;
+    if (restantes.some((p) => p.gravidade === "erro")) {
+      getLoja().avisar("A checagem encontrou problemas no save. Veja em Configurações → Checagem do jogo.");
+    } else if (corrigido.length) {
+      getLoja().avisar(`Checagem automática: o save foi corrigido (${corrigido.length} ajuste(s)).`);
+    }
   },
   sair: () => set({ estado: null, tela: "inicio", sobreposta: null }),
   irParaTela: (tela) => set({ tela }),

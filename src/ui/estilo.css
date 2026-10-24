@@ -27,7 +27,10 @@
 
 * { box-sizing: border-box; }
 
-html, body, #root { height: 100%; margin: 0; }
+/* A página nunca rola inteira: cada tela tem a sua área com rolagem. Assim o topo fica
+   fixo e nada fica escondido atrás das barras do Safari no iPhone. */
+html, body { height: 100%; margin: 0; overflow: hidden; }
+#root { height: 100%; height: 100dvh; }
 
 body {
   background: var(--fundo);
@@ -76,6 +79,7 @@ p { margin: 0; }
 
 .app {
   height: 100%;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   max-width: 560px;
@@ -84,7 +88,8 @@ p { margin: 0; }
 }
 
 .topo {
-  padding: calc(var(--topo) + 10px) 16px 10px;
+  padding: calc(max(var(--topo), 8px) + 8px) 16px 10px;
+  min-height: calc(var(--topo) + 60px);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -104,6 +109,8 @@ p { margin: 0; }
   flex-direction: column;
   gap: 14px;
 }
+/* Nas telas sobrepostas, espaço extra no fim para o último botão não ficar sob a barra do iPhone. */
+.tela-cheia .conteudo { padding-bottom: calc(var(--base) + 32px); }
 /* Dentro da área com rolagem nada encolhe (senão o campinho, que tem overflow, vira uma linha). */
 .conteudo > *, .folha > * { flex-shrink: 0; }
 
@@ -264,7 +271,8 @@ p { margin: 0; }
 /* ---- folha (bottom sheet) e avisos ----------------------------------------------------- */
 
 .veu {
-  position: fixed; inset: 0;
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 100%; height: 100dvh;
   background: rgb(0 0 0 / 55%);
   z-index: 40;
   display: flex;
@@ -276,6 +284,7 @@ p { margin: 0; }
   width: 100%;
   max-width: 560px;
   max-height: 88vh;
+  max-height: 88dvh;
   background: var(--fundo-2);
   border: 1px solid var(--borda);
   border-bottom: 0;
@@ -291,7 +300,8 @@ p { margin: 0; }
 .folha .cabeca-folha { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 
 .tela-cheia {
-  position: fixed; inset: 0;
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 100%; height: 100dvh;
   z-index: 30;
   background: var(--fundo);
   display: flex;
@@ -301,12 +311,13 @@ p { margin: 0; }
   animation: aparecer 0.15s ease-out;
 }
 
+/* Avisos aparecem no topo para não cobrir botões nem as folhas que sobem de baixo. */
 .aviso {
   position: fixed;
   left: 0;
   right: 0;
   margin: 0 auto;
-  bottom: calc(var(--base) + 76px);
+  top: calc(max(var(--topo), 8px) + 8px);
   z-index: 60;
   background: #f1f5f2;
   color: #0b1410;
@@ -317,9 +328,10 @@ p { margin: 0; }
   box-shadow: var(--sombra);
   width: calc(100% - 32px);
   max-width: 520px;
-  animation: subir 0.2s ease-out;
+  animation: descer 0.2s ease-out;
 }
 
+@keyframes descer { from { transform: translateY(-24px); opacity: 0; } }
 @keyframes aparecer { from { opacity: 0; } }
 @keyframes subir { from { transform: translateY(24px); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
@@ -427,7 +439,10 @@ p { margin: 0; }
 /* ---- início ----------------------------------------------------------------------------------- */
 
 .inicio {
-  min-height: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
   padding: calc(var(--topo) + 40px) 20px calc(var(--base) + 24px);

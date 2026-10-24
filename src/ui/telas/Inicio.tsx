@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { formatarData } from "../../engine/calendario";
 import { FICHAS } from "../../engine/jogo";
+import { prontoParaOffline } from "../../save/aparelho";
 import { carregar, importarTexto, listarSaves, type ResumoSave } from "../../save/salvamento";
 import { Cartao, Escudo } from "../componentes";
 import { useLoja } from "../store";
@@ -18,8 +19,11 @@ export function Inicio() {
   const [saves, setSaves] = useState<ResumoSave[] | null>(null);
   const arquivo = useRef<HTMLInputElement>(null);
 
+  const [offline, setOffline] = useState(false);
+
   useEffect(() => {
     listarSaves().then(setSaves).catch(() => setSaves([]));
+    prontoParaOffline().then(setOffline).catch(() => setOffline(false));
   }, []);
 
   const abrir = async (r: ResumoSave) => {
@@ -51,6 +55,7 @@ export function Inicio() {
         <img src="./icone-192.png" alt="" />
         <h1>Proffut</h1>
         <p className="fraco">Seja o técnico. Séries A, B e C do Brasil.</p>
+        {offline && <span className="chip verde" data-offline="pronto">✓ Disponível sem internet</span>}
       </div>
 
       {ehIphone() && !instalado() && (

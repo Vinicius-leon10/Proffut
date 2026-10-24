@@ -86,6 +86,21 @@ export interface Escalacao {
   reservas: number[];
 }
 
+export interface ObraEstadio {
+  tipo: "ampliacao" | "modernizacao";
+  /** Lugares a mais (ampliação). */
+  lugares?: number;
+  terminaEm: string;
+}
+
+export interface Estadio {
+  nome: string;
+  capacidade: number;
+  /** Nível de conforto (0 a 3): cada nível atrai 10% a mais de público. */
+  conforto?: number;
+  obra?: ObraEstadio;
+}
+
 export interface Clube {
   id: string;
   nome: string;
@@ -94,7 +109,7 @@ export interface Clube {
   estado: string;
   serie: SerieClube;
   cores: { primaria: string; secundaria: string };
-  estadio: { nome: string; capacidade: number };
+  estadio: Estadio;
   fundacao: number;
   rival: string | null;
   torcida: number;
