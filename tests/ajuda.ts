@@ -1,8 +1,29 @@
 // Passos que vários testes repetem. Os testes em si ficam nos arquivos *.spec.ts.
 import { test as base, expect, type Locator, type Page } from "@playwright/test";
 
+/**
+ * O Safari do iPhone desenha o que está dentro de uma área com rolagem por baixo do que vem
+ * depois dela, mesmo com z-index maior (WebKit, bug 261302). Em todos os testes a mesma ordem
+ * de camadas é forçada no Chromium: cada área com rolagem vira uma camada própria e a barra de
+ * abas fica por cima dela (testes R16 e R17).
+ */
+const CAMADAS_DO_SAFARI = ".conteudo { position: relative; z-index: 0; } .abas { position: relative; z-index: 1; }";
+
 /** R14: todo teste também falha se o navegador mostrar um erro. */
-export const test = base.extend<{ semErrosNoNavegador: void }>({
+export const test = base.extend<{ camadasDoSafari: void; semErrosNoNavegador: void }>({
+  camadasDoSafari: [
+    async ({ page }, use) => {
+      await page.addInitScript((css) => {
+        document.addEventListener("DOMContentLoaded", () => {
+          const estilo = document.createElement("style");
+          estilo.textContent = css;
+          document.head.appendChild(estilo);
+        });
+      }, CAMADAS_DO_SAFARI);
+      await use();
+    },
+    { auto: true },
+  ],
   semErrosNoNavegador: [
     async ({ page }, use) => {
       const erros: string[] = [];
@@ -21,6 +42,11 @@ export const test = base.extend<{ semErrosNoNavegador: void }>({
 export { expect };
 
 export const botao = (page: Page, nome: string | RegExp) => page.getByRole("button", { name: nome }).first();
+/**
+ * Título do cartão do próximo jogo no painel do clube. Procurar só o texto "Próximo jogo" pega
+ * também avisos como "Fulano está suspenso para o próximo jogo".
+ */
+export const cartaoDoProximoJogo = (page: Page) => page.getByRole("heading", { name: /^(Próximo jogo|Jogo de hoje)$/ });
 export const voltar = (page: Page) => page.getByRole("button", { name: "Voltar", exact: true }).click();
 export const aba = (page: Page, nome: string) => page.locator("nav").getByRole("button", { name: nome }).click();
 
@@ -36,7 +62,7 @@ export async function novoJogo(page: Page, { serie = "Série B", clube = "Ponte 
   await page.getByRole("tab", { name: serie }).click();
   await botao(page, new RegExp(clube)).click();
   await botao(page, /Assumir o/).click();
-  await expect(page.getByText("Próximo jogo")).toBeVisible({ timeout: 20_000 });
+  await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
 }
 
 /** Data mostrada no topo do painel, ex.: "sáb, 04 abr 2026". */
@@ -57,7 +83,7 @@ export async function jogarPartida(page: Page) {
     placar = ((await page.locator(".placar .gols").textContent()) ?? "").replace(/\s+/g, " ").trim();
   }
   await continuar.click();
-  await expect(page.getByText(/Próximo jogo|Jogo de hoje/).first()).toBeVisible({ timeout: 15_000 });
+  await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 15_000 });
   return placar;
 }
 

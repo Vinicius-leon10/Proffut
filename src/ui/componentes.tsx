@@ -1,4 +1,5 @@
 import { useEffect, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { hashTexto } from "../engine/rng";
 import type { Clube, Posicao } from "../engine/tipos";
 import { useLoja } from "./store";
@@ -91,13 +92,17 @@ export function Cartao({ titulo, acao, children, compacto }: { titulo?: string; 
   );
 }
 
+/**
+ * Folha que sobe de baixo. Fica direto no <body>: dentro de uma área com rolagem, o Safari do
+ * iPhone a desenharia por baixo da barra de abas (teste R16).
+ */
 export function Folha({ titulo, aoFechar, children }: { titulo?: ReactNode; aoFechar: () => void; children: ReactNode }) {
   useEffect(() => {
     const tecla = (e: KeyboardEvent) => { if (e.key === "Escape") aoFechar(); };
     window.addEventListener("keydown", tecla);
     return () => window.removeEventListener("keydown", tecla);
   }, [aoFechar]);
-  return (
+  return createPortal(
     <div className="veu" onClick={aoFechar} role="presentation">
       <div className="folha" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
         <div className="alca" />
@@ -109,7 +114,8 @@ export function Folha({ titulo, aoFechar, children }: { titulo?: ReactNode; aoFe
         )}
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

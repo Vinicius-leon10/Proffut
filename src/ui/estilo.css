@@ -17,6 +17,8 @@
   --sombra: 0 6px 24px rgb(0 0 0 / 35%);
   --topo: env(safe-area-inset-top, 0px);
   --base: env(safe-area-inset-bottom, 0px);
+  /* Altura da tela. No modo app do iPhone vem medida em telaInteira.ts (teste R18). */
+  --altura: 100dvh;
   color-scheme: dark;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
   font-size: 16px;
@@ -29,8 +31,9 @@
 
 /* A página nunca rola inteira: cada tela tem a sua área com rolagem. Assim o topo fica
    fixo e nada fica escondido atrás das barras do Safari no iPhone. */
-html, body { height: 100%; margin: 0; overflow: hidden; }
-#root { height: 100%; height: 100dvh; }
+html.app-iphone { --altura: var(--altura-app); }
+html, body { height: 100%; height: var(--altura); margin: 0; overflow: hidden; }
+#root { height: 100%; height: var(--altura); }
 
 body {
   background: var(--fundo);
@@ -79,7 +82,7 @@ p { margin: 0; }
 
 .app {
   height: 100%;
-  height: 100dvh;
+  height: var(--altura);
   display: flex;
   flex-direction: column;
   max-width: 560px;
@@ -103,7 +106,6 @@ p { margin: 0; }
 .conteudo {
   flex: 1;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
   padding: 14px 16px 24px;
   display: flex;
   flex-direction: column;
@@ -272,7 +274,7 @@ p { margin: 0; }
 
 .veu {
   position: fixed; top: 0; left: 0; right: 0;
-  height: 100%; height: 100dvh;
+  height: 100%; height: var(--altura);
   background: rgb(0 0 0 / 55%);
   z-index: 40;
   display: flex;
@@ -284,7 +286,7 @@ p { margin: 0; }
   width: 100%;
   max-width: 560px;
   max-height: 88vh;
-  max-height: 88dvh;
+  max-height: calc(var(--altura) * 0.88);
   background: var(--fundo-2);
   border: 1px solid var(--borda);
   border-bottom: 0;
@@ -301,7 +303,7 @@ p { margin: 0; }
 
 .tela-cheia {
   position: fixed; top: 0; left: 0; right: 0;
-  height: 100%; height: 100dvh;
+  height: 100%; height: var(--altura);
   z-index: 30;
   background: var(--fundo);
   display: flex;
@@ -441,9 +443,8 @@ p { margin: 0; }
 
 .inicio {
   height: 100%;
-  height: 100dvh;
+  height: var(--altura);
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
   padding: calc(var(--topo) + 40px) 20px calc(var(--base) + 24px);

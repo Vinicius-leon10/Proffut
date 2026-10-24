@@ -1,4 +1,4 @@
-import { abrirSite, agora, botao, dataNoTopo, esperarSalvar, expect, jogarPartida, novoJogo, test, voltar } from "./ajuda";
+import { abrirSite, agora, botao, cartaoDoProximoJogo, dataNoTopo, esperarSalvar, expect, jogarPartida, novoJogo, test, voltar } from "./ajuda";
 
 test("R05 o progresso fica salvo no aparelho depois de recarregar", async ({ page }) => {
   await novoJogo(page);
@@ -9,7 +9,7 @@ test("R05 o progresso fica salvo no aparelho depois de recarregar", async ({ pag
 
   await page.reload();
   await botao(page, /Continuar/).click();
-  await expect(page.getByText("Próximo jogo")).toBeVisible();
+  await expect(cartaoDoProximoJogo(page)).toBeVisible();
   expect(await dataNoTopo(page)).toBe(data);
   await expect(page.getByText(/1 jogos/)).toBeVisible();
 });
@@ -33,7 +33,7 @@ test("R06 exporta o save em arquivo e importa de volta", async ({ page }, info) 
   await page.getByRole("button", { name: "Configurações" }).click();
   await botao(page, "Voltar ao menu inicial").click();
   await page.locator('input[type="file"]').setInputFiles(caminho);
-  await expect(page.getByText("Próximo jogo")).toBeVisible();
+  await expect(cartaoDoProximoJogo(page)).toBeVisible();
   expect(await dataNoTopo(page)).toBe(dataExportada);
 });
 
@@ -67,7 +67,7 @@ test("R07 depois da primeira visita, abre, joga e salva sem internet", async ({ 
 
   await page.reload();
   await botao(page, /Continuar/).click();
-  await expect(page.getByText(/Próximo jogo|Jogo de hoje/).first()).toBeVisible();
+  await expect(cartaoDoProximoJogo(page)).toBeVisible();
   expect(await dataNoTopo(page)).toBe(depois);
   await context.setOffline(false);
 });

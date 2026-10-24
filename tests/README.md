@@ -19,6 +19,9 @@ No GitHub, o resumo aparece na própria execução e a pasta vai nos Artifacts.
 - Nunca desligar, pular ou apagar um teste para ficar verde. Teste instável se conserta.
 - O número do teste vai no começo do nome (`test("R15 ...")`) e cada teste ganha uma linha na tabela abaixo.
 - Passos repetidos ficam em `ajuda.ts`.
+- Todos os testes rodam com a tela de um iPhone e simulam duas coisas do Safari que o Chromium não faz:
+  as camadas (o que está numa área com rolagem fica por baixo da barra de abas) e, nos testes do modo
+  app, a altura de tela informada errada. Assim o teste vê o que o usuário vê no celular.
 
 ## Lista
 
@@ -39,3 +42,6 @@ No GitHub, o resumo aparece na própria execução e a pasta vai nos Artifacts.
 | R13 | `financas-e-checagem.spec.ts` | A checagem dentro do jogo (Configurações → Checagem do jogo) não encontra erros. | "Crie uma checagem automática do jogo" |
 | R14 | `ajuda.ts` (vale para todos) | Nenhum teste termina com erro no navegador. | "Crie uma checagem automática do jogo" |
 | R15 | `telas-iphone.spec.ts` | Os avisos aparecem logo abaixo do topo e não cobrem o título nem os botões de cima (Voltar, Mensagens, Configurações). | "Ajustar parte superior da tela" (os avisos cobriam o topo inteiro por 3,5 s; achado ao montar os testes) |
+| R16 | `iphone-safari.spec.ts` | No iPhone, as fichas de compra (Mercado) e de venda (Elenco) aparecem inteiras e por cima da barra de abas, com o último botão livre. | "Ainda não está ajustado a parte de venda e compra" (captura: "Oferecer" e "Dispensar" sob a barra de abas) |
+| R17 | `iphone-safari.spec.ts` | Todas as outras folhas (vaga da Tática, jogo da rodada, substituição ao vivo) também ficam inteiras e por cima de tudo. | "Confira o jogo todo esse ajuste" |
+| R18 | `iphone-safari.spec.ts` | Aberto como app no iPhone, o jogo ocupa a tela inteira (menu, painel, folhas e telas cheias), sem faixa vazia embaixo. | "Faça o jogo ocupar toda a tela" |
