@@ -8,16 +8,17 @@
 
 ## 0. Situação atual (out/2026)
 
-**O MVP está pronto e jogável** (Fases 0, 1 e 2 do roteiro):
+**O MVP está pronto, jogável e publicado** em https://vinicius-leon10.github.io/Proffut/ (Fases 0, 1 e 2 do roteiro):
 - Site instalável no iPhone, funciona offline, save no aparelho com exportar/importar.
 - Séries A, B e C de 2026 com os regulamentos reais, partida ao vivo, tática, mercado, finanças, diretoria e virada de temporada.
+- Estádio: ampliar a capacidade ou modernizar (conforto atrai mais público), com obra em semanas.
+- Rebaixado para a Série D, o técnico recebe propostas de clubes da Série C.
 - Motor calibrado com `npm run sim`: 2,2–2,4 gols por jogo, mandante vence 42–45%, empates 25–29%, correlação força × pontos 0,57–0,79, nenhum clube no vermelho.
-- 11 testes automáticos do motor e um teste que joga no navegador com tela de iPhone.
+- Checagem automática: no app (sozinha ao abrir um jogo e em Configurações) e no GitHub (robô com tela de iPhone, inclusive sem internet, a cada alteração, antes de publicar e todo dia). 16 testes do motor.
 
 **Pendências:**
-- **Elencos reais de 2026:** a rede do ambiente de desenvolvimento bloqueia a Wikipédia (`pt.wikipedia.org`). Com o acesso liberado, os elencos entram como um arquivo de dados (`data/brasil-2026/jogadores.json`), sem mudar o código.
-- **Publicar:** juntar na `main` e ativar o GitHub Pages (ver README).
-- Próximas fases: Copa do Brasil, contratos e renovação, demissão e propostas de emprego, editor.
+- **Elencos reais de 2026:** a rede do ambiente de desenvolvimento bloqueia a Wikipédia (`pt.wikipedia.org`). Falta o usuário escolher: liberar esse endereço na rede do ambiente ou colar as listas. Os elencos entram como `data/brasil-2026/jogadores.json` (força e características dadas por nós), lidos em `novoJogo` no lugar dos gerados.
+- Próximas fases: Copa do Brasil, contratos e renovação, demissão por maus resultados, editor.
 
 ---
 
@@ -420,7 +421,7 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
 
 ## 12. Próximos passos
 
-1. Publicar o site (juntar na `main` + ativar o GitHub Pages) e jogar no iPhone.
-2. Liberar `pt.wikipedia.org` na rede do ambiente e montar os elencos reais de 2026.
-3. Ajustar o equilíbrio com base no que você sentir jogando.
-4. Fase 3: Copa do Brasil, contratos, demissão e propostas de emprego.
+1. ✅ Publicar o site e jogar no iPhone.
+2. Montar os elencos reais de 2026 (liberar `pt.wikipedia.org` na rede do ambiente ou colar as listas).
+3. Ajustar o equilíbrio e as telas com base no que você sentir jogando.
+4. Fase 3: Copa do Brasil, contratos e renovação, demissão por maus resultados.

@@ -6,7 +6,7 @@ Jogo onde você é o técnico de futebol. Inspirado no Brasfoot, roda no navegad
 
 ## Como jogar
 
-1. Abra o site no Safari do iPhone: **https://vinicius-leon10.github.io/Proffut/** (depois de publicado, ver abaixo).
+1. Abra o site no Safari do iPhone: **https://vinicius-leon10.github.io/Proffut/**
 2. Toque em **Compartilhar** → **Adicionar à Tela de Início**. O jogo abre em tela cheia, como um app, e funciona sem internet.
 3. Escolha seu nome, uma série e um clube.
 4. No painel do clube, o botão **Avançar** leva ao próximo jogo. Antes, ajuste a escalação e a tática na aba **Tática**.
@@ -59,6 +59,7 @@ npm run checagem   # robô no navegador com tela de iPhone, inclusive sem intern
 
 ## Documentos
 
+- [CLAUDE.md](CLAUDE.md): situação atual, pendências e como continuar o trabalho numa nova conversa.
 - [PLANO.md](PLANO.md): plano do jogo, decisões e próximos passos.
 - [docs/REFERENCIA_BRASFOOT.md](docs/REFERENCIA_BRASFOOT.md): estudo do Brasfoot e de projetos parecidos.
 - [data/brasil-2026/LEIAME.md](data/brasil-2026/LEIAME.md): fontes e licença dos dados.
