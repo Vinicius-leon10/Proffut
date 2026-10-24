@@ -6,6 +6,21 @@
 
 ---
 
+## 0. Situação atual (out/2026)
+
+**O MVP está pronto e jogável** (Fases 0, 1 e 2 do roteiro):
+- Site instalável no iPhone, funciona offline, save no aparelho com exportar/importar.
+- Séries A, B e C de 2026 com os regulamentos reais, partida ao vivo, tática, mercado, finanças, diretoria e virada de temporada.
+- Motor calibrado com `npm run sim`: 2,2–2,4 gols por jogo, mandante vence 42–45%, empates 25–29%, correlação força × pontos 0,57–0,79, nenhum clube no vermelho.
+- 11 testes automáticos do motor e um teste que joga no navegador com tela de iPhone.
+
+**Pendências:**
+- **Elencos reais de 2026:** a rede do ambiente de desenvolvimento bloqueia a Wikipédia (`pt.wikipedia.org`). Com o acesso liberado, os elencos entram como um arquivo de dados (`data/brasil-2026/jogadores.json`), sem mudar o código.
+- **Publicar:** juntar na `main` e ativar o GitHub Pages (ver README).
+- Próximas fases: Copa do Brasil, contratos e renovação, demissão e propostas de emprego, editor.
+
+---
+
 ## 1. Visão
 
 Você é o técnico. Escolhe um clube, monta o elenco, define a tática, acompanha os jogos narrados minuto a minuto e tenta subir de divisão, ganhar títulos e ser chamado por clubes maiores. Temporada após temporada, por décadas.
@@ -393,17 +408,19 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
 - ✅ Site primeiro (PWA), instalável na tela inicial do iPhone, save guardado no celular.
 - ✅ Começar só com o Brasil 2026: Séries A, B e C, com os nomes reais dos clubes e os regulamentos de 2026.
 - ✅ Sem escudos oficiais; nada extraído dos arquivos do Brasfoot.
+- ✅ Uso pessoal e recreativo, sem fins comerciais (por enquanto).
+- ✅ A IA programa; você testa no iPhone e decide.
+- ✅ Jogadores fictícios agora; elencos reais de 2026 (de fontes públicas) quando a rede permitir.
 
 **Em aberto**
-1. **Jogadores:** nomes reais (elencos de 2026 montados a partir de fontes públicas, com força e características definidas por nós) ou fictícios gerados (rápido, sem risco)?
-2. **Nome:** "Proffut" é o nome final ou provisório?
-3. **Divisão do trabalho:** quanto tempo por semana você tem? Você vai programar, ou a IA programa e você testa, revisa e decide?
-4. **Partida:** só texto (como o Brasfoot) ou planejar um 2D simples para o futuro?
+1. **Nome:** "Proffut" é o nome final ou provisório?
+2. **Partida:** só texto (como o Brasfoot) ou planejar um 2D simples para o futuro?
 
 ---
 
 ## 12. Próximos passos
 
-1. Decidir a questão dos jogadores (seção 11).
-2. Fase 0: criar o projeto PWA e publicar o site vazio para testar a instalação no iPhone.
-3. Fase 1, primeiro marco: **carregar os 60 clubes + simulador de partida + linha de comando que simula uma temporada das três séries e imprime as tabelas.**
+1. Publicar o site (juntar na `main` + ativar o GitHub Pages) e jogar no iPhone.
+2. Liberar `pt.wikipedia.org` na rede do ambiente e montar os elencos reais de 2026.
+3. Ajustar o equilíbrio com base no que você sentir jogando.
+4. Fase 3: Copa do Brasil, contratos, demissão e propostas de emprego.
