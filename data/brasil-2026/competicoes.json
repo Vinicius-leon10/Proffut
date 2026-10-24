@@ -1,0 +1,74 @@
+{
+  "temporada": 2026,
+  "competicoes": [
+    {
+      "id": "serie-a",
+      "nome": "Série A",
+      "nivel": 1,
+      "clubes": 20,
+      "fases": [
+        { "id": "unica", "tipo": "pontos-corridos", "turnos": 2 }
+      ],
+      "acesso": [],
+      "rebaixamento": { "quantidade": 4, "destino": "serie-b" },
+      "desempate": ["pontos", "vitorias", "saldo", "golsPro", "confrontoDireto", "vermelhos", "amarelos", "sorteio"]
+    },
+    {
+      "id": "serie-b",
+      "nome": "Série B",
+      "nivel": 2,
+      "clubes": 20,
+      "fases": [
+        { "id": "classificacao", "tipo": "pontos-corridos", "turnos": 2 },
+        {
+          "id": "playoff",
+          "nome": "Playoff de acesso",
+          "tipo": "mata-mata",
+          "confrontos": [[3, 6], [4, 5]],
+          "idaEVolta": true,
+          "mandoDaVolta": "melhor-campanha",
+          "empateNoAgregado": "a-confirmar"
+        }
+      ],
+      "acesso": [
+        { "regra": "posicoes", "fase": "classificacao", "posicoes": [1, 2], "destino": "serie-a" },
+        { "regra": "vencedores", "fase": "playoff", "destino": "serie-a" }
+      ],
+      "rebaixamento": { "quantidade": 4, "destino": "serie-c" },
+      "desempate": ["pontos", "vitorias", "saldo", "golsPro", "confrontoDireto", "vermelhos", "amarelos", "sorteio"]
+    },
+    {
+      "id": "serie-c",
+      "nome": "Série C",
+      "nivel": 3,
+      "clubes": 20,
+      "fases": [
+        { "id": "primeira", "tipo": "pontos-corridos", "turnos": 1 },
+        {
+          "id": "quadrangulares",
+          "tipo": "grupos",
+          "grupos": [[1, 4, 5, 8], [2, 3, 6, 7]],
+          "turnos": 2,
+          "classificamPorGrupo": 2
+        },
+        {
+          "id": "final",
+          "tipo": "mata-mata",
+          "participantes": "lideres-dos-grupos",
+          "idaEVolta": true,
+          "valeTitulo": true
+        }
+      ],
+      "acesso": [
+        { "regra": "classificados", "fase": "quadrangulares", "destino": "serie-b" }
+      ],
+      "rebaixamento": {
+        "quantidade": 2,
+        "fase": "primeira",
+        "destino": "serie-d-reserva",
+        "observacao": "Em 2026 caem só 2 (transição para a Série C de 24 clubes em 2027). O jogo mantém 20 clubes: sobem 2 da reserva da Série D."
+      },
+      "desempate": ["pontos", "vitorias", "saldo", "golsPro", "confrontoDireto", "vermelhos", "amarelos", "sorteio"]
+    }
+  ]
+}

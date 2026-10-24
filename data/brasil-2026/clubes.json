@@ -1,0 +1,1506 @@
+{
+  "temporada": 2026,
+  "geradoDe": "denisvick-dev/brasfoot (MIT), game/clubes.py",
+  "clubes": [
+    {
+      "id": "flamengo",
+      "nome": "Flamengo",
+      "sigla": "FLA",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "serie": "A",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Maracanã",
+        "capacidade": 78838
+      },
+      "fundacao": 1895,
+      "rival": "fluminense",
+      "torcida": 95,
+      "reputacao": 95,
+      "forcaElenco": {
+        "min": 70,
+        "max": 90
+      },
+      "caixaInicial": 50000000
+    },
+    {
+      "id": "palmeiras",
+      "nome": "Palmeiras",
+      "sigla": "PAL",
+      "cidade": "São Paulo",
+      "estado": "SP",
+      "serie": "A",
+      "cores": {
+        "primaria": "#2E7D32",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Allianz Parque",
+        "capacidade": 43713
+      },
+      "fundacao": 1914,
+      "rival": "corinthians",
+      "torcida": 85,
+      "reputacao": 93,
+      "forcaElenco": {
+        "min": 70,
+        "max": 90
+      },
+      "caixaInicial": 45000000
+    },
+    {
+      "id": "corinthians",
+      "nome": "Corinthians",
+      "sigla": "COR",
+      "cidade": "São Paulo",
+      "estado": "SP",
+      "serie": "A",
+      "cores": {
+        "primaria": "#212121",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Neo Química Arena",
+        "capacidade": 49205
+      },
+      "fundacao": 1910,
+      "rival": "sao-paulo",
+      "torcida": 90,
+      "reputacao": 85,
+      "forcaElenco": {
+        "min": 60,
+        "max": 82
+      },
+      "caixaInicial": 30000000
+    },
+    {
+      "id": "sao-paulo",
+      "nome": "São Paulo",
+      "sigla": "SAO",
+      "cidade": "São Paulo",
+      "estado": "SP",
+      "serie": "A",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Morumbi",
+        "capacidade": 66795
+      },
+      "fundacao": 1930,
+      "rival": "corinthians",
+      "torcida": 82,
+      "reputacao": 85,
+      "forcaElenco": {
+        "min": 62,
+        "max": 83
+      },
+      "caixaInicial": 32000000
+    },
+    {
+      "id": "fluminense",
+      "nome": "Fluminense",
+      "sigla": "FLU",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "serie": "A",
+      "cores": {
+        "primaria": "#1B5E20",
+        "secundaria": "#C62828"
+      },
+      "estadio": {
+        "nome": "Maracanã",
+        "capacidade": 78838
+      },
+      "fundacao": 1902,
+      "rival": "botafogo",
+      "torcida": 55,
+      "reputacao": 82,
+      "forcaElenco": {
+        "min": 62,
+        "max": 83
+      },
+      "caixaInicial": 25000000
+    },
+    {
+      "id": "atletico-mg",
+      "nome": "Atlético-MG",
+      "sigla": "CAM",
+      "cidade": "Belo Horizonte",
+      "estado": "MG",
+      "serie": "A",
+      "cores": {
+        "primaria": "#212121",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Arena MRV",
+        "capacidade": 44892
+      },
+      "fundacao": 1908,
+      "rival": "cruzeiro",
+      "torcida": 75,
+      "reputacao": 87,
+      "forcaElenco": {
+        "min": 65,
+        "max": 85
+      },
+      "caixaInicial": 35000000
+    },
+    {
+      "id": "internacional",
+      "nome": "Internacional",
+      "sigla": "INT",
+      "cidade": "Porto Alegre",
+      "estado": "RS",
+      "serie": "A",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Beira-Rio",
+        "capacidade": 49055
+      },
+      "fundacao": 1909,
+      "rival": "gremio",
+      "torcida": 78,
+      "reputacao": 83,
+      "forcaElenco": {
+        "min": 60,
+        "max": 82
+      },
+      "caixaInicial": 28000000
+    },
+    {
+      "id": "gremio",
+      "nome": "Grêmio",
+      "sigla": "GRE",
+      "cidade": "Porto Alegre",
+      "estado": "RS",
+      "serie": "A",
+      "cores": {
+        "primaria": "#1565C0",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Arena do Grêmio",
+        "capacidade": 55662
+      },
+      "fundacao": 1903,
+      "rival": "internacional",
+      "torcida": 78,
+      "reputacao": 83,
+      "forcaElenco": {
+        "min": 60,
+        "max": 82
+      },
+      "caixaInicial": 28000000
+    },
+    {
+      "id": "santos",
+      "nome": "Santos",
+      "sigla": "SAN",
+      "cidade": "Santos",
+      "estado": "SP",
+      "serie": "A",
+      "cores": {
+        "primaria": "#FFFFFF",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Vila Belmiro",
+        "capacidade": 16798
+      },
+      "fundacao": 1912,
+      "rival": "corinthians",
+      "torcida": 65,
+      "reputacao": 78,
+      "forcaElenco": {
+        "min": 55,
+        "max": 78
+      },
+      "caixaInicial": 18000000
+    },
+    {
+      "id": "botafogo",
+      "nome": "Botafogo",
+      "sigla": "BOT",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "serie": "A",
+      "cores": {
+        "primaria": "#212121",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Nilton Santos",
+        "capacidade": 46831
+      },
+      "fundacao": 1904,
+      "rival": "fluminense",
+      "torcida": 50,
+      "reputacao": 82,
+      "forcaElenco": {
+        "min": 65,
+        "max": 85
+      },
+      "caixaInicial": 35000000
+    },
+    {
+      "id": "vasco",
+      "nome": "Vasco",
+      "sigla": "VAS",
+      "cidade": "Rio de Janeiro",
+      "estado": "RJ",
+      "serie": "A",
+      "cores": {
+        "primaria": "#212121",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "São Januário",
+        "capacidade": 24584
+      },
+      "fundacao": 1898,
+      "rival": "fluminense",
+      "torcida": 70,
+      "reputacao": 75,
+      "forcaElenco": {
+        "min": 55,
+        "max": 78
+      },
+      "caixaInicial": 15000000
+    },
+    {
+      "id": "cruzeiro",
+      "nome": "Cruzeiro",
+      "sigla": "CRU",
+      "cidade": "Belo Horizonte",
+      "estado": "MG",
+      "serie": "A",
+      "cores": {
+        "primaria": "#1565C0",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Mineirão",
+        "capacidade": 61846
+      },
+      "fundacao": 1921,
+      "rival": "atletico-mg",
+      "torcida": 72,
+      "reputacao": 80,
+      "forcaElenco": {
+        "min": 60,
+        "max": 80
+      },
+      "caixaInicial": 25000000
+    },
+    {
+      "id": "athletico-pr",
+      "nome": "Athletico-PR",
+      "sigla": "CAP",
+      "cidade": "Curitiba",
+      "estado": "PR",
+      "serie": "A",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Arena da Baixada",
+        "capacidade": 42372
+      },
+      "fundacao": 1924,
+      "rival": "coritiba",
+      "torcida": 35,
+      "reputacao": 78,
+      "forcaElenco": {
+        "min": 58,
+        "max": 80
+      },
+      "caixaInicial": 22000000
+    },
+    {
+      "id": "bahia",
+      "nome": "Bahia",
+      "sigla": "BAH",
+      "cidade": "Salvador",
+      "estado": "BA",
+      "serie": "A",
+      "cores": {
+        "primaria": "#1565C0",
+        "secundaria": "#C62828"
+      },
+      "estadio": {
+        "nome": "Arena Fonte Nova",
+        "capacidade": 47907
+      },
+      "fundacao": 1931,
+      "rival": "vitoria",
+      "torcida": 50,
+      "reputacao": 72,
+      "forcaElenco": {
+        "min": 55,
+        "max": 78
+      },
+      "caixaInicial": 15000000
+    },
+    {
+      "id": "coritiba",
+      "nome": "Coritiba",
+      "sigla": "CFC",
+      "cidade": "Curitiba",
+      "estado": "PR",
+      "serie": "A",
+      "cores": {
+        "primaria": "#2E7D32",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Couto Pereira",
+        "capacidade": 40502
+      },
+      "fundacao": 1909,
+      "rival": "londrina",
+      "torcida": 28,
+      "reputacao": 64,
+      "forcaElenco": {
+        "min": 50,
+        "max": 74
+      },
+      "caixaInicial": 10000000
+    },
+    {
+      "id": "red-bull-bragantino",
+      "nome": "Red Bull Bragantino",
+      "sigla": "RBB",
+      "cidade": "Bragança Paulista",
+      "estado": "SP",
+      "serie": "A",
+      "cores": {
+        "primaria": "#FFFFFF",
+        "secundaria": "#E53935"
+      },
+      "estadio": {
+        "nome": "Nabi Abi Chedid",
+        "capacidade": 17724
+      },
+      "fundacao": 1928,
+      "rival": "santos",
+      "torcida": 18,
+      "reputacao": 68,
+      "forcaElenco": {
+        "min": 55,
+        "max": 76
+      },
+      "caixaInicial": 16000000
+    },
+    {
+      "id": "chapecoense",
+      "nome": "Chapecoense",
+      "sigla": "CHA",
+      "cidade": "Chapecó",
+      "estado": "SC",
+      "serie": "A",
+      "cores": {
+        "primaria": "#2E7D32",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Arena Condá",
+        "capacidade": 20089
+      },
+      "fundacao": 1973,
+      "rival": "avai",
+      "torcida": 24,
+      "reputacao": 63,
+      "forcaElenco": {
+        "min": 50,
+        "max": 74
+      },
+      "caixaInicial": 9000000
+    },
+    {
+      "id": "mirassol",
+      "nome": "Mirassol",
+      "sigla": "MIR",
+      "cidade": "Mirassol",
+      "estado": "SP",
+      "serie": "A",
+      "cores": {
+        "primaria": "#F9A825",
+        "secundaria": "#2E7D32"
+      },
+      "estadio": {
+        "nome": "José Maria de Campos Maia (Maião)",
+        "capacidade": 15000
+      },
+      "fundacao": 1925,
+      "rival": "novorizontino",
+      "torcida": 14,
+      "reputacao": 62,
+      "forcaElenco": {
+        "min": 50,
+        "max": 74
+      },
+      "caixaInicial": 8000000
+    },
+    {
+      "id": "remo",
+      "nome": "Remo",
+      "sigla": "REM",
+      "cidade": "Belém",
+      "estado": "PA",
+      "serie": "A",
+      "cores": {
+        "primaria": "#1565C0",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Baenão",
+        "capacidade": 14000
+      },
+      "fundacao": 1905,
+      "rival": "paysandu",
+      "torcida": 30,
+      "reputacao": 64,
+      "forcaElenco": {
+        "min": 50,
+        "max": 74
+      },
+      "caixaInicial": 9000000
+    },
+    {
+      "id": "vitoria",
+      "nome": "Vitória",
+      "sigla": "VIT",
+      "cidade": "Salvador",
+      "estado": "BA",
+      "serie": "A",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Barradão",
+        "capacidade": 30000
+      },
+      "fundacao": 1899,
+      "rival": "bahia",
+      "torcida": 30,
+      "reputacao": 65,
+      "forcaElenco": {
+        "min": 50,
+        "max": 74
+      },
+      "caixaInicial": 10000000
+    },
+    {
+      "id": "america-mg",
+      "nome": "América-MG",
+      "sigla": "AMG",
+      "cidade": "Belo Horizonte",
+      "estado": "MG",
+      "serie": "B",
+      "cores": {
+        "primaria": "#2E7D32",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Independência",
+        "capacidade": 23018
+      },
+      "fundacao": 1912,
+      "rival": "athletic-club",
+      "torcida": 18,
+      "reputacao": 50,
+      "forcaElenco": {
+        "min": 42,
+        "max": 68
+      },
+      "caixaInicial": 6000000
+    },
+    {
+      "id": "athletic-club",
+      "nome": "Athletic Club",
+      "sigla": "ATH",
+      "cidade": "São João del-Rei",
+      "estado": "MG",
+      "serie": "B",
+      "cores": {
+        "primaria": "#212121",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "João Marques de Oliveira",
+        "capacidade": 5000
+      },
+      "fundacao": 1909,
+      "rival": "tombense",
+      "torcida": 8,
+      "reputacao": 48,
+      "forcaElenco": {
+        "min": 40,
+        "max": 65
+      },
+      "caixaInicial": 5000000
+    },
+    {
+      "id": "atletico-go",
+      "nome": "Atlético-GO",
+      "sigla": "ACG",
+      "cidade": "Goiânia",
+      "estado": "GO",
+      "serie": "B",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Antônio Accioly",
+        "capacidade": 12500
+      },
+      "fundacao": 1937,
+      "rival": "goias",
+      "torcida": 20,
+      "reputacao": 55,
+      "forcaElenco": {
+        "min": 42,
+        "max": 68
+      },
+      "caixaInicial": 7000000
+    },
+    {
+      "id": "avai",
+      "nome": "Avaí",
+      "sigla": "AVA",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "serie": "B",
+      "cores": {
+        "primaria": "#1565C0",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Ressacada",
+        "capacidade": 17800
+      },
+      "fundacao": 1923,
+      "rival": "chapecoense",
+      "torcida": 18,
+      "reputacao": 52,
+      "forcaElenco": {
+        "min": 42,
+        "max": 68
+      },
+      "caixaInicial": 6000000
+    },
+    {
+      "id": "botafogo-sp",
+      "nome": "Botafogo-SP",
+      "sigla": "BSP",
+      "cidade": "Ribeirão Preto",
+      "estado": "SP",
+      "serie": "B",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Santa Cruz",
+        "capacidade": 29292
+      },
+      "fundacao": 1918,
+      "rival": "ituano",
+      "torcida": 14,
+      "reputacao": 50,
+      "forcaElenco": {
+        "min": 40,
+        "max": 66
+      },
+      "caixaInicial": 5000000
+    },
+    {
+      "id": "ceara",
+      "nome": "Ceará",
+      "sigla": "CEA",
+      "cidade": "Fortaleza",
+      "estado": "CE",
+      "serie": "B",
+      "cores": {
+        "primaria": "#212121",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Castelão",
+        "capacidade": 63903
+      },
+      "fundacao": 1914,
+      "rival": "fortaleza",
+      "torcida": 30,
+      "reputacao": 70,
+      "forcaElenco": {
+        "min": 52,
+        "max": 76
+      },
+      "caixaInicial": 12000000
+    },
+    {
+      "id": "crb",
+      "nome": "CRB",
+      "sigla": "CRB",
+      "cidade": "Maceió",
+      "estado": "AL",
+      "serie": "B",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Rei Pelé",
+        "capacidade": 17126
+      },
+      "fundacao": 1912,
+      "rival": "csa",
+      "torcida": 22,
+      "reputacao": 56,
+      "forcaElenco": {
+        "min": 45,
+        "max": 70
+      },
+      "caixaInicial": 8000000
+    },
+    {
+      "id": "criciuma",
+      "nome": "Criciúma",
+      "sigla": "CRI",
+      "cidade": "Criciúma",
+      "estado": "SC",
+      "serie": "B",
+      "cores": {
+        "primaria": "#F9A825",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Heriberto Hülse",
+        "capacidade": 19225
+      },
+      "fundacao": 1947,
+      "rival": "figueirense",
+      "torcida": 20,
+      "reputacao": 56,
+      "forcaElenco": {
+        "min": 45,
+        "max": 70
+      },
+      "caixaInicial": 8000000
+    },
+    {
+      "id": "cuiaba",
+      "nome": "Cuiabá",
+      "sigla": "CUI",
+      "cidade": "Cuiabá",
+      "estado": "MT",
+      "serie": "B",
+      "cores": {
+        "primaria": "#2E7D32",
+        "secundaria": "#F9A825"
+      },
+      "estadio": {
+        "nome": "Arena Pantanal",
+        "capacidade": 44097
+      },
+      "fundacao": 2001,
+      "rival": "luverdense",
+      "torcida": 15,
+      "reputacao": 55,
+      "forcaElenco": {
+        "min": 45,
+        "max": 70
+      },
+      "caixaInicial": 8000000
+    },
+    {
+      "id": "fortaleza",
+      "nome": "Fortaleza",
+      "sigla": "FOR",
+      "cidade": "Fortaleza",
+      "estado": "CE",
+      "serie": "B",
+      "cores": {
+        "primaria": "#1565C0",
+        "secundaria": "#C62828"
+      },
+      "estadio": {
+        "nome": "Castelão",
+        "capacidade": 63903
+      },
+      "fundacao": 1918,
+      "rival": "ceara",
+      "torcida": 34,
+      "reputacao": 72,
+      "forcaElenco": {
+        "min": 54,
+        "max": 78
+      },
+      "caixaInicial": 15000000
+    },
+    {
+      "id": "goias",
+      "nome": "Goiás",
+      "sigla": "GOI",
+      "cidade": "Goiânia",
+      "estado": "GO",
+      "serie": "B",
+      "cores": {
+        "primaria": "#2E7D32",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Serrinha",
+        "capacidade": 14525
+      },
+      "fundacao": 1943,
+      "rival": "atletico-go",
+      "torcida": 25,
+      "reputacao": 55,
+      "forcaElenco": {
+        "min": 45,
+        "max": 70
+      },
+      "caixaInicial": 8000000
+    },
+    {
+      "id": "juventude",
+      "nome": "Juventude",
+      "sigla": "JUV",
+      "cidade": "Caxias do Sul",
+      "estado": "RS",
+      "serie": "B",
+      "cores": {
+        "primaria": "#2E7D32",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Alfredo Jaconi",
+        "capacidade": 19924
+      },
+      "fundacao": 1913,
+      "rival": "caxias",
+      "torcida": 12,
+      "reputacao": 50,
+      "forcaElenco": {
+        "min": 42,
+        "max": 68
+      },
+      "caixaInicial": 6000000
+    },
+    {
+      "id": "londrina",
+      "nome": "Londrina",
+      "sigla": "LON",
+      "cidade": "Londrina",
+      "estado": "PR",
+      "serie": "B",
+      "cores": {
+        "primaria": "#1565C0",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Estádio do Café",
+        "capacidade": 31000
+      },
+      "fundacao": 1956,
+      "rival": "operario-pr",
+      "torcida": 12,
+      "reputacao": 48,
+      "forcaElenco": {
+        "min": 40,
+        "max": 66
+      },
+      "caixaInicial": 5000000
+    },
+    {
+      "id": "novorizontino",
+      "nome": "Novorizontino",
+      "sigla": "NOV",
+      "cidade": "Novo Horizonte",
+      "estado": "SP",
+      "serie": "B",
+      "cores": {
+        "primaria": "#F9A825",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Jorge Ismael de Biasi",
+        "capacidade": 16000
+      },
+      "fundacao": 1973,
+      "rival": "mirassol",
+      "torcida": 8,
+      "reputacao": 52,
+      "forcaElenco": {
+        "min": 42,
+        "max": 68
+      },
+      "caixaInicial": 5000000
+    },
+    {
+      "id": "nautico",
+      "nome": "Náutico",
+      "sigla": "NAU",
+      "cidade": "Recife",
+      "estado": "PE",
+      "serie": "B",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Aflitos",
+        "capacidade": 19650
+      },
+      "fundacao": 1901,
+      "rival": "santa-cruz",
+      "torcida": 20,
+      "reputacao": 55,
+      "forcaElenco": {
+        "min": 42,
+        "max": 68
+      },
+      "caixaInicial": 6000000
+    },
+    {
+      "id": "operario-pr",
+      "nome": "Operário-PR",
+      "sigla": "OPE",
+      "cidade": "Ponta Grossa",
+      "estado": "PR",
+      "serie": "B",
+      "cores": {
+        "primaria": "#212121",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Germano Krüger",
+        "capacidade": 10000
+      },
+      "fundacao": 1912,
+      "rival": "londrina",
+      "torcida": 10,
+      "reputacao": 48,
+      "forcaElenco": {
+        "min": 40,
+        "max": 65
+      },
+      "caixaInicial": 4000000
+    },
+    {
+      "id": "ponte-preta",
+      "nome": "Ponte Preta",
+      "sigla": "PON",
+      "cidade": "Campinas",
+      "estado": "SP",
+      "serie": "B",
+      "cores": {
+        "primaria": "#212121",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Moisés Lucarelli",
+        "capacidade": 17728
+      },
+      "fundacao": 1900,
+      "rival": "guarani",
+      "torcida": 18,
+      "reputacao": 55,
+      "forcaElenco": {
+        "min": 42,
+        "max": 68
+      },
+      "caixaInicial": 6000000
+    },
+    {
+      "id": "sport",
+      "nome": "Sport",
+      "sigla": "SPT",
+      "cidade": "Recife",
+      "estado": "PE",
+      "serie": "B",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Ilha do Retiro",
+        "capacidade": 26418
+      },
+      "fundacao": 1905,
+      "rival": "santa-cruz",
+      "torcida": 28,
+      "reputacao": 66,
+      "forcaElenco": {
+        "min": 48,
+        "max": 72
+      },
+      "caixaInicial": 11000000
+    },
+    {
+      "id": "sao-bernardo",
+      "nome": "São Bernardo",
+      "sigla": "SBE",
+      "cidade": "São Bernardo do Campo",
+      "estado": "SP",
+      "serie": "B",
+      "cores": {
+        "primaria": "#F9A825",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "1º de Maio",
+        "capacidade": 15000
+      },
+      "fundacao": 2004,
+      "rival": "inter-de-limeira",
+      "torcida": 5,
+      "reputacao": 45,
+      "forcaElenco": {
+        "min": 38,
+        "max": 62
+      },
+      "caixaInicial": 3000000
+    },
+    {
+      "id": "vila-nova",
+      "nome": "Vila Nova",
+      "sigla": "VIL",
+      "cidade": "Goiânia",
+      "estado": "GO",
+      "serie": "B",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Serra Dourada",
+        "capacidade": 42000
+      },
+      "fundacao": 1943,
+      "rival": "goias",
+      "torcida": 18,
+      "reputacao": 52,
+      "forcaElenco": {
+        "min": 40,
+        "max": 66
+      },
+      "caixaInicial": 5000000
+    },
+    {
+      "id": "amazonas-fc",
+      "nome": "Amazonas FC",
+      "sigla": "AMA",
+      "cidade": "Manaus",
+      "estado": "AM",
+      "serie": "C",
+      "cores": {
+        "primaria": "#2E7D32",
+        "secundaria": "#F9A825"
+      },
+      "estadio": {
+        "nome": "Arena da Amazônia",
+        "capacidade": 44000
+      },
+      "fundacao": 2019,
+      "rival": "manaus",
+      "torcida": 12,
+      "reputacao": 50,
+      "forcaElenco": {
+        "min": 38,
+        "max": 62
+      },
+      "caixaInicial": 3000000
+    },
+    {
+      "id": "anapolis",
+      "nome": "Anápolis",
+      "sigla": "ANA",
+      "cidade": "Anápolis",
+      "estado": "GO",
+      "serie": "C",
+      "cores": {
+        "primaria": "#1565C0",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Jonas Duarte",
+        "capacidade": 15000
+      },
+      "fundacao": 1947,
+      "rival": "vila-nova",
+      "torcida": 10,
+      "reputacao": 48,
+      "forcaElenco": {
+        "min": 36,
+        "max": 60
+      },
+      "caixaInicial": 2000000
+    },
+    {
+      "id": "barra-sc",
+      "nome": "Barra-SC",
+      "sigla": "BAR",
+      "cidade": "Itajaí",
+      "estado": "SC",
+      "serie": "C",
+      "cores": {
+        "primaria": "#1565C0",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Arena Barra",
+        "capacidade": 6000
+      },
+      "fundacao": 2013,
+      "rival": "joinville",
+      "torcida": 6,
+      "reputacao": 45,
+      "forcaElenco": {
+        "min": 34,
+        "max": 58
+      },
+      "caixaInicial": 1500000
+    },
+    {
+      "id": "botafogo-pb",
+      "nome": "Botafogo-PB",
+      "sigla": "BPB",
+      "cidade": "João Pessoa",
+      "estado": "PB",
+      "serie": "C",
+      "cores": {
+        "primaria": "#212121",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Almeidão",
+        "capacidade": 25000
+      },
+      "fundacao": 1932,
+      "rival": "treze",
+      "torcida": 20,
+      "reputacao": 55,
+      "forcaElenco": {
+        "min": 38,
+        "max": 60
+      },
+      "caixaInicial": 3000000
+    },
+    {
+      "id": "brusque",
+      "nome": "Brusque",
+      "sigla": "BRU",
+      "cidade": "Brusque",
+      "estado": "SC",
+      "serie": "C",
+      "cores": {
+        "primaria": "#F9A825",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Augusto Bauer",
+        "capacidade": 5000
+      },
+      "fundacao": 1987,
+      "rival": "avai",
+      "torcida": 12,
+      "reputacao": 52,
+      "forcaElenco": {
+        "min": 38,
+        "max": 60
+      },
+      "caixaInicial": 3000000
+    },
+    {
+      "id": "caxias",
+      "nome": "Caxias",
+      "sigla": "CAX",
+      "cidade": "Caxias do Sul",
+      "estado": "RS",
+      "serie": "C",
+      "cores": {
+        "primaria": "#1565C0",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Centenário",
+        "capacidade": 22132
+      },
+      "fundacao": 1935,
+      "rival": "ypiranga-rs",
+      "torcida": 10,
+      "reputacao": 50,
+      "forcaElenco": {
+        "min": 38,
+        "max": 60
+      },
+      "caixaInicial": 2000000
+    },
+    {
+      "id": "confianca",
+      "nome": "Confiança",
+      "sigla": "CON",
+      "cidade": "Aracaju",
+      "estado": "SE",
+      "serie": "C",
+      "cores": {
+        "primaria": "#1565C0",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Batistão",
+        "capacidade": 15575
+      },
+      "fundacao": 1946,
+      "rival": "itabaiana",
+      "torcida": 15,
+      "reputacao": 52,
+      "forcaElenco": {
+        "min": 36,
+        "max": 58
+      },
+      "caixaInicial": 2000000
+    },
+    {
+      "id": "ferroviaria",
+      "nome": "Ferroviária",
+      "sigla": "FRV",
+      "cidade": "Araraquara",
+      "estado": "SP",
+      "serie": "C",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Fonte Luminosa",
+        "capacidade": 20000
+      },
+      "fundacao": 1950,
+      "rival": "novorizontino",
+      "torcida": 10,
+      "reputacao": 52,
+      "forcaElenco": {
+        "min": 38,
+        "max": 60
+      },
+      "caixaInicial": 3000000
+    },
+    {
+      "id": "figueirense",
+      "nome": "Figueirense",
+      "sigla": "FIG",
+      "cidade": "Florianópolis",
+      "estado": "SC",
+      "serie": "C",
+      "cores": {
+        "primaria": "#212121",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Orlando Scarpelli",
+        "capacidade": 19584
+      },
+      "fundacao": 1921,
+      "rival": "avai",
+      "torcida": 18,
+      "reputacao": 55,
+      "forcaElenco": {
+        "min": 38,
+        "max": 62
+      },
+      "caixaInicial": 3000000
+    },
+    {
+      "id": "floresta",
+      "nome": "Floresta",
+      "sigla": "FLO",
+      "cidade": "Fortaleza",
+      "estado": "CE",
+      "serie": "C",
+      "cores": {
+        "primaria": "#2E7D32",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Presidente Vargas",
+        "capacidade": 20000
+      },
+      "fundacao": 2016,
+      "rival": "atletico-ce",
+      "torcida": 5,
+      "reputacao": 45,
+      "forcaElenco": {
+        "min": 34,
+        "max": 56
+      },
+      "caixaInicial": 1500000
+    },
+    {
+      "id": "guarani",
+      "nome": "Guarani",
+      "sigla": "GUA",
+      "cidade": "Campinas",
+      "estado": "SP",
+      "serie": "C",
+      "cores": {
+        "primaria": "#2E7D32",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Brinco de Ouro",
+        "capacidade": 29130
+      },
+      "fundacao": 1911,
+      "rival": "ponte-preta",
+      "torcida": 20,
+      "reputacao": 56,
+      "forcaElenco": {
+        "min": 38,
+        "max": 62
+      },
+      "caixaInicial": 4000000
+    },
+    {
+      "id": "inter-de-limeira",
+      "nome": "Inter de Limeira",
+      "sigla": "INL",
+      "cidade": "Limeira",
+      "estado": "SP",
+      "serie": "C",
+      "cores": {
+        "primaria": "#212121",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Limeirão",
+        "capacidade": 18000
+      },
+      "fundacao": 1947,
+      "rival": "serra-branca",
+      "torcida": 8,
+      "reputacao": 46,
+      "forcaElenco": {
+        "min": 34,
+        "max": 56
+      },
+      "caixaInicial": 1500000
+    },
+    {
+      "id": "itabaiana",
+      "nome": "Itabaiana",
+      "sigla": "ITA",
+      "cidade": "Itabaiana",
+      "estado": "SE",
+      "serie": "C",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Etelvino Mendonça",
+        "capacidade": 11000
+      },
+      "fundacao": 1946,
+      "rival": "sergipe",
+      "torcida": 8,
+      "reputacao": 46,
+      "forcaElenco": {
+        "min": 34,
+        "max": 56
+      },
+      "caixaInicial": 1200000
+    },
+    {
+      "id": "ituano",
+      "nome": "Ituano",
+      "sigla": "ITU",
+      "cidade": "Itu",
+      "estado": "SP",
+      "serie": "C",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Novelli Júnior",
+        "capacidade": 18560
+      },
+      "fundacao": 1947,
+      "rival": "botafogo-sp",
+      "torcida": 10,
+      "reputacao": 50,
+      "forcaElenco": {
+        "min": 38,
+        "max": 60
+      },
+      "caixaInicial": 3000000
+    },
+    {
+      "id": "maranhao",
+      "nome": "Maranhão",
+      "sigla": "MAC",
+      "cidade": "São Luís",
+      "estado": "MA",
+      "serie": "C",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Castelão",
+        "capacidade": 40000
+      },
+      "fundacao": 1932,
+      "rival": "moto-club",
+      "torcida": 8,
+      "reputacao": 46,
+      "forcaElenco": {
+        "min": 34,
+        "max": 56
+      },
+      "caixaInicial": 1200000
+    },
+    {
+      "id": "maringa",
+      "nome": "Maringá",
+      "sigla": "MGA",
+      "cidade": "Maringá",
+      "estado": "PR",
+      "serie": "C",
+      "cores": {
+        "primaria": "#2E7D32",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Willie Davids",
+        "capacidade": 21000
+      },
+      "fundacao": 2010,
+      "rival": "londrina",
+      "torcida": 10,
+      "reputacao": 48,
+      "forcaElenco": {
+        "min": 36,
+        "max": 58
+      },
+      "caixaInicial": 2000000
+    },
+    {
+      "id": "paysandu",
+      "nome": "Paysandu",
+      "sigla": "PAY",
+      "cidade": "Belém",
+      "estado": "PA",
+      "serie": "C",
+      "cores": {
+        "primaria": "#1565C0",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Curuzu",
+        "capacidade": 16200
+      },
+      "fundacao": 1914,
+      "rival": "remo",
+      "torcida": 30,
+      "reputacao": 58,
+      "forcaElenco": {
+        "min": 40,
+        "max": 62
+      },
+      "caixaInicial": 4000000
+    },
+    {
+      "id": "santa-cruz",
+      "nome": "Santa Cruz",
+      "sigla": "STA",
+      "cidade": "Recife",
+      "estado": "PE",
+      "serie": "C",
+      "cores": {
+        "primaria": "#C62828",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Arruda",
+        "capacidade": 60344
+      },
+      "fundacao": 1914,
+      "rival": "sport",
+      "torcida": 35,
+      "reputacao": 62,
+      "forcaElenco": {
+        "min": 42,
+        "max": 64
+      },
+      "caixaInicial": 5000000
+    },
+    {
+      "id": "volta-redonda",
+      "nome": "Volta Redonda",
+      "sigla": "VRE",
+      "cidade": "Volta Redonda",
+      "estado": "RJ",
+      "serie": "C",
+      "cores": {
+        "primaria": "#F9A825",
+        "secundaria": "#212121"
+      },
+      "estadio": {
+        "nome": "Raulino de Oliveira",
+        "capacidade": 18250
+      },
+      "fundacao": 1976,
+      "rival": null,
+      "torcida": 8,
+      "reputacao": 48,
+      "forcaElenco": {
+        "min": 36,
+        "max": 58
+      },
+      "caixaInicial": 2000000
+    },
+    {
+      "id": "ypiranga-rs",
+      "nome": "Ypiranga-RS",
+      "sigla": "YPI",
+      "cidade": "Erechim",
+      "estado": "RS",
+      "serie": "C",
+      "cores": {
+        "primaria": "#2E7D32",
+        "secundaria": "#FFFFFF"
+      },
+      "estadio": {
+        "nome": "Colosso da Lagoa",
+        "capacidade": 22000
+      },
+      "fundacao": 1924,
+      "rival": "caxias",
+      "torcida": 10,
+      "reputacao": 50,
+      "forcaElenco": {
+        "min": 38,
+        "max": 60
+      },
+      "caixaInicial": 2500000
+    }
+  ]
+}

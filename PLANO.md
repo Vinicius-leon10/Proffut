@@ -1,6 +1,6 @@
 # Proffut — Plano do jogo
 
-> Jogo de técnico de futebol para celular, inspirado no Brasfoot.
+> Jogo de técnico de futebol, inspirado no Brasfoot, que roda no **navegador do celular** e pode ser **instalado na tela inicial do iPhone** como se fosse um app.
 > Documento vivo: atualize conforme as decisões forem tomadas.
 > Pesquisa que embasa este plano: [docs/REFERENCIA_BRASFOOT.md](docs/REFERENCIA_BRASFOOT.md).
 
@@ -18,7 +18,8 @@ Você é o técnico. Escolhe um clube, monta o elenco, define a tática, acompan
 |---|---|
 | **Rápido** | Uma rodada em 1–3 min. Uma temporada inteira em menos de 1 hora. |
 | **Simples de entender, difícil de dominar** | Poucos atributos e decisões claras, mas com consequências de longo prazo. |
-| **Leve e offline** | Roda em celular simples, sem internet, sem conta obrigatória. |
+| **Abre em qualquer celular** | É um site: basta um link. No iPhone, "Adicionar à Tela de Início" faz ele abrir em tela cheia, como app. |
+| **Seu jogo fica no seu celular** | O save fica guardado no próprio aparelho, funciona sem internet depois de aberto, sem conta e sem servidor. |
 | **Carreira longa** | Jogadores envelhecem e se aposentam, novos surgem, o técnico troca de clube. |
 | **Feito para celular** | Tela em pé, uma mão, sessões curtas, salvamento automático. |
 
@@ -30,9 +31,9 @@ Você é o técnico. Escolhe um clube, monta o elenco, define a tática, acompan
 | Todos os jogos da rodada acontecendo ao mesmo tempo | Velocidade ajustável e botão "pular para o fim" |
 | Poucos atributos por jogador (posição, força, características) | Explicações curtas na tela ("por que perdi?") para quem está começando |
 | Divisões com acesso e rebaixamento, copas | Objetivos da diretoria claros e visíveis a cada temporada |
-| Mercado, finanças e estádio simples | Salvamento automático a cada rodada e (depois) backup na nuvem |
+| Mercado, finanças e estádio simples | Salvamento automático a cada rodada e backup em arquivo |
 | Propostas de emprego e demissão | Conquistas e histórico da carreira para compartilhar |
-| Banco de dados editável pela comunidade | Editor dentro do próprio app, com importar/exportar pacotes |
+| Banco de dados editável pela comunidade | Editor dentro do próprio jogo, com importar/exportar pacotes |
 
 ---
 
@@ -41,23 +42,26 @@ Você é o técnico. Escolhe um clube, monta o elenco, define a tática, acompan
 O MVP precisa provar uma coisa: **jogar uma temporada inteira é divertido.**
 
 **Entra no MVP**
-- 1 país fictício (inspirado no Brasil) com **2 divisões de 20 clubes** (acesso/rebaixamento de 4).
+- **Brasil 2026: Séries A, B e C**, com os 60 clubes reais e os regulamentos reais de 2026 (ver [data/brasil-2026](data/brasil-2026/LEIAME.md)).
+  - A Série D não é jogada. Uma lista reserva com os clubes da Série D fornece quem sobe para a Série C.
 - Escolher clube e começar carreira.
-- Elenco com ~25 jogadores por clube (cerca de 1.000 jogadores no total), todos fictícios e gerados.
+- Elenco com ~25 jogadores por clube (cerca de 1.500 no total). **Reais ou fictícios: decisão pendente** (seção 11).
 - Escalação, formação e estilo de jogo.
 - Partida ao vivo em texto, com substituições e mudança de tática durante o jogo.
 - Classificação, calendário, resultados e artilharia.
 - Mercado básico: comprar, vender, jogadores livres.
 - Finanças básicas: bilheteria, salários, saldo.
-- Fim de temporada: envelhecimento, evolução, aposentadoria e novos jogadores.
-- Salvar/carregar (3 espaços + salvamento automático).
+- Fim de temporada: acesso/rebaixamento, envelhecimento, evolução, aposentadoria e novos jogadores.
+- Salvar no celular (3 espaços + salvamento automático) e exportar/importar o save em arquivo.
+- Instalável na tela inicial do iPhone e do Android.
 
 **Fica para depois**
-- Copa nacional, competições continentais, mais países.
+- Copa do Brasil, estaduais, Série D jogável, competições continentais, outros países.
 - Empréstimos, contratos detalhados, categorias de base.
 - Estádio (ampliação), patrocínios.
 - Demissão e propostas de outros clubes.
 - Editor de banco de dados.
+- Versão nas lojas (Google Play / App Store).
 - Multijogador.
 
 ---
@@ -133,7 +137,7 @@ Ponto de partida das constantes: o remake em Python, que já foi calibrado (ver 
 
 **Simulação em níveis:**
 - Competições em que o jogador está: motor completo em todos os jogos, inclusive os que ele não assiste (a IA faz o papel dos técnicos).
-- Ligas de outros países: modelo rápido que só gera o placar.
+- Competições de fora (no futuro: Série D, outros países): modelo rápido que só gera o placar.
 
 **Na tela:** placar, relógio, narração curta, velocidade (1x/2x/4x/pular), placares dos outros jogos da rodada mudando ao vivo e intervalo para ajustes.
 
@@ -141,10 +145,18 @@ Ponto de partida das constantes: o remake em Python, que já foi calibrado (ver 
 
 ### 3.4 Temporada e competições
 
+Regulamentos reais de 2026 ([competicoes.json](data/brasil-2026/competicoes.json)):
+
+| Série | Formato | Sobem | Caem |
+|---|---|---|---|
+| A | 38 rodadas, pontos corridos | — | 4 |
+| B | 38 rodadas + playoff (3º × 6º e 4º × 5º, ida e volta) | 2 direto + 2 do playoff | 4 |
+| C | 19 rodadas (turno único) → 2 quadrangulares com os 8 melhores (ida e volta) → final | 2 de cada quadrangular | 2 (em 2026) |
+
 - Calendário com datas reais (fins de semana e meio de semana).
-- Liga por pontos corridos, turno e returno.
-- Critérios de desempate: pontos, vitórias, saldo, gols pró, confronto direto.
-- Depois do MVP: Série C e D, copa nacional em mata-mata (ida e volta, pênaltis) e competições continentais com nomes fictícios.
+- Critérios de desempate: pontos, vitórias, saldo, gols pró, confronto direto, cartões, sorteio.
+- Para quem cai da Série C, sobem clubes da **lista reserva da Série D**, sorteados com peso pela força. Assim cada série fica sempre com 20 clubes.
+- Depois do MVP: Copa do Brasil (mata-mata, ida e volta, pênaltis), estaduais, Série D jogável e competições continentais.
 - **Competições como dados:** formato (pontos corridos, grupos, mata-mata, folga com número ímpar de clubes) e **regras de participação** em arquivo. Exemplos de regra: "os 4 primeiros da Série A", "campeão da copa", "todos do estado X", "os 16 de maior reputação". Isso permite criar estaduais e torneios continentais sem mexer no código e prepara o editor.
 - **Virada de temporada:** premiação, acesso/rebaixamento, envelhecimento, aposentadorias, novos jogadores, contratos que vencem e novo orçamento.
 
@@ -177,97 +189,110 @@ Ponto de partida das constantes: o remake em Python, que já foi calibrado (ver 
 
 ### 3.8 Mundo e dados
 
-- **Tudo fictício no lançamento:** clubes, cidades-sede e jogadores gerados por regras (nomes por nacionalidade, força coerente com a divisão), revisados para não coincidir com clubes reais.
+- **Clubes reais do Brasil 2026** (Séries A, B e C) em [data/brasil-2026](data/brasil-2026/LEIAME.md): nome, sigla, cidade, estádio, capacidade, cores, fundação, rival, torcida, reputação, faixa de força e caixa inicial.
+- **Sem escudos oficiais:** a interface desenha um escudo simples com as cores e a sigla do clube.
+- **Jogadores:** decisão pendente (seção 11). Não vamos tirar dos arquivos do Brasfoot (ver seção 4).
 - Dados em **pacotes JSON** versionados (país → divisões → clubes → jogadores).
-- **Editor no app** (pós-MVP) para renomear clubes e jogadores, mudar cores e atributos, com importar/exportar pacotes. Foi assim que a comunidade manteve o Brasfoot vivo.
+- **Editor no jogo** (pós-MVP) para renomear clubes e jogadores, mudar cores e atributos, com importar/exportar pacotes. Foi assim que a comunidade manteve o Brasfoot vivo.
 
 ---
 
 ## 4. Questões legais (ler antes de qualquer coisa)
 
-- **"Brasfoot" é marca e obra de outro desenvolvedor.** Usar só como referência de *gameplay*. Não copiar nome, telas, ícones, textos, sons nem banco de dados.
-- **Nomes e escudos de clubes reais** são marcas registradas. **Nomes de jogadores reais** envolvem direito de imagem. O jogo deve sair com dados fictícios. O editor deixa cada jogador personalizar o próprio jogo.
-- Antes de usar qualquer nome real, **consultar um advogado**.
-- **LGPD e lojas:** se houver anúncios, analytics ou contas, é preciso ter política de privacidade publicada e preencher a seção de segurança de dados na Google Play e na App Store.
+- **"Brasfoot" é marca e obra de outro desenvolvedor.** Usar só como referência de *gameplay*. Não copiar nome, telas, ícones, textos, sons nem banco de dados. Em especial, **não vamos extrair jogadores dos arquivos do Brasfoot**: a força e as características de cada jogador são trabalho dos autores (ou dos fãs que atualizam os arquivos).
+- **Decisão tomada: nomes reais dos clubes.** Fatos como "o Flamengo está na Série A de 2026" são públicos. Escudos e marcas, não: por isso o jogo **não usa escudos oficiais**.
+- **Nomes de jogadores reais** envolvem direito de imagem (Lei Pelé). O risco é baixo num projeto pessoal e gratuito e aumenta se o jogo tiver anúncios ou for vendido.
+- **Antes de ganhar dinheiro com o jogo, consultar um advogado.**
+- **LGPD:** enquanto o save ficar só no celular e não houver anúncios, analytics ou contas, não coletamos dados pessoais. Se isso mudar, é preciso publicar uma política de privacidade.
 
 ---
 
 ## 5. Tecnologia
 
-### Recomendação: **React Native + Expo + TypeScript**
+### Decisão: **site (PWA) com React + TypeScript + Vite**
+
+Um **PWA** (Progressive Web App) é um site que pode ser instalado na tela inicial, abre em tela cheia e funciona sem internet.
 
 Por quê:
-- O jogo é 90% **telas, listas e tabelas**, não gráficos pesados. Um framework de apps é mais produtivo aqui do que um motor de jogos.
-- Um único código para **Android e iOS**.
-- TypeScript é muito usado, tem muito material de apoio e é fácil de programar com ajuda de IA.
-- O motor do jogo em TypeScript puro também roda no **navegador** (protótipo rápido) e no **Node** (testes e simulação em massa).
-- O Expo facilita build, publicação e atualizações por OTA (EAS).
+- **Basta um link** para jogar e para mostrar aos amigos. Não depende de loja nem de aprovação.
+- No **iPhone:** Safari → Compartilhar → "Adicionar à Tela de Início". O jogo abre com ícone próprio, em tela cheia. No Android, o Chrome oferece "Instalar app".
+- O jogo é 90% **telas, listas e tabelas**: exatamente o que a web faz bem.
+- **Hospedagem grátis** (GitHub Pages, Cloudflare Pages, Netlify ou Vercel). Não precisa de servidor, porque tudo roda no celular.
+- O motor em TypeScript também roda no **Node**, para testes e simulação em massa.
+- **Lojas depois:** o mesmo código pode ser empacotado com **Capacitor** para Google Play e App Store.
 
-| Alternativa | Quando faria sentido |
-|---|---|
-| Flutter (Dart) | Igualmente boa para apps com muita interface. Escolha se preferir Dart. |
-| Unity / Godot | Se a partida em 2D/3D for o centro do jogo. Mais pesados para telas de menu. |
-| Kotlin nativo | Só Android. Não compensa. |
+### Salvar no celular
+
+- O save fica no **IndexedDB**, o banco de dados do próprio navegador, guardado no aparelho.
+- O jogo pede ao navegador para **não apagar os dados** (`navigator.storage.persist()`).
+- **Atenção ao iPhone:** o Safari pode apagar dados de sites que ficam 7 dias sem uso. Um site **instalado na tela inicial** tem contador próprio, que zera a cada uso, então os dados ficam ([WebKit](https://searchengineland.com/what-safaris-7-day-cap-on-script-writeable-storage-means-for-pwa-developers-332519)). Por isso:
+  - na primeira abertura no iPhone, o jogo mostra como instalar na tela inicial;
+  - **Exportar/Importar save** (arquivo `.proffut`) em Configurações, como backup e para passar o jogo de um aparelho para outro.
+- Apagar os dados do Safari ou desinstalar o ícone apaga o save. Isso precisa ficar claro na tela de Configurações.
 
 ### Arquitetura
 
 ```
 proffut/
-├── packages/
-│   ├── engine/     # regras do jogo em TypeScript puro (sem interface):
-│   │               # simulação, calendário, competições, mercado, finanças, IA
-│   └── data/       # gerador de mundo fictício + pacotes JSON
-├── apps/
-│   └── mobile/     # app Expo: telas, navegação, salvamento
+├── src/
+│   ├── engine/      # regras do jogo em TypeScript puro (sem interface):
+│   │                # simulação, calendário, competições, mercado, finanças, IA
+│   ├── save/        # salvamento no IndexedDB, exportar/importar, migração de versões
+│   └── ui/          # telas em React
+├── data/
+│   └── brasil-2026/ # clubes, regulamentos (e jogadores)
+├── public/          # ícones, manifest (o que faz o site ser instalável)
 └── tools/
-    └── sim/        # linha de comando: simula centenas de temporadas
-                    # e imprime estatísticas para calibrar o equilíbrio
+    ├── sim/         # simula centenas de temporadas no Node e imprime
+    │                # estatísticas para calibrar o equilíbrio
+    └── dados/       # scripts que geram os arquivos de data/
 ```
 
 **Princípios**
-1. **O motor não conhece a interface.** O app só chama funções como `avancarDia(estado)` e `simularPartida(jogo, seed)`.
+1. **O motor não conhece a interface.** A tela só chama funções como `avancarDia(estado)` e `simularPartida(jogo, seed)`.
 2. **Determinístico:** RNG com semente salva no estado do jogo.
-3. **Estado serializável:** o jogo inteiro cabe num objeto que vira arquivo de save.
+3. **Estado serializável:** o jogo inteiro cabe num objeto que vira o save.
 4. **Testes desde o primeiro dia** no motor (Vitest).
 5. **Simulação em massa** (`tools/sim`) para balancear com números, não com "achismo".
+6. **Pesado fora da tela:** a simulação da rodada roda num *Web Worker*, para a interface não travar.
 
-**Bibliotecas previstas:** `expo-router` (navegação), `zustand` (estado da interface), `expo-sqlite` ou arquivo JSON compactado (saves), `@shopify/flash-list` (listas grandes), Vitest, ESLint + Prettier, GitHub Actions (CI). Depois: Sentry (erros), AdMob e compras no app.
+**Bibliotecas previstas:** React, Vite, `vite-plugin-pwa` (instalação e funcionamento offline), Zustand (estado da interface), Dexie (IndexedDB), React Router, Vitest (testes do motor), Playwright (testes da interface num navegador de celular simulado), ESLint + Prettier, GitHub Actions (testes e publicação automática do site).
 
 ### Modelo de dados (núcleo)
 
 | Entidade | Principais campos |
 |---|---|
 | `Pais` | id, nome, divisões |
-| `Competicao` | id, tipo (liga/copa), formato, regras de acesso/rebaixamento, premiação |
-| `Clube` | id, nome, cores, cidade, torcida, estádio (capacidade), saldo, reputação |
+| `Competicao` | id, tipo (liga/copa), fases, regras de acesso/rebaixamento, desempate, premiação |
+| `Clube` | id, nome, sigla, cores, cidade, estado, estádio (nome, capacidade), torcida, reputação, saldo |
 | `Jogador` | id, nome, idade, nacionalidade, posição (G/L/Z/M/A), lado, força, potencial, 2 características, energia, moral, lesão, suspensão, contrato, clubeId |
 | `Temporada` | ano, competições, calendário |
-| `Partida` | id, data, competição, mandante, visitante, placar, eventos, seed |
+| `Partida` | id, data, competição, fase, mandante, visitante, placar, eventos, seed |
 | `EventoPartida` | minuto, tipo (gol, cartão, lesão, substituição...), jogadores |
 | `Transferencia` | jogador, origem, destino, valor, data, tipo |
 | `Tecnico` | nome, clube atual, reputação, confiança da diretoria, confiança da torcida, histórico |
 | `Mensagem` | data, tipo (proposta, diretoria, notícia), conteúdo, ações |
-| `EstadoDoJogo` | data atual, seed, técnico(s), mundo, temporada, configurações |
+| `EstadoDoJogo` | versão do save, data atual, seed, técnico(s), mundo, temporada, configurações |
 
 ---
 
 ## 6. Telas
 
-Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado · Mais**, com um botão grande **"Avançar"** sempre visível.
+Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado · Mais**, com um botão grande **"Avançar"** sempre visível. O layout respeita o "notch" e a barra inferior do iPhone.
 
-1. **Início:** novo jogo, continuar, carregar, configurações.
-2. **Novo jogo:** nome do técnico, país, divisão, clube.
+1. **Início:** novo jogo, continuar, carregar, configurações. No iPhone, se o jogo não estiver instalado, mostra como adicionar à tela inicial.
+2. **Novo jogo:** nome do técnico, série, clube.
 3. **Painel do clube (hub):** próximo jogo, posição na tabela, saldo, objetivo da diretoria, caixa de mensagens.
 4. **Elenco:** lista ordenável (posição, força, idade, energia, salário).
 5. **Detalhe do jogador:** atributos, histórico, contrato, ações (vender, renovar, listar).
 6. **Escalação e tática:** campinho com toque/arrastar, formação, estilo, marcação, reservas, força efetiva colorida.
 7. **Partida ao vivo:** placar, relógio, narração, outros jogos, substituições, velocidade.
-8. **Competições:** classificação, rodadas/resultados, artilharia.
+8. **Competições:** classificação de cada série (com fases e playoffs), rodadas/resultados, artilharia.
 9. **Mercado:** busca, filtros, propostas enviadas e recebidas.
 10. **Finanças:** receitas, despesas, saldo, preço do ingresso.
 11. **Mensagens:** propostas, diretoria, notícias.
 12. **Histórico:** campeões, recordes, carreira do técnico.
-13. **Configurações:** velocidade padrão da partida, som, idioma, saves.
+13. **Configurações:** velocidade padrão da partida, som, saves, **exportar/importar save**.
 
 ---
 
@@ -275,70 +300,71 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
 
 > Estimativas para **meio período (~10–15 h/semana) com ajuda de IA**. São só referência; o importante é a ordem.
 
-### Fase 0 · Fundação (1–2 semanas)
-- Confirmar nome, tecnologia e escopo do MVP (seção 11).
-- Criar o monorepo, lint/format, testes e CI no GitHub.
-- **Pronto quando:** `npm test` roda no CI e o app Expo vazio abre no celular.
+### Fase 0 · Fundação (1 semana)
+- Projeto React + TypeScript + Vite, configurado como PWA (ícone, manifest, offline).
+- Lint/format, testes e CI no GitHub.
+- Publicação automática do site a cada alteração.
+- **Pronto quando:** o site vazio abre pelo link, instala na tela inicial do iPhone e abre em tela cheia, inclusive sem internet.
 
-### Fase 1 · Motor do jogo, sem celular (3–6 semanas)
-- Modelo de dados + gerador de mundo fictício (2 divisões).
+### Fase 1 · Motor do jogo (3–6 semanas)
+- Carregar clubes e regulamentos de `data/brasil-2026` + elencos (seção 11).
 - Simulador de partida com seed.
-- Calendário, liga, classificação, virada de temporada.
-- `tools/sim`: simular 100 temporadas e mostrar médias de gols, % de vitória do mandante, campeões e evolução de força.
+- Calendário, as três séries com seus formatos (playoff da B, quadrangulares da C), acesso/rebaixamento, virada de temporada.
+- `tools/sim`: simular 100 temporadas e mostrar médias de gols, % de vitória do mandante, correlação força × pontos, campeões e evolução de força.
 - **Pronto quando:** a linha de comando simula 10 temporadas seguidas sem erro e as estatísticas batem com os alvos da seção 3.3.
 
 ### Fase 2 · MVP jogável no celular (6–10 semanas)
 - Telas 1 a 10 da seção 6, de forma simples.
 - Partida ao vivo com os outros jogos da rodada.
 - Mercado básico e finanças básicas.
-- Salvar/carregar + salvamento automático.
-- **Pronto quando:** dá para jogar 3 temporadas seguidas no celular sem travar e 5 pessoas testaram e deram retorno.
+- Salvar no celular + salvamento automático + exportar/importar.
+- **Pronto quando:** dá para jogar 3 temporadas seguidas no iPhone (instalado na tela inicial) sem travar nem perder o save, e 5 pessoas testaram e deram retorno.
 
 ### Fase 3 · Profundidade (4–8 semanas)
-- Copa nacional, Série C e D.
+- Copa do Brasil.
 - Contratos, renovação, empréstimos, categorias de base.
 - Objetivos da diretoria, demissão, propostas de emprego.
 - Estádio e patrocínio.
 - **Pronto quando:** uma carreira de 10 temporadas tem altos e baixos e troca de clube.
 
 ### Fase 4 · Conteúdo e comunidade (4–6 semanas)
-- Mais países fictícios e competições continentais.
-- Editor no app + importar/exportar pacotes.
+- Série D jogável, estaduais, competições continentais.
+- Editor no jogo + importar/exportar pacotes.
 - Histórico, recordes e conquistas.
 
-### Fase 5 · Polimento e lançamento (4–6 semanas)
+### Fase 5 · Polimento e divulgação do site (3–4 semanas)
 - Tutorial rápido (primeiros 5 minutos), ícone, identidade visual, sons.
-- Desempenho em celular simples, acessibilidade (tamanho de fonte, contraste).
-- Monetização (seção 8), política de privacidade, páginas da loja.
-- **Teste fechado na Google Play** (ver seção 9) → lançamento Android.
+- Desempenho em celular simples, acessibilidade (tamanho de fonte, contraste, leitor de tela).
+- Domínio próprio (opcional) e divulgação em comunidades de jogos de técnico.
 
-### Fase 6 · Depois do lançamento
-- iOS.
+### Fase 6 · Depois
+- **Lojas:** empacotar com Capacitor → Google Play e App Store (seção 9).
 - Multijogador local (vários técnicos no mesmo celular, revezando, como no Brasfoot).
-- Backup na nuvem, temporadas temáticas, partida em 2D simples (opcional).
-- Ligas online entre amigos (avaliar custo de servidor antes).
+- Backup na nuvem (opcional, com conta), partida em 2D simples (opcional).
 
-**Total até o lançamento no Android:** cerca de 6 a 9 meses em meio período.
+**Total até o site completo (Fase 5):** cerca de 5 a 8 meses em meio período. A Fase 2 já entrega algo jogável em ~3 meses.
 
 ---
 
 ## 8. Monetização
 
-Modelo parecido com o do Brasfoot (versão gratuita + versão registrada). O Brasfoot de PC ficou gratuito em novembro de 2025, então cobrar desde o início seria difícil.
-
-- **Grátis com anúncios** (intersticial no máximo a cada N rodadas, nunca durante a partida).
-- **Proffut Pro, compra única:** remove anúncios e libera extras (editor, mais espaços de save, estatísticas avançadas).
+- **Site no começo: grátis e sem anúncios.** O foco é ter jogadores e retorno.
+- O Brasfoot de PC ficou gratuito em novembro de 2025, então cobrar desde o início seria difícil.
+- **Mais adiante (de preferência só depois de falar com um advogado, por causa dos nomes reais):**
+  - **Proffut Pro, compra única** (no site via Pix/cartão, ou nas lojas): extras como editor, mais espaços de save, estatísticas avançadas.
+  - Anúncios discretos (no máximo a cada N rodadas, nunca durante a partida), só na versão grátis.
 - **Nada de pagar para ganhar:** não vender dinheiro do clube, jogadores ou força.
 
-**Custos fixos:** Google Play US$ 25 (uma vez), Apple Developer US$ 99/ano (só quando for para iOS). O plano gratuito do Expo EAS basta no início.
+**Custos:** hospedagem do site grátis; domínio próprio ~R$ 40/ano (opcional). Lojas, só na Fase 6: Google Play US$ 25 (uma vez), Apple Developer US$ 99/ano.
 
 ---
 
 ## 9. Lançamento
 
-- **Android primeiro:** no Brasil, o Android tem ~75% dos celulares e o iOS ~25% ([Statcounter, ago/2026](https://gs.statcounter.com/os-market-share/mobile-tablet/brazil)).
-- **Conta pessoal nova na Google Play** precisa rodar um **teste fechado com pelo menos 12 testadores, inscritos por 14 dias seguidos**, antes de liberar a produção ([Ajuda do Play Console](https://support.google.com/googleplay/android-developer/answer/14151465)). Começar a juntar testadores (amigos, grupos de futebol, comunidades de jogos de técnico) já na Fase 2.
-- Página da loja: capturas da partida ao vivo e do painel, vídeo curto, palavras-chave ("técnico de futebol", "manager", "brasileirão" com cuidado de marca).
+1. **Site** (Fase 2 em diante): link compartilhável, com testes entre amigos. No Brasil, ~75% dos celulares são Android e ~25% iPhone ([Statcounter, ago/2026](https://gs.statcounter.com/os-market-share/mobile-tablet/brazil)), e o site atende os dois.
+2. **Lojas** (Fase 6), se fizer sentido:
+   - **Google Play:** conta pessoal nova precisa de **teste fechado com pelo menos 12 testadores, inscritos por 14 dias seguidos**, antes de liberar a produção ([Ajuda do Play Console](https://support.google.com/googleplay/android-developer/answer/14151465)). Os testadores do site podem ser os mesmos.
+   - **App Store:** a Apple pode recusar apps que são "só um site embrulhado". Um jogo completo e offline costuma passar, mas é um risco a considerar.
 
 ---
 
@@ -348,10 +374,11 @@ Modelo parecido com o do Brasfoot (versão gratuita + versão registrada). O Bra
 |---|---|
 | Jogo desequilibrado (muitos gols, time grande sempre ganha, economia quebra) | `tools/sim` + alvos numéricos + testes automáticos |
 | Escopo crescer demais e nunca lançar | MVP fechado; tudo o mais vai para a lista "depois" |
-| Lento com muitos jogadores e ligas | Simular em detalhe só as ligas do usuário; nas outras, resultado rápido |
-| Problemas legais com nomes reais | Dados fictícios + editor; consultar advogado |
+| **Perder o save no iPhone** | Instalar na tela inicial, `storage.persist()`, exportar/importar save, aviso claro em Configurações |
+| Save antigo não abrir depois de uma atualização | Versão no save + migração automática + testes com saves antigos |
+| Lento em celular simples | Simulação num Web Worker; detalhe completo só nas séries do jogador |
+| Problemas legais com nomes reais | Sem escudos oficiais; nada extraído do Brasfoot; advogado antes de monetizar |
 | Jogador abandona cedo | Primeiros 5 minutos guiados, objetivos claros, rodadas curtas |
-| Perda de save | Salvamento automático, saves versionados, migração entre versões |
 
 **Concorrência:**
 - **Brasfoot:** PC gratuito desde nov/2025, sem atualização oficial desde 2023, mantido pela comunidade. A edição para celular tem limitações. Existe público fiel e espaço para um jogo no estilo, moderno e atualizado.
@@ -360,19 +387,23 @@ Modelo parecido com o do Brasfoot (versão gratuita + versão registrada). O Bra
 
 ---
 
-## 11. Decisões em aberto
+## 11. Decisões
 
-1. **Nome:** "Proffut" é o nome final ou provisório?
-2. **Tecnologia:** confirmar React Native + Expo + TypeScript.
+**Tomadas**
+- ✅ Site primeiro (PWA), instalável na tela inicial do iPhone, save guardado no celular.
+- ✅ Começar só com o Brasil 2026: Séries A, B e C, com os nomes reais dos clubes e os regulamentos de 2026.
+- ✅ Sem escudos oficiais; nada extraído dos arquivos do Brasfoot.
+
+**Em aberto**
+1. **Jogadores:** nomes reais (elencos de 2026 montados a partir de fontes públicas, com força e características definidas por nós) ou fictícios gerados (rápido, sem risco)?
+2. **Nome:** "Proffut" é o nome final ou provisório?
 3. **Divisão do trabalho:** quanto tempo por semana você tem? Você vai programar, ou a IA programa e você testa, revisa e decide?
 4. **Partida:** só texto (como o Brasfoot) ou planejar um 2D simples para o futuro?
-5. **Mundo inicial:** um país fictício inspirado no Brasil está bom para o MVP?
-6. **Monetização:** grátis com anúncios + Pro, ou pago desde o início?
 
 ---
 
 ## 12. Próximos passos
 
-1. Revisar e ajustar este plano (principalmente a seção 11).
-2. Fase 0: criar a estrutura do repositório e o CI.
-3. Fase 1, primeiro marco: **gerador de mundo + simulador de partida + linha de comando que simula uma temporada e imprime a tabela.**
+1. Decidir a questão dos jogadores (seção 11).
+2. Fase 0: criar o projeto PWA e publicar o site vazio para testar a instalação no iPhone.
+3. Fase 1, primeiro marco: **carregar os 60 clubes + simulador de partida + linha de comando que simula uma temporada das três séries e imprime as tabelas.**
