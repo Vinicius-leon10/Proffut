@@ -1,0 +1,66 @@
+name: Baixar dados dos elencos
+
+# Baixa as fontes públicas dos elencos reais e grava tudo na branch dados-elencos.
+# Roda no GitHub porque a rede do ambiente de desenvolvimento não alcança esses sites.
+# Quem monta os elencos do jogo a partir desses arquivos é tools/elencos/montar.ts.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  baixar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v7
+      - name: Preparar (programa das súmulas do BrazilianFootball/data, licença MIT)
+        run: |
+          python3 -m venv /tmp/venv
+          /tmp/venv/bin/pip install --quiet PyPDF2==3.0.1 requests
+          git clone --quiet --depth 1 https://github.com/BrazilianFootball/data /tmp/bf
+          mkdir -p dados/sumulas
+          for arquivo in /tmp/bf/results/processed/Serie_[ABCD]_2025_games.json; do
+            gzip -c "$arquivo" > "dados/sumulas/$(basename "$arquivo").gz"
+          done
+      - name: Súmulas da CBF de 2026 (Séries A, B e C)
+        continue-on-error: true
+        run: /tmp/venv/bin/python tools/elencos/sumulas_cbf.py /tmp/bf 2026 dados
+      - name: Cartola (posições da Série A)
+        continue-on-error: true
+        run: curl -sSf -A "Mozilla/5.0" https://api.cartola.globo.com/atletas/mercado | gzip > dados/cartola-mercado.json.gz
+      - name: Transfermarkt (base livre CC0 do projeto transfermarkt-datasets)
+        continue-on-error: true
+        run: |
+          curl -sSfL https://pub-e682421888d945d684bcae8890b0ec20.r2.dev/data/players.csv.gz -o /tmp/players.csv.gz
+          curl -sSfL https://pub-e682421888d945d684bcae8890b0ec20.r2.dev/data/clubs.csv.gz -o /tmp/clubs.csv.gz
+          /tmp/venv/bin/python tools/elencos/filtrar_transfermarkt.py /tmp/players.csv.gz /tmp/clubs.csv.gz dados
+      - name: Wikidata (posição e nascimento)
+        continue-on-error: true
+        run: /tmp/venv/bin/python tools/elencos/wikidata.py dados
+      - name: Gravar na branch dados-elencos
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dados
+          {
+            echo "# Dados dos elencos"
+            echo
+            echo "Baixados em $(date -u +%Y-%m-%dT%H:%MZ) pelo workflow elencos.yml do Proffut."
+            echo
+            echo "- Súmulas da CBF lidas pelo programa do BrazilianFootball/data (licença MIT)"
+            echo "- Cartola FC (posições da Série A)"
+            echo "- transfermarkt-datasets (CC0)"
+            echo "- Wikidata (CC0)"
+            echo
+            echo "| Arquivo | Tamanho |"
+            echo "|---|---|"
+            find . -type f -not -name LEIAME.md | sort | while read -r f; do echo "| ${f#./} | $(du -h "$f" | cut -f1) |"; done
+          } > LEIAME.md
+          cat LEIAME.md >> "$GITHUB_STEP_SUMMARY"
+          git init -q -b dados-elencos
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Dados dos elencos (${GITHUB_SHA::7})"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-elencos
