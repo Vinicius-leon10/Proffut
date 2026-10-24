@@ -5,3 +5,4 @@ dev-dist/
 .DS_Store
 tools/e2e/capturas/
 tests/resultado/
+__pycache__/
