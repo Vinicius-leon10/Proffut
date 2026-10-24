@@ -27,12 +27,10 @@ O save fica guardado **no próprio celular** e é feito sozinho a cada ação. P
 - Objetivo da diretoria e confiança da diretoria e da torcida.
 - Virada de temporada: acesso e rebaixamento, premiação, evolução e aposentadoria dos jogadores, jovens da base. A carreira não tem fim.
 
-## Publicar o site (uma vez só)
+## Publicação
 
-1. Juntar este código na branch `main`.
-2. No GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-
-A partir daí, cada alteração na `main` testa e publica o site sozinha (`.github/workflows/pages.yml`).
+Cada alteração na `main` testa o jogo, gera o site e publica na branch `gh-pages` (`.github/workflows/pages.yml`).
+O GitHub Pages serve essa branch (Settings → Pages → Deploy from a branch → `gh-pages`, pasta `/ (root)`).
 
 ## Desenvolvimento
 

@@ -1,23 +1,21 @@
 name: Publicar site
 
-# Publica o jogo no GitHub Pages a cada alteração na main.
-# Uma vez só: Settings → Pages → Source: "GitHub Actions".
+# A cada alteração na main: testa, gera o site e publica na branch gh-pages,
+# que o GitHub Pages serve em https://<usuário>.github.io/Proffut/.
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  build:
+  publicar:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -28,16 +26,14 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
-      - uses: actions/upload-pages-artifact@v5
-        with:
-          path: dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.publicar.outputs.page_url }}
-    steps:
-      - id: publicar
-        uses: actions/deploy-pages@v5
+      - name: Publicar na branch gh-pages
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dist
+          touch .nojekyll
+          git init -q -b gh-pages
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Publica ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
