@@ -2,6 +2,7 @@
 
 > Jogo de técnico de futebol para celular, inspirado no Brasfoot.
 > Documento vivo: atualize conforme as decisões forem tomadas.
+> Pesquisa que embasa este plano: [docs/REFERENCIA_BRASFOOT.md](docs/REFERENCIA_BRASFOOT.md).
 
 ---
 
@@ -43,7 +44,7 @@ O MVP precisa provar uma coisa: **jogar uma temporada inteira é divertido.**
 - 1 país fictício (inspirado no Brasil) com **2 divisões de 20 clubes** (acesso/rebaixamento de 4).
 - Escolher clube e começar carreira.
 - Elenco com ~25 jogadores por clube (cerca de 1.000 jogadores no total), todos fictícios e gerados.
-- Escalação, formação e postura tática.
+- Escalação, formação e estilo de jogo.
 - Partida ao vivo em texto, com substituições e mudança de tática durante o jogo.
 - Classificação, calendário, resultados e artilharia.
 - Mercado básico: comprar, vender, jogadores livres.
@@ -67,39 +68,72 @@ O MVP precisa provar uma coisa: **jogar uma temporada inteira é divertido.**
 
 | Campo | Detalhe |
 |---|---|
-| Posição | `GOL`, `LAT`, `ZAG`, `MEI`, `ATA` (+ lado D/E para laterais) |
-| Força | 1–99, a habilidade geral |
+| Posição | `G`, `L`, `Z`, `M`, `A` (o modelo do Brasfoot) + lado D/E |
+| Força | 0–100, a habilidade geral |
 | Idade | 16–40 |
 | Potencial | Oculto; define até onde a força pode crescer |
-| Características | Até 2, por exemplo: Finalização, Cabeceio, Velocidade, Drible, Passe, Marcação, Desarme, Reflexo (GOL), Colocação (GOL), Liderança |
+| Características | 2, de uma lista de 14. **Goleiro:** Colocação, Reflexo, Saída do gol, Defesa de pênalti. **Linha:** Armação, Cabeceio, Cruzamento, Desarme, Drible, Finalização, Marcação, Passe, Resistência, Velocidade |
 | Craque | Marcação especial para os melhores do mundo do jogo |
 | Estado | Energia, moral, lesão (dias), cartões acumulados, suspensão |
 | Contrato | Salário, data de término, valor de mercado |
 
-**Evolução:** cresce até ~27 anos (mais rápido se joga), estabiliza até ~31 e depois cai. Aposentadoria entre 33 e 40 anos. A cada temporada surgem jovens novos ("regens") para o mundo nunca esvaziar.
+**Evolução:** cresce até ~27 anos (mais rápido se joga), estabiliza até ~31 e depois cai. Aposentadoria entre 33 e 40 anos.
+
+**Mundo sustentável:** sem jovens novos, o mundo só perde jogadores. Então cada clube recebe de 1 a 3 jovens da base por temporada. Todo clube mantém um **elenco mínimo** (15 jogadores: 2 G, 4 defensores, 4 meias, 2 atacantes), e uma venda que deixaria o clube abaixo disso é recusada. Fora a base, o jogo nunca cria jogador nem dinheiro do nada.
+
+**Força efetiva:** é o número que entra na simulação.
+
+```
+força efetiva = força × fator de posição × fator de energia × fator de características
+```
+
+- **Posição:** o campo é um mapa de zonas vizinhas. Fora da posição, o jogador rende menos (zona vizinha ~0,92; duas zonas ~0,85; goleiro na linha ~0,65).
+- **Energia:** curva (90+ → 1,00; 50 → ~0,78; 30 → ~0,50).
+- **Características** que combinam com a zona dão bônus (+3% para uma, +7% para duas).
+- **Na tela:** a força aparece colorida (verde, amarelo, vermelho), para o jogador ver na hora quem está mal escalado ou cansado.
 
 ### 3.2 Tática
 
 - **Formações:** 4-4-2, 4-3-3, 3-5-2, 4-5-1, 5-3-2, 4-2-4.
-- **Postura:** Defensiva / Equilibrada / Ofensiva.
+- **Estilo** (multiplica defesa/meio/ataque e define o gasto de energia):
+
+| Estilo | Defesa | Meio | Ataque | Energia |
+|---|---|---|---|---|
+| Equilibrado | 1,00 | 1,00 | 1,00 | normal |
+| Ofensivo | 0,90 | 1,00 | 1,12 | alta |
+| Defensivo | 1,15 | 0,98 | 0,85 | baixa |
+| Contra-ataque | 1,10 | 0,90 | 0,95 | baixa |
+| Ataque total | 0,80 | 1,00 | 1,25 | muito alta |
+| Posse de bola | 1,00 | 1,15 | 0,90 | baixa |
+
 - **Marcação:** Normal / Pressão (mais chance de roubar a bola, gasta mais energia, mais cartões).
+- **Onde concentrar as jogadas:** pelo meio / pelas pontas (dá vantagem a quem tem Cruzamento, Velocidade ou Cabeceio).
 - **Escalação:** 11 titulares + 7 reservas, até 5 substituições.
-- Jogador fora de posição perde força proporcionalmente.
+
+Os multiplicadores são o ponto de partida e serão calibrados no simulador.
 
 ### 3.3 Simulação da partida
 
-Modelo inicial (simples, ajustável):
+Modelo de **evento por minuto**. Foi escolhido no lugar de "sortear o placar e encenar depois" porque substituir e mudar a tática durante o jogo precisa ter efeito real.
 
-1. Calcular a força de cada time por setor: **Defesa** (GOL, ZAG, LAT), **Meio** (MEI, parte dos LAT) e **Ataque** (ATA, parte dos MEI). Aplicar energia, moral, fator casa, postura e jogadores fora de posição.
-2. A cada minuto: o **meio** decide quem tem a iniciativa; o **ataque** de um contra a **defesa** do outro decide se surge uma chance.
-3. Chance → finalização: um jogador é escolhido (peso por posição e características) e o resultado sai da força dele contra a do goleiro.
-4. Eventos paralelos: faltas, cartões, pênaltis, lesões, queda de energia.
-5. A IA do adversário faz substituições e muda a postura conforme o placar.
+1. Calcular a força de cada time por setor com a **força efetiva** dos titulares: **Defesa** (G, Z, L), **Meio** (M, parte dos L) e **Ataque** (A, parte dos M). Aplicar estilo, moral e fator casa.
+2. A cada minuto, um evento pode acontecer (~0,12 por minuto). O **meio** decide qual time tem a iniciativa.
+3. Chance → gol com probabilidade `conversão × ataque / (ataque + defesa)`. O autor é sorteado com peso por posição e características (Finalização, Cabeceio), e o goleiro (Reflexo, Colocação) pesa contra.
+4. Eventos paralelos: faltas, escanteios, cartões, pênaltis, lesões, queda de energia.
+5. A IA faz substituições (prioriza quem está cansado) e muda o estilo conforme o placar.
 
-**Alvos de calibragem iniciais** (ajustar com dados reais):
-- ~2,4–2,7 gols por jogo.
-- Mandante vence ~45–50%, empates ~25–28%.
-- O time mais forte vence com frequência, mas zebras acontecem.
+Ponto de partida das constantes: o remake em Python, que já foi calibrado (ver [estudo de referência](docs/REFERENCIA_BRASFOOT.md#31-motor-de-partida-três-abordagens)).
+
+**Alvos de calibragem** (medidos pelo `tools/sim`):
+- 2,2–2,7 gols por jogo.
+- Mandante vence 42–50%, empates 22–30%.
+- **Correlação entre força do elenco e pontos ≥ 0,55.** O mais forte vence com frequência, mas zebras acontecem. Abaixo disso, o campeonato vira loteria.
+- Artilheiro com ~15–25 gols em 38 rodadas.
+- Rodízio: a maior parte do elenco joga ao longo da temporada.
+
+**Simulação em níveis:**
+- Competições em que o jogador está: motor completo em todos os jogos, inclusive os que ele não assiste (a IA faz o papel dos técnicos).
+- Ligas de outros países: modelo rápido que só gera o placar.
 
 **Na tela:** placar, relógio, narração curta, velocidade (1x/2x/4x/pular), placares dos outros jogos da rodada mudando ao vivo e intervalo para ajustes.
 
@@ -111,6 +145,7 @@ Modelo inicial (simples, ajustável):
 - Liga por pontos corridos, turno e returno.
 - Critérios de desempate: pontos, vitórias, saldo, gols pró, confronto direto.
 - Depois do MVP: Série C e D, copa nacional em mata-mata (ida e volta, pênaltis) e competições continentais com nomes fictícios.
+- **Competições como dados:** formato (pontos corridos, grupos, mata-mata, folga com número ímpar de clubes) e **regras de participação** em arquivo. Exemplos de regra: "os 4 primeiros da Série A", "campeão da copa", "todos do estado X", "os 16 de maior reputação". Isso permite criar estaduais e torneios continentais sem mexer no código e prepara o editor.
 - **Virada de temporada:** premiação, acesso/rebaixamento, envelhecimento, aposentadorias, novos jogadores, contratos que vencem e novo orçamento.
 
 ### 3.5 Mercado de transferências
@@ -125,15 +160,17 @@ Modelo inicial (simples, ajustável):
 
 ### 3.6 Finanças
 
-- **Receitas:** bilheteria (público × preço do ingresso; o público depende de estádio, fase do time e tamanho da torcida), cotas de TV, premiações, venda de jogadores e, depois, patrocínio.
-- **Despesas:** salários, manutenção do estádio e compras.
+- **Receitas:** bilheteria (público × preço do ingresso; o público depende da fase do time e do tamanho da torcida e **nunca passa da capacidade do estádio**), **cota de TV fixa por rodada** (maior nas divisões de cima, para os pequenos não quebrarem), premiações, venda de jogadores e, depois, patrocínio.
+- **Despesas:** salários (pagos **uma vez por mês**; pagar com mais frequência quebrou os clubes pequenos no remake estudado), manutenção do estádio e compras.
+- Todo dinheiro passa por um **extrato com tipo** (bilheteria, TV, salários, transferência...). Isso alimenta a tela de finanças e ajuda a achar bugs.
 - Saldo negativo traz restrições e pressão da diretoria.
+- **Meta de calibragem:** numa temporada simulada, quase nenhum clube da IA termina no vermelho.
 - Depois do MVP: ampliação do estádio (custo + obra de algumas semanas).
 
 ### 3.7 Carreira do técnico (pós-MVP)
 
-- Objetivo da diretoria por temporada (não cair, ficar no meio da tabela, subir, ser campeão), calculado pela força do elenco em relação à liga.
-- Barra de confiança da diretoria → demissão.
+- Objetivo da diretoria por temporada (não cair, ficar no meio da tabela, subir, ser campeão), calculado pela força do elenco em relação à liga. A situação aparece a cada rodada: "encaminhada", "em risco" ou "abaixo do esperado".
+- **Confiança da diretoria** e **confiança da torcida** (0–100, como no Brasfoot). A da diretoria baixa demais → demissão. A da torcida afeta o público.
 - Reputação do técnico → propostas de outros clubes.
 - Histórico: clubes, títulos, recordes.
 - Mais adiante: convite para seleção nacional.
@@ -203,12 +240,12 @@ proffut/
 | `Pais` | id, nome, divisões |
 | `Competicao` | id, tipo (liga/copa), formato, regras de acesso/rebaixamento, premiação |
 | `Clube` | id, nome, cores, cidade, torcida, estádio (capacidade), saldo, reputação |
-| `Jogador` | id, nome, idade, nacionalidade, posição, lado, força, potencial, características, energia, moral, lesão, suspensão, contrato, clubeId |
+| `Jogador` | id, nome, idade, nacionalidade, posição (G/L/Z/M/A), lado, força, potencial, 2 características, energia, moral, lesão, suspensão, contrato, clubeId |
 | `Temporada` | ano, competições, calendário |
 | `Partida` | id, data, competição, mandante, visitante, placar, eventos, seed |
 | `EventoPartida` | minuto, tipo (gol, cartão, lesão, substituição...), jogadores |
 | `Transferencia` | jogador, origem, destino, valor, data, tipo |
-| `Tecnico` | nome, clube atual, reputação, histórico |
+| `Tecnico` | nome, clube atual, reputação, confiança da diretoria, confiança da torcida, histórico |
 | `Mensagem` | data, tipo (proposta, diretoria, notícia), conteúdo, ações |
 | `EstadoDoJogo` | data atual, seed, técnico(s), mundo, temporada, configurações |
 
@@ -223,7 +260,7 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
 3. **Painel do clube (hub):** próximo jogo, posição na tabela, saldo, objetivo da diretoria, caixa de mensagens.
 4. **Elenco:** lista ordenável (posição, força, idade, energia, salário).
 5. **Detalhe do jogador:** atributos, histórico, contrato, ações (vender, renovar, listar).
-6. **Escalação e tática:** campinho com toque/arrastar, formação, postura, reservas.
+6. **Escalação e tática:** campinho com toque/arrastar, formação, estilo, marcação, reservas, força efetiva colorida.
 7. **Partida ao vivo:** placar, relógio, narração, outros jogos, substituições, velocidade.
 8. **Competições:** classificação, rodadas/resultados, artilharia.
 9. **Mercado:** busca, filtros, propostas enviadas e recebidas.
@@ -287,7 +324,7 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
 
 ## 8. Monetização
 
-Modelo parecido com o do Brasfoot (versão gratuita + versão registrada):
+Modelo parecido com o do Brasfoot (versão gratuita + versão registrada). O Brasfoot de PC ficou gratuito em novembro de 2025, então cobrar desde o início seria difícil.
 
 - **Grátis com anúncios** (intersticial no máximo a cada N rodadas, nunca durante a partida).
 - **Proffut Pro, compra única:** remove anúncios e libera extras (editor, mais espaços de save, estatísticas avançadas).
@@ -316,7 +353,10 @@ Modelo parecido com o do Brasfoot (versão gratuita + versão registrada):
 | Jogador abandona cedo | Primeiros 5 minutos guiados, objetivos claros, rodadas curtas |
 | Perda de save | Salvamento automático, saves versionados, migração entre versões |
 
-**Concorrentes para estudar** (o que fazem bem e mal): Brasfoot (PC), Elifoot, Football Manager Mobile, Top Eleven, Soccer Manager.
+**Concorrência:**
+- **Brasfoot:** PC gratuito desde nov/2025, sem atualização oficial desde 2023, mantido pela comunidade. A edição para celular tem limitações. Existe público fiel e espaço para um jogo no estilo, moderno e atualizado.
+- **Remakes e projetos abertos** estudados: ver [docs/REFERENCIA_BRASFOOT.md](docs/REFERENCIA_BRASFOOT.md).
+- **Ainda para estudar:** Elifoot, Football Manager Mobile, Top Eleven, Soccer Manager.
 
 ---
 
