@@ -1,7 +1,7 @@
 name: Checagem diária do site
 
-# Todo dia o robô abre o site publicado, joga uma partida, testa o jogo sem
-# internet e o save. Se falhar, o GitHub avisa por e-mail.
+# Todo dia os testes de ponta a ponta rodam no site publicado (inclusive sem internet).
+# Se falhar, o GitHub avisa por e-mail.
 on:
   schedule:
     - cron: "17 9 * * *" # 6h17 em Brasília
@@ -18,10 +18,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - name: Checagem do site publicado
-        run: npm run checagem -- "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+      - name: Testes no site publicado
+        env:
+          BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+        run: npm run test:e2e
       - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: checagem-diaria
-          path: tools/checagem/resultado/
+          path: tests/resultado/

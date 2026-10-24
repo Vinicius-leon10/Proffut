@@ -15,13 +15,15 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm test
-      - run: npm run build
+      - name: Testes do motor
+        run: npm test
+      - name: Verificação de tipos e geração do site
+        run: npm run build
       - run: npx playwright install --with-deps chromium
-      - name: Checagem no navegador (inclusive sem internet)
-        run: npm run checagem
+      - name: Testes de ponta a ponta (tela de iPhone, inclusive sem internet)
+        run: npm run test:e2e
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: checagem
-          path: tools/checagem/resultado/
+          name: testes
+          path: tests/resultado/

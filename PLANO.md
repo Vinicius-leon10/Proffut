@@ -14,7 +14,7 @@
 - Estádio: ampliar a capacidade ou modernizar (conforto atrai mais público), com obra em semanas.
 - Rebaixado para a Série D, o técnico recebe propostas de clubes da Série C.
 - Motor calibrado com `npm run sim`: 2,2–2,4 gols por jogo, mandante vence 42–45%, empates 25–29%, correlação força × pontos 0,57–0,79, nenhum clube no vermelho.
-- Checagem automática: no app (sozinha ao abrir um jogo e em Configurações) e no GitHub (robô com tela de iPhone, inclusive sem internet, a cada alteração, antes de publicar e todo dia). 16 testes do motor.
+- Checagem automática: no app (sozinha ao abrir um jogo e em Configurações) e no GitHub (testes de ponta a ponta R01… com tela de iPhone, inclusive sem internet, a cada alteração, antes de publicar e todo dia; lista em `tests/README.md`). 16 testes do motor.
 
 **Pendências:**
 - **Elencos reais de 2026:** a rede do ambiente de desenvolvimento bloqueia a Wikipédia (`pt.wikipedia.org`). Falta o usuário escolher: liberar esse endereço na rede do ambiente ou colar as listas. Os elencos entram como `data/brasil-2026/jogadores.json` (força e características dadas por nós), lidos em `novoJogo` no lugar dos gerados.

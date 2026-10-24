@@ -4,4 +4,4 @@ dev-dist/
 *.log
 .DS_Store
 tools/e2e/capturas/
-tools/checagem/resultado/
+tests/resultado/

@@ -1,8 +1,8 @@
 name: Publicar site
 
-# A cada alteração na main: testa, gera o site, joga no navegador (inclusive sem
-# internet) e só então publica na branch gh-pages,
+# A cada alteração na main: roda todos os testes e só então publica na branch gh-pages,
 # que o GitHub Pages serve em https://<usuário>.github.io/Proffut/.
+# Se qualquer teste falhar, o site publicado continua como estava.
 on:
   push:
     branches: [main]
@@ -25,11 +25,18 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm test
-      - run: npm run build
+      - name: Testes do motor
+        run: npm test
+      - name: Verificação de tipos e geração do site
+        run: npm run build
       - run: npx playwright install --with-deps chromium
-      - name: Checagem no navegador antes de publicar
-        run: npm run checagem
+      - name: Testes de ponta a ponta antes de publicar
+        run: npm run test:e2e
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: testes
+          path: tests/resultado/
       - name: Publicar na branch gh-pages
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}

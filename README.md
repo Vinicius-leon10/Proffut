@@ -31,11 +31,11 @@ O save fica guardado **no próprio celular** e é feito sozinho a cada ação. P
 ## Checagem automática
 
 - **No aparelho (funciona sem internet):** toda vez que um jogo é aberto, o save é verificado e o que for seguro corrigir é corrigido sozinho. Em **Configurações → Checagem do jogo** dá para ver tudo: jogo guardado para abrir sem internet, salvamento, proteção do save, espaço, integridade do save e uma partida de teste.
-- **No GitHub:** um robô (`npm run checagem`) abre o jogo num navegador com tela de iPhone, joga uma partida, roda a checagem do app, exporta o save, **joga sem internet**, recarrega sem internet e importa o save. Ele roda a cada alteração, antes de publicar (se falhar, o site não é atualizado) e **todo dia** no site publicado (`.github/workflows/checagem-diaria.yml`). Se falhar, o GitHub avisa por e-mail. O relatório e as capturas ficam em Actions → execução → Artifacts.
+- **No GitHub:** testes de ponta a ponta ([tests/](tests/README.md), numerados R01, R02…) jogam num navegador com tela de iPhone: criam um jogo, jogam partidas, conferem que as telas não ficam cobertas, exportam e importam o save e **jogam sem internet**. Eles rodam a cada alteração, antes de publicar (se um falhar, o site não é atualizado) e **todo dia** no site publicado (`.github/workflows/checagem-diaria.yml`). Se falhar, o GitHub avisa por e-mail. O relatório e as capturas ficam em Actions → execução → Artifacts.
 
 ## Publicação
 
-Cada alteração na `main` testa o jogo, gera o site e publica na branch `gh-pages` (`.github/workflows/pages.yml`).
+Não há versão de teste separada (decisão de out/2026): cada alteração na `main` roda todos os testes e, só se todos passarem, publica na branch `gh-pages` (`.github/workflows/pages.yml`).
 O GitHub Pages serve essa branch (Settings → Pages → Deploy from a branch → `gh-pages`, pasta `/ (root)`).
 
 ## Desenvolvimento
@@ -45,8 +45,10 @@ npm install
 npm run dev        # site local em http://localhost:5173
 npm test           # testes do motor
 npm run sim        # simula temporadas e mostra as estatísticas de calibragem
-npm run build      # gera o site em dist/
-npm run checagem   # robô no navegador com tela de iPhone, inclusive sem internet (relatório em tools/checagem/resultado/)
+npm run build      # verifica os tipos e gera o site em dist/
+npm run test:e2e   # testes de ponta a ponta com tela de iPhone, inclusive sem internet (precisa do build)
+npm run verificar  # motor, tipos, site e ponta a ponta: o que tem de passar antes de cada envio
+npm run capturas   # tira capturas de cada tela (tools/e2e/capturas/)
 ```
 
 | Pasta | Conteúdo |
@@ -55,7 +57,8 @@ npm run checagem   # robô no navegador com tela de iPhone, inclusive sem intern
 | `src/ui/` | Telas em React |
 | `src/save/` | Salvamento no celular (IndexedDB) e exportar/importar |
 | `data/brasil-2026/` | Clubes e regulamentos de 2026 |
-| `tools/` | Simulação em massa, testes no navegador, geração de ícones e de dados |
+| `tests/` | Testes de ponta a ponta (lista em [tests/README.md](tests/README.md)) |
+| `tools/` | Simulação em massa, capturas de tela, geração de ícones e de dados |
 
 ## Documentos
 

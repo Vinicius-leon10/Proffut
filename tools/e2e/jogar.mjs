@@ -1,5 +1,5 @@
 // Joga o Proffut num navegador com tela de iPhone e tira capturas de cada tela.
-// Uso: npm run build && npx vite preview --port 4173 &  depois  npm run e2e [url]
+// Uso: npm run build && npx vite preview --port 4173 &  depois  npm run capturas [url]
 import { mkdirSync } from "node:fs";
 import { createRequire } from "node:module";
 

@@ -16,5 +16,5 @@
     "skipLibCheck": true,
     "types": ["vite/client", "node", "vite-plugin-pwa/client"]
   },
-  "include": ["src", "tools/sim", "vite.config.ts"]
+  "include": ["src", "tools/sim", "tests", "vite.config.ts", "playwright.config.ts"]
 }
