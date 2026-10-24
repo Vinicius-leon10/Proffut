@@ -1,3 +1,4 @@
+import type { Locator } from "@playwright/test";
 import { aba, botao, esperarInteiroNaTela, expect, novoJogo, test } from "./ajuda";
 
 test("R08 no mercado, a ficha do jogador aparece inteira e o botão de oferta pode ser tocado", async ({ page }) => {
@@ -49,4 +50,28 @@ test("R11 os avisos aparecem no topo e não cobrem os botões de baixo", async (
   const caixa = (await aviso.boundingBox())!;
   expect(caixa.y + caixa.height, "o aviso fica no terço de cima da tela").toBeLessThan(page.viewportSize()!.height / 3);
   await esperarInteiroNaTela(page, ficha.getByRole("button", { name: "Dispensar" }));
+});
+
+test("R15 os avisos não cobrem o topo da tela (título e botões)", async ({ page }) => {
+  await novoJogo(page);
+  const aviso = page.locator(".aviso");
+  const abaixoDoTopo = async (topo: Locator) => {
+    const t = (await topo.boundingBox())!;
+    const a = (await aviso.boundingBox())!;
+    expect(a.y, "o aviso começa abaixo do topo").toBeGreaterThanOrEqual(t.y + t.height);
+  };
+
+  // Numa tela cheia (Configurações): o aviso de exportar não pode cobrir o "Voltar".
+  await page.getByRole("button", { name: "Configurações" }).click();
+  await botao(page, "Exportar save").click();
+  await expect(aviso).toContainText("save");
+  await abaixoDoTopo(page.locator(".tela-cheia .topo"));
+  await esperarInteiroNaTela(page, page.getByRole("button", { name: "Voltar", exact: true }));
+
+  // No painel do clube, com o aviso ainda na tela: Mensagens e Configurações livres.
+  await page.getByRole("button", { name: "Voltar", exact: true }).click();
+  await expect(aviso).toBeVisible();
+  await abaixoDoTopo(page.locator(".app > .topo"));
+  await esperarInteiroNaTela(page, page.getByRole("button", { name: /^Mensagens/ }));
+  await esperarInteiroNaTela(page, page.getByRole("button", { name: "Configurações" }));
 });

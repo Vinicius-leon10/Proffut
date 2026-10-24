@@ -38,3 +38,4 @@ No GitHub, o resumo aparece na própria execução e a pasta vai nos Artifacts.
 | R12 | `financas-e-checagem.spec.ts` | Em Finanças dá para ampliar ou modernizar o estádio; ampliar cobra do caixa e começa a obra. | "Finanças colocar opção para melhorar o estádio para aumentar a renda" |
 | R13 | `financas-e-checagem.spec.ts` | A checagem dentro do jogo (Configurações → Checagem do jogo) não encontra erros. | "Crie uma checagem automática do jogo" |
 | R14 | `ajuda.ts` (vale para todos) | Nenhum teste termina com erro no navegador. | "Crie uma checagem automática do jogo" |
+| R15 | `telas-iphone.spec.ts` | Os avisos aparecem logo abaixo do topo e não cobrem o título nem os botões de cima (Voltar, Mensagens, Configurações). | "Ajustar parte superior da tela" (os avisos cobriam o topo inteiro por 3,5 s; achado ao montar os testes) |

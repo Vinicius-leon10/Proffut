@@ -39,7 +39,7 @@ Só clubes brasileiros: Séries A, B e C de 2026 (60 clubes reais, regulamentos 
 
 Pronto e publicado: partida ao vivo, tática, elenco, mercado, finanças, estádio (ampliar/modernizar), diretoria,
 virada de temporada sem fim, rebaixamento para a Série D com propostas de emprego, checagem automática no app,
-testes de ponta a ponta R01–R14 rodando a cada mudança, antes de publicar e todo dia no site publicado.
+testes de ponta a ponta R01–R15 rodando a cada mudança, antes de publicar e todo dia no site publicado.
 
 **Esperando o usuário:**
 1. **Elencos reais de 2026.** Pesquisado: não há no GitHub um arquivo livre com A, B e C (futmanager e
@@ -118,7 +118,7 @@ Obras do estádio se pagam em 3 a 4 temporadas.
 
 - **iPhone:** telas usam `100dvh` (não `100vh`); `html, body` com `overflow: hidden` e a rolagem fica em `.conteudo`;
   folhas com `max-height: 88dvh`; respiro no fim de `.tela-cheia .conteudo`; `flex-shrink: 0` nos filhos de `.conteudo`.
-  Os testes R08–R11 protegem isso.
+  Avisos (toast) logo abaixo do topo, nunca por cima dele. Os testes R08–R11 e R15 protegem isso.
 - Seletor de arquivo do iOS: o `<input type="file">` de importar não tem `accept` (com ele o iPhone esconde o `.json`).
 - Testes: botões com `exact: true` ("Voltar", "Continuar"), títulos por `getByRole("heading")`, buscas dentro de
   `.tela-cheia` ou do `dialog`; para esperar o salvamento use `esperarSalvar` (não `waitForTimeout`).

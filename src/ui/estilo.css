@@ -311,13 +311,14 @@ p { margin: 0; }
   animation: aparecer 0.15s ease-out;
 }
 
-/* Avisos aparecem no topo para não cobrir botões nem as folhas que sobem de baixo. */
+/* Avisos logo abaixo do topo: não cobrem o título nem os botões de cima (Voltar, Configurações),
+   nem os botões de baixo das folhas. O topo tem max(--topo, 8px) + 59px de altura. */
 .aviso {
   position: fixed;
   left: 0;
   right: 0;
   margin: 0 auto;
-  top: calc(max(var(--topo), 8px) + 8px);
+  top: calc(max(var(--topo), 8px) + 67px);
   z-index: 60;
   background: #f1f5f2;
   color: #0b1410;
