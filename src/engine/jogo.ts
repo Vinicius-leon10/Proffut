@@ -1,6 +1,7 @@
 // Orquestra o jogo: criar carreira, avançar o calendário, jogar os dias de jogo.
 import clubesJson from "../../data/brasil-2026/clubes.json";
 import reservaJson from "../../data/brasil-2026/serie-d-reserva.json";
+import jogadoresJson from "../../data/brasil-2026/jogadores.json";
 import { diasEntre, inicioDaTemporada, mesDe, somarDias } from "./calendario";
 import {
   FASE_LIGA, agregado, avancarFases, chaveDaPartida, criarTemporada, decidePorPenaltis, temporadaEncerrada,
@@ -9,7 +10,7 @@ import { COTA_TV_RODADA, DIAS_LESAO, PRECO_REFERENCIA, RECUPERACAO_POR_DIA, TEMP
 import { atualizarConfianca, definirObjetivo } from "./diretoria";
 import { escalarAutomatico, forcaDoTime } from "./forca";
 import { lancar, processarMes, publicoDoJogo } from "./financas";
-import { gerarElenco } from "./gerador";
+import { elencoReal, gerarElenco, type JogadorReal } from "./gerador";
 import { completarLivres, elencoDe, gerarPropostas, reescalar, transferenciasDaIa } from "./mercado";
 import { enviarMensagem } from "./mensagens";
 import {
@@ -39,6 +40,8 @@ export interface FichaClube {
 
 export const FICHAS: FichaClube[] = clubesJson.clubes as FichaClube[];
 const RESERVA: FichaClube[] = reservaJson.clubes as FichaClube[];
+/** Elencos de verdade dos 60 clubes (tools/elencos/montar.ts). Clube sem elenco aqui ganha um gerado. */
+const ELENCOS_REAIS = jogadoresJson.elencos as Record<string, JogadorReal[]>;
 
 /** Tática inicial dos clubes da IA: os fortes atacam mais, os fracos se fecham. */
 function taticaDaIa(ficha: FichaClube, rng: ReturnType<typeof criarRng>): Tatica {
@@ -91,7 +94,9 @@ export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente
 
   for (const clube of Object.values(estado.clubes)) {
     if (clube.serie === "D") continue;
-    for (const j of gerarElenco(rng, clube, () => estado.proximoIdJogador++)) estado.jogadores[j.id] = j;
+    const proximoId = () => estado.proximoIdJogador++;
+    const reais = ELENCOS_REAIS[clube.id];
+    for (const j of reais ? elencoReal(rng, clube, reais, proximoId) : gerarElenco(rng, clube, proximoId)) estado.jogadores[j.id] = j;
   }
   completarLivres(estado, "inicio");
 

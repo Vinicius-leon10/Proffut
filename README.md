@@ -2,7 +2,7 @@
 
 Jogo onde você é o técnico de futebol. Inspirado no Brasfoot, roda no navegador do celular e pode ser instalado na tela inicial do iPhone.
 
-**Séries A, B e C do Brasil em 2026**, com os 60 clubes reais e os regulamentos de 2026. Os jogadores, por enquanto, são fictícios.
+**Séries A, B e C do Brasil em 2026**, com os 60 clubes reais, os regulamentos de 2026 e os jogadores de verdade: elenco atual na Série A (Cartola) e quem jogou em 2025 nas Séries B e C (súmulas da CBF). A força de cada jogador é calculada pelo jogo. Os elencos valem para jogos novos; um jogo já começado continua com os jogadores que tinha.
 
 ## Como jogar
 

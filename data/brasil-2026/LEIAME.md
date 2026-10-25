@@ -7,7 +7,7 @@ Clubes e regulamentos das Séries A, B e C do Campeonato Brasileiro de 2026.
 | `clubes.json` | Os 60 clubes das Séries A, B e C (20 cada) |
 | `serie-d-reserva.json` | 96 clubes da Série D. Não são simulados: servem de reserva para quem sobe para a Série C |
 | `competicoes.json` | Regulamento de cada série em 2026 |
-| `jogadores.json` | **Ainda não existe** (ver "Jogadores" abaixo) |
+| `jogadores.json` | Elencos reais dos 60 clubes (nome, posição, lado, idade, nacionalidade e a força calculada pelo Proffut). Ver "Jogadores" abaixo |
 
 ## O que foi conferido
 
@@ -34,7 +34,21 @@ Não usamos escudos oficiais, que são marcas registradas. A interface desenha u
 
 ## Jogadores
 
-Ainda não há elencos. **Não vamos tirar jogadores dos arquivos do Brasfoot.** A força e as características de cada jogador são trabalho dos autores do Brasfoot (ou dos fãs que fazem as atualizações) e estão protegidas. Além disso, os arquivos oficiais não são atualizados desde 2023. As opções estão na seção 11 do [PLANO.md](../../PLANO.md).
+`jogadores.json` é montado por `tools/elencos/montar.ts` a partir dos dados que o robô `.github/workflows/elencos.yml`
+baixa (branch `dados-elencos`). Para atualizar: rodar o workflow "Baixar dados dos elencos" no GitHub, baixar a branch
+e rodar `npx tsx tools/elencos/montar.ts <pasta da branch>`. O relatório mostra de onde veio cada dado e quanto a
+dedução das posições acerta.
+
+| Dado | De onde vem |
+|---|---|
+| Quem está em cada clube da Série A | [Cartola FC](https://cartola.globo.com) (mercado da rodada em que o robô rodou) |
+| Quem está em cada clube das Séries B e C | Súmulas da CBF de 2025 (último clube em que jogou), lidas pelo programa do [BrazilianFootball/data](https://github.com/BrazilianFootball/data) (MIT). O site da CBF não entrega as súmulas de 2026 ao robô do GitHub, então contratações de 2026 ficam de fora |
+| Posição | Cartola na Série A; nas outras, súmula (goleiros), Transfermarkt ou Wikidata e, quando nenhum informa, deduzida das escalações de 2023 a 2025 (camisa, substituições, gols e formação: acerta cerca de 3 em 4, e 4 em 5 entre os titulares) |
+| Idade e nacionalidade | [transfermarkt-datasets](https://github.com/dcaribou/transfermarkt-datasets) (CC0) e [Wikidata](https://www.wikidata.org) (CC0); sem eles, a idade é estimada pelo número de registro na CBF (erro típico de pouco mais de 1 ano) |
+| Força | **Calculada pelo Proffut**: a faixa do clube (`clubes.json`) e, dentro dela, quanto o jogador joga (titular, entradas, jogos no Cartola) e quanto vale (preço no Cartola, valor no Transfermarkt) |
+
+**Nada vem do Brasfoot** (nem força, nem características, nem listas de jogadores) nem de notas de outros jogos.
+As características (velocidade, finalização...) são sorteadas pelo jogo, como antes.
 
 ## Licença dos dados derivados
 
@@ -63,3 +77,32 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+Os elencos usam as súmulas lidas pelo programa do projeto BrazilianFootball/data:
+
+```
+MIT License
+
+Copyright (c) 2023 Igor Patrício Michels
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+transfermarkt-datasets e Wikidata são de domínio público (CC0). Os dados do Cartola são da Globo; usamos só nome,
+posição, clube, jogos e preço do mercado, para um jogo pessoal e sem fins comerciais.

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { Buscador, estimarNascimento, inferirPosicoes, type JogoDoClube, type NaSumula, type Pessoa, type Pos } from "./montar";
+import { NOMES_NACIONALIDADE } from "../../src/ui/formatos";
+import { Buscador, PAISES, estimarNascimento, inferirPosicoes, type JogoDoClube, type NaSumula, type Pessoa, type Pos } from "./montar";
 
 const pessoa = (nomes: string[], clube: string, nascimento: string, extra: Partial<Pessoa> = {}): Pessoa => ({ nomes, clube, nascimento, fonte: "Transfermarkt", ...extra });
 
@@ -54,5 +55,11 @@ describe("posição deduzida das escalações", () => {
       aparicoes: jogos.map((j) => ({ clube: "c", ano: 2025, data: j.data, titular: true, entrou: false, saiu: false, gols: 0, numero: numeros[cbf] })),
     }]));
     expect(inferirPosicoes(jogos, jogadores, conhecidas).posicoes.get("x")).toBe("L");
+  });
+});
+
+describe("nacionalidades", () => {
+  it("todo país que o montador reconhece tem nome por extenso na ficha do jogador", () => {
+    for (const codigo of new Set(Object.values(PAISES))) expect(NOMES_NACIONALIDADE[codigo], codigo).toBeTruthy();
   });
 });

@@ -8,6 +8,7 @@ import { avancarMinuto, simularAteOFim, substituir } from "./partida";
 import { criarRng, rngPara } from "./rng";
 import type { EstadoJogo, Partida, Posicao } from "./tipos";
 import { exportarTexto, importarTexto } from "../save/salvamento";
+import jogadoresJson from "../../data/brasil-2026/jogadores.json";
 
 const clubes = Array.from({ length: 20 }, (_, i) => `c${i}`);
 
@@ -246,5 +247,22 @@ describe("estádio", () => {
     estado.clubes.brusque.caixa = 1_000;
     expect(ampliarEstadio(estado, 2_000).ok).toBe(false);
     expect(estado.clubes.brusque.estadio.obra).toBeUndefined();
+  });
+});
+
+describe("elencos reais", () => {
+  it("o jogo novo usa os jogadores de data/brasil-2026/jogadores.json, completando o mínimo por posição", () => {
+    const estado = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 7 });
+    const elencos = jogadoresJson.elencos as Record<string, { nome: string; posicao: string; lado: string; idade: number; forca: number; nacionalidade?: string }[]>;
+    expect(Object.keys(elencos)).toHaveLength(60);
+    for (const [clubeId, reais] of Object.entries(elencos)) {
+      const elenco = elencoDe(estado, clubeId);
+      for (const r of reais) {
+        const j = elenco.find((x) => x.nome === r.nome && x.posicao === r.posicao);
+        expect(j, `${r.nome} (${clubeId})`).toBeDefined();
+        expect([j!.idade, j!.forca, j!.lado, j!.nacionalidade]).toEqual([r.idade, r.forca, r.lado, r.nacionalidade ?? "BRA"]);
+      }
+      for (const pos of ["G", "L", "Z", "M", "A"] as Posicao[]) expect(elenco.filter((x) => x.posicao === pos).length).toBeGreaterThanOrEqual(MINIMO_POSICAO[pos] + 1);
+    }
   });
 });

@@ -61,7 +61,7 @@ O MVP precisa provar uma coisa: **jogar uma temporada inteira é divertido.**
 - **Brasil 2026: Séries A, B e C**, com os 60 clubes reais e os regulamentos reais de 2026 (ver [data/brasil-2026](data/brasil-2026/LEIAME.md)).
   - A Série D não é jogada. Uma lista reserva com os clubes da Série D fornece quem sobe para a Série C.
 - Escolher clube e começar carreira.
-- Elenco com ~25 jogadores por clube (cerca de 1.500 no total). **Reais ou fictícios: decisão pendente** (seção 11).
+- Elenco com ~28 jogadores por clube (cerca de 1.700 no total). **Reais** desde out/2026: ver `data/brasil-2026/LEIAME.md` (seção "Jogadores").
 - Escalação, formação e estilo de jogo.
 - Partida ao vivo em texto, com substituições e mudança de tática durante o jogo.
 - Classificação, calendário, resultados e artilharia.
@@ -411,7 +411,7 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
 - ✅ Sem escudos oficiais; nada extraído dos arquivos do Brasfoot.
 - ✅ Uso pessoal e recreativo, sem fins comerciais (por enquanto).
 - ✅ A IA programa; você testa no iPhone e decide.
-- ✅ Jogadores fictícios agora; elencos reais de 2026 (de fontes públicas) quando a rede permitir.
+- ✅ Elencos reais de fontes públicas (out/2026): Série A pelo Cartola, Séries B e C pelas súmulas da CBF de 2025 (o site da CBF bloqueia o robô do GitHub para 2026). Força calculada pelo Proffut.
 
 **Em aberto**
 1. **Nome:** "Proffut" é o nome final ou provisório?

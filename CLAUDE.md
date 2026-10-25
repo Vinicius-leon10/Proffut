@@ -33,23 +33,28 @@ Leia isto antes de mexer no projeto. Detalhes de design em [PLANO.md](PLANO.md);
 
 Jogo de técnico de futebol para uso pessoal e recreativo do dono do repositório, inspirado no Brasfoot (referência, não cópia).
 Site PWA instalado na tela inicial do iPhone, funciona sem internet, save no próprio aparelho.
-Só clubes brasileiros: Séries A, B e C de 2026 (60 clubes reais, regulamentos de 2026). Jogadores fictícios por enquanto.
+Só clubes brasileiros: Séries A, B e C de 2026 (60 clubes reais, regulamentos de 2026) com os jogadores reais
+(`data/brasil-2026/jogadores.json`); a força de cada jogador é calculada por nós.
 
 ## Situação (out/2026)
 
 Pronto e publicado: partida ao vivo, tática, elenco, mercado, finanças, estádio (ampliar/modernizar), diretoria,
 virada de temporada sem fim, rebaixamento para a Série D com propostas de emprego, checagem automática no app,
-testes de ponta a ponta R01–R18 rodando a cada mudança, antes de publicar e todo dia no site publicado.
+elencos reais nos jogos novos, testes de ponta a ponta R01–R19 rodando a cada mudança, antes de publicar e todo dia
+no site publicado.
 
-**Esperando o usuário:**
-1. **Elencos reais de 2026.** Pesquisado: não há no GitHub um arquivo livre com A, B e C (futmanager e
-   leilao-de-times têm A e B, mas sem licença e com notas de terceiros; Cartola só tem a A, sem idade).
-   Proposta feita ao usuário, ainda sem resposta: um workflow do GitHub (lá a internet é liberada; aqui a rede bloqueia
-   a Wikipédia) baixa da Wikipédia o elenco dos 60 clubes (nome, posição, nacionalidade, nascimento) e grava
-   `data/brasil-2026/jogadores.json`; a força é nossa (faixa do clube, idade, seleção, popularidade da página).
-   Em `novoJogo` (`src/engine/jogo.ts`) usar esses elencos no lugar de `gerarElenco` e completar com gerados se faltar
-   gente. Crédito CC BY-SA no `LEIAME.md`. Força e características nunca copiadas do Brasfoot nem de outro jogo.
-2. Em aberto no PLANO.md §11: nome final ("Proffut" é provisório?) e se a partida terá 2D no futuro.
+**Elencos reais (out/2026):** o robô `.github/workflows/elencos.yml` (rodar à mão no GitHub) baixa Cartola, súmulas
+da CBF de 2023–2025 (programa do BrazilianFootball/data, MIT), transfermarkt-datasets e Wikidata para a branch
+`dados-elencos`; `npx tsx tools/elencos/montar.ts <pasta da branch>` grava `data/brasil-2026/jogadores.json` e
+imprime um relatório (fontes, acerto das posições deduzidas, erro da idade estimada). Série A: elenco atual do
+Cartola. Séries B e C: quem jogou em 2025 (o site da CBF não entrega as súmulas de 2026 ao GitHub; decidimos não
+contornar o bloqueio nem disfarçar o robô de navegador). Posição sem fonte é deduzida das escalações (~3 em 4 certas,
+4 em 5 entre titulares); idade sem fonte vem do número de registro na CBF (erro típico ~1,3 ano). Força: faixa do
+clube + uso + valor, nunca de outro jogo. `novoJogo` usa `elencoReal` (`gerador.ts`) e completa posições com gerados.
+Jogos já começados continuam com os jogadores que tinham (não há migração de save).
+
+**Esperando o usuário:** em aberto no PLANO.md §11: nome final ("Proffut" é provisório?) e se a partida terá 2D no
+futuro. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
 
 **Próximas ideias** (PLANO.md §7, Fase 3): Copa do Brasil, contratos e renovação, demissão por maus resultados
 (hoje só há troca de clube ao cair para a D), ajustes de equilíbrio pelo que o usuário sentir jogando.
@@ -93,7 +98,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `src/engine/` | Regras em TypeScript puro, sem interface. Tudo aleatório usa `rngPara(semente, chave)` (`rng.ts`): mesma semente, mesmo resultado |
 | `tipos.ts` | Modelo de dados (`EstadoJogo`, `Clube`, `Jogador`, `Partida`...) |
 | `constantes.ts` | Todos os números de equilíbrio. Mexeu? Rode `npm run sim` |
-| `gerador.ts`, `nomes.ts` | Jogadores fictícios, salário (`salarioBase`), valor de mercado |
+| `gerador.ts`, `nomes.ts` | `elencoReal` (elencos de `jogadores.json`), jogadores gerados (base, livres, quem completa elenco), salário (`salarioBase`), valor de mercado |
 | `forca.ts` | Força efetiva: força × posição × energia × características |
 | `partida.ts` | Simulação minuto a minuto; disputa = a^k/(a^k+b^k), k = `EXPOENTE_DISPUTA` |
 | `calendario.ts`, `competicoes.ts` | Tabelas, turno/returno com mando equilibrado, playoff da B, quadrangulares e final da C |
@@ -106,12 +111,13 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `src/save/` | `salvamento.ts`: IndexedDB (`proffut`/`saves`, chaves `jogo:auto`, `resumo:auto`...), exportar/importar `.json`. `aparelho.ts`: checagem do aparelho |
 | `src/ui/` | React + Zustand. `store.ts` (estado, telas sobrepostas, salvamento 400 ms após cada mudança), `acoes.ts`, `componentes.tsx`, `estilo.css`, `telas/*.tsx` |
 | `tests/` | Testes de ponta a ponta R01…: `*.spec.ts`, passos comuns em `ajuda.ts`, relatório em português em `resumo.ts`, lista em `README.md` |
-| `data/brasil-2026/` | `clubes.json` (60), `serie-d-reserva.json` (96), `competicoes.json`, `LEIAME.md` (fontes) |
-| `tools/` | `sim/` (calibragem), `e2e/` (capturas de tela), `icones/`, `dados/` (scripts Python dos clubes) |
+| `data/brasil-2026/` | `clubes.json` (60), `serie-d-reserva.json` (96), `competicoes.json`, `jogadores.json` (elencos reais, gerado por `tools/elencos`), `LEIAME.md` (fontes e licenças) |
+| `tools/` | `sim/` (calibragem), `e2e/` (capturas de tela), `icones/`, `dados/` (scripts Python dos clubes), `elencos/` (robô dos elencos: `montar.ts` monta `jogadores.json`, `sumulas.ts` lê as súmulas, `fontes-clubes.ts` diz como cada fonte chama os clubes, scripts Python do workflow) |
 
 ## Calibragem atual (`npm run sim`)
 
-~2,3 gols por jogo, mandante vence 42–45%, empates 25–29%, correlação força × pontos 0,57–0,79, nenhum clube no vermelho.
+~2,3 gols por jogo, mandante vence 42–45%, empates 25–29%, correlação força × pontos 0,57–0,79, nenhum clube no vermelho
+(conferido de novo com os elencos reais; a Série C fica no limite: mandante ~40–41%, empates ~29–30%, como antes).
 Obras do estádio se pagam em 3 a 4 temporadas.
 
 ## Armadilhas já resolvidas (não desfazer)

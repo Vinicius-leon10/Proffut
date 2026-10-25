@@ -7,6 +7,9 @@ export default defineConfig({
   // Caminho relativo: o site funciona tanto em /Proffut/ (GitHub Pages) quanto na raiz.
   base: "./",
   define: { __VERSAO__: JSON.stringify(pacote.version) },
+  // Os elencos reais (data/brasil-2026/jogadores.json) vão junto no pacote (~120 KB, 30 KB compactados):
+  // o jogo precisa deles sem internet e o app guarda tudo no aparelho de uma vez.
+  build: { chunkSizeWarningLimit: 700 },
   plugins: [
     react(),
     VitePWA({

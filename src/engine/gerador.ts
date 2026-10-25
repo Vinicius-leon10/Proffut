@@ -1,3 +1,4 @@
+import { MINIMO_POSICAO } from "./constantes";
 import type { Rng } from "./rng";
 import type { Caracteristica, Clube, Jogador, Lado, Posicao, SerieClube } from "./tipos";
 import { NACIONALIDADES_ESTRANGEIRAS, gerarNome } from "./nomes";
@@ -136,6 +137,36 @@ export function gerarElenco(rng: Rng, clube: Pick<Clube, "id" | "serie" | "forca
     nomes.add(jogador.nome);
     return jogador;
   });
+}
+
+/** Jogador de verdade, como está em data/brasil-2026/jogadores.json (força calculada pelo Proffut). */
+export interface JogadorReal {
+  nome: string;
+  posicao: Posicao;
+  lado: Lado;
+  idade: number;
+  forca: number;
+  nacionalidade?: string;
+}
+
+/**
+ * Elenco real do clube. Posição com menos gente que o mínimo para jogar (um a mais que o mínimo do
+ * mercado) ganha reservas gerados.
+ */
+export function elencoReal(rng: Rng, clube: Pick<Clube, "id" | "forcaElenco">, reais: JogadorReal[], proximoId: () => number): Jogador[] {
+  const elenco = reais.map((r) => ({
+    ...criarJogador(rng, { id: proximoId(), posicao: r.posicao, lado: r.lado, forca: r.forca, idade: r.idade, nacionalidade: r.nacionalidade, clubeId: clube.id }),
+    nome: r.nome,
+  }));
+  const { min, max } = clube.forcaElenco;
+  const [q0, q1] = FAIXA_PAPEL.reserva;
+  const [i0, i1] = IDADE_PAPEL.reserva;
+  for (const posicao of Object.keys(MINIMO_POSICAO) as Posicao[]) {
+    while (elenco.filter((j) => j.posicao === posicao).length < MINIMO_POSICAO[posicao] + 1) {
+      elenco.push(criarJogador(rng, { id: proximoId(), posicao, forca: min + (max - min) * rng.real(q0, q1), idade: rng.int(i0, i1), clubeId: clube.id }));
+    }
+  }
+  return elenco;
 }
 
 /** Jovem da base: 16 a 18 anos, força baixa e potencial ligado ao porte do clube. */

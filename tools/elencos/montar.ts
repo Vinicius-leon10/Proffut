@@ -87,7 +87,7 @@ function mapaDeClubes() {
 // ---- nacionalidades ---------------------------------------------------------------------
 
 /** País (como as fontes escrevem, em inglês ou português) → código usado no jogo. */
-const PAISES: Record<string, string> = {
+export const PAISES: Record<string, string> = {
   brazil: "BRA", brasil: "BRA", argentina: "ARG", uruguay: "URU", uruguai: "URU", colombia: "COL", paraguay: "PAR",
   paraguai: "PAR", chile: "CHI", ecuador: "EQU", equador: "EQU", venezuela: "VEN", peru: "PER", bolivia: "BOL",
   portugal: "POR", spain: "ESP", espanha: "ESP", italy: "ITA", italia: "ITA", france: "FRA", franca: "FRA",

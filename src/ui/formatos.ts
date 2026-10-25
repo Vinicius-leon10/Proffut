@@ -25,4 +25,8 @@ export function plural(n: number, singular: string, pluralForma = `${singular}s`
 export const NOMES_NACIONALIDADE: Record<string, string> = {
   BRA: "Brasil", ARG: "Argentina", URU: "Uruguai", COL: "Colômbia", PAR: "Paraguai",
   CHI: "Chile", EQU: "Equador", VEN: "Venezuela", PER: "Peru", BOL: "Bolívia",
+  POR: "Portugal", ESP: "Espanha", ITA: "Itália", FRA: "França", ALE: "Alemanha", HOL: "Holanda", BEL: "Bélgica",
+  EUA: "Estados Unidos", MEX: "México", CRC: "Costa Rica", PAN: "Panamá", HON: "Honduras", HAI: "Haiti", JAP: "Japão",
+  ANG: "Angola", NGA: "Nigéria", GAN: "Gana", CMR: "Camarões", CIV: "Costa do Marfim", SEN: "Senegal", MAR: "Marrocos",
+  CPV: "Cabo Verde", MOC: "Moçambique", GNB: "Guiné-Bissau",
 };
