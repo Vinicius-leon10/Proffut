@@ -150,6 +150,12 @@ describe("mercado e save", () => {
     expect(Object.keys(volta.jogadores)).toHaveLength(Object.keys(estado.jogadores).length);
     expect(() => importarTexto("{}")).toThrow();
   });
+
+  it("save de antes de tirar a velocidade 4x abre em 2x", () => {
+    const estado = novoJogo({ nomeTecnico: "T", clubeId: "brusque", semente: 6 });
+    (estado.config as { velocidade: number }).velocidade = 4;
+    expect(importarTexto(exportarTexto(estado)).config.velocidade).toBe(2);
+  });
 });
 
 describe("mando de campo", () => {

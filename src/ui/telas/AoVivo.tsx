@@ -10,7 +10,7 @@ import { Barra, Escudo, Folha, Icone, Opcoes, Pos, Segmentado } from "../compone
 import { rotuloPartida } from "../formatos";
 import { useJogo, useLoja } from "../store";
 
-const INTERVALO_MS: Record<1 | 2 | 4, number> = { 1: 700, 2: 340, 4: 110 };
+const INTERVALO_MS: Record<1 | 2, number> = { 1: 700, 2: 340 };
 
 function classeLance(e: EventoPartida): string {
   if (e.tipo === "gol" || e.tipo === "gol-penalti") return "lance gol";
@@ -47,7 +47,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
 
   const [iniciado, setIniciado] = useState(false);
   const [pausado, setPausado] = useState(false);
-  const [velocidade, setVelocidade] = useState<1 | 2 | 4>(estado.config.velocidade);
+  const [velocidade, setVelocidade] = useState<1 | 2>(estado.config.velocidade === 1 ? 1 : 2);
   const [aba, setAba] = useState<"lances" | "rodada">("lances");
   const [painel, setPainel] = useState<"trocas" | "tatica" | null>(null);
   const [, setTick] = useState(0);
@@ -125,7 +125,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
             )}
             {!todasTerminadas && (
               <div className="cresce">
-                <Segmentado opcoes={[{ valor: "1", rotulo: "1x" }, { valor: "2", rotulo: "2x" }, { valor: "4", rotulo: "4x" }]} valor={String(velocidade) as "1" | "2" | "4"} aoMudar={(v) => setVelocidade(Number(v) as 1 | 2 | 4)} />
+                <Segmentado opcoes={[{ valor: "1", rotulo: "1x" }, { valor: "2", rotulo: "2x" }]} valor={String(velocidade) as "1" | "2"} aoMudar={(v) => setVelocidade(Number(v) as 1 | 2)} />
               </div>
             )}
             {!todasTerminadas && <button className="botao pequeno" onClick={irAoFim}>Fim ⏭</button>}

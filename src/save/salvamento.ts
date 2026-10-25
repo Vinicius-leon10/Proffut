@@ -56,6 +56,8 @@ export async function listarSaves(): Promise<ResumoSave[]> {
 /** Saves de versões antigas do jogo são atualizados aqui. */
 function migrar(estado: EstadoJogo): EstadoJogo {
   if (estado.versao !== 1) throw new Error("Versão de save desconhecida.");
+  // A velocidade 4x saiu do jogo (out/2026): quem estava nela passa para 2x.
+  if (estado.config && estado.config.velocidade !== 1) estado.config.velocidade = 2;
   return estado;
 }
 

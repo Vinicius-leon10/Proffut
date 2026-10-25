@@ -155,7 +155,7 @@ Ponto de partida das constantes: o remake em Python, que já foi calibrado (ver 
 - Competições em que o jogador está: motor completo em todos os jogos, inclusive os que ele não assiste (a IA faz o papel dos técnicos).
 - Competições de fora (no futuro: Série D, outros países): modelo rápido que só gera o placar.
 
-**Na tela:** placar, relógio, narração curta, velocidade (1x/2x/4x/pular), placares dos outros jogos da rodada mudando ao vivo e intervalo para ajustes.
+**Na tela:** placar, relógio, narração curta, velocidade (1x/2x e "Fim" para pular; a 4x saiu em out/2026 a pedido do usuário), placares dos outros jogos da rodada mudando ao vivo e intervalo para ajustes.
 
 > Regra técnica: a simulação usa gerador aleatório com **semente (seed)**. A mesma semente gera sempre o mesmo jogo, o que permite reproduzir bugs e escrever testes automáticos.
 

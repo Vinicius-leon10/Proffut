@@ -249,7 +249,7 @@ export interface Tecnico {
 }
 
 export interface Configuracoes {
-  velocidade: 1 | 2 | 4;
+  velocidade: 1 | 2;
   escalacaoAutomatica: boolean;
 }
 

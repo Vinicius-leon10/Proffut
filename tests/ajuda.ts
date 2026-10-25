@@ -122,6 +122,38 @@ export async function esperarSalvar(page: Page, desde: number) {
 }
 
 /**
+ * Muda o save automático direto no banco do aparelho, para montar uma situação (por exemplo, um
+ * save de uma versão antiga), e abre o jogo de novo pelo "Continuar". `codigo` recebe `estado`.
+ */
+export async function mexerNoSave(page: Page, codigo: string) {
+  await esperarSalvar(page, (await agora(page)) - 60_000);
+  await page.evaluate(
+    (codigo) =>
+      new Promise<void>((ok, falha) => {
+        const pedido = indexedDB.open("proffut");
+        pedido.onerror = () => falha(pedido.error);
+        pedido.onsuccess = () => {
+          const banco = pedido.result;
+          const saves = banco.transaction("saves", "readwrite").objectStore("saves");
+          const leitura = saves.get("jogo:auto");
+          leitura.onerror = () => falha(leitura.error);
+          leitura.onsuccess = () => {
+            const estado = leitura.result;
+            new Function("estado", codigo)(estado);
+            const escrita = saves.put(estado, "jogo:auto");
+            escrita.onsuccess = () => { banco.close(); ok(); };
+            escrita.onerror = () => falha(escrita.error);
+          };
+        };
+      }),
+    codigo,
+  );
+  await page.reload();
+  await page.getByRole("button", { name: /Continuar/ }).first().click();
+  await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
+}
+
+/**
  * O elemento cabe inteiro na área visível do iPhone (não fica sob a barra do Safari)
  * e nada está por cima dele.
  */

@@ -41,7 +41,7 @@ Só clubes brasileiros: Séries A, B e C de 2026 (60 clubes reais, regulamentos 
 Pronto e publicado: partida ao vivo, tática, elenco, mercado, finanças, estádio (ampliar/modernizar), diretoria,
 virada de temporada sem fim, rebaixamento para a Série D com propostas de emprego, checagem automática no app,
 elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, testes de ponta a ponta
-R01–R23 rodando a cada mudança, antes de publicar e todo dia no site publicado.
+R01–R24 rodando a cada mudança, antes de publicar e todo dia no site publicado.
 
 **Copa do Brasil (out/2026, `src/engine/copa.ts`):** regulamento de 2026 com 126 clubes: 1ª fase com os 28 piores do
 ranking, 2ª com mais 74, 3ª com mais 4 (em 2026 os de verdade: Paysandu, Ponte Preta, Barra-SC, Confiança; depois, os

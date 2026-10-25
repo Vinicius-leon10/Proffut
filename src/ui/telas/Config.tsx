@@ -49,9 +49,9 @@ export function Config() {
         <Cartao titulo="Partida ao vivo">
           <p className="pequeno fraco" style={{ marginBottom: 8 }}>Velocidade inicial do relógio</p>
           <Opcoes
-            opcoes={[{ valor: "1", rotulo: "Lenta" }, { valor: "2", rotulo: "Normal" }, { valor: "4", rotulo: "Rápida" }]}
-            valor={String(estado.config.velocidade) as "1" | "2" | "4"}
-            aoMudar={(v) => { estado.config.velocidade = Number(v) as 1 | 2 | 4; atualizar(); }}
+            opcoes={[{ valor: "1", rotulo: "1x" }, { valor: "2", rotulo: "2x" }]}
+            valor={estado.config.velocidade === 1 ? "1" : "2"}
+            aoMudar={(v) => { estado.config.velocidade = v === "1" ? 1 : 2; atualizar(); }}
           />
         </Cartao>
 
