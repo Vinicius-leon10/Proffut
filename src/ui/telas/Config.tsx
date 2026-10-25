@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { apagarEscudos, importarEscudos } from "../../save/escudos";
 import { armazenamentoPersistente, exportarArquivo, importarTexto, pedirArmazenamentoPersistente, salvar, type Espaco } from "../../save/salvamento";
 import { Cartao, Opcoes, Topo } from "../componentes";
 import { useJogo, useLoja } from "../store";
@@ -8,6 +9,8 @@ export function Config() {
   const { fechar, atualizar, avisar, sair, iniciar, abrir } = useLoja();
   const [persistente, setPersistente] = useState<boolean | null>(null);
   const arquivo = useRef<HTMLInputElement>(null);
+  const arquivoEscudos = useRef<HTMLInputElement>(null);
+  const escudos = Object.keys(useLoja((s) => s.escudos)).length;
 
   useEffect(() => { armazenamentoPersistente().then(setPersistente); }, []);
 
@@ -28,6 +31,27 @@ export function Config() {
     } catch {
       avisar("Não foi possível exportar.");
     }
+  };
+
+  const importarPacote = async (entrada: HTMLInputElement) => {
+    const f = entrada.files?.[0];
+    if (!f) return;
+    try {
+      const r = await importarEscudos(await f.text());
+      useLoja.setState({ escudos: r.escudos });
+      avisar(`${r.importados} escudos importados. Eles ficam só neste aparelho.`);
+    } catch (e) {
+      avisar((e as Error).message);
+    } finally {
+      entrada.value = "";
+    }
+  };
+
+  const voltarAosDesenhados = async () => {
+    if (!confirm("Apagar os escudos importados e voltar aos escudos desenhados?")) return;
+    await apagarEscudos();
+    useLoja.setState({ escudos: {} });
+    avisar("Escudos desenhados de volta.");
   };
 
   const importar = async (f: File | undefined) => {
@@ -63,6 +87,18 @@ export function Config() {
             aoMudar={(v) => { estado.config.som = v === "ligados"; atualizar(); }}
           />
           <p className="mini muito-fraco" style={{ marginTop: 8 }}>No iPhone, com a chave do silencioso ligada, o apito e a torcida não tocam.</p>
+        </Cartao>
+
+        <Cartao titulo="Escudos">
+          <p className="pequeno fraco" style={{ marginBottom: 8 }}>
+            {escudos ? `${escudos} escudos importados.` : "O jogo desenha cada escudo com as cores e a sigla do clube."} Os escudos que
+            você importar (arquivo .json de escudos do Proffut) ficam só neste aparelho.
+          </p>
+          <div className="coluna">
+            <button className="botao cheio" onClick={() => arquivoEscudos.current?.click()}>Importar escudos</button>
+            <input ref={arquivoEscudos} type="file" className="oculto" aria-label="Arquivo de escudos" onChange={(e) => importarPacote(e.currentTarget)} />
+            {escudos > 0 && <button className="botao cheio" onClick={voltarAosDesenhados}>Voltar aos escudos desenhados</button>}
+          </div>
         </Cartao>
 
         <Cartao titulo="Salvar">

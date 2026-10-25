@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { lerEscudos } from "../save/escudos";
 import { Aviso } from "./componentes";
 import { useLoja } from "./store";
 import { AoVivo } from "./telas/AoVivo";
@@ -29,6 +31,10 @@ function Sobreposta() {
 
 export default function App() {
   const tela = useLoja((s) => s.tela);
+  // Escudos importados pelo usuário, guardados no aparelho.
+  useEffect(() => {
+    lerEscudos().then((escudos) => useLoja.setState({ escudos }), () => undefined);
+  }, []);
   return (
     <>
       {tela === "inicio" && <Inicio />}

@@ -1,15 +1,17 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { comArtigo } from "../../engine/artigos";
 import { MAX_SUBSTITUICOES, ESTILOS } from "../../engine/constantes";
 import { FORMACOES, corForca, forcaEfetiva } from "../../engine/forca";
 import { desfechoDoConfronto } from "../../engine/copa";
 import { concluirJogos } from "../../engine/jogo";
 import { avancarMinuto, formatarMinuto, mudarTatica, simularAteOFim, substituir, type PartidaViva } from "../../engine/partida";
-import type { Competicao, EstadoJogo, Estilo, EventoPartida, Formacao, Partida } from "../../engine/tipos";
+import type { Clube, Competicao, EstadoJogo, Estilo, EventoPartida, Formacao, Partida } from "../../engine/tipos";
 import { NOME_COMPETICAO } from "../../engine/competicoes";
 import { Barra, Escudo, Folha, Icone, Opcoes, Pos, Segmentado } from "../componentes";
 import { rotuloPartida } from "../formatos";
 import { apito, liberarSom, pararSons, tocarLances } from "../sons";
 import { useJogo, useLoja } from "../store";
+import { FolhaDoTime, ResumoDoTime } from "./Tatica";
 
 const INTERVALO_MS: Record<1 | 2, number> = { 1: 700, 2: 340 };
 /** Pausa depois de um pênalti marcado, antes da cobrança (o narrador grita e a torcida reage). */
@@ -53,7 +55,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   const [pausado, setPausado] = useState(false);
   const [velocidade, setVelocidade] = useState<1 | 2>(estado.config.velocidade === 1 ? 1 : 2);
   const [aba, setAba] = useState<"lances" | "rodada">("lances");
-  const [painel, setPainel] = useState<"trocas" | "tatica" | null>(null);
+  const [painel, setPainel] = useState<"trocas" | "tatica" | "adversario" | null>(null);
   const [, setTick] = useState(0);
   const avisosVistos = useRef(0);
   const concluido = useRef(false);
@@ -139,18 +141,25 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   const clubeV = estado.clubes[lv.clubeId];
   const progresso = meu.terminada ? 100 : Math.min(100, ((meu.tempo === 2 ? 45 : 0) + Math.min(45, meu.tempo === 2 ? meu.minuto - 45 : meu.minuto)) / 90 * 100);
   const lances = useMemo(() => [...meu.narracao].reverse(), [meu.narracao, meu.narracao.length]);
+  // O escudo do adversário abre o time titular dele no campinho.
+  const escudoNoPlacar = (lado: 0 | 1, clube: Clube) =>
+    lado === meuLado ? <Escudo clube={clube} tamanho={48} /> : (
+      <button className="escudo-botao" onClick={() => setPainel("adversario")} aria-label={`Ver o time titular ${comArtigo("do", clube)}`}>
+        <Escudo clube={clube} tamanho={48} />
+      </button>
+    );
 
   return (
     <div className="tela-cheia">
       <div className="placar">
         <div className="mini fraco centro" style={{ marginBottom: 6 }}>{rotuloPartida(partida)}</div>
         <div className="times">
-          <div className="time"><Escudo clube={clubeM} tamanho={48} /><span className="corta" style={{ maxWidth: "100%" }}>{clubeM.nome}</span></div>
+          <div className="time">{escudoNoPlacar(0, clubeM)}<span className="corta" style={{ maxWidth: "100%" }}>{clubeM.nome}</span></div>
           <div className="centro">
             <div className="gols">{lm.gols} <span className="muito-fraco">x</span> {lv.gols}</div>
             <div className="relogio">{relogio(meu)}</div>
           </div>
-          <div className="time"><Escudo clube={clubeV} tamanho={48} /><span className="corta" style={{ maxWidth: "100%" }}>{clubeV.nome}</span></div>
+          <div className="time">{escudoNoPlacar(1, clubeV)}<span className="corta" style={{ maxWidth: "100%" }}>{clubeV.nome}</span></div>
         </div>
         <div style={{ marginTop: 10 }}><Barra valor={progresso} cor="var(--amarelo)" /></div>
       </div>
@@ -212,6 +221,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
 
       {painel === "trocas" && <PainelTrocas pv={meu} lado={meuLado} aoFechar={() => setPainel(null)} />}
       {painel === "tatica" && <PainelTatica pv={meu} lado={meuLado} aoFechar={() => setPainel(null)} />}
+      {painel === "adversario" && <FolhaDoTime lado={meu.lados[meuLado === 0 ? 1 : 0]} aoFechar={() => setPainel(null)} />}
     </div>
   );
 }
@@ -233,18 +243,18 @@ function PreJogo({ vivas, meu, meuLado, regra, aoComecar, aoAjustar }: { vivas: 
   const eu = meu.lados[meuLado];
   const ele = meu.lados[meuLado === 0 ? 1 : 0];
   const adversario = estado.clubes[ele.clubeId];
-  const media = (ids: number[]) => Math.round(ids.reduce((s, id) => s + estado.jogadores[id].forca, 0) / Math.max(1, ids.length));
   return (
     <div className="conteudo">
       <div className="cartao compacto">
         <div className="linha entre pequeno">
           <span className="fraco">Seu time</span>
-          <span>{eu.tatica.formacao} · {ESTILOS[eu.tatica.estilo].nome} · força média <b>{media(eu.emCampo.map((a) => a.jogadorId))}</b></span>
+          <ResumoDoTime lado={eu} />
         </div>
         <div className="linha entre pequeno" style={{ marginTop: 6 }}>
           <span className="fraco">{adversario.nome}</span>
-          <span>{ele.tatica.formacao} · {ESTILOS[ele.tatica.estilo].nome} · força média <b>{media(ele.emCampo.map((a) => a.jogadorId))}</b></span>
+          <ResumoDoTime lado={ele} />
         </div>
+        <p className="mini fraco" style={{ marginTop: 6 }}>Toque no escudo {comArtigo("do", adversario)} para ver o time titular.</p>
         {regra && <p className="mini fraco" style={{ marginTop: 6 }}>{regra}</p>}
       </div>
       <div className="lista">

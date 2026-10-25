@@ -4,6 +4,7 @@ import { create } from "zustand";
 import type { PartidaViva } from "../engine/partida";
 import type { EstadoJogo, Partida } from "../engine/tipos";
 import { checarEstado, repararEstado } from "../engine/checagem";
+import type { Escudos } from "../save/escudos";
 import { salvar } from "../save/salvamento";
 
 export type Tela = "inicio" | "novo" | "jogo";
@@ -26,6 +27,8 @@ interface Loja {
   sobreposta: Sobreposta | null;
   aviso: { texto: string; id: number } | null;
   salvando: boolean;
+  /** Escudos importados pelo usuário (só neste aparelho); vazio = escudos desenhados. */
+  escudos: Escudos;
   iniciar: (estado: EstadoJogo) => void;
   sair: () => void;
   irParaTela: (tela: Tela) => void;
@@ -47,6 +50,7 @@ export const useLoja = create<Loja>((set, getLoja) => ({
   sobreposta: null,
   aviso: null,
   salvando: false,
+  escudos: {},
   iniciar: (estado) => {
     // Checagem automática a cada jogo aberto: corrige sozinha o que é seguro corrigir.
     const problemas = checarEstado(estado);

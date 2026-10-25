@@ -103,7 +103,7 @@ export function Inicio() {
       <input ref={arquivo} type="file" className="oculto" onChange={(e) => importar(e.target.files?.[0])} />
 
       <p className="mini muito-fraco centro" style={{ marginTop: "auto" }}>
-        Clubes e jogadores reais (força calculada pelo jogo). Escudos genéricos com as cores de cada clube. Projeto pessoal, sem fins comerciais.
+        Clubes e jogadores reais (força calculada pelo jogo). Escudos desenhados com as cores de cada clube (os seus podem ser importados em Configurações). Projeto pessoal, sem fins comerciais.
       </p>
     </main>
   );

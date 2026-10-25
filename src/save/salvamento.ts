@@ -2,7 +2,7 @@
 import { createStore, del, get, set } from "idb-keyval";
 import type { EstadoJogo } from "../engine/tipos";
 
-const banco = createStore("proffut", "saves");
+export const banco = createStore("proffut", "saves");
 
 export type Espaco = "auto" | "1" | "2" | "3";
 export const ESPACOS: Espaco[] = ["auto", "1", "2", "3"];

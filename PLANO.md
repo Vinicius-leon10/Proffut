@@ -206,7 +206,7 @@ Regulamentos reais de 2026 ([competicoes.json](data/brasil-2026/competicoes.json
 ### 3.8 Mundo e dados
 
 - **Clubes reais do Brasil 2026** (Séries A, B e C) em [data/brasil-2026](data/brasil-2026/LEIAME.md): nome, sigla, cidade, estádio, capacidade, cores, fundação, rival, torcida, reputação, faixa de força e caixa inicial.
-- **Sem escudos oficiais:** a interface desenha um escudo simples com as cores e a sigla do clube.
+- **Sem escudos oficiais:** a interface desenha um escudo simples com as cores e a sigla do clube. O usuário pode importar os seus no aparelho (Configurações → Escudos); eles não vão para o site nem para o repositório.
 - **Jogadores:** decisão pendente (seção 11). Não vamos tirar dos arquivos do Brasfoot (ver seção 4).
 - Dados em **pacotes JSON** versionados (país → divisões → clubes → jogadores).
 - **Editor no jogo** (pós-MVP) para renomear clubes e jogadores, mudar cores e atributos, com importar/exportar pacotes. Foi assim que a comunidade manteve o Brasfoot vivo.

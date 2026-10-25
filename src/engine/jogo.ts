@@ -15,7 +15,7 @@ import { elencoReal, gerarElenco, type JogadorReal } from "./gerador";
 import { completarLivres, elencoDe, gerarPropostas, reescalar, transferenciasDaIa } from "./mercado";
 import { enviarMensagem } from "./mensagens";
 import {
-  disputarPenaltis, eventosParaGuardar, iniciarPartida, montarLado, simularAteOFim, type PartidaViva,
+  disputarPenaltis, eventosParaGuardar, iniciarPartida, montarLado, simularAteOFim, type LadoVivo, type PartidaViva,
 } from "./partida";
 import { criarRng, rngPara } from "./rng";
 import { avancarCopa, criarCopa } from "./copa";
@@ -222,6 +222,17 @@ export function prepararJogos(estado: EstadoJogo): PartidaViva[] {
     );
     return iniciarPartida(p, lados[0], lados[1], rngPara(estado.semente, `partida/${p.id}`));
   });
+}
+
+/**
+ * O time que um clube do computador deve pôr em campo no próximo jogo: a mesma escolha que
+ * `prepararJogos` faz no dia (os melhores disponíveis na formação dele), sem mudar nada no jogo.
+ */
+export function provavelTime(estado: EstadoJogo, clubeId: string): LadoVivo {
+  const clube = estado.clubes[clubeId];
+  const elenco = elencoDe(estado, clubeId);
+  const escalacao = escalarAutomatico(elenco, clube.tatica.formacao, clube.tatica.jogadas);
+  return montarLado({ ...clube, escalacao }, estado.jogadores, elenco, false);
 }
 
 function aplicarResultado(estado: EstadoJogo, pv: PartidaViva) {

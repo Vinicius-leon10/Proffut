@@ -4,7 +4,7 @@ import { turnoEReturno, turnoUnico } from "./calendario";
 import { SERIES, classificacao, tabelaDaLiga, temporadaEncerrada } from "./competicoes";
 import { MAX_SUBSTITUICOES, MINIMO_POSICAO } from "./constantes";
 import { desfechoDoConfronto, situacaoNaCopa } from "./copa";
-import { assumirClube, avancar, novoJogo, prepararJogos, propostasDeEmprego, simularDia, simularRestoDaTemporada } from "./jogo";
+import { assumirClube, avancar, novoJogo, prepararJogos, propostasDeEmprego, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
 import { elencoDe, fazerOferta, limiteDaProposta, livres, pedirMais } from "./mercado";
 import { enviarMensagem } from "./mensagens";
 import { avancarMinuto, simularAteOFim, substituir } from "./partida";
@@ -515,5 +515,20 @@ describe("artigo dos clubes", () => {
     expect(textos).toContain("Ponte Preta");
     expect(textos).not.toMatch(/\b(o|do|ao|pelo|no) Ponte Preta/i);
     expect(textos).not.toMatch(/Ponte Preta (foi|é) (o )?(eliminado|rebaixado|campeão|vice-campeão)/);
+  });
+});
+
+describe("time do adversário antes do jogo", () => {
+  it("o provável time titular é o mesmo que entra em campo, e olhar não muda o jogo", () => {
+    const estado = novoJogo({ nomeTecnico: "T", clubeId: "ponte-preta", semente: 61 });
+    avancar(estado);
+    const antes = JSON.stringify(estado.clubes);
+    const pv = prepararJogos(structuredClone(estado)).find((x) => x.lados.some((l) => l.clubeId === "ponte-preta"))!;
+    const ele = pv.lados.find((l) => l.clubeId !== "ponte-preta")!;
+    const provavel = provavelTime(estado, ele.clubeId);
+    expect(JSON.stringify(estado.clubes)).toBe(antes);
+    expect(provavel.emCampo).toHaveLength(11);
+    expect(provavel.emCampo.map((a) => a.jogadorId)).toEqual(ele.emCampo.map((a) => a.jogadorId));
+    expect(provavel.tatica.formacao).toBe(ele.tatica.formacao);
   });
 });

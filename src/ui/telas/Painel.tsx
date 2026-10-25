@@ -1,14 +1,17 @@
+import { useState } from "react";
+import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
 import { NOME_SERIE, tabelaDaLiga, temporadaEncerrada } from "../../engine/competicoes";
 import { situacaoDoObjetivo } from "../../engine/diretoria";
 import { folhaSalarial, formatarDinheiro } from "../../engine/financas";
-import { meuJogoHoje, proximaDataComJogo, proximoJogoDoClube } from "../../engine/jogo";
+import { meuJogoHoje, provavelTime, proximaDataComJogo, proximoJogoDoClube } from "../../engine/jogo";
 import type { SerieId } from "../../engine/tipos";
 import { avancarJogo, simularFimDaTemporada } from "../acoes";
 import { Barra, Cartao, Escudo } from "../componentes";
 import { rotuloPartida } from "../formatos";
 import { useJogo, useLoja } from "../store";
 import { MensagemItem } from "./Mensagens";
+import { FolhaDoTime } from "./Tatica";
 
 const SITUACAO = {
   encaminhada: { texto: "Encaminhado", cor: "verde" },
@@ -19,6 +22,7 @@ const SITUACAO = {
 export function Painel() {
   const estado = useJogo();
   const { abrir } = useLoja();
+  const [verAdversario, setVerAdversario] = useState(false);
   const meuId = estado.tecnico.clubeId;
   const clube = estado.clubes[meuId];
   const serie = clube.serie as SerieId;
@@ -51,7 +55,11 @@ export function Painel() {
             <div className="linha" style={{ justifyContent: "space-around", padding: "6px 0" }}>
               {[proximo.mandante, proximo.visitante].map((id, i) => (
                 <div key={id} className="coluna" style={{ alignItems: "center", gap: 4, width: "40%" }}>
-                  <Escudo clube={estado.clubes[id]} tamanho={52} />
+                  {id === meuId ? <Escudo clube={estado.clubes[id]} tamanho={52} /> : (
+                    <button className="escudo-botao" onClick={() => setVerAdversario(true)} aria-label={`Ver o provável time titular ${comArtigo("do", estado.clubes[id])}`}>
+                      <Escudo clube={estado.clubes[id]} tamanho={52} />
+                    </button>
+                  )}
                   <span className="negrito pequeno centro">{estado.clubes[id].nome}</span>
                   {i === 0 && !proximo.neutro && <span className="mini muito-fraco">mandante</span>}
                 </div>
@@ -66,6 +74,8 @@ export function Painel() {
           <p className="fraco pequeno">{encerrada ? "A temporada terminou." : minhaSerieAcabou ? `A ${NOME_SERIE[serie]} terminou para você. As outras séries ainda estão em andamento.` : "Sem jogos marcados."}</p>
         )}
       </Cartao>
+
+      {verAdversario && adversario && <FolhaDoTime lado={provavelTime(estado, adversario.id)} provavel aoFechar={() => setVerAdversario(false)} />}
 
       <button className="botao primario grande cheio" onClick={avancarJogo}>{rotuloBotao}</button>
       {minhaSerieAcabou && !encerrada && (

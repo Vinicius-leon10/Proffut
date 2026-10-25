@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { comArtigo } from "../../engine/artigos";
 import { ESTILOS } from "../../engine/constantes";
 import { FORMACOES, NOMES_POSICAO, calcularSetores, corForca, disponivel, escalarAutomatico, forcaEfetiva, type Vaga } from "../../engine/forca";
 import { elencoDe } from "../../engine/mercado";
-import { redistribuir } from "../../engine/partida";
+import { redistribuir, type LadoVivo } from "../../engine/partida";
 import type { Estilo, Formacao, Jogador, Tatica as TaticaTipo } from "../../engine/tipos";
 import { Barra, Cartao, Folha, Opcoes, Pos } from "../componentes";
 import { useJogo, useLoja } from "../store";
@@ -29,6 +30,50 @@ export function LinhasDoCampo() {
         <rect x="38" y="112" width="24" height="7" />
       </g>
     </svg>
+  );
+}
+
+/** O time em campo só para ver (o titular do adversário antes do jogo): força na vaga, cor e nome. */
+export function CampoDoTime({ atuacoes, jogadas }: { atuacoes: { jogador: Jogador; vaga: Vaga; energia: number }[]; jogadas: TaticaTipo["jogadas"] }) {
+  return (
+    <div className="campo">
+      <LinhasDoCampo />
+      {atuacoes.map(({ jogador: j, vaga: v, energia }) => {
+        const ef = Math.round(forcaEfetiva(j, v, energia, jogadas));
+        return (
+          <div key={j.id} className="vaga" style={{ left: `${v.x}%`, top: `${v.y}%` }}>
+            <span className={`camisa ${corForca(ef, j.forca)}`}>{ef}</span>
+            <span className="nome">{nomeCurto(j.nome)}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/** "4-4-2 · Equilibrado · força média 62" de um time na partida. */
+export function ResumoDoTime({ lado }: { lado: LadoVivo }) {
+  const estado = useJogo();
+  const media = Math.round(lado.emCampo.reduce((s, a) => s + estado.jogadores[a.jogadorId].forca, 0) / Math.max(1, lado.emCampo.length));
+  return <span>{lado.tatica.formacao} · {ESTILOS[lado.tatica.estilo].nome} · força média <b>{media}</b></span>;
+}
+
+/** O time titular de um clube no campinho, numa folha: "Time titular do Londrina" (ou "Provável time titular..."). */
+export function FolhaDoTime({ lado, provavel, aoFechar }: { lado: LadoVivo; provavel?: boolean; aoFechar: () => void }) {
+  const estado = useJogo();
+  const clube = estado.clubes[lado.clubeId];
+  const atuacoes = lado.emCampo.map((a) => {
+    const jogador = estado.jogadores[a.jogadorId];
+    return { jogador, vaga: a.vaga, energia: lado.energia[a.jogadorId] ?? jogador.energia };
+  });
+  return (
+    <Folha titulo={`${provavel ? "Provável time titular" : "Time titular"} ${comArtigo("do", clube)}`} aoFechar={aoFechar}>
+      <p className="pequeno" style={{ marginBottom: 8 }}><ResumoDoTime lado={lado} /></p>
+      <CampoDoTime atuacoes={atuacoes} jogadas={lado.tatica.jogadas} />
+      <p className="mini muito-fraco" style={{ marginTop: 6 }}>
+        {provavel ? "Os melhores disponíveis hoje; no dia do jogo pode mudar. " : ""}O número é a força que o jogador rende naquela vaga. Verde: rendimento cheio. Amarelo e vermelho: fora de posição ou cansado.
+      </p>
+    </Folha>
   );
 }
 
