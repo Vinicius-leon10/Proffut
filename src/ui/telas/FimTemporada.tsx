@@ -1,3 +1,4 @@
+import { comArtigo } from "../../engine/artigos";
 import { NOME_SERIE, SERIES } from "../../engine/competicoes";
 import { forcaDoTime } from "../../engine/forca";
 import { assumirClube, propostasDeEmprego } from "../../engine/jogo";
@@ -66,12 +67,12 @@ export function FimTemporada() {
 
         {precisaDeClube ? (
           <Cartao titulo="Propostas de emprego">
-            <p className="pequeno fraco" style={{ marginBottom: 8 }}>O {meu.nome} caiu para a Série D, que não é disputada no jogo. Estes clubes da Série C querem você:</p>
+            <p className="pequeno fraco" style={{ marginBottom: 8 }}>{comArtigo("O", meu)} caiu para a Série D, que não é disputada no jogo. Estes clubes da Série C querem você:</p>
             <div className="lista">
               {propostas.map((id) => {
                 const c = estado.clubes[id];
                 return (
-                  <button key={id} className="item" onClick={() => { assumirClube(estado, id); atualizar(); avisar(`Você assumiu o ${c.nome}!`); fechar(); }}>
+                  <button key={id} className="item" onClick={() => { assumirClube(estado, id); atualizar(); avisar(`Você assumiu ${comArtigo("o", c)}!`); fechar(); }}>
                     <Escudo clube={c} tamanho={34} />
                     <div className="cresce">
                       <div className="negrito pequeno">{c.nome}</div>

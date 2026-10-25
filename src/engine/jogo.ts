@@ -2,6 +2,7 @@
 import clubesJson from "../../data/brasil-2026/clubes.json";
 import reservaJson from "../../data/brasil-2026/serie-d-reserva.json";
 import jogadoresJson from "../../data/brasil-2026/jogadores.json";
+import { comArtigo } from "./artigos";
 import { diasEntre, inicioDaTemporada, mesDe, somarDias } from "./calendario";
 import {
   FASE_LIGA, agregado, avancarFases, chaveDaPartida, criarTemporada, decidePorPenaltis, temporadaEncerrada,
@@ -113,7 +114,7 @@ export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente
   estado.objetivo = definirObjetivo(estado);
   enviarMensagem(estado, {
     tipo: "diretoria",
-    titulo: `Bem-vindo ao ${meu.nome}!`,
+    titulo: `Bem-vindo ${comArtigo("ao", meu)}!`,
     texto: `A diretoria confia no seu trabalho. Objetivo para ${TEMPORADA_INICIAL}: ${estado.objetivo.descricao}. Caixa disponível: R$ ${meu.caixa.toLocaleString("pt-BR")}.`,
   });
   return estado;
@@ -343,7 +344,7 @@ export function propostasDeEmprego(estado: EstadoJogo): string[] {
 }
 
 export function assumirClube(estado: EstadoJogo, clubeId: string) {
-  const anterior = estado.clubes[estado.tecnico.clubeId].nome;
+  const anterior = estado.clubes[estado.tecnico.clubeId];
   estado.tecnico.clubeId = clubeId;
   estado.tecnico.confiancaDiretoria = 55;
   estado.tecnico.confiancaTorcida = 50;
@@ -351,8 +352,8 @@ export function assumirClube(estado: EstadoJogo, clubeId: string) {
   const clube = estado.clubes[clubeId];
   enviarMensagem(estado, {
     tipo: "diretoria",
-    titulo: `Bem-vindo ao ${clube.nome}!`,
-    texto: `Depois da passagem pelo ${anterior}, você assume o ${clube.nome}. Objetivo: ${estado.objetivo.descricao}.`,
+    titulo: `Bem-vindo ${comArtigo("ao", clube)}!`,
+    texto: `Depois da passagem ${comArtigo("pelo", anterior)}, você assume ${comArtigo("o", clube)}. Objetivo: ${estado.objetivo.descricao}.`,
   });
 }
 

@@ -1,4 +1,5 @@
 // Séries A, B e C com os regulamentos de 2026: tabela, desempate e mudança de fase.
+import { concorda } from "./artigos";
 import { datasDaTemporada, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { hashTexto, rngPara } from "./rng";
 import type { Competicao, EstadoJogo, EstadoSerie, Partida, SerieId } from "./tipos";
@@ -217,7 +218,7 @@ export function avancarFases(estado: EstadoJogo): string[] {
     a.campeao = t[0].clubeId;
     a.rebaixados = t.slice(16).map((l) => l.clubeId);
     a.fase = "encerrada";
-    noticias.push(`${nome(a.campeao)} é campeão da Série A ${ano}!`);
+    noticias.push(`${nome(a.campeao)} é ${concorda(estado.clubes[a.campeao], "campeão", "campeã")} da Série A ${ano}!`);
   }
 
   // Série B
@@ -269,7 +270,7 @@ export function avancarFases(estado: EstadoJogo): string[] {
     const [chave] = chavesDaFase(estado, "C", "final");
     c.campeao = vencedorDaChave(chave) ?? chave.melhor;
     c.fase = "encerrada";
-    noticias.push(`${nome(c.campeao)} é campeão da Série C ${ano}!`);
+    noticias.push(`${nome(c.campeao)} é ${concorda(estado.clubes[c.campeao], "campeão", "campeã")} da Série C ${ano}!`);
   }
 
   estado.partidas.sort((x, y) => x.data.localeCompare(y.data) || x.serie.localeCompare(y.serie));

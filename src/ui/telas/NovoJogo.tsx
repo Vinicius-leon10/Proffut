@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { comArtigo } from "../../engine/artigos";
 import { FICHAS, forcaEstimada, novoJogo } from "../../engine/jogo";
 import { formatarDinheiro } from "../../engine/financas";
 import type { SerieId } from "../../engine/tipos";
@@ -71,7 +72,7 @@ export function NovoJogo() {
       </div>
       <div style={{ padding: "12px 16px calc(var(--base) + 12px)", borderTop: "1px solid var(--borda)", background: "var(--fundo-2)" }}>
         <button className="botao primario grande cheio" disabled={!selecionado || criando} onClick={comecar}>
-          {criando ? "Preparando a temporada..." : selecionado ? `Assumir o ${selecionado.nome}` : "Escolha um clube"}
+          {criando ? "Preparando a temporada..." : selecionado ? `Assumir ${comArtigo("o", selecionado)}` : "Escolha um clube"}
         </button>
       </div>
     </div>

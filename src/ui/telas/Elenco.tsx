@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { comArtigo } from "../../engine/artigos";
 import { NOMES_CARACTERISTICA, NOMES_POSICAO, fatorEnergia } from "../../engine/forca";
 import { formatarDinheiro } from "../../engine/financas";
 import { valorMercado } from "../../engine/gerador";
@@ -101,7 +102,7 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
           </button>
         </div>
       )}
-      {!meu && clube && <p className="pequeno fraco">Preço pedido pelo {clube.nome}: <b>{formatarDinheiro(precoPedido(estado, j))}</b></p>}
+      {!meu && clube && <p className="pequeno fraco">Preço pedido {comArtigo("pelo", clube)}: <b>{formatarDinheiro(precoPedido(estado, j))}</b></p>}
     </Folha>
   );
 }

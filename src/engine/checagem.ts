@@ -1,5 +1,6 @@
 // Checagem do save: encontra inconsistências, corrige as que são seguras de
 // corrigir e testa o motor com uma partida de verdade (numa cópia do jogo).
+import { comArtigo } from "./artigos";
 import { SERIES } from "./competicoes";
 import { MINIMO_POSICAO } from "./constantes";
 import { limitar } from "./gerador";
@@ -49,7 +50,7 @@ export function checarEstado(estado: EstadoJogo): Problema[] {
 
   let escalacoes = 0, curtos = 0;
   for (const c of Object.values(estado.clubes)) {
-    if (!Number.isFinite(c.caixa)) erro(`O caixa do ${c.nome} está inválido.`, true);
+    if (!Number.isFinite(c.caixa)) erro(`O caixa ${comArtigo("do", c)} está inválido.`, true);
     if (c.serie === "D") continue;
     if (idsEscalacaoInvalidos(estado, c.id)) escalacoes++;
     const elenco = elencoDe(estado, c.id);

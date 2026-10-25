@@ -41,12 +41,12 @@ Só clubes brasileiros: Séries A, B e C de 2026 (60 clubes reais, regulamentos 
 Pronto e publicado: partida ao vivo, tática, elenco, mercado, finanças, estádio (ampliar/modernizar), diretoria,
 virada de temporada sem fim, rebaixamento para a Série D com propostas de emprego, checagem automática no app,
 elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, testes de
-ponta a ponta R01–R25 rodando a cada mudança, antes de publicar e todo dia no site publicado.
+ponta a ponta R01–R26 rodando a cada mudança, antes de publicar e todo dia no site publicado.
 
 **Sons da partida (out/2026, `src/ui/sons.ts`):** apito e torcida sintetizados com Web Audio, narrador com a voz
 pt-BR do aparelho (`speechSynthesis`); nada baixado nem copiado. Apito no início e na volta do intervalo, 2 no
 intervalo, 3 no fim; no pênalti: apito, burburinho e "Pênalti!"; no gol: torcida (mais forte se é do mandante) e
-"Gol do <clube>!"; pênalti perdido: "uhhh". O pênalti é marcado num minuto (evento `penalti`) e cobrado no minuto
+"Gol do/da <clube>!"; pênalti perdido: "uhhh". O pênalti é marcado num minuto (evento `penalti`) e cobrado no minuto
 seguinte (`PartidaViva.penaltiPendente`; o tempo não acaba antes da cobrança) e a partida espera 2,5 s antes da
 cobrança. No iPhone o som só sai depois de um toque (`liberarSom` em "Começar o jogo" e no ▶) e a chave do
 silencioso cala o apito e a torcida. Liga/desliga: botão de som na partida e Configurações → Sons da partida
@@ -119,6 +119,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `src/engine/` | Regras em TypeScript puro, sem interface. Tudo aleatório usa `rngPara(semente, chave)` (`rng.ts`): mesma semente, mesmo resultado |
 | `tipos.ts` | Modelo de dados (`EstadoJogo`, `Clube`, `Jogador`, `Partida`...) |
 | `constantes.ts` | Todos os números de equilíbrio. Mexeu? Rode `npm run sim` |
+| `artigos.ts` | Artigo do clube nos textos: `comArtigo("do", clube)` dá "do Flamengo" ou "da Chapecoense"; `concorda` para campeão/campeã. A lista `CLUBES_FEMININOS` vai pelo id |
 | `gerador.ts`, `nomes.ts` | `elencoReal` (elencos de `jogadores.json`), jogadores gerados (base, livres, quem completa elenco), salário (`salarioBase`), valor de mercado |
 | `forca.ts` | Força efetiva: força × posição × energia × características |
 | `partida.ts` | Simulação minuto a minuto; disputa = a^k/(a^k+b^k), k = `EXPOENTE_DISPUTA` |
@@ -160,3 +161,6 @@ Obras do estádio se pagam em 3 a 4 temporadas.
   `.tela-cheia` ou do `dialog`; para esperar o salvamento use `esperarSalvar` (não `waitForTimeout`).
 - GitHub Actions: usar `actions/*@v7` e Node 22 (Node 20 foi removido do Actions).
 - Ao rodar comandos, não use `pkill` genérico (já derrubou o próprio terminal).
+- Texto com nome de clube: nunca "o ${clube.nome}" fixo; use `comArtigo` e `concorda` (`artigos.ts`): Chapecoense,
+  Ponte Preta, Ferroviária, Inter de Limeira, Portuguesa, Tuna Luso, Aparecidense e Juazeirense são "a" (R26).
+  Nome de estádio vai sem artigo ("Arena Condá agora tem...").

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
 import { formatarDinheiro } from "../../engine/financas";
 import { valorMercado } from "../../engine/gerador";
@@ -36,7 +37,7 @@ function FolhaPedirMais({ m, aoFechar }: { m: Mensagem; aoFechar: () => void }) 
   return (
     <Folha titulo={`Pedir mais por ${j?.nome ?? "jogador"}`} aoFechar={aoFechar}>
       <p className="pequeno">
-        O {comprador?.nome} oferece <b>{formatarDinheiro(p.valor)}</b>.{j ? ` Valor de mercado: ${formatarDinheiro(valorMercado(j))}.` : ""}
+        {comprador ? comArtigo("O", comprador) : "O clube"} oferece <b>{formatarDinheiro(p.valor)}</b>.{j ? ` Valor de mercado: ${formatarDinheiro(valorMercado(j))}.` : ""}
       </p>
       <div className="pequeno fraco">Quanto a mais você pede?</div>
       <Opcoes opcoes={AUMENTOS.map((a) => ({ valor: a, rotulo: `+${a}%` }))} valor={aumento} aoMudar={setAumento} />

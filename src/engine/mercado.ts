@@ -1,4 +1,5 @@
 // Mercado de transferências: compra, venda, livres, propostas e as trocas entre clubes da IA.
+import { comArtigo } from "./artigos";
 import { ELENCO_MAXIMO, MINIMO_POSICAO } from "./constantes";
 import { escalarAutomatico, forcaDoTime } from "./forca";
 import { lancar } from "./financas";
@@ -82,19 +83,19 @@ export function fazerOferta(estado: EstadoJogo, jogadorId: number, oferta: numbe
     const salario = Math.round(salarioBase(j.forca) * 1.15);
     transferir(estado, j, meu.id, 0, estado.data);
     j.salario = salario;
-    return { ok: true, texto: `${j.nome} assinou com o ${meu.nome}. Salário: R$ ${salario.toLocaleString("pt-BR")}/mês.` };
+    return { ok: true, texto: `${j.nome} assinou com ${comArtigo("o", meu)}. Salário: R$ ${salario.toLocaleString("pt-BR")}/mês.` };
   }
   if (meu.caixa < oferta) return { ok: false, texto: "Você não tem dinheiro em caixa para essa oferta." };
   const vendedor = estado.clubes[j.clubeId];
-  if (!podeSair(estado, j)) return { ok: false, texto: `O ${vendedor.nome} não aceita vender: ficaria sem opções na posição.` };
+  if (!podeSair(estado, j)) return { ok: false, texto: `${comArtigo("O", vendedor)} não aceita vender: ficaria sem opções na posição.` };
   const pedido = precoPedido(estado, j);
   const exigencia = pedido * rngPara(estado.semente, `oferta/${j.id}/${estado.data}`).real(0.93, 1.07);
   if (oferta < exigencia) {
     const contra = Math.round(exigencia / 10_000) * 10_000;
-    return { ok: false, texto: `O ${vendedor.nome} recusou. Eles pedem cerca de R$ ${contra.toLocaleString("pt-BR")}.` };
+    return { ok: false, texto: `${comArtigo("O", vendedor)} recusou. Eles pedem cerca de R$ ${contra.toLocaleString("pt-BR")}.` };
   }
   transferir(estado, j, meu.id, oferta, estado.data);
-  return { ok: true, texto: `Negócio fechado! ${j.nome} é o novo reforço do ${meu.nome}.` };
+  return { ok: true, texto: `Negócio fechado! ${j.nome} é o novo reforço ${comArtigo("do", meu)}.` };
 }
 
 /** Dispensa: o jogador vira livre e o clube paga 3 salários de rescisão. */
@@ -138,7 +139,7 @@ export function gerarPropostas(estado: EstadoJogo, data: string) {
     enviarMensagem(estado, {
       tipo: "proposta",
       titulo: `Proposta por ${j.nome}`,
-      texto: `O ${clube.nome} oferece R$ ${valor.toLocaleString("pt-BR")} por ${j.nome}.`,
+      texto: `${comArtigo("O", clube)} oferece R$ ${valor.toLocaleString("pt-BR")} por ${j.nome}.`,
       proposta: { jogadorId: j.id, clubeId: clube.id, valor, validaAte: somarDias(data, 5) },
     });
   }
@@ -156,10 +157,10 @@ export function responderProposta(estado: EstadoJogo, mensagemId: number, aceita
   if (j.clubeId !== estado.tecnico.clubeId) { p.resolvida = "expirada"; return { ok: false, texto: "O jogador não está mais no seu clube." }; }
   if (!podeSair(estado, j)) return { ok: false, texto: "Não dá para vender: o elenco ficaria abaixo do mínimo na posição." };
   const comprador = estado.clubes[p.clubeId];
-  if (comprador.caixa < p.valor) { p.resolvida = "expirada"; return { ok: false, texto: `O ${comprador.nome} não tem mais dinheiro para o negócio.` }; }
+  if (comprador.caixa < p.valor) { p.resolvida = "expirada"; return { ok: false, texto: `${comArtigo("O", comprador)} não tem mais dinheiro para o negócio.` }; }
   transferir(estado, j, comprador.id, p.valor, estado.data);
   p.resolvida = "aceita";
-  return { ok: true, texto: `${j.nome} foi vendido ao ${comprador.nome} por R$ ${p.valor.toLocaleString("pt-BR")}.` };
+  return { ok: true, texto: `${j.nome} foi vendido ${comArtigo("ao", comprador)} por R$ ${p.valor.toLocaleString("pt-BR")}.` };
 }
 
 /**
@@ -196,19 +197,19 @@ export function pedirMais(estado: EstadoJogo, mensagemId: number, pedido: number
     transferir(estado, j, comprador.id, pedido, estado.data);
     p.valor = pedido;
     p.resolvida = "aceita";
-    m.texto = `O ${comprador.nome} pagou ${reais(pedido)} por ${j.nome}, o valor que você pediu.`;
-    return { ok: true, texto: `O ${comprador.nome} aceitou pagar ${reais(pedido)}. ${j.nome} foi vendido.` };
+    m.texto = `${comArtigo("O", comprador)} pagou ${reais(pedido)} por ${j.nome}, o valor que você pediu.`;
+    return { ok: true, texto: `${comArtigo("O", comprador)} aceitou pagar ${reais(pedido)}. ${j.nome} foi vendido.` };
   }
   if (p.pedidos === 1 && pedido <= limite * 1.25) {
     const nova = Math.floor((p.valor + (limite - p.valor) / 2) / 10_000) * 10_000;
-    if (nova <= p.valor) return { ok: true, texto: `O ${comprador.nome} não paga mais que ${reais(p.valor)}.` };
+    if (nova <= p.valor) return { ok: true, texto: `${comArtigo("O", comprador)} não paga mais que ${reais(p.valor)}.` };
     p.valor = nova;
-    m.texto = `O ${comprador.nome} subiu a oferta para ${reais(nova)} por ${j.nome}.`;
-    return { ok: true, texto: `O ${comprador.nome} não paga ${reais(pedido)}, mas subiu a oferta para ${reais(nova)}.` };
+    m.texto = `${comArtigo("O", comprador)} subiu a oferta para ${reais(nova)} por ${j.nome}.`;
+    return { ok: true, texto: `${comArtigo("O", comprador)} não paga ${reais(pedido)}, mas subiu a oferta para ${reais(nova)}.` };
   }
   p.resolvida = "retirada";
-  m.texto = `O ${comprador.nome} achou caro demais e desistiu de ${j.nome}.`;
-  return { ok: true, texto: `O ${comprador.nome} achou caro demais e desistiu da proposta.` };
+  m.texto = `${comArtigo("O", comprador)} achou caro demais e desistiu de ${j.nome}.`;
+  return { ok: true, texto: `${comArtigo("O", comprador)} achou caro demais e desistiu da proposta.` };
 }
 
 /** Janela de transferências: cada clube da IA tenta reforçar a posição mais fraca. */
@@ -243,9 +244,9 @@ export function transferenciasDaIa(estado: EstadoJogo, chave: string): string[] 
     if (!alvos.length) continue;
     const alvo = rng.escolherPeso(alvos, (j) => j.forca - forca + 6);
     const valor = precoPedido(estado, alvo);
-    const origem = alvo.clubeId ? estado.clubes[alvo.clubeId].nome : null;
+    const origem = alvo.clubeId ? estado.clubes[alvo.clubeId] : null;
     transferir(estado, alvo, clube.id, valor, data);
-    if (valor > 0 && origem) noticias.push(`${alvo.nome} troca o ${origem} pelo ${clube.nome} (R$ ${(valor / 1_000_000).toFixed(1).replace(".", ",")} mi).`);
+    if (valor > 0 && origem) noticias.push(`${alvo.nome} troca ${comArtigo("o", origem)} ${comArtigo("pelo", clube)} (R$ ${(valor / 1_000_000).toFixed(1).replace(".", ",")} mi).`);
   }
   return noticias;
 }

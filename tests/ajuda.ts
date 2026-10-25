@@ -61,7 +61,7 @@ export async function novoJogo(page: Page, { serie = "Série B", clube = "Ponte 
   await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
   await page.getByRole("tab", { name: serie }).click();
   await botao(page, new RegExp(clube)).click();
-  await botao(page, /Assumir o/).click();
+  await botao(page, /^Assumir (o|a) /).click();
   await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
 }
 
@@ -170,4 +170,32 @@ export async function esperarInteiroNaTela(page: Page, alvo: Locator) {
     return !!topo && (topo === el || el.contains(topo));
   });
   expect(livre, "algo está cobrindo o elemento").toBe(true);
+}
+
+export type Som = { tipo: "tom"; hz: number } | { tipo: "ruido" } | { tipo: "voz"; texto: string };
+
+/** Anota cada som que o jogo toca: tons (apito), ruídos (torcida) e falas (narrador). */
+export async function escutarSons(page: Page) {
+  await page.addInitScript(() => {
+    const w = window as unknown as { __sons: unknown[] };
+    w.__sons = [];
+    const tom = OscillatorNode.prototype.start;
+    OscillatorNode.prototype.start = function (this: OscillatorNode, ...a: [number?]) {
+      w.__sons.push({ tipo: "tom", hz: this.frequency.value });
+      return tom.apply(this, a);
+    };
+    const ruido = AudioBufferSourceNode.prototype.start;
+    AudioBufferSourceNode.prototype.start = function (this: AudioBufferSourceNode, ...a: [number?, number?, number?]) {
+      w.__sons.push({ tipo: "ruido" });
+      return ruido.apply(this, a);
+    };
+    if (window.speechSynthesis) {
+      const falar = window.speechSynthesis.speak.bind(window.speechSynthesis);
+      window.speechSynthesis.speak = (u: SpeechSynthesisUtterance) => {
+        if (u.text.trim()) w.__sons.push({ tipo: "voz", texto: u.text });
+        try { falar(u); } catch { /* sem voz no navegador de teste */ }
+      };
+    }
+  });
+  return () => page.evaluate(() => (window as unknown as { __sons: Som[] }).__sons);
 }

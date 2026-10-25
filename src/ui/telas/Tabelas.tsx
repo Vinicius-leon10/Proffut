@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
 import { FASE_LIGA, SERIES, ZONAS, agregado, chavesDaFase, classificacao, tabelaDaLiga, type LinhaTabela } from "../../engine/competicoes";
 import { FASES_COPA, NOME_FASE_COPA, agregadoDoConfronto, jogosDaCopa, situacaoNaCopa } from "../../engine/copa";
@@ -126,7 +127,7 @@ function MataMata({ serie }: { serie: SerieId }) {
             <div key={c.chave} style={{ marginBottom: 8 }}>
               {c.ida && <LinhaResultado p={c.ida} aoTocar={() => setAberta(c.ida!)} />}
               {c.volta && <LinhaResultado p={c.volta} aoTocar={() => setAberta(c.volta!)} />}
-              <p className="mini fraco centro">Agregado: {estado.clubes[c.melhor].sigla} {a} x {b} {estado.clubes[c.pior].sigla} (empate favorece o {estado.clubes[c.melhor].nome})</p>
+              <p className="mini fraco centro">Agregado: {estado.clubes[c.melhor].sigla} {a} x {b} {estado.clubes[c.pior].sigla} (empate favorece {comArtigo("o", estado.clubes[c.melhor])})</p>
             </div>
           );
         })}

@@ -2,6 +2,7 @@
 // colocado no ranking (empate vai para os pênaltis); da 5ª fase à semifinal, ida e volta (empate no
 // agregado, pênaltis); final em jogo único, em campo neutro. A Série A entra na 5ª fase.
 // Como as fases iniciais de verdade são em fevereiro e março, aqui elas caem nas quartas-feiras de abril.
+import { comArtigo, concorda } from "./artigos";
 import { inicioDaTemporada, somarDias } from "./calendario";
 import { agregado, chavesDaFase, vencedorDaChave } from "./competicoes";
 import { COTA_COPA, ESCALA_COPA, PREMIO_FINAL_COPA } from "./constantes";
@@ -18,6 +19,11 @@ export const NOME_FASE_COPA: Record<FaseCopa, string> = {
   fase1: "1ª fase", fase2: "2ª fase", fase3: "3ª fase", fase4: "4ª fase", fase5: "5ª fase",
   oitavas: "Oitavas de final", quartas: "Quartas de final", semi: "Semifinal", final: "Final",
 };
+/** A fase numa frase: "na 1ª fase", "nas oitavas de final", "da semifinal"... */
+function comFase(preposicao: "na" | "da", fase: FaseCopa): string {
+  const plural = fase === "oitavas" || fase === "quartas" ? "s" : "";
+  return `${preposicao}${plural} ${fase.startsWith("fase") ? NOME_FASE_COPA[fase] : NOME_FASE_COPA[fase].toLowerCase()}`;
+}
 const IDA_E_VOLTA: FaseCopa[] = ["fase5", "oitavas", "quartas", "semi"];
 /** Fases em que o sorteio separa os clubes em dois potes pelo ranking (melhor metade contra pior metade). */
 const COM_POTES: FaseCopa[] = ["fase1", "fase2", "fase3", "fase4", "fase5"];
@@ -78,7 +84,7 @@ export function criarCopa(estado: EstadoJogo) {
     enviarMensagem(estado, {
       tipo: "noticia",
       titulo: `${NOME_COPA} ${ano}`,
-      texto: `São 126 clubes. O ${estado.clubes[meu].nome} entra na ${NOME_FASE_COPA[entrada]}${entrada === "fase5" ? ", junto com toda a Série A" : ""}. Até a 4ª fase é jogo único na casa do time de pior ranking, com pênaltis se empatar; da 5ª fase à semifinal, ida e volta; a final é em jogo único, em campo neutro.`,
+      texto: `São 126 clubes. ${comArtigo("O", estado.clubes[meu])} entra ${comFase("na", entrada)}${entrada === "fase5" ? ", junto com toda a Série A" : ""}. Até a 4ª fase é jogo único na casa do time de pior ranking, com pênaltis se empatar; da 5ª fase à semifinal, ida e volta; a final é em jogo único, em campo neutro.`,
     });
   }
   sortear(estado, "fase1", fase1);
@@ -123,7 +129,7 @@ function sortear(estado: EstadoJogo, fase: FaseCopa, clubes: string[]) {
     const [serieB, demais] = COTA_COPA[fase];
     for (const id of clubes) {
       const clube = estado.clubes[id];
-      lancar(clube, estado.data, "premiacao", `Copa do Brasil: cota da ${NOME_FASE_COPA[fase]}`, (clube.serie === "B" ? serieB : demais) * ESCALA_COPA);
+      lancar(clube, estado.data, "premiacao", `Copa do Brasil: cota ${comFase("da", fase)}`, (clube.serie === "B" ? serieB : demais) * ESCALA_COPA);
     }
   }
 
@@ -181,11 +187,13 @@ export function avancarCopa(estado: EstadoJogo): string[] {
     copa.fase = "encerrada";
     lancar(estado.clubes[copa.campeao], estado.data, "premiacao", "Copa do Brasil: campeão", PREMIO_FINAL_COPA.campeao * ESCALA_COPA);
     lancar(estado.clubes[copa.vice], estado.data, "premiacao", "Copa do Brasil: vice", PREMIO_FINAL_COPA.vice * ESCALA_COPA);
-    return [`${nome(copa.campeao)} é campeão da ${NOME_COPA} ${estado.temporada}! Vice: ${nome(copa.vice)}.`];
+    const campeao = estado.clubes[copa.campeao];
+    return [`${campeao.nome} é ${concorda(campeao, "campeão", "campeã")} da ${NOME_COPA} ${estado.temporada}! Vice: ${nome(copa.vice)}.`];
   }
 
   const noticias: string[] = [];
-  if (eliminado) noticias.push(`O ${nome(meu)} foi eliminado da ${NOME_COPA} na ${NOME_FASE_COPA[fase]}.`);
+  const meuClube = estado.clubes[meu];
+  if (eliminado) noticias.push(`${comArtigo("O", meuClube)} foi ${concorda(meuClube, "eliminado", "eliminada")} da ${NOME_COPA} ${comFase("na", fase)}.`);
   const proxima = FASES_COPA[FASES_COPA.indexOf(fase) + 1];
   sortear(estado, proxima, [...vencedores, ...(copa.entram[proxima] ?? [])]);
   copa.fase = proxima;
@@ -196,17 +204,18 @@ export function avancarCopa(estado: EstadoJogo): string[] {
 /** Situação do clube na Copa, em uma frase (para a aba da Copa). */
 export function situacaoNaCopa(estado: EstadoJogo, clubeId: string): string {
   const copa = estado.copa;
-  const nome = estado.clubes[clubeId]?.nome ?? clubeId;
+  const clube = estado.clubes[clubeId] ?? { id: clubeId, nome: clubeId };
+  const nome = comArtigo("O", clube);
   if (!copa) return `A ${NOME_COPA} começa na próxima temporada.`;
-  if (copa.campeao === clubeId) return `O ${nome} é o campeão da ${NOME_COPA}!`;
+  if (copa.campeao === clubeId) return `${nome} é ${concorda(clube, "o campeão", "a campeã")} da ${NOME_COPA}!`;
   const entrada = faseDeEntrada(estado, clubeId);
-  if (!entrada) return `O ${nome} não disputa a ${NOME_COPA} nesta temporada.`;
+  if (!entrada) return `${nome} não disputa a ${NOME_COPA} nesta temporada.`;
   const jogou = jogosDaCopa(estado).filter((p) => p.mandante === clubeId || p.visitante === clubeId);
-  if (!jogou.length) return `O ${nome} entra na ${NOME_FASE_COPA[entrada]}.`;
+  if (!jogou.length) return `${nome} entra ${comFase("na", entrada)}.`;
   const ultima = jogou[jogou.length - 1].fase as FaseCopa;
-  if (copa.vice === clubeId) return `O ${nome} foi vice-campeão.`;
+  if (copa.vice === clubeId) return `${nome} foi ${concorda(clube, "vice-campeão", "vice-campeã")}.`;
   const vivo = copa.fase !== "encerrada" && (ultima === copa.fase || jogou.some((p) => p.fase === copa.fase));
-  return vivo ? `O ${nome} está na ${NOME_FASE_COPA[copa.fase as FaseCopa]}.` : `O ${nome} foi eliminado na ${NOME_FASE_COPA[ultima]}.`;
+  return vivo ? `${nome} está ${comFase("na", copa.fase as FaseCopa)}.` : `${nome} foi ${concorda(clube, "eliminado", "eliminada")} ${comFase("na", ultima)}.`;
 }
 
 /**
@@ -218,7 +227,8 @@ export function desfechoDoConfronto(estado: EstadoJogo, p: Partida, clubeId: str
   const fase = p.fase as FaseCopa;
   const vencedor = vencedorDoConfronto(estado, fase, p.chave!);
   if (!vencedor) return "";
-  const nome = estado.clubes[clubeId].nome;
+  const clube = estado.clubes[clubeId];
+  const nome = comArtigo("O", clube);
   const partes: string[] = [];
   if (p.perna === 2) {
     const ag = agregadoDoConfronto(estado, fase, p.chave!);
@@ -231,7 +241,7 @@ export function desfechoDoConfronto(estado: EstadoJogo, p: Partida, clubeId: str
     const [m, v] = p.mandante === clubeId ? p.penaltis : [p.penaltis[1], p.penaltis[0]];
     partes.push(`Nos pênaltis, ${m > v ? "vitória" : "derrota"} por ${m} x ${v}.`);
   }
-  if (fase === "final") partes.push(vencedor === clubeId ? `O ${nome} é campeão da ${NOME_COPA}!` : `O ${nome} fica com o vice.`);
-  else partes.push(vencedor === clubeId ? `O ${nome} passou de fase.` : `O ${nome} está fora da ${NOME_COPA}.`);
+  if (fase === "final") partes.push(vencedor === clubeId ? `${nome} é ${concorda(clube, "campeão", "campeã")} da ${NOME_COPA}!` : `${nome} fica com o vice.`);
+  else partes.push(vencedor === clubeId ? `${nome} passou de fase.` : `${nome} está fora da ${NOME_COPA}.`);
   return partes.join(" ");
 }

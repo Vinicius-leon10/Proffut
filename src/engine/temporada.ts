@@ -1,5 +1,6 @@
 // Virada de temporada: histórico, premiação, acesso/rebaixamento, evolução dos
 // jogadores, aposentadorias, base e preparação do ano seguinte.
+import { comArtigo, concorda } from "./artigos";
 import { inicioDaTemporada, somarDias } from "./calendario";
 import { NOME_SERIE, SERIES, criarTemporada, posicaoNaLiga, tabelaDaLiga } from "./competicoes";
 import { criarCopa } from "./copa";
@@ -209,10 +210,10 @@ export function encerrarTemporada(estado: EstadoJogo) {
   // ---- mensagens ----
   const meuClube = estado.clubes[meuId];
   const resumo = [
-    `${nome(A.campeao!)} foi campeão da Série A, ${nome(B.campeao!)} da Série B e ${nome(C.campeao!)} da Série C.`,
+    `${nome(A.campeao!)} foi ${concorda(estado.clubes[A.campeao!], "campeão", "campeã")} da Série A, ${nome(B.campeao!)} da Série B e ${nome(C.campeao!)} da Série C.`,
     `Seu time terminou a fase de classificação em ${minhaPosicao}º. Objetivo: ${cumpriu ? "cumprido" : "não cumprido"}.`,
-    subiu ? `Acesso conquistado! Em ${ano + 1} o ${meuClube.nome} joga a ${NOME_SERIE[meuClube.serie as SerieId]}.` : "",
-    caiu ? `O ${meuClube.nome} foi rebaixado e joga a ${NOME_SERIE[meuClube.serie as SerieId]} em ${ano + 1}.` : "",
+    subiu ? `Acesso conquistado! Em ${ano + 1} ${comArtigo("o", meuClube)} joga a ${NOME_SERIE[meuClube.serie as SerieId]}.` : "",
+    caiu ? `${comArtigo("O", meuClube)} foi ${concorda(meuClube, "rebaixado", "rebaixada")} e joga a ${NOME_SERIE[meuClube.serie as SerieId]} em ${ano + 1}.` : "",
     sobemDaD.length ? `Vindos da Série D: ${sobemDaD.map(nome).join(" e ")}.` : "",
   ].filter(Boolean).join(" ");
   enviarMensagem(estado, { tipo: "temporada", titulo: `Fim da temporada ${ano}`, texto: resumo });

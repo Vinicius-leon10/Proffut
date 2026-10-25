@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { comArtigo } from "../../engine/artigos";
 import { NOMES_CARACTERISTICA, NOMES_POSICAO } from "../../engine/forca";
 import { formatarDinheiro } from "../../engine/financas";
 import { salarioBase, valorMercado } from "../../engine/gerador";
@@ -40,7 +41,7 @@ function FolhaOferta({ j, aoFechar }: { j: Jogador; aoFechar: () => void }) {
       </div>
       {clube ? (
         <>
-          {!vende && <p className="chip vermelho" style={{ whiteSpace: "normal" }}>O {clube.nome} não vende: ficaria sem opções na posição.</p>}
+          {!vende && <p className="chip vermelho" style={{ whiteSpace: "normal" }}>{comArtigo("O", clube)} não vende: ficaria sem opções na posição.</p>}
           <label className="coluna" style={{ gap: 6 }}>
             <span className="pequeno fraco">Sua oferta: <b className="amarelo">{formatarDinheiro(oferta)}</b> (eles pedem cerca de {formatarDinheiro(pedido)})</span>
             <input type="number" inputMode="numeric" step={50_000} min={0} value={oferta} onChange={(e) => setOferta(Math.max(0, Number(e.target.value)))} />

@@ -102,8 +102,8 @@ export function concluirObras(estado: EstadoJogo, data: string) {
         tipo: "noticia",
         titulo: "Obra concluída!",
         texto: obra.tipo === "ampliacao"
-          ? `O ${clube.estadio.nome} agora tem ${clube.estadio.capacidade.toLocaleString("pt-BR")} lugares.`
-          : `O ${clube.estadio.nome} ficou mais confortável (nível ${clube.estadio.conforto} de ${CONFORTO_MAXIMO}). Mais torcedores vão aos jogos.`,
+          ? `${clube.estadio.nome} agora tem ${clube.estadio.capacidade.toLocaleString("pt-BR")} lugares.`
+          : `${clube.estadio.nome} ficou mais confortável (nível ${clube.estadio.conforto} de ${CONFORTO_MAXIMO}). Mais torcedores vão aos jogos.`,
       });
     }
   }

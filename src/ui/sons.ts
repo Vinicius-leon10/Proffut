@@ -3,7 +3,8 @@
 // português do sistema (speechSynthesis). No iPhone o som só é liberado depois de um toque, por isso
 // `liberarSom` é chamado no botão "Começar o jogo"; com a chave do silencioso ligada, o iPhone cala o
 // apito e a torcida.
-import type { EventoPartida } from "../engine/tipos";
+import { comArtigo } from "../engine/artigos";
+import type { Clube, EventoPartida } from "../engine/tipos";
 
 let contexto: AudioContext | undefined;
 let ruido: AudioBuffer | undefined;
@@ -149,8 +150,8 @@ export function narrar(texto: string) {
   }
 }
 
-/** Sons dos lances novos do jogo do usuário. `nomes` são os dois clubes (mandante, visitante). */
-export function tocarLances(lances: EventoPartida[], nomes: [string, string]) {
+/** Sons dos lances novos do jogo do usuário. `clubes` são os dois times (mandante, visitante). */
+export function tocarLances(lances: EventoPartida[], clubes: [Clube, Clube]) {
   for (const e of lances) {
     if (e.tipo === "penalti") {
       apito("penalti");
@@ -158,7 +159,7 @@ export function tocarLances(lances: EventoPartida[], nomes: [string, string]) {
       narrar("Pênalti!");
     } else if (e.tipo === "gol" || e.tipo === "gol-penalti") {
       torcida("gol", e.lado === 0 ? 1 : 0.6);
-      narrar(`Gol do ${nomes[e.lado]}!`);
+      narrar(`Gol ${comArtigo("do", clubes[e.lado])}!`);
     } else if (e.tipo === "penalti-perdido") {
       torcida("perdeu");
     } else if (e.tipo === "intervalo") {
