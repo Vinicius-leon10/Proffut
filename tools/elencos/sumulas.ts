@@ -100,10 +100,17 @@ export function lerJogador(linha: string): JogadorSumula | null {
   };
 }
 
+export interface Troca { clube: string; entra: number; nomeEntra: string; sai: number; nomeSai: string }
+
 /** Substituição: "41:00 1TRetrô/PE 16 - Marcos Andre ... 22 - Samuel ..." (primeiro número entra, segundo sai). */
+export function lerTroca(texto: string): Troca | null {
+  const m = /^\s*\+?\d+:\d+\s*(?:\dT|INT)?\s*(.*?)\s*(\d+)\s*-\s*(\D+?)\s*(\d+)\s*-\s*(\D+?)\s*$/.exec(texto);
+  return m ? { clube: m[1], entra: Number(m[2]), nomeEntra: m[3], sai: Number(m[4]), nomeSai: m[5] } : null;
+}
+
 export function lerSubstituicao(texto: string): { entra: number; sai: number } | null {
-  const numeros = /(\d+)\s*-\s*\D+?(\d+)\s*-/.exec(texto.replace(/^\s*\d+:\d+\s*(\dT|INT)?/, ""));
-  return numeros ? { entra: Number(numeros[1]), sai: Number(numeros[2]) } : null;
+  const t = lerTroca(texto);
+  return t ? { entra: t.entra, sai: t.sai } : null;
 }
 
 // ---- nomes ------------------------------------------------------------------------------

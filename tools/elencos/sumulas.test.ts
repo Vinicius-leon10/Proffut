@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatarNome, lerJogador, lerSubstituicao, separarApelido } from "./sumulas";
+import { formatarNome, lerJogador, lerSubstituicao, lerTroca, separarApelido } from "./sumulas";
 
 // Linhas reais das súmulas da CBF de 2025 (texto extraído pelo projeto BrazilianFootball/data).
 describe("linhas de jogadores da súmula", () => {
@@ -48,5 +48,17 @@ describe("linhas de jogadores da súmula", () => {
   it("lê quem entra e quem sai numa substituição", () => {
     expect(lerSubstituicao("41:00 1TRetrô/PE 16 - Marcos Andre de Menezes Diniz 22 - Samuel Salustiano de Jesus S...")).toEqual({ entra: 16, sai: 22 });
     expect(lerSubstituicao("12:00 2TTombense/MG 13 - Leonardo Pereira dos Santos 2 - Julio Henrique de Lacerda de...")).toEqual({ entra: 13, sai: 2 });
+  });
+});
+
+describe("substituições com nomes", () => {
+  it("lê clube, números e nomes de quem entra e de quem sai", () => {
+    expect(lerTroca("13:00 2TCoritiba S.a.f./PR 5 - Geovane Batista de Faria 8 - Luiz Filipe da Rosa Machado")).toEqual({
+      clube: "Coritiba S.a.f./PR", entra: 5, nomeEntra: "Geovane Batista de Faria", sai: 8, nomeSai: "Luiz Filipe da Rosa Machado",
+    });
+    expect(lerTroca("+02:00 2TRetrô/PE 16 - Marcos Andre de Menezes Diniz 22 - Samuel Salustiano de Jesus S...")).toMatchObject({
+      clube: "Retrô/PE", entra: 16, sai: 22, nomeSai: "Samuel Salustiano de Jesus S...",
+    });
+    expect(lerTroca("Substituições")).toBeNull();
   });
 });

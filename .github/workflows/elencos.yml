@@ -21,7 +21,8 @@ jobs:
           /tmp/venv/bin/pip install --quiet PyPDF2==3.0.1 requests
           git clone --quiet --depth 1 https://github.com/BrazilianFootball/data /tmp/bf
           mkdir -p dados/sumulas
-          for arquivo in /tmp/bf/results/processed/Serie_[ABCD]_2025_games.json; do
+          # Três temporadas: a mais recente diz quem está em cada clube; as anteriores ajudam a deduzir posições.
+          for arquivo in /tmp/bf/results/processed/Serie_[ABCD]_202[345]_games.json; do
             gzip -c "$arquivo" > "dados/sumulas/$(basename "$arquivo").gz"
           done
       - name: Súmulas da CBF de 2026 (Séries A, B e C)
@@ -29,7 +30,10 @@ jobs:
         run: /tmp/venv/bin/python tools/elencos/sumulas_cbf.py /tmp/bf 2026 dados
       - name: Cartola (posições da Série A)
         continue-on-error: true
-        run: curl -sSf -A "Mozilla/5.0" https://api.cartola.globo.com/atletas/mercado | gzip > dados/cartola-mercado.json.gz
+        run: |
+          curl -sSf -A "Proffut/0.1 (jogo pessoal; https://github.com/Vinicius-leon10/Proffut)" \
+            https://api.cartola.globo.com/atletas/mercado -o /tmp/cartola.json
+          gzip -c /tmp/cartola.json > dados/cartola-mercado.json.gz
       - name: Transfermarkt (base livre CC0 do projeto transfermarkt-datasets)
         continue-on-error: true
         run: |
@@ -49,7 +53,7 @@ jobs:
             echo
             echo "Baixados em $(date -u +%Y-%m-%dT%H:%MZ) pelo workflow elencos.yml do Proffut."
             echo
-            echo "- Súmulas da CBF lidas pelo programa do BrazilianFootball/data (licença MIT)"
+            echo "- Súmulas da CBF (2023 a 2025) lidas pelo programa do BrazilianFootball/data (licença MIT)"
             echo "- Cartola FC (posições da Série A)"
             echo "- transfermarkt-datasets (CC0)"
             echo "- Wikidata (CC0)"
