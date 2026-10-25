@@ -337,7 +337,7 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
 - **Pronto quando:** dá para jogar 3 temporadas seguidas no iPhone (instalado na tela inicial) sem travar nem perder o save, e 5 pessoas testaram e deram retorno.
 
 ### Fase 3 · Profundidade (4–8 semanas)
-- Copa do Brasil.
+- ✅ Copa do Brasil (out/2026: regulamento de 2026, `src/engine/copa.ts`).
 - Contratos, renovação, empréstimos, categorias de base.
 - Objetivos da diretoria, demissão, propostas de emprego.
 - Estádio e patrocínio.
@@ -424,4 +424,4 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
 1. ✅ Publicar o site e jogar no iPhone.
 2. Montar os elencos reais de 2026 (liberar `pt.wikipedia.org` na rede do ambiente ou colar as listas).
 3. Ajustar o equilíbrio e as telas com base no que você sentir jogando.
-4. Fase 3: Copa do Brasil, contratos e renovação, demissão por maus resultados.
+4. Fase 3: ✅ Copa do Brasil; faltam contratos e renovação, demissão por maus resultados.

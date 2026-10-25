@@ -53,12 +53,12 @@ export function Painel() {
                 <div key={id} className="coluna" style={{ alignItems: "center", gap: 4, width: "40%" }}>
                   <Escudo clube={estado.clubes[id]} tamanho={52} />
                   <span className="negrito pequeno centro">{estado.clubes[id].nome}</span>
-                  {i === 0 && <span className="mini muito-fraco">mandante</span>}
+                  {i === 0 && !proximo.neutro && <span className="mini muito-fraco">mandante</span>}
                 </div>
               ))}
             </div>
             <div className="pequeno fraco centro">
-              {proximo.mandante === meuId ? "Em casa" : "Fora de casa"}
+              {proximo.neutro ? "Campo neutro" : proximo.mandante === meuId ? "Em casa" : "Fora de casa"}
               {posAdversario ? ` · adversário em ${posAdversario}º` : ""}
             </div>
           </div>

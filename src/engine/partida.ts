@@ -47,6 +47,8 @@ export interface PartidaViva {
   narracao: EventoPartida[];
   /** Avisos para o usuário (ex.: lesão no time dele). */
   avisos: string[];
+  /** Campo neutro: ninguém tem a vantagem de jogar em casa. */
+  neutro?: boolean;
   rng: Rng;
 }
 
@@ -132,6 +134,7 @@ export function iniciarPartida(partida: Partida, mandante: LadoVivo, visitante: 
     terminada: false,
     narracao: [],
     avisos: [],
+    neutro: partida.neutro,
     rng,
   };
 }
@@ -500,7 +503,7 @@ export function avancarMinuto(pv: PartidaViva, jogadores: Jogadores): EventoPart
   }
 
   if (pv.rng.chance(CHANCE_EVENTO)) {
-    const sM = setoresDoLado(mandante, jogadores, true);
+    const sM = setoresDoLado(mandante, jogadores, !pv.neutro);
     const sV = setoresDoLado(visitante, jogadores, false);
     const casaAtaca = pv.rng.chance(disputa(sM.meio, sV.meio, 2));
     const iAtk: 0 | 1 = casaAtaca ? 0 : 1;

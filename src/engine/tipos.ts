@@ -2,6 +2,9 @@ export type Posicao = "G" | "L" | "Z" | "M" | "A";
 export type Lado = "D" | "E";
 export type SerieId = "A" | "B" | "C";
 export type SerieClube = SerieId | "D";
+/** Competição de uma partida: uma das séries ou a Copa do Brasil ("CB"). */
+export type Competicao = SerieId | "CB";
+export type FaseCopa = "fase1" | "fase2" | "fase3" | "fase4" | "fase5" | "oitavas" | "quartas" | "semi" | "final";
 
 /** As 14 características do modelo do Brasfoot (4 de goleiro, 10 de linha). */
 export type Caracteristica =
@@ -123,6 +126,8 @@ export interface Clube {
   extrato: Lancamento[];
   /** Soma por tipo de lançamento na temporada atual. */
   resumoFinanceiro: Partial<Record<TipoLancamento, number>>;
+  /** Clube da Série D com elenco montado só para a Copa do Brasil (sai na virada da temporada). */
+  elencoDaCopa?: boolean;
 }
 
 export type TipoEvento =
@@ -152,7 +157,7 @@ export interface EventoPartida {
 
 export interface Partida {
   id: string;
-  serie: SerieId;
+  serie: Competicao;
   fase: string;
   grupo?: number;
   /** Mata-mata: número do confronto e se é o jogo de ida (1) ou de volta (2). */
@@ -166,6 +171,8 @@ export interface Partida {
   gm: number;
   gv: number;
   penaltis?: [number, number];
+  /** Final da Copa do Brasil: campo neutro, sem vantagem de mando nem bilheteria. */
+  neutro?: boolean;
   publico?: number;
   /** Gols, cartões e lesões (o resto da narração não é guardado). */
   eventos: EventoPartida[];
@@ -213,9 +220,21 @@ export interface Objetivo {
   posicaoAlvo: number;
 }
 
+/** Copa do Brasil da temporada (falta nos saves de antes da Copa: ela começa na temporada seguinte). */
+export interface EstadoCopa {
+  fase: FaseCopa | "encerrada";
+  /** Os 126 clubes, do mais bem colocado no ranking ao pior: define potes e mando. */
+  ranking: string[];
+  /** Quem entra em cada fase (os outros vêm da fase anterior). */
+  entram: Partial<Record<FaseCopa, string[]>>;
+  campeao?: string;
+  vice?: string;
+}
+
 export interface RegistroTemporada {
   temporada: number;
   campeoes: Record<SerieId, string>;
+  copa?: { campeao: string; vice: string };
   artilheiros: Record<SerieId, { jogadorId: number; nome: string; clubeId: string; gols: number } | null>;
   promovidos: Record<SerieId, string[]>;
   rebaixados: Record<SerieId, string[]>;
@@ -245,6 +264,7 @@ export interface EstadoJogo {
   jogadores: Record<number, Jogador>;
   proximoIdJogador: number;
   series: Record<SerieId, EstadoSerie>;
+  copa?: EstadoCopa;
   partidas: Partida[];
   mensagens: Mensagem[];
   proximoIdMensagem: number;

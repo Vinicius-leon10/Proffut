@@ -21,8 +21,9 @@ O save fica guardado **no próprio celular** e é feito sozinho a cada ação. P
 - Seis formações, seis estilos de jogo, marcação normal ou pressão, jogadas pelo meio ou pelas pontas.
 - **Partida ao vivo** minuto a minuto, com narração, os outros jogos da rodada ao mesmo tempo, substituições e mudança de tática durante o jogo.
 - Regulamentos de 2026: Série A com 38 rodadas, playoff de acesso na Série B, quadrangulares e final na Série C.
+- **Copa do Brasil** com o regulamento de 2026: 126 clubes (os 60 das séries e 66 da Série D), jogo único até a 4ª fase na casa do time de pior ranking, ida e volta da 5ª fase à semifinal (a Série A entra na 5ª fase), pênaltis no empate, final em campo neutro e premiação por fase. Num jogo já começado antes dela, a Copa começa na temporada seguinte.
 - Classificação com zonas, jogos rodada a rodada e artilharia.
-- Mercado: comprar, vender (as propostas chegam nas mensagens), contratar livres, dispensar.
+- Mercado: comprar, vender (as propostas chegam nas mensagens, e dá para pedir mais), contratar livres, dispensar.
 - Finanças: bilheteria (você define o ingresso), TV, patrocínio, salários e extrato.
 - Estádio: ampliar a capacidade ou modernizar (mais conforto, mais público), com custo, tempo de obra e renda extra estimada.
 - Objetivo da diretoria e confiança da diretoria e da torcida.

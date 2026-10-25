@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
 import { formatarData } from "../../engine/calendario";
 import { FASE_LIGA, SERIES, ZONAS, agregado, chavesDaFase, classificacao, tabelaDaLiga, type LinhaTabela } from "../../engine/competicoes";
-import type { Partida, SerieId } from "../../engine/tipos";
-import { Escudo, Folha, Segmentado } from "../componentes";
+import { FASES_COPA, NOME_FASE_COPA, agregadoDoConfronto, jogosDaCopa, situacaoNaCopa } from "../../engine/copa";
+import type { Competicao, FaseCopa, Partida, SerieId } from "../../engine/tipos";
+import { Escudo, Folha, Opcoes, Segmentado } from "../componentes";
 import { useJogo, useLoja } from "../store";
 
 const COR_ZONA = { titulo: "var(--amarelo)", acesso: "var(--verde)", playoff: "var(--azul)", classifica: "var(--azul)", rebaixamento: "var(--vermelho)" } as const;
@@ -161,7 +162,7 @@ function MataMata({ serie }: { serie: SerieId }) {
   );
 }
 
-function Artilharia({ serie }: { serie: SerieId }) {
+function Artilharia({ serie }: { serie: Competicao }) {
   const estado = useJogo();
   const versao = useLoja((s) => s.versao);
   const lista = useMemo(() => {
@@ -191,15 +192,83 @@ function Artilharia({ serie }: { serie: SerieId }) {
   );
 }
 
+const ROTULO_FASE_COPA: Record<FaseCopa, string> = { ...NOME_FASE_COPA, oitavas: "Oitavas", quartas: "Quartas", semi: "Semifinal" };
+const REGRA_FASE_COPA: Record<FaseCopa, string> = {
+  fase1: "Jogo único na casa do time de pior ranking; empate vai para os pênaltis.",
+  fase2: "Jogo único na casa do time de pior ranking; empate vai para os pênaltis.",
+  fase3: "Jogo único na casa do time de pior ranking; empate vai para os pênaltis. Entram os 4 que subiram da Série C (em 2026, os campeões de outras competições).",
+  fase4: "Jogo único na casa do time de pior ranking; empate vai para os pênaltis.",
+  fase5: "Entram os 20 da Série A. Ida e volta; quem tem melhor ranking decide em casa; empate no agregado vai para os pênaltis.",
+  oitavas: "Ida e volta; empate no agregado vai para os pênaltis.",
+  quartas: "Ida e volta; empate no agregado vai para os pênaltis.",
+  semi: "Ida e volta; empate no agregado vai para os pênaltis.",
+  final: "Jogo único em campo neutro; empate vai para os pênaltis.",
+};
+
+/** Copa do Brasil: escolhe a fase e vê os confrontos (jogo único ou ida e volta com o agregado). */
+function CopaDoBrasil() {
+  const estado = useJogo();
+  const copa = estado.copa;
+  const atual: FaseCopa = !copa ? "fase1" : copa.fase === "encerrada" ? "final" : copa.fase;
+  const [fase, setFase] = useState<FaseCopa>(atual);
+  const [vista, setVista] = useState<"jogos" | "artilharia">("jogos");
+  const [aberta, setAberta] = useState<Partida | null>(null);
+  const meuId = estado.tecnico.clubeId;
+  const fases = FASES_COPA.filter((f) => jogosDaCopa(estado, f).length);
+  const jogos = jogosDaCopa(estado, fase);
+  const chaves = [...new Set(jogos.map((p) => p.chave ?? 0))];
+  return (
+    <>
+      {copa?.campeao && <p className="chip amarelo">Campeão: {estado.clubes[copa.campeao].nome}</p>}
+      <p className="pequeno">{situacaoNaCopa(estado, meuId)}</p>
+      {copa && (
+        <>
+          <Segmentado opcoes={[{ valor: "jogos", rotulo: "Jogos" }, { valor: "artilharia", rotulo: "Artilharia" }]} valor={vista} aoMudar={setVista} />
+          {vista === "artilharia" ? <Artilharia serie="CB" /> : (
+            <>
+              <Opcoes opcoes={fases.map((f) => ({ valor: f, rotulo: ROTULO_FASE_COPA[f] }))} valor={fase} aoMudar={setFase} />
+              <p className="mini muito-fraco">{REGRA_FASE_COPA[fase]}</p>
+              <div>
+                {chaves.map((c) => {
+                  const doConfronto = jogos.filter((p) => (p.chave ?? 0) === c);
+                  const ag = doConfronto.length > 1 ? agregadoDoConfronto(estado, fase, c) : null;
+                  const volta = doConfronto.find((p) => p.perna === 2);
+                  return (
+                    <div key={c} style={doConfronto.length > 1 ? { marginBottom: 8 } : undefined}>
+                      {doConfronto.map((p) => <LinhaResultado key={p.id} p={p} aoTocar={() => setAberta(p)} />)}
+                      {ag && volta?.jogada && (
+                        <p className="mini fraco centro">Agregado: {estado.clubes[volta.mandante].sigla} {ag[0]} x {ag[1]} {estado.clubes[volta.visitante].sigla}</p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </>
+      )}
+      {aberta && <FolhaPartida p={aberta} aoFechar={() => setAberta(null)} />}
+    </>
+  );
+}
+
 export function Tabelas() {
   const estado = useJogo();
   const minha = estado.clubes[estado.tecnico.clubeId].serie as SerieId;
-  const [serie, setSerie] = useState<SerieId>(minha);
+  const [serie, setSerie] = useState<SerieId | "CB">(minha);
   const [vista, setVista] = useState<"tabela" | "jogos" | "artilharia">("tabela");
+  if (serie === "CB") {
+    return (
+      <>
+        <Segmentado opcoes={[...SERIES.map((s) => ({ valor: s, rotulo: `Série ${s}` })), { valor: "CB" as const, rotulo: "Copa" }]} valor={serie} aoMudar={setSerie} />
+        <CopaDoBrasil />
+      </>
+    );
+  }
   const fase = estado.series[serie].fase;
   return (
     <>
-      <Segmentado opcoes={SERIES.map((s) => ({ valor: s, rotulo: `Série ${s}` }))} valor={serie} aoMudar={setSerie} />
+      <Segmentado opcoes={[...SERIES.map((s) => ({ valor: s, rotulo: `Série ${s}` })), { valor: "CB" as const, rotulo: "Copa" }]} valor={serie} aoMudar={setSerie} />
       <Segmentado opcoes={[{ valor: "tabela", rotulo: "Classificação" }, { valor: "jogos", rotulo: "Jogos" }, { valor: "artilharia", rotulo: "Artilharia" }]} valor={vista} aoMudar={setVista} />
       {vista === "tabela" && (
         <>

@@ -2,6 +2,7 @@
 // jogadores, aposentadorias, base e preparação do ano seguinte.
 import { inicioDaTemporada, somarDias } from "./calendario";
 import { NOME_SERIE, SERIES, criarTemporada, posicaoNaLiga, tabelaDaLiga } from "./competicoes";
+import { criarCopa } from "./copa";
 import { ELENCO_MAXIMO, MINIMO_POSICAO, PRECO_REFERENCIA } from "./constantes";
 import { definirObjetivo } from "./diretoria";
 import { escalarAutomatico } from "./forca";
@@ -71,6 +72,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
   estado.historico.push({
     temporada: ano,
     campeoes: { A: estado.series.A.campeao!, B: estado.series.B.campeao!, C: estado.series.C.campeao! },
+    ...(estado.copa?.campeao && estado.copa.vice ? { copa: { campeao: estado.copa.campeao, vice: estado.copa.vice } } : {}),
     artilheiros: { A: artilheiro(estado, "A"), B: artilheiro(estado, "B"), C: artilheiro(estado, "C") },
     promovidos: { A: [], B: [...estado.series.B.promovidos], C: [...estado.series.C.promovidos] },
     rebaixados: { A: [...estado.series.A.rebaixados], B: [...estado.series.B.rebaixados], C: [...estado.series.C.rebaixados] },
@@ -82,6 +84,13 @@ export function encerrarTemporada(estado: EstadoJogo) {
     for (const l of tabelas[s]) {
       lancar(estado.clubes[l.clubeId], data, "premiacao", `Premiação: ${l.pos}º na ${NOME_SERIE[s]}`, premiacao(s, l.pos));
     }
+  }
+
+  // ---- elencos montados só para a Copa: saem (a Copa seguinte monta os seus) ----
+  for (const clube of Object.values(estado.clubes)) {
+    if (!clube.elencoDaCopa) continue;
+    for (const j of elencoDe(estado, clube.id)) delete estado.jogadores[j.id];
+    delete clube.elencoDaCopa;
   }
 
   // ---- acesso e rebaixamento ----
@@ -180,6 +189,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
   estado.temporada = ano + 1;
   estado.data = somarDias(inicioDaTemporada(ano + 1), -7);
   criarTemporada(estado);
+  criarCopa(estado);
   transferenciasDaIa(estado, `${ano + 1}-pre-1`);
   transferenciasDaIa(estado, `${ano + 1}-pre-2`);
   for (const clube of Object.values(estado.clubes)) {

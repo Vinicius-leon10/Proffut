@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { formatarData } from "../../engine/calendario";
-import { NOME_SERIE, SERIES } from "../../engine/competicoes";
-import type { Partida } from "../../engine/tipos";
+import { NOME_COMPETICAO, SERIES } from "../../engine/competicoes";
+import type { Competicao, Partida } from "../../engine/tipos";
 import { Topo } from "../componentes";
 import { rotuloPartida } from "../formatos";
 import { useJogo, useLoja } from "../store";
@@ -19,12 +19,12 @@ export function Resultados({ partidas }: { partidas: Partida[] }) {
         <button className="botao primario cheio" onClick={fechar}>Continuar</button>
       </div>
       <div className="conteudo">
-        {SERIES.map((s) => {
+        {([...SERIES, "CB"] as Competicao[]).map((s) => {
           const daSerie = atuais.filter((p) => p.serie === s);
           if (!daSerie.length) return null;
           return (
             <div key={s}>
-              <h3 className="pequeno fraco" style={{ marginBottom: 4 }}>{NOME_SERIE[s]} · {rotuloPartida(daSerie[0]).split(" · ").slice(1).join(" · ")}</h3>
+              <h3 className="pequeno fraco" style={{ marginBottom: 4 }}>{NOME_COMPETICAO[s]} · {rotuloPartida(daSerie[0]).split(" · ").slice(1).join(" · ")}</h3>
               {daSerie.map((p) => <LinhaResultado key={p.id} p={p} aoTocar={() => setAberta(p)} />)}
             </div>
           );

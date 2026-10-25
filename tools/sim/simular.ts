@@ -1,6 +1,7 @@
 // Simula temporadas inteiras sem interface e imprime as estatísticas usadas para
 // calibrar o motor. Uso: npm run sim -- [temporadas=3] [sementes=2]
-import { SERIES, tabelaDaLiga, FASE_LIGA } from "../../src/engine/competicoes";
+import { SERIES, tabelaDaLiga, FASE_LIGA, temporadaEncerrada } from "../../src/engine/competicoes";
+import { FASES_COPA, jogosDaCopa, vencedorDoConfronto } from "../../src/engine/copa";
 import { forcaDoTime } from "../../src/engine/forca";
 import { avancar, novoJogo, simularDia } from "../../src/engine/jogo";
 import { elencoDe } from "../../src/engine/mercado";
@@ -75,6 +76,30 @@ function coletar(estado: EstadoJogo, forcaInicial: Map<string, number>) {
   }
 }
 
+/** Copa do Brasil: de que série é o campeão, zebras (pior ranking passando), pênaltis e prêmio do campeão. */
+const copa = { temporadas: 0, campeaoDaSerie: {} as Record<string, number>, confrontos: 0, zebras: 0, jogos: 0, gols: 0, penaltis: 0, premioCampeao: [] as number[] };
+
+function coletarCopa(estado: EstadoJogo) {
+  const c = estado.copa;
+  if (!c?.campeao) return;
+  copa.temporadas++;
+  const serie = estado.clubes[c.campeao].serie;
+  copa.campeaoDaSerie[serie] = (copa.campeaoDaSerie[serie] ?? 0) + 1;
+  for (const fase of FASES_COPA) {
+    const jogos = jogosDaCopa(estado, fase);
+    copa.jogos += jogos.length;
+    for (const p of jogos) { copa.gols += p.gm + p.gv; if (p.penaltis) copa.penaltis++; }
+    for (const chave of new Set(jogos.map((p) => p.chave!))) {
+      const lados = [...new Set(jogos.filter((p) => p.chave === chave).flatMap((p) => [p.mandante, p.visitante]))];
+      const vencedor = vencedorDoConfronto(estado, fase, chave)!;
+      const perdedor = lados.find((id) => id !== vencedor)!;
+      copa.confrontos++;
+      if (c.ranking.indexOf(vencedor) > c.ranking.indexOf(perdedor)) copa.zebras++;
+    }
+  }
+  copa.premioCampeao.push(estado.clubes[c.campeao].extrato.filter((l) => l.descricao.startsWith("Copa do Brasil")).reduce((s, l) => s + l.valor, 0));
+}
+
 const media = (v: number[]) => v.reduce((a, b) => a + b, 0) / Math.max(1, v.length);
 const mediana = (v: number[]) => { const o = [...v].sort((a, b) => a - b); return o[Math.floor(o.length / 2)] ?? 0; };
 const mi = (v: number) => `${(v / 1_000_000).toFixed(1)} mi`;
@@ -86,13 +111,14 @@ for (let s = 1; s <= sementes; s++) {
   for (let t = 0; t < temporadas; t++) {
     const forcaInicial = new Map(Object.values(estado.clubes).map((c) => [c.id, forcaDoTime(elencoDe(estado, c.id))]));
     let seguranca = 0;
+    let coletado = false;
     while (seguranca++ < 300) {
       const r = avancar(estado);
       if (r.tipo === "nova-temporada" || r.tipo === "nada") break;
       if (r.tipo === "jogos-hoje") {
         // Coleta antes da virada (que acontece no próximo avancar depois do último jogo).
         simularDia(estado);
-        if (SERIES.every((x) => estado.series[x].fase === "encerrada")) { coletar(estado, forcaInicial); }
+        if (!coletado && temporadaEncerrada(estado)) { coletar(estado, forcaInicial); coletarCopa(estado); coletado = true; }
       }
     }
     for (const x of SERIES) {
@@ -112,3 +138,6 @@ for (const s of SERIES) {
   console.log(`  amarelos/jogo ${(a.amarelos / a.jogos).toFixed(2)}   vermelhos/jogo ${(a.vermelhos / a.jogos).toFixed(3)}   lesões/jogo ${(a.lesoes / a.jogos).toFixed(2)}   pênaltis convertidos/jogo ${(a.penaltis / a.jogos).toFixed(2)}`);
   console.log(`  elenco usado ${(100 * media(a.usados)).toFixed(0)}%   caixa no fim: mín ${mi(Math.min(...a.caixas))}  mediana ${mi(mediana(a.caixas))}  máx ${mi(Math.max(...a.caixas))}  negativos ${a.caixas.filter((c) => c < 0).length}/${a.caixas.length}`);
 }
+console.log(`Copa do Brasil (${copa.temporadas} edições, ${copa.jogos} jogos)`);
+console.log(`  campeão por série: ${Object.entries(copa.campeaoDaSerie).map(([s, n]) => `${s} ${n}`).join(", ")}   zebras ${(100 * copa.zebras / Math.max(1, copa.confrontos)).toFixed(0)}% dos confrontos`);
+console.log(`  gols/jogo ${(copa.gols / Math.max(1, copa.jogos)).toFixed(2)}   jogos com pênaltis ${(100 * copa.penaltis / Math.max(1, copa.jogos)).toFixed(0)}%   prêmio do campeão (soma das fases, pode cortar no extrato): ${mi(media(copa.premioCampeao))}`);

@@ -63,7 +63,8 @@ export const useLoja = create<Loja>((set, getLoja) => ({
   sair: () => set({ estado: null, tela: "inicio", sobreposta: null }),
   irParaTela: (tela) => set({ tela }),
   irParaAba: (aba) => set({ aba }),
-  abrir: (sobreposta) => set({ sobreposta }),
+  // Uma tela nova aberta por cima não herda o aviso da anterior (ele cobriria os botões do alto).
+  abrir: (sobreposta) => set({ sobreposta, aviso: null }),
   fechar: () => set({ sobreposta: null }),
   avisar: (texto) => set({ aviso: { texto, id: Date.now() } }),
   atualizar: () => {

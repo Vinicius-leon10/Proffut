@@ -1,10 +1,11 @@
 // Séries A, B e C com os regulamentos de 2026: tabela, desempate e mudança de fase.
 import { datasDaTemporada, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { hashTexto, rngPara } from "./rng";
-import type { EstadoJogo, EstadoSerie, Partida, SerieId } from "./tipos";
+import type { Competicao, EstadoJogo, EstadoSerie, Partida, SerieId } from "./tipos";
 
 export const SERIES: SerieId[] = ["A", "B", "C"];
 export const NOME_SERIE: Record<SerieId, string> = { A: "Série A", B: "Série B", C: "Série C" };
+export const NOME_COMPETICAO: Record<Competicao, string> = { ...NOME_SERIE, CB: "Copa do Brasil" };
 
 /** Zonas da tabela da fase de liga, para colorir a classificação. */
 export const ZONAS: Record<SerieId, { posicoes: number[]; tipo: "acesso" | "playoff" | "classifica" | "rebaixamento" | "titulo"; nome: string }[]> = {
@@ -148,7 +149,7 @@ export interface Chave {
   pior: string;
 }
 
-export function chavesDaFase(estado: EstadoJogo, serie: SerieId, fase: string): Chave[] {
+export function chavesDaFase(estado: EstadoJogo, serie: Competicao, fase: string): Chave[] {
   const jogos = estado.partidas.filter((p) => p.serie === serie && p.fase === fase);
   const chaves = new Map<number, Chave>();
   for (const p of jogos) {
@@ -276,11 +277,15 @@ export function avancarFases(estado: EstadoJogo): string[] {
 }
 
 export function temporadaEncerrada(estado: EstadoJogo): boolean {
-  return SERIES.every((s) => estado.series[s].fase === "encerrada");
+  return SERIES.every((s) => estado.series[s].fase === "encerrada") && (!estado.copa || estado.copa.fase === "encerrada");
 }
 
-/** A partida é o jogo de volta de um mata-mata que, se empatar no agregado, vai para os pênaltis? */
+/**
+ * Empate nesta partida (no placar, se é jogo único, ou no agregado, se é a volta) vai para os pênaltis?
+ * Final da Série C e todos os mata-matas da Copa do Brasil.
+ */
 export function decidePorPenaltis(p: Partida): boolean {
+  if (p.serie === "CB") return p.perna !== 1;
   return p.perna === 2 && p.serie === "C" && p.fase === "final";
 }
 

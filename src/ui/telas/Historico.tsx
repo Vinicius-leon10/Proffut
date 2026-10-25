@@ -29,6 +29,15 @@ export function Historico() {
                     </div>
                   );
                 })}
+                {r.copa && (
+                  <div className="linha">
+                    <Escudo clube={estado.clubes[r.copa.campeao]} tamanho={30} />
+                    <div className="cresce">
+                      <div className="pequeno negrito">Copa do Brasil: {estado.clubes[r.copa.campeao].nome}</div>
+                      <div className="mini fraco corta">Vice: {estado.clubes[r.copa.vice]?.nome}</div>
+                    </div>
+                  </div>
+                )}
                 <div className="linha" style={{ borderTop: "1px solid var(--borda)", paddingTop: 8 }}>
                   <Escudo clube={meu} tamanho={30} />
                   <div className="cresce">

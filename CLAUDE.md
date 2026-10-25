@@ -40,8 +40,19 @@ Só clubes brasileiros: Séries A, B e C de 2026 (60 clubes reais, regulamentos 
 
 Pronto e publicado: partida ao vivo, tática, elenco, mercado, finanças, estádio (ampliar/modernizar), diretoria,
 virada de temporada sem fim, rebaixamento para a Série D com propostas de emprego, checagem automática no app,
-elencos reais nos jogos novos, testes de ponta a ponta R01–R19 rodando a cada mudança, antes de publicar e todo dia
-no site publicado.
+elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, testes de ponta a ponta
+R01–R23 rodando a cada mudança, antes de publicar e todo dia no site publicado.
+
+**Copa do Brasil (out/2026, `src/engine/copa.ts`):** regulamento de 2026 com 126 clubes: 1ª fase com os 28 piores do
+ranking, 2ª com mais 74, 3ª com mais 4 (em 2026 os de verdade: Paysandu, Ponte Preta, Barra-SC, Confiança; depois, os
+4 que subiram da Série C), 5ª com a Série A. Ranking = série + reputação. Jogo único até a 4ª fase na casa do pior
+colocado (empate: pênaltis, sem prorrogação); ida e volta da 5ª à semi (melhor ranking decide em casa; empate no
+agregado: pênaltis); final em jogo único e campo neutro (`Partida.neutro`: sem mando nem bilheteria). Datas: quartas-
+feiras das semanas 0–4, 6, 13–14, 18–19, 28–29 e 34 da temporada (fora das semanas 5, 10, 15, 20 e 25 das séries).
+Os 66 clubes da Série D que entram ganham elenco de 16 (`gerarElencoCopa`, `Clube.elencoDaCopa`), apagado na virada.
+Premiação = valores da CBF de 2026 × `ESCALA_COPA` (0,5), paga no sorteio de cada fase; campeão e vice na final.
+`Partida.serie` agora é `Competicao` ("A" | "B" | "C" | "CB"). Save antigo sem `estado.copa`: a Copa começa na
+temporada seguinte (`temporadaEncerrada` ignora a Copa que não existe).
 
 **Elencos reais (out/2026):** o robô `.github/workflows/elencos.yml` (rodar à mão no GitHub) baixa Cartola, súmulas
 da CBF de 2023–2025 (programa do BrazilianFootball/data, MIT), transfermarkt-datasets e Wikidata para a branch
@@ -56,8 +67,8 @@ Jogos já começados continuam com os jogadores que tinham (não há migração 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final ("Proffut" é provisório?) e se a partida terá 2D no
 futuro. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
 
-**Próximas ideias** (PLANO.md §7, Fase 3): Copa do Brasil, contratos e renovação, demissão por maus resultados
-(hoje só há troca de clube ao cair para a D), ajustes de equilíbrio pelo que o usuário sentir jogando.
+**Próximas ideias** (PLANO.md §7, Fase 3): contratos e renovação, demissão por maus resultados (hoje só há troca de
+clube ao cair para a D), ajustes de equilíbrio pelo que o usuário sentir jogando.
 
 ## Regras fixas do jogo
 
@@ -102,8 +113,9 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `forca.ts` | Força efetiva: força × posição × energia × características |
 | `partida.ts` | Simulação minuto a minuto; disputa = a^k/(a^k+b^k), k = `EXPOENTE_DISPUTA` |
 | `calendario.ts`, `competicoes.ts` | Tabelas, turno/returno com mando equilibrado, playoff da B, quadrangulares e final da C |
+| `copa.ts` | Copa do Brasil: participantes, sorteio por potes, jogos, quem passa, premiação, textos do confronto |
 | `financas.ts`, `estadio.ts` | Bilheteria, TV, patrocínio, salários; obras de ampliação e modernização |
-| `mercado.ts`, `mensagens.ts`, `diretoria.ts` | Compra e venda, propostas, caixa de mensagens, objetivo e confiança |
+| `mercado.ts`, `mensagens.ts`, `diretoria.ts` | Compra e venda, propostas (e "Pedir mais": `pedirMais`, `limiteDaProposta`), caixa de mensagens, objetivo e confiança |
 | `temporada.ts` | Virada: acesso/rebaixamento, idade, evolução, aposentadoria, base, Série D (`serie-d-reserva.json`) |
 | `jogo.ts` | Orquestra: `novoJogo`, `avancar`, `prepararJogos`/`concluirJogos`, propostas de emprego, obras do dia |
 | `checagem.ts` | `checarEstado`, `repararEstado`, `testarPartida` (roda sozinha ao abrir um jogo) |
@@ -117,7 +129,9 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 ## Calibragem atual (`npm run sim`)
 
 ~2,3 gols por jogo, mandante vence 42–45%, empates 25–29%, correlação força × pontos 0,57–0,79, nenhum clube no vermelho
-(conferido de novo com os elencos reais; a Série C fica no limite: mandante ~40–41%, empates ~29–30%, como antes).
+(conferido de novo com os elencos reais e com a Copa; a Série C fica no limite: mandante ~40–41%, empates ~29–31%).
+Copa do Brasil no `npm run sim`: campeão quase sempre da Série A, ~30% de zebras por confronto, ~20% dos jogos nos
+pênaltis, campeão leva ~47 mi somando as fases. Save cresce para ~2 MB (elencos da Série D na Copa).
 Obras do estádio se pagam em 3 a 4 temporadas.
 
 ## Armadilhas já resolvidas (não desfazer)

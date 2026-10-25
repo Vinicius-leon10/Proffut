@@ -119,12 +119,15 @@ export function criarJogador(rng: Rng, o: OpcoesJogador): Jogador {
   };
 }
 
+/** Os titulares e um reserva por posição (16): elenco de quem só entra em campo na Copa do Brasil. */
+const MOLDE_COPA = MOLDE.filter(([posicao, , papel], i) => papel === "titular" || (papel === "reserva" && MOLDE.findIndex(([p, , q]) => p === posicao && q === "reserva") === i));
+
 /** Gera o elenco inteiro de um clube (26 jogadores) dentro da faixa de força dele. */
-export function gerarElenco(rng: Rng, clube: Pick<Clube, "id" | "serie" | "forcaElenco">, proximoId: () => number): Jogador[] {
+export function gerarElenco(rng: Rng, clube: Pick<Clube, "id" | "serie" | "forcaElenco">, proximoId: () => number, molde = MOLDE): Jogador[] {
   const { min, max } = clube.forcaElenco;
   const pEstrangeiro = ESTRANGEIROS_POR_SERIE[clube.serie];
   const nomes = new Set<string>();
-  return MOLDE.map(([posicao, lado, papel]) => {
+  return molde.map(([posicao, lado, papel]) => {
     const [q0, q1] = FAIXA_PAPEL[papel];
     const [i0, i1] = IDADE_PAPEL[papel];
     const forca = min + (max - min) * rng.real(q0, q1);
@@ -137,6 +140,11 @@ export function gerarElenco(rng: Rng, clube: Pick<Clube, "id" | "serie" | "forca
     nomes.add(jogador.nome);
     return jogador;
   });
+}
+
+/** Elenco enxuto (16 jogadores) para um clube da Série D que joga a Copa do Brasil. */
+export function gerarElencoCopa(rng: Rng, clube: Pick<Clube, "id" | "serie" | "forcaElenco">, proximoId: () => number): Jogador[] {
+  return gerarElenco(rng, clube, proximoId, MOLDE_COPA);
 }
 
 /** Jogador de verdade, como está em data/brasil-2026/jogadores.json (força calculada pelo Proffut). */

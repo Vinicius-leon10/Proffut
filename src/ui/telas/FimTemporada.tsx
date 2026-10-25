@@ -35,6 +35,16 @@ export function FimTemporada() {
                 </div>
               );
             })}
+            {r.copa && (
+              <div className="linha">
+                <Escudo clube={estado.clubes[r.copa.campeao]} tamanho={40} />
+                <div className="cresce">
+                  <div className="mini fraco">Copa do Brasil</div>
+                  <div className="negrito">{nome(r.copa.campeao)}</div>
+                  <div className="mini fraco">Vice: {nome(r.copa.vice)}</div>
+                </div>
+              </div>
+            )}
           </div>
         </Cartao>
 

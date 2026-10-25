@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MAX_SUBSTITUICOES, ESTILOS } from "../../engine/constantes";
 import { FORMACOES, corForca, forcaEfetiva } from "../../engine/forca";
+import { desfechoDoConfronto } from "../../engine/copa";
 import { concluirJogos } from "../../engine/jogo";
 import { avancarMinuto, formatarMinuto, mudarTatica, simularAteOFim, substituir, type PartidaViva } from "../../engine/partida";
-import type { Estilo, EventoPartida, Formacao, Partida, SerieId } from "../../engine/tipos";
-import { NOME_SERIE } from "../../engine/competicoes";
+import type { Competicao, EstadoJogo, Estilo, EventoPartida, Formacao, Partida } from "../../engine/tipos";
+import { NOME_COMPETICAO } from "../../engine/competicoes";
 import { Barra, Escudo, Folha, Icone, Opcoes, Pos, Segmentado } from "../componentes";
 import { rotuloPartida } from "../formatos";
 import { useJogo, useLoja } from "../store";
@@ -86,7 +87,8 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
     const p = estado.partidas.find((x) => x.id === meu.partidaId)!;
     const pro = meuLado === 0 ? p.gm : p.gv;
     const contra = meuLado === 0 ? p.gv : p.gm;
-    avisar(pro > contra ? `Vitória por ${pro} x ${contra}!` : pro === contra ? `Empate em ${pro} x ${contra}.` : `Derrota por ${contra} x ${pro}.`);
+    const placar = pro > contra ? `Vitória por ${pro} x ${contra}!` : pro === contra ? `Empate em ${pro} x ${contra}.` : `Derrota por ${contra} x ${pro}.`;
+    avisar([placar, desfechoDoConfronto(estado, p, meuId)].filter(Boolean).join(" "));
     fechar();
   };
 
@@ -112,7 +114,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
       </div>
 
       {!iniciado ? (
-        <PreJogo vivas={vivas} meu={meu} meuLado={meuLado} aoComecar={() => setIniciado(true)} aoAjustar={fechar} />
+        <PreJogo vivas={vivas} meu={meu} meuLado={meuLado} regra={regraDoMataMata(estado, partida)} aoComecar={() => setIniciado(true)} aoAjustar={fechar} />
       ) : (
         <>
           <div className="linha" style={{ padding: "10px 16px", gap: 8, borderBottom: "1px solid var(--borda)" }}>
@@ -169,7 +171,19 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   );
 }
 
-function PreJogo({ vivas, meu, meuLado, aoComecar, aoAjustar }: { vivas: PartidaViva[]; meu: PartidaViva; meuLado: 0 | 1; aoComecar: () => void; aoAjustar: () => void }) {
+/** Antes de um jogo da Copa: como ele se decide (e o placar da ida, no jogo de volta). */
+function regraDoMataMata(estado: EstadoJogo, p: Partida): string | undefined {
+  if (p.serie !== "CB") return undefined;
+  if (p.perna === 1) return "Jogo de ida. A vaga se decide na volta, no placar somado.";
+  if (p.perna === 2) {
+    const ida = estado.partidas.find((x) => x.serie === "CB" && x.fase === p.fase && x.chave === p.chave && x.perna === 1);
+    const placar = ida?.jogada ? ` Na ida: ${estado.clubes[ida.mandante].nome} ${ida.gm} x ${ida.gv} ${estado.clubes[ida.visitante].nome}.` : "";
+    return `Jogo de volta: vale o placar somado; empate no agregado vai para os pênaltis.${placar}`;
+  }
+  return p.neutro ? "Final em jogo único, em campo neutro. Se empatar, pênaltis." : "Jogo único: quem vencer passa de fase. Se empatar, pênaltis.";
+}
+
+function PreJogo({ vivas, meu, meuLado, regra, aoComecar, aoAjustar }: { vivas: PartidaViva[]; meu: PartidaViva; meuLado: 0 | 1; regra?: string; aoComecar: () => void; aoAjustar: () => void }) {
   const estado = useJogo();
   const eu = meu.lados[meuLado];
   const ele = meu.lados[meuLado === 0 ? 1 : 0];
@@ -186,6 +200,7 @@ function PreJogo({ vivas, meu, meuLado, aoComecar, aoAjustar }: { vivas: Partida
           <span className="fraco">{adversario.nome}</span>
           <span>{ele.tatica.formacao} · {ESTILOS[ele.tatica.estilo].nome} · força média <b>{media(ele.emCampo.map((a) => a.jogadorId))}</b></span>
         </div>
+        {regra && <p className="mini fraco" style={{ marginTop: 6 }}>{regra}</p>}
       </div>
       <div className="lista">
         {eu.emCampo.map((a) => {
@@ -211,18 +226,19 @@ function PreJogo({ vivas, meu, meuLado, aoComecar, aoAjustar }: { vivas: Partida
 function OutrosJogos({ vivas, meuId }: { vivas: PartidaViva[]; meuId: string }) {
   const estado = useJogo();
   const partidas = new Map(estado.partidas.map((p) => [p.id, p]));
-  const porSerie = new Map<SerieId, PartidaViva[]>();
+  const porSerie = new Map<Competicao, PartidaViva[]>();
   for (const pv of vivas) {
     const s = partidas.get(pv.partidaId)!.serie;
     porSerie.set(s, [...(porSerie.get(s) ?? []), pv]);
   }
-  const minhaSerie = estado.clubes[meuId].serie as SerieId;
-  const ordem = [...porSerie.keys()].sort((a, b) => (a === minhaSerie ? -1 : b === minhaSerie ? 1 : a.localeCompare(b)));
+  // Primeiro a competição do jogo do usuário.
+  const minha = vivas.map((pv) => partidas.get(pv.partidaId)!).find((p) => p.mandante === meuId || p.visitante === meuId)?.serie;
+  const ordem = [...porSerie.keys()].sort((a, b) => (a === minha ? -1 : b === minha ? 1 : a.localeCompare(b)));
   return (
     <>
       {ordem.map((s) => (
         <div key={s} className="coluna" style={{ gap: 0 }}>
-          <h3 className="pequeno fraco" style={{ margin: "8px 0 4px" }}>{NOME_SERIE[s]}</h3>
+          <h3 className="pequeno fraco" style={{ margin: "8px 0 4px" }}>{NOME_COMPETICAO[s]}</h3>
           {porSerie.get(s)!.map((pv) => <LinhaAoVivo key={pv.partidaId} pv={pv} meuId={meuId} p={partidas.get(pv.partidaId)!} />)}
         </div>
       ))}

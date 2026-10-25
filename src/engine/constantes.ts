@@ -1,5 +1,5 @@
 // Números que regulam o jogo. Ajuste aqui e confira o efeito com `npm run sim`.
-import type { Estilo, Posicao, SerieId } from "./tipos";
+import type { Estilo, FaseCopa, Posicao, SerieId } from "./tipos";
 
 export const TEMPORADA_INICIAL = 2026;
 
@@ -57,6 +57,23 @@ export const PREMIACAO: Record<SerieId, { primeiro: number; ultimo: number }> = 
   B: { primeiro: 5_000_000, ultimo: 500_000 },
   C: { primeiro: 1_500_000, ultimo: 150_000 },
 };
+
+/**
+ * Copa do Brasil: cota por fase disputada, com os valores da CBF em 2026 multiplicados por
+ * ESCALA_COPA (a economia do jogo é menor que a de verdade). Até a 4ª fase, [Série B, demais].
+ */
+export const ESCALA_COPA = 0.5;
+export const COTA_COPA: Record<Exclude<FaseCopa, "final">, [serieB: number, demais: number]> = {
+  fase1: [400_000, 400_000],
+  fase2: [1_380_000, 830_000],
+  fase3: [1_530_000, 950_000],
+  fase4: [1_680_000, 1_070_000],
+  fase5: [2_000_000, 2_000_000],
+  oitavas: [3_000_000, 3_000_000],
+  quartas: [4_000_000, 4_000_000],
+  semi: [9_000_000, 9_000_000],
+};
+export const PREMIO_FINAL_COPA = { campeao: 78_000_000, vice: 34_000_000 };
 
 // ---- calendário -------------------------------------------------------------
 /** Semanas (contando a partir de 0) que têm rodada no meio de semana. */

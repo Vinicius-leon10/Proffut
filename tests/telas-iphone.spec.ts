@@ -98,3 +98,17 @@ test("R21 nos resultados do dia, o Continuar fica no alto da tela, sem precisar 
   await continuar.click();
   await expect(resultados).toHaveCount(0);
 });
+
+test("R23 logo depois de um jogo, o aviso do placar não cobre o Continuar dos resultados do dia", async ({ page }) => {
+  await novoJogo(page, { serie: "Série C", clube: "Brusque" });
+  const resultados = page.locator(".tela-cheia .topo .titulo", { hasText: "Resultados do dia" });
+  // Joga e já avança: o dia seguinte com jogos (Copa do Brasil, quarta-feira) não tem jogo do Brusque.
+  await botao(page, /Avançar|Ir para o jogo/).click();
+  await botao(page, "Começar o jogo").click();
+  await botao(page, "Fim ⏭").click();
+  await page.getByRole("button", { name: "Continuar", exact: true }).click();
+  await expect(page.locator(".aviso")).toContainText(/Vitória|Empate|Derrota/);
+  await botao(page, /Avançar|Ir para o jogo/).click();
+  await expect(resultados).toBeVisible();
+  await esperarInteiroNaTela(page, page.getByRole("button", { name: "Continuar", exact: true }));
+});

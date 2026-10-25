@@ -17,6 +17,7 @@ import {
   disputarPenaltis, eventosParaGuardar, iniciarPartida, montarLado, simularAteOFim, type PartidaViva,
 } from "./partida";
 import { criarRng, rngPara } from "./rng";
+import { avancarCopa, criarCopa } from "./copa";
 import { concluirObras } from "./estadio";
 import { encerrarTemporada } from "./temporada";
 import type { Clube, Estilo, EstadoJogo, Formacao, Partida, SerieClube, Tatica } from "./tipos";
@@ -108,6 +109,7 @@ export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente
   }
 
   criarTemporada(estado);
+  criarCopa(estado);
   estado.objetivo = definirObjetivo(estado);
   enviarMensagem(estado, {
     tipo: "diretoria",
@@ -232,17 +234,22 @@ function aplicarResultado(estado: EstadoJogo, pv: PartidaViva) {
   p.jogada = true;
   p.eventos = eventosParaGuardar(pv);
   if (decidePorPenaltis(p)) {
-    const chave = chaveDaPartida(estado, p);
-    if (chave) {
-      const [a, b] = agregado(chave);
-      if (a === b) p.penaltis = disputarPenaltis(rngPara(estado.semente, `penaltis/${p.id}`), pv, estado.jogadores);
+    let empate = p.gm === p.gv;
+    if (p.perna === 2) {
+      const chave = chaveDaPartida(estado, p);
+      const [a, b] = chave ? agregado(chave) : [0, 1];
+      empate = a === b;
     }
+    if (empate) p.penaltis = disputarPenaltis(rngPara(estado.semente, `penaltis/${p.id}`), pv, estado.jogadores);
   }
 
-  // Dinheiro: bilheteria do mandante e cota de TV da rodada para os dois (fase de liga).
-  p.publico = publicoDoJogo(rng, mandante, visitante);
-  lancar(mandante, p.data, "bilheteria", `Bilheteria x ${visitante.nome} (${p.publico.toLocaleString("pt-BR")} pagantes)`, p.publico * mandante.precoIngresso);
-  if (p.fase === FASE_LIGA[p.serie]) {
+  // Dinheiro: bilheteria do mandante (campo neutro não tem) e cota de TV da rodada para os dois (fase de liga).
+  if (p.neutro) p.publico = Math.round(rng.real(55_000, 70_000));
+  else {
+    p.publico = publicoDoJogo(rng, mandante, visitante);
+    lancar(mandante, p.data, "bilheteria", `Bilheteria x ${visitante.nome} (${p.publico.toLocaleString("pt-BR")} pagantes)`, p.publico * mandante.precoIngresso);
+  }
+  if (p.serie !== "CB" && p.fase === FASE_LIGA[p.serie]) {
     for (const c of [mandante, visitante]) lancar(c, p.data, "tv", "Cota de TV da rodada", COTA_TV_RODADA[p.serie]);
   }
 
@@ -306,7 +313,7 @@ export function concluirJogos(estado: EstadoJogo, vivas: PartidaViva[]): string[
     if (!pv.terminada) simularAteOFim(pv, estado.jogadores);
     aplicarResultado(estado, pv);
   }
-  const noticias = avancarFases(estado);
+  const noticias = [...avancarFases(estado), ...avancarCopa(estado)];
   for (const n of noticias) enviarMensagem(estado, { tipo: "noticia", titulo: "Notícias", texto: n });
   return noticias;
 }
