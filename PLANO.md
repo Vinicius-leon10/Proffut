@@ -206,7 +206,7 @@ Regulamentos reais de 2026 ([competicoes.json](data/brasil-2026/competicoes.json
 ### 3.8 Mundo e dados
 
 - **Clubes reais do Brasil 2026** (Séries A, B e C) em [data/brasil-2026](data/brasil-2026/LEIAME.md): nome, sigla, cidade, estádio, capacidade, cores, fundação, rival, torcida, reputação, faixa de força e caixa inicial.
-- **Sem escudos oficiais:** a interface desenha um escudo simples com as cores e a sigla do clube. O usuário pode importar os seus no aparelho (Configurações → Escudos); eles não vão para o site nem para o repositório.
+- **Escudos:** os do jogo são os que o usuário mandou (out/2026, decisão dele: "Não, quero que use os escudos que mandei agora. O app é particular, uso individual. Use os escudos que mandei, é uma ordem"); sem imagem, a interface desenha um escudo simples com as cores e a sigla do clube.
 - **Jogadores:** decisão pendente (seção 11). Não vamos tirar dos arquivos do Brasfoot (ver seção 4).
 - Dados em **pacotes JSON** versionados (país → divisões → clubes → jogadores).
 - **Editor no jogo** (pós-MVP) para renomear clubes e jogadores, mudar cores e atributos, com importar/exportar pacotes. Foi assim que a comunidade manteve o Brasfoot vivo.
@@ -216,7 +216,7 @@ Regulamentos reais de 2026 ([competicoes.json](data/brasil-2026/competicoes.json
 ## 4. Questões legais (ler antes de qualquer coisa)
 
 - **"Brasfoot" é marca e obra de outro desenvolvedor.** Usar só como referência de *gameplay*. Não copiar nome, telas, ícones, textos, sons nem banco de dados. Em especial, **não vamos extrair jogadores dos arquivos do Brasfoot**: a força e as características de cada jogador são trabalho dos autores (ou dos fãs que atualizam os arquivos).
-- **Decisão tomada: nomes reais dos clubes.** Fatos como "o Flamengo está na Série A de 2026" são públicos. Escudos e marcas, não: por isso o jogo **não usa escudos oficiais**.
+- **Decisão tomada: nomes reais dos clubes.** Fatos como "o Flamengo está na Série A de 2026" são públicos. Escudos e marcas, não: por isso o jogo **não usava escudos oficiais**, até o usuário decidir usar os que mandou (out/2026, uso pessoal; avisado de que o site é público).
 - **Nomes de jogadores reais** envolvem direito de imagem (Lei Pelé). O risco é baixo num projeto pessoal e gratuito e aumenta se o jogo tiver anúncios ou for vendido.
 - **Antes de ganhar dinheiro com o jogo, consultar um advogado.**
 - **LGPD:** enquanto o save ficar só no celular e não houver anúncios, analytics ou contas, não coletamos dados pessoais. Se isso mudar, é preciso publicar uma política de privacidade.
@@ -393,7 +393,7 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
 | **Perder o save no iPhone** | Instalar na tela inicial, `storage.persist()`, exportar/importar save, aviso claro em Configurações |
 | Save antigo não abrir depois de uma atualização | Versão no save + migração automática + testes com saves antigos |
 | Lento em celular simples | Simulação num Web Worker; detalhe completo só nas séries do jogador |
-| Problemas legais com nomes reais | Sem escudos oficiais; nada extraído do Brasfoot; advogado antes de monetizar |
+| Problemas legais com nomes reais | Escudos só por decisão do usuário, uso pessoal e sem fins comerciais (se vier reclamação, volta o desenhado); nada extraído do Brasfoot; advogado antes de monetizar |
 | Jogador abandona cedo | Primeiros 5 minutos guiados, objetivos claros, rodadas curtas |
 
 **Concorrência:**
@@ -408,7 +408,7 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
 **Tomadas**
 - ✅ Site primeiro (PWA), instalável na tela inicial do iPhone, save guardado no celular.
 - ✅ Começar só com o Brasil 2026: Séries A, B e C, com os nomes reais dos clubes e os regulamentos de 2026.
-- ✅ Sem escudos oficiais; nada extraído dos arquivos do Brasfoot.
+- ✅ Nada extraído dos arquivos do Brasfoot. Escudos: os que o usuário mandou (decisão dele, out/2026).
 - ✅ Uso pessoal e recreativo, sem fins comerciais (por enquanto).
 - ✅ A IA programa; você testa no iPhone e decide.
 - ✅ Elencos reais de fontes públicas (out/2026): Série A pelo Cartola, Séries B e C pelas súmulas da CBF de 2025 (o site da CBF bloqueia o robô do GitHub para 2026). Força calculada pelo Proffut.

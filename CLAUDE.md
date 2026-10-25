@@ -40,9 +40,9 @@ Só clubes brasileiros: Séries A, B e C de 2026 (60 clubes reais, regulamentos 
 
 Pronto e publicado: partida ao vivo, tática, elenco, mercado, finanças, estádio (ampliar/modernizar), diretoria,
 virada de temporada sem fim, rebaixamento para a Série D com propostas de emprego, checagem automática no app,
-elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, escudos
-importados no aparelho, time titular do adversário antes do jogo (toque no escudo dele no painel ou no placar), testes
-de ponta a ponta R01–R29 rodando a cada mudança, antes de publicar e todo dia no site publicado.
+elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, escudos dos
+clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
+placar), testes de ponta a ponta R01–R30 rodando a cada mudança, antes de publicar e todo dia no site publicado.
 
 **Sons da partida (out/2026, `src/ui/sons.ts`):** apito, torcida e vaia sintetizados com Web Audio, narrador com a
 voz pt-BR do aparelho (`speechSynthesis`); nada baixado nem copiado. Apito no início e na volta do intervalo, 2 no
@@ -86,10 +86,12 @@ clube ao cair para a D), ajustes de equilíbrio pelo que o usuário sentir jogan
 ## Regras fixas do jogo
 
 - **Não extrair nada do Brasfoot** (arquivos, APK, listas de jogadores, imagens). O usuário pediu e foi recusado; ele aceitou.
-- Sem escudos oficiais no site nem no repositório: o escudo padrão é desenhado com as cores e a sigla do clube.
-  O usuário pode importar um pacote de escudos no aparelho (Configurações → Escudos, `src/save/escudos.ts`): fica só
-  no IndexedDB dele. Em out/2026 ele mandou uma prancha com os oficiais; `tools/escudos/recortar.py` faz o pacote e ele
-  recebe pelo chat. Prancha e pacote nunca vão para o git nem para o site (os escudos são marcas dos clubes).
+- **Escudos: os que o usuário mandou** (out/2026). Antes a regra era não usar escudos oficiais; ele mandou uma prancha
+  com os oficiais e decidiu: "Não, quero que use os escudos que mandei agora. O app é particular, uso individual. Use os escudos que mandei, é uma ordem". Foi avisado de que o site e o
+  repositório são públicos e os escudos são marcas dos clubes (se vier reclamação, o GitHub pode pedir para tirar; aí
+  volta o escudo desenhado). Os 156 ficam em `public/escudos/<id>.png` (`tools/escudos/recortar.py` recorta a prancha;
+  a prancha não vai para o git). `Escudo` usa: o importado no aparelho (Configurações → Escudos, `src/save/escudos.ts`)
+  > o do jogo > o desenhado com as cores e a sigla (só se a imagem não carregar). Clube novo sem imagem: desenhado.
 - As fichas dos clubes vêm do remake MIT denisvick-dev/brasfoot (aviso de licença em `data/brasil-2026/LEIAME.md`).
 - Saves antigos precisam continuar abrindo: campo novo em `EstadoJogo` deve ser opcional ou ganhar correção em
   `repararEstado` (`src/engine/checagem.ts`). O usuário já tem um jogo em andamento no iPhone.
@@ -137,11 +139,12 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `jogo.ts` | Orquestra: `novoJogo`, `avancar`, `prepararJogos`/`concluirJogos`, `provavelTime` (escalação do computador sem mudar o jogo), propostas de emprego, obras do dia |
 | `checagem.ts` | `checarEstado`, `repararEstado`, `testarPartida` (roda sozinha ao abrir um jogo) |
 | `motor.test.ts` | Testes do motor |
-| `src/save/` | `salvamento.ts`: IndexedDB (`proffut`/`saves`, chaves `jogo:auto`, `resumo:auto`...), exportar/importar `.json`. `aparelho.ts`: checagem do aparelho. `escudos.ts`: escudos importados pelo usuário (chave `escudos`, id do clube → imagem) |
+| `src/save/` | `salvamento.ts`: IndexedDB (`proffut`/`saves`, chaves `jogo:auto`, `resumo:auto`...), exportar/importar `.json`. `aparelho.ts`: checagem do aparelho. `escudos.ts`: escudos importados pelo usuário, que trocam os do jogo só no aparelho (chave `escudos`, id do clube → imagem) |
 | `src/ui/` | React + Zustand. `store.ts` (estado, telas sobrepostas, salvamento 400 ms após cada mudança), `acoes.ts`, `componentes.tsx`, `estilo.css`, `sons.ts` (apito, torcida, narrador), `telas/*.tsx` |
 | `tests/` | Testes de ponta a ponta R01…: `*.spec.ts`, passos comuns em `ajuda.ts`, relatório em português em `resumo.ts`, lista em `README.md` |
+| `public/escudos/` | Os 156 escudos dos clubes (`<id>.png`), recortados da prancha que o usuário mandou; o service worker guarda para jogar sem internet |
 | `data/brasil-2026/` | `clubes.json` (60), `serie-d-reserva.json` (96), `competicoes.json`, `jogadores.json` (elencos reais, gerado por `tools/elencos`), `LEIAME.md` (fontes e licenças) |
-| `tools/` | `sim/` (calibragem), `e2e/` (capturas de tela), `icones/`, `dados/` (scripts Python dos clubes), `elencos/` (robô dos elencos: `montar.ts` monta `jogadores.json`, `sumulas.ts` lê as súmulas, `fontes-clubes.ts` diz como cada fonte chama os clubes, scripts Python do workflow), `escudos/` (`recortar.py`: prancha de escudos → pacote que o usuário importa; a saída fica fora do git) |
+| `tools/` | `sim/` (calibragem), `e2e/` (capturas de tela), `icones/`, `dados/` (scripts Python dos clubes), `elencos/` (robô dos elencos: `montar.ts` monta `jogadores.json`, `sumulas.ts` lê as súmulas, `fontes-clubes.ts` diz como cada fonte chama os clubes, scripts Python do workflow), `escudos/` (`recortar.py`: prancha de escudos → `public/escudos/<id>.png`, ou um pacote `.json` para importar) |
 
 ## Calibragem atual (`npm run sim`)
 

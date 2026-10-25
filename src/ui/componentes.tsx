@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { hashTexto } from "../engine/rng";
 import type { Clube, Posicao } from "../engine/tipos";
@@ -16,12 +16,19 @@ function luminancia(hex: string): number {
 }
 
 /**
- * Escudo do clube: o que o usuário importou neste aparelho ou, sem ele, um escudo desenhado com as cores
- * e a sigla do clube (o jogo publicado não traz escudos oficiais).
+ * Escudo do clube: o importado neste aparelho, se houver; senão o do jogo (`public/escudos/<id>.png`, da
+ * prancha que o usuário mandou); se a imagem não carregar, um escudo desenhado com as cores e a sigla.
  */
 export function Escudo({ clube, tamanho = 32 }: { clube: Pick<Clube, "id" | "sigla" | "cores">; tamanho?: number }) {
-  const imagem = useLoja((s) => s.escudos[clube.id]);
-  if (imagem) return <img className="escudo" src={imagem} width={tamanho} height={tamanho} alt="" style={{ flexShrink: 0, objectFit: "contain" }} />;
+  const importado = useLoja((s) => s.escudos[clube.id]);
+  const [falharam, setFalharam] = useState<string[]>([]);
+  const imagem = [importado, `escudos/${clube.id}.png`].find((src): src is string => !!src && !falharam.includes(src));
+  if (imagem) {
+    return (
+      <img className="escudo" src={imagem} width={tamanho} height={tamanho} alt="" style={{ flexShrink: 0, objectFit: "contain" }}
+        onError={() => setFalharam((f) => [...f, imagem])} />
+    );
+  }
   const { primaria, secundaria } = clube.cores;
   const modelo = hashTexto(clube.id) % 4;
   const corTexto = luminancia(primaria) > 0.45 ? "#111" : "#fff";

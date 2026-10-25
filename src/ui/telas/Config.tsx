@@ -47,11 +47,11 @@ export function Config() {
     }
   };
 
-  const voltarAosDesenhados = async () => {
-    if (!confirm("Apagar os escudos importados e voltar aos escudos desenhados?")) return;
+  const apagarImportados = async () => {
+    if (!confirm("Apagar os escudos importados e voltar aos escudos do jogo?")) return;
     await apagarEscudos();
     useLoja.setState({ escudos: {} });
-    avisar("Escudos desenhados de volta.");
+    avisar("Escudos do jogo de volta.");
   };
 
   const importar = async (f: File | undefined) => {
@@ -91,13 +91,13 @@ export function Config() {
 
         <Cartao titulo="Escudos">
           <p className="pequeno fraco" style={{ marginBottom: 8 }}>
-            {escudos ? `${escudos} escudos importados.` : "O jogo desenha cada escudo com as cores e a sigla do clube."} Os escudos que
-            você importar (arquivo .json de escudos do Proffut) ficam só neste aparelho.
+            O jogo usa os escudos dos clubes.{escudos ? ` ${escudos} trocados por escudos importados.` : ""} Para trocar algum, importe
+            um arquivo .json de escudos do Proffut: ele fica só neste aparelho.
           </p>
           <div className="coluna">
             <button className="botao cheio" onClick={() => arquivoEscudos.current?.click()}>Importar escudos</button>
             <input ref={arquivoEscudos} type="file" className="oculto" aria-label="Arquivo de escudos" onChange={(e) => importarPacote(e.currentTarget)} />
-            {escudos > 0 && <button className="botao cheio" onClick={voltarAosDesenhados}>Voltar aos escudos desenhados</button>}
+            {escudos > 0 && <button className="botao cheio" onClick={apagarImportados}>Apagar os escudos importados</button>}
           </div>
         </Cartao>
 

@@ -1,11 +1,12 @@
-"""Recorta uma prancha de escudos (uma imagem com um cartão por clube) num pacote de escudos do Proffut.
+"""Recorta uma prancha de escudos (uma imagem com um cartão por clube) nos escudos do jogo.
 
-    python3 tools/escudos/recortar.py prancha.png escudos.json [conferir.png]
+    python3 tools/escudos/recortar.py prancha.png public/escudos [conferir.png]   → public/escudos/<id>.png
+    python3 tools/escudos/recortar.py prancha.png escudos.json [conferir.png]     → pacote para importar
 
 A prancha segue a ordem da lista dos clubes (Séries A, B, C e D, cada uma em ordem alfabética, como no
 arquivo que o jogo gera para o usuário): cartões brancos sobre fundo cinza-claro, o escudo em cima e o
-nome embaixo. O pacote (.json) o usuário importa em Configurações → Escudos e fica só no aparelho dele:
-nem a prancha nem o pacote entram no repositório (os escudos oficiais são dos clubes).
+nome embaixo. Os escudos do jogo (public/escudos) são os da prancha que o usuário mandou em out/2026; o
+pacote .json é o que se importa em Configurações → Escudos para trocar algum só no aparelho.
 `conferir.png` mostra cada escudo recortado sobre o fundo do jogo, com o id do clube, para conferir.
 """
 import base64
@@ -165,8 +166,16 @@ def main():
         img.save(buf, "PNG", optimize=True)
         escudos[id_] = "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode()
         imagens.append((id_, img))
-    Path(saida).write_text(json.dumps({"formato": "proffut-escudos", "versao": 1, "escudos": escudos}))
-    print(f"{len(escudos)} escudos em {saida} ({Path(saida).stat().st_size / 1e6:.1f} MB)")
+    if saida.endswith(".json"):
+        Path(saida).write_text(json.dumps({"formato": "proffut-escudos", "versao": 1, "escudos": escudos}))
+        print(f"{len(escudos)} escudos em {saida} ({Path(saida).stat().st_size / 1e6:.1f} MB)")
+    else:
+        pasta = Path(saida)
+        pasta.mkdir(parents=True, exist_ok=True)
+        for id_, img in imagens:
+            img.save(pasta / f"{id_}.png", "PNG", optimize=True)
+        total = sum(f.stat().st_size for f in pasta.glob("*.png"))
+        print(f"{len(imagens)} escudos em {pasta}/ ({total / 1e6:.1f} MB)")
     if conferir:
         por_linha, cel = 12, 128
         folha = Image.new("RGB", (por_linha * cel, -(-len(imagens) // por_linha) * cel), "#0b1410")

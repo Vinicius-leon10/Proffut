@@ -30,8 +30,9 @@ Os scripts que geram os arquivos estão em `tools/dados/`.
 
 ## Escudos
 
-Não usamos escudos oficiais, que são marcas registradas. A interface desenha um escudo simples com as cores e a sigla do clube.
-O usuário pode importar escudos no próprio aparelho (Configurações → Escudos); eles não ficam neste repositório nem no site.
+Os escudos ficam em `public/escudos/` (um `<id>.png` por clube), recortados de uma prancha que o dono do projeto mandou
+(out/2026), para seu uso pessoal. Os escudos são marcas registradas e pertencem aos clubes. Se faltar a imagem de um
+clube, a interface desenha um escudo simples com as cores e a sigla dele.
 
 ## Jogadores
 

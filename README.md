@@ -24,7 +24,7 @@ O save fica guardado **no próprio celular** e é feito sozinho a cada ação. P
 - Regulamentos de 2026: Série A com 38 rodadas, playoff de acesso na Série B, quadrangulares e final na Série C.
 - **Copa do Brasil** com o regulamento de 2026: 126 clubes (os 60 das séries e 66 da Série D), jogo único até a 4ª fase na casa do time de pior ranking, ida e volta da 5ª fase à semifinal (a Série A entra na 5ª fase), pênaltis no empate, final em campo neutro e premiação por fase. Num jogo já começado antes dela, a Copa começa na temporada seguinte.
 - Classificação com zonas, jogos rodada a rodada e artilharia.
-- **Escudos:** o jogo desenha cada escudo com as cores e a sigla do clube. Dá para importar os seus em Configurações → Escudos (um arquivo `.json` de escudos do Proffut); eles ficam só no seu aparelho.
+- **Escudos dos clubes** (`public/escudos/`), também sem internet. Para trocar algum só no seu aparelho, importe um arquivo `.json` de escudos do Proffut em Configurações → Escudos.
 - Mercado: comprar, vender (as propostas chegam nas mensagens, e dá para pedir mais), contratar livres, dispensar.
 - Finanças: bilheteria (você define o ingresso), TV, patrocínio, salários e extrato.
 - Estádio: ampliar a capacidade ou modernizar (mais conforto, mais público), com custo, tempo de obra e renda extra estimada.
@@ -70,4 +70,4 @@ npm run capturas   # tira capturas de cada tela (tools/e2e/capturas/)
 - [docs/REFERENCIA_BRASFOOT.md](docs/REFERENCIA_BRASFOOT.md): estudo do Brasfoot e de projetos parecidos.
 - [data/brasil-2026/LEIAME.md](data/brasil-2026/LEIAME.md): fontes e licença dos dados.
 
-Projeto pessoal, sem fins comerciais. Não usa arquivos, imagens nem dados do Brasfoot, e o site não traz escudos oficiais dos clubes (os importados ficam só no aparelho de quem importou).
+Projeto pessoal, sem fins comerciais. Não usa arquivos, imagens nem dados do Brasfoot. Os escudos e as marcas pertencem aos clubes.
