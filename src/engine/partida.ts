@@ -2,9 +2,9 @@
 // assistido ao vivo (a tela chama `avancarMinuto` no ritmo do relógio) e para os
 // jogos simulados de uma vez (`simularAteOFim`).
 import {
-  CHANCE_EVENTO, CONVERSAO, CONVERSAO_PENALTI, ESTILOS, EXPOENTE_DISPUTA, MANDO, MAX_SUBSTITUICOES,
-  PESO_LANCE, PRESSAO, PROB_AMARELO_FALTA, PROB_ASSISTENCIA, PROB_CABECEIO_ESCANTEIO, PROB_LESAO_JOGO,
-  PROB_PENALTI_FALTA, PROB_VERMELHO_FALTA,
+  AVISO_PRESSAO, CHANCE_EVENTO, CONVERSAO, CONVERSAO_PENALTI, ESTATISTICAS, ESTILOS, EXPOENTE_DISPUTA, MANDO,
+  MAX_SUBSTITUICOES, PESO_LANCE, PRESSAO, PROB_AMARELO_FALTA, PROB_ASSISTENCIA, PROB_CABECEIO_ESCANTEIO,
+  PROB_LESAO_JOGO, PROB_PENALTI_FALTA, PROB_VERMELHO_FALTA,
 } from "./constantes";
 import { FORMACOES, calcularSetores, disponivel, forcaEfetiva, type EmCampo, type Setores, type Vaga } from "./forca";
 import type { Rng } from "./rng";
@@ -35,6 +35,26 @@ export interface LadoVivo {
   controlado: boolean;
 }
 
+/** Números de um lado para a tela de estatísticas (cartões saem do `LadoVivo`). */
+export interface EstatisticasLado {
+  ataques: number;
+  ataquesPerigosos: number;
+  /** Posse de bola somada minuto a minuto (cada minuto vale 1, dividido entre os dois lados). */
+  posse: number;
+  chutesNoGol: number;
+  /** Chutes para fora ou bloqueados pela defesa. */
+  chutesFora: number;
+  escanteios: number;
+}
+
+export interface Estatisticas {
+  lados: [EstatisticasLado, EstatisticasLado];
+  /** Ataques perigosos de cada lado em cada minuto jogado (a pressão dos últimos minutos). */
+  perigososPorMinuto: [number, number][];
+  /** Sorteios só das estatísticas: separados para não mudar placar nem lances. */
+  rng: Rng;
+}
+
 export interface PartidaViva {
   partidaId: string;
   lados: [LadoVivo, LadoVivo];
@@ -51,6 +71,11 @@ export interface PartidaViva {
   neutro?: boolean;
   /** Pênalti marcado esperando a cobrança, que sai no minuto seguinte (lado que vai cobrar). */
   penaltiPendente?: 0 | 1;
+  /**
+   * Ataques, posse, chutes e escanteios, também só na memória. Só na partida do usuário: as outras não
+   * aparecem na tela, e sem elas o resto do dia simula mais rápido.
+   */
+  estatisticas?: Estatisticas;
   rng: Rng;
 }
 
@@ -125,7 +150,9 @@ export function montarLado(clube: Clube, jogadores: Jogadores, elenco: Jogador[]
   };
 }
 
-export function iniciarPartida(partida: Partida, mandante: LadoVivo, visitante: LadoVivo, rng: Rng): PartidaViva {
+/** `rngEstatisticas` liga as estatísticas da partida (só a do usuário precisa delas). */
+export function iniciarPartida(partida: Partida, mandante: LadoVivo, visitante: LadoVivo, rng: Rng, rngEstatisticas?: Rng): PartidaViva {
+  const zerado = (): EstatisticasLado => ({ ataques: 0, ataquesPerigosos: 0, posse: 0, chutesNoGol: 0, chutesFora: 0, escanteios: 0 });
   return {
     partidaId: partida.id,
     lados: [mandante, visitante],
@@ -137,6 +164,7 @@ export function iniciarPartida(partida: Partida, mandante: LadoVivo, visitante: 
     narracao: [],
     avisos: [],
     neutro: partida.neutro,
+    estatisticas: rngEstatisticas ? { lados: [zerado(), zerado()], perigososPorMinuto: [], rng: rngEstatisticas } : undefined,
     rng,
   };
 }
@@ -209,6 +237,89 @@ function texto(rng: Rng, modelos: string[], dados: Record<string, string>): stri
   return rng.escolher(modelos).replace(/\{(\w)\}/g, (_, k: string) => dados[k] ?? "");
 }
 
+// ---- estatísticas ----------------------------------------------------------------------
+
+function contarAtaque(e: Estatisticas | undefined, i: 0 | 1, perigoso: boolean) {
+  if (!e) return;
+  e.lados[i].ataques++;
+  if (!perigoso) return;
+  e.lados[i].ataquesPerigosos++;
+  const minuto = e.perigososPorMinuto[e.perigososPorMinuto.length - 1];
+  if (minuto) minuto[i]++;
+}
+
+function contarChute(e: Estatisticas | undefined, i: 0 | 1, noGol: boolean) {
+  if (!e) return;
+  if (noGol) e.lados[i].chutesNoGol++;
+  else e.lados[i].chutesFora++;
+}
+
+/**
+ * O resto do minuto para as estatísticas: a posse de bola e os ataques que não viram lance narrado (bola
+ * rondando a área, chute travado, escanteio afastado). Usa as forças do jogo, mas com sorteios próprios:
+ * placar e lances continuam os mesmos.
+ */
+function estatisticasDoMinuto(e: Estatisticas, setores: [Setores, Setores]) {
+  const { lados, rng } = e;
+  const posse = Math.min(0.85, Math.max(0.15, disputa(setores[0].meio, setores[1].meio, 2) + rng.normal(0, ESTATISTICAS.variacaoPosse)));
+  lados[0].posse += posse;
+  lados[1].posse += 1 - posse;
+  for (let n = rng.int(0, ESTATISTICAS.ataquesPorMinuto); n > 0; n--) {
+    const i: 0 | 1 = rng.chance(posse) ? 0 : 1;
+    const forca = disputa(setores[i].ataque, setores[1 - i].defesa);
+    const perigoso = rng.chance(ESTATISTICAS.perigo.base + ESTATISTICAS.perigo.peso * forca);
+    contarAtaque(e, i, perigoso);
+    if (!perigoso) continue;
+    if (rng.chance(ESTATISTICAS.chute)) contarChute(e, i, rng.chance(ESTATISTICAS.noGol.base + ESTATISTICAS.noGol.peso * forca));
+    else if (rng.chance(ESTATISTICAS.escanteio)) lados[i].escanteios++;
+  }
+}
+
+/** Posse de bola em porcentagem (mandante, visitante); meio a meio antes de a bola rolar. */
+export function posseDeBola(e: Estatisticas): [number, number] {
+  const [m, v] = e.lados;
+  const total = m.posse + v.posse;
+  const casa = total > 0 ? Math.round((m.posse / total) * 100) : 50;
+  return [casa, 100 - casa];
+}
+
+/** Cartões de um lado: amarelos (o segundo amarelo também conta) e vermelhos (direto ou pelo segundo amarelo). */
+export function cartoes(lado: LadoVivo): { amarelos: number; vermelhos: number } {
+  return { amarelos: Object.values(lado.amarelos).reduce((a, b) => a + b, 0), vermelhos: lado.expulsos.length };
+}
+
+/** Ataques perigosos de cada lado nos últimos 15 minutos jogados (mandante, visitante). */
+export function pressaoRecente(e: Estatisticas): [number, number] {
+  return e.perigososPorMinuto
+    .slice(-AVISO_PRESSAO.minutos)
+    .reduce<[number, number]>(([a, b], [x, y]) => [a + x, b + y], [0, 0]);
+}
+
+/**
+ * O adversário domina os últimos 15 minutos? Devolve os ataques perigosos dele e os do lado pedido, para o
+ * aviso na partida, ou null. Liga e desliga com folga (`AVISO_PRESSAO`), para não piscar a cada minuto.
+ */
+export function sobPressao(e: Estatisticas, lado: 0 | 1): { deles: number; nossos: number } | null {
+  const lista = e.perigososPorMinuto;
+  const outro = lado === 0 ? 1 : 0;
+  let nossos = 0;
+  let deles = 0;
+  let ligado = false;
+  lista.forEach((minuto, i) => {
+    nossos += minuto[lado];
+    deles += minuto[outro];
+    const saiu = lista[i - AVISO_PRESSAO.minutos];
+    if (saiu) {
+      nossos -= saiu[lado];
+      deles -= saiu[outro];
+    }
+    const liga = deles >= AVISO_PRESSAO.liga && deles >= AVISO_PRESSAO.proporcao * nossos;
+    const desliga = deles < AVISO_PRESSAO.desliga || deles < AVISO_PRESSAO.proporcaoDesliga * nossos;
+    ligado = liga || (ligado && !desliga);
+  });
+  return ligado ? { deles, nossos } : null;
+}
+
 // ---- lances -------------------------------------------------------------------------
 
 function escolherFinalizador(rng: Rng, lado: LadoVivo, jogadores: Jogadores, cabeceio: boolean): Jogador {
@@ -269,10 +380,13 @@ function finalizacao(pv: PartidaViva, iAtk: 0 | 1, atk: Setores, def: Setores, j
   if (rng.chance(p)) {
     const assistente = rng.chance(PROB_ASSISTENCIA) ? escolherAssistente(rng, ataque, jogadores, autor.id, cabeceio) : undefined;
     const t = cabeceio ? `GOL DE CABEÇA! ${autor.nome} sobe mais que todo mundo!` : texto(rng, TEXTO_GOL, { j: autor.nome });
+    contarChute(pv.estatisticas, iAtk, true);
     marcarGol(pv, iAtk, autor, assistente, "gol", t);
   } else if (goleiro && rng.chance(0.45)) {
+    contarChute(pv.estatisticas, iAtk, true);
     registrar(pv, { tipo: "defesa", lado: iAtk, jogador: autor.id, texto: texto(rng, TEXTO_DEFESA, { g: goleiro.nome, j: autor.nome }) });
   } else {
+    contarChute(pv.estatisticas, iAtk, false);
     registrar(pv, { tipo: "chance", lado: iAtk, jogador: autor.id, texto: texto(rng, TEXTO_PERDEU, { j: autor.nome }) });
   }
 }
@@ -291,9 +405,12 @@ function cobrarPenalti(pv: PartidaViva, iAtk: 0 | 1, jogadores: Jogadores) {
   if (goleiro?.caracteristicas.includes("PEN")) p -= 0.12;
   registrar(pv, { tipo: "chance", lado: iAtk, texto: `${cobrador.nome} ajeita a bola na marca do pênalti...` });
   if (rng.chance(p)) {
+    contarChute(pv.estatisticas, iAtk, true);
     marcarGol(pv, iAtk, cobrador, undefined, "gol-penalti", `GOL! ${cobrador.nome} cobra com categoria e converte o pênalti.`);
   } else {
-    const t = goleiro && rng.chance(0.6) ? `${goleiro.nome} pega o pênalti de ${cobrador.nome}!` : `${cobrador.nome} cobra mal e manda para fora!`;
+    const defendeu = !!goleiro && rng.chance(0.6);
+    contarChute(pv.estatisticas, iAtk, defendeu);
+    const t = defendeu ? `${goleiro.nome} pega o pênalti de ${cobrador.nome}!` : `${cobrador.nome} cobra mal e manda para fora!`;
     registrar(pv, { tipo: "penalti-perdido", lado: iAtk, jogador: cobrador.id, texto: t });
   }
 }
@@ -334,6 +451,7 @@ function falta(pv: PartidaViva, iAtk: 0 | 1, atk: Setores, def: Setores, jogador
   const narrar = rng.chance(0.3);
   if (rng.chance(PROB_PENALTI_FALTA)) {
     // Marcado agora, cobrado no minuto seguinte (dá tempo de o narrador gritar e a torcida reagir).
+    contarAtaque(pv.estatisticas, iAtk, true);
     registrar(pv, { tipo: "penalti", lado: iAtk, jogador: autor.id, texto: `PÊNALTI! ${autor.nome} derruba o adversário dentro da área.` });
     pv.penaltiPendente = iAtk;
   } else {
@@ -343,8 +461,11 @@ function falta(pv: PartidaViva, iAtk: 0 | 1, atk: Setores, def: Setores, jogador
       registrar(pv, { tipo: "lance", lado: iDef, jogador: autor.id, texto: texto(rng, TEXTO_FALTA, { a: autor.nome, v: vitima.nome }) });
     }
     if (rng.chance(0.14)) {
+      contarAtaque(pv.estatisticas, iAtk, true);
       registrar(pv, { tipo: "chance", lado: iAtk, texto: "Falta perigosa na entrada da área..." });
       finalizacao(pv, iAtk, atk, def, jogadores, 0.45, false);
+    } else {
+      contarAtaque(pv.estatisticas, iAtk, false);
     }
   }
 }
@@ -491,6 +612,7 @@ export function avancarMinuto(pv: PartidaViva, jogadores: Jogadores): EventoPart
   }
 
   pv.minuto++;
+  pv.estatisticas?.perigososPorMinuto.push([0, 0]);
   const [mandante, visitante] = pv.lados;
   gastarEnergia(mandante, jogadores);
   gastarEnergia(visitante, jogadores);
@@ -510,24 +632,32 @@ export function avancarMinuto(pv: PartidaViva, jogadores: Jogadores): EventoPart
     const lado = pv.penaltiPendente;
     pv.penaltiPendente = undefined;
     cobrarPenalti(pv, lado, jogadores);
-  } else if (pv.rng.chance(CHANCE_EVENTO)) {
-    const sM = setoresDoLado(mandante, jogadores, !pv.neutro);
-    const sV = setoresDoLado(visitante, jogadores, false);
-    const casaAtaca = pv.rng.chance(disputa(sM.meio, sV.meio, 2));
-    const iAtk: 0 | 1 = casaAtaca ? 0 : 1;
-    const atk = casaAtaca ? sM : sV;
-    const def = casaAtaca ? sV : sM;
-    const tipo = pv.rng.escolherPeso(Object.keys(PESO_LANCE) as (keyof typeof PESO_LANCE)[], (k) => PESO_LANCE[k]);
-    if (tipo === "chance") {
-      // Contra-ataque: quem defende mais e tem pouco a bola finaliza melhor.
-      const contra = pv.lados[iAtk].tatica.estilo === "contra-ataque" && atk.meio < def.meio ? 1.12 : 1;
-      finalizacao(pv, iAtk, atk, def, jogadores, contra, false);
-    } else if (tipo === "escanteio") {
-      if (pv.rng.chance(PROB_CABECEIO_ESCANTEIO)) finalizacao(pv, iAtk, atk, def, jogadores, 0.55, true);
-      else if (pv.rng.chance(0.4)) registrar(pv, { tipo: "lance", lado: iAtk, texto: pv.rng.escolher(TEXTO_ESCANTEIO) });
-    } else {
-      falta(pv, iAtk, atk, def, jogadores);
+  } else {
+    // Forças dos dois lados neste minuto, para o lance e para as estatísticas (calculadas só se precisar).
+    let setores: [Setores, Setores] | undefined;
+    const forcas = () => (setores ??= [setoresDoLado(mandante, jogadores, !pv.neutro), setoresDoLado(visitante, jogadores, false)]);
+    if (pv.rng.chance(CHANCE_EVENTO)) {
+      const [sM, sV] = forcas();
+      const casaAtaca = pv.rng.chance(disputa(sM.meio, sV.meio, 2));
+      const iAtk: 0 | 1 = casaAtaca ? 0 : 1;
+      const atk = casaAtaca ? sM : sV;
+      const def = casaAtaca ? sV : sM;
+      const tipo = pv.rng.escolherPeso(Object.keys(PESO_LANCE) as (keyof typeof PESO_LANCE)[], (k) => PESO_LANCE[k]);
+      if (tipo === "chance") {
+        contarAtaque(pv.estatisticas, iAtk, true);
+        // Contra-ataque: quem defende mais e tem pouco a bola finaliza melhor.
+        const contra = pv.lados[iAtk].tatica.estilo === "contra-ataque" && atk.meio < def.meio ? 1.12 : 1;
+        finalizacao(pv, iAtk, atk, def, jogadores, contra, false);
+      } else if (tipo === "escanteio") {
+        contarAtaque(pv.estatisticas, iAtk, true);
+        if (pv.estatisticas) pv.estatisticas.lados[iAtk].escanteios++;
+        if (pv.rng.chance(PROB_CABECEIO_ESCANTEIO)) finalizacao(pv, iAtk, atk, def, jogadores, 0.55, true);
+        else if (pv.rng.chance(0.4)) registrar(pv, { tipo: "lance", lado: iAtk, texto: pv.rng.escolher(TEXTO_ESCANTEIO) });
+      } else {
+        falta(pv, iAtk, atk, def, jogadores);
+      }
     }
+    if (pv.estatisticas) estatisticasDoMinuto(pv.estatisticas, forcas());
   }
 
   const fimDoTempo = pv.tempo === 1 ? 45 + pv.acrescimo[0] : 90 + pv.acrescimo[1];

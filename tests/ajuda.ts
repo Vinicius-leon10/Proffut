@@ -87,6 +87,18 @@ export async function jogarPartida(page: Page) {
   return placar;
 }
 
+/** Avança até o dia do próximo jogo do meu time e para antes dele, no "Começar o jogo". */
+export async function irParaOMeuJogo(page: Page) {
+  const comecar = botao(page, "Começar o jogo");
+  const continuar = page.getByRole("button", { name: "Continuar", exact: true });
+  for (let i = 0; i < 4 && !(await comecar.isVisible()); i++) {
+    await botao(page, /Avançar|Ir para o jogo/).click();
+    await expect(comecar.or(continuar)).toBeVisible({ timeout: 15_000 });
+    if (await continuar.isVisible()) await continuar.click();
+  }
+  await expect(comecar).toBeVisible();
+}
+
 /** Relógio da página, para usar com `esperarSalvar`. */
 export const agora = (page: Page) => page.evaluate(() => Date.now());
 

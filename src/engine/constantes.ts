@@ -35,6 +35,28 @@ export const ESTILOS: Record<Estilo, { nome: string; defesa: number; meio: numbe
 };
 export const PRESSAO = { meio: 1.05, defesa: 1.02, energia: 1.18, faltas: 1.35 };
 
+// ---- estatísticas da partida (só para mostrar: não mudam placar nem lances) ----------
+/**
+ * O que a tela de estatísticas soma a cada minuto além dos lances narrados: de 0 a `ataquesPorMinuto` ataques,
+ * divididos pela posse de bola; a parte que vira ataque perigoso (base + peso × disputa ataque × defesa); e o
+ * que um ataque perigoso sem lance vira: chute (no gol: base + peso × disputa) ou escanteio.
+ */
+export const ESTATISTICAS = {
+  ataquesPorMinuto: 4,
+  perigo: { base: 0.3, peso: 0.4 },
+  chute: 0.17,
+  noGol: { base: 0.12, peso: 0.2 },
+  escanteio: 0.1,
+  /** Quanto a posse de bola varia de um minuto para o outro (desvio). */
+  variacaoPosse: 0.1,
+};
+/**
+ * Aviso de pressão na partida, pelos ataques perigosos dos últimos `minutos`: liga quando o adversário tem pelo
+ * menos `liga` e o triplo dos seus; desliga quando cai abaixo de `desliga` ou do dobro dos seus (não pisca).
+ * Assim aparece em ~1 de 5 jogos entre times iguais e em ~4 de 5 contra um time bem mais forte.
+ */
+export const AVISO_PRESSAO = { minutos: 15, liga: 14, desliga: 10, proporcao: 3, proporcaoDesliga: 2 };
+
 // ---- energia e recuperação --------------------------------------------------
 export const RECUPERACAO_POR_DIA = 9;
 export const DIAS_LESAO = { min: 4, max: 35 };

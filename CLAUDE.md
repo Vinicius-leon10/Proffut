@@ -42,8 +42,8 @@ Pronto e publicado: partida ao vivo, tática, elenco, mercado, finanças, estád
 virada de temporada sem fim, rebaixamento para a Série D com propostas de emprego, checagem automática no app,
 elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, escudos dos
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
-placar), visual claro "opção 3", testes de ponta a ponta R01–R33 rodando a cada mudança, antes de publicar e todo dia
-no site publicado.
+placar), visual claro "opção 3", estatísticas da partida com aviso de pressão, testes de ponta a ponta R01–R35 rodando
+a cada mudança, antes de publicar e todo dia no site publicado.
 
 **Visual "opção 3" (out/2026, `src/ui/estilo.css`):** design system que o usuário mandou (pacote
 `proffut-design-system-opcao-3.zip`, "Aplique"): editorial claro. Tokens no `:root`: `--fundo` marfim `#f3f3ec`,
@@ -72,6 +72,19 @@ silencioso cala o apito e a torcida. Liga/desliga: botão de som na partida e Co
 (`config.som`, opcional: falta = ligado). Os testes (R25, R27; `escutarSons` em `tests/ajuda.ts`) escutam os sons
 trocando `OscillatorNode.start`, `AudioBufferSourceNode.start` e `speechSynthesis.speak` no navegador de teste, e
 anotam o volume de cada som (maior valor marcado nos ganhos por onde ele passa) e os sons do mesmo instante.
+
+**Estatísticas da partida (out/2026, `partida.ts` e `AoVivo.tsx`):** aba Estatísticas na partida ao vivo, no modelo da
+captura que o usuário mandou: ataques, ataques perigosos e posse em anéis; escanteios e cartões; chutes no gol e para fora
+ou bloqueados; pressão dos últimos 15 minutos (ataques perigosos). Mandante à esquerda como no placar; meu time em verde
+(`--esmeralda`), o adversário em azul (`--azul`). Contam os lances de verdade (cada `finalizacao` e pênalti vira chute,
+cartões saem de `LadoVivo.amarelos`/`expulsos`) e, a cada minuto, `estatisticasDoMinuto` soma a posse e os ataques que não
+viram lance, pelas mesmas forças do jogo (meio para a posse, ataque × defesa para o perigo) com sorteio próprio
+(`estatisticas/<id>`): **placar e lances não mudam** (impressão digital de uma temporada igual antes e depois, e teste no
+motor). Números em `ESTATISTICAS` (`constantes.ts`): ~100 ataques, ~50 perigosos, ~13 chutes (~4,5 no gol) e ~5
+escanteios por time. Só a partida do usuário tem `PartidaViva.estatisticas` (as outras não aparecem; calcular em todas
+deixava a temporada simulada 68% mais lenta). Aviso de pressão (`sobPressao`, `AVISO_PRESSAO`): liga com o adversário
+com 14+ ataques perigosos nos últimos 15 minutos e o triplo dos meus, desliga abaixo de 10 ou do dobro (não pisca);
+some no intervalo e no fim. Aparece em ~1 de 5 jogos entre times iguais e em ~4 de 5 contra time bem mais forte. R34, R35.
 
 **Copa do Brasil (out/2026, `src/engine/copa.ts`):** regulamento de 2026 com 126 clubes: 1ª fase com os 28 piores do
 ranking, 2ª com mais 74, 3ª com mais 4 (em 2026 os de verdade: Paysandu, Ponte Preta, Barra-SC, Confiança; depois, os
@@ -143,11 +156,11 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 |---|---|
 | `src/engine/` | Regras em TypeScript puro, sem interface. Tudo aleatório usa `rngPara(semente, chave)` (`rng.ts`): mesma semente, mesmo resultado |
 | `tipos.ts` | Modelo de dados (`EstadoJogo`, `Clube`, `Jogador`, `Partida`...) |
-| `constantes.ts` | Todos os números de equilíbrio. Mexeu? Rode `npm run sim` |
+| `constantes.ts` | Todos os números de equilíbrio. Mexeu? Rode `npm run sim` (`ESTATISTICAS` e `AVISO_PRESSAO` só mudam o que a tela mostra) |
 | `artigos.ts` | Artigo do clube nos textos: `comArtigo("do", clube)` dá "do Flamengo" ou "da Chapecoense"; `concorda` para campeão/campeã. A lista `CLUBES_FEMININOS` vai pelo id |
 | `gerador.ts`, `nomes.ts` | `elencoReal` (elencos de `jogadores.json`), jogadores gerados (base, livres, quem completa elenco), salário (`salarioBase`), valor de mercado |
 | `forca.ts` | Força efetiva: força × posição × energia × características |
-| `partida.ts` | Simulação minuto a minuto; disputa = a^k/(a^k+b^k), k = `EXPOENTE_DISPUTA` |
+| `partida.ts` | Simulação minuto a minuto; disputa = a^k/(a^k+b^k), k = `EXPOENTE_DISPUTA`. Estatísticas da partida do usuário (`estatisticasDoMinuto`, `posseDeBola`, `cartoes`, `pressaoRecente`, `sobPressao`) |
 | `calendario.ts`, `competicoes.ts` | Tabelas, turno/returno com mando equilibrado, playoff da B, quadrangulares e final da C |
 | `copa.ts` | Copa do Brasil: participantes, sorteio por potes, jogos, quem passa, premiação, textos do confronto |
 | `financas.ts`, `estadio.ts` | Bilheteria, TV, patrocínio, salários; obras de ampliação e modernização |

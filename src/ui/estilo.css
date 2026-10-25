@@ -489,6 +489,30 @@ p { margin: 0; }
 .jogo-rodada.meu { background: var(--destaque); border-radius: 8px; }
 .jogo-rodada .gol-agora { color: var(--amarelo); }
 
+/* Estatísticas da partida: o meu time em verde, o adversário em azul (--cor-m e --cor-v, na ordem do placar). */
+.aviso-pressao { border-left: 4px solid var(--vermelho); background: #fbefed; }
+.estatisticas { display: flex; flex-direction: column; gap: 16px; }
+.estat-times { display: flex; justify-content: space-between; gap: 12px; font-size: 0.82rem; font-weight: 700; }
+.estat-times > span { display: flex; align-items: center; gap: 6px; min-width: 0; padding-bottom: 4px; border-bottom: 3px solid var(--cor-m); }
+.estat-times > span:last-child { flex-direction: row-reverse; border-color: var(--cor-v); }
+.estatisticas .numero { min-width: 22px; font-weight: 800; font-size: 0.92rem; font-variant-numeric: tabular-nums; color: var(--texto); }
+.roscas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.rosca { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.rosca .rotulo { min-height: 2.6em; display: flex; align-items: flex-end; justify-content: center; text-align: center; }
+.rosca .linha { gap: 3px; }
+.rosca .numero { font-size: 0.86rem; }
+.rosca .numero small { font-size: 0.72em; font-weight: 700; }
+.rosca .numero:first-child { text-align: right; }
+.contagens { display: grid; grid-template-columns: repeat(3, 1fr); padding: 8px 0; border-top: 1px solid var(--divisor); border-bottom: 1px solid var(--divisor); }
+.contagem { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.contagem .numero:first-child { text-align: right; }
+.cartao-juiz { display: inline-block; width: 11px; height: 15px; border-radius: 2px; box-shadow: inset 0 0 0 1px rgb(0 0 0 / 14%); }
+.cartao-juiz.amarelo { background: #f2c200; }
+.cartao-juiz.vermelho { background: var(--vermelho); }
+.comparacao .numero:last-child { text-align: right; }
+.dividida { display: flex; gap: 3px; margin-top: 6px; }
+.dividida > div { flex-basis: 0; height: 7px; border-radius: 99px; }
+
 /* ---- início ----------------------------------------------------------------------------------- */
 
 .inicio {

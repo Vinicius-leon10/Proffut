@@ -1,10 +1,13 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { MAX_SUBSTITUICOES, ESTILOS } from "../../engine/constantes";
 import { FORMACOES, corForca, forcaEfetiva } from "../../engine/forca";
 import { desfechoDoConfronto } from "../../engine/copa";
 import { concluirJogos } from "../../engine/jogo";
-import { avancarMinuto, formatarMinuto, mudarTatica, simularAteOFim, substituir, type PartidaViva } from "../../engine/partida";
+import {
+  avancarMinuto, cartoes, formatarMinuto, mudarTatica, posseDeBola, pressaoRecente, simularAteOFim, sobPressao, substituir,
+  type EstatisticasLado, type PartidaViva,
+} from "../../engine/partida";
 import type { Clube, Competicao, EstadoJogo, Estilo, EventoPartida, Formacao, Partida } from "../../engine/tipos";
 import { NOME_COMPETICAO } from "../../engine/competicoes";
 import { Barra, Escudo, Folha, Icone, Opcoes, Pos, Segmentado } from "../componentes";
@@ -54,7 +57,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   const [iniciado, setIniciado] = useState(false);
   const [pausado, setPausado] = useState(false);
   const [velocidade, setVelocidade] = useState<1 | 2>(estado.config.velocidade === 1 ? 1 : 2);
-  const [aba, setAba] = useState<"lances" | "rodada">("lances");
+  const [aba, setAba] = useState<"lances" | "estatisticas" | "rodada">("lances");
   const [painel, setPainel] = useState<"trocas" | "tatica" | "adversario" | null>(null);
   const [, setTick] = useState(0);
   const avisosVistos = useRef(0);
@@ -141,6 +144,9 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   const clubeV = estado.clubes[lv.clubeId];
   const progresso = meu.terminada ? 100 : Math.min(100, ((meu.tempo === 2 ? 45 : 0) + Math.min(45, meu.tempo === 2 ? meu.minuto - 45 : meu.minuto)) / 90 * 100);
   const lances = useMemo(() => [...meu.narracao].reverse(), [meu.narracao, meu.narracao.length]);
+  const adversario = meuLado === 0 ? clubeV : clubeM;
+  // O adversário dominando os últimos 15 minutos: avisa e convida a mexer no time (no intervalo já há o convite).
+  const pressao = meu.estatisticas && !meu.terminada && !meu.intervalo ? sobPressao(meu.estatisticas, meuLado) : null;
   // O escudo do adversário abre o time titular dele no campinho.
   const escudoNoPlacar = (lado: 0 | 1, clube: Clube) =>
     lado === meuLado ? <Escudo clube={clube} tamanho={48} /> : (
@@ -193,13 +199,25 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
               <button className="botao pequeno cresce" onClick={() => setPainel("tatica")}>Tática</button>
             </div>
           )}
+          {pressao && (
+            <div className="cartao compacto aviso-pressao" role="status" style={{ margin: "0 16px" }}>
+              <p className="pequeno">
+                <b>{comArtigo("O", adversario)} está pressionando.</b> {pressao.deles} ataques perigosos contra {pressao.nossos} nos
+                últimos 15 minutos. Mude a tática ou faça uma substituição.
+              </p>
+            </div>
+          )}
           {meu.intervalo && pausado && (
             <div className="cartao compacto" style={{ margin: "0 16px" }}>
               <p className="pequeno"><b>Intervalo.</b> Faça substituições ou mude a tática, e toque em ▶ para o segundo tempo.</p>
             </div>
           )}
           <div style={{ padding: "8px 16px 0" }}>
-            <Segmentado opcoes={[{ valor: "lances", rotulo: "Lances" }, { valor: "rodada", rotulo: "Rodada" }]} valor={aba} aoMudar={setAba} />
+            <Segmentado
+              opcoes={[{ valor: "lances", rotulo: "Lances" }, { valor: "estatisticas", rotulo: "Estatísticas" }, { valor: "rodada", rotulo: "Rodada" }]}
+              valor={aba}
+              aoMudar={setAba}
+            />
           </div>
           <div className="conteudo" style={{ paddingTop: 8 }}>
             {aba === "lances" ? (
@@ -212,6 +230,8 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
                   <span>{prefixo(e)}{e.texto}</span>
                 </div>
               )) : <p className="vazio">A bola vai rolar...</p>
+            ) : aba === "estatisticas" ? (
+              <EstatisticasDaPartida pv={meu} meuLado={meuLado} />
             ) : (
               <OutrosJogos vivas={vivas} meuId={meuId} />
             )}
@@ -274,6 +294,104 @@ function PreJogo({ vivas, meu, meuLado, regra, aoComecar, aoAjustar }: { vivas: 
       <p className="mini muito-fraco">Hoje: {vivas.length} jogos. Os outros placares aparecem na aba Rodada durante o jogo.</p>
       <button className="botao primario grande cheio" onClick={aoComecar}>Começar o jogo</button>
       <button className="botao cheio" onClick={aoAjustar}>Voltar e ajustar a escalação</button>
+    </div>
+  );
+}
+
+/**
+ * Estatísticas da partida, como nos aplicativos de futebol: cada número do lado do seu time (mandante à
+ * esquerda, como no placar), o meu time em verde e o adversário em azul.
+ */
+function EstatisticasDaPartida({ pv, meuLado }: { pv: PartidaViva; meuLado: 0 | 1 }) {
+  const estado = useJogo();
+  const e = pv.estatisticas;
+  if (!e) return <p className="vazio">Esta partida não tem estatísticas.</p>;
+  const [m, v] = e.lados;
+  const par = (f: (l: EstatisticasLado) => number): [number, number] => [f(m), f(v)];
+  const [cm, cv] = [cartoes(pv.lados[0]), cartoes(pv.lados[1])];
+  const cores = meuLado === 0 ? ["var(--esmeralda)", "var(--azul)"] : ["var(--azul)", "var(--esmeralda)"];
+  return (
+    <div className="cartao estatisticas" style={{ "--cor-m": cores[0], "--cor-v": cores[1] } as CSSProperties}>
+      <div className="estat-times">
+        {pv.lados.map((l) => (
+          <span key={l.clubeId}>
+            <Escudo clube={estado.clubes[l.clubeId]} tamanho={20} />
+            <span className="corta">{estado.clubes[l.clubeId].nome}</span>
+          </span>
+        ))}
+      </div>
+      <div className="roscas">
+        <Rosca nome="Ataques" valores={par((l) => l.ataques)} />
+        <Rosca nome="Ataques perigosos" valores={par((l) => l.ataquesPerigosos)} />
+        <Rosca nome="Posse de bola" valores={posseDeBola(e)} sufixo="%" />
+      </div>
+      <div className="contagens">
+        <Contagem nome="Escanteios" valores={par((l) => l.escanteios)}>
+          <svg width="14" height="18" viewBox="0 0 14 18" aria-hidden="true">
+            <path d="M2.5 1.5v15" stroke="var(--texto-2)" strokeWidth="1.6" strokeLinecap="round" />
+            <path d="M3.3 1.8 12.5 4.9 3.3 8Z" fill="var(--vermelho)" />
+          </svg>
+        </Contagem>
+        <Contagem nome="Cartões amarelos" valores={[cm.amarelos, cv.amarelos]}><span className="cartao-juiz amarelo" /></Contagem>
+        <Contagem nome="Cartões vermelhos" valores={[cm.vermelhos, cv.vermelhos]}><span className="cartao-juiz vermelho" /></Contagem>
+      </div>
+      <Comparacao nome="Chutes no gol" valores={par((l) => l.chutesNoGol)} />
+      <Comparacao nome="Chutes para fora ou bloqueados" valores={par((l) => l.chutesFora)} />
+      <Comparacao nome="Pressão nos últimos 15 minutos" valores={pressaoRecente(e)}
+        nota="Ataques perigosos de cada time nos últimos 15 minutos: quem está mandando no jogo agora." />
+    </div>
+  );
+}
+
+/** Anel dividido entre os dois times, com o número de cada um do seu lado. */
+function Rosca({ nome, valores: [a, b], sufixo = "" }: { nome: string; valores: [number, number]; sufixo?: string }) {
+  const raio = 21;
+  const volta = 2 * Math.PI * raio;
+  const total = a + b;
+  return (
+    <div className="rosca" role="group" aria-label={nome}>
+      <div className="mini fraco rotulo">{nome}</div>
+      <div className="linha">
+        <span className="numero">{a}{sufixo && <small>{sufixo}</small>}</span>
+        <svg width="46" height="46" viewBox="0 0 52 52" aria-hidden="true">
+          <circle cx="26" cy="26" r={raio} fill="none" strokeWidth="7" stroke={total ? "var(--cor-m)" : "var(--cartao-2)"} />
+          {b > 0 && (
+            <circle cx="26" cy="26" r={raio} fill="none" strokeWidth="7" stroke="var(--cor-v)"
+              strokeDasharray={`${(b / total) * volta} ${volta}`} transform="rotate(-90 26 26)" />
+          )}
+        </svg>
+        <span className="numero">{b}{sufixo && <small>{sufixo}</small>}</span>
+      </div>
+    </div>
+  );
+}
+
+function Contagem({ nome, valores: [a, b], children }: { nome: string; valores: [number, number]; children: ReactNode }) {
+  return (
+    <div className="contagem" role="group" aria-label={nome} title={nome}>
+      <span className="numero">{a}</span>
+      {children}
+      <span className="numero">{b}</span>
+    </div>
+  );
+}
+
+/** Barra dividida na proporção dos dois times. */
+function Comparacao({ nome, valores: [a, b], nota }: { nome: string; valores: [number, number]; nota?: string }) {
+  const total = a + b;
+  return (
+    <div className="comparacao" role="group" aria-label={nome}>
+      <div className="linha entre">
+        <span className="numero">{a}</span>
+        <span className="pequeno fraco centro">{nome}</span>
+        <span className="numero">{b}</span>
+      </div>
+      <div className="dividida">
+        {a > 0 && <div style={{ flexGrow: a, background: "var(--cor-m)" }} />}
+        {b > 0 && <div style={{ flexGrow: b, background: "var(--cor-v)" }} />}
+        {total === 0 && <div style={{ flexGrow: 1, background: "var(--cartao-2)" }} />}
+      </div>
+      {nota && <p className="mini muito-fraco" style={{ marginTop: 4 }}>{nota}</p>}
     </div>
   );
 }
