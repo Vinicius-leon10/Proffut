@@ -73,14 +73,14 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
     const novos = meu.narracao.slice(lancesOuvidos.current);
     lancesOuvidos.current = meu.narracao.length;
     if (novos.some((e) => e.tipo === "penalti")) suspense.current = Date.now() + SUSPENSE_PENALTI_MS;
-    if (som.current) tocarLances(novos, [estado.clubes[meu.lados[0].clubeId], estado.clubes[meu.lados[1].clubeId]]);
+    if (som.current) tocarLances(novos, meuLado);
     if (meu.avisos.length > avisosVistos.current) {
       avisar(meu.avisos[meu.avisos.length - 1]);
       avisosVistos.current = meu.avisos.length;
     }
     if (meu.intervalo) setPausado(true);
     setTick((t) => t + 1);
-  }, [vivas, estado.jogadores, estado.clubes, meu, avisar]);
+  }, [vivas, estado.jogadores, meu, meuLado, avisar]);
 
   useEffect(() => {
     if (!iniciado || pausado || painel || todasTerminadas) return;

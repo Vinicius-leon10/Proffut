@@ -1,10 +1,13 @@
 // Sons da partida ao vivo, feitos no próprio aparelho (nada é baixado nem copiado de outro jogo):
-// o apito do árbitro e a torcida são sintetizados com Web Audio, e o narrador usa a voz em
-// português do sistema (speechSynthesis). No iPhone o som só é liberado depois de um toque, por isso
+// o apito do árbitro, a torcida e a vaia são sintetizados com Web Audio, e o narrador do pênalti usa a
+// voz em português do sistema (speechSynthesis). No iPhone o som só é liberado depois de um toque, por isso
 // `liberarSom` é chamado no botão "Começar o jogo"; com a chave do silencioso ligada, o iPhone cala o
 // apito e a torcida.
-import { comArtigo } from "../engine/artigos";
-import type { Clube, EventoPartida } from "../engine/tipos";
+import type { EventoPartida } from "../engine/tipos";
+
+/** Volume da festa no gol do meu time (o som mais alto da partida) e da vaia no gol do adversário. */
+const FESTA = 1.5;
+const VAIA = 0.75;
 
 let contexto: AudioContext | undefined;
 let ruido: AudioBuffer | undefined;
@@ -96,27 +99,27 @@ function bufferDeRuido(ctx: AudioContext): AudioBuffer {
 }
 
 /**
- * Torcida: "gol" explode e vai baixando (mais forte se o gol é do time da casa), "penalti" é o
- * burburinho de expectativa e "perdeu" é o "uhhh" de quando o pênalti não entra.
+ * Torcida: "gol" é a festa do gol do meu time, que explode e vai baixando; "penalti" é o burburinho de
+ * expectativa e "perdeu" é o "uhhh" de quando o pênalti não entra.
  */
-export function torcida(tipo: "gol" | "penalti" | "perdeu", forca = 1) {
+export function torcida(tipo: "gol" | "penalti" | "perdeu") {
   const ctx = audio();
   if (!ctx) return;
   const t = ctx.currentTime + 0.03;
-  const duracao = tipo === "gol" ? 4.5 : tipo === "penalti" ? 2.4 : 1.8;
+  const duracao = tipo === "gol" ? 5 : tipo === "penalti" ? 2.4 : 1.8;
   const fonte = ctx.createBufferSource();
   fonte.buffer = bufferDeRuido(ctx);
   const filtro = ctx.createBiquadFilter();
   filtro.type = "bandpass";
   filtro.Q.value = 0.7;
   const volume = ctx.createGain();
-  const pico = (tipo === "gol" ? 0.9 : 0.45) * forca;
+  const pico = tipo === "gol" ? FESTA : 0.45;
   volume.gain.setValueAtTime(0.0001, t);
   if (tipo === "gol") {
     filtro.frequency.setValueAtTime(700, t);
     filtro.frequency.linearRampToValueAtTime(1100, t + 0.5);
     volume.gain.exponentialRampToValueAtTime(pico, t + 0.35);
-    volume.gain.setValueAtTime(pico, t + 2);
+    volume.gain.setValueAtTime(pico, t + 2.5);
   } else if (tipo === "penalti") {
     filtro.frequency.setValueAtTime(500, t);
     filtro.frequency.linearRampToValueAtTime(800, t + duracao);
@@ -130,6 +133,72 @@ export function torcida(tipo: "gol" | "penalti" | "perdeu", forca = 1) {
   fonte.connect(filtro).connect(volume).connect(ctx.destination);
   fonte.start(t);
   fonte.stop(t + duracao);
+}
+
+/**
+ * Vaia do gol do adversário: muita gente fazendo "uuu" grave. Cada voz é um tom grave com um leve
+ * vibrato, passando pelos dois formantes da vogal "u" (~320 Hz forte, ~800 Hz fraco); um ruído grave
+ * por baixo faz o ar do estádio, e no fim as vozes caem um pouco, como numa vaia de verdade.
+ */
+export function vaia() {
+  const ctx = audio();
+  if (!ctx) return;
+  const t = ctx.currentTime + 0.03;
+  const duracao = 3.2;
+  const volume = ctx.createGain();
+  volume.gain.setValueAtTime(0.0001, t);
+  volume.gain.exponentialRampToValueAtTime(VAIA, t + 0.5);
+  volume.gain.setValueAtTime(VAIA, t + duracao - 1);
+  volume.gain.exponentialRampToValueAtTime(0.0001, t + duracao);
+  volume.connect(ctx.destination);
+  const grave = ctx.createBiquadFilter();
+  grave.type = "bandpass";
+  grave.frequency.value = 320;
+  grave.Q.value = 3;
+  grave.connect(volume);
+  const medio = ctx.createBiquadFilter();
+  medio.type = "bandpass";
+  medio.frequency.value = 800;
+  medio.Q.value = 5;
+  const medioMaisBaixo = ctx.createGain();
+  medioMaisBaixo.gain.value = 0.35;
+  medio.connect(medioMaisBaixo).connect(volume);
+
+  const vozes = 16;
+  for (let i = 0; i < vozes; i++) {
+    const altura = 95 + Math.random() * 130;
+    const voz = ctx.createOscillator();
+    voz.type = "sawtooth";
+    voz.frequency.value = altura;
+    voz.frequency.setValueAtTime(altura, t + duracao * 0.55);
+    voz.frequency.linearRampToValueAtTime(altura * 0.8, t + duracao);
+    const vibrato = ctx.createOscillator();
+    vibrato.frequency.value = 4 + Math.random() * 3;
+    const profundidade = ctx.createGain();
+    profundidade.gain.value = altura * 0.03;
+    vibrato.connect(profundidade).connect(voz.frequency);
+    const parte = ctx.createGain();
+    parte.gain.value = 1 / vozes;
+    voz.connect(parte);
+    parte.connect(grave);
+    parte.connect(medio);
+    const entra = t + Math.random() * 0.35;
+    for (const o of [voz, vibrato]) {
+      o.start(entra);
+      o.stop(t + duracao + 0.05);
+    }
+  }
+
+  const ar = ctx.createBufferSource();
+  ar.buffer = bufferDeRuido(ctx);
+  const abafado = ctx.createBiquadFilter();
+  abafado.type = "lowpass";
+  abafado.frequency.value = 400;
+  const arMaisBaixo = ctx.createGain();
+  arMaisBaixo.gain.value = 0.5;
+  ar.connect(abafado).connect(arMaisBaixo).connect(volume);
+  ar.start(t);
+  ar.stop(t + duracao);
 }
 
 /** O narrador, com a voz em português do aparelho, animado. */
@@ -150,16 +219,17 @@ export function narrar(texto: string) {
   }
 }
 
-/** Sons dos lances novos do jogo do usuário. `clubes` são os dois times (mandante, visitante). */
-export function tocarLances(lances: EventoPartida[], clubes: [Clube, Clube]) {
+/** Sons dos lances novos do jogo do usuário. `meuLado` é o lado do time do usuário (0 = mandante). */
+export function tocarLances(lances: EventoPartida[], meuLado: 0 | 1) {
   for (const e of lances) {
     if (e.tipo === "penalti") {
       apito("penalti");
       torcida("penalti");
       narrar("Pênalti!");
     } else if (e.tipo === "gol" || e.tipo === "gol-penalti") {
-      torcida("gol", e.lado === 0 ? 1 : 0.6);
-      narrar(`Gol ${comArtigo("do", clubes[e.lado])}!`);
+      // Sem narrador no gol: festa da torcida no gol do meu time, vaia no do adversário.
+      if (e.lado === meuLado) torcida("gol");
+      else vaia();
     } else if (e.tipo === "penalti-perdido") {
       torcida("perdeu");
     } else if (e.tipo === "intervalo") {

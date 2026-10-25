@@ -172,27 +172,73 @@ export async function esperarInteiroNaTela(page: Page, alvo: Locator) {
   expect(livre, "algo está cobrindo o elemento").toBe(true);
 }
 
-export type Som = { tipo: "tom"; hz: number } | { tipo: "ruido" } | { tipo: "voz"; texto: string };
+export type Som =
+  | { tipo: "tom"; hz: number; pico: number; grupo: number }
+  | { tipo: "ruido"; pico: number; grupo: number }
+  | { tipo: "voz"; texto: string; grupo: number };
 
-/** Anota cada som que o jogo toca: tons (apito), ruídos (torcida) e falas (narrador). */
+/**
+ * Anota cada som que o jogo toca: tons (apito, vaia), ruídos (torcida) e falas (narrador). `pico` é o
+ * maior volume marcado nos ganhos por onde o som passa até a saída; `grupo` junta os sons que começaram
+ * no mesmo instante (o mesmo lance).
+ */
 export async function escutarSons(page: Page) {
   await page.addInitScript(() => {
+    type No = AudioNode & { __saidas?: AudioNode[] };
+    type Param = AudioParam & { __pico?: number };
     const w = window as unknown as { __sons: unknown[] };
     w.__sons = [];
+    let grupo = 0;
+    let mesmoInstante = false;
+    const grupoAtual = () => {
+      if (!mesmoInstante) {
+        grupo++;
+        mesmoInstante = true;
+        queueMicrotask(() => { mesmoInstante = false; });
+      }
+      return grupo;
+    };
+    // Por onde o som passa: cada ligação guarda o destino.
+    const ligar = AudioNode.prototype.connect as (this: AudioNode, ...a: unknown[]) => unknown;
+    AudioNode.prototype.connect = function (this: No, ...a: unknown[]) {
+      if (a[0] instanceof AudioNode) (this.__saidas ??= []).push(a[0]);
+      return ligar.apply(this, a);
+    } as typeof AudioNode.prototype.connect;
+    // Volume: o maior valor marcado em cada parâmetro (o envelope de cada som).
+    for (const metodo of ["setValueAtTime", "linearRampToValueAtTime", "exponentialRampToValueAtTime"] as const) {
+      const original = AudioParam.prototype[metodo];
+      AudioParam.prototype[metodo] = function (this: Param, valor: number, tempo: number) {
+        this.__pico = Math.max(this.__pico ?? 0, valor);
+        return original.call(this, valor, tempo);
+      };
+    }
+    const pico = (inicio: AudioNode) => {
+      let maior = 0;
+      const fila: No[] = [inicio];
+      const vistos = new Set<AudioNode>();
+      while (fila.length) {
+        const no = fila.shift()!;
+        if (vistos.has(no)) continue;
+        vistos.add(no);
+        fila.push(...(no.__saidas ?? []));
+        if (no instanceof GainNode) maior = Math.max(maior, (no.gain as Param).__pico ?? 0);
+      }
+      return maior;
+    };
     const tom = OscillatorNode.prototype.start;
     OscillatorNode.prototype.start = function (this: OscillatorNode, ...a: [number?]) {
-      w.__sons.push({ tipo: "tom", hz: this.frequency.value });
+      w.__sons.push({ tipo: "tom", hz: this.frequency.value, pico: pico(this), grupo: grupoAtual() });
       return tom.apply(this, a);
     };
     const ruido = AudioBufferSourceNode.prototype.start;
     AudioBufferSourceNode.prototype.start = function (this: AudioBufferSourceNode, ...a: [number?, number?, number?]) {
-      w.__sons.push({ tipo: "ruido" });
+      w.__sons.push({ tipo: "ruido", pico: pico(this), grupo: grupoAtual() });
       return ruido.apply(this, a);
     };
     if (window.speechSynthesis) {
       const falar = window.speechSynthesis.speak.bind(window.speechSynthesis);
       window.speechSynthesis.speak = (u: SpeechSynthesisUtterance) => {
-        if (u.text.trim()) w.__sons.push({ tipo: "voz", texto: u.text });
+        if (u.text.trim()) w.__sons.push({ tipo: "voz", texto: u.text, grupo: grupoAtual() });
         try { falar(u); } catch { /* sem voz no navegador de teste */ }
       };
     }

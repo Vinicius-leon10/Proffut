@@ -41,17 +41,19 @@ Só clubes brasileiros: Séries A, B e C de 2026 (60 clubes reais, regulamentos 
 Pronto e publicado: partida ao vivo, tática, elenco, mercado, finanças, estádio (ampliar/modernizar), diretoria,
 virada de temporada sem fim, rebaixamento para a Série D com propostas de emprego, checagem automática no app,
 elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, testes de
-ponta a ponta R01–R26 rodando a cada mudança, antes de publicar e todo dia no site publicado.
+ponta a ponta R01–R27 rodando a cada mudança, antes de publicar e todo dia no site publicado.
 
-**Sons da partida (out/2026, `src/ui/sons.ts`):** apito e torcida sintetizados com Web Audio, narrador com a voz
-pt-BR do aparelho (`speechSynthesis`); nada baixado nem copiado. Apito no início e na volta do intervalo, 2 no
-intervalo, 3 no fim; no pênalti: apito, burburinho e "Pênalti!"; no gol: torcida (mais forte se é do mandante) e
-"Gol do/da <clube>!"; pênalti perdido: "uhhh". O pênalti é marcado num minuto (evento `penalti`) e cobrado no minuto
+**Sons da partida (out/2026, `src/ui/sons.ts`):** apito, torcida e vaia sintetizados com Web Audio, narrador com a
+voz pt-BR do aparelho (`speechSynthesis`); nada baixado nem copiado. Apito no início e na volta do intervalo, 2 no
+intervalo, 3 no fim; no pênalti: apito, burburinho e "Pênalti!"; no gol, sem narrador (o usuário achou a voz
+robótica feia): gol do meu time = festa da torcida (`FESTA`, o som mais alto: ~−14 dB contra ~−16 dB do apito), gol do
+adversário = `vaia()` (16 vozes graves com vibrato nos formantes do "u", ~−18 dB); pênalti perdido: "uhhh". O pênalti é marcado num minuto (evento `penalti`) e cobrado no minuto
 seguinte (`PartidaViva.penaltiPendente`; o tempo não acaba antes da cobrança) e a partida espera 2,5 s antes da
 cobrança. No iPhone o som só sai depois de um toque (`liberarSom` em "Começar o jogo" e no ▶) e a chave do
 silencioso cala o apito e a torcida. Liga/desliga: botão de som na partida e Configurações → Sons da partida
-(`config.som`, opcional: falta = ligado). O R25 escuta os sons trocando `OscillatorNode.start`,
-`AudioBufferSourceNode.start` e `speechSynthesis.speak` no navegador de teste.
+(`config.som`, opcional: falta = ligado). Os testes (R25, R27; `escutarSons` em `tests/ajuda.ts`) escutam os sons
+trocando `OscillatorNode.start`, `AudioBufferSourceNode.start` e `speechSynthesis.speak` no navegador de teste, e
+anotam o volume de cada som (maior valor marcado nos ganhos por onde ele passa) e os sons do mesmo instante.
 
 **Copa do Brasil (out/2026, `src/engine/copa.ts`):** regulamento de 2026 com 126 clubes: 1ª fase com os 28 piores do
 ranking, 2ª com mais 74, 3ª com mais 4 (em 2026 os de verdade: Paysandu, Ponte Preta, Barra-SC, Confiança; depois, os

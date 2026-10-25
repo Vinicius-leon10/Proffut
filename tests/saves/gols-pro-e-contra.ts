@@ -1,6 +1,7 @@
-// Monta com o motor do jogo um jogo novo do clube pedido cuja primeira partida tem gol dele, e imprime
-// o save no formato de exportação (o teste R26 importa esse arquivo para ouvir o narrador).
-//   npx tsx tests/saves/gol-do-clube.ts chapecoense > save.json
+// Monta com o motor do jogo um jogo novo do clube pedido cuja primeira partida tem gol dele e gol do
+// adversário, e imprime o save no formato de exportação (o teste R27 importa esse arquivo para ouvir a
+// torcida comemorar e vaiar).
+//   npx tsx tests/saves/gols-pro-e-contra.ts flamengo > save.json
 import { avancar, novoJogo, prepararJogos } from "../../src/engine/jogo";
 import { simularAteOFim } from "../../src/engine/partida";
 import { exportarTexto } from "../../src/save/salvamento";
@@ -15,13 +16,14 @@ for (let semente = 1; semente <= 500 && !achou; semente++) {
   const meu = prepararJogos(ensaio).find((pv) => pv.lados.some((l) => l.clubeId === clube))!;
   const lado = meu.lados.findIndex((l) => l.clubeId === clube);
   simularAteOFim(meu, ensaio.jogadores);
-  if (meu.narracao.some((e) => (e.tipo === "gol" || e.tipo === "gol-penalti") && e.lado === lado)) {
+  const gols = meu.narracao.filter((e) => e.tipo === "gol" || e.tipo === "gol-penalti");
+  if (gols.some((e) => e.lado === lado) && gols.some((e) => e.lado !== lado)) {
     // Sem process.exit: numa saída por pipe o texto só sai inteiro se o processo terminar sozinho.
     process.stdout.write(exportarTexto(inicial));
     achou = true;
   }
 }
 if (!achou) {
-  console.error(`Nenhuma semente deu gol do ${clube} no primeiro jogo.`);
+  console.error(`Nenhuma semente deu gol do ${clube} e do adversário no primeiro jogo.`);
   process.exitCode = 1;
 }
