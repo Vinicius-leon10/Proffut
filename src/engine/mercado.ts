@@ -4,7 +4,7 @@ import { escalarAutomatico, forcaDoTime } from "./forca";
 import { lancar } from "./financas";
 import { gerarLivre, salarioBase, valorMercado } from "./gerador";
 import { rngPara } from "./rng";
-import type { EstadoJogo, Jogador, Posicao } from "./tipos";
+import type { EstadoJogo, Jogador, Mensagem, Posicao } from "./tipos";
 import { enviarMensagem } from "./mensagens";
 import { somarDias } from "./calendario";
 
@@ -160,6 +160,55 @@ export function responderProposta(estado: EstadoJogo, mensagemId: number, aceita
   transferir(estado, j, comprador.id, p.valor, estado.data);
   p.resolvida = "aceita";
   return { ok: true, texto: `${j.nome} foi vendido ao ${comprador.nome} por R$ ${p.valor.toLocaleString("pt-BR")}.` };
+}
+
+/**
+ * Até quanto o comprador topa pagar: entre 5% e 40% acima da primeira oferta (sorteado por proposta)
+ * e nunca mais do que tem em caixa. O usuário não vê esse número.
+ */
+export function limiteDaProposta(estado: EstadoJogo, m: Mensagem): number {
+  const p = m.proposta!;
+  const inicial = p.inicial ?? p.valor;
+  const fator = rngPara(estado.semente, `limite-proposta/${m.id}`).real(1.05, 1.4);
+  return Math.max(p.valor, Math.min(inicial * fator, estado.clubes[p.clubeId]?.caixa ?? 0));
+}
+
+const reais = (v: number) => `R$ ${v.toLocaleString("pt-BR")}`;
+
+/**
+ * O usuário pede mais do que a proposta. Até o limite do comprador, a venda sai pelo valor pedido.
+ * Um pouco acima (até 25%), na primeira vez, o comprador melhora a oferta até perto da metade do
+ * caminho; acima disso, ou insistindo acima do limite, ele desiste.
+ */
+export function pedirMais(estado: EstadoJogo, mensagemId: number, pedido: number): ResultadoNegocio {
+  const m = estado.mensagens.find((x) => x.id === mensagemId);
+  const p = m?.proposta;
+  if (!m || !p || p.resolvida) return { ok: false, texto: "Essa proposta não está mais valendo." };
+  const j = estado.jogadores[p.jogadorId];
+  if (j?.clubeId !== estado.tecnico.clubeId) { p.resolvida = "expirada"; return { ok: false, texto: "O jogador não está mais no seu clube." }; }
+  if (pedido <= p.valor) return { ok: false, texto: "Peça mais do que a oferta." };
+  if (!podeSair(estado, j)) return { ok: false, texto: "Não dá para vender: o elenco ficaria abaixo do mínimo na posição." };
+  const comprador = estado.clubes[p.clubeId];
+  const limite = limiteDaProposta(estado, m);
+  p.inicial ??= p.valor;
+  p.pedidos = (p.pedidos ?? 0) + 1;
+  if (pedido <= limite) {
+    transferir(estado, j, comprador.id, pedido, estado.data);
+    p.valor = pedido;
+    p.resolvida = "aceita";
+    m.texto = `O ${comprador.nome} pagou ${reais(pedido)} por ${j.nome}, o valor que você pediu.`;
+    return { ok: true, texto: `O ${comprador.nome} aceitou pagar ${reais(pedido)}. ${j.nome} foi vendido.` };
+  }
+  if (p.pedidos === 1 && pedido <= limite * 1.25) {
+    const nova = Math.floor((p.valor + (limite - p.valor) / 2) / 10_000) * 10_000;
+    if (nova <= p.valor) return { ok: true, texto: `O ${comprador.nome} não paga mais que ${reais(p.valor)}.` };
+    p.valor = nova;
+    m.texto = `O ${comprador.nome} subiu a oferta para ${reais(nova)} por ${j.nome}.`;
+    return { ok: true, texto: `O ${comprador.nome} não paga ${reais(pedido)}, mas subiu a oferta para ${reais(nova)}.` };
+  }
+  p.resolvida = "retirada";
+  m.texto = `O ${comprador.nome} achou caro demais e desistiu de ${j.nome}.`;
+  return { ok: true, texto: `O ${comprador.nome} achou caro demais e desistiu da proposta.` };
 }
 
 /** Janela de transferências: cada clube da IA tenta reforçar a posição mais fraca. */

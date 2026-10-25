@@ -15,6 +15,9 @@ export function Resultados({ partidas }: { partidas: Partida[] }) {
   return (
     <div className="tela-cheia">
       <Topo titulo="Resultados do dia" sub={atuais[0] ? formatarData(atuais[0].data, true) : ""} aoVoltar={fechar} />
+      <div className="linha" style={{ padding: "10px 16px", borderBottom: "1px solid var(--borda)" }}>
+        <button className="botao primario cheio" onClick={fechar}>Continuar</button>
+      </div>
       <div className="conteudo">
         {SERIES.map((s) => {
           const daSerie = atuais.filter((p) => p.serie === s);
@@ -26,7 +29,6 @@ export function Resultados({ partidas }: { partidas: Partida[] }) {
             </div>
           );
         })}
-        <button className="botao primario cheio" onClick={fechar}>Continuar</button>
       </div>
       {aberta && <FolhaPartida p={aberta} aoFechar={() => setAberta(null)} />}
     </div>

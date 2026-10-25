@@ -195,7 +195,16 @@ export interface Mensagem {
   texto: string;
   lida: boolean;
   /** Proposta de compra recebida por um jogador do usuário. */
-  proposta?: { jogadorId: number; clubeId: string; valor: number; validaAte: string; resolvida?: "aceita" | "recusada" | "expirada" };
+  proposta?: {
+    jogadorId: number;
+    clubeId: string;
+    valor: number;
+    validaAte: string;
+    resolvida?: "aceita" | "recusada" | "expirada" | "retirada";
+    /** Primeira oferta (guardada quando o usuário pede mais) e quantas vezes ele já pediu. */
+    inicial?: number;
+    pedidos?: number;
+  };
 }
 
 export interface Objetivo {

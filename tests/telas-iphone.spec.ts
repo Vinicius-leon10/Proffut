@@ -75,3 +75,26 @@ test("R15 os avisos não cobrem o topo da tela (título e botões)", async ({ pa
   await esperarInteiroNaTela(page, page.getByRole("button", { name: /^Mensagens/ }));
   await esperarInteiroNaTela(page, page.getByRole("button", { name: "Configurações" }));
 });
+
+test("R21 nos resultados do dia, o Continuar fica no alto da tela, sem precisar rolar", async ({ page }) => {
+  // Um clube da Série C não joga nas quartas-feiras das Séries A e B: nesses dias aparecem os resultados.
+  await novoJogo(page, { serie: "Série C", clube: "Brusque" });
+  const resultados = page.locator(".tela-cheia .topo .titulo", { hasText: "Resultados do dia" });
+  for (let i = 0; i < 10 && !(await resultados.isVisible()); i++) {
+    await botao(page, /Avançar|Ir para o jogo/).click();
+    const comecar = botao(page, "Começar o jogo");
+    await expect(comecar.or(resultados)).toBeVisible({ timeout: 15_000 });
+    if (await resultados.isVisible()) break;
+    await comecar.click();
+    await botao(page, "Fim ⏭").click();
+    await page.getByRole("button", { name: "Continuar", exact: true }).click();
+    await expect(page.getByRole("heading", { name: /^(Próximo jogo|Jogo de hoje)$/ })).toBeVisible({ timeout: 15_000 });
+  }
+  await expect(resultados).toBeVisible();
+  const continuar = page.getByRole("button", { name: "Continuar", exact: true });
+  await expect(continuar, "o Continuar aparece sem rolar a tela").toBeInViewport({ ratio: 1 });
+  const primeiroJogo = (await page.locator(".tela-cheia .conteudo button").first().boundingBox())!;
+  expect((await continuar.boundingBox())!.y, "o Continuar fica acima da lista de jogos").toBeLessThan(primeiroJogo.y);
+  await continuar.click();
+  await expect(resultados).toHaveCount(0);
+});
