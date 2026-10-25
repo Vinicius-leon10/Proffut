@@ -66,6 +66,8 @@ const CAMINHOS: Record<string, ReactNode> = {
   pausa: <><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" /><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" /></>,
   troca: <path d="M7 4v13l-3-3M17 20V7l3 3" />,
   busca: <><circle cx="11" cy="11" r="6.5" /><path d="M16 16l4 4" /></>,
+  som: <><path d="M4 9v6h4l5 4V5L8 9H4z" /><path d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12" /></>,
+  mudo: <><path d="M4 9v6h4l5 4V5L8 9H4z" /><path d="M17 9l5 6M22 9l-5 6" /></>,
 };
 
 export function Icone({ nome }: { nome: keyof typeof CAMINHOS | string }) {

@@ -133,6 +133,7 @@ export interface Clube {
 export type TipoEvento =
   | "gol"
   | "gol-penalti"
+  | "penalti"
   | "penalti-perdido"
   | "amarelo"
   | "vermelho"
@@ -251,6 +252,8 @@ export interface Tecnico {
 export interface Configuracoes {
   velocidade: 1 | 2;
   escalacaoAutomatica: boolean;
+  /** Sons da partida (apito, torcida e narrador). Falta nos saves antigos: ligados. */
+  som?: boolean;
 }
 
 export interface EstadoJogo {

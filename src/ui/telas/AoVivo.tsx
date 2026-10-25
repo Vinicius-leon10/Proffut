@@ -8,14 +8,17 @@ import type { Competicao, EstadoJogo, Estilo, EventoPartida, Formacao, Partida }
 import { NOME_COMPETICAO } from "../../engine/competicoes";
 import { Barra, Escudo, Folha, Icone, Opcoes, Pos, Segmentado } from "../componentes";
 import { rotuloPartida } from "../formatos";
+import { apito, liberarSom, pararSons, tocarLances } from "../sons";
 import { useJogo, useLoja } from "../store";
 
 const INTERVALO_MS: Record<1 | 2, number> = { 1: 700, 2: 340 };
+/** Pausa depois de um pênalti marcado, antes da cobrança (o narrador grita e a torcida reage). */
+const SUSPENSE_PENALTI_MS = 2500;
 
 function classeLance(e: EventoPartida): string {
   if (e.tipo === "gol" || e.tipo === "gol-penalti") return "lance gol";
   if (e.tipo === "vermelho") return "lance cartao-vermelho";
-  if (e.tipo === "intervalo" || e.tipo === "fim" || e.tipo === "lesao") return "lance destaque";
+  if (e.tipo === "intervalo" || e.tipo === "fim" || e.tipo === "lesao" || e.tipo === "penalti") return "lance destaque";
   return "lance";
 }
 
@@ -26,6 +29,7 @@ function prefixo(e: EventoPartida): string {
     case "vermelho": return "🟥 ";
     case "lesao": return "🩹 ";
     case "substituicao": return "🔁 ";
+    case "penalti": return "❗ ";
     default: return "";
   }
 }
@@ -53,18 +57,30 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   const [, setTick] = useState(0);
   const avisosVistos = useRef(0);
   const concluido = useRef(false);
+  const somLigado = estado.config.som !== false;
+  const som = useRef(somLigado);
+  som.current = somLigado;
+  const lancesOuvidos = useRef(0);
+  const suspense = useRef(0);
 
   const todasTerminadas = vivas.every((v) => v.terminada);
 
+  useEffect(() => () => pararSons(), []);
+
   const passo = useCallback(() => {
+    if (Date.now() < suspense.current) return;
     for (const pv of vivas) if (!pv.terminada) avancarMinuto(pv, estado.jogadores);
+    const novos = meu.narracao.slice(lancesOuvidos.current);
+    lancesOuvidos.current = meu.narracao.length;
+    if (novos.some((e) => e.tipo === "penalti")) suspense.current = Date.now() + SUSPENSE_PENALTI_MS;
+    if (som.current) tocarLances(novos, [estado.clubes[meu.lados[0].clubeId].nome, estado.clubes[meu.lados[1].clubeId].nome]);
     if (meu.avisos.length > avisosVistos.current) {
       avisar(meu.avisos[meu.avisos.length - 1]);
       avisosVistos.current = meu.avisos.length;
     }
     if (meu.intervalo) setPausado(true);
     setTick((t) => t + 1);
-  }, [vivas, estado.jogadores, meu, avisar]);
+  }, [vivas, estado.jogadores, estado.clubes, meu, avisar]);
 
   useEffect(() => {
     if (!iniciado || pausado || painel || todasTerminadas) return;
@@ -72,8 +88,34 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
     return () => clearInterval(t);
   }, [iniciado, pausado, painel, todasTerminadas, velocidade, passo]);
 
+  const comecar = () => {
+    if (som.current) {
+      liberarSom();
+      apito("inicio");
+    }
+    setIniciado(true);
+  };
+
+  const pausarOuSeguir = () => {
+    // Cada toque libera o som de novo (o iPhone pode travá-lo quando o app vai para o fundo).
+    if (som.current) liberarSom();
+    // Volta do intervalo: o árbitro apita o começo do segundo tempo.
+    if (pausado && meu.intervalo && som.current) apito("inicio");
+    setPausado(!pausado);
+  };
+
+  const alternarSom = () => {
+    estado.config.som = !somLigado;
+    if (somLigado) pararSons();
+    else liberarSom();
+    atualizar();
+  };
+
   const irAoFim = () => {
     for (const pv of vivas) simularAteOFim(pv, estado.jogadores);
+    // Os lances pulados não tocam; só o apito final.
+    lancesOuvidos.current = meu.narracao.length;
+    if (som.current) apito("fim");
     setIniciado(true);
     setTick((t) => t + 1);
   };
@@ -114,15 +156,18 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
       </div>
 
       {!iniciado ? (
-        <PreJogo vivas={vivas} meu={meu} meuLado={meuLado} regra={regraDoMataMata(estado, partida)} aoComecar={() => setIniciado(true)} aoAjustar={fechar} />
+        <PreJogo vivas={vivas} meu={meu} meuLado={meuLado} regra={regraDoMataMata(estado, partida)} aoComecar={comecar} aoAjustar={fechar} />
       ) : (
         <>
           <div className="linha" style={{ padding: "10px 16px", gap: 8, borderBottom: "1px solid var(--borda)" }}>
             {!todasTerminadas && (
-              <button className="icone-botao" style={{ background: "var(--cartao-2)", color: "var(--texto)" }} onClick={() => setPausado(!pausado)} aria-label={pausado ? "Continuar" : "Pausar"}>
+              <button className="icone-botao" style={{ background: "var(--cartao-2)", color: "var(--texto)" }} onClick={pausarOuSeguir} aria-label={pausado ? "Continuar" : "Pausar"}>
                 <Icone nome={pausado ? "play" : "pausa"} />
               </button>
             )}
+            <button className="icone-botao" style={{ background: "var(--cartao-2)", color: somLigado ? "var(--texto)" : "var(--texto-3)" }} onClick={alternarSom} aria-label={somLigado ? "Desligar o som" : "Ligar o som"}>
+              <Icone nome={somLigado ? "som" : "mudo"} />
+            </button>
             {!todasTerminadas && (
               <div className="cresce">
                 <Segmentado opcoes={[{ valor: "1", rotulo: "1x" }, { valor: "2", rotulo: "2x" }]} valor={String(velocidade) as "1" | "2"} aoMudar={(v) => setVelocidade(Number(v) as 1 | 2)} />

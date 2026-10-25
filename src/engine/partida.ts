@@ -49,6 +49,8 @@ export interface PartidaViva {
   avisos: string[];
   /** Campo neutro: ninguém tem a vantagem de jogar em casa. */
   neutro?: boolean;
+  /** Pênalti marcado esperando a cobrança, que sai no minuto seguinte (lado que vai cobrar). */
+  penaltiPendente?: 0 | 1;
   rng: Rng;
 }
 
@@ -287,7 +289,7 @@ function cobrarPenalti(pv: PartidaViva, iAtk: 0 | 1, jogadores: Jogadores) {
   let p = CONVERSAO_PENALTI;
   if (cobrador.caracteristicas.includes("FIN")) p += 0.05;
   if (goleiro?.caracteristicas.includes("PEN")) p -= 0.12;
-  registrar(pv, { tipo: "chance", lado: iAtk, texto: `PÊNALTI! ${cobrador.nome} ajeita a bola para a cobrança...` });
+  registrar(pv, { tipo: "chance", lado: iAtk, texto: `${cobrador.nome} ajeita a bola na marca do pênalti...` });
   if (rng.chance(p)) {
     marcarGol(pv, iAtk, cobrador, undefined, "gol-penalti", `GOL! ${cobrador.nome} cobra com categoria e converte o pênalti.`);
   } else {
@@ -331,7 +333,9 @@ function falta(pv: PartidaViva, iAtk: 0 | 1, atk: Setores, def: Setores, jogador
 
   const narrar = rng.chance(0.3);
   if (rng.chance(PROB_PENALTI_FALTA)) {
-    cobrarPenalti(pv, iAtk, jogadores);
+    // Marcado agora, cobrado no minuto seguinte (dá tempo de o narrador gritar e a torcida reagir).
+    registrar(pv, { tipo: "penalti", lado: iAtk, jogador: autor.id, texto: `PÊNALTI! ${autor.nome} derruba o adversário dentro da área.` });
+    pv.penaltiPendente = iAtk;
   } else {
     const comCartao = pv.narracao.some((e) => e.min === formatarMinuto(pv) && (e.tipo === "amarelo" || e.tipo === "vermelho"));
     if (narrar && !comCartao && pv.lados[iAtk].emCampo.length) {
@@ -502,7 +506,11 @@ export function avancarMinuto(pv: PartidaViva, jogadores: Jogadores): EventoPart
     for (const i of [0, 1] as const) if (!pv.lados[i].controlado) taticaDaIa(pv, i);
   }
 
-  if (pv.rng.chance(CHANCE_EVENTO)) {
+  if (pv.penaltiPendente !== undefined) {
+    const lado = pv.penaltiPendente;
+    pv.penaltiPendente = undefined;
+    cobrarPenalti(pv, lado, jogadores);
+  } else if (pv.rng.chance(CHANCE_EVENTO)) {
     const sM = setoresDoLado(mandante, jogadores, !pv.neutro);
     const sV = setoresDoLado(visitante, jogadores, false);
     const casaAtaca = pv.rng.chance(disputa(sM.meio, sV.meio, 2));
@@ -523,7 +531,8 @@ export function avancarMinuto(pv: PartidaViva, jogadores: Jogadores): EventoPart
   }
 
   const fimDoTempo = pv.tempo === 1 ? 45 + pv.acrescimo[0] : 90 + pv.acrescimo[1];
-  if (pv.minuto >= fimDoTempo) {
+  // Com pênalti marcado, o árbitro espera a cobrança para encerrar o tempo.
+  if (pv.minuto >= fimDoTempo && pv.penaltiPendente === undefined) {
     if (pv.tempo === 1) {
       pv.intervalo = true;
       registrar(pv, { tipo: "intervalo", lado: 0, texto: `Fim do primeiro tempo: ${mandante.gols} x ${visitante.gols}.` });

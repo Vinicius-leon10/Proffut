@@ -55,6 +55,16 @@ export function Config() {
           />
         </Cartao>
 
+        <Cartao titulo="Sons da partida">
+          <p className="pequeno fraco" style={{ marginBottom: 8 }}>Apito do árbitro, torcida e narrador no gol e no pênalti</p>
+          <Opcoes
+            opcoes={[{ valor: "ligados", rotulo: "Ligados" }, { valor: "desligados", rotulo: "Desligados" }]}
+            valor={estado.config.som === false ? "desligados" : "ligados"}
+            aoMudar={(v) => { estado.config.som = v === "ligados"; atualizar(); }}
+          />
+          <p className="mini muito-fraco" style={{ marginTop: 8 }}>No iPhone, com a chave do silencioso ligada, o apito e a torcida não tocam.</p>
+        </Cartao>
+
         <Cartao titulo="Salvar">
           <p className="pequeno fraco" style={{ marginBottom: 8 }}>
             O jogo salva sozinho no aparelho a cada ação. Use os espaços para guardar momentos da carreira.
