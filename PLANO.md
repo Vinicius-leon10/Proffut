@@ -349,7 +349,7 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
 - Histórico, recordes e conquistas.
 
 ### Fase 5 · Polimento e divulgação do site (3–4 semanas)
-- Tutorial rápido (primeiros 5 minutos), ícone, identidade visual, sons.
+- Tutorial rápido (primeiros 5 minutos), ícone, ✅ identidade visual (out/2026: visual claro "opção 3", o design system que o usuário mandou), ✅ sons.
 - Desempenho em celular simples, acessibilidade (tamanho de fonte, contraste, leitor de tela).
 - Domínio próprio (opcional) e divulgação em comunidades de jogos de técnico.
 

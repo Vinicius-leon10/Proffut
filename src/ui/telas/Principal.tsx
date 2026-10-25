@@ -29,7 +29,7 @@ export function Principal() {
   return (
     <div className="app">
       <header className="topo">
-        <Escudo clube={clube} tamanho={36} />
+        <Escudo clube={clube} tamanho={44} />
         <div className="cresce">
           <div className="titulo corta">{clube.nome}</div>
           <div className="sub corta">

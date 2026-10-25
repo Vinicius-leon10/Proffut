@@ -55,7 +55,7 @@ export function NovoJogo() {
           {clubes.map((f) => {
             const forca = forcaEstimada(f);
             return (
-              <button key={f.id} className="item" onClick={() => setEscolhido(f.id)} style={escolhido === f.id ? { background: "#1d2a10", borderRadius: 10 } : undefined}>
+              <button key={f.id} className="item" onClick={() => setEscolhido(f.id)} style={escolhido === f.id ? { background: "var(--destaque)", borderRadius: 10 } : undefined}>
                 <Escudo clube={f} tamanho={36} />
                 <div className="cresce">
                   <div className="negrito corta">{f.nome}</div>

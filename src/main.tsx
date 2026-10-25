@@ -4,6 +4,8 @@ import { registerSW } from "virtual:pwa-register";
 import App from "./ui/App";
 import { useLoja } from "./ui/store";
 import { ocuparTelaInteira } from "./ui/telaInteira";
+// Letra serifada dos títulos (só o alfabeto latino, que tem os acentos do português), guardada com o app.
+import "@fontsource/dm-serif-display/latin-400.css";
 import "./ui/estilo.css";
 
 ocuparTelaInteira();

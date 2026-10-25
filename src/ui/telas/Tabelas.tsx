@@ -7,7 +7,7 @@ import type { Competicao, FaseCopa, Partida, SerieId } from "../../engine/tipos"
 import { Escudo, Folha, Opcoes, Segmentado } from "../componentes";
 import { useJogo, useLoja } from "../store";
 
-const COR_ZONA = { titulo: "var(--amarelo)", acesso: "var(--verde)", playoff: "var(--azul)", classifica: "var(--azul)", rebaixamento: "var(--vermelho)" } as const;
+const COR_ZONA = { titulo: "var(--dourado)", acesso: "var(--esmeralda)", playoff: "var(--azul)", classifica: "var(--azul)", rebaixamento: "var(--vermelho)" } as const;
 
 function TabelaClassificacao({ linhas, serie, zonas = true }: { linhas: LinhaTabela[]; serie: SerieId; zonas?: boolean }) {
   const estado = useJogo();

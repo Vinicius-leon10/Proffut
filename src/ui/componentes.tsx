@@ -159,7 +159,7 @@ export function Opcoes<T extends string>({ opcoes, valor, aoMudar }: { opcoes: {
 
 export function Barra({ valor, cor }: { valor: number; cor?: string }) {
   const v = Math.max(0, Math.min(100, valor));
-  const c = cor ?? (v >= 70 ? "var(--verde)" : v >= 45 ? "var(--amarelo)" : "var(--vermelho)");
+  const c = cor ?? (v >= 70 ? "var(--esmeralda)" : v >= 45 ? "var(--dourado)" : "var(--vermelho)");
   return <div className="barra" role="meter" aria-valuenow={Math.round(v)} aria-valuemin={0} aria-valuemax={100}><div style={{ width: `${v}%`, background: c }} /></div>;
 }
 

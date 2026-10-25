@@ -52,7 +52,7 @@ export function Painel() {
         {proximo && adversario ? (
           <div className="coluna">
             <div className="pequeno fraco">{rotuloPartida(proximo)} · {formatarData(proximo.data)}</div>
-            <div className="linha" style={{ justifyContent: "space-around", padding: "6px 0" }}>
+            <div className="linha" style={{ justifyContent: "space-around", alignItems: "flex-start", padding: "6px 0" }}>
               {[proximo.mandante, proximo.visitante].map((id, i) => (
                 <div key={id} className="coluna" style={{ alignItems: "center", gap: 4, width: "40%" }}>
                   {id === meuId ? <Escudo clube={estado.clubes[id]} tamanho={52} /> : (

@@ -42,7 +42,19 @@ Pronto e publicado: partida ao vivo, tática, elenco, mercado, finanças, estád
 virada de temporada sem fim, rebaixamento para a Série D com propostas de emprego, checagem automática no app,
 elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, escudos dos
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
-placar), testes de ponta a ponta R01–R30 rodando a cada mudança, antes de publicar e todo dia no site publicado.
+placar), visual claro "opção 3", testes de ponta a ponta R01–R31 rodando a cada mudança, antes de publicar e todo dia
+no site publicado.
+
+**Visual "opção 3" (out/2026, `src/ui/estilo.css`):** design system que o usuário mandou (pacote
+`proffut-design-system-opcao-3.zip`, "Aplique"): editorial claro. Tokens no `:root`: `--fundo` marfim `#f3f3ec`,
+`--cartao` `#fbfbf7`, `--floresta` `#143826` (topo, abas, segmento escolhido, aviso), `--dourado` `#f5c72c` (botão
+principal, aba ativa, filtro escolhido), `--esmeralda` `#34b777` (barras), texto `#10221a`/`#55645b`/`#627067`.
+`--verde`, `--amarelo`, `--vermelho` e `--azul` são cores de TEXTO sobre o claro (contraste ≥ 4,5:1); para fundo e
+barra use `--esmeralda`/`--dourado`. Títulos de página e de folha (`h1`, `h2`, `.topo .titulo`) em DM Serif Display
+(`@fontsource/dm-serif-display`, só o latino, guardada pelo service worker); o resto na letra do sistema. O campinho
+continua verde com as cores claras nos números (fixas no CSS). A barra de status do app no iPhone é
+`black-translucent` (letras brancas): por isso o topo é verde-floresta e `body::before` pinta uma faixa verde atrás
+dela em toda tela (o início não tem topo). As referências do pacote ficam fora do git.
 
 **Sons da partida (out/2026, `src/ui/sons.ts`):** apito, torcida e vaia sintetizados com Web Audio, narrador com a
 voz pt-BR do aparelho (`speechSynthesis`); nada baixado nem copiado. Apito no início e na volta do intervalo, 2 no
@@ -105,7 +117,7 @@ npm test            # testes do motor (vitest, src/engine/motor.test.ts)
 npm run build       # verificação de tipos (tsc) + site em dist/
 npm run test:e2e    # testes de ponta a ponta com tela de iPhone (Playwright, pasta tests/; precisa do build)
 npm run sim         # simula temporadas; use depois de mexer em constantes.ts
-npm run capturas    # captura cada tela jogando (tools/e2e/capturas/, fora do git)
+npm run capturas    # captura cada tela jogando (tools/e2e/capturas/, fora do git; precisa do vite preview na 4173)
 ```
 
 Testar o site publicado: `BASE_URL=https://vinicius-leon10.github.io/Proffut/ npm run test:e2e` (daqui não dá: a rede
@@ -140,7 +152,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `checagem.ts` | `checarEstado`, `repararEstado`, `testarPartida` (roda sozinha ao abrir um jogo) |
 | `motor.test.ts` | Testes do motor |
 | `src/save/` | `salvamento.ts`: IndexedDB (`proffut`/`saves`, chaves `jogo:auto`, `resumo:auto`...), exportar/importar `.json`. `aparelho.ts`: checagem do aparelho. `escudos.ts`: escudos importados pelo usuário, que trocam os do jogo só no aparelho (chave `escudos`, id do clube → imagem) |
-| `src/ui/` | React + Zustand. `store.ts` (estado, telas sobrepostas, salvamento 400 ms após cada mudança), `acoes.ts`, `componentes.tsx`, `estilo.css`, `sons.ts` (apito, torcida, narrador), `telas/*.tsx` |
+| `src/ui/` | React + Zustand. `store.ts` (estado, telas sobrepostas, salvamento 400 ms após cada mudança), `acoes.ts`, `componentes.tsx`, `estilo.css` (visual "opção 3": tokens no `:root`), `sons.ts` (apito, torcida, narrador), `telas/*.tsx` |
 | `tests/` | Testes de ponta a ponta R01…: `*.spec.ts`, passos comuns em `ajuda.ts`, relatório em português em `resumo.ts`, lista em `README.md` |
 | `public/escudos/` | Os 156 escudos dos clubes (`<id>.png`), recortados da prancha que o usuário mandou; o service worker guarda para jogar sem internet |
 | `data/brasil-2026/` | `clubes.json` (60), `serie-d-reserva.json` (96), `competicoes.json`, `jogadores.json` (elencos reais, gerado por `tools/elencos`), `LEIAME.md` (fontes e licenças) |
@@ -169,7 +181,12 @@ Obras do estádio se pagam em 3 a 4 temporadas.
 - Testes: botões com `exact: true` ("Voltar", "Continuar"), títulos por `getByRole("heading")`, buscas dentro de
   `.tela-cheia` ou do `dialog`; para esperar o salvamento use `esperarSalvar` (não `waitForTimeout`).
 - GitHub Actions: usar `actions/*@v7` e Node 22 (Node 20 foi removido do Actions).
-- Ao rodar comandos, não use `pkill` genérico (já derrubou o próprio terminal).
+- Ao rodar comandos, não use `pkill` genérico (já derrubou o próprio terminal). Nem `pgrep -f "<texto>"` seguido
+  de `kill`: o próprio terminal tem o texto na linha de comando. Guarde o PID ao abrir o processo (`$!`).
+- `esperarInteiroNaTela` rola o elemento até o meio da área com rolagem: com o topo de altura fracionada, parar na
+  beirada deixava 0,4 px de fora (rolagem em pixels inteiros) sem esconder nada.
+- Visual claro: nunca usar `--dourado`/`--esmeralda` como cor de texto sobre fundo claro (some); o R31 confere as
+  cores principais e o contraste.
 - Texto com nome de clube: nunca "o ${clube.nome}" fixo; use `comArtigo` e `concorda` (`artigos.ts`): Chapecoense,
   Ponte Preta, Ferroviária, Inter de Limeira, Portuguesa, Tuna Luso, Aparecidense e Juazeirense são "a" (R26).
   Nome de estádio vai sem artigo ("Arena Condá agora tem...").

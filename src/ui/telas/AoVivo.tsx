@@ -161,7 +161,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
           </div>
           <div className="time">{escudoNoPlacar(1, clubeV)}<span className="corta" style={{ maxWidth: "100%" }}>{clubeV.nome}</span></div>
         </div>
-        <div style={{ marginTop: 10 }}><Barra valor={progresso} cor="var(--amarelo)" /></div>
+        <div style={{ marginTop: 10 }}><Barra valor={progresso} cor="var(--dourado)" /></div>
       </div>
 
       {!iniciado ? (

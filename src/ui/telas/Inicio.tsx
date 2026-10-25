@@ -79,7 +79,7 @@ export function Inicio() {
         </button>
       )}
 
-      <button className="botao grande cheio primario" onClick={() => irParaTela("novo")} style={auto ? { background: "var(--cartao-2)", color: "var(--texto)", border: "1px solid var(--borda)" } : undefined}>
+      <button className={`botao grande cheio ${auto ? "floresta" : "primario"}`} onClick={() => irParaTela("novo")}>
         Novo jogo
       </button>
 

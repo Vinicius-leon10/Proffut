@@ -185,7 +185,7 @@ export function Tatica() {
           {setores.map((x) => (
             <div key={x.nome}>
               <div className="linha entre pequeno"><span>{x.nome}</span><span className="num negrito">{Math.round(x.valor)}</span></div>
-              <Barra valor={x.valor} cor="var(--azul)" />
+              <Barra valor={x.valor} cor="var(--esmeralda)" />
             </div>
           ))}
         </div>

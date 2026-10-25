@@ -158,7 +158,9 @@ export async function mexerNoSave(page: Page, codigo: string) {
  * e nada está por cima dele.
  */
 export async function esperarInteiroNaTela(page: Page, alvo: Locator) {
-  await alvo.scrollIntoViewIfNeeded();
+  // Rola até o elemento ficar no meio da área com rolagem, quando dá. Parado na beirada, a rolagem em pixels
+  // inteiros pode deixar uma fração de pixel de fora sem esconder nada (a altura do topo é fracionada).
+  await alvo.evaluate((el) => el.scrollIntoView({ block: "center", inline: "nearest" }));
   const caixa = await alvo.boundingBox();
   const tela = page.viewportSize();
   expect(caixa, "o elemento não está na tela").not.toBeNull();
