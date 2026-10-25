@@ -112,3 +112,34 @@ test("R23 logo depois de um jogo, o aviso do placar não cobre o Continuar dos r
   await expect(resultados).toBeVisible();
   await esperarInteiroNaTela(page, page.getByRole("button", { name: "Continuar", exact: true }));
 });
+
+test("R33 no app do iPhone a tela desce: o topo e o placar começam com folga embaixo da hora e da bateria", async ({ page }) => {
+  // Imita a barra de status de um iPhone com Dynamic Island (área segura de 59 px no topo).
+  const BARRA = 59;
+  await page.addInitScript((barra) => {
+    document.addEventListener("DOMContentLoaded", () => {
+      const estilo = document.createElement("style");
+      estilo.textContent = `:root { --topo: ${barra}px !important; }`;
+      document.head.appendChild(estilo);
+    });
+  }, BARRA);
+  const FOLGA = 20;
+  const comeco = async (alvo: Locator) => (await alvo.boundingBox())!.y;
+  const fim = async (alvo: Locator) => { const c = (await alvo.boundingBox())!; return c.y + c.height; };
+
+  await novoJogo(page);
+  // Painel: escudo e nome do clube começam pelo menos 20 px abaixo da barra.
+  expect(await comeco(page.locator(".topo .escudo").first()), "escudo do topo").toBeGreaterThanOrEqual(BARRA + FOLGA);
+  expect(await comeco(page.locator(".topo .titulo").first()), "nome do clube").toBeGreaterThanOrEqual(BARRA + FOLGA);
+  // O aviso continua logo abaixo do topo, sem cobrir nada.
+  await aba(page, "Tática");
+  await page.getByRole("button", { name: "Escalar automático" }).click();
+  await expect(page.locator(".aviso")).toBeVisible();
+  expect(await comeco(page.locator(".aviso")), "aviso abaixo do topo").toBeGreaterThanOrEqual(await fim(page.locator(".topo").first()));
+
+  // Partida: o rótulo do jogo ("Série B · 1ª rodada") também começa com folga.
+  await aba(page, "Clube");
+  await page.getByRole("button", { name: /Avançar|Ir para o jogo/ }).first().click();
+  await expect(page.getByRole("button", { name: "Começar o jogo" })).toBeVisible({ timeout: 15_000 });
+  expect(await comeco(page.locator(".placar > div").first()), "rótulo do placar").toBeGreaterThanOrEqual(BARRA + FOLGA);
+});

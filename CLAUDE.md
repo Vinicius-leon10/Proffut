@@ -42,7 +42,7 @@ Pronto e publicado: partida ao vivo, tática, elenco, mercado, finanças, estád
 virada de temporada sem fim, rebaixamento para a Série D com propostas de emprego, checagem automática no app,
 elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, escudos dos
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
-placar), visual claro "opção 3", testes de ponta a ponta R01–R32 rodando a cada mudança, antes de publicar e todo dia
+placar), visual claro "opção 3", testes de ponta a ponta R01–R33 rodando a cada mudança, antes de publicar e todo dia
 no site publicado.
 
 **Visual "opção 3" (out/2026, `src/ui/estilo.css`):** design system que o usuário mandou (pacote
@@ -57,8 +57,9 @@ da bateria pela página, não pela meta `black-translucent`: com a página clara
 branca por cima do topo verde (captura do usuário, "Ajuste esse topo"). Por isso a página se declara escura
 (`color-scheme: dark` no `:root`, `html`/`body` verde-floresta) e as telas pintam o marfim por cima (`.app`,
 `.tela-cheia`, `.inicio`); campos (`input`, `select`) com `color-scheme: light`; o topo é verde-floresta e
-`body::before` pinta uma faixa verde atrás da hora em toda tela (o início não tem topo). R32. As referências do pacote
-ficam fora do git.
+`body::before` pinta uma faixa verde atrás da hora em toda tela (o início não tem topo). R32. No app do iPhone o
+topo e o placar descem mais 16 px (`--folga: min(var(--topo), 16px)`; o aviso desce junto): colados na barra, ficavam
+"sobrepostos no topo" (R33). No navegador `--topo` é 0 e nada muda. As referências do pacote ficam fora do git.
 
 **Sons da partida (out/2026, `src/ui/sons.ts`):** apito, torcida e vaia sintetizados com Web Audio, narrador com a
 voz pt-BR do aparelho (`speechSynthesis`); nada baixado nem copiado. Apito no início e na volta do intervalo, 2 no
