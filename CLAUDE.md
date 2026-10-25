@@ -42,7 +42,7 @@ Pronto e publicado: partida ao vivo, tática, elenco, mercado, finanças, estád
 virada de temporada sem fim, rebaixamento para a Série D com propostas de emprego, checagem automática no app,
 elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, escudos dos
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
-placar), visual claro "opção 3", testes de ponta a ponta R01–R31 rodando a cada mudança, antes de publicar e todo dia
+placar), visual claro "opção 3", testes de ponta a ponta R01–R32 rodando a cada mudança, antes de publicar e todo dia
 no site publicado.
 
 **Visual "opção 3" (out/2026, `src/ui/estilo.css`):** design system que o usuário mandou (pacote
@@ -52,9 +52,13 @@ principal, aba ativa, filtro escolhido), `--esmeralda` `#34b777` (barras), texto
 `--verde`, `--amarelo`, `--vermelho` e `--azul` são cores de TEXTO sobre o claro (contraste ≥ 4,5:1); para fundo e
 barra use `--esmeralda`/`--dourado`. Títulos de página e de folha (`h1`, `h2`, `.topo .titulo`) em DM Serif Display
 (`@fontsource/dm-serif-display`, só o latino, guardada pelo service worker); o resto na letra do sistema. O campinho
-continua verde com as cores claras nos números (fixas no CSS). A barra de status do app no iPhone é
-`black-translucent` (letras brancas): por isso o topo é verde-floresta e `body::before` pinta uma faixa verde atrás
-dela em toda tela (o início não tem topo). As referências do pacote ficam fora do git.
+continua verde com as cores claras nos números (fixas no CSS). **Topo no iPhone:** o iPhone escolhe a cor da hora e
+da bateria pela página, não pela meta `black-translucent`: com a página clara ele punha letras pretas e uma névoa
+branca por cima do topo verde (captura do usuário, "Ajuste esse topo"). Por isso a página se declara escura
+(`color-scheme: dark` no `:root`, `html`/`body` verde-floresta) e as telas pintam o marfim por cima (`.app`,
+`.tela-cheia`, `.inicio`); campos (`input`, `select`) com `color-scheme: light`; o topo é verde-floresta e
+`body::before` pinta uma faixa verde atrás da hora em toda tela (o início não tem topo). R32. As referências do pacote
+ficam fora do git.
 
 **Sons da partida (out/2026, `src/ui/sons.ts`):** apito, torcida e vaia sintetizados com Web Audio, narrador com a
 voz pt-BR do aparelho (`speechSynthesis`); nada baixado nem copiado. Apito no início e na volta do intervalo, 2 no
@@ -186,7 +190,8 @@ Obras do estádio se pagam em 3 a 4 temporadas.
 - `esperarInteiroNaTela` rola o elemento até o meio da área com rolagem: com o topo de altura fracionada, parar na
   beirada deixava 0,4 px de fora (rolagem em pixels inteiros) sem esconder nada.
 - Visual claro: nunca usar `--dourado`/`--esmeralda` como cor de texto sobre fundo claro (some); o R31 confere as
-  cores principais e o contraste.
+  cores principais e o contraste. Não declarar a página clara (`color-scheme: light` no `:root` ou fundo claro no
+  `html`/`body`): no iPhone a hora fica preta e uma névoa branca cobre o topo (R32); tela nova pinta o próprio fundo.
 - Texto com nome de clube: nunca "o ${clube.nome}" fixo; use `comArtigo` e `concorda` (`artigos.ts`): Chapecoense,
   Ponte Preta, Ferroviária, Inter de Limeira, Portuguesa, Tuna Luso, Aparecidense e Juazeirense são "a" (R26).
   Nome de estádio vai sem artigo ("Arena Condá agora tem...").

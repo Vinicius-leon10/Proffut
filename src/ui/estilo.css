@@ -31,7 +31,10 @@
   --base: env(safe-area-inset-bottom, 0px);
   /* Altura da tela. No modo app do iPhone vem medida em telaInteira.ts (teste R18). */
   --altura: 100dvh;
-  color-scheme: light;
+  /* Para o iPhone a página é escura (esquema escuro e fundo verde-floresta por trás das telas): assim ele
+     mostra a hora e a bateria em branco sobre o topo verde. Com a página clara ele punha letras pretas e uma
+     névoa branca por cima do topo (R32). As telas pintam o marfim por cima; os campos ficam claros. */
+  color-scheme: dark;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.4;
@@ -44,11 +47,10 @@
 /* A página nunca rola inteira: cada tela tem a sua área com rolagem. Assim o topo fica
    fixo e nada fica escondido atrás das barras do Safari no iPhone. */
 html.app-iphone { --altura: var(--altura-app); }
-html, body { height: 100%; height: var(--altura); margin: 0; overflow: hidden; }
+html, body { height: 100%; height: var(--altura); margin: 0; overflow: hidden; background: var(--floresta); }
 #root { height: 100%; height: var(--altura); }
 
 body {
-  background: var(--fundo);
   color: var(--texto);
   overscroll-behavior: none;
   -webkit-font-smoothing: antialiased;
@@ -71,6 +73,7 @@ button, input, select { font: inherit; color: inherit; }
 button { cursor: pointer; border: 0; background: none; padding: 0; }
 button:disabled { opacity: 0.45; cursor: default; }
 input, select {
+  color-scheme: light;
   background: #fff;
   border: 1px solid var(--borda);
   border-radius: 12px;
@@ -112,6 +115,7 @@ p { margin: 0; }
 .app {
   height: 100%;
   height: var(--altura);
+  background: var(--fundo);
   display: flex;
   flex-direction: column;
   max-width: 560px;

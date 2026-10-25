@@ -27,7 +27,7 @@ const serifada = async (l: Locator) => (await estilo(l, "font-family")).includes
 test("R31 visual claro da opção 3: fundo marfim, topo e abas verde-floresta, dourado na ação principal, títulos serifados, campinho verde", async ({ page }) => {
   await novoJogo(page);
   const corpo = page.locator("body");
-  const fundo = await cor(corpo, "background-color");
+  const fundo = await cor(page.locator(".app"), "background-color");
   expect(luz(fundo), "fundo marfim (claro)").toBeGreaterThan(0.8);
   // A faixa da barra de status do iPhone fica verde-floresta (a hora e a bateria são brancas).
   expect(verdeFloresta(await cor(corpo, "background-color", "::before")), "faixa da barra de status").toBe(true);
@@ -72,4 +72,25 @@ test("R31 visual claro da opção 3: fundo marfim, topo e abas verde-floresta, d
   expect(await serifada(page.locator("main h2").first()), "título da página serifado").toBe(true);
   const campo = await cor(page.locator("main .campo"), "background-color");
   expect(campo[1] - campo[0] > 40 && campo[1] - campo[2] > 20, "campinho verde").toBe(true);
+});
+
+test("R32 topo no iPhone: a página se declara escura (hora e bateria brancas sobre o verde), com as telas em marfim por cima", async ({ page }) => {
+  await novoJogo(page);
+  // O iPhone escolhe a cor da hora e da bateria pela página: escura dá letras brancas, sem névoa clara no topo.
+  const raiz = page.locator("html");
+  expect(await estilo(raiz, "color-scheme"), "página escura para o iPhone").toBe("dark");
+  expect(verdeFloresta(await cor(raiz, "background-color")), "fundo da página por trás das telas").toBe(true);
+  expect(verdeFloresta(await cor(page.locator("body"), "background-color"))).toBe(true);
+  // As telas continuam em marfim por cima, e os campos (busca e filtros do mercado) continuam claros.
+  expect(luz(await cor(page.locator(".app"), "background-color")), "tela em marfim").toBeGreaterThan(0.8);
+  await aba(page, "Mercado");
+  expect(await estilo(page.locator("main select").first(), "color-scheme"), "filtro claro").toBe("light");
+  expect(await estilo(page.locator("main input").first(), "color-scheme"), "busca clara").toBe("light");
+
+  // Na partida: o placar verde-floresta vai até a barra de status, o resto da tela em marfim.
+  await aba(page, "Clube");
+  await page.getByRole("button", { name: /Avançar|Ir para o jogo/ }).first().click();
+  await expect(page.getByRole("button", { name: "Começar o jogo" })).toBeVisible({ timeout: 15_000 });
+  expect(verdeFloresta(await cor(page.locator(".placar"), "background-color")), "placar verde").toBe(true);
+  expect(luz(await cor(page.locator(".tela-cheia"), "background-color")), "partida em marfim").toBeGreaterThan(0.8);
 });
