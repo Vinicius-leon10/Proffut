@@ -1,15 +1,15 @@
 import { execFileSync } from "node:child_process";
-import { abrirSite, agora, botao, cartaoDoProximoJogo, esperarSalvar, expect, irParaOMeuJogo, mexerNoSave, novoJogo, test } from "./ajuda";
+import { abrirSite, agora, botao, cartaoDoProximoJogo, esperarSalvar, expect, irParaOMeuJogo, test } from "./ajuda";
 
 const nomeNoTopo = (page: import("@playwright/test").Page) => page.locator(".topo .titulo").first();
 
 test("R36 demissão: com a diretoria sem paciência, uma derrota demite o técnico; ele escolhe uma das propostas e assume o novo clube", async ({ page }) => {
-  await novoJogo(page); // Ponte Preta
-  // Diretoria quase sem paciência, técnico no clube há tempo e um time sem força para ganhar.
-  await mexerNoSave(page, `
-    estado.tecnico.confiancaDiretoria = 21;
-    estado.tecnico.desde = "2025-01-01";
-    for (const j of Object.values(estado.jogadores)) if (j.clubeId === estado.tecnico.clubeId) j.forca = 5;`);
+  // Jogo montado pelo motor: diretoria quase sem paciência, técnico no clube há tempo e um time sem força para ganhar.
+  // A semente é fixa para o primeiro jogo ser uma derrota (num jogo novo sorteado, às vezes dava empate fora de casa).
+  const save = execFileSync("npx", ["tsx", "tests/saves/diretoria-sem-paciencia.ts"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  await abrirSite(page);
+  await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
+  await expect(cartaoDoProximoJogo(page)).toBeVisible();
   await irParaOMeuJogo(page);
   await botao(page, "Começar o jogo").click();
   await botao(page, "Fim ⏭").click();
