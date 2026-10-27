@@ -43,13 +43,12 @@ virada de temporada sem fim, rebaixamento para a Série D com propostas de empre
 elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, escudos dos
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
 placar), visual claro "opção 3", estatísticas da partida com aviso de pressão, demissão e convites de clubes maiores
-(reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, testes de ponta a ponta
-R01–R40 rodando a cada mudança, antes de publicar e todo dia no site publicado.
+(reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
+testes de ponta a ponta R01–R41 rodando a cada mudança, antes de publicar e todo dia no site publicado.
 
 **Pedido em andamento (out/2026):** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão (1) e
-convites (2), contratos (4), empréstimos (5) e batedor/capitão (7) prontos; faltam nota de cada jogador e melhor em
-campo (8), sala de troféus e recordes (16) e tutorial rápido (19), nessa ordem, cada um publicado quando os testes
-passarem.
+convites (2), contratos (4), empréstimos (5), batedor/capitão (7) e notas (8) prontos; faltam sala de troféus e
+recordes (16) e tutorial rápido (19), nessa ordem, cada um publicado quando os testes passarem.
 
 **Visual "opção 3" (out/2026, `src/ui/estilo.css`):** design system que o usuário mandou (pacote
 `proffut-design-system-opcao-3.zip`, "Aplique"): editorial claro. Tokens no `:root`: `--fundo` marfim `#f3f3ec`,
@@ -133,6 +132,15 @@ ordem é a de antes (resultados iguais). O capitão é só da tela: `capitaoDoTi
 titular, senão o titular mais experiente (jogos na carreira); braçadeira "C" (`.vaga .capitao`) no campinho da
 Tática e no time titular do adversário. Escolha de quem saiu do clube conta como automático. R40.
 
+**Notas dos jogadores (out/2026, `src/engine/notas.ts`):** `notasDaPartida` dá a nota (3 a 10, uma casa) de quem entrou,
+pelos lances narrados (gol, passe, chute no gol/fora, defesa e pênalti defendido do goleiro, cartões, pênalti perdido
+ou cometido), gols sofridos e jogo sem sofrer gol (goleiro e defensores), o placar, a força perto da média da partida e
+uma variação com sorteio próprio (`notas/<partida>/<jogador>`: placar e lances não mudam). Minutos pela narração
+(trocas, vermelho, lesão; no máximo 90); quem jogou menos que o tempo até ali (máx. 60) fica perto da base. Melhor em
+campo: maior nota com 30+ minutos. Ao vivo na aba Notas da partida; no fim de cada jogo (todos os jogos) a nota entra
+em `EstatisticasJogador.notas`/`avaliados` (média na ficha, coluna Nota) e `Partida.melhor`. Números em `NOTAS`
+(constantes.ts): média ~6,75, melhor em campo ~8,4, quem fez gol ~7,9, quem perdeu ~6,3. R41.
+
 **Copa do Brasil (out/2026, `src/engine/copa.ts`):** regulamento de 2026 com 126 clubes: 1ª fase com os 28 piores do
 ranking, 2ª com mais 74, 3ª com mais 4 (em 2026 os de verdade: Paysandu, Ponte Preta, Barra-SC, Confiança; depois, os
 4 que subiram da Série C), 5ª com a Série A. Ranking = série + reputação. Jogo único até a 4ª fase na casa do pior
@@ -215,6 +223,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `carreira.ts` | Reputação do técnico, cargo em risco, demissão e propostas de emprego, convites de clubes maiores, `assumirClube` |
 | `contratos.ts` | Fim de contrato, renovação (pedido do jogador), contrato de reforço, aviso de setembro e o que acaba na virada |
 | `emprestimos.ts` | Emprestar até o fim da temporada (quem aceita), pegar emprestado (taxa), volta na virada |
+| `notas.ts` | Nota de cada jogador na partida (ao vivo e no fim), melhor em campo, nota média |
 | `temporada.ts` | Virada: acesso/rebaixamento, idade, evolução, aposentadoria, base, Série D (`serie-d-reserva.json`) |
 | `jogo.ts` | Orquestra: `novoJogo`, `avancar`, `prepararJogos`/`concluirJogos`, `provavelTime` (escalação do computador sem mudar o jogo), propostas de emprego, obras do dia |
 | `checagem.ts` | `checarEstado`, `repararEstado`, `testarPartida` (roda sozinha ao abrir um jogo) |

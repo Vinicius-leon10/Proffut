@@ -10,6 +10,7 @@ import {
 import { COTA_TV_RODADA, DIAS_LESAO, PRECO_REFERENCIA, RECUPERACAO_POR_DIA, TEMPORADA_INICIAL } from "./constantes";
 import { depoisDoMeuJogo, expirarConvites } from "./carreira";
 import { avisarContratos, garantirContratos } from "./contratos";
+import { melhorEmCampo, notasDaPartida } from "./notas";
 import { atualizarConfianca, definirObjetivo } from "./diretoria";
 import { escalarAutomatico, forcaDoTime } from "./forca";
 import { lancar, processarMes, publicoDoJogo } from "./financas";
@@ -308,6 +309,14 @@ function aplicarResultado(estado: EstadoJogo, pv: PartidaViva) {
       if (e.outro != null && estado.jogadores[e.outro]) estado.jogadores[e.outro].temporada.assistencias++;
     }
   }
+  // Notas: entram na média da temporada de cada um, e o melhor em campo fica na partida.
+  const notas = notasDaPartida(pv, estado.jogadores, estado.semente);
+  for (const n of notas) {
+    const t = estado.jogadores[n.jogadorId].temporada;
+    t.notas = Math.round(((t.notas ?? 0) + n.nota) * 10) / 10;
+    t.avaliados = (t.avaliados ?? 0) + 1;
+  }
+  p.melhor = melhorEmCampo(notas)?.jogadorId;
 
   // Moral.
   const ajustar = (c: Clube, d: number) => { c.moral = Math.max(20, Math.min(100, c.moral + d)); };

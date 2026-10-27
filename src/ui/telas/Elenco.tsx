@@ -5,6 +5,7 @@ import { emprestar, interessadosNoEmprestimo, motivoParaNaoEmprestar } from "../
 import { forcaDoTime } from "../../engine/forca";
 import { NOMES_CARACTERISTICA, NOMES_POSICAO, fatorEnergia } from "../../engine/forca";
 import { formatarDinheiro } from "../../engine/financas";
+import { formatarNota, notaMedia } from "../../engine/notas";
 import { valorMercado } from "../../engine/gerador";
 import { dispensar, elencoDe, podeSair, precoPedido } from "../../engine/mercado";
 import type { Jogador, Posicao } from "../../engine/tipos";
@@ -13,6 +14,7 @@ import { NOMES_NACIONALIDADE } from "../formatos";
 import { useJogo, useLoja } from "../store";
 
 const ORDEM: Posicao[] = ["G", "L", "Z", "M", "A"];
+const nota = (n?: number) => (n == null ? "–" : formatarNota(n));
 
 export function Situacao({ j }: { j: Jogador }) {
   const estado = useJogo();
@@ -173,10 +175,10 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
         {j.caracteristicas.length ? j.caracteristicas.map((c) => <span key={c} className="chip verde">{NOMES_CARACTERISTICA[c]}</span>) : <span className="pequeno fraco">Sem características especiais.</span>}
       </div>
       <table className="tabela">
-        <thead><tr><th></th><th>Jogos</th><th>Gols</th><th>Assist.</th><th>CA</th><th>CV</th></tr></thead>
+        <thead><tr><th></th><th>Jogos</th><th>Gols</th><th>Assist.</th><th>CA</th><th>CV</th><th>Nota</th></tr></thead>
         <tbody>
-          <tr><td className="clube pequeno">Temporada</td><td>{t.jogos}</td><td>{t.gols}</td><td>{t.assistencias}</td><td>{t.amarelos}</td><td>{t.vermelhos}</td></tr>
-          <tr><td className="clube pequeno">Carreira</td><td>{j.carreira.jogos + t.jogos}</td><td>{j.carreira.gols + t.gols}</td><td>{j.carreira.assistencias + t.assistencias}</td><td>{j.carreira.amarelos + t.amarelos}</td><td>{j.carreira.vermelhos + t.vermelhos}</td></tr>
+          <tr><td className="clube pequeno">Temporada</td><td>{t.jogos}</td><td>{t.gols}</td><td>{t.assistencias}</td><td>{t.amarelos}</td><td>{t.vermelhos}</td><td>{nota(notaMedia(t))}</td></tr>
+          <tr><td className="clube pequeno">Carreira</td><td>{j.carreira.jogos + t.jogos}</td><td>{j.carreira.gols + t.gols}</td><td>{j.carreira.assistencias + t.assistencias}</td><td>{j.carreira.amarelos + t.amarelos}</td><td>{j.carreira.vermelhos + t.vermelhos}</td><td>{nota(notaMedia({ notas: (j.carreira.notas ?? 0) + (t.notas ?? 0), avaliados: (j.carreira.avaliados ?? 0) + (t.avaliados ?? 0) }))}</td></tr>
         </tbody>
       </table>
       {meu && !j.emprestimo && (

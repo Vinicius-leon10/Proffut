@@ -497,6 +497,19 @@ p { margin: 0; }
 .jogo-rodada.meu { background: var(--destaque); border-radius: 8px; }
 .jogo-rodada .gol-agora { color: var(--amarelo); }
 
+/* Notas dos jogadores: bolinha colorida pela faixa (texto escuro ou branco, sempre legível). */
+.notas .nota {
+  min-width: 40px; padding: 3px 6px; border-radius: 8px; text-align: center;
+  font-weight: 800; font-size: 0.86rem; font-variant-numeric: tabular-nums;
+}
+.nota.otima { background: #1d8150; color: #fff; }
+.nota.boa { background: #b9e4c8; color: #10221a; }
+.nota.regular { background: #fbe6a2; color: #10221a; }
+.nota.ruim { background: #f6dad5; color: #9e2a20; }
+.notas .minutos { min-width: 30px; text-align: right; }
+.notas .estrela { color: #8a6300; font-size: 0.9rem; }
+.melhor-em-campo .nome { font-size: 1rem; }
+
 /* Estatísticas da partida: o meu time em verde, o adversário em azul (--cor-m e --cor-v, na ordem do placar). */
 .aviso-pressao { border-left: 4px solid var(--vermelho); background: #fbefed; }
 .estatisticas { display: flex; flex-direction: column; gap: 16px; }

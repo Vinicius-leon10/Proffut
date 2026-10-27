@@ -41,6 +41,9 @@ export interface EstatisticasJogador {
   assistencias: number;
   amarelos: number;
   vermelhos: number;
+  /** Soma das notas e quantos jogos tiveram nota (a média é uma pela outra). Faltam nos saves antigos. */
+  notas?: number;
+  avaliados?: number;
 }
 
 export interface Jogador {
@@ -188,6 +191,8 @@ export interface Partida {
   publico?: number;
   /** Gols, cartões e lesões (o resto da narração não é guardado). */
   eventos: EventoPartida[];
+  /** O melhor em campo (maior nota entre quem jogou pelo menos 30 minutos). */
+  melhor?: number;
 }
 
 export type FaseSerie = "liga" | "playoff" | "quadrangulares" | "final" | "encerrada";

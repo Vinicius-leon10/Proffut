@@ -89,6 +89,21 @@ export const CONTRATOS = { anosIniciais: 4, titular: 1.15, promessa: 1.1, vetera
  */
 export const EMPRESTIMOS = { taxa: 0.1, margemForca: 8, margemJovem: 6 };
 
+// ---- notas dos jogadores (só para mostrar: não mudam placar nem lances) ------------
+/**
+ * Nota de 0 a 10 de quem entrou em campo: parte de `base`, soma o resultado do time e os lances dele (gol, passe,
+ * chute no gol, defesa do goleiro, cartão, pênalti...), gol sofrido e jogo sem sofrer gol (goleiro e defensores), a
+ * força dele perto da média da partida (÷ `forca`) e uma variação do jogo (desvio `variacao`). Quem jogou menos que o
+ * tempo de jogo até ali (no máximo `minutosCheios`) fica mais perto da base. Melhor em campo: maior nota com pelo menos
+ * `minutosMelhor` minutos.
+ */
+export const NOTAS = {
+  base: 6.6, vitoria: 0.2, derrota: -0.2, gol: 1.0, golDePenalti: 0.7, passe: 0.6, chuteNoGol: 0.25, chuteFora: 0.05,
+  defesa: 0.35, penaltiDefendido: 1.0, golSofridoGoleiro: -0.35, golSofridoDefensor: -0.15, semSofrerGoleiro: 0.6,
+  semSofrerDefensor: 0.4, amarelo: -0.3, vermelho: -1.5, penaltiPerdido: -0.8, penaltiCometido: -0.6,
+  forca: 25, variacao: 0.3, minutosCheios: 60, minutosMelhor: 30,
+};
+
 // ---- energia e recuperação --------------------------------------------------
 export const RECUPERACAO_POR_DIA = 9;
 export const DIAS_LESAO = { min: 4, max: 35 };

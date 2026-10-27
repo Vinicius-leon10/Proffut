@@ -10,6 +10,7 @@ import {
 } from "../../engine/partida";
 import type { Clube, Competicao, EstadoJogo, Estilo, EventoPartida, Formacao, Partida } from "../../engine/tipos";
 import { NOME_COMPETICAO } from "../../engine/competicoes";
+import { formatarNota, melhorEmCampo, notasDaPartida, type NotaDoJogador } from "../../engine/notas";
 import { Barra, Escudo, Folha, Icone, Opcoes, Pos, Segmentado } from "../componentes";
 import { rotuloPartida } from "../formatos";
 import { apito, liberarSom, pararSons, tocarLances } from "../sons";
@@ -57,7 +58,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   const [iniciado, setIniciado] = useState(false);
   const [pausado, setPausado] = useState(false);
   const [velocidade, setVelocidade] = useState<1 | 2>(estado.config.velocidade === 1 ? 1 : 2);
-  const [aba, setAba] = useState<"lances" | "estatisticas" | "rodada">("lances");
+  const [aba, setAba] = useState<"lances" | "estatisticas" | "notas" | "rodada">("lances");
   const [painel, setPainel] = useState<"trocas" | "tatica" | "adversario" | null>(null);
   const [, setTick] = useState(0);
   const avisosVistos = useRef(0);
@@ -214,7 +215,10 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
           )}
           <div style={{ padding: "8px 16px 0" }}>
             <Segmentado
-              opcoes={[{ valor: "lances", rotulo: "Lances" }, { valor: "estatisticas", rotulo: "Estatísticas" }, { valor: "rodada", rotulo: "Rodada" }]}
+              opcoes={[
+                { valor: "lances", rotulo: "Lances" }, { valor: "estatisticas", rotulo: "Estatísticas" },
+                { valor: "notas", rotulo: "Notas" }, { valor: "rodada", rotulo: "Rodada" },
+              ]}
               valor={aba}
               aoMudar={setAba}
             />
@@ -232,6 +236,8 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
               )) : <p className="vazio">A bola vai rolar...</p>
             ) : aba === "estatisticas" ? (
               <EstatisticasDaPartida pv={meu} meuLado={meuLado} />
+            ) : aba === "notas" ? (
+              <NotasDaPartida pv={meu} meuLado={meuLado} />
             ) : (
               <OutrosJogos vivas={vivas} meuId={meuId} />
             )}
@@ -339,6 +345,53 @@ function EstatisticasDaPartida({ pv, meuLado }: { pv: PartidaViva; meuLado: 0 | 
       <Comparacao nome="Chutes para fora ou bloqueados" valores={par((l) => l.chutesFora)} />
       <Comparacao nome="Pressão nos últimos 15 minutos" valores={pressaoRecente(e)}
         nota="Ataques perigosos de cada time nos últimos 15 minutos: quem está mandando no jogo agora." />
+    </div>
+  );
+}
+
+/** Classe da bolinha da nota: ótima, boa, regular ou ruim. */
+function faixaDaNota(nota: number): string {
+  return nota >= 7.5 ? "otima" : nota >= 7 ? "boa" : nota >= 6 ? "regular" : "ruim";
+}
+
+/** Notas dos jogadores, ao vivo: o melhor em campo (ou até agora) e a nota de cada um que entrou, por time. */
+function NotasDaPartida({ pv, meuLado }: { pv: PartidaViva; meuLado: 0 | 1 }) {
+  const estado = useJogo();
+  const notas = notasDaPartida(pv, estado.jogadores, estado.semente);
+  const melhor = melhorEmCampo(notas);
+  const linha = (n: NotaDoJogador) => {
+    const j = estado.jogadores[n.jogadorId];
+    return (
+      <div key={n.jogadorId} className="item">
+        <Pos pos={j.posicao} />
+        <span className="nome cresce corta pequeno negrito">{j.nome}</span>
+        {n.jogadorId === melhor?.jogadorId && <span className="estrela" aria-label="Melhor em campo">★</span>}
+        <span className="minutos mini fraco">{n.minutos}'</span>
+        <span className={`nota ${faixaDaNota(n.nota)}`}>{formatarNota(n.nota)}</span>
+      </div>
+    );
+  };
+  return (
+    <div className="notas coluna" style={{ gap: 12 }}>
+      {melhor && (
+        <div className="cartao compacto melhor-em-campo">
+          <div className="mini fraco">{pv.terminada ? "Melhor em campo" : "Melhor até agora"}</div>
+          <div className="linha">
+            <Escudo clube={estado.clubes[pv.lados[melhor.lado].clubeId]} tamanho={28} />
+            <span className="nome cresce negrito">{estado.jogadores[melhor.jogadorId].nome}</span>
+            <span className={`nota ${faixaDaNota(melhor.nota)}`}>{formatarNota(melhor.nota)}</span>
+          </div>
+        </div>
+      )}
+      {[meuLado, meuLado === 0 ? 1 : 0].map((i) => (
+        <div key={i} className="time">
+          <h3 className="pequeno fraco linha" style={{ gap: 6, margin: "4px 0" }}>
+            <Escudo clube={estado.clubes[pv.lados[i].clubeId]} tamanho={18} />{estado.clubes[pv.lados[i].clubeId].nome}
+          </h3>
+          <div className="lista">{notas.filter((n) => n.lado === i).map(linha)}</div>
+        </div>
+      ))}
+      <p className="mini muito-fraco">A nota sai dos lances de cada um (gols, passes, chutes, defesas, cartões), do resultado e de como ele está jogando. Quem joga pouco fica perto de 6.</p>
     </div>
   );
 }

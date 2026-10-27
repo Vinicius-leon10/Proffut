@@ -119,7 +119,8 @@ export function encerrarTemporada(estado: EstadoJogo) {
   // ---- jogadores: evolução, idade, aposentadoria ----
   const aposentadosMeus: string[] = [];
   for (const j of Object.values(estado.jogadores)) {
-    for (const k of Object.keys(j.carreira) as (keyof Jogador["carreira"])[]) j.carreira[k] += j.temporada[k];
+    // Soma a temporada na carreira (as notas faltam nos saves antigos: contam como zero).
+    for (const k of Object.keys(j.temporada) as (keyof Jogador["carreira"])[]) j.carreira[k] = (j.carreira[k] ?? 0) + (j.temporada[k] ?? 0);
     evoluir(rng, j);
     j.temporada = { jogos: 0, gols: 0, assistencias: 0, amarelos: 0, vermelhos: 0 };
     j.energia = 100;
