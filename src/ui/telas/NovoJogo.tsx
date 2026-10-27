@@ -27,6 +27,7 @@ export function NovoJogo() {
     setTimeout(() => {
       try {
         const estado = novoJogo({ nomeTecnico: nome || "Técnico", clubeId: selecionado.id });
+        estado.tutorial = true;
         void pedirArmazenamentoPersistente();
         iniciar(estado);
       } catch (e) {

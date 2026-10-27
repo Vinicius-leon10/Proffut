@@ -332,4 +332,6 @@ export interface EstadoJogo {
    * antigos: ao abrir, começa pelos jogos já disputados na temporada em andamento).
    */
   recordes?: { desde: number; clubes: Record<string, RecordesClube> };
+  /** Tutorial rápido por ver: o jogo novo começa com ele (some ao terminar ou pular; Configurações mostra de novo). */
+  tutorial?: boolean;
 }

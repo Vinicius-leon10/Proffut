@@ -8,7 +8,7 @@ Jogo onde você é o técnico de futebol. Inspirado no Brasfoot, roda no navegad
 
 1. Abra o site no Safari do iPhone: **https://vinicius-leon10.github.io/Proffut/**
 2. Toque em **Compartilhar** → **Adicionar à Tela de Início**. O jogo abre em tela cheia, como um app, e funciona sem internet.
-3. Escolha seu nome, uma série e um clube.
+3. Escolha seu nome, uma série e um clube. Um tutorial rápido mostra os passos principais (dá para ver de novo em Configurações).
 4. No painel do clube, o botão **Avançar** leva ao próximo jogo. Antes, ajuste a escalação e a tática na aba **Tática**.
 
 O save fica guardado **no próprio celular** e é feito sozinho a cada ação. Para ter um backup ou passar o jogo para outro aparelho, use **Configurações → Exportar save**.

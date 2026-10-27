@@ -350,7 +350,7 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
 - Histórico, recordes e conquistas.
 
 ### Fase 5 · Polimento e divulgação do site (3–4 semanas)
-- Tutorial rápido (primeiros 5 minutos), ícone, ✅ identidade visual (out/2026: visual claro "opção 3", o design system que o usuário mandou), ✅ sons.
+- ✅ Tutorial rápido (out/2026: seis passos no começo do jogo novo, `src/ui/telas/Tutorial.tsx`), ícone, ✅ identidade visual (out/2026: visual claro "opção 3", o design system que o usuário mandou), ✅ sons.
 - Desempenho em celular simples, acessibilidade (tamanho de fonte, contraste, leitor de tela).
 - Domínio próprio (opcional) e divulgação em comunidades de jogos de técnico.
 
@@ -426,3 +426,43 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
 2. Montar os elencos reais de 2026 (liberar `pt.wikipedia.org` na rede do ambiente ou colar as listas).
 3. Ajustar o equilíbrio e as telas com base no que você sentir jogando.
 4. Fase 3: ✅ Copa do Brasil; ✅ demissão e convites; ✅ contratos e renovação; ✅ empréstimos; ✅ sala de troféus.
+5. O resto da lista de mudanças (§13), quando o usuário escolher.
+
+---
+
+## 13. Lista de mudanças (out/2026)
+
+A lista que o usuário recebeu ("Lista das mudanças que podemos fazer"); ele escolheu "1, 2, 4, 5, 7, 8, 16, 19", todas
+prontas. Tamanho: pequena (rápida), média ou grande (várias etapas).
+
+**Carreira do técnico**
+1. ✅ Demissão: campanha ruim faz a diretoria te demitir, e você recebe propostas de clubes menores. (média)
+2. ✅ Convites de clubes maiores quando você vai bem, no meio ou no fim da temporada. (média)
+3. Seleção brasileira: convite para treinar a seleção, com Copa América e Copa do Mundo. (grande)
+
+**Elenco**
+4. ✅ Contratos com data para acabar: renovar, o jogador pede aumento e, se não renovar, sai de graça. (média)
+5. ✅ Empréstimos: emprestar quem não joga e pegar jogador emprestado. (média)
+6. Treino da semana: escolher um foco (físico, ataque ou defesa) que ajuda os jogadores a evoluir. (média)
+7. ✅ Escolher o batedor de pênalti e o capitão. (pequena)
+
+**Partida**
+8. ✅ Nota de cada jogador no fim do jogo (0 a 10) e o melhor em campo. (pequena)
+9. Mais estatísticas: faltas, impedimentos e defesas do goleiro. (pequena)
+10. Gráfico da pressão minuto a minuto, como nos aplicativos de futebol. (pequena)
+11. Partida em 2D simples, com bolinhas se mexendo no campo. (grande)
+
+**Competições**
+12. Estaduais no começo do ano (Paulistão, Carioca, Mineiro...). (grande)
+13. Série D jogável (hoje, cair para a D tira você do clube). (grande)
+14. Libertadores e Sul-Americana (precisa incluir clubes de outros países). (grande)
+
+**Clube e dinheiro**
+15. Negociar patrocínio: escolher entre propostas, com mais dinheiro garantido ou mais prêmio por resultado. (média)
+16. ✅ Sala de troféus e recordes: títulos, maior goleada, maior público, maiores artilheiros do clube. (pequena)
+
+**Outros**
+17. Vários técnicos no mesmo celular, revezando a vez, como no Brasfoot. (grande)
+18. Editor dentro do jogo para mudar nomes, força e cores de clubes e jogadores. (média)
+19. ✅ Tutorial rápido para quem começa um jogo novo. (pequena)
+20. Ajustes de equilíbrio pelo que o usuário sentir jogando: gols, lesões, preços, dificuldade. (pequena, quando ele quiser)

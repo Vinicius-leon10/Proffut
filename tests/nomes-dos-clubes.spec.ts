@@ -9,6 +9,9 @@ test("R26 clube que se diz \"a\": Assumir a Chapecoense, Bem-vindo à Chapecoens
   const assumir = botao(page, /^Assumir /);
   await expect(assumir).toHaveText("Assumir a Chapecoense");
   await assumir.click();
+  // O tutorial do jogo novo também fala certo.
+  await expect(page.getByRole("dialog").getByRole("heading")).toHaveText("Bem-vindo à Chapecoense!", { timeout: 20_000 });
+  await page.getByRole("dialog").getByRole("button", { name: "Pular" }).click();
   await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
 
   // Mensagem de boas-vindas e a frase da Copa.

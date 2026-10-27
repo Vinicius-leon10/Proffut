@@ -20,6 +20,7 @@ await clicar("Novo jogo");
 await pagina.getByRole("tab", { name: "Série C" }).click();
 await pagina.getByRole("button", { name: /Santa Cruz/ }).click();
 await clicar(/Assumir o/);
+await pagina.getByRole("dialog").getByRole("button", { name: "Pular" }).click();
 await pagina.waitForSelector("text=Próximo jogo");
 
 let dias = 0;

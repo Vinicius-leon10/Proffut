@@ -567,3 +567,20 @@ p { margin: 0; }
 .taca.campeao { background: var(--dourado); color: #1a1500; }
 .taca.vice { background: var(--cartao-2); color: var(--texto-2); }
 .taca.acesso { background: var(--floresta); color: #fff; }
+
+/* ---- tutorial do jogo novo ------------------------------------------------------------------- */
+
+.tutorial { display: flex; flex-direction: column; gap: 14px; }
+.tutorial p { color: var(--texto-2); line-height: 1.5; }
+.tutorial p b { color: var(--texto); }
+.tutorial-icone {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--floresta); color: var(--dourado);
+}
+.tutorial-icone svg { width: 26px; height: 26px; }
+.tutorial-pontos { display: flex; align-items: center; gap: 6px; }
+.tutorial-pontos > span:not(.mini) { width: 8px; height: 8px; border-radius: 99px; background: var(--cartao-2); }
+.tutorial-pontos > span.ativo { width: 20px; background: var(--floresta); }
+.tutorial-pontos .mini { margin-left: auto; }

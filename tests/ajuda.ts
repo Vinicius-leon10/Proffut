@@ -62,6 +62,8 @@ export async function novoJogo(page: Page, { serie = "Série B", clube = "Ponte 
   await page.getByRole("tab", { name: serie }).click();
   await botao(page, new RegExp(clube)).click();
   await botao(page, /^Assumir (o|a) /).click();
+  // O jogo novo começa com o tutorial (R43).
+  await page.getByRole("dialog").getByRole("button", { name: "Pular" }).click({ timeout: 20_000 });
   await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
 }
 

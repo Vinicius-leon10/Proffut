@@ -10,6 +10,7 @@ import { Mercado } from "./Mercado";
 import { Painel } from "./Painel";
 import { Tabelas } from "./Tabelas";
 import { Tatica } from "./Tatica";
+import { Tutorial } from "./Tutorial";
 
 const ABAS: { aba: Aba; rotulo: string; icone: string }[] = [
   { aba: "clube", rotulo: "Clube", icone: "clube" },
@@ -65,6 +66,7 @@ export function Principal() {
           </button>
         ))}
       </nav>
+      {estado.tutorial && <Tutorial />}
     </div>
   );
 }

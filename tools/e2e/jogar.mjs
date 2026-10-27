@@ -32,6 +32,10 @@ await pagina.getByPlaceholder("Ex.: Vinícius").fill("Vinícius");
 await foto("novo-jogo");
 await pagina.getByRole("button", { name: /Vasco/ }).click();
 await clicar(/^Assumir /);
+const pular = pagina.getByRole("dialog").getByRole("button", { name: "Pular" });
+await pular.waitFor();
+await foto("tutorial");
+await pular.click();
 await pagina.waitForSelector("text=Próximo jogo");
 await foto("painel");
 

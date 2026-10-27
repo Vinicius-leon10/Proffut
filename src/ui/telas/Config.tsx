@@ -124,6 +124,11 @@ export function Config() {
           </div>
         </Cartao>
 
+        <Cartao titulo="Tutorial">
+          <p className="pequeno fraco" style={{ marginBottom: 8 }}>Os passos principais do jogo, os mesmos do começo de um jogo novo.</p>
+          <button className="botao cheio" onClick={() => { estado.tutorial = true; atualizar(); fechar(); }}>Ver o tutorial</button>
+        </Cartao>
+
         <Cartao titulo="Checagem do jogo">
           <p className="pequeno fraco" style={{ marginBottom: 8 }}>
             Confere se o jogo está guardado para abrir sem internet, se o salvamento funciona e se o save está íntegro. Funciona sem internet.
