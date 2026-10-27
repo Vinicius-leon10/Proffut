@@ -247,9 +247,11 @@ export function Elenco() {
             {fora.map((j) => (
               <div key={j.id} className="linha pequeno">
                 <Pos pos={j.posicao} />
-                <span className="cresce corta negrito">{j.nome}</span>
-                <Escudo clube={estado.clubes[j.clubeId!]} tamanho={20} />
-                <span className="mini fraco">{estado.clubes[j.clubeId!].nome} · volta no fim de {j.emprestimo!.ate}</span>
+                <div className="cresce" style={{ minWidth: 0 }}>
+                  <div className="negrito corta">{j.nome}</div>
+                  <div className="mini fraco corta">{estado.clubes[j.clubeId!].nome} · volta no fim de {j.emprestimo!.ate}</div>
+                </div>
+                <Escudo clube={estado.clubes[j.clubeId!]} tamanho={24} />
               </div>
             ))}
           </div>

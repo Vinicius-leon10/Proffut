@@ -227,7 +227,7 @@ export function Tatica() {
           <label className="coluna" style={{ gap: 4 }}>
             <span className="pequeno fraco">Batedor de pênalti</span>
             <select aria-label="Batedor de pênalti" value={doClube(clube.batedor) ?? ""} onChange={(e) => escolher("batedor", e.target.value)}>
-              <option value="">Automático (o melhor batedor em campo)</option>
+              <option value="">Automático (o melhor em campo)</option>
               {porCobranca.map((j) => <option key={j.id} value={j.id}>{j.nome} ({j.posicao}, força {j.forca}{j.caracteristicas.includes("FIN") ? ", finalização" : ""})</option>)}
             </select>
           </label>
