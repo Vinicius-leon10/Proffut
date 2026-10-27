@@ -14,7 +14,7 @@ ocuparTelaInteira();
 registerSW({
   immediate: true,
   onOfflineReady() {
-    useLoja.getState().avisar("Jogo guardado no aparelho: já dá para jogar sem internet.");
+    useLoja.getState().avisarDepois("Jogo guardado no aparelho: já dá para jogar sem internet.");
   },
 });
 

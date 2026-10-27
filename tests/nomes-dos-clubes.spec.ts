@@ -1,4 +1,4 @@
-import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, test, voltar } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, pularTutorial, test, voltar } from "./ajuda";
 
 test("R26 clube que se diz \"a\": Assumir a Chapecoense, Bem-vindo à Chapecoense e A Chapecoense na Copa", async ({ page }) => {
   // Na escolha do clube, o botão já fala certo.
@@ -11,7 +11,7 @@ test("R26 clube que se diz \"a\": Assumir a Chapecoense, Bem-vindo à Chapecoens
   await assumir.click();
   // O tutorial do jogo novo também fala certo.
   await expect(page.getByRole("dialog").getByRole("heading")).toHaveText("Bem-vindo à Chapecoense!", { timeout: 20_000 });
-  await page.getByRole("dialog").getByRole("button", { name: "Pular" }).click();
+  await pularTutorial(page);
   await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
 
   // Mensagem de boas-vindas e a frase da Copa.

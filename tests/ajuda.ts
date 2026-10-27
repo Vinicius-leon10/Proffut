@@ -62,9 +62,44 @@ export async function novoJogo(page: Page, { serie = "Série B", clube = "Ponte 
   await page.getByRole("tab", { name: serie }).click();
   await botao(page, new RegExp(clube)).click();
   await botao(page, /^Assumir (o|a) /).click();
-  // O jogo novo começa com o tutorial (R43).
-  await page.getByRole("dialog").getByRole("button", { name: "Pular" }).click({ timeout: 20_000 });
+  await pularTutorial(page);
   await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
+}
+
+/**
+ * O jogo novo começa com o tutorial (R43): pula e espera o save guardar o jogo sem ele. O jogo salva 400 ms depois
+ * da mudança; um teste que recarregasse antes disso veria o tutorial de novo.
+ */
+export async function pularTutorial(page: Page) {
+  const pular = page.getByRole("dialog").getByRole("button", { name: "Pular" });
+  await pular.waitFor({ timeout: 20_000 });
+  const desde = await agora(page);
+  await pular.click();
+  await expect
+    .poll(
+      () =>
+        page.evaluate(
+          (desde) =>
+            new Promise<boolean>((ok, falha) => {
+              const pedido = indexedDB.open("proffut");
+              pedido.onerror = () => falha(pedido.error);
+              pedido.onsuccess = () => {
+                const banco = pedido.result;
+                const saves = banco.transaction("saves", "readonly").objectStore("saves");
+                const jogo = saves.get("jogo:auto");
+                const resumo = saves.get("resumo:auto");
+                resumo.onerror = jogo.onerror = () => falha(jogo.error ?? resumo.error);
+                resumo.onsuccess = () => {
+                  banco.close();
+                  ok(!!jogo.result && !jogo.result.tutorial && !!resumo.result && Date.parse(resumo.result.salvoEm) > desde);
+                };
+              };
+            }),
+          desde,
+        ),
+      { timeout: 15_000, message: "o jogo não salvou sem o tutorial" },
+    )
+    .toBe(true);
 }
 
 /** Data mostrada no topo do painel, ex.: "sáb, 04 abr 2026". */

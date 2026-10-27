@@ -37,13 +37,20 @@ interface Loja {
   abrir: (s: Sobreposta) => void;
   fechar: () => void;
   avisar: (texto: string) => void;
+  /**
+   * Aviso que não vem de um toque (o do service worker): com uma tela aberta por cima ou o tutorial, espera fechar,
+   * para não cobrir os botões do alto dela, como o Continuar dos resultados do dia (R44).
+   */
+  avisarDepois: (texto: string) => void;
   /** Chame depois de qualquer mudança no estado do jogo. */
   atualizar: () => void;
 }
 
 let temporizadorSave: ReturnType<typeof setTimeout> | undefined;
 
-export const useLoja = create<Loja>((set, getLoja) => ({
+const ocupada = (loja: Loja) => !!loja.sobreposta || !!loja.estado?.tutorial;
+
+export const useLoja = create<Loja>((set, getLoja, api) => ({
   estado: null,
   versao: 0,
   tela: "inicio",
@@ -72,6 +79,14 @@ export const useLoja = create<Loja>((set, getLoja) => ({
   abrir: (sobreposta) => set({ sobreposta, aviso: null }),
   fechar: () => set({ sobreposta: null }),
   avisar: (texto) => set({ aviso: { texto, id: Date.now() } }),
+  avisarDepois: (texto) => {
+    if (!ocupada(getLoja())) return getLoja().avisar(texto);
+    const parar = api.subscribe((loja) => {
+      if (ocupada(loja)) return;
+      parar();
+      loja.avisar(texto);
+    });
+  },
   atualizar: () => {
     set({ versao: getLoja().versao + 1 });
     clearTimeout(temporizadorSave);
