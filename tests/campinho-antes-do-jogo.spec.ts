@@ -46,9 +46,12 @@ test("R48 antes do jogo, arrastar um jogador até outro no campinho troca os doi
 
 test("R49 antes do jogo, cada jogador no campinho tem a barrinha de cansaço (a energia dele)", async ({ page }) => {
   await novoJogo(page);
+  const desde = await agora(page);
   await irParaOMeuJogo(page);
-  // No dia do jogo, um titular cansado: o atacante da vaga 9 com 45% de energia.
+  // No dia do jogo, um titular cansado: o atacante da vaga 9 com 45% de energia. Antes, o salvamento de quando o
+  // jogo abriu a partida (400 ms depois): sem esperar, ele chegava depois da mudança e a desfazia.
   await botao(page, "Voltar ao clube").click();
+  await esperarSalvar(page, desde);
   await mexerNoSave(page, "const c = estado.clubes[estado.tecnico.clubeId]; estado.jogadores[c.escalacao.titulares[9]].energia = 45;");
   await irParaOMeuJogo(page);
   const barras = vagas(page).locator(".barra");

@@ -178,6 +178,8 @@ export async function esperarSalvar(page: Page, desde: number) {
 /**
  * Muda o save automático direto no banco do aparelho, para montar uma situação (por exemplo, um
  * save de uma versão antiga), e abre o jogo de novo pelo "Continuar". `codigo` recebe `estado`.
+ * Depois de uma ação que muda o jogo (avançar, abrir a partida), espere antes o salvamento dela
+ * com `esperarSalvar`: ele chega 400 ms depois e desfaria a mudança (R49).
  */
 export async function mexerNoSave(page: Page, codigo: string) {
   await esperarSalvar(page, (await agora(page)) - 60_000);
