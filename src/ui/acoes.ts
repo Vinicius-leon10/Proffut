@@ -1,4 +1,6 @@
 // Ações de jogo disparadas pela interface.
+import { temporadaEncerrada } from "../engine/competicoes";
+import { contratosTerminando } from "../engine/contratos";
 import { avancar, prepararJogos, simularDia, simularRestoDaTemporada } from "../engine/jogo";
 import { useLoja } from "./store";
 
@@ -6,6 +8,9 @@ import { useLoja } from "./store";
 export function avancarJogo() {
   const { estado, atualizar, abrir, avisar } = useLoja.getState();
   if (!estado) return;
+  // Na virada, quem não renovou sai de graça: pergunta antes, citando os nomes.
+  const saem = temporadaEncerrada(estado) ? contratosTerminando(estado) : [];
+  if (saem.length && !window.confirm(`Sem renovar, saem de graça na virada: ${saem.map((j) => j.nome).join(", ")}. Encerrar a temporada mesmo assim?`)) return;
   const r = avancar(estado);
   if (r.tipo === "nova-temporada") {
     atualizar();

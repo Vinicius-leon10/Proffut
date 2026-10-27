@@ -43,13 +43,13 @@ virada de temporada sem fim, rebaixamento para a Série D com propostas de empre
 elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, escudos dos
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
 placar), visual claro "opção 3", estatísticas da partida com aviso de pressão, demissão e convites de clubes maiores
-(reputação do técnico), testes de ponta a ponta R01–R37 rodando a cada mudança, antes de publicar e todo dia no site
-publicado.
+(reputação do técnico), contratos com renovação, testes de ponta a ponta R01–R38 rodando a cada mudança, antes de
+publicar e todo dia no site publicado.
 
 **Pedido em andamento (out/2026):** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão (1) e
-convites (2) prontos; faltam contratos com fim e renovação (4), empréstimos (5), escolher batedor de pênalti e capitão
-(7), nota de cada jogador e melhor em campo (8), sala de troféus e recordes (16) e tutorial rápido (19), nessa ordem,
-cada um publicado quando os testes passarem.
+convites (2) e contratos (4) prontos; faltam empréstimos (5), escolher batedor de pênalti e capitão (7), nota de cada
+jogador e melhor em campo (8), sala de troféus e recordes (16) e tutorial rápido (19), nessa ordem, cada um publicado
+quando os testes passarem.
 
 **Visual "opção 3" (out/2026, `src/ui/estilo.css`):** design system que o usuário mandou (pacote
 `proffut-design-system-opcao-3.zip`, "Aplique"): editorial claro. Tokens no `:root`: `--fundo` marfim `#f3f3ec`,
@@ -104,6 +104,18 @@ cumpriu, subiu ou foi campeão (2); clubes da mesma série ou acima, com reputa�
 + 10; valem 10 dias; aceitar (`responderConvite`) chama `assumirClube` com confiança 65 e derruba os outros convites e as
 propostas pelos jogadores do clube antigo. Números em `CARGO`, `REPUTACAO` e `CONVITES` (`constantes.ts`). Com o
 computador no lugar do usuário, demitido em ~12% das temporadas (todas abaixo do objetivo), por volta do 25º jogo. R36, R37.
+
+**Contratos (out/2026, `src/engine/contratos.ts`):** `Jogador.contratoAte` = última temporada do contrato (livres e os
+elencos da Série D montados para a Copa não têm). Jogo novo: termina em 2026–2029 (`garantirContratos`, pelo id;
+~25% na primeira temporada; os mais velhos, menos). Save antigo: `migrar` (salvamento.ts) dá contrato a partir da
+temporada seguinte (ninguém sai na temporada em andamento). Reforço (`transferir`): `contratoNovo` = temporada +
+`anosMaximos(idade)` (3; 2 dos 30 aos 32; 1 a partir dos 33). Dispensa e excedentes da IA: `liberar` (sem contrato).
+Renovação só no último ano (`renovarContrato`; o jogador pede `pedidoDeRenovacao`: salário de mercado × titular ×
+promessa × veterano, nunca menos do que ganha antes dos 30 anos), na ficha do jogador (Elenco). Em 1º de setembro chega a
+lista "Contratos terminando"; "Encerrar a temporada" pergunta antes citando quem sai. Na virada (`encerrarContratos`):
+no clube do usuário, quem não renovou sai de graça e não volta pelo "mínimo da posição"; os clubes do computador
+renovam todos por 1 a 3 temporadas (o mundo fica como antes). O salário dos jogadores do usuário não é mais
+recalculado na virada (vale o do contrato); o dos outros clubes, sim. R38.
 
 **Copa do Brasil (out/2026, `src/engine/copa.ts`):** regulamento de 2026 com 126 clubes: 1ª fase com os 28 piores do
 ranking, 2ª com mais 74, 3ª com mais 4 (em 2026 os de verdade: Paysandu, Ponte Preta, Barra-SC, Confiança; depois, os
@@ -185,6 +197,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `financas.ts`, `estadio.ts` | Bilheteria, TV, patrocínio, salários; obras de ampliação e modernização |
 | `mercado.ts`, `mensagens.ts`, `diretoria.ts` | Compra e venda, propostas (e "Pedir mais": `pedirMais`, `limiteDaProposta`), caixa de mensagens, objetivo e confiança |
 | `carreira.ts` | Reputação do técnico, cargo em risco, demissão e propostas de emprego, convites de clubes maiores, `assumirClube` |
+| `contratos.ts` | Fim de contrato, renovação (pedido do jogador), contrato de reforço, aviso de setembro e o que acaba na virada |
 | `temporada.ts` | Virada: acesso/rebaixamento, idade, evolução, aposentadoria, base, Série D (`serie-d-reserva.json`) |
 | `jogo.ts` | Orquestra: `novoJogo`, `avancar`, `prepararJogos`/`concluirJogos`, `provavelTime` (escalação do computador sem mudar o jogo), propostas de emprego, obras do dia |
 | `checagem.ts` | `checarEstado`, `repararEstado`, `testarPartida` (roda sozinha ao abrir um jogo) |

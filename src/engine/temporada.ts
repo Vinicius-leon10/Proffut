@@ -2,6 +2,7 @@
 // jogadores, aposentadorias, base e preparação do ano seguinte.
 import { comArtigo, concorda } from "./artigos";
 import { demitir, gerarConvites, mudarReputacao, passouDaCarencia } from "./carreira";
+import { encerrarContratos, garantirContratos, liberar } from "./contratos";
 import { inicioDaTemporada, somarDias } from "./calendario";
 import { NOME_SERIE, SERIES, criarTemporada, posicaoNaLiga, tabelaDaLiga } from "./competicoes";
 import { criarCopa } from "./copa";
@@ -124,12 +125,18 @@ export function encerrarTemporada(estado: EstadoJogo) {
     j.suspensaoJogos = 0;
     j.amarelosAcumulados = 0;
     j.lesaoDias = Math.max(0, j.lesaoDias - 60);
-    j.salario = Math.round(salarioBase(j.forca) * (j.idade <= 20 ? 0.6 : 1));
+    // No clube do usuário vale o salário do contrato (muda na renovação); nos outros, o de mercado.
+    if (j.clubeId !== meuId) j.salario = Math.round(salarioBase(j.forca) * (j.idade <= 20 ? 0.6 : 1));
     if (vaiSeAposentar(rng, j)) {
       if (j.clubeId === meuId) aposentadosMeus.push(j.nome);
       delete estado.jogadores[j.id];
     }
   }
+
+  // ---- contratos: quem o usuário não renovou sai de graça; os clubes do computador renovam ----
+  garantirContratos(estado, ano + 1);
+  const sairamDeGraca = encerrarContratos(estado, ano);
+  const naoVoltam = new Set(sairamDeGraca.map((j) => j.id));
 
   // ---- base, elenco mínimo e excesso ----
   const jovensMeus: string[] = [];
@@ -145,7 +152,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
     // Garante o mínimo por posição com jogadores livres (ou da base, se não houver).
     for (const pos of Object.keys(MINIMO_POSICAO) as Posicao[]) {
       while (elenco().filter((j) => j.posicao === pos).length < MINIMO_POSICAO[pos]) {
-        const livre = livres(estado).filter((j) => j.posicao === pos).sort((a, b) => b.forca - a.forca)[0];
+        const livre = livres(estado).filter((j) => j.posicao === pos && !(clube.id === meuId && naoVoltam.has(j.id))).sort((a, b) => b.forca - a.forca)[0];
         const novo = livre ?? gerarJovem(rng, clube, pos, estado.proximoIdJogador++);
         novo.clubeId = clube.id;
         estado.jogadores[novo.id] = novo;
@@ -158,7 +165,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
         const descartaveis = elenco()
           .filter((j) => elenco().filter((x) => x.posicao === j.posicao).length > MINIMO_POSICAO[j.posicao] + 1)
           .sort((a, b) => a.forca - a.idade / 2 - (b.forca - b.idade / 2));
-        for (const j of descartaveis.slice(0, sobra)) { j.clubeId = null; j.aVenda = false; }
+        for (const j of descartaveis.slice(0, sobra)) liberar(j);
       }
     }
   }
@@ -167,6 +174,8 @@ export function encerrarTemporada(estado: EstadoJogo) {
   const listaLivres = livres(estado).sort((a, b) => b.forca - a.forca);
   for (const j of listaLivres.slice(70)) delete estado.jogadores[j.id];
   completarLivres(estado, `${ano + 1}`);
+  // Quem subiu da base ou chegou para completar um elenco ganha contrato (pelo menos até o fim do ano seguinte).
+  garantirContratos(estado, ano + 2);
 
   // ---- clubes ----
   for (const clube of Object.values(estado.clubes)) {
@@ -228,6 +237,9 @@ export function encerrarTemporada(estado: EstadoJogo) {
     sobemDaD.length ? `Vindos da Série D: ${sobemDaD.map(nome).join(" e ")}.` : "",
   ].filter(Boolean).join(" ");
   enviarMensagem(estado, { tipo: "temporada", titulo: `Fim da temporada ${ano}`, texto: resumo });
+  if (sairamDeGraca.length) {
+    enviarMensagem(estado, { tipo: "mercado", titulo: "Fim de contrato", texto: `Saíram de graça, sem renovar: ${sairamDeGraca.map((j) => j.nome).join(", ")}.` });
+  }
   if (aposentadosMeus.length) {
     enviarMensagem(estado, { tipo: "noticia", titulo: "Aposentadorias", texto: `Penduraram as chuteiras: ${aposentadosMeus.join(", ")}.` });
   }

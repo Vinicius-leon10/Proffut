@@ -64,6 +64,11 @@ export interface Jogador {
   aVenda: boolean;
   temporada: EstatisticasJogador;
   carreira: EstatisticasJogador;
+  /**
+   * Última temporada do contrato: no fim dela, quem joga no clube do usuário e não renovou sai de graça (os clubes
+   * do computador renovam). Livres não têm. Falta nos saves antigos: ganham ao abrir o jogo (`migrar`).
+   */
+  contratoAte?: number;
 }
 
 export type TipoLancamento =

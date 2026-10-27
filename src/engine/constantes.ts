@@ -72,6 +72,15 @@ export const REPUTACAO = { cumpriu: 4, naoCumpriu: -4, acesso: 6, titulo: 6, tit
  */
 export const CONVITES = { folga: 3, alcance: 10, validadeDias: 10, meioDaLiga: 1, virada: 2 };
 
+// ---- contratos --------------------------------------------------------------------
+/**
+ * Contratos: no jogo novo terminam em uma das `anosIniciais` temporadas a partir da primeira (menos para os mais
+ * velhos); reforço e renovação valem até `anos` temporadas a mais, conforme a idade. Para renovar o jogador pede
+ * o salário de mercado (× titular, × promessa, × veterano) e não aceita ganhar menos do que ganha antes dos
+ * `semCorteAte` anos (depois, até `corteVeterano` a menos). O aviso dos contratos terminando chega em `aviso` (mês-dia).
+ */
+export const CONTRATOS = { anosIniciais: 4, titular: 1.15, promessa: 1.1, veterano: 0.85, semCorteAte: 30, corteVeterano: 0.8, aviso: "09-01" };
+
 // ---- energia e recuperação --------------------------------------------------
 export const RECUPERACAO_POR_DIA = 9;
 export const DIAS_LESAO = { min: 4, max: 35 };

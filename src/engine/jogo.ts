@@ -9,6 +9,7 @@ import {
 } from "./competicoes";
 import { COTA_TV_RODADA, DIAS_LESAO, PRECO_REFERENCIA, RECUPERACAO_POR_DIA, TEMPORADA_INICIAL } from "./constantes";
 import { depoisDoMeuJogo, expirarConvites } from "./carreira";
+import { avisarContratos, garantirContratos } from "./contratos";
 import { atualizarConfianca, definirObjetivo } from "./diretoria";
 import { escalarAutomatico, forcaDoTime } from "./forca";
 import { lancar, processarMes, publicoDoJogo } from "./financas";
@@ -105,6 +106,7 @@ export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente
     for (const j of reais ? elencoReal(rng, clube, reais, proximoId) : gerarElenco(rng, clube, proximoId)) estado.jogadores[j.id] = j;
   }
   completarLivres(estado, "inicio");
+  garantirContratos(estado, TEMPORADA_INICIAL);
 
   const meu = estado.clubes[opcoes.clubeId];
   meu.tatica = { formacao: "4-4-2", estilo: "equilibrado", marcacao: "normal", jogadas: "meio" };
@@ -173,6 +175,7 @@ function processarDias(estado: EstadoJogo, ate: string) {
     concluirObras(estado, dia);
     gerarPropostas(estado, dia);
     expirarConvites(estado, dia);
+    avisarContratos(estado, dia);
     if (dia.endsWith("-07-01") || dia.endsWith("-07-15")) {
       const noticias = transferenciasDaIa(estado, dia);
       if (noticias.length) {

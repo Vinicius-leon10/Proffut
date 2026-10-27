@@ -1,6 +1,7 @@
 // Mercado de transferências: compra, venda, livres, propostas e as trocas entre clubes da IA.
 import { comArtigo } from "./artigos";
 import { ELENCO_MAXIMO, MINIMO_POSICAO } from "./constantes";
+import { contratoNovo, liberar } from "./contratos";
 import { escalarAutomatico, forcaDoTime } from "./forca";
 import { lancar } from "./financas";
 import { gerarLivre, salarioBase, valorMercado } from "./gerador";
@@ -66,6 +67,7 @@ function transferir(estado: EstadoJogo, j: Jogador, destinoId: string, valor: nu
   j.clubeId = destinoId;
   j.aVenda = false;
   j.salario = Math.max(j.salario, Math.round(salarioBase(j.forca) * 1.1));
+  contratoNovo(estado, j);
   if (origemId && origemId !== estado.tecnico.clubeId) reescalar(estado, origemId);
   if (destinoId !== estado.tecnico.clubeId) reescalar(estado, destinoId);
   else if (destino.escalacao.reservas.length < 7) destino.escalacao.reservas.push(j.id);
@@ -106,8 +108,7 @@ export function dispensar(estado: EstadoJogo, jogadorId: number): ResultadoNegoc
   const clube = estado.clubes[j.clubeId];
   lancar(clube, estado.data, "rescisao", `Rescisão de ${j.nome}`, -j.salario * 3);
   tirarDaEscalacao(estado, j);
-  j.clubeId = null;
-  j.aVenda = false;
+  liberar(j);
   return { ok: true, texto: `${j.nome} foi dispensado.` };
 }
 

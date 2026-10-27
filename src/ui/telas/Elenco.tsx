@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { comArtigo } from "../../engine/artigos";
+import { anosMaximos, pedidoDeRenovacao, renovarContrato, ultimoAno } from "../../engine/contratos";
 import { NOMES_CARACTERISTICA, NOMES_POSICAO, fatorEnergia } from "../../engine/forca";
 import { formatarDinheiro } from "../../engine/financas";
 import { valorMercado } from "../../engine/gerador";
@@ -12,8 +13,11 @@ import { useJogo, useLoja } from "../store";
 const ORDEM: Posicao[] = ["G", "L", "Z", "M", "A"];
 
 export function Situacao({ j }: { j: Jogador }) {
+  const estado = useJogo();
+  const fimDeContrato = j.clubeId === estado.tecnico.clubeId && ultimoAno(estado, j);
   return (
     <>
+      {fimDeContrato && <span className="chip amarelo" title="Contrato termina nesta temporada">Fim de contrato</span>}
       {j.lesaoDias > 0 && <span className="chip vermelho" title="Lesionado">Lesão {j.lesaoDias}d</span>}
       {j.suspensaoJogos > 0 && <span className="chip vermelho" title="Suspenso">Suspenso</span>}
       {j.amarelosAcumulados === 2 && j.suspensaoJogos === 0 && <span className="chip amarelo" title="Pendurado com 2 amarelos">2 CA</span>}
@@ -43,14 +47,47 @@ export function LinhaJogador({ j, aoTocar, direita }: { j: Jogador; aoTocar?: ()
   );
 }
 
+/** Renovação no último ano do contrato: o salário que ele pede e por quantas temporadas. */
+function Renovacao({ j, aoVoltar }: { j: Jogador; aoVoltar: () => void }) {
+  const estado = useJogo();
+  const { atualizar, avisar } = useLoja();
+  const maximo = anosMaximos(j.idade);
+  const [anos, setAnos] = useState(String(Math.min(2, maximo)));
+  const pedido = pedidoDeRenovacao(estado, j);
+  const renovar = () => {
+    const r = renovarContrato(estado, j.id, Number(anos));
+    avisar(r.texto);
+    atualizar();
+    if (r.ok) aoVoltar();
+  };
+  return (
+    <>
+      <p className="pequeno">{j.nome} pede <b>{formatarDinheiro(pedido)}/mês</b> para renovar. Hoje ganha {formatarDinheiro(j.salario)}/mês.</p>
+      <div className="pequeno fraco">Por quanto tempo?</div>
+      <Opcoes opcoes={Array.from({ length: maximo }, (_, i) => ({ valor: String(i + 1), rotulo: i ? `${i + 1} anos` : "1 ano" }))} valor={anos} aoMudar={setAnos} />
+      {maximo < 3 && <p className="mini fraco">Com {j.idade} anos, ele aceita no máximo {maximo === 1 ? "1 ano" : `${maximo} anos`}.</p>}
+      <button className="botao primario cheio" onClick={renovar}>Renovar até {estado.temporada + Number(anos)} por {formatarDinheiro(pedido)}/mês</button>
+      <button className="botao cheio" onClick={aoVoltar}>Voltar</button>
+    </>
+  );
+}
+
 export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFechar: () => void }) {
   const estado = useJogo();
   const { atualizar, avisar } = useLoja();
+  const [renovando, setRenovando] = useState(false);
   const j = estado.jogadores[jogadorId];
   if (!j) return null;
   const meu = j.clubeId === estado.tecnico.clubeId;
   const clube = j.clubeId ? estado.clubes[j.clubeId] : undefined;
   const t = j.temporada;
+  if (meu && renovando) {
+    return (
+      <Folha titulo={`Renovar com ${j.nome}`} aoFechar={aoFechar}>
+        <Renovacao j={j} aoVoltar={() => setRenovando(false)} />
+      </Folha>
+    );
+  }
   return (
     <Folha titulo={j.nome} aoFechar={aoFechar}>
       <div className="linha" style={{ flexWrap: "wrap", gap: 6 }}>
@@ -61,7 +98,14 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
       </div>
       <div className="linha" style={{ gap: 6 }}>
         {clube ? <><Escudo clube={clube} tamanho={22} /><span className="pequeno">{clube.nome}</span></> : <span className="chip">Sem clube</span>}
+        {clube && j.contratoAte != null && <span className="pequeno fraco">· Contrato até {j.contratoAte}</span>}
       </div>
+      {meu && ultimoAno(estado, j) && (
+        <div className="cartao compacto">
+          <p className="pequeno">O contrato termina no fim de {estado.temporada}. Sem renovar, ele sai de graça na virada.</p>
+          <button className="botao primario cheio" style={{ marginTop: 8 }} onClick={() => setRenovando(true)}>Renovar contrato</button>
+        </div>
+      )}
       <div className="cartao compacto">
         <div className="linha entre">
           <div className="centro"><div className="forca" style={{ fontSize: "1.8rem" }}>{j.forca}</div><div className="mini fraco">força</div></div>
@@ -119,6 +163,7 @@ export function Elenco() {
   const lista = filtro === "todos" ? elenco : elenco.filter((j) => j.posicao === filtro);
   const media = Math.round(elenco.reduce((s, j) => s + j.forca, 0) / Math.max(1, elenco.length));
   const indisponiveis = elenco.filter((j) => j.lesaoDias > 0 || j.suspensaoJogos > 0).length;
+  const terminando = elenco.filter((j) => ultimoAno(estado, j)).length;
 
   return (
     <>
@@ -131,6 +176,11 @@ export function Elenco() {
         valor={filtro}
         aoMudar={setFiltro}
       />
+      {terminando > 0 && (
+        <p className="mini fraco">
+          {terminando === 1 ? "1 jogador está" : `${terminando} jogadores estão`} no último ano de contrato: toque no jogador para renovar, ou ele sai de graça no fim da temporada.
+        </p>
+      )}
       <div className="lista">
         {lista.map((j) => <LinhaJogador key={j.id} j={j} aoTocar={() => setAberto(j.id)} />)}
       </div>
