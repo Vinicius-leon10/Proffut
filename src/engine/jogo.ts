@@ -8,6 +8,7 @@ import {
   FASE_LIGA, agregado, avancarFases, chaveDaPartida, criarTemporada, decidePorPenaltis, temporadaEncerrada,
 } from "./competicoes";
 import { COTA_TV_RODADA, DIAS_LESAO, PRECO_REFERENCIA, RECUPERACAO_POR_DIA, TEMPORADA_INICIAL } from "./constantes";
+import { depoisDoMeuJogo, expirarConvites } from "./carreira";
 import { atualizarConfianca, definirObjetivo } from "./diretoria";
 import { escalarAutomatico, forcaDoTime } from "./forca";
 import { lancar, processarMes, publicoDoJogo } from "./financas";
@@ -93,6 +94,9 @@ export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente
   for (const ficha of FICHAS) estado.clubes[ficha.id] = criarClube(ficha, ficha.serie as SerieClube, rng);
   for (const ficha of RESERVA) estado.clubes[ficha.id] = criarClube(ficha, "D", rng);
   if (!estado.clubes[opcoes.clubeId] || estado.clubes[opcoes.clubeId].serie === "D") throw new Error("Clube inválido");
+  // O técnico começa com a reputação do clube que o contratou.
+  estado.tecnico.reputacao = estado.clubes[opcoes.clubeId].reputacao;
+  estado.tecnico.desde = estado.data;
 
   for (const clube of Object.values(estado.clubes)) {
     if (clube.serie === "D") continue;
@@ -168,6 +172,7 @@ function processarDias(estado: EstadoJogo, ate: string) {
     if (mudouMes) processarMes(estado, dia);
     concluirObras(estado, dia);
     gerarPropostas(estado, dia);
+    expirarConvites(estado, dia);
     if (dia.endsWith("-07-01") || dia.endsWith("-07-15")) {
       const noticias = transferenciasDaIa(estado, dia);
       if (noticias.length) {
@@ -311,6 +316,7 @@ function aplicarResultado(estado: EstadoJogo, pv: PartidaViva) {
   const meu = estado.tecnico.clubeId;
   if (p.mandante === meu || p.visitante === meu) {
     atualizarConfianca(estado, p);
+    depoisDoMeuJogo(estado, p);
     const lado = p.mandante === meu ? lm : lv;
     const avisos: string[] = [];
     for (const id of lado.lesionados) avisos.push(`${estado.jogadores[id].nome} está lesionado (${estado.jogadores[id].lesaoDias} dias).`);
@@ -356,20 +362,6 @@ export function propostasDeEmprego(estado: EstadoJogo): string[] {
   return rng.embaralhar(candidatos).slice(0, 4);
 }
 
-export function assumirClube(estado: EstadoJogo, clubeId: string) {
-  const anterior = estado.clubes[estado.tecnico.clubeId];
-  estado.tecnico.clubeId = clubeId;
-  estado.tecnico.confiancaDiretoria = 55;
-  estado.tecnico.confiancaTorcida = 50;
-  estado.objetivo = definirObjetivo(estado);
-  const clube = estado.clubes[clubeId];
-  enviarMensagem(estado, {
-    tipo: "diretoria",
-    titulo: `Bem-vindo ${comArtigo("ao", clube)}!`,
-    texto: `Depois da passagem ${comArtigo("pelo", anterior)}, você assume ${comArtigo("o", clube)}. Objetivo: ${estado.objetivo.descricao}.`,
-  });
-}
-
 /** Força dos clubes de uma série, do mais forte ao mais fraco. */
 export function rankingDeForca(estado: EstadoJogo, serie: SerieClube): { clubeId: string; forca: number }[] {
   return Object.values(estado.clubes)
@@ -379,3 +371,4 @@ export function rankingDeForca(estado: EstadoJogo, serie: SerieClube): { clubeId
 }
 
 export { reescalar };
+export { assumirClube } from "./carreira";

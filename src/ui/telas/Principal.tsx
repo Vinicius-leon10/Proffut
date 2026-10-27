@@ -3,6 +3,7 @@ import { formatarDinheiro } from "../../engine/financas";
 import { naoLidas } from "../../engine/mensagens";
 import { Escudo, Icone } from "../componentes";
 import { useJogo, useLoja, type Aba } from "../store";
+import { Demissao } from "./Demissao";
 import { Elenco } from "./Elenco";
 import { FimTemporada } from "./FimTemporada";
 import { Mercado } from "./Mercado";
@@ -23,7 +24,8 @@ export function Principal() {
   const { aba, irParaAba, abrir } = useLoja();
   const clube = estado.clubes[estado.tecnico.clubeId];
   const novas = naoLidas(estado);
-  // Clube rebaixado para a Série D (fora do jogo): precisa escolher um novo clube.
+  // Demitido, ou com o clube rebaixado para a Série D (fora do jogo): precisa escolher um novo clube.
+  if (estado.tecnico.demissao) return <Demissao />;
   if (clube.serie === "D") return <FimTemporada />;
 
   return (

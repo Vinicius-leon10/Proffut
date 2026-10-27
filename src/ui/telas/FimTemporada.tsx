@@ -1,19 +1,21 @@
 import { comArtigo } from "../../engine/artigos";
 import { NOME_SERIE, SERIES } from "../../engine/competicoes";
-import { forcaDoTime } from "../../engine/forca";
-import { assumirClube, propostasDeEmprego } from "../../engine/jogo";
-import { elencoDe } from "../../engine/mercado";
+import { propostasDeEmprego } from "../../engine/jogo";
 import type { SerieId } from "../../engine/tipos";
 import { Cartao, Escudo, Topo } from "../componentes";
 import { useJogo, useLoja } from "../store";
+import { PropostasDeEmprego } from "./Demissao";
+import { MensagemItem } from "./Mensagens";
 
 export function FimTemporada() {
   const estado = useJogo();
-  const { fechar, atualizar, avisar } = useLoja();
+  const { fechar } = useLoja();
   const r = estado.historico[estado.historico.length - 1];
   const meu = estado.clubes[estado.tecnico.clubeId];
-  const precisaDeClube = meu.serie === "D";
-  const propostas = precisaDeClube ? propostasDeEmprego(estado) : [];
+  const demissao = estado.tecnico.demissao;
+  const precisaDeClube = meu.serie === "D" || !!demissao;
+  const propostas = demissao ? demissao.propostas : precisaDeClube ? propostasDeEmprego(estado) : [];
+  const convites = estado.mensagens.filter((m) => m.convite && !m.convite.resolvido);
   if (!r) return null;
   const nome = (id: string) => estado.clubes[id]?.nome ?? id;
 
@@ -67,24 +69,23 @@ export function FimTemporada() {
 
         {precisaDeClube ? (
           <Cartao titulo="Propostas de emprego">
-            <p className="pequeno fraco" style={{ marginBottom: 8 }}>{comArtigo("O", meu)} caiu para a Série D, que não é disputada no jogo. Estes clubes da Série C querem você:</p>
-            <div className="lista">
-              {propostas.map((id) => {
-                const c = estado.clubes[id];
-                return (
-                  <button key={id} className="item" onClick={() => { assumirClube(estado, id); atualizar(); avisar(`Você assumiu ${comArtigo("o", c)}!`); fechar(); }}>
-                    <Escudo clube={c} tamanho={34} />
-                    <div className="cresce">
-                      <div className="negrito pequeno">{c.nome}</div>
-                      <div className="mini fraco">{c.cidade}/{c.estado} · força {Math.round(forcaDoTime(elencoDe(estado, id)))}</div>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
+            <p className="pequeno fraco" style={{ marginBottom: 8 }}>
+              {demissao
+                ? `A diretoria ${comArtigo("do", estado.clubes[demissao.clubeId])} não quis continuar com você depois de uma temporada abaixo do objetivo. Estes clubes querem você:`
+                : `${comArtigo("O", meu)} caiu para a Série D, que não é disputada no jogo. Estes clubes da Série C querem você:`}
+            </p>
+            <PropostasDeEmprego propostas={propostas} aoEscolher={fechar} />
           </Cartao>
         ) : (
-          <button className="botao primario grande cheio" onClick={fechar}>Começar {estado.temporada}</button>
+          <>
+            {convites.length > 0 && (
+              <Cartao titulo="Convites para você">
+                <p className="pequeno fraco" style={{ marginBottom: 8 }}>A boa temporada chamou a atenção de clubes maiores. Se preferir ficar, é só começar {estado.temporada}.</p>
+                <div className="lista">{convites.map((m) => <MensagemItem key={m.id} m={m} />)}</div>
+              </Cartao>
+            )}
+            <button className="botao primario grande cheio" onClick={fechar}>Começar {estado.temporada}</button>
+          </>
         )}
       </div>
     </div>

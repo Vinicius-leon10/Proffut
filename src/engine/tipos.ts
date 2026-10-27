@@ -193,7 +193,7 @@ export interface EstadoSerie {
   rebaixados: string[];
 }
 
-export type TipoMensagem = "diretoria" | "proposta" | "lesao" | "noticia" | "temporada" | "mercado";
+export type TipoMensagem = "diretoria" | "proposta" | "lesao" | "noticia" | "temporada" | "mercado" | "convite";
 
 export interface Mensagem {
   id: number;
@@ -212,6 +212,12 @@ export interface Mensagem {
     /** Primeira oferta (guardada quando o usuário pede mais) e quantas vezes ele já pediu. */
     inicial?: number;
     pedidos?: number;
+  };
+  /** Convite de outro clube para o técnico. */
+  convite?: {
+    clubeId: string;
+    validaAte: string;
+    resolvido?: "aceito" | "recusado" | "expirado";
   };
 }
 
@@ -247,6 +253,14 @@ export interface Tecnico {
   clubeId: string;
   confiancaDiretoria: number;
   confiancaTorcida: number;
+  /** Prestígio (0–100): decide quem faz convite e proposta. Falta nos saves antigos: vale a do clube atual. */
+  reputacao?: number;
+  /** Quando assumiu o clube atual (no primeiro mês não há demissão). Falta nos saves antigos: marcada no primeiro jogo. */
+  desde?: string;
+  /** Último recado de cargo em risco (no máximo um por mês). */
+  avisoDeRisco?: string;
+  /** Demitido: escolhe um destes clubes antes de seguir (o `clubeId` ainda é o do clube que o demitiu). */
+  demissao?: { data: string; clubeId: string; propostas: string[] };
 }
 
 export interface Configuracoes {

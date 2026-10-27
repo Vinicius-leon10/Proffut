@@ -2,6 +2,8 @@ import { useState } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
 import { NOME_SERIE, tabelaDaLiga, temporadaEncerrada } from "../../engine/competicoes";
+import { reputacaoDoTecnico } from "../../engine/carreira";
+import { CARGO } from "../../engine/constantes";
 import { situacaoDoObjetivo } from "../../engine/diretoria";
 import { folhaSalarial, formatarDinheiro } from "../../engine/financas";
 import { meuJogoHoje, provavelTime, proximaDataComJogo, proximoJogoDoClube } from "../../engine/jogo";
@@ -44,7 +46,9 @@ export function Painel() {
   const adversario = proximo ? estado.clubes[proximo.mandante === meuId ? proximo.visitante : proximo.mandante] : undefined;
   const posAdversario = adversario && adversario.serie === serie ? tabela.find((l) => l.clubeId === adversario.id)?.pos : undefined;
   const propostas = estado.mensagens.filter((m) => m.proposta && !m.proposta.resolvida);
-  const recentes = estado.mensagens.filter((m) => !(m.proposta && !m.proposta.resolvida)).slice(0, 3);
+  const convites = estado.mensagens.filter((m) => m.convite && !m.convite.resolvido);
+  const recentes = estado.mensagens.filter((m) => !(m.proposta && !m.proposta.resolvida) && !(m.convite && !m.convite.resolvido)).slice(0, 3);
+  const emRisco = estado.tecnico.confiancaDiretoria <= CARGO.aviso;
 
   return (
     <>
@@ -82,6 +86,12 @@ export function Painel() {
         <button className="botao cheio" onClick={simularFimDaTemporada}>Simular até o fim da temporada</button>
       )}
 
+      {convites.length > 0 && (
+        <Cartao titulo="Convites para você">
+          <div className="lista">{convites.map((m) => <MensagemItem key={m.id} m={m} />)}</div>
+        </Cartao>
+      )}
+
       {propostas.length > 0 && (
         <Cartao titulo="Propostas recebidas">
           <div className="lista">{propostas.map((m) => <MensagemItem key={m.id} m={m} />)}</div>
@@ -103,10 +113,14 @@ export function Painel() {
           <div>
             <div className="linha entre mini fraco"><span>Confiança da diretoria</span><span className="num">{Math.round(estado.tecnico.confiancaDiretoria)}</span></div>
             <Barra valor={estado.tecnico.confiancaDiretoria} />
+            {emRisco && <p className="mini vermelho" style={{ marginTop: 4 }}>Cargo em risco: se a confiança chegar a {CARGO.demissao}, você é demitido.</p>}
           </div>
           <div>
             <div className="linha entre mini fraco"><span>Confiança da torcida</span><span className="num">{Math.round(estado.tecnico.confiancaTorcida)}</span></div>
             <Barra valor={estado.tecnico.confiancaTorcida} />
+          </div>
+          <div className="linha entre mini fraco">
+            <span>Sua reputação como técnico</span><span className="num negrito">{Math.round(reputacaoDoTecnico(estado))}</span>
           </div>
         </div>
       </Cartao>

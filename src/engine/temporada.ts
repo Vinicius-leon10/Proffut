@@ -1,10 +1,11 @@
 // Virada de temporada: histórico, premiação, acesso/rebaixamento, evolução dos
 // jogadores, aposentadorias, base e preparação do ano seguinte.
 import { comArtigo, concorda } from "./artigos";
+import { demitir, gerarConvites, mudarReputacao, passouDaCarencia } from "./carreira";
 import { inicioDaTemporada, somarDias } from "./calendario";
 import { NOME_SERIE, SERIES, criarTemporada, posicaoNaLiga, tabelaDaLiga } from "./competicoes";
 import { criarCopa } from "./copa";
-import { ELENCO_MAXIMO, MINIMO_POSICAO, PRECO_REFERENCIA } from "./constantes";
+import { CARGO, CONVITES, ELENCO_MAXIMO, MINIMO_POSICAO, PRECO_REFERENCIA, REPUTACAO } from "./constantes";
 import { definirObjetivo } from "./diretoria";
 import { escalarAutomatico } from "./forca";
 import { lancar, premiacao } from "./financas";
@@ -185,6 +186,12 @@ export function encerrarTemporada(estado: EstadoJogo) {
   const campeao = [A.campeao, B.campeao, C.campeao].includes(meuId);
   t.confiancaDiretoria = limitar(t.confiancaDiretoria + (cumpriu ? 15 : -15) + (subiu ? 15 : 0) + (campeao ? 10 : 0) - (caiu ? 20 : 0), 10, 100);
   t.confiancaTorcida = limitar(t.confiancaTorcida + (subiu ? 15 : 0) + (campeao ? 20 : 0) - (caiu ? 20 : 0), 10, 100);
+  mudarReputacao(estado,
+    (cumpriu ? REPUTACAO.cumpriu : REPUTACAO.naoCumpriu) + (subiu ? REPUTACAO.acesso : 0) + (caiu ? REPUTACAO.rebaixamento : 0) +
+    (campeao ? (minhaSerie === "A" ? REPUTACAO.tituloA : REPUTACAO.titulo) : 0) + (estado.copa?.campeao === meuId ? REPUTACAO.copa : 0));
+  // Quem caiu para a Série D já troca de clube; os outros, abaixo do objetivo e sem a confiança da diretoria, saem.
+  const caiuParaD = C.rebaixados.includes(meuId);
+  const demitido = !t.demissao && !caiuParaD && !cumpriu && t.confiancaDiretoria <= CARGO.demissao && passouDaCarencia(estado);
 
   // ---- nova temporada ----
   estado.temporada = ano + 1;
@@ -207,8 +214,12 @@ export function encerrarTemporada(estado: EstadoJogo) {
   }
   estado.objetivo = definirObjetivo(estado);
 
-  // ---- mensagens ----
+  // ---- técnico: demissão ou convites de clubes maiores (para quem foi bem) ----
   const meuClube = estado.clubes[meuId];
+  if (demitido) demitir(estado, `A diretoria ${comArtigo("do", meuClube)} não quis continuar com você depois de uma temporada abaixo do objetivo.`);
+  else if (!t.demissao && !caiuParaD && (cumpriu || subiu || campeao)) gerarConvites(estado, CONVITES.virada);
+
+  // ---- mensagens ----
   const resumo = [
     `${nome(A.campeao!)} foi ${concorda(estado.clubes[A.campeao!], "campeão", "campeã")} da Série A, ${nome(B.campeao!)} da Série B e ${nome(C.campeao!)} da Série C.`,
     `Seu time terminou a fase de classificação em ${minhaPosicao}º. Objetivo: ${cumpriu ? "cumprido" : "não cumprido"}.`,
@@ -223,9 +234,11 @@ export function encerrarTemporada(estado: EstadoJogo) {
   if (jovensMeus.length) {
     enviarMensagem(estado, { tipo: "noticia", titulo: "Novos jogadores da base", texto: `Subiram para o profissional: ${jovensMeus.join(", ")}.` });
   }
-  enviarMensagem(estado, {
-    tipo: "diretoria",
-    titulo: `Objetivo para ${ano + 1}`,
-    texto: `A diretoria espera: ${estado.objetivo.descricao}.`,
-  });
+  if (!demitido) {
+    enviarMensagem(estado, {
+      tipo: "diretoria",
+      titulo: `Objetivo para ${ano + 1}`,
+      texto: `A diretoria espera: ${estado.objetivo.descricao}.`,
+    });
+  }
 }

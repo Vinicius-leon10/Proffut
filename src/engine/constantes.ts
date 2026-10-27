@@ -57,6 +57,21 @@ export const ESTATISTICAS = {
  */
 export const AVISO_PRESSAO = { minutos: 15, liga: 14, desliga: 10, proporcao: 3, proporcaoDesliga: 2 };
 
+// ---- carreira do técnico ------------------------------------------------------
+/**
+ * Cargo: com a confiança da diretoria em `aviso` ou menos chega o recado de cargo em risco (um por mês); em
+ * `demissao` ou menos, demissão depois de um jogo, se o técnico já tem `carenciaDias` no clube (e na virada, se
+ * não cumpriu o objetivo). Com o computador no lugar do usuário: ~12% das temporadas, todas abaixo do objetivo.
+ */
+export const CARGO = { aviso: 35, demissao: 20, carenciaDias: 30 };
+/** Reputação do técnico (0–100): muda na virada da temporada e na demissão; decide quem faz convite e proposta. */
+export const REPUTACAO = { cumpriu: 4, naoCumpriu: -4, acesso: 6, titulo: 6, tituloA: 10, copa: 6, rebaixamento: -6, demissao: -6, minimo: 30, maximo: 99 };
+/**
+ * Convites (no meio da fase de liga e na virada, para quem vai bem): clubes da mesma série ou acima, com reputação
+ * maior que a do clube atual + `folga` e até a do técnico + `alcance`. Valem `validadeDias` dias.
+ */
+export const CONVITES = { folga: 3, alcance: 10, validadeDias: 10, meioDaLiga: 1, virada: 2 };
+
 // ---- energia e recuperação --------------------------------------------------
 export const RECUPERACAO_POR_DIA = 9;
 export const DIAS_LESAO = { min: 4, max: 35 };

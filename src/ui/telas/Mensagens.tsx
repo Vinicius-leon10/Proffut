@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { comArtigo } from "../../engine/artigos";
+import { responderConvite } from "../../engine/carreira";
 import { formatarData } from "../../engine/calendario";
 import { formatarDinheiro } from "../../engine/financas";
 import { valorMercado } from "../../engine/gerador";
@@ -15,6 +16,7 @@ const ROTULO_TIPO: Record<Mensagem["tipo"], string> = {
   noticia: "Notícias",
   temporada: "Temporada",
   mercado: "Mercado",
+  convite: "Convite",
 };
 
 const AUMENTOS = ["5", "10", "20", "30", "50"] as const;
@@ -61,10 +63,19 @@ export function MensagemItem({ m }: { m: Mensagem }) {
     atualizar();
   };
   const pendente = m.proposta && !m.proposta.resolvida;
+  const convite = m.convite && !m.convite.resolvido;
+  const responderAoConvite = (aceitar: boolean) => {
+    const novo = estado.clubes[m.convite!.clubeId];
+    const atual = estado.clubes[estado.tecnico.clubeId];
+    if (aceitar && !window.confirm(`Assumir ${comArtigo("o", novo)}? Você deixa ${comArtigo("o", atual)}.`)) return;
+    const r = responderConvite(estado, m.id, aceitar);
+    avisar(r.texto);
+    atualizar();
+  };
   return (
     <div className="item" style={{ alignItems: "flex-start", flexDirection: "column", gap: 6 }}>
       <div className="linha entre" style={{ width: "100%" }}>
-        <span className={`chip${m.tipo === "proposta" ? " amarelo" : m.tipo === "diretoria" ? " azul" : m.tipo === "lesao" ? " vermelho" : ""}`}>{ROTULO_TIPO[m.tipo]}</span>
+        <span className={`chip${m.tipo === "proposta" ? " amarelo" : m.tipo === "diretoria" ? " azul" : m.tipo === "lesao" ? " vermelho" : m.tipo === "convite" ? " verde" : ""}`}>{ROTULO_TIPO[m.tipo]}</span>
         <span className="mini muito-fraco">{formatarData(m.data)}</span>
       </div>
       <div className={m.lida ? "pequeno" : "pequeno negrito"}>{m.titulo}</div>
@@ -78,6 +89,13 @@ export function MensagemItem({ m }: { m: Mensagem }) {
       )}
       {pendente && pedindo && <FolhaPedirMais m={m} aoFechar={() => setPedindo(false)} />}
       {m.proposta?.resolvida && <span className="mini muito-fraco">Proposta {m.proposta.resolvida}.</span>}
+      {convite && (
+        <div className="linha" style={{ width: "100%" }}>
+          <button className="botao verde pequeno cresce" onClick={() => responderAoConvite(true)}>Aceitar</button>
+          <button className="botao pequeno cresce" onClick={() => responderAoConvite(false)}>Recusar</button>
+        </div>
+      )}
+      {m.convite?.resolvido && <span className="mini muito-fraco">Convite {m.convite.resolvido}.</span>}
     </div>
   );
 }
