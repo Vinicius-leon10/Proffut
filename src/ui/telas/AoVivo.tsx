@@ -215,9 +215,10 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
           )}
           <div style={{ padding: "8px 16px 0" }}>
             <Segmentado
+              // As notas só no fim da partida (R45).
               opcoes={[
                 { valor: "lances", rotulo: "Lances" }, { valor: "estatisticas", rotulo: "Estatísticas" },
-                { valor: "notas", rotulo: "Notas" }, { valor: "rodada", rotulo: "Rodada" },
+                ...(meu.terminada ? [{ valor: "notas" as const, rotulo: "Notas" }] : []), { valor: "rodada", rotulo: "Rodada" },
               ]}
               valor={aba}
               aoMudar={setAba}
@@ -354,7 +355,7 @@ function faixaDaNota(nota: number): string {
   return nota >= 7.5 ? "otima" : nota >= 7 ? "boa" : nota >= 6 ? "regular" : "ruim";
 }
 
-/** Notas dos jogadores, ao vivo: o melhor em campo (ou até agora) e a nota de cada um que entrou, por time. */
+/** Notas dos jogadores no fim da partida: o melhor em campo e a nota de cada um que entrou, por time. */
 function NotasDaPartida({ pv, meuLado }: { pv: PartidaViva; meuLado: 0 | 1 }) {
   const estado = useJogo();
   const notas = notasDaPartida(pv, estado.jogadores, estado.semente);
@@ -375,7 +376,7 @@ function NotasDaPartida({ pv, meuLado }: { pv: PartidaViva; meuLado: 0 | 1 }) {
     <div className="notas coluna" style={{ gap: 12 }}>
       {melhor && (
         <div className="cartao compacto melhor-em-campo">
-          <div className="mini fraco">{pv.terminada ? "Melhor em campo" : "Melhor até agora"}</div>
+          <div className="mini fraco">Melhor em campo</div>
           <div className="linha">
             <Escudo clube={estado.clubes[pv.lados[melhor.lado].clubeId]} tamanho={28} />
             <span className="nome cresce negrito">{estado.jogadores[melhor.jogadorId].nome}</span>

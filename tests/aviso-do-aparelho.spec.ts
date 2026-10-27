@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { aba, abrirSite, botao, esperarInteiroNaTela, expect, novoJogo, test } from "./ajuda";
+import { aba, abrirSite, botao, esperarInteiroNaTela, expect, irParaOMeuJogo, novoJogo, test } from "./ajuda";
 
 const GUARDADO = "Jogo guardado no aparelho";
 
@@ -81,4 +81,18 @@ test("R44 o \"Jogo guardado no aparelho\" sai da frente quando uma folha abre: a
   await expect(ficha).toBeVisible();
   expect(await page.locator(".aviso", { hasText: GUARDADO }).count(), "o aviso ficou por cima da ficha").toBe(0);
   await esperarInteiroNaTela(page, ficha.getByRole("button", { name: "Fechar" }));
+});
+
+test("R44 o \"Jogo guardado no aparelho\" que chega durante a partida não toma o lugar do aviso do placar", async ({ page }) => {
+  await segurarServiceWorker(page);
+  await novoJogo(page);
+  await irParaOMeuJogo(page);
+  await botao(page, "Começar o jogo").click();
+  // O service worker termina no meio do jogo: nada por cima da partida...
+  await terminarSemAviso(page);
+  await botao(page, "Fim ⏭").click();
+  await page.getByRole("button", { name: "Continuar", exact: true }).click();
+  // ...e, no fim, primeiro o aviso do placar (o R23 pegou o do aparelho no lugar dele), depois o do aparelho.
+  await expect(page.locator(".aviso")).toContainText(/Vitória|Empate|Derrota/);
+  await expect(page.locator(".aviso")).toContainText(GUARDADO, { timeout: 10_000 });
 });

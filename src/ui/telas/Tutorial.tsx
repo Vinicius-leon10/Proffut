@@ -42,8 +42,8 @@ export function Tutorial() {
       icone: "troca",
       texto: (
         <>
-          Na partida dá para fazer até {MAX_SUBSTITUICOES} substituições e mudar a tática. As abas <b>Estatísticas</b> e{" "}
-          <b>Notas</b> mostram se o adversário está pressionando e quem está jogando bem.
+          Na partida dá para fazer até {MAX_SUBSTITUICOES} substituições e mudar a tática. A aba <b>Estatísticas</b> mostra
+          se o adversário está pressionando; no fim do jogo, a aba <b>Notas</b> mostra quem jogou bem.
         </>
       ),
     },

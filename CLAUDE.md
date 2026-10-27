@@ -44,7 +44,7 @@ elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebi
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
 placar), visual claro "opção 3", estatísticas da partida com aviso de pressão, demissão e convites de clubes maiores
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
-sala de troféus e recordes, tutorial rápido no jogo novo, testes de ponta a ponta R01–R44 rodando a cada mudança, antes
+sala de troféus e recordes, tutorial rápido no jogo novo, testes de ponta a ponta R01–R45 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -138,7 +138,8 @@ pelos lances narrados (gol, passe, chute no gol/fora, defesa e pênalti defendid
 ou cometido), gols sofridos e jogo sem sofrer gol (goleiro e defensores), o placar, a força perto da média da partida e
 uma variação com sorteio próprio (`notas/<partida>/<jogador>`: placar e lances não mudam). Minutos pela narração
 (trocas, vermelho, lesão; no máximo 90); quem jogou menos que o tempo até ali (máx. 60) fica perto da base. Melhor em
-campo: maior nota com 30+ minutos. Ao vivo na aba Notas da partida; no fim de cada jogo (todos os jogos) a nota entra
+campo: maior nota com 30+ minutos. Na aba Notas da partida, que só aparece no fim do jogo (pedido do usuário: "Notas
+deixe pra aparecer apenas no final da partida", R45); no fim de cada jogo (todos os jogos) a nota entra
 em `EstatisticasJogador.notas`/`avaliados` (média na ficha, coluna Nota) e `Partida.melhor`. Números em `NOTAS`
 (constantes.ts): média ~6,75, melhor em campo ~8,4, quem fez gol ~7,9, quem perdeu ~6,3. R41.
 
@@ -268,8 +269,9 @@ Obras do estádio se pagam em 3 a 4 temporadas.
   folhas com `max-height: 88dvh`; respiro no fim de `.tela-cheia .conteudo`; `flex-shrink: 0` nos filhos de `.conteudo`.
   Avisos (toast) logo abaixo do topo, nunca por cima dele. Os testes R08–R11 e R15 protegem isso. Aviso que não vem de
   um toque (o "Jogo guardado no aparelho" do service worker) usa `avisarDepois` (`store.ts`): espera a tela aberta por
-  cima e as folhas abertas (`folhasAbertas`, contadas pela `Folha`; o tutorial é uma) fecharem, e sai da frente quando
-  uma folha abre; senão cobre o Continuar dos resultados do dia e o Fechar das fichas (R44).
+  cima, as folhas abertas (`folhasAbertas`, contadas pela `Folha`; o tutorial é uma) e o aviso que já está na tela
+  (o do placar) acabarem, e sai da frente quando uma folha abre; senão cobre o Continuar dos resultados do dia e o
+  Fechar das fichas, ou toma o lugar do aviso do placar (R44).
 - **Folhas (`Folha` em `componentes.tsx`) vão direto no `<body>` (portal).** Dentro de uma área com rolagem o
   Safari do iPhone as desenha por baixo da barra de abas (WebKit 261302), mesmo com z-index maior. O Chromium
   não faz isso; por isso `tests/ajuda.ts` força essas camadas em todos os testes (R16, R17).

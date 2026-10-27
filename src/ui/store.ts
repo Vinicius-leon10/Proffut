@@ -41,8 +41,9 @@ interface Loja {
   fechar: () => void;
   avisar: (texto: string) => void;
   /**
-   * Aviso que não vem de um toque (o do service worker): com uma tela aberta por cima ou uma folha (ficha, tutorial),
-   * espera fechar, para não cobrir os botões do alto dela, como o Continuar dos resultados do dia (R44).
+   * Aviso que não vem de um toque (o do service worker): com uma tela aberta por cima, uma folha (ficha, tutorial) ou
+   * outro aviso na tela, espera, para não cobrir os botões do alto dela, como o Continuar dos resultados do dia, nem
+   * tomar o lugar do aviso do placar (R44).
    */
   avisarDepois: (texto: string) => void;
   /** Chame depois de qualquer mudança no estado do jogo. */
@@ -51,7 +52,8 @@ interface Loja {
 
 let temporizadorSave: ReturnType<typeof setTimeout> | undefined;
 
-const ocupada = (loja: Loja) => !!loja.sobreposta || loja.folhasAbertas > 0;
+// Também espera o aviso que já está na tela (o do placar, depois da partida: R23).
+const ocupada = (loja: Loja) => !!loja.sobreposta || loja.folhasAbertas > 0 || !!loja.aviso;
 
 export const useLoja = create<Loja>((set, getLoja, api) => ({
   estado: null,
