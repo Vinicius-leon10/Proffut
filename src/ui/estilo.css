@@ -551,3 +551,19 @@ p { margin: 0; }
 .marca { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 8px; }
 .marca img { width: 88px; height: 88px; border-radius: 22px; box-shadow: var(--sombra); }
 .marca h1 { font-family: inherit; font-weight: 800; font-size: 2.6rem; letter-spacing: -0.01em; color: var(--texto); }
+
+/* ---- sala de troféus ------------------------------------------------------------------------ */
+
+.trofeus .item { min-height: 0; padding: 8px 2px; }
+.trofeus .colocacao { width: 28px; flex-shrink: 0; font-weight: 800; color: var(--texto-3); }
+.trofeus .gols { min-width: 28px; text-align: right; font-weight: 800; font-size: 1rem; }
+.taca {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.taca svg { width: 20px; height: 20px; }
+.taca.campeao { background: var(--dourado); color: #1a1500; }
+.taca.vice { background: var(--cartao-2); color: var(--texto-2); }
+.taca.acesso { background: var(--floresta); color: #fff; }

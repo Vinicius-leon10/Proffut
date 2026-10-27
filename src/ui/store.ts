@@ -15,6 +15,7 @@ export type Sobreposta =
   | { tipo: "fim-temporada" }
   | { tipo: "financas" }
   | { tipo: "historico" }
+  | { tipo: "trofeus" }
   | { tipo: "config" }
   | { tipo: "checagem" }
   | { tipo: "mensagens" };

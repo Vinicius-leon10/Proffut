@@ -10,6 +10,7 @@ const FORMAS = {
   o: ["o", "a"],
   O: ["O", "A"],
   do: ["do", "da"],
+  no: ["no", "na"],
   ao: ["ao", "à"],
   pelo: ["pelo", "pela"],
 } as const;

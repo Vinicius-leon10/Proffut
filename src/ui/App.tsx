@@ -13,6 +13,7 @@ import { Mensagens } from "./telas/Mensagens";
 import { NovoJogo } from "./telas/NovoJogo";
 import { Principal } from "./telas/Principal";
 import { Resultados } from "./telas/Resultados";
+import { Trofeus } from "./telas/Trofeus";
 
 function Sobreposta() {
   const s = useLoja((x) => x.sobreposta);
@@ -23,6 +24,7 @@ function Sobreposta() {
     case "fim-temporada": return <FimTemporada />;
     case "financas": return <Financas />;
     case "historico": return <Historico />;
+    case "trofeus": return <Trofeus />;
     case "config": return <Config />;
     case "checagem": return <Checagem />;
     case "mensagens": return <Mensagens />;

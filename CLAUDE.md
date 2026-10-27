@@ -44,11 +44,12 @@ elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebi
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
 placar), visual claro "opção 3", estatísticas da partida com aviso de pressão, demissão e convites de clubes maiores
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
-testes de ponta a ponta R01–R41 rodando a cada mudança, antes de publicar e todo dia no site publicado.
+sala de troféus e recordes, testes de ponta a ponta R01–R42 rodando a cada mudança, antes de publicar e todo dia no
+site publicado.
 
 **Pedido em andamento (out/2026):** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão (1) e
-convites (2), contratos (4), empréstimos (5), batedor/capitão (7) e notas (8) prontos; faltam sala de troféus e
-recordes (16) e tutorial rápido (19), nessa ordem, cada um publicado quando os testes passarem.
+convites (2), contratos (4), empréstimos (5), batedor/capitão (7), notas (8) e sala de troféus (16) prontos; falta o
+tutorial rápido (19), publicado quando os testes passarem.
 
 **Visual "opção 3" (out/2026, `src/ui/estilo.css`):** design system que o usuário mandou (pacote
 `proffut-design-system-opcao-3.zip`, "Aplique"): editorial claro. Tokens no `:root`: `--fundo` marfim `#f3f3ec`,
@@ -141,6 +142,16 @@ campo: maior nota com 30+ minutos. Ao vivo na aba Notas da partida; no fim de ca
 em `EstatisticasJogador.notas`/`avaliados` (média na ficha, coluna Nota) e `Partida.melhor`. Números em `NOTAS`
 (constantes.ts): média ~6,75, melhor em campo ~8,4, quem fez gol ~7,9, quem perdeu ~6,3. R41.
 
+**Sala de troféus e recordes (out/2026, `src/engine/trofeus.ts`, tela `Trofeus.tsx`, botão no painel):** recordes de
+cada clube das Séries A, B e C em `EstadoJogo.recordes` = { desde, clubes } (opcional): depois de cada jogo
+(`registrarRecordes`, no fim de `aplicarResultado`) a maior vitória e a pior derrota (pelo saldo, depois pelos gols), o
+maior público em casa (sem campo neutro) e os gols pelo clube em todas as competições (`artilheiros`: os 20 primeiros e
+quem ainda é do clube ou está emprestado por ele; o nome fica depois que o jogador sai ou se aposenta). Clubes da Série
+D não entram. Save antigo: `migrar` chama `montarRecordes` (só os jogos já disputados da temporada em andamento; a tela
+diz "Contando os jogos desde"). Títulos (campeão das séries, Copa e vice, acesso) e a carreira do técnico saem do
+`historico` (`titulosDoClube`, `carreiraDoTecnico`; o clube do técnico em cada fim de temporada) e de
+`Tecnico.clubesAnteriores` (preenchido em `assumirClube`). Placar e lances não mudam; ~60 KB no save. R42.
+
 **Copa do Brasil (out/2026, `src/engine/copa.ts`):** regulamento de 2026 com 126 clubes: 1ª fase com os 28 piores do
 ranking, 2ª com mais 74, 3ª com mais 4 (em 2026 os de verdade: Paysandu, Ponte Preta, Barra-SC, Confiança; depois, os
 4 que subiram da Série C), 5ª com a Série A. Ranking = série + reputação. Jogo único até a 4ª fase na casa do pior
@@ -224,6 +235,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `contratos.ts` | Fim de contrato, renovação (pedido do jogador), contrato de reforço, aviso de setembro e o que acaba na virada |
 | `emprestimos.ts` | Emprestar até o fim da temporada (quem aceita), pegar emprestado (taxa), volta na virada |
 | `notas.ts` | Nota de cada jogador na partida (ao vivo e no fim), melhor em campo, nota média |
+| `trofeus.ts` | Sala de troféus: recordes de cada clube (jogo a jogo), títulos do clube e carreira do técnico (do histórico) |
 | `temporada.ts` | Virada: acesso/rebaixamento, idade, evolução, aposentadoria, base, Série D (`serie-d-reserva.json`) |
 | `jogo.ts` | Orquestra: `novoJogo`, `avancar`, `prepararJogos`/`concluirJogos`, `provavelTime` (escalação do computador sem mudar o jogo), propostas de emprego, obras do dia |
 | `checagem.ts` | `checarEstado`, `repararEstado`, `testarPartida` (roda sozinha ao abrir um jogo) |
@@ -240,7 +252,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 ~2,3 gols por jogo, mandante vence 42–45%, empates 25–29%, correlação força × pontos 0,57–0,79, nenhum clube no vermelho
 (conferido de novo com os elencos reais e com a Copa; a Série C fica no limite: mandante ~40–41%, empates ~29–31%).
 Copa do Brasil no `npm run sim`: campeão quase sempre da Série A, ~30% de zebras por confronto, ~20% dos jogos nos
-pênaltis, campeão leva ~47 mi somando as fases. Save cresce para ~2 MB (elencos da Série D na Copa).
+pênaltis, campeão leva ~47 mi somando as fases. Save com ~2,5 MB (elencos da Série D na Copa).
 Obras do estádio se pagam em 3 a 4 temporadas.
 
 ## Armadilhas já resolvidas (não desfazer)

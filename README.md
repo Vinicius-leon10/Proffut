@@ -30,6 +30,7 @@ O save fica guardado **no próprio celular** e é feito sozinho a cada ação. P
 - Regulamentos de 2026: Série A com 38 rodadas, playoff de acesso na Série B, quadrangulares e final na Série C.
 - **Copa do Brasil** com o regulamento de 2026: 126 clubes (os 60 das séries e 66 da Série D), jogo único até a 4ª fase na casa do time de pior ranking, ida e volta da 5ª fase à semifinal (a Série A entra na 5ª fase), pênaltis no empate, final em campo neutro e premiação por fase. Num jogo já começado antes dela, a Copa começa na temporada seguinte.
 - Classificação com zonas, jogos rodada a rodada e artilharia.
+- **Sala de troféus e recordes** (botão no painel): os títulos e acessos do clube, a maior goleada, a pior derrota, o maior público, os maiores artilheiros do clube e a sua carreira (títulos, clubes, objetivos cumpridos). Num jogo já começado, os recordes contam a partir da temporada em andamento.
 - **Escudos dos clubes** (`public/escudos/`), também sem internet. Para trocar algum só no seu aparelho, importe um arquivo `.json` de escudos do Proffut em Configurações → Escudos.
 - Mercado: comprar, vender (as propostas chegam nas mensagens, e dá para pedir mais), contratar livres, dispensar.
 - Finanças: bilheteria (você define o ingresso), TV, patrocínio, salários e extrato.

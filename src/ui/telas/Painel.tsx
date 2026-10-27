@@ -138,6 +138,7 @@ export function Painel() {
         {recentes.length ? <div className="lista">{recentes.map((m) => <MensagemItem key={m.id} m={m} />)}</div> : <p className="pequeno fraco">Nada novo.</p>}
       </Cartao>
 
+      <button className="botao cheio" onClick={() => abrir({ tipo: "trofeus" })}>Sala de troféus e recordes</button>
       <button className="botao cheio" onClick={() => abrir({ tipo: "historico" })}>Histórico e campeões</button>
     </>
   );

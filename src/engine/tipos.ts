@@ -264,6 +264,28 @@ export interface RegistroTemporada {
   tecnico: { clubeId: string; serie: SerieId; posicao: number; objetivo: string; cumpriu: boolean };
 }
 
+/** Um jogo que virou recorde de um clube. */
+export interface JogoRecorde {
+  temporada: number;
+  data: string;
+  adversario: string;
+  /** Gols do clube e do adversário. */
+  pro: number;
+  contra: number;
+  competicao: Competicao;
+  publico?: number;
+}
+
+/** Recordes de um clube, somados jogo a jogo. */
+export interface RecordesClube {
+  maiorVitoria?: JogoRecorde;
+  piorDerrota?: JogoRecorde;
+  /** Maior público em casa. */
+  maiorPublico?: JogoRecorde;
+  /** Gols pelo clube: os 20 primeiros e quem ainda está no clube (o nome fica depois que o jogador sai ou se aposenta). */
+  artilheiros: { id: number; nome: string; gols: number }[];
+}
+
 export interface Tecnico {
   nome: string;
   clubeId: string;
@@ -275,6 +297,8 @@ export interface Tecnico {
   desde?: string;
   /** Último recado de cargo em risco (no máximo um por mês). */
   avisoDeRisco?: string;
+  /** Clubes que já treinou antes do atual, na ordem (falta nos saves antigos: vem do histórico na primeira troca). */
+  clubesAnteriores?: string[];
   /** Demitido: escolhe um destes clubes antes de seguir (o `clubeId` ainda é o do clube que o demitiu). */
   demissao?: { data: string; clubeId: string; propostas: string[] };
 }
@@ -303,4 +327,9 @@ export interface EstadoJogo {
   proximoIdMensagem: number;
   historico: RegistroTemporada[];
   config: Configuracoes;
+  /**
+   * Sala de troféus: recordes de cada clube das Séries A, B e C, contados desde a temporada `desde` (falta nos saves
+   * antigos: ao abrir, começa pelos jogos já disputados na temporada em andamento).
+   */
+  recordes?: { desde: number; clubes: Record<string, RecordesClube> };
 }

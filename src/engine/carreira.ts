@@ -35,6 +35,8 @@ export function assumirClube(estado: EstadoJogo, clubeId: string, { confianca = 
     if (m.convite && !m.convite.resolvido) m.convite.resolvido = "recusado";
   }
   for (const j of elencoDe(estado, anterior.id)) j.aVenda = false;
+  const anteriores = (t.clubesAnteriores ??= [...new Set(estado.historico.map((r) => r.tecnico.clubeId))]);
+  if (anteriores[anteriores.length - 1] !== anterior.id) anteriores.push(anterior.id);
   t.clubeId = clubeId;
   t.confiancaDiretoria = confianca;
   t.confiancaTorcida = 50;

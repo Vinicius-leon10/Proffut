@@ -40,5 +40,7 @@ export default defineConfig({
   test: {
     include: ["src/**/*.test.ts", "tools/**/*.test.ts"],
     environment: "node",
+    // Vários testes do motor jogam temporadas inteiras (~2,5 s cada); o da virada joga duas e passava do limite de 5 s.
+    testTimeout: 20_000,
   },
 });

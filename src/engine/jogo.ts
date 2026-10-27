@@ -11,6 +11,7 @@ import { COTA_TV_RODADA, DIAS_LESAO, PRECO_REFERENCIA, RECUPERACAO_POR_DIA, TEMP
 import { depoisDoMeuJogo, expirarConvites } from "./carreira";
 import { avisarContratos, garantirContratos } from "./contratos";
 import { melhorEmCampo, notasDaPartida } from "./notas";
+import { registrarRecordes } from "./trofeus";
 import { atualizarConfianca, definirObjetivo } from "./diretoria";
 import { escalarAutomatico, forcaDoTime } from "./forca";
 import { lancar, processarMes, publicoDoJogo } from "./financas";
@@ -317,6 +318,7 @@ function aplicarResultado(estado: EstadoJogo, pv: PartidaViva) {
     t.avaliados = (t.avaliados ?? 0) + 1;
   }
   p.melhor = melhorEmCampo(notas)?.jogadorId;
+  registrarRecordes(estado, p);
 
   // Moral.
   const ajustar = (c: Clube, d: number) => { c.moral = Math.max(20, Math.min(100, c.moral + d)); };
