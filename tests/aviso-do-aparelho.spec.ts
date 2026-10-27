@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { abrirSite, botao, esperarInteiroNaTela, expect, novoJogo, test } from "./ajuda";
+import { aba, abrirSite, botao, esperarInteiroNaTela, expect, novoJogo, test } from "./ajuda";
 
 const GUARDADO = "Jogo guardado no aparelho";
 
@@ -66,4 +66,19 @@ test("R44 o \"Jogo guardado no aparelho\" também espera o tutorial do jogo novo
   await tutorial.getByRole("button", { name: "Pular" }).click();
   await expect(tutorial).toHaveCount(0);
   await expect(page.locator(".aviso")).toContainText(GUARDADO);
+});
+
+test("R44 o \"Jogo guardado no aparelho\" sai da frente quando uma folha abre: a ficha do jogador no Mercado aparece inteira", async ({ page }) => {
+  await segurarServiceWorker(page);
+  await novoJogo(page);
+  // Sem nada aberto, o aviso aparece na hora...
+  await page.evaluate(() => (window as unknown as { liberarServiceWorker: () => void }).liberarServiceWorker());
+  await expect(page.locator(".aviso")).toContainText(GUARDADO);
+  // ...e sai da frente da ficha do jogador, que abre logo depois (o teste R08 pegou o aviso por cima do Fechar).
+  await aba(page, "Mercado");
+  await page.locator(".lista .item").first().click();
+  const ficha = page.getByRole("dialog");
+  await expect(ficha).toBeVisible();
+  expect(await page.locator(".aviso", { hasText: GUARDADO }).count(), "o aviso ficou por cima da ficha").toBe(0);
+  await esperarInteiroNaTela(page, ficha.getByRole("button", { name: "Fechar" }));
 });

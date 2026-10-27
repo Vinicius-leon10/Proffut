@@ -112,6 +112,11 @@ export function Cartao({ titulo, acao, children, compacto }: { titulo?: string; 
  * iPhone a desenharia por baixo da barra de abas (teste R16).
  */
 export function Folha({ titulo, aoFechar, children }: { titulo?: ReactNode; aoFechar: () => void; children: ReactNode }) {
+  // Com a folha aberta, o aviso que chegou sozinho sai da frente e os próximos esperam ela fechar (R44).
+  useEffect(() => {
+    useLoja.setState((s) => ({ folhasAbertas: s.folhasAbertas + 1, aviso: s.aviso?.sozinho ? null : s.aviso }));
+    return () => useLoja.setState((s) => ({ folhasAbertas: s.folhasAbertas - 1 }));
+  }, []);
   useEffect(() => {
     const tecla = (e: KeyboardEvent) => { if (e.key === "Escape") aoFechar(); };
     window.addEventListener("keydown", tecla);

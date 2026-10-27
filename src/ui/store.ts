@@ -26,7 +26,10 @@ interface Loja {
   tela: Tela;
   aba: Aba;
   sobreposta: Sobreposta | null;
-  aviso: { texto: string; id: number } | null;
+  /** `sozinho`: aviso que não veio de um toque (sai da frente quando uma folha abre). */
+  aviso: { texto: string; id: number; sozinho?: boolean } | null;
+  /** Folhas (`Folha`) abertas agora: ficha do jogador, tutorial... */
+  folhasAbertas: number;
   salvando: boolean;
   /** Escudos importados pelo usuário (só neste aparelho); vazio = escudos desenhados. */
   escudos: Escudos;
@@ -38,8 +41,8 @@ interface Loja {
   fechar: () => void;
   avisar: (texto: string) => void;
   /**
-   * Aviso que não vem de um toque (o do service worker): com uma tela aberta por cima ou o tutorial, espera fechar,
-   * para não cobrir os botões do alto dela, como o Continuar dos resultados do dia (R44).
+   * Aviso que não vem de um toque (o do service worker): com uma tela aberta por cima ou uma folha (ficha, tutorial),
+   * espera fechar, para não cobrir os botões do alto dela, como o Continuar dos resultados do dia (R44).
    */
   avisarDepois: (texto: string) => void;
   /** Chame depois de qualquer mudança no estado do jogo. */
@@ -48,7 +51,7 @@ interface Loja {
 
 let temporizadorSave: ReturnType<typeof setTimeout> | undefined;
 
-const ocupada = (loja: Loja) => !!loja.sobreposta || !!loja.estado?.tutorial;
+const ocupada = (loja: Loja) => !!loja.sobreposta || loja.folhasAbertas > 0;
 
 export const useLoja = create<Loja>((set, getLoja, api) => ({
   estado: null,
@@ -57,6 +60,7 @@ export const useLoja = create<Loja>((set, getLoja, api) => ({
   aba: "clube",
   sobreposta: null,
   aviso: null,
+  folhasAbertas: 0,
   salvando: false,
   escudos: {},
   iniciar: (estado) => {
@@ -80,11 +84,12 @@ export const useLoja = create<Loja>((set, getLoja, api) => ({
   fechar: () => set({ sobreposta: null }),
   avisar: (texto) => set({ aviso: { texto, id: Date.now() } }),
   avisarDepois: (texto) => {
-    if (!ocupada(getLoja())) return getLoja().avisar(texto);
+    const mostrar = () => set({ aviso: { texto, id: Date.now(), sozinho: true } });
+    if (!ocupada(getLoja())) return mostrar();
     const parar = api.subscribe((loja) => {
       if (ocupada(loja)) return;
       parar();
-      loja.avisar(texto);
+      mostrar();
     });
   },
   atualizar: () => {

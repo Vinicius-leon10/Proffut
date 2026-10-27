@@ -268,7 +268,8 @@ Obras do estádio se pagam em 3 a 4 temporadas.
   folhas com `max-height: 88dvh`; respiro no fim de `.tela-cheia .conteudo`; `flex-shrink: 0` nos filhos de `.conteudo`.
   Avisos (toast) logo abaixo do topo, nunca por cima dele. Os testes R08–R11 e R15 protegem isso. Aviso que não vem de
   um toque (o "Jogo guardado no aparelho" do service worker) usa `avisarDepois` (`store.ts`): espera a tela aberta por
-  cima e o tutorial fecharem, senão cobre o Continuar dos resultados do dia (R44).
+  cima e as folhas abertas (`folhasAbertas`, contadas pela `Folha`; o tutorial é uma) fecharem, e sai da frente quando
+  uma folha abre; senão cobre o Continuar dos resultados do dia e o Fechar das fichas (R44).
 - **Folhas (`Folha` em `componentes.tsx`) vão direto no `<body>` (portal).** Dentro de uma área com rolagem o
   Safari do iPhone as desenha por baixo da barra de abas (WebKit 261302), mesmo com z-index maior. O Chromium
   não faz isso; por isso `tests/ajuda.ts` força essas camadas em todos os testes (R16, R17).
