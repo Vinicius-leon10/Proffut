@@ -44,8 +44,8 @@ elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebi
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
 placar), visual claro "opção 3", estatísticas da partida com aviso de pressão, demissão e convites de clubes maiores
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
-sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar e tática antes do jogo, arrastar para
-trocar e barrinha de energia no campinho, testes de ponta a ponta R01–R49 rodando a cada mudança, antes
+sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
+jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia), testes de ponta a ponta R01–R52 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -131,8 +131,8 @@ empréstimos". R39.
 cartão da Tática). `LadoVivo.batedor` vem do clube; `cobradores` (partida.ts) põe o escolhido primeiro se estiver em
 campo e depois ordena por `notaCobrador`: vale para o pênalti no jogo e para a disputa por pênaltis. Sem escolha a
 ordem é a de antes (resultados iguais). O capitão é só da tela: `capitaoDoTime` (forca.ts) = o escolhido se for
-titular, senão o titular mais experiente (jogos na carreira); braçadeira "C" (`.vaga .capitao`) no campinho da
-Tática e no time titular do adversário. Escolha de quem saiu do clube conta como automático. R40.
+titular, senão o titular mais experiente (jogos na carreira); braçadeira "C" (`.vaga .capitao`) no campinho de antes
+do jogo e no time titular do adversário. Escolha de quem saiu do clube conta como automático. R40.
 
 **Notas dos jogadores (out/2026, `src/engine/notas.ts`):** `notasDaPartida` dá a nota (3 a 10, uma casa) de quem entrou,
 pelos lances narrados (gol, passe, chute no gol/fora, defesa e pênalti defendido do goleiro, cartões, pênalti perdido
@@ -161,15 +161,20 @@ testes e os jogos antigos não mostram); terminar ou pular apaga o campo. Config
 Nos testes, `novoJogo` (`ajuda.ts`) pula o tutorial com `pularTutorial`, que espera o save guardar o jogo sem ele (o
 jogo salva 400 ms depois; um teste que recarregasse antes veria o tutorial de novo). R43.
 
-**Antes do jogo e campinho da Tática (out/2026, capturas do usuário):** a força média de cada time (`forcaMediaDoTime`
-em `Tatica.tsx`: a força de quem está em campo, sem posição nem cansaço) fica em cima do escudo, no placar da partida
-(`MediaDoTime`, antes e durante o jogo), e saiu do cartão do resumo (`ResumoDoTime semMedia`; a folha do time titular
-do adversário ainda mostra) (R46). No cartão, "Mudar a tática" abre `PainelTatica antesDoJogo` ("Tática do seu time"):
-muda a tática do clube com `mudarTaticaDoClube` (a mesma da aba Tática; trocando a formação, `redistribuir`) e a do
-jogo com `mudarTatica` (R47). Na Tática, arrastar uma camisa até outra troca os dois titulares (pointer events nas
-vagas com `data-vaga` e `touch-action: none`; depois de 8 px vira arrasto, o alvo é achado com `elementsFromPoint`;
-um toque sem arrastar abre a escolha da vaga e o clique logo depois de soltar é ignorado) (R48); embaixo do nome, a
-barrinha de energia (`Barra`, `.vaga .cansaco`) (R49).
+**Antes do jogo: placar, tática e campinho da escalação (out/2026, capturas do usuário):** a força média de cada time
+(`forcaMediaDoTime` em `Tatica.tsx`: a força de quem está em campo, sem posição nem cansaço) fica em cima do escudo, no
+placar da partida (`MediaDoTime`, antes e durante o jogo) (R46). No conteúdo antes do jogo (`PreJogo` em `AoVivo.tsx`)
+ficam só o botão "Mudar a tática" (o cartão com o resumo dos times, a dica do escudo e a regra da Copa saiu, R50), o
+campinho e "Começar o jogo"/"Voltar ao clube". "Mudar a tática" abre `PainelTatica antesDoJogo` ("Tática do seu time"):
+muda a tática do clube com `mudarTaticaDoClube` (a mesma da aba Tática; trocando a formação, `redistribuir`) e monta de
+novo o lado da partida com `montarLado` (R47). O campinho (`CampoDaEscalacao` em `Tatica.tsx`) mostra quem vai jogar (o
+lado da partida, já sem lesionados e suspensos, vaga por vaga) no lugar da lista de titulares (R52): arrastar uma camisa
+até outra troca os dois (pointer events nas vagas com `data-vaga` e `touch-action: none`; depois de 8 px vira arrasto, o
+alvo sai de `elementsFromPoint`; o clique logo depois de soltar é ignorado) (R48); um toque abre `EscolherJogador` para pôr
+outro na vaga, um reserva por exemplo; embaixo do nome, a barrinha de energia (`Barra`, `.vaga .cansaco`) (R49). Toda
+mudança grava `clube.escalacao` (titulares e reservas) e monta de novo o lado da partida (ainda no minuto 0). A aba
+Tática ficou sem campinho e sem reservas (R51): "Escalar automático", Força do time, Batedor e capitão, Formação, Estilo,
+Marcação e jogadas e "Escalar automaticamente antes de cada jogo".
 
 **Copa do Brasil (out/2026, `src/engine/copa.ts`):** regulamento de 2026 com 126 clubes: 1ª fase com os 28 piores do
 ranking, 2ª com mais 74, 3ª com mais 4 (em 2026 os de verdade: Paysandu, Ponte Preta, Barra-SC, Confiança; depois, os

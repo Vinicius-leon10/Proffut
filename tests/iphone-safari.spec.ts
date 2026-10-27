@@ -34,11 +34,10 @@ test("R16 no iPhone, as fichas de compra e de venda ficam por cima da barra de b
   await folhaInteiraPorCima(page);
 });
 
-test("R17 no iPhone, as outras folhas (tática, jogos da rodada, substituição) ficam por cima de tudo", async ({ page }) => {
+test("R17 no iPhone, as outras folhas (time do adversário, jogos da rodada, escolha do jogador, substituição) ficam por cima de tudo", async ({ page }) => {
   await novoJogo(page);
 
-  await aba(page, "Tática");
-  await page.locator(".vaga").first().click();
+  await page.getByRole("button", { name: /^Ver o provável time titular d[oa] / }).click();
   await folhaInteiraPorCima(page);
 
   await aba(page, "Tabelas");
@@ -48,6 +47,8 @@ test("R17 no iPhone, as outras folhas (tática, jogos da rodada, substituição)
 
   await aba(page, "Clube");
   await botao(page, /Avançar|Ir para o jogo/).click();
+  await page.locator(".tela-cheia .campo .vaga").first().click();
+  await folhaInteiraPorCima(page);
   await botao(page, "Começar o jogo").click();
   await botao(page, /Substituir/).click();
   await folhaInteiraPorCima(page);

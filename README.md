@@ -9,7 +9,7 @@ Jogo onde você é o técnico de futebol. Inspirado no Brasfoot, roda no navegad
 1. Abra o site no Safari do iPhone: **https://vinicius-leon10.github.io/Proffut/**
 2. Toque em **Compartilhar** → **Adicionar à Tela de Início**. O jogo abre em tela cheia, como um app, e funciona sem internet.
 3. Escolha seu nome, uma série e um clube. Um tutorial rápido mostra os passos principais (dá para ver de novo em Configurações).
-4. No painel do clube, o botão **Avançar** leva ao próximo jogo. Antes, ajuste a escalação e a tática na aba **Tática**.
+4. No painel do clube, o botão **Avançar** leva ao próximo jogo. Antes de começar, ajuste a escalação no campinho e a tática.
 
 O save fica guardado **no próprio celular** e é feito sozinho a cada ação. Para ter um backup ou passar o jogo para outro aparelho, use **Configurações → Exportar save**.
 
@@ -17,8 +17,8 @@ O save fica guardado **no próprio celular** e é feito sozinho a cada ação. P
 
 - Escolher qualquer clube das Séries A, B ou C.
 - Elenco com força, idade, energia, 2 características (o modelo do Brasfoot), lesões e suspensões.
-- Escalação no campinho, com a **força efetiva** colorida (posição, cansaço e características) e a barrinha de energia de cada jogador. Arraste um jogador até outro para trocar os dois de posição. Tocando no escudo do adversário (no painel ou no placar antes do jogo) aparece o time titular dele no mesmo campinho.
-- Antes do jogo, a força média de cada time aparece no placar, em cima do escudo, e o botão **Mudar a tática** muda a tática do seu time ali mesmo.
+- **Antes de cada jogo**, a escalação no campinho, com a **força efetiva** colorida (posição, cansaço e características) e a barrinha de energia de cada jogador: arraste um jogador até outro para trocar os dois de posição, ou toque nele para pôr um reserva. O botão **Mudar a tática** muda a tática do seu time ali mesmo, e a força média de cada time aparece no placar, em cima do escudo. Tocando no escudo do adversário (no painel ou no placar) aparece o time titular dele no mesmo campinho.
+- Na aba **Tática**: formação, estilo, marcação, força do time, batedor de pênalti e capitão.
 - Seis formações, seis estilos de jogo, marcação normal ou pressão, jogadas pelo meio ou pelas pontas.
 - **Batedor de pênalti e capitão** na Tática: o batedor escolhido cobra os pênaltis quando está em campo (e bate primeiro na disputa por pênaltis); o capitão usa a braçadeira (C) no campinho.
 - **Partida ao vivo** minuto a minuto, com narração, os outros jogos da rodada ao mesmo tempo, substituições e mudança de tática durante o jogo.

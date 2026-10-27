@@ -102,6 +102,11 @@ export async function pularTutorial(page: Page) {
     .toBe(true);
 }
 
+/** O adversário no placar da partida: a coluna com o escudo que mostra o time titular dele. */
+export const adversarioNoPlacar = (page: Page) =>
+  page.locator(".placar .time").filter({ has: page.getByRole("button", { name: /^Ver o time titular d[oa] / }) });
+export const nomeDoAdversario = async (page: Page) => (await adversarioNoPlacar(page).locator("span.corta").textContent())!.trim();
+
 /** Data mostrada no topo do painel, ex.: "sáb, 04 abr 2026". */
 export async function dataNoTopo(page: Page) {
   return (await page.locator(".topo .sub").first().textContent())?.split("·")[0].trim();

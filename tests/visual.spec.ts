@@ -67,10 +67,12 @@ test("R31 visual claro da opção 3: fundo marfim, topo e abas verde-floresta, d
   expect(verdeFloresta(verdeSegmento), "segmento escolhido verde-floresta").toBe(true);
   expect(contraste(await cor(escolhido), verdeSegmento)).toBeGreaterThanOrEqual(4.5);
 
-  // Tática: título da página serifado e o campinho continua verde.
+  // Tática: título da página serifado. O campinho continua verde (o do time do adversário, no painel).
   await aba(page, "Tática");
   expect(await serifada(page.locator("main h2").first()), "título da página serifado").toBe(true);
-  const campo = await cor(page.locator("main .campo"), "background-color");
+  await aba(page, "Clube");
+  await page.getByRole("button", { name: /^Ver o provável time titular d[oa] / }).click();
+  const campo = await cor(page.getByRole("dialog").locator(".campo"), "background-color");
   expect(campo[1] - campo[0] > 40 && campo[1] - campo[2] > 20, "campinho verde").toBe(true);
 });
 

@@ -47,14 +47,15 @@ await pagina.getByRole("button", { name: "Fechar" }).click();
 
 await pagina.getByRole("button", { name: "Tática", exact: true }).click();
 await foto("tatica");
-await pagina.locator(".vaga").nth(9).click();
-await foto("tatica-escolher");
-await pagina.getByRole("button", { name: "Fechar" }).click();
 
 await pagina.getByRole("button", { name: "Clube", exact: true }).click();
 await clicar(/Avançar|Ir para o jogo/);
 await pagina.waitForSelector("text=Começar o jogo");
 await foto("pre-jogo");
+// O campinho da escalação fica antes do jogo: um toque abre a escolha do jogador da vaga.
+await pagina.locator(".tela-cheia .campo .vaga").nth(9).click();
+await foto("pre-jogo-escolher");
+await pagina.getByRole("button", { name: "Fechar" }).click();
 await pagina.getByRole("button", { name: /^Ver o time titular/ }).click();
 await foto("time-adversario");
 await pagina.getByRole("button", { name: "Fechar" }).click();

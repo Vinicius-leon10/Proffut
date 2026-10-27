@@ -32,7 +32,7 @@ test("R09 no elenco, colocar à venda aparece inteiro e o jogador vai para a lis
 test("R10 antes do jogo, os botões de baixo aparecem inteiros e o jogo começa", async ({ page }) => {
   await novoJogo(page);
   await botao(page, /Avançar|Ir para o jogo/).click();
-  await esperarInteiroNaTela(page, botao(page, "Voltar e ajustar a escalação"));
+  await esperarInteiroNaTela(page, botao(page, "Voltar ao clube"));
   await esperarInteiroNaTela(page, botao(page, "Começar o jogo"));
   await botao(page, "Começar o jogo").click();
   await expect(page.locator(".placar")).toBeVisible();

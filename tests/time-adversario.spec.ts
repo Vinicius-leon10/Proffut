@@ -1,4 +1,4 @@
-import { botao, esperarInteiroNaTela, expect, novoJogo, test } from "./ajuda";
+import { adversarioNoPlacar, botao, esperarInteiroNaTela, expect, nomeDoAdversario, novoJogo, test } from "./ajuda";
 
 test("R29 antes do jogo, tocar no escudo do adversário mostra o time titular dele no campinho", async ({ page }) => {
   await novoJogo(page);
@@ -20,16 +20,15 @@ test("R29 antes do jogo, tocar no escudo do adversário mostra o time titular de
     if (await continuar.isVisible()) await continuar.click();
   }
   await expect(comecar).toBeVisible();
-  // No resumo antes do jogo, a linha do adversário: o nome e "formação · estilo" (a força média fica no placar, R46).
-  const linhaDele = page.locator(".tela-cheia .conteudo .cartao .linha").nth(1);
-  const nomeDele = (await linhaDele.locator("span").first().textContent())!.trim();
-  const resumoDele = (await linhaDele.locator("span").nth(1).textContent())!.trim();
+  // No placar antes do jogo, o adversário: o nome e a força média dele (em cima do escudo, R46).
+  const nomeDele = await nomeDoAdversario(page);
+  const mediaDele = (await adversarioNoPlacar(page).locator(".forca-media").textContent())!.trim();
 
   await page.getByRole("button", { name: /^Ver o time titular d[oa] / }).click();
   const folha = page.getByRole("dialog");
   await expect(folha.getByRole("heading")).toContainText("Time titular");
   await expect(folha.getByRole("heading")).toContainText(nomeDele);
-  await expect(folha).toContainText(resumoDele);
+  await expect(folha).toContainText(mediaDele);
   // Os 11 titulares no campinho, cada um com a força na vaga e o nome.
   await expect(folha.locator(".campo .vaga")).toHaveCount(11);
   for (const forca of await folha.locator(".vaga .camisa").allTextContents()) expect(forca).toMatch(/^\d+$/);

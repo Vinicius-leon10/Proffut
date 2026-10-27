@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { botao, expect, irParaOMeuJogo, mexerNoSave, novoJogo, test } from "./ajuda";
+import { botao, expect, irParaOMeuJogo, mexerNoSave, nomeDoAdversario, novoJogo, test } from "./ajuda";
 
 const ESTATISTICAS = [
   "Ataques", "Ataques perigosos", "Posse de bola", "Escanteios", "Cartões amarelos", "Cartões vermelhos",
@@ -70,7 +70,7 @@ test("R35 aviso de pressão: quando o adversário domina os últimos 15 minutos,
   // Meu time bem fraco: o adversário vai pressionar.
   await mexerNoSave(page, "for (const j of Object.values(estado.jogadores)) if (j.clubeId === estado.tecnico.clubeId) j.forca = 5;");
   await irParaOMeuJogo(page);
-  const nomeDele = (await page.locator(".tela-cheia .conteudo .cartao .linha").nth(1).locator("span").first().textContent())!.trim();
+  const nomeDele = await nomeDoAdversario(page);
   await botao(page, "Começar o jogo").click();
 
   // Minuto a minuto até o aviso aparecer, ainda no primeiro tempo.

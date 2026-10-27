@@ -4,18 +4,19 @@ import { MAX_SUBSTITUICOES, ESTILOS } from "../../engine/constantes";
 import { FORMACOES, corForca, forcaEfetiva } from "../../engine/forca";
 import { desfechoDoConfronto } from "../../engine/copa";
 import { concluirJogos } from "../../engine/jogo";
+import { elencoDe } from "../../engine/mercado";
 import {
-  avancarMinuto, cartoes, formatarMinuto, mudarTatica, posseDeBola, pressaoRecente, simularAteOFim, sobPressao, substituir,
+  avancarMinuto, cartoes, formatarMinuto, montarLado, mudarTatica, posseDeBola, pressaoRecente, simularAteOFim, sobPressao, substituir,
   type EstatisticasLado, type LadoVivo, type PartidaViva,
 } from "../../engine/partida";
-import type { Clube, Competicao, EstadoJogo, Estilo, EventoPartida, Formacao, Partida } from "../../engine/tipos";
+import type { Clube, Competicao, Estilo, EventoPartida, Formacao, Partida } from "../../engine/tipos";
 import { NOME_COMPETICAO } from "../../engine/competicoes";
 import { formatarNota, melhorEmCampo, notasDaPartida, type NotaDoJogador } from "../../engine/notas";
 import { Barra, Escudo, Folha, Icone, Opcoes, Pos, Segmentado } from "../componentes";
 import { rotuloPartida } from "../formatos";
 import { apito, liberarSom, pararSons, tocarLances } from "../sons";
 import { useJogo, useLoja } from "../store";
-import { FolhaDoTime, ResumoDoTime, forcaMediaDoTime, mudarTaticaDoClube } from "./Tatica";
+import { CampoDaEscalacao, FolhaDoTime, forcaMediaDoTime, mudarTaticaDoClube } from "./Tatica";
 
 const INTERVALO_MS: Record<1 | 2, number> = { 1: 700, 2: 340 };
 /** Pausa depois de um pênalti marcado, antes da cobrança (o narrador grita e a torcida reage). */
@@ -172,7 +173,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
       </div>
 
       {!iniciado ? (
-        <PreJogo vivas={vivas} meu={meu} meuLado={meuLado} regra={regraDoMataMata(estado, partida)} aoComecar={comecar} aoAjustar={fechar} />
+        <PreJogo vivas={vivas} meu={meu} meuLado={meuLado} aoComecar={comecar} aoVoltar={fechar} />
       ) : (
         <>
           <div className="linha" style={{ padding: "10px 16px", gap: 8, borderBottom: "1px solid var(--borda)" }}>
@@ -253,64 +254,35 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   );
 }
 
-/** Antes de um jogo da Copa: como ele se decide (e o placar da ida, no jogo de volta). */
-function regraDoMataMata(estado: EstadoJogo, p: Partida): string | undefined {
-  if (p.serie !== "CB") return undefined;
-  if (p.perna === 1) return "Jogo de ida. A vaga se decide na volta, no placar somado.";
-  if (p.perna === 2) {
-    const ida = estado.partidas.find((x) => x.serie === "CB" && x.fase === p.fase && x.chave === p.chave && x.perna === 1);
-    const placar = ida?.jogada ? ` Na ida: ${estado.clubes[ida.mandante].nome} ${ida.gm} x ${ida.gv} ${estado.clubes[ida.visitante].nome}.` : "";
-    return `Jogo de volta: vale o placar somado; empate no agregado vai para os pênaltis.${placar}`;
-  }
-  return p.neutro ? "Final em jogo único, em campo neutro. Se empatar, pênaltis." : "Jogo único: quem vencer passa de fase. Se empatar, pênaltis.";
-}
-
 /** A força média de um time, em cima dele no placar (R46). */
 function MediaDoTime({ lado }: { lado: LadoVivo }) {
   const estado = useJogo();
   return <span className="forca-media">força média <b>{forcaMediaDoTime(estado, lado)}</b></span>;
 }
 
-function PreJogo({ vivas, meu, meuLado, regra, aoComecar, aoAjustar }: { vivas: PartidaViva[]; meu: PartidaViva; meuLado: 0 | 1; regra?: string; aoComecar: () => void; aoAjustar: () => void }) {
+function PreJogo({ vivas, meu, meuLado, aoComecar, aoVoltar }: { vivas: PartidaViva[]; meu: PartidaViva; meuLado: 0 | 1; aoComecar: () => void; aoVoltar: () => void }) {
   const estado = useJogo();
+  const { atualizar } = useLoja();
   const [tatica, setTatica] = useState(false);
   const eu = meu.lados[meuLado];
-  const ele = meu.lados[meuLado === 0 ? 1 : 0];
-  const adversario = estado.clubes[ele.clubeId];
+  const clube = estado.clubes[eu.clubeId];
+  // O campinho mostra quem vai jogar (o lado da partida, já sem lesionados e suspensos), vaga por vaga.
+  const titulares = FORMACOES[clube.tatica.formacao].map((v) => eu.emCampo.find((a) => a.vaga === v)?.jogadorId ?? null);
+  // Mexer no campinho muda a escalação do clube e monta de novo o time desta partida (ainda no minuto 0).
+  const mudarEscalacao = (novos: (number | null)[], reservas: number[]) => {
+    clube.escalacao = { titulares: novos, reservas };
+    meu.lados[meuLado] = montarLado(clube, estado.jogadores, elencoDe(estado, clube.id), true);
+    atualizar();
+  };
   return (
     <div className="conteudo">
-      <div className="cartao compacto">
-        <div className="linha entre pequeno">
-          <span className="fraco">Seu time</span>
-          <ResumoDoTime lado={eu} semMedia />
-        </div>
-        <div className="linha entre pequeno" style={{ marginTop: 6 }}>
-          <span className="fraco">{adversario.nome}</span>
-          <ResumoDoTime lado={ele} semMedia />
-        </div>
-        <p className="mini fraco" style={{ marginTop: 6 }}>Toque no escudo {comArtigo("do", adversario)} para ver o time titular.</p>
-        {regra && <p className="mini fraco" style={{ marginTop: 6 }}>{regra}</p>}
-        {/* Mudar a tática do seu time sem sair daqui (R47). */}
-        <button className="botao pequeno cheio" style={{ marginTop: 10 }} onClick={() => setTatica(true)}>Mudar a tática</button>
-      </div>
+      {/* Só a tática no alto (R50); a força média de cada time fica no placar (R46). */}
+      <button className="botao cheio" onClick={() => setTatica(true)}>Mudar a tática</button>
       {tatica && <PainelTatica pv={meu} lado={meuLado} antesDoJogo aoFechar={() => setTatica(false)} />}
-      <div className="lista">
-        {eu.emCampo.map((a) => {
-          const j = estado.jogadores[a.jogadorId];
-          const ef = Math.round(forcaEfetiva(j, a.vaga, j.energia, eu.tatica.jogadas));
-          return (
-            <div key={a.jogadorId} className="item" style={{ minHeight: 40, padding: "6px 2px" }}>
-              <Pos pos={a.vaga.pos} />
-              <span className="cresce pequeno corta">{j.nome}</span>
-              <span className="mini fraco">{Math.round(j.energia)}%</span>
-              <span className={`forca ${corForca(ef, j.forca)}`}>{ef}</span>
-            </div>
-          );
-        })}
-      </div>
+      <CampoDaEscalacao clube={clube} titulares={titulares} reservas={clube.escalacao.reservas} aoMudar={mudarEscalacao} />
       <p className="mini muito-fraco">Hoje: {vivas.length} jogos. Os outros placares aparecem na aba Rodada durante o jogo.</p>
       <button className="botao primario grande cheio" onClick={aoComecar}>Começar o jogo</button>
-      <button className="botao cheio" onClick={aoAjustar}>Voltar e ajustar a escalação</button>
+      <button className="botao cheio" onClick={aoVoltar}>Voltar ao clube</button>
     </div>
   );
 }
@@ -573,7 +545,7 @@ function PainelTatica({ pv, lado, antesDoJogo, aoFechar }: { pv: PartidaViva; la
     if (antesDoJogo) {
       const clube = estado.clubes[l.clubeId];
       mudarTaticaDoClube(estado, clube, m);
-      mudarTatica(pv, lado, { ...clube.tatica }, estado.jogadores);
+      pv.lados[lado] = montarLado(clube, estado.jogadores, elencoDe(estado, clube.id), true);
       atualizar();
     } else mudarTatica(pv, lado, { ...l.tatica, ...m }, estado.jogadores);
     setTick((t) => t + 1);

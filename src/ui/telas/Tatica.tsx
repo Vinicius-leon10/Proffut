@@ -115,34 +115,49 @@ export function FolhaDoTime({ lado, provavel, aoFechar }: { lado: LadoVivo; prov
   );
 }
 
-export function Tatica() {
+/**
+ * O time titular no campinho para mexer antes do jogo (R52): arrastar uma camisa até outra troca os dois de vaga (R48),
+ * um toque abre a escolha do jogador da vaga (um reserva, por exemplo) e embaixo do nome vai a energia (R49).
+ * `titulares` segue as vagas da formação do clube; `aoMudar` recebe a escalação nova.
+ */
+export function CampoDaEscalacao({ clube, titulares, reservas, aoMudar }: {
+  clube: Clube;
+  titulares: (number | null)[];
+  reservas: number[];
+  aoMudar: (titulares: (number | null)[], reservas: number[]) => void;
+}) {
   const estado = useJogo();
-  const { atualizar, avisar } = useLoja();
-  const clube = estado.clubes[estado.tecnico.clubeId];
   const elenco = elencoDe(estado, clube.id);
   const vagas = FORMACOES[clube.tatica.formacao];
   const [vagaAberta, setVagaAberta] = useState<number | null>(null);
-  const [reservaAberta, setReservaAberta] = useState<number | null>(null);
   // Arrastar uma camisa até outra troca os dois de vaga; um toque sem arrastar abre a escolha da vaga.
   const [arrasto, setArrasto] = useState<{ de: number; dx: number; dy: number; alvo: number | null } | null>(null);
   const toque = useRef<{ vaga: number; x: number; y: number; ponteiro: number; arrastando: boolean } | null>(null);
   const semCliqueAte = useRef(0);
-
   const jog = (id: number | null | undefined): Jogador | undefined => (id != null ? estado.jogadores[id] : undefined);
-  const titulares = clube.escalacao.titulares;
-  const reservas = clube.escalacao.reservas;
-
-  const mudarTatica = (mudanca: Partial<TaticaTipo>) => {
-    mudarTaticaDoClube(estado, clube, mudanca);
-    atualizar();
-  };
+  const capitao = capitaoDoTime(estado, clube.id, titulares);
 
   const trocarVagas = (a: number, b: number) => {
     const novos = [...titulares];
     [novos[a], novos[b]] = [novos[b], novos[a]];
-    clube.escalacao.titulares = novos;
-    atualizar();
+    aoMudar(novos, reservas);
   };
+  const escolherParaVaga = (indice: number, jogadorId: number) => {
+    const atual = titulares[indice];
+    const outraVaga = titulares.indexOf(jogadorId);
+    const naReserva = reservas.indexOf(jogadorId);
+    const novos = [...titulares];
+    novos[indice] = jogadorId;
+    if (outraVaga >= 0) novos[outraVaga] = atual;
+    let r = reservas;
+    if (naReserva >= 0) {
+      r = [...reservas];
+      if (atual != null) r[naReserva] = atual; else r.splice(naReserva, 1);
+    }
+    setVagaAberta(null);
+    aoMudar(novos, r);
+  };
+
   const apertar = (vaga: number) => (e: PointerEvent<HTMLButtonElement>) => {
     if (titulares[vaga] == null) return;
     toque.current = { vaga, x: e.clientX, y: e.clientY, ponteiro: e.pointerId, arrastando: false };
@@ -173,75 +188,8 @@ export function Tatica() {
     setArrasto(null);
   };
 
-  const escolherParaVaga = (indice: number, jogadorId: number) => {
-    const atual = titulares[indice];
-    const outraVaga = titulares.indexOf(jogadorId);
-    const naReserva = reservas.indexOf(jogadorId);
-    const novos = [...titulares];
-    novos[indice] = jogadorId;
-    if (outraVaga >= 0) novos[outraVaga] = atual;
-    clube.escalacao.titulares = novos;
-    if (naReserva >= 0) {
-      const r = [...reservas];
-      if (atual != null) r[naReserva] = atual; else r.splice(naReserva, 1);
-      clube.escalacao.reservas = r;
-    }
-    setVagaAberta(null);
-    atualizar();
-  };
-
-  const escolherParaReserva = (indice: number, jogadorId: number) => {
-    const r = [...reservas];
-    const outra = r.indexOf(jogadorId);
-    if (outra >= 0) [r[indice], r[outra]] = [r[outra], r[indice]];
-    else r[indice] = jogadorId;
-    clube.escalacao.reservas = r;
-    setReservaAberta(null);
-    atualizar();
-  };
-
-  const automatica = () => {
-    clube.escalacao = escalarAutomatico(elenco, clube.tatica.formacao, clube.tatica.jogadas);
-    atualizar();
-    avisar("Escalação montada com os melhores disponíveis.");
-  };
-
-  // Força dos setores com a escalação atual (sem mando de campo).
-  const emCampo = titulares
-    .map((id, i) => ({ jogador: jog(id)!, vaga: vagas[i], energia: jog(id)?.energia ?? 0 }))
-    .filter((x) => x.jogador);
-  const s = calcularSetores(emCampo, clube.tatica.jogadas);
-  const estilo = ESTILOS[clube.tatica.estilo];
-  const setores = [
-    { nome: "Defesa", valor: s.defesa * estilo.defesa },
-    { nome: "Meio", valor: s.meio * estilo.meio },
-    { nome: "Ataque", valor: s.ataque * estilo.ataque },
-  ];
-  const problemas = titulares.filter((id) => !jog(id) || !disponivel(jog(id)!)).length;
-  const capitao = capitaoDoTime(estado, clube.id, titulares);
-  // Escolhas que não valem mais (o jogador saiu do clube) contam como automático.
-  const doClube = (id?: number) => (id != null && estado.jogadores[id]?.clubeId === clube.id ? id : undefined);
-  const porCobranca = [...elenco].sort((a, b) => notaCobrador(b) - notaCobrador(a));
-  const porExperiencia = [...elenco].sort((a, b) => b.carreira.jogos + b.temporada.jogos - (a.carreira.jogos + a.temporada.jogos) || b.idade - a.idade);
-  const escolher = (campo: "batedor" | "capitao", valor: string) => {
-    if (valor) clube[campo] = Number(valor);
-    else delete clube[campo];
-    atualizar();
-  };
-
   return (
     <>
-      <div className="linha entre">
-        <h2>Tática</h2>
-        <button className="botao pequeno" onClick={automatica}>Escalar automático</button>
-      </div>
-
-      {problemas > 0 && (
-        <p className="chip vermelho" style={{ whiteSpace: "normal" }}>
-          {problemas} vaga(s) com jogador lesionado, suspenso ou vazia. Se não trocar, o melhor disponível entra no lugar.
-        </p>
-      )}
-
       <div className="campo">
         <LinhasDoCampo />
         {vagas.map((v, i) => {
@@ -271,7 +219,84 @@ export function Tatica() {
           );
         })}
       </div>
-      <p className="mini muito-fraco">O número é a força que o jogador rende naquela vaga, com o cansaço atual. Verde: rendimento cheio. Amarelo e vermelho: fora de posição ou cansado. A barrinha embaixo do nome é a energia. Arraste um jogador até outro para trocar os dois de posição.</p>
+      <p className="mini muito-fraco">
+        O número é a força que o jogador rende naquela vaga, com o cansaço atual. Verde: rendimento cheio. Amarelo e vermelho: fora
+        de posição ou cansado. A barrinha embaixo do nome é a energia. Arraste um jogador até outro para trocar os dois de
+        posição; toque nele para pôr outro no lugar, um reserva, por exemplo.
+      </p>
+      {vagaAberta !== null && (
+        <EscolherJogador
+          titulo={`${NOMES_POSICAO[vagas[vagaAberta].pos]}${vagas[vagaAberta].lado ? ` (${vagas[vagaAberta].lado === "D" ? "direita" : "esquerda"})` : ""}`}
+          vaga={vagas[vagaAberta]}
+          elenco={elenco}
+          titulares={titulares}
+          reservas={reservas}
+          jogadas={clube.tatica.jogadas}
+          aoEscolher={(id) => escolherParaVaga(vagaAberta, id)}
+          aoFechar={() => setVagaAberta(null)}
+        />
+      )}
+    </>
+  );
+}
+
+/** A aba Tática: formação, estilo, marcação, força do time, batedor e capitão. A escalação se ajusta antes do jogo (R51). */
+export function Tatica() {
+  const estado = useJogo();
+  const { atualizar, avisar } = useLoja();
+  const clube = estado.clubes[estado.tecnico.clubeId];
+  const elenco = elencoDe(estado, clube.id);
+  const vagas = FORMACOES[clube.tatica.formacao];
+
+  const jog = (id: number | null | undefined): Jogador | undefined => (id != null ? estado.jogadores[id] : undefined);
+  const titulares = clube.escalacao.titulares;
+
+  const mudarTatica = (mudanca: Partial<TaticaTipo>) => {
+    mudarTaticaDoClube(estado, clube, mudanca);
+    atualizar();
+  };
+
+  const automatica = () => {
+    clube.escalacao = escalarAutomatico(elenco, clube.tatica.formacao, clube.tatica.jogadas);
+    atualizar();
+    avisar("Escalação montada com os melhores disponíveis.");
+  };
+
+  // Força dos setores com a escalação atual (sem mando de campo).
+  const emCampo = titulares
+    .map((id, i) => ({ jogador: jog(id)!, vaga: vagas[i], energia: jog(id)?.energia ?? 0 }))
+    .filter((x) => x.jogador);
+  const s = calcularSetores(emCampo, clube.tatica.jogadas);
+  const estilo = ESTILOS[clube.tatica.estilo];
+  const setores = [
+    { nome: "Defesa", valor: s.defesa * estilo.defesa },
+    { nome: "Meio", valor: s.meio * estilo.meio },
+    { nome: "Ataque", valor: s.ataque * estilo.ataque },
+  ];
+  const problemas = titulares.filter((id) => !jog(id) || !disponivel(jog(id)!)).length;
+  // Escolhas que não valem mais (o jogador saiu do clube) contam como automático.
+  const doClube = (id?: number) => (id != null && estado.jogadores[id]?.clubeId === clube.id ? id : undefined);
+  const porCobranca = [...elenco].sort((a, b) => notaCobrador(b) - notaCobrador(a));
+  const porExperiencia = [...elenco].sort((a, b) => b.carreira.jogos + b.temporada.jogos - (a.carreira.jogos + a.temporada.jogos) || b.idade - a.idade);
+  const escolher = (campo: "batedor" | "capitao", valor: string) => {
+    if (valor) clube[campo] = Number(valor);
+    else delete clube[campo];
+    atualizar();
+  };
+
+  return (
+    <>
+      <div className="linha entre">
+        <h2>Tática</h2>
+        <button className="botao pequeno" onClick={automatica}>Escalar automático</button>
+      </div>
+
+      {problemas > 0 && (
+        <p className="chip vermelho" style={{ whiteSpace: "normal" }}>
+          {problemas} vaga(s) com jogador lesionado, suspenso ou vazia. Troque no campinho antes do jogo; se não trocar, o melhor
+          disponível entra no lugar.
+        </p>
+      )}
 
       <Cartao titulo="Força do time">
         <div className="coluna" style={{ gap: 8 }}>
@@ -281,22 +306,6 @@ export function Tatica() {
               <Barra valor={x.valor} cor="var(--esmeralda)" />
             </div>
           ))}
-        </div>
-      </Cartao>
-
-      <Cartao titulo="Reservas">
-        <div className="lista">
-          {Array.from({ length: 7 }, (_, i) => {
-            const j = jog(reservas[i]);
-            return (
-              <button key={i} className="item" onClick={() => setReservaAberta(i)}>
-                {j ? <Pos pos={j.posicao} /> : <span className="posicao" style={{ background: "var(--cartao-2)" }}>–</span>}
-                <span className="cresce corta pequeno negrito">{j?.nome ?? "Vazio"}</span>
-                {j && <Situacao j={j} />}
-                {j && <span className="forca">{j.forca}</span>}
-              </button>
-            );
-          })}
         </div>
       </Cartao>
 
@@ -343,29 +352,6 @@ export function Tatica() {
         <input type="checkbox" style={{ width: 24, minHeight: 24 }} checked={estado.config.escalacaoAutomatica} onChange={(e) => { estado.config.escalacaoAutomatica = e.target.checked; atualizar(); }} />
       </label>
 
-      {vagaAberta !== null && (
-        <EscolherJogador
-          titulo={`${NOMES_POSICAO[vagas[vagaAberta].pos]}${vagas[vagaAberta].lado ? ` (${vagas[vagaAberta].lado === "D" ? "direita" : "esquerda"})` : ""}`}
-          vaga={vagas[vagaAberta]}
-          elenco={elenco}
-          titulares={titulares}
-          reservas={reservas}
-          jogadas={clube.tatica.jogadas}
-          aoEscolher={(id) => escolherParaVaga(vagaAberta, id)}
-          aoFechar={() => setVagaAberta(null)}
-        />
-      )}
-      {reservaAberta !== null && (
-        <EscolherJogador
-          titulo="Reserva"
-          elenco={elenco.filter((j) => !titulares.includes(j.id))}
-          titulares={titulares}
-          reservas={reservas}
-          jogadas={clube.tatica.jogadas}
-          aoEscolher={(id) => escolherParaReserva(reservaAberta, id)}
-          aoFechar={() => setReservaAberta(null)}
-        />
-      )}
     </>
   );
 }
