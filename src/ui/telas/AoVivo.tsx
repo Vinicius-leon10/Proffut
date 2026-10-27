@@ -6,7 +6,7 @@ import { desfechoDoConfronto } from "../../engine/copa";
 import { concluirJogos } from "../../engine/jogo";
 import {
   avancarMinuto, cartoes, formatarMinuto, mudarTatica, posseDeBola, pressaoRecente, simularAteOFim, sobPressao, substituir,
-  type EstatisticasLado, type PartidaViva,
+  type EstatisticasLado, type LadoVivo, type PartidaViva,
 } from "../../engine/partida";
 import type { Clube, Competicao, EstadoJogo, Estilo, EventoPartida, Formacao, Partida } from "../../engine/tipos";
 import { NOME_COMPETICAO } from "../../engine/competicoes";
@@ -15,7 +15,7 @@ import { Barra, Escudo, Folha, Icone, Opcoes, Pos, Segmentado } from "../compone
 import { rotuloPartida } from "../formatos";
 import { apito, liberarSom, pararSons, tocarLances } from "../sons";
 import { useJogo, useLoja } from "../store";
-import { FolhaDoTime, ResumoDoTime } from "./Tatica";
+import { FolhaDoTime, ResumoDoTime, forcaMediaDoTime, mudarTaticaDoClube } from "./Tatica";
 
 const INTERVALO_MS: Record<1 | 2, number> = { 1: 700, 2: 340 };
 /** Pausa depois de um pênalti marcado, antes da cobrança (o narrador grita e a torcida reage). */
@@ -161,12 +161,12 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
       <div className="placar">
         <div className="mini fraco centro" style={{ marginBottom: 6 }}>{rotuloPartida(partida)}</div>
         <div className="times">
-          <div className="time">{escudoNoPlacar(0, clubeM)}<span className="corta" style={{ maxWidth: "100%" }}>{clubeM.nome}</span></div>
+          <div className="time"><MediaDoTime lado={lm} />{escudoNoPlacar(0, clubeM)}<span className="corta" style={{ maxWidth: "100%" }}>{clubeM.nome}</span></div>
           <div className="centro">
             <div className="gols">{lm.gols} <span className="muito-fraco">x</span> {lv.gols}</div>
             <div className="relogio">{relogio(meu)}</div>
           </div>
-          <div className="time">{escudoNoPlacar(1, clubeV)}<span className="corta" style={{ maxWidth: "100%" }}>{clubeV.nome}</span></div>
+          <div className="time"><MediaDoTime lado={lv} />{escudoNoPlacar(1, clubeV)}<span className="corta" style={{ maxWidth: "100%" }}>{clubeV.nome}</span></div>
         </div>
         <div style={{ marginTop: 10 }}><Barra valor={progresso} cor="var(--dourado)" /></div>
       </div>
@@ -265,8 +265,15 @@ function regraDoMataMata(estado: EstadoJogo, p: Partida): string | undefined {
   return p.neutro ? "Final em jogo único, em campo neutro. Se empatar, pênaltis." : "Jogo único: quem vencer passa de fase. Se empatar, pênaltis.";
 }
 
+/** A força média de um time, em cima dele no placar (R46). */
+function MediaDoTime({ lado }: { lado: LadoVivo }) {
+  const estado = useJogo();
+  return <span className="forca-media">força média <b>{forcaMediaDoTime(estado, lado)}</b></span>;
+}
+
 function PreJogo({ vivas, meu, meuLado, regra, aoComecar, aoAjustar }: { vivas: PartidaViva[]; meu: PartidaViva; meuLado: 0 | 1; regra?: string; aoComecar: () => void; aoAjustar: () => void }) {
   const estado = useJogo();
+  const [tatica, setTatica] = useState(false);
   const eu = meu.lados[meuLado];
   const ele = meu.lados[meuLado === 0 ? 1 : 0];
   const adversario = estado.clubes[ele.clubeId];
@@ -275,15 +282,18 @@ function PreJogo({ vivas, meu, meuLado, regra, aoComecar, aoAjustar }: { vivas: 
       <div className="cartao compacto">
         <div className="linha entre pequeno">
           <span className="fraco">Seu time</span>
-          <ResumoDoTime lado={eu} />
+          <ResumoDoTime lado={eu} semMedia />
         </div>
         <div className="linha entre pequeno" style={{ marginTop: 6 }}>
           <span className="fraco">{adversario.nome}</span>
-          <ResumoDoTime lado={ele} />
+          <ResumoDoTime lado={ele} semMedia />
         </div>
         <p className="mini fraco" style={{ marginTop: 6 }}>Toque no escudo {comArtigo("do", adversario)} para ver o time titular.</p>
         {regra && <p className="mini fraco" style={{ marginTop: 6 }}>{regra}</p>}
+        {/* Mudar a tática do seu time sem sair daqui (R47). */}
+        <button className="botao pequeno cheio" style={{ marginTop: 10 }} onClick={() => setTatica(true)}>Mudar a tática</button>
       </div>
+      {tatica && <PainelTatica pv={meu} lado={meuLado} antesDoJogo aoFechar={() => setTatica(false)} />}
       <div className="lista">
         {eu.emCampo.map((a) => {
           const j = estado.jogadores[a.jogadorId];
@@ -553,16 +563,23 @@ function PainelTrocas({ pv, lado, aoFechar }: { pv: PartidaViva; lado: 0 | 1; ao
   );
 }
 
-function PainelTatica({ pv, lado, aoFechar }: { pv: PartidaViva; lado: 0 | 1; aoFechar: () => void }) {
+/** Tática na partida. Antes do jogo é a tática do clube, como na aba Tática, e vale já para este jogo. */
+function PainelTatica({ pv, lado, antesDoJogo, aoFechar }: { pv: PartidaViva; lado: 0 | 1; antesDoJogo?: boolean; aoFechar: () => void }) {
   const estado = useJogo();
+  const { atualizar } = useLoja();
   const [, setTick] = useState(0);
   const l = pv.lados[lado];
   const mudar = (m: Partial<typeof l.tatica>) => {
-    mudarTatica(pv, lado, { ...l.tatica, ...m }, estado.jogadores);
+    if (antesDoJogo) {
+      const clube = estado.clubes[l.clubeId];
+      mudarTaticaDoClube(estado, clube, m);
+      mudarTatica(pv, lado, { ...clube.tatica }, estado.jogadores);
+      atualizar();
+    } else mudarTatica(pv, lado, { ...l.tatica, ...m }, estado.jogadores);
     setTick((t) => t + 1);
   };
   return (
-    <Folha titulo="Tática durante o jogo" aoFechar={aoFechar}>
+    <Folha titulo={antesDoJogo ? "Tática do seu time" : "Tática durante o jogo"} aoFechar={aoFechar}>
       <h3 className="pequeno fraco">Formação</h3>
       <Opcoes opcoes={(Object.keys(FORMACOES) as Formacao[]).map((f) => ({ valor: f, rotulo: f }))} valor={l.tatica.formacao} aoMudar={(f) => mudar({ formacao: f })} />
       <h3 className="pequeno fraco">Estilo</h3>
@@ -570,7 +587,7 @@ function PainelTatica({ pv, lado, aoFechar }: { pv: PartidaViva; lado: 0 | 1; ao
       <h3 className="pequeno fraco">Marcação e jogadas</h3>
       <Opcoes opcoes={[{ valor: "normal", rotulo: "Normal" }, { valor: "pressao", rotulo: "Pressão" }]} valor={l.tatica.marcacao} aoMudar={(m) => mudar({ marcacao: m })} />
       <Opcoes opcoes={[{ valor: "meio", rotulo: "Pelo meio" }, { valor: "pontas", rotulo: "Pelas pontas" }]} valor={l.tatica.jogadas} aoMudar={(m) => mudar({ jogadas: m })} />
-      <button className="botao primario cheio" onClick={aoFechar}>Voltar ao jogo</button>
+      <button className="botao primario cheio" onClick={aoFechar}>{antesDoJogo ? "Pronto" : "Voltar ao jogo"}</button>
     </Folha>
   );
 }

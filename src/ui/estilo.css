@@ -448,7 +448,13 @@ p { margin: 0; }
   max-width: 100%;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.vaga.selecionada .camisa { border-color: var(--dourado); box-shadow: 0 0 0 3px rgb(245 199 44 / 50%); }
+.vaga.selecionada .camisa, .vaga.alvo .camisa { border-color: var(--dourado); box-shadow: 0 0 0 3px rgb(245 199 44 / 50%); }
+/* Tática: arrastar uma camisa até outra troca os dois (R48); embaixo do nome, a barrinha de energia (R49). */
+.vaga.arrastavel { touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.vaga.arrastando { z-index: 5; }
+.vaga.arrastando .camisa { transform: scale(1.12); box-shadow: 0 8px 18px rgb(0 0 0 / 55%); }
+.vaga .cansaco { width: 40px; }
+.vaga .cansaco .barra { height: 4px; background: rgb(255 255 255 / 28%); }
 /* Braçadeira do capitão: canto de cima da camisa. */
 .vaga .capitao {
   position: absolute; top: -4px; left: calc(50% + 10px);
@@ -470,6 +476,13 @@ p { margin: 0; }
 .placar .barra { background: rgb(255 255 255 / 16%); }
 .placar .times { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
 .placar .time { display: flex; flex-direction: column; align-items: center; gap: 4px; font-weight: 700; font-size: 0.9rem; text-align: center; }
+/* Força média de cada time, em cima dele (R46). */
+.placar .forca-media {
+  font-size: 0.68rem; font-weight: 600; color: #b9cbbf;
+  background: rgb(255 255 255 / 10%);
+  padding: 1px 8px; border-radius: 99px; white-space: nowrap;
+}
+.placar .forca-media b { color: #fff; font-weight: 800; }
 .placar .gols, .jogo-rodada .r { font-variant-ligatures: no-contextual; font-feature-settings: "calt" 0; }
 .placar .gols { font-size: 2.4rem; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
 .placar .relogio { text-align: center; color: var(--dourado); font-weight: 700; font-variant-numeric: tabular-nums; }

@@ -44,7 +44,8 @@ elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebi
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
 placar), visual claro "opção 3", estatísticas da partida com aviso de pressão, demissão e convites de clubes maiores
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
-sala de troféus e recordes, tutorial rápido no jogo novo, testes de ponta a ponta R01–R45 rodando a cada mudança, antes
+sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar e tática antes do jogo, arrastar para
+trocar e barrinha de energia no campinho, testes de ponta a ponta R01–R49 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -159,6 +160,16 @@ diretoria, Avançar, Tática, partida, Elenco e Mercado, save), com "Pular", "Pr
 testes e os jogos antigos não mostram); terminar ou pular apaga o campo. Configurações → "Ver o tutorial" liga de novo.
 Nos testes, `novoJogo` (`ajuda.ts`) pula o tutorial com `pularTutorial`, que espera o save guardar o jogo sem ele (o
 jogo salva 400 ms depois; um teste que recarregasse antes veria o tutorial de novo). R43.
+
+**Antes do jogo e campinho da Tática (out/2026, capturas do usuário):** a força média de cada time (`forcaMediaDoTime`
+em `Tatica.tsx`: a força de quem está em campo, sem posição nem cansaço) fica em cima do escudo, no placar da partida
+(`MediaDoTime`, antes e durante o jogo), e saiu do cartão do resumo (`ResumoDoTime semMedia`; a folha do time titular
+do adversário ainda mostra) (R46). No cartão, "Mudar a tática" abre `PainelTatica antesDoJogo` ("Tática do seu time"):
+muda a tática do clube com `mudarTaticaDoClube` (a mesma da aba Tática; trocando a formação, `redistribuir`) e a do
+jogo com `mudarTatica` (R47). Na Tática, arrastar uma camisa até outra troca os dois titulares (pointer events nas
+vagas com `data-vaga` e `touch-action: none`; depois de 8 px vira arrasto, o alvo é achado com `elementsFromPoint`;
+um toque sem arrastar abre a escolha da vaga e o clique logo depois de soltar é ignorado) (R48); embaixo do nome, a
+barrinha de energia (`Barra`, `.vaga .cansaco`) (R49).
 
 **Copa do Brasil (out/2026, `src/engine/copa.ts`):** regulamento de 2026 com 126 clubes: 1ª fase com os 28 piores do
 ranking, 2ª com mais 74, 3ª com mais 4 (em 2026 os de verdade: Paysandu, Ponte Preta, Barra-SC, Confiança; depois, os

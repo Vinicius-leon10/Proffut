@@ -20,7 +20,7 @@ test("R29 antes do jogo, tocar no escudo do adversário mostra o time titular de
     if (await continuar.isVisible()) await continuar.click();
   }
   await expect(comecar).toBeVisible();
-  // No resumo antes do jogo, a linha do adversário: o nome e "formação · estilo · força média".
+  // No resumo antes do jogo, a linha do adversário: o nome e "formação · estilo" (a força média fica no placar, R46).
   const linhaDele = page.locator(".tela-cheia .conteudo .cartao .linha").nth(1);
   const nomeDele = (await linhaDele.locator("span").first().textContent())!.trim();
   const resumoDele = (await linhaDele.locator("span").nth(1).textContent())!.trim();

@@ -17,7 +17,8 @@ O save fica guardado **no próprio celular** e é feito sozinho a cada ação. P
 
 - Escolher qualquer clube das Séries A, B ou C.
 - Elenco com força, idade, energia, 2 características (o modelo do Brasfoot), lesões e suspensões.
-- Escalação no campinho, com a **força efetiva** colorida (posição, cansaço e características). Tocando no escudo do adversário (no painel ou no placar antes do jogo) aparece o time titular dele no mesmo campinho.
+- Escalação no campinho, com a **força efetiva** colorida (posição, cansaço e características) e a barrinha de energia de cada jogador. Arraste um jogador até outro para trocar os dois de posição. Tocando no escudo do adversário (no painel ou no placar antes do jogo) aparece o time titular dele no mesmo campinho.
+- Antes do jogo, a força média de cada time aparece no placar, em cima do escudo, e o botão **Mudar a tática** muda a tática do seu time ali mesmo.
 - Seis formações, seis estilos de jogo, marcação normal ou pressão, jogadas pelo meio ou pelas pontas.
 - **Batedor de pênalti e capitão** na Tática: o batedor escolhido cobra os pênaltis quando está em campo (e bate primeiro na disputa por pênaltis); o capitão usa a braçadeira (C) no campinho.
 - **Partida ao vivo** minuto a minuto, com narração, os outros jogos da rodada ao mesmo tempo, substituições e mudança de tática durante o jogo.

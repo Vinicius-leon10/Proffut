@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useRef, useState, type PointerEvent } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { ESTILOS } from "../../engine/constantes";
 import { FORMACOES, NOMES_POSICAO, calcularSetores, capitaoDoTime, corForca, disponivel, escalarAutomatico, forcaEfetiva, type Vaga } from "../../engine/forca";
 import { elencoDe } from "../../engine/mercado";
 import { notaCobrador, redistribuir, type LadoVivo } from "../../engine/partida";
-import type { Estilo, Formacao, Jogador, Tatica as TaticaTipo } from "../../engine/tipos";
+import type { Clube, EstadoJogo, Estilo, Formacao, Jogador, Tatica as TaticaTipo } from "../../engine/tipos";
 import { Barra, Cartao, Folha, Opcoes, Pos } from "../componentes";
 import { useJogo, useLoja } from "../store";
 import { Situacao } from "./Elenco";
@@ -55,11 +55,45 @@ export function CampoDoTime({ atuacoes, jogadas, capitao }: { atuacoes: { jogado
   );
 }
 
-/** "4-4-2 · Equilibrado · força média 62" de um time na partida. */
-export function ResumoDoTime({ lado }: { lado: LadoVivo }) {
+/** Força média de quem está em campo (a força de cada um, sem posição nem cansaço). */
+export function forcaMediaDoTime(estado: EstadoJogo, lado: LadoVivo): number {
+  return Math.round(lado.emCampo.reduce((s, a) => s + estado.jogadores[a.jogadorId].forca, 0) / Math.max(1, lado.emCampo.length));
+}
+
+/** "4-4-2 · Equilibrado · força média 62" de um time na partida (antes do jogo, a força média fica no placar). */
+export function ResumoDoTime({ lado, semMedia }: { lado: LadoVivo; semMedia?: boolean }) {
   const estado = useJogo();
-  const media = Math.round(lado.emCampo.reduce((s, a) => s + estado.jogadores[a.jogadorId].forca, 0) / Math.max(1, lado.emCampo.length));
-  return <span>{lado.tatica.formacao} · {ESTILOS[lado.tatica.estilo].nome} · força média <b>{media}</b></span>;
+  return (
+    <span>
+      {lado.tatica.formacao} · {ESTILOS[lado.tatica.estilo].nome}
+      {!semMedia && <> · força média <b>{forcaMediaDoTime(estado, lado)}</b></>}
+    </span>
+  );
+}
+
+/** Muda a tática do clube; trocando a formação, os titulares vão para as vagas novas em que rendem mais. */
+export function mudarTaticaDoClube(estado: EstadoJogo, clube: Clube, mudanca: Partial<TaticaTipo>) {
+  const nova = { ...clube.tatica, ...mudanca };
+  if (mudanca.formacao && mudanca.formacao !== clube.tatica.formacao) {
+    const ids = clube.escalacao.titulares.filter((id): id is number => id != null);
+    const energia = Object.fromEntries(ids.map((id) => [id, estado.jogadores[id].energia]));
+    const atuacoes = redistribuir(ids, nova, energia, estado.jogadores);
+    const novasVagas = FORMACOES[nova.formacao];
+    const novo: (number | null)[] = novasVagas.map(() => null);
+    for (const a of atuacoes) novo[novasVagas.indexOf(a.vaga)] = a.jogadorId;
+    clube.escalacao.titulares = novo;
+  }
+  clube.tatica = nova;
+}
+
+/** A vaga do campinho que está debaixo do dedo (fora a que está sendo arrastada). */
+function vagaNoPonto(x: number, y: number, fora: number): number | null {
+  for (const el of document.elementsFromPoint(x, y)) {
+    const vaga = el.closest("[data-vaga]");
+    const i = vaga ? Number(vaga.getAttribute("data-vaga")) : -1;
+    if (i >= 0 && i !== fora) return i;
+  }
+  return null;
 }
 
 /** O time titular de um clube no campinho, numa folha: "Time titular do Londrina" (ou "Provável time titular..."). */
@@ -89,24 +123,54 @@ export function Tatica() {
   const vagas = FORMACOES[clube.tatica.formacao];
   const [vagaAberta, setVagaAberta] = useState<number | null>(null);
   const [reservaAberta, setReservaAberta] = useState<number | null>(null);
+  // Arrastar uma camisa até outra troca os dois de vaga; um toque sem arrastar abre a escolha da vaga.
+  const [arrasto, setArrasto] = useState<{ de: number; dx: number; dy: number; alvo: number | null } | null>(null);
+  const toque = useRef<{ vaga: number; x: number; y: number; ponteiro: number; arrastando: boolean } | null>(null);
+  const semCliqueAte = useRef(0);
 
   const jog = (id: number | null | undefined): Jogador | undefined => (id != null ? estado.jogadores[id] : undefined);
   const titulares = clube.escalacao.titulares;
   const reservas = clube.escalacao.reservas;
 
   const mudarTatica = (mudanca: Partial<TaticaTipo>) => {
-    const nova = { ...clube.tatica, ...mudanca };
-    if (mudanca.formacao && mudanca.formacao !== clube.tatica.formacao) {
-      const ids = titulares.filter((id): id is number => id != null);
-      const energia = Object.fromEntries(ids.map((id) => [id, estado.jogadores[id].energia]));
-      const atuacoes = redistribuir(ids, nova, energia, estado.jogadores);
-      const novasVagas = FORMACOES[nova.formacao];
-      const novo: (number | null)[] = novasVagas.map(() => null);
-      for (const a of atuacoes) novo[novasVagas.indexOf(a.vaga)] = a.jogadorId;
-      clube.escalacao.titulares = novo;
-    }
-    clube.tatica = nova;
+    mudarTaticaDoClube(estado, clube, mudanca);
     atualizar();
+  };
+
+  const trocarVagas = (a: number, b: number) => {
+    const novos = [...titulares];
+    [novos[a], novos[b]] = [novos[b], novos[a]];
+    clube.escalacao.titulares = novos;
+    atualizar();
+  };
+  const apertar = (vaga: number) => (e: PointerEvent<HTMLButtonElement>) => {
+    if (titulares[vaga] == null) return;
+    toque.current = { vaga, x: e.clientX, y: e.clientY, ponteiro: e.pointerId, arrastando: false };
+  };
+  const mover = (e: PointerEvent<HTMLButtonElement>) => {
+    const t = toque.current;
+    if (!t || t.ponteiro !== e.pointerId) return;
+    const [dx, dy] = [e.clientX - t.x, e.clientY - t.y];
+    if (!t.arrastando) {
+      if (Math.hypot(dx, dy) < 8) return;
+      t.arrastando = true;
+      e.currentTarget.setPointerCapture(e.pointerId);
+    }
+    setArrasto({ de: t.vaga, dx, dy, alvo: vagaNoPonto(e.clientX, e.clientY, t.vaga) });
+  };
+  const soltar = (e: PointerEvent<HTMLButtonElement>) => {
+    const t = toque.current;
+    toque.current = null;
+    if (!t?.arrastando) return;
+    // O clique que vem logo depois de soltar não abre a escolha da vaga.
+    semCliqueAte.current = Date.now() + 400;
+    const alvo = vagaNoPonto(e.clientX, e.clientY, t.vaga);
+    setArrasto(null);
+    if (alvo != null) trocarVagas(t.vaga, alvo);
+  };
+  const cancelar = () => {
+    toque.current = null;
+    setArrasto(null);
   };
 
   const escolherParaVaga = (indice: number, jogadorId: number) => {
@@ -184,16 +248,30 @@ export function Tatica() {
           const j = jog(titulares[i]);
           const ef = j ? Math.round(forcaEfetiva(j, v, j.energia, clube.tatica.jogadas)) : 0;
           const cor = j ? (disponivel(j) ? corForca(ef, j.forca) : "vermelho") : "vazia";
+          const arrastada = arrasto?.de === i;
+          const classes = ["vaga", "arrastavel", vagaAberta === i && "selecionada", arrastada && "arrastando", arrasto?.alvo === i && "alvo"].filter(Boolean).join(" ");
           return (
-            <button key={i} className={`vaga${vagaAberta === i ? " selecionada" : ""}`} style={{ left: `${v.x}%`, top: `${v.y}%` }} onClick={() => setVagaAberta(i)} aria-label={`${NOMES_POSICAO[v.pos]}: ${j?.nome ?? "vazio"}`}>
+            <button
+              key={i}
+              data-vaga={i}
+              className={classes}
+              style={{ left: `${v.x}%`, top: `${v.y}%`, ...(arrastada ? { transform: `translate(calc(-50% + ${arrasto.dx}px), calc(-50% + ${arrasto.dy}px))` } : {}) }}
+              onPointerDown={apertar(i)}
+              onPointerMove={mover}
+              onPointerUp={soltar}
+              onPointerCancel={cancelar}
+              onClick={() => { if (Date.now() > semCliqueAte.current) setVagaAberta(i); }}
+              aria-label={`${NOMES_POSICAO[v.pos]}: ${j?.nome ?? "vazio"}`}
+            >
               <span className={`camisa ${cor}`}>{j ? ef : v.pos}</span>
               {j && j.id === capitao && <Bracadeira />}
               <span className="nome">{j ? nomeCurto(j.nome) : "—"}</span>
+              {j && <span className="cansaco" title={`Energia ${Math.round(j.energia)}%`}><Barra valor={j.energia} /></span>}
             </button>
           );
         })}
       </div>
-      <p className="mini muito-fraco">O número é a força que o jogador rende naquela vaga, com o cansaço atual. Verde: rendimento cheio. Amarelo e vermelho: fora de posição ou cansado.</p>
+      <p className="mini muito-fraco">O número é a força que o jogador rende naquela vaga, com o cansaço atual. Verde: rendimento cheio. Amarelo e vermelho: fora de posição ou cansado. A barrinha embaixo do nome é a energia. Arraste um jogador até outro para trocar os dois de posição.</p>
 
       <Cartao titulo="Força do time">
         <div className="coluna" style={{ gap: 8 }}>
