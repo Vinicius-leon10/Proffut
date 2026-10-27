@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { ESTILOS } from "../../engine/constantes";
-import { FORMACOES, NOMES_POSICAO, calcularSetores, corForca, disponivel, escalarAutomatico, forcaEfetiva, type Vaga } from "../../engine/forca";
+import { FORMACOES, NOMES_POSICAO, calcularSetores, capitaoDoTime, corForca, disponivel, escalarAutomatico, forcaEfetiva, type Vaga } from "../../engine/forca";
 import { elencoDe } from "../../engine/mercado";
-import { redistribuir, type LadoVivo } from "../../engine/partida";
+import { notaCobrador, redistribuir, type LadoVivo } from "../../engine/partida";
 import type { Estilo, Formacao, Jogador, Tatica as TaticaTipo } from "../../engine/tipos";
 import { Barra, Cartao, Folha, Opcoes, Pos } from "../componentes";
 import { useJogo, useLoja } from "../store";
@@ -33,8 +33,11 @@ export function LinhasDoCampo() {
   );
 }
 
-/** O time em campo só para ver (o titular do adversário antes do jogo): força na vaga, cor e nome. */
-export function CampoDoTime({ atuacoes, jogadas }: { atuacoes: { jogador: Jogador; vaga: Vaga; energia: number }[]; jogadas: TaticaTipo["jogadas"] }) {
+/** A braçadeira do capitão, sobre a camisa no campinho. */
+const Bracadeira = () => <span className="capitao" aria-label="Capitão" title="Capitão">C</span>;
+
+/** O time em campo só para ver (o titular do adversário antes do jogo): força na vaga, cor, nome e o capitão. */
+export function CampoDoTime({ atuacoes, jogadas, capitao }: { atuacoes: { jogador: Jogador; vaga: Vaga; energia: number }[]; jogadas: TaticaTipo["jogadas"]; capitao?: number }) {
   return (
     <div className="campo">
       <LinhasDoCampo />
@@ -43,6 +46,7 @@ export function CampoDoTime({ atuacoes, jogadas }: { atuacoes: { jogador: Jogado
         return (
           <div key={j.id} className="vaga" style={{ left: `${v.x}%`, top: `${v.y}%` }}>
             <span className={`camisa ${corForca(ef, j.forca)}`}>{ef}</span>
+            {j.id === capitao && <Bracadeira />}
             <span className="nome">{nomeCurto(j.nome)}</span>
           </div>
         );
@@ -69,7 +73,7 @@ export function FolhaDoTime({ lado, provavel, aoFechar }: { lado: LadoVivo; prov
   return (
     <Folha titulo={`${provavel ? "Provável time titular" : "Time titular"} ${comArtigo("do", clube)}`} aoFechar={aoFechar}>
       <p className="pequeno" style={{ marginBottom: 8 }}><ResumoDoTime lado={lado} /></p>
-      <CampoDoTime atuacoes={atuacoes} jogadas={lado.tatica.jogadas} />
+      <CampoDoTime atuacoes={atuacoes} jogadas={lado.tatica.jogadas} capitao={capitaoDoTime(estado, lado.clubeId, lado.emCampo.map((a) => a.jogadorId))} />
       <p className="mini muito-fraco" style={{ marginTop: 6 }}>
         {provavel ? "Os melhores disponíveis hoje; no dia do jogo pode mudar. " : ""}O número é a força que o jogador rende naquela vaga. Verde: rendimento cheio. Amarelo e vermelho: fora de posição ou cansado.
       </p>
@@ -150,6 +154,16 @@ export function Tatica() {
     { nome: "Ataque", valor: s.ataque * estilo.ataque },
   ];
   const problemas = titulares.filter((id) => !jog(id) || !disponivel(jog(id)!)).length;
+  const capitao = capitaoDoTime(estado, clube.id, titulares);
+  // Escolhas que não valem mais (o jogador saiu do clube) contam como automático.
+  const doClube = (id?: number) => (id != null && estado.jogadores[id]?.clubeId === clube.id ? id : undefined);
+  const porCobranca = [...elenco].sort((a, b) => notaCobrador(b) - notaCobrador(a));
+  const porExperiencia = [...elenco].sort((a, b) => b.carreira.jogos + b.temporada.jogos - (a.carreira.jogos + a.temporada.jogos) || b.idade - a.idade);
+  const escolher = (campo: "batedor" | "capitao", valor: string) => {
+    if (valor) clube[campo] = Number(valor);
+    else delete clube[campo];
+    atualizar();
+  };
 
   return (
     <>
@@ -173,6 +187,7 @@ export function Tatica() {
           return (
             <button key={i} className={`vaga${vagaAberta === i ? " selecionada" : ""}`} style={{ left: `${v.x}%`, top: `${v.y}%` }} onClick={() => setVagaAberta(i)} aria-label={`${NOMES_POSICAO[v.pos]}: ${j?.nome ?? "vazio"}`}>
               <span className={`camisa ${cor}`}>{j ? ef : v.pos}</span>
+              {j && j.id === capitao && <Bracadeira />}
               <span className="nome">{j ? nomeCurto(j.nome) : "—"}</span>
             </button>
           );
@@ -204,6 +219,26 @@ export function Tatica() {
               </button>
             );
           })}
+        </div>
+      </Cartao>
+
+      <Cartao titulo="Batedor de pênalti e capitão">
+        <div className="coluna" style={{ gap: 10 }}>
+          <label className="coluna" style={{ gap: 4 }}>
+            <span className="pequeno fraco">Batedor de pênalti</span>
+            <select aria-label="Batedor de pênalti" value={doClube(clube.batedor) ?? ""} onChange={(e) => escolher("batedor", e.target.value)}>
+              <option value="">Automático (o melhor batedor em campo)</option>
+              {porCobranca.map((j) => <option key={j.id} value={j.id}>{j.nome} ({j.posicao}, força {j.forca}{j.caracteristicas.includes("FIN") ? ", finalização" : ""})</option>)}
+            </select>
+          </label>
+          <label className="coluna" style={{ gap: 4 }}>
+            <span className="pequeno fraco">Capitão</span>
+            <select aria-label="Capitão" value={doClube(clube.capitao) ?? ""} onChange={(e) => escolher("capitao", e.target.value)}>
+              <option value="">Automático (o titular mais experiente)</option>
+              {porExperiencia.map((j) => <option key={j.id} value={j.id}>{j.nome} ({j.posicao}, {j.carreira.jogos + j.temporada.jogos} jogos)</option>)}
+            </select>
+          </label>
+          <p className="mini muito-fraco">Se o batedor não estiver em campo, cobra o melhor batedor que estiver; na disputa por pênaltis ele bate primeiro. O capitão usa a braçadeira (C) no campinho; se não for titular, ela vai para o titular mais experiente.</p>
         </div>
       </Cartao>
 

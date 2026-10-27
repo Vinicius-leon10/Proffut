@@ -1,4 +1,4 @@
-import type { Caracteristica, Formacao, Jogadas, Jogador, Lado, Posicao } from "./tipos";
+import type { Caracteristica, EstadoJogo, Formacao, Jogadas, Jogador, Lado, Posicao } from "./tipos";
 
 export interface Vaga {
   pos: Posicao;
@@ -181,6 +181,20 @@ export function calcularSetores(emCampo: EmCampo[], jogadas: Jogadas): Setores {
     ataque: ataque / REFERENCIA.ataque,
     goleiro,
   };
+}
+
+// ---- capitão -------------------------------------------------------------------------
+
+/** O capitão entre os titulares: o escolhido pelo usuário, se for titular; senão, o mais experiente (jogos, idade). */
+export function capitaoDoTime(estado: EstadoJogo, clubeId: string, titulares: (number | null)[]): number | undefined {
+  const ids = titulares.filter((id): id is number => id != null && !!estado.jogadores[id]);
+  const escolhido = estado.clubes[clubeId]?.capitao;
+  if (escolhido != null && ids.includes(escolhido)) return escolhido;
+  const experiencia = (id: number) => {
+    const j = estado.jogadores[id];
+    return (j.carreira.jogos + j.temporada.jogos) * 100 + j.idade;
+  };
+  return ids.sort((a, b) => experiencia(b) - experiencia(a))[0];
 }
 
 // ---- escalação automática ---------------------------------------------------------

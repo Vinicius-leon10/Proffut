@@ -33,6 +33,8 @@ export interface LadoVivo {
   moral: number;
   /** Controlado pelo usuário: a IA não mexe na tática nem faz trocas por cansaço. */
   controlado: boolean;
+  /** Batedor de pênalti escolhido: cobra quando está em campo (e bate primeiro na disputa por pênaltis). */
+  batedor?: number;
 }
 
 /** Números de um lado para a tela de estatísticas (cartões saem do `LadoVivo`). */
@@ -147,6 +149,7 @@ export function montarLado(clube: Clube, jogadores: Jogadores, elenco: Jogador[]
     gols: 0,
     moral: clube.moral,
     controlado,
+    batedor: clube.batedor,
   };
 }
 
@@ -395,9 +398,7 @@ function cobrarPenalti(pv: PartidaViva, iAtk: 0 | 1, jogadores: Jogadores) {
   const { rng } = pv;
   const ataque = pv.lados[iAtk];
   const defesa = pv.lados[iAtk === 0 ? 1 : 0];
-  const cobrador = [...ataque.emCampo]
-    .map((a) => jogadores[a.jogadorId])
-    .sort((a, b) => notaCobrador(b) - notaCobrador(a))[0];
+  const cobrador = cobradores(ataque, jogadores)[0];
   if (!cobrador) return;
   const goleiro = goleiroDe(defesa, jogadores);
   let p = CONVERSAO_PENALTI;
@@ -415,8 +416,16 @@ function cobrarPenalti(pv: PartidaViva, iAtk: 0 | 1, jogadores: Jogadores) {
   }
 }
 
-function notaCobrador(j: Jogador): number {
+/** Quanto o jogador serve para bater pênalti (o jogo escolhe pela maior nota). */
+export function notaCobrador(j: Jogador): number {
   return j.forca + (j.caracteristicas.includes("FIN") ? 15 : 0) + ({ G: -60, L: 0, Z: -5, M: 5, A: 10 }[j.posicao]);
+}
+
+/** Quem está em campo, na ordem de cobrança: o batedor escolhido primeiro (se estiver em campo), depois pela nota. */
+export function cobradores(lado: LadoVivo, jogadores: Jogadores): Jogador[] {
+  return lado.emCampo
+    .map((a) => jogadores[a.jogadorId])
+    .sort((a, b) => Number(b.id === lado.batedor) - Number(a.id === lado.batedor) || notaCobrador(b) - notaCobrador(a));
 }
 
 function expulsar(pv: PartidaViva, iLado: 0 | 1, jogador: Jogador) {
@@ -683,13 +692,11 @@ export function simularAteOFim(pv: PartidaViva, jogadores: Jogadores) {
 
 /** Disputa por pênaltis entre os jogadores que terminaram em campo. */
 export function disputarPenaltis(rng: Rng, pv: PartidaViva, jogadores: Jogadores): [number, number] {
-  const cobradores = pv.lados.map((l) =>
-    l.emCampo.map((a) => jogadores[a.jogadorId]).sort((a, b) => notaCobrador(b) - notaCobrador(a)),
-  );
+  const ordem = pv.lados.map((l) => cobradores(l, jogadores));
   const goleiros = pv.lados.map((l) => goleiroDe(l, jogadores));
   const placar: [number, number] = [0, 0];
   const cobrar = (i: 0 | 1, n: number) => {
-    const lista = cobradores[i];
+    const lista = ordem[i];
     if (!lista.length) return;
     const c = lista[n % lista.length];
     const g = goleiros[i === 0 ? 1 : 0];

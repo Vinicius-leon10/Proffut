@@ -135,6 +135,10 @@ export interface Clube {
   resumoFinanceiro: Partial<Record<TipoLancamento, number>>;
   /** Clube da Série D com elenco montado só para a Copa do Brasil (sai na virada da temporada). */
   elencoDaCopa?: boolean;
+  /** Batedor de pênalti escolhido pelo usuário (fora de campo ou sem escolha: cobra o melhor batedor em campo). */
+  batedor?: number;
+  /** Capitão escolhido pelo usuário (fora dos titulares ou sem escolha: o titular mais experiente). Só aparece na tela. */
+  capitao?: number;
 }
 
 export type TipoEvento =

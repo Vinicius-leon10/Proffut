@@ -19,6 +19,7 @@ O save fica guardado **no próprio celular** e é feito sozinho a cada ação. P
 - Elenco com força, idade, energia, 2 características (o modelo do Brasfoot), lesões e suspensões.
 - Escalação no campinho, com a **força efetiva** colorida (posição, cansaço e características). Tocando no escudo do adversário (no painel ou no placar antes do jogo) aparece o time titular dele no mesmo campinho.
 - Seis formações, seis estilos de jogo, marcação normal ou pressão, jogadas pelo meio ou pelas pontas.
+- **Batedor de pênalti e capitão** na Tática: o batedor escolhido cobra os pênaltis quando está em campo (e bate primeiro na disputa por pênaltis); o capitão usa a braçadeira (C) no campinho.
 - **Partida ao vivo** minuto a minuto, com narração, os outros jogos da rodada ao mesmo tempo, substituições e mudança de tática durante o jogo.
 - **Estatísticas da partida** (aba Estatísticas): ataques, ataques perigosos, posse de bola, escanteios, cartões, chutes no gol e para fora, e a pressão dos últimos 15 minutos. Quando o adversário domina os últimos 15 minutos, a partida avisa ("está pressionando") e sugere mudar a tática ou fazer uma substituição.
 - **Sons da partida:** apito do árbitro no início, no intervalo e no fim; no pênalti, apito, torcida e o narrador gritando "Pênalti!"; no gol do seu time, a festa da torcida (o som mais alto); no gol do adversário, a vaia. Liga e desliga no botão de som da partida ou em Configurações (com o iPhone no silencioso, o apito e a torcida não tocam).

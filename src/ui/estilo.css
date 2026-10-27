@@ -449,6 +449,14 @@ p { margin: 0; }
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .vaga.selecionada .camisa { border-color: var(--dourado); box-shadow: 0 0 0 3px rgb(245 199 44 / 50%); }
+/* Braçadeira do capitão: canto de cima da camisa. */
+.vaga .capitao {
+  position: absolute; top: -4px; left: calc(50% + 10px);
+  min-width: 16px; height: 16px; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--dourado); color: #10221a; font-size: 0.62rem; font-weight: 800;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 40%);
+}
 
 /* ---- partida ao vivo -------------------------------------------------------------------------- */
 

@@ -43,13 +43,13 @@ virada de temporada sem fim, rebaixamento para a Série D com propostas de empre
 elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, escudos dos
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
 placar), visual claro "opção 3", estatísticas da partida com aviso de pressão, demissão e convites de clubes maiores
-(reputação do técnico), contratos com renovação, empréstimos, testes de ponta a ponta R01–R39 rodando a cada
-mudança, antes de publicar e todo dia no site publicado.
+(reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, testes de ponta a ponta
+R01–R40 rodando a cada mudança, antes de publicar e todo dia no site publicado.
 
 **Pedido em andamento (out/2026):** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão (1) e
-convites (2), contratos (4) e empréstimos (5) prontos; faltam escolher batedor de pênalti e capitão (7), nota de cada
-jogador e melhor em campo (8), sala de troféus e recordes (16) e tutorial rápido (19), nessa ordem, cada um publicado
-quando os testes passarem.
+convites (2), contratos (4), empréstimos (5) e batedor/capitão (7) prontos; faltam nota de cada jogador e melhor em
+campo (8), sala de troféus e recordes (16) e tutorial rápido (19), nessa ordem, cada um publicado quando os testes
+passarem.
 
 **Visual "opção 3" (out/2026, `src/ui/estilo.css`):** design system que o usuário mandou (pacote
 `proffut-design-system-opcao-3.zip`, "Aplique"): editorial claro. Tokens no `:root`: `--fundo` marfim `#f3f3ec`,
@@ -125,6 +125,13 @@ vaga no elenco). Pegar emprestado (ficha no Mercado): reserva de outro clube (ti
 dono (`EMPRESTIMOS`). Emprestado não é comprado, vendido, dispensado, renovado nem levado pela IA; os meus emprestados
 saem da lista do Mercado. Na virada (`encerrarEmprestimos`, antes dos contratos) todos voltam e chega "Fim dos
 empréstimos". R39.
+
+**Batedor de pênalti e capitão (out/2026):** `Clube.batedor` e `Clube.capitao` (opcionais; só o usuário escolhe, no
+cartão da Tática). `LadoVivo.batedor` vem do clube; `cobradores` (partida.ts) põe o escolhido primeiro se estiver em
+campo e depois ordena por `notaCobrador`: vale para o pênalti no jogo e para a disputa por pênaltis. Sem escolha a
+ordem é a de antes (resultados iguais). O capitão é só da tela: `capitaoDoTime` (forca.ts) = o escolhido se for
+titular, senão o titular mais experiente (jogos na carreira); braçadeira "C" (`.vaga .capitao`) no campinho da
+Tática e no time titular do adversário. Escolha de quem saiu do clube conta como automático. R40.
 
 **Copa do Brasil (out/2026, `src/engine/copa.ts`):** regulamento de 2026 com 126 clubes: 1ª fase com os 28 piores do
 ranking, 2ª com mais 74, 3ª com mais 4 (em 2026 os de verdade: Paysandu, Ponte Preta, Barra-SC, Confiança; depois, os
