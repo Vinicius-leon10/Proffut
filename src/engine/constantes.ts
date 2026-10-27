@@ -81,6 +81,14 @@ export const CONVITES = { folga: 3, alcance: 10, validadeDias: 10, meioDaLiga: 1
  */
 export const CONTRATOS = { anosIniciais: 4, titular: 1.15, promessa: 1.1, veterano: 0.85, semCorteAte: 30, corteVeterano: 0.8, aviso: "09-01" };
 
+// ---- empréstimos ------------------------------------------------------------------
+/**
+ * Empréstimo até o fim da temporada: quem recebe paga o salário (e, ao pegar emprestado, uma taxa de `taxa` × o
+ * valor de mercado ao dono). Um clube aceita um jogador emprestado se a força dele for pelo menos a do time menos
+ * `margemForca` (mais `margemJovem` para quem tem até 21 anos) e houver vaga no elenco; titulares não são emprestados.
+ */
+export const EMPRESTIMOS = { taxa: 0.1, margemForca: 8, margemJovem: 6 };
+
 // ---- energia e recuperação --------------------------------------------------
 export const RECUPERACAO_POR_DIA = 9;
 export const DIAS_LESAO = { min: 4, max: 35 };

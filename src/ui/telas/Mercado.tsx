@@ -3,6 +3,7 @@ import { comArtigo } from "../../engine/artigos";
 import { NOMES_CARACTERISTICA, NOMES_POSICAO } from "../../engine/forca";
 import { formatarDinheiro } from "../../engine/financas";
 import { salarioBase, valorMercado } from "../../engine/gerador";
+import { motivoParaNaoPegar, pegarEmprestado, taxaDeEmprestimo } from "../../engine/emprestimos";
 import { elencoDe, fazerOferta, livres, podeSair, precoPedido } from "../../engine/mercado";
 import type { Jogador, Posicao, SerieId } from "../../engine/tipos";
 import { Escudo, Folha, Opcoes, Pos, Segmentado } from "../componentes";
@@ -22,6 +23,13 @@ function FolhaOferta({ j, aoFechar }: { j: Jogador; aoFechar: () => void }) {
 
   const enviar = () => {
     const r = fazerOferta(estado, j.id, oferta);
+    avisar(r.texto);
+    atualizar();
+    if (r.ok) aoFechar();
+  };
+  const naoEmpresta = clube ? motivoParaNaoPegar(estado, j) : null;
+  const pedirEmprestado = () => {
+    const r = pegarEmprestado(estado, j.id);
     avisar(r.texto);
     atualizar();
     if (r.ok) aoFechar();
@@ -55,6 +63,10 @@ function FolhaOferta({ j, aoFechar }: { j: Jogador; aoFechar: () => void }) {
           <button className="botao primario cheio" disabled={!vende || oferta > meu.caixa} onClick={enviar}>
             {oferta > meu.caixa ? "Caixa insuficiente" : `Oferecer ${formatarDinheiro(oferta)}`}
           </button>
+          <button className="botao cheio" disabled={!!naoEmpresta} onClick={pedirEmprestado}>
+            Pedir emprestado até o fim da temporada · taxa {formatarDinheiro(taxaDeEmprestimo(j))}
+          </button>
+          <p className="mini muito-fraco">{naoEmpresta ?? `Emprestado, ele joga por você até o fim de ${estado.temporada} (o salário é seu) e depois volta.`}</p>
         </>
       ) : (
         <>
@@ -82,7 +94,7 @@ export function Mercado() {
   const resultados = useMemo(() => {
     const termo = busca.trim().toLowerCase();
     const base = vista === "livres" ? livres(estado) : vista === "venda" ? elencoDe(estado, meuId).filter((j) => j.aVenda) : Object.values(estado.jogadores).filter((j) => {
-      if (!j.clubeId || j.clubeId === meuId) return false;
+      if (!j.clubeId || j.clubeId === meuId || j.emprestimo?.de === meuId) return false;
       const c = estado.clubes[j.clubeId];
       return c.serie !== "D" && (serie === "todas" || c.serie === serie);
     });

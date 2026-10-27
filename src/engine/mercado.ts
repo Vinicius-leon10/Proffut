@@ -39,7 +39,7 @@ export function podeSair(estado: EstadoJogo, j: Jogador): boolean {
   return naPosicao - 1 >= MINIMO_POSICAO[j.posicao];
 }
 
-function tirarDaEscalacao(estado: EstadoJogo, j: Jogador) {
+export function tirarDaEscalacao(estado: EstadoJogo, j: Jogador) {
   if (!j.clubeId) return;
   const clube = estado.clubes[j.clubeId];
   clube.escalacao.titulares = clube.escalacao.titulares.map((id) => (id === j.id ? null : id));
@@ -80,6 +80,7 @@ export function fazerOferta(estado: EstadoJogo, jogadorId: number, oferta: numbe
   const j = estado.jogadores[jogadorId];
   const meu = estado.clubes[estado.tecnico.clubeId];
   if (!j || j.clubeId === meu.id) return { ok: false, texto: "Jogador inválido." };
+  if (j.emprestimo) return { ok: false, texto: `${j.nome} está emprestado: volta ${comArtigo("ao", estado.clubes[j.emprestimo.de])} no fim da temporada.` };
   if (elencoDe(estado, meu.id).length >= ELENCO_MAXIMO) return { ok: false, texto: `Seu elenco já tem ${ELENCO_MAXIMO} jogadores. Venda ou dispense alguém antes.` };
   if (!j.clubeId) {
     const salario = Math.round(salarioBase(j.forca) * 1.15);
@@ -104,6 +105,7 @@ export function fazerOferta(estado: EstadoJogo, jogadorId: number, oferta: numbe
 export function dispensar(estado: EstadoJogo, jogadorId: number): ResultadoNegocio {
   const j = estado.jogadores[jogadorId];
   if (!j?.clubeId) return { ok: false, texto: "Jogador inválido." };
+  if (j.emprestimo) return { ok: false, texto: `${j.nome} está emprestado: volta ${comArtigo("ao", estado.clubes[j.emprestimo.de])} no fim da temporada.` };
   if (!podeSair(estado, j)) return { ok: false, texto: "Não dá para dispensar: o elenco ficaria abaixo do mínimo na posição." };
   const clube = estado.clubes[j.clubeId];
   lancar(clube, estado.data, "rescisao", `Rescisão de ${j.nome}`, -j.salario * 3);
@@ -130,7 +132,7 @@ export function gerarPropostas(estado: EstadoJogo, data: string) {
   const rng = rngPara(estado.semente, `propostas/${data}`);
   for (const j of elencoDe(estado, meuId)) {
     const pendente = estado.mensagens.some((m) => m.proposta?.jogadorId === j.id && !m.proposta.resolvida);
-    if (pendente) continue;
+    if (pendente || j.emprestimo) continue;
     const chance = j.aVenda ? 0.22 : j.forca >= 70 && j.idade <= 27 ? 0.006 : 0;
     if (!rng.chance(chance)) continue;
     const valor = Math.round((valorMercado(j) * rng.real(j.aVenda ? 0.75 : 1.0, j.aVenda ? 1.15 : 1.4)) / 10_000) * 10_000;
@@ -237,7 +239,7 @@ export function transferenciasDaIa(estado: EstadoJogo, chave: string): string[] 
     if (carencia.falta < 3) continue;
     const orcamento = clube.caixa * 0.35;
     const alvos = Object.values(estado.jogadores).filter((j) => {
-      if (j.posicao !== carencia.pos || j.clubeId === clube.id || j.clubeId === estado.tecnico.clubeId) return false;
+      if (j.posicao !== carencia.pos || j.clubeId === clube.id || j.clubeId === estado.tecnico.clubeId || j.emprestimo) return false;
       if (j.forca < forca - 3 || j.forca > forca + 8 || j.idade > 32) return false;
       if (j.clubeId && estado.clubes[j.clubeId].serie === "D") return false;
       return precoPedido(estado, j) <= orcamento && podeSair(estado, j);

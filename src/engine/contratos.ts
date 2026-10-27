@@ -36,10 +36,10 @@ export function ultimoAno(estado: EstadoJogo, j: Jogador): boolean {
   return j.contratoAte != null && j.contratoAte <= estado.temporada;
 }
 
-/** Jogadores do usuário com o contrato terminando nesta temporada. */
+/** Jogadores do usuário (fora os que vieram emprestados) com o contrato terminando nesta temporada. */
 export function contratosTerminando(estado: EstadoJogo): Jogador[] {
   const meu = estado.tecnico.clubeId;
-  return Object.values(estado.jogadores).filter((j) => j.clubeId === meu && ultimoAno(estado, j));
+  return Object.values(estado.jogadores).filter((j) => j.clubeId === meu && !j.emprestimo && ultimoAno(estado, j));
 }
 
 /** O salário que o jogador pede para renovar nesta temporada. */
@@ -56,7 +56,7 @@ export function pedidoDeRenovacao(estado: EstadoJogo, j: Jogador): number {
 
 export function renovarContrato(estado: EstadoJogo, jogadorId: number, anos: number): { ok: boolean; texto: string } {
   const j = estado.jogadores[jogadorId];
-  if (!j || j.clubeId !== estado.tecnico.clubeId) return { ok: false, texto: "Esse jogador não é do seu clube." };
+  if (!j || j.clubeId !== estado.tecnico.clubeId || j.emprestimo) return { ok: false, texto: "Esse jogador não é do seu clube." };
   if (!ultimoAno(estado, j)) return { ok: false, texto: `O contrato de ${j.nome} ainda não está no último ano.` };
   if (anos < 1 || anos > anosMaximos(j.idade)) return { ok: false, texto: `${j.nome} aceita no máximo ${anosMaximos(j.idade)} ano(s).` };
   j.salario = pedidoDeRenovacao(estado, j);

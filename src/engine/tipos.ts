@@ -69,6 +69,8 @@ export interface Jogador {
    * do computador renovam). Livres não têm. Falta nos saves antigos: ganham ao abrir o jogo (`migrar`).
    */
   contratoAte?: number;
+  /** Emprestado: joga no `clubeId` até a virada da temporada `ate` e então volta ao clube `de` (dono do contrato). */
+  emprestimo?: { de: string; ate: number };
 }
 
 export type TipoLancamento =

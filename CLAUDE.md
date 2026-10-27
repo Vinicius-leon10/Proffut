@@ -43,11 +43,11 @@ virada de temporada sem fim, rebaixamento para a Série D com propostas de empre
 elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, escudos dos
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
 placar), visual claro "opção 3", estatísticas da partida com aviso de pressão, demissão e convites de clubes maiores
-(reputação do técnico), contratos com renovação, testes de ponta a ponta R01–R38 rodando a cada mudança, antes de
-publicar e todo dia no site publicado.
+(reputação do técnico), contratos com renovação, empréstimos, testes de ponta a ponta R01–R39 rodando a cada
+mudança, antes de publicar e todo dia no site publicado.
 
 **Pedido em andamento (out/2026):** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão (1) e
-convites (2) e contratos (4) prontos; faltam empréstimos (5), escolher batedor de pênalti e capitão (7), nota de cada
+convites (2), contratos (4) e empréstimos (5) prontos; faltam escolher batedor de pênalti e capitão (7), nota de cada
 jogador e melhor em campo (8), sala de troféus e recordes (16) e tutorial rápido (19), nessa ordem, cada um publicado
 quando os testes passarem.
 
@@ -116,6 +116,15 @@ lista "Contratos terminando"; "Encerrar a temporada" pergunta antes citando quem
 no clube do usuário, quem não renovou sai de graça e não volta pelo "mínimo da posição"; os clubes do computador
 renovam todos por 1 a 3 temporadas (o mundo fica como antes). O salário dos jogadores do usuário não é mais
 recalculado na virada (vale o do contrato); o dos outros clubes, sim. R38.
+
+**Empréstimos (out/2026, `src/engine/emprestimos.ts`):** `Jogador.emprestimo` = { de: clube dono, ate: temporada da
+volta }; o `clubeId` é o clube onde ele joga, que paga o salário (a folha já vem do `clubeId`). Só até o fim da
+temporada. Emprestar (ficha do jogador no Elenco): jogador meu, fora do último ano de contrato e sem deixar a posição
+abaixo do mínimo, para um dos três clubes mais fortes que o aceitam (força dele ≥ a do time − 8, ou − 14 até 21 anos;
+vaga no elenco). Pegar emprestado (ficha no Mercado): reserva de outro clube (titular não sai), pagando 10% do valor ao
+dono (`EMPRESTIMOS`). Emprestado não é comprado, vendido, dispensado, renovado nem levado pela IA; os meus emprestados
+saem da lista do Mercado. Na virada (`encerrarEmprestimos`, antes dos contratos) todos voltam e chega "Fim dos
+empréstimos". R39.
 
 **Copa do Brasil (out/2026, `src/engine/copa.ts`):** regulamento de 2026 com 126 clubes: 1ª fase com os 28 piores do
 ranking, 2ª com mais 74, 3ª com mais 4 (em 2026 os de verdade: Paysandu, Ponte Preta, Barra-SC, Confiança; depois, os
@@ -198,6 +207,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `mercado.ts`, `mensagens.ts`, `diretoria.ts` | Compra e venda, propostas (e "Pedir mais": `pedirMais`, `limiteDaProposta`), caixa de mensagens, objetivo e confiança |
 | `carreira.ts` | Reputação do técnico, cargo em risco, demissão e propostas de emprego, convites de clubes maiores, `assumirClube` |
 | `contratos.ts` | Fim de contrato, renovação (pedido do jogador), contrato de reforço, aviso de setembro e o que acaba na virada |
+| `emprestimos.ts` | Emprestar até o fim da temporada (quem aceita), pegar emprestado (taxa), volta na virada |
 | `temporada.ts` | Virada: acesso/rebaixamento, idade, evolução, aposentadoria, base, Série D (`serie-d-reserva.json`) |
 | `jogo.ts` | Orquestra: `novoJogo`, `avancar`, `prepararJogos`/`concluirJogos`, `provavelTime` (escalação do computador sem mudar o jogo), propostas de emprego, obras do dia |
 | `checagem.ts` | `checarEstado`, `repararEstado`, `testarPartida` (roda sozinha ao abrir um jogo) |

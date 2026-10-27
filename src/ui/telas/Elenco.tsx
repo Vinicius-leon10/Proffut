@@ -1,12 +1,14 @@
 import { useMemo, useState } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { anosMaximos, pedidoDeRenovacao, renovarContrato, ultimoAno } from "../../engine/contratos";
+import { emprestar, interessadosNoEmprestimo, motivoParaNaoEmprestar } from "../../engine/emprestimos";
+import { forcaDoTime } from "../../engine/forca";
 import { NOMES_CARACTERISTICA, NOMES_POSICAO, fatorEnergia } from "../../engine/forca";
 import { formatarDinheiro } from "../../engine/financas";
 import { valorMercado } from "../../engine/gerador";
 import { dispensar, elencoDe, podeSair, precoPedido } from "../../engine/mercado";
 import type { Jogador, Posicao } from "../../engine/tipos";
-import { Barra, Escudo, Folha, Opcoes, Pos } from "../componentes";
+import { Barra, Cartao, Escudo, Folha, Opcoes, Pos } from "../componentes";
 import { NOMES_NACIONALIDADE } from "../formatos";
 import { useJogo, useLoja } from "../store";
 
@@ -14,9 +16,11 @@ const ORDEM: Posicao[] = ["G", "L", "Z", "M", "A"];
 
 export function Situacao({ j }: { j: Jogador }) {
   const estado = useJogo();
-  const fimDeContrato = j.clubeId === estado.tecnico.clubeId && ultimoAno(estado, j);
+  const meu = j.clubeId === estado.tecnico.clubeId;
+  const fimDeContrato = meu && !j.emprestimo && ultimoAno(estado, j);
   return (
     <>
+      {meu && j.emprestimo && <span className="chip azul" title="Volta ao clube dono no fim da temporada">Emprestado</span>}
       {fimDeContrato && <span className="chip amarelo" title="Contrato termina nesta temporada">Fim de contrato</span>}
       {j.lesaoDias > 0 && <span className="chip vermelho" title="Lesionado">Lesão {j.lesaoDias}d</span>}
       {j.suspensaoJogos > 0 && <span className="chip vermelho" title="Suspenso">Suspenso</span>}
@@ -72,10 +76,46 @@ function Renovacao({ j, aoVoltar }: { j: Jogador; aoVoltar: () => void }) {
   );
 }
 
+/** Os clubes que aceitam o jogador emprestado até o fim da temporada. */
+function Emprestimo({ j, aoVoltar, aoFechar }: { j: Jogador; aoVoltar: () => void; aoFechar: () => void }) {
+  const estado = useJogo();
+  const { atualizar, avisar } = useLoja();
+  const clubes = useMemo(() => interessadosNoEmprestimo(estado, j), [estado, j]);
+  const escolher = (id: string) => {
+    const r = emprestar(estado, j.id, id);
+    avisar(r.texto);
+    atualizar();
+    if (r.ok) aoFechar();
+  };
+  return (
+    <>
+      <p className="pequeno">Quem recebe {j.nome} paga o salário dele até o fim de {estado.temporada}, e ele ganha jogos. Na virada ele volta.</p>
+      {clubes.length ? (
+        <div className="lista">
+          {clubes.map((id) => {
+            const c = estado.clubes[id];
+            return (
+              <button key={id} className="item" onClick={() => escolher(id)} aria-label={`Emprestar ${comArtigo("ao", c)}`}>
+                <Escudo clube={c} tamanho={30} />
+                <div className="cresce">
+                  <div className="negrito pequeno">{c.nome}</div>
+                  <div className="mini fraco">Série {c.serie} · força do time {Math.round(forcaDoTime(elencoDe(estado, id)))}</div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      ) : <p className="pequeno fraco">Nenhum clube quer {j.nome} emprestado agora.</p>}
+      <button className="botao cheio" onClick={aoVoltar}>Voltar</button>
+    </>
+  );
+}
+
 export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFechar: () => void }) {
   const estado = useJogo();
   const { atualizar, avisar } = useLoja();
   const [renovando, setRenovando] = useState(false);
+  const [emprestando, setEmprestando] = useState(false);
   const j = estado.jogadores[jogadorId];
   if (!j) return null;
   const meu = j.clubeId === estado.tecnico.clubeId;
@@ -88,6 +128,14 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
       </Folha>
     );
   }
+  if (meu && emprestando) {
+    return (
+      <Folha titulo={`Emprestar ${j.nome}`} aoFechar={aoFechar}>
+        <Emprestimo j={j} aoVoltar={() => setEmprestando(false)} aoFechar={aoFechar} />
+      </Folha>
+    );
+  }
+  const naoEmpresta = meu && !j.emprestimo ? motivoParaNaoEmprestar(estado, j) : null;
   return (
     <Folha titulo={j.nome} aoFechar={aoFechar}>
       <div className="linha" style={{ flexWrap: "wrap", gap: 6 }}>
@@ -100,7 +148,12 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
         {clube ? <><Escudo clube={clube} tamanho={22} /><span className="pequeno">{clube.nome}</span></> : <span className="chip">Sem clube</span>}
         {clube && j.contratoAte != null && <span className="pequeno fraco">· Contrato até {j.contratoAte}</span>}
       </div>
-      {meu && ultimoAno(estado, j) && (
+      {j.emprestimo && clube && (
+        <p className="pequeno">
+          Emprestado {comArtigo("pelo", estado.clubes[j.emprestimo.de])} {comArtigo("ao", clube)} até o fim de {j.emprestimo.ate}. Na virada ele volta.
+        </p>
+      )}
+      {meu && !j.emprestimo && ultimoAno(estado, j) && (
         <div className="cartao compacto">
           <p className="pequeno">O contrato termina no fim de {estado.temporada}. Sem renovar, ele sai de graça na virada.</p>
           <button className="botao primario cheio" style={{ marginTop: 8 }} onClick={() => setRenovando(true)}>Renovar contrato</button>
@@ -126,8 +179,10 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
           <tr><td className="clube pequeno">Carreira</td><td>{j.carreira.jogos + t.jogos}</td><td>{j.carreira.gols + t.gols}</td><td>{j.carreira.assistencias + t.assistencias}</td><td>{j.carreira.amarelos + t.amarelos}</td><td>{j.carreira.vermelhos + t.vermelhos}</td></tr>
         </tbody>
       </table>
-      {meu && (
+      {meu && !j.emprestimo && (
         <div className="coluna">
+          <button className="botao cheio" disabled={!!naoEmpresta} onClick={() => setEmprestando(true)}>Emprestar até o fim da temporada</button>
+          {naoEmpresta && <p className="mini fraco">{naoEmpresta}</p>}
           <button className="botao cheio" onClick={() => { j.aVenda = !j.aVenda; atualizar(); avisar(j.aVenda ? `${j.nome} foi colocado à venda. Propostas chegam nas mensagens.` : `${j.nome} saiu da lista de venda.`); }}>
             {j.aVenda ? "Tirar da lista de venda" : "Colocar à venda"}
           </button>
@@ -163,7 +218,9 @@ export function Elenco() {
   const lista = filtro === "todos" ? elenco : elenco.filter((j) => j.posicao === filtro);
   const media = Math.round(elenco.reduce((s, j) => s + j.forca, 0) / Math.max(1, elenco.length));
   const indisponiveis = elenco.filter((j) => j.lesaoDias > 0 || j.suspensaoJogos > 0).length;
-  const terminando = elenco.filter((j) => ultimoAno(estado, j)).length;
+  const terminando = elenco.filter((j) => !j.emprestimo && ultimoAno(estado, j)).length;
+  const meuId = estado.tecnico.clubeId;
+  const fora = useMemo(() => Object.values(estado.jogadores).filter((j) => j.emprestimo?.de === meuId), [estado, versao, meuId]);
 
   return (
     <>
@@ -184,6 +241,20 @@ export function Elenco() {
       <div className="lista">
         {lista.map((j) => <LinhaJogador key={j.id} j={j} aoTocar={() => setAberto(j.id)} />)}
       </div>
+      {fora.length > 0 && (
+        <Cartao titulo="Emprestados a outros clubes">
+          <div className="coluna" style={{ gap: 8 }}>
+            {fora.map((j) => (
+              <div key={j.id} className="linha pequeno">
+                <Pos pos={j.posicao} />
+                <span className="cresce corta negrito">{j.nome}</span>
+                <Escudo clube={estado.clubes[j.clubeId!]} tamanho={20} />
+                <span className="mini fraco">{estado.clubes[j.clubeId!].nome} · volta no fim de {j.emprestimo!.ate}</span>
+              </div>
+            ))}
+          </div>
+        </Cartao>
+      )}
       {aberto !== null && <FolhaJogador jogadorId={aberto} aoFechar={() => setAberto(null)} />}
     </>
   );

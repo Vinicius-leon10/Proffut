@@ -3,6 +3,7 @@
 import { comArtigo, concorda } from "./artigos";
 import { demitir, gerarConvites, mudarReputacao, passouDaCarencia } from "./carreira";
 import { encerrarContratos, garantirContratos, liberar } from "./contratos";
+import { encerrarEmprestimos } from "./emprestimos";
 import { inicioDaTemporada, somarDias } from "./calendario";
 import { NOME_SERIE, SERIES, criarTemporada, posicaoNaLiga, tabelaDaLiga } from "./competicoes";
 import { criarCopa } from "./copa";
@@ -133,6 +134,9 @@ export function encerrarTemporada(estado: EstadoJogo) {
     }
   }
 
+  // ---- empréstimos: todos voltam aos clubes donos (antes dos contratos) ----
+  const emprestimos = encerrarEmprestimos(estado, ano);
+
   // ---- contratos: quem o usuário não renovou sai de graça; os clubes do computador renovam ----
   garantirContratos(estado, ano + 1);
   const sairamDeGraca = encerrarContratos(estado, ano);
@@ -237,6 +241,13 @@ export function encerrarTemporada(estado: EstadoJogo) {
     sobemDaD.length ? `Vindos da Série D: ${sobemDaD.map(nome).join(" e ")}.` : "",
   ].filter(Boolean).join(" ");
   enviarMensagem(estado, { tipo: "temporada", titulo: `Fim da temporada ${ano}`, texto: resumo });
+  if (emprestimos.voltaram.length || emprestimos.devolvidos.length) {
+    const partes = [
+      emprestimos.voltaram.length ? `Voltaram ao seu clube: ${emprestimos.voltaram.map((j) => j.nome).join(", ")}.` : "",
+      emprestimos.devolvidos.length ? `Voltaram aos clubes donos: ${emprestimos.devolvidos.map((j) => j.nome).join(", ")}.` : "",
+    ];
+    enviarMensagem(estado, { tipo: "mercado", titulo: "Fim dos empréstimos", texto: partes.filter(Boolean).join(" ") });
+  }
   if (sairamDeGraca.length) {
     enviarMensagem(estado, { tipo: "mercado", titulo: "Fim de contrato", texto: `Saíram de graça, sem renovar: ${sairamDeGraca.map((j) => j.nome).join(", ")}.` });
   }
