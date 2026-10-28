@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { aba, abrirSite, agora, botao, cartaoDoProximoJogo, esperarSalvar, expect, irParaOMeuJogo, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, esperarNoSave, expect, irParaOMeuJogo, test } from "./ajuda";
 
 test("R40 batedor de pênalti e capitão: escolhidos na Tática, o capitão ganha a braçadeira no campinho antes do jogo e o batedor escolhido cobra o pênalti", async ({ page }) => {
   test.setTimeout(120_000);
@@ -25,12 +25,14 @@ test("R40 batedor de pênalti e capitão: escolhidos na Tática, o capitão ganh
   const capitao = page.getByRole("combobox", { name: "Capitão" });
   await expect(batedor.locator("option:checked")).toHaveText(/^Automático/);
   await expect(capitao.locator("option:checked")).toHaveText(/^Automático/);
-  const desde = await agora(page);
-  await batedor.selectOption((await batedor.locator("option", { hasText: goleiro }).getAttribute("value"))!);
-  await capitao.selectOption((await capitao.locator("option", { hasText: lateral }).getAttribute("value"))!);
+  const idBatedor = (await batedor.locator("option", { hasText: goleiro }).getAttribute("value"))!;
+  const idCapitao = (await capitao.locator("option", { hasText: lateral }).getAttribute("value"))!;
+  await batedor.selectOption(idBatedor);
+  await capitao.selectOption(idCapitao);
 
-  // Fechar e abrir o app: as escolhas continuam.
-  await esperarSalvar(page, desde);
+  // Fechar e abrir o app: as escolhas continuam (antes de fechar, as duas têm de estar no save, como no R48).
+  const clube = "estado.clubes[estado.tecnico.clubeId]";
+  await esperarNoSave(page, `${clube}.batedor === ${Number(idBatedor)} && ${clube}.capitao === ${Number(idCapitao)}`);
   await page.reload();
   await page.getByRole("button", { name: /Continuar/ }).first().click();
   await aba(page, "Tática");

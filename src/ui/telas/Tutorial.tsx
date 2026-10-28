@@ -32,9 +32,9 @@ export function Tutorial() {
       texto: (
         <>
           Na aba <b>Tática</b> você escolhe a formação e o estilo de jogo. Quem joga você escolhe antes de cada partida, no
-          campinho: arraste um jogador até outro para trocar os dois de posição, ou toque nele para pôr um reserva. O número
-          de cada um é a força que ele rende naquela vaga: verde é rendimento cheio; amarelo e vermelho, fora de posição ou
-          cansado.
+          campinho: arraste um jogador até outro para trocar os dois de posição, ou toque nele para pôr um reserva; o botão
+          <b>Reservas</b> escolhe quem fica no banco. O número de cada um é a força que ele rende naquela vaga: verde é
+          rendimento cheio; amarelo e vermelho, fora de posição ou cansado.
         </>
       ),
     },

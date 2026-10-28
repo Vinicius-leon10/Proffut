@@ -45,7 +45,8 @@ clubes (os que o usuário mandou), time titular do adversário antes do jogo (to
 placar), visual claro "opção 3", estatísticas da partida com aviso de pressão, demissão e convites de clubes maiores
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
-jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia), testes de ponta a ponta R01–R52 rodando a cada mudança, antes
+jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
+ponta R01–R55 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -164,15 +165,19 @@ jogo salva 400 ms depois; um teste que recarregasse antes veria o tutorial de no
 **Antes do jogo: placar, tática e campinho da escalação (out/2026, capturas do usuário):** a força média de cada time
 (`forcaMediaDoTime` em `Tatica.tsx`: a força de quem está em campo, sem posição nem cansaço) fica em cima do escudo, no
 placar da partida (`MediaDoTime`, antes e durante o jogo) (R46). No conteúdo antes do jogo (`PreJogo` em `AoVivo.tsx`)
-ficam só o botão "Mudar a tática" (o cartão com o resumo dos times, a dica do escudo e a regra da Copa saiu, R50), o
-campinho e "Começar o jogo"/"Voltar ao clube". "Mudar a tática" abre `PainelTatica antesDoJogo` ("Tática do seu time"):
+ficam só os botões "Mudar a tática" e "Reservas" (o cartão com o resumo dos times, a dica do escudo e a regra da Copa
+saiu, R50), o campinho e, embaixo dele, só "Começar o jogo" e "Voltar ao clube" (sem texto: a explicação do número e
+das cores e a linha "Hoje:" saíram, R55; o tutorial explica). "Mudar a tática" abre `PainelTatica antesDoJogo` ("Tática do seu time"):
 muda a tática do clube com `mudarTaticaDoClube` (a mesma da aba Tática; trocando a formação, `redistribuir`) e monta de
 novo o lado da partida com `montarLado` (R47). O campinho (`CampoDaEscalacao` em `Tatica.tsx`) mostra quem vai jogar (o
 lado da partida, já sem lesionados e suspensos, vaga por vaga) no lugar da lista de titulares (R52): arrastar uma camisa
 até outra troca os dois (pointer events nas vagas com `data-vaga` e `touch-action: none`; depois de 8 px vira arrasto, o
 alvo sai de `elementsFromPoint`; o clique logo depois de soltar é ignorado) (R48); um toque abre `EscolherJogador` para pôr
-outro na vaga, um reserva por exemplo; embaixo do nome, a barrinha de energia (`Barra`, `.vaga .cansaco`) (R49). Toda
-mudança grava `clube.escalacao` (titulares e reservas) e monta de novo o lado da partida (ainda no minuto 0). A aba
+outro na vaga, um reserva por exemplo, com a lista em grupos pela posição em campo (`ListaPorPosicao`: o grupo da posição
+da vaga primeiro, depois goleiros, laterais, zagueiros, meias e atacantes) (R53); embaixo do nome, a barrinha de energia
+(`Barra`, `.vaga .cansaco`) (R49). "Reservas" abre `FolhaDosReservas`: os 7 do banco do lado da partida, pela posição
+em campo; um toque escolhe (também por posição, entre quem está fora do time e do banco) quem entra no lugar dele (R54). Toda mudança grava
+`clube.escalacao` (titulares e reservas) e monta de novo o lado da partida (ainda no minuto 0). A aba
 Tática ficou sem campinho e sem reservas (R51): "Escalar automático", Força do time, Batedor e capitão, Formação, Estilo,
 Marcação e jogadas e "Escalar automaticamente antes de cada jogo".
 
@@ -296,7 +301,12 @@ Obras do estádio se pagam em 3 a 4 temporadas.
 - Não usar `-webkit-overflow-scrolling` (inútil desde o iOS 13 e piora as camadas).
 - Seletor de arquivo do iOS: o `<input type="file">` de importar não tem `accept` (com ele o iPhone esconde o `.json`).
 - Testes: botões com `exact: true` ("Voltar", "Continuar"), títulos por `getByRole("heading")`, buscas dentro de
-  `.tela-cheia` ou do `dialog`; para esperar o salvamento use `esperarSalvar` (não `waitForTimeout`).
+  `.tela-cheia` ou do `dialog`; para esperar o salvamento use `esperarSalvar` (não `waitForTimeout`). Para conferir
+  uma mudança depois de recarregar, `esperarNoSave` (espera a mudança no save): `esperarSalvar` com um salvamento de
+  antes no meio (o de abrir a partida) recarregava sem ela (R48 falhava 1 vez em 12). Compare nomes exatos
+  (`allTextContents`), não pedaço de texto ("Pedro" está em "João Pedro"). Teste que joga a partida: a substituição
+  automática de quem se machuca chama qualquer reserva, até o do meu time; antes de dizer que alguém não jogou, veja na
+  narração se ele entrou ("Substituição: entra Fulano,", `entrouNoJogo` no R52).
 - GitHub Actions: usar `actions/*@v7` e Node 22 (Node 20 foi removido do Actions).
 - Ao rodar comandos, não use `pkill` genérico (já derrubou o próprio terminal). Nem `pgrep -f "<texto>"` seguido
   de `kill`: o próprio terminal tem o texto na linha de comando. Guarde o PID ao abrir o processo (`$!`).

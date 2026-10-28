@@ -176,6 +176,37 @@ export async function esperarSalvar(page: Page, desde: number) {
 }
 
 /**
+ * Espera o save automático do aparelho ter uma mudança: `condicao` é uma expressão com `estado` (como em
+ * `mexerNoSave`). Antes de recarregar a página para conferir uma mudança, é mais firme que `esperarSalvar`: o
+ * salvamento de uma ação de antes (abrir a partida) pode chegar no meio e passar pelo da mudança (R48).
+ */
+export async function esperarNoSave(page: Page, condicao: string) {
+  await expect
+    .poll(
+      () =>
+        page.evaluate(
+          (condicao) =>
+            new Promise<boolean>((ok, falha) => {
+              const pedido = indexedDB.open("proffut");
+              pedido.onerror = () => falha(pedido.error);
+              pedido.onsuccess = () => {
+                const banco = pedido.result;
+                const leitura = banco.transaction("saves", "readonly").objectStore("saves").get("jogo:auto");
+                leitura.onerror = () => falha(leitura.error);
+                leitura.onsuccess = () => {
+                  banco.close();
+                  ok(!!leitura.result && !!new Function("estado", `return (${condicao});`)(leitura.result));
+                };
+              };
+            }),
+          condicao,
+        ),
+      { timeout: 15_000, message: `o save do aparelho não ficou com: ${condicao}` },
+    )
+    .toBe(true);
+}
+
+/**
  * Muda o save automático direto no banco do aparelho, para montar uma situação (por exemplo, um
  * save de uma versão antiga), e abre o jogo de novo pelo "Continuar". `codigo` recebe `estado`.
  * Depois de uma ação que muda o jogo (avançar, abrir a partida), espere antes o salvamento dela

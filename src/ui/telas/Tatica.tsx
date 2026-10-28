@@ -4,7 +4,7 @@ import { ESTILOS } from "../../engine/constantes";
 import { FORMACOES, NOMES_POSICAO, calcularSetores, capitaoDoTime, corForca, disponivel, escalarAutomatico, forcaEfetiva, type Vaga } from "../../engine/forca";
 import { elencoDe } from "../../engine/mercado";
 import { notaCobrador, redistribuir, type LadoVivo } from "../../engine/partida";
-import type { Clube, EstadoJogo, Estilo, Formacao, Jogador, Tatica as TaticaTipo } from "../../engine/tipos";
+import type { Clube, EstadoJogo, Estilo, Formacao, Jogador, Posicao, Tatica as TaticaTipo } from "../../engine/tipos";
 import { Barra, Cartao, Folha, Opcoes, Pos } from "../componentes";
 import { useJogo, useLoja } from "../store";
 import { Situacao } from "./Elenco";
@@ -219,11 +219,6 @@ export function CampoDaEscalacao({ clube, titulares, reservas, aoMudar }: {
           );
         })}
       </div>
-      <p className="mini muito-fraco">
-        O número é a força que o jogador rende naquela vaga, com o cansaço atual. Verde: rendimento cheio. Amarelo e vermelho: fora
-        de posição ou cansado. A barrinha embaixo do nome é a energia. Arraste um jogador até outro para trocar os dois de
-        posição; toque nele para pôr outro no lugar, um reserva, por exemplo.
-      </p>
       {vagaAberta !== null && (
         <EscolherJogador
           titulo={`${NOMES_POSICAO[vagas[vagaAberta].pos]}${vagas[vagaAberta].lado ? ` (${vagas[vagaAberta].lado === "D" ? "direita" : "esquerda"})` : ""}`}
@@ -365,6 +360,58 @@ const DESCRICAO_ESTILO: Record<Estilo, string> = {
   posse: "Domina o meio-campo e troca passes. Ataque menos agudo.",
 };
 
+/** As posições de trás para a frente, e o nome de cada grupo na lista. */
+const ORDEM_POSICOES: Posicao[] = ["G", "L", "Z", "M", "A"];
+const GRUPO_POSICAO: Record<Posicao, string> = { G: "Goleiros", L: "Laterais", Z: "Zagueiros", M: "Meio-campistas", A: "Atacantes" };
+
+/** Os jogadores separados pela posição em campo: a pedida primeiro, depois as outras de trás para a frente (R53). */
+function porPosicao(jogadores: Jogador[], primeiro?: Posicao): { pos: Posicao; jogadores: Jogador[] }[] {
+  const ordem = primeiro ? [primeiro, ...ORDEM_POSICOES.filter((p) => p !== primeiro)] : ORDEM_POSICOES;
+  return ordem.map((pos) => ({ pos, jogadores: jogadores.filter((j) => j.posicao === pos) })).filter((g) => g.jogadores.length);
+}
+
+/** Um jogador numa lista de escolha: posição, nome, se é titular ou reserva, energia, força e o quanto rende ali. */
+function LinhaDoJogador({ j, nota, onde, aoEscolher }: { j: Jogador; nota: number; onde: string; aoEscolher: () => void }) {
+  const ef = Math.round(nota);
+  return (
+    <button className="item" onClick={aoEscolher} disabled={!disponivel(j)}>
+      <Pos pos={j.posicao} />
+      <div className="cresce">
+        <div className="linha" style={{ gap: 6 }}>
+          <span className="negrito pequeno corta">{j.nome}</span>
+          <Situacao j={j} />
+        </div>
+        <div className="mini fraco">{onde && <span className="amarelo">{onde} · </span>}energia {Math.round(j.energia)}% · força {j.forca}</div>
+      </div>
+      <span className={`forca ${corForca(ef, j.forca)}`} style={{ fontSize: "1.1rem" }}>{ef}</span>
+    </button>
+  );
+}
+
+/** A lista de escolha em grupos de posição; em cada grupo, quem rende mais primeiro (quem não pode jogar, no fim). */
+function ListaPorPosicao({ jogadores, primeiro, nota, onde, aoEscolher }: {
+  jogadores: Jogador[];
+  primeiro?: Posicao;
+  nota: (j: Jogador) => number;
+  onde: (j: Jogador) => string;
+  aoEscolher: (id: number) => void;
+}) {
+  return (
+    <div className="coluna" style={{ gap: 10 }}>
+      {porPosicao(jogadores, primeiro).map((g) => (
+        <div key={g.pos} className="grupo-posicao">
+          <h3 className="pequeno fraco">{GRUPO_POSICAO[g.pos]}</h3>
+          <div className="lista">
+            {[...g.jogadores]
+              .sort((a, b) => Number(disponivel(b)) - Number(disponivel(a)) || nota(b) - nota(a))
+              .map((j) => <LinhaDoJogador key={j.id} j={j} nota={nota(j)} onde={onde(j)} aoEscolher={() => aoEscolher(j.id)} />)}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function EscolherJogador(props: {
   titulo: string;
   vaga?: Vaga;
@@ -377,28 +424,51 @@ function EscolherJogador(props: {
 }) {
   const { vaga, elenco, titulares, reservas, jogadas } = props;
   const nota = (j: Jogador) => (vaga ? forcaEfetiva(j, vaga, j.energia, jogadas) : j.forca);
-  const lista = [...elenco].sort((a, b) => Number(disponivel(b)) - Number(disponivel(a)) || nota(b) - nota(a));
+  const onde = (j: Jogador) => (titulares.includes(j.id) ? "titular" : reservas.includes(j.id) ? "reserva" : "");
   return (
     <Folha titulo={props.titulo} aoFechar={props.aoFechar}>
+      <ListaPorPosicao jogadores={elenco} primeiro={vaga?.pos} nota={nota} onde={onde} aoEscolher={props.aoEscolher} />
+    </Folha>
+  );
+}
+
+/**
+ * Os 7 do banco antes do jogo, pela posição em campo (R54): um toque troca o reserva por alguém de fora do time e do
+ * banco. `aoMudar` recebe o banco novo.
+ */
+export function FolhaDosReservas({ clube, titulares, banco, aoMudar, aoFechar }: {
+  clube: Clube;
+  titulares: (number | null)[];
+  banco: number[];
+  aoMudar: (banco: number[]) => void;
+  aoFechar: () => void;
+}) {
+  const estado = useJogo();
+  const [trocando, setTrocando] = useState<number | null>(null);
+  const reservas = banco.map((id) => estado.jogadores[id]).filter((j): j is Jogador => !!j);
+  const ordenados = porPosicao(reservas).flatMap((g) => [...g.jogadores].sort((a, b) => b.forca - a.forca));
+  const fora = elencoDe(estado, clube.id).filter((j) => !titulares.includes(j.id) && !banco.includes(j.id));
+  const escolher = (id: number) => {
+    aoMudar(banco.map((x) => (x === trocando ? id : x)));
+    setTrocando(null);
+  };
+  if (trocando != null) {
+    const sai = estado.jogadores[trocando];
+    return (
+      <Folha titulo={`No lugar de ${sai.nome}`} aoFechar={aoFechar}>
+        <ListaPorPosicao jogadores={fora} primeiro={sai.posicao} nota={(j) => j.forca} onde={() => ""} aoEscolher={escolher} />
+        {fora.length === 0 && <p className="pequeno fraco">Não há ninguém no elenco fora do time e do banco.</p>}
+        <button className="botao cheio" onClick={() => setTrocando(null)}>Voltar</button>
+      </Folha>
+    );
+  }
+  return (
+    <Folha titulo="Reservas" aoFechar={aoFechar}>
+      <p className="pequeno fraco">Os {reservas.length} do banco, que podem entrar durante o jogo. Toque em um para trocar.</p>
       <div className="lista">
-        {lista.map((j) => {
-          const ef = Math.round(nota(j));
-          const onde = titulares.includes(j.id) ? "titular" : reservas.includes(j.id) ? "reserva" : "";
-          return (
-            <button key={j.id} className="item" onClick={() => props.aoEscolher(j.id)} disabled={!disponivel(j)}>
-              <Pos pos={j.posicao} />
-              <div className="cresce">
-                <div className="linha" style={{ gap: 6 }}>
-                  <span className="negrito pequeno corta">{j.nome}</span>
-                  <Situacao j={j} />
-                </div>
-                <div className="mini fraco">{onde && <span className="amarelo">{onde} · </span>}energia {Math.round(j.energia)}% · força {j.forca}</div>
-              </div>
-              <span className={`forca ${corForca(ef, j.forca)}`} style={{ fontSize: "1.1rem" }}>{ef}</span>
-            </button>
-          );
-        })}
+        {ordenados.map((j) => <LinhaDoJogador key={j.id} j={j} nota={j.forca} onde="" aoEscolher={() => setTrocando(j.id)} />)}
       </div>
+      <button className="botao primario cheio" onClick={aoFechar}>Pronto</button>
     </Folha>
   );
 }

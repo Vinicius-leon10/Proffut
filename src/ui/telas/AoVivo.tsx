@@ -16,7 +16,7 @@ import { Barra, Escudo, Folha, Icone, Opcoes, Pos, Segmentado } from "../compone
 import { rotuloPartida } from "../formatos";
 import { apito, liberarSom, pararSons, tocarLances } from "../sons";
 import { useJogo, useLoja } from "../store";
-import { CampoDaEscalacao, FolhaDoTime, forcaMediaDoTime, mudarTaticaDoClube } from "./Tatica";
+import { CampoDaEscalacao, FolhaDoTime, FolhaDosReservas, forcaMediaDoTime, mudarTaticaDoClube } from "./Tatica";
 
 const INTERVALO_MS: Record<1 | 2, number> = { 1: 700, 2: 340 };
 /** Pausa depois de um pênalti marcado, antes da cobrança (o narrador grita e a torcida reage). */
@@ -173,7 +173,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
       </div>
 
       {!iniciado ? (
-        <PreJogo vivas={vivas} meu={meu} meuLado={meuLado} aoComecar={comecar} aoVoltar={fechar} />
+        <PreJogo meu={meu} meuLado={meuLado} aoComecar={comecar} aoVoltar={fechar} />
       ) : (
         <>
           <div className="linha" style={{ padding: "10px 16px", gap: 8, borderBottom: "1px solid var(--borda)" }}>
@@ -260,10 +260,11 @@ function MediaDoTime({ lado }: { lado: LadoVivo }) {
   return <span className="forca-media">força média <b>{forcaMediaDoTime(estado, lado)}</b></span>;
 }
 
-function PreJogo({ vivas, meu, meuLado, aoComecar, aoVoltar }: { vivas: PartidaViva[]; meu: PartidaViva; meuLado: 0 | 1; aoComecar: () => void; aoVoltar: () => void }) {
+function PreJogo({ meu, meuLado, aoComecar, aoVoltar }: { meu: PartidaViva; meuLado: 0 | 1; aoComecar: () => void; aoVoltar: () => void }) {
   const estado = useJogo();
   const { atualizar } = useLoja();
   const [tatica, setTatica] = useState(false);
+  const [reservas, setReservas] = useState(false);
   const eu = meu.lados[meuLado];
   const clube = estado.clubes[eu.clubeId];
   // O campinho mostra quem vai jogar (o lado da partida, já sem lesionados e suspensos), vaga por vaga.
@@ -276,11 +277,15 @@ function PreJogo({ vivas, meu, meuLado, aoComecar, aoVoltar }: { vivas: PartidaV
   };
   return (
     <div className="conteudo">
-      {/* Só a tática no alto (R50); a força média de cada time fica no placar (R46). */}
-      <button className="botao cheio" onClick={() => setTatica(true)}>Mudar a tática</button>
+      {/* No alto, a tática (R50) e os reservas (R54); a força média de cada time fica no placar (R46). */}
+      <div className="linha" style={{ gap: 8 }}>
+        <button className="botao cresce" onClick={() => setTatica(true)}>Mudar a tática</button>
+        <button className="botao cresce" onClick={() => setReservas(true)}>Reservas</button>
+      </div>
       {tatica && <PainelTatica pv={meu} lado={meuLado} antesDoJogo aoFechar={() => setTatica(false)} />}
-      <CampoDaEscalacao clube={clube} titulares={titulares} reservas={clube.escalacao.reservas} aoMudar={mudarEscalacao} />
-      <p className="mini muito-fraco">Hoje: {vivas.length} jogos. Os outros placares aparecem na aba Rodada durante o jogo.</p>
+      {reservas && <FolhaDosReservas clube={clube} titulares={titulares} banco={eu.banco} aoMudar={(banco) => mudarEscalacao(titulares, banco)} aoFechar={() => setReservas(false)} />}
+      {/* Embaixo do campinho, só os dois botões (R55). */}
+      <CampoDaEscalacao clube={clube} titulares={titulares} reservas={eu.banco} aoMudar={mudarEscalacao} />
       <button className="botao primario grande cheio" onClick={aoComecar}>Começar o jogo</button>
       <button className="botao cheio" onClick={aoVoltar}>Voltar ao clube</button>
     </div>

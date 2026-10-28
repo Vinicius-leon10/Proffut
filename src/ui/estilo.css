@@ -597,3 +597,7 @@ p { margin: 0; }
 .tutorial-pontos > span:not(.mini) { width: 8px; height: 8px; border-radius: 99px; background: var(--cartao-2); }
 .tutorial-pontos > span.ativo { width: 20px; background: var(--floresta); }
 .tutorial-pontos .mini { margin-left: auto; }
+
+/* ---- escolha de jogador por posição (R53) ---------------------------------------------------- */
+
+.grupo-posicao h3 { margin: 4px 0 2px; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.72rem; }
