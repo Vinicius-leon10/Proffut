@@ -92,6 +92,29 @@ def texto_da_pagina(lang, titulo):
     return r["parse"]["title"], r["parse"]["wikitext"]
 
 
+# Seções que listam os participantes (as de quem subiu ou caiu ficam de fora: citam clubes de outras divisões).
+PARTICIPANTES = re.compile(r"particip|equipes|clubes|times|teams|equipos|club information|informaci[óo]n|localiza|stadia|"
+                           r"est[áa]dios|personnel|grupo|group|serie [ab]\b|zona", re.I)
+FORA_DOS_PARTICIPANTES = re.compile(r"relevo|changes|altas|ascens|descens|rebaix|acesso|promo|relega|cambio|entrenador|"
+                                    r"managerial|[áa]rbitr|transmiss|direitos|broadcast|estat[íi]stic|statistic|goleador|"
+                                    r"artilh|scorer|p[úu]blico|attendance|premia|award|campe[õo]es|champions|final", re.I)
+
+
+def participantes_da_pagina(lang, titulo):
+    """Seções da página e as ligações (inclusive as que vêm de predefinições) das que falam dos participantes."""
+    r = api(lang, action="parse", page=titulo, prop="sections", redirects="1")
+    secoes = (r or {}).get("parse", {}).get("sections", [])
+    lista = []
+    for sec in secoes:
+        nome = re.sub(r"<[^>]+>", "", sec.get("line", ""))
+        if not PARTICIPANTES.search(nome) or FORA_DOS_PARTICIPANTES.search(nome) or not str(sec.get("index", "")).isdigit():
+            continue
+        rl = api(lang, action="parse", page=titulo, section=sec["index"], prop="links", redirects="1")
+        ligacoes_secao = [l["title"] for l in (rl or {}).get("parse", {}).get("links", []) if l.get("ns") == 0]
+        lista.append({"secao": nome, "indice": sec["index"], "ligacoes": ligacoes_secao})
+    return [s.get("line", "") for s in secoes], lista
+
+
 ESPACOS = re.compile(r"[ _]+")
 # Prefixos de outros espaços de nomes (arquivos, categorias, predefinições...) e de outras línguas.
 NAO_ARTIGO = re.compile(r"^(:?[a-z]{2,3}|file|image|category|template|wikipedia|help|portal|special|ficheiro|arquivo|imagem|"
@@ -277,40 +300,55 @@ def main():
     os.makedirs(saida, exist_ok=True)
     paginas, escolhas = {}, []
 
-    # 1. Páginas de partida: o primeiro título da busca que tem todos os pedaços exigidos.
+    # 1. Páginas de partida: todas as de 'titulos' que existem (sem nenhuma, a busca); de cada uma, as ligações das
+    #    seções dos participantes (e as do texto, de reserva).
     for s in sementes:
+        achadas = []
+        titulos = list(s.get("titulos", []))
+        for titulo in titulos:
+            final, texto = texto_da_pagina(s["lang"], titulo)
+            if texto and final not in [a["titulo"] for a in achadas]:
+                paginas[f"{s['lang']}:{final}"] = texto
+                secoes, listas = participantes_da_pagina(s["lang"], final)
+                achadas.append({"titulo": final, "secoes": secoes, "participantes": listas, "ligacoes": ligacoes(texto)})
         candidatos = []
-        for consulta in s["consultas"]:
-            candidatos += [t for t in buscar(s["lang"], consulta) if t not in candidatos]
-        exige = [e.lower() for e in s.get("exige", [])]
-        escolhido = next((t for t in candidatos if all(e in t.lower() for e in exige)), None)
-        titulo, texto = texto_da_pagina(s["lang"], escolhido) if escolhido else (None, None)
-        if texto:
-            paginas[f"{s['lang']}:{titulo}"] = texto
-        escolhas.append({**s, "candidatos": candidatos, "escolhido": titulo})
-        print(f"{s['id']}: {titulo or 'NÃO ACHOU'} ({len(candidatos)} candidatos)", flush=True)
+        if not achadas:
+            for consulta in s.get("consultas", []):
+                candidatos += [t for t in buscar(s["lang"], consulta) if t not in candidatos]
+            exige = [e.lower() for e in s.get("exige", [])]
+            escolhido = next((t for t in candidatos if all(e in t.lower() for e in exige)), None)
+            final, texto = texto_da_pagina(s["lang"], escolhido) if escolhido else (None, None)
+            if texto:
+                paginas[f"{s['lang']}:{final}"] = texto
+                secoes, listas = participantes_da_pagina(s["lang"], final)
+                achadas.append({"titulo": final, "secoes": secoes, "participantes": listas, "ligacoes": ligacoes(texto)})
+        escolhas.append({**s, "candidatos": candidatos, "paginas": achadas})
+        print(f"{s['id']}: {', '.join(a['titulo'] for a in achadas) or 'NÃO ACHOU'} "
+              f"({sum(len(l['ligacoes']) for a in achadas for l in a['participantes'])} ligações nos participantes)", flush=True)
     gravar(saida, "sementes.json.gz", escolhas)
 
-    # 2. Clubes ligados diretamente em cada página de partida, do país do campeonato.
+    # 2. Clubes do país do campeonato entre as ligações (das seções dos participantes e do texto).
     titulos_por_lang = {}
     for e in escolhas:
-        if e["escolhido"]:
-            titulos_por_lang.setdefault(e["lang"], set()).update(ligacoes(paginas[f"{e['lang']}:{e['escolhido']}"]))
+        for a in e["paginas"]:
+            titulos_por_lang.setdefault(e["lang"], set()).update(a["ligacoes"])
+            for l in a["participantes"]:
+                titulos_por_lang[e["lang"]].update(l["ligacoes"])
     qid_de = {lang: qids_dos_titulos(lang, list(titulos)) for lang, titulos in titulos_por_lang.items()}
     todos = {q for mapa in qid_de.values() for q in mapa.values()}
     clubes = clubes_de_futebol(todos)
     print(f"Ligações: {sum(len(t) for t in titulos_por_lang.values())}; itens: {len(todos)}; clubes: {len(clubes)}", flush=True)
     for e in escolhas:
-        if not e["escolhido"]:
-            continue
         mapa = qid_de.get(e["lang"], {})
-        e["clubes"] = []
-        for t in ligacoes(paginas[f"{e['lang']}:{e['escolhido']}"]):
-            q = mapa.get(t)
-            if q in clubes and (not clubes[q] or e["pais"] in clubes[q]):
-                e["clubes"].append({"titulo": t, "qid": q})
+        do_pais = lambda t: mapa.get(t) in clubes and (not clubes[mapa[t]] or e["pais"] in clubes[mapa[t]])
+        for a in e["paginas"]:
+            a["clubes_no_texto"] = [{"titulo": t, "qid": mapa[t]} for t in a["ligacoes"] if do_pais(t)]
+            for l in a["participantes"]:
+                l["clubes"] = [{"titulo": t, "qid": mapa[t]} for t in l["ligacoes"] if do_pais(t)]
+            del a["ligacoes"]
     gravar(saida, "sementes.json.gz", escolhas)
-    dos_campeonatos = {c["qid"] for e in escolhas for c in e.get("clubes", [])}
+    dos_campeonatos = {c["qid"] for e in escolhas for a in e["paginas"]
+                       for c in a["clubes_no_texto"] + [c for l in a["participantes"] for c in l["clubes"]]}
     detalhes = detalhes_dos_clubes(dos_campeonatos)
     for q, d in detalhes.items():
         d["paises"] = clubes.get(q, [])
