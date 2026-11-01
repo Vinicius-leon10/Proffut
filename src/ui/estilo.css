@@ -301,6 +301,9 @@ p { margin: 0; }
 .a-venda > .item { border-bottom: 0; padding-bottom: 6px; }
 .proposta-a-venda { display: flex; flex-direction: column; gap: 8px; padding: 10px; border-radius: 10px; background: #fbf3d6; }
 .sem-proposta { padding: 0 2px; }
+/* Meus à venda: quem está no último ano de contrato, para pôr à venda dali (R64). */
+.contrato-terminando { display: flex; flex-direction: column; gap: 4px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--divisor); }
+.contrato-terminando h3 { margin: 0; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.72rem; }
 
 .posicao {
   width: 26px; height: 26px;

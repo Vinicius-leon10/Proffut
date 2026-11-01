@@ -139,6 +139,12 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
     );
   }
   const naoEmpresta = meu && !j.emprestimo ? motivoParaNaoEmprestar(estado, j) : null;
+  const terminando = meu && !j.emprestimo && ultimoAno(estado, j);
+  const alternarVenda = () => {
+    j.aVenda = !j.aVenda;
+    atualizar();
+    avisar(j.aVenda ? `${j.nome} foi colocado à venda. As propostas aparecem no Mercado.` : `${j.nome} saiu da lista de venda.`);
+  };
   return (
     <Folha titulo={j.nome} aoFechar={aoFechar}>
       <div className="linha" style={{ flexWrap: "wrap", gap: 6 }}>
@@ -156,10 +162,14 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
           Emprestado {comArtigo("pelo", estado.clubes[j.emprestimo.de])} {comArtigo("ao", clube)} até o fim de {j.emprestimo.ate}. Na virada ele volta.
         </p>
       )}
-      {meu && !j.emprestimo && ultimoAno(estado, j) && (
+      {/* No último ano: renovar ou pôr à venda, lado a lado (R64). */}
+      {terminando && (
         <div className="cartao compacto">
-          <p className="pequeno">O contrato termina no fim de {estado.temporada}. Sem renovar, ele sai de graça na virada.</p>
-          <button className="botao primario cheio" style={{ marginTop: 8 }} onClick={() => setRenovando(true)}>Renovar contrato</button>
+          <p className="pequeno">O contrato termina no fim de {estado.temporada}. Sem renovar, ele sai de graça na virada: renove ou ponha à venda.</p>
+          <div className="linha" style={{ marginTop: 8, gap: 8 }}>
+            <button className="botao primario pequeno cresce" onClick={() => setRenovando(true)}>Renovar contrato</button>
+            <button className="botao pequeno cresce" onClick={alternarVenda}>{j.aVenda ? "Tirar da venda" : "Colocar à venda"}</button>
+          </div>
         </div>
       )}
       <div className="cartao compacto">
@@ -186,9 +196,7 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
         <div className="coluna">
           <button className="botao cheio" disabled={!!naoEmpresta} onClick={() => setEmprestando(true)}>Emprestar até o fim da temporada</button>
           {naoEmpresta && <p className="mini fraco">{naoEmpresta}</p>}
-          <button className="botao cheio" onClick={() => { j.aVenda = !j.aVenda; atualizar(); avisar(j.aVenda ? `${j.nome} foi colocado à venda. Propostas chegam nas mensagens.` : `${j.nome} saiu da lista de venda.`); }}>
-            {j.aVenda ? "Tirar da lista de venda" : "Colocar à venda"}
-          </button>
+          {!terminando && <button className="botao cheio" onClick={alternarVenda}>{j.aVenda ? "Tirar da lista de venda" : "Colocar à venda"}</button>}
           <button
             className="botao perigo cheio"
             disabled={!podeSair(estado, j)}
@@ -238,7 +246,7 @@ export function Elenco() {
       />
       {terminando > 0 && (
         <p className="mini fraco">
-          {terminando === 1 ? "1 jogador está" : `${terminando} jogadores estão`} no último ano de contrato: toque no jogador para renovar, ou ele sai de graça no fim da temporada.
+          {terminando === 1 ? "1 jogador está" : `${terminando} jogadores estão`} no último ano de contrato: toque no jogador para renovar ou pôr à venda, ou ele sai de graça no fim da temporada.
         </p>
       )}
       <div className="lista">

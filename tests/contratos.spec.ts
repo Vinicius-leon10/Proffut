@@ -1,6 +1,9 @@
 import { execFileSync } from "node:child_process";
 import type { Locator, Page } from "@playwright/test";
-import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, novoJogo, test } from "./ajuda";
+
+/** O nome exato, para achar a linha do jogador ("Pedro" está em "João Pedro"). */
+const exato = (nome: string) => new RegExp(`^${nome.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`);
 
 /** Nome e idade de cada jogador do elenco com o contrato terminando nesta temporada. */
 async function contratosTerminando(page: Page) {
@@ -61,4 +64,38 @@ test("R38 contratos: no último ano do contrato dá para renovar (o jogador pede
   await page.getByRole("button", { name: /^Mensagens/ }).click();
   const fim = page.locator(".tela-cheia .item", { hasText: "Fim de contrato" });
   await expect(fim).toContainText(sai.nome);
+});
+
+test("R64 quem está no último ano de contrato dá para pôr à venda direto: na ficha, ao lado de Renovar, e em Mercado → Meus à venda, na lista Contrato terminando", async ({ page }) => {
+  await novoJogo(page);
+  // Num jogo novo, parte do elenco já está no último ano de contrato.
+  await aba(page, "Elenco");
+  const terminando = await contratosTerminando(page);
+  expect(terminando.length, "jogadores no último ano de contrato").toBeGreaterThanOrEqual(2);
+  const [primeiro, segundo] = terminando;
+
+  // Na ficha, o cartão do contrato tem Renovar e Colocar à venda lado a lado.
+  await primeiro.linha.click();
+  const ficha = page.getByRole("dialog");
+  const cartao = ficha.locator(".cartao", { hasText: "O contrato termina" });
+  await expect(cartao.getByRole("button", { name: "Renovar contrato" })).toBeVisible();
+  await cartao.getByRole("button", { name: "Colocar à venda" }).click();
+  await expect(page.locator(".aviso")).toContainText(`${primeiro.nome} foi colocado à venda`);
+  await expect(cartao.getByRole("button", { name: "Tirar da venda" })).toBeVisible();
+  await ficha.getByRole("button", { name: "Fechar" }).click();
+
+  // Em Mercado → Meus à venda, ele já está à venda; os outros do último ano ficam em "Contrato terminando", com o botão.
+  await aba(page, "Mercado");
+  await page.getByRole("tab", { name: /Meus à venda/ }).click();
+  const vendas = page.locator("main .a-venda");
+  await expect(vendas.locator(".negrito", { hasText: exato(primeiro.nome) })).toHaveCount(1);
+  const secao = page.locator("main .contrato-terminando");
+  await expect(secao.getByRole("heading", { name: "Contrato terminando" })).toBeVisible();
+  await expect(secao.locator(".item")).toHaveCount(terminando.length - 1);
+  const linhaSegundo = secao.locator(".item").filter({ has: page.locator(".negrito", { hasText: exato(segundo.nome) }) });
+  await linhaSegundo.getByRole("button", { name: "Colocar à venda" }).click();
+  await expect(page.locator(".aviso")).toContainText(`${segundo.nome} foi colocado à venda`);
+  // Ele sobe para a lista de venda e sai de "Contrato terminando".
+  await expect(vendas.locator(".negrito", { hasText: exato(segundo.nome) })).toHaveCount(1);
+  await expect(linhaSegundo).toHaveCount(0);
 });

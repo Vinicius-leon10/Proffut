@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
+import { contratosTerminando } from "../../engine/contratos";
 import { NOMES_CARACTERISTICA, NOMES_POSICAO } from "../../engine/forca";
 import { formatarDinheiro } from "../../engine/financas";
 import { salarioBase, valorMercado } from "../../engine/gerador";
@@ -96,6 +97,17 @@ export function Mercado() {
 
   // A proposta que está valendo por cada jogador meu (R62).
   const propostaPor = useMemo(() => new Map(propostasPendentes(estado).map((m) => [m.proposta!.jogadorId, m])), [estado, versao]);
+  // No último ano de contrato e ainda fora da venda: dá para pôr à venda daqui (R64).
+  const terminando = useMemo(
+    () => contratosTerminando(estado).filter((j) => !j.aVenda && !propostaPor.has(j.id)).sort((a, b) => b.forca - a.forca),
+    [estado, versao, propostaPor],
+  );
+  const { atualizar, avisar } = useLoja();
+  const colocarAVenda = (j: Jogador) => {
+    j.aVenda = true;
+    atualizar();
+    avisar(`${j.nome} foi colocado à venda. As propostas aparecem aqui.`);
+  };
   const resultados = useMemo(() => {
     // Meus à venda: todos (os filtros não aparecem aqui), mais quem recebeu proposta sem estar à venda (R63); quem
     // tem proposta primeiro (R62).
@@ -177,6 +189,22 @@ export function Mercado() {
             </div>
           );
         })}
+        {vista === "venda" && terminando.length > 0 && (
+          <div className="contrato-terminando">
+            <h3 className="pequeno fraco">Contrato terminando</h3>
+            <p className="mini muito-fraco">Saem de graça no fim de {estado.temporada} se você não renovar. À venda, chegam propostas por eles.</p>
+            {terminando.map((j) => (
+              <div key={j.id} className="item">
+                <Pos pos={j.posicao} />
+                <div className="cresce">
+                  <div className="negrito corta pequeno">{j.nome}</div>
+                  <div className="mini fraco corta">{j.idade} anos · força {j.forca}</div>
+                </div>
+                <button className="botao pequeno" onClick={() => colocarAVenda(j)}>Colocar à venda</button>
+              </div>
+            ))}
+          </div>
+        )}
         {vista !== "venda" && resultados.map((j) => {
           const c = j.clubeId ? estado.clubes[j.clubeId] : undefined;
           return (
