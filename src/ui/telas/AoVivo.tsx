@@ -168,13 +168,10 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
       </button>
     );
   // Antes do jogo, o placar grande com a força média em cima do escudo (R46); na partida, o campo 2D no alto e o placar
-  // numa barra embaixo dele, como no exemplo do usuário (R60).
+  // numa barra embaixo dele, como no exemplo do usuário (R60), sem a força média, para sobrar espaço para o campo (R61).
   const timeNoPlacar = (lado: 0 | 1, l: LadoVivo, clube: Clube) =>
     iniciado ? (
-      <div className="time">
-        {escudoNoPlacar(lado, clube, 30)}
-        <span className="nome-e-forca"><span className="nome corta">{clube.nome}</span><MediaDoTime lado={l} /></span>
-      </div>
+      <div className="time">{escudoNoPlacar(lado, clube, 30)}<span className="nome corta">{clube.nome}</span></div>
     ) : (
       <div className="time"><MediaDoTime lado={l} />{escudoNoPlacar(lado, clube, 48)}<span className="nome corta" style={{ maxWidth: "100%" }}>{clube.nome}</span></div>
     );
@@ -183,13 +180,10 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
     <div className="tela-cheia">
       {iniciado ? (
         <div className="placar ao-vivo" style={{ "--cor-m": corDoLado(0), "--cor-v": corDoLado(1) } as CSSProperties}>
-          <CampoDaPartida pv={meu} meuLado={meuLado} duracao={Math.round(INTERVALO_MS[velocidade] * 0.8)} relogio={relogio(meu)} />
+          <CampoDaPartida pv={meu} meuLado={meuLado} duracao={Math.round(INTERVALO_MS[velocidade] * 0.8)} relogio={relogio(meu)} rotulo={rotuloPartida(partida)} />
           <div className="times">
             {timeNoPlacar(0, lm, clubeM)}
-            <div className="centro">
-              <div className="gols">{lm.gols} <span className="muito-fraco">x</span> {lv.gols}</div>
-              <div className="mini fraco corta">{rotuloPartida(partida)}</div>
-            </div>
+            <div className="gols">{lm.gols} <span className="muito-fraco">x</span> {lv.gols}</div>
             {timeNoPlacar(1, lv, clubeV)}
           </div>
         </div>

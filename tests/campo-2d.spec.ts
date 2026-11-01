@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { abrirSite, botao, cartaoDoProximoJogo, expect, test } from "./ajuda";
+import { abrirSite, botao, cartaoDoProximoJogo, expect, irParaOMeuJogo, novoJogo, test } from "./ajuda";
 
 // O que o rótulo do campo diz em cada lance.
 const ACOES = [
@@ -72,4 +72,25 @@ test("R60 na partida, o campo 2D fica em cima, no lugar do placar grande e dos e
   expect(y >= 44 && y <= 56).toBe(true);
   const autor = (await campo.locator(".jogador-do-lance").textContent())!.trim();
   await expect(page.locator(".tela-cheia .lance.gol").first()).toContainText(autor);
+});
+
+test("R61 na partida, a barra do placar fica sem a força média e o campo 2D ganha o espaço: mais alto que antes; antes do jogo a força média continua", async ({ page }) => {
+  await novoJogo(page);
+  await irParaOMeuJogo(page);
+  // Antes do jogo, a força média em cima dos escudos (R46).
+  await expect(page.locator(".placar .forca-media")).toHaveCount(2);
+  await botao(page, "Começar o jogo").click();
+
+  // Na partida, a barra embaixo do campo só com escudo, nome e placar: sem a força média, numa linha só.
+  const campo = page.locator(".tela-cheia .campo-2d");
+  await expect(campo).toBeVisible();
+  await expect(page.locator(".placar .forca-media")).toHaveCount(0);
+  await expect(page.locator(".placar .time .nome")).toHaveCount(2);
+  const barra = (await page.locator(".placar .times").boundingBox())!;
+  expect(barra.height, "a barra do placar numa linha só").toBeLessThanOrEqual(50);
+  // O campo usa o espaço: mais alto (antes, 55 por 105).
+  const caixa = (await campo.boundingBox())!;
+  expect(caixa.height / caixa.width, "proporção do campo").toBeGreaterThanOrEqual(0.56);
+  // O nome da competição continua na tela, no campo.
+  await expect(campo).toContainText(/Série [ABC] · \d+ª rodada/);
 });

@@ -486,17 +486,14 @@ p { margin: 0; }
 .placar .gols, .jogo-rodada .r { font-variant-ligatures: no-contextual; font-feature-settings: "calt" 0; }
 .placar .gols { font-size: 2.4rem; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
 .placar .relogio { text-align: center; color: var(--dourado); font-weight: 700; font-variant-numeric: tabular-nums; }
-/* Na partida, o campo 2D no alto, de ponta a ponta, e o placar numa barra embaixo dele (R60), com a cor de cada time nas pontas. */
+/* Na partida, o campo 2D no alto, de ponta a ponta, e o placar numa barra embaixo dele (R60): uma linha só, com escudo,
+   nome e gols (sem a força média, R61) e a cor de cada time nas pontas. */
 .placar.ao-vivo { padding: calc(var(--topo) + var(--folga)) 0 0; }
-.placar.ao-vivo .times { padding: 10px 14px 12px; border-left: 4px solid var(--cor-m); border-right: 4px solid var(--cor-v); }
-.placar.ao-vivo .time { flex-direction: row; gap: 8px; min-width: 0; text-align: left; font-size: 0.88rem; }
+.placar.ao-vivo .times { padding: 7px 14px; border-left: 4px solid var(--cor-m); border-right: 4px solid var(--cor-v); }
+.placar.ao-vivo .time { flex-direction: row; gap: 8px; min-width: 0; text-align: left; font-size: 0.9rem; }
 .placar.ao-vivo .time:last-child { flex-direction: row-reverse; text-align: right; }
-.placar.ao-vivo .nome-e-forca { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; min-width: 0; }
-.placar.ao-vivo .time:last-child .nome-e-forca { align-items: flex-end; }
-.placar.ao-vivo .nome { max-width: 100%; }
-.placar.ao-vivo .forca-media { font-size: 0.62rem; padding: 0 6px; }
-.placar.ao-vivo .centro { min-width: 0; text-align: center; }
-.placar.ao-vivo .gols { font-size: 1.7rem; line-height: 1.15; }
+.placar.ao-vivo .nome { min-width: 0; }
+.placar.ao-vivo .gols { font-size: 1.6rem; line-height: 1.1; text-align: center; }
 
 /* ---- campo 2D da partida (R60) ---------------------------------------------------------------- */
 
@@ -517,6 +514,11 @@ p { margin: 0; }
   padding: 3px 14px; border-radius: 0 0 8px 8px; background: rgb(16 34 26 / 80%);
 }
 .campo-2d .relogio-do-campo .relogio { font-size: 0.95rem; }
+.campo-2d .rotulo-do-campo {
+  position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); max-width: 90%;
+  font-size: 0.64rem; font-weight: 600; color: rgb(255 255 255 / 72%); text-shadow: 0 1px 2px rgb(0 0 0 / 45%);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none;
+}
 .campo-2d .lance-do-campo {
   position: absolute; top: 52%; transform: translate(-50%, -50%); max-width: 46%;
   display: flex; flex-direction: column; align-items: center; gap: 3px; text-align: center;

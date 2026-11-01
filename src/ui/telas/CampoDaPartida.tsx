@@ -23,10 +23,10 @@ const TEXTO_DA_ACAO: Record<AcaoDoCampo, string> = {
   fim: "Fim de jogo",
 };
 
-// O campo em metros: 105 de comprimento e 55 de largura (mais baixo que um de verdade, para caber no alto da tela do
-// celular), com a grande área, a pequena área e o círculo central do tamanho de sempre.
+// O campo em metros: 105 de comprimento e 60 de largura (um pouco mais baixo que um de verdade, para caber no alto da
+// tela do celular), com a grande área, a pequena área e o círculo central perto do tamanho de sempre.
 const COMPRIMENTO = 105;
-const LARGURA = 55;
+const LARGURA = 60;
 const MEIO = LARGURA / 2;
 /** Do lance (0 a 100 nos dois sentidos) para o desenho, dentro das linhas. */
 const noDesenho = ([x, y]: [number, number]): [number, number] => [1 + (x / 100) * (COMPRIMENTO - 2), 1 + (y / 100) * (LARGURA - 2)];
@@ -35,7 +35,14 @@ const noDesenho = ([x, y]: [number, number]): [number, number] => [1 + (x / 100)
  * O campo 2D da partida (R60), no estilo dos aplicativos de futebol ao vivo: a bola com o caminho do minuto, a sombra
  * do time com a bola (do gol dele até onde chegou, com a ponta virada para o ataque) e o lance com o time e o jogador.
  */
-export function CampoDaPartida({ pv, meuLado, duracao, relogio }: { pv: PartidaViva; meuLado: 0 | 1; duracao: number; relogio: string }) {
+export function CampoDaPartida({ pv, meuLado, duracao, relogio, rotulo }: {
+  pv: PartidaViva;
+  meuLado: 0 | 1;
+  duracao: number;
+  relogio: string;
+  /** A competição e a rodada ("Série A · 1ª rodada"), embaixo no campo. */
+  rotulo: string;
+}) {
   const estado = useJogo();
   const lance = pv.campo?.lance;
   if (!lance) return null;
@@ -61,13 +68,13 @@ export function CampoDaPartida({ pv, meuLado, duracao, relogio }: { pv: PartidaV
         <g className="linhas">
           <rect x={1} y={1} width={COMPRIMENTO - 2} height={LARGURA - 2} />
           <line x1={COMPRIMENTO / 2} y1={1} x2={COMPRIMENTO / 2} y2={LARGURA - 1} />
-          <circle cx={COMPRIMENTO / 2} cy={MEIO} r={7} />
-          <rect x={1} y={MEIO - 15} width={14} height={30} />
-          <rect x={COMPRIMENTO - 15} y={MEIO - 15} width={14} height={30} />
-          <rect x={1} y={MEIO - 6.5} width={5} height={13} />
-          <rect x={COMPRIMENTO - 6} y={MEIO - 6.5} width={5} height={13} />
-          <rect x={-0.5} y={MEIO - 3.5} width={1.5} height={7} />
-          <rect x={COMPRIMENTO - 1} y={MEIO - 3.5} width={1.5} height={7} />
+          <circle cx={COMPRIMENTO / 2} cy={MEIO} r={8} />
+          <rect x={1} y={MEIO - 17} width={15} height={34} />
+          <rect x={COMPRIMENTO - 16} y={MEIO - 17} width={15} height={34} />
+          <rect x={1} y={MEIO - 7.5} width={5.5} height={15} />
+          <rect x={COMPRIMENTO - 6.5} y={MEIO - 7.5} width={5.5} height={15} />
+          <rect x={-0.5} y={MEIO - 3.7} width={1.5} height={7.4} />
+          <rect x={COMPRIMENTO - 1} y={MEIO - 3.7} width={1.5} height={7.4} />
         </g>
         <g className="marcas">
           <circle cx={COMPRIMENTO / 2} cy={MEIO} r={0.5} />
@@ -83,6 +90,7 @@ export function CampoDaPartida({ pv, meuLado, duracao, relogio }: { pv: PartidaV
         </g>
       </svg>
       <div className="relogio-do-campo"><span className="relogio">{relogio}</span></div>
+      <div className="rotulo-do-campo">{rotulo}</div>
       {/* O lance no meio do lado do campo longe da bola: o que acontece, o time e quem está no lance. */}
       <div className={`lance-do-campo ${fim[0] > 50 ? "esquerda" : "direita"}${lance.acao === "gol" ? " gol" : ""}`}>
         <b>{texto}</b>

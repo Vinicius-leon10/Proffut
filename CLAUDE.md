@@ -46,7 +46,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R60 rodando a cada mudança, antes
+ponta R01–R61 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -104,8 +104,10 @@ bola (do gol dele até a bola, no mínimo o meio-campo, com a ponta virada para 
 "Bola segura", "Ataque", "Ataque perigoso", "Chute para fora", "Chute defendido", "GOL!", "Escanteio", "Falta", "Pênalti!",
 "Cartão amarelo"...) com o escudo e o nome do time e, perto da bola, o nome do jogador. Fica no alto da tela da partida, de
 ponta a ponta, no lugar do placar grande e dos escudos, com o relógio numa caixinha em cima (pedido e captura de exemplo
-do usuário); o placar vira uma barra embaixo do campo (`.placar.ao-vivo`: escudos de 30 px, nome, força média, gols, o
-rótulo da partida e a cor de cada time nas pontas; o escudo do adversário ainda abre o time titular). O rótulo do lance
+do usuário); o placar vira uma barra embaixo do campo, numa linha só (`.placar.ao-vivo`: escudos de 30 px, nome, gols e a
+cor de cada time nas pontas; o escudo do adversário ainda abre o time titular). Sem a força média na partida, para o campo
+ter mais espaço (R61): o campo tem 60 de largura por 105 e a competição e a rodada ficam num texto pequeno embaixo, no
+campo. O rótulo do lance
 fica no meio do lado do campo longe da bola, com o nome do jogador embaixo; a bola tem a cor do time com ela. Antes do
 jogo o placar grande continua (R46). O motor: `PartidaViva.campo` (só na partida do usuário, só na
 memória) guarda o `LanceDoCampo` do último minuto; no fim de `avancarMinuto`, `lanceDoMinuto` desenha o minuto a partir
@@ -187,7 +189,7 @@ jogo salva 400 ms depois; um teste que recarregasse antes veria o tutorial de no
 
 **Antes do jogo: placar, tática e campinho da escalação (out/2026, capturas do usuário):** a força média de cada time
 (`forcaMediaDoTime` em `Tatica.tsx`: a força de quem está em campo, sem posição nem cansaço) fica em cima do escudo, no
-placar da partida (`MediaDoTime`, antes e durante o jogo) (R46). No conteúdo antes do jogo (`PreJogo` em `AoVivo.tsx`)
+placar da partida antes do jogo (`MediaDoTime`; na partida saiu da barra do placar, R61) (R46). No conteúdo antes do jogo (`PreJogo` em `AoVivo.tsx`)
 ficam só os botões "Mudar a tática" e "Reservas" (o cartão com o resumo dos times, a dica do escudo e a regra da Copa
 saiu, R50), o campinho e, embaixo dele, só "Começar o jogo" e "Voltar ao clube" (sem texto: a explicação do número e
 das cores e a linha "Hoje:" saíram, R55; o tutorial explica). "Mudar a tática" abre `PainelTatica antesDoJogo` ("Tática do seu time"):
