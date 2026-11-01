@@ -1,5 +1,5 @@
 {
- "descricao": "Páginas de partida do robô dos times novos (tools/times/wikipedia.py): a Série D de 2026, os 27 estaduais de 2026 e a primeira divisão de 2026 dos outros 9 países da Conmebol. O robô baixa todas as páginas de 'titulos' que existem (sem elas, busca pelas 'consultas' e fica com o primeiro título que tem todos os pedaços de 'exige') e, em cada uma, as ligações das seções que falam dos participantes.",
+ "descricao": "Páginas de partida do robô dos times novos (tools/times/wikipedia.py): a Série D de 2026, os 27 estaduais de 2026 e a primeira divisão de 2026 dos outros 9 países da Conmebol. O robô baixa todas as páginas de 'titulos' que existem (sem elas, busca pelas 'consultas' e fica com o primeiro título que tem todos os pedaços de 'exige') e, em cada uma, as ligações das seções que falam dos participantes. Estaduais sem página com participantes buscam também as edições de 2026 e de 2025 ('buscas').",
  "sementes": [
   {
    "id": "serie-d",
@@ -34,6 +34,14 @@
     "Campeonato Acriano de Futebol de 2026",
     "Campeonato Acreano de Futebol de 2025",
     "Campeonato Acreano de Futebol Masculino"
+   ],
+   "buscas": [
+    "Campeonato Acreano de Futebol de 2026",
+    "Campeonato Acreano 2026",
+    "Campeonato Acreano de Futebol de 2025"
+   ],
+   "exige_busca": [
+    "Acr"
    ]
   },
   {
@@ -52,6 +60,14 @@
     "Campeonato Alagoano de Futebol de 2026",
     "Campeonato Alagoano de Futebol de 2025",
     "Campeonato Alagoano de Futebol Masculino"
+   ],
+   "buscas": [
+    "Campeonato Alagoano de Futebol de 2026",
+    "Campeonato Alagoano 2026",
+    "Campeonato Alagoano de Futebol de 2025"
+   ],
+   "exige_busca": [
+    "Alagoano"
    ]
   },
   {
@@ -71,6 +87,14 @@
     "Campeonato Amapaense de Futebol de 2026 - Série A",
     "Campeonato Amapaense de Futebol de 2025 - Série A",
     "Campeonato Amapaense de Futebol Masculino"
+   ],
+   "buscas": [
+    "Campeonato Amapaense de Futebol de 2026",
+    "Campeonato Amapaense 2026",
+    "Campeonato Amapaense de Futebol de 2025"
+   ],
+   "exige_busca": [
+    "Amapaense"
    ]
   },
   {
@@ -138,6 +162,14 @@
     "Campeonato Brasiliense de Futebol de 2025",
     "Campeonato Brasiliense de Futebol Masculino",
     "Campeonato Brasiliense de Futebol"
+   ],
+   "buscas": [
+    "Campeonato Brasiliense de Futebol de 2026",
+    "Campeonato Brasiliense 2026",
+    "Campeonato Brasiliense de Futebol de 2025"
+   ],
+   "exige_busca": [
+    "Brasiliense"
    ]
   },
   {
@@ -156,6 +188,14 @@
     "Campeonato Capixaba de Futebol de 2026",
     "Campeonato Capixaba de Futebol de 2025",
     "Campeonato Capixaba de Futebol Masculino"
+   ],
+   "buscas": [
+    "Campeonato Capixaba de Futebol de 2026",
+    "Campeonato Capixaba 2026",
+    "Campeonato Capixaba de Futebol de 2025"
+   ],
+   "exige_busca": [
+    "Capixaba"
    ]
   },
   {
@@ -206,6 +246,14 @@
     "Campeonato Mato-Grossense de Futebol de 2026",
     "Campeonato Mato-Grossense de Futebol de 2025",
     "Campeonato Mato-Grossense de Futebol Masculino"
+   ],
+   "buscas": [
+    "Campeonato Mato-Grossense de Futebol de 2026",
+    "Campeonato Mato-Grossense 2026",
+    "Campeonato Mato-Grossense de Futebol de 2025"
+   ],
+   "exige_busca": [
+    "Campeonato Mato-Grossense"
    ]
   },
   {
@@ -224,6 +272,14 @@
     "Campeonato Sul-Mato-Grossense de Futebol de 2026",
     "Campeonato Sul-Mato-Grossense de Futebol de 2025",
     "Campeonato Sul-Mato-Grossense de Futebol Masculino"
+   ],
+   "buscas": [
+    "Campeonato Sul-Mato-Grossense de Futebol de 2026",
+    "Campeonato Sul-Mato-Grossense 2026",
+    "Campeonato Sul-Mato-Grossense de Futebol de 2025"
+   ],
+   "exige_busca": [
+    "Sul-Mato-Grossense"
    ]
   },
   {
@@ -325,6 +381,14 @@
     "Campeonato Piauiense de Futebol Masculino de 2026",
     "Campeonato Piauiense de Futebol de 2025",
     "Campeonato Piauiense de Futebol Masculino"
+   ],
+   "buscas": [
+    "Campeonato Piauiense de Futebol de 2026",
+    "Campeonato Piauiense 2026",
+    "Campeonato Piauiense de Futebol de 2025"
+   ],
+   "exige_busca": [
+    "Piauiense"
    ]
   },
   {
@@ -359,6 +423,14 @@
     "Campeonato Potiguar de Futebol de 2026",
     "Campeonato Potiguar de Futebol de 2025",
     "Campeonato Potiguar de Futebol Masculino"
+   ],
+   "buscas": [
+    "Campeonato Potiguar de Futebol de 2026",
+    "Campeonato Potiguar 2026",
+    "Campeonato Potiguar de Futebol de 2025"
+   ],
+   "exige_busca": [
+    "Potiguar"
    ]
   },
   {
@@ -394,6 +466,14 @@
     "Campeonato Rondoniense de Futebol de 2025",
     "Campeonato Rondoniense de Futebol de 2025 - Série A",
     "Campeonato Rondoniense de Futebol Masculino"
+   ],
+   "buscas": [
+    "Campeonato Rondoniense de Futebol de 2026",
+    "Campeonato Rondoniense 2026",
+    "Campeonato Rondoniense de Futebol de 2025"
+   ],
+   "exige_busca": [
+    "Rondoniense"
    ]
   },
   {
@@ -477,6 +557,14 @@
     "Campeonato Tocantinense de Futebol de 2026",
     "Campeonato Tocantinense de Futebol de 2025",
     "Campeonato Tocantinense de Futebol Masculino"
+   ],
+   "buscas": [
+    "Campeonato Tocantinense de Futebol de 2026",
+    "Campeonato Tocantinense 2026",
+    "Campeonato Tocantinense de Futebol de 2025"
+   ],
+   "exige_busca": [
+    "Tocantinense"
    ]
   },
   {

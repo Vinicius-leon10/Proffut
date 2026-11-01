@@ -200,13 +200,16 @@ def valores(qids):
 
 
 def clubes_de_futebol(qids):
-    """Quais itens são clubes de futebol, com o país de cada um."""
+    """Quais itens são clubes de futebol (também os poliesportivos, como o Boca Juniors), com o país de cada um.
+    Seleções nacionais ficam de fora."""
     achados = {}
     for bloco in blocos(sorted(set(qids)), 300):
         for l in sparql(f"""
             SELECT ?item ?pais WHERE {{
               VALUES ?item {{ {valores(bloco)} }}
-              ?item wdt:P31/wdt:P279* wd:Q476028 .
+              VALUES ?tipo {{ wd:Q476028 wd:Q847017 wd:Q12973014 wd:Q103229495 }}
+              ?item wdt:P31/wdt:P279* ?tipo .
+              FILTER NOT EXISTS {{ ?item wdt:P31/wdt:P279* wd:Q6979593 }}
               OPTIONAL {{ ?item wdt:P17 ?pais }}
             }}"""):
             achados.setdefault(valor(l, "item"), set()).add(valor(l, "pais"))
@@ -312,6 +315,20 @@ def main():
                 secoes, listas = participantes_da_pagina(s["lang"], final)
                 achadas.append({"titulo": final, "secoes": secoes, "participantes": listas, "ligacoes": ligacoes(texto)})
         candidatos = []
+        # Sem página com participantes (estaduais sem a página de 2026): a busca, com as edições de 2026 e de 2025.
+        poucos = sum(len(l["ligacoes"]) for a in achadas for l in a["participantes"]) < 8
+        if poucos and s.get("buscas"):
+            for consulta in s["buscas"]:
+                for t in buscar(s["lang"], consulta):
+                    if t in candidatos or not any(a in t for a in ("2026", "2025")):
+                        continue
+                    candidatos.append(t)
+            for titulo in [t for t in candidatos if all(e.lower() in t.lower() for e in s.get("exige_busca", []))][:3]:
+                final, texto = texto_da_pagina(s["lang"], titulo)
+                if texto and final not in [a["titulo"] for a in achadas]:
+                    paginas[f"{s['lang']}:{final}"] = texto
+                    secoes, listas = participantes_da_pagina(s["lang"], final)
+                    achadas.append({"titulo": final, "secoes": secoes, "participantes": listas, "ligacoes": ligacoes(texto)})
         if not achadas:
             for consulta in s.get("consultas", []):
                 candidatos += [t for t in buscar(s["lang"], consulta) if t not in candidatos]
