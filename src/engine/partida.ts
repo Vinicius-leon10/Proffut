@@ -7,6 +7,7 @@ import {
   PROB_LESAO_JOGO, PROB_PENALTI_FALTA, PROB_VERMELHO_FALTA,
 } from "./constantes";
 import { FORMACOES, calcularSetores, disponivel, forcaEfetiva, type EmCampo, type Setores, type Vaga } from "./forca";
+import { lanceDoMinuto, lanceInicial, type MinutoEmNumeros } from "./campo";
 import type { Rng } from "./rng";
 import type { Clube, Estilo, EventoPartida, Jogador, Partida, Tatica } from "./tipos";
 
@@ -57,6 +58,40 @@ export interface Estatisticas {
   rng: Rng;
 }
 
+/** O que acontece com a bola no campo 2D (R60). */
+export type AcaoDoCampo =
+  | "inicio" | "segura" | "posse" | "ataque" | "perigo" | "chute" | "defesa" | "gol" | "escanteio" | "falta"
+  | "falta-perigosa" | "penalti" | "penalti-perdido" | "amarelo" | "vermelho" | "intervalo" | "fim";
+
+/** Um minuto no campo 2D: onde a bola andou, qual time está com ela e o que aconteceu. */
+export interface LanceDoCampo {
+  /** Conta os minutos jogados (muda a cada minuto). */
+  n: number;
+  /** Time com a bola: a sombra no campo é dele. */
+  lado: 0 | 1;
+  /** Time do rótulo: quem fez o lance (no cartão, quem fez a falta). */
+  quem: 0 | 1;
+  acao: AcaoDoCampo;
+  /** Caminho da bola no minuto: x de 0 (gol do mandante) a 100 (gol do visitante), y de 0 (em cima) a 100. */
+  caminho: [number, number][];
+  /** Até onde vai a sombra do time com a bola, em x (do gol dele até aqui). */
+  frente: number;
+  /** Quem aparece no lance: quem chutou, fez o gol, levou o cartão ou está com a bola. */
+  jogadorId?: number;
+}
+
+export interface CampoAoVivo {
+  lance: LanceDoCampo;
+  /** Sorteios só do campo: separados para não mudar placar, lances nem estatísticas. */
+  rng: Rng;
+}
+
+/** O lance principal do minuto, para o campo: quem atacou e de que jeito (o resto vem da narração). */
+export interface FocoDoMinuto {
+  lado: 0 | 1;
+  tipo: keyof typeof PESO_LANCE | "cobranca";
+}
+
 export interface PartidaViva {
   partidaId: string;
   lados: [LadoVivo, LadoVivo];
@@ -78,6 +113,8 @@ export interface PartidaViva {
    * aparecem na tela, e sem elas o resto do dia simula mais rápido.
    */
   estatisticas?: Estatisticas;
+  /** O campo 2D (R60), também só na partida do usuário e só na memória. */
+  campo?: CampoAoVivo;
   rng: Rng;
 }
 
@@ -153,8 +190,8 @@ export function montarLado(clube: Clube, jogadores: Jogadores, elenco: Jogador[]
   };
 }
 
-/** `rngEstatisticas` liga as estatísticas da partida (só a do usuário precisa delas). */
-export function iniciarPartida(partida: Partida, mandante: LadoVivo, visitante: LadoVivo, rng: Rng, rngEstatisticas?: Rng): PartidaViva {
+/** `rngEstatisticas` e `rngCampo` ligam as estatísticas e o campo 2D da partida (só a do usuário precisa deles). */
+export function iniciarPartida(partida: Partida, mandante: LadoVivo, visitante: LadoVivo, rng: Rng, rngEstatisticas?: Rng, rngCampo?: Rng): PartidaViva {
   const zerado = (): EstatisticasLado => ({ ataques: 0, ataquesPerigosos: 0, posse: 0, chutesNoGol: 0, chutesFora: 0, escanteios: 0 });
   return {
     partidaId: partida.id,
@@ -168,6 +205,7 @@ export function iniciarPartida(partida: Partida, mandante: LadoVivo, visitante: 
     avisos: [],
     neutro: partida.neutro,
     estatisticas: rngEstatisticas ? { lados: [zerado(), zerado()], perigososPorMinuto: [], rng: rngEstatisticas } : undefined,
+    campo: rngCampo ? { lance: lanceInicial(), rng: rngCampo } : undefined,
     rng,
   };
 }
@@ -610,6 +648,9 @@ function verificarLesoes(pv: PartidaViva, iLado: 0 | 1, jogadores: Jogadores) {
 export function avancarMinuto(pv: PartidaViva, jogadores: Jogadores): EventoPartida[] {
   if (pv.terminada) return [];
   const antes = pv.narracao.length;
+  // Para o campo 2D: o lance principal do minuto e os números das estatísticas antes dele.
+  let foco: FocoDoMinuto | undefined;
+  const numerosAntes = pv.campo && pv.estatisticas ? numerosDasEstatisticas(pv.estatisticas) : undefined;
 
   if (pv.intervalo) {
     pv.intervalo = false;
@@ -640,6 +681,7 @@ export function avancarMinuto(pv: PartidaViva, jogadores: Jogadores): EventoPart
   if (pv.penaltiPendente !== undefined) {
     const lado = pv.penaltiPendente;
     pv.penaltiPendente = undefined;
+    foco = { lado, tipo: "cobranca" };
     cobrarPenalti(pv, lado, jogadores);
   } else {
     // Forças dos dois lados neste minuto, para o lance e para as estatísticas (calculadas só se precisar).
@@ -652,6 +694,7 @@ export function avancarMinuto(pv: PartidaViva, jogadores: Jogadores): EventoPart
       const atk = casaAtaca ? sM : sV;
       const def = casaAtaca ? sV : sM;
       const tipo = pv.rng.escolherPeso(Object.keys(PESO_LANCE) as (keyof typeof PESO_LANCE)[], (k) => PESO_LANCE[k]);
+      foco = { lado: iAtk, tipo };
       if (tipo === "chance") {
         contarAtaque(pv.estatisticas, iAtk, true);
         // Contra-ataque: quem defende mais e tem pouco a bola finaliza melhor.
@@ -680,7 +723,23 @@ export function avancarMinuto(pv: PartidaViva, jogadores: Jogadores): EventoPart
       registrar(pv, { tipo: "fim", lado: 0, texto: `Fim de jogo: ${mandante.gols} x ${visitante.gols}.` });
     }
   }
-  return pv.narracao.slice(antes);
+  const eventos = pv.narracao.slice(antes);
+  if (pv.campo) {
+    const depois = numerosAntes && numerosDasEstatisticas(pv.estatisticas!);
+    const numeros: MinutoEmNumeros | undefined = numerosAntes && depois && {
+      ataques: [depois.ataques[0] - numerosAntes.ataques[0], depois.ataques[1] - numerosAntes.ataques[1]],
+      perigosos: [depois.perigosos[0] - numerosAntes.perigosos[0], depois.perigosos[1] - numerosAntes.perigosos[1]],
+      posse: depois.posse - numerosAntes.posse,
+    };
+    pv.campo.lance = lanceDoMinuto(pv, foco, eventos, numeros);
+  }
+  return eventos;
+}
+
+/** Ataques, ataques perigosos e posse do mandante até agora (a diferença de um minuto vai para o campo 2D). */
+function numerosDasEstatisticas(e: Estatisticas): MinutoEmNumeros {
+  const [m, v] = e.lados;
+  return { ataques: [m.ataques, v.ataques], perigosos: [m.ataquesPerigosos, v.ataquesPerigosos], posse: m.posse };
 }
 
 export function simularAteOFim(pv: PartidaViva, jogadores: Jogadores) {

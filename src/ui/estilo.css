@@ -486,6 +486,48 @@ p { margin: 0; }
 .placar .gols, .jogo-rodada .r { font-variant-ligatures: no-contextual; font-feature-settings: "calt" 0; }
 .placar .gols { font-size: 2.4rem; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
 .placar .relogio { text-align: center; color: var(--dourado); font-weight: 700; font-variant-numeric: tabular-nums; }
+/* Na partida, o placar vira uma faixa fina em cima do campo 2D (R60). */
+.placar.ao-vivo { padding-bottom: 14px; }
+.placar.ao-vivo .time { flex-direction: row; gap: 8px; min-width: 0; text-align: left; font-size: 0.86rem; }
+.placar.ao-vivo .time:last-child { flex-direction: row-reverse; text-align: right; }
+.placar.ao-vivo .nome-e-forca { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; min-width: 0; }
+.placar.ao-vivo .time:last-child .nome-e-forca { align-items: flex-end; }
+.placar.ao-vivo .nome { max-width: 100%; }
+.placar.ao-vivo .forca-media { font-size: 0.62rem; padding: 0 6px; }
+.placar.ao-vivo .gols { font-size: 1.7rem; line-height: 1.15; }
+.placar.ao-vivo .relogio { font-size: 0.85rem; }
+
+/* ---- campo 2D da partida (R60) ---------------------------------------------------------------- */
+
+.campo-2d { position: relative; margin-top: 10px; border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px rgb(255 255 255 / 10%); }
+.campo-2d svg { display: block; width: 100%; height: auto; }
+.campo-2d .gramado { fill: #3d7a33; }
+.campo-2d .faixa { fill: #44833a; }
+.campo-2d .sombra { fill: rgb(0 0 0 / 26%); }
+.campo-2d .linhas { fill: none; stroke: rgb(255 255 255 / 55%); stroke-width: 0.35; }
+.campo-2d .marcas { fill: rgb(255 255 255 / 60%); }
+.campo-2d .caminho { fill: none; stroke: #fff; stroke-width: 0.4; stroke-linejoin: round; opacity: 0.9; }
+.campo-2d .toque { stroke: #fff; stroke-width: 0.25; }
+.campo-2d .bola { transition-property: transform; transition-timing-function: ease-out; }
+.campo-2d .bola .brilho { fill: rgb(255 255 255 / 28%); }
+.campo-2d .bola .miolo { fill: #fff; stroke: #10221a; stroke-width: 0.35; }
+.campo-2d .lance-do-campo {
+  position: absolute; top: 50%; transform: translateY(-50%); max-width: 44%;
+  display: flex; flex-direction: column; gap: 3px; padding: 2px 0 2px 8px; border-left: 3px solid;
+  color: #fff; text-shadow: 0 1px 3px rgb(0 0 0 / 55%);
+}
+.campo-2d .lance-do-campo.esquerda { left: 7%; }
+.campo-2d .lance-do-campo.direita { right: 7%; }
+.campo-2d .lance-do-campo b { font-size: 1.02rem; font-weight: 800; line-height: 1.15; }
+.campo-2d .lance-do-campo.gol b { font-size: 1.4rem; color: var(--dourado); }
+.campo-2d .time-do-lance { display: flex; align-items: center; gap: 5px; min-width: 0; font-size: 0.76rem; font-weight: 600; opacity: 0.92; }
+.campo-2d .jogador-do-lance {
+  position: absolute; transform: translate(-50%, calc(-100% - 9px)); max-width: 42%;
+  padding: 2px 8px; border-radius: 99px; background: rgb(16 34 26 / 82%); color: #fff;
+  font-size: 0.68rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none;
+}
+.campo-2d .jogador-do-lance.embaixo { transform: translate(-50%, 9px); }
+@media (prefers-reduced-motion: reduce) { .campo-2d .bola { transition: none; } }
 
 .lance { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--divisor); font-size: 0.92rem; }
 .lance .escudo-lance { flex-shrink: 0; margin-top: 2px; }

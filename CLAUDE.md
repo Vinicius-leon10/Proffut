@@ -42,11 +42,11 @@ Pronto e publicado: partida ao vivo, tática, elenco, mercado, finanças, estád
 virada de temporada sem fim, rebaixamento para a Série D com propostas de emprego, checagem automática no app,
 elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, escudos dos
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
-placar), visual claro "opção 3", estatísticas da partida com aviso de pressão, demissão e convites de clubes maiores
+placar), visual claro "opção 3", estatísticas da partida com aviso de pressão, campo 2D na partida, demissão e convites de clubes maiores
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R59 rodando a cada mudança, antes
+ponta R01–R60 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -97,6 +97,23 @@ escanteios por time. Só a partida do usuário tem `PartidaViva.estatisticas` (a
 deixava a temporada simulada 68% mais lenta). Aviso de pressão (`sobPressao`, `AVISO_PRESSAO`): liga com o adversário
 com 14+ ataques perigosos nos últimos 15 minutos e o triplo dos meus, desliga abaixo de 10 ou do dobro (não pisca);
 some no intervalo e no fim. Aparece em ~1 de 5 jogos entre times iguais e em ~4 de 5 contra time bem mais forte. R34, R35.
+
+**Campo 2D da partida (nov/2026, `src/engine/campo.ts`, tela `CampoDaPartida.tsx`):** no estilo dos campos ao vivo dos
+aplicativos que o usuário mandou (capturas): campo deitado com a bola e o caminho dela no minuto, a sombra do time com a
+bola (do gol dele até a bola, no mínimo o meio-campo, com a ponta virada para o ataque) e o rótulo do lance ("Em posse",
+"Bola segura", "Ataque", "Ataque perigoso", "Chute para fora", "Chute defendido", "GOL!", "Escanteio", "Falta", "Pênalti!",
+"Cartão amarelo"...) com o escudo e o nome do time e, perto da bola, o nome do jogador. Fica no alto da tela da partida,
+no lugar do placar grande e dos escudos (pedido do usuário); o placar vira uma faixa fina em cima do campo
+(`.placar.ao-vivo`: escudos de 26 px, nome, força média, gols e relógio; o escudo do adversário ainda abre o time
+titular). Antes do jogo o placar grande continua (R46). O motor: `PartidaViva.campo` (só na partida do usuário, só na
+memória) guarda o `LanceDoCampo` do último minuto; no fim de `avancarMinuto`, `lanceDoMinuto` desenha o minuto a partir
+do lance principal decidido pelo jogo (`FocoDoMinuto`: chance, escanteio, falta ou cobrança de pênalti), da narração do
+minuto (gol > pênalti perdido > pênalti marcado > chute > cartão > fim do tempo > falta > escanteio) e, sem lance
+narrado, dos ataques e da posse do minuto nas estatísticas (quem atacou mais e até onde: segura, posse, ataque, perigo).
+x vai de 0 (gol do mandante, à esquerda) a 100; o mandante ataca para a direita o jogo todo. A bola sai de onde parou.
+Sorteio próprio (`campo/<partida>`): **placar, lances e estatísticas não mudam** (teste no motor). A bola anda com
+transição de 80% do minuto. A caixa Rodada foi para a linha do Substituir e da Tática, para sobrar espaço para os lances.
+R60.
 
 **Carreira do técnico (out/2026, `src/engine/carreira.ts`):** `Tecnico.reputacao` (0–100; começa com a do clube; save
 antigo usa a do clube atual), `desde` (carência: no primeiro mês não há demissão; save antigo marca no primeiro jogo),
@@ -206,8 +223,8 @@ contornar o bloqueio nem disfarçar o robô de navegador). Posição sem fonte �
 clube + uso + valor, nunca de outro jogo. `novoJogo` usa `elencoReal` (`gerador.ts`) e completa posições com gerados.
 Jogos já começados continuam com os jogadores que tinham (não há migração de save).
 
-**Esperando o usuário:** em aberto no PLANO.md §11: nome final ("Proffut" é provisório?) e se a partida terá 2D no
-futuro. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
+**Esperando o usuário:** em aberto no PLANO.md §11: nome final ("Proffut" é provisório?). O 2D da partida começou (R60) e
+segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
 
 **Próximas ideias:** o resto da lista de mudanças (PLANO.md §13: 3, 6, 9–15, 17, 18, 20), quando o usuário escolher, e
 ajustes de equilíbrio pelo que ele sentir jogando.
@@ -268,6 +285,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `contratos.ts` | Fim de contrato, renovação (pedido do jogador), contrato de reforço, aviso de setembro e o que acaba na virada |
 | `emprestimos.ts` | Emprestar até o fim da temporada (quem aceita), pegar emprestado (taxa), volta na virada |
 | `notas.ts` | Nota de cada jogador na partida (ao vivo e no fim), melhor em campo, nota média |
+| `campo.ts` | Campo 2D da partida do usuário: o lance de cada minuto (bola, caminho, sombra, rótulo), com sorteio próprio |
 | `trofeus.ts` | Sala de troféus: recordes de cada clube (jogo a jogo), títulos do clube e carreira do técnico (do histórico) |
 | `temporada.ts` | Virada: acesso/rebaixamento, idade, evolução, aposentadoria, base, Série D (`serie-d-reserva.json`) |
 | `jogo.ts` | Orquestra: `novoJogo`, `avancar`, `prepararJogos`/`concluirJogos`, `provavelTime` (escalação do computador sem mudar o jogo), propostas de emprego, obras do dia |

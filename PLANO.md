@@ -450,7 +450,7 @@ prontas. Tamanho: pequena (rápida), média ou grande (várias etapas).
 8. ✅ Nota de cada jogador no fim do jogo (0 a 10) e o melhor em campo. (pequena)
 9. Mais estatísticas: faltas, impedimentos e defesas do goleiro. (pequena)
 10. Gráfico da pressão minuto a minuto, como nos aplicativos de futebol. (pequena)
-11. Partida em 2D simples, com bolinhas se mexendo no campo. (grande)
+11. 🚧 Partida em 2D: começou (nov/2026, R60) com o campo ao vivo no alto da partida, no estilo dos aplicativos (bola, sombra do time com a bola, lance de cada minuto). (grande)
 
 **Competições**
 12. Estaduais no começo do ano (Paulistão, Carioca, Mineiro...). (grande)

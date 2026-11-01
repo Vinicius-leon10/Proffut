@@ -230,9 +230,10 @@ export function prepararJogos(estado: EstadoJogo): PartidaViva[] {
     const lados = [p.mandante, p.visitante].map((id) =>
       montarLado(estado.clubes[id], estado.jogadores, elencos.get(id) ?? [], id === meu),
     );
-    // Estatísticas só na partida do usuário, com sorteio próprio (não mudam o resultado).
+    // Estatísticas e campo 2D só na partida do usuário, com sorteios próprios (não mudam o resultado).
     const minha = p.mandante === meu || p.visitante === meu;
-    return iniciarPartida(p, lados[0], lados[1], rngPara(estado.semente, `partida/${p.id}`), minha ? rngPara(estado.semente, `estatisticas/${p.id}`) : undefined);
+    const proprio = (nome: string) => (minha ? rngPara(estado.semente, `${nome}/${p.id}`) : undefined);
+    return iniciarPartida(p, lados[0], lados[1], rngPara(estado.semente, `partida/${p.id}`), proprio("estatisticas"), proprio("campo"));
   });
 }
 

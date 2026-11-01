@@ -16,6 +16,7 @@ import { Barra, Escudo, Folha, Icone, Opcoes, Pos, Segmentado } from "../compone
 import { rotuloPartida } from "../formatos";
 import { apito, liberarSom, pararSons, tocarLances } from "../sons";
 import { useJogo, useLoja } from "../store";
+import { CampoDaPartida } from "./CampoDaPartida";
 import { CampoDaEscalacao, FolhaDoTime, FolhaDosReservas, forcaMediaDoTime, mudarTaticaDoClube } from "./Tatica";
 
 const INTERVALO_MS: Record<1 | 2, number> = { 1: 700, 2: 340 };
@@ -158,26 +159,41 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   // O adversário dominando os últimos 15 minutos: avisa e convida a mexer no time (no intervalo já há o convite).
   const pressao = meu.estatisticas && !meu.terminada && !meu.intervalo ? sobPressao(meu.estatisticas, meuLado) : null;
   // O escudo do adversário abre o time titular dele no campinho.
-  const escudoNoPlacar = (lado: 0 | 1, clube: Clube) =>
-    lado === meuLado ? <Escudo clube={clube} tamanho={48} /> : (
+  const escudoNoPlacar = (lado: 0 | 1, clube: Clube, tamanho: number) =>
+    lado === meuLado ? <Escudo clube={clube} tamanho={tamanho} /> : (
       <button className="escudo-botao" onClick={() => setPainel("adversario")} aria-label={`Ver o time titular ${comArtigo("do", clube)}`}>
-        <Escudo clube={clube} tamanho={48} />
+        <Escudo clube={clube} tamanho={tamanho} />
       </button>
+    );
+  // Antes do jogo, o placar grande com a força média em cima do escudo (R46); na partida, uma faixa fina com o campo
+  // 2D embaixo (R60).
+  const timeNoPlacar = (lado: 0 | 1, l: LadoVivo, clube: Clube) =>
+    iniciado ? (
+      <div className="time">
+        {escudoNoPlacar(lado, clube, 26)}
+        <span className="nome-e-forca"><span className="nome corta">{clube.nome}</span><MediaDoTime lado={l} /></span>
+      </div>
+    ) : (
+      <div className="time"><MediaDoTime lado={l} />{escudoNoPlacar(lado, clube, 48)}<span className="nome corta" style={{ maxWidth: "100%" }}>{clube.nome}</span></div>
     );
 
   return (
     <div className="tela-cheia">
-      <div className="placar">
+      <div className={iniciado ? "placar ao-vivo" : "placar"}>
         <div className="mini fraco centro" style={{ marginBottom: 6 }}>{rotuloPartida(partida)}</div>
         <div className="times">
-          <div className="time"><MediaDoTime lado={lm} />{escudoNoPlacar(0, clubeM)}<span className="corta" style={{ maxWidth: "100%" }}>{clubeM.nome}</span></div>
+          {timeNoPlacar(0, lm, clubeM)}
           <div className="centro">
             <div className="gols">{lm.gols} <span className="muito-fraco">x</span> {lv.gols}</div>
             <div className="relogio">{relogio(meu)}</div>
           </div>
-          <div className="time"><MediaDoTime lado={lv} />{escudoNoPlacar(1, clubeV)}<span className="corta" style={{ maxWidth: "100%" }}>{clubeV.nome}</span></div>
+          {timeNoPlacar(1, lv, clubeV)}
         </div>
-        <div style={{ marginTop: 10 }}><Barra valor={progresso} cor="var(--dourado)" /></div>
+        {iniciado ? (
+          <CampoDaPartida pv={meu} meuLado={meuLado} duracao={Math.round(INTERVALO_MS[velocidade] * 0.8)} />
+        ) : (
+          <div style={{ marginTop: 10 }}><Barra valor={progresso} cor="var(--dourado)" /></div>
+        )}
       </div>
 
       {!iniciado ? (
@@ -201,14 +217,20 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
             {!todasTerminadas && <button className="botao pequeno" onClick={irAoFim}>Fim ⏭</button>}
             {todasTerminadas && <button className="botao primario cheio" onClick={continuar}>Continuar</button>}
           </div>
-          {!meu.terminada && (
-            <div className="linha" style={{ padding: "8px 16px", gap: 8 }}>
-              <button className="botao pequeno cresce" onClick={() => setPainel("trocas")}>
-                <Icone nome="troca" /> Substituir ({meu.lados[meuLado].substituicoes}/{MAX_SUBSTITUICOES})
-              </button>
-              <button className="botao pequeno cresce" onClick={() => setPainel("tatica")}>Tática</button>
-            </div>
-          )}
+          {/* Numa linha só: Substituir e Tática durante o jogo, Notas no fim (R45) e a caixa da Rodada no lugar das abas
+              (R56). Com o campo 2D no alto (R60), sobra mais espaço para os lances. */}
+          <div className="linha" style={{ padding: "8px 16px", gap: 8 }}>
+            {!meu.terminada && (
+              <>
+                <button className="botao pequeno" style={{ flex: "1 1 auto" }} onClick={() => setPainel("trocas")}>
+                  <Icone nome="troca" /> Substituir ({meu.lados[meuLado].substituicoes}/{MAX_SUBSTITUICOES})
+                </button>
+                <button className="botao pequeno" style={{ flex: "1 1 auto" }} onClick={() => setPainel("tatica")}>Tática</button>
+              </>
+            )}
+            {meu.terminada && <button className="botao pequeno cresce" onClick={() => setFolha("notas")}>Notas</button>}
+            <button className="botao pequeno" style={{ flex: "1 1 auto" }} onClick={() => setFolha("rodada")}>Rodada</button>
+          </div>
           {pressao && (
             <div className="cartao compacto aviso-pressao" role="status" style={{ margin: "0 16px" }}>
               <p className="pequeno">
@@ -222,11 +244,6 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
               <p className="pequeno"><b>Intervalo.</b> Faça substituições ou mude a tática, e toque em ▶ para o segundo tempo.</p>
             </div>
           )}
-          {/* No lugar das abas, só a caixa da Rodada (R56); a das notas aparece no fim da partida (R45). */}
-          <div className="linha" style={{ padding: "8px 16px 0", gap: 8 }}>
-            {meu.terminada && <button className="botao pequeno cresce" onClick={() => setFolha("notas")}>Notas</button>}
-            <button className="botao pequeno cresce" onClick={() => setFolha("rodada")}>Rodada</button>
-          </div>
           {/* As estatísticas ficam fixas na tela do jogo (R56), travadas em cima: só os lances rolam embaixo (R59). */}
           {meu.estatisticas && (
             <div style={{ padding: "8px 16px 0", flexShrink: 0 }}>
