@@ -227,10 +227,14 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
             {meu.terminada && <button className="botao pequeno cresce" onClick={() => setFolha("notas")}>Notas</button>}
             <button className="botao pequeno cresce" onClick={() => setFolha("rodada")}>Rodada</button>
           </div>
-          {/* As estatísticas ficam fixas na tela do jogo, com os lances embaixo (R56). */}
+          {/* As estatísticas ficam fixas na tela do jogo (R56), travadas em cima: só os lances rolam embaixo (R59). */}
+          {meu.estatisticas && (
+            <div style={{ padding: "8px 16px 0", flexShrink: 0 }}>
+              <EstatisticasDaPartida pv={meu} meuLado={meuLado} />
+            </div>
+          )}
           <div className="conteudo" style={{ paddingTop: 8 }}>
-            <EstatisticasDaPartida pv={meu} meuLado={meuLado} />
-            <h3 className="pequeno fraco" style={{ margin: "8px 0 0" }}>Lances</h3>
+            <h3 className="pequeno fraco" style={{ margin: 0 }}>Lances</h3>
             {lances.length ? lances.map((e, i) => (
               <div key={lances.length - i} className={classeLance(e)}>
                 <span className="min">{e.tipo === "intervalo" || e.tipo === "fim" ? "" : `${e.min}'`}</span>

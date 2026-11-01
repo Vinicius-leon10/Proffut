@@ -98,16 +98,16 @@ test("R56 na partida, as estatísticas ficam fixas na tela do jogo, no lugar da 
   const tela = page.locator(".tela-cheia");
   const conteudo = tela.locator(".conteudo");
 
-  // Sem as abas: as estatísticas já estão na tela do jogo, sem tocar em nada.
+  // Sem as abas: as estatísticas já estão na tela do jogo, sem tocar em nada (em cima da área dos lances, R59).
   for (const nome of ["Lances", "Estatísticas", "Rodada", "Notas"]) await expect(tela.getByRole("tab", { name: nome, exact: true })).toHaveCount(0);
-  for (const nome of ESTATISTICAS) await expect(conteudo.getByRole("group", { name: nome, exact: true })).toHaveCount(1);
-  await expect(conteudo.getByRole("group", { name: "Ataques", exact: true })).toBeInViewport();
+  for (const nome of ESTATISTICAS) await expect(tela.getByRole("group", { name: nome, exact: true })).toHaveCount(1);
+  await expect(tela.getByRole("group", { name: "Ataques", exact: true })).toBeInViewport();
 
   // Os lances continuam, embaixo das estatísticas.
   const lance = conteudo.locator(".lance").first();
   for (let i = 0; i < 60 && !(await lance.count()); i++) await page.clock.runFor(340);
   await expect(lance).toBeVisible();
-  const estatisticas = (await conteudo.locator(".estatisticas").boundingBox())!;
+  const estatisticas = (await tela.locator(".estatisticas").boundingBox())!;
   expect((await lance.boundingBox())!.y, "os lances ficam embaixo das estatísticas").toBeGreaterThanOrEqual(estatisticas.y + estatisticas.height - 1);
 
   // A caixa Rodada abre os jogos da rodada (o meu também), e o jogo segue enquanto ela está aberta.
@@ -129,14 +129,14 @@ test("R56 na partida, as estatísticas ficam fixas na tela do jogo, no lugar da 
   await expect(relogio).toHaveText("Fim");
   await expect(tela.getByRole("button", { name: "Notas", exact: true })).toBeVisible();
   await expect(tela.getByRole("button", { name: "Rodada", exact: true })).toBeVisible();
-  await expect(conteudo.getByRole("group", { name: "Ataques", exact: true })).toBeVisible();
+  await expect(tela.getByRole("group", { name: "Ataques", exact: true })).toBeVisible();
 });
 
 test("R58 as estatísticas na tela do jogo ficam só com o que estava no print: os times, os anéis de ataques, ataques perigosos e posse de bola, e os escanteios e cartões", async ({ page }) => {
   await novoJogo(page);
   await irParaOMeuJogo(page);
   await botao(page, "Começar o jogo").click();
-  const painel = page.locator(".tela-cheia .conteudo .estatisticas");
+  const painel = page.locator(".tela-cheia .estatisticas");
   await expect(painel).toBeVisible();
   // Os dois times em cima, cada um com a sua cor.
   await expect(painel.locator(".estat-times > span")).toHaveCount(2);
@@ -147,4 +147,24 @@ test("R58 as estatísticas na tela do jogo ficam só com o que estava no print: 
   await expect(painel).not.toContainText("Chutes");
   await expect(painel).not.toContainText("Pressão");
   await expect(painel.locator("p")).toHaveCount(0);
+});
+
+test("R59 as estatísticas ficam travadas em cima da tela do jogo: rolando os lances, elas não se mexem", async ({ page }) => {
+  await novoJogo(page);
+  await irParaOMeuJogo(page);
+  await botao(page, "Começar o jogo").click();
+  // No fim, com todos os lances do jogo, a lista é maior que a tela e rola.
+  await botao(page, "Fim ⏭").click();
+  await expect(page.locator(".relogio")).toHaveText("Fim");
+  const painel = page.locator(".tela-cheia .estatisticas");
+  const rolagem = page.locator(".tela-cheia .conteudo");
+  const primeiro = rolagem.locator(".lance").first();
+  await expect(painel).toBeInViewport({ ratio: 1 });
+  const [painelAntes, lanceAntes] = [(await painel.boundingBox())!.y, (await primeiro.boundingBox())!.y];
+
+  await rolagem.evaluate((el) => el.scrollTo(0, el.scrollHeight));
+  expect(await rolagem.evaluate((el) => el.scrollTop), "a lista dos lances rolou").toBeGreaterThan(50);
+  expect((await primeiro.boundingBox())!.y, "os lances andaram").toBeLessThan(lanceAntes - 50);
+  expect((await painel.boundingBox())!.y, "as estatísticas não se mexeram").toBeCloseTo(painelAntes, 0);
+  await expect(painel).toBeInViewport({ ratio: 1 });
 });

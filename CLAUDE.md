@@ -46,7 +46,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R58 rodando a cada mudança, antes
+ponta R01–R59 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -82,7 +82,8 @@ silencioso cala o apito e a torcida. Liga/desliga: botão de som na partida e Co
 trocando `OscillatorNode.start`, `AudioBufferSourceNode.start` e `speechSynthesis.speak` no navegador de teste, e
 anotam o volume de cada som (maior valor marcado nos ganhos por onde ele passa) e os sons do mesmo instante.
 
-**Estatísticas da partida (out/2026, `partida.ts` e `AoVivo.tsx`):** fixas na tela do jogo, em cima dos lances (sem abas:
+**Estatísticas da partida (out/2026, `partida.ts` e `AoVivo.tsx`):** fixas na tela do jogo e travadas em cima, fora da
+área que rola: só os lances rolam embaixo (R59; sem abas:
 fica só a caixa Rodada, que abre os outros jogos numa folha sem parar o jogo, e a Notas no fim; R56), no modelo da
 captura que o usuário mandou e reduzidas ao print dele (R58): os dois times, ataques, ataques perigosos e posse em anéis;
 escanteios e cartões. Chutes (no gol e para fora ou bloqueados) e a pressão dos últimos 15 minutos saíram da tela, mas o
