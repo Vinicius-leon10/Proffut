@@ -43,10 +43,17 @@ test("R34 estatísticas da partida: ataques, ataques perigosos, posse de bola, e
   // Cartões: os mesmos dos lances de cada time (o segundo amarelo conta como amarelo e vermelho).
   const amarelos = await numeros(page, "Cartões amarelos");
   const vermelhos = await numeros(page, "Cartões vermelhos");
-  const escudoDoMandante = await page.locator(".placar .time").first().locator("img.escudo").getAttribute("src");
+  // O escudo diz de quem é o lance: a imagem (pelo endereço) ou, no time novo ainda sem imagem, o desenhado (pelo id do
+  // recorte, que é o do clube). Desde nov/2026 o primeiro jogo é o do estadual, e o mandante pode ser um time novo.
+  const escudoDoMandante = await page.locator(".placar .time").first().locator(".escudo").first()
+    .evaluate((el) => (el.tagName.toLowerCase() === "img" ? el.getAttribute("src") : el.querySelector("clipPath")?.id) ?? "");
+  expect(escudoDoMandante).not.toBe("");
   const deCadaTime = async (texto: RegExp): Promise<[number, number]> => {
     const doMandante = await page.locator(".tela-cheia .lance").filter({ hasText: texto })
-      .evaluateAll((els, src) => els.map((el) => el.querySelector(".escudo-lance img")?.getAttribute("src") === src), escudoDoMandante);
+      .evaluateAll((els, alvo) => els.map((el) => {
+        const e = el.querySelector(".escudo-lance .escudo");
+        return !!e && (e.tagName.toLowerCase() === "img" ? e.getAttribute("src") : e.querySelector("clipPath")?.id) === alvo;
+      }), escudoDoMandante);
     return [doMandante.filter((x) => x).length, doMandante.filter((x) => !x).length];
   };
   const [primeiro, segundo] = [await deCadaTime(/🟨/), await deCadaTime(/Segundo amarelo/)];

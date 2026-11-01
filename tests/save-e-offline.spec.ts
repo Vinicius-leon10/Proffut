@@ -1,4 +1,4 @@
-import { abrirSite, agora, botao, cartaoDoProximoJogo, dataNoTopo, esperarSalvar, expect, jogarPartida, novoJogo, test, voltar } from "./ajuda";
+import { abrirSite, agora, botao, cartaoDoProximoJogo, dataNoTopo, esperarSalvar, expect, gravacaoLenta, horaDoSave, jogarPartida, novoJogo, test, voltar } from "./ajuda";
 
 test("R05 o progresso fica salvo no aparelho depois de recarregar", async ({ page }) => {
   await novoJogo(page);
@@ -71,4 +71,16 @@ test("R07 depois da primeira visita, abre, joga e salva sem internet", async ({ 
   await expect(cartaoDoProximoJogo(page)).toBeVisible();
   expect(await dataNoTopo(page)).toBe(depois);
   await context.setOffline(false);
+});
+
+test("R71 o save marca a hora do jogo guardado, não a do fim da gravação: com o aparelho lento para gravar, o salvamento feito ao abrir o jogo não parece mais novo do que é (o R07 recarregava antes da hora e perdia a partida no GitHub)", async ({ page }) => {
+  await gravacaoLenta(page, 400);
+  await novoJogo(page);
+  await page.reload();
+  const antes = await agora(page);
+  // Abrir o jogo salva: o jogo guardado é o deste toque.
+  await botao(page, /Continuar/).click();
+  const depois = await agora(page);
+  await expect.poll(() => horaDoSave(page), { message: "o jogo não salvou ao abrir", timeout: 15_000 }).toBeGreaterThan(antes);
+  expect(await horaDoSave(page), "hora do save depois do toque que abriu o jogo").toBeLessThanOrEqual(depois);
 });

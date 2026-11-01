@@ -157,6 +157,46 @@ export async function abrirDepoisDoEstadual(page: Page, clube: string) {
 export const agora = (page: Page) => page.evaluate(() => Date.now());
 
 /**
+ * Aparelho lento para gravar: cada gravação no IndexedDB avisa que terminou `ms` depois (como no GitHub, com o save
+ * grande dos times novos). Vale também para a página depois de recarregar.
+ */
+export async function gravacaoLenta(page: Page, ms: number) {
+  await page.addInitScript((ms) => {
+    const original = Object.getOwnPropertyDescriptor(IDBTransaction.prototype, "oncomplete")!;
+    Object.defineProperty(IDBTransaction.prototype, "oncomplete", {
+      configurable: true,
+      get(this: IDBTransaction) {
+        return original.get!.call(this);
+      },
+      set(this: IDBTransaction, fn: ((this: IDBTransaction, ev: Event) => unknown) | null) {
+        const transacao = this;
+        const atrasado = fn && transacao.mode === "readwrite" ? (ev: Event) => setTimeout(() => fn.call(transacao, ev), ms) : fn;
+        original.set!.call(transacao, atrasado);
+      },
+    });
+  }, ms);
+}
+
+/** A hora marcada no registro do save automático (0 sem save). */
+export const horaDoSave = (page: Page) =>
+  page.evaluate(
+    () =>
+      new Promise<number>((ok, falha) => {
+        const pedido = indexedDB.open("proffut");
+        pedido.onerror = () => falha(pedido.error);
+        pedido.onsuccess = () => {
+          const banco = pedido.result;
+          const leitura = banco.transaction("saves", "readonly").objectStore("saves").get("resumo:auto");
+          leitura.onerror = () => falha(leitura.error);
+          leitura.onsuccess = () => {
+            banco.close();
+            ok(leitura.result ? Date.parse(leitura.result.salvoEm) : 0);
+          };
+        };
+      }),
+  );
+
+/**
  * Espera o salvamento automático depois de `desde`: um save mais novo que isso e nenhum
  * outro nos 600 ms seguintes (o jogo salva 400 ms depois da última mudança).
  */

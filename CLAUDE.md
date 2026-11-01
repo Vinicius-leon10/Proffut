@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R70 rodando a cada mudança, antes
+ponta R01–R71 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -381,6 +381,10 @@ Obras do estádio se pagam em 3 a 4 temporadas.
   (`allTextContents`), não pedaço de texto ("Pedro" está em "João Pedro"). Teste que joga a partida: a substituição
   automática de quem se machuca chama qualquer reserva, até o do meu time; antes de dizer que alguém não jogou, veja na
   narração se ele entrou ("Substituição: entra Fulano,", `entrouNoJogo` no R52).
+- O save (`salvar` em `salvamento.ts`) marca no resumo a hora do jogo guardado (antes de gravar) e grava o jogo e o
+  resumo juntos (`setMany`). Com a hora do fim da gravação, o save grande dos times novos (6 a 10 MB) fazia o
+  salvamento de quando o jogo abre parecer mais novo do que a partida: o `esperarSalvar` do R07 aceitava esse e
+  recarregava antes da hora (falhou no GitHub, nov/2026). R71 simula o aparelho lento para gravar (`gravacaoLenta`).
 - GitHub Actions: usar `actions/*@v7` e Node 22 (Node 20 foi removido do Actions).
 - Ao rodar comandos, não use `pkill` genérico (já derrubou o próprio terminal). Nem `pgrep -f "<texto>"` seguido
   de `kill`: o próprio terminal tem o texto na linha de comando. Guarde o PID ao abrir o processo (`$!`).

@@ -1,5 +1,5 @@
 import type { Locator } from "@playwright/test";
-import { abrirSite, agora, botao, cartaoDoProximoJogo, esperarSalvar, expect, novoJogo, test, voltar } from "./ajuda";
+import { aba, abrirSite, agora, botao, cartaoDoProximoJogo, esperarSalvar, expect, novoJogo, test, voltar } from "./ajuda";
 
 // Imagens de teste (quadradinhos de 8 × 8 pixels) para o pacote importado.
 const VERMELHO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAFklEQVR42mO8Iyf3nwEPYGIgAIaHAgArsAInF5Og1wAAAABJRU5ErkJggg==";
@@ -23,7 +23,10 @@ test("R28 escudos importados: ficam no aparelho, aparecem no lugar do escudo do 
   await expect(page.locator(".aviso")).toContainText("2 escudos importados");
   await voltar(page);
   await expect(topo.locator("img.escudo")).toHaveAttribute("src", VERMELHO);
-  // Quem não está no pacote continua com o escudo do jogo (o adversário no cartão do próximo jogo).
+  // Quem não está no pacote continua com o escudo do jogo: os outros clubes da Série B, na tabela. (Desde nov/2026 o
+  // primeiro jogo é o do estadual, e o adversário pode ser um time novo, ainda com o escudo desenhado.)
+  await aba(page, "Tabelas");
+  await page.getByRole("tab", { name: "Séries" }).click();
   await expect(page.locator('main img.escudo[src^="escudos/"]').first()).toBeVisible();
 
   // Fechar e abrir o app: os importados continuam (ficam guardados no aparelho).
@@ -57,11 +60,17 @@ test("R30 o jogo já vem com os escudos que o usuário mandou: aparecem sem impo
   const meu = page.locator(".topo img.escudo").first();
   await expect(meu).toHaveAttribute("src", "escudos/ponte-preta.png");
   await expect.poll(() => carregado(meu)).toBe(true);
-  // Todo clube tem o seu: nenhum escudo desenhado na tela, e o do adversário carrega também.
-  const escudos = page.locator("main img.escudo");
-  await expect(escudos).toHaveCount(2);
-  await expect.poll(() => carregado(escudos.nth(1))).toBe(true);
-  await expect(page.locator("svg.escudo")).toHaveCount(0);
+  // Os clubes das séries têm o seu: na tabela da Série B, nenhum escudo desenhado, e todos carregam. (Desde nov/2026 o
+  // primeiro jogo é o do estadual, e o adversário pode ser um time novo, ainda com o escudo desenhado.)
+  const escudos = page.locator("main table.tabela img.escudo");
+  const tabelaDaSerieB = async () => {
+    await aba(page, "Tabelas");
+    await page.getByRole("tab", { name: "Séries" }).click();
+    await expect(escudos).toHaveCount(20);
+    await expect(page.locator("main table.tabela svg.escudo")).toHaveCount(0);
+    await expect.poll(() => escudos.evaluateAll((els) => els.every((el) => (el as HTMLImageElement).complete && (el as HTMLImageElement).naturalWidth > 0))).toBe(true);
+  };
+  await tabelaDaSerieB();
 
   // Sem internet: os escudos vêm do que o app guardou no aparelho.
   await context.setOffline(true);
@@ -69,5 +78,5 @@ test("R30 o jogo já vem com os escudos que o usuário mandou: aparecem sem impo
   await botao(page, /Continuar/).click();
   await expect(cartaoDoProximoJogo(page)).toBeVisible();
   await expect.poll(() => carregado(meu)).toBe(true);
-  await expect.poll(() => carregado(escudos.nth(1))).toBe(true);
+  await tabelaDaSerieB();
 });

@@ -1,5 +1,5 @@
 // Salva o jogo no próprio celular (IndexedDB) e exporta/importa em arquivo.
-import { createStore, del, get, set } from "idb-keyval";
+import { createStore, del, get, set, setMany } from "idb-keyval";
 import { juntarAoSaveAntigo } from "../engine/jogo";
 import { garantirContratos } from "../engine/contratos";
 import { montarRecordes } from "../engine/trofeus";
@@ -33,8 +33,10 @@ function resumir(espaco: Espaco, estado: EstadoJogo): ResumoSave {
 }
 
 export async function salvar(espaco: Espaco, estado: EstadoJogo): Promise<void> {
-  await set(`jogo:${espaco}`, estado, banco);
-  await set(`resumo:${espaco}`, resumir(espaco, estado), banco);
+  // A hora do save é a do jogo guardado (agora, antes de gravar), não a do fim da gravação: com o save grande e o
+  // aparelho lento para gravar, um salvamento começado antes de uma mudança parecia mais novo do que ela (R71).
+  // O jogo e o resumo vão juntos, numa gravação só.
+  await setMany([[`jogo:${espaco}`, estado], [`resumo:${espaco}`, resumir(espaco, estado)]], banco);
 }
 
 export async function carregar(espaco: Espaco): Promise<EstadoJogo | undefined> {
