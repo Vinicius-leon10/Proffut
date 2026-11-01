@@ -5,12 +5,19 @@ name: Baixar dados dos elencos
 # Quem monta os elencos do jogo a partir desses arquivos é tools/elencos/montar.ts.
 on:
   workflow_dispatch:
+    inputs:
+      fase:
+        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times)"
+        type: choice
+        default: elencos
+        options: [elencos, times]
 
 permissions:
   contents: write
 
 jobs:
   baixar:
+    if: inputs.fase != 'times'
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -68,3 +75,45 @@ jobs:
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -q -m "Dados dos elencos (${GITHUB_SHA::7})"
           git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-elencos
+
+  # Times novos: páginas da Série D, dos estaduais e das ligas dos outros países da Conmebol (Wikipédia), dados dos
+  # clubes e de quem está nos elencos (Wikidata) e os jogadores das ligas sul-americanas que o Transfermarkt cobre.
+  # Quem monta os clubes e os elencos do jogo a partir desses arquivos é tools/times/montar.ts.
+  times:
+    if: inputs.fase == 'times'
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v7
+      - name: Wikipédia e Wikidata
+        run: python3 tools/times/wikipedia.py tools/times/sementes.json dados
+      - name: Transfermarkt (ligas da América do Sul)
+        continue-on-error: true
+        run: |
+          curl -sSfL https://pub-e682421888d945d684bcae8890b0ec20.r2.dev/data/players.csv.gz -o /tmp/players.csv.gz
+          curl -sSfL https://pub-e682421888d945d684bcae8890b0ec20.r2.dev/data/clubs.csv.gz -o /tmp/clubs.csv.gz
+          python3 tools/times/filtrar_transfermarkt.py /tmp/players.csv.gz /tmp/clubs.csv.gz dados
+      - name: Gravar na branch dados-times
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dados
+          {
+            echo "# Dados dos times novos"
+            echo
+            echo "Baixados em $(date -u +%Y-%m-%dT%H:%MZ) pelo workflow elencos.yml (fase times) do Proffut."
+            echo
+            echo "- Wikipédia (CC BY-SA): páginas dos campeonatos de 2026 e dos clubes"
+            echo "- Wikidata (CC0): clubes e jogadores"
+            echo "- transfermarkt-datasets (CC0): ligas da América do Sul que a base cobre"
+            echo
+            echo "| Arquivo | Tamanho |"
+            echo "|---|---|"
+            find . -type f -not -name LEIAME.md | sort | while read -r f; do echo "| ${f#./} | $(du -h "$f" | cut -f1) |"; done
+          } > LEIAME.md
+          cat LEIAME.md >> "$GITHUB_STEP_SUMMARY"
+          git init -q -b dados-times
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Dados dos times novos (${GITHUB_SHA::7})"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-times
