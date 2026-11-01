@@ -49,7 +49,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R64 rodando a cada mudança, antes
+ponta R01–R65 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -143,7 +143,9 @@ temporada seguinte (ninguém sai na temporada em andamento). Reforço (`transfer
 Renovação só no último ano (`renovarContrato`; o jogador pede `pedidoDeRenovacao`: salário de mercado × titular ×
 promessa × veterano, nunca menos do que ganha antes dos 30 anos), na ficha do jogador (Elenco), onde o cartão do
 contrato tem também "Colocar à venda"; em Mercado → Meus à venda, a seção "Contrato terminando" lista quem está no último
-ano e ainda não está à venda, com o mesmo botão (R64). Em 1º de setembro chega a
+ano e ainda não está à venda, com o mesmo botão (R64). Tocar no jogador em Meus à venda (na lista e em "Contrato
+terminando") abre a ficha do Elenco (`FolhaJogador`), com "Tirar da venda" e "Renovar contrato" (R65; antes não
+abria nada). Em 1º de setembro chega a
 lista "Contratos terminando"; "Encerrar a temporada" pergunta antes citando quem sai. Na virada (`encerrarContratos`):
 no clube do usuário, quem não renovou sai de graça e não volta pelo "mínimo da posição"; os clubes do computador
 renovam todos por 1 a 3 temporadas (o mundo fica como antes). O salário dos jogadores do usuário não é mais

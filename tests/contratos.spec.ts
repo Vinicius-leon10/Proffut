@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process";
 import type { Locator, Page } from "@playwright/test";
-import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, novoJogo, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, esperarInteiroNaTela, expect, novoJogo, test } from "./ajuda";
 
 /** O nome exato, para achar a linha do jogador ("Pedro" está em "João Pedro"). */
 const exato = (nome: string) => new RegExp(`^${nome.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`);
@@ -98,4 +98,40 @@ test("R64 quem está no último ano de contrato dá para pôr à venda direto: n
   // Ele sobe para a lista de venda e sai de "Contrato terminando".
   await expect(vendas.locator(".negrito", { hasText: exato(segundo.nome) })).toHaveCount(1);
   await expect(linhaSegundo).toHaveCount(0);
+});
+
+test("R65 em Mercado → Meus à venda, tocar no jogador abre a ficha dele (a do Elenco), com Tirar da venda e Renovar contrato; em Contrato terminando, tocar no nome também", async ({ page }) => {
+  await novoJogo(page);
+  await aba(page, "Mercado");
+  await page.getByRole("tab", { name: /Meus à venda/ }).click();
+  const vendas = page.locator("main .a-venda");
+  const secao = page.locator("main .contrato-terminando");
+  const naVenda = (nome: string) => vendas.filter({ has: page.locator(".negrito", { hasText: exato(nome) }) });
+  const naSecao = (nome: string) => secao.locator(".item").filter({ has: page.locator(".negrito", { hasText: exato(nome) }) });
+  const nomes = (await secao.locator(".item .negrito").allTextContents()).map((n) => n.trim());
+  expect(nomes.length, "jogadores no último ano de contrato").toBeGreaterThanOrEqual(2);
+  const [primeiro, segundo] = nomes;
+
+  // Como na captura do usuário: posto à venda pelo botão, ele vai para a lista de venda; tocando nele, a ficha abre.
+  await naSecao(primeiro).getByRole("button", { name: "Colocar à venda" }).click();
+  await naVenda(primeiro).locator(".negrito").click();
+  const ficha = page.getByRole("dialog");
+  await expect(ficha.getByRole("heading").first()).toHaveText(primeiro);
+  const cartao = ficha.locator(".cartao", { hasText: "O contrato termina" });
+  await expect(cartao.getByRole("button", { name: "Renovar contrato" })).toBeVisible();
+  const tirar = cartao.getByRole("button", { name: "Tirar da venda" });
+  await esperarInteiroNaTela(page, tirar);
+  await tirar.click();
+  await expect(page.locator(".aviso")).toContainText(`${primeiro} saiu da lista de venda`);
+  await ficha.getByRole("button", { name: "Fechar" }).click();
+  // Fora da venda, ele sai da lista e volta para Contrato terminando.
+  await expect(naVenda(primeiro)).toHaveCount(0);
+  await expect(naSecao(primeiro)).toHaveCount(1);
+
+  // Em Contrato terminando, tocar no nome também abre a ficha (o botão do lado continua pondo à venda direto).
+  await naSecao(segundo).locator(".negrito").click();
+  await expect(ficha.getByRole("heading").first()).toHaveText(segundo);
+  await expect(ficha.locator(".cartao", { hasText: "O contrato termina" }).getByRole("button", { name: "Colocar à venda" })).toBeVisible();
+  await ficha.getByRole("button", { name: "Fechar" }).click();
+  await expect(naVenda(segundo)).toHaveCount(0);
 });

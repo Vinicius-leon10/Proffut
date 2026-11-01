@@ -10,7 +10,7 @@ import { elencoDe, fazerOferta, livres, podeSair, precoPedido, propostasPendente
 import type { Jogador, Posicao, SerieId } from "../../engine/tipos";
 import { Escudo, Folha, Opcoes, Pos, Segmentado } from "../componentes";
 import { useJogo, useLoja } from "../store";
-import { LinhaJogador, Situacao } from "./Elenco";
+import { FolhaJogador, LinhaJogador, Situacao } from "./Elenco";
 import { AcoesDaProposta } from "./Mensagens";
 
 type Vista = "buscar" | "livres" | "venda";
@@ -94,6 +94,8 @@ export function Mercado() {
   const [serie, setSerie] = useState<SerieId | "todas">("todas");
   const [busca, setBusca] = useState("");
   const [aberto, setAberto] = useState<Jogador | null>(null);
+  // A ficha de um jogador meu (a mesma do Elenco), aberta de Meus à venda (R65).
+  const [ficha, setFicha] = useState<number | null>(null);
 
   // A proposta que está valendo por cada jogador meu (R62).
   const propostaPor = useMemo(() => new Map(propostasPendentes(estado).map((m) => [m.proposta!.jogadorId, m])), [estado, versao]);
@@ -173,7 +175,7 @@ export function Mercado() {
           const comprador = m ? estado.clubes[m.proposta!.clubeId] : undefined;
           return (
             <div key={j.id} className="a-venda">
-              <LinhaJogador j={j} semAVenda direita={<span className="mini fraco num">{formatarDinheiro(valorMercado(j))}</span>} />
+              <LinhaJogador j={j} semAVenda aoTocar={() => setFicha(j.id)} direita={<span className="mini fraco num">{formatarDinheiro(valorMercado(j))}</span>} />
               {m && comprador ? (
                 <div className="proposta-a-venda">
                   <div className="linha pequeno" style={{ gap: 6 }}>
@@ -195,11 +197,14 @@ export function Mercado() {
             <p className="mini muito-fraco">Saem de graça no fim de {estado.temporada} se você não renovar. À venda, chegam propostas por eles.</p>
             {terminando.map((j) => (
               <div key={j.id} className="item">
-                <Pos pos={j.posicao} />
-                <div className="cresce">
-                  <div className="negrito corta pequeno">{j.nome}</div>
-                  <div className="mini fraco corta">{j.idade} anos · força {j.forca}</div>
-                </div>
+                {/* Tocar no jogador abre a ficha; o botão do lado põe à venda direto. */}
+                <button className="abrir-ficha cresce" onClick={() => setFicha(j.id)}>
+                  <Pos pos={j.posicao} />
+                  <div className="cresce">
+                    <div className="negrito corta pequeno">{j.nome}</div>
+                    <div className="mini fraco corta">{j.idade} anos · força {j.forca}</div>
+                  </div>
+                </button>
                 <button className="botao pequeno" onClick={() => colocarAVenda(j)}>Colocar à venda</button>
               </div>
             ))}
@@ -223,6 +228,7 @@ export function Mercado() {
         })}
       </div>
       {aberto && <FolhaOferta j={aberto} aoFechar={() => setAberto(null)} />}
+      {ficha != null && <FolhaJogador jogadorId={ficha} aoFechar={() => setFicha(null)} />}
     </>
   );
 }

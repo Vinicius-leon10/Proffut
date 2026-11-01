@@ -304,6 +304,7 @@ p { margin: 0; }
 /* Meus à venda: quem está no último ano de contrato, para pôr à venda dali (R64). */
 .contrato-terminando { display: flex; flex-direction: column; gap: 4px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--divisor); }
 .contrato-terminando h3 { margin: 0; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.72rem; }
+.contrato-terminando .abrir-ficha { display: flex; align-items: center; gap: 10px; text-align: left; }
 
 .posicao {
   width: 26px; height: 26px;
