@@ -1,10 +1,8 @@
 import type { Page } from "@playwright/test";
 import { botao, expect, irParaOMeuJogo, mexerNoSave, nomeDoAdversario, novoJogo, test } from "./ajuda";
 
-const ESTATISTICAS = [
-  "Ataques", "Ataques perigosos", "Posse de bola", "Escanteios", "Cartões amarelos", "Cartões vermelhos",
-  "Chutes no gol", "Chutes para fora ou bloqueados", "Pressão nos últimos 15 minutos",
-];
+// As da tela do jogo: as do print do usuário (R58). Os chutes saíram da tela; o motor ainda confere (motor.test.ts).
+const ESTATISTICAS = ["Ataques", "Ataques perigosos", "Posse de bola", "Escanteios", "Cartões amarelos", "Cartões vermelhos"];
 
 /** Os dois números de uma estatística na tela, na ordem do placar (mandante, visitante). */
 async function numeros(page: Page, nome: string): Promise<[number, number]> {
@@ -15,7 +13,7 @@ async function numeros(page: Page, nome: string): Promise<[number, number]> {
 }
 const soma = ([a, b]: [number, number]) => a + b;
 
-test("R34 estatísticas da partida: ataques, ataques perigosos, posse de bola, escanteios, cartões e chutes, que andam com o jogo e batem com os lances", async ({ page }) => {
+test("R34 estatísticas da partida: ataques, ataques perigosos, posse de bola, escanteios e cartões, que andam com o jogo e batem com os lances", async ({ page }) => {
   await page.clock.install();
   await novoJogo(page);
   await irParaOMeuJogo(page);
@@ -30,23 +28,17 @@ test("R34 estatísticas da partida: ataques, ataques perigosos, posse de bola, e
 
   await botao(page, "Fim ⏭").click();
   await expect(page.locator(".relogio")).toHaveText("Fim");
-  const gols = (await page.locator(".placar .gols").textContent())!.split("x").map((n) => Number(n.trim()));
   const ataques = await numeros(page, "Ataques");
   const perigosos = await numeros(page, "Ataques perigosos");
   const posse = await numeros(page, "Posse de bola");
-  const noGol = await numeros(page, "Chutes no gol");
-  const fora = await numeros(page, "Chutes para fora ou bloqueados");
   expect(soma(posse), "a posse de bola soma 100%").toBe(100);
   for (const i of [0, 1]) {
     expect(posse[i]).toBeGreaterThanOrEqual(10);
     expect(perigosos[i], "ataque perigoso também é ataque").toBeLessThanOrEqual(ataques[i]);
-    expect(noGol[i], "todo gol é um chute no gol").toBeGreaterThanOrEqual(gols[i]);
   }
   // Números de um jogo de verdade (os dois times somados).
   expect(soma(ataques)).toBeGreaterThan(80);
   expect(soma(ataques)).toBeLessThan(400);
-  expect(soma(noGol) + soma(fora)).toBeGreaterThan(8);
-  expect(soma(noGol) + soma(fora)).toBeLessThan(60);
 
   // Cartões: os mesmos dos lances de cada time (o segundo amarelo conta como amarelo e vermelho).
   const amarelos = await numeros(page, "Cartões amarelos");
@@ -81,10 +73,12 @@ test("R35 aviso de pressão: quando o adversário domina os últimos 15 minutos,
   const [deles, nossos] = (await aviso.textContent())!.match(/(\d+) ataques? perigosos? contra (\d+)/)!.slice(1).map(Number);
   expect(deles, "o adversário tem pelo menos o dobro de ataques perigosos").toBeGreaterThanOrEqual(2 * nossos);
 
-  // As estatísticas, na mesma tela, mostram a mesma pressão.
-  const pressao = await numeros(page, "Pressão nos últimos 15 minutos");
+  // Os números do aviso cabem nos ataques perigosos do jogo todo, nas estatísticas da mesma tela (a barra da pressão
+  // dos últimos 15 minutos saiu da tela, R58).
+  const perigosos = await numeros(page, "Ataques perigosos");
   const meuLado = (await page.locator(".placar .time").first().textContent())!.includes(nomeDele) ? 1 : 0;
-  expect([pressao[meuLado], pressao[1 - meuLado]]).toEqual([nossos, deles]);
+  expect(nossos).toBeLessThanOrEqual(perigosos[meuLado]);
+  expect(deles).toBeLessThanOrEqual(perigosos[1 - meuLado]);
 
   // No intervalo o aviso sai: o cartão do intervalo já convida a mudar o time. Minuto a minuto até lá: adiantado
   // de uma vez, o relógio de teste dispara um minuto atrás do outro e passa do intervalo antes de a tela parar.
@@ -136,4 +130,21 @@ test("R56 na partida, as estatísticas ficam fixas na tela do jogo, no lugar da 
   await expect(tela.getByRole("button", { name: "Notas", exact: true })).toBeVisible();
   await expect(tela.getByRole("button", { name: "Rodada", exact: true })).toBeVisible();
   await expect(conteudo.getByRole("group", { name: "Ataques", exact: true })).toBeVisible();
+});
+
+test("R58 as estatísticas na tela do jogo ficam só com o que estava no print: os times, os anéis de ataques, ataques perigosos e posse de bola, e os escanteios e cartões", async ({ page }) => {
+  await novoJogo(page);
+  await irParaOMeuJogo(page);
+  await botao(page, "Começar o jogo").click();
+  const painel = page.locator(".tela-cheia .conteudo .estatisticas");
+  await expect(painel).toBeVisible();
+  // Os dois times em cima, cada um com a sua cor.
+  await expect(painel.locator(".estat-times > span")).toHaveCount(2);
+  // Só os anéis e a linha de escanteios e cartões, nessa ordem.
+  const grupos = await painel.getByRole("group").evaluateAll((els) => els.map((el) => el.getAttribute("aria-label")));
+  expect(grupos).toEqual(["Ataques", "Ataques perigosos", "Posse de bola", "Escanteios", "Cartões amarelos", "Cartões vermelhos"]);
+  // Sem os chutes, a pressão e o texto explicativo.
+  await expect(painel).not.toContainText("Chutes");
+  await expect(painel).not.toContainText("Pressão");
+  await expect(painel.locator("p")).toHaveCount(0);
 });

@@ -537,15 +537,12 @@ p { margin: 0; }
 .rosca .numero { font-size: 0.86rem; }
 .rosca .numero small { font-size: 0.72em; font-weight: 700; }
 .rosca .numero:first-child { text-align: right; }
-.contagens { display: grid; grid-template-columns: repeat(3, 1fr); padding: 8px 0; border-top: 1px solid var(--divisor); border-bottom: 1px solid var(--divisor); }
+.contagens { display: grid; grid-template-columns: repeat(3, 1fr); padding: 8px 0 0; border-top: 1px solid var(--divisor); }
 .contagem { display: flex; align-items: center; justify-content: center; gap: 8px; }
 .contagem .numero:first-child { text-align: right; }
 .cartao-juiz { display: inline-block; width: 11px; height: 15px; border-radius: 2px; box-shadow: inset 0 0 0 1px rgb(0 0 0 / 14%); }
 .cartao-juiz.amarelo { background: #f2c200; }
 .cartao-juiz.vermelho { background: var(--vermelho); }
-.comparacao .numero:last-child { text-align: right; }
-.dividida { display: flex; gap: 3px; margin-top: 6px; }
-.dividida > div { flex-basis: 0; height: 7px; border-radius: 99px; }
 
 /* ---- início ----------------------------------------------------------------------------------- */
 

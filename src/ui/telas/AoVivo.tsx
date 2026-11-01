@@ -6,7 +6,7 @@ import { desfechoDoConfronto } from "../../engine/copa";
 import { concluirJogos } from "../../engine/jogo";
 import { elencoDe } from "../../engine/mercado";
 import {
-  avancarMinuto, cartoes, formatarMinuto, montarLado, mudarTatica, posseDeBola, pressaoRecente, simularAteOFim, sobPressao, substituir,
+  avancarMinuto, cartoes, formatarMinuto, montarLado, mudarTatica, posseDeBola, simularAteOFim, sobPressao, substituir,
   type EstatisticasLado, type LadoVivo, type PartidaViva,
 } from "../../engine/partida";
 import type { Clube, Competicao, Estilo, EventoPartida, Formacao, Partida } from "../../engine/tipos";
@@ -328,10 +328,6 @@ function EstatisticasDaPartida({ pv, meuLado }: { pv: PartidaViva; meuLado: 0 | 
         <Contagem nome="Cartões amarelos" valores={[cm.amarelos, cv.amarelos]}><span className="cartao-juiz amarelo" /></Contagem>
         <Contagem nome="Cartões vermelhos" valores={[cm.vermelhos, cv.vermelhos]}><span className="cartao-juiz vermelho" /></Contagem>
       </div>
-      <Comparacao nome="Chutes no gol" valores={par((l) => l.chutesNoGol)} />
-      <Comparacao nome="Chutes para fora ou bloqueados" valores={par((l) => l.chutesFora)} />
-      <Comparacao nome="Pressão nos últimos 15 minutos" valores={pressaoRecente(e)}
-        nota="Ataques perigosos de cada time nos últimos 15 minutos: quem está mandando no jogo agora." />
     </div>
   );
 }
@@ -412,26 +408,6 @@ function Contagem({ nome, valores: [a, b], children }: { nome: string; valores: 
       <span className="numero">{a}</span>
       {children}
       <span className="numero">{b}</span>
-    </div>
-  );
-}
-
-/** Barra dividida na proporção dos dois times. */
-function Comparacao({ nome, valores: [a, b], nota }: { nome: string; valores: [number, number]; nota?: string }) {
-  const total = a + b;
-  return (
-    <div className="comparacao" role="group" aria-label={nome}>
-      <div className="linha entre">
-        <span className="numero">{a}</span>
-        <span className="pequeno fraco centro">{nome}</span>
-        <span className="numero">{b}</span>
-      </div>
-      <div className="dividida">
-        {a > 0 && <div style={{ flexGrow: a, background: "var(--cor-m)" }} />}
-        {b > 0 && <div style={{ flexGrow: b, background: "var(--cor-v)" }} />}
-        {total === 0 && <div style={{ flexGrow: 1, background: "var(--cartao-2)" }} />}
-      </div>
-      {nota && <p className="mini muito-fraco" style={{ marginTop: 4 }}>{nota}</p>}
     </div>
   );
 }

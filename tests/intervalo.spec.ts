@@ -6,8 +6,10 @@ test("R57 a partida para no intervalo mesmo quando o relógio do jogo anda vári
   await irParaOMeuJogo(page);
   await botao(page, "Começar o jogo").click();
 
-  // Daqui em diante o tempo só anda quando o teste manda: um minuto de jogo a cada 340 ms (2x), até o 44.
-  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 10));
+  // Daqui em diante o tempo só anda quando o teste manda: um minuto de jogo a cada 340 ms (2x), até o 44. O salto até
+  // a pausa tem folga (com +10 ms o relógio, que ainda andava, já tinha passado da hora com a máquina ocupada) e dá
+  // no máximo um toque do relógio.
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 2_000));
   const relogio = page.locator(".relogio");
   for (let i = 0; i < 120 && (await relogio.textContent()) !== "44'"; i++) await page.clock.runFor(340);
   await expect(relogio).toHaveText("44'");
