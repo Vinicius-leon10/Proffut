@@ -151,6 +151,12 @@ export function gerarPropostas(estado: EstadoJogo, data: string) {
   }
 }
 
+/** As propostas que estão valendo por jogadores que ainda são do usuário (o aviso no Mercado, R63). */
+export function propostasPendentes(estado: EstadoJogo): Mensagem[] {
+  const meuId = estado.tecnico.clubeId;
+  return estado.mensagens.filter((m) => m.proposta && !m.proposta.resolvida && estado.jogadores[m.proposta.jogadorId]?.clubeId === meuId);
+}
+
 export function responderProposta(estado: EstadoJogo, mensagemId: number, aceitar: boolean): ResultadoNegocio {
   const m = estado.mensagens.find((x) => x.id === mensagemId);
   const p = m?.proposta;

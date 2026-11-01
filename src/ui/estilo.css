@@ -177,6 +177,13 @@ p { margin: 0; }
 .aba svg { width: 24px; height: 24px; }
 .aba.ativa { color: var(--dourado); font-weight: 700; }
 .aba.ativa::after { content: ""; position: absolute; bottom: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--dourado); }
+/* Número de avisos: mensagens novas no topo e propostas no Mercado (barra de baixo e Meus à venda, R63). */
+.selo-numero {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 16px; padding: 0 4px;
+  border-radius: 99px; background: var(--vermelho); color: #fff; font-size: 10px; font-weight: 800; line-height: 1;
+}
+.aba .selo-numero { position: absolute; top: 4px; left: calc(50% + 6px); }
+.segmentado .selo-numero { margin-left: 6px; vertical-align: 1px; }
 
 /* ---- componentes ---------------------------------------------------------------- */
 

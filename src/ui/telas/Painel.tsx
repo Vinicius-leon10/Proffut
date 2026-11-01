@@ -45,7 +45,6 @@ export function Painel() {
 
   const adversario = proximo ? estado.clubes[proximo.mandante === meuId ? proximo.visitante : proximo.mandante] : undefined;
   const posAdversario = adversario && adversario.serie === serie ? tabela.find((l) => l.clubeId === adversario.id)?.pos : undefined;
-  const propostas = estado.mensagens.filter((m) => m.proposta && !m.proposta.resolvida);
   const convites = estado.mensagens.filter((m) => m.convite && !m.convite.resolvido);
   const recentes = estado.mensagens.filter((m) => !(m.proposta && !m.proposta.resolvida) && !(m.convite && !m.convite.resolvido)).slice(0, 3);
   const emRisco = estado.tecnico.confiancaDiretoria <= CARGO.aviso;
@@ -92,11 +91,6 @@ export function Painel() {
         </Cartao>
       )}
 
-      {propostas.length > 0 && (
-        <Cartao titulo="Propostas recebidas">
-          <div className="lista">{propostas.map((m) => <MensagemItem key={m.id} m={m} />)}</div>
-        </Cartao>
-      )}
 
       <Cartao titulo={`${NOME_SERIE[serie]} ${estado.temporada}`}>
         <div className="linha entre">

@@ -5,7 +5,7 @@ import { NOMES_CARACTERISTICA, NOMES_POSICAO } from "../../engine/forca";
 import { formatarDinheiro } from "../../engine/financas";
 import { salarioBase, valorMercado } from "../../engine/gerador";
 import { motivoParaNaoPegar, pegarEmprestado, taxaDeEmprestimo } from "../../engine/emprestimos";
-import { elencoDe, fazerOferta, livres, podeSair, precoPedido } from "../../engine/mercado";
+import { elencoDe, fazerOferta, livres, podeSair, precoPedido, propostasPendentes } from "../../engine/mercado";
 import type { Jogador, Posicao, SerieId } from "../../engine/tipos";
 import { Escudo, Folha, Opcoes, Pos, Segmentado } from "../componentes";
 import { useJogo, useLoja } from "../store";
@@ -85,7 +85,8 @@ export function Mercado() {
   const versao = useLoja((s) => s.versao);
   const meuId = estado.tecnico.clubeId;
   const meu = estado.clubes[meuId];
-  const [vista, setVista] = useState<Vista>("buscar");
+  // Com proposta esperando resposta, o Mercado abre direto em Meus à venda (R63).
+  const [vista, setVista] = useState<Vista>(() => (propostasPendentes(estado).length ? "venda" : "buscar"));
   const [posicao, setPosicao] = useState<Posicao | "todas">("todas");
   const [forcaMin, setForcaMin] = useState(0);
   const [idadeMax, setIdadeMax] = useState(40);
@@ -94,15 +95,13 @@ export function Mercado() {
   const [aberto, setAberto] = useState<Jogador | null>(null);
 
   // A proposta que está valendo por cada jogador meu (R62).
-  const propostaPor = useMemo(
-    () => new Map(estado.mensagens.filter((m) => m.proposta && !m.proposta.resolvida).map((m) => [m.proposta!.jogadorId, m])),
-    [estado, versao],
-  );
+  const propostaPor = useMemo(() => new Map(propostasPendentes(estado).map((m) => [m.proposta!.jogadorId, m])), [estado, versao]);
   const resultados = useMemo(() => {
-    // Meus à venda: todos (os filtros não aparecem aqui), quem tem proposta primeiro (R62).
+    // Meus à venda: todos (os filtros não aparecem aqui), mais quem recebeu proposta sem estar à venda (R63); quem
+    // tem proposta primeiro (R62).
     if (vista === "venda") {
       return elencoDe(estado, meuId)
-        .filter((j) => j.aVenda)
+        .filter((j) => j.aVenda || propostaPor.has(j.id))
         .sort((a, b) => Number(propostaPor.has(b.id)) - Number(propostaPor.has(a.id)) || b.forca - a.forca);
     }
     const termo = busca.trim().toLowerCase();
@@ -123,7 +122,15 @@ export function Mercado() {
         <h2>Mercado</h2>
         <span className="pequeno fraco">Caixa <b className={meu.caixa < 0 ? "vermelho" : "verde"}>{formatarDinheiro(meu.caixa)}</b></span>
       </div>
-      <Segmentado opcoes={[{ valor: "buscar", rotulo: "Buscar" }, { valor: "livres", rotulo: "Livres" }, { valor: "venda", rotulo: "Meus à venda" }]} valor={vista} aoMudar={setVista} />
+      <Segmentado
+        opcoes={[
+          { valor: "buscar", rotulo: "Buscar" },
+          { valor: "livres", rotulo: "Livres" },
+          { valor: "venda", rotulo: <>Meus à venda{propostaPor.size > 0 && <span className="selo-numero">{propostaPor.size}</span>}</> },
+        ]}
+        valor={vista}
+        aoMudar={setVista}
+      />
       {vista !== "venda" && (
         <div className="coluna">
           <input placeholder="Buscar por nome" value={busca} onChange={(e) => setBusca(e.target.value)} />
@@ -161,6 +168,7 @@ export function Mercado() {
                     <Escudo clube={comprador} tamanho={18} />
                     <span>Proposta {comArtigo("do", comprador)}: <b>{formatarDinheiro(m.proposta!.valor)}</b> · vale até {formatarData(m.proposta!.validaAte)}</span>
                   </div>
+                  {!j.aVenda && <span className="mini fraco">Ele não estava à venda.</span>}
                   <AcoesDaProposta m={m} />
                 </div>
               ) : (

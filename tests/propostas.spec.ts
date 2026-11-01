@@ -1,5 +1,8 @@
 import type { Page } from "@playwright/test";
-import { agora, aba, esperarInteiroNaTela, esperarSalvar, expect, novoJogo, test } from "./ajuda";
+import { agora, aba, cartaoDoProximoJogo, esperarInteiroNaTela, esperarSalvar, expect, novoJogo, test } from "./ajuda";
+
+/** O nome exato, para achar a linha do jogador ("Pedro" está em "João Pedro"). */
+const exato = (nome: string) => new RegExp(`^${nome.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`);
 
 /** Coloca no save do aparelho uma proposta do Flamengo por um meia do usuário e abre o jogo de novo. */
 async function receberProposta(page: Page, valor: number) {
@@ -32,7 +35,7 @@ async function receberProposta(page: Page, valor: number) {
   );
   await page.reload();
   await page.getByRole("button", { name: /Continuar/ }).first().click();
-  await expect(page.getByRole("heading", { name: "Propostas recebidas" })).toBeVisible();
+  await expect(cartaoDoProximoJogo(page)).toBeVisible();
   return nome;
 }
 
@@ -41,7 +44,9 @@ test("R20 numa proposta por um jogador meu, dá para pedir mais e vender pelo va
   await esperarSalvar(page, (await agora(page)) - 5_000);
   const nome = await receberProposta(page, 1_000_000);
 
-  const proposta = page.locator(".item").filter({ hasText: `Proposta por ${nome}` });
+  // A proposta fica em Mercado → Meus à venda, embaixo do jogador (saiu do painel do Clube, R63).
+  await aba(page, "Mercado");
+  const proposta = page.locator("main .a-venda").filter({ has: page.locator(".negrito", { hasText: exato(nome) }) });
   await esperarInteiroNaTela(page, proposta.getByRole("button", { name: "Pedir mais" }));
   await proposta.getByRole("button", { name: "Pedir mais" }).click();
 
@@ -54,7 +59,7 @@ test("R20 numa proposta por um jogador meu, dá para pedir mais e vender pelo va
 
   // Até 5% a mais o clube sempre aceita: a venda sai pelo valor pedido.
   await expect(page.locator(".aviso")).toContainText(`O Flamengo aceitou pagar R$ 1.050.000. ${nome} foi vendido.`);
-  await expect(page.getByRole("heading", { name: "Propostas recebidas" })).toHaveCount(0);
+  await expect(proposta).toHaveCount(0);
   await aba(page, "Elenco");
   await expect(page.locator(".lista .item .negrito").filter({ hasText: new RegExp(`^${nome}$`) })).toHaveCount(0);
 });
@@ -129,4 +134,71 @@ test("R62 em Mercado, Meus à venda mostra quem tem proposta (clube, valor e pra
   await expect(page.locator(".aviso")).toContainText(`${doFlamengo} foi vendido ao Flamengo`);
   await expect(linha(doFlamengo)).toHaveCount(0);
   await expect(vendas).toHaveCount(2);
+});
+
+test("R63 as propostas saem do painel do Clube: o Mercado, na barra de baixo, mostra quantas há e abre Meus à venda com elas, até a de quem não estava à venda", async ({ page }) => {
+  await novoJogo(page);
+  await esperarSalvar(page, (await agora(page)) - 5_000);
+  // Duas propostas: por um meia à venda e por um zagueiro que não estava à venda.
+  const [aVenda, foraDaVenda] = await page.evaluate(
+    () =>
+      new Promise<string[]>((ok, falha) => {
+        const pedido = indexedDB.open("proffut");
+        pedido.onerror = () => falha(pedido.error);
+        pedido.onsuccess = () => {
+          const banco = pedido.result;
+          const saves = banco.transaction("saves", "readwrite").objectStore("saves");
+          const leitura = saves.get("jogo:auto");
+          leitura.onsuccess = () => {
+            const estado = leitura.result;
+            type J = { id: number; nome: string; clubeId: string; posicao: string; forca: number; aVenda?: boolean };
+            const meus = (pos: string) => Object.values(estado.jogadores as Record<string, J>)
+              .filter((j) => j.clubeId === estado.tecnico.clubeId && j.posicao === pos)
+              .sort((a, b) => a.forca - b.forca);
+            const [meia] = meus("M");
+            const [zagueiro] = meus("Z");
+            meia.aVenda = true;
+            for (const [j, clubeId, clube] of [[meia, "flamengo", "Flamengo"], [zagueiro, "palmeiras", "Palmeiras"]] as const) {
+              estado.mensagens.unshift({
+                id: estado.proximoIdMensagem++, data: estado.data, tipo: "proposta", lida: false,
+                titulo: `Proposta por ${j.nome}`, texto: `O ${clube} oferece R$ 900.000 por ${j.nome}.`,
+                proposta: { jogadorId: j.id, clubeId, valor: 900_000, validaAte: "2026-12-31" },
+              });
+            }
+            const escrita = saves.put(estado, "jogo:auto");
+            escrita.onsuccess = () => { banco.close(); ok([meia.nome, zagueiro.nome]); };
+            escrita.onerror = () => falha(escrita.error);
+          };
+        };
+      }),
+  );
+  await page.reload();
+  await page.getByRole("button", { name: /Continuar/ }).first().click();
+  await expect(cartaoDoProximoJogo(page)).toBeVisible();
+
+  // No painel do Clube, nada de propostas.
+  await expect(page.getByRole("heading", { name: "Propostas recebidas" })).toHaveCount(0);
+  await expect(page.locator("main")).not.toContainText(`Proposta por ${aVenda}`);
+  // Na barra de baixo, o Mercado avisa quantas propostas há.
+  const mercado = page.locator("nav").getByRole("button", { name: /^Mercado/ });
+  await expect(mercado).toHaveAccessibleName("Mercado, 2 propostas");
+  await expect(mercado.locator(".selo-numero")).toHaveText("2");
+
+  // Tocando, o Mercado abre em Meus à venda, com as duas propostas.
+  await mercado.click();
+  await expect(page.getByRole("tab", { name: /Meus à venda/ })).toHaveAttribute("aria-selected", "true");
+  const vendas = page.locator("main .a-venda");
+  const linha = (nome: string) => vendas.filter({ has: page.locator(".negrito", { hasText: exato(nome) }) });
+  await expect(vendas).toHaveCount(2);
+  await expect(linha(foraDaVenda)).toContainText("Ele não estava à venda");
+  await expect(linha(aVenda)).not.toContainText("não estava à venda");
+
+  // Respondendo, o aviso diminui e some; quem não estava à venda sai da lista.
+  await linha(aVenda).getByRole("button", { name: "Recusar" }).click();
+  await expect(mercado).toHaveAccessibleName("Mercado, 1 proposta");
+  await linha(foraDaVenda).getByRole("button", { name: "Recusar" }).click();
+  await expect(mercado).toHaveAccessibleName("Mercado");
+  await expect(mercado.locator(".selo-numero")).toHaveCount(0);
+  await expect(vendas).toHaveCount(1);
+  await expect(linha(aVenda)).toContainText("Sem proposta por enquanto");
 });

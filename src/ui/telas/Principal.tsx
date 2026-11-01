@@ -1,6 +1,7 @@
 import { formatarData } from "../../engine/calendario";
 import { formatarDinheiro } from "../../engine/financas";
 import { naoLidas } from "../../engine/mensagens";
+import { propostasPendentes } from "../../engine/mercado";
 import { Escudo, Icone } from "../componentes";
 import { useJogo, useLoja, type Aba } from "../store";
 import { Demissao } from "./Demissao";
@@ -25,6 +26,8 @@ export function Principal() {
   const { aba, irParaAba, abrir } = useLoja();
   const clube = estado.clubes[estado.tecnico.clubeId];
   const novas = naoLidas(estado);
+  // As propostas pelos meus jogadores ficam no Mercado, com o número na barra de baixo (R63).
+  const propostas = propostasPendentes(estado).length;
   // Demitido, ou com o clube rebaixado para a Série D (fora do jogo): precisa escolher um novo clube.
   if (estado.tecnico.demissao) return <Demissao />;
   if (clube.serie === "D") return <FimTemporada />;
@@ -41,11 +44,7 @@ export function Principal() {
         </div>
         <button className="icone-botao" onClick={() => abrir({ tipo: "mensagens" })} aria-label={`Mensagens${novas ? `, ${novas} novas` : ""}`} style={{ position: "relative" }}>
           <Icone nome="mensagens" />
-          {novas > 0 && (
-            <span style={{ position: "absolute", top: 4, right: 4, background: "var(--vermelho)", color: "#fff", fontSize: 10, fontWeight: 800, borderRadius: 99, minWidth: 16, height: 16, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 4px" }}>
-              {novas > 9 ? "9+" : novas}
-            </span>
-          )}
+          {novas > 0 && <span className="selo-numero" style={{ position: "absolute", top: 4, right: 4 }}>{novas > 9 ? "9+" : novas}</span>}
         </button>
         <button className="icone-botao" onClick={() => abrir({ tipo: "config" })} aria-label="Configurações"><Icone nome="config" /></button>
       </header>
@@ -59,12 +58,22 @@ export function Principal() {
       </main>
 
       <nav className="abas" aria-label="Seções">
-        {ABAS.map((a) => (
-          <button key={a.aba} className={`aba${aba === a.aba ? " ativa" : ""}`} onClick={() => irParaAba(a.aba)} aria-current={aba === a.aba}>
-            <Icone nome={a.icone} />
-            {a.rotulo}
-          </button>
-        ))}
+        {ABAS.map((a) => {
+          const aviso = a.aba === "mercado" ? propostas : 0;
+          return (
+            <button
+              key={a.aba}
+              className={`aba${aba === a.aba ? " ativa" : ""}`}
+              onClick={() => irParaAba(a.aba)}
+              aria-current={aba === a.aba}
+              aria-label={aviso ? `${a.rotulo}, ${aviso} ${aviso === 1 ? "proposta" : "propostas"}` : undefined}
+            >
+              <Icone nome={a.icone} />
+              {a.rotulo}
+              {aviso > 0 && <span className="selo-numero">{aviso > 9 ? "9+" : aviso}</span>}
+            </button>
+          );
+        })}
       </nav>
       {estado.tutorial && <Tutorial />}
     </div>
