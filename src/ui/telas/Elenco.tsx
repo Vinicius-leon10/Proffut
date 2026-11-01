@@ -196,7 +196,7 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
         <div className="coluna">
           <button className="botao cheio" disabled={!!naoEmpresta} onClick={() => setEmprestando(true)}>Emprestar até o fim da temporada</button>
           {naoEmpresta && <p className="mini fraco">{naoEmpresta}</p>}
-          {!terminando && <button className="botao cheio" onClick={alternarVenda}>{j.aVenda ? "Tirar da lista de venda" : "Colocar à venda"}</button>}
+          {!terminando && <button className="botao cheio" onClick={alternarVenda}>{j.aVenda ? "Tirar da venda" : "Colocar à venda"}</button>}
           <button
             className="botao perigo cheio"
             disabled={!podeSair(estado, j)}

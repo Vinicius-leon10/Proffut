@@ -21,7 +21,8 @@ test("R09 no elenco, colocar à venda aparece inteiro e o jogador vai para a lis
   await esperarInteiroNaTela(page, ficha.getByRole("button", { name: "Dispensar" }));
 
   await ficha.getByRole("button", { name: "Colocar à venda" }).click();
-  await expect(ficha.getByRole("button", { name: "Tirar da lista de venda" })).toBeVisible();
+  // O mesmo rótulo no botão de baixo e no cartão do contrato de quem está no último ano (R64).
+  await expect(ficha.getByRole("button", { name: "Tirar da venda" })).toBeVisible();
   await ficha.getByRole("button", { name: "Fechar" }).click();
 
   await aba(page, "Mercado");
