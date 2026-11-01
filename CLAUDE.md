@@ -40,13 +40,14 @@ Só clubes brasileiros: Séries A, B e C de 2026 (60 clubes reais, regulamentos 
 
 Pronto e publicado: partida ao vivo, tática, elenco, mercado, finanças, estádio (ampliar/modernizar), diretoria,
 virada de temporada sem fim, rebaixamento para a Série D com propostas de emprego, checagem automática no app,
-elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas, sons da partida, escudos dos
+elencos reais nos jogos novos, Copa do Brasil, "Pedir mais" nas propostas recebidas (que também aparecem em Mercado →
+Meus à venda, embaixo de cada jogador, com Aceitar, Pedir mais e Recusar: `AcoesDaProposta` em `Mensagens.tsx`, R62), sons da partida, escudos dos
 clubes (os que o usuário mandou), time titular do adversário antes do jogo (toque no escudo dele no painel ou no
 placar), visual claro "opção 3", estatísticas da partida com aviso de pressão, campo 2D na partida, demissão e convites de clubes maiores
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R61 rodando a cada mudança, antes
+ponta R01–R62 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão

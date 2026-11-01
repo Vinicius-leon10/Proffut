@@ -34,7 +34,7 @@ O save fica guardado **no próprio celular** e é feito sozinho a cada ação. P
 - Classificação com zonas, jogos rodada a rodada e artilharia.
 - **Sala de troféus e recordes** (botão no painel): os títulos e acessos do clube, a maior goleada, a pior derrota, o maior público, os maiores artilheiros do clube e a sua carreira (títulos, clubes, objetivos cumpridos). Num jogo já começado, os recordes contam a partir da temporada em andamento.
 - **Escudos dos clubes** (`public/escudos/`), também sem internet. Para trocar algum só no seu aparelho, importe um arquivo `.json` de escudos do Proffut em Configurações → Escudos.
-- Mercado: comprar, vender (as propostas chegam nas mensagens, e dá para pedir mais), contratar livres, dispensar.
+- Mercado: comprar, vender (as propostas chegam nas mensagens e aparecem em "Meus à venda", embaixo de cada jogador, para aceitar, pedir mais ou recusar ali mesmo), contratar livres, dispensar.
 - Finanças: bilheteria (você define o ingresso), TV, patrocínio, salários e extrato.
 - Estádio: ampliar a capacidade ou modernizar (mais conforto, mais público), com custo, tempo de obra e renda extra estimada.
 - Objetivo da diretoria e confiança da diretoria e da torcida.

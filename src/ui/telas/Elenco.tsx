@@ -16,7 +16,8 @@ import { useJogo, useLoja } from "../store";
 const ORDEM: Posicao[] = ["G", "L", "Z", "M", "A"];
 const nota = (n?: number) => (n == null ? "–" : formatarNota(n));
 
-export function Situacao({ j }: { j: Jogador }) {
+/** `semAVenda`: em Meus à venda (Mercado) todos estão à venda, e a etiqueta só tiraria espaço do nome. */
+export function Situacao({ j, semAVenda }: { j: Jogador; semAVenda?: boolean }) {
   const estado = useJogo();
   const meu = j.clubeId === estado.tecnico.clubeId;
   const fimDeContrato = meu && !j.emprestimo && ultimoAno(estado, j);
@@ -27,19 +28,19 @@ export function Situacao({ j }: { j: Jogador }) {
       {j.lesaoDias > 0 && <span className="chip vermelho" title="Lesionado">Lesão {j.lesaoDias}d</span>}
       {j.suspensaoJogos > 0 && <span className="chip vermelho" title="Suspenso">Suspenso</span>}
       {j.amarelosAcumulados === 2 && j.suspensaoJogos === 0 && <span className="chip amarelo" title="Pendurado com 2 amarelos">2 CA</span>}
-      {j.aVenda && <span className="chip amarelo">À venda</span>}
+      {j.aVenda && !semAVenda && <span className="chip amarelo">À venda</span>}
     </>
   );
 }
 
-export function LinhaJogador({ j, aoTocar, direita }: { j: Jogador; aoTocar?: () => void; direita?: React.ReactNode }) {
+export function LinhaJogador({ j, aoTocar, direita, semAVenda }: { j: Jogador; aoTocar?: () => void; direita?: React.ReactNode; semAVenda?: boolean }) {
   return (
     <button className="item" onClick={aoTocar}>
       <Pos pos={j.posicao} />
       <div className="cresce">
         <div className="linha" style={{ gap: 6 }}>
           <span className="negrito corta pequeno">{j.nome}</span>
-          <Situacao j={j} />
+          <Situacao j={j} semAVenda={semAVenda} />
         </div>
         <div className="mini fraco corta">
           {j.idade} anos{j.posicao === "L" ? ` · ${j.lado === "D" ? "direita" : "esquerda"}` : ""}

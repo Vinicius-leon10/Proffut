@@ -53,7 +53,8 @@ function FolhaPedirMais({ m, aoFechar }: { m: Mensagem; aoFechar: () => void }) 
   );
 }
 
-export function MensagemItem({ m }: { m: Mensagem }) {
+/** Os botões de uma proposta recebida: aceitar, pedir mais (abre a ficha) ou recusar. Nas mensagens, no painel e em Meus à venda (R62). */
+export function AcoesDaProposta({ m }: { m: Mensagem }) {
   const estado = useJogo();
   const { atualizar, avisar } = useLoja();
   const [pedindo, setPedindo] = useState(false);
@@ -62,6 +63,21 @@ export function MensagemItem({ m }: { m: Mensagem }) {
     avisar(r.texto);
     atualizar();
   };
+  return (
+    <>
+      <div className="linha" style={{ width: "100%" }}>
+        <button className="botao verde pequeno cresce" onClick={() => responder(true)}>Aceitar</button>
+        <button className="botao pequeno cresce" onClick={() => setPedindo(true)}>Pedir mais</button>
+        <button className="botao pequeno cresce" onClick={() => responder(false)}>Recusar</button>
+      </div>
+      {pedindo && <FolhaPedirMais m={m} aoFechar={() => setPedindo(false)} />}
+    </>
+  );
+}
+
+export function MensagemItem({ m }: { m: Mensagem }) {
+  const estado = useJogo();
+  const { atualizar, avisar } = useLoja();
   const pendente = m.proposta && !m.proposta.resolvida;
   const convite = m.convite && !m.convite.resolvido;
   const responderAoConvite = (aceitar: boolean) => {
@@ -80,14 +96,7 @@ export function MensagemItem({ m }: { m: Mensagem }) {
       </div>
       <div className={m.lida ? "pequeno" : "pequeno negrito"}>{m.titulo}</div>
       <p className="pequeno fraco">{m.texto}</p>
-      {pendente && (
-        <div className="linha" style={{ width: "100%" }}>
-          <button className="botao verde pequeno cresce" onClick={() => responder(true)}>Aceitar</button>
-          <button className="botao pequeno cresce" onClick={() => setPedindo(true)}>Pedir mais</button>
-          <button className="botao pequeno cresce" onClick={() => responder(false)}>Recusar</button>
-        </div>
-      )}
-      {pendente && pedindo && <FolhaPedirMais m={m} aoFechar={() => setPedindo(false)} />}
+      {pendente && <AcoesDaProposta m={m} />}
       {m.proposta?.resolvida && <span className="mini muito-fraco">Proposta {m.proposta.resolvida}.</span>}
       {convite && (
         <div className="linha" style={{ width: "100%" }}>

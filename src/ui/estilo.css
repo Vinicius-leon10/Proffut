@@ -288,6 +288,12 @@ p { margin: 0; }
 }
 .item:last-child { border-bottom: 0; }
 .item:active { background: rgb(16 34 26 / 4%); }
+/* Meus à venda (Mercado): cada jogador com a proposta que está valendo embaixo (R62). */
+.a-venda { border-bottom: 1px solid var(--divisor); padding-bottom: 10px; }
+.a-venda:last-child { border-bottom: 0; }
+.a-venda > .item { border-bottom: 0; padding-bottom: 6px; }
+.proposta-a-venda { display: flex; flex-direction: column; gap: 8px; padding: 10px; border-radius: 10px; background: #fbf3d6; }
+.sem-proposta { padding: 0 2px; }
 
 .posicao {
   width: 26px; height: 26px;

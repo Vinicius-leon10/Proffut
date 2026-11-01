@@ -58,3 +58,75 @@ test("R20 numa proposta por um jogador meu, dá para pedir mais e vender pelo va
   await aba(page, "Elenco");
   await expect(page.locator(".lista .item .negrito").filter({ hasText: new RegExp(`^${nome}$`) })).toHaveCount(0);
 });
+
+test("R62 em Mercado, Meus à venda mostra quem tem proposta (clube, valor e prazo), primeiro na lista, e dá para aceitar, pedir mais ou recusar ali mesmo", async ({ page }) => {
+  await novoJogo(page);
+  await esperarSalvar(page, (await agora(page)) - 5_000);
+  // Três meias à venda: um com proposta do Flamengo, outro com proposta do Palmeiras e o mais forte sem proposta.
+  const [doFlamengo, doPalmeiras, semProposta] = await page.evaluate(
+    () =>
+      new Promise<string[]>((ok, falha) => {
+        const pedido = indexedDB.open("proffut");
+        pedido.onerror = () => falha(pedido.error);
+        pedido.onsuccess = () => {
+          const banco = pedido.result;
+          const saves = banco.transaction("saves", "readwrite").objectStore("saves");
+          const leitura = saves.get("jogo:auto");
+          leitura.onsuccess = () => {
+            const estado = leitura.result;
+            type J = { id: number; nome: string; clubeId: string; posicao: string; forca: number; aVenda?: boolean };
+            const meias = Object.values(estado.jogadores as Record<string, J>)
+              .filter((j) => j.clubeId === estado.tecnico.clubeId && j.posicao === "M")
+              .sort((a, b) => a.forca - b.forca);
+            const [a, b, c] = meias;
+            for (const j of [a, b, c]) j.aVenda = true;
+            c.forca = 99;
+            const proposta = (j: J, clubeId: string, clube: string, valor: number) =>
+              estado.mensagens.unshift({
+                id: estado.proximoIdMensagem++, data: estado.data, tipo: "proposta", lida: false,
+                titulo: `Proposta por ${j.nome}`, texto: `O ${clube} oferece R$ ${valor.toLocaleString("pt-BR")} por ${j.nome}.`,
+                proposta: { jogadorId: j.id, clubeId, valor, validaAte: "2026-12-31" },
+              });
+            proposta(a, "flamengo", "Flamengo", 1_000_000);
+            proposta(b, "palmeiras", "Palmeiras", 800_000);
+            const escrita = saves.put(estado, "jogo:auto");
+            escrita.onsuccess = () => { banco.close(); ok([a.nome, b.nome, c.nome]); };
+            escrita.onerror = () => falha(escrita.error);
+          };
+        };
+      }),
+  );
+  await page.reload();
+  await page.getByRole("button", { name: /Continuar/ }).first().click();
+  await aba(page, "Mercado");
+  await page.getByRole("tab", { name: "Meus à venda" }).click();
+
+  const vendas = page.locator("main .a-venda");
+  const nomeExato = (nome: string) => new RegExp(`^${nome.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`);
+  const linha = (nome: string) => vendas.filter({ has: page.locator(".negrito", { hasText: nomeExato(nome) }) });
+  await expect(vendas).toHaveCount(3);
+  // Quem tem proposta vem primeiro, mesmo sendo mais fraco.
+  const nomes = (await vendas.locator(".item .negrito").allTextContents()).map((n) => n.trim());
+  expect(nomes.slice(0, 2).sort()).toEqual([doFlamengo, doPalmeiras].sort());
+  expect(nomes[2]).toBe(semProposta);
+  // A proposta: o clube, o valor e até quando vale, com os botões.
+  await expect(linha(doFlamengo)).toContainText("Proposta do Flamengo: R$ 1,00 mi");
+  await expect(linha(doFlamengo)).toContainText("vale até");
+  for (const acao of ["Aceitar", "Pedir mais", "Recusar"]) await expect(linha(doFlamengo).getByRole("button", { name: acao })).toBeVisible();
+  await expect(linha(semProposta)).toContainText("Sem proposta por enquanto");
+  await expect(linha(semProposta).getByRole("button", { name: "Aceitar" })).toHaveCount(0);
+
+  // Pedir mais abre a mesma ficha das mensagens.
+  await linha(doPalmeiras).getByRole("button", { name: "Pedir mais" }).click();
+  await expect(page.getByRole("dialog").getByRole("heading").first()).toHaveText(`Pedir mais por ${doPalmeiras}`);
+  await page.getByRole("dialog").getByRole("button", { name: "Fechar" }).click();
+  // Recusando, a proposta sai e ele continua à venda.
+  await linha(doPalmeiras).getByRole("button", { name: "Recusar" }).click();
+  await expect(page.locator(".aviso")).toContainText("Proposta recusada.");
+  await expect(linha(doPalmeiras)).toContainText("Sem proposta por enquanto");
+  // Aceitando, ele é vendido e sai da lista.
+  await linha(doFlamengo).getByRole("button", { name: "Aceitar" }).click();
+  await expect(page.locator(".aviso")).toContainText(`${doFlamengo} foi vendido ao Flamengo`);
+  await expect(linha(doFlamengo)).toHaveCount(0);
+  await expect(vendas).toHaveCount(2);
+});

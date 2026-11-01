@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { comArtigo } from "../../engine/artigos";
+import { formatarData } from "../../engine/calendario";
 import { NOMES_CARACTERISTICA, NOMES_POSICAO } from "../../engine/forca";
 import { formatarDinheiro } from "../../engine/financas";
 import { salarioBase, valorMercado } from "../../engine/gerador";
@@ -9,6 +10,7 @@ import type { Jogador, Posicao, SerieId } from "../../engine/tipos";
 import { Escudo, Folha, Opcoes, Pos, Segmentado } from "../componentes";
 import { useJogo, useLoja } from "../store";
 import { LinhaJogador, Situacao } from "./Elenco";
+import { AcoesDaProposta } from "./Mensagens";
 
 type Vista = "buscar" | "livres" | "venda";
 
@@ -91,9 +93,20 @@ export function Mercado() {
   const [busca, setBusca] = useState("");
   const [aberto, setAberto] = useState<Jogador | null>(null);
 
+  // A proposta que está valendo por cada jogador meu (R62).
+  const propostaPor = useMemo(
+    () => new Map(estado.mensagens.filter((m) => m.proposta && !m.proposta.resolvida).map((m) => [m.proposta!.jogadorId, m])),
+    [estado, versao],
+  );
   const resultados = useMemo(() => {
+    // Meus à venda: todos (os filtros não aparecem aqui), quem tem proposta primeiro (R62).
+    if (vista === "venda") {
+      return elencoDe(estado, meuId)
+        .filter((j) => j.aVenda)
+        .sort((a, b) => Number(propostaPor.has(b.id)) - Number(propostaPor.has(a.id)) || b.forca - a.forca);
+    }
     const termo = busca.trim().toLowerCase();
-    const base = vista === "livres" ? livres(estado) : vista === "venda" ? elencoDe(estado, meuId).filter((j) => j.aVenda) : Object.values(estado.jogadores).filter((j) => {
+    const base = vista === "livres" ? livres(estado) : Object.values(estado.jogadores).filter((j) => {
       if (!j.clubeId || j.clubeId === meuId || j.emprestimo?.de === meuId) return false;
       const c = estado.clubes[j.clubeId];
       return c.serie !== "D" && (serie === "todas" || c.serie === serie);
@@ -102,7 +115,7 @@ export function Mercado() {
       .filter((j) => (posicao === "todas" || j.posicao === posicao) && j.forca >= forcaMin && j.idade <= idadeMax && (!termo || j.nome.toLowerCase().includes(termo)))
       .sort((a, b) => b.forca - a.forca)
       .slice(0, 60);
-  }, [estado, versao, vista, posicao, forcaMin, idadeMax, serie, busca, meuId]);
+  }, [estado, versao, vista, posicao, forcaMin, idadeMax, serie, busca, meuId, propostaPor]);
 
   return (
     <>
@@ -133,20 +146,40 @@ export function Mercado() {
           </div>
         </div>
       )}
-      {vista === "venda" && <p className="mini muito-fraco">Coloque jogadores à venda pela tela do Elenco. As propostas chegam nas mensagens e no painel do clube.</p>}
+      {vista === "venda" && <p className="mini muito-fraco">Coloque jogadores à venda pela tela do Elenco. As propostas aparecem aqui, embaixo de cada jogador, e também nas mensagens.</p>}
       <div className="lista">
-        {resultados.length === 0 && <p className="vazio">Nenhum jogador encontrado.</p>}
-        {resultados.map((j) => {
+        {resultados.length === 0 && <p className="vazio">{vista === "venda" ? "Nenhum jogador seu à venda." : "Nenhum jogador encontrado."}</p>}
+        {vista === "venda" && resultados.map((j) => {
+          const m = propostaPor.get(j.id);
+          const comprador = m ? estado.clubes[m.proposta!.clubeId] : undefined;
+          return (
+            <div key={j.id} className="a-venda">
+              <LinhaJogador j={j} semAVenda direita={<span className="mini fraco num">{formatarDinheiro(valorMercado(j))}</span>} />
+              {m && comprador ? (
+                <div className="proposta-a-venda">
+                  <div className="linha pequeno" style={{ gap: 6 }}>
+                    <Escudo clube={comprador} tamanho={18} />
+                    <span>Proposta {comArtigo("do", comprador)}: <b>{formatarDinheiro(m.proposta!.valor)}</b> · vale até {formatarData(m.proposta!.validaAte)}</span>
+                  </div>
+                  <AcoesDaProposta m={m} />
+                </div>
+              ) : (
+                <p className="mini muito-fraco sem-proposta">Sem proposta por enquanto.</p>
+              )}
+            </div>
+          );
+        })}
+        {vista !== "venda" && resultados.map((j) => {
           const c = j.clubeId ? estado.clubes[j.clubeId] : undefined;
           return (
             <LinhaJogador
               key={j.id}
               j={j}
-              aoTocar={() => vista !== "venda" && setAberto(j)}
+              aoTocar={() => setAberto(j)}
               direita={
                 <div className="coluna" style={{ alignItems: "flex-end", gap: 2 }}>
-                  {c && vista !== "venda" ? <Escudo clube={c} tamanho={20} /> : null}
-                  <span className="mini fraco num">{vista === "livres" ? `${formatarDinheiro(Math.round(salarioBase(j.forca) * 1.15))}/mês` : formatarDinheiro(vista === "venda" ? valorMercado(j) : precoPedido(estado, j))}</span>
+                  {c ? <Escudo clube={c} tamanho={20} /> : null}
+                  <span className="mini fraco num">{vista === "livres" ? `${formatarDinheiro(Math.round(salarioBase(j.forca) * 1.15))}/mês` : formatarDinheiro(precoPedido(estado, j))}</span>
                 </div>
               }
             />
