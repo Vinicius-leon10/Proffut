@@ -2,19 +2,23 @@
 import clubesJson from "../../data/brasil-2026/clubes.json";
 import reservaJson from "../../data/brasil-2026/serie-d-reserva.json";
 import jogadoresJson from "../../data/brasil-2026/jogadores.json";
+import estaduaisClubesJson from "../../data/brasil-2026/clubes-estaduais.json";
+import estaduaisJson from "../../data/brasil-2026/estaduais.json";
+import exteriorClubesJson from "../../data/america-do-sul-2026/clubes.json";
+import exteriorJogadoresJson from "../../data/america-do-sul-2026/jogadores.json";
 import { comArtigo } from "./artigos";
 import { diasEntre, inicioDaTemporada, mesDe, somarDias } from "./calendario";
 import {
-  FASE_LIGA, agregado, avancarFases, chaveDaPartida, criarTemporada, decidePorPenaltis, temporadaEncerrada,
+  FASE_LIGA, agregado, avancarFases, chaveDaPartida, criarTemporada, decidePorPenaltis, ehSerie, temporadaEncerrada,
 } from "./competicoes";
-import { COTA_TV_RODADA, DIAS_LESAO, PRECO_REFERENCIA, RECUPERACAO_POR_DIA, TEMPORADA_INICIAL } from "./constantes";
+import { COTA_TV_ESTADUAL, COTA_TV_RODADA, DIAS_LESAO, RECUPERACAO_POR_DIA, TEMPORADA_INICIAL } from "./constantes";
 import { depoisDoMeuJogo, expirarConvites } from "./carreira";
 import { avisarContratos, garantirContratos } from "./contratos";
 import { melhorEmCampo, notasDaPartida } from "./notas";
 import { registrarRecordes } from "./trofeus";
 import { atualizarConfianca, definirObjetivo } from "./diretoria";
-import { escalarAutomatico, forcaDoTime } from "./forca";
-import { lancar, processarMes, publicoDoJogo } from "./financas";
+import { escalarAutomatico } from "./forca";
+import { lancar, precoDeReferencia, processarMes, publicoDoJogo } from "./financas";
 import { elencoReal, gerarElenco, type JogadorReal } from "./gerador";
 import { completarLivres, elencoDe, gerarPropostas, reescalar, transferenciasDaIa } from "./mercado";
 import { enviarMensagem } from "./mensagens";
@@ -25,6 +29,7 @@ import { criarRng, rngPara } from "./rng";
 import { avancarCopa, criarCopa } from "./copa";
 import { concluirObras } from "./estadio";
 import { encerrarTemporada } from "./temporada";
+import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno } from "./torneios";
 import type { Clube, Estilo, EstadoJogo, Formacao, Partida, SerieClube, Tatica } from "./tipos";
 
 export interface FichaClube {
@@ -42,12 +47,24 @@ export interface FichaClube {
   reputacao: number;
   forcaElenco: { min: number; max: number };
   caixaInicial: number;
+  /** Clube de fora do Brasil: o código do país ("AR", "UY"...), que é também o da liga que ele joga. */
+  pais?: string;
 }
 
 export const FICHAS: FichaClube[] = clubesJson.clubes as FichaClube[];
-const RESERVA: FichaClube[] = reservaJson.clubes as FichaClube[];
-/** Elencos de verdade dos 60 clubes (tools/elencos/montar.ts). Clube sem elenco aqui ganha um gerado. */
-const ELENCOS_REAIS = jogadoresJson.elencos as Record<string, JogadorReal[]>;
+/** Clubes da Série D. */
+export const RESERVA: FichaClube[] = reservaJson.clubes as FichaClube[];
+/** Clubes que jogam só o estadual. */
+export const FICHAS_ESTADUAIS: FichaClube[] = estaduaisClubesJson.clubes as FichaClube[];
+/** Clubes da primeira divisão dos outros países da Conmebol. */
+export const FICHAS_EXTERIOR: FichaClube[] = exteriorClubesJson.clubes as FichaClube[];
+/** Quem joga cada estadual (sigla do estado → ids dos clubes). */
+export const PARTICIPANTES_ESTADUAIS = estaduaisJson.participantes as Record<string, string[]>;
+/**
+ * Elencos de verdade (tools/elencos/montar.ts e tools/times/montar.ts): Séries A a D, clubes dos estaduais e das
+ * ligas de fora. Clube sem elenco aqui ganha um gerado.
+ */
+export const ELENCOS_REAIS = { ...(jogadoresJson.elencos as Record<string, JogadorReal[]>), ...(exteriorJogadoresJson.elencos as Record<string, JogadorReal[]>) };
 
 /** Tática inicial dos clubes da IA: os fortes atacam mais, os fracos se fecham. */
 function taticaDaIa(ficha: FichaClube, rng: ReturnType<typeof criarRng>): Tatica {
@@ -65,13 +82,63 @@ function criarClube(ficha: FichaClube, serie: SerieClube, rng: ReturnType<typeof
     cores: { ...ficha.cores }, estadio: { ...ficha.estadio }, fundacao: ficha.fundacao, rival: ficha.rival,
     torcida: ficha.torcida, reputacao: ficha.reputacao, forcaElenco: { ...ficha.forcaElenco },
     caixa: ficha.caixaInicial,
-    precoIngresso: PRECO_REFERENCIA[serie === "D" ? "C" : serie],
+    precoIngresso: precoDeReferencia(serie),
     moral: 60,
     tatica: taticaDaIa(ficha, rng),
     escalacao: { titulares: [], reservas: [] },
     extrato: [],
     resumoFinanceiro: {},
   };
+}
+
+/**
+ * Clubes que ainda faltam no jogo (os da Série D, os só do estadual e os de fora), com os elencos: no jogo novo e
+ * ao abrir um save de antes deles. Marca também quem joga cada estadual. Devolve quantos clubes entraram.
+ */
+export function juntarClubesNovos(estado: EstadoJogo, rng: ReturnType<typeof criarRng>): number {
+  let novos = 0;
+  const criar = (ficha: FichaClube, serie: SerieClube) => {
+    if (estado.clubes[ficha.id]) return;
+    const clube = criarClube(ficha, serie, rng);
+    if (ficha.pais) { clube.pais = ficha.pais; clube.liga = ficha.pais; }
+    estado.clubes[ficha.id] = clube;
+    novos++;
+  };
+  for (const ficha of RESERVA) criar(ficha, "D");
+  for (const ficha of FICHAS_ESTADUAIS) criar(ficha, "estadual");
+  for (const ficha of FICHAS_EXTERIOR) criar(ficha, "exterior");
+  for (const [uf, ids] of Object.entries(PARTICIPANTES_ESTADUAIS)) {
+    for (const id of ids) if (estado.clubes[id]) estado.clubes[id].estadual = uf;
+  }
+  // Elenco para quem não tem (os clubes novos e os da Série D que ainda não tinham, ou só tinham o da Copa).
+  const comElenco = new Set(Object.values(estado.jogadores).map((j) => j.clubeId));
+  for (const clube of Object.values(estado.clubes)) {
+    if (clube.elencoDaCopa) {
+      for (const j of elencoDe(estado, clube.id)) delete estado.jogadores[j.id];
+      delete clube.elencoDaCopa;
+      comElenco.delete(clube.id);
+    }
+    if (comElenco.has(clube.id)) continue;
+    const proximoId = () => estado.proximoIdJogador++;
+    const reais = ELENCOS_REAIS[clube.id];
+    const nacionalidade = clube.liga ? PAISES[clube.liga]?.nacionalidade : undefined;
+    for (const j of reais ? elencoReal(rng, clube, reais, proximoId, nacionalidade) : gerarElenco(rng, clube, proximoId, undefined, nacionalidade)) estado.jogadores[j.id] = j;
+    clube.escalacao = escalarAutomatico(elencoDe(estado, clube.id), clube.tatica.formacao, clube.tatica.jogadas);
+  }
+  return novos;
+}
+
+/**
+ * Save de antes dos times novos (nov/2026): entram os clubes da Série D, os só do estadual e os de fora, com os
+ * elencos. Se a temporada ainda não começou, a Série D e as ligas de fora já valem para ela; os estaduais (de janeiro
+ * a março) e, com a temporada em andamento, todos os torneios começam na próxima.
+ */
+export function juntarAoSaveAntigo(estado: EstadoJogo) {
+  if (estado.torneios) return;
+  juntarClubesNovos(estado, rngPara(estado.semente, "mundo/clubes-novos"));
+  const comecou = estado.partidas.some((p) => p.jogada);
+  if (!comecou && estado.data < somarDias(inicioDaTemporada(estado.temporada), 1)) criarTorneios(estado, { semEstaduais: true });
+  else estado.torneios = {};
 }
 
 export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente?: number }): EstadoJogo {
@@ -99,25 +166,28 @@ export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente
   if (!estado.clubes[opcoes.clubeId] || estado.clubes[opcoes.clubeId].serie === "D") throw new Error("Clube inválido");
   // O técnico começa com a reputação do clube que o contratou.
   estado.tecnico.reputacao = estado.clubes[opcoes.clubeId].reputacao;
-  estado.tecnico.desde = estado.data;
 
+  // Séries A, B e C primeiro (os sorteios dos 60 clubes são os de sempre), depois os outros clubes.
   for (const clube of Object.values(estado.clubes)) {
     if (clube.serie === "D") continue;
     const proximoId = () => estado.proximoIdJogador++;
     const reais = ELENCOS_REAIS[clube.id];
     for (const j of reais ? elencoReal(rng, clube, reais, proximoId) : gerarElenco(rng, clube, proximoId)) estado.jogadores[j.id] = j;
   }
+  juntarClubesNovos(estado, rng);
   completarLivres(estado, "inicio");
   garantirContratos(estado, TEMPORADA_INICIAL);
 
   const meu = estado.clubes[opcoes.clubeId];
   meu.tatica = { formacao: "4-4-2", estilo: "equilibrado", marcacao: "normal", jogadas: "meio" };
   for (const clube of Object.values(estado.clubes)) {
-    if (clube.serie === "D") continue;
     clube.escalacao = escalarAutomatico(elencoDe(estado, clube.id), clube.tatica.formacao, clube.tatica.jogadas);
   }
 
   criarTemporada(estado);
+  // Com estaduais, a temporada começa em janeiro, uma semana antes deles.
+  if (Object.keys(estado.torneios ?? {}).some((id) => id.startsWith("E-"))) estado.data = inicioDoAno(TEMPORADA_INICIAL);
+  estado.tecnico.desde = estado.data;
   criarCopa(estado);
   estado.objetivo = definirObjetivo(estado);
   enviarMensagem(estado, {
@@ -197,15 +267,24 @@ export type ResultadoAvanco =
  * a próxima data com jogo; com a temporada encerrada, faz a virada.
  */
 export function avancar(estado: EstadoJogo): ResultadoAvanco {
-  if (jogosPendentesHoje(estado).length) return { tipo: "jogos-hoje", meuJogo: meuJogoHoje(estado) };
-  if (temporadaEncerrada(estado)) {
-    encerrarTemporada(estado);
-    return { tipo: "nova-temporada" };
+  // Dia só com jogos que o usuário não acompanha (Série D dos outros, outros estaduais, ligas de fora): passa direto.
+  for (let seguranca = 0; seguranca < 1000; seguranca++) {
+    const pendentes = jogosPendentesHoje(estado);
+    if (pendentes.length) {
+      const acompanha = competicoesDoUsuario(estado);
+      if (pendentes.some((p) => acompanha.has(p.serie))) return { tipo: "jogos-hoje", meuJogo: meuJogoHoje(estado) };
+      simularDia(estado);
+      continue;
+    }
+    if (temporadaEncerrada(estado)) {
+      encerrarTemporada(estado);
+      return { tipo: "nova-temporada" };
+    }
+    const proxima = proximaDataComJogo(estado);
+    if (!proxima) return { tipo: "nada" };
+    processarDias(estado, proxima);
   }
-  const proxima = proximaDataComJogo(estado);
-  if (!proxima) return { tipo: "nada" };
-  processarDias(estado, proxima);
-  return { tipo: "jogos-hoje", meuJogo: meuJogoHoje(estado) };
+  return { tipo: "nada" };
 }
 
 // ---- dia de jogo -----------------------------------------------------------------------
@@ -274,8 +353,12 @@ function aplicarResultado(estado: EstadoJogo, pv: PartidaViva) {
     p.publico = publicoDoJogo(rng, mandante, visitante);
     lancar(mandante, p.data, "bilheteria", `Bilheteria x ${visitante.nome} (${p.publico.toLocaleString("pt-BR")} pagantes)`, p.publico * mandante.precoIngresso);
   }
-  if (p.serie !== "CB" && p.fase === FASE_LIGA[p.serie]) {
+  if (ehSerie(p.serie) && p.fase === FASE_LIGA[p.serie]) {
     for (const c of [mandante, visitante]) lancar(c, p.data, "tv", "Cota de TV da rodada", COTA_TV_RODADA[p.serie]);
+  }
+  // Estadual: cota de TV para os clubes das Séries A, B e C.
+  if (p.serie.startsWith("E-")) {
+    for (const c of [mandante, visitante]) if (ehSerie(c.serie)) lancar(c, p.data, "tv", "Cota de TV do estadual", COTA_TV_ESTADUAL[c.serie]);
   }
 
   // Jogadores: jogos, gols, cartões, suspensões, lesões e energia.
@@ -348,7 +431,7 @@ export function concluirJogos(estado: EstadoJogo, vivas: PartidaViva[]): string[
     if (!pv.terminada) simularAteOFim(pv, estado.jogadores);
     aplicarResultado(estado, pv);
   }
-  const noticias = [...avancarFases(estado), ...avancarCopa(estado)];
+  const noticias = [...avancarFases(estado), ...avancarCopa(estado), ...avancarTorneios(estado)];
   for (const n of noticias) enviarMensagem(estado, { tipo: "noticia", titulo: "Notícias", texto: n });
   return noticias;
 }
@@ -368,21 +451,6 @@ export function simularRestoDaTemporada(estado: EstadoJogo) {
     if (r.tipo === "jogos-hoje") simularDia(estado);
     else if (r.tipo === "nada") break;
   }
-}
-
-/** Clubes da Série C que fazem proposta quando o clube do usuário cai para a Série D. */
-export function propostasDeEmprego(estado: EstadoJogo): string[] {
-  const rng = rngPara(estado.semente, `emprego/${estado.temporada}`);
-  const candidatos = rankingDeForca(estado, "C").slice(8).map((r) => r.clubeId);
-  return rng.embaralhar(candidatos).slice(0, 4);
-}
-
-/** Força dos clubes de uma série, do mais forte ao mais fraco. */
-export function rankingDeForca(estado: EstadoJogo, serie: SerieClube): { clubeId: string; forca: number }[] {
-  return Object.values(estado.clubes)
-    .filter((c) => c.serie === serie)
-    .map((c) => ({ clubeId: c.id, forca: forcaDoTime(elencoDe(estado, c.id)) }))
-    .sort((a, b) => b.forca - a.forca);
 }
 
 export { reescalar };

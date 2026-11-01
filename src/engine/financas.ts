@@ -1,6 +1,6 @@
-import { COTA_TV_RODADA, MANUTENCAO_POR_LUGAR, PATROCINIO_MES, PRECO_REFERENCIA, PREMIACAO, PUBLICO_POR_TORCIDA } from "./constantes";
+import { COTA_TV_RODADA, MANUTENCAO_POR_LUGAR, PATROCINIO_MES, PATROCINIO_SERIE_D, PRECO_REFERENCIA, PREMIACAO, PUBLICO_POR_TORCIDA } from "./constantes";
 import type { Rng } from "./rng";
-import type { Clube, EstadoJogo, SerieId, TipoLancamento } from "./tipos";
+import type { Clube, EstadoJogo, SerieClube, SerieId, TipoLancamento } from "./tipos";
 
 const LIMITE_EXTRATO = 80;
 
@@ -24,8 +24,15 @@ export function lancar(clube: Clube, data: string, tipo: TipoLancamento, descric
   clube.resumoFinanceiro[tipo] = (clube.resumoFinanceiro[tipo] ?? 0) + valor;
 }
 
+/** A série que vale para público e preços: a Série D, os clubes só do estadual e os de fora contam como a Série C. */
 export function serieDoClube(clube: Clube): SerieId {
-  return clube.serie === "D" ? "C" : clube.serie;
+  return clube.serie === "A" || clube.serie === "B" ? clube.serie : "C";
+}
+
+/** Preço de referência do ingresso: o das séries; na Série D, no estadual e fora do Brasil, mais barato. */
+export function precoDeReferencia(serie: SerieClube): number {
+  if (serie === "A" || serie === "B" || serie === "C") return PRECO_REFERENCIA[serie];
+  return serie === "exterior" ? 25 : serie === "D" ? 20 : 15;
 }
 
 /** Público esperado (sem sorteio), usado também na tela de finanças. */
@@ -55,9 +62,11 @@ export function processarMes(estado: EstadoJogo, data: string) {
     if (j.clubeId) folhas.set(j.clubeId, (folhas.get(j.clubeId) ?? 0) + j.salario);
   }
   for (const clube of Object.values(estado.clubes)) {
-    if (clube.serie === "D") continue;
-    const serie = clube.serie;
-    lancar(clube, data, "patrocinio", "Patrocínio do mês", PATROCINIO_MES[serie] * (0.6 + 0.8 * (clube.reputacao / 100)));
+    // Clubes só do estadual e os de fora não têm contas no jogo (não compram nem vendem por conta própria).
+    if (clube.serie === "estadual" || clube.serie === "exterior") continue;
+    // Série D: patrocínio menor que o da Série C.
+    const patrocinio = clube.serie === "D" ? PATROCINIO_MES.C * PATROCINIO_SERIE_D : PATROCINIO_MES[clube.serie];
+    lancar(clube, data, "patrocinio", "Patrocínio do mês", patrocinio * (0.6 + 0.8 * (clube.reputacao / 100)));
     lancar(clube, data, "salarios", "Folha salarial", -(folhas.get(clube.id) ?? 0));
     lancar(clube, data, "estadio", "Manutenção do estádio", -clube.estadio.capacidade * MANUTENCAO_POR_LUGAR);
   }

@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { aba, abrirSite, botao, esperarInteiroNaTela, expect, irParaOMeuJogo, novoJogo, test } from "./ajuda";
+import { aba, abrirDepoisDoEstadual, abrirSite, botao, esperarInteiroNaTela, expect, irParaOMeuJogo, novoJogo, test } from "./ajuda";
 
 const GUARDADO = "Jogo guardado no aparelho";
 
@@ -30,7 +30,8 @@ async function terminarSemAviso(page: Page) {
 
 test("R44 aviso que chega com uma tela aberta por cima espera ela fechar: o \"Jogo guardado no aparelho\" não cobre o Continuar dos resultados do dia", async ({ page }) => {
   await segurarServiceWorker(page);
-  await novoJogo(page, { serie: "Série C", clube: "Brusque" });
+  // Depois do estadual, no dia do primeiro jogo da Série C (em janeiro não há dia de jogos sem o Brusque).
+  await abrirDepoisDoEstadual(page, "brusque");
   const resultados = page.locator(".tela-cheia .topo .titulo", { hasText: "Resultados do dia" });
   // Joga e já avança: o dia seguinte com jogos (Copa do Brasil, quarta-feira) não tem jogo do Brusque.
   await botao(page, /Avançar|Ir para o jogo/).click();

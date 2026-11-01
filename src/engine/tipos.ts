@@ -1,9 +1,18 @@
 export type Posicao = "G" | "L" | "Z" | "M" | "A";
 export type Lado = "D" | "E";
 export type SerieId = "A" | "B" | "C";
-export type SerieClube = SerieId | "D";
-/** Competição de uma partida: uma das séries ou a Copa do Brasil ("CB"). */
-export type Competicao = SerieId | "CB";
+/**
+ * Onde o clube joga: uma das séries nacionais (A a D), só o estadual ("estadual": clube brasileiro fora das séries
+ * nacionais) ou a primeira divisão de outro país da Conmebol ("exterior", com `Clube.liga`).
+ */
+export type SerieClube = SerieId | "D" | "estadual" | "exterior";
+/**
+ * Competição de uma partida: uma das séries A, B e C, a Copa do Brasil ("CB") ou um dos torneios de
+ * `EstadoJogo.torneios`: a Série D ("D"), um estadual ("E-SP") ou a liga de outro país ("L-AR").
+ */
+export type Competicao = SerieId | "CB" | "D" | `E-${string}` | `L-${string}`;
+/** Torneio de `EstadoJogo.torneios`: Série D, estadual ou liga de outro país. */
+export type IdTorneio = "D" | `E-${string}` | `L-${string}`;
 export type FaseCopa = "fase1" | "fase2" | "fase3" | "fase4" | "fase5" | "oitavas" | "quartas" | "semi" | "final";
 
 /** As 14 características do modelo do Brasfoot (4 de goleiro, 10 de linha). */
@@ -142,6 +151,12 @@ export interface Clube {
   batedor?: number;
   /** Capitão escolhido pelo usuário (fora dos titulares ou sem escolha: o titular mais experiente). Só aparece na tela. */
   capitao?: number;
+  /** País do clube, quando não é do Brasil ("AR", "UY"...). */
+  pais?: string;
+  /** Liga de outro país que o clube joga (o código do país, como em `pais`). */
+  liga?: string;
+  /** Estadual que o clube joga no começo do ano (a sigla do estado), se joga a primeira divisão do estado. */
+  estadual?: string;
 }
 
 export type TipoEvento =
@@ -196,6 +211,27 @@ export interface Partida {
 }
 
 export type FaseSerie = "liga" | "playoff" | "quadrangulares" | "final" | "encerrada";
+
+/**
+ * Torneio da temporada fora das Séries A, B e C e da Copa: a Série D (grupos e mata-mata em ida e volta), um
+ * estadual (no começo do ano: pontos corridos ou grupos, e mata-mata em jogo único) ou a liga de outro país.
+ */
+export interface EstadoTorneio {
+  id: IdTorneio;
+  tipo: "serie-d" | "estadual" | "liga";
+  nome: string;
+  clubes: string[];
+  /** Fase de grupos (Série D e estaduais grandes). */
+  grupos?: string[][];
+  /** "liga", "grupos" ou a fase do mata-mata ("segunda", "terceira", "oitavas", "quartas", "semi", "final"). */
+  fase: string;
+  /** Quem foi para o mata-mata, da melhor campanha para a pior: decide os confrontos e o mando. */
+  semeados?: string[];
+  campeao?: string;
+  vice?: string;
+  /** Série D: os que sobem para a Série C (os finalistas). */
+  promovidos?: string[];
+}
 
 export interface EstadoSerie {
   id: SerieId;
@@ -261,7 +297,9 @@ export interface RegistroTemporada {
   artilheiros: Record<SerieId, { jogadorId: number; nome: string; clubeId: string; gols: number } | null>;
   promovidos: Record<SerieId, string[]>;
   rebaixados: Record<SerieId, string[]>;
-  tecnico: { clubeId: string; serie: SerieId; posicao: number; objetivo: string; cumpriu: boolean };
+  tecnico: { clubeId: string; serie: SerieId | "D"; posicao: number; objetivo: string; cumpriu: boolean };
+  /** Campeões e vices da Série D, dos estaduais e das ligas de fora (falta nas temporadas de antes deles). */
+  torneios?: Partial<Record<IdTorneio, { campeao: string; vice?: string }>>;
 }
 
 /** Um jogo que virou recorde de um clube. */
@@ -322,6 +360,11 @@ export interface EstadoJogo {
   proximoIdJogador: number;
   series: Record<SerieId, EstadoSerie>;
   copa?: EstadoCopa;
+  /**
+   * Série D, estaduais e ligas dos outros países da Conmebol da temporada. Falta nos saves de antes deles: os
+   * clubes chegam ao abrir o jogo e os torneios começam na temporada seguinte.
+   */
+  torneios?: Partial<Record<IdTorneio, EstadoTorneio>>;
   partidas: Partida[];
   mensagens: Mensagem[];
   proximoIdMensagem: number;

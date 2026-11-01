@@ -1,5 +1,5 @@
 import type { Locator } from "@playwright/test";
-import { aba, botao, esperarInteiroNaTela, expect, novoJogo, test } from "./ajuda";
+import { aba, abrirDepoisDoEstadual, botao, esperarInteiroNaTela, expect, novoJogo, test } from "./ajuda";
 
 test("R08 no mercado, a ficha do jogador aparece inteira e o botão de oferta pode ser tocado", async ({ page }) => {
   await novoJogo(page);
@@ -101,7 +101,8 @@ test("R21 nos resultados do dia, o Continuar fica no alto da tela, sem precisar 
 });
 
 test("R23 logo depois de um jogo, o aviso do placar não cobre o Continuar dos resultados do dia", async ({ page }) => {
-  await novoJogo(page, { serie: "Série C", clube: "Brusque" });
+  // Depois do estadual, no dia do primeiro jogo da Série C (em janeiro não há dia de jogos sem o Brusque).
+  await abrirDepoisDoEstadual(page, "brusque");
   const resultados = page.locator(".tela-cheia .topo .titulo", { hasText: "Resultados do dia" });
   // Joga e já avança: o dia seguinte com jogos (Copa do Brasil, quarta-feira) não tem jogo do Brusque.
   await botao(page, /Avançar|Ir para o jogo/).click();

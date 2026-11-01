@@ -1,7 +1,8 @@
-import { aba, botao, cartaoDoProximoJogo, expect, novoJogo, test } from "./ajuda";
+import { aba, abrirDepoisDoEstadual, botao, cartaoDoProximoJogo, expect, test } from "./ajuda";
 
 test("R22 Copa do Brasil: tabela com as fases, meu time da Série B entra na 2ª fase e joga a Copa ao vivo", async ({ page }) => {
-  await novoJogo(page, { serie: "Série B", clube: "Avaí" });
+  // Depois do estadual (a Copa começa em abril, junto com as séries).
+  await abrirDepoisDoEstadual(page, "avai");
 
   // Tabelas → Copa: a 1ª fase (14 jogos, só clubes de pior ranking) e em que fase o meu time entra.
   await aba(page, "Tabelas");

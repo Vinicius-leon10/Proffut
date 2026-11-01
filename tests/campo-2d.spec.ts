@@ -92,5 +92,6 @@ test("R61 na partida, a barra do placar fica sem a força média e o campo 2D ga
   const caixa = (await campo.boundingBox())!;
   expect(caixa.height / caixa.width, "proporção do campo").toBeGreaterThanOrEqual(0.56);
   // O nome da competição continua na tela, no campo.
-  await expect(campo).toContainText(/Série [ABC] · \d+ª rodada/);
+  // A competição e a rodada, embaixo no campo (o primeiro jogo do ano é o do estadual).
+  await expect(campo).toContainText(/(Série [ABCD]|Campeonato \S+) · (Grupo \d+ · )?\d+ª rodada/);
 });

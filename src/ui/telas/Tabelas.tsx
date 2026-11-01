@@ -3,16 +3,18 @@ import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
 import { FASE_LIGA, SERIES, ZONAS, agregado, chavesDaFase, classificacao, tabelaDaLiga, type LinhaTabela } from "../../engine/competicoes";
 import { FASES_COPA, NOME_FASE_COPA, agregadoDoConfronto, jogosDaCopa, situacaoNaCopa } from "../../engine/copa";
-import type { Competicao, FaseCopa, Partida, SerieId } from "../../engine/tipos";
+import { NOME_ESTADUAL, NOME_FASE_TORNEIO, PAISES, tabelaDoTorneio } from "../../engine/torneios";
+import type { Competicao, EstadoTorneio, FaseCopa, Partida, SerieId } from "../../engine/tipos";
 import { Escudo, Folha, Opcoes, Segmentado } from "../componentes";
 import { useJogo, useLoja } from "../store";
 
 const COR_ZONA = { titulo: "var(--dourado)", acesso: "var(--esmeralda)", playoff: "var(--azul)", classifica: "var(--azul)", rebaixamento: "var(--vermelho)" } as const;
 
-function TabelaClassificacao({ linhas, serie, zonas = true }: { linhas: LinhaTabela[]; serie: SerieId; zonas?: boolean }) {
+/** A cor da posição na tabela: a zona da série (ou a função `zona`, nos torneios). */
+function TabelaClassificacao({ linhas, serie, zonas = true, zona }: { linhas: LinhaTabela[]; serie?: SerieId; zonas?: boolean; zona?: (pos: number) => string }) {
   const estado = useJogo();
   const meuId = estado.tecnico.clubeId;
-  const zonaDe = (pos: number) => (zonas ? ZONAS[serie].find((z) => z.posicoes.includes(pos))?.tipo ?? "" : "");
+  const zonaDe = (pos: number) => (zona ? zona(pos) : zonas && serie ? ZONAS[serie].find((z) => z.posicoes.includes(pos))?.tipo ?? "" : "");
   return (
     <table className="tabela">
       <thead>
@@ -87,10 +89,9 @@ export function FolhaPartida({ p, aoFechar }: { p: Partida; aoFechar: () => void
   );
 }
 
-function Jogos({ serie }: { serie: SerieId }) {
+function Jogos({ serie, fase, grupo }: { serie: Competicao; fase: string; grupo?: number }) {
   const estado = useJogo();
-  const fase = FASE_LIGA[serie];
-  const jogos = estado.partidas.filter((p) => p.serie === serie && p.fase === fase);
+  const jogos = estado.partidas.filter((p) => p.serie === serie && p.fase === fase && (grupo == null || p.grupo === grupo));
   const total = Math.max(...jogos.map((p) => p.rodada));
   const atual = jogos.find((p) => !p.jogada)?.rodada ?? total;
   const [rodada, setRodada] = useState(atual);
@@ -253,38 +254,160 @@ function CopaDoBrasil() {
   );
 }
 
+/** Fases do mata-mata dos torneios, na ordem. */
+const ORDEM_MATA_MATA = ["segunda", "terceira", "oitavas", "quartas", "semi", "final"];
+
+/** Série D, estadual ou liga de fora: classificação (grupos ou pontos corridos e mata-mata), jogos e artilharia. */
+function Torneio({ t }: { t: EstadoTorneio }) {
+  const estado = useJogo();
+  const meuId = estado.tecnico.clubeId;
+  const [vista, setVista] = useState<"tabela" | "jogos" | "artilharia">("tabela");
+  const meuGrupo = t.grupos ? Math.max(0, t.grupos.findIndex((g) => g.includes(meuId))) + 1 : undefined;
+  const [grupo, setGrupo] = useState<number>(meuGrupo ?? 1);
+  const fases = ORDEM_MATA_MATA.filter((f) => estado.partidas.some((p) => p.serie === t.id && p.fase === f));
+  const [fase, setFase] = useState<string>(fases[fases.length - 1] ?? "");
+  const [aberta, setAberta] = useState<Partida | null>(null);
+  const primeira = t.grupos ? "grupos" : "liga";
+  const passam = t.tipo === "liga" ? 0 : t.grupos ? 4 : t.clubes.length <= 6 ? 2 : 4;
+  const zona = (pos: number) => (t.tipo === "liga" ? (pos === 1 ? "titulo" : "") : pos <= passam ? "classifica" : "");
+  const regra = t.tipo === "serie-d"
+    ? "Grupos de 6 em turno e returno; passam 4 de cada. Mata-mata em ida e volta; os dois finalistas sobem para a Série C."
+    : t.tipo === "estadual"
+      ? t.grupos
+        ? "Dois grupos em turno único; passam 4 de cada. Quartas, semifinal e final em jogo único; empate vai para os pênaltis."
+        : t.clubes.length <= 6
+          ? "Turno e returno; os 2 primeiros fazem a final, em jogo único; empate vai para os pênaltis."
+          : "Turno único; os 4 primeiros fazem a semifinal e a final, em jogo único; empate vai para os pênaltis."
+      : "Pontos corridos: o primeiro é o campeão.";
+  // Muitos grupos (Série D): um de cada vez; poucos (estaduais): todos.
+  const grupos = t.grupos ? (t.grupos.length > 2 ? [grupo] : t.grupos.map((_, i) => i + 1)) : [];
+  const jogosDaFase = estado.partidas.filter((p) => p.serie === t.id && p.fase === fase);
+  const chaves = [...new Set(jogosDaFase.map((p) => p.chave ?? 0))];
+  return (
+    <>
+      <Segmentado opcoes={[{ valor: "tabela", rotulo: "Classificação" }, { valor: "jogos", rotulo: "Jogos" }, { valor: "artilharia", rotulo: "Artilharia" }]} valor={vista} aoMudar={setVista} />
+      {t.grupos && t.grupos.length > 2 && vista !== "artilharia" && (
+        <select value={grupo} onChange={(e) => setGrupo(Number(e.target.value))} aria-label="Grupo">
+          {t.grupos.map((g, i) => <option key={i} value={i + 1}>Grupo {i + 1}{g.includes(meuId) ? " (seu time)" : ""}</option>)}
+        </select>
+      )}
+      {vista === "tabela" && (
+        <>
+          {t.campeao && <p className="chip amarelo">Campeão: {estado.clubes[t.campeao].nome}</p>}
+          {fases.length > 0 && (
+            <div className="cartao compacto">
+              <Opcoes opcoes={fases.map((f) => ({ valor: f, rotulo: NOME_FASE_TORNEIO[f] }))} valor={fase} aoMudar={setFase} />
+              <div style={{ marginTop: 8 }}>
+                {chaves.map((c) => {
+                  const doConfronto = jogosDaFase.filter((p) => (p.chave ?? 0) === c);
+                  const volta = doConfronto.find((p) => p.perna === 2);
+                  const chave = volta ? chavesDaFase(estado, t.id, fase).find((x) => x.chave === c) : undefined;
+                  const ag = chave?.ida && chave.volta ? agregado(chave) : null;
+                  return (
+                    <div key={c} style={doConfronto.length > 1 ? { marginBottom: 8 } : undefined}>
+                      {doConfronto.map((p) => <LinhaResultado key={p.id} p={p} aoTocar={() => setAberta(p)} />)}
+                      {ag && volta?.jogada && chave && (
+                        <p className="mini fraco centro">Agregado: {estado.clubes[chave.melhor].sigla} {ag[0]} x {ag[1]} {estado.clubes[chave.pior].sigla}</p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          {t.grupos ? grupos.map((g) => (
+            <div key={g} className="cartao compacto">
+              <h3 className="pequeno fraco" style={{ marginBottom: 6 }}>Grupo {g}</h3>
+              <TabelaClassificacao linhas={tabelaDoTorneio(estado, t, g)} zona={zona} />
+            </div>
+          )) : (
+            <div className="cartao compacto">
+              <TabelaClassificacao linhas={tabelaDoTorneio(estado, t)} zona={zona} />
+            </div>
+          )}
+          <p className="mini muito-fraco">{regra}</p>
+        </>
+      )}
+      {vista === "jogos" && <Jogos key={`${t.id}-${grupo}`} serie={t.id} fase={primeira} grupo={t.grupos && t.grupos.length > 2 ? grupo : undefined} />}
+      {vista === "artilharia" && <Artilharia serie={t.id} />}
+      {aberta && <FolhaPartida p={aberta} aoFechar={() => setAberta(null)} />}
+    </>
+  );
+}
+
+type Grupo = "series" | "copa" | "estaduais" | "fora";
+
 export function Tabelas() {
   const estado = useJogo();
-  const minha = estado.clubes[estado.tecnico.clubeId].serie as SerieId;
-  const [serie, setSerie] = useState<SerieId | "CB">(minha);
+  const meuId = estado.tecnico.clubeId;
+  const meu = estado.clubes[meuId];
+  const minha = meu.serie === "D" ? "D" : (meu.serie as SerieId);
+  const torneios = Object.values(estado.torneios ?? {}).filter((t): t is EstadoTorneio => !!t);
+  const estaduais = torneios.filter((t) => t.tipo === "estadual").sort((a, b) => a.nome.localeCompare(b.nome));
+  const ligas = torneios.filter((t) => t.tipo === "liga").sort((a, b) => a.nome.localeCompare(b.nome));
+  const meuEstadual = estaduais.find((t) => t.clubes.includes(meuId));
+  // No começo do ano, com o estadual do usuário em andamento, as Tabelas abrem nele.
+  const [grupo, setGrupo] = useState<Grupo>(meuEstadual && meuEstadual.fase !== "encerrada" ? "estaduais" : "series");
+  const [serie, setSerie] = useState<SerieId | "D">(minha);
+  const [uf, setUf] = useState<string>(meuEstadual?.id ?? estaduais[0]?.id ?? "");
+  const [pais, setPais] = useState<string>(ligas[0]?.id ?? "");
   const [vista, setVista] = useState<"tabela" | "jogos" | "artilharia">("tabela");
-  if (serie === "CB") {
+  const grupos: { valor: Grupo; rotulo: string }[] = [
+    { valor: "series", rotulo: "Séries" }, { valor: "copa", rotulo: "Copa" },
+    ...(estaduais.length ? [{ valor: "estaduais" as const, rotulo: "Estaduais" }] : []),
+    ...(ligas.length ? [{ valor: "fora" as const, rotulo: "Outros países" }] : []),
+  ];
+  const seletor = <Segmentado opcoes={grupos} valor={grupo} aoMudar={setGrupo} />;
+  if (grupo === "copa") return <>{seletor}<CopaDoBrasil /></>;
+  if (grupo === "estaduais") {
+    const t = estaduais.find((x) => x.id === uf) ?? estaduais[0];
     return (
       <>
-        <Segmentado opcoes={[...SERIES.map((s) => ({ valor: s, rotulo: `Série ${s}` })), { valor: "CB" as const, rotulo: "Copa" }]} valor={serie} aoMudar={setSerie} />
-        <CopaDoBrasil />
+        {seletor}
+        <select value={t.id} onChange={(e) => setUf(e.target.value)} aria-label="Estadual">
+          {estaduais.map((x) => <option key={x.id} value={x.id}>{NOME_ESTADUAL[x.id.slice(2)] ?? x.id.slice(2)} ({x.id.slice(2)})</option>)}
+        </select>
+        <Torneio key={t.id} t={t} />
       </>
     );
   }
-  const fase = estado.series[serie].fase;
+  if (grupo === "fora") {
+    const t = ligas.find((x) => x.id === pais) ?? ligas[0];
+    return (
+      <>
+        {seletor}
+        <select value={t.id} onChange={(e) => setPais(e.target.value)} aria-label="País">
+          {ligas.map((x) => <option key={x.id} value={x.id}>{PAISES[x.id.slice(2)]?.pais ?? x.id.slice(2)}</option>)}
+        </select>
+        <Torneio key={t.id} t={t} />
+      </>
+    );
+  }
+  const opcoesSerie = [...SERIES.map((s) => ({ valor: s as SerieId | "D", rotulo: `Série ${s}` })), ...(estado.torneios?.D ? [{ valor: "D" as const, rotulo: "Série D" }] : [])];
+  if (serie === "D" && estado.torneios?.D) {
+    return <>{seletor}<Segmentado opcoes={opcoesSerie} valor={serie} aoMudar={setSerie} /><Torneio key="D" t={estado.torneios.D} /></>;
+  }
+  const s = serie === "D" ? "A" : serie;
+  const fase = estado.series[s].fase;
   return (
     <>
-      <Segmentado opcoes={[...SERIES.map((s) => ({ valor: s, rotulo: `Série ${s}` })), { valor: "CB" as const, rotulo: "Copa" }]} valor={serie} aoMudar={setSerie} />
+      {seletor}
+      <Segmentado opcoes={opcoesSerie} valor={s} aoMudar={setSerie} />
       <Segmentado opcoes={[{ valor: "tabela", rotulo: "Classificação" }, { valor: "jogos", rotulo: "Jogos" }, { valor: "artilharia", rotulo: "Artilharia" }]} valor={vista} aoMudar={setVista} />
       {vista === "tabela" && (
         <>
-          <MataMata serie={serie} />
+          <MataMata serie={s} />
           <div className="cartao compacto">
-            {serie === "C" && <h3 className="pequeno fraco" style={{ marginBottom: 6 }}>Primeira fase</h3>}
-            <TabelaClassificacao linhas={tabelaDaLiga(estado, serie)} serie={serie} />
+            {s === "C" && <h3 className="pequeno fraco" style={{ marginBottom: 6 }}>Primeira fase</h3>}
+            <TabelaClassificacao linhas={tabelaDaLiga(estado, s)} serie={s} />
           </div>
-          <Legenda serie={serie} />
-          {fase === "liga" && serie === "B" && <p className="mini muito-fraco">Do 3º ao 6º: playoff em ida e volta (3º x 6º e 4º x 5º) por duas vagas na Série A.</p>}
-          {fase === "liga" && serie === "C" && <p className="mini muito-fraco">Os 8 primeiros vão para dois quadrangulares; os 2 melhores de cada um sobem. Os 2 últimos caem.</p>}
+          <Legenda serie={s} />
+          {fase === "liga" && s === "B" && <p className="mini muito-fraco">Do 3º ao 6º: playoff em ida e volta (3º x 6º e 4º x 5º) por duas vagas na Série A.</p>}
+          {fase === "liga" && s === "C" && <p className="mini muito-fraco">Os 8 primeiros vão para dois quadrangulares; os 2 melhores de cada um sobem. Os 2 últimos caem.</p>}
         </>
       )}
-      {vista === "jogos" && <Jogos key={serie} serie={serie} />}
-      {vista === "artilharia" && <Artilharia serie={serie} />}
+      {vista === "jogos" && <Jogos key={s} serie={s} fase={FASE_LIGA[s]} />}
+      {vista === "artilharia" && <Artilharia serie={s} />}
     </>
   );
 }

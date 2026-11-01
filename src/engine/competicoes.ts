@@ -2,11 +2,26 @@
 import { concorda } from "./artigos";
 import { datasDaTemporada, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { hashTexto, rngPara } from "./rng";
-import type { Competicao, EstadoJogo, EstadoSerie, Partida, SerieId } from "./tipos";
+import { criarTorneios, ehTorneio, nomeDoTorneio, tabelaDoTorneio, torneioDecidePorPenaltis, torneiosEncerrados } from "./torneios";
+import type { Clube, Competicao, EstadoJogo, EstadoSerie, Partida, SerieClube, SerieId } from "./tipos";
 
 export const SERIES: SerieId[] = ["A", "B", "C"];
-export const NOME_SERIE: Record<SerieId, string> = { A: "Série A", B: "Série B", C: "Série C" };
-export const NOME_COMPETICAO: Record<Competicao, string> = { ...NOME_SERIE, CB: "Copa do Brasil" };
+export const NOME_SERIE: Record<SerieId | "D", string> = { A: "Série A", B: "Série B", C: "Série C", D: "Série D" };
+
+/** "Série A", "Copa do Brasil", "Série D", "Campeonato Paulista", "Campeonato Argentino". */
+export function nomeDaCompeticao(c: Competicao): string {
+  if (c === "CB") return "Copa do Brasil";
+  return ehTorneio(c) ? nomeDoTorneio(c) : NOME_SERIE[c];
+}
+
+export function ehSerie(c: Competicao | SerieClube): c is SerieId {
+  return c === "A" || c === "B" || c === "C";
+}
+
+/** Clube das Séries A, B ou C (os que compram, vendem, emprestam e contratam técnico). */
+export function dasSeries(c: Clube): boolean {
+  return ehSerie(c.serie);
+}
 
 /** Zonas da tabela da fase de liga, para colorir a classificação. */
 export const ZONAS: Record<SerieId, { posicoes: number[]; tipo: "acesso" | "playoff" | "classifica" | "rebaixamento" | "titulo"; nome: string }[]> = {
@@ -60,7 +75,8 @@ export function criarTemporada(estado: EstadoJogo) {
       id: serie, nome: NOME_SERIE[serie], clubes, fase: "liga", promovidos: [], rebaixados: [],
     };
   }
-  estado.partidas.sort((a, b) => a.data.localeCompare(b.data) || a.serie.localeCompare(b.serie));
+  // Série D, estaduais (no começo do ano) e ligas dos outros países.
+  criarTorneios(estado);
 }
 
 // ---- classificação ---------------------------------------------------------------
@@ -99,7 +115,7 @@ function somar(linhas: Map<string, LinhaTabela>, p: Partida) {
  * Classificação de uma fase (ou de um grupo). Desempate: pontos, vitórias,
  * saldo, gols pró, confronto direto entre os empatados e sorteio.
  */
-export function classificacao(estado: EstadoJogo, serie: SerieId, fase: string, clubes: string[], grupo?: number): LinhaTabela[] {
+export function classificacao(estado: EstadoJogo, serie: Competicao, fase: string, clubes: string[], grupo?: number): LinhaTabela[] {
   const jogos = estado.partidas.filter((p) => p.serie === serie && p.fase === fase && p.jogada && (grupo == null || p.grupo === grupo));
   const linhas = new Map(clubes.map((c) => [c, linhaVazia(c)]));
   for (const p of jogos) somar(linhas, p);
@@ -133,10 +149,20 @@ export function tabelaDaLiga(estado: EstadoJogo, serie: SerieId): LinhaTabela[] 
   return classificacao(estado, serie, FASE_LIGA[serie], estado.series[serie].clubes);
 }
 
-export function posicaoNaLiga(estado: EstadoJogo, clubeId: string): number {
+/** A tabela da fase de liga da série do clube (na Série D, a do grupo dele); vazia se ele não joga as séries. */
+export function tabelaDoClube(estado: EstadoJogo, clubeId: string): LinhaTabela[] {
   const serie = estado.clubes[clubeId].serie;
-  if (serie === "D") return 0;
-  return tabelaDaLiga(estado, serie).find((l) => l.clubeId === clubeId)?.pos ?? 0;
+  if (serie === "D") {
+    const t = estado.torneios?.D;
+    const grupo = t?.grupos?.findIndex((g) => g.includes(clubeId)) ?? -1;
+    return t && grupo >= 0 ? tabelaDoTorneio(estado, t, grupo + 1) : [];
+  }
+  return ehSerie(serie) ? tabelaDaLiga(estado, serie) : [];
+}
+
+/** Posição na fase de liga da série do clube (na Série D, no grupo dele); 0 se não joga as séries. */
+export function posicaoNaLiga(estado: EstadoJogo, clubeId: string): number {
+  return tabelaDoClube(estado, clubeId).find((l) => l.clubeId === clubeId)?.pos ?? 0;
 }
 
 // ---- mata-mata ----------------------------------------------------------------------
@@ -278,7 +304,7 @@ export function avancarFases(estado: EstadoJogo): string[] {
 }
 
 export function temporadaEncerrada(estado: EstadoJogo): boolean {
-  return SERIES.every((s) => estado.series[s].fase === "encerrada") && (!estado.copa || estado.copa.fase === "encerrada");
+  return SERIES.every((s) => estado.series[s].fase === "encerrada") && (!estado.copa || estado.copa.fase === "encerrada") && torneiosEncerrados(estado);
 }
 
 /**
@@ -287,6 +313,7 @@ export function temporadaEncerrada(estado: EstadoJogo): boolean {
  */
 export function decidePorPenaltis(p: Partida): boolean {
   if (p.serie === "CB") return p.perna !== 1;
+  if (ehTorneio(p.serie)) return torneioDecidePorPenaltis(p);
   return p.perna === 2 && p.serie === "C" && p.fase === "final";
 }
 

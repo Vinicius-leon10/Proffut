@@ -1,11 +1,11 @@
 // Objetivo da temporada e confiança da diretoria e da torcida.
 import { forcaDoTime } from "./forca";
-import { posicaoNaLiga } from "./competicoes";
+import { ehSerie, posicaoNaLiga } from "./competicoes";
 import { limitar } from "./gerador";
 import type { EstadoJogo, Objetivo, Partida, SerieId } from "./tipos";
 
 /** Metas por série, da mais ambiciosa (clube mais forte) para a mais modesta. */
-const METAS: Record<SerieId, { ate: number; objetivo: Objetivo }[]> = {
+const METAS: Record<SerieId | "D", { ate: number; objetivo: Objetivo }[]> = {
   A: [
     { ate: 2, objetivo: { descricao: "Brigar pelo título (terminar entre os 3)", posicaoAlvo: 3 } },
     { ate: 6, objetivo: { descricao: "Vaga na Libertadores (terminar entre os 6)", posicaoAlvo: 6 } },
@@ -23,11 +23,16 @@ const METAS: Record<SerieId, { ate: number; objetivo: Objetivo }[]> = {
     { ate: 10, objetivo: { descricao: "Classificar para os quadrangulares (até 8º)", posicaoAlvo: 8 } },
     { ate: 20, objetivo: { descricao: "Não cair (terminar até 18º)", posicaoAlvo: 18 } },
   ],
+  // Série D: a posição é a do grupo (de 6); sobem os dois finalistas.
+  D: [
+    { ate: 16, objetivo: { descricao: "Brigar pelo acesso (terminar entre os 2 do grupo)", posicaoAlvo: 2 } },
+    { ate: 200, objetivo: { descricao: "Passar da fase de grupos (terminar entre os 4 do grupo)", posicaoAlvo: 4 } },
+  ],
 };
 
 export function definirObjetivo(estado: EstadoJogo): Objetivo {
   const meu = estado.clubes[estado.tecnico.clubeId];
-  const serie = meu.serie === "D" ? "C" : meu.serie;
+  const serie = meu.serie === "D" ? "D" : ehSerie(meu.serie) ? meu.serie : "C";
   const forcas = Object.values(estado.clubes)
     .filter((c) => c.serie === serie)
     .map((c) => ({ id: c.id, forca: forcaDoTime(Object.values(estado.jogadores).filter((j) => j.clubeId === c.id)) }))

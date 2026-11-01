@@ -7,9 +7,10 @@ import { formatarDinheiro } from "../../engine/financas";
 import { salarioBase, valorMercado } from "../../engine/gerador";
 import { motivoParaNaoPegar, pegarEmprestado, taxaDeEmprestimo } from "../../engine/emprestimos";
 import { elencoDe, fazerOferta, livres, podeSair, precoPedido, propostasPendentes } from "../../engine/mercado";
-import type { Jogador, Posicao, SerieId } from "../../engine/tipos";
+import type { Jogador, Posicao } from "../../engine/tipos";
 import { Escudo, Folha, Opcoes, Pos, Segmentado } from "../componentes";
 import { useJogo, useLoja } from "../store";
+import { PAISES } from "../../engine/torneios";
 import { FolhaJogador, LinhaJogador, Situacao } from "./Elenco";
 import { AcoesDaProposta } from "./Mensagens";
 
@@ -91,7 +92,8 @@ export function Mercado() {
   const [posicao, setPosicao] = useState<Posicao | "todas">("todas");
   const [forcaMin, setForcaMin] = useState(0);
   const [idadeMax, setIdadeMax] = useState(40);
-  const [serie, setSerie] = useState<SerieId | "todas">("todas");
+  // Onde o jogador joga: "todas", uma série (A a D), "estadual" (clubes só do estadual) ou "pais:AR" (liga de fora).
+  const [serie, setSerie] = useState<string>("todas");
   const [busca, setBusca] = useState("");
   const [aberto, setAberto] = useState<Jogador | null>(null);
   // A ficha de um jogador meu (a mesma do Elenco), aberta de Meus à venda (R65).
@@ -122,7 +124,7 @@ export function Mercado() {
     const base = vista === "livres" ? livres(estado) : Object.values(estado.jogadores).filter((j) => {
       if (!j.clubeId || j.clubeId === meuId || j.emprestimo?.de === meuId) return false;
       const c = estado.clubes[j.clubeId];
-      return c.serie !== "D" && (serie === "todas" || c.serie === serie);
+      return serie === "todas" || (serie.startsWith("pais:") ? c.liga === serie.slice(5) : c.serie === serie);
     });
     return base
       .filter((j) => (posicao === "todas" || j.posicao === posicao) && j.forca >= forcaMin && j.idade <= idadeMax && (!termo || j.nome.toLowerCase().includes(termo)))
@@ -157,11 +159,14 @@ export function Mercado() {
               {[40, 33, 30, 27, 24, 21].map((i) => <option key={i} value={i}>{i === 40 ? "Idade" : `Até ${i} anos`}</option>)}
             </select>
             {vista === "buscar" && (
-              <select value={serie} onChange={(e) => setSerie(e.target.value as SerieId | "todas")} aria-label="Série">
-                <option value="todas">Série</option>
+              <select value={serie} onChange={(e) => setSerie(e.target.value)} aria-label="Série">
+                <option value="todas">Onde joga</option>
                 <option value="A">Série A</option>
                 <option value="B">Série B</option>
                 <option value="C">Série C</option>
+                <option value="D">Série D</option>
+                <option value="estadual">Só estadual</option>
+                {Object.entries(PAISES).map(([codigo, p]) => <option key={codigo} value={`pais:${codigo}`}>{p.pais}</option>)}
               </select>
             )}
           </div>

@@ -2,7 +2,7 @@
 // depois da demissão e convites de clubes maiores (no meio da fase de liga e na virada da temporada).
 import { comArtigo } from "./artigos";
 import { diasEntre, formatarData, somarDias } from "./calendario";
-import { FASE_LIGA, NOME_SERIE } from "./competicoes";
+import { FASE_LIGA, NOME_SERIE, dasSeries, ehSerie } from "./competicoes";
 import { CARGO, CONVITES, REPUTACAO } from "./constantes";
 import { definirObjetivo, situacaoDoObjetivo } from "./diretoria";
 import { forcaDoTime } from "./forca";
@@ -12,7 +12,7 @@ import { enviarMensagem } from "./mensagens";
 import { rngPara } from "./rng";
 import type { EstadoJogo, Partida, SerieClube, SerieId } from "./tipos";
 
-const ORDEM_SERIE: Record<SerieClube, number> = { A: 0, B: 1, C: 2, D: 3 };
+const ORDEM_SERIE: Record<SerieClube, number> = { A: 0, B: 1, C: 2, D: 3, estadual: 4, exterior: 5 };
 
 /** Reputação do técnico; nos saves de antes dela, a do clube atual. */
 export function reputacaoDoTecnico(estado: EstadoJogo): number {
@@ -81,7 +81,9 @@ export function depoisDoMeuJogo(estado: EstadoJogo, p: Partida) {
 }
 
 function meioDaLiga(estado: EstadoJogo, p: Partida): boolean {
-  if (p.serie === "CB" || p.fase !== FASE_LIGA[p.serie]) return false;
+  // Na Série D, a fase de grupos faz o papel da fase de liga.
+  const faseDeLiga = ehSerie(p.serie) ? FASE_LIGA[p.serie] : p.serie === "D" ? "grupos" : null;
+  if (!faseDeLiga || p.fase !== faseDeLiga) return false;
   const meu = estado.tecnico.clubeId;
   const daLiga = estado.partidas.filter((x) => x.serie === p.serie && x.fase === p.fase && (x.mandante === meu || x.visitante === meu));
   return daLiga.filter((x) => x.jogada).length === Math.ceil(daLiga.length / 2);
@@ -98,7 +100,7 @@ export function demitir(estado: EstadoJogo, motivo: string) {
 /** Clubes das Séries A, B e C (fora o que demitiu) com reputação até a do técnico: três dos oito mais perto dela. */
 function propostasAposDemissao(estado: EstadoJogo): string[] {
   const reputacao = reputacaoDoTecnico(estado);
-  const clubes = Object.values(estado.clubes).filter((c) => c.serie !== "D" && c.id !== estado.tecnico.clubeId);
+  const clubes = Object.values(estado.clubes).filter((c) => dasSeries(c) && c.id !== estado.tecnico.clubeId);
   const ate = clubes.filter((c) => c.reputacao <= reputacao).sort((a, b) => b.reputacao - a.reputacao);
   const lista = (ate.length >= 3 ? ate : [...clubes].sort((a, b) => a.reputacao - b.reputacao)).slice(0, 8);
   return rngPara(estado.semente, `demissao/${estado.data}`).embaralhar(lista.map((c) => c.id)).slice(0, 3);
@@ -113,7 +115,7 @@ export function gerarConvites(estado: EstadoJogo, quantos: number): string[] {
   const teto = Math.max(reputacaoDoTecnico(estado), atual.reputacao) + CONVITES.alcance;
   const pendentes = new Set(estado.mensagens.flatMap((m) => (m.convite && !m.convite.resolvido ? [m.convite.clubeId] : [])));
   const candidatos = Object.values(estado.clubes).filter((c) =>
-    c.serie !== "D" && c.id !== atual.id && !pendentes.has(c.id) && ORDEM_SERIE[c.serie] <= ORDEM_SERIE[atual.serie] &&
+    dasSeries(c) && c.id !== atual.id && !pendentes.has(c.id) && ORDEM_SERIE[c.serie] <= ORDEM_SERIE[atual.serie] &&
     c.reputacao > atual.reputacao + CONVITES.folga && c.reputacao <= teto);
   const escolhidos = rngPara(estado.semente, `convites/${estado.data}`).embaralhar(candidatos).slice(0, quantos);
   const validaAte = somarDias(estado.data, CONVITES.validadeDias);

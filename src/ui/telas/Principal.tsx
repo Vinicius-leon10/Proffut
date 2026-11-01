@@ -6,7 +6,6 @@ import { Escudo, Icone } from "../componentes";
 import { useJogo, useLoja, type Aba } from "../store";
 import { Demissao } from "./Demissao";
 import { Elenco } from "./Elenco";
-import { FimTemporada } from "./FimTemporada";
 import { Mercado } from "./Mercado";
 import { Painel } from "./Painel";
 import { Tabelas } from "./Tabelas";
@@ -28,9 +27,8 @@ export function Principal() {
   const novas = naoLidas(estado);
   // As propostas pelos meus jogadores ficam no Mercado, com o número na barra de baixo (R63).
   const propostas = propostasPendentes(estado).length;
-  // Demitido, ou com o clube rebaixado para a Série D (fora do jogo): precisa escolher um novo clube.
+  // Demitido: precisa escolher um novo clube (rebaixado para a Série D, o técnico continua no clube e joga a D).
   if (estado.tecnico.demissao) return <Demissao />;
-  if (clube.serie === "D") return <FimTemporada />;
 
   return (
     <div className="app">

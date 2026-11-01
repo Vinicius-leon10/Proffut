@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 // Passos que vários testes repetem. Os testes em si ficam nos arquivos *.spec.ts.
 import { test as base, expect, type Locator, type Page } from "@playwright/test";
 
@@ -139,6 +140,17 @@ export async function irParaOMeuJogo(page: Page) {
     if (await continuar.isVisible()) await continuar.click();
   }
   await expect(comecar).toBeVisible();
+}
+
+/**
+ * Abre um jogo do clube logo depois do estadual, no dia do primeiro jogo das séries (save montado pelo motor em
+ * tests/saves/depois-dos-estaduais.ts): para os testes do calendário das séries, sem jogar o estadual de janeiro.
+ */
+export async function abrirDepoisDoEstadual(page: Page, clube: string) {
+  const save = execFileSync("npx", ["tsx", "tests/saves/depois-dos-estaduais.ts", clube], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  await abrirSite(page);
+  await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
+  await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
 }
 
 /** Relógio da página, para usar com `esperarSalvar`. */

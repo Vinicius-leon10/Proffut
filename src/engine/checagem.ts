@@ -7,7 +7,13 @@ import { limitar } from "./gerador";
 import { elencoDe, livres } from "./mercado";
 import { iniciarPartida, montarLado, simularAteOFim } from "./partida";
 import { rngPara } from "./rng";
-import type { EstadoJogo, Partida, Posicao } from "./tipos";
+import type { EstadoJogo, Jogador, Partida, Posicao } from "./tipos";
+
+function elencosPorClube(estado: EstadoJogo): Map<string, Jogador[]> {
+  const mapa = new Map<string, Jogador[]>();
+  for (const j of Object.values(estado.jogadores)) if (j.clubeId) mapa.set(j.clubeId, [...(mapa.get(j.clubeId) ?? []), j]);
+  return mapa;
+}
 
 export interface Problema {
   gravidade: "erro" | "aviso";
@@ -49,11 +55,13 @@ export function checarEstado(estado: EstadoJogo): Problema[] {
   if (estado.proximoIdJogador <= ids) erro("Numeração dos jogadores fora de ordem.", true);
 
   let escalacoes = 0, curtos = 0;
+  const elencos = elencosPorClube(estado);
   for (const c of Object.values(estado.clubes)) {
     if (!Number.isFinite(c.caixa)) erro(`O caixa ${comArtigo("do", c)} está inválido.`, true);
-    if (c.serie === "D") continue;
+    const elenco = elencos.get(c.id) ?? [];
+    // Clube sem jogador nenhum não joga (Série D de um save antigo, antes de ganhar os elencos).
+    if (!elenco.length) continue;
     if (idsEscalacaoInvalidos(estado, c.id)) escalacoes++;
-    const elenco = elencoDe(estado, c.id);
     if (POSICOES.some((p) => elenco.filter((j) => j.posicao === p).length < MINIMO_POSICAO[p])) curtos++;
   }
   if (escalacoes) aviso(`${escalacoes} clube(s) com jogadores que já saíram na escalação.`, true);
@@ -89,9 +97,10 @@ export function repararEstado(estado: EstadoJogo): string[] {
   if (estado.proximoIdJogador <= maiorId) { estado.proximoIdJogador = maiorId + 1; feito.push("Numeração dos jogadores corrigida."); }
 
   let escalacoes = 0, caixas = 0, reforcos = 0;
+  const elencos = elencosPorClube(estado);
   for (const c of Object.values(estado.clubes)) {
     if (!Number.isFinite(c.caixa)) { c.caixa = 0; caixas++; }
-    if (c.serie === "D") continue;
+    if (!elencos.get(c.id)?.length) continue;
     if (idsEscalacaoInvalidos(estado, c.id)) {
       const valido = (id: number | null) => id != null && estado.jogadores[id]?.clubeId === c.id;
       c.escalacao.titulares = c.escalacao.titulares.map((id) => (valido(id) ? id : null));
@@ -124,8 +133,9 @@ export function testarPartida(estado: EstadoJogo): ResultadoTestePartida {
     const copia: EstadoJogo = structuredClone(estado);
     const meu = copia.tecnico.clubeId;
     const serie = copia.clubes[meu]?.serie;
-    const adversario = Object.values(copia.clubes).find((c) => c.id !== meu && c.serie === serie && serie !== "D")
-      ?? Object.values(copia.clubes).find((c) => c.id !== meu && c.serie !== "D");
+    const comElenco = new Set(Object.values(copia.jogadores).map((j) => j.clubeId));
+    const adversario = Object.values(copia.clubes).find((c) => c.id !== meu && c.serie === serie && comElenco.has(c.id))
+      ?? Object.values(copia.clubes).find((c) => c.id !== meu && comElenco.has(c.id));
     if (!adversario) return { ok: false, texto: "Não há adversário para o teste." };
     const p: Partida = {
       id: "checagem", serie: "A", fase: "amistoso", rodada: 1, data: copia.data,

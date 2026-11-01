@@ -1,5 +1,6 @@
 // Mercado de transferências: compra, venda, livres, propostas e as trocas entre clubes da IA.
 import { comArtigo } from "./artigos";
+import { dasSeries } from "./competicoes";
 import { ELENCO_MAXIMO, MINIMO_POSICAO } from "./constantes";
 import { contratoNovo, liberar } from "./contratos";
 import { escalarAutomatico, forcaDoTime } from "./forca";
@@ -117,7 +118,7 @@ export function dispensar(estado: EstadoJogo, jogadorId: number): ResultadoNegoc
 /** Clube da IA interessado em comprar: tem dinheiro e precisa da posição. */
 function interessados(estado: EstadoJogo, j: Jogador, valor: number) {
   return Object.values(estado.clubes).filter((c) => {
-    if (c.serie === "D" || c.id === j.clubeId || c.id === estado.tecnico.clubeId) return false;
+    if (!dasSeries(c) || c.id === j.clubeId || c.id === estado.tecnico.clubeId) return false;
     if (c.caixa < valor * 1.3) return false;
     const elenco = elencoDe(estado, c.id);
     if (elenco.length >= ELENCO_MAXIMO - 1) return false;
@@ -226,7 +227,7 @@ export function transferenciasDaIa(estado: EstadoJogo, chave: string): string[] 
   const rng = rngPara(estado.semente, `janela/${chave}`);
   const data = estado.data;
   const noticias: string[] = [];
-  const clubes = rng.embaralhar(Object.values(estado.clubes).filter((c) => c.serie !== "D" && c.id !== estado.tecnico.clubeId));
+  const clubes = rng.embaralhar(Object.values(estado.clubes).filter((c) => dasSeries(c) && c.id !== estado.tecnico.clubeId));
   for (const clube of clubes) {
     if (!rng.chance(0.3)) continue;
     const elenco = elencoDe(estado, clube.id);
@@ -247,7 +248,6 @@ export function transferenciasDaIa(estado: EstadoJogo, chave: string): string[] 
     const alvos = Object.values(estado.jogadores).filter((j) => {
       if (j.posicao !== carencia.pos || j.clubeId === clube.id || j.clubeId === estado.tecnico.clubeId || j.emprestimo) return false;
       if (j.forca < forca - 3 || j.forca > forca + 8 || j.idade > 32) return false;
-      if (j.clubeId && estado.clubes[j.clubeId].serie === "D") return false;
       return precoPedido(estado, j) <= orcamento && podeSair(estado, j);
     });
     if (!alvos.length) continue;

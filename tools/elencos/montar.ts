@@ -14,7 +14,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { gunzipSync } from "node:zlib";
-import { FONTES_CLUBES } from "./fontes-clubes";
+import { FONTES_CLUBES, type NomesNasFontes } from "./fontes-clubes";
 import { formatarNome, lerJogador, lerTroca, normalizar } from "./sumulas";
 
 export type Pos = "G" | "L" | "Z" | "M" | "A";
@@ -70,11 +70,14 @@ const maisFrequente = <T>(contagem: Map<T, number>): T | undefined => [...contag
 
 // ---- clubes nas fontes --------------------------------------------------------------------
 
-/** Nome do clube em cada fonte → id do jogo. Clubes fora dos 60 ficam como "fora:<nome>". */
-function mapaDeClubes() {
+/**
+ * Nome do clube em cada fonte → id do jogo. Clubes fora dos 60 (e dos `extras`, os clubes novos da Série D e dos
+ * estaduais) ficam como "fora:<nome>".
+ */
+function mapaDeClubes(extras: Record<string, NomesNasFontes> = {}) {
   const cbf = new Map<string, string>(), tm = new Map<string, string>(), wikidata = new Map<string, string>();
   const cartola = new Map<string, string>();
-  for (const [id, f] of Object.entries(FONTES_CLUBES)) {
+  for (const [id, f] of Object.entries({ ...FONTES_CLUBES, ...extras })) {
     for (const n of f.cbf) cbf.set(normalizar(n), id);
     if (f.tm) tm.set(normalizar(f.tm), id);
     for (const n of f.wikidata ?? []) wikidata.set(normalizar(n), id);
@@ -285,6 +288,8 @@ export function lerSumulas(arquivos: { ano: number; caminho: string }[], idDoClu
       const data = `${a}-${m}-${d}`;
       const lados = new Map<string, JogoDoClube>();
       for (const [texto, nomeClube] of jogo.Players) {
+        // Algumas súmulas da Copa têm linhas sem o texto do jogador.
+        if (typeof texto !== "string" || typeof nomeClube !== "string") continue;
         const j = lerJogador(texto);
         if (!j) continue;
         const clube = idDoClube(nomeClube);
@@ -705,9 +710,14 @@ function completar(c: Candidato, achados: Pessoa[]) {
   }
 }
 
-export function montar(dados: string, clubes: FichaClube[]) {
+/**
+ * `opcoes` (tools/times/montar.ts, para os clubes novos): `competicoes` são as súmulas lidas (as séries e, para os
+ * clubes dos estaduais, a Copa do Brasil, "CdB"); `excluir`, os registros na CBF de quem já está num elenco das
+ * Séries A, B e C; `fontes`, como as súmulas chamam os clubes novos.
+ */
+export function montar(dados: string, clubes: FichaClube[], opcoes: { competicoes?: string[]; excluir?: Set<string>; fontes?: Record<string, NomesNasFontes> } = {}) {
   const relatorio: string[] = [];
-  const ids = mapaDeClubes();
+  const ids = mapaDeClubes(opcoes.fontes);
   const pessoas = carregarPessoas(dados, ids);
   const serieDe = new Map(clubes.map((c) => [c.id, c.serie]));
 
@@ -733,7 +743,8 @@ export function montar(dados: string, clubes: FichaClube[]) {
   const buscadorComCartola = new Buscador([...pessoas, ...pessoasCartola]);
 
   // Súmulas de 2025 (e de 2026, se o robô um dia conseguir baixar).
-  const arquivos = ["A", "B", "C", "D"].flatMap((s) => [2023, 2024, 2025, 2026].map((ano) => ({ ano, caminho: join(dados, "sumulas", `Serie_${s}_${ano}_games.json.gz`) })))
+  const competicoes = opcoes.competicoes ?? ["Serie_A", "Serie_B", "Serie_C", "Serie_D"];
+  const arquivos = competicoes.flatMap((s) => [2023, 2024, 2025, 2026].map((ano) => ({ ano, caminho: join(dados, "sumulas", `${s}_${ano}_games.json.gz`) })))
     .filter((a) => existsSync(a.caminho));
   const { jogadores, jogos } = lerSumulas(arquivos, ids.cbf);
   const apelidoDe = (reg: NaSumula) => maisFrequente(reg.apelidos) ?? reg.nomeCompleto;
@@ -762,9 +773,13 @@ export function montar(dados: string, clubes: FichaClube[]) {
   for (const j of jogos) jogosPorClubeAno.set(`${j.clube}|${j.ano}`, (jogosPorClubeAno.get(`${j.clube}|${j.ano}`) ?? 0) + 1);
   for (const clube of clubes) {
     if (porClube.has(clube.id)) continue;
-    const ano = (jogosPorClubeAno.get(`${clube.id}|2026`) ?? 0) >= 5 ? 2026 : 2025;
+    // A temporada mais recente com jogos do clube (2026 só com 5 ou mais; os clubes dos estaduais que não jogaram
+    // a Série D nem a Copa em 2025 podem ter só 2024 ou 2023).
+    const jogosEm = (ano: number) => jogosPorClubeAno.get(`${clube.id}|${ano}`) ?? 0;
+    const ano = jogosEm(2026) >= 5 ? 2026 : [2025, 2024, 2023].find((a) => jogosEm(a) > 0) ?? 2025;
     const lista: Candidato[] = [];
     for (const reg of jogadores.values()) {
+      if (opcoes.excluir?.has(reg.cbf)) continue;
       const ultima = reg.aparicoes.reduce((a, b) => (b.data > a.data ? b : a));
       if (ultima.clube !== clube.id || ultima.ano !== ano) continue;
       // Quem está no Cartola foi para um clube da Série A.
@@ -901,7 +916,7 @@ export function montar(dados: string, clubes: FichaClube[]) {
 
 // ---- linha de comando ----------------------------------------------------------------------
 
-if (process.argv[1]?.endsWith("montar.ts")) {
+if (/elencos[\\/]montar\.ts$/.test(process.argv[1] ?? "")) {
   const dados = process.argv[2];
   if (!dados) throw new Error("Uso: npx tsx tools/elencos/montar.ts <pasta com os dados do robô>");
   const clubes = (JSON.parse(readFileSync("data/brasil-2026/clubes.json", "utf8")) as { clubes: FichaClube[] }).clubes;

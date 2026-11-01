@@ -33,8 +33,9 @@ Leia isto antes de mexer no projeto. Detalhes de design em [PLANO.md](PLANO.md);
 
 Jogo de técnico de futebol para uso pessoal e recreativo do dono do repositório, inspirado no Brasfoot (referência, não cópia).
 Site PWA instalado na tela inicial do iPhone, funciona sem internet, save no próprio aparelho.
-Só clubes brasileiros: Séries A, B e C de 2026 (60 clubes reais, regulamentos de 2026) com os jogadores reais
-(`data/brasil-2026/jogadores.json`); a força de cada jogador é calculada por nós.
+Clubes brasileiros das Séries A, B, C e D de 2026 (regulamentos de 2026), os clubes que só jogam os 27 estaduais e a
+primeira divisão de 2026 dos outros 9 países da Conmebol, com os jogadores reais (`data/brasil-2026/jogadores.json` e
+`data/america-do-sul-2026/jogadores.json`); a força de cada jogador é calculada por nós.
 
 ## Situação (out/2026)
 
@@ -49,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R65 rodando a cada mudança, antes
+ponta R01–R70 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -127,7 +128,7 @@ antigo usa a do clube atual), `desde` (carência: no primeiro mês não há demi
 `avisoDeRisco`, `demissao` ({ data, clubeId, propostas }). Depois de cada jogo do usuário (`depoisDoMeuJogo`): confiança da
 diretoria ≤ 35 → mensagem "Cargo em risco" (uma por mês; o painel mostra o aviso); ≤ 20 depois da carência → demitido:
 reputação −6 e três propostas de clubes A/B/C com reputação até a dele. Na virada: abaixo do objetivo e confiança ≤ 20
-→ demitido (quem cai para a D segue com `propostasDeEmprego`, da Série C). Enquanto `demissao` existe, `Principal`
+→ demitido (quem cai para a D continua no clube e pode receber convites, nov/2026). Enquanto `demissao` existe, `Principal`
 mostra a tela `Demissao` no lugar do painel (continua depois de fechar o app). Convites (`Mensagem.convite`, tipo
 "convite"): no meio da fase de liga (jogo nº metade) para quem está "encaminhado" (1 convite) e na virada para quem
 cumpriu, subiu ou foi campeão (2); clubes da mesma série ou acima, com reputação > a do clube atual + 3 e ≤ a do técnico
@@ -219,7 +220,8 @@ ranking, 2ª com mais 74, 3ª com mais 4 (em 2026 os de verdade: Paysandu, Ponte
 colocado (empate: pênaltis, sem prorrogação); ida e volta da 5ª à semi (melhor ranking decide em casa; empate no
 agregado: pênaltis); final em jogo único e campo neutro (`Partida.neutro`: sem mando nem bilheteria). Datas: quartas-
 feiras das semanas 0–4, 6, 13–14, 18–19, 28–29 e 34 da temporada (fora das semanas 5, 10, 15, 20 e 25 das séries).
-Os 66 clubes da Série D que entram ganham elenco de 16 (`gerarElencoCopa`, `Clube.elencoDaCopa`), apagado na virada.
+Os 66 clubes da Série D que entram jogam com o elenco deles (desde nov/2026 todo clube da D tem elenco; o elenco só da
+Copa, `gerarElencoCopa`/`Clube.elencoDaCopa`, sobrou para saves antigos e sai ao abrir o jogo).
 Premiação = valores da CBF de 2026 × `ESCALA_COPA` (0,5), paga no sorteio de cada fase; campeão e vice na final.
 `Partida.serie` agora é `Competicao` ("A" | "B" | "C" | "CB"). Save antigo sem `estado.copa`: a Copa começa na
 temporada seguinte (`temporadaEncerrada` ignora a Copa que não existe).
@@ -234,8 +236,45 @@ contornar o bloqueio nem disfarçar o robô de navegador). Posição sem fonte �
 clube + uso + valor, nunca de outro jogo. `novoJogo` usa `elencoReal` (`gerador.ts`) e completa posições com gerados.
 Jogos já começados continuam com os jogadores que tinham (não há migração de save).
 
+**Times novos (nov/2026, `src/engine/torneios.ts`, `tools/times/`):** pedido "Vamos adicionar os times da serie D, times do
+estaduais e os times dos países da América do Sul ( só a serie A de cada pais ). Traga os jogadores reais"; ele escolheu
+"Tudo jogando já". `Clube.serie` ganhou "estadual" (clube brasileiro só do estadual) e "exterior" (com `Clube.pais` e
+`Clube.liga`, código do país: AR, BO, CL, CO, EC, PY, PE, UY, VE); `Clube.estadual` = sigla do estado cujo estadual o clube
+joga. `EstadoJogo.torneios` (opcional) guarda os torneios da temporada (`EstadoTorneio`; ids "D", "E-SP", "L-AR"), criados
+em `criarTemporada` por `criarTorneios`: **Série D** (os clubes da D com elenco, em grupos regionais de 6 de norte a sul,
+turno e returno, 4 de cada grupo passam; mata-mata em ida e volta com a volta na casa da melhor campanha; sobem para a
+C os dois finalistas, tantos quantos a C rebaixa; domingos a partir de abril), **estaduais** (no começo do ano, domingos das
+semanas −12 a −2 antes das séries, no máximo 11 datas: até 6 clubes turno e returno e final; 7 a 10 turno único,
+semifinal e final; 11 ou mais, dois grupos, quartas, semi e final; mata-mata em jogo único na casa da melhor campanha,
+pênaltis no empate) e **ligas de fora** (pontos corridos aos domingos, turno e returno até 18 clubes, turno único acima;
+o primeiro é o campeão; sem acesso nem rebaixamento). Com estaduais, a temporada começa em janeiro (`inicioDoAno`: uma
+semana antes do primeiro domingo do estadual; o jogo novo começa em 3 de janeiro de 2026) e as séries seguem em abril
+como antes. `avancar` passa direto (simulando) pelos dias só com jogos que o usuário não acompanha
+(`competicoesDoUsuario`: A, B, C, Copa e os torneios do clube dele); Resultados do dia e a caixa Rodada mostram só esses.
+Cota de TV do estadual para os clubes das séries (`COTA_TV_ESTADUAL`: os estaduais somam dois meses de salário); a D tem
+patrocínio de 60% do da C; clubes só do estadual e de fora não têm contas mensais. Rebaixado para a D, o técnico continua no
+clube (objetivo pela posição no grupo; pode ganhar convites; a tela de propostas de emprego obrigatórias saiu). A IA das
+séries pode comprar jogadores de qualquer clube; só os clubes das séries compram, emprestam e contratam técnico. Recordes
+contam os clubes de A a D. A virada mantém o elenco mínimo, a base e os excedentes de todos os clubes (os de fora com
+jovens do próprio país). Save antigo: `migrar` chama `juntarAoSaveAntigo` (jogo.ts): entram os clubes que faltam com os
+elencos (os da D trocam o elenco só da Copa por um de verdade) e os torneios ficam para a temporada seguinte (se a temporada
+nem começou, a D e as ligas de fora já valem). Telas: Tabelas em Séries (com Série D), Copa, Estaduais (escolhe o estado) e
+Outros países (escolhe o país); Mercado → "Onde joga" (Séries A a D, "Só estadual" e cada país); painel com o cartão do
+estadual em andamento; fim da temporada com campeões da D, dos estaduais e das ligas. Números: 410 clubes, ~11.400
+jogadores, ~4.300 jogos por temporada (temporada simulada ~10 s aqui), save de 6 a 10 MB. **Dados**: o robô
+`.github/workflows/elencos.yml` com a fase "times" baixa da Wikipédia as páginas de 2026 (Série D, estaduais, ligas; os
+participantes vêm das seções de grupos ou de participantes, com as ligações já montadas: na Wikipédia em português os
+clubes vêm de predefinições), as páginas dos clubes (ficha e elenco atual: "fs player" em inglês, "Jugador de fútbol" em
+espanhol, com nascimento), o Wikidata (clubes, inclusive poliesportivos, e jogadores) e o transfermarkt-datasets (Argentina
+e Colômbia) para a branch `dados-times`; `npx tsx tools/times/montar.ts <dados-times> <pasta com as súmulas, inclusive as da
+Copa>` grava `clubes-estaduais.json`, `estaduais.json` e os elencos novos de `jogadores.json` (os 60 das séries não mudam) em
+`data/brasil-2026/` e `clubes.json` e `jogadores.json` em `data/america-do-sul-2026/`. Os clubes brasileiros novos têm o
+elenco das súmulas da CBF (Série D e Copa do Brasil de 2023 a 2025, pelo programa dos elencos das séries, sem quem já está
+nas séries); sem súmulas, elenco gerado. Estaduais sem página (AC, AL, ES, MT, TO) usam os clubes do estado no jogo e nas
+súmulas. Lista dos times novos para os escudos: `docs/TIMES_NOVOS.md`. R66–R70.
+
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final ("Proffut" é provisório?). O 2D da partida começou (R60) e
-segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
+segue pelo que ele pedir. Os escudos dos 276 times novos (lista em `docs/TIMES_NOVOS.md`): ele vai mandar. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
 
 **Próximas ideias:** o resto da lista de mudanças (PLANO.md §13: 3, 6, 9–15, 17, 18, 20), quando o usuário escolher, e
 ajustes de equilíbrio pelo que ele sentir jogando.
@@ -290,6 +329,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `partida.ts` | Simulação minuto a minuto; disputa = a^k/(a^k+b^k), k = `EXPOENTE_DISPUTA`. Estatísticas da partida do usuário (`estatisticasDoMinuto`, `posseDeBola`, `cartoes`, `pressaoRecente`, `sobPressao`) |
 | `calendario.ts`, `competicoes.ts` | Tabelas, turno/returno com mando equilibrado, playoff da B, quadrangulares e final da C |
 | `copa.ts` | Copa do Brasil: participantes, sorteio por potes, jogos, quem passa, premiação, textos do confronto |
+| `torneios.ts` | Série D, estaduais e ligas de fora: participantes, jogos, grupos, mata-mata, campeões, `competicoesDoUsuario`, `inicioDoAno` |
 | `financas.ts`, `estadio.ts` | Bilheteria, TV, patrocínio, salários; obras de ampliação e modernização |
 | `mercado.ts`, `mensagens.ts`, `diretoria.ts` | Compra e venda, propostas (e "Pedir mais": `pedirMais`, `limiteDaProposta`), caixa de mensagens, objetivo e confiança |
 | `carreira.ts` | Reputação do técnico, cargo em risco, demissão e propostas de emprego, convites de clubes maiores, `assumirClube` |
@@ -307,12 +347,13 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `tests/` | Testes de ponta a ponta R01…: `*.spec.ts`, passos comuns em `ajuda.ts`, relatório em português em `resumo.ts`, lista em `README.md` |
 | `public/escudos/` | Os 156 escudos dos clubes (`<id>.png`), recortados da prancha que o usuário mandou; o service worker guarda para jogar sem internet |
 | `data/brasil-2026/` | `clubes.json` (60), `serie-d-reserva.json` (96), `competicoes.json`, `jogadores.json` (elencos reais, gerado por `tools/elencos`), `LEIAME.md` (fontes e licenças) |
-| `tools/` | `sim/` (calibragem), `e2e/` (capturas de tela), `icones/`, `dados/` (scripts Python dos clubes), `elencos/` (robô dos elencos: `montar.ts` monta `jogadores.json`, `sumulas.ts` lê as súmulas, `fontes-clubes.ts` diz como cada fonte chama os clubes, scripts Python do workflow), `escudos/` (`recortar.py`: prancha de escudos → `public/escudos/<id>.png`, ou um pacote `.json` para importar) |
+| `tools/` | `times/` (times novos: `wikipedia.py` é o robô da Wikipédia e do Wikidata, `montar.ts` monta clubes e elencos, `wiki.ts` lê fichas e elencos das páginas), `sim/` (calibragem), `e2e/` (capturas de tela), `icones/`, `dados/` (scripts Python dos clubes), `elencos/` (robô dos elencos: `montar.ts` monta `jogadores.json`, `sumulas.ts` lê as súmulas, `fontes-clubes.ts` diz como cada fonte chama os clubes, scripts Python do workflow), `escudos/` (`recortar.py`: prancha de escudos → `public/escudos/<id>.png`, ou um pacote `.json` para importar) |
 
 ## Calibragem atual (`npm run sim`)
 
 ~2,3 gols por jogo, mandante vence 42–45%, empates 25–29%, correlação força × pontos 0,57–0,79, nenhum clube no vermelho
-(conferido de novo com os elencos reais e com a Copa; a Série C fica no limite: mandante ~40–41%, empates ~29–31%).
+(conferido de novo com os elencos reais, com a Copa e, em nov/2026, com os estaduais, a Série D e as ligas de fora; a Série
+C fica no limite: mandante ~40–43%, empates ~28–31%). 3 temporadas × 2 sementes levam ~80 s.
 Copa do Brasil no `npm run sim`: campeão quase sempre da Série A, ~30% de zebras por confronto, ~20% dos jogos nos
 pênaltis, campeão leva ~47 mi somando as fases. Save com ~2,5 MB (elencos da Série D na Copa).
 Obras do estádio se pagam em 3 a 4 temporadas.

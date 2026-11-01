@@ -1,13 +1,28 @@
 # Dados: Brasil 2026
 
-Clubes e regulamentos das Séries A, B e C do Campeonato Brasileiro de 2026.
+Clubes e regulamentos das Séries A, B, C e D do Campeonato Brasileiro de 2026 e dos 27 estaduais de 2026.
 
 | Arquivo | Conteúdo |
 |---|---|
 | `clubes.json` | Os 60 clubes das Séries A, B e C (20 cada) |
-| `serie-d-reserva.json` | 96 clubes da Série D. Não são simulados: servem de reserva para quem sobe para a Série C |
+| `serie-d-reserva.json` | Os 96 clubes da Série D de 2026 (jogada desde nov/2026; o nome do arquivo é de quando ela só servia de reserva para o acesso) |
+| `clubes-estaduais.json` | Clubes que só jogam o estadual (fora das Séries A a D). Ver "Times novos" abaixo |
+| `estaduais.json` | Quem joga a primeira divisão de cada estadual de 2026 (sigla do estado → ids dos clubes) |
 | `competicoes.json` | Regulamento de cada série em 2026 |
-| `jogadores.json` | Elencos reais dos 60 clubes (nome, posição, lado, idade, nacionalidade e a força calculada pelo Proffut). Ver "Jogadores" abaixo |
+| `jogadores.json` | Elencos reais dos 60 clubes das séries e dos clubes da Série D e dos estaduais que aparecem nas súmulas (nome, posição, lado, idade, nacionalidade e a força calculada pelo Proffut). Ver "Jogadores" abaixo |
+
+Os clubes da primeira divisão dos outros 9 países da Conmebol ficam em `data/america-do-sul-2026/` (com o LEIAME de lá).
+
+## Times novos (nov/2026)
+
+Montados por `tools/times/montar.ts` a partir do que o robô `.github/workflows/elencos.yml` (fase "times") baixa para a
+branch `dados-times`, e das súmulas da CBF. O relatório da montagem diz de que página saiu cada campeonato.
+
+| Dado | De onde vem |
+|---|---|
+| Quem joga cada estadual de 2026 | [Wikipédia](https://pt.wikipedia.org) (CC BY-SA): a página do estadual de 2026 (as seções dos grupos ou dos participantes); sem ela, a de 2025 ou a página geral. Acre, Alagoas, Espírito Santo, Mato Grosso e Tocantins não têm página com os participantes: entram os clubes do estado nas Séries A a D e os que aparecem nas súmulas |
+| Ficha dos clubes só do estadual | A ficha da página do clube na Wikipédia (nome curto, estádio, capacidade, fundação, cores) e o [Wikidata](https://www.wikidata.org) (CC0); os que só aparecem nas súmulas têm a cidade e o estádio dos jogos em casa delas. Torcida, reputação, faixa de força e caixa são estimativas de jogo |
+| Elencos da Série D e dos clubes só do estadual | Súmulas da CBF da Série D e da Copa do Brasil de 2023 a 2025 (BrazilianFootball/data, MIT), pelo mesmo programa dos elencos das séries, sem quem já está num elenco das Séries A, B e C. Clube sem súmulas ganha elenco gerado pelo jogo |
 
 ## O que foi conferido
 

@@ -1,16 +1,17 @@
 // Sala de troféus: recordes de cada clube (maior goleada, pior derrota, maior público, artilheiros), somados jogo a
 // jogo, e os títulos do clube e do técnico, tirados do histórico das temporadas.
 import { comArtigo } from "./artigos";
-import { NOME_COMPETICAO, NOME_SERIE, SERIES } from "./competicoes";
+import { NOME_SERIE, SERIES, nomeDaCompeticao } from "./competicoes";
 import type { EstadoJogo, JogoRecorde, Partida, RecordesClube, SerieId } from "./tipos";
 
 const MAXIMO_ARTILHEIROS = 20;
 
-/** Depois de cada jogo: os recordes dos dois clubes (os da Série D, que só jogam a Copa, ficam de fora). */
+/** Depois de cada jogo: os recordes dos dois clubes das Séries A a D (os só do estadual e os de fora ficam de fora). */
 export function registrarRecordes(estado: EstadoJogo, p: Partida) {
   const recordes = (estado.recordes ??= { desde: estado.temporada, clubes: {} }).clubes;
   [p.mandante, p.visitante].forEach((clubeId, lado) => {
-    if (estado.clubes[clubeId]?.serie === "D") return;
+    const serie = estado.clubes[clubeId]?.serie;
+    if (serie !== "A" && serie !== "B" && serie !== "C" && serie !== "D") return;
     const r = (recordes[clubeId] ??= { artilheiros: [] });
     const [pro, contra] = lado === 0 ? [p.gm, p.gv] : [p.gv, p.gm];
     const adversario = lado === 0 ? p.visitante : p.mandante;
@@ -90,7 +91,7 @@ export function descreverPublico(estado: EstadoJogo, j: JogoRecorde): string {
 
 function contra(estado: EstadoJogo, j: JogoRecorde) {
   const clube = estado.clubes[j.adversario];
-  return `contra ${clube ? comArtigo("o", clube) : j.adversario} · ${NOME_COMPETICAO[j.competicao]} ${j.temporada}`;
+  return `contra ${clube ? comArtigo("o", clube) : j.adversario} · ${nomeDaCompeticao(j.competicao)} ${j.temporada}`;
 }
 
 export type { RecordesClube };

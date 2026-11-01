@@ -19,14 +19,17 @@ function luminancia(hex: string): number {
  * Escudo do clube: o importado neste aparelho, se houver; senão o do jogo (`public/escudos/<id>.png`, da
  * prancha que o usuário mandou); se a imagem não carregar, um escudo desenhado com as cores e a sigla.
  */
+/** Imagens de escudo que não carregaram nesta sessão (os clubes sem escudo não tentam de novo a cada tela). */
+const ESCUDOS_QUE_FALTAM = new Set<string>();
+
 export function Escudo({ clube, tamanho = 32 }: { clube: Pick<Clube, "id" | "sigla" | "cores">; tamanho?: number }) {
   const importado = useLoja((s) => s.escudos[clube.id]);
   const [falharam, setFalharam] = useState<string[]>([]);
-  const imagem = [importado, `escudos/${clube.id}.png`].find((src): src is string => !!src && !falharam.includes(src));
+  const imagem = [importado, `escudos/${clube.id}.png`].find((src): src is string => !!src && !falharam.includes(src) && !ESCUDOS_QUE_FALTAM.has(src));
   if (imagem) {
     return (
       <img className="escudo" src={imagem} width={tamanho} height={tamanho} alt="" style={{ flexShrink: 0, objectFit: "contain" }}
-        onError={() => setFalharam((f) => [...f, imagem])} />
+        onError={() => { ESCUDOS_QUE_FALTAM.add(imagem); setFalharam((f) => [...f, imagem]); }} />
     );
   }
   const { primaria, secundaria } = clube.cores;

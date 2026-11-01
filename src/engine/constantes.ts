@@ -116,7 +116,14 @@ export const MINIMO_POSICAO: Record<Posicao, number> = { G: 2, L: 2, Z: 3, M: 4,
 // ---- dinheiro -----------------------------------------------------------------
 export const PRECO_REFERENCIA: Record<SerieId, number> = { A: 60, B: 35, C: 25 };
 export const COTA_TV_RODADA: Record<SerieId, number> = { A: 350_000, B: 120_000, C: 70_000 };
+/**
+ * Cota de TV por jogo do estadual, para os clubes das Séries A, B e C (os estaduais, de janeiro a março, somam dois
+ * meses de salário à temporada).
+ */
+export const COTA_TV_ESTADUAL: Record<SerieId, number> = { A: 250_000, B: 160_000, C: 70_000 };
 export const PATROCINIO_MES: Record<SerieId, number> = { A: 1_200_000, B: 350_000, C: 150_000 };
+/** Patrocínio da Série D, como fração do da Série C. */
+export const PATROCINIO_SERIE_D = 0.6;
 export const MANUTENCAO_POR_LUGAR = 4;
 /** Público potencial por ponto de torcida (antes do preço e da capacidade). */
 export const PUBLICO_POR_TORCIDA = 550;

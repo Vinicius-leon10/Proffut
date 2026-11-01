@@ -1,7 +1,7 @@
 import { comArtigo } from "../../engine/artigos";
 import { NOME_SERIE, SERIES } from "../../engine/competicoes";
-import { propostasDeEmprego } from "../../engine/jogo";
-import type { SerieId } from "../../engine/tipos";
+import { nomeDoTorneio } from "../../engine/torneios";
+import type { IdTorneio, SerieId } from "../../engine/tipos";
 import { Cartao, Escudo, Topo } from "../componentes";
 import { useJogo, useLoja } from "../store";
 import { PropostasDeEmprego } from "./Demissao";
@@ -13,8 +13,8 @@ export function FimTemporada() {
   const r = estado.historico[estado.historico.length - 1];
   const meu = estado.clubes[estado.tecnico.clubeId];
   const demissao = estado.tecnico.demissao;
-  const precisaDeClube = meu.serie === "D" || !!demissao;
-  const propostas = demissao ? demissao.propostas : precisaDeClube ? propostasDeEmprego(estado) : [];
+  const precisaDeClube = !!demissao;
+  const propostas = demissao ? demissao.propostas : [];
   const convites = estado.mensagens.filter((m) => m.convite && !m.convite.resolvido);
   if (!r) return null;
   const nome = (id: string) => estado.clubes[id]?.nome ?? id;
@@ -38,6 +38,15 @@ export function FimTemporada() {
                 </div>
               );
             })}
+            {r.torneios?.D && (
+              <div className="linha">
+                <Escudo clube={estado.clubes[r.torneios.D.campeao]} tamanho={40} />
+                <div className="cresce">
+                  <div className="mini fraco">Série D</div>
+                  <div className="negrito">{nome(r.torneios.D.campeao)}</div>
+                </div>
+              </div>
+            )}
             {r.copa && (
               <div className="linha">
                 <Escudo clube={estado.clubes[r.copa.campeao]} tamanho={40} />
@@ -48,11 +57,22 @@ export function FimTemporada() {
                 </div>
               </div>
             )}
+            {/* Estaduais e ligas de fora: só os nomes dos campeões. */}
+            {(["E-", "L-"] as const).map((prefixo) => {
+              const lista = (Object.entries(r.torneios ?? {}) as [IdTorneio, { campeao: string }][]).filter(([id]) => id.startsWith(prefixo));
+              if (!lista.length) return null;
+              return (
+                <p key={prefixo} className="pequeno">
+                  <span className="mini fraco">{prefixo === "E-" ? "Estaduais" : "América do Sul"}: </span>
+                  {lista.map(([id, t]) => `${nome(t.campeao)} (${prefixo === "E-" ? id.slice(2) : nomeDoTorneio(id).replace("Campeonato ", "")})`).join(", ")}
+                </p>
+              );
+            })}
           </div>
         </Cartao>
 
         <Cartao titulo="Seu desempenho">
-          <p>{r.tecnico.posicao}º lugar na {NOME_SERIE[r.tecnico.serie]}.</p>
+          <p>{r.tecnico.serie === "D" ? `${r.tecnico.posicao}º lugar no grupo da Série D.` : `${r.tecnico.posicao}º lugar na ${NOME_SERIE[r.tecnico.serie]}.`}</p>
           <p className={`pequeno ${r.tecnico.cumpriu ? "verde" : "vermelho"}`}>{r.tecnico.cumpriu ? "Objetivo cumprido" : "Objetivo não cumprido"}: {r.tecnico.objetivo}</p>
           {!precisaDeClube && <p className="pequeno fraco" style={{ marginTop: 6 }}>Em {estado.temporada}: {NOME_SERIE[meu.serie as SerieId]}. Objetivo: {estado.objetivo.descricao}.</p>}
         </Cartao>
@@ -64,15 +84,17 @@ export function FimTemporada() {
             <p><span className="vermelho">Caem para a Série B:</span> {r.rebaixados.A.map(nome).join(", ")}</p>
             <p><span className="vermelho">Caem para a Série C:</span> {r.rebaixados.B.map(nome).join(", ")}</p>
             <p><span className="vermelho">Caem para a Série D:</span> {r.rebaixados.C.map(nome).join(", ")}</p>
+            {/* Da Série D sobem os finalistas: o campeão e o vice. */}
+            {r.torneios?.D?.vice && (
+              <p><span className="verde">Sobem para a Série C:</span> {[r.torneios.D.campeao, r.torneios.D.vice].map(nome).join(", ")}</p>
+            )}
           </div>
         </Cartao>
 
         {precisaDeClube ? (
           <Cartao titulo="Propostas de emprego">
             <p className="pequeno fraco" style={{ marginBottom: 8 }}>
-              {demissao
-                ? `A diretoria ${comArtigo("do", estado.clubes[demissao.clubeId])} não quis continuar com você depois de uma temporada abaixo do objetivo. Estes clubes querem você:`
-                : `${comArtigo("O", meu)} caiu para a Série D, que não é disputada no jogo. Estes clubes da Série C querem você:`}
+              {`A diretoria ${comArtigo("do", estado.clubes[demissao!.clubeId])} não quis continuar com você depois de uma temporada abaixo do objetivo. Estes clubes querem você:`}
             </p>
             <PropostasDeEmprego propostas={propostas} aoEscolher={fechar} />
           </Cartao>

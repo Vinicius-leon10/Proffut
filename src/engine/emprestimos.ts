@@ -1,6 +1,7 @@
 // Empréstimos até o fim da temporada: o usuário empresta um jogador dele (quem recebe paga o salário e ele ganha
 // jogos) ou pega emprestado o reserva de outro clube (paga uma taxa e o salário). Na virada, todos voltam.
 import { comArtigo } from "./artigos";
+import { dasSeries } from "./competicoes";
 import { ELENCO_MAXIMO, EMPRESTIMOS } from "./constantes";
 import { forcaDoTime } from "./forca";
 import { lancar } from "./financas";
@@ -21,7 +22,7 @@ export function motivoParaNaoEmprestar(estado: EstadoJogo, j: Jogador): string |
 export function interessadosNoEmprestimo(estado: EstadoJogo, j: Jogador): string[] {
   const margem = EMPRESTIMOS.margemForca + (j.idade <= 21 ? EMPRESTIMOS.margemJovem : 0);
   return Object.values(estado.clubes)
-    .filter((c) => c.serie !== "D" && c.id !== j.clubeId)
+    .filter((c) => dasSeries(c) && c.id !== j.clubeId)
     .map((c) => ({ c, elenco: elencoDe(estado, c.id) }))
     .filter(({ elenco }) => elenco.length < ELENCO_MAXIMO - 1)
     .map(({ c, elenco }) => ({ id: c.id, forca: forcaDoTime(elenco) }))

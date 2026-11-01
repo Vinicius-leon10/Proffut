@@ -11,7 +11,8 @@ test("R05 o progresso fica salvo no aparelho depois de recarregar", async ({ pag
   await botao(page, /Continuar/).click();
   await expect(cartaoDoProximoJogo(page)).toBeVisible();
   expect(await dataNoTopo(page)).toBe(data);
-  await expect(page.getByText(/1 jogos/)).toBeVisible();
+  // O primeiro jogo do ano é o do estadual: o cartão dele mostra a posição depois de 1 jogo.
+  await expect(page.locator("main").getByText(/^\d+º (no grupo|lugar)$/)).toBeVisible();
 });
 
 test("R06 exporta o save em arquivo e importa de volta", async ({ page }, info) => {

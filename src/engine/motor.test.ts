@@ -10,15 +10,18 @@ import { somarDias, turnoEReturno, turnoUnico } from "./calendario";
 import { SERIES, classificacao, tabelaDaLiga, temporadaEncerrada } from "./competicoes";
 import { MAX_SUBSTITUICOES, MINIMO_POSICAO } from "./constantes";
 import { desfechoDoConfronto, situacaoNaCopa } from "./copa";
-import { assumirClube, avancar, novoJogo, prepararJogos, propostasDeEmprego, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
+import { assumirClube, avancar, jogosPendentesHoje, juntarAoSaveAntigo, novoJogo, prepararJogos, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
+import { checarEstado } from "./checagem";
+import { PAISES, competicoesDoUsuario, inicioDoAno, tabelaDoTorneio } from "./torneios";
 import { dispensar, elencoDe, fazerOferta, limiteDaProposta, livres, pedirMais, transferenciasDaIa } from "./mercado";
 import { enviarMensagem } from "./mensagens";
 import { avancarMinuto, cartoes, cobradores, notaCobrador, posseDeBola, simularAteOFim, sobPressao, substituir, type Estatisticas } from "./partida";
 import { criarRng, rngPara } from "./rng";
 import { carreiraDoTecnico, descreverPublico, descreverRecorde, titulosDoClube } from "./trofeus";
-import type { EstadoJogo, Partida, Posicao } from "./tipos";
+import type { EstadoJogo, EstadoTorneio, Partida, Posicao } from "./tipos";
 import { exportarTexto, importarTexto } from "../save/salvamento";
 import jogadoresJson from "../../data/brasil-2026/jogadores.json";
+import exteriorJson from "../../data/america-do-sul-2026/jogadores.json";
 
 const clubes = Array.from({ length: 20 }, (_, i) => `c${i}`);
 
@@ -178,19 +181,162 @@ describe("mando de campo", () => {
 });
 
 describe("rebaixado para a Série D", () => {
-  it("o técnico recebe propostas da Série C e assume outro clube", () => {
+  it("o técnico continua no clube e joga a Série D na temporada seguinte (antes, era obrigado a trocar de clube)", () => {
     const estado = novoJogo({ nomeTecnico: "T", clubeId: "itabaiana", semente: 11 });
     estado.config.escalacaoAutomatica = true;
-    for (const j of elencoDe(estado, "itabaiana")) j.forca = 5;
     simularRestoDaTemporada(estado);
-    expect(estado.series.C.rebaixados).toContain("itabaiana");
+    // O clube cai (no lugar de um dos rebaixados) e a diretoria ainda confia no técnico: não é demitido.
+    const C = estado.series.C;
+    if (!C.rebaixados.includes("itabaiana")) C.rebaixados[0] = "itabaiana";
+    delete estado.tecnico.demissao;
+    estado.tecnico.confiancaDiretoria = 80;
     avancar(estado);
     expect(estado.clubes.itabaiana.serie).toBe("D");
-    const propostas = propostasDeEmprego(estado);
-    expect(propostas).toHaveLength(4);
-    for (const id of propostas) expect(estado.clubes[id].serie).toBe("C");
-    assumirClube(estado, propostas[0]);
-    expect(estado.tecnico.clubeId).toBe(propostas[0]);
+    expect(estado.tecnico.demissao).toBeUndefined();
+    expect(estado.tecnico.clubeId).toBe("itabaiana");
+    expect(estado.torneios!.D!.clubes).toContain("itabaiana");
+    expect(estado.objetivo.descricao).toMatch(/grupo/);
+    expect(estado.partidas.some((p) => p.serie === "D" && (p.mandante === "itabaiana" || p.visitante === "itabaiana"))).toBe(true);
+  });
+});
+
+describe("Série D jogada", () => {
+  const estado = novoJogo({ nomeTecnico: "T", clubeId: "ponte-preta", semente: 5 });
+  estado.config.escalacaoAutomatica = true;
+  const D = estado.torneios!.D!;
+  const domingo = (data: string) => new Date(`${data}T12:00:00Z`).getUTCDay() === 0;
+
+  it("tem os clubes da Série D em grupos regionais de 6, em turno e returno, aos domingos a partir de abril", () => {
+    expect(D.clubes.length).toBeGreaterThanOrEqual(90);
+    expect(D.grupos!.every((g) => g.length >= 5 && g.length <= 7)).toBe(true);
+    for (const id of D.clubes) expect(elencoDe(estado, id).length, id).toBeGreaterThanOrEqual(16);
+    const jogos = estado.partidas.filter((p) => p.serie === "D");
+    expect(jogos).toHaveLength(D.grupos!.reduce((n, g) => n + g.length * (g.length - 1), 0));
+    for (const p of jogos) {
+      expect(domingo(p.data)).toBe(true);
+      expect(p.data >= `${estado.temporada}-04-01`).toBe(true);
+    }
+  });
+
+  it("passam 4 de cada grupo, o mata-mata é em ida e volta (a volta na casa da melhor campanha) e sobem os 2 finalistas, que jogam a Série C no ano seguinte", () => {
+    simularRestoDaTemporada(estado);
+    expect(D.fase).toBe("encerrada");
+    const daFase = (fase: string) => estado.partidas.filter((p) => p.serie === "D" && p.fase === fase);
+    const passaram = 2 ** Math.floor(Math.log2(D.grupos!.length * 4));
+    expect(D.semeados).toHaveLength(passaram);
+    for (let n = passaram, fase = 0; n >= 2; n /= 2, fase++) {
+      const jogos = estado.partidas.filter((p) => p.serie === "D" && p.fase !== "grupos" && p.rodada <= 2).filter((p) => ["segunda", "terceira", "oitavas", "quartas", "semi", "final"].slice(-Math.log2(passaram))[fase] === p.fase);
+      expect(jogos).toHaveLength(n);
+      for (const p of jogos.filter((x) => x.perna === 2)) {
+        expect(D.semeados!.indexOf(p.mandante)).toBeLessThan(D.semeados!.indexOf(p.visitante));
+        expect(domingo(p.data)).toBe(true);
+      }
+    }
+    expect(daFase("final")).toHaveLength(2);
+    expect([...D.promovidos!].sort()).toEqual([D.campeao, D.vice].sort());
+    const rebaixadosC = [...estado.series.C.rebaixados];
+    avancar(estado);
+    for (const id of D.promovidos!) expect(estado.clubes[id].serie).toBe("C");
+    for (const id of rebaixadosC) expect(estado.clubes[id].serie).toBe("D");
+    for (const s of SERIES) expect(Object.values(estado.clubes).filter((c) => c.serie === s)).toHaveLength(20);
+    expect(estado.historico[0].torneios?.D?.campeao).toBe(D.campeao);
+    // Na temporada nova, a Série D tem os rebaixados da C e não tem quem subiu.
+    expect(estado.torneios!.D!.clubes).toEqual(expect.arrayContaining(rebaixadosC));
+    for (const id of D.promovidos!) expect(estado.torneios!.D!.clubes).not.toContain(id);
+  });
+
+  it("Avançar passa direto pelos dias só com jogos que o usuário não acompanha, mas eles são jogados", () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 8 });
+    e.config.escalacaoAutomatica = true;
+    const acompanha = competicoesDoUsuario(e);
+    for (let i = 0; i < 25; i++) {
+      const r = avancar(e);
+      expect(r.tipo).toBe("jogos-hoje");
+      expect(jogosPendentesHoje(e).some((p) => acompanha.has(p.serie))).toBe(true);
+      simularDia(e);
+    }
+    const passados = e.partidas.filter((p) => p.serie === "D" && p.data <= e.data);
+    expect(passados.length).toBeGreaterThan(0);
+    expect(passados.every((p) => p.jogada)).toBe(true);
+  });
+});
+
+describe("estaduais e ligas de fora", () => {
+  const estado = novoJogo({ nomeTecnico: "T", clubeId: "palmeiras", semente: 21 });
+  estado.config.escalacaoAutomatica = true;
+  const torneios = Object.values(estado.torneios!).filter((t): t is EstadoTorneio => !!t);
+  const estaduais = torneios.filter((t) => t.tipo === "estadual");
+  const ligas = torneios.filter((t) => t.tipo === "liga");
+  const domingo = (data: string) => new Date(`${data}T12:00:00Z`).getUTCDay() === 0;
+  const inicioDasSeries = () => estado.partidas.filter((p) => p.serie === "A").map((p) => p.data).sort()[0];
+
+  it("o jogo novo começa em janeiro, uma semana antes dos 27 estaduais, que são aos domingos e acabam antes das séries", () => {
+    expect(estaduais).toHaveLength(27);
+    expect(estado.data).toBe(inicioDoAno(2026));
+    expect(estado.data.startsWith("2026-01")).toBe(true);
+    expect(estado.clubes.palmeiras.estadual).toBe("SP");
+    for (const t of estaduais) {
+      expect(t.clubes.length, t.id).toBeGreaterThanOrEqual(4);
+      for (const id of t.clubes) expect(estado.clubes[id].estadual, id).toBe(t.id.slice(2));
+      for (const p of estado.partidas.filter((x) => x.serie === t.id)) {
+        expect(domingo(p.data)).toBe(true);
+        expect(p.data < inicioDasSeries()).toBe(true);
+      }
+    }
+  });
+
+  it("as ligas dos 9 países têm os clubes de lá, com elenco, e não jogam as competições do Brasil", () => {
+    expect(ligas.map((t) => t.id).sort()).toEqual(["L-AR", "L-BO", "L-CL", "L-CO", "L-EC", "L-PE", "L-PY", "L-UY", "L-VE"]);
+    for (const t of ligas) {
+      expect(t.clubes.length, t.id).toBeGreaterThanOrEqual(10);
+      for (const id of t.clubes) {
+        const c = estado.clubes[id];
+        expect(c.serie).toBe("exterior");
+        expect(c.pais).toBe(t.id.slice(2));
+        expect(elencoDe(estado, id).length, id).toBeGreaterThanOrEqual(16);
+        expect(estado.copa!.ranking).not.toContain(id);
+      }
+    }
+  });
+
+  it("estaduais com até 11 datas e campeão; ligas com o campeão em primeiro; tudo no histórico", () => {
+    simularRestoDaTemporada(estado);
+    for (const t of estaduais) {
+      expect(t.fase).toBe("encerrada");
+      expect(t.clubes).toContain(t.campeao);
+      const datas = new Set(estado.partidas.filter((p) => p.serie === t.id).map((p) => p.data));
+      expect(datas.size, t.id).toBeLessThanOrEqual(11);
+      expect([...datas].every((d) => d < inicioDasSeries())).toBe(true);
+    }
+    for (const t of ligas) {
+      expect(t.fase).toBe("encerrada");
+      expect(t.campeao).toBe(tabelaDoTorneio(estado, t)[0].clubeId);
+    }
+    avancar(estado);
+    expect(Object.keys(estado.historico[0].torneios!)).toHaveLength(torneios.length);
+    // A temporada seguinte também começa em janeiro, com os estaduais.
+    expect(estado.data).toBe(inicioDoAno(2027));
+    expect(Object.keys(estado.torneios!).filter((id) => id.startsWith("E-"))).toHaveLength(27);
+  });
+
+  it("save de antes dos times novos: ganha os clubes e os elencos ao abrir; os torneios começam na temporada seguinte", () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "palmeiras", semente: 22 });
+    const novos = Object.values(e.clubes).filter((c) => c.serie === "estadual" || c.serie === "exterior").map((c) => c.id);
+    // Volta o save para como era antes: sem esses clubes, sem os elencos da Série D e sem torneios, com a temporada andando.
+    for (const j of Object.values(e.jogadores)) {
+      if (j.clubeId && (novos.includes(j.clubeId) || e.clubes[j.clubeId].serie === "D")) delete e.jogadores[j.id];
+    }
+    for (const id of novos) delete e.clubes[id];
+    for (const c of Object.values(e.clubes)) delete c.estadual;
+    e.partidas = e.partidas.filter((p) => !(p.serie === "D" || p.serie.startsWith("E-") || p.serie.startsWith("L-")));
+    delete e.torneios;
+    e.partidas[0].jogada = true;
+    juntarAoSaveAntigo(e);
+    for (const id of novos) expect(e.clubes[id], id).toBeTruthy();
+    for (const c of Object.values(e.clubes)) expect(elencoDe(e, c.id).length, c.id).toBeGreaterThanOrEqual(16);
+    expect(e.clubes.palmeiras.estadual).toBe("SP");
+    expect(e.torneios).toEqual({});
+    expect(checarEstado(e).filter((p) => p.gravidade === "erro")).toEqual([]);
   });
 });
 
@@ -270,7 +416,10 @@ describe("elencos reais", () => {
   it("o jogo novo usa os jogadores de data/brasil-2026/jogadores.json, completando o mínimo por posição", () => {
     const estado = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 7 });
     const elencos = jogadoresJson.elencos as Record<string, { nome: string; posicao: string; lado: string; idade: number; forca: number; nacionalidade?: string }[]>;
-    expect(Object.keys(elencos)).toHaveLength(60);
+    // Os 60 clubes das séries A a C e, desde nov/2026, os da Série D e dos estaduais que aparecem nas súmulas.
+    const dasSeries = Object.values(estado.clubes).filter((c) => ["A", "B", "C"].includes(c.serie)).map((c) => c.id);
+    for (const id of dasSeries) expect(elencos[id], id).toBeDefined();
+    for (const id of Object.keys(elencos)) expect(["A", "B", "C", "D", "estadual"]).toContain(estado.clubes[id].serie);
     for (const [clubeId, reais] of Object.entries(elencos)) {
       const elenco = elencoDe(estado, clubeId);
       for (const r of reais) {
@@ -279,6 +428,23 @@ describe("elencos reais", () => {
         expect([j!.idade, j!.forca, j!.lado, j!.nacionalidade]).toEqual([r.idade, r.forca, r.lado, r.nacionalidade ?? "BRA"]);
       }
       for (const pos of ["G", "L", "Z", "M", "A"] as Posicao[]) expect(elenco.filter((x) => x.posicao === pos).length).toBeGreaterThanOrEqual(MINIMO_POSICAO[pos] + 1);
+    }
+  });
+
+  it("os clubes de fora usam os elencos de data/america-do-sul-2026/jogadores.json, com a nacionalidade do país quando os dados não dizem outra", () => {
+    const estado = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 7 });
+    const elencos = exteriorJson.elencos as Record<string, { nome: string; posicao: string; lado: string; idade: number; forca: number; nacionalidade?: string }[]>;
+    expect(Object.keys(elencos).length).toBeGreaterThanOrEqual(150);
+    for (const [clubeId, reais] of Object.entries(elencos)) {
+      const clube = estado.clubes[clubeId];
+      expect(clube.serie, clubeId).toBe("exterior");
+      const doPais = PAISES[clube.pais!].nacionalidade;
+      const elenco = elencoDe(estado, clubeId);
+      for (const r of reais) {
+        const j = elenco.find((x) => x.nome === r.nome && x.posicao === r.posicao);
+        expect(j, `${r.nome} (${clubeId})`).toBeDefined();
+        expect([j!.idade, j!.forca, j!.nacionalidade]).toEqual([r.idade, r.forca, r.nacionalidade ?? doPais]);
+      }
     }
   });
 });
@@ -845,7 +1011,8 @@ describe("carreira do técnico", () => {
     expect(novo.convite!.resolvido).toBe("expirado");
   });
 
-  it("na virada: abaixo do objetivo e sem a confiança da diretoria, demitido; quem sobe ganha reputação e convites", () => {
+  // Duas temporadas inteiras, com os estaduais, a Série D e as ligas de fora: mais tempo.
+  it("na virada: abaixo do objetivo e sem a confiança da diretoria, demitido; quem sobe ganha reputação e convites", { timeout: 90_000 }, () => {
     // Clube do meio da Série A que termina abaixo de um objetivo impossível, com a diretoria por um fio.
     const ruim = novoJogo({ nomeTecnico: "T", clubeId: "bahia", semente: 24 });
     simularRestoDaTemporada(ruim);
@@ -1154,11 +1321,11 @@ describe("sala de troféus e recordes", () => {
   estado.config.escalacaoAutomatica = true;
   simularRestoDaTemporada(estado);
 
-  it("depois de cada jogo, os recordes de cada clube batem com os jogos disputados (os da Série D ficam de fora)", () => {
+  it("depois de cada jogo, os recordes de cada clube batem com os jogos disputados (os só do estadual e os de fora ficam de fora)", () => {
     expect(estado.recordes!.desde).toBe(2026);
     for (const [id, clube] of Object.entries(estado.clubes)) {
       const r = estado.recordes!.clubes[id];
-      if (clube.serie === "D") {
+      if (clube.serie === "estadual" || clube.serie === "exterior") {
         expect(r).toBeUndefined();
         continue;
       }

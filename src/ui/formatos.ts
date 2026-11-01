@@ -1,9 +1,15 @@
-import { NOME_COMPETICAO } from "../engine/competicoes";
+import { nomeDaCompeticao } from "../engine/competicoes";
 import { NOME_FASE_COPA } from "../engine/copa";
+import { NOME_FASE_TORNEIO, ehTorneio } from "../engine/torneios";
 import type { FaseCopa, Partida } from "../engine/tipos";
 
 export function rotuloPartida(p: Partida): string {
-  const serie = NOME_COMPETICAO[p.serie];
+  const serie = nomeDaCompeticao(p.serie);
+  if (ehTorneio(p.serie)) {
+    if (p.fase === "liga") return `${serie} · ${p.rodada}ª rodada`;
+    if (p.fase === "grupos") return `${serie} · Grupo ${p.grupo} · ${p.rodada}ª rodada`;
+    return `${serie} · ${NOME_FASE_TORNEIO[p.fase] ?? p.fase}${p.perna ? ` (${p.perna === 1 ? "ida" : "volta"})` : ""}`;
+  }
   if (p.serie === "CB") {
     const fase = NOME_FASE_COPA[p.fase as FaseCopa] ?? p.fase;
     return `${serie} · ${fase}${p.perna ? ` (${p.perna === 1 ? "ida" : "volta"})` : ""}`;

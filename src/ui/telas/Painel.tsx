@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
-import { NOME_SERIE, tabelaDaLiga, temporadaEncerrada } from "../../engine/competicoes";
+import { NOME_SERIE, tabelaDoClube, temporadaEncerrada } from "../../engine/competicoes";
 import { reputacaoDoTecnico } from "../../engine/carreira";
 import { CARGO } from "../../engine/constantes";
 import { situacaoDoObjetivo } from "../../engine/diretoria";
 import { folhaSalarial, formatarDinheiro } from "../../engine/financas";
 import { meuJogoHoje, provavelTime, proximaDataComJogo, proximoJogoDoClube } from "../../engine/jogo";
+import { NOME_FASE_TORNEIO, posicaoNoTorneio, torneiosDoClube } from "../../engine/torneios";
 import type { SerieId } from "../../engine/tipos";
 import { avancarJogo, simularFimDaTemporada } from "../acoes";
 import { Barra, Cartao, Escudo } from "../componentes";
@@ -27,13 +28,19 @@ export function Painel() {
   const [verAdversario, setVerAdversario] = useState(false);
   const meuId = estado.tecnico.clubeId;
   const clube = estado.clubes[meuId];
-  const serie = clube.serie as SerieId;
+  const serie = clube.serie as SerieId | "D";
   const hoje = meuJogoHoje(estado);
   const proximo = hoje ?? proximoJogoDoClube(estado);
   const encerrada = temporadaEncerrada(estado);
-  const minhaSerieAcabou = estado.series[serie].fase === "encerrada";
-  const tabela = tabelaDaLiga(estado, serie);
-  const linha = tabela.find((l) => l.clubeId === meuId)!;
+  // Na Série D a série acaba para o usuário quando ele cai no mata-mata (ou o torneio termina).
+  const torneioD = serie === "D" ? estado.torneios?.D : undefined;
+  const minhaSerieAcabou = serie === "D"
+    ? !!torneioD && torneioD.fase !== "grupos" && !estado.partidas.some((p) => p.serie === "D" && !p.jogada && (p.mandante === meuId || p.visitante === meuId))
+    : estado.series[serie].fase === "encerrada";
+  const tabela = tabelaDoClube(estado, meuId);
+  const linha = tabela.find((l) => l.clubeId === meuId) ?? { pos: 0, pts: 0, j: 0, v: 0, e: 0, d: 0 };
+  // Estadual em andamento (no começo do ano): a posição dele num cartão à parte.
+  const estadual = torneiosDoClube(estado, meuId).find((t) => t.tipo === "estadual" && t.fase !== "encerrada");
   const { situacao } = situacaoDoObjetivo(estado);
   const proximaData = proximaDataComJogo(estado);
 
@@ -92,10 +99,23 @@ export function Painel() {
       )}
 
 
+      {estadual && (
+        <Cartao titulo={`${estadual.nome} ${estado.temporada}`}>
+          <div className="linha entre pequeno">
+            <span>{estadual.fase === "liga" || estadual.fase === "grupos"
+              ? `${posicaoNoTorneio(estado, estadual, meuId) || "–"}º ${estadual.grupos ? "no grupo" : "lugar"}`
+              : estadual.semeados?.includes(meuId) && estado.partidas.some((p) => p.serie === estadual.id && !p.jogada && (p.mandante === meuId || p.visitante === meuId))
+                ? `Na ${NOME_FASE_TORNEIO[estadual.fase].toLowerCase()}`
+                : "Fora da disputa do título"}</span>
+            <button className="botao pequeno" onClick={() => useLoja.getState().irParaAba("tabelas")}>Ver tabela</button>
+          </div>
+        </Cartao>
+      )}
+
       <Cartao titulo={`${NOME_SERIE[serie]} ${estado.temporada}`}>
         <div className="linha entre">
           <div>
-            <div style={{ fontSize: "2rem", fontWeight: 800 }} className="num">{linha.j ? `${linha.pos}º` : "–"}</div>
+            <div style={{ fontSize: "2rem", fontWeight: 800 }} className="num">{linha.j ? `${linha.pos}º` : "–"}{serie === "D" && linha.j ? <span className="mini fraco"> no grupo</span> : null}</div>
             <div className="mini fraco">{linha.pts} pts · {linha.j} jogos · {linha.v}V {linha.e}E {linha.d}D</div>
           </div>
           <div className="coluna" style={{ alignItems: "flex-end", gap: 6, maxWidth: "60%" }}>

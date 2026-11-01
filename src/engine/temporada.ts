@@ -7,15 +7,16 @@ import { encerrarEmprestimos } from "./emprestimos";
 import { inicioDaTemporada, somarDias } from "./calendario";
 import { NOME_SERIE, SERIES, criarTemporada, posicaoNaLiga, tabelaDaLiga } from "./competicoes";
 import { criarCopa } from "./copa";
-import { CARGO, CONVITES, ELENCO_MAXIMO, MINIMO_POSICAO, PRECO_REFERENCIA, REPUTACAO } from "./constantes";
+import { CARGO, CONVITES, ELENCO_MAXIMO, MINIMO_POSICAO, REPUTACAO } from "./constantes";
 import { definirObjetivo } from "./diretoria";
 import { escalarAutomatico } from "./forca";
-import { lancar, premiacao } from "./financas";
+import { lancar, precoDeReferencia, premiacao } from "./financas";
 import { gerarElenco, gerarJovem, limitar, salarioBase } from "./gerador";
 import { completarLivres, elencoDe, livres, reescalar, transferenciasDaIa } from "./mercado";
 import { enviarMensagem } from "./mensagens";
 import { rngPara, type Rng } from "./rng";
-import type { EstadoJogo, Jogador, Posicao, RegistroTemporada, SerieId } from "./tipos";
+import { PAISES, inicioDoAno } from "./torneios";
+import type { EstadoJogo, IdTorneio, Jogador, Posicao, RegistroTemporada, SerieId } from "./tipos";
 
 function artilheiro(estado: EstadoJogo, serie: SerieId): RegistroTemporada["artilheiros"][SerieId] {
   const gols = new Map<number, number>();
@@ -67,12 +68,16 @@ export function encerrarTemporada(estado: EstadoJogo) {
   const rng = rngPara(estado.semente, `virada/${ano}`);
   const nome = (id: string) => estado.clubes[id]?.nome ?? id;
   const meuId = estado.tecnico.clubeId;
-  const minhaSerie = estado.clubes[meuId].serie as SerieId;
+  const minhaSerie = estado.clubes[meuId].serie as SerieId | "D";
+  const torneios = Object.values(estado.torneios ?? {}).filter((t) => !!t);
 
   // ---- histórico ----
   const tabelas = Object.fromEntries(SERIES.map((s) => [s, tabelaDaLiga(estado, s)])) as Record<SerieId, ReturnType<typeof tabelaDaLiga>>;
   const minhaPosicao = posicaoNaLiga(estado, meuId);
-  const cumpriu = minhaPosicao <= estado.objetivo.posicaoAlvo;
+  // Na Série D, subir também cumpre o objetivo (a posição é a do grupo).
+  const cumpriu = (minhaPosicao > 0 && minhaPosicao <= estado.objetivo.posicaoAlvo) || !!estado.torneios?.D?.promovidos?.includes(meuId);
+  const campeoesDosTorneios: Partial<Record<IdTorneio, { campeao: string; vice?: string }>> = {};
+  for (const t of torneios) if (t.campeao) campeoesDosTorneios[t.id] = { campeao: t.campeao, ...(t.vice ? { vice: t.vice } : {}) };
   estado.historico.push({
     temporada: ano,
     campeoes: { A: estado.series.A.campeao!, B: estado.series.B.campeao!, C: estado.series.C.campeao! },
@@ -81,6 +86,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
     promovidos: { A: [], B: [...estado.series.B.promovidos], C: [...estado.series.C.promovidos] },
     rebaixados: { A: [...estado.series.A.rebaixados], B: [...estado.series.B.rebaixados], C: [...estado.series.C.rebaixados] },
     tecnico: { clubeId: meuId, serie: minhaSerie, posicao: minhaPosicao, objetivo: estado.objetivo.descricao, cumpriu },
+    ...(Object.keys(campeoesDosTorneios).length ? { torneios: campeoesDosTorneios } : {}),
   });
 
   // ---- premiação ----
@@ -104,13 +110,20 @@ export function encerrarTemporada(estado: EstadoJogo) {
   for (const id of B.rebaixados) estado.clubes[id].serie = "C";
   for (const id of C.promovidos) estado.clubes[id].serie = "B";
   for (const id of C.rebaixados) estado.clubes[id].serie = "D";
-  const candidatos = Object.values(estado.clubes).filter((c) => c.serie === "D" && !C.rebaixados.includes(c.id));
+  // Sobem da Série D os finalistas dela; sem a Série D jogada (saves de antes dela), sorteio pela reputação.
   const sobemDaD: string[] = [];
-  for (let i = 0; i < C.rebaixados.length && candidatos.length; i++) {
+  for (const id of estado.torneios?.D?.promovidos ?? []) {
+    if (sobemDaD.length < C.rebaixados.length && estado.clubes[id]?.serie === "D" && !C.rebaixados.includes(id)) sobemDaD.push(id);
+  }
+  const candidatos = Object.values(estado.clubes).filter((c) => c.serie === "D" && !C.rebaixados.includes(c.id) && !sobemDaD.includes(c.id));
+  while (sobemDaD.length < C.rebaixados.length && candidatos.length) {
     const escolhido = rng.escolherPeso(candidatos, (c) => c.reputacao);
     candidatos.splice(candidatos.indexOf(escolhido), 1);
-    escolhido.serie = "C";
     sobemDaD.push(escolhido.id);
+  }
+  for (const id of sobemDaD) {
+    const escolhido = estado.clubes[id];
+    escolhido.serie = "C";
     if (!elencoDe(estado, escolhido.id).length) {
       for (const j of gerarElenco(rng, escolhido, () => estado.proximoIdJogador++)) estado.jogadores[j.id] = j;
     }
@@ -143,32 +156,41 @@ export function encerrarTemporada(estado: EstadoJogo) {
   const sairamDeGraca = encerrarContratos(estado, ano);
   const naoVoltam = new Set(sairamDeGraca.map((j) => j.id));
 
-  // ---- base, elenco mínimo e excesso ----
+  // ---- base, elenco mínimo e excesso (todos os clubes que jogam: séries, estaduais e ligas de fora) ----
   const jovensMeus: string[] = [];
+  const elencos = new Map<string, Jogador[]>();
+  for (const j of Object.values(estado.jogadores)) if (j.clubeId) elencos.set(j.clubeId, [...(elencos.get(j.clubeId) ?? []), j]);
+  const livresPorPosicao = new Map<Posicao, Jogador[]>();
+  for (const j of livres(estado)) livresPorPosicao.set(j.posicao, [...(livresPorPosicao.get(j.posicao) ?? []), j]);
+  for (const lista of livresPorPosicao.values()) lista.sort((a, b) => b.forca - a.forca);
   for (const clube of Object.values(estado.clubes)) {
-    if (clube.serie === "D") continue;
-    const elenco = () => elencoDe(estado, clube.id);
-    const quantos = elenco().length < 24 ? 3 : elenco().length < 28 ? 2 : 1;
+    const elenco = elencos.get(clube.id) ?? [];
+    // Clube sem jogador nenhum não joga (Série D de um save antigo antes de abrir o jogo).
+    if (!elenco.length) continue;
+    const doPais = clube.liga ? PAISES[clube.liga]?.nacionalidade : undefined;
+    const entrar = (j: Jogador) => { j.clubeId = clube.id; estado.jogadores[j.id] = j; elenco.push(j); };
+    const quantos = elenco.length < 24 ? 3 : elenco.length < 28 ? 2 : 1;
     for (let i = 0; i < quantos; i++) {
-      const jovem = gerarJovem(rng, clube, posicaoMaisCarente(elenco()), estado.proximoIdJogador++);
-      estado.jogadores[jovem.id] = jovem;
+      const jovem = gerarJovem(rng, clube, posicaoMaisCarente(elenco), estado.proximoIdJogador++, doPais);
+      entrar(jovem);
       if (clube.id === meuId) jovensMeus.push(`${jovem.nome} (${jovem.posicao}, ${jovem.idade} anos)`);
     }
     // Garante o mínimo por posição com jogadores livres (ou da base, se não houver).
     for (const pos of Object.keys(MINIMO_POSICAO) as Posicao[]) {
-      while (elenco().filter((j) => j.posicao === pos).length < MINIMO_POSICAO[pos]) {
-        const livre = livres(estado).filter((j) => j.posicao === pos && !(clube.id === meuId && naoVoltam.has(j.id))).sort((a, b) => b.forca - a.forca)[0];
-        const novo = livre ?? gerarJovem(rng, clube, pos, estado.proximoIdJogador++);
-        novo.clubeId = clube.id;
-        estado.jogadores[novo.id] = novo;
+      while (elenco.filter((j) => j.posicao === pos).length < MINIMO_POSICAO[pos]) {
+        const fila = livresPorPosicao.get(pos) ?? [];
+        const i = fila.findIndex((j) => !(clube.id === meuId && naoVoltam.has(j.id)));
+        const novo = i >= 0 ? fila.splice(i, 1)[0] : gerarJovem(rng, clube, pos, estado.proximoIdJogador++, doPais);
+        entrar(novo);
       }
     }
     // Clubes da IA dispensam os excedentes mais fracos e mais velhos.
     if (clube.id !== meuId) {
-      const sobra = elenco().length - (ELENCO_MAXIMO - 3);
+      const sobra = elenco.length - (ELENCO_MAXIMO - 3);
       if (sobra > 0) {
-        const descartaveis = elenco()
-          .filter((j) => elenco().filter((x) => x.posicao === j.posicao).length > MINIMO_POSICAO[j.posicao] + 1)
+        const naPosicao = (pos: Posicao) => elenco.filter((x) => x.posicao === pos).length;
+        const descartaveis = elenco
+          .filter((j) => naPosicao(j.posicao) > MINIMO_POSICAO[j.posicao] + 1)
           .sort((a, b) => a.forca - a.idade / 2 - (b.forca - b.idade / 2));
         for (const j of descartaveis.slice(0, sobra)) liberar(j);
       }
@@ -190,32 +212,32 @@ export function encerrarTemporada(estado: EstadoJogo) {
     clube.escalacao.reservas = clube.escalacao.reservas.filter(ficou);
     clube.resumoFinanceiro = {};
     clube.moral = 60;
-    if (clube.id !== meuId && clube.serie !== "D") clube.precoIngresso = PRECO_REFERENCIA[clube.serie];
+    if (clube.id !== meuId) clube.precoIngresso = precoDeReferencia(clube.serie);
   }
 
   // ---- diretoria ----
   const t = estado.tecnico;
-  const subiu = (B.promovidos.includes(meuId) && minhaSerie === "B") || (C.promovidos.includes(meuId) && minhaSerie === "C");
+  const subiu = (B.promovidos.includes(meuId) && minhaSerie === "B") || (C.promovidos.includes(meuId) && minhaSerie === "C") || sobemDaD.includes(meuId);
   const caiu = [...A.rebaixados, ...B.rebaixados, ...C.rebaixados].includes(meuId);
-  const campeao = [A.campeao, B.campeao, C.campeao].includes(meuId);
+  const campeao = [A.campeao, B.campeao, C.campeao, estado.torneios?.D?.campeao].includes(meuId);
   t.confiancaDiretoria = limitar(t.confiancaDiretoria + (cumpriu ? 15 : -15) + (subiu ? 15 : 0) + (campeao ? 10 : 0) - (caiu ? 20 : 0), 10, 100);
   t.confiancaTorcida = limitar(t.confiancaTorcida + (subiu ? 15 : 0) + (campeao ? 20 : 0) - (caiu ? 20 : 0), 10, 100);
   mudarReputacao(estado,
     (cumpriu ? REPUTACAO.cumpriu : REPUTACAO.naoCumpriu) + (subiu ? REPUTACAO.acesso : 0) + (caiu ? REPUTACAO.rebaixamento : 0) +
     (campeao ? (minhaSerie === "A" ? REPUTACAO.tituloA : REPUTACAO.titulo) : 0) + (estado.copa?.campeao === meuId ? REPUTACAO.copa : 0));
-  // Quem caiu para a Série D já troca de clube; os outros, abaixo do objetivo e sem a confiança da diretoria, saem.
+  // Abaixo do objetivo e sem a confiança da diretoria, o técnico sai (também quem caiu para a Série D).
   const caiuParaD = C.rebaixados.includes(meuId);
-  const demitido = !t.demissao && !caiuParaD && !cumpriu && t.confiancaDiretoria <= CARGO.demissao && passouDaCarencia(estado);
+  const demitido = !t.demissao && !cumpriu && t.confiancaDiretoria <= CARGO.demissao && passouDaCarencia(estado);
 
-  // ---- nova temporada ----
+  // ---- nova temporada: com estaduais, começa em janeiro, uma semana antes deles ----
   estado.temporada = ano + 1;
-  estado.data = somarDias(inicioDaTemporada(ano + 1), -7);
+  const comEstaduais = Object.values(estado.clubes).some((c) => c.estadual);
+  estado.data = comEstaduais ? inicioDoAno(ano + 1) : somarDias(inicioDaTemporada(ano + 1), -7);
   criarTemporada(estado);
   criarCopa(estado);
   transferenciasDaIa(estado, `${ano + 1}-pre-1`);
   transferenciasDaIa(estado, `${ano + 1}-pre-2`);
   for (const clube of Object.values(estado.clubes)) {
-    if (clube.serie === "D") continue;
     if (clube.id === meuId) {
       const meu = estado.clubes[meuId];
       const elenco = elencoDe(estado, meuId);
@@ -231,11 +253,13 @@ export function encerrarTemporada(estado: EstadoJogo) {
   // ---- técnico: demissão ou convites de clubes maiores (para quem foi bem) ----
   const meuClube = estado.clubes[meuId];
   if (demitido) demitir(estado, `A diretoria ${comArtigo("do", meuClube)} não quis continuar com você depois de uma temporada abaixo do objetivo.`);
-  else if (!t.demissao && !caiuParaD && (cumpriu || subiu || campeao)) gerarConvites(estado, CONVITES.virada);
+  // Convites: para quem foi bem e para quem caiu para a Série D (clubes das séries de cima querem o técnico).
+  else if (!t.demissao && (cumpriu || subiu || campeao || caiuParaD)) gerarConvites(estado, CONVITES.virada);
 
   // ---- mensagens ----
+  const campeaoD = campeoesDosTorneios.D?.campeao;
   const resumo = [
-    `${nome(A.campeao!)} foi ${concorda(estado.clubes[A.campeao!], "campeão", "campeã")} da Série A, ${nome(B.campeao!)} da Série B e ${nome(C.campeao!)} da Série C.`,
+    `${nome(A.campeao!)} foi ${concorda(estado.clubes[A.campeao!], "campeão", "campeã")} da Série A, ${nome(B.campeao!)} da Série B${campeaoD ? `, ${nome(C.campeao!)} da Série C e ${nome(campeaoD)} da Série D` : ` e ${nome(C.campeao!)} da Série C`}.`,
     `Seu time terminou a fase de classificação em ${minhaPosicao}º. Objetivo: ${cumpriu ? "cumprido" : "não cumprido"}.`,
     subiu ? `Acesso conquistado! Em ${ano + 1} ${comArtigo("o", meuClube)} joga a ${NOME_SERIE[meuClube.serie as SerieId]}.` : "",
     caiu ? `${comArtigo("O", meuClube)} foi ${concorda(meuClube, "rebaixado", "rebaixada")} e joga a ${NOME_SERIE[meuClube.serie as SerieId]} em ${ano + 1}.` : "",

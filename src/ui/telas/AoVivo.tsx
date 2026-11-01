@@ -10,7 +10,8 @@ import {
   type EstatisticasLado, type LadoVivo, type PartidaViva,
 } from "../../engine/partida";
 import type { Clube, Competicao, Estilo, EventoPartida, Formacao, Partida } from "../../engine/tipos";
-import { NOME_COMPETICAO } from "../../engine/competicoes";
+import { nomeDaCompeticao } from "../../engine/competicoes";
+import { competicoesDoUsuario } from "../../engine/torneios";
 import { formatarNota, melhorEmCampo, notasDaPartida, type NotaDoJogador } from "../../engine/notas";
 import { Barra, Escudo, Folha, Icone, Opcoes, Pos, Segmentado } from "../componentes";
 import { rotuloPartida } from "../formatos";
@@ -443,8 +444,11 @@ function OutrosJogos({ vivas, meuId }: { vivas: PartidaViva[]; meuId: string }) 
   const estado = useJogo();
   const partidas = new Map(estado.partidas.map((p) => [p.id, p]));
   const porSerie = new Map<Competicao, PartidaViva[]>();
+  // Só os campeonatos que o usuário acompanha (não os outros estaduais nem as ligas de fora).
+  const acompanha = competicoesDoUsuario(estado);
   for (const pv of vivas) {
     const s = partidas.get(pv.partidaId)!.serie;
+    if (!acompanha.has(s)) continue;
     porSerie.set(s, [...(porSerie.get(s) ?? []), pv]);
   }
   // Primeiro a competição do jogo do usuário.
@@ -454,7 +458,7 @@ function OutrosJogos({ vivas, meuId }: { vivas: PartidaViva[]; meuId: string }) 
     <>
       {ordem.map((s) => (
         <div key={s} className="coluna" style={{ gap: 0 }}>
-          <h3 className="pequeno fraco" style={{ margin: "8px 0 4px" }}>{NOME_COMPETICAO[s]}</h3>
+          <h3 className="pequeno fraco" style={{ margin: "8px 0 4px" }}>{nomeDaCompeticao(s)}</h3>
           {porSerie.get(s)!.map((pv) => <LinhaAoVivo key={pv.partidaId} pv={pv} meuId={meuId} p={partidas.get(pv.partidaId)!} />)}
         </div>
       ))}

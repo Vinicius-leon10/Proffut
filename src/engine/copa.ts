@@ -38,7 +38,8 @@ const ORDEM_SERIE = { A: 0, B: 1, C: 2, D: 3 } as const;
 
 /** Ranking da Copa: Série A, B, C e D, e dentro de cada uma a reputação do clube. */
 export function rankingDaCopa(estado: EstadoJogo): string[] {
-  return Object.values(estado.clubes)
+  const nacionais = Object.values(estado.clubes).filter((c): c is typeof c & { serie: keyof typeof ORDEM_SERIE } => c.serie in ORDEM_SERIE);
+  return nacionais
     .sort((a, b) => ORDEM_SERIE[a.serie] - ORDEM_SERIE[b.serie] || b.reputacao - a.reputacao || a.id.localeCompare(b.id))
     .map((c) => c.id);
 }

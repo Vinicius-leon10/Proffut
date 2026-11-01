@@ -38,7 +38,7 @@ const IDADE_PAPEL: Record<Papel, [number, number]> = {
   jovem: [17, 21],
 };
 
-const ESTRANGEIROS_POR_SERIE: Record<SerieClube, number> = { A: 0.12, B: 0.05, C: 0.02, D: 0.01 };
+const ESTRANGEIROS_POR_SERIE: Record<SerieClube, number> = { A: 0.12, B: 0.05, C: 0.02, D: 0.01, estadual: 0, exterior: 0 };
 
 export function limitar(valor: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, valor));
@@ -122,8 +122,11 @@ export function criarJogador(rng: Rng, o: OpcoesJogador): Jogador {
 /** Os titulares e um reserva por posição (16): elenco de quem só entra em campo na Copa do Brasil. */
 const MOLDE_COPA = MOLDE.filter(([posicao, , papel], i) => papel === "titular" || (papel === "reserva" && MOLDE.findIndex(([p, , q]) => p === posicao && q === "reserva") === i));
 
-/** Gera o elenco inteiro de um clube (26 jogadores) dentro da faixa de força dele. */
-export function gerarElenco(rng: Rng, clube: Pick<Clube, "id" | "serie" | "forcaElenco">, proximoId: () => number, molde = MOLDE): Jogador[] {
+/**
+ * Gera o elenco inteiro de um clube (26 jogadores) dentro da faixa de força dele. `doPais`: nacionalidade dos
+ * jogadores de um clube de fora do Brasil.
+ */
+export function gerarElenco(rng: Rng, clube: Pick<Clube, "id" | "serie" | "forcaElenco">, proximoId: () => number, molde = MOLDE, doPais?: string): Jogador[] {
   const { min, max } = clube.forcaElenco;
   const pEstrangeiro = ESTRANGEIROS_POR_SERIE[clube.serie];
   const nomes = new Set<string>();
@@ -132,7 +135,7 @@ export function gerarElenco(rng: Rng, clube: Pick<Clube, "id" | "serie" | "forca
     const [i0, i1] = IDADE_PAPEL[papel];
     const forca = min + (max - min) * rng.real(q0, q1);
     const idade = rng.int(i0, i1);
-    const nacionalidade = papel !== "jovem" && rng.chance(pEstrangeiro) ? rng.escolher(NACIONALIDADES_ESTRANGEIRAS) : "BRA";
+    const nacionalidade = doPais ?? (papel !== "jovem" && rng.chance(pEstrangeiro) ? rng.escolher(NACIONALIDADES_ESTRANGEIRAS) : "BRA");
     let jogador = criarJogador(rng, { id: proximoId(), posicao, lado: lado ?? undefined, forca, idade, nacionalidade, clubeId: clube.id });
     for (let tentativa = 0; tentativa < 5 && nomes.has(jogador.nome); tentativa++) {
       jogador = { ...jogador, nome: gerarNome(rng, nacionalidade) };
@@ -161,9 +164,10 @@ export interface JogadorReal {
  * Elenco real do clube. Posição com menos gente que o mínimo para jogar (um a mais que o mínimo do
  * mercado) ganha reservas gerados.
  */
-export function elencoReal(rng: Rng, clube: Pick<Clube, "id" | "forcaElenco">, reais: JogadorReal[], proximoId: () => number): Jogador[] {
+export function elencoReal(rng: Rng, clube: Pick<Clube, "id" | "forcaElenco">, reais: JogadorReal[], proximoId: () => number, doPais?: string): Jogador[] {
+  // Nos clubes de fora, quem não tem nacionalidade nos dados é do país do clube (nos brasileiros, do Brasil).
   const elenco = reais.map((r) => ({
-    ...criarJogador(rng, { id: proximoId(), posicao: r.posicao, lado: r.lado, forca: r.forca, idade: r.idade, nacionalidade: r.nacionalidade, clubeId: clube.id }),
+    ...criarJogador(rng, { id: proximoId(), posicao: r.posicao, lado: r.lado, forca: r.forca, idade: r.idade, nacionalidade: r.nacionalidade ?? doPais, clubeId: clube.id }),
     nome: r.nome,
   }));
   const { min, max } = clube.forcaElenco;
@@ -171,18 +175,18 @@ export function elencoReal(rng: Rng, clube: Pick<Clube, "id" | "forcaElenco">, r
   const [i0, i1] = IDADE_PAPEL.reserva;
   for (const posicao of Object.keys(MINIMO_POSICAO) as Posicao[]) {
     while (elenco.filter((j) => j.posicao === posicao).length < MINIMO_POSICAO[posicao] + 1) {
-      elenco.push(criarJogador(rng, { id: proximoId(), posicao, forca: min + (max - min) * rng.real(q0, q1), idade: rng.int(i0, i1), clubeId: clube.id }));
+      elenco.push(criarJogador(rng, { id: proximoId(), posicao, forca: min + (max - min) * rng.real(q0, q1), idade: rng.int(i0, i1), nacionalidade: doPais, clubeId: clube.id }));
     }
   }
   return elenco;
 }
 
-/** Jovem da base: 16 a 18 anos, força baixa e potencial ligado ao porte do clube. */
-export function gerarJovem(rng: Rng, clube: Pick<Clube, "id" | "forcaElenco">, posicao: Posicao, id: number): Jogador {
+/** Jovem da base: 16 a 18 anos, força baixa e potencial ligado ao porte do clube. `doPais`: clube de fora do Brasil. */
+export function gerarJovem(rng: Rng, clube: Pick<Clube, "id" | "forcaElenco">, posicao: Posicao, id: number, doPais?: string): Jogador {
   const { min, max } = clube.forcaElenco;
   const forca = rng.int(Math.max(20, min - 14), Math.max(25, min + 2));
   const potencial = limitar(rng.int(min, max + 6), forca + 5, 95);
-  return criarJogador(rng, { id, posicao, forca, idade: rng.int(16, 18), potencial, clubeId: clube.id });
+  return criarJogador(rng, { id, posicao, forca, idade: rng.int(16, 18), potencial, nacionalidade: doPais, clubeId: clube.id });
 }
 
 /** Jogador sem clube, para o mercado de livres. */
