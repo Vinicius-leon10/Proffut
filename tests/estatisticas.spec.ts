@@ -14,14 +14,13 @@ async function numeros(page: Page, nome: string): Promise<[number, number]> {
   return [m, v];
 }
 const soma = ([a, b]: [number, number]) => a + b;
-const abaDaPartida = (page: Page, nome: string) => page.locator(".tela-cheia").getByRole("tab", { name: nome }).click();
 
 test("R34 estatísticas da partida: ataques, ataques perigosos, posse de bola, escanteios, cartões e chutes, que andam com o jogo e batem com os lances", async ({ page }) => {
   await page.clock.install();
   await novoJogo(page);
   await irParaOMeuJogo(page);
   await botao(page, "Começar o jogo").click();
-  await abaDaPartida(page, "Estatísticas");
+  // As estatísticas ficam na tela do jogo, sem aba (R56).
   for (const nome of ESTATISTICAS) await expect(page.locator(".tela-cheia").getByRole("group", { name: nome, exact: true })).toHaveCount(1);
 
   // Os números andam com o jogo.
@@ -52,7 +51,6 @@ test("R34 estatísticas da partida: ataques, ataques perigosos, posse de bola, e
   // Cartões: os mesmos dos lances de cada time (o segundo amarelo conta como amarelo e vermelho).
   const amarelos = await numeros(page, "Cartões amarelos");
   const vermelhos = await numeros(page, "Cartões vermelhos");
-  await abaDaPartida(page, "Lances");
   const escudoDoMandante = await page.locator(".placar .time").first().locator("img.escudo").getAttribute("src");
   const deCadaTime = async (texto: RegExp): Promise<[number, number]> => {
     const doMandante = await page.locator(".tela-cheia .lance").filter({ hasText: texto })
@@ -83,8 +81,7 @@ test("R35 aviso de pressão: quando o adversário domina os últimos 15 minutos,
   const [deles, nossos] = (await aviso.textContent())!.match(/(\d+) ataques? perigosos? contra (\d+)/)!.slice(1).map(Number);
   expect(deles, "o adversário tem pelo menos o dobro de ataques perigosos").toBeGreaterThanOrEqual(2 * nossos);
 
-  // As estatísticas mostram a mesma pressão.
-  await abaDaPartida(page, "Estatísticas");
+  // As estatísticas, na mesma tela, mostram a mesma pressão.
   const pressao = await numeros(page, "Pressão nos últimos 15 minutos");
   const meuLado = (await page.locator(".placar .time").first().textContent())!.includes(nomeDele) ? 1 : 0;
   expect([pressao[meuLado], pressao[1 - meuLado]]).toEqual([nossos, deles]);
@@ -97,4 +94,46 @@ test("R35 aviso de pressão: quando o adversário domina os últimos 15 minutos,
   await expect(relogio).toHaveText("Intervalo");
   await expect(page.getByText("Faça substituições ou mude a tática")).toBeVisible();
   await expect(aviso).toHaveCount(0);
+});
+
+test("R56 na partida, as estatísticas ficam fixas na tela do jogo, no lugar da aba Lances e com os lances embaixo; das abas só fica a Rodada (e as Notas no fim)", async ({ page }) => {
+  await page.clock.install();
+  await novoJogo(page);
+  await irParaOMeuJogo(page);
+  await botao(page, "Começar o jogo").click();
+  const tela = page.locator(".tela-cheia");
+  const conteudo = tela.locator(".conteudo");
+
+  // Sem as abas: as estatísticas já estão na tela do jogo, sem tocar em nada.
+  for (const nome of ["Lances", "Estatísticas", "Rodada", "Notas"]) await expect(tela.getByRole("tab", { name: nome, exact: true })).toHaveCount(0);
+  for (const nome of ESTATISTICAS) await expect(conteudo.getByRole("group", { name: nome, exact: true })).toHaveCount(1);
+  await expect(conteudo.getByRole("group", { name: "Ataques", exact: true })).toBeInViewport();
+
+  // Os lances continuam, embaixo das estatísticas.
+  const lance = conteudo.locator(".lance").first();
+  for (let i = 0; i < 60 && !(await lance.count()); i++) await page.clock.runFor(340);
+  await expect(lance).toBeVisible();
+  const estatisticas = (await conteudo.locator(".estatisticas").boundingBox())!;
+  expect((await lance.boundingBox())!.y, "os lances ficam embaixo das estatísticas").toBeGreaterThanOrEqual(estatisticas.y + estatisticas.height - 1);
+
+  // A caixa Rodada abre os jogos da rodada (o meu também), e o jogo segue enquanto ela está aberta.
+  const relogio = page.locator(".relogio");
+  const antes = (await relogio.textContent())!;
+  await tela.getByRole("button", { name: "Rodada", exact: true }).click();
+  const folha = page.getByRole("dialog");
+  await expect(folha.getByRole("heading", { name: "Rodada", exact: true })).toBeVisible();
+  await expect(folha.locator(".jogo-rodada.meu")).toHaveCount(1);
+  expect(await folha.locator(".jogo-rodada").count()).toBeGreaterThan(1);
+  await page.clock.runFor(2_000);
+  await expect(relogio).not.toHaveText(antes);
+  await folha.getByRole("button", { name: "Fechar" }).click();
+  await expect(folha).toHaveCount(0);
+
+  // As Notas só no fim (R45), numa caixa ao lado da Rodada; as estatísticas continuam na tela.
+  await expect(tela.getByRole("button", { name: "Notas", exact: true })).toHaveCount(0);
+  await botao(page, "Fim ⏭").click();
+  await expect(relogio).toHaveText("Fim");
+  await expect(tela.getByRole("button", { name: "Notas", exact: true })).toBeVisible();
+  await expect(tela.getByRole("button", { name: "Rodada", exact: true })).toBeVisible();
+  await expect(conteudo.getByRole("group", { name: "Ataques", exact: true })).toBeVisible();
 });

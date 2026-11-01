@@ -1,5 +1,5 @@
 // Notas dos jogadores na partida (0 a 10) e o melhor em campo, a partir dos lances narrados. Usam sorteio próprio:
-// placar e lances não mudam. Servem ao vivo (aba Notas) e no fim do jogo (média da temporada na ficha).
+// placar e lances não mudam. Servem na partida (caixa Notas, no fim) e depois do jogo (média da temporada na ficha).
 import { NOTAS } from "./constantes";
 import type { LadoVivo, PartidaViva } from "./partida";
 import { rngPara } from "./rng";

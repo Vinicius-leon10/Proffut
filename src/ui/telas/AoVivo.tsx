@@ -59,7 +59,8 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   const [iniciado, setIniciado] = useState(false);
   const [pausado, setPausado] = useState(false);
   const [velocidade, setVelocidade] = useState<1 | 2>(estado.config.velocidade === 1 ? 1 : 2);
-  const [aba, setAba] = useState<"lances" | "estatisticas" | "notas" | "rodada">("lances");
+  // A rodada e as notas abrem por cima do jogo, que segue (ao contrário das trocas e da tática).
+  const [folha, setFolha] = useState<"rodada" | "notas" | null>(null);
   const [painel, setPainel] = useState<"trocas" | "tatica" | "adversario" | null>(null);
   const [, setTick] = useState(0);
   const avisosVistos = useRef(0);
@@ -69,13 +70,16 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   som.current = somLigado;
   const lancesOuvidos = useRef(0);
   const suspense = useRef(0);
+  // Parada no intervalo: nenhum minuto a mais até o toque no ▶. Dois toques do relógio antes de a tela parar
+  // passavam do intervalo e paravam no 46' (R57).
+  const noIntervalo = useRef(false);
 
   const todasTerminadas = vivas.every((v) => v.terminada);
 
   useEffect(() => () => pararSons(), []);
 
   const passo = useCallback(() => {
-    if (Date.now() < suspense.current) return;
+    if (Date.now() < suspense.current || noIntervalo.current) return;
     for (const pv of vivas) if (!pv.terminada) avancarMinuto(pv, estado.jogadores);
     const novos = meu.narracao.slice(lancesOuvidos.current);
     lancesOuvidos.current = meu.narracao.length;
@@ -85,7 +89,10 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
       avisar(meu.avisos[meu.avisos.length - 1]);
       avisosVistos.current = meu.avisos.length;
     }
-    if (meu.intervalo) setPausado(true);
+    if (meu.intervalo) {
+      noIntervalo.current = true;
+      setPausado(true);
+    }
     setTick((t) => t + 1);
   }, [vivas, estado.jogadores, meu, meuLado, avisar]);
 
@@ -108,6 +115,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
     if (som.current) liberarSom();
     // Volta do intervalo: o árbitro apita o começo do segundo tempo.
     if (pausado && meu.intervalo && som.current) apito("inicio");
+    noIntervalo.current = false;
     setPausado(!pausado);
   };
 
@@ -214,39 +222,30 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
               <p className="pequeno"><b>Intervalo.</b> Faça substituições ou mude a tática, e toque em ▶ para o segundo tempo.</p>
             </div>
           )}
-          <div style={{ padding: "8px 16px 0" }}>
-            <Segmentado
-              // As notas só no fim da partida (R45).
-              opcoes={[
-                { valor: "lances", rotulo: "Lances" }, { valor: "estatisticas", rotulo: "Estatísticas" },
-                ...(meu.terminada ? [{ valor: "notas" as const, rotulo: "Notas" }] : []), { valor: "rodada", rotulo: "Rodada" },
-              ]}
-              valor={aba}
-              aoMudar={setAba}
-            />
+          {/* No lugar das abas, só a caixa da Rodada (R56); a das notas aparece no fim da partida (R45). */}
+          <div className="linha" style={{ padding: "8px 16px 0", gap: 8 }}>
+            {meu.terminada && <button className="botao pequeno cresce" onClick={() => setFolha("notas")}>Notas</button>}
+            <button className="botao pequeno cresce" onClick={() => setFolha("rodada")}>Rodada</button>
           </div>
+          {/* As estatísticas ficam fixas na tela do jogo, com os lances embaixo (R56). */}
           <div className="conteudo" style={{ paddingTop: 8 }}>
-            {aba === "lances" ? (
-              lances.length ? lances.map((e, i) => (
-                <div key={lances.length - i} className={classeLance(e)}>
-                  <span className="min">{e.tipo === "intervalo" || e.tipo === "fim" ? "" : `${e.min}'`}</span>
-                  {e.tipo !== "intervalo" && e.tipo !== "fim" && (
-                    <span className="escudo-lance"><Escudo clube={e.lado === 0 ? clubeM : clubeV} tamanho={18} /></span>
-                  )}
-                  <span>{prefixo(e)}{e.texto}</span>
-                </div>
-              )) : <p className="vazio">A bola vai rolar...</p>
-            ) : aba === "estatisticas" ? (
-              <EstatisticasDaPartida pv={meu} meuLado={meuLado} />
-            ) : aba === "notas" ? (
-              <NotasDaPartida pv={meu} meuLado={meuLado} />
-            ) : (
-              <OutrosJogos vivas={vivas} meuId={meuId} />
-            )}
+            <EstatisticasDaPartida pv={meu} meuLado={meuLado} />
+            <h3 className="pequeno fraco" style={{ margin: "8px 0 0" }}>Lances</h3>
+            {lances.length ? lances.map((e, i) => (
+              <div key={lances.length - i} className={classeLance(e)}>
+                <span className="min">{e.tipo === "intervalo" || e.tipo === "fim" ? "" : `${e.min}'`}</span>
+                {e.tipo !== "intervalo" && e.tipo !== "fim" && (
+                  <span className="escudo-lance"><Escudo clube={e.lado === 0 ? clubeM : clubeV} tamanho={18} /></span>
+                )}
+                <span>{prefixo(e)}{e.texto}</span>
+              </div>
+            )) : <p className="vazio">A bola vai rolar...</p>}
           </div>
         </>
       )}
 
+      {folha === "rodada" && <Folha titulo="Rodada" aoFechar={() => setFolha(null)}><OutrosJogos vivas={vivas} meuId={meuId} /></Folha>}
+      {folha === "notas" && <Folha titulo="Notas" aoFechar={() => setFolha(null)}><NotasDaPartida pv={meu} meuLado={meuLado} /></Folha>}
       {painel === "trocas" && <PainelTrocas pv={meu} lado={meuLado} aoFechar={() => setPainel(null)} />}
       {painel === "tatica" && <PainelTatica pv={meu} lado={meuLado} aoFechar={() => setPainel(null)} />}
       {painel === "adversario" && <FolhaDoTime lado={meu.lados[meuLado === 0 ? 1 : 0]} aoFechar={() => setPainel(null)} />}
@@ -299,7 +298,7 @@ function PreJogo({ meu, meuLado, aoComecar, aoVoltar }: { meu: PartidaViva; meuL
 function EstatisticasDaPartida({ pv, meuLado }: { pv: PartidaViva; meuLado: 0 | 1 }) {
   const estado = useJogo();
   const e = pv.estatisticas;
-  if (!e) return <p className="vazio">Esta partida não tem estatísticas.</p>;
+  if (!e) return null;
   const [m, v] = e.lados;
   const par = (f: (l: EstatisticasLado) => number): [number, number] => [f(m), f(v)];
   const [cm, cv] = [cartoes(pv.lados[0]), cartoes(pv.lados[1])];

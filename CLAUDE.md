@@ -46,7 +46,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R55 rodando a cada mudança, antes
+ponta R01–R57 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -75,13 +75,15 @@ intervalo, 3 no fim; no pênalti: apito, burburinho e "Pênalti!"; no gol, sem n
 robótica feia): gol do meu time = festa da torcida (`FESTA`, o som mais alto: ~−14 dB contra ~−16 dB do apito), gol do
 adversário = `vaia()` (16 vozes graves com vibrato nos formantes do "u", ~−18 dB); pênalti perdido: "uhhh". O pênalti é marcado num minuto (evento `penalti`) e cobrado no minuto
 seguinte (`PartidaViva.penaltiPendente`; o tempo não acaba antes da cobrança) e a partida espera 2,5 s antes da
-cobrança. No iPhone o som só sai depois de um toque (`liberarSom` em "Começar o jogo" e no ▶) e a chave do
+cobrança. No intervalo, `noIntervalo` (AoVivo) segura o relógio até o toque no ▶: dois toques do relógio antes de a
+tela parar passavam do intervalo (R57). No iPhone o som só sai depois de um toque (`liberarSom` em "Começar o jogo" e no ▶) e a chave do
 silencioso cala o apito e a torcida. Liga/desliga: botão de som na partida e Configurações → Sons da partida
 (`config.som`, opcional: falta = ligado). Os testes (R25, R27; `escutarSons` em `tests/ajuda.ts`) escutam os sons
 trocando `OscillatorNode.start`, `AudioBufferSourceNode.start` e `speechSynthesis.speak` no navegador de teste, e
 anotam o volume de cada som (maior valor marcado nos ganhos por onde ele passa) e os sons do mesmo instante.
 
-**Estatísticas da partida (out/2026, `partida.ts` e `AoVivo.tsx`):** aba Estatísticas na partida ao vivo, no modelo da
+**Estatísticas da partida (out/2026, `partida.ts` e `AoVivo.tsx`):** fixas na tela do jogo, em cima dos lances (sem abas:
+fica só a caixa Rodada, que abre os outros jogos numa folha sem parar o jogo, e a Notas no fim; R56), no modelo da
 captura que o usuário mandou: ataques, ataques perigosos e posse em anéis; escanteios e cartões; chutes no gol e para fora
 ou bloqueados; pressão dos últimos 15 minutos (ataques perigosos). Mandante à esquerda como no placar; meu time em verde
 (`--esmeralda`), o adversário em azul (`--azul`). Contam os lances de verdade (cada `finalizacao` e pênalti vira chute,
@@ -140,8 +142,8 @@ pelos lances narrados (gol, passe, chute no gol/fora, defesa e pênalti defendid
 ou cometido), gols sofridos e jogo sem sofrer gol (goleiro e defensores), o placar, a força perto da média da partida e
 uma variação com sorteio próprio (`notas/<partida>/<jogador>`: placar e lances não mudam). Minutos pela narração
 (trocas, vermelho, lesão; no máximo 90); quem jogou menos que o tempo até ali (máx. 60) fica perto da base. Melhor em
-campo: maior nota com 30+ minutos. Na aba Notas da partida, que só aparece no fim do jogo (pedido do usuário: "Notas
-deixe pra aparecer apenas no final da partida", R45); no fim de cada jogo (todos os jogos) a nota entra
+campo: maior nota com 30+ minutos. Na caixa Notas da partida (abre numa folha), que só aparece no fim do jogo (pedido do
+usuário: "Notas deixe pra aparecer apenas no final da partida", R45); no fim de cada jogo (todos os jogos) a nota entra
 em `EstatisticasJogador.notas`/`avaliados` (média na ficha, coluna Nota) e `Partida.melhor`. Números em `NOTAS`
 (constantes.ts): média ~6,75, melhor em campo ~8,4, quem fez gol ~7,9, quem perdeu ~6,3. R41.
 

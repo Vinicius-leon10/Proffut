@@ -96,11 +96,13 @@ test("R52 antes do jogo, o campinho fica no lugar da lista de titulares: um toqu
   // que saiu não, a não ser chamado do banco numa substituição: a automática, de quem se machuca, pode chamá-lo.
   await botao(page, "Começar o jogo").click();
   await botao(page, "Fim ⏭").click();
-  const abaNotas = page.locator(".tela-cheia").getByRole("tab", { name: "Notas", exact: true });
-  await expect(abaNotas).toBeVisible();
+  const caixaNotas = page.locator(".tela-cheia").getByRole("button", { name: "Notas", exact: true });
+  await expect(caixaNotas).toBeVisible();
   const [entraEntrou, saiEntrou] = [await entrouNoJogo(page, entra), await entrouNoJogo(page, sai)];
-  await abaNotas.click();
-  const meus = await page.locator(".tela-cheia .notas .time").first().locator(".item .nome").allTextContents();
+  await caixaNotas.click();
+  const notasDoMeuTime = page.getByRole("dialog").locator(".notas .time").first();
+  await expect(notasDoMeuTime).toBeVisible();
+  const meus = await notasDoMeuTime.locator(".item .nome").allTextContents();
   expect(meus).toContain(entra);
   expect(entraEntrou, `${entra} entrou numa substituição`).toBe(false);
   if (!saiEntrou) expect(meus).not.toContain(sai);

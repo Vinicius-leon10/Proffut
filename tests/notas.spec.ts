@@ -2,17 +2,19 @@ import { aba, botao, expect, irParaOMeuJogo, novoJogo, test } from "./ajuda";
 
 const numero = (texto: string) => Number(texto.trim().replace(",", "."));
 
-test("R41 notas: no fim da partida, a aba Notas mostra a nota de cada jogador que entrou em campo e o melhor em campo; a ficha mostra a nota média", async ({ page }) => {
+test("R41 notas: no fim da partida, a caixa Notas mostra a nota de cada jogador que entrou em campo e o melhor em campo; a ficha mostra a nota média", async ({ page }) => {
   await novoJogo(page);
   await irParaOMeuJogo(page);
   await botao(page, "Começar o jogo").click();
   // As notas saem no fim da partida (R45).
   await botao(page, "Fim ⏭").click();
   await expect(page.locator(".relogio")).toHaveText("Fim");
-  await page.locator(".tela-cheia").getByRole("tab", { name: "Notas" }).click();
+  // A caixa Notas abre as notas por cima da tela do jogo (R56).
+  await page.locator(".tela-cheia").getByRole("button", { name: "Notas", exact: true }).click();
+  const folha = page.getByRole("dialog");
 
   // Os dois times, com a nota (3 a 10, uma casa) e os minutos de cada um.
-  const linhas = page.locator(".tela-cheia .notas .item");
+  const linhas = folha.locator(".notas .item");
   await expect.poll(() => linhas.count()).toBeGreaterThanOrEqual(22);
   const jogadores: { nome: string; nota: number; minutos: number }[] = [];
   for (const linha of await linhas.all()) {
@@ -30,7 +32,7 @@ test("R41 notas: no fim da partida, a aba Notas mostra a nota de cada jogador qu
   }
 
   // O melhor em campo tem a maior nota entre quem jogou pelo menos 30 minutos.
-  const melhor = page.locator(".tela-cheia .melhor-em-campo");
+  const melhor = folha.locator(".melhor-em-campo");
   await expect(melhor).toContainText("Melhor em campo");
   const notaDoMelhor = numero((await melhor.locator(".nota").textContent())!);
   const nomeDoMelhor = (await melhor.locator(".nome").textContent())!.trim();
@@ -38,8 +40,10 @@ test("R41 notas: no fim da partida, a aba Notas mostra a nota de cada jogador qu
   for (const j of jogadores.filter((x) => x.minutos >= 30)) expect(notaDoMelhor).toBeGreaterThanOrEqual(j.nota);
 
   // Depois do jogo, a ficha de quem jogou mostra a nota média da temporada (aqui, a nota desse jogo).
-  const meus = page.locator(".tela-cheia .notas .time").first().locator(".item");
+  const meus = folha.locator(".notas .time").first().locator(".item");
   const primeiro = { nome: (await meus.first().locator(".nome").textContent())!.trim(), nota: (await meus.first().locator(".nota").textContent())! };
+  await folha.getByRole("button", { name: "Fechar" }).click();
+  await expect(folha).toHaveCount(0);
   await page.getByRole("button", { name: "Continuar", exact: true }).click();
   await aba(page, "Elenco");
   const exato = new RegExp(`^${primeiro.nome.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`);
@@ -48,25 +52,27 @@ test("R41 notas: no fim da partida, a aba Notas mostra a nota de cada jogador qu
   await expect(temporada.getByRole("cell").last()).toHaveText(primeiro.nota);
 });
 
-test("R45 a aba Notas só aparece no fim da partida: durante o jogo e no intervalo ela não está lá", async ({ page }) => {
+test("R45 as Notas só aparecem no fim da partida: durante o jogo e no intervalo a caixa delas não está lá", async ({ page }) => {
   await page.clock.install();
   await novoJogo(page);
   await irParaOMeuJogo(page);
   await botao(page, "Começar o jogo").click();
-  const aba = (nome: string) => page.locator(".tela-cheia").getByRole("tab", { name: nome, exact: true });
-  await expect(aba("Estatísticas")).toBeVisible();
-  await expect(aba("Notas")).toHaveCount(0);
+  // Ao lado da Rodada, a caixa das notas (R56) só aparece no fim.
+  const caixa = (nome: string) => page.locator(".tela-cheia").getByRole("button", { name: nome, exact: true });
+  await expect(caixa("Rodada")).toBeVisible();
+  await expect(caixa("Notas")).toHaveCount(0);
 
   // No intervalo também não. Minuto a minuto até lá, como no R35.
   const relogio = page.locator(".relogio");
   for (let i = 0; i < 60 && (await relogio.textContent()) !== "Intervalo"; i++) await page.clock.runFor(340);
   await expect(relogio).toHaveText("Intervalo");
-  await expect(aba("Notas")).toHaveCount(0);
+  await expect(caixa("Notas")).toHaveCount(0);
 
-  // No fim, a aba aparece com as notas e o melhor em campo.
+  // No fim, a caixa aparece e abre as notas e o melhor em campo.
   await botao(page, "Fim ⏭").click();
   await expect(relogio).toHaveText("Fim");
-  await aba("Notas").click();
-  await expect(page.locator(".tela-cheia .melhor-em-campo")).toContainText("Melhor em campo");
-  await expect.poll(() => page.locator(".tela-cheia .notas .item").count()).toBeGreaterThanOrEqual(22);
+  await caixa("Notas").click();
+  const folha = page.getByRole("dialog");
+  await expect(folha.locator(".melhor-em-campo")).toContainText("Melhor em campo");
+  await expect.poll(() => folha.locator(".notas .item").count()).toBeGreaterThanOrEqual(22);
 });
