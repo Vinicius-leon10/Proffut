@@ -102,10 +102,12 @@ some no intervalo e no fim. Aparece em ~1 de 5 jogos entre times iguais e em ~4 
 aplicativos que o usuário mandou (capturas): campo deitado com a bola e o caminho dela no minuto, a sombra do time com a
 bola (do gol dele até a bola, no mínimo o meio-campo, com a ponta virada para o ataque) e o rótulo do lance ("Em posse",
 "Bola segura", "Ataque", "Ataque perigoso", "Chute para fora", "Chute defendido", "GOL!", "Escanteio", "Falta", "Pênalti!",
-"Cartão amarelo"...) com o escudo e o nome do time e, perto da bola, o nome do jogador. Fica no alto da tela da partida,
-no lugar do placar grande e dos escudos (pedido do usuário); o placar vira uma faixa fina em cima do campo
-(`.placar.ao-vivo`: escudos de 26 px, nome, força média, gols e relógio; o escudo do adversário ainda abre o time
-titular). Antes do jogo o placar grande continua (R46). O motor: `PartidaViva.campo` (só na partida do usuário, só na
+"Cartão amarelo"...) com o escudo e o nome do time e, perto da bola, o nome do jogador. Fica no alto da tela da partida, de
+ponta a ponta, no lugar do placar grande e dos escudos, com o relógio numa caixinha em cima (pedido e captura de exemplo
+do usuário); o placar vira uma barra embaixo do campo (`.placar.ao-vivo`: escudos de 30 px, nome, força média, gols, o
+rótulo da partida e a cor de cada time nas pontas; o escudo do adversário ainda abre o time titular). O rótulo do lance
+fica no meio do lado do campo longe da bola, com o nome do jogador embaixo; a bola tem a cor do time com ela. Antes do
+jogo o placar grande continua (R46). O motor: `PartidaViva.campo` (só na partida do usuário, só na
 memória) guarda o `LanceDoCampo` do último minuto; no fim de `avancarMinuto`, `lanceDoMinuto` desenha o minuto a partir
 do lance principal decidido pelo jogo (`FocoDoMinuto`: chance, escanteio, falta ou cobrança de pênalti), da narração do
 minuto (gol > pênalti perdido > pênalti marcado > chute > cartão > fim do tempo > falta > escanteio) e, sem lance

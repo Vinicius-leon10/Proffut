@@ -159,18 +159,20 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   // O adversário dominando os últimos 15 minutos: avisa e convida a mexer no time (no intervalo já há o convite).
   const pressao = meu.estatisticas && !meu.terminada && !meu.intervalo ? sobPressao(meu.estatisticas, meuLado) : null;
   // O escudo do adversário abre o time titular dele no campinho.
+  // Cada time com a sua cor, como nas estatísticas: o meu em verde, o adversário em azul.
+  const corDoLado = (lado: 0 | 1) => (lado === meuLado ? "var(--esmeralda)" : "var(--azul)");
   const escudoNoPlacar = (lado: 0 | 1, clube: Clube, tamanho: number) =>
     lado === meuLado ? <Escudo clube={clube} tamanho={tamanho} /> : (
       <button className="escudo-botao" onClick={() => setPainel("adversario")} aria-label={`Ver o time titular ${comArtigo("do", clube)}`}>
         <Escudo clube={clube} tamanho={tamanho} />
       </button>
     );
-  // Antes do jogo, o placar grande com a força média em cima do escudo (R46); na partida, uma faixa fina com o campo
-  // 2D embaixo (R60).
+  // Antes do jogo, o placar grande com a força média em cima do escudo (R46); na partida, o campo 2D no alto e o placar
+  // numa barra embaixo dele, como no exemplo do usuário (R60).
   const timeNoPlacar = (lado: 0 | 1, l: LadoVivo, clube: Clube) =>
     iniciado ? (
       <div className="time">
-        {escudoNoPlacar(lado, clube, 26)}
+        {escudoNoPlacar(lado, clube, 30)}
         <span className="nome-e-forca"><span className="nome corta">{clube.nome}</span><MediaDoTime lado={l} /></span>
       </div>
     ) : (
@@ -179,22 +181,32 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
 
   return (
     <div className="tela-cheia">
-      <div className={iniciado ? "placar ao-vivo" : "placar"}>
-        <div className="mini fraco centro" style={{ marginBottom: 6 }}>{rotuloPartida(partida)}</div>
-        <div className="times">
-          {timeNoPlacar(0, lm, clubeM)}
-          <div className="centro">
-            <div className="gols">{lm.gols} <span className="muito-fraco">x</span> {lv.gols}</div>
-            <div className="relogio">{relogio(meu)}</div>
+      {iniciado ? (
+        <div className="placar ao-vivo" style={{ "--cor-m": corDoLado(0), "--cor-v": corDoLado(1) } as CSSProperties}>
+          <CampoDaPartida pv={meu} meuLado={meuLado} duracao={Math.round(INTERVALO_MS[velocidade] * 0.8)} relogio={relogio(meu)} />
+          <div className="times">
+            {timeNoPlacar(0, lm, clubeM)}
+            <div className="centro">
+              <div className="gols">{lm.gols} <span className="muito-fraco">x</span> {lv.gols}</div>
+              <div className="mini fraco corta">{rotuloPartida(partida)}</div>
+            </div>
+            {timeNoPlacar(1, lv, clubeV)}
           </div>
-          {timeNoPlacar(1, lv, clubeV)}
         </div>
-        {iniciado ? (
-          <CampoDaPartida pv={meu} meuLado={meuLado} duracao={Math.round(INTERVALO_MS[velocidade] * 0.8)} />
-        ) : (
+      ) : (
+        <div className="placar">
+          <div className="mini fraco centro" style={{ marginBottom: 6 }}>{rotuloPartida(partida)}</div>
+          <div className="times">
+            {timeNoPlacar(0, lm, clubeM)}
+            <div className="centro">
+              <div className="gols">{lm.gols} <span className="muito-fraco">x</span> {lv.gols}</div>
+              <div className="relogio">{relogio(meu)}</div>
+            </div>
+            {timeNoPlacar(1, lv, clubeV)}
+          </div>
           <div style={{ marginTop: 10 }}><Barra valor={progresso} cor="var(--dourado)" /></div>
-        )}
-      </div>
+        </div>
+      )}
 
       {!iniciado ? (
         <PreJogo meu={meu} meuLado={meuLado} aoComecar={comecar} aoVoltar={fechar} />

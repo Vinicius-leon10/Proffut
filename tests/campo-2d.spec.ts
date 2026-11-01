@@ -24,13 +24,18 @@ test("R60 na partida, o campo 2D fica em cima, no lugar do placar grande e dos e
   await expect(campo).toHaveCount(0);
   await botao(page, "Começar o jogo").click();
 
-  // Na partida, o campo fica no alto, em cima dos botões; o placar vira uma faixa fina em cima dele, com escudos pequenos.
+  // Na partida, o campo fica no alto da tela, de ponta a ponta, com o relógio em cima dele (como no exemplo do
+  // usuário); o placar vira uma barra embaixo do campo, com escudos pequenos, e os botões vêm depois.
   await expect(campo).toBeVisible();
   const caixa = (await campo.boundingBox())!;
-  expect(caixa.y + caixa.height).toBeLessThanOrEqual((await page.getByRole("button", { name: "Pausar" }).boundingBox())!.y);
-  expect((await page.locator(".placar .gols").boundingBox())!.y).toBeLessThan(caixa.y);
+  expect(caixa.y, "o campo começa no alto").toBeLessThanOrEqual(1);
+  expect(caixa.width, "de ponta a ponta").toBeCloseTo(page.viewportSize()!.width, 0);
+  await expect(campo.locator(".relogio")).toBeVisible();
+  const gols = (await page.locator(".placar .gols").boundingBox())!;
+  expect(gols.y, "o placar fica embaixo do campo").toBeGreaterThanOrEqual(caixa.y + caixa.height - 1);
+  expect(gols.y + gols.height).toBeLessThanOrEqual((await page.getByRole("button", { name: "Pausar" }).boundingBox())!.y);
   await expect(page.locator(".placar .gols")).toHaveText(/^\d+ x \d+$/);
-  for (const escudo of await page.locator(".placar .time .escudo").all()) expect((await escudo.boundingBox())!.height).toBeLessThanOrEqual(30);
+  for (const escudo of await page.locator(".placar .time .escudo").all()) expect((await escudo.boundingBox())!.height).toBeLessThanOrEqual(32);
   await expect(campo.locator(".bola")).toHaveCount(1);
   await expect(campo.locator(".sombra")).toHaveCount(1);
   // O escudo do adversário continua abrindo o time titular dele.

@@ -35,7 +35,7 @@ const noDesenho = ([x, y]: [number, number]): [number, number] => [1 + (x / 100)
  * O campo 2D da partida (R60), no estilo dos aplicativos de futebol ao vivo: a bola com o caminho do minuto, a sombra
  * do time com a bola (do gol dele até onde chegou, com a ponta virada para o ataque) e o lance com o time e o jogador.
  */
-export function CampoDaPartida({ pv, meuLado, duracao }: { pv: PartidaViva; meuLado: 0 | 1; duracao: number }) {
+export function CampoDaPartida({ pv, meuLado, duracao, relogio }: { pv: PartidaViva; meuLado: 0 | 1; duracao: number; relogio: string }) {
   const estado = useJogo();
   const lance = pv.campo?.lance;
   if (!lance) return null;
@@ -76,24 +76,19 @@ export function CampoDaPartida({ pv, meuLado, duracao }: { pv: PartidaViva; meuL
         </g>
         {pontos.length > 1 && <polyline points={pontos.map((p) => p.join(",")).join(" ")} className="caminho" />}
         {pontos.slice(0, -1).map(([x, y], i) => <circle key={i} cx={x} cy={y} r={0.9} className="toque" style={{ fill: cor(lance.lado) }} />)}
+        {/* A bola na cor do time que está com ela. */}
         <g className="bola" style={{ transform: `translate(${bx}px, ${by}px)`, transitionDuration: `${duracao}ms` }}>
-          <circle r={3.2} className="brilho" />
-          <circle r={1.5} className="miolo" />
+          <circle r={3.4} className="brilho" />
+          <circle r={1.6} className="miolo" style={{ fill: cor(lance.lado) }} />
         </g>
       </svg>
-      {/* O rótulo fica do outro lado do campo, longe da bola. */}
-      <div className={`lance-do-campo ${fim[0] > 50 ? "esquerda" : "direita"}${lance.acao === "gol" ? " gol" : ""}`} style={{ borderColor: cor(lance.quem) }}>
+      <div className="relogio-do-campo"><span className="relogio">{relogio}</span></div>
+      {/* O lance no meio do lado do campo longe da bola: o que acontece, o time e quem está no lance. */}
+      <div className={`lance-do-campo ${fim[0] > 50 ? "esquerda" : "direita"}${lance.acao === "gol" ? " gol" : ""}`}>
         <b>{texto}</b>
         <span className="time-do-lance"><Escudo clube={clube} tamanho={16} /><span className="corta">{clube.nome}</span></span>
+        {jogador && <span className="jogador-do-lance">{jogador.nome}</span>}
       </div>
-      {jogador && (
-        <span
-          className={`jogador-do-lance${fim[1] < 30 ? " embaixo" : ""}`}
-          style={{ left: `${Math.min(80, Math.max(20, (bx / COMPRIMENTO) * 100))}%`, top: `${(by / LARGURA) * 100}%` }}
-        >
-          {jogador.nome}
-        </span>
-      )}
     </div>
   );
 }
