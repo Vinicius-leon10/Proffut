@@ -306,7 +306,9 @@ ajustes de equilíbrio pelo que ele sentir jogando.
   `docs/ESCUDOS_TIMES_NOVOS_FONTES.csv`; o zip e a prancha ficam fora do git): `tools/escudos/preparar.py` converte para
   sRGB, deixa transparente o fundo liso claro, corta a margem e reduz para 128 px e 256 cores (18 MB → 1,25 MB, iguais na
   tela); Galo Maringá, Maranguape e São Raimundo-PA ficam com o fundo branco (`MANTER_FUNDO`: o branco de dentro encosta
-  na borda). Desde então todo clube do jogo tem escudo (432; R73 confere os arquivos e as tabelas, também sem internet). `Escudo` usa: o importado no aparelho (Configurações → Escudos, `src/save/escudos.ts`)
+  na borda). Com a correção das listas dos campeonatos (R74) entraram o Real Oruro e o Anzoátegui, e ele mandou os dois
+  escudos (`escudos-faltantes-2.zip`, FootyLogos, fonte no mesmo CSV). Todo clube do jogo tem escudo (434 arquivos: os 16
+  clubes que saíram das listas continuam nos saves antigos; R73 confere os arquivos e as tabelas, também sem internet). `Escudo` usa: o importado no aparelho (Configurações → Escudos, `src/save/escudos.ts`)
   > o do jogo > o desenhado com as cores e a sigla (só se a imagem não carregar). Clube novo sem imagem: desenhado.
 - As fichas dos clubes vêm do remake MIT denisvick-dev/brasfoot (aviso de licença em `data/brasil-2026/LEIAME.md`).
 - Saves antigos precisam continuar abrindo: campo novo em `EstadoJogo` deve ser opcional ou ganhar correção em
@@ -365,7 +367,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `src/save/` | `salvamento.ts`: IndexedDB (`proffut`/`saves`, chaves `jogo:auto`, `resumo:auto`...), exportar/importar `.json`. `aparelho.ts`: checagem do aparelho. `escudos.ts`: escudos importados pelo usuário, que trocam os do jogo só no aparelho (chave `escudos`, id do clube → imagem) |
 | `src/ui/` | React + Zustand. `store.ts` (estado, telas sobrepostas, salvamento 400 ms após cada mudança), `acoes.ts`, `componentes.tsx`, `estilo.css` (visual "opção 3": tokens no `:root`), `sons.ts` (apito, torcida, narrador), `telas/*.tsx` |
 | `tests/` | Testes de ponta a ponta R01…: `*.spec.ts`, passos comuns em `ajuda.ts`, relatório em português em `resumo.ts`, lista em `README.md` |
-| `public/escudos/` | Os 432 escudos dos clubes (`<id>.png`): 156 recortados da prancha que o usuário mandou e 276 do pacote dos times novos (`tools/escudos/preparar.py`); o service worker guarda para jogar sem internet |
+| `public/escudos/` | Os 434 escudos dos clubes (`<id>.png`): 156 recortados da prancha que o usuário mandou e 278 dos pacotes dos times novos (`tools/escudos/preparar.py`); o service worker guarda para jogar sem internet |
 | `data/brasil-2026/` | `clubes.json` (60), `serie-d-reserva.json` (96), `competicoes.json`, `jogadores.json` (elencos reais, gerado por `tools/elencos`), `LEIAME.md` (fontes e licenças) |
 | `tools/` | `times/` (times novos: `wikipedia.py` é o robô da Wikipédia e do Wikidata, `montar.ts` monta clubes e elencos, `wiki.ts` lê fichas e elencos das páginas), `sim/` (calibragem), `e2e/` (capturas de tela), `icones/`, `dados/` (scripts Python dos clubes), `elencos/` (robô dos elencos: `montar.ts` monta `jogadores.json`, `sumulas.ts` lê as súmulas, `fontes-clubes.ts` diz como cada fonte chama os clubes, scripts Python do workflow), `escudos/` (`recortar.py`: prancha de escudos → `public/escudos/<id>.png`, ou um pacote `.json` para importar) |
 
