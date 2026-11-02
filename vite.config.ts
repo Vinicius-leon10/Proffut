@@ -1,12 +1,27 @@
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
+import { createHash } from "node:crypto";
+import { readFileSync, readdirSync } from "node:fs";
 import pacote from "./package.json" with { type: "json" };
+
+// Os escudos (public/escudos) ficam fora da fila do service worker, que guarda um arquivo por vez: com 434 escudos, a
+// versão nova levava quase um minuto para ficar pronta no site publicado (R76). Ficam num cache só deles, com o nome
+// tirado do conteúdo (escudo trocado, cache novo); com o service worker pronto, o app manda a lista e ele baixa os que
+// faltam, vários ao mesmo tempo (src/ui/guardarEscudos.ts e public/guardar-escudos.js).
+const ESCUDOS = readdirSync("public/escudos").filter((f) => f.endsWith(".png")).sort();
+const conteudo = createHash("sha1");
+for (const f of ESCUDOS) conteudo.update(f).update(readFileSync(`public/escudos/${f}`));
+const CACHE_ESCUDOS = `escudos-${conteudo.digest("hex").slice(0, 10)}`;
 
 export default defineConfig({
   // Caminho relativo: o site funciona tanto em /Proffut/ (GitHub Pages) quanto na raiz.
   base: "./",
-  define: { __VERSAO__: JSON.stringify(pacote.version) },
+  define: {
+    __VERSAO__: JSON.stringify(pacote.version),
+    __ESCUDOS__: JSON.stringify(ESCUDOS.map((f) => f.slice(0, -4))),
+    __CACHE_ESCUDOS__: JSON.stringify(CACHE_ESCUDOS),
+  },
   // Os elencos reais (data/brasil-2026/jogadores.json) vão junto no pacote (~120 KB, 30 KB compactados):
   // o jogo precisa deles sem internet e o app guarda tudo no aparelho de uma vez.
   build: { chunkSizeWarningLimit: 700 },
@@ -34,6 +49,11 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
+        globIgnores: ["**/node_modules/**/*", "**/escudos/**"],
+        // Recebe do app a lista dos escudos e baixa os que faltam, fora da tela (public/guardar-escudos.js).
+        importScripts: ["guardar-escudos.js"],
+        // O escudo que aparece na tela é guardado na hora; sem internet, sai do aparelho.
+        runtimeCaching: [{ urlPattern: /\/escudos\/[^/]+\.png$/, handler: "CacheFirst", options: { cacheName: CACHE_ESCUDOS } }],
       },
     }),
   ],

@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { registerSW } from "virtual:pwa-register";
 import App from "./ui/App";
+import { guardarEscudos } from "./ui/guardarEscudos";
 import { useLoja } from "./ui/store";
 import { ocuparTelaInteira } from "./ui/telaInteira";
 // Letra serifada dos títulos (só o alfabeto latino, que tem os acentos do português), guardada com o app.
@@ -17,6 +18,8 @@ registerSW({
     useLoja.getState().avisarDepois("Jogo guardado no aparelho: já dá para jogar sem internet.");
   },
 });
+// Os escudos ficam fora da fila do service worker (R76): com ele pronto, ele baixa os que faltam no aparelho.
+void guardarEscudos();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

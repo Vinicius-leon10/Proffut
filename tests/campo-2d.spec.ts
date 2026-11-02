@@ -22,6 +22,9 @@ test("R60 na partida, o campo 2D fica em cima, no lugar do placar grande e dos e
   const campo = page.locator(".tela-cheia .campo-2d");
   await expect(botao(page, "Começar o jogo")).toBeVisible();
   await expect(campo).toHaveCount(0);
+  // O relógio do jogo só anda quando o teste manda, desde antes do apito: com a partida correndo em tempo real até a
+  // contagem começar, uma máquina mais lenta chegava ao gol antes dela (nov/2026).
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1_000));
   await botao(page, "Começar o jogo").click();
 
   // Na partida, o campo fica no alto da tela, de ponta a ponta, com o relógio em cima dele (como no exemplo do
@@ -44,7 +47,6 @@ test("R60 na partida, o campo 2D fica em cima, no lugar do placar grande e dos e
   await page.getByRole("dialog").getByRole("button", { name: "Fechar" }).click();
 
   // Minuto a minuto (o tempo só anda quando o teste manda) até o primeiro gol.
-  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 2_000));
   const times = (await page.locator(".placar .time .nome").allTextContents()).map((t) => t.trim());
   expect(times).toHaveLength(2);
   const rotulo = campo.locator(".lance-do-campo");

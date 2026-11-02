@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R75 rodando a cada mudança, antes
+ponta R01–R76 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -367,7 +367,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `src/save/` | `salvamento.ts`: IndexedDB (`proffut`/`saves`, chaves `jogo:auto`, `resumo:auto`...), exportar/importar `.json`. `aparelho.ts`: checagem do aparelho. `escudos.ts`: escudos importados pelo usuário, que trocam os do jogo só no aparelho (chave `escudos`, id do clube → imagem) |
 | `src/ui/` | React + Zustand. `store.ts` (estado, telas sobrepostas, salvamento 400 ms após cada mudança), `acoes.ts`, `componentes.tsx`, `estilo.css` (visual "opção 3": tokens no `:root`), `sons.ts` (apito, torcida, narrador), `telas/*.tsx` |
 | `tests/` | Testes de ponta a ponta R01…: `*.spec.ts`, passos comuns em `ajuda.ts`, relatório em português em `resumo.ts`, lista em `README.md` |
-| `public/escudos/` | Os 434 escudos dos clubes (`<id>.png`): 156 recortados da prancha que o usuário mandou e 278 dos pacotes dos times novos (`tools/escudos/preparar.py`); o service worker guarda para jogar sem internet |
+| `public/escudos/` | Os 434 escudos dos clubes (`<id>.png`): 156 recortados da prancha que o usuário mandou e 278 dos pacotes dos times novos (`tools/escudos/preparar.py`); ficam fora da fila do service worker, num cache só deles (`guardarEscudos`), para jogar sem internet |
 | `data/brasil-2026/` | `clubes.json` (60), `serie-d-reserva.json` (96), `competicoes.json`, `jogadores.json` (elencos reais, gerado por `tools/elencos`), `LEIAME.md` (fontes e licenças) |
 | `tools/` | `times/` (times novos: `wikipedia.py` é o robô da Wikipédia e do Wikidata, `montar.ts` monta clubes e elencos, `wiki.ts` lê fichas e elencos das páginas), `sim/` (calibragem), `e2e/` (capturas de tela), `icones/`, `dados/` (scripts Python dos clubes), `elencos/` (robô dos elencos: `montar.ts` monta `jogadores.json`, `sumulas.ts` lê as súmulas, `fontes-clubes.ts` diz como cada fonte chama os clubes, scripts Python do workflow), `escudos/` (`recortar.py`: prancha de escudos → `public/escudos/<id>.png`, ou um pacote `.json` para importar) |
 
@@ -407,6 +407,15 @@ Obras do estádio se pagam em 3 a 4 temporadas.
   resumo juntos (`setMany`). Com a hora do fim da gravação, o save grande dos times novos (6 a 10 MB) fazia o
   salvamento de quando o jogo abre parecer mais novo do que a partida: o `esperarSalvar` do R07 aceitava esse e
   recarregava antes da hora (falhou no GitHub, nov/2026). R71 simula o aparelho lento para gravar (`gravacaoLenta`).
+- **Escudos fora da fila do service worker** (nov/2026): o Workbox guarda os arquivos do app um por vez; com os 434
+  escudos na fila, a versão nova levava quase um minuto para ficar pronta no site publicado (a checagem diária falhou no
+  R44, que espera o service worker). Agora `globIgnores` tira `escudos/` da fila (fica só o app, 16 arquivos), o escudo
+  que aparece na tela é guardado na hora (`runtimeCaching` CacheFirst no cache `escudos-<hash do conteúdo>`, nome
+  calculado no `vite.config.ts`) e, com o service worker pronto, `guardarEscudos` (`src/ui/guardarEscudos.ts`, em
+  `main.tsx`) manda a lista para ele: `public/guardar-escudos.js` (no `importScripts` do sw.js) baixa os que faltam, 8 ao
+  mesmo tempo, fora da tela, e apaga caches de escudos antigos. Escudo novo não precisa de mais nada. R76. Testes com
+  `page.clock`: pausar o relógio antes do apito (`pauseAt` antes de "Começar o jogo"); deixar a partida correr em tempo
+  real até a contagem fazia o R60 chegar ao gol antes dela quando a máquina ficava mais lenta.
 - GitHub Actions: usar `actions/*@v7` e Node 22 (Node 20 foi removido do Actions).
 - Ao rodar comandos, não use `pkill` genérico (já derrubou o próprio terminal). Nem `pgrep -f "<texto>"` seguido
   de `kill`: o próprio terminal tem o texto na linha de comando. Guarde o PID ao abrir o processo (`$!`).

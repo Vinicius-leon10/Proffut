@@ -126,3 +126,42 @@ test("R73 os times novos têm os escudos que o usuário mandou: todo clube do jo
   await expect(cartaoDoProximoJogo(page)).toBeVisible();
   await conferir();
 });
+
+test("R76 a versão nova fica pronta logo: os escudos não entram na fila do service worker (que guarda um arquivo por vez e, com 434 escudos, levava quase um minuto no site publicado), ficam num cache só deles e, sem internet, aparecem os de qualquer clube", async ({ page, context }) => {
+  await abrirSite(page);
+  await page.evaluate(() => navigator.serviceWorker.ready);
+  if (!(await page.evaluate(() => !!navigator.serviceWorker.controller))) await page.reload();
+  await page.waitForFunction(() => !!navigator.serviceWorker.controller, null, { timeout: 20_000 });
+  // Na fila da instalação, só o app: poucos arquivos e nenhum escudo.
+  const fila = await page.evaluate(async () => {
+    let total = 0;
+    let escudos = 0;
+    for (const nome of await caches.keys()) {
+      if (!nome.startsWith("workbox-precache")) continue;
+      for (const r of await (await caches.open(nome)).keys()) {
+        total++;
+        if (r.url.includes("/escudos/")) escudos++;
+      }
+    }
+    return { total, escudos };
+  });
+  expect(fila.escudos, "escudos na fila do service worker").toBe(0);
+  expect(fila.total, "arquivos na fila do service worker").toBeLessThan(60);
+  // Logo depois, os escudos de todos os clubes chegam ao aparelho, num cache só deles.
+  const noAparelho = () =>
+    page.evaluate(async () => {
+      let total = 0;
+      for (const nome of await caches.keys()) if (nome.startsWith("escudos")) total += (await (await caches.open(nome)).keys()).length;
+      return total;
+    });
+  await expect.poll(noAparelho, { message: "escudos guardados no aparelho", timeout: 60_000 }).toBeGreaterThanOrEqual(418);
+
+  // Sem internet, um jogo novo mostra os escudos de clubes que ainda não tinham aparecido na tela (os da Venezuela).
+  await context.setOffline(true);
+  await novoJogo(page);
+  await aba(page, "Tabelas");
+  await page.getByRole("tab", { name: "Outros países" }).click();
+  await page.getByRole("combobox", { name: "País" }).selectOption({ label: "Venezuela" });
+  await escudosDasTabelas(page);
+  await context.setOffline(false);
+});
