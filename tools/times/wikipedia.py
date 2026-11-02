@@ -1,7 +1,9 @@
 """Baixa da Wikipédia e do Wikidata o que o jogo precisa para os times novos: a Série D de 2026, os 27
-estaduais de 2026 e a primeira divisão de 2026 dos outros 9 países da Conmebol.
+estaduais de 2026 e a primeira e a segunda divisão de 2026 dos outros 9 países da Conmebol.
 
-    python tools/times/wikipedia.py tools/times/sementes.json <pasta de saída>
+    python tools/times/wikipedia.py tools/times/sementes.json <pasta de saída> [começo do id das sementes]
+
+Com o terceiro argumento, só as sementes cujo id começa com ele (as segundas divisões: liga2-).
 
 Roda no GitHub (workflow elencos.yml, fase "times"): a rede do ambiente de desenvolvimento não alcança esses sites.
 Só usa a biblioteca padrão do Python. Grava (tudo em gzip):
@@ -299,6 +301,8 @@ def gravar(pasta, nome, dados):
 
 def main():
     sementes = json.load(open(sys.argv[1], encoding="utf-8"))["sementes"]
+    if len(sys.argv) > 3:
+        sementes = [s for s in sementes if s["id"].startswith(sys.argv[3])]
     saida = sys.argv[2]
     os.makedirs(saida, exist_ok=True)
     paginas, escolhas = {}, []

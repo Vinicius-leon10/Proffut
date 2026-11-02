@@ -7,17 +7,17 @@ on:
   workflow_dispatch:
     inputs:
       fase:
-        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times)"
+        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas)"
         type: choice
         default: elencos
-        options: [elencos, times]
+        options: [elencos, times, segundas]
 
 permissions:
   contents: write
 
 jobs:
   baixar:
-    if: inputs.fase != 'times'
+    if: inputs.fase == 'elencos'
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -118,3 +118,37 @@ jobs:
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -q -m "Dados dos times novos (${GITHUB_SHA::7})"
           git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-times
+
+  # Segunda divisão de 2026 dos outros 9 países da Conmebol: só as sementes liga2-, numa branch própria, para os dados
+  # das primeiras divisões e dos estaduais (branch dados-times) ficarem como estão. tools/times/montar.ts junta as duas.
+  segundas:
+    if: inputs.fase == 'segundas'
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v7
+      - name: Wikipédia e Wikidata (só as segundas divisões)
+        run: python3 tools/times/wikipedia.py tools/times/sementes.json dados liga2-
+      - name: Gravar na branch dados-segundas
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dados
+          {
+            echo "# Dados das segundas divisões"
+            echo
+            echo "Baixados em $(date -u +%Y-%m-%dT%H:%MZ) pelo workflow elencos.yml (fase segundas) do Proffut."
+            echo
+            echo "- Wikipédia (CC BY-SA): páginas das segundas divisões de 2026 e dos clubes"
+            echo "- Wikidata (CC0): clubes e jogadores"
+            echo
+            echo "| Arquivo | Tamanho |"
+            echo "|---|---|"
+            find . -type f -not -name LEIAME.md | sort | while read -r f; do echo "| ${f#./} | $(du -h "$f" | cut -f1) |"; done
+          } > LEIAME.md
+          cat LEIAME.md >> "$GITHUB_STEP_SUMMARY"
+          git init -q -b dados-segundas
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Dados das segundas divisões (${GITHUB_SHA::7})"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-segundas

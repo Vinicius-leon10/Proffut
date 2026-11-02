@@ -1,5 +1,5 @@
 {
- "descricao": "Páginas de partida do robô dos times novos (tools/times/wikipedia.py): a Série D de 2026, os 27 estaduais de 2026 e a primeira divisão de 2026 dos outros 9 países da Conmebol. O robô baixa todas as páginas de 'titulos' que existem (sem elas, busca pelas 'consultas' e fica com o primeiro título que tem todos os pedaços de 'exige') e, em cada uma, as ligações das seções que falam dos participantes. Estaduais sem página com participantes buscam também as edições de 2026 e de 2025 ('buscas').",
+ "descricao": "Páginas de partida do robô dos times novos (tools/times/wikipedia.py): a Série D de 2026, os 27 estaduais de 2026 e a primeira e a segunda divisão de 2026 dos outros 9 países da Conmebol (sementes liga-XX e liga2-XX). O robô baixa todas as páginas de 'titulos' que existem (sem elas, busca pelas 'consultas' e fica com o primeiro título que tem todos os pedaços de 'exige') e, em cada uma, as ligações das seções que falam dos participantes. Estaduais sem página com participantes buscam também as edições de 2026 e de 2025 ('buscas').",
  "sementes": [
   {
    "id": "serie-d",
@@ -870,6 +870,317 @@
    "titulos": [
     "Primera División de Venezuela 2026",
     "Liga FUTVE 2026"
+   ]
+  },
+  {
+   "id": "liga2-AR-en",
+   "liga": "AR2",
+   "lang": "en",
+   "pais": "Q414",
+   "consultas": [
+    "2026 Primera Nacional Argentina"
+   ],
+   "exige": [
+    "2026",
+    "Nacional"
+   ],
+   "titulos": [
+    "2026 Primera Nacional",
+    "2026 Primera Nacional season"
+   ]
+  },
+  {
+   "id": "liga2-AR-es",
+   "liga": "AR2",
+   "lang": "es",
+   "pais": "Q414",
+   "consultas": [
+    "Primera Nacional 2026 Argentina"
+   ],
+   "exige": [
+    "2026",
+    "Nacional"
+   ],
+   "titulos": [
+    "Primera Nacional 2026",
+    "Campeonato de Primera Nacional 2026"
+   ]
+  },
+  {
+   "id": "liga2-BO-en",
+   "liga": "BO2",
+   "lang": "en",
+   "pais": "Q750",
+   "consultas": [
+    "2026 Copa Simón Bolívar Bolivia"
+   ],
+   "exige": [
+    "2026",
+    "Bolívar"
+   ],
+   "titulos": [
+    "2026 Copa Simón Bolívar",
+    "2026 Copa Simón Bolívar (Bolivia)"
+   ]
+  },
+  {
+   "id": "liga2-BO-es",
+   "liga": "BO2",
+   "lang": "es",
+   "pais": "Q750",
+   "consultas": [
+    "Copa Simón Bolívar 2026 Bolivia"
+   ],
+   "exige": [
+    "2026",
+    "Bolívar"
+   ],
+   "titulos": [
+    "Copa Simón Bolívar 2026",
+    "Copa Simón Bolívar 2026 (Bolivia)"
+   ]
+  },
+  {
+   "id": "liga2-CL-en",
+   "liga": "CL2",
+   "lang": "en",
+   "pais": "Q298",
+   "consultas": [
+    "2026 Primera B Chile"
+   ],
+   "exige": [
+    "2026",
+    "Primera B"
+   ],
+   "titulos": [
+    "2026 Primera B de Chile",
+    "2026 Liga de Ascenso (Chile)"
+   ]
+  },
+  {
+   "id": "liga2-CL-es",
+   "liga": "CL2",
+   "lang": "es",
+   "pais": "Q298",
+   "consultas": [
+    "Primera B Chile 2026",
+    "Ascenso 2026 Chile"
+   ],
+   "exige": [
+    "2026",
+    "Primera B"
+   ],
+   "titulos": [
+    "Primera B de Chile 2026",
+    "Campeonato de Primera B 2026 (Chile)",
+    "Liga de Ascenso 2026 (Chile)"
+   ]
+  },
+  {
+   "id": "liga2-CO-en",
+   "liga": "CO2",
+   "lang": "en",
+   "pais": "Q739",
+   "consultas": [
+    "2026 Primera B Colombia"
+   ],
+   "exige": [
+    "2026",
+    "Primera B"
+   ],
+   "titulos": [
+    "2026 Categoría Primera B",
+    "2026 Categoría Primera B season"
+   ]
+  },
+  {
+   "id": "liga2-CO-es",
+   "liga": "CO2",
+   "lang": "es",
+   "pais": "Q739",
+   "consultas": [
+    "Primera B 2026 Colombia",
+    "Torneo BetPlay 2026"
+   ],
+   "exige": [
+    "2026"
+   ],
+   "titulos": [
+    "Primera B de Colombia 2026",
+    "Torneo BetPlay 2026",
+    "Torneo de Ascenso 2026 (Colombia)"
+   ]
+  },
+  {
+   "id": "liga2-EC-en",
+   "liga": "EC2",
+   "lang": "en",
+   "pais": "Q736",
+   "consultas": [
+    "2026 Ecuadorian Serie B"
+   ],
+   "exige": [
+    "2026",
+    "Serie B"
+   ],
+   "titulos": [
+    "2026 Ecuadorian Serie B",
+    "2026 Serie B (Ecuador)"
+   ]
+  },
+  {
+   "id": "liga2-EC-es",
+   "liga": "EC2",
+   "lang": "es",
+   "pais": "Q736",
+   "consultas": [
+    "Serie B Ecuador 2026"
+   ],
+   "exige": [
+    "2026",
+    "Serie B"
+   ],
+   "titulos": [
+    "Serie B de Ecuador 2026",
+    "Campeonato Ecuatoriano de Fútbol Serie B 2026"
+   ]
+  },
+  {
+   "id": "liga2-PY-en",
+   "liga": "PY2",
+   "lang": "en",
+   "pais": "Q733",
+   "consultas": [
+    "2026 División Intermedia Paraguay"
+   ],
+   "exige": [
+    "2026",
+    "Intermedia"
+   ],
+   "titulos": [
+    "2026 Paraguayan División Intermedia",
+    "2026 División Intermedia (Paraguay)"
+   ]
+  },
+  {
+   "id": "liga2-PY-es",
+   "liga": "PY2",
+   "lang": "es",
+   "pais": "Q733",
+   "consultas": [
+    "División Intermedia 2026 Paraguay"
+   ],
+   "exige": [
+    "2026",
+    "Intermedia"
+   ],
+   "titulos": [
+    "División Intermedia 2026",
+    "División Intermedia 2026 (Paraguay)"
+   ]
+  },
+  {
+   "id": "liga2-PE-en",
+   "liga": "PE2",
+   "lang": "en",
+   "pais": "Q419",
+   "consultas": [
+    "2026 Liga 2 Peru"
+   ],
+   "exige": [
+    "2026",
+    "Liga 2"
+   ],
+   "titulos": [
+    "2026 Liga 2 (Peru)",
+    "2026 Peruvian Liga 2"
+   ]
+  },
+  {
+   "id": "liga2-PE-es",
+   "liga": "PE2",
+   "lang": "es",
+   "pais": "Q419",
+   "consultas": [
+    "Liga 2 2026 Perú"
+   ],
+   "exige": [
+    "2026",
+    "Liga 2"
+   ],
+   "titulos": [
+    "Liga 2 2026 (Perú)",
+    "Liga 2 de Perú 2026",
+    "Segunda División del Perú 2026"
+   ]
+  },
+  {
+   "id": "liga2-UY-en",
+   "liga": "UY2",
+   "lang": "en",
+   "pais": "Q77",
+   "consultas": [
+    "2026 Uruguayan Segunda División"
+   ],
+   "exige": [
+    "2026",
+    "Segunda"
+   ],
+   "titulos": [
+    "2026 Uruguayan Segunda División",
+    "2026 Segunda División (Uruguay)"
+   ]
+  },
+  {
+   "id": "liga2-UY-es",
+   "liga": "UY2",
+   "lang": "es",
+   "pais": "Q77",
+   "consultas": [
+    "Segunda División Uruguay 2026"
+   ],
+   "exige": [
+    "2026",
+    "Segunda"
+   ],
+   "titulos": [
+    "Campeonato Uruguayo de Segunda División 2026",
+    "Segunda División de Uruguay 2026",
+    "Segunda División Profesional de Uruguay 2026"
+   ]
+  },
+  {
+   "id": "liga2-VE-en",
+   "liga": "VE2",
+   "lang": "en",
+   "pais": "Q717",
+   "consultas": [
+    "2026 Liga FUTVE 2"
+   ],
+   "exige": [
+    "2026",
+    "FUTVE 2"
+   ],
+   "titulos": [
+    "2026 Liga FUTVE 2",
+    "2026 Venezuelan Segunda División"
+   ]
+  },
+  {
+   "id": "liga2-VE-es",
+   "liga": "VE2",
+   "lang": "es",
+   "pais": "Q717",
+   "consultas": [
+    "Liga FUTVE 2 2026"
+   ],
+   "exige": [
+    "2026",
+    "FUTVE 2"
+   ],
+   "titulos": [
+    "Liga FUTVE 2 2026",
+    "Segunda División de Venezuela 2026"
    ]
   }
  ]
