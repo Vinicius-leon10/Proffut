@@ -30,7 +30,7 @@ import { avancarCopa, criarCopa } from "./copa";
 import { concluirObras } from "./estadio";
 import { encerrarTemporada } from "./temporada";
 import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno } from "./torneios";
-import type { Clube, Estilo, EstadoJogo, Formacao, Partida, SerieClube, Tatica } from "./tipos";
+import type { Clube, Estilo, EstadoJogo, Formacao, Jogador, Partida, SerieClube, Tatica } from "./tipos";
 
 export interface FichaClube {
   id: string;
@@ -47,8 +47,10 @@ export interface FichaClube {
   reputacao: number;
   forcaElenco: { min: number; max: number };
   caixaInicial: number;
-  /** Clube de fora do Brasil: o código do país ("AR", "UY"...), que é também o da liga que ele joga. */
+  /** Clube de fora do Brasil: o código do país ("AR", "UY"...). */
   pais?: string;
+  /** Liga que ele joga em 2026: o código do país (primeira divisão) ou com 2 no fim (segunda); falta: a primeira. */
+  liga?: string;
 }
 
 export const FICHAS: FichaClube[] = clubesJson.clubes as FichaClube[];
@@ -100,7 +102,7 @@ export function juntarClubesNovos(estado: EstadoJogo, rng: ReturnType<typeof cri
   const criar = (ficha: FichaClube, serie: SerieClube) => {
     if (estado.clubes[ficha.id]) return;
     const clube = criarClube(ficha, serie, rng);
-    if (ficha.pais) { clube.pais = ficha.pais; clube.liga = ficha.pais; }
+    if (ficha.pais) { clube.pais = ficha.pais; clube.liga = ficha.liga ?? ficha.pais; }
     estado.clubes[ficha.id] = clube;
     novos++;
   };
@@ -121,7 +123,7 @@ export function juntarClubesNovos(estado: EstadoJogo, rng: ReturnType<typeof cri
     if (comElenco.has(clube.id)) continue;
     const proximoId = () => estado.proximoIdJogador++;
     const reais = ELENCOS_REAIS[clube.id];
-    const nacionalidade = clube.liga ? PAISES[clube.liga]?.nacionalidade : undefined;
+    const nacionalidade = clube.pais ? PAISES[clube.pais]?.nacionalidade : undefined;
     for (const j of reais ? elencoReal(rng, clube, reais, proximoId, nacionalidade) : gerarElenco(rng, clube, proximoId, undefined, nacionalidade)) estado.jogadores[j.id] = j;
     clube.escalacao = escalarAutomatico(elencoDe(estado, clube.id), clube.tatica.formacao, clube.tatica.jogadas);
   }
@@ -146,21 +148,25 @@ export function juntarAoSaveAntigo(estado: EstadoJogo) {
  * páginas, quem desistiu e quem perdeu a final da segunda divisão). No save que já tem os times novos, entram os que
  * faltavam (com elenco) e cada clube fica com o estadual e a liga das listas atuais: os campeonatos da próxima
  * temporada saem certos; os da temporada em andamento seguem como estão. Quem saiu das listas continua no jogo, com os
- * jogadores, sem estadual nem liga. A Série D do save não muda (ela já mudou com os acessos e as quedas).
+ * jogadores, sem estadual nem liga. A Série D do save não muda (ela já mudou com os acessos e as quedas), nem a divisão
+ * dos clubes de fora nos países em que o save já tem a segunda divisão.
  */
 export function acertarParticipantes(estado: EstadoJogo) {
   if (!estado.torneios) return;
+  // Países em que o save já tem a segunda divisão (nov/2026): lá o acesso e a queda mudam a divisão dos clubes, e vale a
+  // do save. Nos outros (save de antes dela), vale a das listas.
+  const comSegunda = new Set(Object.values(estado.clubes).flatMap((c) => (c.liga?.endsWith("2") ? [c.liga.slice(0, 2)] : [])));
   juntarClubesNovos(estado, rngPara(estado.semente, "mundo/clubes-novos-2"));
   const ufDoClube = new Map(Object.entries(PARTICIPANTES_ESTADUAIS).flatMap(([uf, ids]) => ids.map((id) => [id, uf] as const)));
-  const ligaDoClube = new Map(FICHAS_EXTERIOR.map((f) => [f.id, f.pais]));
+  const ligaDoClube = new Map(FICHAS_EXTERIOR.map((f) => [f.id, f.liga ?? f.pais]));
   for (const c of Object.values(estado.clubes)) {
     const uf = ufDoClube.get(c.id);
     if (uf) c.estadual = uf;
     else delete c.estadual;
     if (c.serie !== "exterior") continue;
     const liga = ligaDoClube.get(c.id);
-    if (liga) c.liga = liga;
-    else delete c.liga;
+    if (!liga) delete c.liga;
+    else if (!c.liga || !comSegunda.has(liga.slice(0, 2)) || c.liga.slice(0, 2) !== liga.slice(0, 2)) c.liga = liga;
   }
 }
 
@@ -283,6 +289,8 @@ function processarDias(estado: EstadoJogo, ate: string) {
 export type ResultadoAvanco =
   | { tipo: "jogos-hoje"; meuJogo?: Partida }
   | { tipo: "nova-temporada" }
+  /** Os últimos jogos do ano eram de campeonatos que o usuário não acompanha: a temporada acabou, falta encerrar. */
+  | { tipo: "fim-dos-jogos" }
   | { tipo: "nada" };
 
 /**
@@ -290,6 +298,7 @@ export type ResultadoAvanco =
  * a próxima data com jogo; com a temporada encerrada, faz a virada.
  */
 export function avancar(estado: EstadoJogo): ResultadoAvanco {
+  let andou = false;
   // Dia só com jogos que o usuário não acompanha (Série D dos outros, outros estaduais, ligas de fora): passa direto.
   for (let seguranca = 0; seguranca < 1000; seguranca++) {
     const pendentes = jogosPendentesHoje(estado);
@@ -297,9 +306,13 @@ export function avancar(estado: EstadoJogo): ResultadoAvanco {
       const acompanha = competicoesDoUsuario(estado);
       if (pendentes.some((p) => acompanha.has(p.serie))) return { tipo: "jogos-hoje", meuJogo: meuJogoHoje(estado) };
       simularDia(estado);
+      andou = true;
       continue;
     }
     if (temporadaEncerrada(estado)) {
+      // A virada só no botão "Encerrar a temporada" (ele pergunta antes quem sai de graça): se os últimos jogos do ano
+      // eram de fora (a 2ª divisão da Argentina termina depois da final da Série C), este Avançar para aqui (R79).
+      if (andou) return { tipo: "fim-dos-jogos" };
       encerrarTemporada(estado);
       return { tipo: "nova-temporada" };
     }
@@ -350,7 +363,8 @@ export function provavelTime(estado: EstadoJogo, clubeId: string): LadoVivo {
   return montarLado({ ...clube, escalacao }, estado.jogadores, elenco, false);
 }
 
-function aplicarResultado(estado: EstadoJogo, pv: PartidaViva) {
+/** `elencos`: os jogadores de cada clube, montados uma vez para o dia (procurar no jogo todo a cada partida pesava). */
+function aplicarResultado(estado: EstadoJogo, pv: PartidaViva, elencos: Map<string, Jogador[]>) {
   const p = estado.partidas.find((x) => x.id === pv.partidaId)!;
   const rng = rngPara(estado.semente, `pos-jogo/${p.id}`);
   const [lm, lv] = pv.lados;
@@ -386,7 +400,7 @@ function aplicarResultado(estado: EstadoJogo, pv: PartidaViva) {
 
   // Jogadores: jogos, gols, cartões, suspensões, lesões e energia.
   for (const lado of pv.lados) {
-    for (const j of elencoDe(estado, lado.clubeId)) {
+    for (const j of elencos.get(lado.clubeId) ?? []) {
       if (j.suspensaoJogos > 0 && !lado.jogaram.includes(j.id)) j.suspensaoJogos--;
     }
     for (const id of lado.jogaram) {
@@ -450,9 +464,17 @@ function aplicarResultado(estado: EstadoJogo, pv: PartidaViva) {
 
 /** Termina (se preciso) e registra todas as partidas do dia, depois avança as fases. */
 export function concluirJogos(estado: EstadoJogo, vivas: PartidaViva[]): string[] {
+  // Os elencos do dia, uma vez só (registrar uma partida não troca ninguém de clube).
+  const elencos = new Map<string, Jogador[]>();
+  for (const j of Object.values(estado.jogadores)) {
+    if (!j.clubeId) continue;
+    const lista = elencos.get(j.clubeId);
+    if (lista) lista.push(j);
+    else elencos.set(j.clubeId, [j]);
+  }
   for (const pv of vivas) {
     if (!pv.terminada) simularAteOFim(pv, estado.jogadores);
-    aplicarResultado(estado, pv);
+    aplicarResultado(estado, pv, elencos);
   }
   const noticias = [...avancarFases(estado), ...avancarCopa(estado), ...avancarTorneios(estado)];
   for (const n of noticias) enviarMensagem(estado, { tipo: "noticia", titulo: "Notícias", texto: n });

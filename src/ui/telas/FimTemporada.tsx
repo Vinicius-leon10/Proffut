@@ -59,9 +59,9 @@ export function FimTemporada() {
                 </div>
               </div>
             )}
-            {/* Estaduais e ligas de fora: só os nomes dos campeões. */}
+            {/* Estaduais e ligas de fora (só a primeira divisão): só os nomes dos campeões. */}
             {(["E-", "L-"] as const).map((prefixo) => {
-              const lista = (Object.entries(r.torneios ?? {}) as [IdTorneio, { campeao: string }][]).filter(([id]) => id.startsWith(prefixo));
+              const lista = (Object.entries(r.torneios ?? {}) as [IdTorneio, { campeao: string }][]).filter(([id]) => id.startsWith(prefixo) && !id.endsWith("2"));
               if (!lista.length) return null;
               return (
                 <p key={prefixo} className="pequeno">

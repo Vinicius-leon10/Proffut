@@ -1,6 +1,6 @@
 {
  "temporada": 2026,
- "descricao": "Clubes da primeira divisão de 2026 dos outros 9 países da Conmebol. Montado por tools/times/montar.ts.",
+ "descricao": "Clubes da primeira e da segunda divisão (liga com 2 no fim) de 2026 dos outros 9 países da Conmebol. Montado por tools/times/montar.ts.",
  "clubes": [
   {
    "id": "argentinos-juniors",
@@ -3951,6 +3951,3906 @@
     "max": 63
    },
    "caixaInicial": 2400000
+  },
+  {
+   "id": "all-boys",
+   "nome": "All Boys",
+   "sigla": "ALL",
+   "cidade": "Monte Castro",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Islas Malvinas",
+    "capacidade": 15000
+   },
+   "fundacao": 1913,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 38,
+    "max": 62
+   },
+   "caixaInicial": 1000000,
+   "liga": "AR2"
+  },
+  {
+   "id": "atletico-de-rafaela",
+   "nome": "Atlético de Rafaela",
+   "sigla": "RAF",
+   "cidade": "Rafaela",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#007FFF",
+    "secundaria": "#77B5FE"
+   },
+   "estadio": {
+    "nome": "Estádio Rafaela",
+    "capacidade": 14660
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 38,
+    "max": 61
+   },
+   "caixaInicial": 900000,
+   "liga": "AR2"
+  },
+  {
+   "id": "tristan-suarez",
+   "nome": "Tristán Suárez",
+   "sigla": "TRI",
+   "cidade": "Tristán Suárez",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000040"
+   },
+   "estadio": {
+    "nome": "Estádio 20 de Octubre",
+    "capacidade": 7500
+   },
+   "fundacao": 1929,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 38,
+    "max": 62
+   },
+   "caixaInicial": 1000000,
+   "liga": "AR2"
+  },
+  {
+   "id": "central-norte",
+   "nome": "Central Norte",
+   "sigla": "CEN",
+   "cidade": "Salta",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Padre Ernesto Martearena Salta, Argentina",
+    "capacidade": 20408
+   },
+   "fundacao": 1921,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 37,
+    "max": 60
+   },
+   "caixaInicial": 600000,
+   "liga": "AR2"
+  },
+  {
+   "id": "chacarita-juniors",
+   "nome": "Chacarita Juniors",
+   "sigla": "CHA",
+   "cidade": "Villa Maipú",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio do Chacarita Juniors",
+    "capacidade": 26530
+   },
+   "fundacao": 1906,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 43,
+    "max": 66
+   },
+   "caixaInicial": 2300000,
+   "liga": "AR2"
+  },
+  {
+   "id": "chaco-for-ever",
+   "nome": "Chaco For Ever",
+   "sigla": "CFE",
+   "cidade": "Resistência",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Juan Alberto García",
+    "capacidade": 25000
+   },
+   "fundacao": 1913,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 40,
+    "max": 64
+   },
+   "caixaInicial": 1600000,
+   "liga": "AR2"
+  },
+  {
+   "id": "agropecuario",
+   "nome": "Agropecuario",
+   "sigla": "AGR",
+   "cidade": "Carlos Casares",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#008000"
+   },
+   "estadio": {
+    "nome": "Ofelia Rosenzuaig, Carlos Casares, Buenos Aires",
+    "capacidade": 8000
+   },
+   "fundacao": 2011,
+   "rival": null,
+   "torcida": 1,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 36,
+    "max": 60
+   },
+   "caixaInicial": 500000,
+   "liga": "AR2"
+  },
+  {
+   "id": "almagro",
+   "nome": "Almagro",
+   "sigla": "ALM",
+   "cidade": "Buenos Aires",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#0000FF"
+   },
+   "estadio": {
+    "nome": "Estádio Tres de Febrero (Argentina)",
+    "capacidade": 19000
+   },
+   "fundacao": 1911,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 37,
+    "max": 61
+   },
+   "caixaInicial": 700000,
+   "liga": "AR2"
+  },
+  {
+   "id": "almirante-brown",
+   "nome": "Almirante Brown",
+   "sigla": "ALM",
+   "cidade": "Isidro Casanova",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFF00"
+   },
+   "estadio": {
+    "nome": "Estádio Fragata Presidente Sarmiento",
+    "capacidade": 25000
+   },
+   "fundacao": 1912,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 37,
+    "max": 61
+   },
+   "caixaInicial": 600000,
+   "liga": "AR2"
+  },
+  {
+   "id": "acassuso",
+   "nome": "Acassuso",
+   "sigla": "ACA",
+   "cidade": "San Isidro",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#000040",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio La Quema",
+    "capacidade": 2000
+   },
+   "fundacao": 1922,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 39,
+    "max": 62
+   },
+   "caixaInicial": 1100000,
+   "liga": "AR2"
+  },
+  {
+   "id": "atlanta",
+   "nome": "Atlanta",
+   "sigla": "ATL",
+   "cidade": "Buenos Aires",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFDD00",
+    "secundaria": "#0000FF"
+   },
+   "estadio": {
+    "nome": "Estádio Don León Kolbowski",
+    "capacidade": 10000
+   },
+   "fundacao": 1904,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 42,
+    "max": 65
+   },
+   "caixaInicial": 2000000,
+   "liga": "AR2"
+  },
+  {
+   "id": "colegiales",
+   "nome": "Colegiales",
+   "sigla": "COL",
+   "cidade": "Vicente López",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#0000FF",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Libertarios Unidos",
+    "capacidade": 8500
+   },
+   "fundacao": 1908,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 36,
+    "max": 60
+   },
+   "caixaInicial": 500000,
+   "liga": "AR2"
+  },
+  {
+   "id": "colon",
+   "nome": "Colón",
+   "sigla": "COL",
+   "cidade": "Santa Fé",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Brigadier General Estanislao López",
+    "capacidade": 30835
+   },
+   "fundacao": 1905,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 41,
+    "max": 64
+   },
+   "caixaInicial": 1800000,
+   "liga": "AR2"
+  },
+  {
+   "id": "guemes",
+   "nome": "Güemes",
+   "sigla": "GUE",
+   "cidade": "Santiago del Estero",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#0000FF",
+    "secundaria": "#000040"
+   },
+   "estadio": {
+    "nome": "Estadio Arturo \"Jiya\" Miranda",
+    "capacidade": 17000
+   },
+   "fundacao": 1932,
+   "rival": null,
+   "torcida": 1,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 36,
+    "max": 60
+   },
+   "caixaInicial": 500000,
+   "liga": "AR2"
+  },
+  {
+   "id": "los-andes",
+   "nome": "Los Andes",
+   "sigla": "AND",
+   "cidade": "Lomas de Zamora",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Eduardo Gallardón",
+    "capacidade": 38000
+   },
+   "fundacao": 1917,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 40,
+    "max": 63
+   },
+   "caixaInicial": 1500000,
+   "liga": "AR2"
+  },
+  {
+   "id": "mitre",
+   "nome": "Mitre",
+   "sigla": "MIT",
+   "cidade": "Santiago del Estero",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFDD00",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Doctores José y Antonio Castiglione",
+    "capacidade": 21000
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 43,
+    "max": 65
+   },
+   "caixaInicial": 2100000,
+   "liga": "AR2"
+  },
+  {
+   "id": "nueva-chicago",
+   "nome": "Nueva Chicago",
+   "sigla": "NUE",
+   "cidade": "Buenos Aires",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#008000",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Nueva Chicago",
+    "capacidade": 18000
+   },
+   "fundacao": 1911,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 40,
+    "max": 63
+   },
+   "caixaInicial": 1400000,
+   "liga": "AR2"
+  },
+  {
+   "id": "patronato",
+   "nome": "Patronato",
+   "sigla": "PAT",
+   "cidade": "Paraná",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Presbítero Bartolomé Grella",
+    "capacidade": 23500
+   },
+   "fundacao": 1914,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 44,
+    "max": 67
+   },
+   "caixaInicial": 2600000,
+   "liga": "AR2"
+  },
+  {
+   "id": "san-miguel",
+   "nome": "San Miguel",
+   "sigla": "SAN",
+   "cidade": "Los Polvorines",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Malvinas Argentinas",
+    "capacidade": 6800
+   },
+   "fundacao": 1922,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 37,
+    "max": 61
+   },
+   "caixaInicial": 800000,
+   "liga": "AR2"
+  },
+  {
+   "id": "san-telmo",
+   "nome": "San Telmo",
+   "sigla": "SAN",
+   "cidade": "Dock Sud",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#00BFFF",
+    "secundaria": "#000040"
+   },
+   "estadio": {
+    "nome": "Estádio Doctor Osvaldo Baletto",
+    "capacidade": 6000
+   },
+   "fundacao": 1904,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 42,
+    "max": 65
+   },
+   "caixaInicial": 2000000,
+   "liga": "AR2"
+  },
+  {
+   "id": "temperley",
+   "nome": "Temperley",
+   "sigla": "TEM",
+   "cidade": "Temperley",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#4ABBFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Alfredo Beranger",
+    "capacidade": 26000
+   },
+   "fundacao": 1912,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 36,
+    "max": 60
+   },
+   "caixaInicial": 600000,
+   "liga": "AR2"
+  },
+  {
+   "id": "ciudad-de-bolivar",
+   "nome": "Ciudad de Bolívar",
+   "sigla": "CIU",
+   "cidade": "San Carlos de Bolívar",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#4ABBFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Municipal Eva Perón,San Carlos de Bolívar, Buenos Aires Province, Argentina",
+    "capacidade": 4000
+   },
+   "fundacao": 2002,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 41,
+    "max": 64
+   },
+   "caixaInicial": 1600000,
+   "liga": "AR2"
+  },
+  {
+   "id": "ferrocarril-midland",
+   "nome": "Ferrocarril Midland",
+   "sigla": "FER",
+   "cidade": "Libertad",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Ciudad de Libertad",
+    "capacidade": 10000
+   },
+   "fundacao": 1914,
+   "rival": null,
+   "torcida": 1,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 36,
+    "max": 60
+   },
+   "caixaInicial": 500000,
+   "liga": "AR2"
+  },
+  {
+   "id": "defensores-de-belgrano",
+   "nome": "Defensores de Belgrano",
+   "sigla": "DEF",
+   "cidade": "Núñez",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Juan Pasquale",
+    "capacidade": 9000
+   },
+   "fundacao": 1906,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 41,
+    "max": 64
+   },
+   "caixaInicial": 1700000,
+   "liga": "AR2"
+  },
+  {
+   "id": "deportivo-madryn",
+   "nome": "Deportivo Madryn",
+   "sigla": "MAD",
+   "cidade": "Puerto Madryn",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Categoría:Hospitales de la provincia de Córdoba (España)",
+    "capacidade": 6000
+   },
+   "fundacao": 1924,
+   "rival": null,
+   "torcida": 1,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 36,
+    "max": 60
+   },
+   "caixaInicial": 500000,
+   "liga": "AR2"
+  },
+  {
+   "id": "deportivo-maipu",
+   "nome": "Deportivo Maipú",
+   "sigla": "MAI",
+   "cidade": "Maipú",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Omar Higinio Sperdutti",
+    "capacidade": 8000
+   },
+   "fundacao": 1927,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 39,
+    "max": 62
+   },
+   "caixaInicial": 1200000,
+   "liga": "AR2"
+  },
+  {
+   "id": "deportivo-moron",
+   "nome": "Deportivo Morón",
+   "sigla": "MOR",
+   "cidade": "Morón",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Nuevo Francisco Urbano",
+    "capacidade": 35000
+   },
+   "fundacao": 1947,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 40,
+    "max": 63
+   },
+   "caixaInicial": 1400000,
+   "liga": "AR2"
+  },
+  {
+   "id": "estudiantes-de-buenos-aires",
+   "nome": "Estudiantes de Buenos Aires",
+   "sigla": "EBA",
+   "cidade": "Caseros",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Ciudad de Caseros",
+    "capacidade": 16740
+   },
+   "fundacao": 1898,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 37,
+    "max": 61
+   },
+   "caixaInicial": 700000,
+   "liga": "AR2"
+  },
+  {
+   "id": "ferro-carril-oeste",
+   "nome": "Ferro Carril Oeste",
+   "sigla": "FCO",
+   "cidade": "Buenos Aires",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#004000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Arquiteto Ricardo Etcheverry",
+    "capacidade": 24442
+   },
+   "fundacao": 1904,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 39,
+    "max": 63
+   },
+   "caixaInicial": 1300000,
+   "liga": "AR2"
+  },
+  {
+   "id": "gimnasia-de-jujuy",
+   "nome": "Gimnasia de Jujuy",
+   "sigla": "GIM",
+   "cidade": "San Salvador de Jujuy",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio 23 de Agosto",
+    "capacidade": 24000
+   },
+   "fundacao": 1931,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 42,
+    "max": 64
+   },
+   "caixaInicial": 1900000,
+   "liga": "AR2"
+  },
+  {
+   "id": "gimnasia-y-tiro",
+   "nome": "Gimnasia y Tiro",
+   "sigla": "GIM",
+   "cidade": "Salta",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio El Gigante del Norte",
+    "capacidade": 24300
+   },
+   "fundacao": 1902,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 43,
+    "max": 66
+   },
+   "caixaInicial": 2200000,
+   "liga": "AR2"
+  },
+  {
+   "id": "godoy-cruz",
+   "nome": "Godoy Cruz",
+   "sigla": "GOD",
+   "cidade": "Godoy Cruz",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#0000FF",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Feliciano Gambarte",
+    "capacidade": 16000
+   },
+   "fundacao": 1921,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 44,
+    "max": 66
+   },
+   "caixaInicial": 2500000,
+   "liga": "AR2"
+  },
+  {
+   "id": "quilmes",
+   "nome": "Quilmes",
+   "sigla": "QUI",
+   "cidade": "Quilmes",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Centenario Ciudad de Quilmes",
+    "capacidade": 30200
+   },
+   "fundacao": 1887,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 38,
+    "max": 61
+   },
+   "caixaInicial": 900000,
+   "liga": "AR2"
+  },
+  {
+   "id": "racing-de-cordoba",
+   "nome": "Racing de Córdoba",
+   "sigla": "RAC",
+   "cidade": "Córdova",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#27BEF8",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Miguel Sancho",
+    "capacidade": 15000
+   },
+   "fundacao": 1924,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 37,
+    "max": 61
+   },
+   "caixaInicial": 800000,
+   "liga": "AR2"
+  },
+  {
+   "id": "san-martin-san-juan",
+   "nome": "San Martín (San Juan)",
+   "sigla": "SAN",
+   "cidade": "San Juan",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Ingeniero Hilario Sánchez",
+    "capacidade": 19500
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 44,
+    "max": 66
+   },
+   "caixaInicial": 2400000,
+   "liga": "AR2"
+  },
+  {
+   "id": "san-martin-tucuman",
+   "nome": "San Martín (Tucumán)",
+   "sigla": "SAN",
+   "cidade": "São Miguel de Tucumã",
+   "estado": "AR",
+   "pais": "AR",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio La Ciudadela, San Miguel de Tucumán, Argentina",
+    "capacidade": 27250
+   },
+   "fundacao": 1909,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 39,
+    "max": 62
+   },
+   "caixaInicial": 1200000,
+   "liga": "AR2"
+  },
+  {
+   "id": "wilstermann-cooperativas",
+   "nome": "Wilstermann Cooperativas",
+   "sigla": "WIL",
+   "cidade": "Bolívia",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#2E7D32",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio de Bolívia",
+    "capacidade": 15000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 35,
+   "forcaElenco": {
+    "min": 24,
+    "max": 46
+   },
+   "caixaInicial": 100000,
+   "liga": "BO2"
+  },
+  {
+   "id": "chaco-petrolero",
+   "nome": "Chaco Petrolero",
+   "sigla": "CHA",
+   "cidade": "La Paz",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Hernando Siles",
+    "capacidade": 38000
+   },
+   "fundacao": 1944,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 30,
+    "max": 50
+   },
+   "caixaInicial": 400000,
+   "liga": "BO2"
+  },
+  {
+   "id": "deportivo-fatic",
+   "nome": "Deportivo FATIC",
+   "sigla": "FAT",
+   "cidade": "El Alto",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#0000FF"
+   },
+   "estadio": {
+    "nome": "La Paz",
+    "capacidade": 25000
+   },
+   "fundacao": 2015,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 37,
+   "forcaElenco": {
+    "min": 26,
+    "max": 48
+   },
+   "caixaInicial": 200000,
+   "liga": "BO2"
+  },
+  {
+   "id": "royal-pari",
+   "nome": "Royal Pari",
+   "sigla": "ROY",
+   "cidade": "Santa Cruz de la Sierra",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#FF6800",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Ramón Tahuichi Aguilera",
+    "capacidade": 35180
+   },
+   "fundacao": 2002,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 30,
+    "max": 50
+   },
+   "caixaInicial": 400000,
+   "liga": "BO2"
+  },
+  {
+   "id": "universitario-de-sucre",
+   "nome": "Universitario de Sucre",
+   "sigla": "UNI",
+   "cidade": "Sucre",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Olímpico Patria",
+    "capacidade": 30700
+   },
+   "fundacao": 1962,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 32,
+    "max": 53
+   },
+   "caixaInicial": 500000,
+   "liga": "BO2"
+  },
+  {
+   "id": "empresa-minera-huanuni",
+   "nome": "Empresa Minera Huanuni",
+   "sigla": "EMH",
+   "cidade": "Huanuni",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#C62828",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Manuel Flores",
+    "capacidade": 15000
+   },
+   "fundacao": 2012,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 37,
+   "forcaElenco": {
+    "min": 26,
+    "max": 48
+   },
+   "caixaInicial": 200000,
+   "liga": "BO2"
+  },
+  {
+   "id": "garcia-agreda",
+   "nome": "García Agreda",
+   "sigla": "GAR",
+   "cidade": "Tarija",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#0000FF",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio IV Centenario",
+    "capacidade": 15000
+   },
+   "fundacao": 1951,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 37,
+   "forcaElenco": {
+    "min": 26,
+    "max": 48
+   },
+   "caixaInicial": 200000,
+   "liga": "BO2"
+  },
+  {
+   "id": "independiente-unificada",
+   "nome": "Independiente Unificada",
+   "sigla": "IND",
+   "cidade": "Potosí",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#6A1B9A",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Potosí",
+    "capacidade": 15000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 35,
+   "forcaElenco": {
+    "min": 24,
+    "max": 46
+   },
+   "caixaInicial": 100000,
+   "liga": "BO2"
+  },
+  {
+   "id": "real-santa-cruz",
+   "nome": "Real Santa Cruz",
+   "sigla": "RSC",
+   "cidade": "Santa Cruz de la Sierra",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Juan Carlos Durán",
+    "capacidade": 25000
+   },
+   "fundacao": 1960,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 31,
+    "max": 52
+   },
+   "caixaInicial": 500000,
+   "liga": "BO2"
+  },
+  {
+   "id": "universitario-de-pando",
+   "nome": "Universitario de Pando",
+   "sigla": "UNI",
+   "cidade": "Cobija",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#FFF312",
+    "secundaria": "#009D28"
+   },
+   "estadio": {
+    "nome": "Roberto Jordán Cuéllar",
+    "capacidade": 24000
+   },
+   "fundacao": 1995,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 39,
+   "forcaElenco": {
+    "min": 27,
+    "max": 49
+   },
+   "caixaInicial": 300000,
+   "liga": "BO2"
+  },
+  {
+   "id": "universitario-del-beni",
+   "nome": "Universitario del Beni",
+   "sigla": "UNI",
+   "cidade": "Trinidad",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#C62828",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio de Trinidad",
+    "capacidade": 15000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 35,
+   "forcaElenco": {
+    "min": 24,
+    "max": 46
+   },
+   "caixaInicial": 100000,
+   "liga": "BO2"
+  },
+  {
+   "id": "union-tarija",
+   "nome": "Unión Tarija",
+   "sigla": "UNI",
+   "cidade": "Tarija",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#008000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio IV Centenario",
+    "capacidade": 15000
+   },
+   "fundacao": 1980,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 40,
+   "forcaElenco": {
+    "min": 28,
+    "max": 49
+   },
+   "caixaInicial": 300000,
+   "liga": "BO2"
+  },
+  {
+   "id": "flamengo-de-sucre",
+   "nome": "Flamengo de Sucre",
+   "sigla": "FLA",
+   "cidade": "Sucre",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Olímpico Patria",
+    "capacidade": 30700
+   },
+   "fundacao": 1966,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 39,
+   "forcaElenco": {
+    "min": 27,
+    "max": 49
+   },
+   "caixaInicial": 300000,
+   "liga": "BO2"
+  },
+  {
+   "id": "oruro-royal-club",
+   "nome": "Oruro Royal Club",
+   "sigla": "ORU",
+   "cidade": "Oruro",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Jesús Bermúdez",
+    "capacidade": 35000
+   },
+   "fundacao": 1896,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 30,
+    "max": 51
+   },
+   "caixaInicial": 400000,
+   "liga": "BO2"
+  },
+  {
+   "id": "magallanes",
+   "nome": "Magallanes",
+   "sigla": "MAG",
+   "cidade": "Santiago",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Santiago Bueras",
+    "capacidade": 5000
+   },
+   "fundacao": 1925,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 36,
+    "max": 57
+   },
+   "caixaInicial": 700000,
+   "liga": "CL2"
+  },
+  {
+   "id": "san-marcos-de-arica",
+   "nome": "San Marcos de Arica",
+   "sigla": "SMA",
+   "cidade": "Arica",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#14ABF9",
+    "secundaria": "#003399"
+   },
+   "estadio": {
+    "nome": "Estádio Carlos Dittborn",
+    "capacidade": 9956
+   },
+   "fundacao": 1978,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 32,
+    "max": 54
+   },
+   "caixaInicial": 300000,
+   "liga": "CL2"
+  },
+  {
+   "id": "union-san-felipe",
+   "nome": "Unión San Felipe",
+   "sigla": "USF",
+   "cidade": "San Felipe",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Municipal de San Felipe",
+    "capacidade": 12000
+   },
+   "fundacao": 1956,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 32,
+    "max": 54
+   },
+   "caixaInicial": 300000,
+   "liga": "CL2"
+  },
+  {
+   "id": "rangers-de-talca",
+   "nome": "Rangers de Talca",
+   "sigla": "RAN",
+   "cidade": "Talca",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#EE0000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Fiscal de Talca",
+    "capacidade": 16070
+   },
+   "fundacao": 1902,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 34,
+    "max": 56
+   },
+   "caixaInicial": 500000,
+   "liga": "CL2"
+  },
+  {
+   "id": "deportes-antofagasta",
+   "nome": "Deportes Antofagasta",
+   "sigla": "ANT",
+   "cidade": "Antofagasta",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Regional de Antofagasta",
+    "capacidade": 21178
+   },
+   "fundacao": 1973,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 34,
+    "max": 56
+   },
+   "caixaInicial": 500000,
+   "liga": "CL2"
+  },
+  {
+   "id": "cobreloa",
+   "nome": "Cobreloa",
+   "sigla": "COB",
+   "cidade": "Calama",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#00FF00",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Zorros del Desierto",
+    "capacidade": 13000
+   },
+   "fundacao": 1977,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 38,
+    "max": 59
+   },
+   "caixaInicial": 900000,
+   "liga": "CL2"
+  },
+  {
+   "id": "deportes-copiapo",
+   "nome": "Deportes Copiapó",
+   "sigla": "COP",
+   "cidade": "Copiapó",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Luis Valenzuela Hermosilla",
+    "capacidade": 8000
+   },
+   "fundacao": 1999,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 41,
+   "forcaElenco": {
+    "min": 31,
+    "max": 53
+   },
+   "caixaInicial": 200000,
+   "liga": "CL2"
+  },
+  {
+   "id": "deportes-iquique",
+   "nome": "Deportes Iquique",
+   "sigla": "IQU",
+   "cidade": "Iquique",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#5EDBFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Tierra de Campeones",
+    "capacidade": 13171
+   },
+   "fundacao": 1978,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 35,
+    "max": 56
+   },
+   "caixaInicial": 600000,
+   "liga": "CL2"
+  },
+  {
+   "id": "curico-unido",
+   "nome": "Curicó Unido",
+   "sigla": "CUR",
+   "cidade": "Curicó",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio La Granja",
+    "capacidade": 8016
+   },
+   "fundacao": 1973,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 33,
+    "max": 55
+   },
+   "caixaInicial": 400000,
+   "liga": "CL2"
+  },
+  {
+   "id": "deportes-puerto-montt",
+   "nome": "Deportes Puerto Montt",
+   "sigla": "PUE",
+   "cidade": "Puerto Montt",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#009242"
+   },
+   "estadio": {
+    "nome": "Estádio Regional de Chinquihue",
+    "capacidade": 10065
+   },
+   "fundacao": 1983,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 41,
+   "forcaElenco": {
+    "min": 31,
+    "max": 53
+   },
+   "caixaInicial": 200000,
+   "liga": "CL2"
+  },
+  {
+   "id": "deportes-recoleta",
+   "nome": "Deportes Recoleta",
+   "sigla": "REC",
+   "cidade": "Santiago",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#02286F"
+   },
+   "estadio": {
+    "nome": "Estadio Municipal Leonel Sánchez Lineros Recoleta, Chile",
+    "capacidade": 5000
+   },
+   "fundacao": 2014,
+   "rival": null,
+   "torcida": 1,
+   "reputacao": 40,
+   "forcaElenco": {
+    "min": 30,
+    "max": 52
+   },
+   "caixaInicial": 200000,
+   "liga": "CL2"
+  },
+  {
+   "id": "deportes-santa-cruz",
+   "nome": "Deportes Santa Cruz",
+   "sigla": "SAN",
+   "cidade": "Santa Cruz",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Municipal Joaquín Muñoz García",
+    "capacidade": 5000
+   },
+   "fundacao": 1913,
+   "rival": null,
+   "torcida": 1,
+   "reputacao": 40,
+   "forcaElenco": {
+    "min": 30,
+    "max": 52
+   },
+   "caixaInicial": 200000,
+   "liga": "CL2"
+  },
+  {
+   "id": "santiago-wanderers",
+   "nome": "Santiago Wanderers",
+   "sigla": "SAN",
+   "cidade": "Valparaíso",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#66DECE",
+    "secundaria": "#0C3433"
+   },
+   "estadio": {
+    "nome": "Estádio Playa Ancha",
+    "capacidade": 23000
+   },
+   "fundacao": 1892,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 37,
+    "max": 57
+   },
+   "caixaInicial": 700000,
+   "liga": "CL2"
+  },
+  {
+   "id": "deportes-temuco",
+   "nome": "Deportes Temuco",
+   "sigla": "TEM",
+   "cidade": "Temuco",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Municipal Germán Becker",
+    "capacidade": 18125
+   },
+   "fundacao": 1960,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 33,
+    "max": 55
+   },
+   "caixaInicial": 400000,
+   "liga": "CL2"
+  },
+  {
+   "id": "san-luis-de-quillota",
+   "nome": "San Luis de Quillota",
+   "sigla": "SLQ",
+   "cidade": "Quillota",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#FFDF00",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Municipal Lucio Fariña Fernández",
+    "capacidade": 7680
+   },
+   "fundacao": 1919,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 32,
+    "max": 54
+   },
+   "caixaInicial": 300000,
+   "liga": "CL2"
+  },
+  {
+   "id": "union-espanola",
+   "nome": "Unión Española",
+   "sigla": "UNI",
+   "cidade": "Santiago",
+   "estado": "CL",
+   "pais": "CL",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Santa Laura",
+    "capacidade": 22000
+   },
+   "fundacao": 1897,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 37,
+    "max": 58
+   },
+   "caixaInicial": 800000,
+   "liga": "CL2"
+  },
+  {
+   "id": "atletico-fc",
+   "nome": "Atlético FC",
+   "sigla": "ATL",
+   "cidade": "Cáli",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Olímpico Pascual Guerrero",
+    "capacidade": 42200
+   },
+   "fundacao": 2005,
+   "rival": null,
+   "torcida": 1,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 32,
+    "max": 56
+   },
+   "caixaInicial": 200000,
+   "liga": "CO2"
+  },
+  {
+   "id": "barranquilla",
+   "nome": "Barranquilla",
+   "sigla": "BAR",
+   "cidade": "Barranquilla",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#ED1C24",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Metropolitano Roberto Meléndez",
+    "capacidade": 46692
+   },
+   "fundacao": 2005,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 32,
+    "max": 56
+   },
+   "caixaInicial": 300000,
+   "liga": "CO2"
+  },
+  {
+   "id": "boca-juniors-de-cali",
+   "nome": "Boca Juniors de Cali",
+   "sigla": "BJC",
+   "cidade": "Cáli",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#133DC7",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Olímpico Pascual Guerrero",
+    "capacidade": 42200
+   },
+   "fundacao": 1939,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 33,
+    "max": 57
+   },
+   "caixaInicial": 400000,
+   "liga": "CO2"
+  },
+  {
+   "id": "bogota",
+   "nome": "Bogotá",
+   "sigla": "BOG",
+   "cidade": "Bogotá",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#FFFF00",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Metropolitano de Techo",
+    "capacidade": 7300
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 34,
+    "max": 58
+   },
+   "caixaInicial": 500000,
+   "liga": "CO2"
+  },
+  {
+   "id": "deportes-quindio",
+   "nome": "Deportes Quindío",
+   "sigla": "QUI",
+   "cidade": "Armênia",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#13C46E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Centenário de Armenia",
+    "capacidade": 29000
+   },
+   "fundacao": 1951,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 33,
+    "max": 57
+   },
+   "caixaInicial": 400000,
+   "liga": "CO2"
+  },
+  {
+   "id": "envigado",
+   "nome": "Envigado",
+   "sigla": "ENV",
+   "cidade": "Envigado",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#DE4514",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Polideportivo Sur",
+    "capacidade": 12000
+   },
+   "fundacao": 1989,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 40,
+    "max": 63
+   },
+   "caixaInicial": 1300000,
+   "liga": "CO2"
+  },
+  {
+   "id": "independiente-valle-del-cauca",
+   "nome": "Independiente Valle del Cauca",
+   "sigla": "IVC",
+   "cidade": "Yumbo",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#035F30"
+   },
+   "estadio": {
+    "nome": "Estádio de Yumbo",
+    "capacidade": 15000
+   },
+   "fundacao": 2025,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 36,
+    "max": 60
+   },
+   "caixaInicial": 800000,
+   "liga": "CO2"
+  },
+  {
+   "id": "inter-palmira",
+   "nome": "Inter Palmira",
+   "sigla": "INT",
+   "cidade": "Palmira",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#BCFF05",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio de Palmira",
+    "capacidade": 15000
+   },
+   "fundacao": 2024,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 35,
+    "max": 59
+   },
+   "caixaInicial": 600000,
+   "liga": "CO2"
+  },
+  {
+   "id": "itagui-leones",
+   "nome": "Itagüí Leones",
+   "sigla": "ITA",
+   "cidade": "Itagüí",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#F4DF24",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Alberto Grisales",
+    "capacidade": 14020
+   },
+   "fundacao": 1944,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 38,
+    "max": 61
+   },
+   "caixaInicial": 1000000,
+   "liga": "CO2"
+  },
+  {
+   "id": "orsomarso",
+   "nome": "Orsomarso",
+   "sigla": "ORS",
+   "cidade": "Palmira",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#1D4DF3",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Francisco Rivera Escobar",
+    "capacidade": 10000
+   },
+   "fundacao": 2016,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 34,
+    "max": 57
+   },
+   "caixaInicial": 400000,
+   "liga": "CO2"
+  },
+  {
+   "id": "patriotas-boyaca",
+   "nome": "Patriotas Boyacá",
+   "sigla": "PAT",
+   "cidade": "Tunja",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#EA1515",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio La Independencia",
+    "capacidade": 20630
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 39,
+    "max": 62
+   },
+   "caixaInicial": 1200000,
+   "liga": "CO2"
+  },
+  {
+   "id": "real-cartagena",
+   "nome": "Real Cartagena",
+   "sigla": "REA",
+   "cidade": "Cartagena das Índias",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#FFF200",
+    "secundaria": "#1F30CB"
+   },
+   "estadio": {
+    "nome": "Estádio Olímpico Jaime Morón León",
+    "capacidade": 16068
+   },
+   "fundacao": 1971,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 37,
+    "max": 60
+   },
+   "caixaInicial": 900000,
+   "liga": "CO2"
+  },
+  {
+   "id": "real-cundinamarca",
+   "nome": "Real Cundinamarca",
+   "sigla": "REA",
+   "cidade": "Soacha",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#77DD77",
+    "secundaria": "#199F67"
+   },
+   "estadio": {
+    "nome": "Estadio Luis Carlos Galán Sarmiento",
+    "capacidade": 8000
+   },
+   "fundacao": 2023,
+   "rival": null,
+   "torcida": 1,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 32,
+    "max": 56
+   },
+   "caixaInicial": 200000,
+   "liga": "CO2"
+  },
+  {
+   "id": "real-santander",
+   "nome": "Real Santander",
+   "sigla": "REA",
+   "cidade": "Piedecuesta",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#F9A825",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Villa Concha",
+    "capacidade": 5500
+   },
+   "fundacao": 2002,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 35,
+    "max": 59
+   },
+   "caixaInicial": 600000,
+   "liga": "CO2"
+  },
+  {
+   "id": "tigres",
+   "nome": "Tigres",
+   "sigla": "TIG",
+   "cidade": "Bogotá",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#808080",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Metropolitano de Techo",
+    "capacidade": 7300
+   },
+   "fundacao": 2016,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 36,
+    "max": 59
+   },
+   "caixaInicial": 700000,
+   "liga": "CO2"
+  },
+  {
+   "id": "union-magdalena",
+   "nome": "Unión Magdalena",
+   "sigla": "UNI",
+   "cidade": "Santa Marta",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#0000FF",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Sierra Nevada",
+    "capacidade": 18000
+   },
+   "fundacao": 1953,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 39,
+    "max": 61
+   },
+   "caixaInicial": 1100000,
+   "liga": "CO2"
+  },
+  {
+   "id": "22-de-julio",
+   "nome": "22 de Julio",
+   "sigla": "JUL",
+   "cidade": "Equador",
+   "estado": "EC",
+   "pais": "EC",
+   "cores": {
+    "primaria": "#7B1E1E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio de Equador",
+    "capacidade": 15000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 32,
+    "max": 54
+   },
+   "caixaInicial": 300000,
+   "liga": "EC2"
+  },
+  {
+   "id": "9-de-octubre",
+   "nome": "9 de Octubre",
+   "sigla": "OCT",
+   "cidade": "Guaiaquil",
+   "estado": "EC",
+   "pais": "EC",
+   "cores": {
+    "primaria": "#00531F",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Modelo Alberto Spencer",
+    "capacidade": 48000
+   },
+   "fundacao": 1926,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 37,
+    "max": 58
+   },
+   "caixaInicial": 700000,
+   "liga": "EC2"
+  },
+  {
+   "id": "atletico-rojiblanco",
+   "nome": "Atlético Rojiblanco",
+   "sigla": "ROJ",
+   "cidade": "Guayaquil",
+   "estado": "EC",
+   "pais": "EC",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#0000AA"
+   },
+   "estadio": {
+    "nome": "Christian Benítez Betancourt",
+    "capacidade": 10150
+   },
+   "fundacao": 2022,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 32,
+    "max": 54
+   },
+   "caixaInicial": 300000,
+   "liga": "EC2"
+  },
+  {
+   "id": "cuenca-juniors",
+   "nome": "Cuenca Juniors",
+   "sigla": "CUE",
+   "cidade": "Cuenca",
+   "estado": "EC",
+   "pais": "EC",
+   "cores": {
+    "primaria": "#EF6C00",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio de Cuenca",
+    "capacidade": 15000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 32,
+    "max": 54
+   },
+   "caixaInicial": 300000,
+   "liga": "EC2"
+  },
+  {
+   "id": "el-nacional",
+   "nome": "El Nacional",
+   "sigla": "NAC",
+   "cidade": "Quito",
+   "estado": "EC",
+   "pais": "EC",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Olímpico Atahualpa",
+    "capacidade": 35742
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 38,
+    "max": 59
+   },
+   "caixaInicial": 900000,
+   "liga": "EC2"
+  },
+  {
+   "id": "independiente-juniors",
+   "nome": "Independiente Juniors",
+   "sigla": "IND",
+   "cidade": "Quito",
+   "estado": "EC",
+   "pais": "EC",
+   "cores": {
+    "primaria": "#1C39BB",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio La Cocha",
+    "capacidade": 15000
+   },
+   "fundacao": 2017,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 33,
+    "max": 54
+   },
+   "caixaInicial": 400000,
+   "liga": "EC2"
+  },
+  {
+   "id": "cumbaya",
+   "nome": "Cumbayá",
+   "sigla": "CUM",
+   "cidade": "Quito",
+   "estado": "EC",
+   "pais": "EC",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Olímpico Atahualpa",
+    "capacidade": 38258
+   },
+   "fundacao": 2013,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 35,
+    "max": 56
+   },
+   "caixaInicial": 600000,
+   "liga": "EC2"
+  },
+  {
+   "id": "liga-de-portoviejo",
+   "nome": "Liga de Portoviejo",
+   "sigla": "LIG",
+   "cidade": "Portoviejo",
+   "estado": "EC",
+   "pais": "EC",
+   "cores": {
+    "primaria": "#008000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Reales Tamarindos",
+    "capacidade": 25000
+   },
+   "fundacao": 1969,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 36,
+    "max": 57
+   },
+   "caixaInicial": 700000,
+   "liga": "EC2"
+  },
+  {
+   "id": "san-antonio",
+   "nome": "San Antonio",
+   "sigla": "SAN",
+   "cidade": "Equador",
+   "estado": "EC",
+   "pais": "EC",
+   "cores": {
+    "primaria": "#0D1B4C",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio de Equador",
+    "capacidade": 15000
+   },
+   "fundacao": 2012,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 32,
+    "max": 54
+   },
+   "caixaInicial": 300000,
+   "liga": "EC2"
+  },
+  {
+   "id": "santo-domingo",
+   "nome": "Santo Domingo",
+   "sigla": "SAN",
+   "cidade": "Santo Domingo",
+   "estado": "EC",
+   "pais": "EC",
+   "cores": {
+    "primaria": "#0D1B4C",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Folke Anderson",
+    "capacidade": 16000
+   },
+   "fundacao": 1983,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 32,
+    "max": 54
+   },
+   "caixaInicial": 300000,
+   "liga": "EC2"
+  },
+  {
+   "id": "vinotinto-ecuador",
+   "nome": "Vinotinto Ecuador",
+   "sigla": "VIN",
+   "cidade": "Quito",
+   "estado": "EC",
+   "pais": "EC",
+   "cores": {
+    "primaria": "#800020",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Olímpico Atahualpa",
+    "capacidade": 38258
+   },
+   "fundacao": 1992,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 34,
+    "max": 55
+   },
+   "caixaInicial": 500000,
+   "liga": "EC2"
+  },
+  {
+   "id": "12-de-junio",
+   "nome": "12 de Junio",
+   "sigla": "JUN",
+   "cidade": "Villa Hayes",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#000080",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Facundo de León Villa Hayes, Paraguay",
+    "capacidade": 2000
+   },
+   "fundacao": 1936,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 31,
+    "max": 53
+   },
+   "caixaInicial": 200000,
+   "liga": "PY2"
+  },
+  {
+   "id": "3-de-noviembre",
+   "nome": "3 de Noviembre",
+   "sigla": "NOV",
+   "cidade": "Paraguai",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Rubén Ramírez Stadium",
+    "capacidade": 2000
+   },
+   "fundacao": 1959,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 31,
+    "max": 53
+   },
+   "caixaInicial": 200000,
+   "liga": "PY2"
+  },
+  {
+   "id": "paraguari",
+   "nome": "Paraguarí",
+   "sigla": "PAR",
+   "cidade": "Paraguarí",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#7B1E1E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio de Paraguarí",
+    "capacidade": 15000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 1,
+   "reputacao": 40,
+   "forcaElenco": {
+    "min": 30,
+    "max": 52
+   },
+   "caixaInicial": 200000,
+   "liga": "PY2"
+  },
+  {
+   "id": "tembetary",
+   "nome": "Tembetary",
+   "sigla": "TEM",
+   "cidade": "Villa Elisa",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#FF0000"
+   },
+   "estadio": {
+    "nome": "Complejo Tembetary,Villa Elisa, Paraguay",
+    "capacidade": 4500
+   },
+   "fundacao": 1912,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 33,
+    "max": 55
+   },
+   "caixaInicial": 400000,
+   "liga": "PY2"
+  },
+  {
+   "id": "deportivo-capiata",
+   "nome": "Deportivo Capiatá",
+   "sigla": "CAP",
+   "cidade": "Capiatá",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#FFFF00",
+    "secundaria": "#0000FF"
+   },
+   "estadio": {
+    "nome": "Estádio Erico Galeano Segovia",
+    "capacidade": 5000
+   },
+   "fundacao": 2008,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 37,
+    "max": 57
+   },
+   "caixaInicial": 700000,
+   "liga": "PY2"
+  },
+  {
+   "id": "deportivo-santani",
+   "nome": "Deportivo Santaní",
+   "sigla": "SAN",
+   "cidade": "San Estanislao",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Juan José Vázquez",
+    "capacidade": 8000
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 32,
+    "max": 54
+   },
+   "caixaInicial": 300000,
+   "liga": "PY2"
+  },
+  {
+   "id": "benjamin-aceval",
+   "nome": "Benjamín Aceval",
+   "sigla": "BEN",
+   "cidade": "Benjamín Aceval",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#0033CC"
+   },
+   "estadio": {
+    "nome": "Estadio Isidro Roussillón Pascottini",
+    "capacidade": 5000
+   },
+   "fundacao": 1918,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 31,
+    "max": 53
+   },
+   "caixaInicial": 200000,
+   "liga": "PY2"
+  },
+  {
+   "id": "fernando-de-la-mora",
+   "nome": "Fernando de la Mora",
+   "sigla": "FER",
+   "cidade": "Fernando de la Mora",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#FF0000"
+   },
+   "estadio": {
+    "nome": "Estadio Emiliano Ghezzi",
+    "capacidade": 8000
+   },
+   "fundacao": 1925,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 32,
+    "max": 53
+   },
+   "caixaInicial": 300000,
+   "liga": "PY2"
+  },
+  {
+   "id": "general-caballero-jlm",
+   "nome": "General Caballero JLM",
+   "sigla": "GCJ",
+   "cidade": "Juan León Mallorquín",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Ka'arendyDoctor Juan León Mallorquín, Paraguay",
+    "capacidade": 10120
+   },
+   "fundacao": 1962,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 35,
+    "max": 56
+   },
+   "caixaInicial": 600000,
+   "liga": "PY2"
+  },
+  {
+   "id": "sol-de-america",
+   "nome": "Sol de América",
+   "sigla": "SOL",
+   "cidade": "Assunção",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#0038A2",
+    "secundaria": "#0000FF"
+   },
+   "estadio": {
+    "nome": "Estádio Luis Alfonso Giagni",
+    "capacidade": 10000
+   },
+   "fundacao": 1909,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 38,
+    "max": 59
+   },
+   "caixaInicial": 900000,
+   "liga": "PY2"
+  },
+  {
+   "id": "sportivo-carapegua",
+   "nome": "Sportivo Carapeguá",
+   "sigla": "CAR",
+   "cidade": "Carapeguá",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#0000FF"
+   },
+   "estadio": {
+    "nome": "Estadio Francisco Javier Bogarín",
+    "capacidade": 9000
+   },
+   "fundacao": 2010,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 34,
+    "max": 56
+   },
+   "caixaInicial": 500000,
+   "liga": "PY2"
+  },
+  {
+   "id": "encarnacion",
+   "nome": "Encarnación",
+   "sigla": "ENC",
+   "cidade": "Encarnación",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#EF6C00",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Villa Alegre",
+    "capacidade": 16000
+   },
+   "fundacao": 2023,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 31,
+    "max": 53
+   },
+   "caixaInicial": 200000,
+   "liga": "PY2"
+  },
+  {
+   "id": "guairena",
+   "nome": "Guaireña",
+   "sigla": "GUA",
+   "cidade": "Vila Rica",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Parque del Guairá",
+    "capacidade": 12000
+   },
+   "fundacao": 2016,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 33,
+    "max": 55
+   },
+   "caixaInicial": 400000,
+   "liga": "PY2"
+  },
+  {
+   "id": "independiente-de-campo-grande",
+   "nome": "Independiente de Campo Grande",
+   "sigla": "ICG",
+   "cidade": "Assunção",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Ricardo Gregor",
+    "capacidade": 2000
+   },
+   "fundacao": 1925,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 36,
+    "max": 57
+   },
+   "caixaInicial": 700000,
+   "liga": "PY2"
+  },
+  {
+   "id": "resistencia",
+   "nome": "Resistencia",
+   "sigla": "RES",
+   "cidade": "Assunção",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#77BBFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Tomás Beygon Gorea",
+    "capacidade": 5000
+   },
+   "fundacao": 1917,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 34,
+    "max": 56
+   },
+   "caixaInicial": 500000,
+   "liga": "PY2"
+  },
+  {
+   "id": "tacuary",
+   "nome": "Tacuary",
+   "sigla": "TAC",
+   "cidade": "Jara (Assunção)",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Toribio Vargas",
+    "capacidade": 3000
+   },
+   "fundacao": 1923,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 37,
+    "max": 58
+   },
+   "caixaInicial": 800000,
+   "liga": "PY2"
+  },
+  {
+   "id": "comerciantes",
+   "nome": "Comerciantes",
+   "sigla": "COM",
+   "cidade": "Iquitos",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#00EA00",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Max Augustín",
+    "capacidade": 24576
+   },
+   "fundacao": 2017,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 39,
+   "forcaElenco": {
+    "min": 29,
+    "max": 51
+   },
+   "caixaInicial": 200000,
+   "liga": "PE2"
+  },
+  {
+   "id": "academia-cantolao",
+   "nome": "Academia Cantolao",
+   "sigla": "ACA",
+   "cidade": "Callao",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#FFD900",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Miguel Grau (Callao)",
+    "capacidade": 15000
+   },
+   "fundacao": 2012,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 33,
+    "max": 54
+   },
+   "caixaInicial": 400000,
+   "liga": "PE2"
+  },
+  {
+   "id": "alianza-universidad",
+   "nome": "Alianza Universidad",
+   "sigla": "ALI",
+   "cidade": "Huánuco",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#0233B3",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Heraclio Tapia",
+    "capacidade": 20000
+   },
+   "fundacao": 1939,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 31,
+    "max": 53
+   },
+   "caixaInicial": 400000,
+   "liga": "PE2"
+  },
+  {
+   "id": "ada",
+   "nome": "ADA",
+   "sigla": "ADA",
+   "cidade": "Jaén",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#004028",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Víctor Montoya Segura",
+    "capacidade": 9000
+   },
+   "fundacao": 1953,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 39,
+   "forcaElenco": {
+    "min": 29,
+    "max": 51
+   },
+   "caixaInicial": 200000,
+   "liga": "PE2"
+  },
+  {
+   "id": "ayacucho",
+   "nome": "Ayacucho",
+   "sigla": "AYA",
+   "cidade": "Aiacucho",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Las Américas",
+    "capacidade": 12000
+   },
+   "fundacao": 1972,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 36,
+    "max": 57
+   },
+   "caixaInicial": 700000,
+   "liga": "PE2"
+  },
+  {
+   "id": "bentin-tacna-heroica",
+   "nome": "Bentín Tacna Heroica",
+   "sigla": "BTH",
+   "cidade": "Tacna",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#0000FF",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Jorge Basadre",
+    "capacidade": 19850
+   },
+   "fundacao": 2014,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 40,
+   "forcaElenco": {
+    "min": 29,
+    "max": 51
+   },
+   "caixaInicial": 200000,
+   "liga": "PE2"
+  },
+  {
+   "id": "carlos-a-mannucci",
+   "nome": "Carlos A. Mannucci",
+   "sigla": "CAR",
+   "cidade": "Trujillo",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#0030BF",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Mansiche",
+    "capacidade": 24000
+   },
+   "fundacao": 1959,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 34,
+    "max": 55
+   },
+   "caixaInicial": 500000,
+   "liga": "PE2"
+  },
+  {
+   "id": "cesar-vallejo",
+   "nome": "César Vallejo",
+   "sigla": "CES",
+   "cidade": "Trujillo",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#FF4D00",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Mansiche",
+    "capacidade": 24000
+   },
+   "fundacao": 1996,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 36,
+    "max": 57
+   },
+   "caixaInicial": 700000,
+   "liga": "PE2"
+  },
+  {
+   "id": "universidad-san-martin",
+   "nome": "Universidad San Martín",
+   "sigla": "USM",
+   "cidade": "Lima",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Villa Deportiva de la Universidad San Martín de Porres",
+    "capacidade": 15000
+   },
+   "fundacao": 2004,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 36,
+    "max": 57
+   },
+   "caixaInicial": 700000,
+   "liga": "PE2"
+  },
+  {
+   "id": "deportivo-binacional",
+   "nome": "Deportivo Binacional",
+   "sigla": "BIN",
+   "cidade": "Juliaca",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#061CAE",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Arequipa",
+    "capacidade": 40370
+   },
+   "fundacao": 2010,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 33,
+    "max": 54
+   },
+   "caixaInicial": 400000,
+   "liga": "PE2"
+  },
+  {
+   "id": "deportivo-llacuabamba",
+   "nome": "Deportivo Llacuabamba",
+   "sigla": "LLA",
+   "cidade": "Otuzco",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Comunal de Llacuabamba, Parcoy, La Libertad",
+    "capacidade": 2000
+   },
+   "fundacao": 2011,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 41,
+   "forcaElenco": {
+    "min": 30,
+    "max": 52
+   },
+   "caixaInicial": 300000,
+   "liga": "PE2"
+  },
+  {
+   "id": "estudiantil-cni",
+   "nome": "Estudiantil CNI",
+   "sigla": "EST",
+   "cidade": "Iquitos",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Max AugustínIquitos",
+    "capacidade": 24000
+   },
+   "fundacao": 1996,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 39,
+   "forcaElenco": {
+    "min": 29,
+    "max": 51
+   },
+   "caixaInicial": 200000,
+   "liga": "PE2"
+  },
+  {
+   "id": "san-marcos-de-huari",
+   "nome": "San Marcos de Huari",
+   "sigla": "SMH",
+   "cidade": "Huari",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#2E7D32"
+   },
+   "estadio": {
+    "nome": "Estadio Rosas Pampa",
+    "capacidade": 20000
+   },
+   "fundacao": 2022,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 39,
+   "forcaElenco": {
+    "min": 29,
+    "max": 51
+   },
+   "caixaInicial": 200000,
+   "liga": "PE2"
+  },
+  {
+   "id": "molinos-el-pirata",
+   "nome": "Molinos El Pirata",
+   "sigla": "MOL",
+   "cidade": "José Leonardo Ortiz",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Francisco Mendoza Pizarro",
+    "capacidade": 5000
+   },
+   "fundacao": 2015,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 31,
+    "max": 52
+   },
+   "caixaInicial": 300000,
+   "liga": "PE2"
+  },
+  {
+   "id": "santos-de-nasca",
+   "nome": "Santos de Nasca",
+   "sigla": "SAN",
+   "cidade": "Nazca",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#0731BE",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio José Picasso Peratta",
+    "capacidade": 10000
+   },
+   "fundacao": 1976,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 40,
+   "forcaElenco": {
+    "min": 29,
+    "max": 51
+   },
+   "caixaInicial": 200000,
+   "liga": "PE2"
+  },
+  {
+   "id": "union-comercio",
+   "nome": "Unión Comercio",
+   "sigla": "UNI",
+   "cidade": "Moyobamba",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#FF0013",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio IPD de Moyobamba",
+    "capacidade": 5000
+   },
+   "fundacao": 1994,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 33,
+    "max": 54
+   },
+   "caixaInicial": 500000,
+   "liga": "PE2"
+  },
+  {
+   "id": "union-minas",
+   "nome": "Unión Minas",
+   "sigla": "UNI",
+   "cidade": "Cerro de Pasco",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#FFFF00",
+    "secundaria": "#2F5FD0"
+   },
+   "estadio": {
+    "nome": "Estadio Daniel Alcides Carrión",
+    "capacidade": 8000
+   },
+   "fundacao": 1974,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 41,
+   "forcaElenco": {
+    "min": 30,
+    "max": 52
+   },
+   "caixaInicial": 300000,
+   "liga": "PE2"
+  },
+  {
+   "id": "atenas",
+   "nome": "Atenas",
+   "sigla": "ATE",
+   "cidade": "San Carlos",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Atenas",
+    "capacidade": 6000
+   },
+   "fundacao": 1928,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 37,
+    "max": 60
+   },
+   "caixaInicial": 800000,
+   "liga": "UY2"
+  },
+  {
+   "id": "rentistas",
+   "nome": "Rentistas",
+   "sigla": "REN",
+   "cidade": "Montevidéu",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#EE1C25",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Complejo Rentistas",
+    "capacidade": 10000
+   },
+   "fundacao": 1933,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 34,
+    "max": 57
+   },
+   "caixaInicial": 500000,
+   "liga": "UY2"
+  },
+  {
+   "id": "fenix",
+   "nome": "Fénix",
+   "sigla": "FEN",
+   "cidade": "Montevidéu",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Parque Capurro",
+    "capacidade": 10000
+   },
+   "fundacao": 1916,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 38,
+    "max": 61
+   },
+   "caixaInicial": 900000,
+   "liga": "UY2"
+  },
+  {
+   "id": "river-plate-uy",
+   "nome": "River Plate",
+   "sigla": "RIV",
+   "cidade": "Montevidéu",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#C62828",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Saroldi",
+    "capacidade": 5165
+   },
+   "fundacao": 1932,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 36,
+    "max": 58
+   },
+   "caixaInicial": 600000,
+   "liga": "UY2"
+  },
+  {
+   "id": "oriental",
+   "nome": "Oriental",
+   "sigla": "ORI",
+   "cidade": "La Paz",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Parque Oriental La Paz, Uruguay",
+    "capacidade": 2000
+   },
+   "fundacao": 1924,
+   "rival": null,
+   "torcida": 1,
+   "reputacao": 40,
+   "forcaElenco": {
+    "min": 30,
+    "max": 54
+   },
+   "caixaInicial": 200000,
+   "liga": "UY2"
+  },
+  {
+   "id": "plaza-colonia",
+   "nome": "Plaza Colonia",
+   "sigla": "PLA",
+   "cidade": "Colônia do Sacramento",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Profesor Alberto Suppici",
+    "capacidade": 12000
+   },
+   "fundacao": 1917,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 37,
+    "max": 60
+   },
+   "caixaInicial": 800000,
+   "liga": "UY2"
+  },
+  {
+   "id": "cerrito",
+   "nome": "Cerrito",
+   "sigla": "CER",
+   "cidade": "Montevidéu",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#FFFF00",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Parque Maracaná",
+    "capacidade": 8000
+   },
+   "fundacao": 1929,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 32,
+    "max": 56
+   },
+   "caixaInicial": 300000,
+   "liga": "UY2"
+  },
+  {
+   "id": "colon-uy",
+   "nome": "Colón",
+   "sigla": "COL",
+   "cidade": "Montevidéu",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Parque Doctor Carlos Suero",
+    "capacidade": 2000
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 41,
+   "forcaElenco": {
+    "min": 31,
+    "max": 55
+   },
+   "caixaInicial": 200000,
+   "liga": "UY2"
+  },
+  {
+   "id": "huracan-uy",
+   "nome": "Huracán",
+   "sigla": "HUR",
+   "cidade": "Montevidéu",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#0000FF",
+    "secundaria": "#FF0000"
+   },
+   "estadio": {
+    "nome": "Parque Pedro Ángel Bossio,Montevideo, Uruguay",
+    "capacidade": 2000
+   },
+   "fundacao": 1954,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 41,
+   "forcaElenco": {
+    "min": 30,
+    "max": 54
+   },
+   "caixaInicial": 200000,
+   "liga": "UY2"
+  },
+  {
+   "id": "la-luz",
+   "nome": "La Luz",
+   "sigla": "LUZ",
+   "cidade": "Montevidéu",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Parque Liebig'sFray Bentos, Uruguay",
+    "capacidade": 5000
+   },
+   "fundacao": 1929,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 35,
+    "max": 58
+   },
+   "caixaInicial": 600000,
+   "liga": "UY2"
+  },
+  {
+   "id": "miramar-misiones",
+   "nome": "Miramar Misiones",
+   "sigla": "MIR",
+   "cidade": "Montevidéu",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Parque Luis Méndez Piana",
+    "capacidade": 4000
+   },
+   "fundacao": 1980,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 33,
+    "max": 56
+   },
+   "caixaInicial": 400000,
+   "liga": "UY2"
+  },
+  {
+   "id": "paysandu-uy",
+   "nome": "Paysandú",
+   "sigla": "PAY",
+   "cidade": "Paysandú",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Parque Artigas",
+    "capacidade": 23000
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 1,
+   "reputacao": 40,
+   "forcaElenco": {
+    "min": 30,
+    "max": 54
+   },
+   "caixaInicial": 200000,
+   "liga": "UY2"
+  },
+  {
+   "id": "tacuarembo",
+   "nome": "Tacuarembó",
+   "sigla": "TAC",
+   "cidade": "Tacuarembó",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Raúl Goyenola",
+    "capacidade": 12000
+   },
+   "fundacao": 1999,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 33,
+    "max": 57
+   },
+   "caixaInicial": 400000,
+   "liga": "UY2"
+  },
+  {
+   "id": "uruguay-montevideo",
+   "nome": "Uruguay Montevideo",
+   "sigla": "URU",
+   "cidade": "Montevidéu",
+   "estado": "UY",
+   "pais": "UY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Parque ANCAP",
+    "capacidade": 4000
+   },
+   "fundacao": 1921,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 31,
+    "max": 55
+   },
+   "caixaInicial": 300000,
+   "liga": "UY2"
+  },
+  {
+   "id": "aragua",
+   "nome": "Aragua",
+   "sigla": "ARA",
+   "cidade": "Maracay",
+   "estado": "VE",
+   "pais": "VE",
+   "cores": {
+    "primaria": "#F9F92B",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Olímpico Hermanos Ghersi Páez",
+    "capacidade": 20000
+   },
+   "fundacao": 2002,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 40,
+   "forcaElenco": {
+    "min": 28,
+    "max": 50
+   },
+   "caixaInicial": 300000,
+   "liga": "VE2"
+  },
+  {
+   "id": "mineros-de-guayana",
+   "nome": "Mineros de Guayana",
+   "sigla": "MIN",
+   "cidade": "Puerto Ordaz",
+   "estado": "VE",
+   "pais": "VE",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Polideportivo Cachamay",
+    "capacidade": 45600
+   },
+   "fundacao": 1981,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 30,
+    "max": 51
+   },
+   "caixaInicial": 400000,
+   "liga": "VE2"
+  },
+  {
+   "id": "deportivo-lara",
+   "nome": "Deportivo Lara",
+   "sigla": "LAR",
+   "cidade": "Cabudare",
+   "estado": "VE",
+   "pais": "VE",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Metropolitano de Fútbol de Lara",
+    "capacidade": 40312
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 32,
+    "max": 53
+   },
+   "caixaInicial": 500000,
+   "liga": "VE2"
+  },
+  {
+   "id": "maritimo",
+   "nome": "Marítimo",
+   "sigla": "MAR",
+   "cidade": "Caracas",
+   "estado": "VE",
+   "pais": "VE",
+   "cores": {
+    "primaria": "#007500",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Olímpico de la Universidad Central de Venezuela",
+    "capacidade": 24900
+   },
+   "fundacao": 1959,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 40,
+   "forcaElenco": {
+    "min": 28,
+    "max": 50
+   },
+   "caixaInicial": 300000,
+   "liga": "VE2"
+  },
+  {
+   "id": "deportivo-miranda",
+   "nome": "Deportivo Miranda",
+   "sigla": "MIR",
+   "cidade": "Caracas",
+   "estado": "VE",
+   "pais": "VE",
+   "cores": {
+    "primaria": "#6A1B9A",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Brígido Iriarte",
+    "capacidade": 10000
+   },
+   "fundacao": 1948,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 31,
+    "max": 52
+   },
+   "caixaInicial": 400000,
+   "liga": "VE2"
+  },
+  {
+   "id": "dynamo-puerto",
+   "nome": "Dynamo Puerto",
+   "sigla": "DYN",
+   "cidade": "Puerto la Cruz",
+   "estado": "VE",
+   "pais": "VE",
+   "cores": {
+    "primaria": "#C62828",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio de Puerto la Cruz",
+    "capacidade": 15000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 35,
+   "forcaElenco": {
+    "min": 25,
+    "max": 47
+   },
+   "caixaInicial": 100000,
+   "liga": "VE2"
+  },
+  {
+   "id": "atletico-el-vigia",
+   "nome": "Atlético El Vigía",
+   "sigla": "VIG",
+   "cidade": "El Vigía",
+   "estado": "VE",
+   "pais": "VE",
+   "cores": {
+    "primaria": "#FFFF00",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Ramón Hernández",
+    "capacidade": 12785
+   },
+   "fundacao": 1987,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 36,
+   "forcaElenco": {
+    "min": 26,
+    "max": 47
+   },
+   "caixaInicial": 200000,
+   "liga": "VE2"
+  },
+  {
+   "id": "real-frontera",
+   "nome": "Real Frontera",
+   "sigla": "REA",
+   "cidade": "San Antonio del Táchira",
+   "estado": "VE",
+   "pais": "VE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Pedro Chávez",
+    "capacidade": 15000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 1,
+   "reputacao": 34,
+   "forcaElenco": {
+    "min": 24,
+    "max": 46
+   },
+   "caixaInicial": 100000,
+   "liga": "VE2"
+  },
+  {
+   "id": "urena",
+   "nome": "Ureña",
+   "sigla": "URE",
+   "cidade": "Ureña",
+   "estado": "VE",
+   "pais": "VE",
+   "cores": {
+    "primaria": "#1565C0",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Polideportivo de Pueblo Nuevo",
+    "capacidade": 42500
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 35,
+   "forcaElenco": {
+    "min": 25,
+    "max": 47
+   },
+   "caixaInicial": 100000,
+   "liga": "VE2"
+  },
+  {
+   "id": "yaracuyanos",
+   "nome": "Yaracuyanos",
+   "sigla": "YAR",
+   "cidade": "San Felipe",
+   "estado": "VE",
+   "pais": "VE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Florentino Oropeza",
+    "capacidade": 10000
+   },
+   "fundacao": 2006,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 40,
+   "forcaElenco": {
+    "min": 28,
+    "max": 50
+   },
+   "caixaInicial": 300000,
+   "liga": "VE2"
   }
  ]
 }

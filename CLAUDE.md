@@ -34,7 +34,7 @@ Leia isto antes de mexer no projeto. Detalhes de design em [PLANO.md](PLANO.md);
 Jogo de técnico de futebol para uso pessoal e recreativo do dono do repositório, inspirado no Brasfoot (referência, não cópia).
 Site PWA instalado na tela inicial do iPhone, funciona sem internet, save no próprio aparelho.
 Clubes brasileiros das Séries A, B, C e D de 2026 (regulamentos de 2026), os clubes que só jogam os 27 estaduais e a
-primeira divisão de 2026 dos outros 9 países da Conmebol, com os jogadores reais (`data/brasil-2026/jogadores.json` e
+primeira e a segunda divisão de 2026 dos outros 9 países da Conmebol (com acesso e queda), com os jogadores reais (`data/brasil-2026/jogadores.json` e
 `data/america-do-sul-2026/jogadores.json`); a força de cada jogador é calculada por nós.
 
 ## Situação (out/2026)
@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R76 rodando a cada mudança, antes
+ponta R01–R79 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -288,7 +288,39 @@ saiu continua no jogo, sem campeonato; a Série D do save não muda). Cidades qu
 `docs/TIMES_NOVOS.md` (gerado por `tools/times/lista.py`) lista os escudos que faltam (todos os clubes do jogo, de
 qualquer série); os dos 276 times novos chegaram em nov/2026 (R73). R66–R69.
 
-**Esperando o usuário:** em aberto no PLANO.md §11: nome final ("Proffut" é provisório?). O 2D da partida começou (R60) e
+**Segunda divisão da América do Sul (nov/2026):** pedido "Conseguimos esta colocando as outras series dos paises da
+america do sul ?"; ele escolheu "Com acesso e queda". 150 clubes: Argentina 36 (Primera Nacional, turno único), Bolívia 14
+(Copa Simón Bolívar), Chile 16, Colômbia 16, Equador 11, Paraguai 16 (Intermedia), Peru 17, Uruguai 14 e Venezuela 10, sem
+os times B (reservas de clubes da primeira, que não sobem: Monagas B, Zamora B, Sport Huancayo II) e sem quem a página só
+cita (o Atlético Huila virou o Independiente Valle del Cauca; o Coopsol caiu para a 3ª). O Deportes Quindío e o
+Yaracuyanos, que saíram da primeira no R74, voltam aqui com o mesmo id e escudo. **Motor:** `Clube.liga` = "AR" na primeira
+e "AR2" na segunda (a ficha tem `liga` só na segunda); torneio `L-AR2` (`nomeDoTorneio`: "Campeonato Argentino – 2ª
+divisão"), jogado como as ligas de fora. Na virada, `trocarDivisoes` (torneios.ts, logo depois do acesso da Série D): os
+últimos da primeira descem e os primeiros da segunda sobem, pela tabela da temporada (sem playoffs nem médias),
+`SOBEM_E_CAEM` por país (Uruguai 3, Venezuela 1, os outros 2; `vagasEntreDivisoes` limita pelo tamanho). Save antigo:
+`acertarParticipantes` põe os clubes da segunda com `liga` "XX2" (vale na temporada seguinte) e, nos países em que o save já
+tem a segunda (algum clube com "XX2"), a divisão do save manda: abrir o jogo não desfaz o acesso e a queda (R78). Base e
+completar elenco usam a nacionalidade de `Clube.pais` (não de `liga`). **Telas:** Tabelas → Outros países: escolhe o país
+e, com as duas divisões, "1ª divisão" ou "2ª divisão" (abre na 1ª); a zona de queda (vermelha) na 1ª e a de acesso
+(verde) na 2ª, com a regra embaixo (R77). Mercado → "Onde joga" com o país pega as duas divisões (`Clube.pais`). Fim da
+temporada: campeões só das primeiras divisões. **Fim do ano:** a 2ª da Argentina (35 rodadas) termina depois da final da
+Série C num save sem a Copa; o `avancar` que joga os últimos jogos de fora devolve `fim-dos-jogos` e para (o painel mostra
+"Encerrar a temporada", que pergunta quem sai de graça); antes ele fazia a virada direto (R79). **Desempenho:** o
+`aplicarResultado` procurava o elenco dos dois times varrendo os ~16 mil jogadores a cada partida, e o mercado do
+computador contava o elenco de cada vendedor do mesmo jeito (`podeSair`); agora os elencos do dia saem uma vez só
+(`concluirJogos`) e o mercado conta uma vez por janela (`contarElencos`): mesmos resultados (impressão digital de duas
+temporadas igual) e 30% mais rápido. Números: 568 clubes, ~16.000 jogadores, ~6.700 jogos por temporada (temporada
+simulada ~11 s aqui; antes, sem a segunda, ~10 s), save de 9 a 14 MB. **Dados:** fase "segundas" do robô
+(`elencos.yml`, sementes `liga2-XX-en`/`-es`) grava a branch `dados-segundas`; `npx tsx tools/times/montar.ts <dados-times>
+<súmulas> <dados-segundas>` junta os dados (o que já veio da `dados-times` fica: a primeira divisão sai igual, byte a byte)
+e monta as segundas (`TAMANHO_DA_SEGUNDA`, `PESO_SEGUNDA`: o melhor da segunda fica um pouco abaixo do mais fraco da
+primeira; `MANUAL_NOMES_SEGUNDA`: Estudiantes de Buenos Aires, Flamengo de Sucre, Santos de Nasca...; cidades em
+`MANUAL_CIDADES`). 130 dos 150 têm elenco da Wikipédia; os outros, gerado. **Escudos:** faltam os 148 novos
+(`docs/TIMES_NOVOS.md`): o R73 fica vermelho até eles chegarem, e nada vai para a `main` antes.
+
+**Esperando o usuário:** os escudos dos 148 clubes da segunda divisão da América do Sul (lista em `docs/TIMES_NOVOS.md`,
+que ele passa para a IA da Manus); a segunda divisão só é publicada com eles (R73). Em aberto no PLANO.md §11: nome final
+("Proffut" é provisório?). O 2D da partida começou (R60) e
 segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
 
 **Próximas ideias:** o resto da lista de mudanças (PLANO.md §13: 3, 6, 9–15, 17, 18, 20), quando o usuário escolher, e
@@ -351,7 +383,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `partida.ts` | Simulação minuto a minuto; disputa = a^k/(a^k+b^k), k = `EXPOENTE_DISPUTA`. Estatísticas da partida do usuário (`estatisticasDoMinuto`, `posseDeBola`, `cartoes`, `pressaoRecente`, `sobPressao`) |
 | `calendario.ts`, `competicoes.ts` | Tabelas, turno/returno com mando equilibrado, playoff da B, quadrangulares e final da C |
 | `copa.ts` | Copa do Brasil: participantes, sorteio por potes, jogos, quem passa, premiação, textos do confronto |
-| `torneios.ts` | Série D, estaduais e ligas de fora: participantes, jogos, grupos, mata-mata, campeões, `competicoesDoUsuario`, `inicioDoAno` |
+| `torneios.ts` | Série D, estaduais e ligas de fora (primeira e segunda divisão): participantes, jogos, grupos, mata-mata, campeões, acesso e queda entre as divisões de fora (`trocarDivisoes`), `competicoesDoUsuario`, `inicioDoAno` |
 | `financas.ts`, `estadio.ts` | Bilheteria, TV, patrocínio, salários; obras de ampliação e modernização |
 | `mercado.ts`, `mensagens.ts`, `diretoria.ts` | Compra e venda, propostas (e "Pedir mais": `pedirMais`, `limiteDaProposta`), caixa de mensagens, objetivo e confiança |
 | `carreira.ts` | Reputação do técnico, cargo em risco, demissão e propostas de emprego, convites de clubes maiores, `assumirClube` |
@@ -417,6 +449,11 @@ Obras do estádio se pagam em 3 a 4 temporadas.
   `page.clock`: pausar o relógio antes do apito (`pauseAt` antes de "Começar o jogo"); deixar a partida correr em tempo
   real até a contagem fazia o R60 chegar ao gol antes dela quando a máquina ficava mais lenta.
 - GitHub Actions: usar `actions/*@v7` e Node 22 (Node 20 foi removido do Actions).
+- **Virada só no botão:** o `avancar` faz a virada apenas quando é chamado com a temporada já encerrada (o botão
+  "Encerrar a temporada", que pergunta antes quem sai de graça). Se ele mesmo joga os últimos jogos do ano (todos de fora
+  do Brasil), devolve `fim-dos-jogos` e para (R79). Laço que simula temporadas: trate `fim-dos-jogos` como "acabou o ano".
+- **Nada de `elencoDe` dentro de laço grande:** ele varre os ~16 mil jogadores. Para muitos clubes ou muitas perguntas,
+  monte os elencos (ou as contagens) uma vez, como `concluirJogos` e `transferenciasDaIa` fazem.
 - Ao rodar comandos, não use `pkill` genérico (já derrubou o próprio terminal). Nem `pgrep -f "<texto>"` seguido
   de `kill`: o próprio terminal tem o texto na linha de comando. Guarde o PID ao abrir o processo (`$!`).
 - `esperarInteiroNaTela` rola o elemento até o meio da área com rolagem: com o topo de altura fracionada, parar na

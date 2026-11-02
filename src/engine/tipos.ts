@@ -153,7 +153,10 @@ export interface Clube {
   capitao?: number;
   /** País do clube, quando não é do Brasil ("AR", "UY"...). */
   pais?: string;
-  /** Liga de outro país que o clube joga (o código do país, como em `pais`). */
+  /**
+   * Liga de outro país que o clube joga: o código do país na primeira divisão ("AR") e com 2 no fim na segunda
+   * ("AR2"). Muda na virada, com o acesso e a queda.
+   */
   liga?: string;
   /** Estadual que o clube joga no começo do ano (a sigla do estado), se joga a primeira divisão do estado. */
   estadual?: string;

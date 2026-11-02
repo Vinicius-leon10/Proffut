@@ -1,10 +1,11 @@
-// Monta os times novos do jogo: os participantes dos 27 estaduais de 2026, os elencos da Série D e a primeira
-// divisão de 2026 dos outros 9 países da Conmebol, com a ficha de cada clube novo e os elencos de verdade.
+// Monta os times novos do jogo: os participantes dos 27 estaduais de 2026, os elencos da Série D e a primeira e a
+// segunda divisão de 2026 dos outros 9 países da Conmebol, com a ficha de cada clube novo e os elencos de verdade.
 //
-//   npx tsx tools/times/montar.ts <pasta da branch dados-times> <pasta com as súmulas> [--so-participantes]
+//   npx tsx tools/times/montar.ts <pasta da branch dados-times> <pasta com as súmulas> [<pasta da branch dados-segundas>] [--so-participantes]
 //
 // A segunda pasta é a da branch dados-elencos (súmulas das Séries A a D) com as súmulas da Copa do Brasil de 2023 a
-// 2025 em sumulas/CdB_<ano>_games.json.gz (o robô dos elencos já baixa as da Copa).
+// 2025 em sumulas/CdB_<ano>_games.json.gz (o robô dos elencos já baixa as da Copa). A terceira (opcional) é a da
+// branch dados-segundas, com as páginas das segundas divisões (fase "segundas" do robô); sem ela, só a primeira.
 //
 // Fontes (o robô .github/workflows/elencos.yml, fase "times", baixa as da Wikipédia, do Wikidata e do Transfermarkt):
 //   - Wikipédia: quem joga cada campeonato (as seções dos grupos ou dos participantes), a ficha de cada clube novo
@@ -49,6 +50,8 @@ export interface FichaNova {
   cores: { primaria: string; secundaria: string }; estadio: { nome: string; capacidade: number };
   fundacao: number; rival: string | null; torcida: number; reputacao: number; forcaElenco: { min: number; max: number };
   caixaInicial: number; pais?: string;
+  /** Segunda divisão do país ("AR2"); falta na primeira. */
+  liga?: string;
 }
 
 const lerGz = (arquivo: string) => JSON.parse(gunzipSync(readFileSync(arquivo)).toString("utf8"));
@@ -106,6 +109,19 @@ const PESO_PAIS: Record<string, { topo: [number, number]; base: [number, number]
   VE: { topo: [52, 72], base: [38, 58], reputacao: [46, 74], torcida: [2, 45], caixa: [600_000, 6_000_000] },
 };
 
+type Peso = (typeof PESO_PAIS)[string];
+/**
+ * Peso da segunda divisão de cada país: o melhor clube dela fica um pouco abaixo do mais fraco da primeira (a da
+ * Argentina perto das Séries B e C do jogo; as da Bolívia e da Venezuela perto da Série D).
+ */
+const PESO_SEGUNDA: Record<string, Peso> = Object.fromEntries(Object.entries(PESO_PAIS).map(([pais, p]) => [pais, {
+  topo: [p.base[0] - 4, p.base[1] - 4],
+  base: [p.base[0] - 14, p.base[1] - 12],
+  reputacao: [p.reputacao[0] - 12, p.reputacao[0] + 2],
+  torcida: [1, p.torcida[0] + 10],
+  caixa: [Math.max(100_000, p.caixa[0] * 0.15), p.caixa[0]],
+} satisfies Peso]));
+
 // ---- nomes -------------------------------------------------------------------------------------
 
 /** Palavras que não distinguem um clube de outro ("Esporte Clube", "Club Atlético"...). */
@@ -153,13 +169,25 @@ function nomeCurto(oficial: string): string {
 
 // ---- leitura ------------------------------------------------------------------------------------
 
-const [dadosTimes, dadosSumulas] = process.argv.slice(2);
-if (!dadosTimes || !dadosSumulas) throw new Error("Uso: npx tsx tools/times/montar.ts <pasta dados-times> <pasta com as súmulas>");
+const [dadosTimes, dadosSumulas, dadosSegundas] = process.argv.slice(2).filter((a) => !a.startsWith("--"));
+if (!dadosTimes || !dadosSumulas) throw new Error("Uso: npx tsx tools/times/montar.ts <pasta dados-times> <pasta com as súmulas> [<pasta dados-segundas>]");
 const sementes: Semente[] = lerGz(join(dadosTimes, "sementes.json.gz"));
 const clubesWd: Record<string, ClubeWd> = lerGz(join(dadosTimes, "clubes.json.gz"));
 const paginas: Record<string, string> = lerGz(join(dadosTimes, "paginas.json.gz"));
 const elencosRobo: Record<string, ElencoRobo> = lerGz(join(dadosTimes, "elencos.json.gz"));
 const pessoasWd: Record<string, PessoaWd> = lerGz(join(dadosTimes, "jogadores.json.gz"));
+// Segundas divisões (nov/2026): os dados da branch dados-segundas entram só onde faltam (o que já veio da dados-times,
+// baixado antes, fica como está: a primeira divisão e os estaduais não mudam).
+if (dadosSegundas) {
+  sementes.push(...(lerGz(join(dadosSegundas, "sementes.json.gz")) as Semente[]));
+  const juntar = <T>(alvo: Record<string, T>, arquivo: string) => {
+    for (const [k, v] of Object.entries(lerGz(join(dadosSegundas, arquivo)) as Record<string, T>)) if (!(k in alvo)) alvo[k] = v;
+  };
+  juntar(clubesWd, "clubes.json.gz");
+  juntar(paginas, "paginas.json.gz");
+  juntar(elencosRobo, "elencos.json.gz");
+  juntar(pessoasWd, "jogadores.json.gz");
+}
 const relatorio: string[] = [];
 
 /** Nomes das súmulas que as palavras não ligam ao clube (apelidos, patrocínio no nome, sigla). */
@@ -217,7 +245,7 @@ const SECAO_DE_PARTICIPANTES = /participantes|teams|equipos|club information|clu
  * participantes pega também os clubes citados no texto e nas subseções, como os rebaixados do ano anterior em
  * "Promovidos e rebaixados", as desistências ou quem perdeu a final da segunda divisão (nov/2026).
  */
-const SECAO_DE_TABELA = /informa[çc][õo]es das equipes|est[áa]dios|localiza[çc][ãa]o|stadia and locations|club information|informaci[óo]n|sedes/i;
+const SECAO_DE_TABELA = /informa[çc][õo]es das equipes|est[áa]dios|localiza[çc][ãa]o|localizaci[óo]n|stadia and locations|club information|informaci[óo]n|sedes/i;
 
 /**
  * Clubes de um campeonato, da primeira página (na ordem do robô: a de 2026, depois a de 2025...) que tem 4 ou mais:
@@ -368,17 +396,21 @@ function fichaBrasileira(c: ClubeNaPagina, wd: ClubeWd | undefined, uf: string, 
 }
 
 /** Ficha de um clube de fora. `fama` (0 a 1) é a posição dele entre os clubes do país. `reservar`: guarda o id e o nome. */
-function fichaDeFora(c: ClubeNaPagina, wd: ClubeWd | undefined, pais: string, fama: number, reservar = true): FichaNova {
+function fichaDeFora(c: ClubeNaPagina, wd: ClubeWd | undefined, pais: string, fama: number, reservar = true, segunda = false): FichaNova {
   const en = ficha(paginaDoClube("en", wd) ?? "");
   const es = ficha(paginaDoClube("es", wd) ?? "");
   const comum = textoVisivel(en.clubname ?? "");
   const curto = textoVisivel(en.short_name ?? "");
-  const escolhido = comum && comum.length <= 24 && !/^(club|asociaci)/i.test(comum) ? comum : curto && curto.length > 3 ? curto : nomeCurto(wd?.es ?? c.titulo);
+  // Na segunda divisão, o título da ligação vem antes do rótulo do Wikidata, que às vezes ainda tem o nome antigo
+  // ("Vargas Torres" para o Santo Domingo).
+  const doTitulo = nomeCurto(c.titulo);
+  const oficial = segunda && !ENFEITES.has(normalizar(doTitulo)) ? doTitulo : nomeCurto(wd?.es ?? c.titulo);
+  const escolhido = comum && comum.length <= 24 && !/^(club|asociaci)/i.test(comum) ? comum : curto && curto.length > 3 ? curto : oficial;
   // Sem "FC", "SC", "F.C." no fim e sem "FBC" no começo ("Envigado FC" → "Envigado").
   const limpo = escolhido.replace(/\s+(F\.?\s?C\.?|S\.?\s?C\.?|Association)$/i, "").replace(/^FBC\s+/i, "").trim();
-  const nomeBase = MANUAL_NOMES[limpo] ?? limpo;
+  const nomeBase = (segunda ? MANUAL_NOMES_SEGUNDA[limpo] : undefined) ?? MANUAL_NOMES[limpo] ?? limpo;
   const { id, nome } = reservar ? idENome(nomeBase, pais, false) : { id: slug(nomeBase), nome: nomeBase };
-  const p = PESO_PAIS[pais];
+  const p = (segunda ? PESO_SEGUNDA : PESO_PAIS)[pais];
   const t = fama ** 1.5;
   const entre = ([a, b]: [number, number]) => a + (b - a) * t;
   const cidade = MANUAL_CIDADES[id] ?? wd?.cidades[0] ?? textoVisivel(en.ground ?? "").split(",")[1]?.trim() ?? PAISES_NOME[pais];
@@ -396,6 +428,7 @@ function fichaDeFora(c: ClubeNaPagina, wd: ClubeWd | undefined, pais: string, fa
     reputacao: Math.round(entre(p.reputacao)),
     forcaElenco: { min: Math.round(p.base[0] + (p.topo[0] - p.base[0]) * t), max: Math.round(p.base[1] + (p.topo[1] - p.base[1]) * t) },
     caixaInicial: Math.round(entre(p.caixa) / 100_000) * 100_000,
+    ...(segunda ? { liga: `${pais}2` } : {}),
   };
 }
 
@@ -408,10 +441,31 @@ const MANUAL_NOMES: Record<string, string> = {
   "Deportivo Riestra": "Riestra", "CDT Real Oruro": "Real Oruro",
 };
 
+/**
+ * Nomes da segunda divisão: o nome curto de todo mundo, no lugar do nome oficial comprido ou de uma abreviação; e um
+ * nome diferente para quem tem o nome de um clube conhecido do jogo (o Estudiantes de Buenos Aires e o de La Plata, o
+ * Flamengo de Sucre, o Santos de Nasca).
+ */
+const MANUAL_NOMES_SEGUNDA: Record<string, string> = {
+  "10 de Noviembre Wilstermann Cooperativas": "Wilstermann Cooperativas", "Racing (C)": "Racing de Córdoba", "Mitre (SdE)": "Mitre",
+  "Gimnasia y Esgrima de Jujuy": "Gimnasia de Jujuy", Estudiantes: "Estudiantes de Buenos Aires", Flamengo: "Flamengo de Sucre",
+  Santos: "Santos de Nasca", "Independiente F.B.C.": "Independiente de Campo Grande", "Dr Benjamín Aceval": "Benjamín Aceval",
+  Pirata: "Molinos El Pirata", "FC San Marcos": "San Marcos de Huari", "Universidad de San Martín de Porres": "Universidad San Martín",
+  "Universidad César Vallejo": "César Vallejo", Patriotas: "Patriotas Boyacá", "Atlético": "Atlético FC",
+};
+
 /** Cidade dos clubes que as fontes não dizem (sem ela, ficava o nome do país). */
 const MANUAL_CIDADES: Record<string, string> = {
   "real-oruro": "Oruro", "san-jose": "Oruro", anzoategui: "Puerto La Cruz", "alianza-valledupar": "Valledupar", "inter-bogota": "Bogotá",
   leones: "Ibarra", libertad: "Loja", "juan-pablo-ii-college": "Chongoyape", "deportivo-moquegua": "Moquegua", cajamarca: "Cajamarca",
+  // Segunda divisão (a ficha do clube na Wikipédia diz o estádio; a cidade dele vem daqui).
+  "central-norte": "Salta", "itagui-leones": "Itagüí", "deportivo-fatic": "El Alto", "garcia-agreda": "Tarija", "universitario-de-pando": "Cobija",
+  "universitario-del-beni": "Trinidad", "empresa-minera-huanuni": "Huanuni", "independiente-unificada": "Potosí", "atletico-rojiblanco": "Guayaquil",
+  "cuenca-juniors": "Cuenca", "independiente-juniors": "Quito", "santo-domingo": "Santo Domingo", "12-de-junio": "Villa Hayes",
+  "benjamin-aceval": "Benjamín Aceval", "fernando-de-la-mora": "Fernando de la Mora", "general-caballero-jlm": "Juan León Mallorquín",
+  "sportivo-carapegua": "Carapeguá", encarnacion: "Encarnación", paraguari: "Paraguarí", comerciantes: "Iquitos", "academia-cantolao": "Callao",
+  ada: "Jaén", "bentin-tacna-heroica": "Tacna", "estudiantil-cni": "Iquitos", "san-marcos-de-huari": "Huari", "real-frontera": "San Antonio del Táchira",
+  urena: "Ureña",
 };
 
 // ---- participantes: estaduais e ligas -------------------------------------------------------------
@@ -535,12 +589,16 @@ const GRANDES = new Set(["Boca Juniors", "River Plate", "Peñarol", "Nacional", 
   "Deportivo Táchira"]);
 const fichasExterior: FichaNova[] = [];
 const ligas: Record<string, { c: ClubeNaPagina; wd?: ClubeWd }[]> = {};
-for (const pais of LIGAS) {
+/**
+ * Os clubes de uma liga de fora pelas páginas de 2026 em inglês e em espanhol (sementes `<prefixo>-<país>-<língua>`):
+ * a lista com o tamanho mais perto de `alvo`. `fora`: quem não pode entrar (na segunda divisão, os da primeira).
+ */
+function listaDaLiga(pais: string, prefixo: string, alvo: number, fora: (c: ClubeNaPagina) => boolean = () => false) {
   const qidDoPais = Object.keys(PAIS_DO_ITEM).find((q) => PAIS_DO_ITEM[q] === pais)!;
   // Clube de outro país sai; sem país no Wikidata (Real Oruro, Anzoátegui...) fica: está na página da liga.
   const doPais = (lista: ClubeNaPagina[]) => lista.filter((c) => {
     const paises = clubesWd[c.qid]?.paises ?? [];
-    return (!paises.length || paises.includes(qidDoPais)) && !NOME_ANTIGO.test(`${clubesWd[c.qid]?.es} ${clubesWd[c.qid]?.en} ${c.titulo}`);
+    return (!paises.length || paises.includes(qidDoPais)) && !NOME_ANTIGO.test(`${clubesWd[c.qid]?.es} ${clubesWd[c.qid]?.en} ${c.titulo}`) && !fora(c);
   });
   // As listas possíveis: de cada página, a dos grupos, as dos participantes e as das tabelas; e a dos clubes que estão
   // nas duas páginas. As das tabelas (marcadas) ganham no empate: a dos participantes pega também os citados no texto.
@@ -548,7 +606,8 @@ for (const pais of LIGAS) {
   const deTabela = new Set<ClubeNaPagina[]>();
   const porLingua: ClubeNaPagina[][] = [];
   for (const lang of ["en", "es"]) {
-    const s = porSemente.get(`liga-${pais}-${lang}`)!;
+    const s = porSemente.get(`${prefixo}-${pais}-${lang}`);
+    if (!s) continue;
     for (const p of s.paginas.slice(0, 1)) {
       const unicos = (l: ClubeNaPagina[]) => [...new Map(l.map((c) => [c.qid, c])).values()];
       const grupos = doPais(unicos(p.participantes.filter((l) => SECAO_DE_GRUPO.test(l.secao.trim())).flatMap((l) => l.clubes)));
@@ -562,11 +621,33 @@ for (const pais of LIGAS) {
   const [en = [], es = []] = porLingua;
   const emEs = new Set(es.map((c) => c.qid));
   candidatas.push(en.filter((c) => emEs.has(c.qid)));
-  const alvo = TAMANHO_DA_LIGA[pais];
   const lista = candidatas.filter((l) => l.length >= 8)
     .sort((a, b) => Math.abs(a.length - alvo) - Math.abs(b.length - alvo) || Number(deTabela.has(b)) - Number(deTabela.has(a)) || b.length - a.length)[0] ?? [];
+  return { lista, tamanhos: candidatas.map((l) => l.length) };
+}
+for (const pais of LIGAS) {
+  const alvo = TAMANHO_DA_LIGA[pais];
+  const { lista, tamanhos } = listaDaLiga(pais, "liga", alvo);
   ligas[pais] = lista.map((c) => ({ c, wd: clubesWd[c.qid] }));
-  relatorio.push(`Liga ${pais}: ${lista.length} clubes (esperados ${alvo}; listas das páginas: ${candidatas.map((l) => l.length).join(", ")}).`);
+  relatorio.push(`Liga ${pais}: ${lista.length} clubes (esperados ${alvo}; listas das páginas: ${tamanhos.join(", ")}).`);
+}
+
+/**
+ * Quantos clubes cada segunda divisão tem em 2026, sem os da primeira e sem os times B (reservas de clubes da primeira,
+ * que não sobem: na Venezuela, o Monagas B e o Zamora B; no Peru, o Sport Huancayo II; o Puerto Cabello da página é o
+ * da primeira).
+ */
+const TAMANHO_DA_SEGUNDA: Record<string, number> = { AR: 36, BO: 14, CL: 16, CO: 16, EC: 11, PY: 16, PE: 17, UY: 14, VE: 10 };
+const TIME_B = /["“”]B["“”]|\sB$/;
+if (dadosSegundas) {
+  // Quem está na primeira divisão de algum país não entra na segunda (as páginas citam os rebaixados e os promovidos).
+  const naPrimeira = new Set(LIGAS.flatMap((p) => ligas[p].map(({ c }) => c.qid)));
+  for (const pais of LIGAS) {
+    const alvo = TAMANHO_DA_SEGUNDA[pais];
+    const { lista, tamanhos } = listaDaLiga(pais, "liga2", alvo, (c) => naPrimeira.has(c.qid) || TIME_B.test(c.titulo));
+    ligas[`${pais}2`] = lista.map((c) => ({ c, wd: clubesWd[c.qid] }));
+    relatorio.push(`Segunda divisão ${pais}: ${lista.length} clubes (esperados ${alvo}; listas das páginas: ${tamanhos.join(", ")}).`);
+  }
 }
 
 // ---- elencos dos clubes de fora -------------------------------------------------------------------
@@ -704,8 +785,12 @@ function valorDoElenco(wd: ClubeWd): number {
   }
   return [...new Set(valores)].sort((a, b) => b - a).slice(0, 20).reduce((a, b) => a + b, 0);
 }
-for (const pais of LIGAS) {
-  const lista = ligas[pais];
+// Primeiro as primeiras divisões (os ids delas não mudam), depois as segundas.
+for (const liga of [...LIGAS, ...LIGAS.map((p) => `${p}2`)]) {
+  const lista = ligas[liga];
+  if (!lista) continue;
+  const pais = liga.slice(0, 2);
+  const segunda = liga.endsWith("2");
   // A fama é a ordem pelo valor do elenco (Argentina e Colômbia) e pelo número de Wikipédias com a página do clube.
   const valores = lista.map(({ wd }) => (wd ? valorDoElenco(wd) : 0));
   const pWiki = percentis(lista.map(({ wd }) => Number(wd?.links ?? 0)));
@@ -714,9 +799,9 @@ for (const pais of LIGAS) {
   const base = percentis(lista.map((_, i) => (temValor ? 0.7 * pValor[i] + 0.3 * pWiki[i] : pWiki[i])));
   // Os grandes (Peñarol, Colo-Colo, Olimpia...) ficam acima de todos os outros do país.
   const nomes = lista.map(({ c, wd }) => fichaDeFora(c, wd, pais, 0, false).nome);
-  const fama = base.map((f, i) => (GRANDES.has(nomes[i]) ? 0.9 + 0.1 * f : 0.88 * f));
+  const fama = base.map((f, i) => (GRANDES.has(nomes[i]) && !segunda ? 0.9 + 0.1 * f : 0.88 * f));
   lista.forEach(({ c, wd }, i) => {
-    const f = fichaDeFora(c, wd, pais, fama[i]);
+    const f = fichaDeFora(c, wd, pais, fama[i], true, segunda);
     fichasExterior.push(f);
     if (wd) {
       const elenco = elencoDeFora(f, wd);
@@ -724,7 +809,11 @@ for (const pais of LIGAS) {
     }
   });
 }
-relatorio.push(`Clubes de fora: ${fichasExterior.length}; com elenco da Wikipédia: ${Object.keys(elencosExterior).length} (${Object.values(elencosExterior).flat().length} jogadores).`);
+for (const segunda of [false, true]) {
+  const fichas = fichasExterior.filter((f) => !!f.liga === segunda);
+  const comElenco = fichas.filter((f) => elencosExterior[f.id]);
+  relatorio.push(`Clubes de fora (${segunda ? "segunda" : "primeira"} divisão): ${fichas.length}; com elenco da Wikipédia: ${comElenco.length} (${comElenco.flatMap((f) => elencosExterior[f.id]).length} jogadores).`);
+}
 
 // ---- elencos dos clubes brasileiros (Série D e só do estadual), pelas súmulas -----------------------
 
@@ -782,7 +871,7 @@ if (!process.argv.includes("--so-participantes")) {
     temporada: 2026, descricao: "Quem joga a primeira divisão de cada estadual de 2026 (sigla do estado → ids dos clubes). Montado por tools/times/montar.ts.", participantes: estaduais,
   }, null, 1) + "\n");
   writeFileSync("data/america-do-sul-2026/clubes.json", JSON.stringify({
-    temporada: 2026, descricao: "Clubes da primeira divisão de 2026 dos outros 9 países da Conmebol. Montado por tools/times/montar.ts.", clubes: fichasExterior,
+    temporada: 2026, descricao: "Clubes da primeira e da segunda divisão (liga com 2 no fim) de 2026 dos outros 9 países da Conmebol. Montado por tools/times/montar.ts.", clubes: fichasExterior,
   }, null, 1) + "\n");
   escrever("data/america-do-sul-2026/jogadores.json", { fonte: "Wikipédia (elencos atuais), Wikidata e transfermarkt-datasets. Força calculada pelo Proffut.", elencos: elencosExterior });
 }

@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { aba, abrirSite, botao, cartaoDoProximoJogo, dataNoTopo, esperarNoSave, expect, novoJogo, test } from "./ajuda";
 
-type Ficha = { nome: string; pais?: string };
+type Ficha = { nome: string; pais?: string; liga?: string };
 const ler = (arquivo: string) => JSON.parse(readFileSync(arquivo, "utf8")) as { clubes: Ficha[] };
 const exterior = ler("data/america-do-sul-2026/clubes.json");
 const estaduais = ler("data/brasil-2026/clubes-estaduais.json");
@@ -23,7 +23,8 @@ test("R66 Tabelas: Séries (com a Série D em grupos), Copa, Estaduais (escolhen
   await page.getByRole("tab", { name: "Outros países" }).click();
   await page.getByRole("combobox", { name: "País" }).selectOption({ label: "Argentina" });
   const argentinos = page.locator("main table.tabela tbody tr");
-  await expect(argentinos).toHaveCount(nomes(exterior.clubes, "AR").length);
+  // Abre na 1ª divisão (a 2ª fica no botão ao lado, R77).
+  await expect(argentinos).toHaveCount(exterior.clubes.filter((c) => c.pais === "AR" && !c.liga).length);
   await expect(page.locator("main table.tabela")).toContainText("Boca Juniors");
 
   await page.getByRole("tab", { name: "Séries" }).click();

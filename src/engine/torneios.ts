@@ -56,11 +56,48 @@ export function ehTorneio(c: Competicao): c is IdTorneio {
   return c === "D" || c.startsWith("E-") || c.startsWith("L-");
 }
 
-/** "Série D", "Campeonato Paulista", "Campeonato Argentino". */
+/** "Série D", "Campeonato Paulista", "Campeonato Argentino", "Campeonato Argentino – 2ª divisão". */
 export function nomeDoTorneio(id: IdTorneio): string {
   if (id === "D") return "Série D";
   if (id.startsWith("E-")) return `Campeonato ${NOME_ESTADUAL[id.slice(2)] ?? id.slice(2)}`;
-  return PAISES[id.slice(2)]?.liga ?? `Liga ${id.slice(2)}`;
+  const pais = id.slice(2, 4);
+  const nome = PAISES[pais]?.liga ?? `Liga ${pais}`;
+  return id === `L-${pais}2` ? `${nome} – 2ª divisão` : nome;
+}
+
+/**
+ * Quantos sobem da segunda divisão e caem da primeira em cada país na virada (como em 2026, sem os playoffs e as
+ * médias de pontos: pela tabela da temporada).
+ */
+export const SOBEM_E_CAEM: Record<string, number> = { AR: 2, BO: 2, CL: 2, CO: 2, EC: 2, PY: 2, PE: 2, UY: 3, VE: 1 };
+
+/** Quantos sobem e caem entre as divisões do país nesta temporada (0 se as duas não estão jogando). */
+export function vagasEntreDivisoes(estado: EstadoJogo, pais: string): number {
+  const primeira = estado.torneios?.[`L-${pais}`];
+  const segunda = estado.torneios?.[`L-${pais}2`];
+  if (!primeira || !segunda) return 0;
+  return Math.max(0, Math.min(SOBEM_E_CAEM[pais] ?? 2, segunda.clubes.length, primeira.clubes.length - 2));
+}
+
+/**
+ * Na virada, em cada país com as duas divisões jogadas: os últimos da primeira descem e os primeiros da segunda
+ * sobem (`SOBEM_E_CAEM`). Devolve quem subiu e quem caiu, por país.
+ */
+export function trocarDivisoes(estado: EstadoJogo): Record<string, { sobem: string[]; caem: string[] }> {
+  const trocas: Record<string, { sobem: string[]; caem: string[] }> = {};
+  for (const pais of Object.keys(PAISES)) {
+    const primeira = estado.torneios?.[`L-${pais}`];
+    const segunda = estado.torneios?.[`L-${pais}2`];
+    if (!primeira || !segunda || primeira.fase !== "encerrada" || segunda.fase !== "encerrada") continue;
+    const n = vagasEntreDivisoes(estado, pais);
+    if (!n) continue;
+    const caem = tabelaDoTorneio(estado, primeira).slice(-n).map((l) => l.clubeId);
+    const sobem = tabelaDoTorneio(estado, segunda).slice(0, n).map((l) => l.clubeId);
+    for (const id of caem) estado.clubes[id].liga = `${pais}2`;
+    for (const id of sobem) estado.clubes[id].liga = pais;
+    trocas[pais] = { sobem, caem };
+  }
+  return trocas;
 }
 
 /** Domingo da semana `semana` da temporada (contando do primeiro sábado de abril). */

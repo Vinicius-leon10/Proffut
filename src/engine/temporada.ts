@@ -15,7 +15,7 @@ import { gerarElenco, gerarJovem, limitar, salarioBase } from "./gerador";
 import { completarLivres, elencoDe, livres, reescalar, transferenciasDaIa } from "./mercado";
 import { enviarMensagem } from "./mensagens";
 import { rngPara, type Rng } from "./rng";
-import { PAISES, inicioDoAno } from "./torneios";
+import { PAISES, inicioDoAno, trocarDivisoes } from "./torneios";
 import type { EstadoJogo, IdTorneio, Jogador, Posicao, RegistroTemporada, SerieId } from "./tipos";
 
 function artilheiro(estado: EstadoJogo, serie: SerieId): RegistroTemporada["artilheiros"][SerieId] {
@@ -128,6 +128,8 @@ export function encerrarTemporada(estado: EstadoJogo) {
       for (const j of gerarElenco(rng, escolhido, () => estado.proximoIdJogador++)) estado.jogadores[j.id] = j;
     }
   }
+  // Nos países da América do Sul: os últimos da primeira divisão descem e os primeiros da segunda sobem.
+  trocarDivisoes(estado);
 
   // ---- jogadores: evolução, idade, aposentadoria ----
   const aposentadosMeus: string[] = [];
@@ -167,7 +169,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
     const elenco = elencos.get(clube.id) ?? [];
     // Clube sem jogador nenhum não joga (Série D de um save antigo antes de abrir o jogo).
     if (!elenco.length) continue;
-    const doPais = clube.liga ? PAISES[clube.liga]?.nacionalidade : undefined;
+    const doPais = clube.pais ? PAISES[clube.pais]?.nacionalidade : undefined;
     const entrar = (j: Jogador) => { j.clubeId = clube.id; estado.jogadores[j.id] = j; elenco.push(j); };
     const quantos = elenco.length < 24 ? 3 : elenco.length < 28 ? 2 : 1;
     for (let i = 0; i < quantos; i++) {

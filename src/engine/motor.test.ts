@@ -12,13 +12,13 @@ import { MAX_SUBSTITUICOES, MINIMO_POSICAO } from "./constantes";
 import { desfechoDoConfronto, situacaoNaCopa } from "./copa";
 import { acertarParticipantes, assumirClube, avancar, jogosPendentesHoje, juntarAoSaveAntigo, novoJogo, prepararJogos, propostasDeEmprego, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
 import { checarEstado } from "./checagem";
-import { PAISES, competicoesDoUsuario, inicioDoAno, participantes, tabelaDoTorneio } from "./torneios";
+import { PAISES, competicoesDoUsuario, inicioDoAno, participantes, tabelaDoTorneio, vagasEntreDivisoes } from "./torneios";
 import { dispensar, elencoDe, fazerOferta, limiteDaProposta, livres, pedirMais, transferenciasDaIa } from "./mercado";
 import { enviarMensagem } from "./mensagens";
 import { avancarMinuto, cartoes, cobradores, notaCobrador, posseDeBola, simularAteOFim, sobPressao, substituir, type Estatisticas } from "./partida";
 import { criarRng, rngPara } from "./rng";
 import { carreiraDoTecnico, descreverPublico, descreverRecorde, titulosDoClube } from "./trofeus";
-import type { EstadoJogo, EstadoTorneio, Partida, Posicao } from "./tipos";
+import type { EstadoJogo, EstadoTorneio, IdTorneio, Partida, Posicao } from "./tipos";
 import { exportarTexto, importarTexto } from "../save/salvamento";
 import jogadoresJson from "../../data/brasil-2026/jogadores.json";
 import exteriorJson from "../../data/america-do-sul-2026/jogadores.json";
@@ -84,6 +84,19 @@ describe("temporada completa", () => {
   const estado = novoJogo({ nomeTecnico: "Teste", clubeId: "ponte-preta", semente: 7 });
   estado.config.escalacaoAutomatica = true;
   simularRestoDaTemporada(estado);
+  // Antes da virada: quem deve cair e subir em cada país da América do Sul, pela tabela final de cada divisão.
+  const trocasEsperadas = Object.keys(PAISES).map((pais) => {
+    const primeira = estado.torneios?.[`L-${pais}`];
+    const segunda = estado.torneios?.[`L-${pais}2`];
+    const n = vagasEntreDivisoes(estado, pais);
+    return {
+      pais,
+      n,
+      tamanhos: [primeira?.clubes.length, segunda?.clubes.length],
+      caem: primeira ? tabelaDoTorneio(estado, primeira).slice(primeira.clubes.length - n).map((l) => l.clubeId) : [],
+      sobem: segunda ? tabelaDoTorneio(estado, segunda).slice(0, n).map((l) => l.clubeId) : [],
+    };
+  });
 
   it("todas as séries terminam com campeão, promovidos e rebaixados certos", () => {
     expect(temporadaEncerrada(estado)).toBe(true);
@@ -118,6 +131,22 @@ describe("temporada completa", () => {
     }
     expect(estado.partidas.every((p) => !p.jogada)).toBe(true);
     expect(livres(estado).length).toBeGreaterThan(0);
+  });
+
+  it("na virada, os últimos da 1ª divisão de cada país da América do Sul caem e os primeiros da 2ª sobem; as divisões ficam do mesmo tamanho", () => {
+    // A virada é do teste de cima (rodando só este, ela acontece aqui).
+    if (estado.temporada === 2026) avancar(estado);
+    expect(estado.temporada).toBe(2027);
+    for (const { pais, n, tamanhos, caem, sobem } of trocasEsperadas) {
+      expect(n, pais).toBeGreaterThan(0);
+      expect([caem.length, sobem.length], pais).toEqual([n, n]);
+      for (const id of caem) expect(estado.clubes[id].liga, `${pais}: ${id} caiu`).toBe(`${pais}2`);
+      for (const id of sobem) expect(estado.clubes[id].liga, `${pais}: ${id} subiu`).toBe(pais);
+      const [primeira, segunda] = [estado.torneios?.[`L-${pais}`], estado.torneios?.[`L-${pais}2`]];
+      expect([primeira?.clubes.length, segunda?.clubes.length], pais).toEqual(tamanhos);
+      for (const id of sobem) expect(primeira?.clubes, pais).toContain(id);
+      for (const id of caem) expect(segunda?.clubes, pais).toContain(id);
+    }
   });
 
   it("é determinística: mesma semente, mesmos campeões", () => {
@@ -288,14 +317,16 @@ describe("estaduais e ligas de fora", () => {
     }
   });
 
-  it("as ligas dos 9 países têm os clubes de lá, com elenco, e não jogam as competições do Brasil", () => {
-    expect(ligas.map((t) => t.id).sort()).toEqual(["L-AR", "L-BO", "L-CL", "L-CO", "L-EC", "L-PE", "L-PY", "L-UY", "L-VE"]);
+  it("as ligas dos 9 países (1ª e 2ª divisão) têm os clubes de lá, com elenco, e não jogam as competições do Brasil", () => {
+    const paises = ["AR", "BO", "CL", "CO", "EC", "PE", "PY", "UY", "VE"];
+    expect(ligas.map((t) => t.id).sort()).toEqual(paises.flatMap((p) => [`L-${p}`, `L-${p}2`]));
     for (const t of ligas) {
-      expect(t.clubes.length, t.id).toBeGreaterThanOrEqual(10);
+      expect(t.clubes.length, t.id).toBeGreaterThanOrEqual(t.id.endsWith("2") ? 8 : 10);
       for (const id of t.clubes) {
         const c = estado.clubes[id];
         expect(c.serie).toBe("exterior");
-        expect(c.pais).toBe(t.id.slice(2));
+        expect(c.pais).toBe(t.id.slice(2, 4));
+        expect(c.liga).toBe(t.id.slice(2));
         expect(elencoDe(estado, id).length, id).toBeGreaterThanOrEqual(16);
         expect(estado.copa!.ranking).not.toContain(id);
       }
@@ -340,6 +371,42 @@ describe("estaduais e ligas de fora", () => {
     expect(e.clubes.palmeiras.estadual).toBe("SP");
     expect(e.torneios).toEqual({});
     expect(checarEstado(e).filter((p) => p.gravidade === "erro")).toEqual([]);
+  });
+});
+
+describe("segunda divisão da América do Sul (nov/2026)", () => {
+  it("save de antes da 2ª divisão: ao abrir, entram os clubes dela (liga com 2 no fim), com elenco, e a 1ª divisão não muda; depois do acesso e da queda, abrir de novo mantém a divisão de cada clube", () => {
+    const estado = novoJogo({ nomeTecnico: "T", clubeId: "ponte-preta", semente: 23 });
+    const daSegunda = Object.values(estado.clubes).filter((c) => c.liga?.endsWith("2")).map((c) => c.id);
+    expect(daSegunda.length).toBeGreaterThanOrEqual(9 * 8);
+    // Volta o save para antes da segunda divisão: sem os clubes, os torneios e os jogos dela.
+    for (const id of daSegunda) {
+      for (const j of elencoDe(estado, id)) delete estado.jogadores[j.id];
+      delete estado.clubes[id];
+    }
+    const segunda = (id: string) => /^L-[A-Z]{2}2$/.test(id);
+    for (const id of Object.keys(estado.torneios!)) if (segunda(id)) delete estado.torneios![id as IdTorneio];
+    estado.partidas = estado.partidas.filter((x) => !segunda(x.serie));
+    const antes = participantes(estado);
+    for (const pais of Object.keys(PAISES)) expect(antes[`L-${pais}2`], pais).toBeUndefined();
+
+    acertarParticipantes(estado);
+    const p = participantes(estado);
+    for (const pais of Object.keys(PAISES)) {
+      expect(p[`L-${pais}`], pais).toEqual(antes[`L-${pais}`]);
+      expect(p[`L-${pais}2`]?.length ?? 0, pais).toBeGreaterThanOrEqual(8);
+    }
+    for (const id of daSegunda) {
+      expect(estado.clubes[id]?.liga, id).toMatch(/^[A-Z]{2}2$/);
+      expect(elencoDe(estado, id).length, id).toBeGreaterThanOrEqual(18);
+    }
+    expect(checarEstado(estado).filter((x) => x.gravidade === "erro")).toEqual([]);
+    // Depois do acesso e da queda, vale a divisão do save: abrir o jogo de novo não desfaz.
+    const [cai, sobe] = [p["L-UY"]![0], p["L-UY2"]![0]];
+    estado.clubes[cai].liga = "UY2";
+    estado.clubes[sobe].liga = "UY";
+    acertarParticipantes(estado);
+    expect([estado.clubes[cai].liga, estado.clubes[sobe].liga]).toEqual(["UY2", "UY"]);
   });
 });
 

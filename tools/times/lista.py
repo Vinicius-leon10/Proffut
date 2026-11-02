@@ -33,8 +33,9 @@ linhas = ["# Escudos que faltam", "",
           "(`public/escudos/<arquivo>`: PNG, de preferência com fundo transparente). Enquanto não houver imagem, o jogo desenha",
           "um escudo com as cores e a sigla do clube. Lista gerada por `tools/times/lista.py`.", "",
           "Histórico: os escudos dos 276 times novos chegaram em nov/2026 e, com a correção das listas dos campeonatos, os",
-          "do Real Oruro e do Anzoátegui (a fonte de cada um está em `ESCUDOS_TIMES_NOVOS_FONTES.csv`). Quando a lista de",
-          "um campeonato muda, os clubes que entram aparecem aqui.", "",
+          "do Real Oruro e do Anzoátegui (a fonte de cada um está em `ESCUDOS_TIMES_NOVOS_FONTES.csv`). Depois entrou a",
+          "segunda divisão dos 9 países (o Deportes Quindío e o Yaracuyanos, que já tinham escudo, voltaram nela). Quando a",
+          "lista de um campeonato muda, os clubes que entram aparecem aqui.", "",
           (f"Total: {len(estaduais) + len(exterior)} escudos ({len(estaduais)} de clubes brasileiros e {len(exterior)} de fora)."
            if estaduais or exterior else "Todos os clubes do jogo têm escudo."), ""]
 if estaduais:
@@ -44,14 +45,16 @@ for c in estaduais:
     por_uf[c["estado"]].append(c)
 for uf in sorted(por_uf, key=lambda u: NOMES_UF[u]):
     linhas += [f"### {NOMES_UF[uf]} ({uf})", ""] + tabela(por_uf[uf])
-if exterior:
-    linhas += ["## Outros países da Conmebol: primeira divisão de 2026", ""]
-por_pais = collections.defaultdict(list)
-for c in exterior:
-    por_pais[c["pais"]].append(c)
-for p in sorted(por_pais, key=lambda x: PAISES[x]):
-    n = len(por_pais[p])
-    linhas += [f"### {PAISES[p]} ({n} {'clube' if n == 1 else 'clubes'})", ""] + tabela(por_pais[p])
+for divisao, lista in [("primeira", [c for c in exterior if not c.get("liga")]), ("segunda", [c for c in exterior if c.get("liga")])]:
+    if not lista:
+        continue
+    linhas += [f"## Outros países da Conmebol: {divisao} divisão de 2026", ""]
+    por_pais = collections.defaultdict(list)
+    for c in lista:
+        por_pais[c["pais"]].append(c)
+    for p in sorted(por_pais, key=lambda x: PAISES[x]):
+        n = len(por_pais[p])
+        linhas += [f"### {PAISES[p]} ({n} {'clube' if n == 1 else 'clubes'})", ""] + tabela(por_pais[p])
 os.makedirs("docs", exist_ok=True)
 with open("docs/TIMES_NOVOS.md", "w", encoding="utf-8") as f:
     f.write("\n".join(linhas))

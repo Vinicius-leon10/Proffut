@@ -32,11 +32,33 @@ export function precoPedido(estado: EstadoJogo, j: Jogador): number {
 }
 
 /** O clube pode abrir mão do jogador sem ficar abaixo do mínimo da posição? */
-export function podeSair(estado: EstadoJogo, j: Jogador): boolean {
+/** Quantos jogadores cada clube tem, no total e por posição. */
+type Contagem = Map<string, { total: number; porPosicao: Record<Posicao, number> }>;
+
+function contarElencos(estado: EstadoJogo): Contagem {
+  const contagem: Contagem = new Map();
+  for (const j of Object.values(estado.jogadores)) if (j.clubeId) mudarContagem(contagem, j.clubeId, j.posicao, 1);
+  return contagem;
+}
+
+function mudarContagem(contagem: Contagem, clubeId: string, posicao: Posicao, quantos: number) {
+  let c = contagem.get(clubeId);
+  if (!c) contagem.set(clubeId, (c = { total: 0, porPosicao: { G: 0, L: 0, Z: 0, M: 0, A: 0 } }));
+  c.total += quantos;
+  c.porPosicao[posicao] += quantos;
+}
+
+/**
+ * O clube deixa o jogador sair sem ficar com o elenco curto. `contagem`: os elencos já contados (o mercado do computador
+ * pergunta por centenas de jogadores de uma vez; contar o elenco a cada pergunta varria o jogo todo).
+ */
+export function podeSair(estado: EstadoJogo, j: Jogador, contagem?: Contagem): boolean {
   if (!j.clubeId) return true;
-  const elenco = elencoDe(estado, j.clubeId);
-  if (elenco.length <= 18) return false;
-  const naPosicao = elenco.filter((x) => x.posicao === j.posicao).length;
+  const c = contagem ? contagem.get(j.clubeId) : undefined;
+  const elenco = contagem ? undefined : elencoDe(estado, j.clubeId);
+  const total = c ? c.total : elenco ? elenco.length : 0;
+  if (total <= 18) return false;
+  const naPosicao = c ? c.porPosicao[j.posicao] : elenco!.filter((x) => x.posicao === j.posicao).length;
   return naPosicao - 1 >= MINIMO_POSICAO[j.posicao];
 }
 
@@ -228,6 +250,7 @@ export function transferenciasDaIa(estado: EstadoJogo, chave: string): string[] 
   const data = estado.data;
   const noticias: string[] = [];
   const clubes = rng.embaralhar(Object.values(estado.clubes).filter((c) => dasSeries(c) && c.id !== estado.tecnico.clubeId));
+  const contagem = contarElencos(estado);
   for (const clube of clubes) {
     if (!rng.chance(0.3)) continue;
     const elenco = elencoDe(estado, clube.id);
@@ -248,12 +271,14 @@ export function transferenciasDaIa(estado: EstadoJogo, chave: string): string[] 
     const alvos = Object.values(estado.jogadores).filter((j) => {
       if (j.posicao !== carencia.pos || j.clubeId === clube.id || j.clubeId === estado.tecnico.clubeId || j.emprestimo) return false;
       if (j.forca < forca - 3 || j.forca > forca + 8 || j.idade > 32) return false;
-      return precoPedido(estado, j) <= orcamento && podeSair(estado, j);
+      return precoPedido(estado, j) <= orcamento && podeSair(estado, j, contagem);
     });
     if (!alvos.length) continue;
     const alvo = rng.escolherPeso(alvos, (j) => j.forca - forca + 6);
     const valor = precoPedido(estado, alvo);
     const origem = alvo.clubeId ? estado.clubes[alvo.clubeId] : null;
+    if (alvo.clubeId) mudarContagem(contagem, alvo.clubeId, alvo.posicao, -1);
+    mudarContagem(contagem, clube.id, alvo.posicao, 1);
     transferir(estado, alvo, clube.id, valor, data);
     if (valor > 0 && origem) noticias.push(`${alvo.nome} troca ${comArtigo("o", origem)} ${comArtigo("pelo", clube)} (R$ ${(valor / 1_000_000).toFixed(1).replace(".", ",")} mi).`);
   }

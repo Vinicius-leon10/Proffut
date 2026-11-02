@@ -115,11 +115,9 @@ for (let s = 1; s <= sementes; s++) {
     while (seguranca++ < 300) {
       const r = avancar(estado);
       if (r.tipo === "nova-temporada" || r.tipo === "nada") break;
-      if (r.tipo === "jogos-hoje") {
-        // Coleta antes da virada (que acontece no próximo avancar depois do último jogo).
-        simularDia(estado);
-        if (!coletado && temporadaEncerrada(estado)) { coletar(estado, forcaInicial); coletarCopa(estado); coletado = true; }
-      }
+      if (r.tipo === "jogos-hoje") simularDia(estado);
+      // Coleta antes da virada (que acontece no próximo avancar depois do último jogo).
+      if (!coletado && temporadaEncerrada(estado)) { coletar(estado, forcaInicial); coletarCopa(estado); coletado = true; }
     }
     for (const x of SERIES) {
       const n = Object.values(estado.clubes).filter((c) => c.serie === x).length;

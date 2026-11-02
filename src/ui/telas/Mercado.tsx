@@ -92,7 +92,8 @@ export function Mercado() {
   const [posicao, setPosicao] = useState<Posicao | "todas">("todas");
   const [forcaMin, setForcaMin] = useState(0);
   const [idadeMax, setIdadeMax] = useState(40);
-  // Onde o jogador joga: "todas", uma série (A a D), "estadual" (clubes só do estadual) ou "pais:AR" (liga de fora).
+  // Onde o jogador joga: "todas", uma série (A a D), "estadual" (clubes só do estadual) ou "pais:AR" (clubes de outro
+  // país, das duas divisões).
   const [serie, setSerie] = useState<string>("todas");
   const [busca, setBusca] = useState("");
   const [aberto, setAberto] = useState<Jogador | null>(null);
@@ -124,7 +125,7 @@ export function Mercado() {
     const base = vista === "livres" ? livres(estado) : Object.values(estado.jogadores).filter((j) => {
       if (!j.clubeId || j.clubeId === meuId || j.emprestimo?.de === meuId) return false;
       const c = estado.clubes[j.clubeId];
-      return serie === "todas" || (serie.startsWith("pais:") ? c.liga === serie.slice(5) : c.serie === serie);
+      return serie === "todas" || (serie.startsWith("pais:") ? c.pais === serie.slice(5) : c.serie === serie);
     });
     return base
       .filter((j) => (posicao === "todas" || j.posicao === posicao) && j.forca >= forcaMin && j.idade <= idadeMax && (!termo || j.nome.toLowerCase().includes(termo)))

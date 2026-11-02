@@ -21,6 +21,11 @@ export function avancarJogo() {
     avisar("Não há jogos a disputar.");
     return;
   }
+  if (r.tipo === "fim-dos-jogos") {
+    atualizar();
+    avisar(`Acabaram os jogos de ${estado.temporada}. Agora é só encerrar a temporada.`);
+    return;
+  }
   if (r.meuJogo) {
     const vivas = prepararJogos(estado);
     atualizar();
