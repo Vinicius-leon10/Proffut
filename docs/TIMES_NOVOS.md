@@ -1,10 +1,12 @@
 # Times novos (nov/2026)
 
-Os times que entraram no jogo em nov/2026 e ainda não têm escudo: os clubes brasileiros que só jogam o estadual e a
-primeira divisão de 2026 dos outros 9 países da Conmebol. Os da Série D já têm (estavam na prancha de escudos).
+Os times que entraram no jogo em nov/2026 sem escudo: os clubes brasileiros que só jogam o estadual e a primeira
+divisão de 2026 dos outros 9 países da Conmebol. Os da Série D já tinham (estavam na prancha de escudos).
 
-Para cada um: o nome no jogo, a cidade e o arquivo do escudo (`public/escudos/<arquivo>`). Enquanto não houver
-imagem, o jogo desenha um escudo com as cores e a sigla do clube. Lista gerada por `tools/times/lista.py`.
+Para cada um: o nome no jogo, a cidade e o arquivo do escudo (`public/escudos/<arquivo>`). Lista gerada por
+`tools/times/lista.py`. **Os escudos chegaram em nov/2026** (pacote do usuário, preparado por
+`tools/escudos/preparar.py`; a fonte de cada um está em `ESCUDOS_TIMES_NOVOS_FONTES.csv`): todo clube do jogo tem o seu
+(R73).
 
 Total: 115 clubes brasileiros só do estadual e 161 clubes de fora (276 escudos).
 

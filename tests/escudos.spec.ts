@@ -1,4 +1,5 @@
-import type { Locator } from "@playwright/test";
+import { existsSync, readFileSync } from "node:fs";
+import type { Locator, Page } from "@playwright/test";
 import { aba, abrirSite, agora, botao, cartaoDoProximoJogo, esperarSalvar, expect, novoJogo, test, voltar } from "./ajuda";
 
 // Imagens de teste (quadradinhos de 8 × 8 pixels) para o pacote importado.
@@ -79,4 +80,49 @@ test("R30 o jogo já vem com os escudos que o usuário mandou: aparecem sem impo
   await expect(cartaoDoProximoJogo(page)).toBeVisible();
   await expect.poll(() => carregado(meu)).toBe(true);
   await tabelaDaSerieB();
+});
+
+/** Nas tabelas que estão na tela: escudos de imagem (nenhum desenhado) e todos carregados. */
+async function escudosDasTabelas(page: Page) {
+  const imagens = page.locator("main table.tabela img.escudo");
+  await expect(imagens.first()).toBeVisible();
+  await expect(page.locator("main table.tabela svg.escudo")).toHaveCount(0);
+  await expect.poll(() => imagens.evaluateAll((els) => els.every((el) => (el as HTMLImageElement).complete && (el as HTMLImageElement).naturalWidth > 0))).toBe(true);
+}
+
+test("R73 os times novos têm os escudos que o usuário mandou: todo clube do jogo tem a imagem e, nas tabelas dos estaduais e dos outros países, nenhum escudo é desenhado, também sem internet", async ({ page, context }) => {
+  // Todo clube do jogo (séries, Série D, só do estadual e de fora) tem o seu arquivo.
+  const ids = ["data/brasil-2026/clubes.json", "data/brasil-2026/serie-d-reserva.json", "data/brasil-2026/clubes-estaduais.json", "data/america-do-sul-2026/clubes.json"]
+    .flatMap((arquivo) => (JSON.parse(readFileSync(arquivo, "utf8")) as { clubes: { id: string }[] }).clubes.map((c) => c.id));
+  expect(ids.length).toBeGreaterThan(400);
+  expect(ids.filter((id) => !existsSync(`public/escudos/${id}.png`)), "clubes sem escudo").toEqual([]);
+
+  await abrirSite(page);
+  await page.evaluate(() => navigator.serviceWorker.ready);
+  if (!(await page.evaluate(() => !!navigator.serviceWorker.controller))) await page.reload();
+  await page.waitForFunction(() => !!navigator.serviceWorker.controller, null, { timeout: 20_000 });
+  const desde = await agora(page);
+  await novoJogo(page); // Ponte Preta: no começo do ano, as Tabelas abrem no Paulista
+  await esperarSalvar(page, desde);
+  const conferir = async () => {
+    await aba(page, "Tabelas");
+    await page.getByRole("tab", { name: "Estaduais" }).click();
+    for (const estado of ["E-SP", "E-AP"]) {
+      await page.getByRole("combobox", { name: "Estadual" }).selectOption(estado);
+      await escudosDasTabelas(page);
+    }
+    await page.getByRole("tab", { name: "Outros países" }).click();
+    for (const pais of ["Argentina", "Bolívia"]) {
+      await page.getByRole("combobox", { name: "País" }).selectOption({ label: pais });
+      await escudosDasTabelas(page);
+    }
+  };
+  await conferir();
+
+  // Sem internet: os escudos novos vêm do que o app guardou no aparelho.
+  await context.setOffline(true);
+  await page.reload();
+  await botao(page, /Continuar/).click();
+  await expect(cartaoDoProximoJogo(page)).toBeVisible();
+  await conferir();
 });

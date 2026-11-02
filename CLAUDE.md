@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R72 rodando a cada mudança, antes
+ponta R01–R73 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -274,10 +274,10 @@ Copa>` grava `clubes-estaduais.json`, `estaduais.json` e os elencos novos de `jo
 `data/brasil-2026/` e `clubes.json` e `jogadores.json` em `data/america-do-sul-2026/`. Os clubes brasileiros novos têm o
 elenco das súmulas da CBF (Série D e Copa do Brasil de 2023 a 2025, pelo programa dos elencos das séries, sem quem já está
 nas séries); sem súmulas, elenco gerado. Estaduais sem página (AC, AL, ES, MT, TO) usam os clubes do estado no jogo e nas
-súmulas. Lista dos times novos para os escudos: `docs/TIMES_NOVOS.md`. R66–R69.
+súmulas. Lista dos times novos para os escudos: `docs/TIMES_NOVOS.md` (os escudos chegaram em nov/2026, R73). R66–R69.
 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final ("Proffut" é provisório?). O 2D da partida começou (R60) e
-segue pelo que ele pedir. Os escudos dos 276 times novos (lista em `docs/TIMES_NOVOS.md`): ele vai mandar. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
+segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
 
 **Próximas ideias:** o resto da lista de mudanças (PLANO.md §13: 3, 6, 9–15, 17, 18, 20), quando o usuário escolher, e
 ajustes de equilíbrio pelo que ele sentir jogando.
@@ -289,7 +289,12 @@ ajustes de equilíbrio pelo que ele sentir jogando.
   com os oficiais e decidiu: "Não, quero que use os escudos que mandei agora. O app é particular, uso individual. Use os escudos que mandei, é uma ordem". Foi avisado de que o site e o
   repositório são públicos e os escudos são marcas dos clubes (se vier reclamação, o GitHub pode pedir para tirar; aí
   volta o escudo desenhado). Os 156 ficam em `public/escudos/<id>.png` (`tools/escudos/recortar.py` recorta a prancha;
-  a prancha não vai para o git). `Escudo` usa: o importado no aparelho (Configurações → Escudos, `src/save/escudos.ts`)
+  a prancha não vai para o git). Em nov/2026 ele mandou os 276 dos times novos (`escudos-novos-276.zip`: um PNG por
+  clube com o nome da lista, a prancha e o manifesto com a fonte de cada um, guardado em
+  `docs/ESCUDOS_TIMES_NOVOS_FONTES.csv`; o zip e a prancha ficam fora do git): `tools/escudos/preparar.py` converte para
+  sRGB, deixa transparente o fundo liso claro, corta a margem e reduz para 128 px e 256 cores (18 MB → 1,25 MB, iguais na
+  tela); Galo Maringá, Maranguape e São Raimundo-PA ficam com o fundo branco (`MANTER_FUNDO`: o branco de dentro encosta
+  na borda). Desde então todo clube do jogo tem escudo (432; R73 confere os arquivos e as tabelas, também sem internet). `Escudo` usa: o importado no aparelho (Configurações → Escudos, `src/save/escudos.ts`)
   > o do jogo > o desenhado com as cores e a sigla (só se a imagem não carregar). Clube novo sem imagem: desenhado.
 - As fichas dos clubes vêm do remake MIT denisvick-dev/brasfoot (aviso de licença em `data/brasil-2026/LEIAME.md`).
 - Saves antigos precisam continuar abrindo: campo novo em `EstadoJogo` deve ser opcional ou ganhar correção em
@@ -348,7 +353,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `src/save/` | `salvamento.ts`: IndexedDB (`proffut`/`saves`, chaves `jogo:auto`, `resumo:auto`...), exportar/importar `.json`. `aparelho.ts`: checagem do aparelho. `escudos.ts`: escudos importados pelo usuário, que trocam os do jogo só no aparelho (chave `escudos`, id do clube → imagem) |
 | `src/ui/` | React + Zustand. `store.ts` (estado, telas sobrepostas, salvamento 400 ms após cada mudança), `acoes.ts`, `componentes.tsx`, `estilo.css` (visual "opção 3": tokens no `:root`), `sons.ts` (apito, torcida, narrador), `telas/*.tsx` |
 | `tests/` | Testes de ponta a ponta R01…: `*.spec.ts`, passos comuns em `ajuda.ts`, relatório em português em `resumo.ts`, lista em `README.md` |
-| `public/escudos/` | Os 156 escudos dos clubes (`<id>.png`), recortados da prancha que o usuário mandou; o service worker guarda para jogar sem internet |
+| `public/escudos/` | Os 432 escudos dos clubes (`<id>.png`): 156 recortados da prancha que o usuário mandou e 276 do pacote dos times novos (`tools/escudos/preparar.py`); o service worker guarda para jogar sem internet |
 | `data/brasil-2026/` | `clubes.json` (60), `serie-d-reserva.json` (96), `competicoes.json`, `jogadores.json` (elencos reais, gerado por `tools/elencos`), `LEIAME.md` (fontes e licenças) |
 | `tools/` | `times/` (times novos: `wikipedia.py` é o robô da Wikipédia e do Wikidata, `montar.ts` monta clubes e elencos, `wiki.ts` lê fichas e elencos das páginas), `sim/` (calibragem), `e2e/` (capturas de tela), `icones/`, `dados/` (scripts Python dos clubes), `elencos/` (robô dos elencos: `montar.ts` monta `jogadores.json`, `sumulas.ts` lê as súmulas, `fontes-clubes.ts` diz como cada fonte chama os clubes, scripts Python do workflow), `escudos/` (`recortar.py`: prancha de escudos → `public/escudos/<id>.png`, ou um pacote `.json` para importar) |
 
