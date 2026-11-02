@@ -17,7 +17,7 @@ import { avisarContratos, garantirContratos } from "./contratos";
 import { melhorEmCampo, notasDaPartida } from "./notas";
 import { registrarRecordes } from "./trofeus";
 import { atualizarConfianca, definirObjetivo } from "./diretoria";
-import { escalarAutomatico } from "./forca";
+import { escalarAutomatico, forcaDoTime } from "./forca";
 import { lancar, precoDeReferencia, processarMes, publicoDoJogo } from "./financas";
 import { elencoReal, gerarElenco, type JogadorReal } from "./gerador";
 import { completarLivres, elencoDe, gerarPropostas, reescalar, transferenciasDaIa } from "./mercado";
@@ -451,6 +451,24 @@ export function simularRestoDaTemporada(estado: EstadoJogo) {
     if (r.tipo === "jogos-hoje") simularDia(estado);
     else if (r.tipo === "nada") break;
   }
+}
+
+/**
+ * O técnico só treina clubes das Séries A, B e C: quando o clube dele cai para a Série D, quatro clubes da Série C (fora
+ * os oito mais fortes) fazem proposta, e ele escolhe um no fim da temporada.
+ */
+export function propostasDeEmprego(estado: EstadoJogo): string[] {
+  const rng = rngPara(estado.semente, `emprego/${estado.temporada}`);
+  const candidatos = rankingDeForca(estado, "C").slice(8).map((r) => r.clubeId);
+  return rng.embaralhar(candidatos).slice(0, 4);
+}
+
+/** Força dos clubes de uma série, do mais forte ao mais fraco. */
+export function rankingDeForca(estado: EstadoJogo, serie: SerieClube): { clubeId: string; forca: number }[] {
+  return Object.values(estado.clubes)
+    .filter((c) => c.serie === serie)
+    .map((c) => ({ clubeId: c.id, forca: forcaDoTime(elencoDe(estado, c.id)) }))
+    .sort((a, b) => b.forca - a.forca);
 }
 
 export { reescalar };

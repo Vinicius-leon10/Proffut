@@ -225,9 +225,10 @@ export function encerrarTemporada(estado: EstadoJogo) {
   mudarReputacao(estado,
     (cumpriu ? REPUTACAO.cumpriu : REPUTACAO.naoCumpriu) + (subiu ? REPUTACAO.acesso : 0) + (caiu ? REPUTACAO.rebaixamento : 0) +
     (campeao ? (minhaSerie === "A" ? REPUTACAO.tituloA : REPUTACAO.titulo) : 0) + (estado.copa?.campeao === meuId ? REPUTACAO.copa : 0));
-  // Abaixo do objetivo e sem a confiança da diretoria, o técnico sai (também quem caiu para a Série D).
+  // Abaixo do objetivo e sem a confiança da diretoria, o técnico sai. Quem cai para a Série D não é demitido: o técnico
+  // só treina clubes das Séries A, B e C e escolhe um da Série C no fim da temporada (`propostasDeEmprego`, R72).
   const caiuParaD = C.rebaixados.includes(meuId);
-  const demitido = !t.demissao && !cumpriu && t.confiancaDiretoria <= CARGO.demissao && passouDaCarencia(estado);
+  const demitido = !t.demissao && !caiuParaD && !cumpriu && t.confiancaDiretoria <= CARGO.demissao && passouDaCarencia(estado);
 
   // ---- nova temporada: com estaduais, começa em janeiro, uma semana antes deles ----
   estado.temporada = ano + 1;
@@ -253,8 +254,8 @@ export function encerrarTemporada(estado: EstadoJogo) {
   // ---- técnico: demissão ou convites de clubes maiores (para quem foi bem) ----
   const meuClube = estado.clubes[meuId];
   if (demitido) demitir(estado, `A diretoria ${comArtigo("do", meuClube)} não quis continuar com você depois de uma temporada abaixo do objetivo.`);
-  // Convites: para quem foi bem e para quem caiu para a Série D (clubes das séries de cima querem o técnico).
-  else if (!t.demissao && (cumpriu || subiu || campeao || caiuParaD)) gerarConvites(estado, CONVITES.virada);
+  // Convites: para quem foi bem (quem caiu para a Série D escolhe nas propostas de emprego).
+  else if (!t.demissao && !caiuParaD && (cumpriu || subiu || campeao)) gerarConvites(estado, CONVITES.virada);
 
   // ---- mensagens ----
   const campeaoD = campeoesDosTorneios.D?.campeao;
@@ -282,7 +283,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
   if (jovensMeus.length) {
     enviarMensagem(estado, { tipo: "noticia", titulo: "Novos jogadores da base", texto: `Subiram para o profissional: ${jovensMeus.join(", ")}.` });
   }
-  if (!demitido) {
+  if (!demitido && !caiuParaD) {
     enviarMensagem(estado, {
       tipo: "diretoria",
       titulo: `Objetivo para ${ano + 1}`,

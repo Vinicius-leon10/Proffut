@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
-import { aba, abrirSite, botao, cartaoDoProximoJogo, dataNoTopo, expect, novoJogo, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, dataNoTopo, esperarNoSave, expect, novoJogo, test } from "./ajuda";
 
 type Ficha = { nome: string; pais?: string };
 const ler = (arquivo: string) => JSON.parse(readFileSync(arquivo, "utf8")) as { clubes: Ficha[] };
@@ -76,19 +76,33 @@ test("R69 save de antes dos times novos: ao abrir, os clubes da Série D, dos es
   await expect(page.getByRole("tab", { name: "Estaduais" })).toHaveCount(0);
 });
 
-test("R70 rebaixado para a Série D, o técnico continua no clube e joga a D na temporada seguinte (antes, tinha de trocar de clube)", async ({ page }) => {
+test("R72 o técnico só treina clubes das Séries A, B e C: o jogo novo só tem essas séries e, com o clube rebaixado para a Série D, é preciso escolher um clube da Série C (a D é jogada sem ele)", async ({ page }) => {
   test.setTimeout(120_000);
+  await abrirSite(page);
+  await botao(page, "Novo jogo").click();
+  expect(await page.getByRole("tab").allTextContents()).toEqual(["Série A", "Série B", "Série C"]);
+
   const save = execFileSync("npx", ["tsx", "tests/saves/rebaixado-para-d.ts", "brusque"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   // Quem não renovou sai de graça: o jogo pergunta antes de encerrar.
   page.on("dialog", (d) => d.accept());
   await botao(page, "Encerrar a temporada 2026").click();
-  // O fim da temporada não obriga a trocar de clube: sem propostas de emprego, só o "Começar 2027".
-  await expect(botao(page, "Começar 2027")).toBeVisible({ timeout: 20_000 });
-  await expect(page.getByRole("heading", { name: "Propostas de emprego" })).toHaveCount(0);
-  await botao(page, "Começar 2027").click();
+  // O fim da temporada pede para escolher um dos clubes da Série C: sem "Começar 2027" no Brusque, que vai para a D.
+  const titulo = page.getByRole("heading", { name: "Propostas de emprego" });
+  const propostas = page.getByRole("button", { name: /^Assumir (o|a) / });
+  await expect(titulo).toBeVisible({ timeout: 20_000 });
+  await expect(botao(page, "Começar 2027")).toHaveCount(0);
+  await expect(propostas).toHaveCount(4);
+  for (const texto of await propostas.allTextContents()) expect(texto).toContain("Série C");
+  // Fechando e abrindo o app antes de escolher, a escolha continua lá.
+  await esperarNoSave(page, "estado.clubes.brusque.serie === 'D' && estado.temporada === 2027");
+  await page.reload();
+  await botao(page, /Continuar/).click();
+  await expect(titulo).toBeVisible({ timeout: 20_000 });
+  const novo = ((await propostas.first().locator(".negrito").textContent()) ?? "").trim();
+  await propostas.first().click();
   await expect(cartaoDoProximoJogo(page)).toBeVisible();
-  await expect(page.locator(".topo .titulo")).toHaveText("Brusque");
-  await expect(page.getByRole("heading", { name: "Série D 2027" })).toBeVisible();
+  await expect(page.locator(".topo .titulo")).toHaveText(novo);
+  await expect(page.getByRole("heading", { name: "Série C 2027" })).toBeVisible();
 });

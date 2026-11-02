@@ -10,7 +10,7 @@ import { somarDias, turnoEReturno, turnoUnico } from "./calendario";
 import { SERIES, classificacao, tabelaDaLiga, temporadaEncerrada } from "./competicoes";
 import { MAX_SUBSTITUICOES, MINIMO_POSICAO } from "./constantes";
 import { desfechoDoConfronto, situacaoNaCopa } from "./copa";
-import { assumirClube, avancar, jogosPendentesHoje, juntarAoSaveAntigo, novoJogo, prepararJogos, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
+import { assumirClube, avancar, jogosPendentesHoje, juntarAoSaveAntigo, novoJogo, prepararJogos, propostasDeEmprego, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
 import { checarEstado } from "./checagem";
 import { PAISES, competicoesDoUsuario, inicioDoAno, tabelaDoTorneio } from "./torneios";
 import { dispensar, elencoDe, fazerOferta, limiteDaProposta, livres, pedirMais, transferenciasDaIa } from "./mercado";
@@ -181,22 +181,25 @@ describe("mando de campo", () => {
 });
 
 describe("rebaixado para a Série D", () => {
-  it("o técnico continua no clube e joga a Série D na temporada seguinte (antes, era obrigado a trocar de clube)", () => {
+  it("o técnico só treina clubes das Séries A, B e C: não fica na D nem é demitido; recebe 4 propostas da Série C e assume uma", () => {
     const estado = novoJogo({ nomeTecnico: "T", clubeId: "itabaiana", semente: 11 });
     estado.config.escalacaoAutomatica = true;
     simularRestoDaTemporada(estado);
-    // O clube cai (no lugar de um dos rebaixados) e a diretoria ainda confia no técnico: não é demitido.
+    // O clube cai (no lugar de um dos rebaixados), com a diretoria sem paciência: mesmo assim não é demissão.
     const C = estado.series.C;
     if (!C.rebaixados.includes("itabaiana")) C.rebaixados[0] = "itabaiana";
     delete estado.tecnico.demissao;
-    estado.tecnico.confiancaDiretoria = 80;
+    estado.tecnico.confiancaDiretoria = 10;
     avancar(estado);
     expect(estado.clubes.itabaiana.serie).toBe("D");
     expect(estado.tecnico.demissao).toBeUndefined();
-    expect(estado.tecnico.clubeId).toBe("itabaiana");
-    expect(estado.torneios!.D!.clubes).toContain("itabaiana");
-    expect(estado.objetivo.descricao).toMatch(/grupo/);
-    expect(estado.partidas.some((p) => p.serie === "D" && (p.mandante === "itabaiana" || p.visitante === "itabaiana"))).toBe(true);
+    expect(estado.mensagens.some((m) => m.convite && !m.convite.resolvido), "sem convites: escolhe nas propostas").toBe(false);
+    const propostas = propostasDeEmprego(estado);
+    expect(propostas).toHaveLength(4);
+    for (const id of propostas) expect(estado.clubes[id].serie).toBe("C");
+    assumirClube(estado, propostas[0]);
+    expect(estado.tecnico.clubeId).toBe(propostas[0]);
+    expect(estado.objetivo.descricao).not.toMatch(/grupo/);
   });
 });
 

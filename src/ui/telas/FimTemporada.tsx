@@ -1,5 +1,6 @@
 import { comArtigo } from "../../engine/artigos";
-import { NOME_SERIE, SERIES } from "../../engine/competicoes";
+import { NOME_SERIE, SERIES, dasSeries } from "../../engine/competicoes";
+import { propostasDeEmprego } from "../../engine/jogo";
 import { nomeDoTorneio } from "../../engine/torneios";
 import type { IdTorneio, SerieId } from "../../engine/tipos";
 import { Cartao, Escudo, Topo } from "../componentes";
@@ -13,8 +14,9 @@ export function FimTemporada() {
   const r = estado.historico[estado.historico.length - 1];
   const meu = estado.clubes[estado.tecnico.clubeId];
   const demissao = estado.tecnico.demissao;
-  const precisaDeClube = !!demissao;
-  const propostas = demissao ? demissao.propostas : [];
+  // O técnico só treina clubes das Séries A, B e C: com o clube rebaixado para a Série D, escolhe um da Série C.
+  const precisaDeClube = !!demissao || !dasSeries(meu);
+  const propostas = demissao ? demissao.propostas : precisaDeClube ? propostasDeEmprego(estado) : [];
   const convites = estado.mensagens.filter((m) => m.convite && !m.convite.resolvido);
   if (!r) return null;
   const nome = (id: string) => estado.clubes[id]?.nome ?? id;
@@ -94,7 +96,9 @@ export function FimTemporada() {
         {precisaDeClube ? (
           <Cartao titulo="Propostas de emprego">
             <p className="pequeno fraco" style={{ marginBottom: 8 }}>
-              {`A diretoria ${comArtigo("do", estado.clubes[demissao!.clubeId])} não quis continuar com você depois de uma temporada abaixo do objetivo. Estes clubes querem você:`}
+              {demissao
+                ? `A diretoria ${comArtigo("do", estado.clubes[demissao.clubeId])} não quis continuar com você depois de uma temporada abaixo do objetivo. Estes clubes querem você:`
+                : `${comArtigo("O", meu)} caiu para a Série D. Você só treina clubes das Séries A, B e C: estes clubes da Série C querem você.`}
             </p>
             <PropostasDeEmprego propostas={propostas} aoEscolher={fechar} />
           </Cartao>

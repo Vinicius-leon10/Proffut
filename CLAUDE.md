@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R71 rodando a cada mudança, antes
+ponta R01–R72 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -128,8 +128,11 @@ antigo usa a do clube atual), `desde` (carência: no primeiro mês não há demi
 `avisoDeRisco`, `demissao` ({ data, clubeId, propostas }). Depois de cada jogo do usuário (`depoisDoMeuJogo`): confiança da
 diretoria ≤ 35 → mensagem "Cargo em risco" (uma por mês; o painel mostra o aviso); ≤ 20 depois da carência → demitido:
 reputação −6 e três propostas de clubes A/B/C com reputação até a dele. Na virada: abaixo do objetivo e confiança ≤ 20
-→ demitido (quem cai para a D continua no clube e pode receber convites, nov/2026). Enquanto `demissao` existe, `Principal`
-mostra a tela `Demissao` no lugar do painel (continua depois de fechar o app). Convites (`Mensagem.convite`, tipo
+→ demitido. Quem cai para a D não é demitido nem recebe convites: o técnico só treina clubes das Séries A, B e C (pedido
+do usuário, nov/2026: "Mas nos só vamos usar os times da seria a, b e c como técnico"), e o fim da temporada mostra quatro
+propostas da Série C (`propostasDeEmprego` em `jogo.ts`), obrigatórias; com o clube fora das séries, `Principal` mostra
+`FimTemporada` (continua depois de fechar o app; logo depois da virada, a de cima basta). R72. Enquanto `demissao` existe,
+`Principal` mostra a tela `Demissao` no lugar do painel (continua depois de fechar o app). Convites (`Mensagem.convite`, tipo
 "convite"): no meio da fase de liga (jogo nº metade) para quem está "encaminhado" (1 convite) e na virada para quem
 cumpriu, subiu ou foi campeão (2); clubes da mesma série ou acima, com reputação > a do clube atual + 3 e ≤ a do técnico
 + 10; valem 10 dias; aceitar (`responderConvite`) chama `assumirClube` com confiança 65 e derruba os outros convites e as
@@ -252,8 +255,8 @@ semana antes do primeiro domingo do estadual; o jogo novo começa em 3 de janeir
 como antes. `avancar` passa direto (simulando) pelos dias só com jogos que o usuário não acompanha
 (`competicoesDoUsuario`: A, B, C, Copa e os torneios do clube dele); Resultados do dia e a caixa Rodada mostram só esses.
 Cota de TV do estadual para os clubes das séries (`COTA_TV_ESTADUAL`: os estaduais somam dois meses de salário); a D tem
-patrocínio de 60% do da C; clubes só do estadual e de fora não têm contas mensais. Rebaixado para a D, o técnico continua no
-clube (objetivo pela posição no grupo; pode ganhar convites; a tela de propostas de emprego obrigatórias saiu). A IA das
+patrocínio de 60% do da C; clubes só do estadual e de fora não têm contas mensais. Rebaixado para a D, o técnico escolhe um
+clube da Série C, como antes: ele só treina clubes das Séries A, B e C (R72; o R70, que o deixava na D, saiu). A IA das
 séries pode comprar jogadores de qualquer clube; só os clubes das séries compram, emprestam e contratam técnico. Recordes
 contam os clubes de A a D. A virada mantém o elenco mínimo, a base e os excedentes de todos os clubes (os de fora com
 jovens do próprio país). Save antigo: `migrar` chama `juntarAoSaveAntigo` (jogo.ts): entram os clubes que faltam com os
@@ -271,7 +274,7 @@ Copa>` grava `clubes-estaduais.json`, `estaduais.json` e os elencos novos de `jo
 `data/brasil-2026/` e `clubes.json` e `jogadores.json` em `data/america-do-sul-2026/`. Os clubes brasileiros novos têm o
 elenco das súmulas da CBF (Série D e Copa do Brasil de 2023 a 2025, pelo programa dos elencos das séries, sem quem já está
 nas séries); sem súmulas, elenco gerado. Estaduais sem página (AC, AL, ES, MT, TO) usam os clubes do estado no jogo e nas
-súmulas. Lista dos times novos para os escudos: `docs/TIMES_NOVOS.md`. R66–R70.
+súmulas. Lista dos times novos para os escudos: `docs/TIMES_NOVOS.md`. R66–R69.
 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final ("Proffut" é provisório?). O 2D da partida começou (R60) e
 segue pelo que ele pedir. Os escudos dos 276 times novos (lista em `docs/TIMES_NOVOS.md`): ele vai mandar. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.

@@ -1,4 +1,5 @@
 import { formatarData } from "../../engine/calendario";
+import { dasSeries } from "../../engine/competicoes";
 import { formatarDinheiro } from "../../engine/financas";
 import { naoLidas } from "../../engine/mensagens";
 import { propostasPendentes } from "../../engine/mercado";
@@ -6,6 +7,7 @@ import { Escudo, Icone } from "../componentes";
 import { useJogo, useLoja, type Aba } from "../store";
 import { Demissao } from "./Demissao";
 import { Elenco } from "./Elenco";
+import { FimTemporada } from "./FimTemporada";
 import { Mercado } from "./Mercado";
 import { Painel } from "./Painel";
 import { Tabelas } from "./Tabelas";
@@ -22,13 +24,18 @@ const ABAS: { aba: Aba; rotulo: string; icone: string }[] = [
 
 export function Principal() {
   const estado = useJogo();
-  const { aba, irParaAba, abrir } = useLoja();
+  const { aba, irParaAba, abrir, sobreposta } = useLoja();
   const clube = estado.clubes[estado.tecnico.clubeId];
   const novas = naoLidas(estado);
   // As propostas pelos meus jogadores ficam no Mercado, com o número na barra de baixo (R63).
   const propostas = propostasPendentes(estado).length;
-  // Demitido: precisa escolher um novo clube (rebaixado para a Série D, o técnico continua no clube e joga a D).
+  // Demitido, ou com o clube rebaixado para a Série D (o técnico só treina clubes das Séries A, B e C): precisa escolher
+  // um novo clube, também depois de fechar e abrir o app. Logo depois da virada, a tela do fim da temporada já está
+  // aberta por cima com as propostas: aqui embaixo não se repete.
+  const precisaDeClube = !!estado.tecnico.demissao || !dasSeries(clube);
+  if (precisaDeClube && sobreposta?.tipo === "fim-temporada") return null;
   if (estado.tecnico.demissao) return <Demissao />;
+  if (!dasSeries(clube)) return <FimTemporada />;
 
   return (
     <div className="app">
