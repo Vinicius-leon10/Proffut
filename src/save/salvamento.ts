@@ -1,6 +1,6 @@
 // Salva o jogo no próprio celular (IndexedDB) e exporta/importa em arquivo.
 import { createStore, del, get, set, setMany } from "idb-keyval";
-import { juntarAoSaveAntigo } from "../engine/jogo";
+import { acertarParticipantes, juntarAoSaveAntigo } from "../engine/jogo";
 import { garantirContratos } from "../engine/contratos";
 import { montarRecordes } from "../engine/trofeus";
 import type { EstadoJogo } from "../engine/tipos";
@@ -66,6 +66,8 @@ function migrar(estado: EstadoJogo): EstadoJogo {
   // Times novos (nov/2026): Série D, estaduais e ligas de fora entram no save (antes dos contratos, para os
   // jogadores novos também ganharem contrato).
   juntarAoSaveAntigo(estado);
+  // Listas dos campeonatos corrigidas (nov/2026): entram os clubes que faltavam e a próxima temporada sai certa.
+  acertarParticipantes(estado);
   // Contratos chegaram em out/2026: no save de antes, ninguém sai de graça na temporada em andamento.
   garantirContratos(estado, estado.temporada + 1);
   // Sala de troféus (out/2026): os recordes começam pelos jogos já disputados na temporada em andamento.

@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R73 rodando a cada mudança, antes
+ponta R01–R75 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -259,11 +259,12 @@ patrocínio de 60% do da C; clubes só do estadual e de fora não têm contas me
 clube da Série C, como antes: ele só treina clubes das Séries A, B e C (R72; o R70, que o deixava na D, saiu). A IA das
 séries pode comprar jogadores de qualquer clube; só os clubes das séries compram, emprestam e contratam técnico. Recordes
 contam os clubes de A a D. A virada mantém o elenco mínimo, a base e os excedentes de todos os clubes (os de fora com
-jovens do próprio país). Save antigo: `migrar` chama `juntarAoSaveAntigo` (jogo.ts): entram os clubes que faltam com os
+jovens do próprio país); os excedentes saem um a um, e a posição de quem sai fica com pelo menos um a mais que o mínimo
+(antes, a conta era feita uma vez só e um clube podia ficar sem goleiro, R75). Save antigo: `migrar` chama `juntarAoSaveAntigo` (jogo.ts): entram os clubes que faltam com os
 elencos (os da D trocam o elenco só da Copa por um de verdade) e os torneios ficam para a temporada seguinte (se a temporada
 nem começou, a D e as ligas de fora já valem). Telas: Tabelas em Séries (com Série D), Copa, Estaduais (escolhe o estado) e
 Outros países (escolhe o país); Mercado → "Onde joga" (Séries A a D, "Só estadual" e cada país); painel com o cartão do
-estadual em andamento; fim da temporada com campeões da D, dos estaduais e das ligas. Números: 410 clubes, ~11.400
+estadual em andamento; fim da temporada com campeões da D, dos estaduais e das ligas. Números: 418 clubes, ~11.600
 jogadores, ~4.300 jogos por temporada (temporada simulada ~10 s aqui), save de 6 a 10 MB. **Dados**: o robô
 `.github/workflows/elencos.yml` com a fase "times" baixa da Wikipédia as páginas de 2026 (Série D, estaduais, ligas; os
 participantes vêm das seções de grupos ou de participantes, com as ligações já montadas: na Wikipédia em português os
@@ -274,7 +275,18 @@ Copa>` grava `clubes-estaduais.json`, `estaduais.json` e os elencos novos de `jo
 `data/brasil-2026/` e `clubes.json` e `jogadores.json` em `data/america-do-sul-2026/`. Os clubes brasileiros novos têm o
 elenco das súmulas da CBF (Série D e Copa do Brasil de 2023 a 2025, pelo programa dos elencos das séries, sem quem já está
 nas séries); sem súmulas, elenco gerado. Estaduais sem página (AC, AL, ES, MT, TO) usam os clubes do estado no jogo e nas
-súmulas. Lista dos times novos para os escudos: `docs/TIMES_NOVOS.md` (os escudos chegaram em nov/2026, R73). R66–R69.
+súmulas. **Listas corrigidas (nov/2026, pedido "Veja o que faltar"):** a seção de participantes das páginas pega também os
+clubes citados no texto e nas subseções ("Promovidos e rebaixados": os rebaixados do ano anterior; "Desistências"; quem
+perdeu a final da segunda divisão). `montar.ts` agora prefere a tabela das equipes (`SECAO_DE_TABELA`: informações,
+estádios, localização) e, nas ligas, a lista de tabela ganha no empate e o clube sem país no Wikidata fica (Real Oruro,
+Anzoátegui). Saíram 11 clubes de 7 estaduais (AP, BA, CE, DF, MS, RN, RR) e 5 de fora (IN San Juan, Jorge Wilstermann,
+Deportes Quindío, Titanes, Yaracuyanos); entraram Real Oruro e Anzoátegui. O relatório do `montar.ts` também compara a
+Série D do jogo com a página de 2026: a diferença era o Ivinhema (na D de 2026) no lugar do Pantanal (que ficou só no
+estadual), trocado em `serie-d-reserva.json`. Saves com os times novos: `migrar` chama `acertarParticipantes` (jogo.ts):
+entram os clubes que faltam e cada clube fica com o estadual e a liga das listas atuais (vale na próxima temporada; quem
+saiu continua no jogo, sem campeonato; a Série D do save não muda). Cidades que as fontes não dão: `MANUAL_CIDADES`. R74.
+`docs/TIMES_NOVOS.md` (gerado por `tools/times/lista.py`) lista os escudos que faltam (todos os clubes do jogo, de
+qualquer série); os dos 276 times novos chegaram em nov/2026 (R73). R66–R69.
 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final ("Proffut" é provisório?). O 2D da partida começou (R60) e
 segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.

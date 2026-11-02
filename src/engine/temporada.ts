@@ -184,15 +184,19 @@ export function encerrarTemporada(estado: EstadoJogo) {
         entrar(novo);
       }
     }
-    // Clubes da IA dispensam os excedentes mais fracos e mais velhos.
+    // Clubes da IA dispensam os excedentes mais fracos e mais velhos, um a um: a posição de quem sai precisa continuar
+    // com um a mais que o mínimo (antes, a conta era feita uma vez só, e quatro goleiros fracos saíam todos, R75).
     if (clube.id !== meuId) {
-      const sobra = elenco.length - (ELENCO_MAXIMO - 3);
+      let sobra = elenco.length - (ELENCO_MAXIMO - 3);
       if (sobra > 0) {
-        const naPosicao = (pos: Posicao) => elenco.filter((x) => x.posicao === pos).length;
-        const descartaveis = elenco
-          .filter((j) => naPosicao(j.posicao) > MINIMO_POSICAO[j.posicao] + 1)
-          .sort((a, b) => a.forca - a.idade / 2 - (b.forca - b.idade / 2));
-        for (const j of descartaveis.slice(0, sobra)) liberar(j);
+        const naPosicao = (pos: Posicao) => elenco.filter((x) => x.posicao === pos && x.clubeId === clube.id).length;
+        const porForca = [...elenco].sort((a, b) => a.forca - a.idade / 2 - (b.forca - b.idade / 2));
+        for (const j of porForca) {
+          if (sobra <= 0) break;
+          if (naPosicao(j.posicao) <= MINIMO_POSICAO[j.posicao] + 1) continue;
+          liberar(j);
+          sobra--;
+        }
       }
     }
   }

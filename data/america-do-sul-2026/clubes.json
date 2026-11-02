@@ -794,38 +794,13 @@
    },
    "fundacao": 1942,
    "rival": null,
-   "torcida": 17,
-   "reputacao": 55,
+   "torcida": 19,
+   "reputacao": 56,
    "forcaElenco": {
-    "min": 42,
-    "max": 62
+    "min": 43,
+    "max": 63
    },
-   "caixaInicial": 2800000
-  },
-  {
-   "id": "jorge-wilstermann",
-   "nome": "Jorge Wilstermann",
-   "sigla": "JOR",
-   "cidade": "Cochabamba",
-   "estado": "BO",
-   "pais": "BO",
-   "cores": {
-    "primaria": "#FF0000",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Estádio Jesús Bermúdez",
-    "capacidade": 35000
-   },
-   "fundacao": 1949,
-   "rival": null,
-   "torcida": 42,
-   "reputacao": 68,
-   "forcaElenco": {
-    "min": 48,
-    "max": 68
-   },
-   "caixaInicial": 6100000
+   "caixaInicial": 3000000
   },
   {
    "id": "real-tomayapo",
@@ -844,11 +819,11 @@
    },
    "fundacao": 1999,
    "rival": null,
-   "torcida": 7,
+   "torcida": 8,
    "reputacao": 49,
    "forcaElenco": {
-    "min": 39,
-    "max": 59
+    "min": 40,
+    "max": 60
    },
    "caixaInicial": 1400000
   },
@@ -870,12 +845,37 @@
    "fundacao": 1962,
    "rival": null,
    "torcida": 10,
-   "reputacao": 50,
+   "reputacao": 51,
    "forcaElenco": {
     "min": 40,
     "max": 60
    },
-   "caixaInicial": 1700000
+   "caixaInicial": 1800000
+  },
+  {
+   "id": "real-oruro",
+   "nome": "Real Oruro",
+   "sigla": "REA",
+   "cidade": "Oruro",
+   "estado": "BO",
+   "pais": "BO",
+   "cores": {
+    "primaria": "#DD0000",
+    "secundaria": "#CC0000"
+   },
+   "estadio": {
+    "nome": "Estadio Jesús BermúdezOruro",
+    "capacidade": 28000
+   },
+   "fundacao": 1962,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 39,
+    "max": 59
+   },
+   "caixaInicial": 900000
   },
   {
    "id": "always-ready",
@@ -894,13 +894,13 @@
    },
    "fundacao": 1933,
    "rival": null,
-   "torcida": 24,
-   "reputacao": 58,
+   "torcida": 26,
+   "reputacao": 59,
    "forcaElenco": {
     "min": 44,
     "max": 64
    },
-   "caixaInicial": 3600000
+   "caixaInicial": 3900000
   },
   {
    "id": "aurora",
@@ -919,13 +919,13 @@
    },
    "fundacao": 1935,
    "rival": null,
-   "torcida": 27,
-   "reputacao": 60,
+   "torcida": 29,
+   "reputacao": 62,
    "forcaElenco": {
     "min": 45,
     "max": 65
    },
-   "caixaInicial": 4100000
+   "caixaInicial": 4400000
   },
   {
    "id": "blooming",
@@ -944,13 +944,13 @@
    },
    "fundacao": 1946,
    "rival": null,
-   "torcida": 30,
-   "reputacao": 62,
+   "torcida": 33,
+   "reputacao": 64,
    "forcaElenco": {
     "min": 46,
     "max": 66
    },
-   "caixaInicial": 4600000
+   "caixaInicial": 5000000
   },
   {
    "id": "bolivar",
@@ -994,13 +994,13 @@
    },
    "fundacao": 1962,
    "rival": null,
-   "torcida": 15,
-   "reputacao": 53,
+   "torcida": 16,
+   "reputacao": 54,
    "forcaElenco": {
-    "min": 41,
-    "max": 61
+    "min": 42,
+    "max": 62
    },
-   "caixaInicial": 2400000
+   "caixaInicial": 2500000
   },
   {
    "id": "independiente-petrolero",
@@ -1019,13 +1019,13 @@
    },
    "fundacao": 1932,
    "rival": null,
-   "torcida": 12,
+   "torcida": 13,
    "reputacao": 52,
    "forcaElenco": {
     "min": 41,
     "max": 61
    },
-   "caixaInicial": 2000000
+   "caixaInicial": 2100000
   },
   {
    "id": "real-potosi",
@@ -1044,13 +1044,13 @@
    },
    "fundacao": 1988,
    "rival": null,
-   "torcida": 24,
-   "reputacao": 58,
+   "torcida": 26,
+   "reputacao": 59,
    "forcaElenco": {
     "min": 44,
     "max": 64
    },
-   "caixaInicial": 3600000
+   "caixaInicial": 3900000
   },
   {
    "id": "universitario-de-vinto",
@@ -1069,11 +1069,11 @@
    },
    "fundacao": 2005,
    "rival": null,
-   "torcida": 7,
+   "torcida": 8,
    "reputacao": 49,
    "forcaElenco": {
-    "min": 39,
-    "max": 59
+    "min": 40,
+    "max": 60
    },
    "caixaInicial": 1400000
   },
@@ -1081,7 +1081,7 @@
    "id": "san-jose",
    "nome": "San José",
    "sigla": "SAN",
-   "cidade": "Bolivia",
+   "cidade": "Oruro",
    "estado": "BO",
    "pais": "BO",
    "cores": {
@@ -1103,31 +1103,6 @@
    "caixaInicial": 900000
   },
   {
-   "id": "in-san-juan",
-   "nome": "IN San Juan",
-   "sigla": "SAN",
-   "cidade": "Bolívia",
-   "estado": "BO",
-   "pais": "BO",
-   "cores": {
-    "primaria": "#FF4500",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Samuel Vaca JiménezWarnes",
-    "capacidade": 18000
-   },
-   "fundacao": 2019,
-   "rival": null,
-   "torcida": 2,
-   "reputacao": 46,
-   "forcaElenco": {
-    "min": 38,
-    "max": 58
-   },
-   "caixaInicial": 600000
-  },
-  {
    "id": "oriente-petrolero",
    "nome": "Oriente Petrolero",
    "sigla": "ORI",
@@ -1144,13 +1119,13 @@
    },
    "fundacao": 1955,
    "rival": null,
-   "torcida": 34,
-   "reputacao": 64,
+   "torcida": 37,
+   "reputacao": 66,
    "forcaElenco": {
-    "min": 46,
-    "max": 66
+    "min": 47,
+    "max": 67
    },
-   "caixaInicial": 5100000
+   "caixaInicial": 5500000
   },
   {
    "id": "the-strongest",
@@ -1170,7 +1145,7 @@
    "fundacao": 1908,
    "rival": null,
    "torcida": 54,
-   "reputacao": 75,
+   "reputacao": 76,
    "forcaElenco": {
     "min": 52,
     "max": 72
@@ -1581,7 +1556,7 @@
    "id": "alianza-valledupar",
    "nome": "Alianza Valledupar",
    "sigla": "ALI",
-   "cidade": "Colômbia",
+   "cidade": "Valledupar",
    "estado": "CO",
    "pais": "CO",
    "cores": {
@@ -1594,13 +1569,13 @@
    },
    "fundacao": 2024,
    "rival": null,
-   "torcida": 10,
+   "torcida": 8,
    "reputacao": 57,
    "forcaElenco": {
     "min": 47,
     "max": 69
    },
-   "caixaInicial": 2700000
+   "caixaInicial": 2400000
   },
   {
    "id": "america-de-cali",
@@ -1625,7 +1600,7 @@
     "min": 62,
     "max": 80
    },
-   "caixaInicial": 17800000
+   "caixaInicial": 17700000
   },
   {
    "id": "atletico-bucaramanga",
@@ -1644,13 +1619,38 @@
    },
    "fundacao": 1949,
    "rival": null,
-   "torcida": 36,
+   "torcida": 35,
    "reputacao": 69,
    "forcaElenco": {
-    "min": 54,
+    "min": 53,
     "max": 74
    },
-   "caixaInicial": 9500000
+   "caixaInicial": 9200000
+  },
+  {
+   "id": "junior",
+   "nome": "Junior",
+   "sigla": "JUN",
+   "cidade": "Barranquilla",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000066"
+   },
+   "estadio": {
+    "nome": "Estádio Metropolitano Roberto Meléndez",
+    "capacidade": 46692
+   },
+   "fundacao": 1924,
+   "rival": null,
+   "torcida": 69,
+   "reputacao": 84,
+   "forcaElenco": {
+    "min": 62,
+    "max": 80
+   },
+   "caixaInicial": 17900000
   },
   {
    "id": "atletico-nacional",
@@ -1694,63 +1694,13 @@
    },
    "fundacao": 2002,
    "rival": null,
-   "torcida": 12,
-   "reputacao": 58,
-   "forcaElenco": {
-    "min": 48,
-    "max": 69
-   },
-   "caixaInicial": 3200000
-  },
-  {
-   "id": "santa-fe",
-   "nome": "Santa Fe",
-   "sigla": "SAN",
-   "cidade": "Bogotá",
-   "estado": "CO",
-   "pais": "CO",
-   "cores": {
-    "primaria": "#F91010",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Estádio El Campín",
-    "capacidade": 36343
-   },
-   "fundacao": 1941,
-   "rival": null,
-   "torcida": 33,
-   "reputacao": 68,
-   "forcaElenco": {
-    "min": 53,
-    "max": 73
-   },
-   "caixaInicial": 8600000
-  },
-  {
-   "id": "llaneros",
-   "nome": "Llaneros",
-   "sigla": "LLA",
-   "cidade": "Villavicencio",
-   "estado": "CO",
-   "pais": "CO",
-   "cores": {
-    "primaria": "#FFFFFF",
-    "secundaria": "#000000"
-   },
-   "estadio": {
-    "nome": "Estadio Bello Horizonte - Rey Pelé",
-    "capacidade": 15000
-   },
-   "fundacao": 2012,
-   "rival": null,
-   "torcida": 8,
-   "reputacao": 56,
+   "torcida": 10,
+   "reputacao": 57,
    "forcaElenco": {
     "min": 47,
     "max": 69
    },
-   "caixaInicial": 2300000
+   "caixaInicial": 2800000
   },
   {
    "id": "cucuta-deportivo",
@@ -1768,31 +1718,6 @@
     "capacidade": 45220
    },
    "fundacao": 1924,
-   "rival": null,
-   "torcida": 6,
-   "reputacao": 55,
-   "forcaElenco": {
-    "min": 46,
-    "max": 68
-   },
-   "caixaInicial": 1700000
-  },
-  {
-   "id": "deportes-quindio",
-   "nome": "Deportes Quindío",
-   "sigla": "QUI",
-   "cidade": "Armênia",
-   "estado": "CO",
-   "pais": "CO",
-   "cores": {
-    "primaria": "#13C46E",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Estádio Centenário de Armenia",
-    "capacidade": 29000
-   },
-   "fundacao": 1951,
    "rival": null,
    "torcida": 5,
    "reputacao": 55,
@@ -1819,13 +1744,13 @@
    },
    "fundacao": 1954,
    "rival": null,
-   "torcida": 30,
+   "torcida": 29,
    "reputacao": 66,
    "forcaElenco": {
     "min": 52,
-    "max": 73
+    "max": 72
    },
-   "caixaInicial": 7800000
+   "caixaInicial": 7500000
   },
   {
    "id": "deportivo-cali",
@@ -1850,32 +1775,7 @@
     "min": 55,
     "max": 75
    },
-   "caixaInicial": 11200000
-  },
-  {
-   "id": "independiente-medellin",
-   "nome": "Independiente Medellín",
-   "sigla": "IND",
-   "cidade": "Medellín",
-   "estado": "CO",
-   "pais": "CO",
-   "cores": {
-    "primaria": "#FF0000",
-    "secundaria": "#000049"
-   },
-   "estadio": {
-    "nome": "Unidad Deportiva Atanasio Girardot",
-    "capacidade": 46000
-   },
-   "fundacao": 1913,
-   "rival": null,
-   "torcida": 40,
-   "reputacao": 71,
-   "forcaElenco": {
-    "min": 55,
-    "max": 74
-   },
-   "caixaInicial": 10300000
+   "caixaInicial": 11100000
   },
   {
    "id": "deportivo-pasto",
@@ -1894,13 +1794,13 @@
    },
    "fundacao": 1949,
    "rival": null,
-   "torcida": 21,
+   "torcida": 20,
    "reputacao": 62,
    "forcaElenco": {
     "min": 50,
     "max": 71
    },
-   "caixaInicial": 5600000
+   "caixaInicial": 5200000
   },
   {
    "id": "deportivo-pereira",
@@ -1919,13 +1819,13 @@
    },
    "fundacao": 1944,
    "rival": null,
-   "torcida": 19,
-   "reputacao": 61,
+   "torcida": 17,
+   "reputacao": 60,
    "forcaElenco": {
     "min": 49,
-    "max": 71
+    "max": 70
    },
-   "caixaInicial": 4900000
+   "caixaInicial": 4500000
   },
   {
    "id": "fortaleza-co",
@@ -1944,19 +1844,69 @@
    },
    "fundacao": 2010,
    "rival": null,
-   "torcida": 14,
-   "reputacao": 59,
+   "torcida": 12,
+   "reputacao": 58,
    "forcaElenco": {
     "min": 48,
-    "max": 70
+    "max": 69
    },
-   "caixaInicial": 3700000
+   "caixaInicial": 3300000
+  },
+  {
+   "id": "independiente-medellin",
+   "nome": "Independiente Medellín",
+   "sigla": "IND",
+   "cidade": "Medellín",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#000049"
+   },
+   "estadio": {
+    "nome": "Unidad Deportiva Atanasio Girardot",
+    "capacidade": 46000
+   },
+   "fundacao": 1913,
+   "rival": null,
+   "torcida": 39,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 54,
+    "max": 74
+   },
+   "caixaInicial": 10100000
+  },
+  {
+   "id": "santa-fe",
+   "nome": "Santa Fe",
+   "sigla": "SAN",
+   "cidade": "Bogotá",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#F91010",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio El Campín",
+    "capacidade": 36343
+   },
+   "fundacao": 1941,
+   "rival": null,
+   "torcida": 32,
+   "reputacao": 67,
+   "forcaElenco": {
+    "min": 53,
+    "max": 73
+   },
+   "caixaInicial": 8300000
   },
   {
    "id": "inter-bogota",
    "nome": "Inter Bogotá",
    "sigla": "INT",
-   "cidade": "Colômbia",
+   "cidade": "Bogotá",
    "estado": "CO",
    "pais": "CO",
    "cores": {
@@ -1964,18 +1914,18 @@
     "secundaria": "#212121"
    },
    "estadio": {
-    "nome": "Estádio de Colômbia",
+    "nome": "Estádio de Bogotá",
     "capacidade": 15000
    },
    "fundacao": 2025,
    "rival": null,
-   "torcida": 16,
-   "reputacao": 60,
+   "torcida": 15,
+   "reputacao": 59,
    "forcaElenco": {
-    "min": 49,
+    "min": 48,
     "max": 70
    },
-   "caixaInicial": 4300000
+   "caixaInicial": 3900000
   },
   {
    "id": "jaguares-de-cordoba",
@@ -1994,38 +1944,38 @@
    },
    "fundacao": 2012,
    "rival": null,
+   "torcida": 6,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 46,
+    "max": 68
+   },
+   "caixaInicial": 1700000
+  },
+  {
+   "id": "llaneros",
+   "nome": "Llaneros",
+   "sigla": "LLA",
+   "cidade": "Villavicencio",
+   "estado": "CO",
+   "pais": "CO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Bello Horizonte - Rey Pelé",
+    "capacidade": 15000
+   },
+   "fundacao": 2012,
+   "rival": null,
    "torcida": 7,
    "reputacao": 56,
    "forcaElenco": {
     "min": 46,
     "max": 68
    },
-   "caixaInicial": 1900000
-  },
-  {
-   "id": "junior",
-   "nome": "Junior",
-   "sigla": "JUN",
-   "cidade": "Barranquilla",
-   "estado": "CO",
-   "pais": "CO",
-   "cores": {
-    "primaria": "#FFFFFF",
-    "secundaria": "#000066"
-   },
-   "estadio": {
-    "nome": "Estádio Metropolitano Roberto Meléndez",
-    "capacidade": 46692
-   },
-   "fundacao": 1924,
-   "rival": null,
-   "torcida": 70,
-   "reputacao": 84,
-   "forcaElenco": {
-    "min": 62,
-    "max": 80
-   },
-   "caixaInicial": 17900000
+   "caixaInicial": 2000000
   },
   {
    "id": "millonarios",
@@ -2044,7 +1994,7 @@
    },
    "fundacao": 1946,
    "rival": null,
-   "torcida": 69,
+   "torcida": 68,
    "reputacao": 83,
    "forcaElenco": {
     "min": 62,
@@ -2069,13 +2019,13 @@
    },
    "fundacao": 1947,
    "rival": null,
-   "torcida": 27,
-   "reputacao": 65,
+   "torcida": 25,
+   "reputacao": 64,
    "forcaElenco": {
     "min": 51,
     "max": 72
    },
-   "caixaInicial": 7100000
+   "caixaInicial": 6700000
   },
   {
    "id": "aguilas-doradas",
@@ -2094,13 +2044,13 @@
    },
    "fundacao": 2008,
    "rival": null,
-   "torcida": 24,
+   "torcida": 22,
    "reputacao": 63,
    "forcaElenco": {
-    "min": 51,
-    "max": 72
+    "min": 50,
+    "max": 71
    },
-   "caixaInicial": 6300000
+   "caixaInicial": 5900000
   },
   {
    "id": "barcelona-sc",
@@ -2153,21 +2103,21 @@
    "caixaInicial": 7300000
   },
   {
-   "id": "macara",
-   "nome": "Macará",
-   "sigla": "MAC",
+   "id": "tecnico-universitario",
+   "nome": "Técnico Universitario",
+   "sigla": "TEC",
    "cidade": "Ambato",
    "estado": "EC",
    "pais": "EC",
    "cores": {
-    "primaria": "#87CEFA",
-    "secundaria": "#0000FF"
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
    },
    "estadio": {
     "nome": "Estádio Bellavista",
     "capacidade": 18000
    },
-   "fundacao": 1939,
+   "fundacao": 1971,
    "rival": null,
    "torcida": 20,
    "reputacao": 60,
@@ -2203,6 +2153,31 @@
    "caixaInicial": 14300000
   },
   {
+   "id": "macara",
+   "nome": "Macará",
+   "sigla": "MAC",
+   "cidade": "Ambato",
+   "estado": "EC",
+   "pais": "EC",
+   "cores": {
+    "primaria": "#87CEFA",
+    "secundaria": "#0000FF"
+   },
+   "estadio": {
+    "nome": "Estádio Bellavista",
+    "capacidade": 18000
+   },
+   "fundacao": 1939,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 48,
+    "max": 68
+   },
+   "caixaInicial": 4700000
+  },
+  {
    "id": "emelec",
    "nome": "Emelec",
    "sigla": "EME",
@@ -2226,31 +2201,6 @@
     "max": 78
    },
    "caixaInicial": 14700000
-  },
-  {
-   "id": "tecnico-universitario",
-   "nome": "Técnico Universitario",
-   "sigla": "TEC",
-   "cidade": "Ambato",
-   "estado": "EC",
-   "pais": "EC",
-   "cores": {
-    "primaria": "#000000",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Estádio Bellavista",
-    "capacidade": 18000
-   },
-   "fundacao": 1971,
-   "rival": null,
-   "torcida": 20,
-   "reputacao": 60,
-   "forcaElenco": {
-    "min": 48,
-    "max": 68
-   },
-   "caixaInicial": 4700000
   },
   {
    "id": "delfin",
@@ -2328,10 +2278,35 @@
    "caixaInicial": 14600000
   },
   {
+   "id": "ldu-quito",
+   "nome": "LDU Quito",
+   "sigla": "LDU",
+   "cidade": "Quito",
+   "estado": "EC",
+   "pais": "EC",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio de Liga Deportiva Universitaria",
+    "capacidade": 41596
+   },
+   "fundacao": 1930,
+   "rival": null,
+   "torcida": 65,
+   "reputacao": 82,
+   "forcaElenco": {
+    "min": 60,
+    "max": 78
+   },
+   "caixaInicial": 15000000
+  },
+  {
    "id": "leones",
    "nome": "Leones",
    "sigla": "LEO",
-   "cidade": "Equador",
+   "cidade": "Ibarra",
    "estado": "EC",
    "pais": "EC",
    "cores": {
@@ -2356,7 +2331,7 @@
    "id": "libertad",
    "nome": "Libertad",
    "sigla": "LIB",
-   "cidade": "Equador",
+   "cidade": "Loja",
    "estado": "EC",
    "pais": "EC",
    "cores": {
@@ -2376,31 +2351,6 @@
     "max": 76
    },
    "caixaInicial": 13200000
-  },
-  {
-   "id": "ldu-quito",
-   "nome": "LDU Quito",
-   "sigla": "LDU",
-   "cidade": "Quito",
-   "estado": "EC",
-   "pais": "EC",
-   "cores": {
-    "primaria": "#FFFFFF",
-    "secundaria": "#212121"
-   },
-   "estadio": {
-    "nome": "Estádio de Liga Deportiva Universitaria",
-    "capacidade": 41596
-   },
-   "fundacao": 1930,
-   "rival": null,
-   "torcida": 65,
-   "reputacao": 82,
-   "forcaElenco": {
-    "min": 60,
-    "max": 78
-   },
-   "caixaInicial": 15000000
   },
   {
    "id": "manta",
@@ -2528,6 +2478,31 @@
    "caixaInicial": 13800000
   },
   {
+   "id": "2-de-mayo",
+   "nome": "2 de Mayo",
+   "sigla": "MAY",
+   "cidade": "Pedro Juan Caballero",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Monumental Río Parapití",
+    "capacidade": 18000
+   },
+   "fundacao": 1935,
+   "rival": null,
+   "torcida": 19,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 48,
+    "max": 68
+   },
+   "caixaInicial": 4300000
+  },
+  {
    "id": "guarani-py",
    "nome": "Guarani",
    "sigla": "GUA",
@@ -2653,29 +2628,54 @@
    "caixaInicial": 8900000
   },
   {
-   "id": "2-de-mayo",
-   "nome": "2 de Mayo",
-   "sigla": "MAY",
-   "cidade": "Pedro Juan Caballero",
+   "id": "san-lorenzo-py",
+   "nome": "San Lorenzo",
+   "sigla": "SAN",
+   "cidade": "San Lorenzo",
    "estado": "PY",
    "pais": "PY",
    "cores": {
-    "primaria": "#FFFFFF",
+    "primaria": "#00838F",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Ciudad Universitaria",
+    "capacidade": 5000
+   },
+   "fundacao": 1930,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 44,
+    "max": 64
+   },
+   "caixaInicial": 1300000
+  },
+  {
+   "id": "recoleta",
+   "nome": "Recoleta",
+   "sigla": "REC",
+   "cidade": "Assunção",
+   "estado": "PY",
+   "pais": "PY",
+   "cores": {
+    "primaria": "#FFFF00",
     "secundaria": "#212121"
    },
    "estadio": {
-    "nome": "Monumental Río Parapití",
-    "capacidade": 18000
+    "nome": "Estadio Roque F. Batelhana",
+    "capacidade": 6000
    },
-   "fundacao": 1935,
+   "fundacao": 1931,
    "rival": null,
-   "torcida": 19,
-   "reputacao": 60,
+   "torcida": 7,
+   "reputacao": 54,
    "forcaElenco": {
-    "min": 48,
-    "max": 68
+    "min": 45,
+    "max": 65
    },
-   "caixaInicial": 4300000
+   "caixaInicial": 1800000
   },
   {
    "id": "sportivo-ameliano",
@@ -2728,31 +2728,6 @@
    "caixaInicial": 3400000
   },
   {
-   "id": "san-lorenzo-py",
-   "nome": "San Lorenzo",
-   "sigla": "SAN",
-   "cidade": "San Lorenzo",
-   "estado": "PY",
-   "pais": "PY",
-   "cores": {
-    "primaria": "#00838F",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Estadio Ciudad Universitaria",
-    "capacidade": 5000
-   },
-   "fundacao": 1930,
-   "rival": null,
-   "torcida": 4,
-   "reputacao": 53,
-   "forcaElenco": {
-    "min": 44,
-    "max": 64
-   },
-   "caixaInicial": 1300000
-  },
-  {
    "id": "sportivo-trinidense",
    "nome": "Sportivo Trinidense",
    "sigla": "TRI",
@@ -2778,35 +2753,10 @@
    "caixaInicial": 6400000
   },
   {
-   "id": "recoleta",
-   "nome": "Recoleta",
-   "sigla": "REC",
-   "cidade": "Assunção",
-   "estado": "PY",
-   "pais": "PY",
-   "cores": {
-    "primaria": "#FFFF00",
-    "secundaria": "#212121"
-   },
-   "estadio": {
-    "nome": "Estadio Roque F. Batelhana",
-    "capacidade": 6000
-   },
-   "fundacao": 1931,
-   "rival": null,
-   "torcida": 7,
-   "reputacao": 54,
-   "forcaElenco": {
-    "min": 45,
-    "max": 65
-   },
-   "caixaInicial": 1800000
-  },
-  {
    "id": "juan-pablo-ii-college",
    "nome": "Juan Pablo II College",
    "sigla": "JPC",
-   "cidade": "Peru",
+   "cidade": "Chongoyape",
    "estado": "PE",
    "pais": "PE",
    "cores": {
@@ -2814,7 +2764,7 @@
     "secundaria": "#212121"
    },
    "estadio": {
-    "nome": "Estádio de Peru",
+    "nome": "Estádio de Chongoyape",
     "capacidade": 15000
    },
    "fundacao": 2015,
@@ -2826,31 +2776,6 @@
     "max": 62
    },
    "caixaInicial": 900000
-  },
-  {
-   "id": "adt",
-   "nome": "ADT",
-   "sigla": "ADT",
-   "cidade": "Tarma",
-   "estado": "PE",
-   "pais": "PE",
-   "cores": {
-    "primaria": "#069BFF",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Estadio Unión Tarma",
-    "capacidade": 7000
-   },
-   "fundacao": 1929,
-   "rival": null,
-   "torcida": 26,
-   "reputacao": 61,
-   "forcaElenco": {
-    "min": 47,
-    "max": 67
-   },
-   "caixaInicial": 5000000
   },
   {
    "id": "alianza-atletico",
@@ -2878,29 +2803,29 @@
    "caixaInicial": 3200000
   },
   {
-   "id": "alianza-lima",
-   "nome": "Alianza Lima",
-   "sigla": "ALI",
-   "cidade": "Lima",
+   "id": "adt",
+   "nome": "ADT",
+   "sigla": "ADT",
+   "cidade": "Tarma",
    "estado": "PE",
    "pais": "PE",
    "cores": {
-    "primaria": "#071241",
+    "primaria": "#069BFF",
     "secundaria": "#FFFFFF"
    },
    "estadio": {
-    "nome": "Estádio Alejandro Villanueva",
-    "capacidade": 33938
+    "nome": "Estadio Unión Tarma",
+    "capacidade": 7000
    },
-   "fundacao": 1921,
+   "fundacao": 1929,
    "rival": null,
-   "torcida": 60,
-   "reputacao": 78,
+   "torcida": 26,
+   "reputacao": 61,
    "forcaElenco": {
-    "min": 55,
-    "max": 75
+    "min": 47,
+    "max": 67
    },
-   "caixaInicial": 11100000
+   "caixaInicial": 5000000
   },
   {
    "id": "atletico-grau",
@@ -2953,54 +2878,29 @@
    "caixaInicial": 8500000
   },
   {
-   "id": "comerciantes-unidos",
-   "nome": "Comerciantes Unidos",
-   "sigla": "COM",
-   "cidade": "Cutervo",
+   "id": "alianza-lima",
+   "nome": "Alianza Lima",
+   "sigla": "ALI",
+   "cidade": "Lima",
    "estado": "PE",
    "pais": "PE",
    "cores": {
-    "primaria": "#C62828",
+    "primaria": "#071241",
     "secundaria": "#FFFFFF"
    },
    "estadio": {
-    "nome": "Estadio Municipal Juan Maldonado Gamarra",
-    "capacidade": 13000
+    "nome": "Estádio Alejandro Villanueva",
+    "capacidade": 33938
    },
-   "fundacao": 2002,
+   "fundacao": 1921,
    "rival": null,
-   "torcida": 7,
-   "reputacao": 52,
+   "torcida": 60,
+   "reputacao": 78,
    "forcaElenco": {
-    "min": 43,
-    "max": 63
+    "min": 55,
+    "max": 75
    },
-   "caixaInicial": 1500000
-  },
-  {
-   "id": "deportivo-garcilaso",
-   "nome": "Deportivo Garcilaso",
-   "sigla": "GAR",
-   "cidade": "Cusco",
-   "estado": "PE",
-   "pais": "PE",
-   "cores": {
-    "primaria": "#2DA6FF",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Estádio Inca Garcilaso de la Vega",
-    "capacidade": 34500
-   },
-   "fundacao": 1957,
-   "rival": null,
-   "torcida": 23,
-   "reputacao": 60,
-   "forcaElenco": {
-    "min": 46,
-    "max": 66
-   },
-   "caixaInicial": 4400000
+   "caixaInicial": 11100000
   },
   {
    "id": "chankas",
@@ -3031,7 +2931,7 @@
    "id": "deportivo-moquegua",
    "nome": "Deportivo Moquegua",
    "sigla": "MOQ",
-   "cidade": "Peru",
+   "cidade": "Moquegua",
    "estado": "PE",
    "pais": "PE",
    "cores": {
@@ -3051,6 +2951,181 @@
     "max": 62
    },
    "caixaInicial": 1200000
+  },
+  {
+   "id": "universitario",
+   "nome": "Universitario",
+   "sigla": "UNI",
+   "cidade": "Lima",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#FEFAEB",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estadio Monumental U",
+    "capacidade": 80093
+   },
+   "fundacao": 1924,
+   "rival": null,
+   "torcida": 62,
+   "reputacao": 79,
+   "forcaElenco": {
+    "min": 55,
+    "max": 75
+   },
+   "caixaInicial": 11500000
+  },
+  {
+   "id": "comerciantes-unidos",
+   "nome": "Comerciantes Unidos",
+   "sigla": "COM",
+   "cidade": "Cutervo",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#C62828",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Municipal Juan Maldonado Gamarra",
+    "capacidade": 13000
+   },
+   "fundacao": 2002,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 43,
+    "max": 63
+   },
+   "caixaInicial": 1500000
+  },
+  {
+   "id": "cusco",
+   "nome": "Cusco",
+   "sigla": "CUS",
+   "cidade": "Cusco",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#EACF75",
+    "secundaria": "#212121"
+   },
+   "estadio": {
+    "nome": "Estádio Inca Garcilaso de la Vega",
+    "capacidade": 34500
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 44,
+    "max": 64
+   },
+   "caixaInicial": 2300000
+  },
+  {
+   "id": "deportivo-garcilaso",
+   "nome": "Deportivo Garcilaso",
+   "sigla": "GAR",
+   "cidade": "Cusco",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#2DA6FF",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Inca Garcilaso de la Vega",
+    "capacidade": 34500
+   },
+   "fundacao": 1957,
+   "rival": null,
+   "torcida": 23,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 46,
+    "max": 66
+   },
+   "caixaInicial": 4400000
+  },
+  {
+   "id": "melgar",
+   "nome": "Melgar",
+   "sigla": "MEL",
+   "cidade": "Arequipa",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Arequipa",
+    "capacidade": 40370
+   },
+   "fundacao": 1915,
+   "rival": null,
+   "torcida": 50,
+   "reputacao": 73,
+   "forcaElenco": {
+    "min": 53,
+    "max": 73
+   },
+   "caixaInicial": 9200000
+  },
+  {
+   "id": "cajamarca",
+   "nome": "Cajamarca",
+   "sigla": "CAJ",
+   "cidade": "Cajamarca",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#FFE600",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Héroes de San Ramón",
+    "capacidade": 18450
+   },
+   "fundacao": 2023,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 42,
+    "max": 62
+   },
+   "caixaInicial": 800000
+  },
+  {
+   "id": "sport-boys",
+   "nome": "Sport Boys",
+   "sigla": "BOY",
+   "cidade": "El Callao",
+   "estado": "PE",
+   "pais": "PE",
+   "cores": {
+    "primaria": "#FFCADD",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Miguel Grau (Callao)",
+    "capacidade": 15000
+   },
+   "fundacao": 1927,
+   "rival": null,
+   "torcida": 41,
+   "reputacao": 69,
+   "forcaElenco": {
+    "min": 51,
+    "max": 71
+   },
+   "caixaInicial": 7700000
   },
   {
    "id": "huancayo",
@@ -3126,131 +3201,6 @@
     "max": 63
    },
    "caixaInicial": 1900000
-  },
-  {
-   "id": "universitario",
-   "nome": "Universitario",
-   "sigla": "UNI",
-   "cidade": "Lima",
-   "estado": "PE",
-   "pais": "PE",
-   "cores": {
-    "primaria": "#FEFAEB",
-    "secundaria": "#212121"
-   },
-   "estadio": {
-    "nome": "Estadio Monumental U",
-    "capacidade": 80093
-   },
-   "fundacao": 1924,
-   "rival": null,
-   "torcida": 62,
-   "reputacao": 79,
-   "forcaElenco": {
-    "min": 55,
-    "max": 75
-   },
-   "caixaInicial": 11500000
-  },
-  {
-   "id": "cusco",
-   "nome": "Cusco",
-   "sigla": "CUS",
-   "cidade": "Cusco",
-   "estado": "PE",
-   "pais": "PE",
-   "cores": {
-    "primaria": "#EACF75",
-    "secundaria": "#212121"
-   },
-   "estadio": {
-    "nome": "Estádio Inca Garcilaso de la Vega",
-    "capacidade": 34500
-   },
-   "fundacao": 2009,
-   "rival": null,
-   "torcida": 11,
-   "reputacao": 54,
-   "forcaElenco": {
-    "min": 44,
-    "max": 64
-   },
-   "caixaInicial": 2300000
-  },
-  {
-   "id": "melgar",
-   "nome": "Melgar",
-   "sigla": "MEL",
-   "cidade": "Arequipa",
-   "estado": "PE",
-   "pais": "PE",
-   "cores": {
-    "primaria": "#000000",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Estádio Arequipa",
-    "capacidade": 40370
-   },
-   "fundacao": 1915,
-   "rival": null,
-   "torcida": 50,
-   "reputacao": 73,
-   "forcaElenco": {
-    "min": 53,
-    "max": 73
-   },
-   "caixaInicial": 9200000
-  },
-  {
-   "id": "cajamarca",
-   "nome": "Cajamarca",
-   "sigla": "CAJ",
-   "cidade": "Peru",
-   "estado": "PE",
-   "pais": "PE",
-   "cores": {
-    "primaria": "#FFE600",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Estadio Héroes de San Ramón",
-    "capacidade": 18450
-   },
-   "fundacao": 2023,
-   "rival": null,
-   "torcida": 3,
-   "reputacao": 50,
-   "forcaElenco": {
-    "min": 42,
-    "max": 62
-   },
-   "caixaInicial": 800000
-  },
-  {
-   "id": "sport-boys",
-   "nome": "Sport Boys",
-   "sigla": "BOY",
-   "cidade": "El Callao",
-   "estado": "PE",
-   "pais": "PE",
-   "cores": {
-    "primaria": "#FFCADD",
-    "secundaria": "#000000"
-   },
-   "estadio": {
-    "nome": "Estádio Miguel Grau (Callao)",
-    "capacidade": 15000
-   },
-   "fundacao": 1927,
-   "rival": null,
-   "torcida": 41,
-   "reputacao": 69,
-   "forcaElenco": {
-    "min": 51,
-    "max": 71
-   },
-   "caixaInicial": 7700000
   },
   {
    "id": "boston-river",
@@ -3669,13 +3619,38 @@
    },
    "fundacao": 2014,
    "rival": null,
-   "torcida": 6,
-   "reputacao": 48,
+   "torcida": 19,
+   "reputacao": 57,
    "forcaElenco": {
-    "min": 39,
-    "max": 59
+    "min": 44,
+    "max": 64
    },
-   "caixaInicial": 1000000
+   "caixaInicial": 2800000
+  },
+  {
+   "id": "anzoategui",
+   "nome": "Anzoátegui",
+   "sigla": "ANZ",
+   "cidade": "Puerto La Cruz",
+   "estado": "VE",
+   "pais": "VE",
+   "cores": {
+    "primaria": "#2E7D32",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio de Puerto La Cruz",
+    "capacidade": 15000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 38,
+    "max": 58
+   },
+   "caixaInicial": 600000
   },
   {
    "id": "carabobo",
@@ -3694,13 +3669,13 @@
    },
    "fundacao": 1997,
    "rival": null,
-   "torcida": 30,
-   "reputacao": 64,
+   "torcida": 37,
+   "reputacao": 69,
    "forcaElenco": {
-    "min": 47,
-    "max": 67
+    "min": 50,
+    "max": 70
    },
-   "caixaInicial": 4100000
+   "caixaInicial": 5100000
   },
   {
    "id": "caracas",
@@ -3719,13 +3694,13 @@
    },
    "fundacao": 1967,
    "rival": null,
-   "torcida": 45,
-   "reputacao": 74,
+   "torcida": 44,
+   "reputacao": 73,
    "forcaElenco": {
     "min": 52,
     "max": 72
    },
-   "caixaInicial": 6000000
+   "caixaInicial": 5800000
   },
   {
    "id": "guaira",
@@ -3744,13 +3719,13 @@
    },
    "fundacao": 2008,
    "rival": null,
-   "torcida": 12,
-   "reputacao": 52,
+   "torcida": 6,
+   "reputacao": 49,
    "forcaElenco": {
-    "min": 41,
-    "max": 61
+    "min": 39,
+    "max": 59
    },
-   "caixaInicial": 1900000
+   "caixaInicial": 1100000
   },
   {
    "id": "rayo-zuliano",
@@ -3769,13 +3744,13 @@
    },
    "fundacao": 1950,
    "rival": null,
-   "torcida": 4,
-   "reputacao": 47,
+   "torcida": 3,
+   "reputacao": 46,
    "forcaElenco": {
-    "min": 39,
-    "max": 59
+    "min": 38,
+    "max": 58
    },
-   "caixaInicial": 800000
+   "caixaInicial": 700000
   },
   {
    "id": "deportivo-tachira",
@@ -3819,13 +3794,13 @@
    },
    "fundacao": 1971,
    "rival": null,
-   "torcida": 20,
-   "reputacao": 58,
+   "torcida": 10,
+   "reputacao": 52,
    "forcaElenco": {
-    "min": 44,
-    "max": 64
+    "min": 41,
+    "max": 61
    },
-   "caixaInicial": 2900000
+   "caixaInicial": 1700000
   },
   {
    "id": "metropolitanos",
@@ -3844,13 +3819,13 @@
    },
    "fundacao": 2011,
    "rival": null,
-   "torcida": 10,
-   "reputacao": 51,
+   "torcida": 4,
+   "reputacao": 47,
    "forcaElenco": {
-    "min": 40,
-    "max": 60
+    "min": 39,
+    "max": 59
    },
-   "caixaInicial": 1600000
+   "caixaInicial": 900000
   },
   {
    "id": "monagas",
@@ -3869,13 +3844,13 @@
    },
    "fundacao": 1987,
    "rival": null,
-   "torcida": 20,
-   "reputacao": 58,
+   "torcida": 10,
+   "reputacao": 52,
    "forcaElenco": {
-    "min": 44,
-    "max": 64
+    "min": 41,
+    "max": 61
    },
-   "caixaInicial": 2900000
+   "caixaInicial": 1700000
   },
   {
    "id": "portuguesa-ve",
@@ -3894,38 +3869,13 @@
    },
    "fundacao": 1972,
    "rival": null,
-   "torcida": 30,
-   "reputacao": 64,
+   "torcida": 16,
+   "reputacao": 55,
    "forcaElenco": {
-    "min": 47,
-    "max": 67
+    "min": 43,
+    "max": 63
    },
-   "caixaInicial": 4100000
-  },
-  {
-   "id": "titanes",
-   "nome": "Titanes",
-   "sigla": "TIT",
-   "cidade": "Venezuela",
-   "estado": "VE",
-   "pais": "VE",
-   "cores": {
-    "primaria": "#FFFFFF",
-    "secundaria": "#4B0080"
-   },
-   "estadio": {
-    "nome": "Estádio Agustín Tovar",
-    "capacidade": 30000
-   },
-   "fundacao": 2026,
-   "rival": null,
-   "torcida": 2,
-   "reputacao": 46,
-   "forcaElenco": {
-    "min": 38,
-    "max": 58
-   },
-   "caixaInicial": 600000
+   "caixaInicial": 2400000
   },
   {
    "id": "trujillanos",
@@ -3944,13 +3894,13 @@
    },
    "fundacao": 1981,
    "rival": null,
-   "torcida": 20,
-   "reputacao": 58,
+   "torcida": 22,
+   "reputacao": 59,
    "forcaElenco": {
-    "min": 44,
-    "max": 64
+    "min": 45,
+    "max": 65
    },
-   "caixaInicial": 2900000
+   "caixaInicial": 3200000
   },
   {
    "id": "universidad-central",
@@ -3969,38 +3919,13 @@
    },
    "fundacao": 1950,
    "rival": null,
-   "torcida": 4,
-   "reputacao": 47,
+   "torcida": 30,
+   "reputacao": 64,
    "forcaElenco": {
-    "min": 39,
-    "max": 59
+    "min": 47,
+    "max": 67
    },
-   "caixaInicial": 800000
-  },
-  {
-   "id": "yaracuyanos",
-   "nome": "Yaracuyanos",
-   "sigla": "YAR",
-   "cidade": "San Felipe",
-   "estado": "VE",
-   "pais": "VE",
-   "cores": {
-    "primaria": "#FFFFFF",
-    "secundaria": "#212121"
-   },
-   "estadio": {
-    "nome": "Estádio Florentino Oropeza",
-    "capacidade": 10000
-   },
-   "fundacao": 2006,
-   "rival": null,
-   "torcida": 10,
-   "reputacao": 51,
-   "forcaElenco": {
-    "min": 40,
-    "max": 60
-   },
-   "caixaInicial": 1600000
+   "caixaInicial": 4100000
   },
   {
    "id": "zamora",
@@ -4019,13 +3944,13 @@
    },
    "fundacao": 2002,
    "rival": null,
-   "torcida": 30,
-   "reputacao": 64,
+   "torcida": 16,
+   "reputacao": 55,
    "forcaElenco": {
-    "min": 47,
-    "max": 67
+    "min": 43,
+    "max": 63
    },
-   "caixaInicial": 4100000
+   "caixaInicial": 2400000
   }
  ]
 }

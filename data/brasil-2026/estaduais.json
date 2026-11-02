@@ -20,13 +20,11 @@
   ],
   "AP": [
    "cristal",
-   "macapa",
    "independente",
    "oratorio",
    "portuguesa-ap",
    "santana",
    "santos-ap",
-   "sao-paulo-ap",
    "trem",
    "ypiranga"
   ],
@@ -44,19 +42,15 @@
    "bahia-de-feira",
    "jequie",
    "barcelona-de-ilheus",
-   "colo-colo-de-ilheus",
    "bahia",
    "jacuipense",
    "vitoria",
    "galicia",
-   "jacobina",
    "porto-ba",
    "juazeirense"
   ],
   "CE": [
    "iguatu",
-   "barbalha",
-   "cariri",
    "ceara",
    "tirol",
    "ferroviario",
@@ -73,12 +67,10 @@
    "ceilandia",
    "legiao",
    "paranoa",
-   "planaltina",
    "real-brasilia",
    "samambaia",
    "sobradinho",
    "ceilandense",
-   "santa-maria",
    "gama"
   ],
   "ES": [
@@ -130,7 +122,6 @@
    "aguia-negra",
    "pantanal",
    "ivinhema",
-   "novo",
    "operario-ms"
   ],
   "MG": [
@@ -227,7 +218,6 @@
    "america-rn",
    "baraunas",
    "potiguar",
-   "potyguar-seridoense",
    "forca-e-luz",
    "laguna",
    "globo",
@@ -256,7 +246,6 @@
    "uniao-cacoalense"
   ],
   "RR": [
-   "real",
    "progresso",
    "rio-negro",
    "monte-roraima",

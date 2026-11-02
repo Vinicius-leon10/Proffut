@@ -19,36 +19,12 @@
    "fundacao": 1969,
    "rival": null,
    "torcida": 5,
-   "reputacao": 37,
+   "reputacao": 36,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 490000
-  },
-  {
-   "id": "macapa",
-   "nome": "Macapá",
-   "sigla": "MAC",
-   "cidade": "Macapá",
-   "estado": "AP",
-   "cores": {
-    "primaria": "#073CD2",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Estádio Municipal Glicério Marques",
-    "capacidade": 3100
-   },
-   "fundacao": 1940,
-   "rival": null,
-   "torcida": 5,
-   "reputacao": 38,
-   "forcaElenco": {
-    "min": 27,
-    "max": 45
-   },
-   "caixaInicial": 550000
+   "caixaInicial": 480000
   },
   {
    "id": "independente",
@@ -67,12 +43,12 @@
    "fundacao": 1962,
    "rival": null,
    "torcida": 5,
-   "reputacao": 37,
+   "reputacao": 36,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 490000
+   "caixaInicial": 480000
   },
   {
    "id": "portuguesa-ap",
@@ -96,7 +72,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "santana",
@@ -144,31 +120,7 @@
     "min": 28,
     "max": 46
    },
-   "caixaInicial": 580000
-  },
-  {
-   "id": "sao-paulo-ap",
-   "nome": "São Paulo-AP",
-   "sigla": "SAO",
-   "cidade": "Macapá",
-   "estado": "AP",
-   "cores": {
-    "primaria": "#FFFFFF",
-    "secundaria": "#212121"
-   },
-   "estadio": {
-    "nome": "Glicério Marques",
-    "capacidade": 3000
-   },
-   "fundacao": 1988,
-   "rival": null,
-   "torcida": 3,
-   "reputacao": 33,
-   "forcaElenco": {
-    "min": 25,
-    "max": 43
-   },
-   "caixaInicial": 370000
+   "caixaInicial": 570000
   },
   {
    "id": "ypiranga",
@@ -186,7 +138,7 @@
    },
    "fundacao": 1963,
    "rival": null,
-   "torcida": 6,
+   "torcida": 5,
    "reputacao": 39,
    "forcaElenco": {
     "min": 27,
@@ -210,13 +162,13 @@
    },
    "fundacao": 1950,
    "rival": null,
-   "torcida": 2,
+   "torcida": 1,
    "reputacao": 29,
    "forcaElenco": {
     "min": 23,
     "max": 41
    },
-   "caixaInicial": 250000
+   "caixaInicial": 240000
   },
   {
    "id": "princesa-do-solimoes",
@@ -240,7 +192,7 @@
     "min": 27,
     "max": 45
    },
-   "caixaInicial": 550000
+   "caixaInicial": 540000
   },
   {
    "id": "sao-raimundo",
@@ -258,7 +210,7 @@
    },
    "fundacao": 1918,
    "rival": null,
-   "torcida": 6,
+   "torcida": 5,
    "reputacao": 39,
    "forcaElenco": {
     "min": 27,
@@ -282,7 +234,7 @@
    },
    "fundacao": 1937,
    "rival": null,
-   "torcida": 6,
+   "torcida": 5,
    "reputacao": 39,
    "forcaElenco": {
     "min": 27,
@@ -306,13 +258,13 @@
    },
    "fundacao": 1969,
    "rival": null,
-   "torcida": 2,
+   "torcida": 1,
    "reputacao": 29,
    "forcaElenco": {
     "min": 23,
     "max": 41
    },
-   "caixaInicial": 250000
+   "caixaInicial": 240000
   },
   {
    "id": "barcelona-de-ilheus",
@@ -336,31 +288,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
-  },
-  {
-   "id": "colo-colo-de-ilheus",
-   "nome": "Colo Colo de Ilhéus",
-   "sigla": "CCI",
-   "cidade": "Ilhéus",
-   "estado": "BA",
-   "cores": {
-    "primaria": "#FFFF00",
-    "secundaria": "#FFDD00"
-   },
-   "estadio": {
-    "nome": "Mário Pessoa",
-    "capacidade": 10000
-   },
-   "fundacao": 1948,
-   "rival": null,
-   "torcida": 5,
-   "reputacao": 38,
-   "forcaElenco": {
-    "min": 27,
-    "max": 45
-   },
-   "caixaInicial": 550000
+   "caixaInicial": 300000
   },
   {
    "id": "galicia",
@@ -387,78 +315,6 @@
    "caixaInicial": 580000
   },
   {
-   "id": "jacobina",
-   "nome": "Jacobina",
-   "sigla": "JAC",
-   "cidade": "Jacobina",
-   "estado": "BA",
-   "cores": {
-    "primaria": "#0000FF",
-    "secundaria": "#000088"
-   },
-   "estadio": {
-    "nome": "José Rocha",
-    "capacidade": 6000
-   },
-   "fundacao": 1993,
-   "rival": null,
-   "torcida": 2,
-   "reputacao": 29,
-   "forcaElenco": {
-    "min": 23,
-    "max": 41
-   },
-   "caixaInicial": 250000
-  },
-  {
-   "id": "barbalha",
-   "nome": "Barbalha",
-   "sigla": "BAR",
-   "cidade": "Barbalha",
-   "estado": "CE",
-   "cores": {
-    "primaria": "#FF0000",
-    "secundaria": "#0000DD"
-   },
-   "estadio": {
-    "nome": "Lírio Callou",
-    "capacidade": 5000
-   },
-   "fundacao": 2002,
-   "rival": null,
-   "torcida": 2,
-   "reputacao": 31,
-   "forcaElenco": {
-    "min": 24,
-    "max": 42
-   },
-   "caixaInicial": 310000
-  },
-  {
-   "id": "cariri",
-   "nome": "Cariri",
-   "sigla": "CAR",
-   "cidade": "Juazeiro do Norte",
-   "estado": "CE",
-   "cores": {
-    "primaria": "#0033FF",
-    "secundaria": "#000000"
-   },
-   "estadio": {
-    "nome": "Estádio de Juazeiro do Norte",
-    "capacidade": 5000
-   },
-   "fundacao": 2019,
-   "rival": null,
-   "torcida": 1,
-   "reputacao": 28,
-   "forcaElenco": {
-    "min": 22,
-    "max": 40
-   },
-   "caixaInicial": 220000
-  },
-  {
    "id": "horizonte",
    "nome": "Horizonte",
    "sigla": "HOR",
@@ -475,12 +331,12 @@
    "fundacao": 2004,
    "rival": null,
    "torcida": 4,
-   "reputacao": 36,
+   "reputacao": 35,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 450000
+   "caixaInicial": 440000
   },
   {
    "id": "maranguape",
@@ -504,7 +360,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 340000
+   "caixaInicial": 330000
   },
   {
    "id": "quixada",
@@ -525,8 +381,8 @@
    "torcida": 3,
    "reputacao": 33,
    "forcaElenco": {
-    "min": 25,
-    "max": 43
+    "min": 24,
+    "max": 42
    },
    "caixaInicial": 370000
   },
@@ -552,7 +408,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "paranoa",
@@ -573,34 +429,10 @@
    "torcida": 3,
    "reputacao": 33,
    "forcaElenco": {
-    "min": 25,
-    "max": 43
-   },
-   "caixaInicial": 370000
-  },
-  {
-   "id": "planaltina",
-   "nome": "Planaltina",
-   "sigla": "PLA",
-   "cidade": "Planaltina",
-   "estado": "DF",
-   "cores": {
-    "primaria": "#000000",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Adonir Guimarães",
-    "capacidade": 12000
-   },
-   "fundacao": 1963,
-   "rival": null,
-   "torcida": 2,
-   "reputacao": 31,
-   "forcaElenco": {
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 370000
   },
   {
    "id": "real-brasilia",
@@ -619,12 +451,12 @@
    "fundacao": 1996,
    "rival": null,
    "torcida": 5,
-   "reputacao": 37,
+   "reputacao": 36,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 490000
+   "caixaInicial": 480000
   },
   {
    "id": "samambaia",
@@ -642,13 +474,13 @@
    },
    "fundacao": 1993,
    "rival": null,
-   "torcida": 2,
+   "torcida": 1,
    "reputacao": 29,
    "forcaElenco": {
     "min": 23,
     "max": 41
    },
-   "caixaInicial": 250000
+   "caixaInicial": 240000
   },
   {
    "id": "sobradinho",
@@ -696,31 +528,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 340000
-  },
-  {
-   "id": "santa-maria",
-   "nome": "Santa Maria",
-   "sigla": "SAN",
-   "cidade": "Santa Maria",
-   "estado": "DF",
-   "cores": {
-    "primaria": "#790707",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Estádio de Santa Maria",
-    "capacidade": 5000
-   },
-   "fundacao": 2000,
-   "rival": null,
-   "torcida": 1,
-   "reputacao": 28,
-   "forcaElenco": {
-    "min": 22,
-    "max": 40
-   },
-   "caixaInicial": 220000
+   "caixaInicial": 330000
   },
   {
    "id": "anapolina",
@@ -768,7 +576,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "jataiense",
@@ -789,8 +597,8 @@
    "torcida": 3,
    "reputacao": 33,
    "forcaElenco": {
-    "min": 25,
-    "max": 43
+    "min": 24,
+    "max": 42
    },
    "caixaInicial": 370000
   },
@@ -810,13 +618,13 @@
    },
    "fundacao": 2009,
    "rival": null,
-   "torcida": 2,
+   "torcida": 1,
    "reputacao": 29,
    "forcaElenco": {
     "min": 23,
     "max": 41
    },
-   "caixaInicial": 250000
+   "caixaInicial": 240000
   },
   {
    "id": "itz",
@@ -840,7 +648,7 @@
     "min": 22,
     "max": 40
    },
-   "caixaInicial": 220000
+   "caixaInicial": 210000
   },
   {
    "id": "tuntum",
@@ -858,13 +666,13 @@
    },
    "fundacao": 2021,
    "rival": null,
-   "torcida": 2,
+   "torcida": 1,
    "reputacao": 29,
    "forcaElenco": {
     "min": 23,
     "max": 41
    },
-   "caixaInicial": 250000
+   "caixaInicial": 240000
   },
   {
    "id": "aquidauanense",
@@ -888,7 +696,7 @@
     "min": 25,
     "max": 43
    },
-   "caixaInicial": 410000
+   "caixaInicial": 400000
   },
   {
    "id": "naviraiense",
@@ -907,12 +715,12 @@
    "fundacao": 2005,
    "rival": null,
    "torcida": 5,
-   "reputacao": 37,
+   "reputacao": 36,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 490000
+   "caixaInicial": 480000
   },
   {
    "id": "corumbaense",
@@ -936,7 +744,7 @@
     "min": 27,
     "max": 45
    },
-   "caixaInicial": 550000
+   "caixaInicial": 540000
   },
   {
    "id": "costa-rica",
@@ -955,12 +763,12 @@
    "fundacao": 2004,
    "rival": null,
    "torcida": 5,
-   "reputacao": 37,
+   "reputacao": 36,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 490000
+   "caixaInicial": 480000
   },
   {
    "id": "coxim",
@@ -979,12 +787,12 @@
    "fundacao": 2002,
    "rival": null,
    "torcida": 4,
-   "reputacao": 36,
+   "reputacao": 35,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 450000
+   "caixaInicial": 440000
   },
   {
    "id": "dourados",
@@ -1008,7 +816,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 340000
+   "caixaInicial": 330000
   },
   {
    "id": "aguia-negra",
@@ -1032,47 +840,23 @@
     "min": 28,
     "max": 46
    },
-   "caixaInicial": 580000
+   "caixaInicial": 570000
   },
   {
-   "id": "ivinhema",
-   "nome": "Ivinhema",
-   "sigla": "IVI",
-   "cidade": "Ivinhema",
-   "estado": "MS",
-   "cores": {
-    "primaria": "#0033CC",
-    "secundaria": "#FFFFFF"
-   },
-   "estadio": {
-    "nome": "Luiz Saraiva Vieira",
-    "capacidade": 5000
-   },
-   "fundacao": 2006,
-   "rival": null,
-   "torcida": 4,
-   "reputacao": 36,
-   "forcaElenco": {
-    "min": 26,
-    "max": 44
-   },
-   "caixaInicial": 450000
-  },
-  {
-   "id": "novo",
-   "nome": "Novo",
-   "sigla": "NOV",
+   "id": "pantanal",
+   "nome": "Pantanal",
+   "sigla": "PAN",
    "cidade": "Campo Grande",
    "estado": "MS",
    "cores": {
-    "primaria": "#027B54",
+    "primaria": "#000000",
     "secundaria": "#FFFFFF"
    },
    "estadio": {
-    "nome": "Estádio Universitário Pedro Pedrossian",
-    "capacidade": 45000
+    "nome": "Jacques da Luz",
+    "capacidade": 4500
    },
-   "fundacao": 2010,
+   "fundacao": 2004,
    "rival": null,
    "torcida": 2,
    "reputacao": 31,
@@ -1080,7 +864,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "urt",
@@ -1128,7 +912,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 340000
+   "caixaInicial": 330000
   },
   {
    "id": "north",
@@ -1146,13 +930,13 @@
    },
    "fundacao": 2022,
    "rival": null,
-   "torcida": 2,
+   "torcida": 1,
    "reputacao": 29,
    "forcaElenco": {
     "min": 23,
     "max": 41
    },
-   "caixaInicial": 250000
+   "caixaInicial": 240000
   },
   {
    "id": "amazonia",
@@ -1176,7 +960,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "bragantino",
@@ -1200,7 +984,7 @@
     "min": 25,
     "max": 43
    },
-   "caixaInicial": 410000
+   "caixaInicial": 400000
   },
   {
    "id": "cameta",
@@ -1219,12 +1003,12 @@
    "fundacao": 2007,
    "rival": null,
    "torcida": 4,
-   "reputacao": 36,
+   "reputacao": 35,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 450000
+   "caixaInicial": 440000
   },
   {
    "id": "capitao-poco",
@@ -1242,13 +1026,13 @@
    },
    "fundacao": 2018,
    "rival": null,
-   "torcida": 2,
+   "torcida": 1,
    "reputacao": 29,
    "forcaElenco": {
     "min": 23,
     "max": 41
    },
-   "caixaInicial": 250000
+   "caixaInicial": 240000
   },
   {
    "id": "castanhal",
@@ -1272,7 +1056,7 @@
     "min": 25,
     "max": 43
    },
-   "caixaInicial": 410000
+   "caixaInicial": 400000
   },
   {
    "id": "santa-rosa",
@@ -1296,7 +1080,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "sao-francisco-pa",
@@ -1317,8 +1101,8 @@
    "torcida": 3,
    "reputacao": 33,
    "forcaElenco": {
-    "min": 25,
-    "max": 43
+    "min": 24,
+    "max": 42
    },
    "caixaInicial": 370000
   },
@@ -1344,7 +1128,7 @@
     "min": 27,
     "max": 45
    },
-   "caixaInicial": 550000
+   "caixaInicial": 540000
   },
   {
    "id": "atletico-de-cajazeiras",
@@ -1363,12 +1147,12 @@
    "fundacao": 1948,
    "rival": null,
    "torcida": 4,
-   "reputacao": 36,
+   "reputacao": 35,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 450000
+   "caixaInicial": 440000
   },
   {
    "id": "campinense",
@@ -1413,8 +1197,8 @@
    "torcida": 3,
    "reputacao": 33,
    "forcaElenco": {
-    "min": 25,
-    "max": 43
+    "min": 24,
+    "max": 42
    },
    "caixaInicial": 370000
   },
@@ -1440,7 +1224,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 340000
+   "caixaInicial": 330000
   },
   {
    "id": "nacional-de-patos",
@@ -1459,12 +1243,12 @@
    "fundacao": 1961,
    "rival": null,
    "torcida": 4,
-   "reputacao": 36,
+   "reputacao": 35,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 450000
+   "caixaInicial": 440000
   },
   {
    "id": "pombal",
@@ -1488,7 +1272,7 @@
     "min": 22,
     "max": 40
    },
-   "caixaInicial": 220000
+   "caixaInicial": 210000
   },
   {
    "id": "foz-do-iguacu",
@@ -1536,7 +1320,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "galo-maringa",
@@ -1560,7 +1344,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "afogados-da-ingazeira",
@@ -1584,7 +1368,7 @@
     "min": 25,
     "max": 43
    },
-   "caixaInicial": 410000
+   "caixaInicial": 400000
   },
   {
    "id": "vitoria-pe",
@@ -1605,8 +1389,8 @@
    "torcida": 3,
    "reputacao": 33,
    "forcaElenco": {
-    "min": 25,
-    "max": 43
+    "min": 24,
+    "max": 42
    },
    "caixaInicial": 370000
   },
@@ -1632,7 +1416,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "petrolina",
@@ -1656,7 +1440,7 @@
     "min": 25,
     "max": 43
    },
-   "caixaInicial": 410000
+   "caixaInicial": 400000
   },
   {
    "id": "4-de-julho",
@@ -1675,12 +1459,12 @@
    "fundacao": 1987,
    "rival": null,
    "torcida": 5,
-   "reputacao": 37,
+   "reputacao": 36,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 490000
+   "caixaInicial": 480000
   },
   {
    "id": "atletico-piauiense",
@@ -1704,7 +1488,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "river",
@@ -1776,7 +1560,7 @@
     "min": 28,
     "max": 46
    },
-   "caixaInicial": 580000
+   "caixaInicial": 570000
   },
   {
    "id": "baraunas",
@@ -1800,7 +1584,7 @@
     "min": 28,
     "max": 46
    },
-   "caixaInicial": 580000
+   "caixaInicial": 570000
   },
   {
    "id": "potiguar",
@@ -1824,31 +1608,7 @@
     "min": 27,
     "max": 45
    },
-   "caixaInicial": 550000
-  },
-  {
-   "id": "potyguar-seridoense",
-   "nome": "Potyguar Seridoense",
-   "sigla": "POT",
-   "cidade": "Currais Novos",
-   "estado": "RN",
-   "cores": {
-    "primaria": "#FF0000",
-    "secundaria": "#0000E0"
-   },
-   "estadio": {
-    "nome": "Coronel José Bezerra (Bezerrão)",
-    "capacidade": 2440
-   },
-   "fundacao": 1960,
-   "rival": null,
-   "torcida": 3,
-   "reputacao": 32,
-   "forcaElenco": {
-    "min": 24,
-    "max": 42
-   },
-   "caixaInicial": 340000
+   "caixaInicial": 540000
   },
   {
    "id": "forca-e-luz",
@@ -1872,7 +1632,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "globo",
@@ -1917,8 +1677,8 @@
    "torcida": 3,
    "reputacao": 33,
    "forcaElenco": {
-    "min": 25,
-    "max": 43
+    "min": 24,
+    "max": 42
    },
    "caixaInicial": 370000
   },
@@ -1939,12 +1699,12 @@
    "fundacao": 1944,
    "rival": null,
    "torcida": 4,
-   "reputacao": 36,
+   "reputacao": 35,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 450000
+   "caixaInicial": 440000
   },
   {
    "id": "inter-de-santa-maria",
@@ -1963,12 +1723,12 @@
    "fundacao": 1928,
    "rival": null,
    "torcida": 5,
-   "reputacao": 37,
+   "reputacao": 36,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 490000
+   "caixaInicial": 480000
   },
   {
    "id": "novo-hamburgo",
@@ -2016,7 +1776,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "barcelona",
@@ -2040,7 +1800,7 @@
     "min": 25,
     "max": 43
    },
-   "caixaInicial": 410000
+   "caixaInicial": 400000
   },
   {
    "id": "ji-parana",
@@ -2064,7 +1824,7 @@
     "min": 27,
     "max": 45
    },
-   "caixaInicial": 550000
+   "caixaInicial": 540000
   },
   {
    "id": "rondoniense",
@@ -2088,7 +1848,7 @@
     "min": 25,
     "max": 43
    },
-   "caixaInicial": 410000
+   "caixaInicial": 400000
   },
   {
    "id": "uniao-cacoalense",
@@ -2107,36 +1867,12 @@
    "fundacao": 1982,
    "rival": null,
    "torcida": 4,
-   "reputacao": 36,
+   "reputacao": 35,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 450000
-  },
-  {
-   "id": "real",
-   "nome": "Real",
-   "sigla": "REA",
-   "cidade": "São Luiz do Anauá",
-   "estado": "RR",
-   "cores": {
-    "primaria": "#FFFFFF",
-    "secundaria": "#212121"
-   },
-   "estadio": {
-    "nome": "Canarinho, Boa Vista",
-    "capacidade": 4556
-   },
-   "fundacao": 2006,
-   "rival": null,
-   "torcida": 4,
-   "reputacao": 36,
-   "forcaElenco": {
-    "min": 26,
-    "max": 44
-   },
-   "caixaInicial": 450000
+   "caixaInicial": 440000
   },
   {
    "id": "progresso",
@@ -2155,12 +1891,12 @@
    "fundacao": 1959,
    "rival": null,
    "torcida": 5,
-   "reputacao": 37,
+   "reputacao": 36,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 490000
+   "caixaInicial": 480000
   },
   {
    "id": "rio-negro",
@@ -2179,12 +1915,12 @@
    "fundacao": 1971,
    "rival": null,
    "torcida": 5,
-   "reputacao": 37,
+   "reputacao": 36,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 490000
+   "caixaInicial": 480000
   },
   {
    "id": "bare",
@@ -2208,7 +1944,7 @@
     "min": 27,
     "max": 45
    },
-   "caixaInicial": 550000
+   "caixaInicial": 540000
   },
   {
    "id": "nautico-rr",
@@ -2256,7 +1992,7 @@
     "min": 25,
     "max": 43
    },
-   "caixaInicial": 410000
+   "caixaInicial": 400000
   },
   {
    "id": "camboriu",
@@ -2277,8 +2013,8 @@
    "torcida": 3,
    "reputacao": 33,
    "forcaElenco": {
-    "min": 25,
-    "max": 43
+    "min": 24,
+    "max": 42
    },
    "caixaInicial": 370000
   },
@@ -2299,12 +2035,12 @@
    "fundacao": 2005,
    "rival": null,
    "torcida": 4,
-   "reputacao": 36,
+   "reputacao": 35,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 450000
+   "caixaInicial": 440000
   },
   {
    "id": "carlos-renaux",
@@ -2323,12 +2059,12 @@
    "fundacao": 1913,
    "rival": null,
    "torcida": 4,
-   "reputacao": 36,
+   "reputacao": 35,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 450000
+   "caixaInicial": 440000
   },
   {
    "id": "capivariano",
@@ -2371,12 +2107,12 @@
    "fundacao": 1927,
    "rival": null,
    "torcida": 4,
-   "reputacao": 36,
+   "reputacao": 35,
    "forcaElenco": {
     "min": 26,
     "max": 44
    },
-   "caixaInicial": 450000
+   "caixaInicial": 440000
   },
   {
    "id": "america-de-propria",
@@ -2424,7 +2160,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "atletico-gloriense",
@@ -2448,7 +2184,7 @@
     "min": 22,
     "max": 40
    },
-   "caixaInicial": 220000
+   "caixaInicial": 210000
   },
   {
    "id": "dorense",
@@ -2472,7 +2208,7 @@
     "min": 24,
     "max": 42
    },
-   "caixaInicial": 310000
+   "caixaInicial": 300000
   },
   {
    "id": "falcon",
@@ -2493,8 +2229,8 @@
    "torcida": 3,
    "reputacao": 33,
    "forcaElenco": {
-    "min": 25,
-    "max": 43
+    "min": 24,
+    "max": 42
    },
    "caixaInicial": 370000
   },

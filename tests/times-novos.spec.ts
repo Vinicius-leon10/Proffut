@@ -106,3 +106,48 @@ test("R72 o técnico só treina clubes das Séries A, B e C: o jogo novo só tem
   await expect(page.locator(".topo .titulo")).toHaveText(novo);
   await expect(page.getByRole("heading", { name: "Série C 2027" })).toBeVisible();
 });
+
+test("R74 as listas dos campeonatos estão certas: nos estaduais não entram os rebaixados do ano anterior nem quem desistiu; nas ligas de fora, só a primeira divisão de 2026 (Bolívia com o Real Oruro e sem o IN San Juan, Venezuela com o Anzoátegui e sem o Titanes); na Série D, o Ivinhema", async ({ page }) => {
+  await novoJogo(page);
+  await aba(page, "Tabelas");
+  const linhas = page.locator("main table.tabela td.clube");
+  const nomes = () => page.locator("main table.tabela td.clube .corta").allTextContents();
+  const estadual = page.getByRole("combobox", { name: "Estadual" });
+  const estaduais: [string, number, string[]][] = [
+    ["E-AP", 8, ["Macapá", "São Paulo-AP"]], ["E-BA", 10, ["Jacobina", "Colo Colo de Ilhéus"]], ["E-CE", 10, ["Barbalha", "Cariri"]],
+    ["E-DF", 10, ["Planaltina", "Santa Maria"]], ["E-MS", 10, ["Novo"]], ["E-RN", 7, ["Potyguar Seridoense"]], ["E-RR", 8, ["Real"]],
+  ];
+  for (const [uf, total, fora] of estaduais) {
+    await estadual.selectOption(uf);
+    await expect(linhas, uf).toHaveCount(total);
+    const lista = await nomes();
+    for (const n of fora) expect(lista, `${uf} sem ${n}`).not.toContain(n);
+  }
+
+  await page.getByRole("tab", { name: "Outros países" }).click();
+  const pais = page.getByRole("combobox", { name: "País" });
+  const ligas: [string, number, string[], string[]][] = [
+    ["Bolívia", 16, ["Real Oruro"], ["IN San Juan", "Jorge Wilstermann"]], ["Colômbia", 20, [], ["Deportes Quindío"]],
+    ["Venezuela", 14, ["Anzoátegui"], ["Titanes", "Yaracuyanos"]],
+  ];
+  for (const [nome, total, dentro, fora] of ligas) {
+    await pais.selectOption({ label: nome });
+    await expect(linhas, nome).toHaveCount(total);
+    const lista = await nomes();
+    for (const n of dentro) expect(lista, `${nome} com ${n}`).toContain(n);
+    for (const n of fora) expect(lista, `${nome} sem ${n}`).not.toContain(n);
+  }
+
+  // Série D: os 96, com o Ivinhema no lugar do Pantanal (que fica no estadual).
+  await page.getByRole("tab", { name: "Séries" }).click();
+  await page.getByRole("tab", { name: "Série D" }).click();
+  const grupo = page.getByRole("combobox", { name: "Grupo" });
+  const todos: string[] = [];
+  for (const valor of await grupo.locator("option").evaluateAll((os) => os.map((o) => (o as HTMLOptionElement).value))) {
+    await grupo.selectOption(valor);
+    todos.push(...(await nomes()));
+  }
+  expect(todos).toHaveLength(96);
+  expect(todos).toContain("Ivinhema");
+  expect(todos).not.toContain("Pantanal");
+});

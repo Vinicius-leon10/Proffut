@@ -1,7 +1,7 @@
 {
   "temporada": 2026,
   "geradoDe": "denisvick-dev/brasfoot (MIT), game/clubes.py",
-  "descricao": "Clubes da Série D 2026. Não são simulados: servem de reserva para o acesso à Série C.",
+  "descricao": "Clubes da Série D 2026 (desde nov/2026 jogada no jogo). Conferida com a página da Série D de 2026 (relatório de tools/times/montar.ts): o Ivinhema está no lugar do Pantanal.",
   "clubes": [
     {
       "id": "abc",
@@ -1468,28 +1468,28 @@
       "caixaInicial": 300000
     },
     {
-      "id": "pantanal",
-      "nome": "Pantanal",
-      "sigla": "PAN",
-      "cidade": "Campo Grande",
+      "id": "ivinhema",
+      "nome": "Ivinhema",
+      "sigla": "IVI",
+      "cidade": "Ivinhema",
       "estado": "MS",
       "cores": {
-        "primaria": "#2E7D32",
+        "primaria": "#0033CC",
         "secundaria": "#FFFFFF"
       },
       "estadio": {
-        "nome": "Morenão",
-        "capacidade": 44000
+        "nome": "Luiz Saraiva Vieira",
+        "capacidade": 5000
       },
-      "fundacao": 2021,
+      "fundacao": 2006,
       "rival": null,
-      "torcida": 2,
-      "reputacao": 34,
+      "torcida": 4,
+      "reputacao": 35,
       "forcaElenco": {
-        "min": 24,
+        "min": 26,
         "max": 44
       },
-      "caixaInicial": 300000
+      "caixaInicial": 440000
     },
     {
       "id": "parnahyba",

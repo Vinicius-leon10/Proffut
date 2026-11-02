@@ -212,6 +212,12 @@ function paginaDoClube(lang: "pt" | "es" | "en", wd?: ClubeWd): string | undefin
 const SECAO_DE_GRUPO = /^(grupo|group|serie|zona|zone|chave)\s+\S{1,3}$/i;
 /** Seção com a lista dos participantes. */
 const SECAO_DE_PARTICIPANTES = /participantes|teams|equipos|club information|clubes|equipes/i;
+/**
+ * Seção de tabela ou mapa com as equipes (informações, estádios, localização). Traz só quem joga: a seção dos
+ * participantes pega também os clubes citados no texto e nas subseções, como os rebaixados do ano anterior em
+ * "Promovidos e rebaixados", as desistências ou quem perdeu a final da segunda divisão (nov/2026).
+ */
+const SECAO_DE_TABELA = /informa[çc][õo]es das equipes|est[áa]dios|localiza[çc][ãa]o|stadia and locations|club information|informaci[óo]n|sedes/i;
 
 /**
  * Clubes de um campeonato, da primeira página (na ordem do robô: a de 2026, depois a de 2025...) que tem 4 ou mais:
@@ -224,8 +230,12 @@ function clubesDaSemente(s: Semente): { clubes: ClubeNaPagina[]; pagina: string 
     const grupos = unicos(p.participantes.filter((l) => SECAO_DE_GRUPO.test(l.secao.trim())).flatMap((l) => l.clubes));
     const listas = p.participantes.filter((l) => SECAO_DE_PARTICIPANTES.test(l.secao)).sort((a, b) => b.clubes.length - a.clubes.length);
     const lista = unicos(listas[0]?.clubes ?? []);
+    const tabelas = p.participantes.filter((l) => SECAO_DE_TABELA.test(l.secao)).sort((a, b) => b.clubes.length - a.clubes.length);
+    const tabela = unicos(tabelas[0]?.clubes ?? []);
     // Os grupos valem se trazem quase todos os da lista (às vezes o robô não reconhece algum clube num grupo).
     if (grupos.length >= 4 && grupos.length >= lista.length - 1) return { clubes: grupos, pagina: `${p.titulo} (grupos)` };
+    // A tabela das equipes vale se traz quase todos os da lista: o que sobra na lista são os citados no texto.
+    if (tabela.length >= 4 && tabela.length >= lista.length - 2) return { clubes: tabela, pagina: `${p.titulo} (${tabelas[0].secao})` };
     if (lista.length >= 4) return { clubes: lista, pagina: `${p.titulo} (${listas[0].secao})` };
     const todas = unicos(p.participantes.flatMap((l) => l.clubes));
     if (todas.length >= 4) return { clubes: todas, pagina: p.titulo };
@@ -371,7 +381,7 @@ function fichaDeFora(c: ClubeNaPagina, wd: ClubeWd | undefined, pais: string, fa
   const p = PESO_PAIS[pais];
   const t = fama ** 1.5;
   const entre = ([a, b]: [number, number]) => a + (b - a) * t;
-  const cidade = wd?.cidades[0] ?? textoVisivel(en.ground ?? "").split(",")[1]?.trim() ?? PAISES_NOME[pais];
+  const cidade = MANUAL_CIDADES[id] ?? wd?.cidades[0] ?? textoVisivel(en.ground ?? "").split(",")[1]?.trim() ?? PAISES_NOME[pais];
   const estadio = wd?.estadios[0];
   return {
     id, nome, sigla: sigla(nomeBase), cidade, estado: pais, pais,
@@ -395,7 +405,13 @@ const PAISES_NOME: Record<string, string> = { AR: "Argentina", BO: "Bolívia", C
 const MANUAL_NOMES: Record<string, string> = {
   "FC Barcelona": "Barcelona SC", Barcelona: "Barcelona SC", "Estudiantes (LP)": "Estudiantes", "AA Estudiantes": "Estudiantes de Río Cuarto",
   "Gimnasia y Esgrima": "Gimnasia de Mendoza", "Gimnasia y Esgrima La Plata": "Gimnasia", "GV San José": "San José", "The Strongest": "The Strongest",
-  "Deportivo Riestra": "Riestra",
+  "Deportivo Riestra": "Riestra", "CDT Real Oruro": "Real Oruro",
+};
+
+/** Cidade dos clubes que as fontes não dizem (sem ela, ficava o nome do país). */
+const MANUAL_CIDADES: Record<string, string> = {
+  "real-oruro": "Oruro", "san-jose": "Oruro", anzoategui: "Puerto La Cruz", "alianza-valledupar": "Valledupar", "inter-bogota": "Bogotá",
+  leones: "Ibarra", libertad: "Loja", "juan-pablo-ii-college": "Chongoyape", "deportivo-moquegua": "Moquegua", cajamarca: "Cajamarca",
 };
 
 // ---- participantes: estaduais e ligas -------------------------------------------------------------
@@ -469,6 +485,27 @@ for (const uf of ufs) {
   relatorio.push(`Estadual ${uf}: ${ids.length} clubes (${pagina || "sem página: clubes do estado no jogo e nas súmulas"}).`);
 }
 
+// Série D de 2026: a página × a lista do jogo (serie-d-reserva.json). Só relatório, para conferir à mão.
+{
+  const p = porSemente.get("serie-d")?.paginas[0];
+  if (p) {
+    const daPagina = [...new Map(p.participantes.filter((l) => SECAO_DE_GRUPO.test(l.secao.trim())).flatMap((l) => l.clubes).map((c) => [c.qid, c])).values()];
+    const naD = new Set<string>();
+    const semPar: string[] = [];
+    const nasSeries: string[] = [];
+    for (const c of daPagina) {
+      const ids = new Set(ufs.map((uf) => clubeDoJogo(c, clubesWd[c.qid], uf)).filter((x): x is string => !!x));
+      const id = ids.size === 1 ? [...ids][0] : undefined;
+      if (!id) semPar.push(c.titulo);
+      else if (fichasD.some((f) => f.id === id)) naD.add(id);
+      else nasSeries.push(`${c.titulo} (${id})`);
+    }
+    const fora = fichasD.filter((f) => !naD.has(f.id)).map((f) => `${f.nome}/${f.estado}`);
+    relatorio.push(`Série D 2026: ${daPagina.length} na página, ${naD.size} na D do jogo. Da página, sem par no jogo: ${semPar.join("; ") || "nenhum"}. ` +
+      `Da página, nas Séries A a C do jogo: ${nasSeries.join("; ") || "nenhum"}. Da D do jogo, fora da página: ${fora.join(", ") || "nenhum"}.`);
+  }
+}
+
 if (process.argv.includes("--so-participantes")) {
   for (const uf of ufs) {
     console.log(`${uf}: ${estaduais[uf].map((id) => (id.startsWith("novo:") ? `+${clubesWd[id.slice(5)]?.pt ?? id}` : id)).join(", ")}`);
@@ -500,9 +537,15 @@ const fichasExterior: FichaNova[] = [];
 const ligas: Record<string, { c: ClubeNaPagina; wd?: ClubeWd }[]> = {};
 for (const pais of LIGAS) {
   const qidDoPais = Object.keys(PAIS_DO_ITEM).find((q) => PAIS_DO_ITEM[q] === pais)!;
-  const doPais = (lista: ClubeNaPagina[]) => lista.filter((c) => clubesWd[c.qid]?.paises.includes(qidDoPais) && !NOME_ANTIGO.test(`${clubesWd[c.qid]?.es} ${clubesWd[c.qid]?.en} ${c.titulo}`));
-  // As listas possíveis: de cada página, a dos grupos e a dos participantes; e a dos clubes que estão nas duas.
+  // Clube de outro país sai; sem país no Wikidata (Real Oruro, Anzoátegui...) fica: está na página da liga.
+  const doPais = (lista: ClubeNaPagina[]) => lista.filter((c) => {
+    const paises = clubesWd[c.qid]?.paises ?? [];
+    return (!paises.length || paises.includes(qidDoPais)) && !NOME_ANTIGO.test(`${clubesWd[c.qid]?.es} ${clubesWd[c.qid]?.en} ${c.titulo}`);
+  });
+  // As listas possíveis: de cada página, a dos grupos, as dos participantes e as das tabelas; e a dos clubes que estão
+  // nas duas páginas. As das tabelas (marcadas) ganham no empate: a dos participantes pega também os citados no texto.
   const candidatas: ClubeNaPagina[][] = [];
+  const deTabela = new Set<ClubeNaPagina[]>();
   const porLingua: ClubeNaPagina[][] = [];
   for (const lang of ["en", "es"]) {
     const s = porSemente.get(`liga-${pais}-${lang}`)!;
@@ -510,7 +553,9 @@ for (const pais of LIGAS) {
       const unicos = (l: ClubeNaPagina[]) => [...new Map(l.map((c) => [c.qid, c])).values()];
       const grupos = doPais(unicos(p.participantes.filter((l) => SECAO_DE_GRUPO.test(l.secao.trim())).flatMap((l) => l.clubes)));
       const listas = p.participantes.filter((l) => SECAO_DE_PARTICIPANTES.test(l.secao)).map((l) => doPais(unicos(l.clubes)));
-      candidatas.push(grupos, ...listas);
+      const tabelas = p.participantes.filter((l) => SECAO_DE_TABELA.test(l.secao)).map((l) => doPais(unicos(l.clubes)));
+      for (const t of tabelas) deTabela.add(t);
+      candidatas.push(grupos, ...listas, ...tabelas);
       porLingua.push(doPais(clubesDaSemente(s).clubes));
     }
   }
@@ -518,7 +563,8 @@ for (const pais of LIGAS) {
   const emEs = new Set(es.map((c) => c.qid));
   candidatas.push(en.filter((c) => emEs.has(c.qid)));
   const alvo = TAMANHO_DA_LIGA[pais];
-  const lista = candidatas.filter((l) => l.length >= 8).sort((a, b) => Math.abs(a.length - alvo) - Math.abs(b.length - alvo) || b.length - a.length)[0] ?? [];
+  const lista = candidatas.filter((l) => l.length >= 8)
+    .sort((a, b) => Math.abs(a.length - alvo) - Math.abs(b.length - alvo) || Number(deTabela.has(b)) - Number(deTabela.has(a)) || b.length - a.length)[0] ?? [];
   ligas[pais] = lista.map((c) => ({ c, wd: clubesWd[c.qid] }));
   relatorio.push(`Liga ${pais}: ${lista.length} clubes (esperados ${alvo}; listas das páginas: ${candidatas.map((l) => l.length).join(", ")}).`);
 }

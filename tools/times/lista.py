@@ -1,5 +1,5 @@
-"""Gera docs/TIMES_NOVOS.md: a lista dos times novos (nov/2026) que ainda não têm escudo, para o dono do jogo mandar os
-escudos. Roda depois de tools/times/montar.ts:
+"""Gera docs/TIMES_NOVOS.md: a lista dos times do jogo que ainda não têm escudo (de qualquer série ou país), para o dono
+do jogo mandar os escudos. Roda depois de tools/times/montar.ts:
 
     python3 tools/times/lista.py
 """
@@ -17,7 +17,8 @@ PAISES = {"AR": "Argentina", "BO": "Bolívia", "CL": "Chile", "CO": "Colômbia",
           "UY": "Uruguai", "VE": "Venezuela"}
 
 escudos = {f[:-4] for f in os.listdir("public/escudos") if f.endswith(".png")}
-estaduais = [c for c in json.load(open("data/brasil-2026/clubes-estaduais.json", encoding="utf-8"))["clubes"] if c["id"] not in escudos]
+estaduais = [c for arquivo in ["clubes.json", "serie-d-reserva.json", "clubes-estaduais.json"]
+             for c in json.load(open(f"data/brasil-2026/{arquivo}", encoding="utf-8"))["clubes"] if c["id"] not in escudos]
 exterior = [c for c in json.load(open("data/america-do-sul-2026/clubes.json", encoding="utf-8"))["clubes"] if c["id"] not in escudos]
 
 
@@ -27,24 +28,29 @@ def tabela(clubes):
     return linhas + [""]
 
 
-linhas = ["# Times novos (nov/2026)", "",
-          "Os times que entraram no jogo em nov/2026 e ainda não têm escudo: os clubes brasileiros que só jogam o estadual e a",
-          "primeira divisão de 2026 dos outros 9 países da Conmebol. Os da Série D já têm (estavam na prancha de escudos).", "",
-          "Para cada um: o nome no jogo, a cidade e o arquivo do escudo (`public/escudos/<arquivo>`). Enquanto não houver",
-          "imagem, o jogo desenha um escudo com as cores e a sigla do clube. Lista gerada por `tools/times/lista.py`.", "",
-          f"Total: {len(estaduais)} clubes brasileiros só do estadual e {len(exterior)} clubes de fora ({len(estaduais) + len(exterior)} escudos).", "",
-          "## Brasil: clubes que só jogam o estadual", ""]
+linhas = ["# Escudos que faltam", "",
+          "Os times do jogo que ainda não têm escudo. Para cada um: o nome no jogo, a cidade e o arquivo do escudo",
+          "(`public/escudos/<arquivo>`: PNG, de preferência com fundo transparente). Enquanto não houver imagem, o jogo desenha",
+          "um escudo com as cores e a sigla do clube. Lista gerada por `tools/times/lista.py`.", "",
+          "Histórico: os escudos dos 276 times novos chegaram em nov/2026 (a fonte de cada um está em",
+          "`ESCUDOS_TIMES_NOVOS_FONTES.csv`). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.", "",
+          (f"Total: {len(estaduais) + len(exterior)} escudos ({len(estaduais)} de clubes brasileiros e {len(exterior)} de fora)."
+           if estaduais or exterior else "Todos os clubes do jogo têm escudo."), ""]
+if estaduais:
+    linhas += ["## Brasil", ""]
 por_uf = collections.defaultdict(list)
 for c in estaduais:
     por_uf[c["estado"]].append(c)
 for uf in sorted(por_uf, key=lambda u: NOMES_UF[u]):
     linhas += [f"### {NOMES_UF[uf]} ({uf})", ""] + tabela(por_uf[uf])
-linhas += ["## Outros países da Conmebol: primeira divisão de 2026", ""]
+if exterior:
+    linhas += ["## Outros países da Conmebol: primeira divisão de 2026", ""]
 por_pais = collections.defaultdict(list)
 for c in exterior:
     por_pais[c["pais"]].append(c)
 for p in sorted(por_pais, key=lambda x: PAISES[x]):
-    linhas += [f"### {PAISES[p]} ({len(por_pais[p])} clubes)", ""] + tabela(por_pais[p])
+    n = len(por_pais[p])
+    linhas += [f"### {PAISES[p]} ({n} {'clube' if n == 1 else 'clubes'})", ""] + tabela(por_pais[p])
 os.makedirs("docs", exist_ok=True)
 with open("docs/TIMES_NOVOS.md", "w", encoding="utf-8") as f:
     f.write("\n".join(linhas))

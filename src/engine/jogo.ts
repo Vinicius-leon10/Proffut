@@ -141,6 +141,29 @@ export function juntarAoSaveAntigo(estado: EstadoJogo) {
   else estado.torneios = {};
 }
 
+/**
+ * Listas dos estaduais e das ligas de fora corrigidas (nov/2026: entravam os rebaixados do ano anterior citados nas
+ * páginas, quem desistiu e quem perdeu a final da segunda divisão). No save que já tem os times novos, entram os que
+ * faltavam (com elenco) e cada clube fica com o estadual e a liga das listas atuais: os campeonatos da próxima
+ * temporada saem certos; os da temporada em andamento seguem como estão. Quem saiu das listas continua no jogo, com os
+ * jogadores, sem estadual nem liga. A Série D do save não muda (ela já mudou com os acessos e as quedas).
+ */
+export function acertarParticipantes(estado: EstadoJogo) {
+  if (!estado.torneios) return;
+  juntarClubesNovos(estado, rngPara(estado.semente, "mundo/clubes-novos-2"));
+  const ufDoClube = new Map(Object.entries(PARTICIPANTES_ESTADUAIS).flatMap(([uf, ids]) => ids.map((id) => [id, uf] as const)));
+  const ligaDoClube = new Map(FICHAS_EXTERIOR.map((f) => [f.id, f.pais]));
+  for (const c of Object.values(estado.clubes)) {
+    const uf = ufDoClube.get(c.id);
+    if (uf) c.estadual = uf;
+    else delete c.estadual;
+    if (c.serie !== "exterior") continue;
+    const liga = ligaDoClube.get(c.id);
+    if (liga) c.liga = liga;
+    else delete c.liga;
+  }
+}
+
 export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente?: number }): EstadoJogo {
   const semente = opcoes.semente ?? Math.floor(Math.random() * 2 ** 31);
   const rng = rngPara(semente, "mundo");
