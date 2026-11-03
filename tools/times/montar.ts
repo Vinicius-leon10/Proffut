@@ -456,7 +456,8 @@ function fichaDeFora(c: ClubeNaPagina, wd: ClubeWd | undefined, pais: string, fa
   const escolhido = comum && comum.length <= 24 && !/^(club|asociaci)/i.test(comum) ? comum : curto && curto.length > 3 ? curto : oficial;
   // Sem "FC", "SC", "F.C." no fim e sem "FBC" no começo ("Envigado FC" → "Envigado").
   const limpo = escolhido.replace(/\s+(F\.?\s?C\.?|S\.?\s?C\.?|Association)$/i, "").replace(/^FBC\s+/i, "").trim();
-  const nomeBase = (segunda ? MANUAL_NOMES_SEGUNDA[limpo] : undefined) ?? MANUAL_NOMES[limpo] ?? limpo;
+  // Os nomes da 2ª divisão da Conmebol (o Patriotas da 3ª do Peru não é o Patriotas Boyacá da Colômbia).
+  const nomeBase = (nivel === 2 && PAISES_NOME[pais] ? MANUAL_NOMES_SEGUNDA[limpo] : undefined) ?? MANUAL_NOMES[limpo] ?? limpo;
   const { id, nome } = reservar ? idENome(nomeBase, pais, false) : { id: slug(nomeBase), nome: nomeBase };
   const p = pesoDoNivel(pais, nivel);
   const t = fama ** 1.5;
@@ -487,7 +488,8 @@ const PAISES_NOME: Record<string, string> = { AR: "Argentina", BO: "Bolívia", C
 const MANUAL_NOMES: Record<string, string> = {
   "FC Barcelona": "Barcelona SC", Barcelona: "Barcelona SC", "Estudiantes (LP)": "Estudiantes", "AA Estudiantes": "Estudiantes de Río Cuarto",
   "Gimnasia y Esgrima": "Gimnasia de Mendoza", "Gimnasia y Esgrima La Plata": "Gimnasia", "GV San José": "San José", "The Strongest": "The Strongest",
-  "Deportivo Riestra": "Riestra", "CDT Real Oruro": "Real Oruro",
+  "Deportivo Riestra": "Riestra", "CDT Real Oruro": "Real Oruro", "Orlando City Soccer": "Orlando City", "Los Angeles": "Los Angeles FC",
+  "UNAM, PUM": "Pumas UNAM", "Brooklyn FC (Men)": "Brooklyn FC",
 };
 
 /**
@@ -723,7 +725,8 @@ if (dadosAmerica) {
   // Nível por nível (os de cima primeiro): quem já está numa liga não entra na de baixo.
   for (const [codigo, alvo] of [...LIGAS_AMERICA].sort((a, b) => nivelDe(a[0]) - nivelDe(b[0]))) {
     const pais = codigo.slice(0, 2);
-    const { lista, tamanhos } = listaDaLiga(pais, "america", alvo, (c) => usados.has(c.qid) || TIME_B.test(c.titulo), codigo, 4);
+    // Fora também as ligações que são de estádios (a página da League One liga um estádio na lista dos times).
+    const { lista, tamanhos } = listaDaLiga(pais, "america", alvo, (c) => usados.has(c.qid) || TIME_B.test(c.titulo) || /\b(stadium|estadio|estádio)\b/i.test(c.titulo), codigo, 4);
     if (lista.length < 4) { relatorio.push(`América ${codigo}: sem lista (listas das páginas: ${tamanhos.join(", ")}).`); continue; }
     ligas[codigo] = lista.map((c) => ({ c, wd: clubesWd[c.qid] }));
     for (const c of lista) usados.add(c.qid);

@@ -329,9 +329,21 @@ de clubes maiores continuam só das séries. **Simulação rápida** (`src/engin
 jogos das ligas de fora que o usuário não acompanha (`simulacaoRapida` em torneios.ts) saem em `concluirJogos` pela força dos
 11 melhores (Poisson), com os autores dos gols e sem cartões, lesões nem cansaço; números ajustados aos da simulação
 completa (~2,25 gols, mandante ~43%, empates ~29%). Temporada simulada 11 s → 8 s, save no fim do ano 13,5 → 11,8 MB.
-**América toda (em andamento):** o robô (fase "america", `tools/times/sementes-america.json`, branch `dados-america`) já
-baixou as ligas da Concacaf, as 3ª divisões, a 2ª dos estaduais, as copas e as convocações das 51 seleções; faltam montar
-os clubes (`montar.ts`), os campeonatos novos, as copas e as seleções no jogo, e a lista de escudos.
+**América toda (em andamento, nov/2026):** pedido "traga tudo que tem da América... e a seleção de todos esses países".
+Robô: fase "america" (`tools/times/sementes_america.py` gera `sementes-america.json`; branch `dados-america`): ligas da
+Concacaf, 3ª divisões, 2ª dos estaduais, copas e convocações das 51 seleções. **Feito (etapa 2, esperando escudos):**
+`montar.ts <dados-times> <súmulas> <dados-segundas> <dados-america>` monta a Concacaf (México 3 divisões, MLS com os 3
+canadenses, USL Championship e League One, Canadá, os 7 da América Central com a 2ª de HN/GT/SV/PA, Caribe) e as 3ª da
+Argentina (Primera B), Chile, Peru e Uruguai: 429 clubes novos (`LIGAS_AMERICA`, `PESO_PAIS`/`pesoDoNivel`), os antigos
+iguais. **Clubes leves** (`Clube.leve`/`FichaNova.leve`, `ehLeve`): 3ª divisões, 2ª da América Central e Caribe (menos
+Jamaica, Trinidad e Haiti) entram sem jogadores; jogam pela simulação rápida com a força da ficha; ganham elenco
+(`garantirElenco`, jogo.ts) quando o técnico assume ou numa partida completa. Motor: `PAISES` com a Concacaf e a região
+(`Regiao`, `NOME_REGIAO`), `divisaoDaLiga`/`ligaDoNivel` ("AR3"), `SOBEM_E_CAEM` por nível (MLS, Canadá e México fechados),
+`trocarDivisoes` em todos os níveis; nomes ingleses, franceses e holandeses para os jogadores criados (nomes.ts). Telas: jogo
+novo e Tabelas por região, divisões até a 3ª (R82, R83). Números: 998 clubes, ~21 mil jogadores, ~11 mil jogos por
+temporada, temporada simulada ~9 s, save de 12,5 a 16 MB. **Falta:** os 429 escudos (`docs/TIMES_NOVOS.md`; R73 vermelho
+até lá), a 2ª divisão dos estaduais (as páginas do robô eram quase todas a da 1ª), as copas (Libertadores, Sul-Americana,
+Champions Cup...) e as seleções. O trabalho fica no ramo `claude/copia-america` (com `[skip ci]`) até os escudos chegarem.
 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e

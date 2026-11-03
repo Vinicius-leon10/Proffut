@@ -15,6 +15,8 @@ NOMES_UF = {"AC": "Acre", "AL": "Alagoas", "AP": "Amapá", "AM": "Amazonas", "BA
             "SC": "Santa Catarina", "SP": "São Paulo", "SE": "Sergipe", "TO": "Tocantins"}
 PAISES = {"AR": "Argentina", "BO": "Bolívia", "CL": "Chile", "CO": "Colômbia", "EC": "Equador", "PY": "Paraguai", "PE": "Peru",
           "UY": "Uruguai", "VE": "Venezuela"}
+# Concacaf (nov/2026): os nomes de tools/times/sementes-america.json.
+PAISES.update({k: v["nome"] for k, v in json.load(open("tools/times/sementes-america.json", encoding="utf-8"))["paises"].items()})
 
 escudos = {f[:-4] for f in os.listdir("public/escudos") if f.endswith(".png")}
 estaduais = [c for arquivo in ["clubes.json", "serie-d-reserva.json", "clubes-estaduais.json"]
@@ -34,8 +36,9 @@ linhas = ["# Escudos que faltam", "",
           "um escudo com as cores e a sigla do clube. Lista gerada por `tools/times/lista.py`.", "",
           "Histórico: os escudos dos 276 times novos chegaram em nov/2026 e, com a correção das listas dos campeonatos, os",
           "do Real Oruro e do Anzoátegui (a fonte de cada um está em `ESCUDOS_TIMES_NOVOS_FONTES.csv`). Depois entrou a",
-          "segunda divisão dos 9 países (o Deportes Quindío e o Yaracuyanos, que já tinham escudo, voltaram nela). Quando a",
-          "lista de um campeonato muda, os clubes que entram aparecem aqui.", "",
+          "segunda divisão dos 9 países (o Deportes Quindío e o Yaracuyanos, que já tinham escudo, voltaram nela) e os escudos",
+          "dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (México, EUA, Canadá, América Central e",
+          "Caribe) e as 3ª divisões. Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.", "",
           (f"Total: {len(estaduais) + len(exterior)} escudos ({len(estaduais)} de clubes brasileiros e {len(exterior)} de fora)."
            if estaduais or exterior else "Todos os clubes do jogo têm escudo."), ""]
 if estaduais:
@@ -45,10 +48,14 @@ for c in estaduais:
     por_uf[c["estado"]].append(c)
 for uf in sorted(por_uf, key=lambda u: NOMES_UF[u]):
     linhas += [f"### {NOMES_UF[uf]} ({uf})", ""] + tabela(por_uf[uf])
-for divisao, lista in [("primeira", [c for c in exterior if not c.get("liga")]), ("segunda", [c for c in exterior if c.get("liga")])]:
-    if not lista:
-        continue
-    linhas += [f"## Outros países da Conmebol: {divisao} divisão de 2026", ""]
+def nivel(c):
+    liga = c.get("liga") or c["pais"]
+    return int(liga[2:] or 1)
+
+
+for n in sorted({nivel(c) for c in exterior}):
+    lista = [c for c in exterior if nivel(c) == n]
+    linhas += [f"## Outros países da América: {n}ª divisão de 2026", ""]
     por_pais = collections.defaultdict(list)
     for c in lista:
         por_pais[c["pais"]].append(c)
