@@ -462,7 +462,8 @@ Obras do estádio se pagam em 3 a 4 temporadas.
   `main.tsx`) manda a lista para ele: `public/guardar-escudos.js` (no `importScripts` do sw.js) baixa os que faltam, 8 ao
   mesmo tempo, fora da tela, e apaga caches de escudos antigos. Escudo novo não precisa de mais nada. R76. Testes com
   `page.clock`: pausar o relógio antes do apito (`pauseAt` antes de "Começar o jogo"); deixar a partida correr em tempo
-  real até a contagem fazia o R60 chegar ao gol antes dela quando a máquina ficava mais lenta.
+  real até a contagem fazia o R60 chegar ao gol antes dela quando a máquina ficava mais lenta (e o R25 contar o apito de um
+  pênalti logo no começo como o do início, nov/2026).
 - GitHub Actions: usar `actions/*@v7` e Node 22 (Node 20 foi removido do Actions).
 - **Virada só no botão:** o `avancar` faz a virada apenas quando é chamado com a temporada já encerrada (o botão
   "Encerrar a temporada", que pergunta antes quem sai de graça). Se ele mesmo joga os últimos jogos do ano (todos de fora

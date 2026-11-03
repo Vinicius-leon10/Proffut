@@ -14,6 +14,9 @@ test("R25 sons da partida: apito no início, pênalti com narrador e apito final
   await expect(cartaoDoProximoJogo(page)).toBeVisible();
 
   await botao(page, /Avançar|Ir para o jogo/).click();
+  // O relógio para antes do apito: com a máquina lenta, a partida andava sozinha até o pênalti antes da contagem (o apito
+  // dele contava como o do início). Os minutos andam com o runFor abaixo.
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1_000));
   await botao(page, "Começar o jogo").click();
   expect(await apitos(), "apito do início").toBe(1);
 
