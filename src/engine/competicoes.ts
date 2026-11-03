@@ -3,7 +3,7 @@ import { concorda } from "./artigos";
 import { datasDaTemporada, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { hashTexto, rngPara } from "./rng";
 import { criarTorneios, ehTorneio, nomeDoTorneio, tabelaDoTorneio, torneioDecidePorPenaltis, torneiosEncerrados } from "./torneios";
-import type { Clube, Competicao, EstadoJogo, EstadoSerie, Partida, SerieClube, SerieId } from "./tipos";
+import type { Clube, Competicao, EstadoJogo, EstadoSerie, EstadoTorneio, IdTorneio, Partida, SerieClube, SerieId } from "./tipos";
 
 export const SERIES: SerieId[] = ["A", "B", "C"];
 export const NOME_SERIE: Record<SerieId | "D", string> = { A: "Série A", B: "Série B", C: "Série C", D: "Série D" };
@@ -151,13 +151,31 @@ export function tabelaDaLiga(estado: EstadoJogo, serie: SerieId): LinhaTabela[] 
 
 /** A tabela da fase de liga da série do clube (na Série D, a do grupo dele); vazia se ele não joga as séries. */
 export function tabelaDoClube(estado: EstadoJogo, clubeId: string): LinhaTabela[] {
-  const serie = estado.clubes[clubeId].serie;
-  if (serie === "D") {
-    const t = estado.torneios?.D;
-    const grupo = t?.grupos?.findIndex((g) => g.includes(clubeId)) ?? -1;
-    return t && grupo >= 0 ? tabelaDoTorneio(estado, t, grupo + 1) : [];
-  }
-  return ehSerie(serie) ? tabelaDaLiga(estado, serie) : [];
+  const clube = estado.clubes[clubeId];
+  const serie = clube.serie;
+  if (ehSerie(serie)) return tabelaDaLiga(estado, serie);
+  // Série D, liga de fora ou estadual (clube só do estadual): a do torneio (no grupo dele, se há grupos).
+  const t = torneioPrincipal(estado, clube);
+  if (!t) return [];
+  if (!t.grupos) return tabelaDoTorneio(estado, t);
+  const grupo = t.grupos.findIndex((g) => g.includes(clubeId));
+  return grupo >= 0 ? tabelaDoTorneio(estado, t, grupo + 1) : [];
+}
+
+/** O campeonato principal de um clube fora das Séries A, B e C: a Série D, a liga do país dele ou o estadual. */
+export function torneioPrincipal(estado: EstadoJogo, clube: Clube): EstadoTorneio | undefined {
+  const id: IdTorneio | undefined = clube.serie === "D" ? "D" : clube.serie === "exterior" && clube.liga ? `L-${clube.liga}`
+    : clube.serie === "estadual" && clube.estadual ? `E-${clube.estadual}` : undefined;
+  return id ? estado.torneios?.[id] : undefined;
+}
+
+/** Nome do campeonato principal do clube: "Série A", "Série D", "Campeonato Argentino", "Campeonato Paulista". */
+export function nomeDaLigaDoClube(estado: EstadoJogo, clube: Clube): string {
+  if (ehSerie(clube.serie)) return NOME_SERIE[clube.serie];
+  if (clube.serie === "D") return "Série D";
+  const t = torneioPrincipal(estado, clube);
+  if (t) return t.nome;
+  return clube.serie === "exterior" && clube.liga ? nomeDoTorneio(`L-${clube.liga}`) : clube.estadual ? nomeDoTorneio(`E-${clube.estadual}`) : "Campeonato";
 }
 
 /** Posição na fase de liga da série do clube (na Série D, no grupo dele); 0 se não joga as séries. */

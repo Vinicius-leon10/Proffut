@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
-import { aba, abrirSite, botao, cartaoDoProximoJogo, dataNoTopo, esperarNoSave, expect, novoJogo, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, dataNoTopo, esperarNoSave, expect, novoJogo, pularTutorial, test } from "./ajuda";
 
 type Ficha = { nome: string; pais?: string; liga?: string };
 const ler = (arquivo: string) => JSON.parse(readFileSync(arquivo, "utf8")) as { clubes: Ficha[] };
@@ -77,35 +77,47 @@ test("R69 save de antes dos times novos: ao abrir, os clubes da Série D, dos es
   await expect(page.getByRole("tab", { name: "Estaduais" })).toHaveCount(0);
 });
 
-test("R72 o técnico só treina clubes das Séries A, B e C: o jogo novo só tem essas séries e, com o clube rebaixado para a Série D, é preciso escolher um clube da Série C (a D é jogada sem ele)", async ({ page }) => {
-  test.setTimeout(120_000);
+test("R80 jogo novo: o técnico escolhe o país pela bandeira, a divisão e o clube, de qualquer país ou série; com o Boca Juniors, o painel mostra o Campeonato Argentino", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  expect(await page.getByRole("tab").allTextContents()).toEqual(["Série A", "Série B", "Série C"]);
+  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  // Os 10 países da Conmebol, cada um com a bandeira; o Brasil vem escolhido, com as séries e os estaduais.
+  const paises = page.getByRole("group", { name: "País" }).getByRole("button");
+  await expect(paises).toHaveCount(10);
+  for (const texto of await paises.allTextContents()) expect(texto, texto).toMatch(/^\p{Regional_Indicator}{2}/u);
+  await expect(page.getByRole("button", { name: /Brasil/ })).toHaveAttribute("aria-pressed", "true");
+  expect(await page.getByRole("tab").allTextContents()).toEqual(["Série A", "Série B", "Série C", "Série D", "Só estadual"]);
+  // Série D e só do estadual também valem.
+  await page.getByRole("tab", { name: "Série D" }).click();
+  await expect(page.locator(".lista .item").first()).toBeVisible();
+  await page.getByRole("button", { name: /Argentina/ }).click();
+  expect(await page.getByRole("tab").allTextContents()).toEqual(["1ª divisão", "2ª divisão"]);
+  await page.getByRole("tab", { name: "1ª divisão" }).click();
+  await botao(page, /Boca Juniors/).click();
+  await botao(page, /^Assumir (o|a) /).click();
+  await pularTutorial(page);
+  await expect(page.locator(".topo .titulo")).toHaveText("Boca Juniors");
+  await expect(page.getByRole("heading", { name: "Campeonato Argentino 2026" })).toBeVisible();
+  await expect(cartaoDoProximoJogo(page)).toBeVisible();
+});
 
+test("R81 o técnico treina qualquer clube: com o clube rebaixado para a Série D, ele continua no clube e começa 2027 na Série D (antes era obrigado a escolher um clube da Série C)", async ({ page }) => {
+  test.setTimeout(120_000);
   const save = execFileSync("npx", ["tsx", "tests/saves/rebaixado-para-d.ts", "brusque"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   // Quem não renovou sai de graça: o jogo pergunta antes de encerrar.
   page.on("dialog", (d) => d.accept());
   await botao(page, "Encerrar a temporada 2026").click();
-  // O fim da temporada pede para escolher um dos clubes da Série C: sem "Começar 2027" no Brusque, que vai para a D.
-  const titulo = page.getByRole("heading", { name: "Propostas de emprego" });
-  const propostas = page.getByRole("button", { name: /^Assumir (o|a) / });
-  await expect(titulo).toBeVisible({ timeout: 20_000 });
-  await expect(botao(page, "Começar 2027")).toHaveCount(0);
-  await expect(propostas).toHaveCount(4);
-  for (const texto of await propostas.allTextContents()) expect(texto).toContain("Série C");
-  // Fechando e abrindo o app antes de escolher, a escolha continua lá.
-  await esperarNoSave(page, "estado.clubes.brusque.serie === 'D' && estado.temporada === 2027");
+  await expect(page.getByRole("heading", { name: "Propostas de emprego" })).toHaveCount(0);
+  await botao(page, "Começar 2027").click();
+  await expect(page.locator(".topo .titulo")).toHaveText("Brusque");
+  await esperarNoSave(page, "estado.clubes.brusque.serie === 'D' && estado.temporada === 2027 && estado.tecnico.clubeId === 'brusque'");
+  // Fechando e abrindo o app, continua no Brusque, no painel.
   await page.reload();
   await botao(page, /Continuar/).click();
-  await expect(titulo).toBeVisible({ timeout: 20_000 });
-  const novo = ((await propostas.first().locator(".negrito").textContent()) ?? "").trim();
-  await propostas.first().click();
   await expect(cartaoDoProximoJogo(page)).toBeVisible();
-  await expect(page.locator(".topo .titulo")).toHaveText(novo);
-  await expect(page.getByRole("heading", { name: "Série C 2027" })).toBeVisible();
+  await expect(page.locator(".topo .titulo")).toHaveText("Brusque");
 });
 
 test("R74 as listas dos campeonatos estão certas: nos estaduais não entram os rebaixados do ano anterior nem quem desistiu; nas ligas de fora, só a primeira divisão de 2026 (Bolívia com o Real Oruro e sem o IN San Juan, Venezuela com o Anzoátegui e sem o Titanes); na Série D, o Ivinhema", async ({ page }) => {

@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
-import { NOME_SERIE, tabelaDoClube, temporadaEncerrada } from "../../engine/competicoes";
+import { ehSerie, nomeDaLigaDoClube, tabelaDoClube, temporadaEncerrada, torneioPrincipal } from "../../engine/competicoes";
 import { reputacaoDoTecnico } from "../../engine/carreira";
 import { CARGO } from "../../engine/constantes";
 import { situacaoDoObjetivo } from "../../engine/diretoria";
 import { folhaSalarial, formatarDinheiro } from "../../engine/financas";
 import { meuJogoHoje, provavelTime, proximaDataComJogo, proximoJogoDoClube } from "../../engine/jogo";
 import { NOME_FASE_TORNEIO, posicaoNoTorneio, torneiosDoClube } from "../../engine/torneios";
-import type { SerieId } from "../../engine/tipos";
 import { avancarJogo, simularFimDaTemporada } from "../acoes";
 import { Barra, Cartao, Escudo } from "../componentes";
 import { rotuloPartida } from "../formatos";
@@ -28,19 +27,22 @@ export function Painel() {
   const [verAdversario, setVerAdversario] = useState(false);
   const meuId = estado.tecnico.clubeId;
   const clube = estado.clubes[meuId];
-  const serie = clube.serie as SerieId | "D";
+  const serie = clube.serie;
   const hoje = meuJogoHoje(estado);
   const proximo = hoje ?? proximoJogoDoClube(estado);
   const encerrada = temporadaEncerrada(estado);
-  // Na Série D a série acaba para o usuário quando ele cai no mata-mata (ou o torneio termina).
-  const torneioD = serie === "D" ? estado.torneios?.D : undefined;
-  const minhaSerieAcabou = serie === "D"
-    ? !!torneioD && torneioD.fase !== "grupos" && !estado.partidas.some((p) => p.serie === "D" && !p.jogada && (p.mandante === meuId || p.visitante === meuId))
-    : estado.series[serie].fase === "encerrada";
+  // Fora das Séries A, B e C (Série D, liga de fora, estadual): o campeonato acaba para o usuário quando ele não tem mais
+  // jogos nele (nos de mata-mata, depois da fase de grupos).
+  const principal = ehSerie(serie) ? undefined : torneioPrincipal(estado, clube);
+  const minhaSerieAcabou = ehSerie(serie)
+    ? estado.series[serie].fase === "encerrada"
+    : !!principal && (principal.tipo === "liga" || (principal.fase !== "grupos" && principal.fase !== "liga")) &&
+      !estado.partidas.some((p) => p.serie === principal.id && !p.jogada && (p.mandante === meuId || p.visitante === meuId));
+  const nomeDaLiga = nomeDaLigaDoClube(estado, clube);
   const tabela = tabelaDoClube(estado, meuId);
   const linha = tabela.find((l) => l.clubeId === meuId) ?? { pos: 0, pts: 0, j: 0, v: 0, e: 0, d: 0 };
   // Estadual em andamento (no começo do ano): a posição dele num cartão à parte.
-  const estadual = torneiosDoClube(estado, meuId).find((t) => t.tipo === "estadual" && t.fase !== "encerrada");
+  const estadual = torneiosDoClube(estado, meuId).find((t) => t.tipo === "estadual" && t.fase !== "encerrada" && t.id !== principal?.id);
   const { situacao } = situacaoDoObjetivo(estado);
   const proximaData = proximaDataComJogo(estado);
 
@@ -81,7 +83,7 @@ export function Painel() {
             </div>
           </div>
         ) : (
-          <p className="fraco pequeno">{encerrada ? "A temporada terminou." : minhaSerieAcabou ? `A ${NOME_SERIE[serie]} terminou para você. As outras séries ainda estão em andamento.` : "Sem jogos marcados."}</p>
+          <p className="fraco pequeno">{encerrada ? "A temporada terminou." : minhaSerieAcabou ? `${nomeDaLiga} terminou para você. Os outros campeonatos ainda estão em andamento.` : "Sem jogos marcados."}</p>
         )}
       </Cartao>
 
@@ -112,10 +114,10 @@ export function Painel() {
         </Cartao>
       )}
 
-      <Cartao titulo={`${NOME_SERIE[serie]} ${estado.temporada}`}>
+      <Cartao titulo={`${nomeDaLiga} ${estado.temporada}`}>
         <div className="linha entre">
           <div>
-            <div style={{ fontSize: "2rem", fontWeight: 800 }} className="num">{linha.j ? `${linha.pos}º` : "–"}{serie === "D" && linha.j ? <span className="mini fraco"> no grupo</span> : null}</div>
+            <div style={{ fontSize: "2rem", fontWeight: 800 }} className="num">{linha.j ? `${linha.pos}º` : "–"}{principal?.grupos && linha.j ? <span className="mini fraco"> no grupo</span> : null}</div>
             <div className="mini fraco">{linha.pts} pts · {linha.j} jogos · {linha.v}V {linha.e}E {linha.d}D</div>
           </div>
           <div className="coluna" style={{ alignItems: "flex-end", gap: 6, maxWidth: "60%" }}>

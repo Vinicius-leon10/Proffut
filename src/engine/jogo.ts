@@ -29,7 +29,8 @@ import { criarRng, rngPara } from "./rng";
 import { avancarCopa, criarCopa } from "./copa";
 import { concluirObras } from "./estadio";
 import { encerrarTemporada } from "./temporada";
-import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno } from "./torneios";
+import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno, simulacaoRapida, torneioDecidePorPenaltis } from "./torneios";
+import { jogarRapido } from "./rapida";
 import type { Clube, Estilo, EstadoJogo, Formacao, Jogador, Partida, SerieClube, Tatica } from "./tipos";
 
 export interface FichaClube {
@@ -192,9 +193,6 @@ export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente
   };
   for (const ficha of FICHAS) estado.clubes[ficha.id] = criarClube(ficha, ficha.serie as SerieClube, rng);
   for (const ficha of RESERVA) estado.clubes[ficha.id] = criarClube(ficha, "D", rng);
-  if (!estado.clubes[opcoes.clubeId] || estado.clubes[opcoes.clubeId].serie === "D") throw new Error("Clube inválido");
-  // O técnico começa com a reputação do clube que o contratou.
-  estado.tecnico.reputacao = estado.clubes[opcoes.clubeId].reputacao;
 
   // Séries A, B e C primeiro (os sorteios dos 60 clubes são os de sempre), depois os outros clubes.
   for (const clube of Object.values(estado.clubes)) {
@@ -204,6 +202,10 @@ export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente
     for (const j of reais ? elencoReal(rng, clube, reais, proximoId) : gerarElenco(rng, clube, proximoId)) estado.jogadores[j.id] = j;
   }
   juntarClubesNovos(estado, rng);
+  // O técnico treina qualquer clube (nov/2026): das séries, da Série D, só do estadual ou de fora.
+  if (!estado.clubes[opcoes.clubeId]) throw new Error("Clube inválido");
+  // O técnico começa com a reputação do clube que o contratou.
+  estado.tecnico.reputacao = estado.clubes[opcoes.clubeId].reputacao;
   completarLivres(estado, "inicio");
   garantirContratos(estado, TEMPORADA_INICIAL);
 
@@ -335,7 +337,9 @@ export function prepararJogos(estado: EstadoJogo): PartidaViva[] {
     lista.push(j);
     elencos.set(j.clubeId, lista);
   }
-  return jogosPendentesHoje(estado).map((p) => {
+  // Os jogos da simulação rápida saem em `concluirJogos`, sem partida ao vivo.
+  const acompanha = competicoesDoUsuario(estado);
+  return jogosPendentesHoje(estado).filter((p) => !simulacaoRapida(estado, p, acompanha)).map((p) => {
     for (const id of [p.mandante, p.visitante]) {
       const clube = estado.clubes[id];
       if (id !== meu || estado.config.escalacaoAutomatica) {
@@ -476,6 +480,10 @@ export function concluirJogos(estado: EstadoJogo, vivas: PartidaViva[]): string[
     if (!pv.terminada) simularAteOFim(pv, estado.jogadores);
     aplicarResultado(estado, pv, elencos);
   }
+  const acompanha = competicoesDoUsuario(estado);
+  for (const p of jogosPendentesHoje(estado)) {
+    if (simulacaoRapida(estado, p, acompanha)) jogarRapido(estado, p, elencos, torneioDecidePorPenaltis(p));
+  }
   const noticias = [...avancarFases(estado), ...avancarCopa(estado), ...avancarTorneios(estado)];
   for (const n of noticias) enviarMensagem(estado, { tipo: "noticia", titulo: "Notícias", texto: n });
   return noticias;
@@ -496,16 +504,6 @@ export function simularRestoDaTemporada(estado: EstadoJogo) {
     if (r.tipo === "jogos-hoje") simularDia(estado);
     else if (r.tipo === "nada") break;
   }
-}
-
-/**
- * O técnico só treina clubes das Séries A, B e C: quando o clube dele cai para a Série D, quatro clubes da Série C (fora
- * os oito mais fortes) fazem proposta, e ele escolhe um no fim da temporada.
- */
-export function propostasDeEmprego(estado: EstadoJogo): string[] {
-  const rng = rngPara(estado.semente, `emprego/${estado.temporada}`);
-  const candidatos = rankingDeForca(estado, "C").slice(8).map((r) => r.clubeId);
-  return rng.embaralhar(candidatos).slice(0, 4);
 }
 
 /** Força dos clubes de uma série, do mais forte ao mais fraco. */

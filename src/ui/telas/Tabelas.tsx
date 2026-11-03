@@ -351,18 +351,20 @@ export function Tabelas() {
   const estado = useJogo();
   const meuId = estado.tecnico.clubeId;
   const meu = estado.clubes[meuId];
-  const minha = meu.serie === "D" ? "D" : (meu.serie as SerieId);
+  const minha: SerieId | "D" = meu.serie === "D" ? "D" : meu.serie === "A" || meu.serie === "B" || meu.serie === "C" ? meu.serie : "A";
   const torneios = Object.values(estado.torneios ?? {}).filter((t): t is EstadoTorneio => !!t);
   const estaduais = torneios.filter((t) => t.tipo === "estadual").sort((a, b) => a.nome.localeCompare(b.nome));
   const ligas = torneios.filter((t) => t.tipo === "liga").sort((a, b) => a.nome.localeCompare(b.nome));
   const meuEstadual = estaduais.find((t) => t.clubes.includes(meuId));
   // No começo do ano, com o estadual do usuário em andamento, as Tabelas abrem nele.
-  const [grupo, setGrupo] = useState<Grupo>(meuEstadual && meuEstadual.fase !== "encerrada" ? "estaduais" : "series");
+  // Clube de fora abre nos outros países (no dele); clube só do estadual, nos estaduais.
+  const [grupo, setGrupo] = useState<Grupo>(
+    (meuEstadual && meuEstadual.fase !== "encerrada") || meu.serie === "estadual" ? "estaduais" : meu.serie === "exterior" ? "fora" : "series");
   const [serie, setSerie] = useState<SerieId | "D">(minha);
   const [uf, setUf] = useState<string>(meuEstadual?.id ?? estaduais[0]?.id ?? "");
   const paises = [...new Set(ligas.map((x) => x.id.slice(2, 4)))].sort((a, b) => (PAISES[a]?.pais ?? a).localeCompare(PAISES[b]?.pais ?? b));
-  const [pais, setPais] = useState<string>(paises[0] ?? "");
-  const [divisao, setDivisao] = useState<"1" | "2">("1");
+  const [pais, setPais] = useState<string>(meu.pais && paises.includes(meu.pais) ? meu.pais : paises[0] ?? "");
+  const [divisao, setDivisao] = useState<"1" | "2">(meu.liga?.endsWith("2") ? "2" : "1");
   const [vista, setVista] = useState<"tabela" | "jogos" | "artilharia">("tabela");
   const grupos: { valor: Grupo; rotulo: string }[] = [
     { valor: "series", rotulo: "Séries" }, { valor: "copa", rotulo: "Copa" },

@@ -357,6 +357,14 @@ export function torneiosEncerrados(estado: EstadoJogo): boolean {
   return Object.values(estado.torneios ?? {}).every((t) => !t || t.fase === "encerrada");
 }
 
+/**
+ * Jogo pela simulação rápida (rapida.ts): os das ligas de fora do Brasil que o usuário não acompanha (o time dele, se
+ * jogar uma delas, tem a simulação completa).
+ */
+export function simulacaoRapida(estado: EstadoJogo, p: Partida, acompanha = competicoesDoUsuario(estado)): boolean {
+  return p.serie.startsWith("L-") && !acompanha.has(p.serie);
+}
+
 /** Competições que o usuário acompanha: os dias só com jogos de outras passam sem parar (Série D dos outros, os outros estaduais e as ligas de fora). */
 export function competicoesDoUsuario(estado: EstadoJogo): Set<Competicao> {
   const meu = estado.tecnico.clubeId;

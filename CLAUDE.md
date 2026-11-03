@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R79 rodando a cada mudança, antes
+ponta R01–R81 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -128,10 +128,8 @@ antigo usa a do clube atual), `desde` (carência: no primeiro mês não há demi
 `avisoDeRisco`, `demissao` ({ data, clubeId, propostas }). Depois de cada jogo do usuário (`depoisDoMeuJogo`): confiança da
 diretoria ≤ 35 → mensagem "Cargo em risco" (uma por mês; o painel mostra o aviso); ≤ 20 depois da carência → demitido:
 reputação −6 e três propostas de clubes A/B/C com reputação até a dele. Na virada: abaixo do objetivo e confiança ≤ 20
-→ demitido. Quem cai para a D não é demitido nem recebe convites: o técnico só treina clubes das Séries A, B e C (pedido
-do usuário, nov/2026: "Mas nos só vamos usar os times da seria a, b e c como técnico"), e o fim da temporada mostra quatro
-propostas da Série C (`propostasDeEmprego` em `jogo.ts`), obrigatórias; com o clube fora das séries, `Principal` mostra
-`FimTemporada` (continua depois de fechar o app; logo depois da virada, a de cima basta). R72. Enquanto `demissao` existe,
+→ demitido. Quem cai para a D continua no clube (o técnico treina qualquer clube desde nov/2026, R81; antes, no R72, era
+obrigado a escolher um clube da Série C). Enquanto `demissao` existe,
 `Principal` mostra a tela `Demissao` no lugar do painel (continua depois de fechar o app). Convites (`Mensagem.convite`, tipo
 "convite"): no meio da fase de liga (jogo nº metade) para quem está "encaminhado" (1 convite) e na virada para quem
 cumpriu, subiu ou foi campeão (2); clubes da mesma série ou acima, com reputação > a do clube atual + 3 e ≤ a do técnico
@@ -255,8 +253,8 @@ semana antes do primeiro domingo do estadual; o jogo novo começa em 3 de janeir
 como antes. `avancar` passa direto (simulando) pelos dias só com jogos que o usuário não acompanha
 (`competicoesDoUsuario`: A, B, C, Copa e os torneios do clube dele); Resultados do dia e a caixa Rodada mostram só esses.
 Cota de TV do estadual para os clubes das séries (`COTA_TV_ESTADUAL`: os estaduais somam dois meses de salário); a D tem
-patrocínio de 60% do da C; clubes só do estadual e de fora não têm contas mensais. Rebaixado para a D, o técnico escolhe um
-clube da Série C, como antes: ele só treina clubes das Séries A, B e C (R72; o R70, que o deixava na D, saiu). A IA das
+patrocínio de 60% do da C; clubes só do estadual e de fora não têm contas mensais (fora o do usuário). Rebaixado para a D, o
+técnico continua no clube (R81). A IA das
 séries pode comprar jogadores de qualquer clube; só os clubes das séries compram, emprestam e contratam técnico. Recordes
 contam os clubes de A a D. A virada mantém o elenco mínimo, a base e os excedentes de todos os clubes (os de fora com
 jovens do próprio país); os excedentes saem um a um, e a posição de quem sai fica com pelo menos um a mais que o mínimo
@@ -319,6 +317,21 @@ primeira; `MANUAL_NOMES_SEGUNDA`: Estudiantes de Buenos Aires, Flamengo de Sucre
 `escudos-novos-148.zip` que a IA da Manus montou (FotMob, Football-Logos e outras; fonte de cada um no fim de
 `docs/ESCUDOS_TIMES_NOVOS_FONTES.csv`), preparados com `tools/escudos/preparar.py --quantizar` (0,7 MB; já vinham sem
 fundo).
+
+**Técnico de qualquer clube e simulação rápida (nov/2026):** pedido "E vamos permitir que podemos ser técnico de qualquer
+time... na hora de escolher o país, veja também a parte da bandeira". Jogo novo (`NovoJogo.tsx`): país pela bandeira (emoji
+pelos indicadores regionais, `bandeira`), divisão (Brasil: A, B, C, D, "Só estadual"; fora: 1ª e 2ª) e clube (R80). O
+técnico treina qualquer clube: rebaixado para a D continua nele (R81; o R72 saiu, `propostasDeEmprego` também). Clube fora
+das séries: `torneioPrincipal`, `tabelaDoClube` e `nomeDaLigaDoClube` (competicoes.ts) dão o campeonato dele (Série D, liga
+de fora, estadual); `objetivoNoTorneio` (diretoria.ts) pela força entre os clubes do campeonato; o clube do usuário tem
+contas do mês mesmo fora das séries; acesso e queda de fora contam como subiu/caiu; o histórico guarda `competicao`. Convites
+de clubes maiores continuam só das séries. **Simulação rápida** (`src/engine/rapida.ts`, `RAPIDA` em constantes.ts): os
+jogos das ligas de fora que o usuário não acompanha (`simulacaoRapida` em torneios.ts) saem em `concluirJogos` pela força dos
+11 melhores (Poisson), com os autores dos gols e sem cartões, lesões nem cansaço; números ajustados aos da simulação
+completa (~2,25 gols, mandante ~43%, empates ~29%). Temporada simulada 11 s → 8 s, save no fim do ano 13,5 → 11,8 MB.
+**América toda (em andamento):** o robô (fase "america", `tools/times/sementes-america.json`, branch `dados-america`) já
+baixou as ligas da Concacaf, as 3ª divisões, a 2ª dos estaduais, as copas e as convocações das 51 seleções; faltam montar
+os clubes (`montar.ts`), os campeonatos novos, as copas e as seleções no jogo, e a lista de escudos.
 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e

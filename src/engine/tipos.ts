@@ -300,7 +300,8 @@ export interface RegistroTemporada {
   artilheiros: Record<SerieId, { jogadorId: number; nome: string; clubeId: string; gols: number } | null>;
   promovidos: Record<SerieId, string[]>;
   rebaixados: Record<SerieId, string[]>;
-  tecnico: { clubeId: string; serie: SerieId | "D"; posicao: number; objetivo: string; cumpriu: boolean };
+  /** `competicao`: nome do campeonato do clube ("Série A", "Campeonato Argentino"; falta nas temporadas antigas). */
+  tecnico: { clubeId: string; serie: SerieClube; competicao?: string; posicao: number; objetivo: string; cumpriu: boolean };
   /** Campeões e vices da Série D, dos estaduais e das ligas de fora (falta nas temporadas de antes deles). */
   torneios?: Partial<Record<IdTorneio, { campeao: string; vice?: string }>>;
 }

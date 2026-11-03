@@ -1,6 +1,6 @@
 // Objetivo da temporada e confiança da diretoria e da torcida.
 import { forcaDoTime } from "./forca";
-import { ehSerie, posicaoNaLiga } from "./competicoes";
+import { ehSerie, posicaoNaLiga, torneioPrincipal } from "./competicoes";
 import { limitar } from "./gerador";
 import type { EstadoJogo, Objetivo, Partida, SerieId } from "./tipos";
 
@@ -32,6 +32,7 @@ const METAS: Record<SerieId | "D", { ate: number; objetivo: Objetivo }[]> = {
 
 export function definirObjetivo(estado: EstadoJogo): Objetivo {
   const meu = estado.clubes[estado.tecnico.clubeId];
+  if (meu.serie === "exterior" || meu.serie === "estadual") return objetivoNoTorneio(estado);
   const serie = meu.serie === "D" ? "D" : ehSerie(meu.serie) ? meu.serie : "C";
   const forcas = Object.values(estado.clubes)
     .filter((c) => c.serie === serie)
@@ -39,6 +40,31 @@ export function definirObjetivo(estado: EstadoJogo): Objetivo {
     .sort((a, b) => b.forca - a.forca);
   const ranking = forcas.findIndex((f) => f.id === meu.id) + 1;
   return METAS[serie].find((m) => ranking <= m.ate)!.objetivo;
+}
+
+/**
+ * Objetivo num clube de fora do Brasil ou só do estadual: pela força dele entre os clubes do campeonato. Nos estaduais
+ * com grupos, a posição é a do grupo e o alvo é o mata-mata.
+ */
+function objetivoNoTorneio(estado: EstadoJogo): Objetivo {
+  const meu = estado.clubes[estado.tecnico.clubeId];
+  const t = torneioPrincipal(estado, meu);
+  const clubes = t ? (t.grupos?.find((g) => g.includes(meu.id)) ?? t.clubes) : [meu.id];
+  const forca = (id: string) => forcaDoTime(Object.values(estado.jogadores).filter((j) => j.clubeId === id));
+  const ordem = [...clubes].sort((a, b) => forca(b) - forca(a));
+  const ranking = ordem.indexOf(meu.id) + 1;
+  const n = clubes.length;
+  if (t?.tipo === "estadual") {
+    const passam = t.grupos ? 4 : n <= 6 ? 2 : 4;
+    return ranking <= Math.max(1, Math.round(n / 5))
+      ? { descricao: "Brigar pelo título (terminar em 1º)", posicaoAlvo: 1 }
+      : { descricao: `Passar para o mata-mata (terminar entre os ${passam}${t.grupos ? " do grupo" : ""})`, posicaoAlvo: passam };
+  }
+  const alto = Math.max(1, Math.round(n * 0.15));
+  if (ranking <= alto) return { descricao: "Brigar pelo título (terminar entre os 3)", posicaoAlvo: 3 };
+  if (ranking <= Math.round(n * 0.4)) return { descricao: `Terminar entre os ${Math.round(n * 0.35)}`, posicaoAlvo: Math.round(n * 0.35) };
+  if (ranking <= Math.round(n * 0.7)) return { descricao: `Terminar na primeira metade (até ${Math.ceil(n / 2)}º)`, posicaoAlvo: Math.ceil(n / 2) };
+  return { descricao: `Não ficar entre os últimos (terminar até ${n - 3}º)`, posicaoAlvo: n - 3 };
 }
 
 export type SituacaoObjetivo = "encaminhada" | "em-risco" | "abaixo";

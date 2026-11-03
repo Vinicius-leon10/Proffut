@@ -5,7 +5,7 @@ import { demitir, gerarConvites, mudarReputacao, passouDaCarencia } from "./carr
 import { encerrarContratos, garantirContratos, liberar } from "./contratos";
 import { encerrarEmprestimos } from "./emprestimos";
 import { inicioDaTemporada, somarDias } from "./calendario";
-import { NOME_SERIE, SERIES, criarTemporada, posicaoNaLiga, tabelaDaLiga } from "./competicoes";
+import { NOME_SERIE, SERIES, criarTemporada, nomeDaLigaDoClube, posicaoNaLiga, tabelaDaLiga } from "./competicoes";
 import { criarCopa } from "./copa";
 import { CARGO, CONVITES, ELENCO_MAXIMO, MINIMO_POSICAO, REPUTACAO } from "./constantes";
 import { definirObjetivo } from "./diretoria";
@@ -62,13 +62,18 @@ function posicaoMaisCarente(elenco: Jogador[]): Posicao {
   )[0];
 }
 
+/** "a Série A", "o Campeonato Argentino". */
+function comArtigoDaLiga(nome: string): string {
+  return `${nome.startsWith("Série") ? "a" : "o"} ${nome}`;
+}
+
 export function encerrarTemporada(estado: EstadoJogo) {
   const ano = estado.temporada;
   const data = estado.data;
   const rng = rngPara(estado.semente, `virada/${ano}`);
   const nome = (id: string) => estado.clubes[id]?.nome ?? id;
   const meuId = estado.tecnico.clubeId;
-  const minhaSerie = estado.clubes[meuId].serie as SerieId | "D";
+  const minhaSerie = estado.clubes[meuId].serie;
   const torneios = Object.values(estado.torneios ?? {}).filter((t) => !!t);
 
   // ---- histórico ----
@@ -85,7 +90,10 @@ export function encerrarTemporada(estado: EstadoJogo) {
     artilheiros: { A: artilheiro(estado, "A"), B: artilheiro(estado, "B"), C: artilheiro(estado, "C") },
     promovidos: { A: [], B: [...estado.series.B.promovidos], C: [...estado.series.C.promovidos] },
     rebaixados: { A: [...estado.series.A.rebaixados], B: [...estado.series.B.rebaixados], C: [...estado.series.C.rebaixados] },
-    tecnico: { clubeId: meuId, serie: minhaSerie, posicao: minhaPosicao, objetivo: estado.objetivo.descricao, cumpriu },
+    tecnico: {
+      clubeId: meuId, serie: minhaSerie, competicao: nomeDaLigaDoClube(estado, estado.clubes[meuId]), posicao: minhaPosicao,
+      objetivo: estado.objetivo.descricao, cumpriu,
+    },
     ...(Object.keys(campeoesDosTorneios).length ? { torneios: campeoesDosTorneios } : {}),
   });
 
@@ -129,7 +137,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
     }
   }
   // Nos países da América do Sul: os últimos da primeira divisão descem e os primeiros da segunda sobem.
-  trocarDivisoes(estado);
+  const trocas = Object.values(trocarDivisoes(estado));
 
   // ---- jogadores: evolução, idade, aposentadoria ----
   const aposentadosMeus: string[] = [];
@@ -223,18 +231,18 @@ export function encerrarTemporada(estado: EstadoJogo) {
 
   // ---- diretoria ----
   const t = estado.tecnico;
-  const subiu = (B.promovidos.includes(meuId) && minhaSerie === "B") || (C.promovidos.includes(meuId) && minhaSerie === "C") || sobemDaD.includes(meuId);
-  const caiu = [...A.rebaixados, ...B.rebaixados, ...C.rebaixados].includes(meuId);
+  const subiu = (B.promovidos.includes(meuId) && minhaSerie === "B") || (C.promovidos.includes(meuId) && minhaSerie === "C") ||
+    sobemDaD.includes(meuId) || trocas.some((t) => t.sobem.includes(meuId));
+  const caiu = [...A.rebaixados, ...B.rebaixados, ...C.rebaixados].includes(meuId) || trocas.some((t) => t.caem.includes(meuId));
   const campeao = [A.campeao, B.campeao, C.campeao, estado.torneios?.D?.campeao].includes(meuId);
   t.confiancaDiretoria = limitar(t.confiancaDiretoria + (cumpriu ? 15 : -15) + (subiu ? 15 : 0) + (campeao ? 10 : 0) - (caiu ? 20 : 0), 10, 100);
   t.confiancaTorcida = limitar(t.confiancaTorcida + (subiu ? 15 : 0) + (campeao ? 20 : 0) - (caiu ? 20 : 0), 10, 100);
   mudarReputacao(estado,
     (cumpriu ? REPUTACAO.cumpriu : REPUTACAO.naoCumpriu) + (subiu ? REPUTACAO.acesso : 0) + (caiu ? REPUTACAO.rebaixamento : 0) +
     (campeao ? (minhaSerie === "A" ? REPUTACAO.tituloA : REPUTACAO.titulo) : 0) + (estado.copa?.campeao === meuId ? REPUTACAO.copa : 0));
-  // Abaixo do objetivo e sem a confiança da diretoria, o técnico sai. Quem cai para a Série D não é demitido: o técnico
-  // só treina clubes das Séries A, B e C e escolhe um da Série C no fim da temporada (`propostasDeEmprego`, R72).
-  const caiuParaD = C.rebaixados.includes(meuId);
-  const demitido = !t.demissao && !caiuParaD && !cumpriu && t.confiancaDiretoria <= CARGO.demissao && passouDaCarencia(estado);
+  // Abaixo do objetivo e sem a confiança da diretoria, o técnico sai. O técnico treina qualquer clube (nov/2026): quem cai
+  // para a Série D continua nela (R81).
+  const demitido = !t.demissao && !cumpriu && t.confiancaDiretoria <= CARGO.demissao && passouDaCarencia(estado);
 
   // ---- nova temporada: com estaduais, começa em janeiro, uma semana antes deles ----
   estado.temporada = ano + 1;
@@ -260,16 +268,16 @@ export function encerrarTemporada(estado: EstadoJogo) {
   // ---- técnico: demissão ou convites de clubes maiores (para quem foi bem) ----
   const meuClube = estado.clubes[meuId];
   if (demitido) demitir(estado, `A diretoria ${comArtigo("do", meuClube)} não quis continuar com você depois de uma temporada abaixo do objetivo.`);
-  // Convites: para quem foi bem (quem caiu para a Série D escolhe nas propostas de emprego).
-  else if (!t.demissao && !caiuParaD && (cumpriu || subiu || campeao)) gerarConvites(estado, CONVITES.virada);
+  // Convites: para quem foi bem.
+  else if (!t.demissao && (cumpriu || subiu || campeao)) gerarConvites(estado, CONVITES.virada);
 
   // ---- mensagens ----
   const campeaoD = campeoesDosTorneios.D?.campeao;
   const resumo = [
     `${nome(A.campeao!)} foi ${concorda(estado.clubes[A.campeao!], "campeão", "campeã")} da Série A, ${nome(B.campeao!)} da Série B${campeaoD ? `, ${nome(C.campeao!)} da Série C e ${nome(campeaoD)} da Série D` : ` e ${nome(C.campeao!)} da Série C`}.`,
     `Seu time terminou a fase de classificação em ${minhaPosicao}º. Objetivo: ${cumpriu ? "cumprido" : "não cumprido"}.`,
-    subiu ? `Acesso conquistado! Em ${ano + 1} ${comArtigo("o", meuClube)} joga a ${NOME_SERIE[meuClube.serie as SerieId]}.` : "",
-    caiu ? `${comArtigo("O", meuClube)} foi ${concorda(meuClube, "rebaixado", "rebaixada")} e joga a ${NOME_SERIE[meuClube.serie as SerieId]} em ${ano + 1}.` : "",
+    subiu ? `Acesso conquistado! Em ${ano + 1} ${comArtigo("o", meuClube)} joga ${comArtigoDaLiga(nomeDaLigaDoClube(estado, meuClube))}.` : "",
+    caiu ? `${comArtigo("O", meuClube)} foi ${concorda(meuClube, "rebaixado", "rebaixada")} e joga ${comArtigoDaLiga(nomeDaLigaDoClube(estado, meuClube))} em ${ano + 1}.` : "",
     sobemDaD.length ? `Vindos da Série D: ${sobemDaD.map(nome).join(" e ")}.` : "",
   ].filter(Boolean).join(" ");
   enviarMensagem(estado, { tipo: "temporada", titulo: `Fim da temporada ${ano}`, texto: resumo });
@@ -289,7 +297,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
   if (jovensMeus.length) {
     enviarMensagem(estado, { tipo: "noticia", titulo: "Novos jogadores da base", texto: `Subiram para o profissional: ${jovensMeus.join(", ")}.` });
   }
-  if (!demitido && !caiuParaD) {
+  if (!demitido) {
     enviarMensagem(estado, {
       tipo: "diretoria",
       titulo: `Objetivo para ${ano + 1}`,

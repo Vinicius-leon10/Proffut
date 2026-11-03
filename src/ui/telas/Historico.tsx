@@ -2,6 +2,7 @@ import { comArtigo } from "../../engine/artigos";
 import { NOME_SERIE, SERIES } from "../../engine/competicoes";
 import { Cartao, Escudo, Topo } from "../componentes";
 import { useJogo, useLoja } from "../store";
+import type { SerieId } from "../../engine/tipos";
 
 export function Historico() {
   const estado = useJogo();
@@ -42,7 +43,7 @@ export function Historico() {
                 <div className="linha" style={{ borderTop: "1px solid var(--borda)", paddingTop: 8 }}>
                   <Escudo clube={meu} tamanho={30} />
                   <div className="cresce">
-                    <div className="pequeno">Você: {r.tecnico.posicao}º na {NOME_SERIE[r.tecnico.serie]} com {comArtigo("o", meu)}</div>
+                    <div className="pequeno">Você: {r.tecnico.posicao}º · {r.tecnico.competicao ?? NOME_SERIE[r.tecnico.serie as SerieId]} com {comArtigo("o", meu)}</div>
                     <div className={`mini ${r.tecnico.cumpriu ? "verde" : "vermelho"}`}>{r.tecnico.cumpriu ? "Objetivo cumprido" : "Objetivo não cumprido"}: {r.tecnico.objetivo}</div>
                   </div>
                 </div>

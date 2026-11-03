@@ -7,10 +7,10 @@ import { folhaSalarial } from "./financas";
 import { capitaoDoTime, forcaDoTime } from "./forca";
 import { melhorEmCampo, notaMedia, notasDaPartida } from "./notas";
 import { somarDias, turnoEReturno, turnoUnico } from "./calendario";
-import { SERIES, classificacao, tabelaDaLiga, temporadaEncerrada } from "./competicoes";
+import { SERIES, classificacao, nomeDaLigaDoClube, posicaoNaLiga, tabelaDaLiga, tabelaDoClube, temporadaEncerrada } from "./competicoes";
 import { MAX_SUBSTITUICOES, MINIMO_POSICAO } from "./constantes";
 import { desfechoDoConfronto, situacaoNaCopa } from "./copa";
-import { acertarParticipantes, assumirClube, avancar, jogosPendentesHoje, juntarAoSaveAntigo, novoJogo, prepararJogos, propostasDeEmprego, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
+import { acertarParticipantes, assumirClube, avancar, jogosPendentesHoje, juntarAoSaveAntigo, novoJogo, prepararJogos, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
 import { checarEstado } from "./checagem";
 import { PAISES, competicoesDoUsuario, inicioDoAno, participantes, tabelaDoTorneio, vagasEntreDivisoes } from "./torneios";
 import { dispensar, elencoDe, fazerOferta, limiteDaProposta, livres, pedirMais, transferenciasDaIa } from "./mercado";
@@ -113,6 +113,27 @@ describe("temporada completa", () => {
     expect(tabelaDaLiga(estado, "A")[0].j).toBe(38);
   });
 
+  it("as ligas de fora saem pela simulação rápida: só os gols, com autores do próprio time, e números parecidos com os da simulação completa", () => {
+    const deFora = estado.partidas.filter((p) => p.serie.startsWith("L-"));
+    expect(deFora.length).toBeGreaterThan(3000);
+    expect(deFora.every((p) => p.jogada)).toBe(true);
+    // Só gols: sem cartões, lesões nem trocas (não há lance a lance).
+    expect(deFora.flatMap((p) => p.eventos).every((e) => e.tipo === "gol")).toBe(true);
+    for (const p of deFora.slice(0, 300)) expect(p.eventos.length, p.id).toBe(p.gm + p.gv);
+    const n = deFora.length;
+    const gols = deFora.reduce((s, p) => s + p.gm + p.gv, 0) / n;
+    const casa = deFora.filter((p) => p.gm > p.gv).length / n;
+    const empate = deFora.filter((p) => p.gm === p.gv).length / n;
+    expect(gols).toBeGreaterThan(2.0);
+    expect(gols).toBeLessThan(2.6);
+    expect(casa).toBeGreaterThan(0.38);
+    expect(casa).toBeLessThan(0.48);
+    expect(empate).toBeGreaterThan(0.24);
+    expect(empate).toBeLessThan(0.34);
+    // As séries do Brasil continuam com a simulação completa (cartões aparecem).
+    expect(estado.partidas.filter((p) => p.serie === "A").flatMap((p) => p.eventos).some((e) => e.tipo === "amarelo")).toBe(true);
+  });
+
   it("a virada mantém 20 clubes por série e elencos válidos", () => {
     const campeaoA = estado.series.A.campeao;
     const r = avancar(estado);
@@ -210,25 +231,40 @@ describe("mando de campo", () => {
 });
 
 describe("rebaixado para a Série D", () => {
-  it("o técnico só treina clubes das Séries A, B e C: não fica na D nem é demitido; recebe 4 propostas da Série C e assume uma", () => {
+  it("o técnico treina qualquer clube: rebaixado para a D, continua no clube, com objetivo do grupo; sem a confiança da diretoria, é demitido como em qualquer série", () => {
     const estado = novoJogo({ nomeTecnico: "T", clubeId: "itabaiana", semente: 11 });
     estado.config.escalacaoAutomatica = true;
     simularRestoDaTemporada(estado);
-    // O clube cai (no lugar de um dos rebaixados), com a diretoria sem paciência: mesmo assim não é demissão.
     const C = estado.series.C;
     if (!C.rebaixados.includes("itabaiana")) C.rebaixados[0] = "itabaiana";
     delete estado.tecnico.demissao;
-    estado.tecnico.confiancaDiretoria = 10;
+    const demitido = structuredClone(estado);
+    estado.tecnico.confiancaDiretoria = 80;
     avancar(estado);
     expect(estado.clubes.itabaiana.serie).toBe("D");
+    expect(estado.tecnico.clubeId).toBe("itabaiana");
     expect(estado.tecnico.demissao).toBeUndefined();
-    expect(estado.mensagens.some((m) => m.convite && !m.convite.resolvido), "sem convites: escolhe nas propostas").toBe(false);
-    const propostas = propostasDeEmprego(estado);
-    expect(propostas).toHaveLength(4);
-    for (const id of propostas) expect(estado.clubes[id].serie).toBe("C");
-    assumirClube(estado, propostas[0]);
-    expect(estado.tecnico.clubeId).toBe(propostas[0]);
-    expect(estado.objetivo.descricao).not.toMatch(/grupo/);
+    expect(estado.objetivo.descricao).toMatch(/grupo/);
+    expect(estado.torneios?.D?.clubes).toContain("itabaiana");
+    // Com a diretoria sem paciência e o objetivo não cumprido, a demissão vale também para quem cai para a D.
+    demitido.tecnico.confiancaDiretoria = 10;
+    demitido.historico = [];
+    const cumpriu = posicaoNaLiga(demitido, "itabaiana") <= demitido.objetivo.posicaoAlvo;
+    avancar(demitido);
+    if (!cumpriu) expect(demitido.tecnico.demissao).toBeTruthy();
+  });
+
+  it("clube de fora do Brasil: objetivo pela força entre os clubes da liga e tabela do painel na liga dele", () => {
+    const estado = novoJogo({ nomeTecnico: "T", clubeId: "boca-juniors", semente: 12 });
+    expect(estado.objetivo.posicaoAlvo).toBeLessThanOrEqual(3);
+    expect(tabelaDoClube(estado, "boca-juniors").length).toBe(estado.torneios!["L-AR"]!.clubes.length);
+    expect(nomeDaLigaDoClube(estado, estado.clubes["boca-juniors"])).toBe("Campeonato Argentino");
+    expect(competicoesDoUsuario(estado).has("L-AR")).toBe(true);
+    // Os jogos dele têm a simulação completa (é a liga dele).
+    simularRestoDaTemporada(estado);
+    const meus = estado.partidas.filter((p) => p.serie === "L-AR" && (p.mandante === "boca-juniors" || p.visitante === "boca-juniors"));
+    expect(meus.flatMap((p) => p.eventos).some((e) => e.tipo === "amarelo")).toBe(true);
+    expect(posicaoNaLiga(estado, "boca-juniors")).toBeGreaterThan(0);
   });
 });
 

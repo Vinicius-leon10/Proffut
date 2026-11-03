@@ -62,10 +62,12 @@ export function processarMes(estado: EstadoJogo, data: string) {
     if (j.clubeId) folhas.set(j.clubeId, (folhas.get(j.clubeId) ?? 0) + j.salario);
   }
   for (const clube of Object.values(estado.clubes)) {
-    // Clubes só do estadual e os de fora não têm contas no jogo (não compram nem vendem por conta própria).
-    if (clube.serie === "estadual" || clube.serie === "exterior") continue;
-    // Série D: patrocínio menor que o da Série C.
-    const patrocinio = clube.serie === "D" ? PATROCINIO_MES.C * PATROCINIO_SERIE_D : PATROCINIO_MES[clube.serie];
+    // Clubes só do estadual e os de fora não têm contas no jogo (não compram nem vendem por conta própria), fora o do
+    // usuário, que pode treinar qualquer clube.
+    const fora = clube.serie === "estadual" || clube.serie === "exterior";
+    if (fora && clube.id !== estado.tecnico.clubeId) continue;
+    // Série D, só do estadual e de fora: patrocínio menor que o da Série C.
+    const patrocinio = clube.serie === "D" || fora ? PATROCINIO_MES.C * PATROCINIO_SERIE_D : PATROCINIO_MES[clube.serie as SerieId];
     lancar(clube, data, "patrocinio", "Patrocínio do mês", patrocinio * (0.6 + 0.8 * (clube.reputacao / 100)));
     lancar(clube, data, "salarios", "Folha salarial", -(folhas.get(clube.id) ?? 0));
     lancar(clube, data, "estadio", "Manutenção do estádio", -clube.estadio.capacidade * MANUTENCAO_POR_LUGAR);

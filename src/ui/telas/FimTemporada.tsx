@@ -1,6 +1,5 @@
 import { comArtigo } from "../../engine/artigos";
-import { NOME_SERIE, SERIES, dasSeries } from "../../engine/competicoes";
-import { propostasDeEmprego } from "../../engine/jogo";
+import { NOME_SERIE, SERIES, nomeDaLigaDoClube } from "../../engine/competicoes";
 import { nomeDoTorneio } from "../../engine/torneios";
 import type { IdTorneio, SerieId } from "../../engine/tipos";
 import { Cartao, Escudo, Topo } from "../componentes";
@@ -14,9 +13,9 @@ export function FimTemporada() {
   const r = estado.historico[estado.historico.length - 1];
   const meu = estado.clubes[estado.tecnico.clubeId];
   const demissao = estado.tecnico.demissao;
-  // O técnico só treina clubes das Séries A, B e C: com o clube rebaixado para a Série D, escolhe um da Série C.
-  const precisaDeClube = !!demissao || !dasSeries(meu);
-  const propostas = demissao ? demissao.propostas : precisaDeClube ? propostasDeEmprego(estado) : [];
+  // Demitido: escolhe um clube nas propostas (o técnico treina qualquer clube: rebaixado, continua nele).
+  const precisaDeClube = !!demissao;
+  const propostas = demissao ? demissao.propostas : [];
   const convites = estado.mensagens.filter((m) => m.convite && !m.convite.resolvido);
   if (!r) return null;
   const nome = (id: string) => estado.clubes[id]?.nome ?? id;
@@ -74,9 +73,9 @@ export function FimTemporada() {
         </Cartao>
 
         <Cartao titulo="Seu desempenho">
-          <p>{r.tecnico.serie === "D" ? `${r.tecnico.posicao}º lugar no grupo da Série D.` : `${r.tecnico.posicao}º lugar na ${NOME_SERIE[r.tecnico.serie]}.`}</p>
+          <p>{r.tecnico.serie === "D" ? `${r.tecnico.posicao}º lugar no grupo da Série D.` : `${r.tecnico.posicao}º lugar: ${r.tecnico.competicao ?? NOME_SERIE[r.tecnico.serie as SerieId]}.`}</p>
           <p className={`pequeno ${r.tecnico.cumpriu ? "verde" : "vermelho"}`}>{r.tecnico.cumpriu ? "Objetivo cumprido" : "Objetivo não cumprido"}: {r.tecnico.objetivo}</p>
-          {!precisaDeClube && <p className="pequeno fraco" style={{ marginTop: 6 }}>Em {estado.temporada}: {NOME_SERIE[meu.serie as SerieId]}. Objetivo: {estado.objetivo.descricao}.</p>}
+          {!precisaDeClube && <p className="pequeno fraco" style={{ marginTop: 6 }}>Em {estado.temporada}: {nomeDaLigaDoClube(estado, meu)}. Objetivo: {estado.objetivo.descricao}.</p>}
         </Cartao>
 
         <Cartao titulo="Sobe e desce">
@@ -96,9 +95,7 @@ export function FimTemporada() {
         {precisaDeClube ? (
           <Cartao titulo="Propostas de emprego">
             <p className="pequeno fraco" style={{ marginBottom: 8 }}>
-              {demissao
-                ? `A diretoria ${comArtigo("do", estado.clubes[demissao.clubeId])} não quis continuar com você depois de uma temporada abaixo do objetivo. Estes clubes querem você:`
-                : `${comArtigo("O", meu)} caiu para a Série D. Você só treina clubes das Séries A, B e C: estes clubes da Série C querem você.`}
+              {demissao && `A diretoria ${comArtigo("do", estado.clubes[demissao.clubeId])} não quis continuar com você depois de uma temporada abaixo do objetivo. Estes clubes querem você:`}
             </p>
             <PropostasDeEmprego propostas={propostas} aoEscolher={fechar} />
           </Cartao>

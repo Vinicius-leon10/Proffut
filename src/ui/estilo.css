@@ -266,6 +266,25 @@ p { margin: 0; }
 }
 .segmentado button.ativo { background: var(--floresta); color: #fff; box-shadow: 0 1px 3px rgb(16 34 26 / 25%); }
 
+/* Jogo novo: os países com a bandeira (o técnico escolhe o país, a divisão e o clube). */
+.paises { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.pais {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--borda);
+  background: var(--cartao);
+  color: var(--texto);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: left;
+}
+.pais .bandeira { font-size: 1.5rem; line-height: 1; }
+.pais.ativo { background: var(--floresta); border-color: var(--floresta); color: #fff; }
+
 .opcoes { display: flex; flex-wrap: wrap; gap: 8px; }
 .opcao {
   padding: 8px 12px;
