@@ -10,7 +10,8 @@
   "US": {
    "nome": "Estados Unidos",
    "itens": [
-    "Q30"
+    "Q30",
+    "Q16"
    ]
   },
   "CA": {
@@ -389,7 +390,8 @@
    "lang": "en",
    "pais": "Q30",
    "paises": [
-    "Q30"
+    "Q30",
+    "Q16"
    ],
    "titulos": [
     "2026 Major League Soccer season"
@@ -399,7 +401,7 @@
     "United States league 2026"
    ],
    "exige": [
-    "2026"
+    "Major League Soccer"
    ]
   },
   {
@@ -408,17 +410,19 @@
    "lang": "es",
    "pais": "Q30",
    "paises": [
-    "Q30"
+    "Q30",
+    "Q16"
    ],
    "titulos": [
-    "Temporada 2026 de la Major League Soccer"
+    "Temporada 2026 de la Major League Soccer",
+    "Major League Soccer 2026"
    ],
    "consultas": [
     "Temporada 2026 de la Major League Soccer",
     "Estados Unidos liga 2026"
    ],
    "exige": [
-    "2026"
+    "Major League Soccer"
    ]
   },
   {
@@ -427,7 +431,8 @@
    "lang": "en",
    "pais": "Q30",
    "paises": [
-    "Q30"
+    "Q30",
+    "Q16"
    ],
    "titulos": [
     "2026 USL Championship season"
@@ -446,7 +451,8 @@
    "lang": "es",
    "pais": "Q30",
    "paises": [
-    "Q30"
+    "Q30",
+    "Q16"
    ],
    "titulos": [
     "Temporada 2026 del USL Championship"
@@ -465,7 +471,8 @@
    "lang": "en",
    "pais": "Q30",
    "paises": [
-    "Q30"
+    "Q30",
+    "Q16"
    ],
    "titulos": [
     "2026 USL League One season"
@@ -484,7 +491,8 @@
    "lang": "es",
    "pais": "Q30",
    "paises": [
-    "Q30"
+    "Q30",
+    "Q16"
    ],
    "titulos": [
     "Temporada 2026 de la USL League One"
@@ -545,6 +553,7 @@
    ],
    "titulos": [
     "2025–26 Liga FPD season",
+    "2025–26 Liga FPD",
     "2025–26 Costa Rican Primera División season"
    ],
    "consultas": [
@@ -604,7 +613,8 @@
    ],
    "titulos": [
     "Liga de Ascenso de Costa Rica 2025-26",
-    "Clausura 2026 Liga de Ascenso Costa Rica"
+    "Clausura 2026 Liga de Ascenso Costa Rica",
+    "Liga de Ascenso (Costa Rica)"
    ],
    "consultas": [
     "Liga de Ascenso de Costa Rica 2025-26",
@@ -747,7 +757,7 @@
     "Guatemala league 2026"
    ],
    "exige": [
-    "Guatemala"
+    "Primera División de Guatemala"
    ]
   },
   {
@@ -766,7 +776,7 @@
     "Guatemala liga 2026"
    ],
    "exige": [
-    "Guatemala"
+    "Primera División de Guatemala"
    ]
   },
   {
@@ -903,7 +913,7 @@
     "Panama league 2026"
    ],
    "exige": [
-    "Prom"
+    "Liga Prom"
    ]
   },
   {
@@ -922,7 +932,7 @@
     "Panamá liga 2026"
    ],
    "exige": [
-    "Prom"
+    "Liga Prom"
    ]
   },
   {
@@ -980,7 +990,7 @@
     "Nicaragua league 2026"
    ],
    "exige": [
-    "Nicaragua"
+    "Segunda División"
    ]
   },
   {
@@ -999,7 +1009,7 @@
     "Nicaragua liga 2026"
    ],
    "exige": [
-    "Nicaragua"
+    "Segunda División"
    ]
   },
   {
@@ -3082,22 +3092,6 @@
    ],
    "exige": [
     "Canadian Championship"
-   ]
-  },
-  {
-   "id": "copa-MX",
-   "copa": true,
-   "lang": "es",
-   "pais": "Q96",
-   "titulos": [
-    "Copa México 2026",
-    "Campeón de Campeones 2026"
-   ],
-   "consultas": [
-    "Copa México 2026"
-   ],
-   "exige": [
-    "2026"
    ]
   },
   {

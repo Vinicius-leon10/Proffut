@@ -21,7 +21,7 @@ FR, UK, NL, EUA = "Q142", "Q145", "Q55", "Q30"
 CONCACAF = {
     # América do Norte
     "MX": ("México", ["Q96"], "Mexico", "México"),
-    "US": ("Estados Unidos", [EUA], "United States", "Estados Unidos"),
+    "US": ("Estados Unidos", [EUA, "Q16"], "United States", "Estados Unidos"),
     "CA": ("Canadá", ["Q16"], "Canada", "Canadá"),
     # América Central
     "CR": ("Costa Rica", ["Q800"], "Costa Rica", "Costa Rica"),
@@ -71,22 +71,22 @@ LIGAS = [
     ("MX", 1, ["2025–26 Liga MX season"], ["Torneo Clausura 2026 (México)", "Liga MX 2025-26"], ["Liga MX"]),
     ("MX", 2, ["2025–26 Liga de Expansión MX season"], ["Torneo Clausura 2026 Liga de Expansión MX", "Liga de Expansión MX 2025-26"], ["Expansión"]),
     ("MX", 3, ["2025–26 Liga Premier de México season", "2025–26 Liga Premier season"], ["Liga Premier de México 2025-26"], ["Premier"]),
-    ("US", 1, ["2026 Major League Soccer season"], ["Temporada 2026 de la Major League Soccer"], ["2026"]),
+    ("US", 1, ["2026 Major League Soccer season"], ["Temporada 2026 de la Major League Soccer", "Major League Soccer 2026"], ["Major League Soccer"]),
     ("US", 2, ["2026 USL Championship season"], ["Temporada 2026 del USL Championship"], ["USL Championship"]),
     ("US", 3, ["2026 USL League One season"], ["Temporada 2026 de la USL League One"], ["League One"]),
     ("CA", 1, ["2026 Canadian Premier League season"], ["Temporada 2026 de la Canadian Premier League"], ["Canadian Premier"]),
-    ("CR", 1, ["2025–26 Liga FPD season", "2025–26 Costa Rican Primera División season"], ["Torneo de Clausura 2026 (Costa Rica)", "Campeonato de Primera División de Costa Rica 2025-26"], ["Costa Rica"]),
-    ("CR", 2, ["2025–26 Liga de Ascenso (Costa Rica)"], ["Liga de Ascenso de Costa Rica 2025-26", "Clausura 2026 Liga de Ascenso Costa Rica"], ["Ascenso"]),
+    ("CR", 1, ["2025–26 Liga FPD season", "2025–26 Liga FPD", "2025–26 Costa Rican Primera División season"], ["Torneo de Clausura 2026 (Costa Rica)", "Campeonato de Primera División de Costa Rica 2025-26"], ["Costa Rica"]),
+    ("CR", 2, ["2025–26 Liga de Ascenso (Costa Rica)"], ["Liga de Ascenso de Costa Rica 2025-26", "Clausura 2026 Liga de Ascenso Costa Rica", "Liga de Ascenso (Costa Rica)"], ["Ascenso"]),
     ("HN", 1, ["2025–26 Liga Nacional de Fútbol Profesional de Honduras", "2025–26 Honduran Liga Nacional"], ["Liga Nacional de Fútbol Profesional de Honduras 2025-26", "Torneo Clausura 2026 (Honduras)"], ["Honduras"]),
     ("HN", 2, ["2025–26 Liga de Ascenso de Honduras"], ["Liga de Ascenso de Honduras 2025-26"], ["Ascenso"]),
     ("GT", 1, ["2025–26 Liga Nacional de Guatemala"], ["Liga Nacional de Guatemala 2025-26", "Torneo Clausura 2026 (Guatemala)"], ["Guatemala"]),
-    ("GT", 2, ["2025–26 Primera División de Guatemala"], ["Primera División de Guatemala 2025-26"], ["Guatemala"]),
+    ("GT", 2, ["2025–26 Primera División de Guatemala"], ["Primera División de Guatemala 2025-26"], ["Primera División de Guatemala"]),
     ("SV", 1, ["2025–26 Primera División de El Salvador", "2025–26 Salvadoran Primera División"], ["Primera División de El Salvador 2025-26", "Torneo Clausura 2026 (El Salvador)"], ["Salvador"]),
     ("SV", 2, ["2025–26 Segunda División de El Salvador"], ["Segunda División de El Salvador 2025-26"], ["Salvador"]),
     ("PA", 1, ["2026 Liga Panameña de Fútbol", "2026 Liga Panameña de Fútbol season"], ["Liga Panameña de Fútbol 2026", "Torneo Apertura 2026 (Panamá)"], ["Paname"]),
-    ("PA", 2, ["2026 Liga Prom"], ["Liga Prom 2026"], ["Prom"]),
+    ("PA", 2, ["2026 Liga Prom"], ["Liga Prom 2026"], ["Liga Prom"]),
     ("NI", 1, ["2025–26 Liga Primera de Nicaragua"], ["Liga Primera de Nicaragua 2025-26", "Torneo Clausura 2026 (Nicaragua)"], ["Nicaragua"]),
-    ("NI", 2, ["2025–26 Segunda División de Nicaragua"], ["Segunda División de Nicaragua 2025-26"], ["Nicaragua"]),
+    ("NI", 2, ["2025–26 Segunda División de Nicaragua"], ["Segunda División de Nicaragua 2025-26"], ["Segunda División"]),
     ("BZ", 1, ["2025–26 Premier League of Belize"], ["Liga Premier de Belice 2025-26"], ["Belize"]),
     ("JM", 1, ["2025–26 Jamaica Premier League"], ["Liga Premier de Jamaica 2025-26"], ["Jamaica"]),
     ("TT", 1, ["2025–26 TT Premier League", "2025–26 TT Premier League season"], ["TT Premier League 2025-26"], ["Premier"]),
@@ -163,7 +163,6 @@ COPAS = [
     ("copa-VE", "es", "Q717", ["Copa Venezuela 2026"], ["Copa Venezuela"]),
     ("copa-US", "en", EUA, ["2026 U.S. Open Cup"], ["Open Cup"]),
     ("copa-CA", "en", "Q16", ["2026 Canadian Championship"], ["Canadian Championship"]),
-    ("copa-MX", "es", "Q96", ["Copa México 2026", "Campeón de Campeones 2026"], ["2026"]),
 ]
 
 # Seleções (página em inglês, seção do elenco atual). Conmebol: os 10 países; Concacaf: as filiadas.
