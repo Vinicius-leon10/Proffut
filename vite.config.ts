@@ -61,6 +61,8 @@ export default defineConfig({
     include: ["src/**/*.test.ts", "tools/**/*.test.ts"],
     environment: "node",
     // Vários testes do motor jogam temporadas inteiras (~2,5 s cada); o da virada joga duas e passava do limite de 5 s.
-    testTimeout: 20_000,
+    // Com a segunda divisão da América do Sul (568 clubes) uma temporada leva ~12 s, e com os três arquivos de teste ao
+    // mesmo tempo passava de 20 s.
+    testTimeout: 60_000,
   },
 });

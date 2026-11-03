@@ -315,11 +315,12 @@ simulada ~11 s aqui; antes, sem a segunda, ~10 s), save de 9 a 14 MB. **Dados:**
 <súmulas> <dados-segundas>` junta os dados (o que já veio da `dados-times` fica: a primeira divisão sai igual, byte a byte)
 e monta as segundas (`TAMANHO_DA_SEGUNDA`, `PESO_SEGUNDA`: o melhor da segunda fica um pouco abaixo do mais fraco da
 primeira; `MANUAL_NOMES_SEGUNDA`: Estudiantes de Buenos Aires, Flamengo de Sucre, Santos de Nasca...; cidades em
-`MANUAL_CIDADES`). 130 dos 150 têm elenco da Wikipédia; os outros, gerado. **Escudos:** faltam os 148 novos
-(`docs/TIMES_NOVOS.md`): o R73 fica vermelho até eles chegarem, e nada vai para a `main` antes.
+`MANUAL_CIDADES`). 130 dos 150 têm elenco da Wikipédia; os outros, gerado. **Escudos:** os 148 novos chegaram no pacote
+`escudos-novos-148.zip` que a IA da Manus montou (FotMob, Football-Logos e outras; fonte de cada um no fim de
+`docs/ESCUDOS_TIMES_NOVOS_FONTES.csv`), preparados com `tools/escudos/preparar.py --quantizar` (0,7 MB; já vinham sem
+fundo).
 
-**Esperando o usuário:** os escudos dos 148 clubes da segunda divisão da América do Sul (lista em `docs/TIMES_NOVOS.md`,
-que ele passa para a IA da Manus); a segunda divisão só é publicada com eles (R73). Em aberto no PLANO.md §11: nome final
+**Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e
 segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
 
@@ -339,7 +340,8 @@ ajustes de equilíbrio pelo que ele sentir jogando.
   sRGB, deixa transparente o fundo liso claro, corta a margem e reduz para 128 px e 256 cores (18 MB → 1,25 MB, iguais na
   tela); Galo Maringá, Maranguape e São Raimundo-PA ficam com o fundo branco (`MANTER_FUNDO`: o branco de dentro encosta
   na borda). Com a correção das listas dos campeonatos (R74) entraram o Real Oruro e o Anzoátegui, e ele mandou os dois
-  escudos (`escudos-faltantes-2.zip`, FootyLogos, fonte no mesmo CSV). Todo clube do jogo tem escudo (434 arquivos: os 16
+  escudos (`escudos-faltantes-2.zip`, FootyLogos, fonte no mesmo CSV); depois, os 148 da segunda divisão da América do Sul
+(`escudos-novos-148.zip`, montado pela IA da Manus). Todo clube do jogo tem escudo (582 arquivos: os 14
   clubes que saíram das listas continuam nos saves antigos; R73 confere os arquivos e as tabelas, também sem internet). `Escudo` usa: o importado no aparelho (Configurações → Escudos, `src/save/escudos.ts`)
   > o do jogo > o desenhado com as cores e a sigla (só se a imagem não carregar). Clube novo sem imagem: desenhado.
 - As fichas dos clubes vêm do remake MIT denisvick-dev/brasfoot (aviso de licença em `data/brasil-2026/LEIAME.md`).
@@ -399,7 +401,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `src/save/` | `salvamento.ts`: IndexedDB (`proffut`/`saves`, chaves `jogo:auto`, `resumo:auto`...), exportar/importar `.json`. `aparelho.ts`: checagem do aparelho. `escudos.ts`: escudos importados pelo usuário, que trocam os do jogo só no aparelho (chave `escudos`, id do clube → imagem) |
 | `src/ui/` | React + Zustand. `store.ts` (estado, telas sobrepostas, salvamento 400 ms após cada mudança), `acoes.ts`, `componentes.tsx`, `estilo.css` (visual "opção 3": tokens no `:root`), `sons.ts` (apito, torcida, narrador), `telas/*.tsx` |
 | `tests/` | Testes de ponta a ponta R01…: `*.spec.ts`, passos comuns em `ajuda.ts`, relatório em português em `resumo.ts`, lista em `README.md` |
-| `public/escudos/` | Os 434 escudos dos clubes (`<id>.png`): 156 recortados da prancha que o usuário mandou e 278 dos pacotes dos times novos (`tools/escudos/preparar.py`); ficam fora da fila do service worker, num cache só deles (`guardarEscudos`), para jogar sem internet |
+| `public/escudos/` | Os 582 escudos dos clubes (`<id>.png`): 156 recortados da prancha que o usuário mandou e 426 dos pacotes dos times novos (`tools/escudos/preparar.py`); ficam fora da fila do service worker, num cache só deles (`guardarEscudos`), para jogar sem internet |
 | `data/brasil-2026/` | `clubes.json` (60), `serie-d-reserva.json` (96), `competicoes.json`, `jogadores.json` (elencos reais, gerado por `tools/elencos`), `LEIAME.md` (fontes e licenças) |
 | `tools/` | `times/` (times novos: `wikipedia.py` é o robô da Wikipédia e do Wikidata, `montar.ts` monta clubes e elencos, `wiki.ts` lê fichas e elencos das páginas), `sim/` (calibragem), `e2e/` (capturas de tela), `icones/`, `dados/` (scripts Python dos clubes), `elencos/` (robô dos elencos: `montar.ts` monta `jogadores.json`, `sumulas.ts` lê as súmulas, `fontes-clubes.ts` diz como cada fonte chama os clubes, scripts Python do workflow), `escudos/` (`recortar.py`: prancha de escudos → `public/escudos/<id>.png`, ou um pacote `.json` para importar) |
 

@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import type { Locator, Page } from "@playwright/test";
 import { aba, abrirSite, agora, botao, cartaoDoProximoJogo, esperarSalvar, expect, novoJogo, test, voltar } from "./ajuda";
 
@@ -114,7 +114,11 @@ test("R73 os times novos têm os escudos que o usuário mandou: todo clube do jo
     await page.getByRole("tab", { name: "Outros países" }).click();
     for (const pais of ["Argentina", "Bolívia"]) {
       await page.getByRole("combobox", { name: "País" }).selectOption({ label: pais });
-      await escudosDasTabelas(page);
+      // As duas divisões: a segunda tem os 148 escudos que chegaram depois (escudos-novos-148.zip).
+      for (const divisao of ["1ª divisão", "2ª divisão"]) {
+        await page.getByRole("tab", { name: divisao }).click();
+        await escudosDasTabelas(page);
+      }
     }
   };
   await conferir();
@@ -154,7 +158,10 @@ test("R76 a versão nova fica pronta logo: os escudos não entram na fila do ser
       for (const nome of await caches.keys()) if (nome.startsWith("escudos")) total += (await (await caches.open(nome)).keys()).length;
       return total;
     });
-  await expect.poll(noAparelho, { message: "escudos guardados no aparelho", timeout: 60_000 }).toBeGreaterThanOrEqual(418);
+  // Todos os escudos do jogo (os arquivos de public/escudos), não um número fixo: com a segunda divisão eles passaram de
+  // 434 para 582, e esperar só 418 deixava a internet cair antes de o aparelho terminar de guardar.
+  const todos = readdirSync("public/escudos").filter((f) => f.endsWith(".png")).length;
+  await expect.poll(noAparelho, { message: "escudos guardados no aparelho", timeout: 90_000 }).toBeGreaterThanOrEqual(todos);
 
   // Sem internet, um jogo novo mostra os escudos de clubes que ainda não tinham aparecido na tela (os da Venezuela).
   await context.setOffline(true);
