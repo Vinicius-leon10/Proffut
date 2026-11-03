@@ -366,7 +366,8 @@ export function Tabelas() {
   const [serie, setSerie] = useState<SerieId | "D">(minha);
   const [uf, setUf] = useState<string>(meuEstadual?.id ?? estaduais[0]?.id ?? "");
   const paises = [...new Set(ligas.map((x) => divisaoDaLiga(x.id.slice(2)).pais))].sort((a, b) => (PAISES[a]?.pais ?? a).localeCompare(PAISES[b]?.pais ?? b));
-  const [pais, setPais] = useState<string>(meu.pais && paises.includes(meu.pais) ? meu.pais : paises[0] ?? "");
+  // Abre no país do clube do usuário; senão, no primeiro da América do Sul (a Argentina), não no primeiro do alfabeto.
+  const [pais, setPais] = useState<string>(meu.pais && paises.includes(meu.pais) ? meu.pais : paises.find((p) => PAISES[p]?.regiao === "sul") ?? paises[0] ?? "");
   const [divisao, setDivisao] = useState<string>(meu.liga ? String(divisaoDaLiga(meu.liga).nivel) : "1");
   const [vista, setVista] = useState<"tabela" | "jogos" | "artilharia">("tabela");
   const grupos: { valor: Grupo; rotulo: string }[] = [
