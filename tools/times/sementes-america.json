@@ -1,0 +1,3855 @@
+{
+ "descricao": "Páginas de partida do robô para o resto da América (gerado por tools/times/sementes_america.py).",
+ "paises": {
+  "MX": {
+   "nome": "México",
+   "itens": [
+    "Q96"
+   ]
+  },
+  "US": {
+   "nome": "Estados Unidos",
+   "itens": [
+    "Q30"
+   ]
+  },
+  "CA": {
+   "nome": "Canadá",
+   "itens": [
+    "Q16"
+   ]
+  },
+  "CR": {
+   "nome": "Costa Rica",
+   "itens": [
+    "Q800"
+   ]
+  },
+  "HN": {
+   "nome": "Honduras",
+   "itens": [
+    "Q783"
+   ]
+  },
+  "GT": {
+   "nome": "Guatemala",
+   "itens": [
+    "Q774"
+   ]
+  },
+  "SV": {
+   "nome": "El Salvador",
+   "itens": [
+    "Q792"
+   ]
+  },
+  "PA": {
+   "nome": "Panamá",
+   "itens": [
+    "Q804"
+   ]
+  },
+  "NI": {
+   "nome": "Nicarágua",
+   "itens": [
+    "Q811"
+   ]
+  },
+  "BZ": {
+   "nome": "Belize",
+   "itens": [
+    "Q242"
+   ]
+  },
+  "JM": {
+   "nome": "Jamaica",
+   "itens": [
+    "Q766"
+   ]
+  },
+  "TT": {
+   "nome": "Trinidad e Tobago",
+   "itens": [
+    "Q754"
+   ]
+  },
+  "HT": {
+   "nome": "Haiti",
+   "itens": [
+    "Q790"
+   ]
+  },
+  "DO": {
+   "nome": "República Dominicana",
+   "itens": [
+    "Q786"
+   ]
+  },
+  "CU": {
+   "nome": "Cuba",
+   "itens": [
+    "Q241"
+   ]
+  },
+  "PR": {
+   "nome": "Porto Rico",
+   "itens": [
+    "Q1183",
+    "Q30"
+   ]
+  },
+  "SR": {
+   "nome": "Suriname",
+   "itens": [
+    "Q730"
+   ]
+  },
+  "GY": {
+   "nome": "Guiana",
+   "itens": [
+    "Q734"
+   ]
+  },
+  "CW": {
+   "nome": "Curaçao",
+   "itens": [
+    "Q25279",
+    "Q55"
+   ]
+  },
+  "AW": {
+   "nome": "Aruba",
+   "itens": [
+    "Q21203",
+    "Q55"
+   ]
+  },
+  "SX": {
+   "nome": "São Martinho (Países Baixos)",
+   "itens": [
+    "Q26273",
+    "Q55"
+   ]
+  },
+  "BQ": {
+   "nome": "Bonaire",
+   "itens": [
+    "Q25396",
+    "Q27561",
+    "Q55"
+   ]
+  },
+  "MQ": {
+   "nome": "Martinica",
+   "itens": [
+    "Q17054",
+    "Q142"
+   ]
+  },
+  "GP": {
+   "nome": "Guadalupe",
+   "itens": [
+    "Q17012",
+    "Q142"
+   ]
+  },
+  "GF": {
+   "nome": "Guiana Francesa",
+   "itens": [
+    "Q3769",
+    "Q142"
+   ]
+  },
+  "MF": {
+   "nome": "São Martinho (França)",
+   "itens": [
+    "Q126125",
+    "Q142"
+   ]
+  },
+  "BB": {
+   "nome": "Barbados",
+   "itens": [
+    "Q244"
+   ]
+  },
+  "BS": {
+   "nome": "Bahamas",
+   "itens": [
+    "Q778"
+   ]
+  },
+  "BM": {
+   "nome": "Bermudas",
+   "itens": [
+    "Q23635",
+    "Q145"
+   ]
+  },
+  "KY": {
+   "nome": "Ilhas Cayman",
+   "itens": [
+    "Q5785",
+    "Q145"
+   ]
+  },
+  "LC": {
+   "nome": "Santa Lúcia",
+   "itens": [
+    "Q760"
+   ]
+  },
+  "GD": {
+   "nome": "Granada",
+   "itens": [
+    "Q769"
+   ]
+  },
+  "VC": {
+   "nome": "São Vicente e Granadinas",
+   "itens": [
+    "Q757"
+   ]
+  },
+  "KN": {
+   "nome": "São Cristóvão e Névis",
+   "itens": [
+    "Q763"
+   ]
+  },
+  "AG": {
+   "nome": "Antígua e Barbuda",
+   "itens": [
+    "Q781"
+   ]
+  },
+  "DM": {
+   "nome": "Dominica",
+   "itens": [
+    "Q784"
+   ]
+  },
+  "MS": {
+   "nome": "Montserrat",
+   "itens": [
+    "Q13353",
+    "Q145"
+   ]
+  },
+  "AI": {
+   "nome": "Anguila",
+   "itens": [
+    "Q25228",
+    "Q145"
+   ]
+  },
+  "VG": {
+   "nome": "Ilhas Virgens Britânicas",
+   "itens": [
+    "Q25305",
+    "Q145"
+   ]
+  },
+  "VI": {
+   "nome": "Ilhas Virgens Americanas",
+   "itens": [
+    "Q11703",
+    "Q30"
+   ]
+  },
+  "TC": {
+   "nome": "Turks e Caicos",
+   "itens": [
+    "Q18221",
+    "Q145"
+   ]
+  }
+ },
+ "sementes": [
+  {
+   "id": "america-MX-en",
+   "liga": "MX",
+   "lang": "en",
+   "pais": "Q96",
+   "paises": [
+    "Q96"
+   ],
+   "titulos": [
+    "2025–26 Liga MX season"
+   ],
+   "consultas": [
+    "2025-26 Liga MX season",
+    "Mexico league 2026"
+   ],
+   "exige": [
+    "Liga MX"
+   ]
+  },
+  {
+   "id": "america-MX-es",
+   "liga": "MX",
+   "lang": "es",
+   "pais": "Q96",
+   "paises": [
+    "Q96"
+   ],
+   "titulos": [
+    "Torneo Clausura 2026 (México)",
+    "Liga MX 2025-26"
+   ],
+   "consultas": [
+    "Torneo Clausura 2026 (México)",
+    "México liga 2026"
+   ],
+   "exige": [
+    "Liga MX"
+   ]
+  },
+  {
+   "id": "america-MX2-en",
+   "liga": "MX2",
+   "lang": "en",
+   "pais": "Q96",
+   "paises": [
+    "Q96"
+   ],
+   "titulos": [
+    "2025–26 Liga de Expansión MX season"
+   ],
+   "consultas": [
+    "2025-26 Liga de Expansión MX season",
+    "Mexico league 2026"
+   ],
+   "exige": [
+    "Expansión"
+   ]
+  },
+  {
+   "id": "america-MX2-es",
+   "liga": "MX2",
+   "lang": "es",
+   "pais": "Q96",
+   "paises": [
+    "Q96"
+   ],
+   "titulos": [
+    "Torneo Clausura 2026 Liga de Expansión MX",
+    "Liga de Expansión MX 2025-26"
+   ],
+   "consultas": [
+    "Torneo Clausura 2026 Liga de Expansión MX",
+    "México liga 2026"
+   ],
+   "exige": [
+    "Expansión"
+   ]
+  },
+  {
+   "id": "america-MX3-en",
+   "liga": "MX3",
+   "lang": "en",
+   "pais": "Q96",
+   "paises": [
+    "Q96"
+   ],
+   "titulos": [
+    "2025–26 Liga Premier de México season",
+    "2025–26 Liga Premier season"
+   ],
+   "consultas": [
+    "2025-26 Liga Premier de México season",
+    "Mexico league 2026"
+   ],
+   "exige": [
+    "Premier"
+   ]
+  },
+  {
+   "id": "america-MX3-es",
+   "liga": "MX3",
+   "lang": "es",
+   "pais": "Q96",
+   "paises": [
+    "Q96"
+   ],
+   "titulos": [
+    "Liga Premier de México 2025-26"
+   ],
+   "consultas": [
+    "Liga Premier de México 2025-26",
+    "México liga 2026"
+   ],
+   "exige": [
+    "Premier"
+   ]
+  },
+  {
+   "id": "america-US-en",
+   "liga": "US",
+   "lang": "en",
+   "pais": "Q30",
+   "paises": [
+    "Q30"
+   ],
+   "titulos": [
+    "2026 Major League Soccer season"
+   ],
+   "consultas": [
+    "2026 Major League Soccer season",
+    "United States league 2026"
+   ],
+   "exige": [
+    "2026"
+   ]
+  },
+  {
+   "id": "america-US-es",
+   "liga": "US",
+   "lang": "es",
+   "pais": "Q30",
+   "paises": [
+    "Q30"
+   ],
+   "titulos": [
+    "Temporada 2026 de la Major League Soccer"
+   ],
+   "consultas": [
+    "Temporada 2026 de la Major League Soccer",
+    "Estados Unidos liga 2026"
+   ],
+   "exige": [
+    "2026"
+   ]
+  },
+  {
+   "id": "america-US2-en",
+   "liga": "US2",
+   "lang": "en",
+   "pais": "Q30",
+   "paises": [
+    "Q30"
+   ],
+   "titulos": [
+    "2026 USL Championship season"
+   ],
+   "consultas": [
+    "2026 USL Championship season",
+    "United States league 2026"
+   ],
+   "exige": [
+    "USL Championship"
+   ]
+  },
+  {
+   "id": "america-US2-es",
+   "liga": "US2",
+   "lang": "es",
+   "pais": "Q30",
+   "paises": [
+    "Q30"
+   ],
+   "titulos": [
+    "Temporada 2026 del USL Championship"
+   ],
+   "consultas": [
+    "Temporada 2026 del USL Championship",
+    "Estados Unidos liga 2026"
+   ],
+   "exige": [
+    "USL Championship"
+   ]
+  },
+  {
+   "id": "america-US3-en",
+   "liga": "US3",
+   "lang": "en",
+   "pais": "Q30",
+   "paises": [
+    "Q30"
+   ],
+   "titulos": [
+    "2026 USL League One season"
+   ],
+   "consultas": [
+    "2026 USL League One season",
+    "United States league 2026"
+   ],
+   "exige": [
+    "League One"
+   ]
+  },
+  {
+   "id": "america-US3-es",
+   "liga": "US3",
+   "lang": "es",
+   "pais": "Q30",
+   "paises": [
+    "Q30"
+   ],
+   "titulos": [
+    "Temporada 2026 de la USL League One"
+   ],
+   "consultas": [
+    "Temporada 2026 de la USL League One",
+    "Estados Unidos liga 2026"
+   ],
+   "exige": [
+    "League One"
+   ]
+  },
+  {
+   "id": "america-CA-en",
+   "liga": "CA",
+   "lang": "en",
+   "pais": "Q16",
+   "paises": [
+    "Q16"
+   ],
+   "titulos": [
+    "2026 Canadian Premier League season"
+   ],
+   "consultas": [
+    "2026 Canadian Premier League season",
+    "Canada league 2026"
+   ],
+   "exige": [
+    "Canadian Premier"
+   ]
+  },
+  {
+   "id": "america-CA-es",
+   "liga": "CA",
+   "lang": "es",
+   "pais": "Q16",
+   "paises": [
+    "Q16"
+   ],
+   "titulos": [
+    "Temporada 2026 de la Canadian Premier League"
+   ],
+   "consultas": [
+    "Temporada 2026 de la Canadian Premier League",
+    "Canadá liga 2026"
+   ],
+   "exige": [
+    "Canadian Premier"
+   ]
+  },
+  {
+   "id": "america-CR-en",
+   "liga": "CR",
+   "lang": "en",
+   "pais": "Q800",
+   "paises": [
+    "Q800"
+   ],
+   "titulos": [
+    "2025–26 Liga FPD season",
+    "2025–26 Costa Rican Primera División season"
+   ],
+   "consultas": [
+    "2025-26 Liga FPD season",
+    "Costa Rica league 2026"
+   ],
+   "exige": [
+    "Costa Rica"
+   ]
+  },
+  {
+   "id": "america-CR-es",
+   "liga": "CR",
+   "lang": "es",
+   "pais": "Q800",
+   "paises": [
+    "Q800"
+   ],
+   "titulos": [
+    "Torneo de Clausura 2026 (Costa Rica)",
+    "Campeonato de Primera División de Costa Rica 2025-26"
+   ],
+   "consultas": [
+    "Torneo de Clausura 2026 (Costa Rica)",
+    "Costa Rica liga 2026"
+   ],
+   "exige": [
+    "Costa Rica"
+   ]
+  },
+  {
+   "id": "america-CR2-en",
+   "liga": "CR2",
+   "lang": "en",
+   "pais": "Q800",
+   "paises": [
+    "Q800"
+   ],
+   "titulos": [
+    "2025–26 Liga de Ascenso (Costa Rica)"
+   ],
+   "consultas": [
+    "2025-26 Liga de Ascenso (Costa Rica)",
+    "Costa Rica league 2026"
+   ],
+   "exige": [
+    "Ascenso"
+   ]
+  },
+  {
+   "id": "america-CR2-es",
+   "liga": "CR2",
+   "lang": "es",
+   "pais": "Q800",
+   "paises": [
+    "Q800"
+   ],
+   "titulos": [
+    "Liga de Ascenso de Costa Rica 2025-26",
+    "Clausura 2026 Liga de Ascenso Costa Rica"
+   ],
+   "consultas": [
+    "Liga de Ascenso de Costa Rica 2025-26",
+    "Costa Rica liga 2026"
+   ],
+   "exige": [
+    "Ascenso"
+   ]
+  },
+  {
+   "id": "america-HN-en",
+   "liga": "HN",
+   "lang": "en",
+   "pais": "Q783",
+   "paises": [
+    "Q783"
+   ],
+   "titulos": [
+    "2025–26 Liga Nacional de Fútbol Profesional de Honduras",
+    "2025–26 Honduran Liga Nacional"
+   ],
+   "consultas": [
+    "2025-26 Liga Nacional de Fútbol Profesional de Honduras",
+    "Honduras league 2026"
+   ],
+   "exige": [
+    "Honduras"
+   ]
+  },
+  {
+   "id": "america-HN-es",
+   "liga": "HN",
+   "lang": "es",
+   "pais": "Q783",
+   "paises": [
+    "Q783"
+   ],
+   "titulos": [
+    "Liga Nacional de Fútbol Profesional de Honduras 2025-26",
+    "Torneo Clausura 2026 (Honduras)"
+   ],
+   "consultas": [
+    "Liga Nacional de Fútbol Profesional de Honduras 2025-26",
+    "Honduras liga 2026"
+   ],
+   "exige": [
+    "Honduras"
+   ]
+  },
+  {
+   "id": "america-HN2-en",
+   "liga": "HN2",
+   "lang": "en",
+   "pais": "Q783",
+   "paises": [
+    "Q783"
+   ],
+   "titulos": [
+    "2025–26 Liga de Ascenso de Honduras"
+   ],
+   "consultas": [
+    "2025-26 Liga de Ascenso de Honduras",
+    "Honduras league 2026"
+   ],
+   "exige": [
+    "Ascenso"
+   ]
+  },
+  {
+   "id": "america-HN2-es",
+   "liga": "HN2",
+   "lang": "es",
+   "pais": "Q783",
+   "paises": [
+    "Q783"
+   ],
+   "titulos": [
+    "Liga de Ascenso de Honduras 2025-26"
+   ],
+   "consultas": [
+    "Liga de Ascenso de Honduras 2025-26",
+    "Honduras liga 2026"
+   ],
+   "exige": [
+    "Ascenso"
+   ]
+  },
+  {
+   "id": "america-GT-en",
+   "liga": "GT",
+   "lang": "en",
+   "pais": "Q774",
+   "paises": [
+    "Q774"
+   ],
+   "titulos": [
+    "2025–26 Liga Nacional de Guatemala"
+   ],
+   "consultas": [
+    "2025-26 Liga Nacional de Guatemala",
+    "Guatemala league 2026"
+   ],
+   "exige": [
+    "Guatemala"
+   ]
+  },
+  {
+   "id": "america-GT-es",
+   "liga": "GT",
+   "lang": "es",
+   "pais": "Q774",
+   "paises": [
+    "Q774"
+   ],
+   "titulos": [
+    "Liga Nacional de Guatemala 2025-26",
+    "Torneo Clausura 2026 (Guatemala)"
+   ],
+   "consultas": [
+    "Liga Nacional de Guatemala 2025-26",
+    "Guatemala liga 2026"
+   ],
+   "exige": [
+    "Guatemala"
+   ]
+  },
+  {
+   "id": "america-GT2-en",
+   "liga": "GT2",
+   "lang": "en",
+   "pais": "Q774",
+   "paises": [
+    "Q774"
+   ],
+   "titulos": [
+    "2025–26 Primera División de Guatemala"
+   ],
+   "consultas": [
+    "2025-26 Primera División de Guatemala",
+    "Guatemala league 2026"
+   ],
+   "exige": [
+    "Guatemala"
+   ]
+  },
+  {
+   "id": "america-GT2-es",
+   "liga": "GT2",
+   "lang": "es",
+   "pais": "Q774",
+   "paises": [
+    "Q774"
+   ],
+   "titulos": [
+    "Primera División de Guatemala 2025-26"
+   ],
+   "consultas": [
+    "Primera División de Guatemala 2025-26",
+    "Guatemala liga 2026"
+   ],
+   "exige": [
+    "Guatemala"
+   ]
+  },
+  {
+   "id": "america-SV-en",
+   "liga": "SV",
+   "lang": "en",
+   "pais": "Q792",
+   "paises": [
+    "Q792"
+   ],
+   "titulos": [
+    "2025–26 Primera División de El Salvador",
+    "2025–26 Salvadoran Primera División"
+   ],
+   "consultas": [
+    "2025-26 Primera División de El Salvador",
+    "El Salvador league 2026"
+   ],
+   "exige": [
+    "Salvador"
+   ]
+  },
+  {
+   "id": "america-SV-es",
+   "liga": "SV",
+   "lang": "es",
+   "pais": "Q792",
+   "paises": [
+    "Q792"
+   ],
+   "titulos": [
+    "Primera División de El Salvador 2025-26",
+    "Torneo Clausura 2026 (El Salvador)"
+   ],
+   "consultas": [
+    "Primera División de El Salvador 2025-26",
+    "El Salvador liga 2026"
+   ],
+   "exige": [
+    "Salvador"
+   ]
+  },
+  {
+   "id": "america-SV2-en",
+   "liga": "SV2",
+   "lang": "en",
+   "pais": "Q792",
+   "paises": [
+    "Q792"
+   ],
+   "titulos": [
+    "2025–26 Segunda División de El Salvador"
+   ],
+   "consultas": [
+    "2025-26 Segunda División de El Salvador",
+    "El Salvador league 2026"
+   ],
+   "exige": [
+    "Salvador"
+   ]
+  },
+  {
+   "id": "america-SV2-es",
+   "liga": "SV2",
+   "lang": "es",
+   "pais": "Q792",
+   "paises": [
+    "Q792"
+   ],
+   "titulos": [
+    "Segunda División de El Salvador 2025-26"
+   ],
+   "consultas": [
+    "Segunda División de El Salvador 2025-26",
+    "El Salvador liga 2026"
+   ],
+   "exige": [
+    "Salvador"
+   ]
+  },
+  {
+   "id": "america-PA-en",
+   "liga": "PA",
+   "lang": "en",
+   "pais": "Q804",
+   "paises": [
+    "Q804"
+   ],
+   "titulos": [
+    "2026 Liga Panameña de Fútbol",
+    "2026 Liga Panameña de Fútbol season"
+   ],
+   "consultas": [
+    "2026 Liga Panameña de Fútbol",
+    "Panama league 2026"
+   ],
+   "exige": [
+    "Paname"
+   ]
+  },
+  {
+   "id": "america-PA-es",
+   "liga": "PA",
+   "lang": "es",
+   "pais": "Q804",
+   "paises": [
+    "Q804"
+   ],
+   "titulos": [
+    "Liga Panameña de Fútbol 2026",
+    "Torneo Apertura 2026 (Panamá)"
+   ],
+   "consultas": [
+    "Liga Panameña de Fútbol 2026",
+    "Panamá liga 2026"
+   ],
+   "exige": [
+    "Paname"
+   ]
+  },
+  {
+   "id": "america-PA2-en",
+   "liga": "PA2",
+   "lang": "en",
+   "pais": "Q804",
+   "paises": [
+    "Q804"
+   ],
+   "titulos": [
+    "2026 Liga Prom"
+   ],
+   "consultas": [
+    "2026 Liga Prom",
+    "Panama league 2026"
+   ],
+   "exige": [
+    "Prom"
+   ]
+  },
+  {
+   "id": "america-PA2-es",
+   "liga": "PA2",
+   "lang": "es",
+   "pais": "Q804",
+   "paises": [
+    "Q804"
+   ],
+   "titulos": [
+    "Liga Prom 2026"
+   ],
+   "consultas": [
+    "Liga Prom 2026",
+    "Panamá liga 2026"
+   ],
+   "exige": [
+    "Prom"
+   ]
+  },
+  {
+   "id": "america-NI-en",
+   "liga": "NI",
+   "lang": "en",
+   "pais": "Q811",
+   "paises": [
+    "Q811"
+   ],
+   "titulos": [
+    "2025–26 Liga Primera de Nicaragua"
+   ],
+   "consultas": [
+    "2025-26 Liga Primera de Nicaragua",
+    "Nicaragua league 2026"
+   ],
+   "exige": [
+    "Nicaragua"
+   ]
+  },
+  {
+   "id": "america-NI-es",
+   "liga": "NI",
+   "lang": "es",
+   "pais": "Q811",
+   "paises": [
+    "Q811"
+   ],
+   "titulos": [
+    "Liga Primera de Nicaragua 2025-26",
+    "Torneo Clausura 2026 (Nicaragua)"
+   ],
+   "consultas": [
+    "Liga Primera de Nicaragua 2025-26",
+    "Nicaragua liga 2026"
+   ],
+   "exige": [
+    "Nicaragua"
+   ]
+  },
+  {
+   "id": "america-NI2-en",
+   "liga": "NI2",
+   "lang": "en",
+   "pais": "Q811",
+   "paises": [
+    "Q811"
+   ],
+   "titulos": [
+    "2025–26 Segunda División de Nicaragua"
+   ],
+   "consultas": [
+    "2025-26 Segunda División de Nicaragua",
+    "Nicaragua league 2026"
+   ],
+   "exige": [
+    "Nicaragua"
+   ]
+  },
+  {
+   "id": "america-NI2-es",
+   "liga": "NI2",
+   "lang": "es",
+   "pais": "Q811",
+   "paises": [
+    "Q811"
+   ],
+   "titulos": [
+    "Segunda División de Nicaragua 2025-26"
+   ],
+   "consultas": [
+    "Segunda División de Nicaragua 2025-26",
+    "Nicaragua liga 2026"
+   ],
+   "exige": [
+    "Nicaragua"
+   ]
+  },
+  {
+   "id": "america-BZ-en",
+   "liga": "BZ",
+   "lang": "en",
+   "pais": "Q242",
+   "paises": [
+    "Q242"
+   ],
+   "titulos": [
+    "2025–26 Premier League of Belize"
+   ],
+   "consultas": [
+    "2025-26 Premier League of Belize",
+    "Belize league 2026"
+   ],
+   "exige": [
+    "Belize"
+   ]
+  },
+  {
+   "id": "america-BZ-es",
+   "liga": "BZ",
+   "lang": "es",
+   "pais": "Q242",
+   "paises": [
+    "Q242"
+   ],
+   "titulos": [
+    "Liga Premier de Belice 2025-26"
+   ],
+   "consultas": [
+    "Liga Premier de Belice 2025-26",
+    "Belice liga 2026"
+   ],
+   "exige": [
+    "Belize"
+   ]
+  },
+  {
+   "id": "america-JM-en",
+   "liga": "JM",
+   "lang": "en",
+   "pais": "Q766",
+   "paises": [
+    "Q766"
+   ],
+   "titulos": [
+    "2025–26 Jamaica Premier League"
+   ],
+   "consultas": [
+    "2025-26 Jamaica Premier League",
+    "Jamaica league 2026"
+   ],
+   "exige": [
+    "Jamaica"
+   ]
+  },
+  {
+   "id": "america-JM-es",
+   "liga": "JM",
+   "lang": "es",
+   "pais": "Q766",
+   "paises": [
+    "Q766"
+   ],
+   "titulos": [
+    "Liga Premier de Jamaica 2025-26"
+   ],
+   "consultas": [
+    "Liga Premier de Jamaica 2025-26",
+    "Jamaica liga 2026"
+   ],
+   "exige": [
+    "Jamaica"
+   ]
+  },
+  {
+   "id": "america-TT-en",
+   "liga": "TT",
+   "lang": "en",
+   "pais": "Q754",
+   "paises": [
+    "Q754"
+   ],
+   "titulos": [
+    "2025–26 TT Premier League",
+    "2025–26 TT Premier League season"
+   ],
+   "consultas": [
+    "2025-26 TT Premier League",
+    "Trinidad and Tobago league 2026"
+   ],
+   "exige": [
+    "Premier"
+   ]
+  },
+  {
+   "id": "america-TT-es",
+   "liga": "TT",
+   "lang": "es",
+   "pais": "Q754",
+   "paises": [
+    "Q754"
+   ],
+   "titulos": [
+    "TT Premier League 2025-26"
+   ],
+   "consultas": [
+    "TT Premier League 2025-26",
+    "Trinidad y Tobago liga 2026"
+   ],
+   "exige": [
+    "Premier"
+   ]
+  },
+  {
+   "id": "america-HT-en",
+   "liga": "HT",
+   "lang": "en",
+   "pais": "Q790",
+   "paises": [
+    "Q790"
+   ],
+   "titulos": [
+    "2025–26 Ligue Haïtienne",
+    "2025–26 Championnat National (Haiti)"
+   ],
+   "consultas": [
+    "2025-26 Ligue Haïtienne",
+    "Haiti league 2026"
+   ],
+   "exige": [
+    "Ha"
+   ]
+  },
+  {
+   "id": "america-HT-es",
+   "liga": "HT",
+   "lang": "es",
+   "pais": "Q790",
+   "paises": [
+    "Q790"
+   ],
+   "titulos": [
+    "Liga Haitiana 2025-26"
+   ],
+   "consultas": [
+    "Liga Haitiana 2025-26",
+    "Haití liga 2026"
+   ],
+   "exige": [
+    "Ha"
+   ]
+  },
+  {
+   "id": "america-DO-en",
+   "liga": "DO",
+   "lang": "en",
+   "pais": "Q786",
+   "paises": [
+    "Q786"
+   ],
+   "titulos": [
+    "2026 Liga Dominicana de Fútbol"
+   ],
+   "consultas": [
+    "2026 Liga Dominicana de Fútbol",
+    "Dominican Republic league 2026"
+   ],
+   "exige": [
+    "Dominicana"
+   ]
+  },
+  {
+   "id": "america-DO-es",
+   "liga": "DO",
+   "lang": "es",
+   "pais": "Q786",
+   "paises": [
+    "Q786"
+   ],
+   "titulos": [
+    "Liga Dominicana de Fútbol 2026"
+   ],
+   "consultas": [
+    "Liga Dominicana de Fútbol 2026",
+    "República Dominicana liga 2026"
+   ],
+   "exige": [
+    "Dominicana"
+   ]
+  },
+  {
+   "id": "america-CU-en",
+   "liga": "CU",
+   "lang": "en",
+   "pais": "Q241",
+   "paises": [
+    "Q241"
+   ],
+   "titulos": [
+    "2026 Campeonato Nacional de Fútbol de Cuba",
+    "2025 Campeonato Nacional de Fútbol de Cuba"
+   ],
+   "consultas": [
+    "2026 Campeonato Nacional de Fútbol de Cuba",
+    "Cuba league 2026"
+   ],
+   "exige": [
+    "Cuba"
+   ]
+  },
+  {
+   "id": "america-CU-es",
+   "liga": "CU",
+   "lang": "es",
+   "pais": "Q241",
+   "paises": [
+    "Q241"
+   ],
+   "titulos": [
+    "Campeonato Nacional de Fútbol de Cuba 2026",
+    "Campeonato Nacional de Fútbol de Cuba 2025"
+   ],
+   "consultas": [
+    "Campeonato Nacional de Fútbol de Cuba 2026",
+    "Cuba liga 2026"
+   ],
+   "exige": [
+    "Cuba"
+   ]
+  },
+  {
+   "id": "america-PR-en",
+   "liga": "PR",
+   "lang": "en",
+   "pais": "Q1183",
+   "paises": [
+    "Q1183",
+    "Q30"
+   ],
+   "titulos": [
+    "2025–26 Liga Puerto Rico",
+    "2026 Liga Puerto Rico season"
+   ],
+   "consultas": [
+    "2025-26 Liga Puerto Rico",
+    "Puerto Rico league 2026"
+   ],
+   "exige": [
+    "Puerto Rico"
+   ]
+  },
+  {
+   "id": "america-PR-es",
+   "liga": "PR",
+   "lang": "es",
+   "pais": "Q1183",
+   "paises": [
+    "Q1183",
+    "Q30"
+   ],
+   "titulos": [
+    "Liga Puerto Rico 2025-26"
+   ],
+   "consultas": [
+    "Liga Puerto Rico 2025-26",
+    "Puerto Rico liga 2026"
+   ],
+   "exige": [
+    "Puerto Rico"
+   ]
+  },
+  {
+   "id": "america-SR-en",
+   "liga": "SR",
+   "lang": "en",
+   "pais": "Q730",
+   "paises": [
+    "Q730"
+   ],
+   "titulos": [
+    "2025–26 SVB Eerste Divisie",
+    "2025–26 Suriname Major League"
+   ],
+   "consultas": [
+    "2025-26 SVB Eerste Divisie",
+    "Suriname league 2026"
+   ],
+   "exige": [
+    "S"
+   ]
+  },
+  {
+   "id": "america-SR-es",
+   "liga": "SR",
+   "lang": "es",
+   "pais": "Q730",
+   "paises": [
+    "Q730"
+   ],
+   "titulos": [
+    "Primera División de Surinam 2025-26"
+   ],
+   "consultas": [
+    "Primera División de Surinam 2025-26",
+    "Surinam liga 2026"
+   ],
+   "exige": [
+    "S"
+   ]
+  },
+  {
+   "id": "america-GY-en",
+   "liga": "GY",
+   "lang": "en",
+   "pais": "Q734",
+   "paises": [
+    "Q734"
+   ],
+   "titulos": [
+    "2025–26 GFF Elite League",
+    "2026 GFF Elite League"
+   ],
+   "consultas": [
+    "2025-26 GFF Elite League",
+    "Guyana league 2026"
+   ],
+   "exige": [
+    "Elite"
+   ]
+  },
+  {
+   "id": "america-GY-es",
+   "liga": "GY",
+   "lang": "es",
+   "pais": "Q734",
+   "paises": [
+    "Q734"
+   ],
+   "titulos": [
+    "GFF Elite League 2025-26"
+   ],
+   "consultas": [
+    "GFF Elite League 2025-26",
+    "Guyana liga 2026"
+   ],
+   "exige": [
+    "Elite"
+   ]
+  },
+  {
+   "id": "america-CW-en",
+   "liga": "CW",
+   "lang": "en",
+   "pais": "Q25279",
+   "paises": [
+    "Q25279",
+    "Q55"
+   ],
+   "titulos": [
+    "2025–26 Curaçao Promé Divishon"
+   ],
+   "consultas": [
+    "2025-26 Curaçao Promé Divishon",
+    "Curaçao league 2026"
+   ],
+   "exige": [
+    "Prom"
+   ]
+  },
+  {
+   "id": "america-CW-es",
+   "liga": "CW",
+   "lang": "es",
+   "pais": "Q25279",
+   "paises": [
+    "Q25279",
+    "Q55"
+   ],
+   "titulos": [
+    "Promé Divishon 2025-26"
+   ],
+   "consultas": [
+    "Promé Divishon 2025-26",
+    "Curazao liga 2026"
+   ],
+   "exige": [
+    "Prom"
+   ]
+  },
+  {
+   "id": "america-AW-en",
+   "liga": "AW",
+   "lang": "en",
+   "pais": "Q21203",
+   "paises": [
+    "Q21203",
+    "Q55"
+   ],
+   "titulos": [
+    "2025–26 Aruban Division di Honor"
+   ],
+   "consultas": [
+    "2025-26 Aruban Division di Honor",
+    "Aruba league 2026"
+   ],
+   "exige": [
+    "Honor"
+   ]
+  },
+  {
+   "id": "america-AW-es",
+   "liga": "AW",
+   "lang": "es",
+   "pais": "Q21203",
+   "paises": [
+    "Q21203",
+    "Q55"
+   ],
+   "titulos": [
+    "División di Honor 2025-26"
+   ],
+   "consultas": [
+    "División di Honor 2025-26",
+    "Aruba liga 2026"
+   ],
+   "exige": [
+    "Honor"
+   ]
+  },
+  {
+   "id": "america-SX-en",
+   "liga": "SX",
+   "lang": "en",
+   "pais": "Q26273",
+   "paises": [
+    "Q26273",
+    "Q55"
+   ],
+   "titulos": [
+    "2025–26 Sint Maarten Premier League"
+   ],
+   "consultas": [
+    "2025-26 Sint Maarten Premier League",
+    "Sint Maarten league 2026"
+   ],
+   "exige": [
+    "Sint Maarten"
+   ]
+  },
+  {
+   "id": "america-BQ-en",
+   "liga": "BQ",
+   "lang": "en",
+   "pais": "Q25396",
+   "paises": [
+    "Q25396",
+    "Q27561",
+    "Q55"
+   ],
+   "titulos": [
+    "2025–26 Bonaire League"
+   ],
+   "consultas": [
+    "2025-26 Bonaire League",
+    "Bonaire league 2026"
+   ],
+   "exige": [
+    "Bonaire"
+   ]
+  },
+  {
+   "id": "america-MQ-en",
+   "liga": "MQ",
+   "lang": "en",
+   "pais": "Q17054",
+   "paises": [
+    "Q17054",
+    "Q142"
+   ],
+   "titulos": [
+    "2025–26 Martinique Championnat National"
+   ],
+   "consultas": [
+    "2025-26 Martinique Championnat National",
+    "Martinique league 2026"
+   ],
+   "exige": [
+    "Martinique"
+   ]
+  },
+  {
+   "id": "america-MQ-es",
+   "liga": "MQ",
+   "lang": "es",
+   "pais": "Q17054",
+   "paises": [
+    "Q17054",
+    "Q142"
+   ],
+   "titulos": [
+    "Campeonato Nacional de Martinica 2025-26"
+   ],
+   "consultas": [
+    "Campeonato Nacional de Martinica 2025-26",
+    "Martinica liga 2026"
+   ],
+   "exige": [
+    "Martinique"
+   ]
+  },
+  {
+   "id": "america-GP-en",
+   "liga": "GP",
+   "lang": "en",
+   "pais": "Q17012",
+   "paises": [
+    "Q17012",
+    "Q142"
+   ],
+   "titulos": [
+    "2025–26 Guadeloupe Division of Honour",
+    "2025–26 Guadeloupe Division d'Honneur"
+   ],
+   "consultas": [
+    "2025-26 Guadeloupe Division of Honour",
+    "Guadeloupe league 2026"
+   ],
+   "exige": [
+    "Guadeloupe"
+   ]
+  },
+  {
+   "id": "america-GF-en",
+   "liga": "GF",
+   "lang": "en",
+   "pais": "Q3769",
+   "paises": [
+    "Q3769",
+    "Q142"
+   ],
+   "titulos": [
+    "2025–26 French Guiana Régional 1"
+   ],
+   "consultas": [
+    "2025-26 French Guiana Régional 1",
+    "French Guiana league 2026"
+   ],
+   "exige": [
+    "Guiana"
+   ]
+  },
+  {
+   "id": "america-MF-en",
+   "liga": "MF",
+   "lang": "en",
+   "pais": "Q126125",
+   "paises": [
+    "Q126125",
+    "Q142"
+   ],
+   "titulos": [
+    "2025–26 Saint-Martin Senior League"
+   ],
+   "consultas": [
+    "2025-26 Saint-Martin Senior League",
+    "Saint Martin league 2026"
+   ],
+   "exige": [
+    "Martin"
+   ]
+  },
+  {
+   "id": "america-BB-en",
+   "liga": "BB",
+   "lang": "en",
+   "pais": "Q244",
+   "paises": [
+    "Q244"
+   ],
+   "titulos": [
+    "2026 Barbados Premier League",
+    "2025 Barbados Premier League"
+   ],
+   "consultas": [
+    "2026 Barbados Premier League",
+    "Barbados league 2026"
+   ],
+   "exige": [
+    "Barbados"
+   ]
+  },
+  {
+   "id": "america-BS-en",
+   "liga": "BS",
+   "lang": "en",
+   "pais": "Q778",
+   "paises": [
+    "Q778"
+   ],
+   "titulos": [
+    "2025–26 BFA Senior League"
+   ],
+   "consultas": [
+    "2025-26 BFA Senior League",
+    "Bahamas league 2026"
+   ],
+   "exige": [
+    "BFA"
+   ]
+  },
+  {
+   "id": "america-BM-en",
+   "liga": "BM",
+   "lang": "en",
+   "pais": "Q23635",
+   "paises": [
+    "Q23635",
+    "Q145"
+   ],
+   "titulos": [
+    "2025–26 Bermudian Premier Division"
+   ],
+   "consultas": [
+    "2025-26 Bermudian Premier Division",
+    "Bermuda league 2026"
+   ],
+   "exige": [
+    "Bermud"
+   ]
+  },
+  {
+   "id": "america-KY-en",
+   "liga": "KY",
+   "lang": "en",
+   "pais": "Q5785",
+   "paises": [
+    "Q5785",
+    "Q145"
+   ],
+   "titulos": [
+    "2025–26 Cayman Islands Premier League"
+   ],
+   "consultas": [
+    "2025-26 Cayman Islands Premier League",
+    "Cayman Islands league 2026"
+   ],
+   "exige": [
+    "Cayman"
+   ]
+  },
+  {
+   "id": "america-LC-en",
+   "liga": "LC",
+   "lang": "en",
+   "pais": "Q760",
+   "paises": [
+    "Q760"
+   ],
+   "titulos": [
+    "2026 SLFA First Division",
+    "2025 SLFA First Division"
+   ],
+   "consultas": [
+    "2026 SLFA First Division",
+    "Saint Lucia league 2026"
+   ],
+   "exige": [
+    "SLFA"
+   ]
+  },
+  {
+   "id": "america-GD-en",
+   "liga": "GD",
+   "lang": "en",
+   "pais": "Q769",
+   "paises": [
+    "Q769"
+   ],
+   "titulos": [
+    "2025–26 GFA Premier Division",
+    "2026 GFA Premier Division"
+   ],
+   "consultas": [
+    "2025-26 GFA Premier Division",
+    "Grenada league 2026"
+   ],
+   "exige": [
+    "GFA"
+   ]
+  },
+  {
+   "id": "america-VC-en",
+   "liga": "VC",
+   "lang": "en",
+   "pais": "Q757",
+   "paises": [
+    "Q757"
+   ],
+   "titulos": [
+    "2025–26 SVGFF Premier Division",
+    "2026 SVGFF Premier Division"
+   ],
+   "consultas": [
+    "2025-26 SVGFF Premier Division",
+    "Saint Vincent and the Grenadines league 2026"
+   ],
+   "exige": [
+    "SVGFF"
+   ]
+  },
+  {
+   "id": "america-KN-en",
+   "liga": "KN",
+   "lang": "en",
+   "pais": "Q763",
+   "paises": [
+    "Q763"
+   ],
+   "titulos": [
+    "2025–26 SKNFA Premier League",
+    "2025–26 SKNFA Super League"
+   ],
+   "consultas": [
+    "2025-26 SKNFA Premier League",
+    "Saint Kitts and Nevis league 2026"
+   ],
+   "exige": [
+    "SKNFA"
+   ]
+  },
+  {
+   "id": "america-AG-en",
+   "liga": "AG",
+   "lang": "en",
+   "pais": "Q781",
+   "paises": [
+    "Q781"
+   ],
+   "titulos": [
+    "2025–26 Antigua and Barbuda Premier Division"
+   ],
+   "consultas": [
+    "2025-26 Antigua and Barbuda Premier Division",
+    "Antigua and Barbuda league 2026"
+   ],
+   "exige": [
+    "Antigua"
+   ]
+  },
+  {
+   "id": "america-DM-en",
+   "liga": "DM",
+   "lang": "en",
+   "pais": "Q784",
+   "paises": [
+    "Q784"
+   ],
+   "titulos": [
+    "2025–26 Dominica Premiere League",
+    "2026 Dominica Premiere League"
+   ],
+   "consultas": [
+    "2025-26 Dominica Premiere League",
+    "Dominica league 2026"
+   ],
+   "exige": [
+    "Dominica"
+   ]
+  },
+  {
+   "id": "america-AI-en",
+   "liga": "AI",
+   "lang": "en",
+   "pais": "Q25228",
+   "paises": [
+    "Q25228",
+    "Q145"
+   ],
+   "titulos": [
+    "2025–26 AFA Senior Male League"
+   ],
+   "consultas": [
+    "2025-26 AFA Senior Male League",
+    "Anguilla league 2026"
+   ],
+   "exige": [
+    "AFA"
+   ]
+  },
+  {
+   "id": "america-VG-en",
+   "liga": "VG",
+   "lang": "en",
+   "pais": "Q25305",
+   "paises": [
+    "Q25305",
+    "Q145"
+   ],
+   "titulos": [
+    "2025–26 BVIFA National Football League"
+   ],
+   "consultas": [
+    "2025-26 BVIFA National Football League",
+    "British Virgin Islands league 2026"
+   ],
+   "exige": [
+    "BVIFA"
+   ]
+  },
+  {
+   "id": "america-VI-en",
+   "liga": "VI",
+   "lang": "en",
+   "pais": "Q11703",
+   "paises": [
+    "Q11703",
+    "Q30"
+   ],
+   "titulos": [
+    "2025–26 U.S. Virgin Islands Premier League"
+   ],
+   "consultas": [
+    "2025-26 U.S. Virgin Islands Premier League",
+    "United States Virgin Islands league 2026"
+   ],
+   "exige": [
+    "Virgin"
+   ]
+  },
+  {
+   "id": "america-TC-en",
+   "liga": "TC",
+   "lang": "en",
+   "pais": "Q18221",
+   "paises": [
+    "Q18221",
+    "Q145"
+   ],
+   "titulos": [
+    "2025–26 Provo Premier League",
+    "2025–26 WIV Provo Premier League"
+   ],
+   "consultas": [
+    "2025-26 Provo Premier League",
+    "Turks and Caicos Islands league 2026"
+   ],
+   "exige": [
+    "Provo"
+   ]
+  },
+  {
+   "id": "america-AR3-en",
+   "liga": "AR3",
+   "lang": "en",
+   "pais": "Q414",
+   "titulos": [
+    "2026 Primera B Metropolitana"
+   ],
+   "consultas": [
+    "2026 Primera B Metropolitana"
+   ],
+   "exige": [
+    "Primera B"
+   ]
+  },
+  {
+   "id": "america-AR3-es",
+   "liga": "AR3",
+   "lang": "es",
+   "pais": "Q414",
+   "titulos": [
+    "Campeonato de Primera B 2026 (Argentina)",
+    "Primera B Metropolitana 2026"
+   ],
+   "consultas": [
+    "Campeonato de Primera B 2026 (Argentina)"
+   ],
+   "exige": [
+    "Primera B"
+   ]
+  },
+  {
+   "id": "america-AR3b-en",
+   "liga": "AR3b",
+   "lang": "en",
+   "pais": "Q414",
+   "titulos": [
+    "2026 Torneo Federal A"
+   ],
+   "consultas": [
+    "2026 Torneo Federal A"
+   ],
+   "exige": [
+    "Federal A"
+   ]
+  },
+  {
+   "id": "america-AR3b-es",
+   "liga": "AR3b",
+   "lang": "es",
+   "pais": "Q414",
+   "titulos": [
+    "Torneo Federal A 2026"
+   ],
+   "consultas": [
+    "Torneo Federal A 2026"
+   ],
+   "exige": [
+    "Federal A"
+   ]
+  },
+  {
+   "id": "america-CL3-en",
+   "liga": "CL3",
+   "lang": "en",
+   "pais": "Q298",
+   "titulos": [
+    "2026 Segunda División Profesional de Chile"
+   ],
+   "consultas": [
+    "2026 Segunda División Profesional de Chile"
+   ],
+   "exige": [
+    "Segunda"
+   ]
+  },
+  {
+   "id": "america-CL3-es",
+   "liga": "CL3",
+   "lang": "es",
+   "pais": "Q298",
+   "titulos": [
+    "Segunda División Profesional de Chile 2026"
+   ],
+   "consultas": [
+    "Segunda División Profesional de Chile 2026"
+   ],
+   "exige": [
+    "Segunda"
+   ]
+  },
+  {
+   "id": "america-PE3-en",
+   "liga": "PE3",
+   "lang": "en",
+   "pais": "Q419",
+   "titulos": [
+    "2026 Liga 3 (Peru)"
+   ],
+   "consultas": [
+    "2026 Liga 3 (Peru)"
+   ],
+   "exige": [
+    "Liga 3"
+   ]
+  },
+  {
+   "id": "america-PE3-es",
+   "liga": "PE3",
+   "lang": "es",
+   "pais": "Q419",
+   "titulos": [
+    "Liga 3 2026 (Perú)",
+    "Liga 3 de Perú 2026"
+   ],
+   "consultas": [
+    "Liga 3 2026 (Perú)"
+   ],
+   "exige": [
+    "Liga 3"
+   ]
+  },
+  {
+   "id": "america-PY3-en",
+   "liga": "PY3",
+   "lang": "en",
+   "pais": "Q733",
+   "titulos": [
+    "2026 Paraguayan Primera B"
+   ],
+   "consultas": [
+    "2026 Paraguayan Primera B"
+   ],
+   "exige": [
+    "Primera B"
+   ]
+  },
+  {
+   "id": "america-PY3-es",
+   "liga": "PY3",
+   "lang": "es",
+   "pais": "Q733",
+   "titulos": [
+    "Primera B 2026 (Paraguay)",
+    "Primera División B de Paraguay 2026"
+   ],
+   "consultas": [
+    "Primera B 2026 (Paraguay)"
+   ],
+   "exige": [
+    "Primera B"
+   ]
+  },
+  {
+   "id": "america-UY3-en",
+   "liga": "UY3",
+   "lang": "en",
+   "pais": "Q77",
+   "titulos": [
+    "2026 Uruguayan Primera División Amateur",
+    "2026 Uruguayan Divisional C"
+   ],
+   "consultas": [
+    "2026 Uruguayan Primera División Amateur"
+   ],
+   "exige": [
+    "Uruguay"
+   ]
+  },
+  {
+   "id": "america-UY3-es",
+   "liga": "UY3",
+   "lang": "es",
+   "pais": "Q77",
+   "titulos": [
+    "Campeonato Uruguayo de Primera División Amateur 2026",
+    "Divisional C 2026"
+   ],
+   "consultas": [
+    "Campeonato Uruguayo de Primera División Amateur 2026"
+   ],
+   "exige": [
+    "Uruguay"
+   ]
+  },
+  {
+   "id": "america-VE3-en",
+   "liga": "VE3",
+   "lang": "en",
+   "pais": "Q717",
+   "titulos": [
+    "2026 Liga FUTVE 3"
+   ],
+   "consultas": [
+    "2026 Liga FUTVE 3"
+   ],
+   "exige": [
+    "Venezuela"
+   ]
+  },
+  {
+   "id": "america-VE3-es",
+   "liga": "VE3",
+   "lang": "es",
+   "pais": "Q717",
+   "titulos": [
+    "Tercera División de Venezuela 2026",
+    "Liga FUTVE 3 2026"
+   ],
+   "consultas": [
+    "Tercera División de Venezuela 2026"
+   ],
+   "exige": [
+    "Venezuela"
+   ]
+  },
+  {
+   "id": "america-BO3-es",
+   "liga": "BO3",
+   "lang": "es",
+   "pais": "Q750",
+   "titulos": [
+    "Copa Simón Bolívar 2026 (Bolivia)"
+   ],
+   "consultas": [
+    "Copa Simón Bolívar 2026 (Bolivia)"
+   ],
+   "exige": [
+    "Bolívar"
+   ]
+  },
+  {
+   "id": "america-EC3-en",
+   "liga": "EC3",
+   "lang": "en",
+   "pais": "Q736",
+   "titulos": [
+    "2026 Ecuadorian Segunda Categoría"
+   ],
+   "consultas": [
+    "2026 Ecuadorian Segunda Categoría"
+   ],
+   "exige": [
+    "Segunda"
+   ]
+  },
+  {
+   "id": "america-EC3-es",
+   "liga": "EC3",
+   "lang": "es",
+   "pais": "Q736",
+   "titulos": [
+    "Segunda Categoría de Ecuador 2026"
+   ],
+   "consultas": [
+    "Segunda Categoría de Ecuador 2026"
+   ],
+   "exige": [
+    "Segunda"
+   ]
+  },
+  {
+   "id": "estadual2-AC",
+   "uf": "AC",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Acreano de Futebol de 2026 – Série A2",
+    "Campeonato Acreano de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Acreano de Futebol de 2026 - Série A2",
+    "Campeonato Acreano de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Acreano de Futebol de 2026 – Série B",
+    "Campeonato Acreano de Futebol de 2026 – Módulo II",
+    "Campeonato Acreano de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Acreano 2026 Segunda Divisão",
+    "Campeonato Acreano 2026 Série A2",
+    "Campeonato Acreano 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Acreano"
+   ]
+  },
+  {
+   "id": "estadual2-AL",
+   "uf": "AL",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Alagoano de Futebol de 2026 – Série A2",
+    "Campeonato Alagoano de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Alagoano de Futebol de 2026 - Série A2",
+    "Campeonato Alagoano de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Alagoano de Futebol de 2026 – Série B",
+    "Campeonato Alagoano de Futebol de 2026 – Módulo II",
+    "Campeonato Alagoano de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Alagoano 2026 Segunda Divisão",
+    "Campeonato Alagoano 2026 Série A2",
+    "Campeonato Alagoano 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Alagoano"
+   ]
+  },
+  {
+   "id": "estadual2-AP",
+   "uf": "AP",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Amapaense de Futebol de 2026 – Série A2",
+    "Campeonato Amapaense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Amapaense de Futebol de 2026 - Série A2",
+    "Campeonato Amapaense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Amapaense de Futebol de 2026 – Série B",
+    "Campeonato Amapaense de Futebol de 2026 – Módulo II",
+    "Campeonato Amapaense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Amapaense 2026 Segunda Divisão",
+    "Campeonato Amapaense 2026 Série A2",
+    "Campeonato Amapaense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Amapaense"
+   ]
+  },
+  {
+   "id": "estadual2-AM",
+   "uf": "AM",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Amazonense de Futebol de 2026 – Série A2",
+    "Campeonato Amazonense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Amazonense de Futebol de 2026 - Série A2",
+    "Campeonato Amazonense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Amazonense de Futebol de 2026 – Série B",
+    "Campeonato Amazonense de Futebol de 2026 – Módulo II",
+    "Campeonato Amazonense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Amazonense 2026 Segunda Divisão",
+    "Campeonato Amazonense 2026 Série A2",
+    "Campeonato Amazonense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Amazonense"
+   ]
+  },
+  {
+   "id": "estadual2-BA",
+   "uf": "BA",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Baiano de Futebol de 2026 – Série A2",
+    "Campeonato Baiano de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Baiano de Futebol de 2026 - Série A2",
+    "Campeonato Baiano de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Baiano de Futebol de 2026 – Série B",
+    "Campeonato Baiano de Futebol de 2026 – Módulo II",
+    "Campeonato Baiano de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Baiano 2026 Segunda Divisão",
+    "Campeonato Baiano 2026 Série A2",
+    "Campeonato Baiano 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Baiano"
+   ]
+  },
+  {
+   "id": "estadual2-CE",
+   "uf": "CE",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Cearense de Futebol de 2026 – Série A2",
+    "Campeonato Cearense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Cearense de Futebol de 2026 - Série A2",
+    "Campeonato Cearense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Cearense de Futebol de 2026 – Série B",
+    "Campeonato Cearense de Futebol de 2026 – Módulo II",
+    "Campeonato Cearense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Cearense 2026 Segunda Divisão",
+    "Campeonato Cearense 2026 Série A2",
+    "Campeonato Cearense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Cearense"
+   ]
+  },
+  {
+   "id": "estadual2-DF",
+   "uf": "DF",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Brasiliense de Futebol de 2026 – Série A2",
+    "Campeonato Brasiliense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Brasiliense de Futebol de 2026 - Série A2",
+    "Campeonato Brasiliense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Brasiliense de Futebol de 2026 – Série B",
+    "Campeonato Brasiliense de Futebol de 2026 – Módulo II",
+    "Campeonato Brasiliense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Brasiliense 2026 Segunda Divisão",
+    "Campeonato Brasiliense 2026 Série A2",
+    "Campeonato Brasiliense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Brasiliense"
+   ]
+  },
+  {
+   "id": "estadual2-ES",
+   "uf": "ES",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Capixaba de Futebol de 2026 – Série A2",
+    "Campeonato Capixaba de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Capixaba de Futebol de 2026 - Série A2",
+    "Campeonato Capixaba de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Capixaba de Futebol de 2026 – Série B",
+    "Campeonato Capixaba de Futebol de 2026 – Módulo II",
+    "Campeonato Capixaba de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Capixaba 2026 Segunda Divisão",
+    "Campeonato Capixaba 2026 Série A2",
+    "Campeonato Capixaba 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Capixaba"
+   ]
+  },
+  {
+   "id": "estadual2-GO",
+   "uf": "GO",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Goiano de Futebol de 2026 – Série A2",
+    "Campeonato Goiano de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Goiano de Futebol de 2026 - Série A2",
+    "Campeonato Goiano de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Goiano de Futebol de 2026 – Série B",
+    "Campeonato Goiano de Futebol de 2026 – Módulo II",
+    "Campeonato Goiano de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Goiano 2026 Segunda Divisão",
+    "Campeonato Goiano 2026 Série A2",
+    "Campeonato Goiano 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Goiano"
+   ]
+  },
+  {
+   "id": "estadual2-MA",
+   "uf": "MA",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Maranhense de Futebol de 2026 – Série A2",
+    "Campeonato Maranhense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Maranhense de Futebol de 2026 - Série A2",
+    "Campeonato Maranhense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Maranhense de Futebol de 2026 – Série B",
+    "Campeonato Maranhense de Futebol de 2026 – Módulo II",
+    "Campeonato Maranhense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Maranhense 2026 Segunda Divisão",
+    "Campeonato Maranhense 2026 Série A2",
+    "Campeonato Maranhense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Maranhense"
+   ]
+  },
+  {
+   "id": "estadual2-MT",
+   "uf": "MT",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Mato-Grossense de Futebol de 2026 – Série A2",
+    "Campeonato Mato-Grossense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Mato-Grossense de Futebol de 2026 - Série A2",
+    "Campeonato Mato-Grossense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Mato-Grossense de Futebol de 2026 – Série B",
+    "Campeonato Mato-Grossense de Futebol de 2026 – Módulo II",
+    "Campeonato Mato-Grossense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Mato-Grossense 2026 Segunda Divisão",
+    "Campeonato Mato-Grossense 2026 Série A2",
+    "Campeonato Mato-Grossense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Mato"
+   ]
+  },
+  {
+   "id": "estadual2-MS",
+   "uf": "MS",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Sul-Mato-Grossense de Futebol de 2026 – Série A2",
+    "Campeonato Sul-Mato-Grossense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Sul-Mato-Grossense de Futebol de 2026 - Série A2",
+    "Campeonato Sul-Mato-Grossense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Sul-Mato-Grossense de Futebol de 2026 – Série B",
+    "Campeonato Sul-Mato-Grossense de Futebol de 2026 – Módulo II",
+    "Campeonato Sul-Mato-Grossense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Sul-Mato-Grossense 2026 Segunda Divisão",
+    "Campeonato Sul-Mato-Grossense 2026 Série A2",
+    "Campeonato Sul-Mato-Grossense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Sul"
+   ]
+  },
+  {
+   "id": "estadual2-MG",
+   "uf": "MG",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Mineiro de Futebol de 2026 – Série A2",
+    "Campeonato Mineiro de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Mineiro de Futebol de 2026 - Série A2",
+    "Campeonato Mineiro de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Mineiro de Futebol de 2026 – Série B",
+    "Campeonato Mineiro de Futebol de 2026 – Módulo II",
+    "Campeonato Mineiro de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Mineiro 2026 Segunda Divisão",
+    "Campeonato Mineiro 2026 Série A2",
+    "Campeonato Mineiro 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Mineiro"
+   ]
+  },
+  {
+   "id": "estadual2-PA",
+   "uf": "PA",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Paraense de Futebol de 2026 – Série A2",
+    "Campeonato Paraense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Paraense de Futebol de 2026 - Série A2",
+    "Campeonato Paraense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Paraense de Futebol de 2026 – Série B",
+    "Campeonato Paraense de Futebol de 2026 – Módulo II",
+    "Campeonato Paraense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Paraense 2026 Segunda Divisão",
+    "Campeonato Paraense 2026 Série A2",
+    "Campeonato Paraense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Paraense"
+   ]
+  },
+  {
+   "id": "estadual2-PB",
+   "uf": "PB",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Paraibano de Futebol de 2026 – Série A2",
+    "Campeonato Paraibano de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Paraibano de Futebol de 2026 - Série A2",
+    "Campeonato Paraibano de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Paraibano de Futebol de 2026 – Série B",
+    "Campeonato Paraibano de Futebol de 2026 – Módulo II",
+    "Campeonato Paraibano de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Paraibano 2026 Segunda Divisão",
+    "Campeonato Paraibano 2026 Série A2",
+    "Campeonato Paraibano 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Paraibano"
+   ]
+  },
+  {
+   "id": "estadual2-PR",
+   "uf": "PR",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Paranaense de Futebol de 2026 – Série A2",
+    "Campeonato Paranaense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Paranaense de Futebol de 2026 - Série A2",
+    "Campeonato Paranaense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Paranaense de Futebol de 2026 – Série B",
+    "Campeonato Paranaense de Futebol de 2026 – Módulo II",
+    "Campeonato Paranaense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Paranaense 2026 Segunda Divisão",
+    "Campeonato Paranaense 2026 Série A2",
+    "Campeonato Paranaense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Paranaense"
+   ]
+  },
+  {
+   "id": "estadual2-PE",
+   "uf": "PE",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Pernambucano de Futebol de 2026 – Série A2",
+    "Campeonato Pernambucano de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Pernambucano de Futebol de 2026 - Série A2",
+    "Campeonato Pernambucano de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Pernambucano de Futebol de 2026 – Série B",
+    "Campeonato Pernambucano de Futebol de 2026 – Módulo II",
+    "Campeonato Pernambucano de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Pernambucano 2026 Segunda Divisão",
+    "Campeonato Pernambucano 2026 Série A2",
+    "Campeonato Pernambucano 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Pernambucano"
+   ]
+  },
+  {
+   "id": "estadual2-PI",
+   "uf": "PI",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Piauiense de Futebol de 2026 – Série A2",
+    "Campeonato Piauiense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Piauiense de Futebol de 2026 - Série A2",
+    "Campeonato Piauiense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Piauiense de Futebol de 2026 – Série B",
+    "Campeonato Piauiense de Futebol de 2026 – Módulo II",
+    "Campeonato Piauiense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Piauiense 2026 Segunda Divisão",
+    "Campeonato Piauiense 2026 Série A2",
+    "Campeonato Piauiense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Piauiense"
+   ]
+  },
+  {
+   "id": "estadual2-RJ",
+   "uf": "RJ",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Carioca de Futebol de 2026 – Série A2",
+    "Campeonato Carioca de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Carioca de Futebol de 2026 - Série A2",
+    "Campeonato Carioca de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Carioca de Futebol de 2026 – Série B",
+    "Campeonato Carioca de Futebol de 2026 – Módulo II",
+    "Campeonato Carioca de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Carioca 2026 Segunda Divisão",
+    "Campeonato Carioca 2026 Série A2",
+    "Campeonato Carioca 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Carioca"
+   ]
+  },
+  {
+   "id": "estadual2-RN",
+   "uf": "RN",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Potiguar de Futebol de 2026 – Série A2",
+    "Campeonato Potiguar de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Potiguar de Futebol de 2026 - Série A2",
+    "Campeonato Potiguar de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Potiguar de Futebol de 2026 – Série B",
+    "Campeonato Potiguar de Futebol de 2026 – Módulo II",
+    "Campeonato Potiguar de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Potiguar 2026 Segunda Divisão",
+    "Campeonato Potiguar 2026 Série A2",
+    "Campeonato Potiguar 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Potiguar"
+   ]
+  },
+  {
+   "id": "estadual2-RS",
+   "uf": "RS",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Gaúcho de Futebol de 2026 – Série A2",
+    "Campeonato Gaúcho de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Gaúcho de Futebol de 2026 - Série A2",
+    "Campeonato Gaúcho de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Gaúcho de Futebol de 2026 – Série B",
+    "Campeonato Gaúcho de Futebol de 2026 – Módulo II",
+    "Campeonato Gaúcho de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Gaúcho 2026 Segunda Divisão",
+    "Campeonato Gaúcho 2026 Série A2",
+    "Campeonato Gaúcho 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Gaúcho"
+   ]
+  },
+  {
+   "id": "estadual2-RO",
+   "uf": "RO",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Rondoniense de Futebol de 2026 – Série A2",
+    "Campeonato Rondoniense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Rondoniense de Futebol de 2026 - Série A2",
+    "Campeonato Rondoniense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Rondoniense de Futebol de 2026 – Série B",
+    "Campeonato Rondoniense de Futebol de 2026 – Módulo II",
+    "Campeonato Rondoniense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Rondoniense 2026 Segunda Divisão",
+    "Campeonato Rondoniense 2026 Série A2",
+    "Campeonato Rondoniense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Rondoniense"
+   ]
+  },
+  {
+   "id": "estadual2-RR",
+   "uf": "RR",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Roraimense de Futebol de 2026 – Série A2",
+    "Campeonato Roraimense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Roraimense de Futebol de 2026 - Série A2",
+    "Campeonato Roraimense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Roraimense de Futebol de 2026 – Série B",
+    "Campeonato Roraimense de Futebol de 2026 – Módulo II",
+    "Campeonato Roraimense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Roraimense 2026 Segunda Divisão",
+    "Campeonato Roraimense 2026 Série A2",
+    "Campeonato Roraimense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Roraimense"
+   ]
+  },
+  {
+   "id": "estadual2-SC",
+   "uf": "SC",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Catarinense de Futebol de 2026 – Série A2",
+    "Campeonato Catarinense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Catarinense de Futebol de 2026 - Série A2",
+    "Campeonato Catarinense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Catarinense de Futebol de 2026 – Série B",
+    "Campeonato Catarinense de Futebol de 2026 – Módulo II",
+    "Campeonato Catarinense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Catarinense 2026 Segunda Divisão",
+    "Campeonato Catarinense 2026 Série A2",
+    "Campeonato Catarinense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Catarinense"
+   ]
+  },
+  {
+   "id": "estadual2-SP",
+   "uf": "SP",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Paulista de Futebol de 2026 – Série A2",
+    "Campeonato Paulista de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Paulista de Futebol de 2026 - Série A2",
+    "Campeonato Paulista de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Paulista de Futebol de 2026 – Série B",
+    "Campeonato Paulista de Futebol de 2026 – Módulo II",
+    "Campeonato Paulista de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Paulista 2026 Segunda Divisão",
+    "Campeonato Paulista 2026 Série A2",
+    "Campeonato Paulista 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Paulista"
+   ]
+  },
+  {
+   "id": "estadual2-SE",
+   "uf": "SE",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Sergipano de Futebol de 2026 – Série A2",
+    "Campeonato Sergipano de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Sergipano de Futebol de 2026 - Série A2",
+    "Campeonato Sergipano de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Sergipano de Futebol de 2026 – Série B",
+    "Campeonato Sergipano de Futebol de 2026 – Módulo II",
+    "Campeonato Sergipano de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Sergipano 2026 Segunda Divisão",
+    "Campeonato Sergipano 2026 Série A2",
+    "Campeonato Sergipano 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Sergipano"
+   ]
+  },
+  {
+   "id": "estadual2-TO",
+   "uf": "TO",
+   "divisao": 2,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Campeonato Tocantinense de Futebol de 2026 – Série A2",
+    "Campeonato Tocantinense de Futebol de 2026 – Segunda Divisão",
+    "Campeonato Tocantinense de Futebol de 2026 - Série A2",
+    "Campeonato Tocantinense de Futebol de 2026 - Segunda Divisão",
+    "Campeonato Tocantinense de Futebol de 2026 – Série B",
+    "Campeonato Tocantinense de Futebol de 2026 – Módulo II",
+    "Campeonato Tocantinense de Futebol de 2026 – Série Prata"
+   ],
+   "consultas": [
+    "Campeonato Tocantinense 2026 Segunda Divisão",
+    "Campeonato Tocantinense 2026 Série A2",
+    "Campeonato Tocantinense 2026 Série B"
+   ],
+   "exige": [
+    "2026",
+    "Tocantinense"
+   ]
+  },
+  {
+   "id": "copa-libertadores",
+   "copa": true,
+   "lang": "es",
+   "titulos": [
+    "Copa Libertadores 2026"
+   ],
+   "consultas": [
+    "Copa Libertadores 2026"
+   ],
+   "exige": [
+    "Libertadores"
+   ]
+  },
+  {
+   "id": "copa-sulamericana",
+   "copa": true,
+   "lang": "es",
+   "titulos": [
+    "Copa Sudamericana 2026"
+   ],
+   "consultas": [
+    "Copa Sudamericana 2026"
+   ],
+   "exige": [
+    "Sudamericana"
+   ]
+  },
+  {
+   "id": "copa-recopa",
+   "copa": true,
+   "lang": "es",
+   "titulos": [
+    "Recopa Sudamericana 2026"
+   ],
+   "consultas": [
+    "Recopa Sudamericana 2026"
+   ],
+   "exige": [
+    "Recopa"
+   ]
+  },
+  {
+   "id": "copa-concacaf",
+   "copa": true,
+   "lang": "en",
+   "titulos": [
+    "2026 CONCACAF Champions Cup"
+   ],
+   "consultas": [
+    "2026 CONCACAF Champions Cup"
+   ],
+   "exige": [
+    "Champions Cup"
+   ]
+  },
+  {
+   "id": "copa-centroamericana",
+   "copa": true,
+   "lang": "en",
+   "titulos": [
+    "2025 CONCACAF Central American Cup"
+   ],
+   "consultas": [
+    "2025 CONCACAF Central American Cup"
+   ],
+   "exige": [
+    "Central American"
+   ]
+  },
+  {
+   "id": "copa-caribe",
+   "copa": true,
+   "lang": "en",
+   "titulos": [
+    "2025 CONCACAF Caribbean Cup"
+   ],
+   "consultas": [
+    "2025 CONCACAF Caribbean Cup"
+   ],
+   "exige": [
+    "Caribbean"
+   ]
+  },
+  {
+   "id": "copa-leagues",
+   "copa": true,
+   "lang": "en",
+   "titulos": [
+    "2026 Leagues Cup",
+    "2025 Leagues Cup"
+   ],
+   "consultas": [
+    "2026 Leagues Cup"
+   ],
+   "exige": [
+    "Leagues Cup"
+   ]
+  },
+  {
+   "id": "copa-nordeste",
+   "copa": true,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Copa do Nordeste de Futebol de 2026"
+   ],
+   "consultas": [
+    "Copa do Nordeste de Futebol de 2026"
+   ],
+   "exige": [
+    "Nordeste"
+   ]
+  },
+  {
+   "id": "copa-verde",
+   "copa": true,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Copa Verde de 2026"
+   ],
+   "consultas": [
+    "Copa Verde de 2026"
+   ],
+   "exige": [
+    "Copa Verde"
+   ]
+  },
+  {
+   "id": "copa-sulsudeste",
+   "copa": true,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Copa Sul-Sudeste de 2026"
+   ],
+   "consultas": [
+    "Copa Sul-Sudeste de 2026"
+   ],
+   "exige": [
+    "Sul-Sudeste"
+   ]
+  },
+  {
+   "id": "copa-supercopa",
+   "copa": true,
+   "lang": "pt",
+   "pais": "Q155",
+   "titulos": [
+    "Supercopa do Brasil de 2026"
+   ],
+   "consultas": [
+    "Supercopa do Brasil de 2026"
+   ],
+   "exige": [
+    "Supercopa"
+   ]
+  },
+  {
+   "id": "copa-AR",
+   "copa": true,
+   "lang": "es",
+   "pais": "Q414",
+   "titulos": [
+    "Copa Argentina 2026"
+   ],
+   "consultas": [
+    "Copa Argentina 2026"
+   ],
+   "exige": [
+    "Copa Argentina"
+   ]
+  },
+  {
+   "id": "copa-CL",
+   "copa": true,
+   "lang": "es",
+   "pais": "Q298",
+   "titulos": [
+    "Copa Chile 2026"
+   ],
+   "consultas": [
+    "Copa Chile 2026"
+   ],
+   "exige": [
+    "Copa Chile"
+   ]
+  },
+  {
+   "id": "copa-CO",
+   "copa": true,
+   "lang": "es",
+   "pais": "Q739",
+   "titulos": [
+    "Copa Colombia 2026"
+   ],
+   "consultas": [
+    "Copa Colombia 2026"
+   ],
+   "exige": [
+    "Copa Colombia"
+   ]
+  },
+  {
+   "id": "copa-EC",
+   "copa": true,
+   "lang": "es",
+   "pais": "Q736",
+   "titulos": [
+    "Copa Ecuador 2026"
+   ],
+   "consultas": [
+    "Copa Ecuador 2026"
+   ],
+   "exige": [
+    "Copa Ecuador"
+   ]
+  },
+  {
+   "id": "copa-PY",
+   "copa": true,
+   "lang": "es",
+   "pais": "Q733",
+   "titulos": [
+    "Copa Paraguay 2026"
+   ],
+   "consultas": [
+    "Copa Paraguay 2026"
+   ],
+   "exige": [
+    "Copa Paraguay"
+   ]
+  },
+  {
+   "id": "copa-UY",
+   "copa": true,
+   "lang": "es",
+   "pais": "Q77",
+   "titulos": [
+    "Copa AUF Uruguay 2026"
+   ],
+   "consultas": [
+    "Copa AUF Uruguay 2026"
+   ],
+   "exige": [
+    "Copa AUF"
+   ]
+  },
+  {
+   "id": "copa-VE",
+   "copa": true,
+   "lang": "es",
+   "pais": "Q717",
+   "titulos": [
+    "Copa Venezuela 2026"
+   ],
+   "consultas": [
+    "Copa Venezuela 2026"
+   ],
+   "exige": [
+    "Copa Venezuela"
+   ]
+  },
+  {
+   "id": "copa-US",
+   "copa": true,
+   "lang": "en",
+   "pais": "Q30",
+   "titulos": [
+    "2026 U.S. Open Cup"
+   ],
+   "consultas": [
+    "2026 U.S. Open Cup"
+   ],
+   "exige": [
+    "Open Cup"
+   ]
+  },
+  {
+   "id": "copa-CA",
+   "copa": true,
+   "lang": "en",
+   "pais": "Q16",
+   "titulos": [
+    "2026 Canadian Championship"
+   ],
+   "consultas": [
+    "2026 Canadian Championship"
+   ],
+   "exige": [
+    "Canadian Championship"
+   ]
+  },
+  {
+   "id": "copa-MX",
+   "copa": true,
+   "lang": "es",
+   "pais": "Q96",
+   "titulos": [
+    "Copa México 2026",
+    "Campeón de Campeones 2026"
+   ],
+   "consultas": [
+    "Copa México 2026"
+   ],
+   "exige": [
+    "2026"
+   ]
+  },
+  {
+   "id": "selecao-BR",
+   "selecao": "BR",
+   "lang": "en",
+   "titulos": [
+    "Brazil national football team"
+   ],
+   "consultas": [
+    "Brazil national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-AR",
+   "selecao": "AR",
+   "lang": "en",
+   "titulos": [
+    "Argentina national football team"
+   ],
+   "consultas": [
+    "Argentina national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-BO",
+   "selecao": "BO",
+   "lang": "en",
+   "titulos": [
+    "Bolivia national football team"
+   ],
+   "consultas": [
+    "Bolivia national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-CL",
+   "selecao": "CL",
+   "lang": "en",
+   "titulos": [
+    "Chile national football team"
+   ],
+   "consultas": [
+    "Chile national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-CO",
+   "selecao": "CO",
+   "lang": "en",
+   "titulos": [
+    "Colombia national football team"
+   ],
+   "consultas": [
+    "Colombia national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-EC",
+   "selecao": "EC",
+   "lang": "en",
+   "titulos": [
+    "Ecuador national football team"
+   ],
+   "consultas": [
+    "Ecuador national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-PY",
+   "selecao": "PY",
+   "lang": "en",
+   "titulos": [
+    "Paraguay national football team"
+   ],
+   "consultas": [
+    "Paraguay national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-PE",
+   "selecao": "PE",
+   "lang": "en",
+   "titulos": [
+    "Peru national football team"
+   ],
+   "consultas": [
+    "Peru national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-UY",
+   "selecao": "UY",
+   "lang": "en",
+   "titulos": [
+    "Uruguay national football team"
+   ],
+   "consultas": [
+    "Uruguay national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-VE",
+   "selecao": "VE",
+   "lang": "en",
+   "titulos": [
+    "Venezuela national football team"
+   ],
+   "consultas": [
+    "Venezuela national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-MX",
+   "selecao": "MX",
+   "lang": "en",
+   "titulos": [
+    "Mexico national football team"
+   ],
+   "consultas": [
+    "Mexico national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-US",
+   "selecao": "US",
+   "lang": "en",
+   "titulos": [
+    "United States men's national soccer team"
+   ],
+   "consultas": [
+    "United States national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-CA",
+   "selecao": "CA",
+   "lang": "en",
+   "titulos": [
+    "Canada men's national soccer team"
+   ],
+   "consultas": [
+    "Canada national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-CR",
+   "selecao": "CR",
+   "lang": "en",
+   "titulos": [
+    "Costa Rica national football team"
+   ],
+   "consultas": [
+    "Costa Rica national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-HN",
+   "selecao": "HN",
+   "lang": "en",
+   "titulos": [
+    "Honduras national football team",
+    "Honduras men's national football team"
+   ],
+   "consultas": [
+    "Honduras national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-GT",
+   "selecao": "GT",
+   "lang": "en",
+   "titulos": [
+    "Guatemala national football team",
+    "Guatemala men's national football team"
+   ],
+   "consultas": [
+    "Guatemala national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-SV",
+   "selecao": "SV",
+   "lang": "en",
+   "titulos": [
+    "El Salvador national football team",
+    "El Salvador men's national football team"
+   ],
+   "consultas": [
+    "El Salvador national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-PA",
+   "selecao": "PA",
+   "lang": "en",
+   "titulos": [
+    "Panama national football team",
+    "Panama men's national football team"
+   ],
+   "consultas": [
+    "Panama national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-NI",
+   "selecao": "NI",
+   "lang": "en",
+   "titulos": [
+    "Nicaragua national football team",
+    "Nicaragua men's national football team"
+   ],
+   "consultas": [
+    "Nicaragua national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-BZ",
+   "selecao": "BZ",
+   "lang": "en",
+   "titulos": [
+    "Belize national football team",
+    "Belize men's national football team"
+   ],
+   "consultas": [
+    "Belize national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-JM",
+   "selecao": "JM",
+   "lang": "en",
+   "titulos": [
+    "Jamaica national football team",
+    "Jamaica men's national football team"
+   ],
+   "consultas": [
+    "Jamaica national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-TT",
+   "selecao": "TT",
+   "lang": "en",
+   "titulos": [
+    "Trinidad and Tobago national football team",
+    "Trinidad and Tobago men's national football team"
+   ],
+   "consultas": [
+    "Trinidad and Tobago national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-HT",
+   "selecao": "HT",
+   "lang": "en",
+   "titulos": [
+    "Haiti national football team",
+    "Haiti men's national football team"
+   ],
+   "consultas": [
+    "Haiti national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-DO",
+   "selecao": "DO",
+   "lang": "en",
+   "titulos": [
+    "Dominican Republic national football team",
+    "Dominican Republic men's national football team"
+   ],
+   "consultas": [
+    "Dominican Republic national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-CU",
+   "selecao": "CU",
+   "lang": "en",
+   "titulos": [
+    "Cuba national football team",
+    "Cuba men's national football team"
+   ],
+   "consultas": [
+    "Cuba national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-PR",
+   "selecao": "PR",
+   "lang": "en",
+   "titulos": [
+    "Puerto Rico national football team",
+    "Puerto Rico men's national football team"
+   ],
+   "consultas": [
+    "Puerto Rico national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-SR",
+   "selecao": "SR",
+   "lang": "en",
+   "titulos": [
+    "Suriname national football team",
+    "Suriname men's national football team"
+   ],
+   "consultas": [
+    "Suriname national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-GY",
+   "selecao": "GY",
+   "lang": "en",
+   "titulos": [
+    "Guyana national football team",
+    "Guyana men's national football team"
+   ],
+   "consultas": [
+    "Guyana national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-CW",
+   "selecao": "CW",
+   "lang": "en",
+   "titulos": [
+    "Curaçao national football team",
+    "Curaçao men's national football team"
+   ],
+   "consultas": [
+    "Curaçao national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-AW",
+   "selecao": "AW",
+   "lang": "en",
+   "titulos": [
+    "Aruba national football team",
+    "Aruba men's national football team"
+   ],
+   "consultas": [
+    "Aruba national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-SX",
+   "selecao": "SX",
+   "lang": "en",
+   "titulos": [
+    "Sint Maarten national football team",
+    "Sint Maarten men's national football team"
+   ],
+   "consultas": [
+    "Sint Maarten national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-BQ",
+   "selecao": "BQ",
+   "lang": "en",
+   "titulos": [
+    "Bonaire national football team",
+    "Bonaire men's national football team"
+   ],
+   "consultas": [
+    "Bonaire national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-MQ",
+   "selecao": "MQ",
+   "lang": "en",
+   "titulos": [
+    "Martinique national football team",
+    "Martinique men's national football team"
+   ],
+   "consultas": [
+    "Martinique national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-GP",
+   "selecao": "GP",
+   "lang": "en",
+   "titulos": [
+    "Guadeloupe national football team",
+    "Guadeloupe men's national football team"
+   ],
+   "consultas": [
+    "Guadeloupe national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-GF",
+   "selecao": "GF",
+   "lang": "en",
+   "titulos": [
+    "French Guiana national football team",
+    "French Guiana men's national football team"
+   ],
+   "consultas": [
+    "French Guiana national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-MF",
+   "selecao": "MF",
+   "lang": "en",
+   "titulos": [
+    "Saint Martin national football team",
+    "Saint Martin men's national football team"
+   ],
+   "consultas": [
+    "Saint Martin national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-BB",
+   "selecao": "BB",
+   "lang": "en",
+   "titulos": [
+    "Barbados national football team",
+    "Barbados men's national football team"
+   ],
+   "consultas": [
+    "Barbados national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-BS",
+   "selecao": "BS",
+   "lang": "en",
+   "titulos": [
+    "Bahamas national football team",
+    "Bahamas men's national football team"
+   ],
+   "consultas": [
+    "Bahamas national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-BM",
+   "selecao": "BM",
+   "lang": "en",
+   "titulos": [
+    "Bermuda national football team",
+    "Bermuda men's national football team"
+   ],
+   "consultas": [
+    "Bermuda national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-KY",
+   "selecao": "KY",
+   "lang": "en",
+   "titulos": [
+    "Cayman Islands national football team",
+    "Cayman Islands men's national football team"
+   ],
+   "consultas": [
+    "Cayman Islands national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-LC",
+   "selecao": "LC",
+   "lang": "en",
+   "titulos": [
+    "Saint Lucia national football team",
+    "Saint Lucia men's national football team"
+   ],
+   "consultas": [
+    "Saint Lucia national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-GD",
+   "selecao": "GD",
+   "lang": "en",
+   "titulos": [
+    "Grenada national football team",
+    "Grenada men's national football team"
+   ],
+   "consultas": [
+    "Grenada national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-VC",
+   "selecao": "VC",
+   "lang": "en",
+   "titulos": [
+    "Saint Vincent and the Grenadines national football team",
+    "Saint Vincent and the Grenadines men's national football team"
+   ],
+   "consultas": [
+    "Saint Vincent and the Grenadines national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-KN",
+   "selecao": "KN",
+   "lang": "en",
+   "titulos": [
+    "Saint Kitts and Nevis national football team",
+    "Saint Kitts and Nevis men's national football team"
+   ],
+   "consultas": [
+    "Saint Kitts and Nevis national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-AG",
+   "selecao": "AG",
+   "lang": "en",
+   "titulos": [
+    "Antigua and Barbuda national football team",
+    "Antigua and Barbuda men's national football team"
+   ],
+   "consultas": [
+    "Antigua and Barbuda national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-DM",
+   "selecao": "DM",
+   "lang": "en",
+   "titulos": [
+    "Dominica national football team",
+    "Dominica men's national football team"
+   ],
+   "consultas": [
+    "Dominica national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-MS",
+   "selecao": "MS",
+   "lang": "en",
+   "titulos": [
+    "Montserrat national football team",
+    "Montserrat men's national football team"
+   ],
+   "consultas": [
+    "Montserrat national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-AI",
+   "selecao": "AI",
+   "lang": "en",
+   "titulos": [
+    "Anguilla national football team",
+    "Anguilla men's national football team"
+   ],
+   "consultas": [
+    "Anguilla national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-VG",
+   "selecao": "VG",
+   "lang": "en",
+   "titulos": [
+    "British Virgin Islands national football team",
+    "British Virgin Islands men's national football team"
+   ],
+   "consultas": [
+    "British Virgin Islands national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-VI",
+   "selecao": "VI",
+   "lang": "en",
+   "titulos": [
+    "United States Virgin Islands national football team",
+    "United States Virgin Islands men's national football team"
+   ],
+   "consultas": [
+    "United States Virgin Islands national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  },
+  {
+   "id": "selecao-TC",
+   "selecao": "TC",
+   "lang": "en",
+   "titulos": [
+    "Turks and Caicos Islands national football team",
+    "Turks and Caicos Islands men's national football team"
+   ],
+   "consultas": [
+    "Turks and Caicos Islands national football team"
+   ],
+   "exige": [
+    "national"
+   ]
+  }
+ ]
+}

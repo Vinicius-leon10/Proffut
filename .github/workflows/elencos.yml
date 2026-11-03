@@ -7,10 +7,10 @@ on:
   workflow_dispatch:
     inputs:
       fase:
-        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas)"
+        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america)"
         type: choice
         default: elencos
-        options: [elencos, times, segundas]
+        options: [elencos, times, segundas, america]
 
 permissions:
   contents: write
@@ -152,3 +152,35 @@ jobs:
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -q -m "Dados das segundas divisões (${GITHUB_SHA::7})"
           git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-segundas
+
+  america:
+    if: inputs.fase == 'america'
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v7
+      - name: Wikipédia e Wikidata (resto da América, copas e seleções)
+        run: python3 tools/times/wikipedia.py tools/times/sementes-america.json dados
+      - name: Gravar na branch dados-america
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dados
+          {
+            echo "# Dados do resto da América"
+            echo
+            echo "Baixados em $(date -u +%Y-%m-%dT%H:%MZ) pelo workflow elencos.yml (fase america) do Proffut."
+            echo
+            echo "- Wikipédia (CC BY-SA): páginas de 2026 das ligas da Concacaf, das 3ª divisões, da 2ª dos estaduais, das copas, dos clubes e das seleções"
+            echo "- Wikidata (CC0): clubes e jogadores"
+            echo
+            echo "| Arquivo | Tamanho |"
+            echo "|---|---|"
+            find . -type f -not -name LEIAME.md | sort | while read -r f; do echo "| ${f#./} | $(du -h "$f" | cut -f1) |"; done
+          } > LEIAME.md
+          cat LEIAME.md >> "$GITHUB_STEP_SUMMARY"
+          git init -q -b dados-america
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Dados do resto da América (${GITHUB_SHA::7})"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-america

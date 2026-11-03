@@ -1,5 +1,6 @@
 """Baixa da Wikipédia e do Wikidata o que o jogo precisa para os times novos: a Série D de 2026, os 27
-estaduais de 2026 e a primeira e a segunda divisão de 2026 dos outros 9 países da Conmebol.
+estaduais de 2026, a primeira e a segunda divisão de 2026 dos outros 9 países da Conmebol e, com
+tools/times/sementes-america.json, as ligas da Concacaf, as 3ª divisões, a 2ª dos estaduais, as copas e as seleções.
 
     python tools/times/wikipedia.py tools/times/sementes.json <pasta de saída> [começo do id das sementes]
 
@@ -307,6 +308,10 @@ def main():
     os.makedirs(saida, exist_ok=True)
     paginas, escolhas = {}, []
 
+    # Seleções (sementes com "selecao"): só a página, para o elenco atual (passo 5).
+    selecoes = [s for s in sementes if s.get("selecao")]
+    sementes = [s for s in sementes if not s.get("selecao")]
+
     # 1. Páginas de partida: todas as de 'titulos' que existem (sem nenhuma, a busca); de cada uma, as ligações das
     #    seções dos participantes (e as do texto, de reserva).
     for s in sementes:
@@ -361,7 +366,9 @@ def main():
     print(f"Ligações: {sum(len(t) for t in titulos_por_lang.values())}; itens: {len(todos)}; clubes: {len(clubes)}", flush=True)
     for e in escolhas:
         mapa = qid_de.get(e["lang"], {})
-        do_pais = lambda t: mapa.get(t) in clubes and (not clubes[mapa[t]] or e["pais"] in clubes[mapa[t]])
+        # "paises": os itens aceitos (territórios aparecem com o país dono); copa sem país: clubes de qualquer país.
+        aceitos = set(e.get("paises") or ([e["pais"]] if e.get("pais") else []))
+        do_pais = lambda t, aceitos=aceitos: mapa.get(t) in clubes and (not aceitos or not clubes[mapa[t]] or bool(aceitos & set(clubes[mapa[t]])))
         for a in e["paginas"]:
             a["clubes_no_texto"] = [{"titulo": t, "qid": mapa[t]} for t in a["ligacoes"] if do_pais(t)]
             for l in a["participantes"]:
@@ -390,6 +397,30 @@ def main():
             trechos = secoes_do_elenco(texto)
             elencos[f"{q}|{lang}"] = {"qid": q, "lang": lang, "titulo": titulo, "secoes": [t["secao"] for t in trechos],
                                      "ligacoes": [t for tr in trechos for t in ligacoes(tr["texto"])]}
+    # 5. Seleções: a página de cada uma e as ligações da seção do elenco atual (os jogadores vão para o passo 4).
+    escolhidas = []
+    for s in selecoes:
+        achada = None
+        for titulo in s.get("titulos", []):
+            final, texto = texto_da_pagina(s["lang"], titulo)
+            if texto:
+                achada = (final, texto)
+                break
+        if not achada:
+            candidatos = [t for c in s.get("consultas", []) for t in buscar(s["lang"], c)]
+            escolhido = next((t for t in candidatos if all(e.lower() in t.lower() for e in s.get("exige", []))), None)
+            final, texto = texto_da_pagina(s["lang"], escolhido) if escolhido else (None, None)
+            achada = (final, texto) if texto else None
+        if achada:
+            final, texto = achada
+            paginas[f"{s['lang']}:{final}"] = texto
+            trechos = secoes_do_elenco(texto)
+            elencos[f"selecao:{s['selecao']}|{s['lang']}"] = {"qid": None, "selecao": s["selecao"], "lang": s["lang"], "titulo": final,
+                                                             "secoes": [t["secao"] for t in trechos],
+                                                             "ligacoes": [t for tr in trechos for t in ligacoes(tr["texto"])]}
+        escolhidas.append({**s, "pagina": achada[0] if achada else None})
+        print(f"{s['id']}: {achada[0] if achada else 'NÃO ACHOU'}", flush=True)
+    gravar(saida, "selecoes.json.gz", escolhidas)
     gravar(saida, "paginas.json.gz", paginas)
     print(f"Páginas: {len(paginas)}; clubes com seção de elenco: {sum(1 for e in elencos.values() if e['secoes'])}", flush=True)
 

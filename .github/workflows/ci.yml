@@ -2,7 +2,7 @@ name: Testes
 
 on:
   push:
-    branches-ignore: [gh-pages, dados-elencos]
+    branches-ignore: [gh-pages, dados-elencos, dados-times, dados-segundas, dados-america]
   pull_request:
 
 jobs:
