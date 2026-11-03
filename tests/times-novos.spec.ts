@@ -81,9 +81,14 @@ test("R80 jogo novo: o técnico escolhe o país pela bandeira, a divisão e o cl
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
   await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
-  // Os 10 países da Conmebol, cada um com a bandeira; o Brasil vem escolhido, com as séries e os estaduais.
+  // Os países da América com clubes no jogo (o Brasil e os outros), por região, cada um com a bandeira; o Brasil vem
+  // escolhido, com as séries e os estaduais.
+  const comClubes = new Set(exterior.clubes.map((c) => c.pais)).size + 1;
   const paises = page.getByRole("group", { name: "País" }).getByRole("button");
-  await expect(paises).toHaveCount(10);
+  await expect(paises).toHaveCount(comClubes);
+  for (const regiao of ["América do Sul", "América do Norte", "América Central", "Caribe"]) {
+    await expect(page.getByRole("group", { name: "País" }).getByText(regiao, { exact: true })).toBeVisible();
+  }
   for (const texto of await paises.allTextContents()) expect(texto, texto).toMatch(/^\p{Regional_Indicator}{2}/u);
   await expect(page.getByRole("button", { name: /Brasil/ })).toHaveAttribute("aria-pressed", "true");
   expect(await page.getByRole("tab").allTextContents()).toEqual(["Série A", "Série B", "Série C", "Série D", "Só estadual"]);
@@ -91,7 +96,7 @@ test("R80 jogo novo: o técnico escolhe o país pela bandeira, a divisão e o cl
   await page.getByRole("tab", { name: "Série D" }).click();
   await expect(page.locator(".lista .item").first()).toBeVisible();
   await page.getByRole("button", { name: /Argentina/ }).click();
-  expect(await page.getByRole("tab").allTextContents()).toEqual(["1ª divisão", "2ª divisão"]);
+  expect(await page.getByRole("tab").allTextContents()).toEqual(["1ª divisão", "2ª divisão", "3ª divisão"]);
   await page.getByRole("tab", { name: "1ª divisão" }).click();
   await botao(page, /Boca Juniors/).click();
   await botao(page, /^Assumir (o|a) /).click();

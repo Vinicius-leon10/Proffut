@@ -1,6 +1,6 @@
 import { comArtigo } from "../../engine/artigos";
 import { NOME_SERIE, SERIES, nomeDaLigaDoClube } from "../../engine/competicoes";
-import { nomeDoTorneio } from "../../engine/torneios";
+import { divisaoDaLiga, nomeDoTorneio } from "../../engine/torneios";
 import type { IdTorneio, SerieId } from "../../engine/tipos";
 import { Cartao, Escudo, Topo } from "../componentes";
 import { useJogo, useLoja } from "../store";
@@ -60,7 +60,7 @@ export function FimTemporada() {
             )}
             {/* Estaduais e ligas de fora (só a primeira divisão): só os nomes dos campeões. */}
             {(["E-", "L-"] as const).map((prefixo) => {
-              const lista = (Object.entries(r.torneios ?? {}) as [IdTorneio, { campeao: string }][]).filter(([id]) => id.startsWith(prefixo) && !id.endsWith("2"));
+              const lista = (Object.entries(r.torneios ?? {}) as [IdTorneio, { campeao: string }][]).filter(([id]) => id.startsWith(prefixo) && (prefixo === "E-" || divisaoDaLiga(id.slice(2)).nivel === 1));
               if (!lista.length) return null;
               return (
                 <p key={prefixo} className="pequeno">

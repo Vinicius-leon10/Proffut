@@ -50,8 +50,10 @@ export interface FichaNova {
   cores: { primaria: string; secundaria: string }; estadio: { nome: string; capacidade: number };
   fundacao: number; rival: string | null; torcida: number; reputacao: number; forcaElenco: { min: number; max: number };
   caixaInicial: number; pais?: string;
-  /** Segunda divisão do país ("AR2"); falta na primeira. */
+  /** Divisão do país a partir da 2ª ("AR2", "MX3"); falta na primeira. */
   liga?: string;
+  /** Clube leve: entra no jogo sem jogadores (divisões de baixo). */
+  leve?: boolean;
 }
 
 const lerGz = (arquivo: string) => JSON.parse(gunzipSync(readFileSync(arquivo)).toString("utf8"));
@@ -78,6 +80,25 @@ const PAIS_DO_ITEM: Record<string, string> = {
   Q155: "BR", Q414: "AR", Q750: "BO", Q298: "CL", Q739: "CO", Q736: "EC", Q733: "PY", Q419: "PE", Q77: "UY", Q717: "VE",
 };
 
+/** Países da Concacaf e os itens do Wikidata aceitos como país dos clubes (tools/times/sementes-america.json). */
+const CONCACAF: Record<string, { nome: string; itens: string[] }> = lerJson("tools/times/sementes-america.json").paises;
+/** Peso da 1ª divisão de cada país (o Caribe pelo grupo). */
+function pesoDaPrimeira(pais: string): Peso {
+  return PESO_PAIS[pais] ?? (["JM", "TT", "HT", "DO", "CU", "SR", "GY", "CW", "PR"].includes(pais) ? PESO_CARIBE.forte : PESO_CARIBE.fraco);
+}
+/** Peso de cada divisão: a 2ª como `PESO_SEGUNDA`, a 3ª abaixo da 2ª do mesmo jeito. */
+function pesoDoNivel(pais: string, nivel: number): Peso {
+  if (nivel <= 1) return pesoDaPrimeira(pais);
+  if (nivel === 2 && PESO_SEGUNDA[pais]) return PESO_SEGUNDA[pais];
+  const p = pesoDoNivel(pais, nivel - 1);
+  return { topo: [p.base[0] - 4, p.base[1] - 4], base: [p.base[0] - 14, p.base[1] - 12], reputacao: [p.reputacao[0] - 12, p.reputacao[0] + 2],
+    torcida: [1, p.torcida[0] + 10], caixa: [Math.max(100_000, p.caixa[0] * 0.15), p.caixa[0]] };
+}
+
+/** Itens do Wikidata aceitos como país dos clubes de cada país do jogo. */
+const ITENS_DO_PAIS = (pais: string): string[] =>
+  CONCACAF[pais]?.itens ?? Object.keys(PAIS_DO_ITEM).filter((q) => PAIS_DO_ITEM[q] === pais);
+
 /** Nacionalidade (código de 3 letras do Wikidata ou da FIFA, ou o nome do país) → código do jogo. */
 const NACIONALIDADE: Record<string, string> = {
   bra: "BRA", brasil: "BRA", brazil: "BRA", arg: "ARG", argentina: "ARG", ury: "URU", uru: "URU", uruguay: "URU", uruguai: "URU",
@@ -90,8 +111,16 @@ const NACIONALIDADE: Record<string, string> = {
   ago: "ANG", ang: "ANG", angola: "ANG", nga: "NGA", nigeria: "NGA", gha: "GAN", ghana: "GAN", cmr: "CMR", camerun: "CMR",
   civ: "CIV", sen: "SEN", senegal: "SEN", mar: "MAR", marruecos: "MAR", cpv: "CPV", nld: "HOL", ned: "HOL", bel: "BEL",
 };
+// Concacaf (códigos ISO de 3 letras do Wikidata, nov/2026).
+Object.assign(NACIONALIDADE, {
+  mex: "MEX", usa: "EUA", can: "CAN", cri: "CRC", hnd: "HON", gtm: "GUA", slv: "SLV", pan: "PAN", nic: "NCA", blz: "BLZ",
+  jam: "JAM", tto: "TRI", hti: "HAI", dom: "DOM", cub: "CUB", pri: "PUR", sur: "SUR", guy: "GUY", cuw: "CUW", abw: "ARU",
+});
 const nacionalidade = (texto?: string) => (texto ? NACIONALIDADE[normalizar(texto)] : undefined);
-const NACIONALIDADE_DO_PAIS: Record<string, string> = { AR: "ARG", BO: "BOL", CL: "CHI", CO: "COL", EC: "EQU", PY: "PAR", PE: "PER", UY: "URU", VE: "VEN" };
+const NACIONALIDADE_DO_PAIS: Record<string, string> = {
+  AR: "ARG", BO: "BOL", CL: "CHI", CO: "COL", EC: "EQU", PY: "PAR", PE: "PER", UY: "URU", VE: "VEN",
+  MX: "MEX", US: "EUA", CA: "CAN", CR: "CRC", HN: "HON", GT: "GUA", SV: "SLV", PA: "PAN", NI: "NCA", BZ: "BLZ", JM: "JAM", TT: "TRI", HT: "HAI",
+};
 
 /**
  * Peso de cada país (faixa de força, reputação, torcida e caixa do clube mais famoso e do menos famoso). A Série A
@@ -107,6 +136,22 @@ const PESO_PAIS: Record<string, { topo: [number, number]; base: [number, number]
   PE: { topo: [56, 76], base: [42, 62], reputacao: [50, 80], torcida: [3, 65], caixa: [800_000, 12_000_000] },
   BO: { topo: [52, 72], base: [38, 58], reputacao: [46, 76], torcida: [2, 55], caixa: [600_000, 8_000_000] },
   VE: { topo: [52, 72], base: [38, 58], reputacao: [46, 74], torcida: [2, 45], caixa: [600_000, 6_000_000] },
+  // Concacaf (nov/2026): o México e a MLS perto da Argentina; a América Central perto da Bolívia; o Caribe abaixo.
+  MX: { topo: [64, 84], base: [50, 70], reputacao: [58, 88], torcida: [8, 85], caixa: [3_000_000, 35_000_000] },
+  US: { topo: [62, 80], base: [50, 68], reputacao: [55, 80], torcida: [8, 60], caixa: [5_000_000, 40_000_000] },
+  CA: { topo: [46, 64], base: [36, 54], reputacao: [40, 58], torcida: [2, 15], caixa: [500_000, 4_000_000] },
+  CR: { topo: [54, 72], base: [40, 58], reputacao: [46, 74], torcida: [3, 45], caixa: [600_000, 8_000_000] },
+  HN: { topo: [52, 70], base: [38, 56], reputacao: [44, 70], torcida: [3, 40], caixa: [500_000, 6_000_000] },
+  GT: { topo: [52, 70], base: [38, 56], reputacao: [44, 70], torcida: [3, 40], caixa: [500_000, 6_000_000] },
+  SV: { topo: [48, 66], base: [36, 54], reputacao: [42, 64], torcida: [2, 30], caixa: [400_000, 4_000_000] },
+  PA: { topo: [48, 66], base: [36, 54], reputacao: [42, 64], torcida: [2, 25], caixa: [400_000, 4_000_000] },
+  NI: { topo: [42, 60], base: [32, 50], reputacao: [36, 56], torcida: [1, 15], caixa: [200_000, 2_000_000] },
+  BZ: { topo: [36, 52], base: [28, 44], reputacao: [30, 46], torcida: [1, 8], caixa: [100_000, 800_000] },
+};
+/** Ligas do Caribe e outras sem peso próprio: abaixo da América Central (Jamaica e Trinidad no alto). */
+const PESO_CARIBE: Record<string, { topo: [number, number]; base: [number, number]; reputacao: [number, number]; torcida: [number, number]; caixa: [number, number] }> = {
+  forte: { topo: [44, 60], base: [32, 50], reputacao: [36, 56], torcida: [1, 15], caixa: [200_000, 2_000_000] },
+  fraco: { topo: [34, 50], base: [24, 42], reputacao: [26, 44], torcida: [1, 6], caixa: [100_000, 600_000] },
 };
 
 type Peso = (typeof PESO_PAIS)[string];
@@ -169,7 +214,7 @@ function nomeCurto(oficial: string): string {
 
 // ---- leitura ------------------------------------------------------------------------------------
 
-const [dadosTimes, dadosSumulas, dadosSegundas] = process.argv.slice(2).filter((a) => !a.startsWith("--"));
+const [dadosTimes, dadosSumulas, dadosSegundas, dadosAmerica] = process.argv.slice(2).filter((a) => !a.startsWith("--"));
 if (!dadosTimes || !dadosSumulas) throw new Error("Uso: npx tsx tools/times/montar.ts <pasta dados-times> <pasta com as súmulas> [<pasta dados-segundas>]");
 const sementes: Semente[] = lerGz(join(dadosTimes, "sementes.json.gz"));
 const clubesWd: Record<string, ClubeWd> = lerGz(join(dadosTimes, "clubes.json.gz"));
@@ -178,10 +223,12 @@ const elencosRobo: Record<string, ElencoRobo> = lerGz(join(dadosTimes, "elencos.
 const pessoasWd: Record<string, PessoaWd> = lerGz(join(dadosTimes, "jogadores.json.gz"));
 // Segundas divisões (nov/2026): os dados da branch dados-segundas entram só onde faltam (o que já veio da dados-times,
 // baixado antes, fica como está: a primeira divisão e os estaduais não mudam).
-if (dadosSegundas) {
-  sementes.push(...(lerGz(join(dadosSegundas, "sementes.json.gz")) as Semente[]));
+// O mesmo para a branch dados-america (o resto da América, nov/2026), quando vem a quarta pasta.
+for (const pasta of [dadosSegundas, dadosAmerica]) {
+  if (!pasta) continue;
+  sementes.push(...(lerGz(join(pasta, "sementes.json.gz")) as Semente[]));
   const juntar = <T>(alvo: Record<string, T>, arquivo: string) => {
-    for (const [k, v] of Object.entries(lerGz(join(dadosSegundas, arquivo)) as Record<string, T>)) if (!(k in alvo)) alvo[k] = v;
+    for (const [k, v] of Object.entries(lerGz(join(pasta, arquivo)) as Record<string, T>)) if (!(k in alvo)) alvo[k] = v;
   };
   juntar(clubesWd, "clubes.json.gz");
   juntar(paginas, "paginas.json.gz");
@@ -396,7 +443,8 @@ function fichaBrasileira(c: ClubeNaPagina, wd: ClubeWd | undefined, uf: string, 
 }
 
 /** Ficha de um clube de fora. `fama` (0 a 1) é a posição dele entre os clubes do país. `reservar`: guarda o id e o nome. */
-function fichaDeFora(c: ClubeNaPagina, wd: ClubeWd | undefined, pais: string, fama: number, reservar = true, segunda = false): FichaNova {
+function fichaDeFora(c: ClubeNaPagina, wd: ClubeWd | undefined, pais: string, fama: number, reservar = true, nivel = 1): FichaNova {
+  const segunda = nivel >= 2;
   const en = ficha(paginaDoClube("en", wd) ?? "");
   const es = ficha(paginaDoClube("es", wd) ?? "");
   const comum = textoVisivel(en.clubname ?? "");
@@ -410,10 +458,10 @@ function fichaDeFora(c: ClubeNaPagina, wd: ClubeWd | undefined, pais: string, fa
   const limpo = escolhido.replace(/\s+(F\.?\s?C\.?|S\.?\s?C\.?|Association)$/i, "").replace(/^FBC\s+/i, "").trim();
   const nomeBase = (segunda ? MANUAL_NOMES_SEGUNDA[limpo] : undefined) ?? MANUAL_NOMES[limpo] ?? limpo;
   const { id, nome } = reservar ? idENome(nomeBase, pais, false) : { id: slug(nomeBase), nome: nomeBase };
-  const p = (segunda ? PESO_SEGUNDA : PESO_PAIS)[pais];
+  const p = pesoDoNivel(pais, nivel);
   const t = fama ** 1.5;
   const entre = ([a, b]: [number, number]) => a + (b - a) * t;
-  const cidade = MANUAL_CIDADES[id] ?? wd?.cidades[0] ?? textoVisivel(en.ground ?? "").split(",")[1]?.trim() ?? PAISES_NOME[pais];
+  const cidade = MANUAL_CIDADES[id] ?? wd?.cidades[0] ?? textoVisivel(en.ground ?? "").split(",")[1]?.trim() ?? PAISES_NOME[pais] ?? CONCACAF[pais]?.nome;
   const estadio = wd?.estadios[0];
   return {
     id, nome, sigla: sigla(nomeBase), cidade, estado: pais, pais,
@@ -428,7 +476,8 @@ function fichaDeFora(c: ClubeNaPagina, wd: ClubeWd | undefined, pais: string, fa
     reputacao: Math.round(entre(p.reputacao)),
     forcaElenco: { min: Math.round(p.base[0] + (p.topo[0] - p.base[0]) * t), max: Math.round(p.base[1] + (p.topo[1] - p.base[1]) * t) },
     caixaInicial: Math.round(entre(p.caixa) / 100_000) * 100_000,
-    ...(segunda ? { liga: `${pais}2` } : {}),
+    ...(segunda ? { liga: `${pais}${nivel}` } : {}),
+    ...(ehLeve(pais, nivel) ? { leve: true } : {}),
   };
 }
 
@@ -471,7 +520,8 @@ const MANUAL_CIDADES: Record<string, string> = {
 // ---- participantes: estaduais e ligas -------------------------------------------------------------
 
 const porSemente = new Map(sementes.map((s) => [s.id, s]));
-const ufs = sementes.filter((s) => s.uf).map((s) => s.uf!);
+// Só os estaduais da 1ª divisão (as sementes "est-XX"; as da 2ª, "estadual2-XX", são de outra fase).
+const ufs = sementes.filter((s) => s.uf && s.id.startsWith("est-")).map((s) => s.uf!);
 const qidDoJogo = new Map<string, string>();
 /** Clubes novos que só existem nas súmulas (estaduais sem página na Wikipédia). */
 const novosDasSumulas: FichaNova[] = [];
@@ -593,12 +643,14 @@ const ligas: Record<string, { c: ClubeNaPagina; wd?: ClubeWd }[]> = {};
  * Os clubes de uma liga de fora pelas páginas de 2026 em inglês e em espanhol (sementes `<prefixo>-<país>-<língua>`):
  * a lista com o tamanho mais perto de `alvo`. `fora`: quem não pode entrar (na segunda divisão, os da primeira).
  */
-function listaDaLiga(pais: string, prefixo: string, alvo: number, fora: (c: ClubeNaPagina) => boolean = () => false) {
-  const qidDoPais = Object.keys(PAIS_DO_ITEM).find((q) => PAIS_DO_ITEM[q] === pais)!;
-  // Clube de outro país sai; sem país no Wikidata (Real Oruro, Anzoátegui...) fica: está na página da liga.
+function listaDaLiga(pais: string, prefixo: string, alvo: number, fora: (c: ClubeNaPagina) => boolean = () => false, codigo = pais, minimo = 8) {
+  const itens = ITENS_DO_PAIS(pais);
+  // Clube de outro país sai; sem país no Wikidata (Real Oruro, Anzoátegui...) fica: está na página da liga. A MLS tem os
+  // clubes do Canadá (Toronto, Vancouver, Montréal).
+  const aceitos = pais === "US" ? [...itens, ...ITENS_DO_PAIS("CA")] : itens;
   const doPais = (lista: ClubeNaPagina[]) => lista.filter((c) => {
     const paises = clubesWd[c.qid]?.paises ?? [];
-    return (!paises.length || paises.includes(qidDoPais)) && !NOME_ANTIGO.test(`${clubesWd[c.qid]?.es} ${clubesWd[c.qid]?.en} ${c.titulo}`) && !fora(c);
+    return (!paises.length || paises.some((q) => aceitos.includes(q))) && !NOME_ANTIGO.test(`${clubesWd[c.qid]?.es} ${clubesWd[c.qid]?.en} ${c.titulo}`) && !fora(c);
   });
   // As listas possíveis: de cada página, a dos grupos, as dos participantes e as das tabelas; e a dos clubes que estão
   // nas duas páginas. As das tabelas (marcadas) ganham no empate: a dos participantes pega também os citados no texto.
@@ -606,7 +658,7 @@ function listaDaLiga(pais: string, prefixo: string, alvo: number, fora: (c: Club
   const deTabela = new Set<ClubeNaPagina[]>();
   const porLingua: ClubeNaPagina[][] = [];
   for (const lang of ["en", "es"]) {
-    const s = porSemente.get(`${prefixo}-${pais}-${lang}`);
+    const s = porSemente.get(`${prefixo}-${codigo}-${lang}`);
     if (!s) continue;
     for (const p of s.paginas.slice(0, 1)) {
       const unicos = (l: ClubeNaPagina[]) => [...new Map(l.map((c) => [c.qid, c])).values()];
@@ -621,7 +673,7 @@ function listaDaLiga(pais: string, prefixo: string, alvo: number, fora: (c: Club
   const [en = [], es = []] = porLingua;
   const emEs = new Set(es.map((c) => c.qid));
   candidatas.push(en.filter((c) => emEs.has(c.qid)));
-  const lista = candidatas.filter((l) => l.length >= 8)
+  const lista = candidatas.filter((l) => l.length >= minimo)
     .sort((a, b) => Math.abs(a.length - alvo) - Math.abs(b.length - alvo) || Number(deTabela.has(b)) - Number(deTabela.has(a)) || b.length - a.length)[0] ?? [];
   return { lista, tamanhos: candidatas.map((l) => l.length) };
 }
@@ -647,6 +699,35 @@ if (dadosSegundas) {
     const { lista, tamanhos } = listaDaLiga(pais, "liga2", alvo, (c) => naPrimeira.has(c.qid) || TIME_B.test(c.titulo));
     ligas[`${pais}2`] = lista.map((c) => ({ c, wd: clubesWd[c.qid] }));
     relatorio.push(`Segunda divisão ${pais}: ${lista.length} clubes (esperados ${alvo}; listas das páginas: ${tamanhos.join(", ")}).`);
+  }
+}
+
+/**
+ * O resto da América (nov/2026, branch dados-america): as ligas de cada país da Concacaf e as 3ª divisões da Conmebol,
+ * com o tamanho de 2026 (para escolher entre as listas das páginas). Ficam leves (sem jogadores, `FichaNova.leve`) as 3ª
+ * divisões, as 2ª da América Central e as ligas do Caribe menos as de Jamaica, Trinidad e Haiti: só a força da ficha,
+ * para o save não crescer com milhares de elencos.
+ */
+const LIGAS_AMERICA: [codigo: string, alvo: number][] = [
+  ["MX", 18], ["MX2", 15], ["MX3", 18], ["US", 30], ["US2", 25], ["US3", 16], ["CA", 8],
+  ["CR", 12], ["HN", 10], ["HN2", 18], ["GT", 12], ["GT2", 15], ["SV", 12], ["SV2", 14], ["PA", 12], ["PA2", 23], ["NI", 10], ["BZ", 6],
+  ["JM", 14], ["TT", 10], ["HT", 16], ["DO", 11], ["CU", 14], ["SR", 8], ["GY", 8], ["CW", 12], ["MF", 8], ["AG", 10], ["AI", 7],
+  ["AR3", 22], ["CL3", 14], ["PE3", 30], ["UY3", 22],
+];
+const CARIBE_COM_ELENCO = new Set(["JM", "TT", "HT"]);
+const ehLeve = (pais: string, nivel: number) =>
+  nivel >= 3 || (nivel === 2 && !!CONCACAF[pais] && !["MX", "US"].includes(pais)) || (nivel === 1 && !!CONCACAF[pais] && !["MX", "US", "CA", "CR", "HN", "GT", "SV", "PA", "NI", "BZ"].includes(pais) && !CARIBE_COM_ELENCO.has(pais));
+const nivelDe = (codigo: string) => Number(codigo.slice(2)) || 1;
+if (dadosAmerica) {
+  const usados = new Set(Object.values(ligas).flatMap((l) => l.map(({ c }) => c.qid)));
+  // Nível por nível (os de cima primeiro): quem já está numa liga não entra na de baixo.
+  for (const [codigo, alvo] of [...LIGAS_AMERICA].sort((a, b) => nivelDe(a[0]) - nivelDe(b[0]))) {
+    const pais = codigo.slice(0, 2);
+    const { lista, tamanhos } = listaDaLiga(pais, "america", alvo, (c) => usados.has(c.qid) || TIME_B.test(c.titulo), codigo, 4);
+    if (lista.length < 4) { relatorio.push(`América ${codigo}: sem lista (listas das páginas: ${tamanhos.join(", ")}).`); continue; }
+    ligas[codigo] = lista.map((c) => ({ c, wd: clubesWd[c.qid] }));
+    for (const c of lista) usados.add(c.qid);
+    relatorio.push(`América ${codigo}: ${lista.length} clubes (esperados ${alvo}; listas das páginas: ${tamanhos.join(", ")}).`);
   }
 }
 
@@ -785,12 +866,14 @@ function valorDoElenco(wd: ClubeWd): number {
   }
   return [...new Set(valores)].sort((a, b) => b - a).slice(0, 20).reduce((a, b) => a + b, 0);
 }
-// Primeiro as primeiras divisões (os ids delas não mudam), depois as segundas.
-for (const liga of [...LIGAS, ...LIGAS.map((p) => `${p}2`)]) {
+// Primeiro as primeiras divisões (os ids delas não mudam), depois as segundas e, por fim, o resto da América.
+const ORDEM_DAS_LIGAS = [...LIGAS, ...LIGAS.map((p) => `${p}2`), ...[...LIGAS_AMERICA].map(([c]) => c).sort((a, b) => nivelDe(a) - nivelDe(b))];
+for (const liga of [...new Set(ORDEM_DAS_LIGAS)]) {
   const lista = ligas[liga];
   if (!lista) continue;
   const pais = liga.slice(0, 2);
-  const segunda = liga.endsWith("2");
+  const nivel = nivelDe(liga);
+  const segunda = nivel >= 2;
   // A fama é a ordem pelo valor do elenco (Argentina e Colômbia) e pelo número de Wikipédias com a página do clube.
   const valores = lista.map(({ wd }) => (wd ? valorDoElenco(wd) : 0));
   const pWiki = percentis(lista.map(({ wd }) => Number(wd?.links ?? 0)));
@@ -801,18 +884,18 @@ for (const liga of [...LIGAS, ...LIGAS.map((p) => `${p}2`)]) {
   const nomes = lista.map(({ c, wd }) => fichaDeFora(c, wd, pais, 0, false).nome);
   const fama = base.map((f, i) => (GRANDES.has(nomes[i]) && !segunda ? 0.9 + 0.1 * f : 0.88 * f));
   lista.forEach(({ c, wd }, i) => {
-    const f = fichaDeFora(c, wd, pais, fama[i], true, segunda);
+    const f = fichaDeFora(c, wd, pais, fama[i], true, nivel);
     fichasExterior.push(f);
-    if (wd) {
+    if (wd && !f.leve) {
       const elenco = elencoDeFora(f, wd);
       if (elenco.length >= 16) elencosExterior[f.id] = elenco;
     }
   });
 }
-for (const segunda of [false, true]) {
-  const fichas = fichasExterior.filter((f) => !!f.liga === segunda);
+for (const nivel of [1, 2, 3]) {
+  const fichas = fichasExterior.filter((f) => nivelDe(f.liga ?? f.pais!) === nivel);
   const comElenco = fichas.filter((f) => elencosExterior[f.id]);
-  relatorio.push(`Clubes de fora (${segunda ? "segunda" : "primeira"} divisão): ${fichas.length}; com elenco da Wikipédia: ${comElenco.length} (${comElenco.flatMap((f) => elencosExterior[f.id]).length} jogadores).`);
+  relatorio.push(`Clubes de fora (${nivel}ª divisão): ${fichas.length} (leves: ${fichas.filter((f) => f.leve).length}); com elenco da Wikipédia: ${comElenco.length} (${comElenco.flatMap((f) => elencosExterior[f.id]).length} jogadores).`);
 }
 
 // ---- elencos dos clubes brasileiros (Série D e só do estadual), pelas súmulas -----------------------
@@ -871,7 +954,7 @@ if (!process.argv.includes("--so-participantes")) {
     temporada: 2026, descricao: "Quem joga a primeira divisão de cada estadual de 2026 (sigla do estado → ids dos clubes). Montado por tools/times/montar.ts.", participantes: estaduais,
   }, null, 1) + "\n");
   writeFileSync("data/america-do-sul-2026/clubes.json", JSON.stringify({
-    temporada: 2026, descricao: "Clubes da primeira e da segunda divisão (liga com 2 no fim) de 2026 dos outros 9 países da Conmebol. Montado por tools/times/montar.ts.", clubes: fichasExterior,
+    temporada: 2026, descricao: "Clubes de 2026 dos outros países da América: as divisões dos 9 da Conmebol e da Concacaf (liga com o nível no fim a partir da 2ª; leve: sem jogadores). Montado por tools/times/montar.ts.", clubes: fichasExterior,
   }, null, 1) + "\n");
   escrever("data/america-do-sul-2026/jogadores.json", { fonte: "Wikipédia (elencos atuais), Wikidata e transfermarkt-datasets. Força calculada pelo Proffut.", elencos: elencosExterior });
 }

@@ -3,7 +3,7 @@ import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
 import { FASE_LIGA, SERIES, ZONAS, agregado, chavesDaFase, classificacao, tabelaDaLiga, type LinhaTabela } from "../../engine/competicoes";
 import { FASES_COPA, NOME_FASE_COPA, agregadoDoConfronto, jogosDaCopa, situacaoNaCopa } from "../../engine/copa";
-import { NOME_ESTADUAL, NOME_FASE_TORNEIO, PAISES, tabelaDoTorneio, vagasEntreDivisoes } from "../../engine/torneios";
+import { NOME_ESTADUAL, NOME_FASE_TORNEIO, NOME_REGIAO, PAISES, divisaoDaLiga, tabelaDoTorneio, vagasEntreDivisoes, type Regiao } from "../../engine/torneios";
 import type { Competicao, EstadoTorneio, FaseCopa, Partida, SerieId } from "../../engine/tipos";
 import { Escudo, Folha, Opcoes, Segmentado } from "../componentes";
 import { useJogo, useLoja } from "../store";
@@ -269,15 +269,20 @@ function Torneio({ t }: { t: EstadoTorneio }) {
   const [aberta, setAberta] = useState<Partida | null>(null);
   const primeira = t.grupos ? "grupos" : "liga";
   const passam = t.tipo === "liga" ? 0 : t.grupos ? 4 : t.clubes.length <= 6 ? 2 : 4;
-  // Ligas de fora com as duas divisões: os últimos da primeira caem e os primeiros da segunda sobem.
-  const pais = t.tipo === "liga" ? t.id.slice(2, 4) : "";
-  const segundaDivisao = t.tipo === "liga" && t.id.endsWith("2");
-  const trocam = t.tipo === "liga" ? vagasEntreDivisoes(estado, pais) : 0;
+  // Ligas de fora com divisões: os primeiros sobem para a de cima e os últimos caem para a de baixo.
+  const { pais, nivel } = t.tipo === "liga" ? divisaoDaLiga(t.id.slice(2)) : { pais: "", nivel: 0 };
+  const sobem = nivel > 1 ? vagasEntreDivisoes(estado, pais, nivel - 1) : 0;
+  const caem = t.tipo === "liga" ? vagasEntreDivisoes(estado, pais, nivel) : 0;
   const zona = (pos: number) => {
     if (t.tipo !== "liga") return pos <= passam ? "classifica" : "";
-    if (segundaDivisao) return pos <= trocam ? "acesso" : "";
-    return pos === 1 ? "titulo" : pos > t.clubes.length - trocam ? "rebaixamento" : "";
+    if (nivel === 1 && pos === 1) return "titulo";
+    if (pos <= sobem) return "acesso";
+    return pos > t.clubes.length - caem ? "rebaixamento" : "";
   };
+  const regraDaLiga = [
+    nivel === 1 ? "Pontos corridos: o primeiro é o campeão." : `Pontos corridos: ${sobem === 1 ? "o primeiro sobe" : sobem ? `os ${sobem} primeiros sobem` : "ninguém sobe"} para a ${nivel - 1}ª divisão.`,
+    caem ? `${caem === 1 ? "O último cai" : `Os ${caem} últimos caem`} para a ${nivel + 1}ª divisão.` : "",
+  ].filter(Boolean).join(" ");
   const regra = t.tipo === "serie-d"
     ? "Grupos de 6 em turno e returno; passam 4 de cada. Mata-mata em ida e volta; os dois finalistas sobem para a Série C."
     : t.tipo === "estadual"
@@ -286,9 +291,7 @@ function Torneio({ t }: { t: EstadoTorneio }) {
         : t.clubes.length <= 6
           ? "Turno e returno; os 2 primeiros fazem a final, em jogo único; empate vai para os pênaltis."
           : "Turno único; os 4 primeiros fazem a semifinal e a final, em jogo único; empate vai para os pênaltis."
-      : segundaDivisao
-        ? `Pontos corridos: ${trocam === 1 ? "o primeiro sobe" : `os ${trocam} primeiros sobem`} para a 1ª divisão.`
-        : `Pontos corridos: o primeiro é o campeão.${trocam ? ` ${trocam === 1 ? "O último cai" : `Os ${trocam} últimos caem`} para a 2ª divisão.` : ""}`;
+      : regraDaLiga;
   // Muitos grupos (Série D): um de cada vez; poucos (estaduais): todos.
   const grupos = t.grupos ? (t.grupos.length > 2 ? [grupo] : t.grupos.map((_, i) => i + 1)) : [];
   const jogosDaFase = estado.partidas.filter((p) => p.serie === t.id && p.fase === fase);
@@ -362,9 +365,9 @@ export function Tabelas() {
     (meuEstadual && meuEstadual.fase !== "encerrada") || meu.serie === "estadual" ? "estaduais" : meu.serie === "exterior" ? "fora" : "series");
   const [serie, setSerie] = useState<SerieId | "D">(minha);
   const [uf, setUf] = useState<string>(meuEstadual?.id ?? estaduais[0]?.id ?? "");
-  const paises = [...new Set(ligas.map((x) => x.id.slice(2, 4)))].sort((a, b) => (PAISES[a]?.pais ?? a).localeCompare(PAISES[b]?.pais ?? b));
+  const paises = [...new Set(ligas.map((x) => divisaoDaLiga(x.id.slice(2)).pais))].sort((a, b) => (PAISES[a]?.pais ?? a).localeCompare(PAISES[b]?.pais ?? b));
   const [pais, setPais] = useState<string>(meu.pais && paises.includes(meu.pais) ? meu.pais : paises[0] ?? "");
-  const [divisao, setDivisao] = useState<"1" | "2">(meu.liga?.endsWith("2") ? "2" : "1");
+  const [divisao, setDivisao] = useState<string>(meu.liga ? String(divisaoDaLiga(meu.liga).nivel) : "1");
   const [vista, setVista] = useState<"tabela" | "jogos" | "artilharia">("tabela");
   const grupos: { valor: Grupo; rotulo: string }[] = [
     { valor: "series", rotulo: "Séries" }, { valor: "copa", rotulo: "Copa" },
@@ -386,19 +389,30 @@ export function Tabelas() {
     );
   }
   if (grupo === "fora") {
-    // Um país de cada vez; com as duas divisões jogando, escolhe a divisão (abre na primeira).
+    // Um país de cada vez (por região); com mais de uma divisão jogando, escolhe a divisão (abre na primeira).
     const codigo = paises.includes(pais) ? pais : paises[0];
-    const primeira = ligas.find((x) => x.id === `L-${codigo}`);
-    const segunda = ligas.find((x) => x.id === `L-${codigo}2`);
-    const t = (divisao === "2" && segunda) || primeira || segunda!;
+    const doPais = ligas.filter((x) => divisaoDaLiga(x.id.slice(2)).pais === codigo)
+      .sort((a, b) => divisaoDaLiga(a.id.slice(2)).nivel - divisaoDaLiga(b.id.slice(2)).nivel);
+    const t = doPais.find((x) => String(divisaoDaLiga(x.id.slice(2)).nivel) === divisao) ?? doPais[0];
     return (
       <>
         {seletor}
         <select value={codigo} onChange={(e) => setPais(e.target.value)} aria-label="País">
-          {paises.map((p) => <option key={p} value={p}>{PAISES[p]?.pais ?? p}</option>)}
+          {(Object.keys(NOME_REGIAO) as Regiao[]).map((r) => {
+            const daRegiao = paises.filter((p) => PAISES[p]?.regiao === r);
+            return daRegiao.length ? (
+              <optgroup key={r} label={NOME_REGIAO[r]}>
+                {daRegiao.map((p) => <option key={p} value={p}>{PAISES[p]?.pais ?? p}</option>)}
+              </optgroup>
+            ) : null;
+          })}
         </select>
-        {primeira && segunda && (
-          <Segmentado opcoes={[{ valor: "1" as const, rotulo: "1ª divisão" }, { valor: "2" as const, rotulo: "2ª divisão" }]} valor={divisao} aoMudar={setDivisao} />
+        {doPais.length > 1 && (
+          <Segmentado
+            opcoes={doPais.map((x) => { const n = divisaoDaLiga(x.id.slice(2)).nivel; return { valor: String(n), rotulo: `${n}ª divisão` }; })}
+            valor={String(divisaoDaLiga(t.id.slice(2)).nivel)}
+            aoMudar={setDivisao}
+          />
         )}
         <Torneio key={t.id} t={t} />
       </>

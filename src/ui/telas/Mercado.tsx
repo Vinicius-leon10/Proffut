@@ -10,7 +10,7 @@ import { elencoDe, fazerOferta, livres, podeSair, precoPedido, propostasPendente
 import type { Jogador, Posicao } from "../../engine/tipos";
 import { Escudo, Folha, Opcoes, Pos, Segmentado } from "../componentes";
 import { useJogo, useLoja } from "../store";
-import { PAISES } from "../../engine/torneios";
+import { NOME_REGIAO, PAISES, type Regiao } from "../../engine/torneios";
 import { FolhaJogador, LinhaJogador, Situacao } from "./Elenco";
 import { AcoesDaProposta } from "./Mensagens";
 
@@ -84,6 +84,7 @@ function FolhaOferta({ j, aoFechar }: { j: Jogador; aoFechar: () => void }) {
 
 export function Mercado() {
   const estado = useJogo();
+  const paisesComClube = new Set(Object.values(estado.clubes).flatMap((c) => (c.pais ? [c.pais] : [])));
   const versao = useLoja((s) => s.versao);
   const meuId = estado.tecnico.clubeId;
   const meu = estado.clubes[meuId];
@@ -167,7 +168,15 @@ export function Mercado() {
                 <option value="C">Série C</option>
                 <option value="D">Série D</option>
                 <option value="estadual">Só estadual</option>
-                {Object.entries(PAISES).map(([codigo, p]) => <option key={codigo} value={`pais:${codigo}`}>{p.pais}</option>)}
+                {/* Só os países com clubes no jogo, por região. */}
+                {(Object.keys(NOME_REGIAO) as Regiao[]).map((r) => {
+                  const daRegiao = Object.entries(PAISES).filter(([codigo, p]) => p.regiao === r && paisesComClube.has(codigo));
+                  return daRegiao.length ? (
+                    <optgroup key={r} label={NOME_REGIAO[r]}>
+                      {daRegiao.map(([codigo, p]) => <option key={codigo} value={`pais:${codigo}`}>{p.pais}</option>)}
+                    </optgroup>
+                  ) : null;
+                })}
               </select>
             )}
           </div>

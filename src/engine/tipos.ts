@@ -158,6 +158,12 @@ export interface Clube {
    * ("AR2"). Muda na virada, com o acesso e a queda.
    */
   liga?: string;
+  /**
+   * Clube leve (divisões de baixo, nov/2026): fica no jogo sem jogadores, com a força da faixa da ficha (simulação
+   * rápida), para o save não crescer com milhares de elencos. Ganha o elenco quando precisa (`garantirElenco`): quando o
+   * técnico o assume ou quando ele entra numa partida com a simulação completa.
+   */
+  leve?: boolean;
   /** Estadual que o clube joga no começo do ano (a sigla do estado), se joga a primeira divisão do estado. */
   estadual?: string;
 }

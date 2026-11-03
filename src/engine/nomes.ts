@@ -57,7 +57,28 @@ const HISPANICOS_SOBRENOMES = [
 
 export const NACIONALIDADES_ESTRANGEIRAS = ["ARG", "URU", "COL", "PAR", "CHI", "EQU", "VEN", "PER", "BOL"];
 
+/** Países de língua inglesa e francesa da América (nov/2026): nomes do inglês e do francês, não do espanhol. */
+const ANGLOS = new Set(["EUA", "CAN", "JAM", "TRI", "GUY", "BRB", "BAH", "BER", "CAY", "LCA", "GRN", "VIN", "SKN", "ATG", "DMA", "MSR", "AIA", "VGB", "VIR", "TCA", "BLZ", "SXM"]);
+const FRANCOS = new Set(["HAI", "MTQ", "GLP", "GUF", "SMN"]);
+const NEERLANDESES = new Set(["SUR", "CUW", "ARU", "BOE"]);
+const INGLESES_PRIMEIROS = ["James", "John", "Michael", "David", "Chris", "Daniel", "Andre", "Kevin", "Jordan", "Tyler", "Brandon", "Justin",
+  "Marcus", "Ryan", "Tevin", "Kemar", "Shamar", "Romario", "Damion", "Javon", "Leon", "Aaron", "Jamal", "Dwayne", "Kyle", "Liam"];
+const INGLESES_SOBRENOMES = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Wilson", "Taylor", "Thomas", "Moore",
+  "Jackson", "White", "Harris", "Clarke", "Campbell", "Reid", "Bailey", "Lewis", "Gordon", "Morgan", "Grant", "Francis", "Henry", "Walker"];
+const FRANCESES_PRIMEIROS = ["Jean", "Pierre", "Louis", "Marc", "Kevin", "Wilner", "Frantz", "Duckens", "Mikaël", "Jérémy", "Yannick",
+  "Steeven", "Ronaldo", "Johnny", "Carlens", "Derrick", "Fabrice", "Romain", "Thomas", "Loïc"];
+const FRANCESES_SOBRENOMES = ["Joseph", "Pierre", "Jean-Baptiste", "Louis", "Charles", "François", "Saint-Fleur", "Lafontant", "Bernard",
+  "Étienne", "Alcéna", "Désir", "Augustin", "Germain", "Lambert", "Moreau", "Dorval", "Belfort", "Vital", "Jacques"];
+const NEERLANDESES_PRIMEIROS = ["Kenji", "Jurich", "Gervane", "Sheraldo", "Ryan", "Leandro", "Juninho", "Rangelo", "Tahith", "Kevin",
+  "Jearl", "Roshon", "Shermar", "Vurnon", "Dion", "Gleofilo"];
+const NEERLANDESES_SOBRENOMES = ["Martina", "Bacuna", "Kastaneer", "Janga", "Gorré", "Hooi", "Maria", "Roemeratoe", "Margaritha", "Felida",
+  "Brenet", "Chong", "Tokaay", "Vlijter", "Leerdam", "Anita"];
+
 export function gerarNome(rng: Rng, nacionalidade: string): string {
+  const doPar = (primeiros: string[], sobrenomes: string[]) => `${rng.escolher(primeiros)} ${rng.escolher(sobrenomes)}`;
+  if (ANGLOS.has(nacionalidade)) return doPar(INGLESES_PRIMEIROS, INGLESES_SOBRENOMES);
+  if (FRANCOS.has(nacionalidade)) return doPar(FRANCESES_PRIMEIROS, FRANCESES_SOBRENOMES);
+  if (NEERLANDESES.has(nacionalidade)) return doPar(NEERLANDESES_PRIMEIROS, NEERLANDESES_SOBRENOMES);
   if (nacionalidade !== "BRA") {
     const primeiro = rng.escolher(HISPANICOS_PRIMEIROS);
     const sobrenome = rng.escolher(HISPANICOS_SOBRENOMES);

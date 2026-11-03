@@ -21,18 +21,72 @@ export const NOME_ESTADUAL: Record<string, string> = {
   RS: "Gaúcho", RO: "Rondoniense", RR: "Roraimense", SC: "Catarinense", SP: "Paulista", SE: "Sergipano", TO: "Tocantinense",
 };
 
-/** Os outros países da Conmebol: nome do país, do campeonato (em português) e a nacionalidade dos jogadores. */
-export const PAISES: Record<string, { pais: string; liga: string; nacionalidade: string }> = {
-  AR: { pais: "Argentina", liga: "Campeonato Argentino", nacionalidade: "ARG" },
-  BO: { pais: "Bolívia", liga: "Campeonato Boliviano", nacionalidade: "BOL" },
-  CL: { pais: "Chile", liga: "Campeonato Chileno", nacionalidade: "CHI" },
-  CO: { pais: "Colômbia", liga: "Campeonato Colombiano", nacionalidade: "COL" },
-  EC: { pais: "Equador", liga: "Campeonato Equatoriano", nacionalidade: "EQU" },
-  PY: { pais: "Paraguai", liga: "Campeonato Paraguaio", nacionalidade: "PAR" },
-  PE: { pais: "Peru", liga: "Campeonato Peruano", nacionalidade: "PER" },
-  UY: { pais: "Uruguai", liga: "Campeonato Uruguaio", nacionalidade: "URU" },
-  VE: { pais: "Venezuela", liga: "Campeonato Venezuelano", nacionalidade: "VEN" },
+/** Região do país na América (para agrupar nas telas). */
+export type Regiao = "sul" | "norte" | "central" | "caribe";
+export const NOME_REGIAO: Record<Regiao, string> = { sul: "América do Sul", norte: "América do Norte", central: "América Central", caribe: "Caribe" };
+
+/**
+ * Os outros países da América: nome do país, do campeonato (em português), a nacionalidade dos jogadores (código de 3
+ * letras) e a região. Conmebol desde nov/2026; a Concacaf (América do Norte, Central e Caribe) também, a pedido de
+ * "traga tudo que tem da América".
+ */
+export const PAISES: Record<string, { pais: string; liga: string; nacionalidade: string; regiao: Regiao }> = {
+  AR: { pais: "Argentina", liga: "Campeonato Argentino", nacionalidade: "ARG", regiao: "sul" },
+  BO: { pais: "Bolívia", liga: "Campeonato Boliviano", nacionalidade: "BOL", regiao: "sul" },
+  CL: { pais: "Chile", liga: "Campeonato Chileno", nacionalidade: "CHI", regiao: "sul" },
+  CO: { pais: "Colômbia", liga: "Campeonato Colombiano", nacionalidade: "COL", regiao: "sul" },
+  EC: { pais: "Equador", liga: "Campeonato Equatoriano", nacionalidade: "EQU", regiao: "sul" },
+  PY: { pais: "Paraguai", liga: "Campeonato Paraguaio", nacionalidade: "PAR", regiao: "sul" },
+  PE: { pais: "Peru", liga: "Campeonato Peruano", nacionalidade: "PER", regiao: "sul" },
+  UY: { pais: "Uruguai", liga: "Campeonato Uruguaio", nacionalidade: "URU", regiao: "sul" },
+  VE: { pais: "Venezuela", liga: "Campeonato Venezuelano", nacionalidade: "VEN", regiao: "sul" },
+  MX: { pais: "México", liga: "Campeonato Mexicano", nacionalidade: "MEX", regiao: "norte" },
+  US: { pais: "Estados Unidos", liga: "MLS", nacionalidade: "EUA", regiao: "norte" },
+  CA: { pais: "Canadá", liga: "Campeonato Canadense", nacionalidade: "CAN", regiao: "norte" },
+  CR: { pais: "Costa Rica", liga: "Campeonato Costarriquenho", nacionalidade: "CRC", regiao: "central" },
+  HN: { pais: "Honduras", liga: "Campeonato Hondurenho", nacionalidade: "HON", regiao: "central" },
+  GT: { pais: "Guatemala", liga: "Campeonato Guatemalteco", nacionalidade: "GUA", regiao: "central" },
+  SV: { pais: "El Salvador", liga: "Campeonato Salvadorenho", nacionalidade: "SLV", regiao: "central" },
+  PA: { pais: "Panamá", liga: "Campeonato Panamenho", nacionalidade: "PAN", regiao: "central" },
+  NI: { pais: "Nicarágua", liga: "Campeonato Nicaraguense", nacionalidade: "NCA", regiao: "central" },
+  BZ: { pais: "Belize", liga: "Campeonato Belizenho", nacionalidade: "BLZ", regiao: "central" },
+  JM: { pais: "Jamaica", liga: "Campeonato Jamaicano", nacionalidade: "JAM", regiao: "caribe" },
+  TT: { pais: "Trinidad e Tobago", liga: "Campeonato Trinitino", nacionalidade: "TRI", regiao: "caribe" },
+  HT: { pais: "Haiti", liga: "Campeonato Haitiano", nacionalidade: "HAI", regiao: "caribe" },
+  DO: { pais: "República Dominicana", liga: "Campeonato Dominicano", nacionalidade: "DOM", regiao: "caribe" },
+  CU: { pais: "Cuba", liga: "Campeonato Cubano", nacionalidade: "CUB", regiao: "caribe" },
+  PR: { pais: "Porto Rico", liga: "Campeonato Porto-Riquenho", nacionalidade: "PUR", regiao: "caribe" },
+  SR: { pais: "Suriname", liga: "Campeonato Surinamês", nacionalidade: "SUR", regiao: "caribe" },
+  GY: { pais: "Guiana", liga: "Campeonato Guianense", nacionalidade: "GUY", regiao: "caribe" },
+  CW: { pais: "Curaçao", liga: "Campeonato de Curaçao", nacionalidade: "CUW", regiao: "caribe" },
+  AW: { pais: "Aruba", liga: "Campeonato Arubano", nacionalidade: "ARU", regiao: "caribe" },
+  SX: { pais: "São Martinho (Países Baixos)", liga: "Campeonato de São Martinho", nacionalidade: "SXM", regiao: "caribe" },
+  BQ: { pais: "Bonaire", liga: "Campeonato de Bonaire", nacionalidade: "BOE", regiao: "caribe" },
+  MQ: { pais: "Martinica", liga: "Campeonato Martinicano", nacionalidade: "MTQ", regiao: "caribe" },
+  GP: { pais: "Guadalupe", liga: "Campeonato de Guadalupe", nacionalidade: "GLP", regiao: "caribe" },
+  GF: { pais: "Guiana Francesa", liga: "Campeonato da Guiana Francesa", nacionalidade: "GUF", regiao: "caribe" },
+  MF: { pais: "São Martinho (França)", liga: "Campeonato de Saint-Martin", nacionalidade: "SMN", regiao: "caribe" },
+  BB: { pais: "Barbados", liga: "Campeonato Barbadiano", nacionalidade: "BRB", regiao: "caribe" },
+  BS: { pais: "Bahamas", liga: "Campeonato Bahamense", nacionalidade: "BAH", regiao: "caribe" },
+  BM: { pais: "Bermudas", liga: "Campeonato Bermudense", nacionalidade: "BER", regiao: "caribe" },
+  KY: { pais: "Ilhas Cayman", liga: "Campeonato das Ilhas Cayman", nacionalidade: "CAY", regiao: "caribe" },
+  LC: { pais: "Santa Lúcia", liga: "Campeonato Santa-Lucense", nacionalidade: "LCA", regiao: "caribe" },
+  GD: { pais: "Granada", liga: "Campeonato Granadino", nacionalidade: "GRN", regiao: "caribe" },
+  VC: { pais: "São Vicente e Granadinas", liga: "Campeonato São-Vicentino", nacionalidade: "VIN", regiao: "caribe" },
+  KN: { pais: "São Cristóvão e Névis", liga: "Campeonato de São Cristóvão e Névis", nacionalidade: "SKN", regiao: "caribe" },
+  AG: { pais: "Antígua e Barbuda", liga: "Campeonato Antiguano", nacionalidade: "ATG", regiao: "caribe" },
+  DM: { pais: "Dominica", liga: "Campeonato Dominiquense", nacionalidade: "DMA", regiao: "caribe" },
+  MS: { pais: "Montserrat", liga: "Campeonato de Montserrat", nacionalidade: "MSR", regiao: "caribe" },
+  AI: { pais: "Anguila", liga: "Campeonato de Anguila", nacionalidade: "AIA", regiao: "caribe" },
+  VG: { pais: "Ilhas Virgens Britânicas", liga: "Campeonato das Ilhas Virgens Britânicas", nacionalidade: "VGB", regiao: "caribe" },
+  VI: { pais: "Ilhas Virgens Americanas", liga: "Campeonato das Ilhas Virgens Americanas", nacionalidade: "VIR", regiao: "caribe" },
+  TC: { pais: "Turks e Caicos", liga: "Campeonato de Turks e Caicos", nacionalidade: "TCA", regiao: "caribe" },
 };
+
+/** País e divisão de um código de liga: "AR" é a 1ª da Argentina, "AR2" a 2ª, "MX3" a 3ª do México. */
+export function divisaoDaLiga(liga: string): { pais: string; nivel: number } {
+  return { pais: liga.slice(0, 2), nivel: Number(liga.slice(2)) || 1 };
+}
 
 /** Semana do primeiro domingo dos estaduais (as séries começam na semana 0, o primeiro sábado de abril). */
 export const SEMANA_ESTADUAIS = -12;
@@ -60,42 +114,60 @@ export function ehTorneio(c: Competicao): c is IdTorneio {
 export function nomeDoTorneio(id: IdTorneio): string {
   if (id === "D") return "Série D";
   if (id.startsWith("E-")) return `Campeonato ${NOME_ESTADUAL[id.slice(2)] ?? id.slice(2)}`;
-  const pais = id.slice(2, 4);
+  const { pais, nivel } = divisaoDaLiga(id.slice(2));
   const nome = PAISES[pais]?.liga ?? `Liga ${pais}`;
-  return id === `L-${pais}2` ? `${nome} – 2ª divisão` : nome;
+  return nivel > 1 ? `${nome} – ${nivel}ª divisão` : nome;
 }
 
 /**
- * Quantos sobem da segunda divisão e caem da primeira em cada país na virada (como em 2026, sem os playoffs e as
- * médias de pontos: pela tabela da temporada).
+ * Quantos sobem e caem na virada em cada país, entre a 1ª e a 2ª divisão e entre a 2ª e a 3ª (como em 2026, sem os
+ * playoffs e as médias de pontos: pela tabela da temporada). Ligas fechadas, sem acesso nem queda: MLS, Canadá e México
+ * (a Liga MX está sem rebaixamento). Os países que não aparecem: 2 e 2.
  */
-export const SOBEM_E_CAEM: Record<string, number> = { AR: 2, BO: 2, CL: 2, CO: 2, EC: 2, PY: 2, PE: 2, UY: 3, VE: 1 };
+export const SOBEM_E_CAEM: Record<string, number[]> = {
+  AR: [2, 2], BO: [2, 2], CL: [2, 2], CO: [2, 2], EC: [2, 2], PY: [2, 2], PE: [2, 2], UY: [3, 2], VE: [1, 2],
+  MX: [0, 0], US: [0, 0], CA: [0, 0],
+};
 
-/** Quantos sobem e caem entre as divisões do país nesta temporada (0 se as duas não estão jogando). */
-export function vagasEntreDivisoes(estado: EstadoJogo, pais: string): number {
-  const primeira = estado.torneios?.[`L-${pais}`];
-  const segunda = estado.torneios?.[`L-${pais}2`];
-  if (!primeira || !segunda) return 0;
-  return Math.max(0, Math.min(SOBEM_E_CAEM[pais] ?? 2, segunda.clubes.length, primeira.clubes.length - 2));
+/** Código da liga do país na divisão `nivel` ("AR", "AR2", "AR3"). */
+export function ligaDoNivel(pais: string, nivel: number): string {
+  return nivel === 1 ? pais : `${pais}${nivel}`;
+}
+
+/** Quantos sobem e caem entre as divisões `nivel` e `nivel + 1` do país nesta temporada (0 se as duas não jogam). */
+export function vagasEntreDivisoes(estado: EstadoJogo, pais: string, nivel = 1): number {
+  const cima = estado.torneios?.[`L-${ligaDoNivel(pais, nivel)}`];
+  const baixo = estado.torneios?.[`L-${ligaDoNivel(pais, nivel + 1)}`];
+  if (!cima || !baixo) return 0;
+  const n = (SOBEM_E_CAEM[pais] ?? [2, 2])[nivel - 1] ?? 2;
+  return Math.max(0, Math.min(n, baixo.clubes.length, cima.clubes.length - 2));
 }
 
 /**
- * Na virada, em cada país com as duas divisões jogadas: os últimos da primeira descem e os primeiros da segunda
- * sobem (`SOBEM_E_CAEM`). Devolve quem subiu e quem caiu, por país.
+ * Na virada, em cada país com as divisões jogadas: os últimos de cada divisão descem e os primeiros da de baixo sobem
+ * (`SOBEM_E_CAEM`). Devolve quem subiu e quem caiu, por liga de cima ("AR", "AR2").
  */
 export function trocarDivisoes(estado: EstadoJogo): Record<string, { sobem: string[]; caem: string[] }> {
   const trocas: Record<string, { sobem: string[]; caem: string[] }> = {};
   for (const pais of Object.keys(PAISES)) {
-    const primeira = estado.torneios?.[`L-${pais}`];
-    const segunda = estado.torneios?.[`L-${pais}2`];
-    if (!primeira || !segunda || primeira.fase !== "encerrada" || segunda.fase !== "encerrada") continue;
-    const n = vagasEntreDivisoes(estado, pais);
-    if (!n) continue;
-    const caem = tabelaDoTorneio(estado, primeira).slice(-n).map((l) => l.clubeId);
-    const sobem = tabelaDoTorneio(estado, segunda).slice(0, n).map((l) => l.clubeId);
-    for (const id of caem) estado.clubes[id].liga = `${pais}2`;
-    for (const id of sobem) estado.clubes[id].liga = pais;
-    trocas[pais] = { sobem, caem };
+    for (let nivel = 1; nivel <= 4; nivel++) {
+      const cima = estado.torneios?.[`L-${ligaDoNivel(pais, nivel)}`];
+      const baixo = estado.torneios?.[`L-${ligaDoNivel(pais, nivel + 1)}`];
+      if (!cima || !baixo || cima.fase !== "encerrada" || baixo.fase !== "encerrada") continue;
+      const n = vagasEntreDivisoes(estado, pais, nivel);
+      if (!n) continue;
+      trocas[ligaDoNivel(pais, nivel)] = {
+        caem: tabelaDoTorneio(estado, cima).slice(-n).map((l) => l.clubeId),
+        sobem: tabelaDoTorneio(estado, baixo).slice(0, n).map((l) => l.clubeId),
+      };
+    }
+    // As tabelas são lidas antes de mudar alguém de divisão (um clube não sobe e cai no mesmo ano).
+    for (const [liga, { sobem, caem }] of Object.entries(trocas)) {
+      if (divisaoDaLiga(liga).pais !== pais) continue;
+      const { nivel } = divisaoDaLiga(liga);
+      for (const id of caem) estado.clubes[id].liga = ligaDoNivel(pais, nivel + 1);
+      for (const id of sobem) estado.clubes[id].liga = ligaDoNivel(pais, nivel);
+    }
   }
   return trocas;
 }
@@ -118,7 +190,8 @@ export function participantes(estado: EstadoJogo): Partial<Record<IdTorneio, str
   const temElenco = new Set(Object.values(estado.jogadores).map((j) => j.clubeId));
   const juntar = (id: IdTorneio, c: Clube) => { (lista[id] ??= []).push(c.id); };
   for (const c of Object.values(estado.clubes)) {
-    if (!temElenco.has(c.id)) continue;
+    // Clube sem jogadores não joga, fora os leves (das divisões de baixo, com a simulação rápida).
+    if (!temElenco.has(c.id) && !c.leve) continue;
     if (c.serie === "D") juntar("D", c);
     if (c.estadual) juntar(`E-${c.estadual}`, c);
     if (c.serie === "exterior" && c.liga) juntar(`L-${c.liga}`, c);

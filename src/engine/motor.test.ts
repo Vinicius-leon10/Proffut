@@ -12,7 +12,7 @@ import { MAX_SUBSTITUICOES, MINIMO_POSICAO } from "./constantes";
 import { desfechoDoConfronto, situacaoNaCopa } from "./copa";
 import { acertarParticipantes, assumirClube, avancar, jogosPendentesHoje, juntarAoSaveAntigo, novoJogo, prepararJogos, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
 import { checarEstado } from "./checagem";
-import { PAISES, competicoesDoUsuario, inicioDoAno, participantes, tabelaDoTorneio, vagasEntreDivisoes } from "./torneios";
+import { PAISES, competicoesDoUsuario, divisaoDaLiga, inicioDoAno, participantes, tabelaDoTorneio, vagasEntreDivisoes } from "./torneios";
 import { dispensar, elencoDe, fazerOferta, limiteDaProposta, livres, pedirMais, transferenciasDaIa } from "./mercado";
 import { enviarMensagem } from "./mensagens";
 import { avancarMinuto, cartoes, cobradores, notaCobrador, posseDeBola, simularAteOFim, sobPressao, substituir, type Estatisticas } from "./partida";
@@ -85,7 +85,8 @@ describe("temporada completa", () => {
   estado.config.escalacaoAutomatica = true;
   simularRestoDaTemporada(estado);
   // Antes da virada: quem deve cair e subir em cada país da América do Sul, pela tabela final de cada divisão.
-  const trocasEsperadas = Object.keys(PAISES).map((pais) => {
+  // Os 9 da Conmebol (na Concacaf, a MLS, o Canadá e o México não têm acesso e queda).
+  const trocasEsperadas = ["AR", "BO", "CL", "CO", "EC", "PY", "PE", "UY", "VE"].map((pais) => {
     const primeira = estado.torneios?.[`L-${pais}`];
     const segunda = estado.torneios?.[`L-${pais}2`];
     const n = vagasEntreDivisoes(estado, pais);
@@ -144,7 +145,8 @@ describe("temporada completa", () => {
     for (const s of SERIES) expect(Object.values(estado.clubes).filter((c) => c.serie === s)).toHaveLength(20);
     for (const j of Object.values(estado.jogadores)) if (j.clubeId) expect(estado.clubes[j.clubeId]).toBeTruthy();
     for (const c of Object.values(estado.clubes)) {
-      if (c.serie === "D") continue;
+      // Série D e clubes leves (sem jogadores, das divisões de baixo) ficam de fora.
+      if (c.serie === "D" || c.leve) continue;
       const elenco = elencoDe(estado, c.id);
       for (const pos of Object.keys(MINIMO_POSICAO) as Posicao[]) {
         expect(elenco.filter((j) => j.posicao === pos).length).toBeGreaterThanOrEqual(MINIMO_POSICAO[pos]);
@@ -353,19 +355,27 @@ describe("estaduais e ligas de fora", () => {
     }
   });
 
-  it("as ligas dos 9 países (1ª e 2ª divisão) têm os clubes de lá, com elenco, e não jogam as competições do Brasil", () => {
+  it("as ligas de fora (as divisões dos 9 países da Conmebol e as da Concacaf) têm os clubes de lá, com elenco (os leves, sem), e não jogam as competições do Brasil", () => {
     const paises = ["AR", "BO", "CL", "CO", "EC", "PE", "PY", "UY", "VE"];
-    expect(ligas.map((t) => t.id).sort()).toEqual(paises.flatMap((p) => [`L-${p}`, `L-${p}2`]));
+    const ids = ligas.map((t) => t.id);
+    for (const p of paises) for (const id of [`L-${p}`, `L-${p}2`]) expect(ids, id).toContain(id);
+    // A Concacaf: México, MLS e Canadá, os 7 da América Central e o Caribe.
+    for (const id of ["L-MX", "L-MX2", "L-US", "L-US2", "L-CA", "L-CR", "L-HN", "L-GT", "L-SV", "L-PA", "L-NI", "L-JM"]) expect(ids, id).toContain(id);
     for (const t of ligas) {
-      expect(t.clubes.length, t.id).toBeGreaterThanOrEqual(t.id.endsWith("2") ? 8 : 10);
+      expect(t.clubes.length, t.id).toBeGreaterThanOrEqual(4);
       for (const id of t.clubes) {
         const c = estado.clubes[id];
         expect(c.serie).toBe("exterior");
-        expect(c.pais).toBe(t.id.slice(2, 4));
+        expect(c.pais).toBe(divisaoDaLiga(t.id.slice(2)).pais);
         expect(c.liga).toBe(t.id.slice(2));
-        expect(elencoDe(estado, id).length, id).toBeGreaterThanOrEqual(16);
+        if (c.leve) expect(elencoDe(estado, id), id).toHaveLength(0);
+        else expect(elencoDe(estado, id).length, id).toBeGreaterThanOrEqual(16);
         expect(estado.copa!.ranking).not.toContain(id);
       }
+    }
+    // As 1ª e 2ª divisões da Conmebol têm elenco (nenhum clube leve).
+    for (const t of ligas.filter((x) => paises.includes(divisaoDaLiga(x.id.slice(2)).pais) && divisaoDaLiga(x.id.slice(2)).nivel <= 2)) {
+      for (const id of t.clubes) expect(estado.clubes[id].leve, id).toBeFalsy();
     }
   });
 
@@ -403,7 +413,7 @@ describe("estaduais e ligas de fora", () => {
     e.partidas[0].jogada = true;
     juntarAoSaveAntigo(e);
     for (const id of novos) expect(e.clubes[id], id).toBeTruthy();
-    for (const c of Object.values(e.clubes)) expect(elencoDe(e, c.id).length, c.id).toBeGreaterThanOrEqual(16);
+    for (const c of Object.values(e.clubes)) if (!c.leve) expect(elencoDe(e, c.id).length, c.id).toBeGreaterThanOrEqual(16);
     expect(e.clubes.palmeiras.estadual).toBe("SP");
     expect(e.torneios).toEqual({});
     expect(checarEstado(e).filter((p) => p.gravidade === "erro")).toEqual([]);
@@ -413,22 +423,23 @@ describe("estaduais e ligas de fora", () => {
 describe("segunda divisão da América do Sul (nov/2026)", () => {
   it("save de antes da 2ª divisão: ao abrir, entram os clubes dela (liga com 2 no fim), com elenco, e a 1ª divisão não muda; depois do acesso e da queda, abrir de novo mantém a divisão de cada clube", () => {
     const estado = novoJogo({ nomeTecnico: "T", clubeId: "ponte-preta", semente: 23 });
-    const daSegunda = Object.values(estado.clubes).filter((c) => c.liga?.endsWith("2")).map((c) => c.id);
+    const conmebol = ["AR", "BO", "CL", "CO", "EC", "PY", "PE", "UY", "VE"];
+    const daSegunda = Object.values(estado.clubes).filter((c) => c.liga?.endsWith("2") && conmebol.includes(c.pais!)).map((c) => c.id);
     expect(daSegunda.length).toBeGreaterThanOrEqual(9 * 8);
     // Volta o save para antes da segunda divisão: sem os clubes, os torneios e os jogos dela.
     for (const id of daSegunda) {
       for (const j of elencoDe(estado, id)) delete estado.jogadores[j.id];
       delete estado.clubes[id];
     }
-    const segunda = (id: string) => /^L-[A-Z]{2}2$/.test(id);
+    const segunda = (id: string) => /^L-[A-Z]{2}2$/.test(id) && conmebol.includes(id.slice(2, 4));
     for (const id of Object.keys(estado.torneios!)) if (segunda(id)) delete estado.torneios![id as IdTorneio];
     estado.partidas = estado.partidas.filter((x) => !segunda(x.serie));
     const antes = participantes(estado);
-    for (const pais of Object.keys(PAISES)) expect(antes[`L-${pais}2`], pais).toBeUndefined();
+    for (const pais of conmebol) expect(antes[`L-${pais}2`], pais).toBeUndefined();
 
     acertarParticipantes(estado);
     const p = participantes(estado);
-    for (const pais of Object.keys(PAISES)) {
+    for (const pais of conmebol) {
       expect(p[`L-${pais}`], pais).toEqual(antes[`L-${pais}`]);
       expect(p[`L-${pais}2`]?.length ?? 0, pais).toBeGreaterThanOrEqual(8);
     }

@@ -50,8 +50,10 @@ export interface FichaClube {
   caixaInicial: number;
   /** Clube de fora do Brasil: o código do país ("AR", "UY"...). */
   pais?: string;
-  /** Liga que ele joga em 2026: o código do país (primeira divisão) ou com 2 no fim (segunda); falta: a primeira. */
+  /** Liga que ele joga em 2026: o código do país (primeira divisão) ou com o nível no fim ("AR2"); falta: a primeira. */
   liga?: string;
+  /** Clube leve: entra no jogo sem jogadores (`Clube.leve`). */
+  leve?: boolean;
 }
 
 export const FICHAS: FichaClube[] = clubesJson.clubes as FichaClube[];
@@ -85,6 +87,7 @@ function criarClube(ficha: FichaClube, serie: SerieClube, rng: ReturnType<typeof
     cores: { ...ficha.cores }, estadio: { ...ficha.estadio }, fundacao: ficha.fundacao, rival: ficha.rival,
     torcida: ficha.torcida, reputacao: ficha.reputacao, forcaElenco: { ...ficha.forcaElenco },
     caixa: ficha.caixaInicial,
+    ...(ficha.leve ? { leve: true } : {}),
     precoIngresso: precoDeReferencia(serie),
     moral: 60,
     tatica: taticaDaIa(ficha, rng),
@@ -121,14 +124,32 @@ export function juntarClubesNovos(estado: EstadoJogo, rng: ReturnType<typeof cri
       delete clube.elencoDaCopa;
       comElenco.delete(clube.id);
     }
-    if (comElenco.has(clube.id)) continue;
-    const proximoId = () => estado.proximoIdJogador++;
-    const reais = ELENCOS_REAIS[clube.id];
-    const nacionalidade = clube.pais ? PAISES[clube.pais]?.nacionalidade : undefined;
-    for (const j of reais ? elencoReal(rng, clube, reais, proximoId, nacionalidade) : gerarElenco(rng, clube, proximoId, undefined, nacionalidade)) estado.jogadores[j.id] = j;
-    clube.escalacao = escalarAutomatico(elencoDe(estado, clube.id), clube.tatica.formacao, clube.tatica.jogadas);
+    if (comElenco.has(clube.id) || clube.leve) continue;
+    criarElenco(estado, clube, rng);
   }
   return novos;
+}
+
+function criarElenco(estado: EstadoJogo, clube: Clube, rng: ReturnType<typeof criarRng>) {
+  const proximoId = () => estado.proximoIdJogador++;
+  const reais = ELENCOS_REAIS[clube.id];
+  const nacionalidade = clube.pais ? PAISES[clube.pais]?.nacionalidade : undefined;
+  for (const j of reais ? elencoReal(rng, clube, reais, proximoId, nacionalidade) : gerarElenco(rng, clube, proximoId, undefined, nacionalidade)) estado.jogadores[j.id] = j;
+  clube.escalacao = escalarAutomatico(elencoDe(estado, clube.id), clube.tatica.formacao, clube.tatica.jogadas);
+}
+
+/**
+ * Clube leve (sem jogadores) ganha o elenco: quando o técnico o assume ou quando ele entra numa partida com a
+ * simulação completa. Devolve se precisou criar.
+ */
+export function garantirElenco(estado: EstadoJogo, clubeId: string): boolean {
+  const clube = estado.clubes[clubeId];
+  if (!clube?.leve) return false;
+  delete clube.leve;
+  if (Object.values(estado.jogadores).some((j) => j.clubeId === clubeId)) return false;
+  criarElenco(estado, clube, rngPara(estado.semente, `elenco/${clubeId}/${estado.temporada}`));
+  garantirContratos(estado, estado.temporada + 1);
+  return true;
 }
 
 /**
@@ -204,7 +225,8 @@ export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente
   juntarClubesNovos(estado, rng);
   // O técnico treina qualquer clube (nov/2026): das séries, da Série D, só do estadual ou de fora.
   if (!estado.clubes[opcoes.clubeId]) throw new Error("Clube inválido");
-  // O técnico começa com a reputação do clube que o contratou.
+  // O técnico começa com a reputação do clube que o contratou (clube leve ganha o elenco).
+  garantirElenco(estado, opcoes.clubeId);
   estado.tecnico.reputacao = estado.clubes[opcoes.clubeId].reputacao;
   completarLivres(estado, "inicio");
   garantirContratos(estado, TEMPORADA_INICIAL);
@@ -339,7 +361,13 @@ export function prepararJogos(estado: EstadoJogo): PartidaViva[] {
   }
   // Os jogos da simulação rápida saem em `concluirJogos`, sem partida ao vivo.
   const acompanha = competicoesDoUsuario(estado);
-  return jogosPendentesHoje(estado).filter((p) => !simulacaoRapida(estado, p, acompanha)).map((p) => {
+  const hoje = jogosPendentesHoje(estado).filter((p) => !simulacaoRapida(estado, p, acompanha));
+  // Clube leve que entra numa partida completa ganha o elenco (e os elencos do dia são montados de novo).
+  if (hoje.some((p) => [p.mandante, p.visitante].some((id) => garantirElenco(estado, id)))) {
+    elencos.clear();
+    for (const j of Object.values(estado.jogadores)) if (j.clubeId) elencos.set(j.clubeId, [...(elencos.get(j.clubeId) ?? []), j]);
+  }
+  return hoje.map((p) => {
     for (const id of [p.mandante, p.visitante]) {
       const clube = estado.clubes[id];
       if (id !== meu || estado.config.escalacaoAutomatica) {

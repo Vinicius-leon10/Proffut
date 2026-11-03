@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { FICHAS, FICHAS_ESTADUAIS, FICHAS_EXTERIOR, PARTICIPANTES_ESTADUAIS, RESERVA, forcaEstimada, novoJogo, type FichaClube } from "../../engine/jogo";
-import { PAISES } from "../../engine/torneios";
+import { NOME_REGIAO, PAISES, divisaoDaLiga, type Regiao } from "../../engine/torneios";
 import { formatarDinheiro } from "../../engine/financas";
 import { pedirArmazenamentoPersistente } from "../../save/salvamento";
 import { Escudo, Segmentado, Topo } from "../componentes";
@@ -20,11 +20,18 @@ const DIVISOES: Record<string, { valor: string; rotulo: string; clubes: FichaClu
     { valor: "D", rotulo: "Série D", clubes: RESERVA },
     { valor: "estadual", rotulo: "Só estadual", clubes: FICHAS_ESTADUAIS.filter((f) => NOS_ESTADUAIS.has(f.id)) },
   ],
-  ...Object.fromEntries(Object.keys(PAISES).map((pais) => [pais, [
-    { valor: "1", rotulo: "1ª divisão", clubes: FICHAS_EXTERIOR.filter((f) => f.pais === pais && !f.liga) },
-    { valor: "2", rotulo: "2ª divisão", clubes: FICHAS_EXTERIOR.filter((f) => f.pais === pais && f.liga) },
-  ].filter((d) => d.clubes.length)])),
+  // Os outros países, com as divisões que têm clubes no jogo (1ª, 2ª, 3ª...).
+  ...Object.fromEntries(Object.keys(PAISES).map((pais) => {
+    const doPais = FICHAS_EXTERIOR.filter((f) => f.pais === pais);
+    const niveis = [...new Set(doPais.map((f) => divisaoDaLiga(f.liga ?? pais).nivel))].sort((a, b) => a - b);
+    return [pais, niveis.map((n) => ({ valor: String(n), rotulo: `${n}ª divisão`, clubes: doPais.filter((f) => divisaoDaLiga(f.liga ?? pais).nivel === n) }))];
+  }).filter(([, divisoes]) => divisoes.length)),
 };
+/** Os países por região (o Brasil na América do Sul, em primeiro). */
+const POR_REGIAO = (Object.keys(NOME_REGIAO) as Regiao[]).map((regiao) => ({
+  regiao,
+  paises: Object.keys(DIVISOES).filter((p) => (p === "BR" ? "sul" : PAISES[p].regiao) === regiao),
+})).filter((g) => g.paises.length);
 const NOME_PAIS: Record<string, string> = { BR: "Brasil", ...Object.fromEntries(Object.entries(PAISES).map(([k, v]) => [k, v.pais])) };
 
 export function NovoJogo() {
@@ -71,16 +78,20 @@ export function NovoJogo() {
           <input value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Ex.: Vinícius" maxLength={30} autoComplete="off" />
         </label>
 
-        <div className="coluna" style={{ gap: 6 }}>
-          <span className="pequeno fraco">País</span>
-          <div role="group" aria-label="País" className="paises">
-            {Object.keys(DIVISOES).map((p) => (
-              <button key={p} className={`pais${p === pais ? " ativo" : ""}`} aria-pressed={p === pais} onClick={() => escolherPais(p)}>
-                <span className="bandeira" aria-hidden>{bandeira(p)}</span>
-                <span className="corta">{NOME_PAIS[p]}</span>
-              </button>
-            ))}
-          </div>
+        <div role="group" aria-label="País" className="coluna" style={{ gap: 6 }}>
+          {POR_REGIAO.map((g) => (
+            <div key={g.regiao} className="coluna" style={{ gap: 6 }}>
+              <span className="pequeno fraco">{NOME_REGIAO[g.regiao]}</span>
+              <div className="paises">
+                {g.paises.map((p) => (
+                  <button key={p} className={`pais${p === pais ? " ativo" : ""}`} aria-pressed={p === pais} onClick={() => escolherPais(p)}>
+                    <span className="bandeira" aria-hidden>{bandeira(p)}</span>
+                    <span className="corta">{NOME_PAIS[p]}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
         <Segmentado opcoes={divisoes.map((d) => ({ valor: d.valor, rotulo: d.rotulo }))} valor={atual.valor} aoMudar={(d) => { setDivisao(d); setEscolhido(null); }} />

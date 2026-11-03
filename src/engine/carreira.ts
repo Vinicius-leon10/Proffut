@@ -10,6 +10,7 @@ import { limitar } from "./gerador";
 import { elencoDe } from "./mercado";
 import { enviarMensagem } from "./mensagens";
 import { rngPara } from "./rng";
+import { garantirElenco } from "./jogo";
 import type { EstadoJogo, Partida, SerieClube, SerieId } from "./tipos";
 
 const ORDEM_SERIE: Record<SerieClube, number> = { A: 0, B: 1, C: 2, D: 3, estadual: 4, exterior: 5 };
@@ -38,6 +39,7 @@ export function assumirClube(estado: EstadoJogo, clubeId: string, { confianca = 
   const anteriores = (t.clubesAnteriores ??= [...new Set(estado.historico.map((r) => r.tecnico.clubeId))]);
   if (anteriores[anteriores.length - 1] !== anterior.id) anteriores.push(anterior.id);
   t.clubeId = clubeId;
+  garantirElenco(estado, clubeId);
   t.confiancaDiretoria = confianca;
   t.confiancaTorcida = 50;
   t.desde = estado.data;
