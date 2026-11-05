@@ -48,7 +48,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
+        globPatterns: ["**/*.{js,css,html,svg,png,woff2,mp3}"],
         globIgnores: ["**/node_modules/**/*", "**/escudos/**"],
         // Recebe do app a lista dos escudos e baixa os que faltam, fora da tela (public/guardar-escudos.js).
         importScripts: ["guardar-escudos.js"],

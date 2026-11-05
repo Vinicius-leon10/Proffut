@@ -15,7 +15,7 @@ import { competicoesDoUsuario } from "../../engine/torneios";
 import { formatarNota, melhorEmCampo, notasDaPartida, type NotaDoJogador } from "../../engine/notas";
 import { Barra, Escudo, Folha, Icone, Opcoes, Pos, Segmentado } from "../componentes";
 import { rotuloPartida } from "../formatos";
-import { apito, liberarSom, pararSons, tocarLances } from "../sons";
+import { apito, carregarNarrador, liberarSom, pararSons, tocarLances } from "../sons";
 import { useJogo, useLoja } from "../store";
 import { CampoDaPartida } from "./CampoDaPartida";
 import { CampoDaEscalacao, FolhaDoTime, FolhaDosReservas, forcaMediaDoTime, mudarTaticaDoClube } from "./Tatica";
@@ -78,7 +78,11 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
 
   const todasTerminadas = vivas.every((v) => v.terminada);
 
-  useEffect(() => () => pararSons(), []);
+  // Prepara os áudios do narrador antes do apito; ao sair da partida, para o que estiver tocando.
+  useEffect(() => {
+    carregarNarrador();
+    return () => pararSons();
+  }, []);
 
   const passo = useCallback(() => {
     if (Date.now() < suspense.current || noIntervalo.current) return;

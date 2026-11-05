@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R87 rodando a cada mudança, antes
+ponta R01–R88 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -73,18 +73,30 @@ branca por cima do topo verde (captura do usuário, "Ajuste esse topo"). Por iss
 topo e o placar descem mais 16 px (`--folga: min(var(--topo), 16px)`; o aviso desce junto): colados na barra, ficavam
 "sobrepostos no topo" (R33). No navegador `--topo` é 0 e nada muda. As referências do pacote ficam fora do git.
 
-**Sons da partida (out/2026, `src/ui/sons.ts`):** apito, torcida e vaia sintetizados com Web Audio, narrador com a
-voz pt-BR do aparelho (`speechSynthesis`); nada baixado nem copiado. Apito no início e na volta do intervalo, 2 no
-intervalo, 3 no fim; no pênalti: apito, burburinho e "Pênalti!"; no gol, sem narrador (o usuário achou a voz
-robótica feia): gol do meu time = festa da torcida (`FESTA`, o som mais alto: ~−14 dB contra ~−16 dB do apito), gol do
-adversário = `vaia()` (16 vozes graves com vibrato nos formantes do "u", ~−18 dB); pênalti perdido: "uhhh". O pênalti é marcado num minuto (evento `penalti`) e cobrado no minuto
+**Sons da partida (out/2026, `src/ui/sons.ts`):** apito, torcida e vaia sintetizados com Web Audio; nada copiado de
+outro jogo. Apito no início e na volta do intervalo, 2 no intervalo, 3 no fim; no pênalti: apito, burburinho e o
+narrador; no gol: o narrador, e festa da torcida no gol do meu time (`FESTA`, ~−14 dB contra ~−16 dB do apito) ou
+`vaia()` no do adversário (16 vozes graves com vibrato nos formantes do "u", ~−18 dB); pênalti perdido: "uhhh".
+**Narrador (nov/2026):** pedido "eu quero testar isso da voz melhor em português, narrando o jogo. Vamos começar só
+colocando o gol, o pênalti e o cartão vermelho" (antes era a voz robótica do aparelho, `speechSynthesis`, que ele achou
+feia: saiu). Áudios gravados uma vez com a API da ElevenLabs em `public/narrador/<nome>.mp3` (`gol`: "Gooooool! É gol!",
+`penalti`: "Pênalti! O juiz marca pênalti!", `vermelho`: "Cartão vermelho! Expulso de campo!"), voz "Liam" (Voice ID
+`TX3LPaxmHKxFdv7VOQHJ`, voz pública da ElevenLabs), modelo `eleven_multilingual_v2` (stability 0,3, similarity 0,8,
+style 0,7, speaker boost), depois sem o silêncio das pontas e com o volume igualado (`ffmpeg`: `silenceremove`,
+`loudnorm=I=-14`, mono 96 kbps). Ficam no precache do service worker (`globPatterns` com `mp3`): tocam sem internet. A
+chave fica só no ambiente de nuvem "Padrão" do Claude Code (`ELEVENLABS_API_KEY`, com `api.elevenlabs.io` liberado);
+nunca vai para o jogo, para arquivos ou para o git. Ela não lista vozes (falta a permissão `voices_read`): para outra voz,
+o usuário manda o Voice ID. `narrar(nome)` toca o áudio por Web Audio (`carregarNarrador` baixa e prepara ao abrir a
+partida; se o áudio ainda estiver chegando, toca quando chegar) num ganho de 1,2; o gol é narrado para os dois times.
+R88. O pênalti é marcado num minuto (evento `penalti`) e cobrado no minuto
 seguinte (`PartidaViva.penaltiPendente`; o tempo não acaba antes da cobrança) e a partida espera 2,5 s antes da
 cobrança. No intervalo, `noIntervalo` (AoVivo) segura o relógio até o toque no ▶: dois toques do relógio antes de a
 tela parar passavam do intervalo (R57). No iPhone o som só sai depois de um toque (`liberarSom` em "Começar o jogo" e no ▶) e a chave do
 silencioso cala o apito e a torcida. Liga/desliga: botão de som na partida e Configurações → Sons da partida
-(`config.som`, opcional: falta = ligado). Os testes (R25, R27; `escutarSons` em `tests/ajuda.ts`) escutam os sons
-trocando `OscillatorNode.start`, `AudioBufferSourceNode.start` e `speechSynthesis.speak` no navegador de teste, e
-anotam o volume de cada som (maior valor marcado nos ganhos por onde ele passa) e os sons do mesmo instante.
+(`config.som`, opcional: falta = ligado). Os testes (R25, R27, R88; `escutarSons` em `tests/ajuda.ts`) escutam os sons
+trocando `OscillatorNode.start`, `AudioBufferSourceNode.start` (o do narrador tem `narracao` = a frase) e
+`speechSynthesis.speak` no navegador de teste, e anotam o volume de cada som (maior valor marcado nos ganhos por onde ele
+passa) e os sons do mesmo instante.
 
 **Estatísticas da partida (out/2026, `partida.ts` e `AoVivo.tsx`):** fixas na tela do jogo e travadas em cima, fora da
 área que rola: só os lances rolam embaixo (R59; sem abas:
