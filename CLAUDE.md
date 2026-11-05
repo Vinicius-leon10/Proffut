@@ -357,6 +357,15 @@ ainda não tem espaço (saves antigos) ao espaço que é cópia dele (`mesmoPont
 um livre (R86). O espaço ligado ao Continuar abre o Continuar, que pode estar mais novo (R87). R84–R87. **Seleções (regra do usuário para quando
 entrarem):** só é chamado para técnico de uma seleção quem ganhou a liga principal (1ª divisão) de um país.
 
+**Narrador com voz gravada (nov/2026, retirado):** o usuário pediu a narração do gol, do pênalti e do cartão vermelho
+(e depois do início e do fim do jogo) com voz melhor em português; foram feitos com a ElevenLabs (chave só no ambiente
+de nuvem "Padrão", `ELEVENLABS_API_KEY`; plano grátis: só vozes padrão, e a chave não lista vozes), mas as vozes padrão
+ficaram robóticas ou com sotaque de Portugal, e ele pediu "Tire esses audios novos por enquanto, não gostei como ficou.
+Pare a geração de audios". O trabalho ficou no histórico (commits 46ddd8e, d96ddb4 e 466418d: `public/narrador/`,
+`narrar` e `carregarNarrador` em `sons.ts`, R88 e o save `gol-penalti-vermelho.ts`) e foi desfeito antes de ir para a
+`main`. Não gerar áudios sem ele pedir. Ele pode mandar áudios gravados (a voz dele ou de quem deixar usar; nada de
+narração da TV ou do rádio): para voltar, refazer a partir desses commits com os arquivos dele no lugar dos gerados.
+
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e
 segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
