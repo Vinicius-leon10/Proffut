@@ -1,0 +1,267 @@
+{
+ "fonte": "Wikipédia (CC BY-SA), páginas de 2026 baixadas pelo robô (fase america do elencos.yml); montado por tools/copas/montar.ts",
+ "copas": {
+  "K-LIB": {
+   "grupos": [
+    "lanus",
+    "platense",
+    "estudiantes",
+    "independiente-rivadavia",
+    "rosario-central",
+    "boca-juniors",
+    "always-ready",
+    "bolivar",
+    "flamengo",
+    "corinthians",
+    "palmeiras",
+    "cruzeiro",
+    "mirassol",
+    "fluminense",
+    "coquimbo-unido",
+    "universidad-catolica",
+    "santa-fe",
+    "junior",
+    "independiente-del-valle",
+    "ldu-quito",
+    "cerro-porteno",
+    "libertad-py",
+    "universitario",
+    "cusco",
+    "nacional-uy",
+    "penarol",
+    "universidad-central",
+    "guaira"
+   ],
+   "fase2": [
+    "argentinos-juniors",
+    "nacional-potosi",
+    "botafogo",
+    "bahia",
+    "o-higgins",
+    "huachipato",
+    "deportes-tolima",
+    "independiente-medellin",
+    "barcelona-sc",
+    "guarani-py",
+    "sporting-cristal",
+    "liverpool",
+    "carabobo"
+   ],
+   "fase1": [
+    "the-strongest",
+    "universidad-catolica-ec",
+    "2-de-mayo",
+    "alianza-lima",
+    "juventud",
+    "deportivo-tachira"
+   ]
+  },
+  "K-SUL": {
+   "grupos": [
+    "river-plate",
+    "racing-club",
+    "riestra",
+    "san-lorenzo",
+    "tigre",
+    "barracas-central",
+    "sao-paulo",
+    "gremio",
+    "bragantino",
+    "atletico-mg",
+    "santos",
+    "vasco"
+   ],
+   "fase1": [
+    "san-antonio-bulo-bulo",
+    "blooming",
+    "independiente-petrolero",
+    "guabira",
+    "universidad-de-chile",
+    "audax-italiano",
+    "palestino",
+    "cobresal",
+    "atletico-nacional",
+    "america-de-cali",
+    "atletico-bucaramanga",
+    "millonarios",
+    "orense",
+    "libertad",
+    "macara",
+    "deportivo-cuenca",
+    "sportivo-trinidense",
+    "nacional-py",
+    "recoleta",
+    "olimpia",
+    "alianza-atletico",
+    "melgar",
+    "deportivo-garcilaso",
+    "cienciano",
+    "defensor-sporting",
+    "boston-river",
+    "racing-de-montevideo",
+    "montevideo-city",
+    "puerto-cabello",
+    "monagas",
+    "caracas",
+    "metropolitanos"
+   ]
+  },
+  "K-REC": {
+   "final": [
+    "flamengo",
+    "lanus"
+   ]
+  },
+  "K-SUP": {
+   "final": [
+    "flamengo",
+    "corinthians"
+   ]
+  },
+  "K-CONC": {
+   "oitavas": [
+    "mount-pleasant",
+    "liga-deportiva-alajuelense",
+    "seattle-sounders",
+    "toluca",
+    "inter-miami"
+   ],
+   "fase1": [
+    "vancouver",
+    "atletico-ottawa",
+    "forge",
+    "o-m",
+    "defence-force",
+    "xelaju",
+    "real-espana",
+    "olimpia-hn",
+    "cartagines",
+    "sporting-san-miguelito",
+    "la-galaxy",
+    "america",
+    "monterrey",
+    "cruz-azul",
+    "tigres-uanl",
+    "pumas-unam",
+    "philadelphia-union",
+    "san-diego",
+    "vancouver-whitecaps",
+    "fc-cincinnati",
+    "los-angeles-fc",
+    "nashville"
+   ]
+  },
+  "K-LEAG": {
+   "mx": [
+    "cruz-azul",
+    "monterrey",
+    "pachuca",
+    "necaxa",
+    "leon",
+    "pumas-unam",
+    "atlas",
+    "atletico-de-san-luis",
+    "santos-laguna",
+    "toluca",
+    "tigres-uanl",
+    "america",
+    "guadalajara",
+    "juarez",
+    "tijuana",
+    "queretaro",
+    "atlante",
+    "puebla"
+   ],
+   "mls": [
+    "philadelphia-union",
+    "fc-cincinnati",
+    "inter-miami",
+    "charlotte",
+    "nycfc",
+    "nashville",
+    "columbus-crew",
+    "chicago-fire",
+    "orlando-city",
+    "san-diego",
+    "vancouver-whitecaps",
+    "los-angeles-fc",
+    "minnesota-united",
+    "seattle-sounders",
+    "austin",
+    "fc-dallas",
+    "portland-timbers",
+    "real-salt-lake"
+   ]
+  },
+  "K-NE": {
+   "grupos": [
+    "crb",
+    "asa",
+    "vitoria",
+    "jacuipense",
+    "juazeirense",
+    "ceara",
+    "fortaleza",
+    "ferroviario",
+    "maranhao",
+    "imperatriz",
+    "sousa",
+    "botafogo-pb",
+    "sport",
+    "retro",
+    "piaui",
+    "fluminense-pi",
+    "america-rn",
+    "abc",
+    "confianca",
+    "itabaiana"
+   ]
+  },
+  "K-VER": {
+   "norte": [
+    "independencia",
+    "galvez",
+    "trem",
+    "amazonas-fc",
+    "nacional",
+    "remo",
+    "paysandu",
+    "aguia-de-maraba",
+    "porto-velho",
+    "guapore",
+    "gas",
+    "monte-roraima"
+   ],
+   "centro": [
+    "gama",
+    "capital",
+    "rio-branco-es",
+    "vitoria-es",
+    "vila-nova",
+    "anapolis",
+    "atletico-go",
+    "primavera-mt",
+    "cuiaba",
+    "operario-ms",
+    "araguaina",
+    "tocantinopolis"
+   ]
+  },
+  "K-SSE": {
+   "grupos": [
+    "america-mg",
+    "tombense",
+    "operario-pr",
+    "cianorte",
+    "volta-redonda",
+    "sampaio-correa-rj",
+    "juventude",
+    "caxias",
+    "avai",
+    "chapecoense",
+    "sao-bernardo",
+    "novorizontino"
+   ]
+  }
+ }
+}
