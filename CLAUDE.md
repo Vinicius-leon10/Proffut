@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R94 rodando a cada mudança, antes
+ponta R01–R96 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -320,7 +320,7 @@ fundo).
 
 **Técnico de qualquer clube e simulação rápida (nov/2026):** pedido "E vamos permitir que podemos ser técnico de qualquer
 time... na hora de escolher o país, veja também a parte da bandeira". Jogo novo (`NovoJogo.tsx`, em três páginas desde nov/2026, R94: nome do
-técnico → país pela bandeira → divisões e clubes do país): país pela bandeira (emoji pelos indicadores regionais,
+técnico → continente (R96: só a América por enquanto) → lista dos países em ordem, com busca → divisões e clubes do país): país pela bandeira (emoji pelos indicadores regionais,
 `bandeira`), divisão (Brasil: A, B, C, D, "Só estadual"; fora: 1ª, 2ª e 3ª) e clube (R80). Nos testes,
 `escolherPaisNoJogoNovo` (`ajuda.ts`) faz as duas primeiras páginas. O
 técnico treina qualquer clube: rebaixado para a D continua nele (R81; o R72 saiu, `propostasDeEmprego` também). Clube fora
@@ -416,7 +416,7 @@ Salvar liga o jogo ao espaço escolhido (pergunta se lá há outro jogo: `Resumo
 Trocar o Continuar por outro jogo quando ele está fora dos espaços pergunta antes (`podeTrocarOContinuar`). Voltar ao
 menu grava antes, e o menu espera (`esperarGravacaoAoSair`). Ao abrir o menu, `ligarOContinuar` liga o Continuar que
 ainda não tem espaço (saves antigos) ao espaço que é cópia dele (`mesmoPonto`: clube, técnico e data) ou o copia para
-um livre (R86). O espaço ligado ao Continuar abre o Continuar, que pode estar mais novo (R87). R84–R87.
+um livre (R86). O espaço ligado ao Continuar abre o Continuar, que pode estar mais novo (R87). R84–R87. No menu, "Apagar" em cada espaço e "Apagar o Continuar" (`apagarJogo`: o Continuar e o espaço ligado a ele saem juntos, R95).
 
 **Narrador com voz gravada (nov/2026, retirado):** o usuário pediu a narração do gol, do pênalti e do cartão vermelho
 (e depois do início e do fim do jogo) com voz melhor em português; foram feitos com a ElevenLabs (chave só no ambiente

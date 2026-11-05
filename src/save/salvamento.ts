@@ -114,6 +114,21 @@ export async function apagar(espaco: Espaco): Promise<void> {
   await del(`resumo:${espaco}`, banco);
 }
 
+/**
+ * Apaga um jogo salvo (R95). O Continuar e o espaço ligado a ele são o mesmo jogo: apagar um apaga os dois (senão o menu
+ * copiaria o Continuar de volta para um espaço livre).
+ */
+export async function apagarJogo(espaco: Espaco): Promise<void> {
+  const auto = await get<ResumoSave>("resumo:auto", banco);
+  if (espaco === "auto") {
+    if (auto?.ligado) await apagar(auto.ligado);
+    await apagar("auto");
+    return;
+  }
+  await apagar(espaco);
+  if (auto?.ligado === espaco) await apagar("auto");
+}
+
 export async function listarSaves(): Promise<ResumoSave[]> {
   const lista: ResumoSave[] = [];
   for (const espaco of ESPACOS) {

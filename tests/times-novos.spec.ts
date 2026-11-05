@@ -82,14 +82,12 @@ test("R80 jogo novo: o técnico escolhe o país pela bandeira, a divisão e o cl
   await botao(page, "Novo jogo").click();
   await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
-  // Os países da América com clubes no jogo (o Brasil e os outros), por região, cada um com a bandeira; o Brasil vem
-  // escolhido, com as séries e os estaduais.
+  await page.getByRole("button", { name: /América/ }).click();
+  // Os países da América com clubes no jogo (o Brasil e os outros), numa lista só (R96), cada um com a bandeira; o Brasil
+  // vem escolhido, com as séries e os estaduais.
   const comClubes = new Set(exterior.clubes.map((c) => c.pais)).size + 1;
   const paises = page.getByRole("group", { name: "País" }).getByRole("button");
   await expect(paises).toHaveCount(comClubes);
-  for (const regiao of ["América do Sul", "América do Norte", "América Central", "Caribe"]) {
-    await expect(page.getByRole("group", { name: "País" }).getByText(regiao, { exact: true })).toBeVisible();
-  }
   for (const texto of await paises.allTextContents()) expect(texto, texto).toMatch(/^\p{Regional_Indicator}{2}/u);
   await expect(page.getByRole("button", { name: /Brasil/ })).toHaveAttribute("aria-pressed", "true");
   await page.getByRole("button", { name: /Brasil/ }).click();
@@ -181,10 +179,11 @@ test("R94 jogo novo em três páginas: primeiro só o nome do técnico; depois s
   await expect(page.getByRole("group", { name: "País" })).toHaveCount(0);
   await expect(page.locator(".lista .item")).toHaveCount(0);
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
-  // 2ª página: só os países, sem nome nem clubes.
+  // Depois do continente (R96), só os países, sem nome nem clubes.
+  await page.getByRole("button", { name: /América/ }).click();
   await expect(page.getByRole("group", { name: "País" })).toBeVisible();
   await expect(page.getByPlaceholder("Ex.: Vinícius")).toHaveCount(0);
-  await expect(page.locator(".lista .item")).toHaveCount(0);
+  await expect(page.locator(".lista .item .forca")).toHaveCount(0);
   await page.getByRole("button", { name: /Argentina/ }).click();
   // 3ª página: as divisões e os clubes da Argentina.
   await expect(page.locator(".topo .titulo")).toHaveText("Argentina");
@@ -200,4 +199,27 @@ test("R94 jogo novo em três páginas: primeiro só o nome do técnico; depois s
   await botao(page, /^Assumir (o|a) /).click();
   await pularTutorial(page);
   await expect(page.locator(".topo .titulo")).toHaveText("Ponte Preta");
+});
+
+test("R96 jogo novo: depois do nome, o continente (América) e então a lista completa dos países em ordem, sem divisão por região, com busca pelo nome", async ({ page }) => {
+  await abrirSite(page);
+  await botao(page, "Novo jogo").click();
+  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByRole("button", { name: "Próximo", exact: true }).click();
+  // O continente primeiro.
+  await expect(page.getByRole("group", { name: "País" })).toHaveCount(0);
+  await page.getByRole("button", { name: /América/ }).click();
+  // A lista inteira, em ordem alfabética, sem os títulos das regiões.
+  const paises = page.getByRole("group", { name: "País" }).getByRole("button");
+  const nomes = (await paises.allTextContents()).map((t) => t.replace(/^\p{Regional_Indicator}{2}/u, "").trim());
+  expect(nomes.length).toBeGreaterThanOrEqual(30);
+  expect(nomes).toEqual([...nomes].sort((a, b) => a.localeCompare(b, "pt-BR")));
+  for (const regiao of ["América do Sul", "América do Norte", "América Central", "Caribe"]) {
+    await expect(page.getByRole("group", { name: "País" }).getByText(regiao, { exact: true })).toHaveCount(0);
+  }
+  // Busca pelo nome.
+  await page.getByPlaceholder("Nome do país").fill("urug");
+  await expect(paises).toHaveCount(1);
+  await paises.first().click();
+  await expect(page.locator(".topo .titulo")).toHaveText("Uruguai");
 });

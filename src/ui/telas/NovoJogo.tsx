@@ -33,11 +33,15 @@ const POR_REGIAO = (Object.keys(NOME_REGIAO) as Regiao[]).map((regiao) => ({
   paises: Object.keys(DIVISOES).filter((p) => (p === "BR" ? "sul" : PAISES[p].regiao) === regiao),
 })).filter((g) => g.paises.length);
 const NOME_PAIS: Record<string, string> = { BR: "Brasil", ...Object.fromEntries(Object.entries(PAISES).map(([k, v]) => [k, v.pais])) };
+/** Os países em ordem alfabética, numa lista só (R96: sem a divisão por região). */
+const PAISES_EM_ORDEM = POR_REGIAO.flatMap((g) => g.paises).sort((a, b) => NOME_PAIS[a].localeCompare(NOME_PAIS[b], "pt-BR"));
+const semAcento = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
 /** Jogo novo em três páginas (pedido do usuário, R94): o nome do técnico, o país (bandeiras) e o clube (divisões do país). */
 export function NovoJogo() {
   const { iniciar, irParaTela, avisar } = useLoja();
-  const [passo, setPasso] = useState<"nome" | "pais" | "clube">("nome");
+  const [passo, setPasso] = useState<"nome" | "continente" | "pais" | "clube">("nome");
+  const [busca, setBusca] = useState("");
   const [nome, setNome] = useState("");
   const [pais, setPais] = useState("BR");
   const [divisao, setDivisao] = useState("A");
@@ -88,33 +92,50 @@ export function NovoJogo() {
           <label className="coluna" style={{ gap: 6 }}>
             <span className="pequeno fraco">Nome do técnico</span>
             <input value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Ex.: Vinícius" maxLength={30} autoComplete="off"
-              onKeyDown={(e) => { if (e.key === "Enter") setPasso("pais"); }} />
+              onKeyDown={(e) => { if (e.key === "Enter") setPasso("continente"); }} />
           </label>
         </div>
-        {rodape(<button className="botao primario grande cheio" onClick={() => setPasso("pais")}>Próximo</button>)}
+        {rodape(<button className="botao primario grande cheio" onClick={() => setPasso("continente")}>Próximo</button>)}
+      </div>
+    );
+  }
+
+  // O continente (só a América por enquanto; os outros entram quando chegarem ao jogo), R96.
+  if (passo === "continente") {
+    return (
+      <div className="app">
+        <Topo titulo="Escolha o continente" sub={`Técnico: ${nome.trim() || "Técnico"}`} aoVoltar={() => setPasso("nome")} />
+        <div className="conteudo">
+          <div className="lista">
+            <button className="item" onClick={() => { setBusca(""); setPasso("pais"); }}>
+              <span className="bandeira" aria-hidden style={{ fontSize: 28 }}>🌎</span>
+              <div className="cresce">
+                <div className="negrito">América</div>
+                <div className="mini fraco">{PAISES_EM_ORDEM.length} países</div>
+              </div>
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
 
   if (passo === "pais") {
+    const termo = semAcento(busca.trim());
+    const lista = PAISES_EM_ORDEM.filter((p) => !termo || semAcento(NOME_PAIS[p]).includes(termo));
     return (
       <div className="app">
-        <Topo titulo="Escolha o país" sub={`Técnico: ${nome.trim() || "Técnico"}`} aoVoltar={() => setPasso("nome")} />
+        <Topo titulo="Escolha o país" sub="América" aoVoltar={() => setPasso("continente")} />
         <div className="conteudo">
-          <div role="group" aria-label="País" className="coluna" style={{ gap: 6 }}>
-            {POR_REGIAO.map((g) => (
-              <div key={g.regiao} className="coluna" style={{ gap: 6 }}>
-                <span className="pequeno fraco">{NOME_REGIAO[g.regiao]}</span>
-                <div className="paises">
-                  {g.paises.map((p) => (
-                    <button key={p} className={`pais${p === pais ? " ativo" : ""}`} aria-pressed={p === pais} onClick={() => escolherPais(p)}>
-                      <span className="bandeira" aria-hidden>{bandeira(p)}</span>
-                      <span className="corta">{NOME_PAIS[p]}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
+          <input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder="Nome do país" autoComplete="off" aria-label="Nome do país" />
+          <div role="group" aria-label="País" className="lista">
+            {lista.map((p) => (
+              <button key={p} className="item" aria-pressed={p === pais} onClick={() => escolherPais(p)}>
+                <span className="bandeira" aria-hidden style={{ fontSize: 26 }}>{bandeira(p)}</span>
+                <span className="cresce negrito corta">{NOME_PAIS[p]}</span>
+              </button>
             ))}
+            {!lista.length && <p className="pequeno fraco">Nenhum país com esse nome.</p>}
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { formatarData } from "../../engine/calendario";
 import { FICHAS } from "../../engine/jogo";
 import { prontoParaOffline } from "../../save/aparelho";
-import { carregar, espacoLivre, importarTexto, ligarOContinuar, listarSaves, podeTrocarOContinuar, type ResumoSave } from "../../save/salvamento";
+import { apagarJogo, carregar, espacoLivre, importarTexto, ligarOContinuar, listarSaves, podeTrocarOContinuar, type ResumoSave } from "../../save/salvamento";
 import { Cartao, Escudo } from "../componentes";
 import { esperarGravacaoAoSair, useLoja } from "../store";
 
@@ -53,6 +53,16 @@ export function Inicio() {
     }
   };
 
+  const apagarSave = async (r: ResumoSave) => {
+    const mesmo = r.espaco === "auto" ? r.ligado : r.espaco === auto?.ligado ? "auto" : undefined;
+    const onde = r.espaco === "auto" ? "o jogo do Continuar" : `o Espaço ${r.espaco}`;
+    const junto = mesmo ? (r.espaco === "auto" ? ` e o Espaço ${mesmo} (é o mesmo jogo)` : " e o Continuar (é o mesmo jogo)") : "";
+    if (!window.confirm(`Apagar ${onde}${junto}: ${r.clube}, técnico ${r.tecnico}? Não dá para desfazer.`)) return;
+    await apagarJogo(r.espaco);
+    setSaves(await listarSaves());
+    avisar("Jogo apagado.");
+  };
+
   const auto = saves?.find((s) => s.espaco === "auto");
   const espacos = saves?.filter((s) => s.espaco !== "auto") ?? [];
   const ficha = (id: string) => FICHAS.find((f) => f.id === id);
@@ -87,6 +97,11 @@ export function Inicio() {
           <span className="botao primario pequeno">Jogar</span>
         </button>
       )}
+      {auto && (
+        <button className="botao pequeno" style={{ alignSelf: "flex-end" }} onClick={() => apagarSave(auto)} aria-label="Apagar o jogo do Continuar">
+          Apagar o Continuar
+        </button>
+      )}
 
       <button className={`botao grande cheio ${auto ? "floresta" : "primario"}`} onClick={() => irParaTela("novo")}>
         Novo jogo
@@ -96,13 +111,16 @@ export function Inicio() {
         <Cartao titulo="Jogos salvos">
           <div className="lista">
             {espacos.map((r) => (
-              <button key={r.espaco} className="item" onClick={() => abrir(r)}>
-                {ficha(r.clubeId) && <Escudo clube={ficha(r.clubeId)!} tamanho={30} />}
-                <div className="cresce">
-                  <div className="negrito pequeno">Espaço {r.espaco}: {r.clube}</div>
-                  <div className="mini fraco">{r.tecnico} · {r.temporada} · {formatarData(r.data)}</div>
-                </div>
-              </button>
+              <div key={r.espaco} className="item">
+                <button className="linha cresce" onClick={() => abrir(r)} style={{ background: "none", border: 0, padding: 0, textAlign: "left", gap: 10, color: "inherit" }}>
+                  {ficha(r.clubeId) && <Escudo clube={ficha(r.clubeId)!} tamanho={30} />}
+                  <div className="cresce">
+                    <div className="negrito pequeno">Espaço {r.espaco}: {r.clube}</div>
+                    <div className="mini fraco">{r.tecnico} · {r.temporada} · {formatarData(r.data)}</div>
+                  </div>
+                </button>
+                <button className="botao pequeno" onClick={() => apagarSave(r)} aria-label={`Apagar o Espaço ${r.espaco}`}>Apagar</button>
+              </div>
             ))}
           </div>
         </Cartao>

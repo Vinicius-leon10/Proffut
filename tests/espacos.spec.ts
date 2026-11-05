@@ -165,3 +165,32 @@ test("R87 o espaço ligado ao Continuar abre o Continuar, que pode estar mais no
   await esperarSalvar(page, antes);
   await esperarNoSave(page, 'estado.tecnico.nome === "Mais novo"');
 });
+
+test("R95 apagar jogos salvos no menu: o Apagar de um espaço pergunta antes, tira o espaço (e o Continuar, se é o mesmo jogo) e deixa os outros como estão, também depois de fechar e abrir o app", async ({ page }) => {
+  test.setTimeout(150_000);
+  await novoJogo(page, { clube: "Ponte Preta" });
+  await irAoMenu(page);
+  await novoJogo(page, { clube: "Avaí" });
+  await irAoMenu(page);
+  await expect(espaco(page, 1)).toContainText("Ponte Preta");
+  await expect(espaco(page, 2)).toContainText("Avaí");
+  // Sem confirmar, nada sai.
+  page.once("dialog", (d) => d.dismiss());
+  await espaco(page, 1).getByRole("button", { name: /^Apagar/ }).click();
+  await expect(espaco(page, 1)).toBeVisible();
+  // Confirmando, sai o espaço 1; o 2 (o do Continuar) fica.
+  page.once("dialog", (d) => { expect(d.message()).toContain("Ponte Preta"); d.accept(); });
+  await espaco(page, 1).getByRole("button", { name: /^Apagar/ }).click();
+  await expect(espaco(page, 1)).toHaveCount(0);
+  await expect(espaco(page, 2)).toContainText("Avaí");
+  await expect(page.locator(".inicio")).toContainText("Continuar");
+  // Apagar o espaço do Continuar tira os dois (é o mesmo jogo).
+  page.once("dialog", (d) => d.accept());
+  await espaco(page, 2).getByRole("button", { name: /^Apagar/ }).click();
+  await expect(espaco(page, 2)).toHaveCount(0);
+  await expect(page.locator(".inicio")).not.toContainText("Continuar");
+  await page.reload();
+  await expect(page.getByRole("heading", { name: "Proffut" })).toBeVisible({ timeout: 20_000 });
+  await expect(page.locator(".inicio .item")).toHaveCount(0);
+  await expect(page.locator(".inicio")).not.toContainText("Continuar");
+});
