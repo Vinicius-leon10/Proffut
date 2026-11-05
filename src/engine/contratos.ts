@@ -14,7 +14,8 @@ export function anosMaximos(idade: number): number {
 /** Contrato para quem está num clube e ainda não tem (jogo novo, save antigo, reforço sem contrato). */
 export function garantirContratos(estado: EstadoJogo, primeiraTemporada: number) {
   for (const j of Object.values(estado.jogadores)) {
-    if (!j.clubeId || j.contratoAte != null) continue;
+    // Quem joga fora dos clubes do jogo (ligado à seleção, "sel-") não tem contrato no jogo.
+    if (!j.clubeId || j.contratoAte != null || j.clubeId.startsWith("sel-")) continue;
     const anos = Math.min(CONTRATOS.anosIniciais, anosMaximos(j.idade) + 1);
     j.contratoAte = primeiraTemporada + (hashTexto(`contrato/${j.id}`, estado.semente) % anos);
   }

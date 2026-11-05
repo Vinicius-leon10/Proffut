@@ -11,7 +11,7 @@ import { SERIES, classificacao, nomeDaLigaDoClube, posicaoNaLiga, tabelaDaLiga, 
 import { MAX_SUBSTITUICOES, MINIMO_POSICAO } from "./constantes";
 import { desfechoDoConfronto, situacaoNaCopa } from "./copa";
 import { DEFINICOES, situacaoNaCopaDeClubes } from "./copas";
-import { acertarParticipantes, assumirClube, avancar, jogosPendentesHoje, juntarAoSaveAntigo, novoJogo, prepararJogos, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
+import { acertarParticipantes, assumirClube, avancar, concluirJogos, jogosPendentesHoje, juntarAoSaveAntigo, novoJogo, prepararJogos, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
 import { checarEstado } from "./checagem";
 import { PAISES, competicoesDoUsuario, divisaoDaLiga, inicioDoAno, participantes, tabelaDoTorneio, vagasEntreDivisoes } from "./torneios";
 import { dispensar, elencoDe, fazerOferta, limiteDaProposta, livres, pedirMais, transferenciasDaIa } from "./mercado";
@@ -23,6 +23,12 @@ import type { EstadoJogo, EstadoTorneio, IdTorneio, Partida, Posicao } from "./t
 import { exportarTexto, importarTexto } from "../save/salvamento";
 import jogadoresJson from "../../data/brasil-2026/jogadores.json";
 import exteriorJson from "../../data/america-do-sul-2026/jogadores.json";
+import convocadosJson from "../../data/selecoes-2026/convocados.json";
+import { candidatosDaSelecao, confirmarConvocacao, convitesDeSelecoes, nacionalidadeDoPais, rankingDasSelecoes, tabelasDeSelecoes } from "./selecoes";
+
+/** Quem foi convocado por uma seleção e joga num clube do jogo ganha a nacionalidade dela (os dados dos clubes nem sempre dizem). */
+const NACIONALIDADE_DA_CONVOCACAO = new Map(Object.entries(convocadosJson.selecoes as Record<string, { convocados: { noJogo?: string; clubeDoJogo?: string }[] }>)
+  .flatMap(([pais, s]) => s.convocados.filter((c) => c.noJogo && c.clubeDoJogo).map((c) => [`${c.clubeDoJogo}/${c.noJogo}`, nacionalidadeDoPais(pais)] as const)));
 
 const clubes = Array.from({ length: 20 }, (_, i) => `c${i}`);
 
@@ -146,8 +152,9 @@ describe("temporada completa", () => {
     for (const s of SERIES) expect(Object.values(estado.clubes).filter((c) => c.serie === s)).toHaveLength(20);
     for (const j of Object.values(estado.jogadores)) if (j.clubeId) expect(estado.clubes[j.clubeId]).toBeTruthy();
     for (const c of Object.values(estado.clubes)) {
-      // Série D e clubes leves (sem jogadores, das divisões de baixo) ficam de fora.
-      if (c.serie === "D" || c.leve) continue;
+      // Série D e clubes leves (sem jogadores, das divisões de baixo) ficam de fora; as seleções jogam com os convocados
+      // dos clubes (o elenco delas é só quem joga fora dos clubes do jogo).
+      if (c.serie === "D" || c.leve || c.serie === "selecao") continue;
       const elenco = elencoDe(estado, c.id);
       for (const pos of Object.keys(MINIMO_POSICAO) as Posicao[]) {
         expect(elenco.filter((j) => j.posicao === pos).length).toBeGreaterThanOrEqual(MINIMO_POSICAO[pos]);
@@ -414,7 +421,7 @@ describe("estaduais e ligas de fora", () => {
     e.partidas[0].jogada = true;
     juntarAoSaveAntigo(e);
     for (const id of novos) expect(e.clubes[id], id).toBeTruthy();
-    for (const c of Object.values(e.clubes)) if (!c.leve) expect(elencoDe(e, c.id).length, c.id).toBeGreaterThanOrEqual(16);
+    for (const c of Object.values(e.clubes)) if (!c.leve && c.serie !== "selecao") expect(elencoDe(e, c.id).length, c.id).toBeGreaterThanOrEqual(16);
     expect(e.clubes.palmeiras.estadual).toBe("SP");
     expect(e.torneios).toEqual({});
     expect(checarEstado(e).filter((p) => p.gravidade === "erro")).toEqual([]);
@@ -464,6 +471,8 @@ describe("escalação depois da virada", () => {
     simularRestoDaTemporada(estado);
     avancar(estado);
     for (const c of Object.values(estado.clubes)) {
+      // A escalação das seleções é dos convocados (jogadores dos clubes).
+      if (c.serie === "selecao") continue;
       for (const id of [...c.escalacao.titulares, ...c.escalacao.reservas]) {
         if (id != null) expect(estado.jogadores[id]?.clubeId).toBe(c.id);
       }
@@ -543,7 +552,8 @@ describe("elencos reais", () => {
       for (const r of reais) {
         const j = elenco.find((x) => x.nome === r.nome && x.posicao === r.posicao);
         expect(j, `${r.nome} (${clubeId})`).toBeDefined();
-        expect([j!.idade, j!.forca, j!.lado, j!.nacionalidade]).toEqual([r.idade, r.forca, r.lado, r.nacionalidade ?? "BRA"]);
+        const nacionalidade = NACIONALIDADE_DA_CONVOCACAO.get(`${clubeId}/${r.nome}`) ?? r.nacionalidade ?? "BRA";
+        expect([j!.idade, j!.forca, j!.lado, j!.nacionalidade]).toEqual([r.idade, r.forca, r.lado, nacionalidade]);
       }
       for (const pos of ["G", "L", "Z", "M", "A"] as Posicao[]) expect(elenco.filter((x) => x.posicao === pos).length).toBeGreaterThanOrEqual(MINIMO_POSICAO[pos] + 1);
     }
@@ -561,7 +571,8 @@ describe("elencos reais", () => {
       for (const r of reais) {
         const j = elenco.find((x) => x.nome === r.nome && x.posicao === r.posicao);
         expect(j, `${r.nome} (${clubeId})`).toBeDefined();
-        expect([j!.idade, j!.forca, j!.nacionalidade]).toEqual([r.idade, r.forca, r.nacionalidade ?? doPais]);
+        const nacionalidade = NACIONALIDADE_DA_CONVOCACAO.get(`${clubeId}/${r.nome}`) ?? r.nacionalidade ?? doPais;
+        expect([j!.idade, j!.forca, j!.nacionalidade]).toEqual([r.idade, r.forca, nacionalidade]);
       }
     }
   });
@@ -1163,8 +1174,10 @@ describe("carreira do técnico", () => {
 describe("contratos", () => {
   it("no jogo novo, quem está num clube tem contrato até 2026–2029 (os mais velhos, menos); livres não têm", () => {
     const estado = novoJogo({ nomeTecnico: "T", clubeId: "ponte-preta", semente: 31 });
-    // Os elencos da Série D montados só para a Copa saem na virada: não precisam de contrato.
-    const comClube = Object.values(estado.jogadores).filter((j) => j.clubeId && estado.clubes[j.clubeId].serie !== "D");
+    // Os elencos da Série D montados só para a Copa saem na virada: não precisam de contrato. Quem joga fora dos clubes do
+    // jogo (ligado à seleção) também não tem contrato no jogo.
+    const comClube = Object.values(estado.jogadores).filter((j) => j.clubeId && estado.clubes[j.clubeId].serie !== "D" && !j.clubeFora);
+    for (const j of Object.values(estado.jogadores)) if (j.clubeFora) expect(j.contratoAte, j.nome).toBeUndefined();
     const fins = new Set<number>();
     for (const j of comClube) {
       expect(j.contratoAte, j.nome).toBeGreaterThanOrEqual(2026);
@@ -1184,7 +1197,7 @@ describe("contratos", () => {
     for (const j of Object.values(estado.jogadores)) delete j.contratoAte;
     const aberto = importarTexto(exportarTexto(estado));
     for (const j of Object.values(aberto.jogadores)) {
-      if (j.clubeId) expect(j.contratoAte, j.nome).toBeGreaterThanOrEqual(2027);
+      if (j.clubeId && !j.clubeFora) expect(j.contratoAte, j.nome).toBeGreaterThanOrEqual(2027);
       else expect(j.contratoAte).toBeUndefined();
     }
   });
@@ -1444,7 +1457,7 @@ describe("sala de troféus e recordes", () => {
     expect(estado.recordes!.desde).toBe(2026);
     for (const [id, clube] of Object.entries(estado.clubes)) {
       const r = estado.recordes!.clubes[id];
-      if (clube.serie === "estadual" || clube.serie === "exterior") {
+      if (clube.serie === "estadual" || clube.serie === "exterior" || clube.serie === "selecao") {
         expect(r).toBeUndefined();
         continue;
       }
@@ -1683,5 +1696,176 @@ describe("copas de clubes (Libertadores, Sul-Americana, Recopa, Concacaf, region
     expect(aberto.temporada).toBe(2027);
     expect(Object.keys(aberto.copas!).length).toBeGreaterThanOrEqual(DEFINICOES.length - 2);
     expect(aberto.copas!["K-LIB"]!.clubes).toHaveLength(47);
+  });
+});
+
+describe("seleções da América (nov/2026)", () => {
+  /** Joga até o começo da temporada `ano` (com as viradas). */
+  function jogarAte(e: EstadoJogo, ano: number) {
+    for (let i = 0; i < 6000 && e.temporada < ano; i++) {
+      const r = avancar(e);
+      if (r.tipo === "jogos-hoje") simularDia(e);
+      else if (r.tipo === "nada") break;
+    }
+  }
+
+  it("jogo novo: as 51 seleções com a convocação de verdade; quem joga fora fica ligado à seleção (sem contrato nem mercado) e quem joga num clube do jogo continua nele, com a nacionalidade da seleção", () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 41 });
+    const selecoes = Object.values(e.clubes).filter((c) => c.serie === "selecao");
+    expect(selecoes).toHaveLength(51);
+    expect(e.clubes["sel-BR"].nome).toBe("Brasil");
+    const br = e.selecoes!.convocados["sel-BR"].map((id) => e.jogadores[id]);
+    const vini = br.find((j) => j.nome === "Vinícius Júnior")!;
+    expect(vini.clubeId).toBe("sel-BR");
+    expect(vini.clubeFora).toEqual({ nome: "Real Madrid", pais: "Espanha" });
+    expect(vini.selecao!.jogos).toBeGreaterThan(50);
+    expect(vini.forca).toBeGreaterThanOrEqual(88);
+    expect(vini.contratoAte).toBeUndefined();
+    // Do clube do jogo: o Pedro Morisco continua no Coritiba.
+    const morisco = br.find((j) => j.nome === "Pedro Morisco")!;
+    expect(morisco.clubeId).toBe("coritiba");
+    // Bolivianos do Santos viram bolivianos (os dados do clube não diziam).
+    const terceros = Object.values(e.jogadores).find((j) => j.nome === "Miguel Terceros" && j.clubeId === "santos");
+    if (terceros) expect(terceros.nacionalidade).toBe("BOL");
+    for (const s of selecoes) {
+      const convocados = e.selecoes!.convocados[s.id];
+      expect(convocados.length, s.id).toBeGreaterThanOrEqual(16);
+      expect(convocados.every((id) => e.jogadores[id]?.nacionalidade === nacionalidadeDoPais(s.pais!)), s.id).toBe(true);
+    }
+    // Ninguém em duas seleções.
+    const todos = Object.values(e.selecoes!.convocados).flat();
+    expect(new Set(todos).size).toBe(todos.length);
+    // O mercado do computador não leva quem joga fora.
+    transferenciasDaIa(e, "teste-selecoes");
+    expect(e.jogadores[vini.id].clubeId).toBe("sel-BR");
+    expect(checarEstado(e).filter((p) => p.gravidade === "erro")).toEqual([]);
+  });
+
+  it("datas FIFA: na concentração os convocados ficam fora dos clubes (escalação e partida) e voltam depois; sem jogos de seleção em junho de 2026 (Copa do Mundo)", () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 42 });
+    e.config.escalacaoAutomatica = true;
+    let conferidos = 0;
+    let concentrados = 0;
+    for (let i = 0; i < 600 && e.data < "2026-09-10"; i++) {
+      const r = avancar(e);
+      if (r.tipo !== "jogos-hoje") break;
+      const vivas = prepararJogos(e);
+      if (e.selecoes!.concentradas.length) {
+        concentrados = Math.max(concentrados, Object.values(e.jogadores).filter((j) => j.convocado).length);
+        for (const pv of vivas) for (const lado of pv.lados) {
+          if (lado.clubeId.startsWith("sel-")) continue;
+          for (const id of [...lado.emCampo.map((a) => a.jogadorId), ...lado.banco]) {
+            expect(e.jogadores[id].convocado, `${e.jogadores[id].nome} (${lado.clubeId}) em ${e.data}`).toBeUndefined();
+            conferidos++;
+          }
+        }
+      }
+      concluirJogos(e, vivas);
+    }
+    expect(conferidos).toBeGreaterThan(100);
+    expect(concentrados).toBeGreaterThan(900);
+    // Depois da data FIFA de setembro, todos voltaram.
+    for (let i = 0; i < 50 && e.data < "2026-09-12"; i++) {
+      const r = avancar(e);
+      if (r.tipo !== "jogos-hoje") break;
+      simularDia(e);
+    }
+    expect(e.data >= "2026-09-12").toBe(true);
+    expect(Object.values(e.jogadores).filter((j) => j.convocado)).toEqual([]);
+    const jogos = e.partidas.filter((p) => p.serie.startsWith("S-"));
+    expect(jogos.filter((p) => p.data.startsWith("2026-06") || p.data.startsWith("2026-07"))).toEqual([]);
+    expect(jogos.filter((p) => p.jogada).length).toBeGreaterThanOrEqual(100);
+    // Os jogos pela seleção contam na seleção, não na temporada do clube.
+    const vini = Object.values(e.jogadores).find((j) => j.nome === "Vinícius Júnior")!;
+    expect(vini.temporada.jogos).toBe(0);
+    expect(vini.selecao!.jogos).toBeGreaterThan(57);
+  });
+
+  it("de 2026 a 2029: Copa Ouro (anos ímpares), Copa América (2028), Eliminatórias da Conmebol (18 rodadas, a tabela junta as temporadas, 6 vão à Copa e 1 à repescagem) e da Concacaf (3 fases)", { timeout: 240_000 }, () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "palmeiras", semente: 43 });
+    e.config.escalacaoAutomatica = true;
+    jogarAte(e, 2029);
+    const eli = e.selecoes!.competicoes["S-ELI-SUL-2030"]!;
+    expect(eli.selecoes).toHaveLength(10);
+    // Depois de 2027 e 2028: 12 rodadas jogadas, somadas nas duas temporadas.
+    const tabela = tabelasDeSelecoes(e, "S-ELI-SUL-2030", "liga")[0];
+    expect(tabela.map((l) => l.j)).toEqual(Array(10).fill(12));
+    jogarAte(e, 2030);
+    const [h27, h28, h29] = [2027, 2028, 2029].map((ano) => e.historico.find((h) => h.temporada === ano)!);
+    expect(h27.selecoes!["S-OURO-2027"]!.campeao).toMatch(/^sel-/);
+    const america = h28.selecoes!["S-AME-2028"]!;
+    expect(america.campeao).toMatch(/^sel-/);
+    expect(america.vice).not.toBe(america.campeao);
+    expect(h29.selecoes!["S-OURO-2029"]!.campeao).toMatch(/^sel-/);
+    const sul = h29.selecoes!["S-ELI-SUL-2030"]!;
+    expect(sul.classificados).toHaveLength(6);
+    expect(sul.repescagem).toHaveLength(1);
+    const ccf = h29.selecoes!["S-ELI-CCF-2030"]!;
+    expect(ccf.classificados).toHaveLength(3);
+    expect(ccf.repescagem).toHaveLength(2);
+    for (const id of [...ccf.classificados!, ...ccf.repescagem!]) expect(e.clubes[id].pais && ["BR", "AR", "UY"].includes(e.clubes[id].pais!)).toBe(false);
+    // As competições que acabaram saem; os jogos delas também.
+    expect(e.selecoes!.competicoes["S-ELI-SUL-2030"]).toBeUndefined();
+    expect(e.partidas.some((p) => p.serie.startsWith("S-ELI"))).toBe(false);
+    expect(e.selecoes!.agenda).toEqual([]);
+    // O ranking mudou com os jogos.
+    expect(rankingDasSelecoes(e).find((s) => s.id === "sel-BR")!.pontos).not.toBe(2050);
+  });
+
+  it("convite de seleção só para quem já ganhou a liga principal de um país; aceitar: técnico da seleção junto com o clube, a convocação dele vale e o jogo da seleção é dele", () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 44 });
+    expect(convitesDeSelecoes(e, 95)).toEqual([]);
+    // Campeão da Série A em 2025 (de mentira, para o teste).
+    e.historico.push({
+      temporada: 2025, campeoes: { A: "flamengo", B: "coritiba", C: "londrina" }, artilheiros: { A: null, B: null, C: null },
+      promovidos: { A: [], B: [], C: [] }, rebaixados: { A: [], B: [], C: [] },
+      tecnico: { clubeId: "flamengo", serie: "A", posicao: 1, objetivo: "", cumpriu: true },
+    });
+    const convites = convitesDeSelecoes(e, 95);
+    expect(convites).toHaveLength(2);
+    const m = e.mensagens.find((x) => x.convite?.clubeId === convites[0])!;
+    expect(responderConvite(e, m.id, true).ok).toBe(true);
+    expect(e.tecnico.selecao).toBe(convites[0]);
+    expect(e.tecnico.clubeId).toBe("flamengo");
+    expect(e.mensagens.find((x) => x.convite?.clubeId === convites[1])!.convite!.resolvido).toBe("recusado");
+    const minha = e.tecnico.selecao!;
+    // A convocação do técnico: os 23 piores candidatos (para ver que vale a dele, não a do auxiliar).
+    const piores = candidatosDaSelecao(e, minha).sort((a, b) => a.forca - b.forca).slice(0, 23).map((j) => j.id);
+    confirmarConvocacao(e, piores);
+    expect(competicoesDoUsuario(e).has("S-AMI")).toBe(true);
+    let jogo: Partida | undefined;
+    for (let i = 0; i < 200 && !jogo; i++) {
+      const r = avancar(e);
+      if (r.tipo !== "jogos-hoje") break;
+      if (r.meuJogo && r.meuJogo.serie.startsWith("S-")) jogo = r.meuJogo;
+      else simularDia(e);
+    }
+    expect(jogo).toBeDefined();
+    expect(e.data).toBe("2026-03-26");
+    expect(new Set(e.selecoes!.convocados[minha])).toEqual(new Set(piores));
+    const vivas = prepararJogos(e);
+    const pv = vivas.find((v) => v.partidaId === jogo!.id)!;
+    const lado = pv.lados.find((l) => l.clubeId === minha)!;
+    expect(lado.controlado).toBe(true);
+    for (const a of lado.emCampo) expect(piores).toContain(a.jogadorId);
+    concluirJogos(e, vivas);
+    expect(e.partidas.find((p) => p.id === jogo!.id)!.jogada).toBe(true);
+  });
+
+  it("save de antes das seleções: ao abrir, entram as seleções e os amistosos da próxima data FIFA, sem mexer nos clubes", () => {
+    const antigo = novoJogo({ nomeTecnico: "T", clubeId: "bahia", semente: 45 });
+    for (const j of Object.values(antigo.jogadores)) {
+      if (j.clubeId?.startsWith("sel-")) delete antigo.jogadores[j.id];
+      delete j.selecao;
+    }
+    for (const id of Object.keys(antigo.clubes)) if (id.startsWith("sel-")) delete antigo.clubes[id];
+    antigo.partidas = antigo.partidas.filter((p) => !p.serie.startsWith("S-"));
+    delete antigo.selecoes;
+    const clubes = Object.keys(antigo.clubes).length;
+    const aberto = importarTexto(exportarTexto(antigo));
+    expect(Object.keys(aberto.clubes).length).toBe(clubes + 51);
+    expect(aberto.partidas.filter((p) => p.serie === "S-AMI").length).toBeGreaterThanOrEqual(40);
+    expect(aberto.partidas.filter((p) => p.serie === "S-AMI").every((p) => p.data > aberto.data)).toBe(true);
+    expect(checarEstado(aberto).filter((p) => p.gravidade === "erro")).toEqual([]);
   });
 });

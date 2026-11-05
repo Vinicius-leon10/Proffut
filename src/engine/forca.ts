@@ -199,8 +199,13 @@ export function capitaoDoTime(estado: EstadoJogo, clubeId: string, titulares: (n
 
 // ---- escalação automática ---------------------------------------------------------
 
-export function disponivel(j: Jogador): boolean {
-  return j.lesaoDias <= 0 && j.suspensaoJogos <= 0;
+/**
+ * Pode jogar: sem lesão nem suspensão e, pelo clube, sem estar com a seleção. `paraSelecao`: para jogar pela seleção, só a
+ * lesão conta (as suspensões são dos campeonatos dos clubes).
+ */
+export function disponivel(j: Jogador, paraSelecao = false): boolean {
+  if (paraSelecao) return j.lesaoDias <= 0;
+  return j.lesaoDias <= 0 && j.suspensaoJogos <= 0 && !j.convocado;
 }
 
 /**
@@ -211,9 +216,10 @@ export function escalarAutomatico(
   elenco: Jogador[],
   formacao: Formacao,
   jogadas: Jogadas,
+  paraSelecao = false,
 ): { titulares: (number | null)[]; reservas: number[] } {
   const vagas = FORMACOES[formacao];
-  const livres = elenco.filter(disponivel);
+  const livres = elenco.filter((j) => disponivel(j, paraSelecao));
   const pares: { vaga: number; jogador: Jogador; nota: number }[] = [];
   vagas.forEach((vaga, i) => {
     for (const j of livres) pares.push({ vaga: i, jogador: j, nota: forcaEfetiva(j, vaga, j.energia, jogadas) });

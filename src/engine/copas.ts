@@ -622,7 +622,7 @@ function sortearPares(rng: Rng, lista: string[], separar: (id: string) => string
 }
 
 /** Grupos pelos potes do ranking, evitando dois do mesmo país (ou estado) no mesmo grupo quando dá. */
-function sortearGrupos(rng: Rng, ranking: string[], quantos: number, separar: (id: string) => string): string[][] {
+export function sortearGrupos(rng: Rng, ranking: string[], quantos: number, separar: (id: string) => string): string[][] {
   const potes: string[][] = [];
   for (let i = 0; i < ranking.length; i += quantos) potes.push(ranking.slice(i, i + quantos));
   for (let tentativa = 0; tentativa < 80; tentativa++) {

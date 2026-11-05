@@ -3,15 +3,19 @@ export type Lado = "D" | "E";
 export type SerieId = "A" | "B" | "C";
 /**
  * Onde o clube joga: uma das séries nacionais (A a D), só o estadual ("estadual": clube brasileiro fora das séries
- * nacionais) ou a primeira divisão de outro país da Conmebol ("exterior", com `Clube.liga`).
+ * nacionais) ou a primeira divisão de outro país da Conmebol ("exterior", com `Clube.liga`). As seleções (selecoes.ts) também são "clubes", com a série
+ * "selecao" e o id "sel-" + o país.
  */
-export type SerieClube = SerieId | "D" | "estadual" | "exterior";
+export type SerieClube = SerieId | "D" | "estadual" | "exterior" | "selecao";
 /**
  * Competição de uma partida: uma das séries A, B e C, a Copa do Brasil ("CB"), um dos torneios de
  * `EstadoJogo.torneios` (a Série D "D", um estadual "E-SP" ou a liga de outro país "L-AR") ou uma das copas de clubes de
  * `EstadoJogo.copas` ("K-LIB": Libertadores, Sul-Americana, as copas regionais e as nacionais dos outros países).
  */
-export type Competicao = SerieId | "CB" | "D" | `E-${string}` | `L-${string}` | IdCopa;
+export type Competicao = SerieId | "CB" | "D" | `E-${string}` | `L-${string}` | IdCopa | IdCompeticaoSelecoes;
+/** Competição de seleções (selecoes.ts): "S-ELI-SUL-2030", "S-AME-2028", "S-OURO-2027", os amistosos "S-AMI". */
+export type IdCompeticaoSelecoes = `S-${string}`;
+export type TipoCompeticaoSelecoes = "eliminatorias-sul" | "eliminatorias-concacaf" | "copa-america" | "copa-ouro";
 /** Copa de clubes de `EstadoJogo.copas` (copas.ts): "K-LIB", "K-SUL", "K-NE", "K-AR"... */
 export type IdCopa = `K-${string}`;
 /** Torneio de `EstadoJogo.torneios`: Série D, estadual ou liga de outro país. */
@@ -86,6 +90,15 @@ export interface Jogador {
   contratoAte?: number;
   /** Emprestado: joga no `clubeId` até a virada da temporada `ate` e então volta ao clube `de` (dono do contrato). */
   emprestimo?: { de: string; ate: number };
+  /**
+   * Joga fora dos clubes do jogo (Europa, Ásia...): o clube de verdade e o país dele. O `clubeId` é o da seleção ("sel-BR"):
+   * não joga por clube nenhum, só pela seleção.
+   */
+  clubeFora?: { nome: string; pais: string };
+  /** Jogos e gols pela seleção (os de verdade até 2026, mais os do jogo). Falta em quem nunca foi convocado. */
+  selecao?: { jogos: number; gols: number };
+  /** Com a seleção agora (o id dela): não joga pelo clube até voltar (selecoes.ts, `atualizarConcentracoes`). */
+  convocado?: string;
 }
 
 export type TipoLancamento =
@@ -326,6 +339,52 @@ export interface EstadoCopaClubes {
   vice?: string;
 }
 
+/** Competição de seleções em andamento (selecoes.ts): Eliminatórias (atravessam as temporadas), Copa América ou Copa Ouro. */
+export interface EstadoCompeticaoSelecoes {
+  id: IdCompeticaoSelecoes;
+  tipo: TipoCompeticaoSelecoes;
+  nome: string;
+  /** Ano da Copa do Mundo (Eliminatórias) ou do torneio. */
+  ano: number;
+  /** "liga" (Eliminatórias da Conmebol), "fase1" a "fase3" (Concacaf), "grupos", "quartas", "semi", "final"; "encerrada" no fim. */
+  fase: string;
+  /** Todas as seleções que jogam, da mais forte para a mais fraca no começo. */
+  selecoes: string[];
+  /** Quem entra em cada fase (Concacaf). */
+  entram?: Record<string, string[]>;
+  /** Grupos de cada fase de grupos. */
+  grupos?: Record<string, string[][]>;
+  /** Sede do torneio (a única que joga em casa). */
+  sede?: string;
+  /** Eliminatórias: os que vão à Copa do Mundo e os da repescagem. */
+  classificados?: string[];
+  repescagem?: string[];
+  campeao?: string;
+  vice?: string;
+}
+
+/** As seleções (selecoes.ts). Falta nos saves de antes delas: entram ao abrir o jogo. */
+export interface EstadoSelecoes {
+  /** Pontos do ranking (Elo) de cada seleção. */
+  ranking: Record<string, number>;
+  /** Convocados de cada seleção: os da concentração em andamento ou os da última. */
+  convocados: Record<string, number[]>;
+  /** Seleções concentradas agora (os convocados estão fora dos clubes). */
+  concentradas: string[];
+  /** O técnico já escolheu os convocados da próxima concentração da seleção dele (senão o auxiliar convoca). */
+  convocacaoFeita?: boolean;
+  /** Data do jogo do último recado de convocação mandado ao técnico. */
+  avisoConvocacao?: string;
+  /** Competições em andamento e as que acabaram na temporada (saem na virada). */
+  competicoes: Partial<Record<IdCompeticaoSelecoes, EstadoCompeticaoSelecoes>>;
+  /** Jogos das próximas temporadas: entram em `partidas` na virada do ano deles. */
+  agenda: Partida[];
+  /** Última data da data FIFA com os amistosos já marcados. */
+  amistososAte?: string;
+  /** Quantos de cada posição cada seleção tinha fora dos clubes do jogo no começo: a base de fora se mantém. */
+  base: Record<string, Partial<Record<Posicao, number>>>;
+}
+
 export interface RegistroTemporada {
   temporada: number;
   campeoes: Record<SerieId, string>;
@@ -339,6 +398,10 @@ export interface RegistroTemporada {
   torneios?: Partial<Record<IdTorneio, { campeao: string; vice?: string }>>;
   /** Campeões e vices das copas de clubes (Libertadores, Sul-Americana...; falta nas temporadas de antes delas). */
   copas?: Partial<Record<IdCopa, { campeao: string; vice?: string }>>;
+  /** Competições de seleções que acabaram no ano: campeão e vice (torneios) ou quem foi à Copa do Mundo (Eliminatórias). */
+  selecoes?: Partial<Record<IdCompeticaoSelecoes, { campeao?: string; vice?: string; classificados?: string[]; repescagem?: string[] }>>;
+  /** Seleção que o técnico treinava no fim da temporada. */
+  selecaoDoTecnico?: string;
 }
 
 /** Um jogo que virou recorde de um clube. */
@@ -378,6 +441,12 @@ export interface Tecnico {
   clubesAnteriores?: string[];
   /** Demitido: escolhe um destes clubes antes de seguir (o `clubeId` ainda é o do clube que o demitiu). */
   demissao?: { data: string; clubeId: string; propostas: string[] };
+  /** Seleção que o técnico treina junto com o clube (o id dela, "sel-BR"). */
+  selecao?: string;
+  /** Quando assumiu a seleção. */
+  selecaoDesde?: string;
+  /** Seleções que já treinou. */
+  selecoesAnteriores?: string[];
 }
 
 export interface Configuracoes {
@@ -409,6 +478,8 @@ export interface EstadoJogo {
    * nacionais dos outros países). Falta nos saves de antes delas: começam na temporada seguinte.
    */
   copas?: Partial<Record<IdCopa, EstadoCopaClubes>>;
+  /** Seleções: ranking, convocações e competições (Eliminatórias, Copa América, Copa Ouro). Falta nos saves de antes delas. */
+  selecoes?: EstadoSelecoes;
   partidas: Partida[];
   mensagens: Mensagem[];
   proximoIdMensagem: number;

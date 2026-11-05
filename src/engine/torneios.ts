@@ -12,6 +12,7 @@ import { comArtigo, concorda } from "./artigos";
 import { inicioDaTemporada, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { chavesDaFase, classificacao, vencedorDaChave, type LinhaTabela } from "./competicoes";
 import { hashTexto, rngPara } from "./rng";
+import { competicoesDaSelecao } from "./selecoes";
 import type { Clube, Competicao, EstadoJogo, EstadoTorneio, IdTorneio, Partida } from "./tipos";
 
 export const NOME_ESTADUAL: Record<string, string> = {
@@ -437,6 +438,8 @@ export function torneiosEncerrados(estado: EstadoJogo): boolean {
 export function simulacaoRapida(estado: EstadoJogo, p: Partida, acompanha = competicoesDoUsuario(estado)): boolean {
   if (acompanha.has(p.serie)) return false;
   if (p.serie.startsWith("L-")) return true;
+  // Jogos de seleções: só os da seleção do técnico têm a simulação completa (os outros, nem a competição ele acompanha).
+  if (p.serie.startsWith("S-")) return !(estado.tecnico.selecao && (p.mandante === estado.tecnico.selecao || p.visitante === estado.tecnico.selecao));
   // Nas copas, só os jogos entre clubes de fora do Brasil: os brasileiros têm a bilheteria, o cansaço e os recordes de sempre.
   return p.serie.startsWith("K-") && !!estado.clubes[p.mandante]?.pais && !!estado.clubes[p.visitante]?.pais;
 }
@@ -448,5 +451,7 @@ export function competicoesDoUsuario(estado: EstadoJogo): Set<Competicao> {
   for (const t of torneiosDoClube(estado, meu)) lista.add(t.id);
   // As copas de clubes que o clube do usuário joga (Libertadores, Copa do Nordeste...).
   for (const c of Object.values(estado.copas ?? {})) if (c?.clubes.includes(meu)) lista.add(c.id);
+  // As competições da seleção do técnico (e os amistosos dela).
+  if (estado.tecnico.selecao) for (const id of competicoesDaSelecao(estado, estado.tecnico.selecao)) lista.add(id);
   return lista;
 }

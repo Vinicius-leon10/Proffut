@@ -65,7 +65,7 @@ export function processarMes(estado: EstadoJogo, data: string) {
     // Clubes só do estadual e os de fora não têm contas no jogo (não compram nem vendem por conta própria), fora o do
     // usuário, que pode treinar qualquer clube.
     const fora = clube.serie === "estadual" || clube.serie === "exterior";
-    if (fora && clube.id !== estado.tecnico.clubeId) continue;
+    if ((fora && clube.id !== estado.tecnico.clubeId) || clube.serie === "selecao") continue;
     // Série D, só do estadual e de fora: patrocínio menor que o da Série C.
     const patrocinio = clube.serie === "D" || fora ? PATROCINIO_MES.C * PATROCINIO_SERIE_D : PATROCINIO_MES[clube.serie as SerieId];
     lancar(clube, data, "patrocinio", "Patrocínio do mês", patrocinio * (0.6 + 0.8 * (clube.reputacao / 100)));

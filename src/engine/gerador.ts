@@ -38,7 +38,7 @@ const IDADE_PAPEL: Record<Papel, [number, number]> = {
   jovem: [17, 21],
 };
 
-const ESTRANGEIROS_POR_SERIE: Record<SerieClube, number> = { A: 0.12, B: 0.05, C: 0.02, D: 0.01, estadual: 0, exterior: 0 };
+const ESTRANGEIROS_POR_SERIE: Record<SerieClube, number> = { A: 0.12, B: 0.05, C: 0.02, D: 0.01, estadual: 0, exterior: 0, selecao: 0 };
 
 export function limitar(valor: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, valor));

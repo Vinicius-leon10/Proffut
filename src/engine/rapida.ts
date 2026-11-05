@@ -39,9 +39,9 @@ export function forcaRapida(clube: Clube, elenco: Jogador[]): number {
 const PESO_GOL: Record<Posicao, number> = { G: 0, Z: 0.6, L: 0.8, M: 2.5, A: 5 };
 const PESO_PASSE: Record<Posicao, number> = { G: 0.05, Z: 0.4, L: 1.5, M: 3, A: 2 };
 
-/** Os 11 que entram: o goleiro mais forte e os 10 mais fortes da linha, fora os lesionados e os suspensos. */
-function onze(elenco: Jogador[]): Jogador[] {
-  const aptos = elenco.filter((j) => j.lesaoDias <= 0 && j.suspensaoJogos <= 0);
+/** Os 11 que entram: o goleiro mais forte e os 10 mais fortes da linha, fora os lesionados e os suspensos (e os convocados). */
+function onze(elenco: Jogador[], selecao = false): Jogador[] {
+  const aptos = elenco.filter((j) => j.lesaoDias <= 0 && (selecao || (j.suspensaoJogos <= 0 && !j.convocado)));
   const lista = (aptos.length >= 11 ? aptos : elenco).slice().sort((a, b) => b.forca - a.forca);
   const g = lista.find((j) => j.posicao === "G");
   const linha = lista.filter((j) => j !== g).slice(0, g ? 10 : 11);
@@ -56,7 +56,8 @@ function onze(elenco: Jogador[]): Jogador[] {
  */
 export function jogarRapido(
   estado: EstadoJogo, p: Partida, elencos: Map<string, Jogador[]>, decidePorPenaltis: boolean, empatado: (p: Partida) => boolean = (x) => x.gm === x.gv,
-) {
+  selecao = false,
+): Jogador[] {
   const rng = rngPara(estado.semente, `rapida/${p.id}`);
   const mandante = estado.clubes[p.mandante];
   const visitante = estado.clubes[p.visitante];
@@ -64,13 +65,20 @@ export function jogarRapido(
   const elencoV = elencos.get(p.visitante) ?? [];
   const [fm, fv] = [forcaRapida(mandante, elencoM), forcaRapida(visitante, elencoV)];
   const [gm, gv] = placarRapido(rng, fm, fv, !!p.neutro);
-  const times = [onze(elencoM), onze(elencoV)];
+  // Pela seleção (`selecao`: os elencos são os convocados), quem joga é quem não está machucado; os jogos e os gols contam
+  // na seleção, não na temporada do clube, e a suspensão dos clubes não anda.
+  const times = [onze(elencoM, selecao), onze(elencoV, selecao)];
   for (const time of times) {
-    for (const j of time) j.temporada.jogos++;
-    // Quem não jogou cumpre a suspensão, como na simulação completa.
+    for (const j of time) {
+      if (selecao) j.selecao = { jogos: (j.selecao?.jogos ?? 0) + 1, gols: j.selecao?.gols ?? 0 };
+      else j.temporada.jogos++;
+    }
   }
-  for (const [i, elenco] of [elencoM, elencoV].entries()) {
-    for (const j of elenco) if (j.suspensaoJogos > 0 && !times[i].includes(j)) j.suspensaoJogos--;
+  // Quem não jogou cumpre a suspensão, como na simulação completa.
+  if (!selecao) {
+    for (const [i, elenco] of [elencoM, elencoV].entries()) {
+      for (const j of elenco) if (j.suspensaoJogos > 0 && !times[i].includes(j)) j.suspensaoJogos--;
+    }
   }
   const eventos: { minuto: number; lado: 0 | 1; jogador?: number; outro?: number }[] = [];
   ([gm, gv] as const).forEach((n, lado) => {
@@ -80,8 +88,9 @@ export function jogarRapido(
       const autor = time.length ? rng.escolherPeso(time, (j) => PESO_GOL[j.posicao] * j.forca + 0.01) : undefined;
       const outros = time.filter((j) => j !== autor);
       const passe = autor && outros.length && rng.chance(0.65) ? rng.escolherPeso(outros, (j) => PESO_PASSE[j.posicao] * j.forca + 0.01) : undefined;
-      if (autor) autor.temporada.gols++;
-      if (passe) passe.temporada.assistencias++;
+      if (autor && selecao) autor.selecao!.gols++;
+      else if (autor) autor.temporada.gols++;
+      if (passe && !selecao) passe.temporada.assistencias++;
       eventos.push({ minuto, lado: lado as 0 | 1, ...(autor ? { jogador: autor.id } : {}), ...(passe ? { outro: passe.id } : {}) });
     }
   });
@@ -103,4 +112,5 @@ export function jogarRapido(
   if (gm > gv) { ajustar(mandante, 6); ajustar(visitante, -6); }
   else if (gm < gv) { ajustar(mandante, -6); ajustar(visitante, 6); }
   else { ajustar(mandante, -1); ajustar(visitante, 1); }
+  return times.flat();
 }

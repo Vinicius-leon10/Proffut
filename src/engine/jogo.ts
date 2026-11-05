@@ -32,6 +32,10 @@ import { concluirObras } from "./estadio";
 import { encerrarTemporada } from "./temporada";
 import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno, simulacaoRapida } from "./torneios";
 import { jogarRapido } from "./rapida";
+import {
+  aplicarJogoDeSelecoes, atualizarConcentracoes, avancarSelecoes, depoisDoJogoRapido, ehCompeticaoDeSelecoes, elencoDaSelecao,
+  ehSelecao, juntarSelecoes, selecoesDoJogoNovo,
+} from "./selecoes";
 import type { Clube, Estilo, EstadoJogo, Formacao, Jogador, Partida, SerieClube, Tatica } from "./tipos";
 
 export interface FichaClube {
@@ -159,11 +163,12 @@ export function garantirElenco(estado: EstadoJogo, clubeId: string): boolean {
  * a março) e, com a temporada em andamento, todos os torneios começam na próxima.
  */
 export function juntarAoSaveAntigo(estado: EstadoJogo) {
-  if (estado.torneios) return;
+  if (estado.torneios) return juntarSelecoes(estado);
   juntarClubesNovos(estado, rngPara(estado.semente, "mundo/clubes-novos"));
   const comecou = estado.partidas.some((p) => p.jogada);
   if (!comecou && estado.data < somarDias(inicioDaTemporada(estado.temporada), 1)) criarTorneios(estado, { semEstaduais: true });
   else estado.torneios = {};
+  juntarSelecoes(estado);
 }
 
 /**
@@ -245,6 +250,8 @@ export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente
   criarCopa(estado);
   // Libertadores, Sul-Americana, as copas da Concacaf, as regionais do Brasil e as nacionais de fora (as de 2026).
   criarCopasDeClubes(estado);
+  // As 51 seleções da América, com as convocações de verdade, as competições do ano e os amistosos de março.
+  selecoesDoJogoNovo(estado);
   estado.objetivo = definirObjetivo(estado);
   enviarMensagem(estado, {
     tipo: "diretoria",
@@ -269,9 +276,24 @@ export function jogosPendentesHoje(estado: EstadoJogo): Partida[] {
   return partidasDoDia(estado).filter((p) => !p.jogada);
 }
 
+/** O jogo do usuário hoje: o da seleção dele (se ela joga, é esse que ele dirige) ou o do clube. */
 export function meuJogoHoje(estado: EstadoJogo): Partida | undefined {
   const meu = estado.tecnico.clubeId;
-  return jogosPendentesHoje(estado).find((p) => p.mandante === meu || p.visitante === meu);
+  const selecao = estado.tecnico.selecao;
+  const hoje = jogosPendentesHoje(estado);
+  return (selecao ? hoje.find((p) => p.mandante === selecao || p.visitante === selecao) : undefined)
+    ?? hoje.find((p) => p.mandante === meu || p.visitante === meu);
+}
+
+/** O time que o usuário dirige numa partida (o clube ou a seleção), ou undefined. */
+export function meuTimeNaPartida(estado: EstadoJogo, p: Pick<Partida, "mandante" | "visitante">): string | undefined {
+  const meus = [estado.tecnico.selecao, estado.tecnico.clubeId].filter((x): x is string => !!x);
+  return meus.find((id) => id === p.mandante || id === p.visitante);
+}
+
+/** Os jogadores que podem jogar por um time: o elenco do clube ou os convocados da seleção. */
+export function elencoDoTime(estado: EstadoJogo, id: string): Jogador[] {
+  return ehSelecao(id) ? elencoDaSelecao(estado, id) : elencoDe(estado, id);
 }
 
 export function proximoJogoDoClube(estado: EstadoJogo, clubeId = estado.tecnico.clubeId): Partida | undefined {
@@ -300,6 +322,8 @@ function processarDias(estado: EstadoJogo, ate: string) {
       }
     }
     if (mudouMes) processarMes(estado, dia);
+    // Seleções: quem está concentrado (fora dos clubes) e as convocações.
+    atualizarConcentracoes(estado);
     concluirObras(estado, dia);
     gerarPropostas(estado, dia);
     expirarConvites(estado, dia);
@@ -354,7 +378,10 @@ export function avancar(estado: EstadoJogo): ResultadoAvanco {
 
 /** Monta todas as partidas do dia (a do usuário com o lado dele "controlado"). */
 export function prepararJogos(estado: EstadoJogo): PartidaViva[] {
-  const meu = estado.tecnico.clubeId;
+  const minhaSelecao = estado.tecnico.selecao;
+  // No dia em que a seleção dele joga, o técnico está com ela: o auxiliar dirige o clube (escala e mexe no time).
+  const comASelecao = !!minhaSelecao && jogosPendentesHoje(estado).some((p) => p.mandante === minhaSelecao || p.visitante === minhaSelecao);
+  const meu = comASelecao ? minhaSelecao! : estado.tecnico.clubeId;
   const elencos = new Map<string, ReturnType<typeof elencoDe>>();
   for (const j of Object.values(estado.jogadores)) {
     if (!j.clubeId) continue;
@@ -370,16 +397,19 @@ export function prepararJogos(estado: EstadoJogo): PartidaViva[] {
     elencos.clear();
     for (const j of Object.values(estado.jogadores)) if (j.clubeId) elencos.set(j.clubeId, [...(elencos.get(j.clubeId) ?? []), j]);
   }
+  // Seleções: os convocados.
+  for (const p of hoje) for (const id of [p.mandante, p.visitante]) if (ehSelecao(id)) elencos.set(id, elencoDaSelecao(estado, id));
   return hoje.map((p) => {
-    for (const id of [p.mandante, p.visitante]) {
+    const lados = [p.mandante, p.visitante].map((id) => {
       const clube = estado.clubes[id];
       if (id !== meu || estado.config.escalacaoAutomatica) {
-        clube.escalacao = escalarAutomatico(elencos.get(id) ?? [], clube.tatica.formacao, clube.tatica.jogadas);
+        const escalacao = escalarAutomatico(elencos.get(id) ?? [], clube.tatica.formacao, clube.tatica.jogadas, ehSelecao(id));
+        // O clube do usuário no dia da seleção: o auxiliar escala só este jogo (a escalação do técnico fica guardada).
+        if (id === estado.tecnico.clubeId && comASelecao) return montarLado({ ...clube, escalacao }, estado.jogadores, elencos.get(id) ?? [], false);
+        clube.escalacao = escalacao;
       }
-    }
-    const lados = [p.mandante, p.visitante].map((id) =>
-      montarLado(estado.clubes[id], estado.jogadores, elencos.get(id) ?? [], id === meu),
-    );
+      return montarLado(clube, estado.jogadores, elencos.get(id) ?? [], id === meu);
+    });
     // Estatísticas e campo 2D só na partida do usuário, com sorteios próprios (não mudam o resultado).
     const minha = p.mandante === meu || p.visitante === meu;
     const proprio = (nome: string) => (minha ? rngPara(estado.semente, `${nome}/${p.id}`) : undefined);
@@ -393,14 +423,19 @@ export function prepararJogos(estado: EstadoJogo): PartidaViva[] {
  */
 export function provavelTime(estado: EstadoJogo, clubeId: string): LadoVivo {
   const clube = estado.clubes[clubeId];
-  const elenco = elencoDe(estado, clubeId);
-  const escalacao = escalarAutomatico(elenco, clube.tatica.formacao, clube.tatica.jogadas);
+  const elenco = elencoDoTime(estado, clubeId);
+  const escalacao = escalarAutomatico(elenco, clube.tatica.formacao, clube.tatica.jogadas, ehSelecao(clubeId));
   return montarLado({ ...clube, escalacao }, estado.jogadores, elenco, false);
 }
 
 /** `elencos`: os jogadores de cada clube, montados uma vez para o dia (procurar no jogo todo a cada partida pesava). */
 function aplicarResultado(estado: EstadoJogo, pv: PartidaViva, elencos: Map<string, Jogador[]>) {
   const p = estado.partidas.find((x) => x.id === pv.partidaId)!;
+  // Jogo de seleções: jogos e gols pela seleção, ranking; sem bilheteria, sem a temporada dos clubes.
+  if (ehCompeticaoDeSelecoes(p.serie)) {
+    aplicarJogoDeSelecoes(estado, pv, p, () => empatadoNoConfronto(estado, p));
+    return;
+  }
   const rng = rngPara(estado.semente, `pos-jogo/${p.id}`);
   const [lm, lv] = pv.lados;
   const mandante = estado.clubes[p.mandante];
@@ -497,6 +532,14 @@ function aplicarResultado(estado: EstadoJogo, pv: PartidaViva, elencos: Map<stri
   }
 }
 
+/** Empate que leva aos pênaltis: no placar (jogo único) ou no agregado (na volta do mata-mata). */
+function empatadoNoConfronto(estado: EstadoJogo, p: Partida): boolean {
+  if (p.perna !== 2) return p.gm === p.gv;
+  const chave = chaveDaPartida(estado, p);
+  const [a, b] = chave ? agregado(chave) : [0, 1];
+  return a === b;
+}
+
 /** Termina (se preciso) e registra todas as partidas do dia, depois avança as fases. */
 export function concluirJogos(estado: EstadoJogo, vivas: PartidaViva[]): string[] {
   // Os elencos do dia, uma vez só (registrar uma partida não troca ninguém de clube).
@@ -515,14 +558,18 @@ export function concluirJogos(estado: EstadoJogo, vivas: PartidaViva[]): string[
   for (const p of jogosPendentesHoje(estado)) {
     if (!simulacaoRapida(estado, p, acompanha)) continue;
     // Na volta do mata-mata, o empate que leva aos pênaltis é o do agregado.
-    jogarRapido(estado, p, elencos, decidePorPenaltis(p), (x) => {
-      if (x.perna !== 2) return x.gm === x.gv;
-      const chave = chaveDaPartida(estado, x);
-      const [a, b] = chave ? agregado(chave) : [0, 1];
-      return a === b;
-    });
+    if (ehCompeticaoDeSelecoes(p.serie)) {
+      // Seleções: os convocados de cada uma.
+      const convocados = new Map([p.mandante, p.visitante].map((id) => [id, elencoDaSelecao(estado, id)] as const));
+      const jogaram = jogarRapido(estado, p, convocados, decidePorPenaltis(p), (x) => empatadoNoConfronto(estado, x), true);
+      depoisDoJogoRapido(estado, p, jogaram);
+      continue;
+    }
+    jogarRapido(estado, p, elencos, decidePorPenaltis(p), (x) => empatadoNoConfronto(estado, x));
   }
-  const noticias = [...avancarFases(estado), ...avancarCopa(estado), ...avancarTorneios(estado), ...avancarCopasDeClubes(estado)];
+  const noticias = [
+    ...avancarFases(estado), ...avancarCopa(estado), ...avancarTorneios(estado), ...avancarCopasDeClubes(estado), ...avancarSelecoes(estado),
+  ];
   for (const n of noticias) enviarMensagem(estado, { tipo: "noticia", titulo: "Notícias", texto: n });
   return noticias;
 }

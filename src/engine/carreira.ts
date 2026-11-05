@@ -11,9 +11,10 @@ import { elencoDe } from "./mercado";
 import { enviarMensagem } from "./mensagens";
 import { rngPara } from "./rng";
 import { garantirElenco } from "./jogo";
+import { assumirSelecao, comArtigoDaSelecao, ehSelecao } from "./selecoes";
 import type { EstadoJogo, Partida, SerieClube, SerieId } from "./tipos";
 
-const ORDEM_SERIE: Record<SerieClube, number> = { A: 0, B: 1, C: 2, D: 3, estadual: 4, exterior: 5 };
+const ORDEM_SERIE: Record<SerieClube, number> = { A: 0, B: 1, C: 2, D: 3, estadual: 4, exterior: 5, selecao: 6 };
 
 /** Reputação do técnico; nos saves de antes dela, a do clube atual. */
 export function reputacaoDoTecnico(estado: EstadoJogo): number {
@@ -33,7 +34,8 @@ export function assumirClube(estado: EstadoJogo, clubeId: string, { confianca = 
   const anterior = estado.clubes[t.clubeId];
   for (const m of estado.mensagens) {
     if (m.proposta && !m.proposta.resolvida) m.proposta.resolvida = "retirada";
-    if (m.convite && !m.convite.resolvido) m.convite.resolvido = "recusado";
+    // Os convites de seleções continuam valendo (o técnico treina a seleção junto com o clube).
+    if (m.convite && !m.convite.resolvido && !ehSelecao(m.convite.clubeId)) m.convite.resolvido = "recusado";
   }
   for (const j of elencoDe(estado, anterior.id)) j.aVenda = false;
   const anteriores = (t.clubesAnteriores ??= [...new Set(estado.historico.map((r) => r.tecnico.clubeId))]);
@@ -138,9 +140,13 @@ export function responderConvite(estado: EstadoJogo, mensagemId: number, aceitar
   const clube = estado.clubes[c.clubeId];
   if (!aceitar) {
     c.resolvido = "recusado";
-    return { ok: true, texto: `Convite ${comArtigo("do", clube)} recusado.` };
+    return { ok: true, texto: `Convite ${ehSelecao(clube.id) ? comArtigoDaSelecao("do", clube.id, estado) : comArtigo("do", clube)} recusado.` };
   }
   c.resolvido = "aceito";
+  if (ehSelecao(clube.id)) {
+    assumirSelecao(estado, clube.id);
+    return { ok: true, texto: `Você é o técnico ${comArtigoDaSelecao("do", clube.id, estado)}!` };
+  }
   assumirClube(estado, clube.id, { confianca: 65 });
   return { ok: true, texto: `Você assumiu ${comArtigo("o", clube)}!` };
 }

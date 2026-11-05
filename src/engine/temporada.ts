@@ -1,7 +1,7 @@
 // Virada de temporada: histórico, premiação, acesso/rebaixamento, evolução dos
 // jogadores, aposentadorias, base e preparação do ano seguinte.
 import { comArtigo, concorda } from "./artigos";
-import { demitir, gerarConvites, mudarReputacao, passouDaCarencia } from "./carreira";
+import { demitir, gerarConvites, mudarReputacao, passouDaCarencia, reputacaoDoTecnico } from "./carreira";
 import { encerrarContratos, garantirContratos, liberar } from "./contratos";
 import { encerrarEmprestimos } from "./emprestimos";
 import { inicioDaTemporada, somarDias } from "./calendario";
@@ -17,6 +17,7 @@ import { completarLivres, elencoDe, livres, reescalar, transferenciasDaIa } from
 import { enviarMensagem } from "./mensagens";
 import { rngPara, type Rng } from "./rng";
 import { PAISES, inicioDoAno, trocarDivisoes } from "./torneios";
+import { anoNovoDasSelecoes, convitesDeSelecoes, guardarJogosQueContinuam, resumoDasSelecoes } from "./selecoes";
 import type { EstadoJogo, IdCopa, IdTorneio, Jogador, Posicao, RegistroTemporada, SerieId } from "./tipos";
 
 function artilheiro(estado: EstadoJogo, serie: SerieId): RegistroTemporada["artilheiros"][SerieId] {
@@ -99,6 +100,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
   for (const t of torneios) if (t.campeao) campeoesDosTorneios[t.id] = { campeao: t.campeao, ...(t.vice ? { vice: t.vice } : {}) };
   const campeoesDasCopas: Partial<Record<IdCopa, { campeao: string; vice?: string }>> = {};
   for (const c of Object.values(estado.copas ?? {})) if (c?.campeao) campeoesDasCopas[c.id] = { campeao: c.campeao, ...(c.vice ? { vice: c.vice } : {}) };
+  const dasSelecoes = resumoDasSelecoes(estado);
   estado.historico.push({
     temporada: ano,
     campeoes: { A: estado.series.A.campeao!, B: estado.series.B.campeao!, C: estado.series.C.campeao! },
@@ -112,6 +114,8 @@ export function encerrarTemporada(estado: EstadoJogo) {
     },
     ...(Object.keys(campeoesDosTorneios).length ? { torneios: campeoesDosTorneios } : {}),
     ...(Object.keys(campeoesDasCopas).length ? { copas: campeoesDasCopas } : {}),
+    ...(Object.keys(dasSelecoes).length ? { selecoes: dasSelecoes } : {}),
+    ...(estado.tecnico.selecao ? { selecaoDoTecnico: estado.tecnico.selecao } : {}),
   });
 
   // ---- premiação ----
@@ -192,8 +196,9 @@ export function encerrarTemporada(estado: EstadoJogo) {
   for (const lista of livresPorPosicao.values()) lista.sort((a, b) => b.forca - a.forca);
   for (const clube of Object.values(estado.clubes)) {
     const elenco = elencos.get(clube.id) ?? [];
-    // Clube sem jogador nenhum não joga (Série D de um save antigo antes de abrir o jogo).
-    if (!elenco.length) continue;
+    // Clube sem jogador nenhum não joga (Série D de um save antigo antes de abrir o jogo). As seleções renovam a base de
+    // fora delas no ano novo (`anoNovoDasSelecoes`).
+    if (!elenco.length || clube.serie === "selecao") continue;
     const doPais = clube.pais ? PAISES[clube.pais]?.nacionalidade : undefined;
     const entrar = (j: Jogador) => { j.clubeId = clube.id; estado.jogadores[j.id] = j; elenco.push(j); };
     const quantos = elenco.length < 24 ? 3 : elenco.length < 28 ? 2 : 1;
@@ -237,6 +242,8 @@ export function encerrarTemporada(estado: EstadoJogo) {
 
   // ---- clubes ----
   for (const clube of Object.values(estado.clubes)) {
+    // As seleções escalam os convocados a cada concentração.
+    if (clube.serie === "selecao") { clube.moral = 60; continue; }
     // Quem se aposentou ou saiu do clube deixa a escalação.
     const ficou = (id: number | null) => id != null && estado.jogadores[id]?.clubeId === clube.id;
     clube.escalacao.titulares = clube.escalacao.titulares.map((id) => (ficou(id) ? id : null));
@@ -266,9 +273,12 @@ export function encerrarTemporada(estado: EstadoJogo) {
   estado.temporada = ano + 1;
   const comEstaduais = Object.values(estado.clubes).some((c) => c.estadual);
   estado.data = comEstaduais ? inicioDoAno(ano + 1) : somarDias(inicioDaTemporada(ano + 1), -7);
+  // As Eliminatórias atravessam as temporadas: os jogos delas ficam (a tabela junta os anos).
+  const continuam = guardarJogosQueContinuam(estado);
   criarTemporada(estado);
   criarCopa(estado);
   criarCopasDeClubes(estado, vagas);
+  anoNovoDasSelecoes(estado, continuam);
   transferenciasDaIa(estado, `${ano + 1}-pre-1`);
   transferenciasDaIa(estado, `${ano + 1}-pre-2`);
   for (const clube of Object.values(estado.clubes)) {
@@ -278,7 +288,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
       // Mantém quem o usuário escalou (se ainda está no clube) e completa o resto.
       if (estado.config.escalacaoAutomatica) meu.escalacao = escalarAutomatico(elenco, meu.tatica.formacao, meu.tatica.jogadas);
       else reescalar(estado, meuId);
-    } else {
+    } else if (clube.serie !== "selecao") {
       reescalar(estado, clube.id);
     }
   }
@@ -289,6 +299,8 @@ export function encerrarTemporada(estado: EstadoJogo) {
   if (demitido) demitir(estado, `A diretoria ${comArtigo("do", meuClube)} não quis continuar com você depois de uma temporada abaixo do objetivo.`);
   // Convites: para quem foi bem.
   else if (!t.demissao && (cumpriu || subiu || campeao)) gerarConvites(estado, CONVITES.virada);
+  // Seleções: só chamam quem já ganhou a liga principal de um país (regra do usuário).
+  if (!t.demissao) convitesDeSelecoes(estado, reputacaoDoTecnico(estado));
 
   // ---- mensagens ----
   const campeaoD = campeoesDosTorneios.D?.campeao;

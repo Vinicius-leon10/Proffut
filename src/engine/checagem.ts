@@ -58,6 +58,8 @@ export function checarEstado(estado: EstadoJogo): Problema[] {
   const elencos = elencosPorClube(estado);
   for (const c of Object.values(estado.clubes)) {
     if (!Number.isFinite(c.caixa)) erro(`O caixa ${comArtigo("do", c)} está inválido.`, true);
+    // As seleções escalam os convocados (jogadores dos clubes): não têm elenco próprio para conferir.
+    if (c.serie === "selecao") continue;
     const elenco = elencos.get(c.id) ?? [];
     // Clube sem jogador nenhum não joga (Série D de um save antigo, antes de ganhar os elencos).
     if (!elenco.length) continue;
@@ -100,7 +102,7 @@ export function repararEstado(estado: EstadoJogo): string[] {
   const elencos = elencosPorClube(estado);
   for (const c of Object.values(estado.clubes)) {
     if (!Number.isFinite(c.caixa)) { c.caixa = 0; caixas++; }
-    if (!elencos.get(c.id)?.length) continue;
+    if (!elencos.get(c.id)?.length || c.serie === "selecao") continue;
     if (idsEscalacaoInvalidos(estado, c.id)) {
       const valido = (id: number | null) => id != null && estado.jogadores[id]?.clubeId === c.id;
       c.escalacao.titulares = c.escalacao.titulares.map((id) => (valido(id) ? id : null));

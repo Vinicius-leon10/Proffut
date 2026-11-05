@@ -122,15 +122,21 @@ type Jogadores = Record<number, Jogador>;
 
 // ---- montagem -------------------------------------------------------------------
 
-/** Garante uma escalação válida: troca quem está lesionado/suspenso pelo melhor substituto. */
+/**
+ * Garante uma escalação válida: troca quem está lesionado/suspenso (ou fora do elenco) pelo melhor substituto. `elenco`:
+ * quem pode jogar (o elenco do clube ou os convocados da seleção; nas seleções, a suspensão dos clubes não conta).
+ */
 export function escalacaoValida(clube: Clube, jogadores: Jogadores, elenco: Jogador[]): { emCampo: Atuacao[]; banco: number[] } {
   const vagas = FORMACOES[clube.tatica.formacao];
   const usados = new Set<number>();
   const emCampo: Atuacao[] = [];
+  const doElenco = new Set(elenco.map((j) => j.id));
+  const selecao = clube.serie === "selecao";
+  const apto = (j: Jogador) => disponivel(j, selecao);
   vagas.forEach((vaga, i) => {
     const id = clube.escalacao.titulares[i];
     const j = id != null ? jogadores[id] : undefined;
-    if (j && j.clubeId === clube.id && disponivel(j) && !usados.has(j.id)) {
+    if (j && doElenco.has(j.id) && apto(j) && !usados.has(j.id)) {
       emCampo.push({ jogadorId: j.id, vaga });
       usados.add(j.id);
     } else {
@@ -143,7 +149,7 @@ export function escalacaoValida(clube: Clube, jogadores: Jogadores, elenco: Joga
     let melhor: Jogador | undefined;
     let nota = -1;
     for (const j of elenco) {
-      if (usados.has(j.id) || !disponivel(j)) continue;
+      if (usados.has(j.id) || !apto(j)) continue;
       const n = forcaEfetiva(j, atuacao.vaga, j.energia, clube.tatica.jogadas);
       if (n > nota) { nota = n; melhor = j; }
     }
@@ -151,11 +157,11 @@ export function escalacaoValida(clube: Clube, jogadores: Jogadores, elenco: Joga
   }
   const banco = clube.escalacao.reservas.filter((id) => {
     const j = jogadores[id];
-    return j && j.clubeId === clube.id && disponivel(j) && !usados.has(id);
+    return j && doElenco.has(id) && apto(j) && !usados.has(id);
   });
   if (banco.length < 7) {
     const extras = elenco
-      .filter((j) => disponivel(j) && !usados.has(j.id) && !banco.includes(j.id))
+      .filter((j) => apto(j) && !usados.has(j.id) && !banco.includes(j.id))
       .sort((a, b) => b.forca - a.forca);
     for (const j of extras) {
       if (banco.length >= 7) break;

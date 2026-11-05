@@ -270,6 +270,8 @@ export function transferenciasDaIa(estado: EstadoJogo, chave: string): string[] 
     const orcamento = clube.caixa * 0.35;
     const alvos = Object.values(estado.jogadores).filter((j) => {
       if (j.posicao !== carencia.pos || j.clubeId === clube.id || j.clubeId === estado.tecnico.clubeId || j.emprestimo) return false;
+      // Quem joga fora dos clubes do jogo (ligado à seleção) não está no mercado.
+      if (j.clubeId?.startsWith("sel-")) return false;
       if (j.forca < forca - 3 || j.forca > forca + 8 || j.idade > 32) return false;
       return precoPedido(estado, j) <= orcamento && podeSair(estado, j, contagem);
     });

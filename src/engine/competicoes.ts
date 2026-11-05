@@ -4,6 +4,7 @@ import { datasDaTemporada, turnoEReturno, turnoUnico, type Confronto } from "./c
 import { hashTexto, rngPara } from "./rng";
 import { copaDecidePorPenaltis, copasEncerradas, ehCopaDeClubes, nomeDaCopa } from "./copas";
 import { criarTorneios, ehTorneio, nomeDoTorneio, tabelaDoTorneio, torneioDecidePorPenaltis, torneiosEncerrados } from "./torneios";
+import { ehCompeticaoDeSelecoes, nomeDaCompeticaoDeSelecoes, selecoesDecidePorPenaltis, selecoesEncerradas } from "./selecoes";
 import type { Clube, Competicao, EstadoJogo, EstadoSerie, EstadoTorneio, IdTorneio, Partida, SerieClube, SerieId } from "./tipos";
 
 export const SERIES: SerieId[] = ["A", "B", "C"];
@@ -13,6 +14,7 @@ export const NOME_SERIE: Record<SerieId | "D", string> = { A: "SÃ©rie A", B: "SÃ
 export function nomeDaCompeticao(c: Competicao): string {
   if (c === "CB") return "Copa do Brasil";
   if (ehCopaDeClubes(c)) return nomeDaCopa(c);
+  if (ehCompeticaoDeSelecoes(c)) return nomeDaCompeticaoDeSelecoes(undefined, c);
   return ehTorneio(c) ? nomeDoTorneio(c) : NOME_SERIE[c];
 }
 
@@ -325,7 +327,7 @@ export function avancarFases(estado: EstadoJogo): string[] {
 
 export function temporadaEncerrada(estado: EstadoJogo): boolean {
   return SERIES.every((s) => estado.series[s].fase === "encerrada") && (!estado.copa || estado.copa.fase === "encerrada") && torneiosEncerrados(estado) &&
-    copasEncerradas(estado);
+    copasEncerradas(estado) && selecoesEncerradas(estado);
 }
 
 /**
@@ -335,6 +337,7 @@ export function temporadaEncerrada(estado: EstadoJogo): boolean {
 export function decidePorPenaltis(p: Partida): boolean {
   if (p.serie === "CB") return p.perna !== 1;
   if (ehCopaDeClubes(p.serie)) return copaDecidePorPenaltis(p);
+  if (ehCompeticaoDeSelecoes(p.serie)) return selecoesDecidePorPenaltis(p);
   if (ehTorneio(p.serie)) return torneioDecidePorPenaltis(p);
   return p.perna === 2 && p.serie === "C" && p.fase === "final";
 }
