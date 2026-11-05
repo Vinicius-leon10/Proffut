@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { formatarData } from "../../engine/calendario";
 import { FICHAS } from "../../engine/jogo";
 import { prontoParaOffline } from "../../save/aparelho";
-import { carregar, importarTexto, listarSaves, type ResumoSave } from "../../save/salvamento";
+import { carregar, espacoLivre, importarTexto, listarSaves, podeTrocarOContinuar, type ResumoSave } from "../../save/salvamento";
 import { Cartao, Escudo } from "../componentes";
-import { useLoja } from "../store";
+import { esperarGravacaoAoSair, useLoja } from "../store";
 
 function ehIphone(): boolean {
   return /iPhone|iPad|iPod/.test(navigator.userAgent);
@@ -22,14 +22,17 @@ export function Inicio() {
   const [offline, setOffline] = useState(false);
 
   useEffect(() => {
-    listarSaves().then(setSaves).catch(() => setSaves([]));
+    esperarGravacaoAoSair().then(listarSaves).then(setSaves).catch(() => setSaves([]));
     prontoParaOffline().then(setOffline).catch(() => setOffline(false));
   }, []);
 
   const abrir = async (r: ResumoSave) => {
     try {
+      // Abrir um espaço troca o jogo do Continuar: se aquele não está em nenhum espaço, pergunta antes (R85).
+      if (r.espaco !== "auto" && r.espaco !== auto?.ligado && !(await podeTrocarOContinuar())) return;
       const estado = await carregar(r.espaco);
-      if (estado) iniciar(estado);
+      // O espaço aberto passa a acompanhar o jogo; o Continuar segue o espaço ligado a ele (R84).
+      if (estado) iniciar(estado, r.espaco === "auto" ? r.ligado ?? null : r.espaco);
     } catch (e) {
       avisar((e as Error).message);
     }
@@ -38,7 +41,9 @@ export function Inicio() {
   const importar = async (f: File | undefined) => {
     if (!f) return;
     try {
-      iniciar(importarTexto(await f.text()));
+      const estado = importarTexto(await f.text());
+      if (!(await podeTrocarOContinuar())) return;
+      iniciar(estado, (await espacoLivre()) ?? null);
       avisar("Save importado!");
     } catch (e) {
       avisar((e as Error).message);
@@ -74,6 +79,7 @@ export function Inicio() {
             <div className="negrito">Continuar</div>
             <div className="pequeno fraco corta">{auto.clube} · {auto.tecnico}</div>
             <div className="mini muito-fraco">Temporada {auto.temporada} · {formatarData(auto.data)}</div>
+            <div className="mini muito-fraco">{auto.ligado ? `Espaço ${auto.ligado} · salva sozinho` : "Fora dos espaços"}</div>
           </div>
           <span className="botao primario pequeno">Jogar</span>
         </button>

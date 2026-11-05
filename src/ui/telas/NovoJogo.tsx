@@ -3,7 +3,7 @@ import { comArtigo } from "../../engine/artigos";
 import { FICHAS, FICHAS_ESTADUAIS, FICHAS_EXTERIOR, PARTICIPANTES_ESTADUAIS, RESERVA, forcaEstimada, novoJogo, type FichaClube } from "../../engine/jogo";
 import { PAISES } from "../../engine/torneios";
 import { formatarDinheiro } from "../../engine/financas";
-import { pedirArmazenamentoPersistente } from "../../save/salvamento";
+import { espacoLivre, pedirArmazenamentoPersistente, podeTrocarOContinuar } from "../../save/salvamento";
 import { Escudo, Segmentado, Topo } from "../componentes";
 import { useLoja } from "../store";
 
@@ -45,8 +45,12 @@ export function NovoJogo() {
     setEscolhido(null);
   };
 
-  const comecar = () => {
+  const comecar = async () => {
     if (!selecionado) return;
+    // O jogo novo toma o lugar do Continuar: se aquele não está em nenhum espaço, pergunta antes (R85).
+    if (!(await podeTrocarOContinuar())) return;
+    // E vai sozinho para o primeiro espaço livre, que salva junto a cada rodada (R84).
+    const espaco = (await espacoLivre()) ?? null;
     setCriando(true);
     // Deixa a tela mostrar "Preparando..." antes de gerar o mundo.
     setTimeout(() => {
@@ -54,7 +58,7 @@ export function NovoJogo() {
         const estado = novoJogo({ nomeTecnico: nome || "Técnico", clubeId: selecionado.id });
         estado.tutorial = true;
         void pedirArmazenamentoPersistente();
-        iniciar(estado);
+        iniciar(estado, espaco);
       } catch (e) {
         avisar((e as Error).message);
         setCriando(false);

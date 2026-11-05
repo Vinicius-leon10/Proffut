@@ -18,11 +18,17 @@ export interface ResumoSave {
   temporada: number;
   data: string;
   salvoEm: string;
+  /** Identifica o jogo (a semente do jogo novo): o mesmo jogo em dois espaços tem a mesma. Saves antigos não têm. */
+  semente?: number;
+  /** Só no automático (o Continuar): o espaço que acompanha este jogo, salvo junto a cada mudança (R84). */
+  ligado?: Espaco;
 }
 
-function resumir(espaco: Espaco, estado: EstadoJogo): ResumoSave {
+function resumir(espaco: Espaco, estado: EstadoJogo, ligado?: Espaco): ResumoSave {
   return {
     espaco,
+    semente: estado.semente,
+    ...(ligado && espaco === "auto" ? { ligado } : {}),
     tecnico: estado.tecnico.nome,
     clube: estado.clubes[estado.tecnico.clubeId].nome,
     clubeId: estado.tecnico.clubeId,
@@ -32,11 +38,39 @@ function resumir(espaco: Espaco, estado: EstadoJogo): ResumoSave {
   };
 }
 
-export async function salvar(espaco: Espaco, estado: EstadoJogo): Promise<void> {
+/**
+ * Salva o jogo. No automático, `ligado` é o espaço que acompanha o jogo: ele é gravado junto, na mesma gravação, para
+ * que cada espaço fique sempre no ponto mais novo do seu jogo e dê para trocar de jogo sem perder nada (R84).
+ */
+export async function salvar(espaco: Espaco, estado: EstadoJogo, ligado?: Espaco, gravarOLigado = true): Promise<void> {
   // A hora do save é a do jogo guardado (agora, antes de gravar), não a do fim da gravação: com o save grande e o
   // aparelho lento para gravar, um salvamento começado antes de uma mudança parecia mais novo do que ela (R71).
   // O jogo e o resumo vão juntos, numa gravação só.
-  await setMany([[`jogo:${espaco}`, estado], [`resumo:${espaco}`, resumir(espaco, estado)]], banco);
+  const gravar: [string, unknown][] = [[`jogo:${espaco}`, estado], [`resumo:${espaco}`, resumir(espaco, estado, ligado)]];
+  if (espaco === "auto" && ligado && gravarOLigado) gravar.push([`jogo:${ligado}`, estado], [`resumo:${ligado}`, resumir(ligado, estado)]);
+  await setMany(gravar, banco);
+}
+
+/** O primeiro espaço vazio (1 a 3), para o jogo novo ir sozinho para ele; nenhum livre: undefined. */
+export async function espacoLivre(): Promise<Espaco | undefined> {
+  for (const espaco of ESPACOS) {
+    if (espaco !== "auto" && !(await get<ResumoSave>(`resumo:${espaco}`, banco))) return espaco;
+  }
+  return undefined;
+}
+
+export async function resumoDe(espaco: Espaco): Promise<ResumoSave | undefined> {
+  return get<ResumoSave>(`resumo:${espaco}`, banco);
+}
+
+/**
+ * Antes de trocar o jogo do Continuar por outro (abrir um espaço, jogo novo, importar): se ele não está em nenhum
+ * espaço, seria perdido; pergunta antes (R85). Devolve se pode trocar.
+ */
+export async function podeTrocarOContinuar(): Promise<boolean> {
+  const auto = await resumoDe("auto");
+  if (!auto || auto.ligado) return true;
+  return confirm(`O jogo do Continuar (${auto.clube}, ${auto.temporada}) não está em nenhum espaço e vai ser perdido. Trocar mesmo assim?`);
 }
 
 export async function carregar(espaco: Espaco): Promise<EstadoJogo | undefined> {

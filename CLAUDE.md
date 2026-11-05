@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R81 rodando a cada mudança, antes
+ponta R01–R85 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -332,6 +332,16 @@ completa (~2,25 gols, mandante ~43%, empates ~29%). Temporada simulada 11 s → 
 **América toda (em andamento):** o robô (fase "america", `tools/times/sementes-america.json`, branch `dados-america`) já
 baixou as ligas da Concacaf, as 3ª divisões, a 2ª dos estaduais, as copas e as convocações das 51 seleções; faltam montar
 os clubes (`montar.ts`), os campeonatos novos, as copas e as seleções no jogo, e a lista de escudos.
+
+**Espaços que acompanham o jogo (nov/2026, `salvamento.ts`, `store.ts`):** pedido "Quero que esse save embaixo seja
+automático, a cada rodada, posso alterna entre os saves sem me preocupar" (ele abriu um espaço antigo e perdeu o jogo
+mais avançado do Continuar). O jogo aberto tem um espaço ligado (`Loja.espaco`, guardado em `resumo:auto.ligado`):
+`salvar("auto", estado, ligado)` grava o automático e o espaço na mesma gravação; na partida ao vivo só o automático (o
+espaço vai ao fechar a partida). Jogo novo e importado vão para o primeiro espaço livre (`espacoLivre`); Configurações →
+Salvar liga o jogo ao espaço escolhido (pergunta se lá há outro jogo: `ResumoSave.semente` identifica o jogo).
+Trocar o Continuar por outro jogo quando ele está fora dos espaços pergunta antes (`podeTrocarOContinuar`). Voltar ao
+menu grava antes, e o menu espera (`esperarGravacaoAoSair`). R84, R85. **Seleções (regra do usuário para quando
+entrarem):** só é chamado para técnico de uma seleção quem ganhou a liga principal (1ª divisão) de um país.
 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e
