@@ -51,9 +51,12 @@ function onze(elenco: Jogador[]): Jogador[] {
 /**
  * Joga uma partida do jeito rápido e registra: placar, gols (autor e, às vezes, quem deu o passe, com o minuto),
  * jogos e gols de cada jogador, e a moral dos clubes. Sem cartões, lesões nem cansaço. `elencos`: os jogadores de cada
- * clube no dia (montados uma vez em `concluirJogos`).
+ * clube no dia (montados uma vez em `concluirJogos`). `empatado`: se o confronto terminou empatado (na volta de um
+ * mata-mata em ida e volta, o agregado), para os pênaltis.
  */
-export function jogarRapido(estado: EstadoJogo, p: Partida, elencos: Map<string, Jogador[]>, decidePorPenaltis: boolean) {
+export function jogarRapido(
+  estado: EstadoJogo, p: Partida, elencos: Map<string, Jogador[]>, decidePorPenaltis: boolean, empatado: (p: Partida) => boolean = (x) => x.gm === x.gv,
+) {
   const rng = rngPara(estado.semente, `rapida/${p.id}`);
   const mandante = estado.clubes[p.mandante];
   const visitante = estado.clubes[p.visitante];
@@ -86,7 +89,9 @@ export function jogarRapido(estado: EstadoJogo, p: Partida, elencos: Map<string,
   p.gm = gm;
   p.gv = gv;
   p.eventos = eventos.map((e) => ({ min: String(e.minuto), tipo: "gol" as const, lado: e.lado, ...(e.jogador != null ? { jogador: e.jogador } : {}), ...(e.outro != null ? { outro: e.outro } : {}), texto: "" }));
-  if (gm === gv && decidePorPenaltis) {
+  // Jogada antes dos pênaltis: o agregado da volta conta este jogo.
+  p.jogada = true;
+  if (decidePorPenaltis && empatado(p)) {
     // Pênaltis: 5 cobranças de cada lado, um pouco a favor do time mais forte; empate segue nas alternadas.
     const chance = (f: number, g: number) => 0.75 + 0.004 * (f - g);
     let [a, b] = [0, 0];
@@ -94,7 +99,6 @@ export function jogarRapido(estado: EstadoJogo, p: Partida, elencos: Map<string,
     while (a === b) { if (rng.chance(chance(fm, fv))) a++; if (rng.chance(chance(fv, fm))) b++; }
     p.penaltis = [a, b];
   }
-  p.jogada = true;
   const ajustar = (c: Clube, d: number) => { c.moral = Math.max(20, Math.min(100, c.moral + d)); };
   if (gm > gv) { ajustar(mandante, 6); ajustar(visitante, -6); }
   else if (gm < gv) { ajustar(mandante, -6); ajustar(visitante, 6); }

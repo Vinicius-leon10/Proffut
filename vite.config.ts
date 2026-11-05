@@ -49,6 +49,9 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
+        // O pacote do jogo leva os dados de todos os clubes e jogadores da América (passou de 2 MB, o limite padrão, com
+        // as copas): precisa ser guardado inteiro para jogar sem internet.
+        maximumFileSizeToCacheInBytes: 6 * 1024 * 1024,
         globIgnores: ["**/node_modules/**/*", "**/escudos/**"],
         // Recebe do app a lista dos escudos e baixa os que faltam, fora da tela (public/guardar-escudos.js).
         importScripts: ["guardar-escudos.js"],

@@ -431,11 +431,14 @@ export function torneiosEncerrados(estado: EstadoJogo): boolean {
 }
 
 /**
- * Jogo pela simulação rápida (rapida.ts): os das ligas de fora do Brasil que o usuário não acompanha (o time dele, se
- * jogar uma delas, tem a simulação completa).
+ * Jogo pela simulação rápida (rapida.ts): os das ligas de fora do Brasil e os das copas de clubes (copas.ts) entre dois
+ * clubes de fora, nas competições que o usuário não acompanha (o time dele, se jogar uma delas, tem a simulação completa).
  */
 export function simulacaoRapida(estado: EstadoJogo, p: Partida, acompanha = competicoesDoUsuario(estado)): boolean {
-  return p.serie.startsWith("L-") && !acompanha.has(p.serie);
+  if (acompanha.has(p.serie)) return false;
+  if (p.serie.startsWith("L-")) return true;
+  // Nas copas, só os jogos entre clubes de fora do Brasil: os brasileiros têm a bilheteria, o cansaço e os recordes de sempre.
+  return p.serie.startsWith("K-") && !!estado.clubes[p.mandante]?.pais && !!estado.clubes[p.visitante]?.pais;
 }
 
 /** Competições que o usuário acompanha: os dias só com jogos de outras passam sem parar (Série D dos outros, os outros estaduais e as ligas de fora). */
@@ -443,5 +446,7 @@ export function competicoesDoUsuario(estado: EstadoJogo): Set<Competicao> {
   const meu = estado.tecnico.clubeId;
   const lista = new Set<Competicao>(["A", "B", "C", "CB"]);
   for (const t of torneiosDoClube(estado, meu)) lista.add(t.id);
+  // As copas de clubes que o clube do usuário joga (Libertadores, Copa do Nordeste...).
+  for (const c of Object.values(estado.copas ?? {})) if (c?.clubes.includes(meu)) lista.add(c.id);
   return lista;
 }

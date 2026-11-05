@@ -660,7 +660,8 @@ describe("Copa do Brasil", () => {
       const [final] = daCopa(e, "final");
       expect(final.neutro).toBe(true);
       expect([final.mandante, final.visitante].sort()).toEqual([e.copa!.campeao, e.copa!.vice].sort());
-      expect(final.data >= e.partidas.filter((p) => p.serie !== "CB").map((p) => p.data).sort().at(-1)!).toBe(true);
+      // A final é o último jogo do futebol brasileiro no ano (as finais da Libertadores e da Sul-Americana vêm depois).
+      expect(final.data >= e.partidas.filter((p) => p.serie !== "CB" && !p.serie.startsWith("K-")).map((p) => p.data).sort().at(-1)!).toBe(true);
     });
 
     it("empate em jogo único ou no agregado vai para os pênaltis", () => {

@@ -11,6 +11,7 @@ import { diasEntre, inicioDaTemporada, mesDe, somarDias } from "./calendario";
 import {
   FASE_LIGA, agregado, avancarFases, chaveDaPartida, criarTemporada, decidePorPenaltis, ehSerie, temporadaEncerrada,
 } from "./competicoes";
+import { avancarCopasDeClubes, criarCopasDeClubes } from "./copas";
 import { COTA_TV_ESTADUAL, COTA_TV_RODADA, DIAS_LESAO, RECUPERACAO_POR_DIA, TEMPORADA_INICIAL } from "./constantes";
 import { depoisDoMeuJogo, expirarConvites } from "./carreira";
 import { avisarContratos, garantirContratos } from "./contratos";
@@ -29,7 +30,7 @@ import { criarRng, rngPara } from "./rng";
 import { avancarCopa, criarCopa } from "./copa";
 import { concluirObras } from "./estadio";
 import { encerrarTemporada } from "./temporada";
-import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno, simulacaoRapida, torneioDecidePorPenaltis } from "./torneios";
+import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno, simulacaoRapida } from "./torneios";
 import { jogarRapido } from "./rapida";
 import type { Clube, Estilo, EstadoJogo, Formacao, Jogador, Partida, SerieClube, Tatica } from "./tipos";
 
@@ -242,6 +243,8 @@ export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente
   if (Object.keys(estado.torneios ?? {}).some((id) => id.startsWith("E-"))) estado.data = inicioDoAno(TEMPORADA_INICIAL);
   estado.tecnico.desde = estado.data;
   criarCopa(estado);
+  // Libertadores, Sul-Americana, as copas da Concacaf, as regionais do Brasil e as nacionais de fora (as de 2026).
+  criarCopasDeClubes(estado);
   estado.objetivo = definirObjetivo(estado);
   enviarMensagem(estado, {
     tipo: "diretoria",
@@ -510,9 +513,16 @@ export function concluirJogos(estado: EstadoJogo, vivas: PartidaViva[]): string[
   }
   const acompanha = competicoesDoUsuario(estado);
   for (const p of jogosPendentesHoje(estado)) {
-    if (simulacaoRapida(estado, p, acompanha)) jogarRapido(estado, p, elencos, torneioDecidePorPenaltis(p));
+    if (!simulacaoRapida(estado, p, acompanha)) continue;
+    // Na volta do mata-mata, o empate que leva aos pênaltis é o do agregado.
+    jogarRapido(estado, p, elencos, decidePorPenaltis(p), (x) => {
+      if (x.perna !== 2) return x.gm === x.gv;
+      const chave = chaveDaPartida(estado, x);
+      const [a, b] = chave ? agregado(chave) : [0, 1];
+      return a === b;
+    });
   }
-  const noticias = [...avancarFases(estado), ...avancarCopa(estado), ...avancarTorneios(estado)];
+  const noticias = [...avancarFases(estado), ...avancarCopa(estado), ...avancarTorneios(estado), ...avancarCopasDeClubes(estado)];
   for (const n of noticias) enviarMensagem(estado, { tipo: "noticia", titulo: "Notícias", texto: n });
   return noticias;
 }

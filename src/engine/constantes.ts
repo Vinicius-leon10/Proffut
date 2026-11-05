@@ -72,7 +72,7 @@ export const AVISO_PRESSAO = { minutos: 15, liga: 14, desliga: 10, proporcao: 3,
  */
 export const CARGO = { aviso: 35, demissao: 20, carenciaDias: 30 };
 /** Reputação do técnico (0–100): muda na virada da temporada e na demissão; decide quem faz convite e proposta. */
-export const REPUTACAO = { cumpriu: 4, naoCumpriu: -4, acesso: 6, titulo: 6, tituloA: 10, copa: 6, rebaixamento: -6, demissao: -6, minimo: 30, maximo: 99 };
+export const REPUTACAO = { cumpriu: 4, naoCumpriu: -4, acesso: 6, titulo: 6, tituloA: 10, copa: 6, libertadores: 10, continental: 6, regional: 2, rebaixamento: -6, demissao: -6, minimo: 30, maximo: 99 };
 /**
  * Convites (no meio da fase de liga e na virada, para quem vai bem): clubes da mesma série ou acima, com reputação
  * maior que a do clube atual + `folga` e até a do técnico + `alcance`. Valem `validadeDias` dias.

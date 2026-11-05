@@ -7,10 +7,13 @@ export type SerieId = "A" | "B" | "C";
  */
 export type SerieClube = SerieId | "D" | "estadual" | "exterior";
 /**
- * Competição de uma partida: uma das séries A, B e C, a Copa do Brasil ("CB") ou um dos torneios de
- * `EstadoJogo.torneios`: a Série D ("D"), um estadual ("E-SP") ou a liga de outro país ("L-AR").
+ * Competição de uma partida: uma das séries A, B e C, a Copa do Brasil ("CB"), um dos torneios de
+ * `EstadoJogo.torneios` (a Série D "D", um estadual "E-SP" ou a liga de outro país "L-AR") ou uma das copas de clubes de
+ * `EstadoJogo.copas` ("K-LIB": Libertadores, Sul-Americana, as copas regionais e as nacionais dos outros países).
  */
-export type Competicao = SerieId | "CB" | "D" | `E-${string}` | `L-${string}`;
+export type Competicao = SerieId | "CB" | "D" | `E-${string}` | `L-${string}` | IdCopa;
+/** Copa de clubes de `EstadoJogo.copas` (copas.ts): "K-LIB", "K-SUL", "K-NE", "K-AR"... */
+export type IdCopa = `K-${string}`;
 /** Torneio de `EstadoJogo.torneios`: Série D, estadual ou liga de outro país. */
 export type IdTorneio = "D" | `E-${string}` | `L-${string}`;
 export type FaseCopa = "fase1" | "fase2" | "fase3" | "fase4" | "fase5" | "oitavas" | "quartas" | "semi" | "final";
@@ -299,6 +302,30 @@ export interface EstadoCopa {
   vice?: string;
 }
 
+/**
+ * Copa de clubes da temporada (copas.ts): continentais (Libertadores, Sul-Americana, Recopa, as da Concacaf), regionais do
+ * Brasil (Supercopa, Copa do Nordeste, Copa Verde, Copa Sul-Sudeste) e as nacionais dos outros países. Cada uma segue
+ * as fases da definição dela (`DEFINICOES`).
+ */
+export interface EstadoCopaClubes {
+  id: IdCopa;
+  nome: string;
+  /** Fase em andamento (a última jogada, enquanto a próxima espera os transferidos de outra copa); "encerrada" no fim. */
+  fase: string;
+  /** Todos os clubes que jogam (os que entram em qualquer fase, inclusive os transferidos de outra copa). */
+  clubes: string[];
+  /** Quem entra em cada fase (os outros vêm da fase anterior). */
+  entram: Record<string, string[]>;
+  /** Quem passou da fase em andamento e espera a próxima começar (na ordem dos confrontos ou da campanha). */
+  classificados?: string[];
+  /** Grupos de cada fase de grupos ("grupos" → [[...], [...]]). */
+  grupos?: Record<string, string[][]>;
+  /** Do mais forte ao mais fraco (potes do sorteio e mando quando a campanha empata). */
+  ranking: string[];
+  campeao?: string;
+  vice?: string;
+}
+
 export interface RegistroTemporada {
   temporada: number;
   campeoes: Record<SerieId, string>;
@@ -310,6 +337,8 @@ export interface RegistroTemporada {
   tecnico: { clubeId: string; serie: SerieClube; competicao?: string; posicao: number; objetivo: string; cumpriu: boolean };
   /** Campeões e vices da Série D, dos estaduais e das ligas de fora (falta nas temporadas de antes deles). */
   torneios?: Partial<Record<IdTorneio, { campeao: string; vice?: string }>>;
+  /** Campeões e vices das copas de clubes (Libertadores, Sul-Americana...; falta nas temporadas de antes delas). */
+  copas?: Partial<Record<IdCopa, { campeao: string; vice?: string }>>;
 }
 
 /** Um jogo que virou recorde de um clube. */
@@ -375,6 +404,11 @@ export interface EstadoJogo {
    * clubes chegam ao abrir o jogo e os torneios começam na temporada seguinte.
    */
   torneios?: Partial<Record<IdTorneio, EstadoTorneio>>;
+  /**
+   * Copas de clubes da temporada (Libertadores, Sul-Americana, Recopa, as da Concacaf, as regionais do Brasil e as
+   * nacionais dos outros países). Falta nos saves de antes delas: começam na temporada seguinte.
+   */
+  copas?: Partial<Record<IdCopa, EstadoCopaClubes>>;
   partidas: Partida[];
   mensagens: Mensagem[];
   proximoIdMensagem: number;

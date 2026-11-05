@@ -2,9 +2,11 @@ import { useMemo, useState } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
 import { FASE_LIGA, SERIES, ZONAS, agregado, chavesDaFase, classificacao, tabelaDaLiga, type LinhaTabela } from "../../engine/competicoes";
-import { FASES_COPA, NOME_FASE_COPA, agregadoDoConfronto, jogosDaCopa, situacaoNaCopa } from "../../engine/copa";
+import { FASES_COPA, NOME_FASE_COPA, agregadoDoConfronto, faseDeEntrada, jogosDaCopa, situacaoNaCopa } from "../../engine/copa";
+import { DEFINICOES, definicaoDaCopa, regraDaFaseDaCopa, situacaoNaCopaDeClubes, tabelasDaCopa, type DefinicaoCopa } from "../../engine/copas";
 import { NOME_ESTADUAL, NOME_FASE_TORNEIO, NOME_REGIAO, PAISES, divisaoDaLiga, tabelaDoTorneio, vagasEntreDivisoes, type Regiao } from "../../engine/torneios";
-import type { Competicao, EstadoTorneio, FaseCopa, Partida, SerieId } from "../../engine/tipos";
+import type { Competicao, EstadoTorneio, FaseCopa, IdCopa, Partida, SerieId } from "../../engine/tipos";
+import { letraDoGrupo } from "../formatos";
 import { Escudo, Folha, Opcoes, Segmentado } from "../componentes";
 import { useJogo, useLoja } from "../store";
 
@@ -254,6 +256,149 @@ function CopaDoBrasil() {
   );
 }
 
+
+/** Onde cada copa aparece no seletor. */
+const GRUPOS_DAS_COPAS: { grupo: DefinicaoCopa["grupo"]; rotulo: string }[] = [
+  { grupo: "brasil", rotulo: "Brasil" }, { grupo: "conmebol", rotulo: "América do Sul" }, { grupo: "concacaf", rotulo: "Concacaf" },
+  { grupo: "nacional", rotulo: "Copas nacionais" },
+];
+
+/** Confrontos de uma fase do mata-mata (jogo único ou ida e volta, com o agregado). */
+function Confrontos({ serie, fase }: { serie: Competicao; fase: string }) {
+  const estado = useJogo();
+  const [aberta, setAberta] = useState<Partida | null>(null);
+  const jogos = estado.partidas.filter((p) => p.serie === serie && p.fase === fase);
+  const chaves = [...new Set(jogos.map((p) => p.chave ?? 0))];
+  return (
+    <div>
+      {chaves.map((c) => {
+        const doConfronto = jogos.filter((p) => (p.chave ?? 0) === c);
+        const volta = doConfronto.find((p) => p.perna === 2);
+        const chave = volta ? chavesDaFase(estado, serie, fase).find((x) => x.chave === c) : undefined;
+        const ag = chave?.ida && chave.volta ? agregado(chave) : null;
+        return (
+          <div key={c} style={doConfronto.length > 1 ? { marginBottom: 8 } : undefined}>
+            {doConfronto.map((p) => <LinhaResultado key={p.id} p={p} aoTocar={() => setAberta(p)} />)}
+            {ag && volta?.jogada && chave && (
+              <p className="mini fraco centro">Agregado: {estado.clubes[chave.melhor].sigla} {ag[0]} x {ag[1]} {estado.clubes[chave.pior].sigla}</p>
+            )}
+          </div>
+        );
+      })}
+      {aberta && <FolhaPartida p={aberta} aoFechar={() => setAberta(null)} />}
+    </div>
+  );
+}
+
+/** Jogos de uma fase de grupos, rodada a rodada (só os do grupo, se `clubes` vem). */
+function JogosDaFase({ serie, fase, clubes }: { serie: Competicao; fase: string; clubes?: string[] }) {
+  const estado = useJogo();
+  const jogos = estado.partidas.filter((p) => p.serie === serie && p.fase === fase && (!clubes || clubes.includes(p.mandante) || clubes.includes(p.visitante)));
+  const total = Math.max(1, ...jogos.map((p) => p.rodada));
+  const atual = jogos.find((p) => !p.jogada)?.rodada ?? total;
+  const [rodada, setRodada] = useState(atual);
+  const [aberta, setAberta] = useState<Partida | null>(null);
+  const daRodada = jogos.filter((p) => p.rodada === rodada);
+  return (
+    <>
+      <div className="linha entre">
+        <button className="botao pequeno" disabled={rodada <= 1} onClick={() => setRodada(rodada - 1)} aria-label="Rodada anterior">◀</button>
+        <div className="centro">
+          <div className="negrito">{rodada}ª rodada</div>
+          <div className="mini fraco">{daRodada[0] && formatarData(daRodada[0].data)}</div>
+        </div>
+        <button className="botao pequeno" disabled={rodada >= total} onClick={() => setRodada(rodada + 1)} aria-label="Próxima rodada">▶</button>
+      </div>
+      <div>{daRodada.map((p) => <LinhaResultado key={p.id} p={p} aoTocar={() => setAberta(p)} />)}</div>
+      {aberta && <FolhaPartida p={aberta} aoFechar={() => setAberta(null)} />}
+    </>
+  );
+}
+
+/** Uma copa de clubes (Libertadores, Copa do Nordeste...): as fases, os grupos com a tabela e os confrontos. */
+function CopaDeClubes({ id }: { id: IdCopa }) {
+  const estado = useJogo();
+  const meuId = estado.tecnico.clubeId;
+  const def = definicaoDaCopa(id)!;
+  const copa = estado.copas![id]!;
+  const fases = def.fases.filter((f) => estado.partidas.some((p) => p.serie === id && p.fase === f.id));
+  const atual = fases.find((f) => f.id === copa.fase)?.id ?? fases.at(-1)?.id ?? def.fases[0].id;
+  const [faseId, setFase] = useState(atual);
+  const [vista, setVista] = useState<"jogos" | "artilharia">("jogos");
+  const fase = def.fases.find((f) => f.id === faseId) ?? def.fases[0];
+  const tabelas = fase.tipo === "mata" ? [] : tabelasDaCopa(estado, id, fase.id);
+  const meuGrupo = Math.max(0, tabelas.findIndex((t) => t.some((l) => l.clubeId === meuId)));
+  const [grupo, setGrupo] = useState(meuGrupo);
+  const passam = fase.grupos?.passam ?? 0;
+  // A cor dos que passam; nos grupos da Libertadores, o 3º vai para a Sul-Americana; nos da Sul-Americana, o 2º para a repescagem.
+  const zona = (pos: number) => (pos === 1 && id === "K-SUL" && fase.id === "grupos" ? "titulo" : pos <= passam ? "classifica" : pos === 3 && id === "K-LIB" && fase.id === "grupos" ? "playoff" : "");
+  const nomesDosGrupos = fase.grupos?.fixos?.length === 2 && id === "K-LEAG" ? ["MLS", "Liga MX"] : tabelas.map((_, i) => `Grupo ${letraDoGrupo(i + 1)}`);
+  const muitos = tabelas.length > 2;
+  const visiveis = muitos ? [grupo] : tabelas.map((_, i) => i);
+  return (
+    <>
+      {copa.campeao && <p className="chip amarelo">Campeão: {estado.clubes[copa.campeao].nome}</p>}
+      {copa.clubes.includes(meuId) && <p className="pequeno">{situacaoNaCopaDeClubes(estado, id, meuId)}</p>}
+      <Segmentado opcoes={[{ valor: "jogos", rotulo: "Jogos" }, { valor: "artilharia", rotulo: "Artilharia" }]} valor={vista} aoMudar={setVista} />
+      {vista === "artilharia" ? <Artilharia serie={id} /> : (
+        <>
+          {fases.length > 0 && <Opcoes opcoes={fases.map((f) => ({ valor: f.id, rotulo: f.nome }))} valor={fase.id} aoMudar={(f) => { setFase(f); setGrupo(0); }} />}
+          {!fases.length && <p className="vazio">Os jogos ainda não foram sorteados.</p>}
+          <p className="mini muito-fraco">{regraDaFaseDaCopa(id, fase.id)}</p>
+          {fase.tipo === "mata" ? <Confrontos serie={id} fase={fase.id} /> : (
+            <>
+              {muitos && (
+                <select value={grupo} onChange={(e) => setGrupo(Number(e.target.value))} aria-label="Grupo">
+                  {tabelas.map((t, i) => <option key={i} value={i}>{nomesDosGrupos[i]}{t.some((l) => l.clubeId === meuId) ? " (seu time)" : ""}</option>)}
+                </select>
+              )}
+              {visiveis.map((g) => (
+                <div key={g} className="cartao compacto">
+                  <h3 className="pequeno fraco" style={{ marginBottom: 6 }}>{nomesDosGrupos[g]}</h3>
+                  <TabelaClassificacao linhas={tabelas[g]} zona={zona} />
+                </div>
+              ))}
+              <JogosDaFase key={`${fase.id}-${grupo}`} serie={id} fase={fase.id} clubes={muitos ? tabelas[grupo]?.map((l) => l.clubeId) : undefined} />
+            </>
+          )}
+        </>
+      )}
+    </>
+  );
+}
+
+/** Copas: a Copa do Brasil e as outras (Libertadores, Sul-Americana, as da Concacaf, as regionais e as nacionais). */
+function Copas() {
+  const estado = useJogo();
+  const meuId = estado.tecnico.clubeId;
+  const existentes = DEFINICOES.filter((d) => estado.copas?.[d.id]);
+  const joga = (id: string) => (id === "CB" ? !!faseDeEntrada(estado, meuId) : !!estado.copas?.[id as IdCopa]?.clubes.includes(meuId));
+  const emAndamento = (id: string) => (id === "CB" ? estado.copa?.fase !== "encerrada" : estado.copas?.[id as IdCopa]?.fase !== "encerrada");
+  // Abre na Copa do Brasil, se o clube do usuário a joga; senão, na copa do próximo jogo dele (ou na primeira em andamento).
+  const proximo = estado.partidas.find((p) => !p.jogada && (p.mandante === meuId || p.visitante === meuId) && p.serie.startsWith("K-"));
+  const inicial = joga("CB") ? "CB" : proximo?.serie ?? existentes.map((d) => d.id).find((id) => joga(id) && emAndamento(id)) ?? "CB";
+  const [qual, setQual] = useState<string>(inicial);
+  const temCopa = !!estado.copa;
+  return (
+    <>
+      {existentes.length > 0 && (
+        <select value={qual} onChange={(e) => setQual(e.target.value)} aria-label="Copa">
+          {GRUPOS_DAS_COPAS.map(({ grupo, rotulo }) => {
+            const doGrupo = existentes.filter((d) => d.grupo === grupo);
+            const opcoes = [...(grupo === "brasil" && temCopa ? [{ id: "CB", nome: "Copa do Brasil" }] : []), ...doGrupo.map((d) => ({ id: d.id, nome: d.nome }))];
+            return opcoes.length ? (
+              <optgroup key={grupo} label={rotulo}>
+                {opcoes.map((o) => <option key={o.id} value={o.id}>{o.nome}{joga(o.id) ? " (seu time)" : ""}</option>)}
+              </optgroup>
+            ) : null;
+          })}
+        </select>
+      )}
+      {qual === "CB" || !estado.copas?.[qual as IdCopa] ? <CopaDoBrasil /> : <CopaDeClubes key={qual} id={qual as IdCopa} />}
+    </>
+  );
+}
+
 /** Fases do mata-mata dos torneios, na ordem. */
 const ORDEM_MATA_MATA = ["segunda", "terceira", "oitavas", "quartas", "semi", "final"];
 
@@ -371,12 +516,12 @@ export function Tabelas() {
   const [divisao, setDivisao] = useState<string>(meu.liga ? String(divisaoDaLiga(meu.liga).nivel) : "1");
   const [vista, setVista] = useState<"tabela" | "jogos" | "artilharia">("tabela");
   const grupos: { valor: Grupo; rotulo: string }[] = [
-    { valor: "series", rotulo: "Séries" }, { valor: "copa", rotulo: "Copa" },
+    { valor: "series", rotulo: "Séries" }, { valor: "copa", rotulo: estado.copas ? "Copas" : "Copa" },
     ...(estaduais.length ? [{ valor: "estaduais" as const, rotulo: "Estaduais" }] : []),
     ...(ligas.length ? [{ valor: "fora" as const, rotulo: "Outros países" }] : []),
   ];
   const seletor = <Segmentado opcoes={grupos} valor={grupo} aoMudar={setGrupo} />;
-  if (grupo === "copa") return <>{seletor}<CopaDoBrasil /></>;
+  if (grupo === "copa") return <>{seletor}<Copas /></>;
   if (grupo === "estaduais") {
     const t = estaduais.find((x) => x.id === uf) ?? estaduais[0];
     return (

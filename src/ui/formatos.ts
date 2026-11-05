@@ -1,10 +1,21 @@
 import { nomeDaCompeticao } from "../engine/competicoes";
 import { NOME_FASE_COPA } from "../engine/copa";
+import { definicaoDaCopa, ehCopaDeClubes, nomeDaFaseDaCopa } from "../engine/copas";
 import { NOME_FASE_TORNEIO, ehTorneio } from "../engine/torneios";
 import type { FaseCopa, Partida } from "../engine/tipos";
 
+/** Letra do grupo (1 → "A"). */
+export const letraDoGrupo = (n: number) => String.fromCharCode(64 + n);
+
 export function rotuloPartida(p: Partida): string {
   const serie = nomeDaCompeticao(p.serie);
+  if (ehCopaDeClubes(p.serie)) {
+    const tipo = definicaoDaCopa(p.serie)?.fases.find((f) => f.id === p.fase)?.tipo;
+    const fase = nomeDaFaseDaCopa(p.serie, p.fase);
+    if (tipo === "grupos") return `${serie} · Grupo ${letraDoGrupo(p.grupo ?? 1)} · ${p.rodada}ª rodada`;
+    if (tipo === "cruzado") return `${serie} · ${fase} · ${p.rodada}ª rodada`;
+    return `${serie} · ${fase}${p.perna ? ` (${p.perna === 1 ? "ida" : "volta"})` : ""}`;
+  }
   if (ehTorneio(p.serie)) {
     if (p.fase === "liga") return `${serie} · ${p.rodada}ª rodada`;
     if (p.fase === "grupos") return `${serie} · Grupo ${p.grupo} · ${p.rodada}ª rodada`;

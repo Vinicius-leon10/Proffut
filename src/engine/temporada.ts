@@ -7,6 +7,7 @@ import { encerrarEmprestimos } from "./emprestimos";
 import { inicioDaTemporada, somarDias } from "./calendario";
 import { NOME_SERIE, SERIES, criarTemporada, nomeDaLigaDoClube, posicaoNaLiga, tabelaDaLiga } from "./competicoes";
 import { criarCopa } from "./copa";
+import { criarCopasDeClubes, definicaoDaCopa, vagasDasCopas } from "./copas";
 import { CARGO, CONVITES, ELENCO_MAXIMO, MINIMO_POSICAO, REPUTACAO } from "./constantes";
 import { definirObjetivo } from "./diretoria";
 import { escalarAutomatico } from "./forca";
@@ -16,7 +17,7 @@ import { completarLivres, elencoDe, livres, reescalar, transferenciasDaIa } from
 import { enviarMensagem } from "./mensagens";
 import { rngPara, type Rng } from "./rng";
 import { PAISES, inicioDoAno, trocarDivisoes } from "./torneios";
-import type { EstadoJogo, IdTorneio, Jogador, Posicao, RegistroTemporada, SerieId } from "./tipos";
+import type { EstadoJogo, IdCopa, IdTorneio, Jogador, Posicao, RegistroTemporada, SerieId } from "./tipos";
 
 function artilheiro(estado: EstadoJogo, serie: SerieId): RegistroTemporada["artilheiros"][SerieId] {
   const gols = new Map<number, number>();
@@ -62,6 +63,17 @@ function posicaoMaisCarente(elenco: Jogador[]): Posicao {
   )[0];
 }
 
+/** Reputação pelos títulos das copas de clubes: Libertadores, as outras continentais e as regionais e nacionais. */
+function reputacaoDasCopas(campeoes: Partial<Record<IdCopa, { campeao: string }>>, meuId: string): number {
+  let soma = 0;
+  for (const [id, c] of Object.entries(campeoes)) {
+    if (c?.campeao !== meuId) continue;
+    const def = definicaoDaCopa(id);
+    soma += id === "K-LIB" ? REPUTACAO.libertadores : def?.grupo === "conmebol" || def?.grupo === "concacaf" ? REPUTACAO.continental : REPUTACAO.regional;
+  }
+  return soma;
+}
+
 /** "a Série A", "o Campeonato Argentino". */
 function comArtigoDaLiga(nome: string): string {
   return `${nome.startsWith("Série") ? "a" : "o"} ${nome}`;
@@ -75,6 +87,8 @@ export function encerrarTemporada(estado: EstadoJogo) {
   const meuId = estado.tecnico.clubeId;
   const minhaSerie = estado.clubes[meuId].serie;
   const torneios = Object.values(estado.torneios ?? {}).filter((t) => !!t);
+  // Quem joga as copas de clubes na temporada seguinte: pelas tabelas e pelos campeões deste ano (antes do acesso e da queda).
+  const vagas = vagasDasCopas(estado);
 
   // ---- histórico ----
   const tabelas = Object.fromEntries(SERIES.map((s) => [s, tabelaDaLiga(estado, s)])) as Record<SerieId, ReturnType<typeof tabelaDaLiga>>;
@@ -83,6 +97,8 @@ export function encerrarTemporada(estado: EstadoJogo) {
   const cumpriu = (minhaPosicao > 0 && minhaPosicao <= estado.objetivo.posicaoAlvo) || !!estado.torneios?.D?.promovidos?.includes(meuId);
   const campeoesDosTorneios: Partial<Record<IdTorneio, { campeao: string; vice?: string }>> = {};
   for (const t of torneios) if (t.campeao) campeoesDosTorneios[t.id] = { campeao: t.campeao, ...(t.vice ? { vice: t.vice } : {}) };
+  const campeoesDasCopas: Partial<Record<IdCopa, { campeao: string; vice?: string }>> = {};
+  for (const c of Object.values(estado.copas ?? {})) if (c?.campeao) campeoesDasCopas[c.id] = { campeao: c.campeao, ...(c.vice ? { vice: c.vice } : {}) };
   estado.historico.push({
     temporada: ano,
     campeoes: { A: estado.series.A.campeao!, B: estado.series.B.campeao!, C: estado.series.C.campeao! },
@@ -95,6 +111,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
       objetivo: estado.objetivo.descricao, cumpriu,
     },
     ...(Object.keys(campeoesDosTorneios).length ? { torneios: campeoesDosTorneios } : {}),
+    ...(Object.keys(campeoesDasCopas).length ? { copas: campeoesDasCopas } : {}),
   });
 
   // ---- premiação ----
@@ -239,7 +256,8 @@ export function encerrarTemporada(estado: EstadoJogo) {
   t.confiancaTorcida = limitar(t.confiancaTorcida + (subiu ? 15 : 0) + (campeao ? 20 : 0) - (caiu ? 20 : 0), 10, 100);
   mudarReputacao(estado,
     (cumpriu ? REPUTACAO.cumpriu : REPUTACAO.naoCumpriu) + (subiu ? REPUTACAO.acesso : 0) + (caiu ? REPUTACAO.rebaixamento : 0) +
-    (campeao ? (minhaSerie === "A" ? REPUTACAO.tituloA : REPUTACAO.titulo) : 0) + (estado.copa?.campeao === meuId ? REPUTACAO.copa : 0));
+    (campeao ? (minhaSerie === "A" ? REPUTACAO.tituloA : REPUTACAO.titulo) : 0) + (estado.copa?.campeao === meuId ? REPUTACAO.copa : 0) +
+    reputacaoDasCopas(campeoesDasCopas, meuId));
   // Abaixo do objetivo e sem a confiança da diretoria, o técnico sai. O técnico treina qualquer clube (nov/2026): quem cai
   // para a Série D continua nela (R81).
   const demitido = !t.demissao && !cumpriu && t.confiancaDiretoria <= CARGO.demissao && passouDaCarencia(estado);
@@ -250,6 +268,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
   estado.data = comEstaduais ? inicioDoAno(ano + 1) : somarDias(inicioDaTemporada(ano + 1), -7);
   criarTemporada(estado);
   criarCopa(estado);
+  criarCopasDeClubes(estado, vagas);
   transferenciasDaIa(estado, `${ano + 1}-pre-1`);
   transferenciasDaIa(estado, `${ano + 1}-pre-2`);
   for (const clube of Object.values(estado.clubes)) {
