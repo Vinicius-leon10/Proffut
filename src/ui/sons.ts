@@ -25,7 +25,7 @@ function audio(): AudioContext | undefined {
   }
 }
 
-/** As frases do narrador, gravadas (ElevenLabs, voz "Liam", modelo multilíngue): `public/narrador/<nome>.mp3`. */
+/** As frases do narrador, gravadas (ElevenLabs, voz "Liam", modelo v3): `public/narrador/<nome>.mp3`. */
 const NARRACOES = ["gol", "penalti", "vermelho"] as const;
 export type Narracao = (typeof NARRACOES)[number];
 /** Volume do narrador: por cima da torcida, para a frase ser entendida. */

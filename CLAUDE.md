@@ -79,10 +79,12 @@ narrador; no gol: o narrador, e festa da torcida no gol do meu time (`FESTA`, ~�
 `vaia()` no do adversário (16 vozes graves com vibrato nos formantes do "u", ~−18 dB); pênalti perdido: "uhhh".
 **Narrador (nov/2026):** pedido "eu quero testar isso da voz melhor em português, narrando o jogo. Vamos começar só
 colocando o gol, o pênalti e o cartão vermelho" (antes era a voz robótica do aparelho, `speechSynthesis`, que ele achou
-feia: saiu). Áudios gravados uma vez com a API da ElevenLabs em `public/narrador/<nome>.mp3` (`gol`: "Gooooool! É gol!",
-`penalti`: "Pênalti! O juiz marca pênalti!", `vermelho`: "Cartão vermelho! Expulso de campo!"), voz "Liam" (Voice ID
-`TX3LPaxmHKxFdv7VOQHJ`, voz pública da ElevenLabs), modelo `eleven_multilingual_v2` (stability 0,3, similarity 0,8,
-style 0,7, speaker boost), depois sem o silêncio das pontas e com o volume igualado (`ffmpeg`: `silenceremove`,
+feia: saiu). Áudios gravados uma vez com a API da ElevenLabs em `public/narrador/<nome>.mp3` (`gol`: "[shouting] [excited]
+GOOOOOOOOOOOL! É GOL! QUE GOLAÇO!", `penalti`: "... PÊNALTI! O juiz marca pênalti!", `vermelho`: "... CARTÃO VERMELHO!
+Expulso de campo!"), voz "Liam" (Voice ID `TX3LPaxmHKxFdv7VOQHJ`, voz padrão da ElevenLabs), modelo `eleven_v3`
+(`language_code` "pt", stability 0,0, as etiquetas entre colchetes dão o tom). O usuário achou "muito robotizada" a
+primeira versão (`eleven_multilingual_v2`) e escolheu o Liam entre 11 vozes padrão no v3. No plano grátis dele só as
+vozes padrão funcionam pela API (as da biblioteca, como narradores brasileiros, pedem plano pago), depois sem o silêncio das pontas e com o volume igualado (`ffmpeg`: `silenceremove`,
 `loudnorm=I=-14`, mono 96 kbps). Ficam no precache do service worker (`globPatterns` com `mp3`): tocam sem internet. A
 chave fica só no ambiente de nuvem "Padrão" do Claude Code (`ELEVENLABS_API_KEY`, com `api.elevenlabs.io` liberado);
 nunca vai para o jogo, para arquivos ou para o git. Ela não lista vozes (falta a permissão `voices_read`): para outra voz,
