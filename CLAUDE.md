@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R81 rodando a cada mudança, antes
+ponta R01–R87 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -344,6 +344,18 @@ novo e Tabelas por região, divisões até a 3ª (R82, R83). Números: 998 clube
 temporada, temporada simulada ~9 s, save de 12,5 a 16 MB. **Falta:** 307 dos 429 escudos (122 chegaram no pacote parcial `escudos-novos-429`, preparados com `preparar.py --quantizar`; os do Columbus Crew, Inter Miami e Los Angeles FC vieram errados e ficaram de fora) (`docs/TIMES_NOVOS.md`; R73 vermelho
 até lá), a 2ª divisão dos estaduais (as páginas do robô eram quase todas a da 1ª), as copas (Libertadores, Sul-Americana,
 Champions Cup...) e as seleções. O trabalho fica no ramo `claude/copia-america` (com `[skip ci]`) até os escudos chegarem.
+
+**Espaços que acompanham o jogo (nov/2026, `salvamento.ts`, `store.ts`):** pedido "Quero que esse save embaixo seja
+automático, a cada rodada, posso alterna entre os saves sem me preocupar" (ele abriu um espaço antigo e perdeu o jogo
+mais avançado do Continuar). O jogo aberto tem um espaço ligado (`Loja.espaco`, guardado em `resumo:auto.ligado`):
+`salvar("auto", estado, ligado)` grava o automático e o espaço na mesma gravação; na partida ao vivo só o automático (o
+espaço vai ao fechar a partida). Jogo novo e importado vão para o primeiro espaço livre (`espacoLivre`); Configurações →
+Salvar liga o jogo ao espaço escolhido (pergunta se lá há outro jogo: `ResumoSave.semente` identifica o jogo).
+Trocar o Continuar por outro jogo quando ele está fora dos espaços pergunta antes (`podeTrocarOContinuar`). Voltar ao
+menu grava antes, e o menu espera (`esperarGravacaoAoSair`). Ao abrir o menu, `ligarOContinuar` liga o Continuar que
+ainda não tem espaço (saves antigos) ao espaço que é cópia dele (`mesmoPonto`: clube, técnico e data) ou o copia para
+um livre (R86). O espaço ligado ao Continuar abre o Continuar, que pode estar mais novo (R87). R84–R87. **Seleções (regra do usuário para quando
+entrarem):** só é chamado para técnico de uma seleção quem ganhou a liga principal (1ª divisão) de um país.
 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e

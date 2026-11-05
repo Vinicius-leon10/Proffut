@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { apagarEscudos, importarEscudos } from "../../save/escudos";
-import { armazenamentoPersistente, exportarArquivo, importarTexto, pedirArmazenamentoPersistente, salvar, type Espaco } from "../../save/salvamento";
+import { armazenamentoPersistente, espacoLivre, exportarArquivo, importarTexto, ligarOContinuar, pedirArmazenamentoPersistente, resumoDe, type Espaco } from "../../save/salvamento";
 import { Cartao, Opcoes, Topo } from "../componentes";
 import { useJogo, useLoja } from "../store";
 
@@ -14,10 +14,17 @@ export function Config() {
 
   useEffect(() => { armazenamentoPersistente().then(setPersistente); }, []);
 
+  const espacoAtual = useLoja((s) => s.espaco);
+  const ligarAoEspaco = useLoja((s) => s.ligarAoEspaco);
   const salvarEm = async (espaco: Espaco) => {
     try {
-      await salvar(espaco, estado);
-      avisar(`Jogo salvo no espaço ${espaco}.`);
+      // Outro jogo no espaço seria apagado: pergunta antes.
+      const ali = await resumoDe(espaco);
+      if (ali && espaco !== espacoAtual && ali.semente !== estado.semente
+        && !confirm(`O espaço ${espaco} tem outro jogo (${ali.clube}, ${ali.temporada}), que vai ser apagado. Salvar este no lugar?`)) return;
+      // O espaço passa a acompanhar este jogo: salva junto a cada rodada (R84).
+      await ligarAoEspaco(espaco);
+      avisar(`Jogo salvo no espaço ${espaco}. Ele salva sozinho a cada rodada.`);
     } catch {
       avisar("Não foi possível salvar no aparelho.");
     }
@@ -58,8 +65,12 @@ export function Config() {
     if (!f) return;
     try {
       const novo = importarTexto(await f.text());
-      if (!confirm("Carregar este save? O jogo atual continua salvo no espaço automático só até a próxima jogada.")) return;
-      iniciar(novo);
+      // O jogo atual fica no espaço dele ou vai para um livre (ligarOContinuar); sem nenhum, seria perdido.
+      const fica = espacoAtual ?? (await espacoLivre());
+      if (!confirm(fica ? `Carregar este save? O jogo atual continua no espaço ${fica}.` : "Carregar este save? O jogo atual não está em nenhum espaço e vai ser perdido.")) return;
+      await sair();
+      await ligarOContinuar();
+      iniciar(novo, (await espacoLivre()) ?? null);
       avisar("Save importado!");
     } catch (e) {
       avisar((e as Error).message);
@@ -103,7 +114,8 @@ export function Config() {
 
         <Cartao titulo="Salvar">
           <p className="pequeno fraco" style={{ marginBottom: 8 }}>
-            O jogo salva sozinho no aparelho a cada ação. Use os espaços para guardar momentos da carreira.
+            O jogo salva sozinho no aparelho a cada ação{espacoAtual ? `, também no espaço ${espacoAtual}` : ""}. Cada espaço guarda
+            um jogo e acompanha esse jogo: dá para ter até 3 jogos e trocar entre eles no menu inicial sem perder nada.
           </p>
           <div className="linha">
             {(["1", "2", "3"] as Espaco[]).map((e) => (
