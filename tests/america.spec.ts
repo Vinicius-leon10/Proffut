@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, novoJogo, pularTutorial, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, novoJogo, pularTutorial, test, escolherPaisNoJogoNovo } from "./ajuda";
 
 // O resto da América (pedido: "eu quero que agora você traga tudo que tem da América. Tudo da América do Sul, tudo da
 // América Central e tudo da América do Norte").
@@ -10,9 +10,7 @@ const daLiga = (liga: string) => exterior.filter((c) => (c.liga ?? c.pais) === l
 
 test("R82 a Concacaf no jogo: o técnico assume um clube do México e o painel mostra o Campeonato Mexicano; nas Tabelas, os países por região, a Jamaica com a liga dela e a Argentina com a 1ª, a 2ª e a 3ª divisão (a 3ª de clubes leves, sem jogadores, mas com tabela)", async ({ page }) => {
   await abrirSite(page);
-  await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
-  await page.getByRole("button", { name: /México/ }).click();
+  await escolherPaisNoJogoNovo(page, /México/);
   expect(await page.getByRole("tab").allTextContents()).toEqual(["1ª divisão", "2ª divisão", "3ª divisão"]);
   await page.getByRole("tab", { name: "1ª divisão" }).click();
   const primeiro = ((await page.locator(".lista .item .negrito").first().textContent()) ?? "").trim();

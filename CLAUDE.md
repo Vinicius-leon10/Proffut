@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R93 rodando a cada mudança, antes
+ponta R01–R94 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -319,8 +319,10 @@ primeira; `MANUAL_NOMES_SEGUNDA`: Estudiantes de Buenos Aires, Flamengo de Sucre
 fundo).
 
 **Técnico de qualquer clube e simulação rápida (nov/2026):** pedido "E vamos permitir que podemos ser técnico de qualquer
-time... na hora de escolher o país, veja também a parte da bandeira". Jogo novo (`NovoJogo.tsx`): país pela bandeira (emoji
-pelos indicadores regionais, `bandeira`), divisão (Brasil: A, B, C, D, "Só estadual"; fora: 1ª e 2ª) e clube (R80). O
+time... na hora de escolher o país, veja também a parte da bandeira". Jogo novo (`NovoJogo.tsx`, em três páginas desde nov/2026, R94: nome do
+técnico → país pela bandeira → divisões e clubes do país): país pela bandeira (emoji pelos indicadores regionais,
+`bandeira`), divisão (Brasil: A, B, C, D, "Só estadual"; fora: 1ª, 2ª e 3ª) e clube (R80). Nos testes,
+`escolherPaisNoJogoNovo` (`ajuda.ts`) faz as duas primeiras páginas. O
 técnico treina qualquer clube: rebaixado para a D continua nele (R81; o R72 saiu, `propostasDeEmprego` também). Clube fora
 das séries: `torneioPrincipal`, `tabelaDoClube` e `nomeDaLigaDoClube` (competicoes.ts) dão o campeonato dele (Série D, liga
 de fora, estadual); `objetivoNoTorneio` (diretoria.ts) pela força entre os clubes do campeonato; o clube do usuário tem

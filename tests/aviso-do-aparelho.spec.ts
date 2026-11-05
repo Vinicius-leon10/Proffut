@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { aba, abrirDepoisDoEstadual, abrirSite, botao, esperarInteiroNaTela, expect, irParaOMeuJogo, novoJogo, test } from "./ajuda";
+import { aba, abrirDepoisDoEstadual, abrirSite, botao, esperarInteiroNaTela, expect, irParaOMeuJogo, novoJogo, test, escolherPaisNoJogoNovo } from "./ajuda";
 
 const GUARDADO = "Jogo guardado no aparelho";
 
@@ -55,8 +55,7 @@ test("R44 aviso que chega com uma tela aberta por cima espera ela fechar: o \"Jo
 test("R44 o \"Jogo guardado no aparelho\" também espera o tutorial do jogo novo fechar", async ({ page }) => {
   await segurarServiceWorker(page);
   await abrirSite(page);
-  await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await escolherPaisNoJogoNovo(page);
   await page.getByRole("tab", { name: "Série B" }).click();
   await botao(page, /Ponte Preta/).click();
   await botao(page, /^Assumir (o|a) /).click();

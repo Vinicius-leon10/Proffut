@@ -81,6 +81,7 @@ test("R80 jogo novo: o técnico escolhe o país pela bandeira, a divisão e o cl
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
   await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByRole("button", { name: "Próximo", exact: true }).click();
   // Os países da América com clubes no jogo (o Brasil e os outros), por região, cada um com a bandeira; o Brasil vem
   // escolhido, com as séries e os estaduais.
   const comClubes = new Set(exterior.clubes.map((c) => c.pais)).size + 1;
@@ -91,10 +92,12 @@ test("R80 jogo novo: o técnico escolhe o país pela bandeira, a divisão e o cl
   }
   for (const texto of await paises.allTextContents()) expect(texto, texto).toMatch(/^\p{Regional_Indicator}{2}/u);
   await expect(page.getByRole("button", { name: /Brasil/ })).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: /Brasil/ }).click();
   expect(await page.getByRole("tab").allTextContents()).toEqual(["Série A", "Série B", "Série C", "Série D", "Só estadual"]);
   // Série D e só do estadual também valem.
   await page.getByRole("tab", { name: "Série D" }).click();
   await expect(page.locator(".lista .item").first()).toBeVisible();
+  await page.getByRole("button", { name: "Voltar", exact: true }).click();
   await page.getByRole("button", { name: /Argentina/ }).click();
   expect(await page.getByRole("tab").allTextContents()).toEqual(["1ª divisão", "2ª divisão", "3ª divisão"]);
   await page.getByRole("tab", { name: "1ª divisão" }).click();
@@ -168,4 +171,33 @@ test("R74 as listas dos campeonatos estão certas: nos estaduais não entram os 
   expect(todos).toHaveLength(96);
   expect(todos).toContain("Ivinhema");
   expect(todos).not.toContain("Pantanal");
+});
+
+test("R94 jogo novo em três páginas: primeiro só o nome do técnico; depois só os países (bandeiras); depois as divisões e os clubes do país escolhido, com Voltar para trocar de país", async ({ page }) => {
+  await abrirSite(page);
+  await botao(page, "Novo jogo").click();
+  // 1ª página: só o nome.
+  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await expect(page.getByRole("group", { name: "País" })).toHaveCount(0);
+  await expect(page.locator(".lista .item")).toHaveCount(0);
+  await page.getByRole("button", { name: "Próximo", exact: true }).click();
+  // 2ª página: só os países, sem nome nem clubes.
+  await expect(page.getByRole("group", { name: "País" })).toBeVisible();
+  await expect(page.getByPlaceholder("Ex.: Vinícius")).toHaveCount(0);
+  await expect(page.locator(".lista .item")).toHaveCount(0);
+  await page.getByRole("button", { name: /Argentina/ }).click();
+  // 3ª página: as divisões e os clubes da Argentina.
+  await expect(page.locator(".topo .titulo")).toHaveText("Argentina");
+  await expect(page.getByRole("group", { name: "País" })).toHaveCount(0);
+  expect(await page.getByRole("tab").allTextContents()).toEqual(["1ª divisão", "2ª divisão", "3ª divisão"]);
+  await expect(page.locator(".lista .item").first()).toBeVisible();
+  // Voltar: os países de novo; com o Brasil, as séries.
+  await page.getByRole("button", { name: "Voltar", exact: true }).click();
+  await page.getByRole("button", { name: /Brasil/ }).click();
+  expect(await page.getByRole("tab").allTextContents()).toEqual(["Série A", "Série B", "Série C", "Série D", "Só estadual"]);
+  await page.getByRole("tab", { name: "Série B" }).click();
+  await botao(page, /Ponte Preta/).click();
+  await botao(page, /^Assumir (o|a) /).click();
+  await pularTutorial(page);
+  await expect(page.locator(".topo .titulo")).toHaveText("Ponte Preta");
 });

@@ -56,10 +56,17 @@ export async function abrirSite(page: Page) {
   await expect(page.getByRole("heading", { name: "Proffut" })).toBeVisible({ timeout: 20_000 });
 }
 
-export async function novoJogo(page: Page, { serie = "Série B", clube = "Ponte Preta" } = {}) {
-  await abrirSite(page);
+/** Jogo novo até a página dos clubes do país (R94: nome, país e clube em três páginas). */
+export async function escolherPaisNoJogoNovo(page: Page, pais: string | RegExp = "Brasil") {
   await botao(page, "Novo jogo").click();
   await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByRole("button", { name: "Próximo", exact: true }).click();
+  await page.getByRole("group", { name: "País" }).getByRole("button", { name: pais }).click();
+}
+
+export async function novoJogo(page: Page, { serie = "Série B", clube = "Ponte Preta" } = {}) {
+  await abrirSite(page);
+  await escolherPaisNoJogoNovo(page);
   await page.getByRole("tab", { name: serie }).click();
   await botao(page, new RegExp(clube)).click();
   await botao(page, /^Assumir (o|a) /).click();

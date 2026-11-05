@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { FICHAS, FICHAS_ESTADUAIS, FICHAS_EXTERIOR, PARTICIPANTES_ESTADUAIS, RESERVA, forcaEstimada, novoJogo, type FichaClube } from "../../engine/jogo";
 import { NOME_REGIAO, PAISES, divisaoDaLiga, type Regiao } from "../../engine/torneios";
@@ -34,8 +34,10 @@ const POR_REGIAO = (Object.keys(NOME_REGIAO) as Regiao[]).map((regiao) => ({
 })).filter((g) => g.paises.length);
 const NOME_PAIS: Record<string, string> = { BR: "Brasil", ...Object.fromEntries(Object.entries(PAISES).map(([k, v]) => [k, v.pais])) };
 
+/** Jogo novo em três páginas (pedido do usuário, R94): o nome do técnico, o país (bandeiras) e o clube (divisões do país). */
 export function NovoJogo() {
   const { iniciar, irParaTela, avisar } = useLoja();
+  const [passo, setPasso] = useState<"nome" | "pais" | "clube">("nome");
   const [nome, setNome] = useState("");
   const [pais, setPais] = useState("BR");
   const [divisao, setDivisao] = useState("A");
@@ -50,6 +52,7 @@ export function NovoJogo() {
     setPais(p);
     setDivisao(DIVISOES[p][0].valor);
     setEscolhido(null);
+    setPasso("clube");
   };
 
   const comecar = async () => {
@@ -73,31 +76,55 @@ export function NovoJogo() {
     }, 30);
   };
 
+  const rodape = (conteudo: ReactNode) => (
+    <div style={{ padding: "12px 16px calc(var(--base) + 12px)", borderTop: "1px solid var(--borda)", background: "var(--fundo-2)" }}>{conteudo}</div>
+  );
+
+  if (passo === "nome") {
+    return (
+      <div className="app">
+        <Topo titulo="Novo jogo" sub="Seu nome" aoVoltar={() => irParaTela("inicio")} />
+        <div className="conteudo">
+          <label className="coluna" style={{ gap: 6 }}>
+            <span className="pequeno fraco">Nome do técnico</span>
+            <input value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Ex.: Vinícius" maxLength={30} autoComplete="off"
+              onKeyDown={(e) => { if (e.key === "Enter") setPasso("pais"); }} />
+          </label>
+        </div>
+        {rodape(<button className="botao primario grande cheio" onClick={() => setPasso("pais")}>Próximo</button>)}
+      </div>
+    );
+  }
+
+  if (passo === "pais") {
+    return (
+      <div className="app">
+        <Topo titulo="Escolha o país" sub={`Técnico: ${nome.trim() || "Técnico"}`} aoVoltar={() => setPasso("nome")} />
+        <div className="conteudo">
+          <div role="group" aria-label="País" className="coluna" style={{ gap: 6 }}>
+            {POR_REGIAO.map((g) => (
+              <div key={g.regiao} className="coluna" style={{ gap: 6 }}>
+                <span className="pequeno fraco">{NOME_REGIAO[g.regiao]}</span>
+                <div className="paises">
+                  {g.paises.map((p) => (
+                    <button key={p} className={`pais${p === pais ? " ativo" : ""}`} aria-pressed={p === pais} onClick={() => escolherPais(p)}>
+                      <span className="bandeira" aria-hidden>{bandeira(p)}</span>
+                      <span className="corta">{NOME_PAIS[p]}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="app">
-      <Topo titulo="Novo jogo" sub="Escolha seu nome, o país e o clube" aoVoltar={() => irParaTela("inicio")} />
+      <Topo titulo={NOME_PAIS[pais]} sub="Escolha a liga e o clube" aoVoltar={() => setPasso("pais")} />
       <div className="conteudo">
-        <label className="coluna" style={{ gap: 6 }}>
-          <span className="pequeno fraco">Nome do técnico</span>
-          <input value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Ex.: Vinícius" maxLength={30} autoComplete="off" />
-        </label>
-
-        <div role="group" aria-label="País" className="coluna" style={{ gap: 6 }}>
-          {POR_REGIAO.map((g) => (
-            <div key={g.regiao} className="coluna" style={{ gap: 6 }}>
-              <span className="pequeno fraco">{NOME_REGIAO[g.regiao]}</span>
-              <div className="paises">
-                {g.paises.map((p) => (
-                  <button key={p} className={`pais${p === pais ? " ativo" : ""}`} aria-pressed={p === pais} onClick={() => escolherPais(p)}>
-                    <span className="bandeira" aria-hidden>{bandeira(p)}</span>
-                    <span className="corta">{NOME_PAIS[p]}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
         <Segmentado opcoes={divisoes.map((d) => ({ valor: d.valor, rotulo: d.rotulo }))} valor={atual.valor} aoMudar={(d) => { setDivisao(d); setEscolhido(null); }} />
 
         <div className="lista">
@@ -119,11 +146,11 @@ export function NovoJogo() {
           })}
         </div>
       </div>
-      <div style={{ padding: "12px 16px calc(var(--base) + 12px)", borderTop: "1px solid var(--borda)", background: "var(--fundo-2)" }}>
+      {rodape(
         <button className="botao primario grande cheio" disabled={!selecionado || criando} onClick={comecar}>
           {criando ? "Preparando a temporada..." : selecionado ? `Assumir ${comArtigo("o", selecionado)}` : "Escolha um clube"}
-        </button>
-      </div>
+        </button>,
+      )}
     </div>
   );
 }

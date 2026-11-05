@@ -1,11 +1,10 @@
-import { abrirSite, agora, botao, cartaoDoProximoJogo, esperarSalvar, expect, test } from "./ajuda";
+import { abrirSite, agora, botao, cartaoDoProximoJogo, esperarSalvar, expect, test, escolherPaisNoJogoNovo } from "./ajuda";
 
 const PASSOS = ["Bem-vindo à Ponte Preta!", "Avance até o jogo", "Monte o time", "Durante o jogo", "Elenco e mercado", "Tudo fica salvo"];
 
 test("R43 tutorial rápido: no jogo novo, o tutorial mostra os passos principais; terminado ou pulado, não volta ao abrir o app; dá para ver de novo em Configurações", async ({ page }) => {
   await abrirSite(page);
-  await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await escolherPaisNoJogoNovo(page);
   await page.getByRole("tab", { name: "Série B" }).click();
   await botao(page, /Ponte Preta/).click();
   await botao(page, /^Assumir (o|a) /).click();

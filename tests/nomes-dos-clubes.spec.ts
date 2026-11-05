@@ -1,10 +1,9 @@
-import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, pularTutorial, test, voltar } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, pularTutorial, test, voltar, escolherPaisNoJogoNovo } from "./ajuda";
 
 test("R26 clube que se diz \"a\": Assumir a Chapecoense, Bem-vindo à Chapecoense e A Chapecoense na Copa", async ({ page }) => {
   // Na escolha do clube, o botão já fala certo.
   await abrirSite(page);
-  await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await escolherPaisNoJogoNovo(page);
   await botao(page, /Chapecoense/).click();
   const assumir = botao(page, /^Assumir /);
   await expect(assumir).toHaveText("Assumir a Chapecoense");
