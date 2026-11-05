@@ -63,13 +63,43 @@ export async function resumoDe(espaco: Espaco): Promise<ResumoSave | undefined> 
   return get<ResumoSave>(`resumo:${espaco}`, banco);
 }
 
+/** Dois resumos do mesmo jogo no mesmo ponto (nos saves antigos, sem a identificação do jogo: clube, técnico e data). */
+function mesmoPonto(a: ResumoSave, b: ResumoSave): boolean {
+  if (a.semente != null && b.semente != null && a.semente !== b.semente) return false;
+  return a.clubeId === b.clubeId && a.tecnico === b.tecnico && a.temporada === b.temporada && a.data === b.data;
+}
+
 /**
- * Antes de trocar o jogo do Continuar por outro (abrir um espaço, jogo novo, importar): se ele não está em nenhum
- * espaço, seria perdido; pergunta antes (R85). Devolve se pode trocar.
+ * Liga o jogo do Continuar a um espaço, se ainda não estiver: ao espaço que é uma cópia dele (saves de antes dos
+ * espaços que acompanham o jogo, R86) ou, senão, ao primeiro espaço livre (o jogo é copiado para lá). Devolve o espaço
+ * ligado; nenhum (todos ocupados por outros jogos): undefined.
+ */
+export async function ligarOContinuar(): Promise<Espaco | undefined> {
+  const auto = await resumoDe("auto");
+  if (!auto) return undefined;
+  if (auto.ligado) return auto.ligado;
+  for (const espaco of ESPACOS) {
+    const r = espaco === "auto" ? undefined : await resumoDe(espaco);
+    if (r && mesmoPonto(auto, r)) {
+      await set("resumo:auto", { ...auto, ligado: espaco }, banco);
+      return espaco;
+    }
+  }
+  const livre = await espacoLivre();
+  const estado = livre && (await get<EstadoJogo>("jogo:auto", banco));
+  if (!livre || !estado) return undefined;
+  await setMany([[`jogo:${livre}`, estado], [`resumo:${livre}`, { ...resumir(livre, estado), salvoEm: auto.salvoEm }], ["resumo:auto", { ...auto, ligado: livre }]], banco);
+  return livre;
+}
+
+/**
+ * Antes de trocar o jogo do Continuar por outro (abrir um espaço, jogo novo, importar): ele fica num espaço
+ * (`ligarOContinuar`); se todos estão ocupados por outros jogos, ele seria perdido: pergunta antes (R85). Devolve se
+ * pode trocar.
  */
 export async function podeTrocarOContinuar(): Promise<boolean> {
   const auto = await resumoDe("auto");
-  if (!auto || auto.ligado) return true;
+  if (!auto || (await ligarOContinuar())) return true;
   return confirm(`O jogo do Continuar (${auto.clube}, ${auto.temporada}) não está em nenhum espaço e vai ser perdido. Trocar mesmo assim?`);
 }
 

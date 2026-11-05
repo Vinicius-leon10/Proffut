@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R85 rodando a cada mudança, antes
+ponta R01–R87 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -340,7 +340,9 @@ mais avançado do Continuar). O jogo aberto tem um espaço ligado (`Loja.espaco`
 espaço vai ao fechar a partida). Jogo novo e importado vão para o primeiro espaço livre (`espacoLivre`); Configurações →
 Salvar liga o jogo ao espaço escolhido (pergunta se lá há outro jogo: `ResumoSave.semente` identifica o jogo).
 Trocar o Continuar por outro jogo quando ele está fora dos espaços pergunta antes (`podeTrocarOContinuar`). Voltar ao
-menu grava antes, e o menu espera (`esperarGravacaoAoSair`). R84, R85. **Seleções (regra do usuário para quando
+menu grava antes, e o menu espera (`esperarGravacaoAoSair`). Ao abrir o menu, `ligarOContinuar` liga o Continuar que
+ainda não tem espaço (saves antigos) ao espaço que é cópia dele (`mesmoPonto`: clube, técnico e data) ou o copia para
+um livre (R86). O espaço ligado ao Continuar abre o Continuar, que pode estar mais novo (R87). R84–R87. **Seleções (regra do usuário para quando
 entrarem):** só é chamado para técnico de uma seleção quem ganhou a liga principal (1ª divisão) de um país.
 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final

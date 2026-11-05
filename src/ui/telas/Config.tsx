@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { apagarEscudos, importarEscudos } from "../../save/escudos";
-import { armazenamentoPersistente, espacoLivre, exportarArquivo, importarTexto, pedirArmazenamentoPersistente, podeTrocarOContinuar, resumoDe, type Espaco } from "../../save/salvamento";
+import { armazenamentoPersistente, espacoLivre, exportarArquivo, importarTexto, ligarOContinuar, pedirArmazenamentoPersistente, resumoDe, type Espaco } from "../../save/salvamento";
 import { Cartao, Opcoes, Topo } from "../componentes";
 import { useJogo, useLoja } from "../store";
 
@@ -65,9 +65,11 @@ export function Config() {
     if (!f) return;
     try {
       const novo = importarTexto(await f.text());
-      if (!confirm("Carregar este save no lugar do jogo atual?")) return;
+      // O jogo atual fica no espaço dele ou vai para um livre (ligarOContinuar); sem nenhum, seria perdido.
+      const fica = espacoAtual ?? (await espacoLivre());
+      if (!confirm(fica ? `Carregar este save? O jogo atual continua no espaço ${fica}.` : "Carregar este save? O jogo atual não está em nenhum espaço e vai ser perdido.")) return;
       await sair();
-      if (!(await podeTrocarOContinuar())) return;
+      await ligarOContinuar();
       iniciar(novo, (await espacoLivre()) ?? null);
       avisar("Save importado!");
     } catch (e) {

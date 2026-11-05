@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { formatarData } from "../../engine/calendario";
 import { FICHAS } from "../../engine/jogo";
 import { prontoParaOffline } from "../../save/aparelho";
-import { carregar, espacoLivre, importarTexto, listarSaves, podeTrocarOContinuar, type ResumoSave } from "../../save/salvamento";
+import { carregar, espacoLivre, importarTexto, ligarOContinuar, listarSaves, podeTrocarOContinuar, type ResumoSave } from "../../save/salvamento";
 import { Cartao, Escudo } from "../componentes";
 import { esperarGravacaoAoSair, useLoja } from "../store";
 
@@ -22,7 +22,8 @@ export function Inicio() {
   const [offline, setOffline] = useState(false);
 
   useEffect(() => {
-    esperarGravacaoAoSair().then(listarSaves).then(setSaves).catch(() => setSaves([]));
+    // Antes de listar: o jogo do Continuar vai para um espaço, se ainda não estiver (saves antigos, R86).
+    esperarGravacaoAoSair().then(ligarOContinuar).then(listarSaves).then(setSaves).catch(() => setSaves([]));
     prontoParaOffline().then(setOffline).catch(() => setOffline(false));
   }, []);
 
@@ -30,7 +31,9 @@ export function Inicio() {
     try {
       // Abrir um espaço troca o jogo do Continuar: se aquele não está em nenhum espaço, pergunta antes (R85).
       if (r.espaco !== "auto" && r.espaco !== auto?.ligado && !(await podeTrocarOContinuar())) return;
-      const estado = await carregar(r.espaco);
+      // O espaço ligado ao Continuar abre o Continuar: é o mesmo jogo, e o Continuar pode estar mais novo (na partida
+      // ao vivo só ele é gravado a cada minuto; o app fechado no meio do jogo deixa o espaço no começo dela).
+      const estado = await carregar(r.espaco === auto?.ligado ? "auto" : r.espaco);
       // O espaço aberto passa a acompanhar o jogo; o Continuar segue o espaço ligado a ele (R84).
       if (estado) iniciar(estado, r.espaco === "auto" ? r.ligado ?? null : r.espaco);
     } catch (e) {
