@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R88 rodando a cada mudança, antes
+ponta R01–R87 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -73,36 +73,18 @@ branca por cima do topo verde (captura do usuário, "Ajuste esse topo"). Por iss
 topo e o placar descem mais 16 px (`--folga: min(var(--topo), 16px)`; o aviso desce junto): colados na barra, ficavam
 "sobrepostos no topo" (R33). No navegador `--topo` é 0 e nada muda. As referências do pacote ficam fora do git.
 
-**Sons da partida (out/2026, `src/ui/sons.ts`):** apito, torcida e vaia sintetizados com Web Audio; nada copiado de
-outro jogo. Apito no início e na volta do intervalo, 2 no intervalo, 3 no fim; no pênalti: apito, burburinho e o
-narrador; no gol: o narrador, e festa da torcida no gol do meu time (`FESTA`, ~−14 dB contra ~−16 dB do apito) ou
-`vaia()` no do adversário (16 vozes graves com vibrato nos formantes do "u", ~−18 dB); pênalti perdido: "uhhh".
-**Narrador (nov/2026):** pedido "eu quero testar isso da voz melhor em português, narrando o jogo. Vamos começar só
-colocando o gol, o pênalti e o cartão vermelho", depois "Gere tbm inico de jogo e acaba o jogo" (antes era a voz robótica
-do aparelho, `speechSynthesis`, que ele achou feia: saiu). Áudios gravados uma vez com a API da ElevenLabs em
-`public/narrador/<nome>.mp3`: `inicio` ("Rola a bola! Começa o jogo!", no "Começar o jogo"), `gol` ("GOOOOOOOOOOOL! É
-GOL! QUE GOLAÇO!", os dois times), `penalti` ("PÊNALTI! O juiz marca pênalti!"), `vermelho` ("CARTÃO VERMELHO! Expulso
-de campo!") e `fim` ("Fim de jogo! O árbitro apita e acabou!", também no "Fim ⏭"). Voz "Liam" (Voice ID
-`TX3LPaxmHKxFdv7VOQHJ`, voz padrão da ElevenLabs), modelo `eleven_v3`, `language_code` "pt", stability 0,0 e o tom
-entre colchetes no começo do texto: "[Brazilian Portuguese accent] [shouting] [excited]" (no início e no fim, sem o
-"[shouting]"). Como ele escolheu: a primeira versão (`eleven_multilingual_v2`) ficou "muito robotizada"; no v3 ele
-escolheu o Liam entre 11 vozes padrão, achou o sotaque de Portugal e, entre 6 versões com sotaque brasileiro, ficou com
-a do "[Brazilian Portuguese accent]" ("esse minha gente não gostei": nada de "minha gente" no texto). No plano grátis
-dele só as vozes padrão funcionam pela API (as da biblioteca, como narradores brasileiros, pedem plano pago). Depois de
-gerar: sem o silêncio das pontas e com o volume igualado (`ffmpeg`: `silenceremove`, `loudnorm=I=-14`, mono 96 kbps).
-Ficam no precache do service worker (`globPatterns` com `mp3`): tocam sem internet. A chave fica só no ambiente de nuvem
-"Padrão" do Claude Code (`ELEVENLABS_API_KEY`, com `api.elevenlabs.io` liberado); nunca vai para o jogo, para arquivos
-ou para o git. Ela não lista vozes (falta a permissão `voices_read`): para outra voz, o usuário manda o Voice ID.
-`narrar(nome)` toca o áudio por Web Audio (`carregarNarrador` baixa e prepara ao abrir a partida; se o áudio ainda
-estiver chegando, toca quando chegar) num ganho de 1,2. R88. O pênalti é marcado num minuto (evento `penalti`) e cobrado no minuto
+**Sons da partida (out/2026, `src/ui/sons.ts`):** apito, torcida e vaia sintetizados com Web Audio, narrador com a
+voz pt-BR do aparelho (`speechSynthesis`); nada baixado nem copiado. Apito no início e na volta do intervalo, 2 no
+intervalo, 3 no fim; no pênalti: apito, burburinho e "Pênalti!"; no gol, sem narrador (o usuário achou a voz
+robótica feia): gol do meu time = festa da torcida (`FESTA`, o som mais alto: ~−14 dB contra ~−16 dB do apito), gol do
+adversário = `vaia()` (16 vozes graves com vibrato nos formantes do "u", ~−18 dB); pênalti perdido: "uhhh". O pênalti é marcado num minuto (evento `penalti`) e cobrado no minuto
 seguinte (`PartidaViva.penaltiPendente`; o tempo não acaba antes da cobrança) e a partida espera 2,5 s antes da
 cobrança. No intervalo, `noIntervalo` (AoVivo) segura o relógio até o toque no ▶: dois toques do relógio antes de a
 tela parar passavam do intervalo (R57). No iPhone o som só sai depois de um toque (`liberarSom` em "Começar o jogo" e no ▶) e a chave do
 silencioso cala o apito e a torcida. Liga/desliga: botão de som na partida e Configurações → Sons da partida
-(`config.som`, opcional: falta = ligado). Os testes (R25, R27, R88; `escutarSons` em `tests/ajuda.ts`) escutam os sons
-trocando `OscillatorNode.start`, `AudioBufferSourceNode.start` (o do narrador tem `narracao` = a frase) e
-`speechSynthesis.speak` no navegador de teste, e anotam o volume de cada som (maior valor marcado nos ganhos por onde ele
-passa) e os sons do mesmo instante.
+(`config.som`, opcional: falta = ligado). Os testes (R25, R27; `escutarSons` em `tests/ajuda.ts`) escutam os sons
+trocando `OscillatorNode.start`, `AudioBufferSourceNode.start` e `speechSynthesis.speak` no navegador de teste, e
+anotam o volume de cada som (maior valor marcado nos ganhos por onde ele passa) e os sons do mesmo instante.
 
 **Estatísticas da partida (out/2026, `partida.ts` e `AoVivo.tsx`):** fixas na tela do jogo e travadas em cima, fora da
 área que rola: só os lances rolam embaixo (R59; sem abas:
@@ -362,6 +344,15 @@ menu grava antes, e o menu espera (`esperarGravacaoAoSair`). Ao abrir o menu, `l
 ainda não tem espaço (saves antigos) ao espaço que é cópia dele (`mesmoPonto`: clube, técnico e data) ou o copia para
 um livre (R86). O espaço ligado ao Continuar abre o Continuar, que pode estar mais novo (R87). R84–R87. **Seleções (regra do usuário para quando
 entrarem):** só é chamado para técnico de uma seleção quem ganhou a liga principal (1ª divisão) de um país.
+
+**Narrador com voz gravada (nov/2026, retirado):** o usuário pediu a narração do gol, do pênalti e do cartão vermelho
+(e depois do início e do fim do jogo) com voz melhor em português; foram feitos com a ElevenLabs (chave só no ambiente
+de nuvem "Padrão", `ELEVENLABS_API_KEY`; plano grátis: só vozes padrão, e a chave não lista vozes), mas as vozes padrão
+ficaram robóticas ou com sotaque de Portugal, e ele pediu "Tire esses audios novos por enquanto, não gostei como ficou.
+Pare a geração de audios". O trabalho ficou no histórico (commits 46ddd8e, d96ddb4 e 466418d: `public/narrador/`,
+`narrar` e `carregarNarrador` em `sons.ts`, R88 e o save `gol-penalti-vermelho.ts`) e foi desfeito antes de ir para a
+`main`. Não gerar áudios sem ele pedir. Ele pode mandar áudios gravados (a voz dele ou de quem deixar usar; nada de
+narração da TV ou do rádio): para voltar, refazer a partir desses commits com os arquivos dele no lugar dos gerados.
 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e

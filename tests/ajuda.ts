@@ -316,8 +316,7 @@ export async function esperarInteiroNaTela(page: Page, alvo: Locator) {
 export type Som =
   | { tipo: "tom"; hz: number; pico: number; grupo: number }
   | { tipo: "ruido"; pico: number; grupo: number }
-  | { tipo: "voz"; texto: string; grupo: number }
-  | { tipo: "narrador"; nome: string; grupo: number };
+  | { tipo: "voz"; texto: string; grupo: number };
 
 /**
  * Anota cada som que o jogo toca: tons (apito, vaia), ruídos (torcida) e falas (narrador). `pico` é o
@@ -373,10 +372,8 @@ export async function escutarSons(page: Page) {
       return tom.apply(this, a);
     };
     const ruido = AudioBufferSourceNode.prototype.start;
-    AudioBufferSourceNode.prototype.start = function (this: AudioBufferSourceNode & { narracao?: string }, ...a: [number?, number?, number?]) {
-      // O narrador (áudios gravados, `narracao` = qual frase) e a torcida (ruído sintetizado).
-      if (this.narracao) w.__sons.push({ tipo: "narrador", nome: this.narracao, grupo: grupoAtual() });
-      else w.__sons.push({ tipo: "ruido", pico: pico(this), grupo: grupoAtual() });
+    AudioBufferSourceNode.prototype.start = function (this: AudioBufferSourceNode, ...a: [number?, number?, number?]) {
+      w.__sons.push({ tipo: "ruido", pico: pico(this), grupo: grupoAtual() });
       return ruido.apply(this, a);
     };
     if (window.speechSynthesis) {

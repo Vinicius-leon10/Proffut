@@ -91,7 +91,7 @@ export function Config() {
         </Cartao>
 
         <Cartao titulo="Sons da partida">
-          <p className="pequeno fraco" style={{ marginBottom: 8 }}>Apito do árbitro, torcida no gol (festa ou vaia) e narrador no começo e no fim do jogo, no gol, no pênalti e no cartão vermelho</p>
+          <p className="pequeno fraco" style={{ marginBottom: 8 }}>Apito do árbitro, torcida no gol (festa ou vaia) e narrador no pênalti</p>
           <Opcoes
             opcoes={[{ valor: "ligados", rotulo: "Ligados" }, { valor: "desligados", rotulo: "Desligados" }]}
             valor={estado.config.som === false ? "desligados" : "ligados"}

@@ -1,9 +1,8 @@
-// Sons da partida ao vivo: o apito do árbitro, a torcida e a vaia são sintetizados com Web Audio no próprio
-// aparelho (nada é copiado de outro jogo). O narrador (início, gol, pênalti, cartão vermelho e fim de jogo) são áudios gravados uma vez
-// com a ElevenLabs (pedido do usuário: "eu quero testar isso da voz melhor em português, narrando o jogo"), em
-// `public/narrador/`, guardados pelo service worker para tocar sem internet; a voz robótica do aparelho
-// (speechSynthesis) não fala mais. No iPhone o som só é liberado depois de um toque, por isso `liberarSom` é chamado
-// no botão "Começar o jogo"; com a chave do silencioso ligada, o iPhone cala tudo.
+// Sons da partida ao vivo, feitos no próprio aparelho (nada é baixado nem copiado de outro jogo):
+// o apito do árbitro, a torcida e a vaia são sintetizados com Web Audio, e o narrador do pênalti usa a
+// voz em português do sistema (speechSynthesis). No iPhone o som só é liberado depois de um toque, por isso
+// `liberarSom` é chamado no botão "Começar o jogo"; com a chave do silencioso ligada, o iPhone cala o
+// apito e a torcida.
 import type { EventoPartida } from "../engine/tipos";
 
 /** Volume da festa no gol do meu time (o som mais alto da partida) e da vaia no gol do adversário. */
@@ -25,69 +24,25 @@ function audio(): AudioContext | undefined {
   }
 }
 
-/** As frases do narrador, gravadas (ElevenLabs, voz "Liam", modelo v3): `public/narrador/<nome>.mp3`. */
-const NARRACOES = ["inicio", "gol", "penalti", "vermelho", "fim"] as const;
-export type Narracao = (typeof NARRACOES)[number];
-/** Volume do narrador: por cima da torcida, para a frase ser entendida. */
-const NARRADOR = 1.2;
-
-const carregadas = new Map<Narracao, Promise<AudioBuffer | undefined>>();
-const tocando = new Set<AudioBufferSourceNode>();
-
-/** Baixa (do cache do aparelho) e prepara os áudios do narrador; pode ser chamado antes do toque. */
-export function carregarNarrador() {
-  const ctx = audio();
-  if (!ctx) return;
-  for (const nome of NARRACOES) {
-    if (carregadas.has(nome)) continue;
-    carregadas.set(
-      nome,
-      fetch(`${import.meta.env.BASE_URL}narrador/${nome}.mp3`)
-        .then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error(String(r.status)))))
-        .then((dados) => ctx.decodeAudioData(dados))
-        .catch(() => {
-          carregadas.delete(nome); // tenta de novo no próximo lance
-          return undefined;
-        }),
-    );
-  }
-}
-
-/** O narrador grita a frase (se o áudio ainda estiver chegando, toca assim que chegar). */
-export function narrar(nome: Narracao) {
-  const ctx = audio();
-  if (!ctx) return;
-  carregarNarrador();
-  void carregadas.get(nome)?.then((buffer) => {
-    if (!buffer) return;
-    const fonte = ctx.createBufferSource() as AudioBufferSourceNode & { narracao?: Narracao };
-    fonte.buffer = buffer;
-    fonte.narracao = nome; // qual frase é (os testes escutam por aqui)
-    const volume = ctx.createGain();
-    volume.gain.setValueAtTime(NARRADOR, ctx.currentTime);
-    fonte.connect(volume).connect(ctx.destination);
-    tocando.add(fonte);
-    fonte.onended = () => tocando.delete(fonte);
-    fonte.start();
-  });
-}
-
-/** Chame num toque do usuário: libera o som no iPhone. */
+/** Chame num toque do usuário: libera o som e a voz no iPhone. */
 export function liberarSom() {
   audio();
-  carregarNarrador();
+  try {
+    const u = new SpeechSynthesisUtterance(" ");
+    u.volume = 0;
+    window.speechSynthesis?.speak(u);
+  } catch {
+    // Sem voz no aparelho: o resto dos sons continua.
+  }
 }
 
-/** Para a narração (ao sair da partida ou desligar o som). */
+/** Para a narração (ao sair da partida). */
 export function pararSons() {
-  for (const fonte of tocando) {
-    try {
-      fonte.stop();
-    } catch {
-      // já tinha parado
-    }
+  try {
+    window.speechSynthesis?.cancel();
+  } catch {
+    // nada a parar
   }
-  tocando.clear();
 }
 
 /** Uma apitada: tom agudo com o trinado da bolinha do apito. */
@@ -246,27 +201,41 @@ export function vaia() {
   ar.stop(t + duracao);
 }
 
+/** O narrador, com a voz em português do aparelho, animado. */
+export function narrar(texto: string) {
+  try {
+    const voz = window.speechSynthesis;
+    if (!voz) return;
+    const fala = new SpeechSynthesisUtterance(texto);
+    fala.lang = "pt-BR";
+    const brasileira = voz.getVoices().find((v) => v.lang.replace("_", "-").toLowerCase() === "pt-br");
+    if (brasileira) fala.voice = brasileira;
+    fala.rate = 1.1;
+    fala.pitch = 1.2;
+    fala.volume = 1;
+    voz.speak(fala);
+  } catch {
+    // Sem voz no aparelho: os outros sons continuam.
+  }
+}
+
 /** Sons dos lances novos do jogo do usuário. `meuLado` é o lado do time do usuário (0 = mandante). */
 export function tocarLances(lances: EventoPartida[], meuLado: 0 | 1) {
   for (const e of lances) {
     if (e.tipo === "penalti") {
       apito("penalti");
       torcida("penalti");
-      narrar("penalti");
+      narrar("Pênalti!");
     } else if (e.tipo === "gol" || e.tipo === "gol-penalti") {
-      // O narrador grita o gol de qualquer time; a torcida faz festa no gol do meu time e vaia no do adversário.
-      narrar("gol");
+      // Sem narrador no gol: festa da torcida no gol do meu time, vaia no do adversário.
       if (e.lado === meuLado) torcida("gol");
       else vaia();
-    } else if (e.tipo === "vermelho") {
-      narrar("vermelho");
     } else if (e.tipo === "penalti-perdido") {
       torcida("perdeu");
     } else if (e.tipo === "intervalo") {
       apito("intervalo");
     } else if (e.tipo === "fim") {
       apito("fim");
-      narrar("fim");
     }
   }
 }
