@@ -341,7 +341,7 @@ Jamaica, Trinidad e Haiti) entram sem jogadores; jogam pela simulação rápida 
 (`Regiao`, `NOME_REGIAO`), `divisaoDaLiga`/`ligaDoNivel` ("AR3"), `SOBEM_E_CAEM` por nível (MLS, Canadá e México fechados),
 `trocarDivisoes` em todos os níveis; nomes ingleses, franceses e holandeses para os jogadores criados (nomes.ts). Telas: jogo
 novo e Tabelas por região, divisões até a 3ª (R82, R83). Números: 998 clubes, ~21 mil jogadores, ~11 mil jogos por
-temporada, temporada simulada ~9 s, save de 12,5 a 16 MB. **Falta:** os 429 escudos (`docs/TIMES_NOVOS.md`; R73 vermelho
+temporada, temporada simulada ~9 s, save de 12,5 a 16 MB. **Falta:** 307 dos 429 escudos (122 chegaram no pacote parcial `escudos-novos-429`, preparados com `preparar.py --quantizar`; os do Columbus Crew, Inter Miami e Los Angeles FC vieram errados e ficaram de fora) (`docs/TIMES_NOVOS.md`; R73 vermelho
 até lá), a 2ª divisão dos estaduais (as páginas do robô eram quase todas a da 1ª), as copas (Libertadores, Sul-Americana,
 Champions Cup...) e as seleções. O trabalho fica no ramo `claude/copia-america` (com `[skip ci]`) até os escudos chegarem.
 
@@ -426,7 +426,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `src/save/` | `salvamento.ts`: IndexedDB (`proffut`/`saves`, chaves `jogo:auto`, `resumo:auto`...), exportar/importar `.json`. `aparelho.ts`: checagem do aparelho. `escudos.ts`: escudos importados pelo usuário, que trocam os do jogo só no aparelho (chave `escudos`, id do clube → imagem) |
 | `src/ui/` | React + Zustand. `store.ts` (estado, telas sobrepostas, salvamento 400 ms após cada mudança), `acoes.ts`, `componentes.tsx`, `estilo.css` (visual "opção 3": tokens no `:root`), `sons.ts` (apito, torcida, narrador), `telas/*.tsx` |
 | `tests/` | Testes de ponta a ponta R01…: `*.spec.ts`, passos comuns em `ajuda.ts`, relatório em português em `resumo.ts`, lista em `README.md` |
-| `public/escudos/` | Os 582 escudos dos clubes (`<id>.png`): 156 recortados da prancha que o usuário mandou e 426 dos pacotes dos times novos (`tools/escudos/preparar.py`); ficam fora da fila do service worker, num cache só deles (`guardarEscudos`), para jogar sem internet |
+| `public/escudos/` | Os 704 escudos dos clubes (`<id>.png`): 156 recortados da prancha que o usuário mandou e 548 dos pacotes dos times novos (`tools/escudos/preparar.py`); ficam fora da fila do service worker, num cache só deles (`guardarEscudos`), para jogar sem internet |
 | `data/brasil-2026/` | `clubes.json` (60), `serie-d-reserva.json` (96), `competicoes.json`, `jogadores.json` (elencos reais, gerado por `tools/elencos`), `LEIAME.md` (fontes e licenças) |
 | `tools/` | `times/` (times novos: `wikipedia.py` é o robô da Wikipédia e do Wikidata, `montar.ts` monta clubes e elencos, `wiki.ts` lê fichas e elencos das páginas), `sim/` (calibragem), `e2e/` (capturas de tela), `icones/`, `dados/` (scripts Python dos clubes), `elencos/` (robô dos elencos: `montar.ts` monta `jogadores.json`, `sumulas.ts` lê as súmulas, `fontes-clubes.ts` diz como cada fonte chama os clubes, scripts Python do workflow), `escudos/` (`recortar.py`: prancha de escudos → `public/escudos/<id>.png`, ou um pacote `.json` para importar) |
 

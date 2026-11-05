@@ -8,9 +8,10 @@ Histórico: os escudos dos 276 times novos chegaram em nov/2026 e, com a correç
 do Real Oruro e do Anzoátegui (a fonte de cada um está em `ESCUDOS_TIMES_NOVOS_FONTES.csv`). Depois entrou a
 segunda divisão dos 9 países (o Deportes Quindío e o Yaracuyanos, que já tinham escudo, voltaram nela) e os escudos
 dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (México, EUA, Canadá, América Central e
-Caribe) e as 3ª divisões. Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
+Caribe) e as 3ª divisões; 122 dos 429 escudos chegaram (pacote parcial escudos-novos-429, nov/2026; o do Columbus Crew,
+o do Inter Miami e o do Los Angeles FC vieram errados e continuam aqui). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 429 escudos (0 de clubes brasileiros e 429 de fora).
+Total: 307 escudos (0 de clubes brasileiros e 307 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
 
@@ -39,190 +40,38 @@ Total: 429 escudos (0 de clubes brasileiros e 429 de fora).
 | Parham | Parham | `parham.png` |
 | Pigotts Bullets | Pigotts | `pigotts-bullets.png` |
 
-### Belize (6 clubes)
+### Belize (2 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Altitude | Belize | `altitude.png` |
 | Belmopan | Belmopan | `belmopan.png` |
-| Port Layola | Belize City | `port-layola.png` |
-| San Pedro Pirates | Belize | `san-pedro-pirates.png` |
-| Verdes | Benque Viejo | `verdes.png` |
-| Wagiya | Dangriga | `wagiya.png` |
 
-### Canadá (8 clubes)
+### Costa Rica (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Atlético Ottawa | Ottawa | `atletico-ottawa.png` |
-| Cavalry | Calgary | `cavalry.png` |
-| Forge | Hamilton | `forge.png` |
-| HFX Wanderers | Halifax | `hfx-wanderers.png` |
-| Inter Toronto | Toronto | `inter-toronto.png` |
-| Pacific | Langford | `pacific.png` |
-| Supra | Canadá | `supra.png` |
-| Vancouver | Canadá | `vancouver.png` |
-
-### Costa Rica (10 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Cartaginés | Cartago | `cartagines.png` |
-| Guadalupe | Costa Rica | `guadalupe.png` |
-| Herediano | Heredia | `herediano.png` |
-| Liga Deportiva Alajuelense | Alajuela | `liga-deportiva-alajuelense.png` |
 | Municipal Liberia | Liberia | `municipal-liberia.png` |
-| Puntarenas | Puntarenas | `puntarenas.png` |
-| Pérez Zeledón | San Isidro de El General | `perez-zeledon.png` |
-| San Carlos | Quesada | `san-carlos.png` |
-| Saprissa | San José | `saprissa.png` |
-| Sporting | San José | `sporting.png` |
 
-### Cuba (14 clubes)
+### Cuba (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| CF Granma | Jiguaní | `cf-granma.png` |
-| FC Camagüey | Camagüey | `fc-camaguey.png` |
-| FC Ciego de Ávila | Ciego de Ávila | `fc-ciego-de-avila.png` |
-| FC Cienfuegos | Cienfuegos | `fc-cienfuegos.png` |
-| FC Guantánamo | Guantánamo | `fc-guantanamo.png` |
-| FC Holguín | Banes | `fc-holguin.png` |
-| FC Isla de la Juventud | Nueva Gerona | `fc-isla-de-la-juventud.png` |
-| FC Matanzas | Calimete | `fc-matanzas.png` |
 | FC Pinar del Río | Pinar del Río | `fc-pinar-del-rio.png` |
-| FC Sancti Spíritus | Sancti Spíritus | `fc-sancti-spiritus.png` |
-| FC Santiago de Cuba | Santiago de Cuba | `fc-santiago-de-cuba.png` |
-| FC Villa Clara | Zulueta (Remedios) | `fc-villa-clara.png` |
-| Habana | Cuba | `habana.png` |
-| Las Tunas | Manatí | `las-tunas.png` |
 
-### Curaçao (12 clubes)
+### Estados Unidos (3 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| C.S.D. Barber | Barber | `c-s-d-barber.png` |
-| C.V.V. Willemstad | Curaçao | `c-v-v-willemstad.png` |
-| CRKSV Jong Colombia | Boca Samí | `crksv-jong-colombia.png` |
-| CRKSV Jong Holland | Willemstad | `crksv-jong-holland.png` |
-| Hubentut Fortuna | Willemstad | `hubentut-fortuna.png` |
-| RKSV Centro Dominguito | Willemstad | `rksv-centro-dominguito.png` |
-| RKV F.C. SITHOC | Willemstad | `rkv-f-c-sithoc.png` |
-| S.U.B.T. | Willemstad | `s-u-b-t.png` |
-| S.V. Vesta | Curaçao | `s-v-vesta.png` |
-| S.V. Victory Boys | Willemstad | `s-v-victory-boys.png` |
-| Scherpenheuvel | Willemstad | `scherpenheuvel.png` |
-| UNDEBA | Curaçao | `undeba.png` |
-
-### El Salvador (11 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Alianza | San Salvador | `alianza.png` |
-| C.D. Platense | Zacatecoluca | `c-d-platense.png` |
-| Cacahuatique | El Salvador | `cacahuatique.png` |
-| FAS | Santa Ana | `fas.png` |
-| Fuerte San Francisco | San Francisco Gotera | `fuerte-san-francisco.png` |
-| Hércules | El Salvador | `hercules.png` |
-| Isidro Metapán | Metapán | `isidro-metapan.png` |
-| Luis Ángel Firpo | Usulután | `luis-angel-firpo.png` |
-| Municipal Limeño | Santa Rosa de Lima | `municipal-limeno.png` |
-| Zacatecoluca | Zacatecoluca | `zacatecoluca.png` |
-| Águila | San Miguel de la Frontera | `aguila.png` |
-
-### Estados Unidos (30 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Atlanta United | Atlanta | `atlanta-united.png` |
-| Austin | Austin | `austin.png` |
-| CF Montréal | Montreal | `cf-montreal.png` |
-| Charlotte | Charlotte | `charlotte.png` |
-| Chicago Fire | Chicago | `chicago-fire.png` |
-| Colorado Rapids | Commerce City | `colorado-rapids.png` |
 | Columbus Crew | Columbus | `columbus-crew.png` |
-| D.C. United | Washington, D.C. | `d-c-united.png` |
-| FC Cincinnati | Cincinnati | `fc-cincinnati.png` |
-| FC Dallas | Frisco | `fc-dallas.png` |
-| Houston Dynamo | Houston | `houston-dynamo.png` |
 | Inter Miami | Miami | `inter-miami.png` |
-| LA Galaxy | Los Angeles | `la-galaxy.png` |
 | Los Angeles FC | Los Angeles | `los-angeles-fc.png` |
-| Minnesota United | Minneapolis | `minnesota-united.png` |
-| NYCFC | Nova Iorque | `nycfc.png` |
-| Nashville | Nashville | `nashville.png` |
-| New England Revolution | Foxborough | `new-england-revolution.png` |
-| New York Red Bulls | Harrison | `new-york-red-bulls.png` |
-| Orlando City | Orlando | `orlando-city.png` |
-| Philadelphia Union | Chester | `philadelphia-union.png` |
-| Portland Timbers | Portland | `portland-timbers.png` |
-| Real Salt Lake | Salt Lake City | `real-salt-lake.png` |
-| San Diego | San Diego | `san-diego.png` |
-| San Jose Earthquakes | São José | `san-jose-earthquakes.png` |
-| Seattle Sounders | Seattle | `seattle-sounders.png` |
-| Sporting Kansas City | Kansas City | `sporting-kansas-city.png` |
-| St. Louis City | St. Louis | `st-louis-city.png` |
-| Toronto | Toronto | `toronto.png` |
-| Vancouver Whitecaps | Vancouver | `vancouver-whitecaps.png` |
 
-### Guatemala (12 clubes)
+### Honduras (3 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Achuapa | Guatemala | `achuapa.png` |
-| Antigua | Antigua Guatemala | `antigua.png` |
-| Atlético Mictlán | Guatemala | `atletico-mictlan.png` |
-| Aurora | Cidade da Guatemala | `aurora-gt.png` |
-| CD Malacateco | Malacatán | `cd-malacateco.png` |
-| Cobán Imperial | Cobán | `coban-imperial.png` |
-| Comunicaciones | Cidade da Guatemala | `comunicaciones.png` |
-| Guastatoya | Guastatoya | `guastatoya.png` |
-| Marquense | San Marcos | `marquense.png` |
-| Mixco | Guatemala | `mixco.png` |
-| Municipal | Cidade da Guatemala | `municipal.png` |
-| Xelajú | Quetzaltenango | `xelaju.png` |
-
-### Guiana (5 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Fruta Conquerors | Georgetown | `fruta-conquerors.png` |
-| Guyana Defence Force | Georgetown | `guyana-defence-force.png` |
-| Santos Georgetown | Georgetown | `santos-georgetown.png` |
-| Slingerz | Georgetown | `slingerz.png` |
-| Western Tigers | Guyana | `western-tigers.png` |
-
-### Haiti (13 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| ASC | Cabo Haitiano | `asc.png` |
-| América des Cayes | Les Cayes | `america-des-cayes.png` |
-| Baltimore | Saint-Marc | `baltimore.png` |
-| Cavaly AS | Léogâne | `cavaly-as.png` |
-| Don Bosco | Pétionville | `don-bosco.png` |
-| FICA | Cabo Haitiano | `fica.png` |
-| Juventus des Cayes | Porto Príncipe | `juventus-des-cayes.png` |
-| Ouanaminthe | Ouanaminthe | `ouanaminthe.png` |
-| Racing | Gonaïves | `racing.png` |
-| Racing Haïtien | Porto Príncipe | `racing-haitien.png` |
-| Real Hope FA | Cabo Haitiano | `real-hope-fa.png` |
-| Tempête | Saint-Marc | `tempete.png` |
-| Violette | Porto Príncipe | `violette.png` |
-
-### Honduras (11 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Atracciones Espina | La Ceiba | `atracciones-espina.png` |
 | Choloma | Honduras | `choloma.png` |
-| Juticalpa | Honduras | `juticalpa.png` |
-| Marathón | San Pedro Sula | `marathon.png` |
-| Motagua | Tegucigalpa | `motagua.png` |
-| Olancho | Olancho | `olancho.png` |
-| Olimpia | Tegucigalpa | `olimpia-hn.png` |
-| Platense | Puerto Cortés | `platense-hn.png` |
-| Policía Nacional | Honduras | `policia-nacional.png` |
 | Real España | San Pedro Sula | `real-espana.png` |
 | Universidad Pedagógica | Honduras | `universidad-pedagogica.png` |
 
