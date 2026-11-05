@@ -1,5 +1,6 @@
 // Sala de troféus: recordes de cada clube (maior goleada, pior derrota, maior público, artilheiros), somados jogo a
 // jogo, e os títulos do clube e do técnico, tirados do histórico das temporadas.
+import { definicaoDaCopa } from "./copas";
 import { comArtigo } from "./artigos";
 import { NOME_SERIE, SERIES, nomeDaCompeticao } from "./competicoes";
 import type { EstadoJogo, JogoRecorde, Partida, RecordesClube, SerieId } from "./tipos";
@@ -60,6 +61,13 @@ export function titulosDoClube(estado: EstadoJogo, clubeId: string): Titulo[] {
     for (const s of SERIES) if (r.campeoes[s] === clubeId) lista.push({ temporada: r.temporada, titulo: `Campeão da ${NOME_SERIE[s]}`, clubeId });
     if (r.copa?.campeao === clubeId) lista.push({ temporada: r.temporada, titulo: "Campeão da Copa do Brasil", clubeId });
     if (r.copa?.vice === clubeId) lista.push({ temporada: r.temporada, titulo: "Vice da Copa do Brasil", clubeId });
+    // Copas de clubes (Libertadores, Sul-Americana, Copa do Nordeste...): os títulos; os vices só das continentais.
+    for (const [id, c] of Object.entries(r.copas ?? {})) {
+      const def = definicaoDaCopa(id);
+      if (!c || !def) continue;
+      if (c.campeao === clubeId) lista.push({ temporada: r.temporada, titulo: `Campeão da ${def.nome}`, clubeId });
+      else if (c.vice === clubeId && (def.grupo === "conmebol" || def.grupo === "concacaf")) lista.push({ temporada: r.temporada, titulo: `Vice da ${def.nome}`, clubeId });
+    }
     const subiu = (["B", "C"] as SerieId[]).find((s) => r.promovidos[s]?.includes(clubeId));
     if (subiu) lista.push({ temporada: r.temporada, titulo: `Acesso à ${NOME_SERIE[subiu === "B" ? "A" : "B"]}`, clubeId });
   }

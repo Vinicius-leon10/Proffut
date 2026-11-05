@@ -288,8 +288,9 @@ const leaguesCup: DefinicaoCopa = {
     { id: "liga", nome: "Fase de liga", tipo: "cruzado", semanas: [17, 18, 19], dia: "qua", grupos: { quantos: 2, passam: 4, rodadas: 3, fixos: ["mls", "mx"] }, nota: "Cada clube da MLS joga 3 vezes contra clubes da Liga MX; a tabela é separada por liga." },
     // 1º da MLS x 4º da Liga MX, 2º x 3º, 3º x 2º, 4º x 1º.
     { id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [20], dia: "qua", pares: { cruzamentos: [[[1, 1], [2, 4]], [[1, 2], [2, 3]], [[2, 2], [1, 3]], [[2, 1], [1, 4]]] } },
-    { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [21], dia: "qua", pares: "chave" },
-    { id: "final", nome: "Final", tipo: "mata", semanas: [22], dia: "sab", pares: "chave" },
+    // Semifinal e final depois da data FIFA de setembro (semanas 21 e 22).
+    { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [23], dia: "qua", pares: "chave" },
+    { id: "final", nome: "Final", tipo: "mata", semanas: [24], dia: "sab", pares: "chave" },
   ],
   participantes: (estado, vagas) => vagas?.["K-LEAG"] ?? de2026(estado, "K-LEAG") ?? { mls: ordemDaLiga(estado, "US", false).slice(0, 18), mx: ordemDaLiga(estado, "MX", false).slice(0, 18) },
   premios: { liga: 0.3 * MILHAO, quartas: 0.4 * MILHAO, semi: 0.6 * MILHAO, campeao: 5.5 * MILHAO, vice: 2 * MILHAO },
@@ -441,10 +442,13 @@ function vagasDaConmebol(estado: EstadoJogo, pelaTabela: boolean): VagasDasCopas
   const sul: Record<string, string[]> = { fase1: [], grupos: [] };
   const campeoes = pelaTabela ? unicos([estado.copas?.["K-LIB"]?.campeao, estado.copas?.["K-SUL"]?.campeao]) : [];
   lib.grupos.push(...campeoes);
+  // Sem os campeões continentais do ano (save de antes das copas), as duas vagas nos grupos vão para o Brasil e a Argentina.
+  const semCampeao = 2 - campeoes.length;
   for (const pais of PAISES_CONMEBOL) {
     const tabela = pais === "BR" ? ordemDaSerieA(estado, pelaTabela) : ordemDaLiga(estado, pais, pelaTabela);
     const copa = pelaTabela ? (pais === "BR" ? estado.copa?.campeao : estado.copas?.[COPA_DO_PAIS[pais]]?.campeao) : undefined;
-    const [g, f2, f1] = VAGAS_LIBERTADORES[pais];
+    const [base, f2, f1] = VAGAS_LIBERTADORES[pais];
+    const g = base + (pais === "BR" ? Math.min(1, semCampeao) : pais === "AR" ? Math.max(0, semCampeao - 1) : 0);
     const total = g + f2 + f1;
     // Brasil e Argentina: o campeão da copa entra antes da tabela; nos outros, no lugar da última vaga.
     const ordem = pais === "BR" || pais === "AR" ? unicos([copa, ...tabela]) : unicos([...tabela.slice(0, total - 1), copa, ...tabela]);
@@ -968,18 +972,24 @@ export function situacaoNaCopaDeClubes(estado: EstadoJogo, copaId: IdCopa, clube
   const def = POR_ID.get(copaId);
   if (!copa || !clube || !def) return "";
   const nome = comArtigo("O", clube);
+  const naFase = (f: FaseCopa) => `${["oitavas", "quartas"].some((x) => f.id.startsWith(x)) ? "nas" : "na"} ${f.nome.toLowerCase()}`;
   if (copa.campeao === clubeId) return `${nome} é ${concorda(clube, "o campeão", "a campeã")} da ${def.nome}!`;
   if (copa.vice === clubeId) return `${nome} foi ${concorda(clube, "vice-campeão", "vice-campeã")} da ${def.nome}.`;
   if (!copa.clubes.includes(clubeId)) return `${nome} não joga a ${def.nome} nesta temporada.`;
   const jogos = estado.partidas.filter((p) => p.serie === copaId && (p.mandante === clubeId || p.visitante === clubeId));
   const ultima = jogos.at(-1);
   if (!ultima) {
-    const entrada = def.fases.find((f) => copa.entram[f.id]?.includes(clubeId));
-    return `${nome} entra na ${def.nome} ${entrada ? `na ${entrada.nome.toLowerCase()}` : "mais adiante"}.`;
+    const entrada = def.fases.find((f) => copa.entram[f.id]?.includes(clubeId) || f.grupos?.fixos?.some((g) => copa.entram[g]?.includes(clubeId)));
+    return `${nome} entra na ${def.nome} ${entrada ? naFase(entrada) : "mais adiante"}.`;
   }
-  const faseDoClube = def.fases.find((f) => f.id === ultima.fase)!;
-  const vivo = copa.fase !== "encerrada" && (copa.fase === ultima.fase && copa.classificados == null || copa.classificados?.includes(clubeId) || Object.values(copa.entram).some((l) => l.includes(clubeId) && def.fases.findIndex((f) => copa.entram[f.id] === l) > def.fases.indexOf(faseDoClube)));
-  return vivo ? `${nome} está na ${faseDoClube.nome.toLowerCase()} da ${def.nome}.` : `${nome} foi ${concorda(clube, "eliminado", "eliminada")} da ${def.nome} na ${faseDoClube.nome.toLowerCase()}.`;
+  const fase = def.fases.find((f) => f.id === ultima.fase)!;
+  // Eliminado: perdeu na última fase que jogou (os que vão para a fase seguinte por outro caminho, como o 1º dos grupos
+  // da Sul-Americana, não estão entre os eliminados).
+  const r = resultadoDaFase(estado, def, copa, fase);
+  if (r?.eliminados.includes(clubeId)) return `${nome} foi ${concorda(clube, "eliminado", "eliminada")} da ${def.nome} ${naFase(fase)}.`;
+  const proximo = jogos.find((p) => !p.jogada);
+  const faseDoProximo = proximo ? def.fases.find((f) => f.id === proximo.fase)! : undefined;
+  return faseDoProximo ? `${nome} está ${naFase(faseDoProximo)} da ${def.nome}.` : `${nome} passou de fase na ${def.nome} e espera o sorteio da próxima.`;
 }
 
 export { PAISES, divisaoDaLiga };

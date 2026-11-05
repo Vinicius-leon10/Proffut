@@ -6,6 +6,7 @@ import { reputacaoDoTecnico } from "../../engine/carreira";
 import { CARGO } from "../../engine/constantes";
 import { situacaoDoObjetivo } from "../../engine/diretoria";
 import { folhaSalarial, formatarDinheiro } from "../../engine/financas";
+import { copasDoClube, situacaoNaCopaDeClubes } from "../../engine/copas";
 import { meuJogoHoje, provavelTime, proximaDataComJogo, proximoJogoDoClube } from "../../engine/jogo";
 import { NOME_FASE_TORNEIO, posicaoNoTorneio, torneiosDoClube } from "../../engine/torneios";
 import { avancarJogo, simularFimDaTemporada } from "../acoes";
@@ -44,6 +45,8 @@ export function Painel() {
   // Estadual em andamento (no começo do ano): a posição dele num cartão à parte.
   const estadual = torneiosDoClube(estado, meuId).find((t) => t.tipo === "estadual" && t.fase !== "encerrada" && t.id !== principal?.id);
   const { situacao } = situacaoDoObjetivo(estado);
+  // Copas de clubes do usuário (Libertadores, Copa do Nordeste...): em andamento ou ganhas.
+  const minhasCopas = copasDoClube(estado, meuId).filter((c) => c.fase !== "encerrada" || c.campeao === meuId);
   const proximaData = proximaDataComJogo(estado);
 
   let rotuloBotao = "Avançar";
@@ -110,6 +113,14 @@ export function Painel() {
                 ? `Na ${NOME_FASE_TORNEIO[estadual.fase].toLowerCase()}`
                 : "Fora da disputa do título"}</span>
             <button className="botao pequeno" onClick={() => useLoja.getState().irParaAba("tabelas")}>Ver tabela</button>
+          </div>
+        </Cartao>
+      )}
+
+      {minhasCopas.length > 0 && (
+        <Cartao titulo="Copas" acao={<button className="botao pequeno" onClick={() => useLoja.getState().irParaAba("tabelas")}>Ver tabelas</button>}>
+          <div className="coluna" style={{ gap: 4 }}>
+            {minhasCopas.map((c) => <p key={c.id} className="pequeno">{situacaoNaCopaDeClubes(estado, c.id, meuId)}</p>)}
           </div>
         </Cartao>
       )}

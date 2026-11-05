@@ -40,6 +40,15 @@ export function Historico() {
                     </div>
                   </div>
                 )}
+                {(["K-LIB", "K-SUL"] as const).map((id) => r.copas?.[id] && (
+                  <div key={id} className="linha">
+                    <Escudo clube={estado.clubes[r.copas[id]!.campeao]} tamanho={30} />
+                    <div className="cresce">
+                      <div className="pequeno negrito">{id === "K-LIB" ? "Libertadores" : "Sul-Americana"}: {estado.clubes[r.copas[id]!.campeao]?.nome}</div>
+                      {r.copas[id]!.vice && <div className="mini fraco corta">Vice: {estado.clubes[r.copas[id]!.vice!]?.nome}</div>}
+                    </div>
+                  </div>
+                ))}
                 <div className="linha" style={{ borderTop: "1px solid var(--borda)", paddingTop: 8 }}>
                   <Escudo clube={meu} tamanho={30} />
                   <div className="cresce">
