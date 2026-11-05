@@ -38,8 +38,8 @@ linhas = ["# Escudos que faltam", "",
           "do Real Oruro e do Anzoátegui (a fonte de cada um está em `ESCUDOS_TIMES_NOVOS_FONTES.csv`). Depois entrou a",
           "segunda divisão dos 9 países (o Deportes Quindío e o Yaracuyanos, que já tinham escudo, voltaram nela) e os escudos",
           "dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (México, EUA, Canadá, América Central e",
-          "Caribe) e as 3ª divisões; 122 dos 429 escudos chegaram (pacote parcial escudos-novos-429, nov/2026; o do Columbus Crew,\n"
-          "o do Inter Miami e o do Los Angeles FC vieram errados e continuam aqui). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.", "",
+          "Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1\n"
+          "vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.", "",
           (f"Total: {len(estaduais) + len(exterior)} escudos ({len(estaduais)} de clubes brasileiros e {len(exterior)} de fora)."
            if estaduais or exterior else "Todos os clubes do jogo têm escudo."), ""]
 if estaduais:

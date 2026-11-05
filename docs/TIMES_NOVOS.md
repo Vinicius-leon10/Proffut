@@ -8,171 +8,56 @@ Histórico: os escudos dos 276 times novos chegaram em nov/2026 e, com a correç
 do Real Oruro e do Anzoátegui (a fonte de cada um está em `ESCUDOS_TIMES_NOVOS_FONTES.csv`). Depois entrou a
 segunda divisão dos 9 países (o Deportes Quindío e o Yaracuyanos, que já tinham escudo, voltaram nela) e os escudos
 dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (México, EUA, Canadá, América Central e
-Caribe) e as 3ª divisões; 122 dos 429 escudos chegaram (pacote parcial escudos-novos-429, nov/2026; o do Columbus Crew,
-o do Inter Miami e o do Los Angeles FC vieram errados e continuam aqui). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
+Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
+vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 307 escudos (0 de clubes brasileiros e 307 de fora).
+Total: 227 escudos (0 de clubes brasileiros e 227 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
 
-### Anguila (7 clubes)
+### Antígua e Barbuda (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Attackers | The Valley | `attackers.png` |
-| Diamond | The Valley | `diamond.png` |
-| Doc's United | The Valley | `doc-s-united.png` |
-| Lymers | The Valley | `lymers.png` |
-| Roaring Lions | Terra Pedregosa | `roaring-lions.png` |
-| Spartans Football Club | The Valley | `spartans-football-club.png` |
-| Uprising | The Valley | `uprising.png` |
-
-### Antígua e Barbuda (8 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| All Saints United | Antígua e Barbuda | `all-saints-united.png` |
 | Five Islands | São João | `five-islands.png` |
-| Grenades | São João | `grenades.png` |
-| John Hughes | Antígua e Barbuda | `john-hughes.png` |
-| Old Road | Antigua and Barbuda | `old-road.png` |
-| Ottos Rangers | Antígua e Barbuda | `ottos-rangers.png` |
-| Parham | Parham | `parham.png` |
-| Pigotts Bullets | Pigotts | `pigotts-bullets.png` |
 
-### Belize (2 clubes)
+### Belize (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Altitude | Belize | `altitude.png` |
 | Belmopan | Belmopan | `belmopan.png` |
 
-### Costa Rica (1 clube)
+### Jamaica (5 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Municipal Liberia | Liberia | `municipal-liberia.png` |
-
-### Cuba (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| FC Pinar del Río | Pinar del Río | `fc-pinar-del-rio.png` |
-
-### Estados Unidos (3 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Columbus Crew | Columbus | `columbus-crew.png` |
-| Inter Miami | Miami | `inter-miami.png` |
-| Los Angeles FC | Los Angeles | `los-angeles-fc.png` |
-
-### Honduras (3 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Choloma | Honduras | `choloma.png` |
-| Real España | San Pedro Sula | `real-espana.png` |
-| Universidad Pedagógica | Honduras | `universidad-pedagogica.png` |
-
-### Jamaica (14 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Arnett Gardens | Kingston | `arnett-gardens.png` |
-| Cavalier | Jamaica | `cavalier.png` |
 | Chapelton Maroons | Jamaica | `chapelton-maroons.png` |
-| Dunbeholden | Jamaica | `dunbeholden.png` |
-| Harbour View | Kingston | `harbour-view.png` |
-| Humble Lions | May Pen | `humble-lions.png` |
-| Molynes United | Kingston | `molynes-united.png` |
 | Montego Bay United | Montego Bay | `montego-bay-united.png` |
-| Mount Pleasant | Saint Ann's Bay | `mount-pleasant.png` |
 | Portmore United | Portmore | `portmore-united.png` |
-| Tivoli Gardens | Kingston | `tivoli-gardens.png` |
-| Treasure Beach | Treasure Beach | `treasure-beach.png` |
 | Vere United | Hayes | `vere-united.png` |
 | Waterhouse | Kingston | `waterhouse.png` |
 
-### México (18 clubes)
+### México (2 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| América | Cidade do México | `america.png` |
-| Atlas | Guadalajara | `atlas.png` |
-| Atlético de San Luis | San Luis Potosí | `atletico-de-san-luis.png` |
-| Cruz Azul | Cidade do México | `cruz-azul.png` |
-| Guadalajara | Guadalajara | `guadalajara.png` |
-| Juárez | Ciudad Juárez | `juarez.png` |
-| León | León de Los Aldama | `leon.png` |
-| Mazatlán | Mazatlán | `mazatlan.png` |
 | Monterrey | Monterrei | `monterrey.png` |
-| Necaxa | Aguascalientes | `necaxa.png` |
-| Pachuca | Pachuca de Soto | `pachuca.png` |
-| Puebla | Puebla de Zaragoza | `puebla.png` |
 | Pumas UNAM | Cidade do México | `pumas-unam.png` |
-| Querétaro | Santiago de Querétaro | `queretaro.png` |
-| Santos Laguna | Torreón | `santos-laguna.png` |
-| Tigres UANL | San Nicolás de los Garza | `tigres-uanl.png` |
-| Tijuana | Tijuana | `tijuana.png` |
-| Toluca | Toluca | `toluca.png` |
 
-### Nicarágua (10 clubes)
+### República Dominicana (2 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| ART Municipal Jalapa | Nicaragua | `art-municipal-jalapa.png` |
-| Diriangén | Diriamba | `diriangen.png` |
-| H&H Export Sébaco | Nicaragua | `h-h-export-sebaco.png` |
-| Managua | Managua | `managua.png` |
-| Matagalpa | Nicaragua | `matagalpa.png` |
-| Rancho Santana | Nicaragua | `rancho-santana.png` |
-| Real Estelí | Estelí | `real-esteli.png` |
-| Real Madriz | Somoto | `real-madriz.png` |
-| UNAN Managua | Distrito I | `unan-managua.png` |
-| Walter Ferretti | Managua | `walter-ferretti.png` |
-
-### Panamá (12 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Alianza | Cidade do Panamá | `alianza-pa.png` |
-| Herrera | Herrera | `herrera.png` |
-| Independiente | La Chorrera | `independiente-pa.png` |
-| Plaza Amador | Cidade do Panamá | `plaza-amador.png` |
-| San Francisco | Panamá | `san-francisco.png` |
-| Sporting San Miguelito | Panamá | `sporting-san-miguelito.png` |
-| Tauro | Cidade do Panamá | `tauro.png` |
-| UMECIT | Panama City | `umecit.png` |
-| Universitario | El Chorrillo | `universitario-pa.png` |
-| Unión Coclé | Panamá | `union-cocle.png` |
-| Veraguas United | Panamá | `veraguas-united.png` |
-| Árabe Unido | Colón | `arabe-unido.png` |
-
-### República Dominicana (11 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Atletico Vega Real | La Vega | `atletico-vega-real.png` |
-| Atlántico Fútbol Club | San Felipe de Puerto Plata | `atlantico-futbol-club.png` |
 | Atlético Pantoja | São Domingos | `atletico-pantoja.png` |
 | Atlético San Cristóbal | Dominican Republic | `atletico-san-cristobal.png` |
-| Barcelona Atlético | São Domingos | `barcelona-atletico.png` |
-| Cibao | Santiago de los Caballeros | `cibao.png` |
-| Delfines del Este | República Dominicana | `delfines-del-este.png` |
-| Jarabacoa | La Vega | `jarabacoa.png` |
-| Moca | Moca | `moca.png` |
-| O&M | República Dominicana | `o-m.png` |
-| Salcedo | Salcedo | `salcedo.png` |
 
-### Suriname (6 clubes)
+### Suriname (5 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | ACoconut | Brokopondo | `acoconut.png` |
 | Botopasi | Suriname | `botopasi.png` |
 | S.V. Sophia | Suriname | `s-v-sophia.png` |
-| S.V. Tahitie | Brownsweg | `s-v-tahitie.png` |
 | SNL | Paramaribo | `snl.png` |
 | Slee Juniors | Suriname | `slee-juniors.png` |
 
