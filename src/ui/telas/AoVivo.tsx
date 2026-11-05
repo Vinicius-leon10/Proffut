@@ -15,7 +15,7 @@ import { competicoesDoUsuario } from "../../engine/torneios";
 import { formatarNota, melhorEmCampo, notasDaPartida, type NotaDoJogador } from "../../engine/notas";
 import { Barra, Escudo, Folha, Icone, Opcoes, Pos, Segmentado } from "../componentes";
 import { rotuloPartida } from "../formatos";
-import { apito, carregarNarrador, liberarSom, pararSons, tocarLances } from "../sons";
+import { apito, carregarNarrador, liberarSom, narrar, pararSons, tocarLances } from "../sons";
 import { useJogo, useLoja } from "../store";
 import { CampoDaPartida } from "./CampoDaPartida";
 import { CampoDaEscalacao, FolhaDoTime, FolhaDosReservas, forcaMediaDoTime, mudarTaticaDoClube } from "./Tatica";
@@ -112,6 +112,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
     if (som.current) {
       liberarSom();
       apito("inicio");
+      narrar("inicio");
     }
     setIniciado(true);
   };
@@ -134,9 +135,12 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
 
   const irAoFim = () => {
     for (const pv of vivas) simularAteOFim(pv, estado.jogadores);
-    // Os lances pulados não tocam; só o apito final.
+    // Os lances pulados não tocam; só o apito final e o narrador fechando o jogo.
     lancesOuvidos.current = meu.narracao.length;
-    if (som.current) apito("fim");
+    if (som.current) {
+      apito("fim");
+      narrar("fim");
+    }
     setIniciado(true);
     setTick((t) => t + 1);
   };

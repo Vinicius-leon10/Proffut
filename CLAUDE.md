@@ -78,19 +78,23 @@ outro jogo. Apito no início e na volta do intervalo, 2 no intervalo, 3 no fim; 
 narrador; no gol: o narrador, e festa da torcida no gol do meu time (`FESTA`, ~−14 dB contra ~−16 dB do apito) ou
 `vaia()` no do adversário (16 vozes graves com vibrato nos formantes do "u", ~−18 dB); pênalti perdido: "uhhh".
 **Narrador (nov/2026):** pedido "eu quero testar isso da voz melhor em português, narrando o jogo. Vamos começar só
-colocando o gol, o pênalti e o cartão vermelho" (antes era a voz robótica do aparelho, `speechSynthesis`, que ele achou
-feia: saiu). Áudios gravados uma vez com a API da ElevenLabs em `public/narrador/<nome>.mp3` (`gol`: "[shouting] [excited]
-GOOOOOOOOOOOL! É GOL! QUE GOLAÇO!", `penalti`: "... PÊNALTI! O juiz marca pênalti!", `vermelho`: "... CARTÃO VERMELHO!
-Expulso de campo!"), voz "Liam" (Voice ID `TX3LPaxmHKxFdv7VOQHJ`, voz padrão da ElevenLabs), modelo `eleven_v3`
-(`language_code` "pt", stability 0,0, as etiquetas entre colchetes dão o tom). O usuário achou "muito robotizada" a
-primeira versão (`eleven_multilingual_v2`) e escolheu o Liam entre 11 vozes padrão no v3. No plano grátis dele só as
-vozes padrão funcionam pela API (as da biblioteca, como narradores brasileiros, pedem plano pago), depois sem o silêncio das pontas e com o volume igualado (`ffmpeg`: `silenceremove`,
-`loudnorm=I=-14`, mono 96 kbps). Ficam no precache do service worker (`globPatterns` com `mp3`): tocam sem internet. A
-chave fica só no ambiente de nuvem "Padrão" do Claude Code (`ELEVENLABS_API_KEY`, com `api.elevenlabs.io` liberado);
-nunca vai para o jogo, para arquivos ou para o git. Ela não lista vozes (falta a permissão `voices_read`): para outra voz,
-o usuário manda o Voice ID. `narrar(nome)` toca o áudio por Web Audio (`carregarNarrador` baixa e prepara ao abrir a
-partida; se o áudio ainda estiver chegando, toca quando chegar) num ganho de 1,2; o gol é narrado para os dois times.
-R88. O pênalti é marcado num minuto (evento `penalti`) e cobrado no minuto
+colocando o gol, o pênalti e o cartão vermelho", depois "Gere tbm inico de jogo e acaba o jogo" (antes era a voz robótica
+do aparelho, `speechSynthesis`, que ele achou feia: saiu). Áudios gravados uma vez com a API da ElevenLabs em
+`public/narrador/<nome>.mp3`: `inicio` ("Rola a bola! Começa o jogo!", no "Começar o jogo"), `gol` ("GOOOOOOOOOOOL! É
+GOL! QUE GOLAÇO!", os dois times), `penalti` ("PÊNALTI! O juiz marca pênalti!"), `vermelho` ("CARTÃO VERMELHO! Expulso
+de campo!") e `fim` ("Fim de jogo! O árbitro apita e acabou!", também no "Fim ⏭"). Voz "Liam" (Voice ID
+`TX3LPaxmHKxFdv7VOQHJ`, voz padrão da ElevenLabs), modelo `eleven_v3`, `language_code` "pt", stability 0,0 e o tom
+entre colchetes no começo do texto: "[Brazilian Portuguese accent] [shouting] [excited]" (no início e no fim, sem o
+"[shouting]"). Como ele escolheu: a primeira versão (`eleven_multilingual_v2`) ficou "muito robotizada"; no v3 ele
+escolheu o Liam entre 11 vozes padrão, achou o sotaque de Portugal e, entre 6 versões com sotaque brasileiro, ficou com
+a do "[Brazilian Portuguese accent]" ("esse minha gente não gostei": nada de "minha gente" no texto). No plano grátis
+dele só as vozes padrão funcionam pela API (as da biblioteca, como narradores brasileiros, pedem plano pago). Depois de
+gerar: sem o silêncio das pontas e com o volume igualado (`ffmpeg`: `silenceremove`, `loudnorm=I=-14`, mono 96 kbps).
+Ficam no precache do service worker (`globPatterns` com `mp3`): tocam sem internet. A chave fica só no ambiente de nuvem
+"Padrão" do Claude Code (`ELEVENLABS_API_KEY`, com `api.elevenlabs.io` liberado); nunca vai para o jogo, para arquivos
+ou para o git. Ela não lista vozes (falta a permissão `voices_read`): para outra voz, o usuário manda o Voice ID.
+`narrar(nome)` toca o áudio por Web Audio (`carregarNarrador` baixa e prepara ao abrir a partida; se o áudio ainda
+estiver chegando, toca quando chegar) num ganho de 1,2. R88. O pênalti é marcado num minuto (evento `penalti`) e cobrado no minuto
 seguinte (`PartidaViva.penaltiPendente`; o tempo não acaba antes da cobrança) e a partida espera 2,5 s antes da
 cobrança. No intervalo, `noIntervalo` (AoVivo) segura o relógio até o toque no ▶: dois toques do relógio antes de a
 tela parar passavam do intervalo (R57). No iPhone o som só sai depois de um toque (`liberarSom` em "Começar o jogo" e no ▶) e a chave do

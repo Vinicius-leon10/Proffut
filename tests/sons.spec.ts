@@ -93,7 +93,7 @@ test("R27 a torcida comemora alto o gol do meu time e vaia o gol do adversário"
   expect(tudo.some((s) => s.tipo === "ruido" && s.pico >= 1 && vaia.some((v) => v.grupo === s.grupo)), "nada de festa no gol do adversário").toBe(false);
 });
 
-test("R88 o narrador (voz gravada em português) grita o gol de qualquer time, o pênalti e o cartão vermelho; a voz robótica do aparelho não fala mais", async ({ page }) => {
+test("R88 o narrador (voz gravada em português do Brasil) abre o jogo, grita o gol de qualquer time, o pênalti e o cartão vermelho e fecha o jogo; a voz robótica do aparelho não fala mais", async ({ page }) => {
   test.setTimeout(120_000);
   // Jogo montado pelo motor: a primeira partida do Flamengo tem gol, pênalti e cartão vermelho.
   const save = execFileSync("npx", ["tsx", "tests/saves/gol-penalti-vermelho.ts"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
@@ -120,5 +120,8 @@ test("R88 o narrador (voz gravada em português) grita o gol de qualquer time, o
   await expect.poll(() => narrou("gol"), { message: "o narrador grita cada gol" }).toBe(gols);
   await expect.poll(() => narrou("vermelho"), { message: "o narrador grita cada cartão vermelho" }).toBe(vermelhos);
   await expect.poll(() => narrou("penalti"), { message: "o narrador grita o pênalti" }).toBeGreaterThan(0);
+  // Abre e fecha o jogo, uma vez cada (a volta do intervalo não tem narração).
+  await expect.poll(() => narrou("inicio"), { message: "o narrador abre o jogo" }).toBe(1);
+  await expect.poll(() => narrou("fim"), { message: "o narrador fecha o jogo" }).toBe(1);
   expect((await sons()).filter((s) => s.tipo === "voz"), "nada da voz robótica do aparelho").toEqual([]);
 });

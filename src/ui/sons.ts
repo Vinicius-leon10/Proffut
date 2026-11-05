@@ -1,5 +1,5 @@
 // Sons da partida ao vivo: o apito do árbitro, a torcida e a vaia são sintetizados com Web Audio no próprio
-// aparelho (nada é copiado de outro jogo). O narrador (gol, pênalti e cartão vermelho) são áudios gravados uma vez
+// aparelho (nada é copiado de outro jogo). O narrador (início, gol, pênalti, cartão vermelho e fim de jogo) são áudios gravados uma vez
 // com a ElevenLabs (pedido do usuário: "eu quero testar isso da voz melhor em português, narrando o jogo"), em
 // `public/narrador/`, guardados pelo service worker para tocar sem internet; a voz robótica do aparelho
 // (speechSynthesis) não fala mais. No iPhone o som só é liberado depois de um toque, por isso `liberarSom` é chamado
@@ -26,7 +26,7 @@ function audio(): AudioContext | undefined {
 }
 
 /** As frases do narrador, gravadas (ElevenLabs, voz "Liam", modelo v3): `public/narrador/<nome>.mp3`. */
-const NARRACOES = ["gol", "penalti", "vermelho"] as const;
+const NARRACOES = ["inicio", "gol", "penalti", "vermelho", "fim"] as const;
 export type Narracao = (typeof NARRACOES)[number];
 /** Volume do narrador: por cima da torcida, para a frase ser entendida. */
 const NARRADOR = 1.2;
@@ -266,6 +266,7 @@ export function tocarLances(lances: EventoPartida[], meuLado: 0 | 1) {
       apito("intervalo");
     } else if (e.tipo === "fim") {
       apito("fim");
+      narrar("fim");
     }
   }
 }
