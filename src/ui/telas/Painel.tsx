@@ -7,7 +7,7 @@ import { CARGO } from "../../engine/constantes";
 import { situacaoDoObjetivo } from "../../engine/diretoria";
 import { folhaSalarial, formatarDinheiro } from "../../engine/financas";
 import { copasDoClube, situacaoNaCopaDeClubes } from "../../engine/copas";
-import { meuJogoHoje, provavelTime, proximaDataComJogo, proximoJogoDoClube } from "../../engine/jogo";
+import { meuJogoHoje, meuTimeNaPartida, provavelTime, proximaDataComJogo, proximoJogoDoClube } from "../../engine/jogo";
 import { NOME_FASE_TORNEIO, posicaoNoTorneio, torneiosDoClube } from "../../engine/torneios";
 import { avancarJogo, simularFimDaTemporada } from "../acoes";
 import { Barra, Cartao, Escudo } from "../componentes";
@@ -15,6 +15,7 @@ import { rotuloPartida } from "../formatos";
 import { useJogo, useLoja } from "../store";
 import { MensagemItem } from "./Mensagens";
 import { FolhaDoTime } from "./Tatica";
+import { CartaoDaSelecao } from "./Selecao";
 
 const SITUACAO = {
   encaminhada: { texto: "Encaminhado", cor: "verde" },
@@ -55,7 +56,9 @@ export function Painel() {
   else if (proximo && proximo.data === proximaData) rotuloBotao = `Avançar para ${formatarData(proximo.data)}`;
   else if (proximaData) rotuloBotao = `Avançar (${formatarData(proximaData)})`;
 
-  const adversario = proximo ? estado.clubes[proximo.mandante === meuId ? proximo.visitante : proximo.mandante] : undefined;
+  // O time do usuário no jogo (o clube ou, no dia do jogo dela, a seleção).
+  const meuNoJogo = (proximo && meuTimeNaPartida(estado, proximo)) || meuId;
+  const adversario = proximo ? estado.clubes[proximo.mandante === meuNoJogo ? proximo.visitante : proximo.mandante] : undefined;
   const posAdversario = adversario && adversario.serie === serie ? tabela.find((l) => l.clubeId === adversario.id)?.pos : undefined;
   const convites = estado.mensagens.filter((m) => m.convite && !m.convite.resolvido);
   const recentes = estado.mensagens.filter((m) => !(m.proposta && !m.proposta.resolvida) && !(m.convite && !m.convite.resolvido)).slice(0, 3);
@@ -70,7 +73,7 @@ export function Painel() {
             <div className="linha" style={{ justifyContent: "space-around", alignItems: "flex-start", padding: "6px 0" }}>
               {[proximo.mandante, proximo.visitante].map((id, i) => (
                 <div key={id} className="coluna" style={{ alignItems: "center", gap: 4, width: "40%" }}>
-                  {id === meuId ? <Escudo clube={estado.clubes[id]} tamanho={52} /> : (
+                  {id === meuNoJogo ? <Escudo clube={estado.clubes[id]} tamanho={52} /> : (
                     <button className="escudo-botao" onClick={() => setVerAdversario(true)} aria-label={`Ver o provável time titular ${comArtigo("do", estado.clubes[id])}`}>
                       <Escudo clube={estado.clubes[id]} tamanho={52} />
                     </button>
@@ -81,7 +84,7 @@ export function Painel() {
               ))}
             </div>
             <div className="pequeno fraco centro">
-              {proximo.neutro ? "Campo neutro" : proximo.mandante === meuId ? "Em casa" : "Fora de casa"}
+              {proximo.neutro ? "Campo neutro" : proximo.mandante === meuNoJogo ? "Em casa" : "Fora de casa"}
               {posAdversario ? ` · adversário em ${posAdversario}º` : ""}
             </div>
           </div>
@@ -96,6 +99,8 @@ export function Painel() {
       {minhaSerieAcabou && !encerrada && (
         <button className="botao cheio" onClick={simularFimDaTemporada}>Simular até o fim da temporada</button>
       )}
+
+      <CartaoDaSelecao />
 
       {convites.length > 0 && (
         <Cartao titulo="Convites para você">

@@ -1,6 +1,7 @@
 import { comArtigo } from "../../engine/artigos";
 import { NOME_SERIE, SERIES, nomeDaLigaDoClube } from "../../engine/competicoes";
 import { DEFINICOES } from "../../engine/copas";
+import { selecoesDaTemporadaEmTexto } from "../../engine/selecoes";
 import { divisaoDaLiga, nomeDoTorneio } from "../../engine/torneios";
 import type { IdTorneio, SerieId } from "../../engine/tipos";
 import { Cartao, Escudo, Topo } from "../componentes";
@@ -75,6 +76,10 @@ export function FimTemporada() {
                 <span className="mini fraco">Outras copas: </span>
                 {DEFINICOES.filter((d) => d.id !== "K-LIB" && d.id !== "K-SUL" && r.copas?.[d.id]).map((d) => `${d.nome}: ${nome(r.copas![d.id]!.campeao)}`).join("; ")}.
               </p>
+            )}
+            {/* Seleções: campeões da Copa América e da Copa Ouro e quem foi à Copa do Mundo pelas Eliminatórias. */}
+            {r.selecoes && (
+              <p className="pequeno"><span className="mini fraco">Seleções: </span>{selecoesDaTemporadaEmTexto(estado, r).join("; ")}.</p>
             )}
             {/* Estaduais e ligas de fora (só a primeira divisão): só os nomes dos campeões. */}
             {(["E-", "L-"] as const).map((prefixo) => {

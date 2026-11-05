@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R87 rodando a cada mudança, antes
+ponta R01–R93 rodando a cada mudança, antes
 de publicar e todo dia no site publicado.
 
 **Último pedido (out/2026), concluído:** da lista de mudanças o usuário escolheu "1, 2, 4, 5, 7, 8, 16, 19": demissão
@@ -347,8 +347,62 @@ foto, dois escudos numa imagem e um pedaço; no lote 1, Chapelton Maroons com o 
 UNAM com faixa ou história, S.V. Sophia e SNL em miniatura, Vere United e Waterhouse com anúncio, Montego Bay United
 branco sobre transparente, Atlético Pantoja e Atlético San Cristóbal com fundo de mapa ou foto; as fontes do lote 1
 ainda vão ser consolidadas pela Manus) (`docs/TIMES_NOVOS.md`; R73 vermelho
-até lá), a 2ª divisão dos estaduais (as páginas do robô eram quase todas a da 1ª), as copas (Libertadores, Sul-Americana,
-Champions Cup...) e as seleções. O trabalho fica no ramo `claude/copia-america` (com `[skip ci]`) até os escudos chegarem.
+até lá) e a 2ª divisão dos estaduais (as páginas do robô eram quase todas a da 1ª; o usuário disse que não precisa por
+enquanto). As copas e as seleções ficaram prontas (abaixo; pedido "Faça 1 e 2. O 3 e 4 são desnecessários por enquanto" e
+"Faça tudo, depois trago o restante dos escudos"). O trabalho fica no ramo `claude/copia-america` (com `[skip ci]`) até
+os escudos chegarem.
+
+**Copas de clubes da América (nov/2026, `src/engine/copas.ts`, R88–R89):** Libertadores, Sul-Americana, Recopa,
+Supercopa do Brasil, Copa do Nordeste, Copa Verde, Copa Sul-Sudeste, as da Concacaf (Copa dos Campeões, Leagues Cup,
+Centro-Americana, Caribe) e as copas nacionais (Argentina, Chile, Colômbia, Equador, Paraguai, Uruguai, Venezuela, U.S.
+Open Cup, Canadá). Cada copa é uma lista de fases (`DEFINICOES`): grupos (turno único ou turno e returno), grupos
+cruzados (Nordeste, Leagues Cup) ou mata-mata (jogo único ou ida e volta, pênaltis no empate, volta na casa da melhor
+campanha, final em campo neutro nas da Conmebol). Os eliminados da 3ª fase da Libertadores vão aos grupos da
+Sul-Americana e os 3º dos grupos à repescagem dela (`aoTerminar`, `depois`). Datas em semanas da temporada
+(`diaDaSemana`); se o clube já joga no dia antes ou depois, `escolherData` passa para outro dia da semana. Quem joga em
+2026: as listas de verdade (`data/copas-2026/participantes.json`, de `tools/copas/montar.ts`); depois, pelas tabelas e
+campeões do jogo (`vagasDasCopas`, na virada). Prêmios por fase; títulos na sala de troféus, reputação do técnico
+(`REPUTACAO.libertadores` etc.), fim de temporada e histórico. Tabelas → Copas com o seletor em grupos e o Painel com o
+cartão "Copas". Jogos entre dois clubes de fora pela simulação rápida; os dos brasileiros, completos (bilheteria, cansaço,
+recordes). Save antigo: as copas começam na temporada seguinte.
+
+**Seleções da América (nov/2026, `src/engine/selecoes.ts`, tela `Selecao.tsx`, R90–R93):** as 51 seleções (10 da
+Conmebol e 41 da Concacaf) são "clubes" com a série "selecao" e o id "sel-" + o país (assim partida, placar, tabelas e
+escudo funcionam como nos clubes; o escudo é a bandeira em emoji). As convocações de verdade vêm de
+`data/selecoes-2026/convocados.json` (`tools/selecoes/montar.ts <dados-america>`: a seção "Current squad" de cada página
+da Wikipédia em inglês, 1.228 convocados). Quem joga num clube do jogo continua nele (ganha a nacionalidade da seleção e
+os jogos por ela, `Jogador.selecao`); quem joga fora (Europa, Ásia...) fica ligado à seleção (`clubeId` "sel-BR",
+`Jogador.clubeFora`), sem contrato, fora do mercado e dos clubes, com a força calculada pelo nível da seleção (Elo), o porte
+do clube e da liga, os jogos pela seleção e a idade (`forcaDeFora`); envelhece, se aposenta e jovens de fora tomam o lugar
+(`completarBases`, na virada). A primeira concentração de cada seleção usa a convocação de verdade (no máximo 26); depois o
+computador chama os 23 melhores por posição (`convocarAutomatico`). Datas FIFA (quinta e terça): março (semanas −2/−1),
+junho (8/9, fora dos anos de Copa do Mundo), setembro (21/22), outubro (26/27) e novembro (31/32). Concentração
+(`atualizarConcentracoes`, a cada dia): de 3 dias antes de cada jogo até o jogo, e entre dois jogos com até 6 dias;
+os convocados ficam com `Jogador.convocado` e `disponivel(j)` os tira dos clubes (o Brasileirão não para; o elenco mostra
+o selo "Seleção URU"). Pela seleção só a lesão conta (`disponivel(j, true)`); os jogos e gols contam em `Jogador.selecao`, não
+na temporada do clube. Competições (`EstadoJogo.selecoes.competicoes`; as Eliminatórias atravessam as temporadas: os jogos
+dos anos seguintes ficam em `selecoes.agenda` e os jogados ficam em `partidas` na virada, `guardarJogosQueContinuam` e
+`anoNovoDasSelecoes`): Eliminatórias da Conmebol (os 10 em turno e returno, 18 rodadas, de setembro de 3 anos antes da
+Copa a setembro do ano anterior; 6 vão à Copa e o 7º à repescagem), da Concacaf (só membros da FIFA: 1ª fase com os 4
+piores em ida e volta em março, 2ª com 30 em 6 grupos de 5 de junho a outubro, 3ª com 12 em 3 grupos de 4 no ano
+seguinte; os 3 melhores do ranking entram na 3ª; os primeiros vão à Copa e os 2 melhores segundos à repescagem), Copa
+América (anos múltiplos de 4: as 10 da Conmebol e as 6 melhores da Concacaf; sede sorteada na Conmebol) e Copa Ouro (anos
+ímpares: as 16 melhores da Concacaf, sede nos Estados Unidos), em junho e julho (semanas 10 a 13: 4 grupos de 4,
+quartas, semi e final em jogo único). Nas datas sem jogo oficial, amistosos entre seleções de força parecida
+(`marcarAmistosos`, marcados só depois de jogada a data anterior). A Copa do Mundo (com os outros continentes) ainda não
+está no jogo: as Eliminatórias dizem quem vai. Ranking do tipo Elo (`atualizarRanking`: amistoso 20, eliminatórias 40,
+torneio 50, final 60). Jogos de seleções pela simulação rápida (com cansaço e um pouco de lesão), menos os da seleção do
+técnico. **Técnico de seleção** (regra do usuário: "pra ser chamado para ser técnico de qualquer seleção tenho que ganhar a
+liga principal de um país"): na virada, quem já ganhou a Série A ou a 1ª divisão de outro país (`jaGanhouLigaPrincipal`,
+pelo histórico) e não treina seleção recebe 2 convites (`convitesDeSelecoes`, seleções até a reputação dele + 8);
+aceitar (`assumirSelecao`) deixa ele com a seleção e o clube (`Tecnico.selecao`). No dia do jogo da seleção, o técnico
+dirige a seleção ao vivo e o auxiliar dirige o clube (sem mexer na escalação guardada). Painel com o cartão da seleção
+(próximo jogo, posição, ranking, "Convocar", "Deixar a seleção"); tela Convocação (os convocados e os 25 melhores de cada
+posição; "Convocar os melhores"); sem convocar, o auxiliar convoca na concentração. Fora da Copa nas Eliminatórias (sendo
+favorita) ou nos grupos do torneio (entre as 4 mais fortes): a federação o dispensa. Tabelas → Seleções: ranking,
+competições e amistosos. Fim de temporada e histórico com os campeões e os classificados. Save antigo: as seleções
+entram ao abrir (`juntarSelecoes`), com as competições que ainda não começaram e os amistosos da próxima data. Números:
+~22.400 jogadores (885 de fora), temporada simulada ~7,5 s, save de 13 a 15 MB.
 
 **Espaços que acompanham o jogo (nov/2026, `salvamento.ts`, `store.ts`):** pedido "Quero que esse save embaixo seja
 automático, a cada rodada, posso alterna entre os saves sem me preocupar" (ele abriu um espaço antigo e perdeu o jogo
@@ -359,8 +413,7 @@ Salvar liga o jogo ao espaço escolhido (pergunta se lá há outro jogo: `Resumo
 Trocar o Continuar por outro jogo quando ele está fora dos espaços pergunta antes (`podeTrocarOContinuar`). Voltar ao
 menu grava antes, e o menu espera (`esperarGravacaoAoSair`). Ao abrir o menu, `ligarOContinuar` liga o Continuar que
 ainda não tem espaço (saves antigos) ao espaço que é cópia dele (`mesmoPonto`: clube, técnico e data) ou o copia para
-um livre (R86). O espaço ligado ao Continuar abre o Continuar, que pode estar mais novo (R87). R84–R87. **Seleções (regra do usuário para quando
-entrarem):** só é chamado para técnico de uma seleção quem ganhou a liga principal (1ª divisão) de um país.
+um livre (R86). O espaço ligado ao Continuar abre o Continuar, que pode estar mais novo (R87). R84–R87.
 
 **Narrador com voz gravada (nov/2026, retirado):** o usuário pediu a narração do gol, do pênalti e do cartão vermelho
 (e depois do início e do fim do jogo) com voz melhor em português; foram feitos com a ElevenLabs (chave só no ambiente
@@ -379,6 +432,11 @@ segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, fa
 ajustes de equilíbrio pelo que ele sentir jogando.
 
 ## Regras fixas do jogo
+
+- **Tamanho e peso (pedido do usuário, nov/2026):** "Quero que não se preocupe com isso agora, vamos construir da maneira
+  que ele seja completo, se futuramente ele ficar lento ou pesado iremos ajustar isso, mas tenho iphone 15 e com memória,
+  então o momento não é pra se preocupar em limitar o jogo, lógico que podemos otimizar, mas de uma maneira que não afete
+  a funcionalidade do jogo". Construir completo; otimizar só sem tirar nada do jogo.
 
 - **Não extrair nada do Brasfoot** (arquivos, APK, listas de jogadores, imagens). O usuário pediu e foi recusado; ele aceitou.
 - **Escudos: os que o usuário mandou** (out/2026). Antes a regra era não usar escudos oficiais; ele mandou uma prancha
@@ -436,6 +494,8 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `partida.ts` | Simulação minuto a minuto; disputa = a^k/(a^k+b^k), k = `EXPOENTE_DISPUTA`. Estatísticas da partida do usuário (`estatisticasDoMinuto`, `posseDeBola`, `cartoes`, `pressaoRecente`, `sobPressao`) |
 | `calendario.ts`, `competicoes.ts` | Tabelas, turno/returno com mando equilibrado, playoff da B, quadrangulares e final da C |
 | `copa.ts` | Copa do Brasil: participantes, sorteio por potes, jogos, quem passa, premiação, textos do confronto |
+| `copas.ts` | Copas de clubes da América (Libertadores, Sul-Americana, Recopa, Supercopa, Nordeste, Verde, Sul-Sudeste, Concacaf, copas nacionais): fases, grupos, mata-mata, datas, transferências entre copas, prêmios, quem joga no ano seguinte (`vagasDasCopas`) |
+| `selecoes.ts` | Seleções: dados das 51, base de fora, convocação, concentração nas datas FIFA, Eliminatórias, Copa América, Copa Ouro, amistosos, ranking Elo, convites e técnico de seleção |
 | `torneios.ts` | Série D, estaduais e ligas de fora (primeira e segunda divisão): participantes, jogos, grupos, mata-mata, campeões, acesso e queda entre as divisões de fora (`trocarDivisoes`), `competicoesDoUsuario`, `inicioDoAno` |
 | `financas.ts`, `estadio.ts` | Bilheteria, TV, patrocínio, salários; obras de ampliação e modernização |
 | `mercado.ts`, `mensagens.ts`, `diretoria.ts` | Compra e venda, propostas (e "Pedir mais": `pedirMais`, `limiteDaProposta`), caixa de mensagens, objetivo e confiança |
@@ -454,7 +514,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `tests/` | Testes de ponta a ponta R01…: `*.spec.ts`, passos comuns em `ajuda.ts`, relatório em português em `resumo.ts`, lista em `README.md` |
 | `public/escudos/` | Os 784 escudos dos clubes (`<id>.png`): 156 recortados da prancha que o usuário mandou e 628 dos pacotes dos times novos (`tools/escudos/preparar.py`); ficam fora da fila do service worker, num cache só deles (`guardarEscudos`), para jogar sem internet |
 | `data/brasil-2026/` | `clubes.json` (60), `serie-d-reserva.json` (96), `competicoes.json`, `jogadores.json` (elencos reais, gerado por `tools/elencos`), `LEIAME.md` (fontes e licenças) |
-| `tools/` | `times/` (times novos: `wikipedia.py` é o robô da Wikipédia e do Wikidata, `montar.ts` monta clubes e elencos, `wiki.ts` lê fichas e elencos das páginas), `sim/` (calibragem), `e2e/` (capturas de tela), `icones/`, `dados/` (scripts Python dos clubes), `elencos/` (robô dos elencos: `montar.ts` monta `jogadores.json`, `sumulas.ts` lê as súmulas, `fontes-clubes.ts` diz como cada fonte chama os clubes, scripts Python do workflow), `escudos/` (`recortar.py`: prancha de escudos → `public/escudos/<id>.png`, ou um pacote `.json` para importar) |
+| `tools/` | `times/` (times novos: `wikipedia.py` é o robô da Wikipédia e do Wikidata, `montar.ts` monta clubes e elencos, `wiki.ts` lê fichas e elencos das páginas), `sim/` (calibragem), `e2e/` (capturas de tela), `icones/`, `dados/` (scripts Python dos clubes), `elencos/` (robô dos elencos: `montar.ts` monta `jogadores.json`, `sumulas.ts` lê as súmulas, `fontes-clubes.ts` diz como cada fonte chama os clubes, scripts Python do workflow), `escudos/` (`recortar.py`: prancha de escudos → `public/escudos/<id>.png`, ou um pacote `.json` para importar), `copas/` (`montar.ts`: quem joga cada copa em 2026), `selecoes/` (`montar.ts`: as convocações das 51 seleções) |
 
 ## Calibragem atual (`npm run sim`)
 

@@ -1,13 +1,15 @@
 import { nomeDaCompeticao } from "../engine/competicoes";
 import { NOME_FASE_COPA } from "../engine/copa";
 import { definicaoDaCopa, ehCopaDeClubes, nomeDaFaseDaCopa } from "../engine/copas";
-import { NOME_FASE_TORNEIO, ehTorneio } from "../engine/torneios";
+import { NOME_FASE_TORNEIO, PAISES, ehTorneio } from "../engine/torneios";
+import { ehCompeticaoDeSelecoes, rotuloDeSelecoes } from "../engine/selecoes";
 import type { FaseCopa, Partida } from "../engine/tipos";
 
 /** Letra do grupo (1 → "A"). */
 export const letraDoGrupo = (n: number) => String.fromCharCode(64 + n);
 
 export function rotuloPartida(p: Partida): string {
+  if (ehCompeticaoDeSelecoes(p.serie)) return rotuloDeSelecoes(undefined, p);
   const serie = nomeDaCompeticao(p.serie);
   if (ehCopaDeClubes(p.serie)) {
     const tipo = definicaoDaCopa(p.serie)?.fases.find((f) => f.id === p.fase)?.tipo;
@@ -51,4 +53,6 @@ export const NOMES_NACIONALIDADE: Record<string, string> = {
   EUA: "Estados Unidos", MEX: "México", CRC: "Costa Rica", PAN: "Panamá", HON: "Honduras", HAI: "Haiti", JAP: "Japão",
   ANG: "Angola", NGA: "Nigéria", GAN: "Gana", CMR: "Camarões", CIV: "Costa do Marfim", SEN: "Senegal", MAR: "Marrocos",
   CPV: "Cabo Verde", MOC: "Moçambique", GNB: "Guiné-Bissau",
+  // Os países da América que faltavam (as nacionalidades dos clubes e das seleções da Concacaf).
+  ...Object.fromEntries(Object.values(PAISES).map((p) => [p.nacionalidade, p.pais])),
 };

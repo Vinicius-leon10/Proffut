@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { comArtigo } from "../../engine/artigos";
+import { comArtigoDaSelecao, ehSelecao } from "../../engine/selecoes";
 import { responderConvite } from "../../engine/carreira";
 import { formatarData } from "../../engine/calendario";
 import { formatarDinheiro } from "../../engine/financas";
@@ -83,7 +84,11 @@ export function MensagemItem({ m }: { m: Mensagem }) {
   const responderAoConvite = (aceitar: boolean) => {
     const novo = estado.clubes[m.convite!.clubeId];
     const atual = estado.clubes[estado.tecnico.clubeId];
-    if (aceitar && !window.confirm(`Assumir ${comArtigo("o", novo)}? Você deixa ${comArtigo("o", atual)}.`)) return;
+    // Seleção: o técnico fica também com o clube.
+    const pergunta = ehSelecao(novo.id)
+      ? `Assumir ${comArtigoDaSelecao("o", novo.id, estado)}? Você continua ${comArtigo("no", atual)}.`
+      : `Assumir ${comArtigo("o", novo)}? Você deixa ${comArtigo("o", atual)}.`;
+    if (aceitar && !window.confirm(pergunta)) return;
     const r = responderConvite(estado, m.id, aceitar);
     avisar(r.texto);
     atualizar();

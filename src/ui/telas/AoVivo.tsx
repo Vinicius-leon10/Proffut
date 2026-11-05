@@ -3,8 +3,7 @@ import { comArtigo } from "../../engine/artigos";
 import { MAX_SUBSTITUICOES, ESTILOS } from "../../engine/constantes";
 import { FORMACOES, corForca, forcaEfetiva } from "../../engine/forca";
 import { desfechoDoConfronto } from "../../engine/copa";
-import { concluirJogos } from "../../engine/jogo";
-import { elencoDe } from "../../engine/mercado";
+import { concluirJogos, elencoDoTime } from "../../engine/jogo";
 import {
   avancarMinuto, cartoes, formatarMinuto, montarLado, mudarTatica, posseDeBola, simularAteOFim, sobPressao, substituir,
   type EstatisticasLado, type LadoVivo, type PartidaViva,
@@ -53,9 +52,10 @@ function relogio(pv: PartidaViva): string {
 export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   const estado = useJogo();
   const { fechar, atualizar, avisar } = useLoja();
-  const meuId = estado.tecnico.clubeId;
-  const meu = vivas.find((v) => v.lados.some((l) => l.clubeId === meuId))!;
-  const meuLado: 0 | 1 = meu.lados[0].clubeId === meuId ? 0 : 1;
+  // A partida do usuário: a do time que ele dirige hoje (o clube ou, no dia do jogo dela, a seleção).
+  const meu = vivas.find((v) => v.lados.some((l) => l.controlado)) ?? vivas.find((v) => v.lados.some((l) => l.clubeId === estado.tecnico.clubeId))!;
+  const meuLado: 0 | 1 = meu.lados[0].controlado ? 0 : meu.lados[1].controlado ? 1 : meu.lados[0].clubeId === estado.tecnico.clubeId ? 0 : 1;
+  const meuId = meu.lados[meuLado].clubeId;
   const partida = estado.partidas.find((p) => p.id === meu.partidaId)!;
 
   const [iniciado, setIniciado] = useState(false);
@@ -299,7 +299,7 @@ function PreJogo({ meu, meuLado, aoComecar, aoVoltar }: { meu: PartidaViva; meuL
   // Mexer no campinho muda a escalação do clube e monta de novo o time desta partida (ainda no minuto 0).
   const mudarEscalacao = (novos: (number | null)[], reservas: number[]) => {
     clube.escalacao = { titulares: novos, reservas };
-    meu.lados[meuLado] = montarLado(clube, estado.jogadores, elencoDe(estado, clube.id), true);
+    meu.lados[meuLado] = montarLado(clube, estado.jogadores, elencoDoTime(estado, clube.id), true);
     atualizar();
   };
   return (
@@ -314,7 +314,7 @@ function PreJogo({ meu, meuLado, aoComecar, aoVoltar }: { meu: PartidaViva; meuL
       {/* Embaixo do campinho, só os dois botões (R55). */}
       <CampoDaEscalacao clube={clube} titulares={titulares} reservas={eu.banco} aoMudar={mudarEscalacao} />
       <button className="botao primario grande cheio" onClick={aoComecar}>Começar o jogo</button>
-      <button className="botao cheio" onClick={aoVoltar}>Voltar ao clube</button>
+      <button className="botao cheio" onClick={aoVoltar}>{eu.clubeId.startsWith("sel-") ? "Voltar" : "Voltar ao clube"}</button>
     </div>
   );
 }
@@ -556,13 +556,13 @@ function PainelTatica({ pv, lado, antesDoJogo, aoFechar }: { pv: PartidaViva; la
     if (antesDoJogo) {
       const clube = estado.clubes[l.clubeId];
       mudarTaticaDoClube(estado, clube, m);
-      pv.lados[lado] = montarLado(clube, estado.jogadores, elencoDe(estado, clube.id), true);
+      pv.lados[lado] = montarLado(clube, estado.jogadores, elencoDoTime(estado, clube.id), true);
       atualizar();
     } else mudarTatica(pv, lado, { ...l.tatica, ...m }, estado.jogadores);
     setTick((t) => t + 1);
   };
   return (
-    <Folha titulo={antesDoJogo ? "Tática do seu time" : "Tática durante o jogo"} aoFechar={aoFechar}>
+    <Folha titulo={antesDoJogo ? (l.clubeId.startsWith("sel-") ? "Tática da sua seleção" : "Tática do seu time") : "Tática durante o jogo"} aoFechar={aoFechar}>
       <h3 className="pequeno fraco">Formação</h3>
       <Opcoes opcoes={(Object.keys(FORMACOES) as Formacao[]).map((f) => ({ valor: f, rotulo: f }))} valor={l.tatica.formacao} aoMudar={(f) => mudar({ formacao: f })} />
       <h3 className="pequeno fraco">Estilo</h3>

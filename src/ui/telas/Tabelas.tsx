@@ -5,7 +5,8 @@ import { FASE_LIGA, SERIES, ZONAS, agregado, chavesDaFase, classificacao, tabela
 import { FASES_COPA, NOME_FASE_COPA, agregadoDoConfronto, faseDeEntrada, jogosDaCopa, situacaoNaCopa } from "../../engine/copa";
 import { DEFINICOES, definicaoDaCopa, regraDaFaseDaCopa, situacaoNaCopaDeClubes, tabelasDaCopa, type DefinicaoCopa } from "../../engine/copas";
 import { NOME_ESTADUAL, NOME_FASE_TORNEIO, NOME_REGIAO, PAISES, divisaoDaLiga, tabelaDoTorneio, vagasEntreDivisoes, type Regiao } from "../../engine/torneios";
-import type { Competicao, EstadoTorneio, FaseCopa, IdCopa, Partida, SerieId } from "../../engine/tipos";
+import { AMISTOSOS, NOME_FASE_SELECOES, nomeDoPais, paisDaSelecao, rankingDasSelecoes, tabelasDeSelecoes } from "../../engine/selecoes";
+import type { Competicao, EstadoCompeticaoSelecoes, EstadoTorneio, FaseCopa, IdCopa, Partida, SerieId } from "../../engine/tipos";
 import { letraDoGrupo } from "../formatos";
 import { Escudo, Folha, Opcoes, Segmentado } from "../componentes";
 import { useJogo, useLoja } from "../store";
@@ -13,14 +14,19 @@ import { useJogo, useLoja } from "../store";
 const COR_ZONA = { titulo: "var(--dourado)", acesso: "var(--esmeralda)", playoff: "var(--azul)", classifica: "var(--azul)", rebaixamento: "var(--vermelho)" } as const;
 
 /** A cor da posição na tabela: a zona da série (ou a função `zona`, nos torneios). */
-function TabelaClassificacao({ linhas, serie, zonas = true, zona }: { linhas: LinhaTabela[]; serie?: SerieId; zonas?: boolean; zona?: (pos: number) => string }) {
+function TabelaClassificacao({ linhas, serie, zonas = true, zona, meu, rotulo = "Clube" }: {
+  linhas: LinhaTabela[]; serie?: SerieId; zonas?: boolean; zona?: (pos: number) => string;
+  /** O time em destaque (o clube do usuário; nas seleções, a seleção dele). */
+  meu?: string;
+  rotulo?: string;
+}) {
   const estado = useJogo();
-  const meuId = estado.tecnico.clubeId;
+  const meuId = meu ?? estado.tecnico.clubeId;
   const zonaDe = (pos: number) => (zona ? zona(pos) : zonas && serie ? ZONAS[serie].find((z) => z.posicoes.includes(pos))?.tipo ?? "" : "");
   return (
     <table className="tabela">
       <thead>
-        <tr><th>#</th><th>Clube</th><th>P</th><th>J</th><th>V</th><th>E</th><th>D</th><th>SG</th></tr>
+        <tr><th>#</th><th>{rotulo}</th><th>P</th><th>J</th><th>V</th><th>E</th><th>D</th><th>SG</th></tr>
       </thead>
       <tbody>
         {linhas.map((l) => {
@@ -53,11 +59,11 @@ function Legenda({ serie }: { serie: SerieId }) {
 
 export function LinhaResultado({ p, aoTocar }: { p: Partida; aoTocar?: () => void }) {
   const estado = useJogo();
-  const meuId = estado.tecnico.clubeId;
+  const meus = [estado.tecnico.clubeId, estado.tecnico.selecao];
   const m = estado.clubes[p.mandante];
   const v = estado.clubes[p.visitante];
   return (
-    <button className={`jogo-rodada${p.mandante === meuId || p.visitante === meuId ? " meu" : ""}`} onClick={aoTocar} style={{ width: "100%" }}>
+    <button className={`jogo-rodada${meus.includes(p.mandante) || meus.includes(p.visitante) ? " meu" : ""}`} onClick={aoTocar} style={{ width: "100%" }}>
       <div className="m"><span className="corta">{m.nome}</span><Escudo clube={m} tamanho={22} /></div>
       <div className="r">
         {p.jogada ? `${p.gm} x ${p.gv}` : "x"}
@@ -493,7 +499,140 @@ function Torneio({ t }: { t: EstadoTorneio }) {
   );
 }
 
-type Grupo = "series" | "copa" | "estaduais" | "fora";
+/** O nome no seletor: "Eliminatórias da Copa de 2030", "Copa América 2028". */
+function nomeDaCompeticaoNoSeletor(c: EstadoCompeticaoSelecoes): string {
+  if (c.tipo === "eliminatorias-sul") return `Eliminatórias da Copa de ${c.ano}`;
+  if (c.tipo === "eliminatorias-concacaf") return `Eliminatórias da Concacaf (Copa de ${c.ano})`;
+  return `${c.nome} ${c.ano}`;
+}
+
+/** As fases de cada tipo de competição de seleções, na ordem. */
+const FASES_SELECOES: Record<EstadoCompeticaoSelecoes["tipo"], string[]> = {
+  "eliminatorias-sul": ["liga"], "eliminatorias-concacaf": ["fase1", "fase2", "fase3"],
+  "copa-america": ["grupos", "quartas", "semi", "final"], "copa-ouro": ["grupos", "quartas", "semi", "final"],
+};
+
+/** A regra de cada fase, embaixo dos jogos. */
+function regraDaFaseDeSelecoes(c: EstadoCompeticaoSelecoes, fase: string): string {
+  if (fase === "liga") return "Turno e returno, 18 rodadas nas datas FIFA. Os 6 primeiros vão à Copa do Mundo; o 7º, à repescagem.";
+  if (fase === "fase1") return "Os 4 piores do ranking em ida e volta; os 2 vencedores vão à 2ª fase.";
+  if (fase === "fase2") return "6 grupos de 5 em turno único; os primeiros e os 3 melhores segundos vão à 3ª fase (com os 3 melhores do ranking).";
+  if (fase === "fase3") return "3 grupos de 4 em turno e returno; os primeiros vão à Copa do Mundo e os 2 melhores segundos, à repescagem.";
+  if (fase === "grupos") return `4 grupos de 4 em turno único; os 2 primeiros vão às quartas. ${c.sede ? `Sede: ${nomeDoPais(paisDaSelecao(c.sede))} (os outros jogos em campo neutro).` : ""}`;
+  return "Jogo único; empate vai para os pênaltis.";
+}
+
+/** Uma competição de seleções: as fases, os grupos com a tabela e os confrontos. */
+function CompeticaoDeSelecoes({ c }: { c: EstadoCompeticaoSelecoes }) {
+  const estado = useJogo();
+  const minha = estado.tecnico.selecao;
+  const fases = FASES_SELECOES[c.tipo].filter((f) => estado.partidas.some((p) => p.serie === c.id && p.fase === f));
+  const [fase, setFase] = useState(fases.includes(c.fase) ? c.fase : fases.at(-1) ?? FASES_SELECOES[c.tipo][0]);
+  const tabelas = fase === "liga" || fase.startsWith("fase2") || fase === "fase3" || fase === "grupos" ? tabelasDeSelecoes(estado, c.id, fase) : [];
+  const meuGrupo = Math.max(0, tabelas.findIndex((t) => t.some((l) => l.clubeId === minha)));
+  const [grupo, setGrupo] = useState(meuGrupo);
+  const zona = (pos: number) => {
+    if (fase === "liga") return pos <= 6 ? "classifica" : pos === 7 ? "playoff" : "";
+    if (fase === "grupos") return pos <= 2 ? "classifica" : "";
+    return pos === 1 ? "classifica" : pos === 2 ? "playoff" : "";
+  };
+  const muitos = tabelas.length > 2;
+  const visiveis = muitos ? [grupo] : tabelas.map((_, i) => i);
+  const nome = (id: string) => estado.clubes[id]?.nome ?? id;
+  return (
+    <>
+      {c.campeao && <p className="chip amarelo">Campeão: {nome(c.campeao)}</p>}
+      {c.classificados && <p className="pequeno">Vão à Copa do Mundo de {c.ano}: {c.classificados.map(nome).join(", ")}.{c.repescagem?.length ? ` Repescagem: ${c.repescagem.map(nome).join(" e ")}.` : ""}</p>}
+      {fases.length > 1 && <Opcoes opcoes={fases.map((f) => ({ valor: f, rotulo: NOME_FASE_SELECOES[f] ?? f }))} valor={fase} aoMudar={(f) => { setFase(f); setGrupo(0); }} />}
+      {!fases.length && <p className="vazio">Os jogos ainda não foram marcados.</p>}
+      <p className="mini muito-fraco">{regraDaFaseDeSelecoes(c, fase)}</p>
+      {!tabelas.length ? <Confrontos serie={c.id} fase={fase} /> : (
+        <>
+          {muitos && (
+            <select value={grupo} onChange={(e) => setGrupo(Number(e.target.value))} aria-label="Grupo">
+              {tabelas.map((t, i) => <option key={i} value={i}>Grupo {letraDoGrupo(i + 1)}{t.some((l) => l.clubeId === minha) ? " (sua seleção)" : ""}</option>)}
+            </select>
+          )}
+          {visiveis.map((g) => (
+            <div key={g} className="cartao compacto">
+              {tabelas.length > 1 && <h3 className="pequeno fraco" style={{ marginBottom: 6 }}>Grupo {letraDoGrupo(g + 1)}</h3>}
+              <TabelaClassificacao linhas={tabelas[g]} zona={zona} meu={minha} rotulo="Seleção" />
+            </div>
+          ))}
+          <JogosDaFase key={`${fase}-${grupo}`} serie={c.id} fase={fase} clubes={muitos || tabelas.length > 1 ? tabelas[grupo]?.map((l) => l.clubeId) : undefined} />
+        </>
+      )}
+    </>
+  );
+}
+
+/** O ranking das seleções da América (pontos do tipo Elo, que mudam a cada jogo). */
+function RankingDasSelecoes() {
+  const estado = useJogo();
+  const minha = estado.tecnico.selecao;
+  return (
+    <>
+      <p className="mini muito-fraco">Os pontos mudam a cada jogo: vencer um time mais forte vale mais, e os jogos oficiais valem mais que os amistosos.</p>
+      <div className="lista">
+        {rankingDasSelecoes(estado).map((s) => {
+          const c = estado.clubes[s.id];
+          return (
+            <div key={s.id} className={`item${s.id === minha ? " meu" : ""}`}>
+              <span className="colocacao num">{s.pos}º</span>
+              <Escudo clube={c} tamanho={24} />
+              <span className="cresce pequeno negrito corta">{c.nome}</span>
+              <span className="num pequeno">{s.pontos}</span>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+}
+
+/** Os amistosos do ano, data FIFA por data FIFA (a mais recente primeiro). */
+function AmistososDoAno() {
+  const estado = useJogo();
+  const [aberta, setAberta] = useState<Partida | null>(null);
+  const jogos = estado.partidas.filter((p) => p.serie === AMISTOSOS);
+  const datas = [...new Set(jogos.map((p) => p.data))].sort().reverse();
+  if (!datas.length) return <p className="vazio">Nenhum amistoso marcado ainda.</p>;
+  return (
+    <>
+      {datas.map((d) => (
+        <div key={d} className="cartao compacto">
+          <h3 className="pequeno fraco" style={{ marginBottom: 6 }}>{formatarData(d, true)}</h3>
+          {jogos.filter((p) => p.data === d).map((p) => <LinhaResultado key={p.id} p={p} aoTocar={() => setAberta(p)} />)}
+        </div>
+      ))}
+      {aberta && <FolhaPartida p={aberta} aoFechar={() => setAberta(null)} />}
+    </>
+  );
+}
+
+/** Seleções: o ranking, as competições (Eliminatórias, Copa América, Copa Ouro) e os amistosos. */
+function Selecoes() {
+  const estado = useJogo();
+  const minha = estado.tecnico.selecao;
+  const comps = Object.values(estado.selecoes?.competicoes ?? {}).filter((c): c is EstadoCompeticaoSelecoes => !!c)
+    .sort((a, b) => a.ano - b.ano || a.id.localeCompare(b.id));
+  // Abre na competição do próximo jogo da seleção do técnico; senão, no ranking.
+  const proximo = minha ? estado.partidas.find((p) => !p.jogada && p.serie.startsWith("S-") && (p.mandante === minha || p.visitante === minha)) : undefined;
+  const [qual, setQual] = useState<string>(proximo?.serie ?? "ranking");
+  const comp = comps.find((c) => c.id === qual);
+  return (
+    <>
+      <select value={comp || qual === AMISTOSOS ? qual : "ranking"} onChange={(e) => setQual(e.target.value)} aria-label="Seleções">
+        <option value="ranking">Ranking</option>
+        {comps.map((c) => <option key={c.id} value={c.id}>{nomeDaCompeticaoNoSeletor(c)}{minha && c.selecoes.includes(minha) ? " (sua seleção)" : ""}</option>)}
+        <option value={AMISTOSOS}>Amistosos</option>
+      </select>
+      {comp ? <CompeticaoDeSelecoes key={comp.id} c={comp} /> : qual === AMISTOSOS ? <AmistososDoAno /> : <RankingDasSelecoes />}
+    </>
+  );
+}
+
+type Grupo = "series" | "copa" | "estaduais" | "fora" | "selecoes";
 
 export function Tabelas() {
   const estado = useJogo();
@@ -519,9 +658,11 @@ export function Tabelas() {
     { valor: "series", rotulo: "Séries" }, { valor: "copa", rotulo: estado.copas ? "Copas" : "Copa" },
     ...(estaduais.length ? [{ valor: "estaduais" as const, rotulo: "Estaduais" }] : []),
     ...(ligas.length ? [{ valor: "fora" as const, rotulo: "Outros países" }] : []),
+    ...(estado.selecoes ? [{ valor: "selecoes" as const, rotulo: "Seleções" }] : []),
   ];
   const seletor = <Segmentado opcoes={grupos} valor={grupo} aoMudar={setGrupo} />;
   if (grupo === "copa") return <>{seletor}<Copas /></>;
+  if (grupo === "selecoes") return <>{seletor}<Selecoes /></>;
   if (grupo === "estaduais") {
     const t = estaduais.find((x) => x.id === uf) ?? estaduais[0];
     return (

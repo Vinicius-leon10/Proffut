@@ -375,6 +375,8 @@ export interface EstadoSelecoes {
   convocacaoFeita?: boolean;
   /** Data do jogo do último recado de convocação mandado ao técnico. */
   avisoConvocacao?: string;
+  /** Seleções que ainda vão usar a convocação de verdade (a última de 2026) na primeira concentração. */
+  primeiraConvocacao?: string[];
   /** Competições em andamento e as que acabaram na temporada (saem na virada). */
   competicoes: Partial<Record<IdCompeticaoSelecoes, EstadoCompeticaoSelecoes>>;
   /** Jogos das próximas temporadas: entram em `partidas` na virada do ano deles. */

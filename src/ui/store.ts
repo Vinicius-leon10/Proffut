@@ -18,7 +18,8 @@ export type Sobreposta =
   | { tipo: "trofeus" }
   | { tipo: "config" }
   | { tipo: "checagem" }
-  | { tipo: "mensagens" };
+  | { tipo: "mensagens" }
+  | { tipo: "convocacao" };
 
 interface Loja {
   estado: EstadoJogo | null;

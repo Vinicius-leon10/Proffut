@@ -1,5 +1,6 @@
 import { comArtigo } from "../../engine/artigos";
 import { NOME_SERIE, SERIES } from "../../engine/competicoes";
+import { comArtigoDaSelecao, selecoesDaTemporadaEmTexto } from "../../engine/selecoes";
 import { Cartao, Escudo, Topo } from "../componentes";
 import { useJogo, useLoja } from "../store";
 import type { SerieId } from "../../engine/tipos";
@@ -49,6 +50,10 @@ export function Historico() {
                     </div>
                   </div>
                 ))}
+                {r.selecoes && <p className="mini fraco">Seleções: {selecoesDaTemporadaEmTexto(estado, r).join("; ")}.</p>}
+                {r.selecaoDoTecnico && estado.clubes[r.selecaoDoTecnico] && (
+                  <p className="mini fraco">Você também treinava {comArtigoDaSelecao("o", r.selecaoDoTecnico, estado)}.</p>
+                )}
                 <div className="linha" style={{ borderTop: "1px solid var(--borda)", paddingTop: 8 }}>
                   <Escudo clube={meu} tamanho={30} />
                   <div className="cresce">

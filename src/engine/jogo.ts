@@ -34,7 +34,7 @@ import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoA
 import { jogarRapido } from "./rapida";
 import {
   aplicarJogoDeSelecoes, atualizarConcentracoes, avancarSelecoes, depoisDoJogoRapido, ehCompeticaoDeSelecoes, elencoDaSelecao,
-  ehSelecao, juntarSelecoes, selecoesDoJogoNovo,
+  ehSelecao, selecoesDoJogoNovo,
 } from "./selecoes";
 import type { Clube, Estilo, EstadoJogo, Formacao, Jogador, Partida, SerieClube, Tatica } from "./tipos";
 
@@ -163,12 +163,11 @@ export function garantirElenco(estado: EstadoJogo, clubeId: string): boolean {
  * a março) e, com a temporada em andamento, todos os torneios começam na próxima.
  */
 export function juntarAoSaveAntigo(estado: EstadoJogo) {
-  if (estado.torneios) return juntarSelecoes(estado);
+  if (estado.torneios) return;
   juntarClubesNovos(estado, rngPara(estado.semente, "mundo/clubes-novos"));
   const comecou = estado.partidas.some((p) => p.jogada);
   if (!comecou && estado.data < somarDias(inicioDaTemporada(estado.temporada), 1)) criarTorneios(estado, { semEstaduais: true });
   else estado.torneios = {};
-  juntarSelecoes(estado);
 }
 
 /**

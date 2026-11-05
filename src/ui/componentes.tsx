@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { hashTexto } from "../engine/rng";
+import { bandeira, ehSelecao, paisDaSelecao } from "../engine/selecoes";
 import type { Clube, Posicao } from "../engine/tipos";
 import { useLoja } from "./store";
 
@@ -25,6 +26,14 @@ const ESCUDOS_QUE_FALTAM = new Set<string>();
 export function Escudo({ clube, tamanho = 32 }: { clube: Pick<Clube, "id" | "sigla" | "cores">; tamanho?: number }) {
   const importado = useLoja((s) => s.escudos[clube.id]);
   const [falharam, setFalharam] = useState<string[]>([]);
+  // Seleção: a bandeira do país no lugar do escudo.
+  if (ehSelecao(clube.id) && !importado) {
+    return (
+      <span className="escudo bandeira-escudo" aria-hidden="true" style={{ width: tamanho, height: tamanho, fontSize: Math.round(tamanho * 0.82) }}>
+        {bandeira(paisDaSelecao(clube.id))}
+      </span>
+    );
+  }
   const imagem = [importado, `escudos/${clube.id}.png`].find((src): src is string => !!src && !falharam.includes(src) && !ESCUDOS_QUE_FALTAM.has(src));
   if (imagem) {
     return (

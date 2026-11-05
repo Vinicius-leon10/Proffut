@@ -84,7 +84,7 @@ function FolhaOferta({ j, aoFechar }: { j: Jogador; aoFechar: () => void }) {
 
 export function Mercado() {
   const estado = useJogo();
-  const paisesComClube = new Set(Object.values(estado.clubes).flatMap((c) => (c.pais ? [c.pais] : [])));
+  const paisesComClube = new Set(Object.values(estado.clubes).flatMap((c) => (c.pais && c.serie !== "selecao" ? [c.pais] : [])));
   const versao = useLoja((s) => s.versao);
   const meuId = estado.tecnico.clubeId;
   const meu = estado.clubes[meuId];
@@ -126,6 +126,8 @@ export function Mercado() {
     const base = vista === "livres" ? livres(estado) : Object.values(estado.jogadores).filter((j) => {
       if (!j.clubeId || j.clubeId === meuId || j.emprestimo?.de === meuId) return false;
       const c = estado.clubes[j.clubeId];
+      // Quem joga fora dos clubes do jogo (ligado à seleção) não está à venda.
+      if (c.serie === "selecao") return false;
       return serie === "todas" || (serie.startsWith("pais:") ? c.pais === serie.slice(5) : c.serie === serie);
     });
     return base

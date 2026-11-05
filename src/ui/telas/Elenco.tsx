@@ -29,6 +29,9 @@ export function Situacao({ j, semAVenda }: { j: Jogador; semAVenda?: boolean }) 
       {j.suspensaoJogos > 0 && <span className="chip vermelho" title="Suspenso">Suspenso</span>}
       {j.amarelosAcumulados === 2 && j.suspensaoJogos === 0 && <span className="chip amarelo" title="Pendurado com 2 amarelos">2 CA</span>}
       {j.aVenda && !semAVenda && <span className="chip amarelo">À venda</span>}
+      {j.convocado && estado.clubes[j.convocado] && (
+        <span className="chip azul" title="Está com a seleção e não joga pelo clube até voltar">Seleção {estado.clubes[j.convocado].sigla}</span>
+      )}
     </>
   );
 }
@@ -154,9 +157,15 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
         <Situacao j={j} />
       </div>
       <div className="linha" style={{ gap: 6 }}>
-        {clube ? <><Escudo clube={clube} tamanho={22} /><span className="pequeno">{clube.nome}</span></> : <span className="chip">Sem clube</span>}
-        {clube && j.contratoAte != null && <span className="pequeno fraco">· Contrato até {j.contratoAte}</span>}
+        {j.clubeFora ? (
+          // Joga fora dos clubes do jogo (Europa, Ásia...): só joga pela seleção.
+          <span className="pequeno">{j.clubeFora.nome}{j.clubeFora.pais ? ` (${j.clubeFora.pais})` : ""} <span className="fraco">· fora dos clubes do jogo</span></span>
+        ) : clube ? <><Escudo clube={clube} tamanho={22} /><span className="pequeno">{clube.nome}</span></> : <span className="chip">Sem clube</span>}
+        {clube && !j.clubeFora && j.contratoAte != null && <span className="pequeno fraco">· Contrato até {j.contratoAte}</span>}
       </div>
+      {j.selecao && (j.selecao.jogos > 0 || j.convocado) && (
+        <p className="pequeno">Pela seleção: {j.selecao.jogos} {j.selecao.jogos === 1 ? "jogo" : "jogos"} e {j.selecao.gols} {j.selecao.gols === 1 ? "gol" : "gols"}.</p>
+      )}
       {j.emprestimo && clube && (
         <p className="pequeno">
           Emprestado {comArtigo("pelo", estado.clubes[j.emprestimo.de])} {comArtigo("ao", clube)} até o fim de {j.emprestimo.ate}. Na virada ele volta.

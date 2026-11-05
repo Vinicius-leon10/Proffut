@@ -1852,6 +1852,25 @@ describe("seleções da América (nov/2026)", () => {
     expect(e.partidas.find((p) => p.id === jogo!.id)!.jogada).toBe(true);
   });
 
+  it("save de antes da Concacaf e das seleções (como o do iPhone): os convocados dos clubes que chegam ao abrir são os jogadores desses clubes, sem cópia de fora", () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "bahia", semente: 46 });
+    // Volta o save para antes da Concacaf (clubes, jogadores, torneios, copas e jogos dela) e das seleções.
+    const daConcacaf = new Set(Object.values(e.clubes).filter((c) => c.serie === "exterior" && PAISES[c.pais!]?.regiao !== "sul").map((c) => c.id));
+    for (const j of Object.values(e.jogadores)) if (j.clubeId && (daConcacaf.has(j.clubeId) || j.clubeId.startsWith("sel-"))) delete e.jogadores[j.id];
+    for (const id of Object.keys(e.clubes)) if (daConcacaf.has(id) || id.startsWith("sel-")) delete e.clubes[id];
+    for (const t of Object.values(e.torneios!)) if (t && t.clubes.some((id) => daConcacaf.has(id))) delete e.torneios![t.id];
+    for (const c of Object.values(e.copas!)) if (c && c.clubes.some((id) => daConcacaf.has(id))) delete e.copas![c.id];
+    e.partidas = e.partidas.filter((p) => !p.serie.startsWith("S-") && ![p.mandante, p.visitante].some((id) => daConcacaf.has(id)));
+    delete e.selecoes;
+    const aberto = importarTexto(exportarTexto(e));
+    // Raúl Rangel (goleiro do Guadalajara, convocado pelo México): um só, no Guadalajara e convocado.
+    const rangel = Object.values(aberto.jogadores).filter((j) => j.nome === "Raúl Rangel");
+    expect(rangel).toHaveLength(1);
+    expect(rangel[0].clubeId).toBe("guadalajara");
+    expect(rangel[0].nacionalidade).toBe("MEX");
+    expect(aberto.selecoes!.convocados["sel-MX"]).toContain(rangel[0].id);
+  });
+
   it("save de antes das seleções: ao abrir, entram as seleções e os amistosos da próxima data FIFA, sem mexer nos clubes", () => {
     const antigo = novoJogo({ nomeTecnico: "T", clubeId: "bahia", semente: 45 });
     for (const j of Object.values(antigo.jogadores)) {
@@ -1866,6 +1885,9 @@ describe("seleções da América (nov/2026)", () => {
     expect(Object.keys(aberto.clubes).length).toBe(clubes + 51);
     expect(aberto.partidas.filter((p) => p.serie === "S-AMI").length).toBeGreaterThanOrEqual(40);
     expect(aberto.partidas.filter((p) => p.serie === "S-AMI").every((p) => p.data > aberto.data)).toBe(true);
+    // As Eliminatórias da próxima Copa já ficam marcadas (de setembro de 2027 a setembro de 2029, na agenda).
+    expect(aberto.selecoes!.competicoes["S-ELI-SUL-2030"]).toBeDefined();
+    expect(aberto.selecoes!.agenda.filter((p) => p.serie === "S-ELI-SUL-2030")).toHaveLength(90);
     expect(checarEstado(aberto).filter((p) => p.gravidade === "erro")).toEqual([]);
   });
 });

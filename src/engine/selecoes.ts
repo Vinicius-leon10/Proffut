@@ -33,7 +33,7 @@ import { hashTexto, rngPara, type Rng } from "./rng";
 import { PAISES } from "./torneios";
 import type {
   Clube, Competicao, EstadoCompeticaoSelecoes, EstadoJogo, EstadoSelecoes, IdCompeticaoSelecoes, Jogador, Partida, Posicao,
-  TipoCompeticaoSelecoes,
+  RegistroTemporada, TipoCompeticaoSelecoes,
 } from "./tipos";
 
 // ---- as seleções -------------------------------------------------------------------------------------------
@@ -280,10 +280,16 @@ export function criarSelecoes(estado: EstadoJogo) {
     sel.convocados[id] = convocados;
   }
   completarBases(estado, "inicio");
-  // Quem não tem a convocação de verdade (ou tem menos de 23) completa com os melhores.
+  // Quem não tem a convocação de verdade (ou tem menos de 23) completa com os melhores; listas compridas demais (a página
+  // do Uruguai traz 42) ficam com os 26 melhores.
   const porNacionalidade = agruparPorNacionalidade(estado);
+  sel.primeiraConvocacao = PAISES_SELECOES.map(idSelecao);
   for (const pais of PAISES_SELECOES) {
     const id = idSelecao(pais);
+    if (sel.convocados[id].length > CONVOCADOS_POR_SELECAO + 3) {
+      sel.convocados[id] = sel.convocados[id].map((x) => estado.jogadores[x]).sort((a, b) => notaDeConvocacao(b) - notaDeConvocacao(a) || a.id - b.id)
+        .slice(0, CONVOCADOS_POR_SELECAO + 3).map((j) => j.id);
+    }
     if (sel.convocados[id].length < CONVOCADOS_POR_SELECAO) {
       const extra = convocarAutomatico(estado, id, porNacionalidade).filter((x) => !sel.convocados[id].includes(x));
       sel.convocados[id] = [...sel.convocados[id], ...extra].slice(0, Math.max(CONVOCADOS_POR_SELECAO, sel.convocados[id].length));
@@ -473,20 +479,30 @@ function jogosDasRodadas(serie: IdCompeticaoSelecoes, fase: string, rodadas: Con
   return lista;
 }
 
-/** Eliminatórias da Conmebol para a Copa de `copa`: os 10 em turno e returno, de setembro de copa-3 a setembro de copa-1. */
-function criarEliminatoriasSul(estado: EstadoJogo, copa: number) {
+/** A próxima Copa do Mundo depois do ano (2026 → 2030). */
+export const proximaCopa = (ano: number) => ano + 1 + ((2 - ((ano + 1) % 4) + 4) % 4);
+
+/**
+ * Eliminatórias da Conmebol para a Copa de `copa`: os 10 em turno e returno, 2 rodadas por data FIFA, de setembro de copa-3
+ * a setembro de copa-1 (9 datas). No save de antes das seleções (`desde`: a data de hoje), as datas que já passaram dão
+ * lugar às seguintes (até março do ano da Copa); sem 9 datas pela frente, essas Eliminatórias ficam de fora.
+ */
+function criarEliminatoriasSul(estado: EstadoJogo, copa: number, desde = ""): boolean {
   const id: IdCompeticaoSelecoes = `S-ELI-SUL-${copa}`;
   const selecoes = conmebol();
-  const datas = [
-    ...datasDaJanela(copa - 3, "set"), ...datasDaJanela(copa - 3, "out"), ...datasDaJanela(copa - 3, "nov"),
-    ...datasDaJanela(copa - 2, "set"), ...datasDaJanela(copa - 2, "out"), ...datasDaJanela(copa - 2, "nov"),
-    ...datasDaJanela(copa - 1, "mar"), ...datasDaJanela(copa - 1, "jun"), ...datasDaJanela(copa - 1, "set"),
+  const janelas: [number, Janela][] = [
+    [copa - 3, "set"], [copa - 3, "out"], [copa - 3, "nov"], [copa - 2, "set"], [copa - 2, "out"], [copa - 2, "nov"],
+    [copa - 1, "mar"], [copa - 1, "jun"], [copa - 1, "set"], [copa - 1, "out"], [copa - 1, "nov"], [copa, "mar"],
   ];
+  const livres = janelas.map(([ano, j]) => datasDaJanela(ano, j)).filter(([primeira]) => primeira > desde).slice(0, 9);
+  if (livres.length < 9) return false;
+  const datas = livres.flat();
   const rodadas = turnoEReturno(selecoes, rngPara(estado.semente, `eliminatorias/${id}`));
   estado.selecoes!.competicoes[id] = {
     id, tipo: "eliminatorias-sul", nome: NOMES["eliminatorias-sul"], ano: copa, fase: "liga", selecoes,
   };
   marcar(estado, jogosDasRodadas(id, "liga", rodadas, datas));
+  return true;
 }
 
 /**
@@ -552,7 +568,13 @@ export function criarCompeticoesDoAno(estado: EstadoJogo, desde = "") {
   const ano = estado.temporada;
   const sel = estado.selecoes!;
   const nova = (id: string, primeiraData: string) => !sel.competicoes[id as IdCompeticaoSelecoes] && primeiraData > desde;
-  if (anoDeCopa(ano + 3) && nova(`S-ELI-SUL-${ano + 3}`, datasDaJanela(ano, "set")[0])) criarEliminatoriasSul(estado, ano + 3);
+  // As Eliminatórias da Conmebol começam em setembro, 3 anos antes da Copa; no save antigo, as da próxima Copa, se ainda
+  // houver 9 datas FIFA até ela.
+  const copa = proximaCopa(ano);
+  if (!sel.competicoes[`S-ELI-SUL-${copa}`]) {
+    if (!desde && anoDeCopa(ano + 3)) criarEliminatoriasSul(estado, ano + 3);
+    else if (desde) criarEliminatoriasSul(estado, copa, desde);
+  }
   if (anoDeCopa(ano + 2) && nova(`S-ELI-CCF-${ano + 2}`, datasDaJanela(ano, "mar")[0])) criarEliminatoriasConcacaf(estado, ano + 2);
   const r1 = diaDaSemana(ano, DATAS_TORNEIO.r1[0], DATAS_TORNEIO.r1[1]);
   if (ano % 4 === 0 && nova(`S-AME-${ano}`, r1)) criarTorneio(estado, "copa-america", ano);
@@ -761,6 +783,8 @@ export function atualizarConcentracoes(estado: EstadoJogo) {
   for (const id of agora) {
     if (eram.has(id)) continue;
     if (id === minhaSelecao && sel.convocacaoFeita) sel.convocacaoFeita = false;
+    // A primeira concentração usa a convocação de verdade.
+    else if (sel.primeiraConvocacao?.includes(id)) sel.primeiraConvocacao = sel.primeiraConvocacao.filter((x) => x !== id);
     else {
       porNacionalidade ??= agruparPorNacionalidade(estado);
       sel.convocados[id] = convocarAutomatico(estado, id, porNacionalidade);
@@ -811,6 +835,7 @@ export function confirmarConvocacao(estado: EstadoJogo, ids: number[]) {
   const minha = estado.tecnico.selecao;
   if (!sel || !minha) return;
   sel.convocados[minha] = [...new Set(ids)].filter((id) => !!estado.jogadores[id]);
+  if (sel.primeiraConvocacao) sel.primeiraConvocacao = sel.primeiraConvocacao.filter((x) => x !== minha);
   // Já concentrada: a lista nova vale na hora; senão, vale quando a concentração começar.
   if (sel.concentradas.includes(minha)) {
     for (const j of Object.values(estado.jogadores)) if (j.convocado === minha && !sel.convocados[minha].includes(j.id)) delete j.convocado;
@@ -1024,9 +1049,21 @@ function depoisDaCompeticao(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes) 
 
 // ---- virada da temporada -----------------------------------------------------------------------------------
 
+/** As competições de seleções de uma temporada do histórico, em texto: "Copa América 2028: Brasil (vice: México)". */
+export function selecoesDaTemporadaEmTexto(estado: EstadoJogo, r: RegistroTemporada): string[] {
+  const nome = (id: string) => estado.clubes[id]?.nome ?? id;
+  return (Object.entries(r.selecoes ?? {}) as [IdCompeticaoSelecoes, NonNullable<RegistroTemporada["selecoes"]>[IdCompeticaoSelecoes]][]).flatMap(([id, x]) => {
+    if (!x) return [];
+    const ano = id.split("-").at(-1);
+    if (x.campeao) return [`${nomeDaCompeticaoDeSelecoes(undefined, id)} ${ano}: ${nome(x.campeao)}${x.vice ? ` (vice: ${nome(x.vice)})` : ""}`];
+    const repescagem = x.repescagem?.length ? `; repescagem: ${x.repescagem.map(nome).join(" e ")}` : "";
+    return [`${nomeDaCompeticaoDeSelecoes(undefined, id)} da Copa de ${ano}: ${(x.classificados ?? []).map(nome).join(", ")}${repescagem}`];
+  });
+}
+
 /** Campeões e classificados das competições de seleções que acabaram no ano (para o histórico). */
-export function resumoDasSelecoes(estado: EstadoJogo): NonNullable<import("./tipos").RegistroTemporada["selecoes"]> {
-  const r: NonNullable<import("./tipos").RegistroTemporada["selecoes"]> = {};
+export function resumoDasSelecoes(estado: EstadoJogo): NonNullable<RegistroTemporada["selecoes"]> {
+  const r: NonNullable<RegistroTemporada["selecoes"]> = {};
   for (const c of Object.values(estado.selecoes?.competicoes ?? {})) {
     if (!c || c.fase !== "encerrada") continue;
     r[c.id] = {

@@ -13,6 +13,7 @@ import { Mensagens } from "./telas/Mensagens";
 import { NovoJogo } from "./telas/NovoJogo";
 import { Principal } from "./telas/Principal";
 import { Resultados } from "./telas/Resultados";
+import { Convocacao } from "./telas/Selecao";
 import { Trofeus } from "./telas/Trofeus";
 
 function Sobreposta() {
@@ -28,6 +29,7 @@ function Sobreposta() {
     case "config": return <Config />;
     case "checagem": return <Checagem />;
     case "mensagens": return <Mensagens />;
+    case "convocacao": return <Convocacao />;
   }
 }
 

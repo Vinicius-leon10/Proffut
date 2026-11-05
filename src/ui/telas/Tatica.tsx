@@ -2,6 +2,7 @@ import { useRef, useState, type PointerEvent } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { ESTILOS } from "../../engine/constantes";
 import { FORMACOES, NOMES_POSICAO, calcularSetores, capitaoDoTime, corForca, disponivel, escalarAutomatico, forcaEfetiva, type Vaga } from "../../engine/forca";
+import { elencoDoTime } from "../../engine/jogo";
 import { elencoDe } from "../../engine/mercado";
 import { notaCobrador, redistribuir, type LadoVivo } from "../../engine/partida";
 import type { Clube, EstadoJogo, Estilo, Formacao, Jogador, Posicao, Tatica as TaticaTipo } from "../../engine/tipos";
@@ -127,7 +128,9 @@ export function CampoDaEscalacao({ clube, titulares, reservas, aoMudar }: {
   aoMudar: (titulares: (number | null)[], reservas: number[]) => void;
 }) {
   const estado = useJogo();
-  const elenco = elencoDe(estado, clube.id);
+  // Na seleção, os convocados (e só a lesão tira alguém do jogo).
+  const elenco = elencoDoTime(estado, clube.id);
+  const selecao = clube.serie === "selecao";
   const vagas = FORMACOES[clube.tatica.formacao];
   const [vagaAberta, setVagaAberta] = useState<number | null>(null);
   // Arrastar uma camisa até outra troca os dois de vaga; um toque sem arrastar abre a escolha da vaga.
@@ -195,7 +198,7 @@ export function CampoDaEscalacao({ clube, titulares, reservas, aoMudar }: {
         {vagas.map((v, i) => {
           const j = jog(titulares[i]);
           const ef = j ? Math.round(forcaEfetiva(j, v, j.energia, clube.tatica.jogadas)) : 0;
-          const cor = j ? (disponivel(j) ? corForca(ef, j.forca) : "vermelho") : "vazia";
+          const cor = j ? (disponivel(j, selecao) ? corForca(ef, j.forca) : "vermelho") : "vazia";
           const arrastada = arrasto?.de === i;
           const classes = ["vaga", "arrastavel", vagaAberta === i && "selecionada", arrastada && "arrastando", arrasto?.alvo === i && "alvo"].filter(Boolean).join(" ");
           return (
@@ -229,6 +232,7 @@ export function CampoDaEscalacao({ clube, titulares, reservas, aoMudar }: {
           jogadas={clube.tatica.jogadas}
           aoEscolher={(id) => escolherParaVaga(vagaAberta, id)}
           aoFechar={() => setVagaAberta(null)}
+          selecao={selecao}
         />
       )}
     </>
@@ -371,10 +375,10 @@ function porPosicao(jogadores: Jogador[], primeiro?: Posicao): { pos: Posicao; j
 }
 
 /** Um jogador numa lista de escolha: posição, nome, se é titular ou reserva, energia, força e o quanto rende ali. */
-function LinhaDoJogador({ j, nota, onde, aoEscolher }: { j: Jogador; nota: number; onde: string; aoEscolher: () => void }) {
+function LinhaDoJogador({ j, nota, onde, aoEscolher, selecao }: { j: Jogador; nota: number; onde: string; aoEscolher: () => void; selecao?: boolean }) {
   const ef = Math.round(nota);
   return (
-    <button className="item" onClick={aoEscolher} disabled={!disponivel(j)}>
+    <button className="item" onClick={aoEscolher} disabled={!disponivel(j, selecao)}>
       <Pos pos={j.posicao} />
       <div className="cresce">
         <div className="linha" style={{ gap: 6 }}>
@@ -389,12 +393,14 @@ function LinhaDoJogador({ j, nota, onde, aoEscolher }: { j: Jogador; nota: numbe
 }
 
 /** A lista de escolha em grupos de posição; em cada grupo, quem rende mais primeiro (quem não pode jogar, no fim). */
-function ListaPorPosicao({ jogadores, primeiro, nota, onde, aoEscolher }: {
+function ListaPorPosicao({ jogadores, primeiro, nota, onde, aoEscolher, selecao }: {
   jogadores: Jogador[];
   primeiro?: Posicao;
   nota: (j: Jogador) => number;
   onde: (j: Jogador) => string;
   aoEscolher: (id: number) => void;
+  /** Lista da seleção: só a lesão impede de jogar. */
+  selecao?: boolean;
 }) {
   return (
     <div className="coluna" style={{ gap: 10 }}>
@@ -403,8 +409,8 @@ function ListaPorPosicao({ jogadores, primeiro, nota, onde, aoEscolher }: {
           <h3 className="pequeno fraco">{GRUPO_POSICAO[g.pos]}</h3>
           <div className="lista">
             {[...g.jogadores]
-              .sort((a, b) => Number(disponivel(b)) - Number(disponivel(a)) || nota(b) - nota(a))
-              .map((j) => <LinhaDoJogador key={j.id} j={j} nota={nota(j)} onde={onde(j)} aoEscolher={() => aoEscolher(j.id)} />)}
+              .sort((a, b) => Number(disponivel(b, selecao)) - Number(disponivel(a, selecao)) || nota(b) - nota(a))
+              .map((j) => <LinhaDoJogador key={j.id} j={j} nota={nota(j)} onde={onde(j)} aoEscolher={() => aoEscolher(j.id)} selecao={selecao} />)}
           </div>
         </div>
       ))}
@@ -421,13 +427,14 @@ function EscolherJogador(props: {
   jogadas: TaticaTipo["jogadas"];
   aoEscolher: (id: number) => void;
   aoFechar: () => void;
+  selecao?: boolean;
 }) {
   const { vaga, elenco, titulares, reservas, jogadas } = props;
   const nota = (j: Jogador) => (vaga ? forcaEfetiva(j, vaga, j.energia, jogadas) : j.forca);
   const onde = (j: Jogador) => (titulares.includes(j.id) ? "titular" : reservas.includes(j.id) ? "reserva" : "");
   return (
     <Folha titulo={props.titulo} aoFechar={props.aoFechar}>
-      <ListaPorPosicao jogadores={elenco} primeiro={vaga?.pos} nota={nota} onde={onde} aoEscolher={props.aoEscolher} />
+      <ListaPorPosicao jogadores={elenco} primeiro={vaga?.pos} nota={nota} onde={onde} aoEscolher={props.aoEscolher} selecao={props.selecao} />
     </Folha>
   );
 }
@@ -447,7 +454,8 @@ export function FolhaDosReservas({ clube, titulares, banco, aoMudar, aoFechar }:
   const [trocando, setTrocando] = useState<number | null>(null);
   const reservas = banco.map((id) => estado.jogadores[id]).filter((j): j is Jogador => !!j);
   const ordenados = porPosicao(reservas).flatMap((g) => [...g.jogadores].sort((a, b) => b.forca - a.forca));
-  const fora = elencoDe(estado, clube.id).filter((j) => !titulares.includes(j.id) && !banco.includes(j.id));
+  const selecao = clube.serie === "selecao";
+  const fora = elencoDoTime(estado, clube.id).filter((j) => !titulares.includes(j.id) && !banco.includes(j.id));
   const escolher = (id: number) => {
     aoMudar(banco.map((x) => (x === trocando ? id : x)));
     setTrocando(null);
@@ -456,7 +464,7 @@ export function FolhaDosReservas({ clube, titulares, banco, aoMudar, aoFechar }:
     const sai = estado.jogadores[trocando];
     return (
       <Folha titulo={`No lugar de ${sai.nome}`} aoFechar={aoFechar}>
-        <ListaPorPosicao jogadores={fora} primeiro={sai.posicao} nota={(j) => j.forca} onde={() => ""} aoEscolher={escolher} />
+        <ListaPorPosicao jogadores={fora} primeiro={sai.posicao} nota={(j) => j.forca} onde={() => ""} aoEscolher={escolher} selecao={selecao} />
         {fora.length === 0 && <p className="pequeno fraco">Não há ninguém no elenco fora do time e do banco.</p>}
         <button className="botao cheio" onClick={() => setTrocando(null)}>Voltar</button>
       </Folha>
@@ -466,7 +474,7 @@ export function FolhaDosReservas({ clube, titulares, banco, aoMudar, aoFechar }:
     <Folha titulo="Reservas" aoFechar={aoFechar}>
       <p className="pequeno fraco">Os {reservas.length} do banco, que podem entrar durante o jogo. Toque em um para trocar.</p>
       <div className="lista">
-        {ordenados.map((j) => <LinhaDoJogador key={j.id} j={j} nota={j.forca} onde="" aoEscolher={() => setTrocando(j.id)} />)}
+        {ordenados.map((j) => <LinhaDoJogador key={j.id} j={j} nota={j.forca} onde="" aoEscolher={() => setTrocando(j.id)} selecao={selecao} />)}
       </div>
       <button className="botao primario cheio" onClick={aoFechar}>Pronto</button>
     </Folha>
