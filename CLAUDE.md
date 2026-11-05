@@ -346,11 +346,12 @@ temporada, temporada simulada ~9 s, save de 12,5 a 16 MB. **Falta:** 227 dos 429
 foto, dois escudos numa imagem e um pedaço; no lote 1, Chapelton Maroons com o escudo do Humble Lions, Monterrey e Pumas
 UNAM com faixa ou história, S.V. Sophia e SNL em miniatura, Vere United e Waterhouse com anúncio, Montego Bay United
 branco sobre transparente, Atlético Pantoja e Atlético San Cristóbal com fundo de mapa ou foto; as fontes do lote 1
-ainda vão ser consolidadas pela Manus) (`docs/TIMES_NOVOS.md`; R73 vermelho
-até lá) e a 2ª divisão dos estaduais (as páginas do robô eram quase todas a da 1ª; o usuário disse que não precisa por
+ainda vão ser consolidadas pela Manus) (`docs/TIMES_NOVOS.md`; até chegarem, o escudo é desenhado e o R73 aceita só os da
+lista) e a 2ª divisão dos estaduais (as páginas do robô eram quase todas a da 1ª; o usuário disse que não precisa por
 enquanto). As copas e as seleções ficaram prontas (abaixo; pedido "Faça 1 e 2. O 3 e 4 são desnecessários por enquanto" e
-"Faça tudo, depois trago o restante dos escudos"). O trabalho fica no ramo `claude/copia-america` (com `[skip ci]`) até
-os escudos chegarem.
+"Faça tudo, depois trago o restante dos escudos"). Publicado sem os 227 escudos que faltam, a pedido do usuário ("Pode
+deixar tudo no jogo, depois colocamos os escudos"): quando chegarem, `preparar.py --quantizar`, `tools/times/lista.py`
+(a lista encolhe) e publicar.
 
 **Copas de clubes da América (nov/2026, `src/engine/copas.ts`, R88–R89):** Libertadores, Sul-Americana, Recopa,
 Supercopa do Brasil, Copa do Nordeste, Copa Verde, Copa Sul-Sudeste, as da Concacaf (Copa dos Campeões, Leagues Cup,

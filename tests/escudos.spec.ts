@@ -90,12 +90,17 @@ async function escudosDasTabelas(page: Page) {
   await expect.poll(() => imagens.evaluateAll((els) => els.every((el) => (el as HTMLImageElement).complete && (el as HTMLImageElement).naturalWidth > 0))).toBe(true);
 }
 
-test("R73 os times novos têm os escudos que o usuário mandou: todo clube do jogo tem a imagem e, nas tabelas dos estaduais e dos outros países, nenhum escudo é desenhado, também sem internet", async ({ page, context }) => {
-  // Todo clube do jogo (séries, Série D, só do estadual e de fora) tem o seu arquivo.
+test("R73 os times novos têm os escudos que o usuário mandou: todo clube do jogo tem a imagem (menos os da lista dos que faltam) e, nas tabelas dos estaduais e dos outros países, nenhum escudo é desenhado, também sem internet", async ({ page, context }) => {
+  // Todo clube do jogo (séries, Série D, só do estadual e de fora) tem o seu arquivo, menos os que ainda estão na lista
+  // dos que faltam (docs/TIMES_NOVOS.md, de tools/times/lista.py): o usuário decidiu publicar sem eles ("Pode deixar tudo
+  // no jogo, depois colocamos os escudos"); até chegarem, o jogo desenha o escudo com as cores e a sigla.
   const ids = ["data/brasil-2026/clubes.json", "data/brasil-2026/serie-d-reserva.json", "data/brasil-2026/clubes-estaduais.json", "data/america-do-sul-2026/clubes.json"]
     .flatMap((arquivo) => (JSON.parse(readFileSync(arquivo, "utf8")) as { clubes: { id: string }[] }).clubes.map((c) => c.id));
   expect(ids.length).toBeGreaterThan(400);
-  expect(ids.filter((id) => !existsSync(`public/escudos/${id}.png`)), "clubes sem escudo").toEqual([]);
+  const faltam = new Set([...readFileSync("docs/TIMES_NOVOS.md", "utf8").matchAll(/`([a-z0-9-]+)\.png`/g)].map((m) => m[1]));
+  expect(ids.filter((id) => !existsSync(`public/escudos/${id}.png`) && !faltam.has(id)), "clubes sem escudo e fora da lista dos que faltam").toEqual([]);
+  // A lista está em dia: quem já tem o escudo saiu dela.
+  expect([...faltam].filter((id) => existsSync(`public/escudos/${id}.png`)), "escudos que já chegaram e continuam na lista").toEqual([]);
 
   await abrirSite(page);
   await page.evaluate(() => navigator.serviceWorker.ready);
