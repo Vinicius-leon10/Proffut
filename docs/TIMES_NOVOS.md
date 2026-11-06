@@ -11,7 +11,7 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 119 escudos (0 de clubes brasileiros e 119 de fora).
+Total: 107 escudos (0 de clubes brasileiros e 107 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
 
@@ -37,7 +37,7 @@ Total: 119 escudos (0 de clubes brasileiros e 119 de fora).
 | S.V. Sophia | Suriname | `s-v-sophia.png` |
 | SNL | Paramaribo | `snl.png` |
 
-### Trinidad e Tobago (8 clubes)
+### Trinidad e Tobago (6 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
@@ -46,9 +46,7 @@ Total: 119 escudos (0 de clubes brasileiros e 119 de fora).
 | Defence Force | Port of Spain | `defence-force.png` |
 | La Horquetta Rangers | Port of Spain | `la-horquetta-rangers.png` |
 | Morvant Caledonia United | Morvant | `morvant-caledonia-united.png` |
-| Point Fortin Civic | Point Fortin | `point-fortin-civic.png` |
 | Police | Port of Spain | `police.png` |
-| Sando | San Fernando | `sando.png` |
 
 ## Outros países da América: 2ª divisão de 2026
 
@@ -126,28 +124,17 @@ Total: 119 escudos (0 de clubes brasileiros e 119 de fora).
 
 ## Outros países da América: 3ª divisão de 2026
 
-### Chile (12 clubes)
+### Chile (7 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Brujas de Salamanca | Salamanca | `brujas-de-salamanca.png` |
 | Concón National | Chile | `concon-national.png` |
-| Deportes Colina | Colina | `deportes-colina.png` |
-| Deportes Linares | Linares | `deportes-linares.png` |
-| Deportes Rengo | Chile | `deportes-rengo.png` |
 | General Velásquez | San Vicente de Tagua Tagua | `general-velasquez.png` |
-| Lota Schwager | Coronel | `lota-schwager.png` |
 | Provincial Osorno | Chile | `provincial-osorno.png` |
-| Provincial Ovalle | Ovalle | `provincial-ovalle.png` |
 | Real San Joaquín | Chile | `real-san-joaquin.png` |
 | Santiago Morning | La Pintana | `santiago-morning.png` |
 | Trasandino | Los Andes | `trasandino.png` |
-
-### Estados Unidos (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Sporting Cascades | Estados Unidos | `sporting-cascades.png` |
 
 ### México (3 clubes)
 
@@ -183,14 +170,13 @@ Total: 119 escudos (0 de clubes brasileiros e 119 de fora).
 | Unión Huaral | Huaral | `union-huaral.png` |
 | Unión Santo Domingo | Peru | `union-santo-domingo.png` |
 
-### Uruguai (20 clubes)
+### Uruguai (16 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Alto Perú | Montevidéu | `alto-peru.png` |
 | Basáñez | Montevidéu | `basanez.png` |
 | Bella Italia | Uruguai | `bella-italia.png` |
-| Bella Vista | Montevidéu | `bella-vista.png` |
 | Centro Atlético Lito | Uruguai | `centro-atletico-lito.png` |
 | Deportivo Colonia | Juan L. Lacaze | `deportivo-colonia.png` |
 | Durazno | Durazno | `durazno.png` |
@@ -198,12 +184,9 @@ Total: 119 escudos (0 de clubes brasileiros e 119 de fora).
 | Halcones | Uruguai | `halcones.png` |
 | Italiano | Uruguai | `italiano.png` |
 | Mar de Fondo | Montevidéu | `mar-de-fondo.png` |
-| Parque del Plata | Parque del Plata | `parque-del-plata.png` |
 | Platense | Montevidéu | `platense-uy.png` |
 | Potencia | Montevidéu | `potencia.png` |
 | Rocha | Rocha | `rocha.png` |
 | Salto | Salto | `salto.png` |
 | Salus | Montevidéu | `salus.png` |
 | Terremoto | Uruguai | `terremoto.png` |
-| Villa Española | Montevidéu | `villa-espanola.png` |
-| Villa Teresa | Montevidéu | `villa-teresa.png` |
