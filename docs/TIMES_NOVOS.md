@@ -11,7 +11,7 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 130 escudos (0 de clubes brasileiros e 130 de fora).
+Total: 120 escudos (0 de clubes brasileiros e 120 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
 
@@ -21,21 +21,14 @@ Total: 130 escudos (0 de clubes brasileiros e 130 de fora).
 |---|---|---|
 | Five Islands | São João | `five-islands.png` |
 
-### Belize (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Belmopan | Belmopan | `belmopan.png` |
-
-### Jamaica (3 clubes)
+### Jamaica (2 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Portmore United | Portmore | `portmore-united.png` |
 | Vere United | Hayes | `vere-united.png` |
-| Waterhouse | Kingston | `waterhouse.png` |
 
-### Suriname (5 clubes)
+### Suriname (4 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
@@ -43,9 +36,8 @@ Total: 130 escudos (0 de clubes brasileiros e 130 de fora).
 | Botopasi | Suriname | `botopasi.png` |
 | S.V. Sophia | Suriname | `s-v-sophia.png` |
 | SNL | Paramaribo | `snl.png` |
-| Slee Juniors | Suriname | `slee-juniors.png` |
 
-### Trinidad e Tobago (9 clubes)
+### Trinidad e Tobago (8 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
@@ -56,7 +48,6 @@ Total: 130 escudos (0 de clubes brasileiros e 130 de fora).
 | Morvant Caledonia United | Morvant | `morvant-caledonia-united.png` |
 | Point Fortin Civic | Point Fortin | `point-fortin-civic.png` |
 | Police | Port of Spain | `police.png` |
-| San Juan Jabloteh | Port of Spain | `san-juan-jabloteh.png` |
 | Sando | San Fernando | `sando.png` |
 
 ## Outros países da América: 2ª divisão de 2026
@@ -74,7 +65,7 @@ Total: 130 escudos (0 de clubes brasileiros e 130 de fora).
 | Juventud Independiente | San Salvador department | `juventud-independiente.png` |
 | Real Destroyer | Puerto de la Libertad | `real-destroyer.png` |
 
-### Guatemala (11 clubes)
+### Guatemala (10 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
@@ -82,7 +73,6 @@ Total: 130 escudos (0 de clubes brasileiros e 130 de fora).
 | Chimaltenango | Guatemala | `chimaltenango.png` |
 | Coatepeque | Guatemala | `coatepeque.png` |
 | Nueva | Guatemala | `nueva.png` |
-| Puerto San José | Guatemala | `puerto-san-jose.png` |
 | Sacachispas | Guatemala | `sacachispas.png` |
 | San Benito | San Benito | `san-benito.png` |
 | Sanarate | Guatemala | `sanarate.png` |
@@ -90,7 +80,7 @@ Total: 130 escudos (0 de clubes brasileiros e 130 de fora).
 | USAC | Cidade da Guatemala | `usac.png` |
 | Zacapa | Zacapa | `zacapa.png` |
 
-### Honduras (17 clubes)
+### Honduras (16 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
@@ -107,7 +97,6 @@ Total: 130 escudos (0 de clubes brasileiros e 130 de fora).
 | Parrillas One | Honduras | `parrillas-one.png` |
 | Pirata | Honduras | `pirata.png` |
 | Pumas | Honduras | `pumas.png` |
-| Real Sociedad | Tocoa | `real-sociedad.png` |
 | Santa Rosa | Honduras | `santa-rosa-hn.png` |
 | Tela | Atlántida Department | `tela.png` |
 | Vida | La Ceiba | `vida.png` |
@@ -137,12 +126,6 @@ Total: 130 escudos (0 de clubes brasileiros e 130 de fora).
 
 ## Outros países da América: 3ª divisão de 2026
 
-### Argentina (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Villa San Carlos | Berisso | `villa-san-carlos.png` |
-
 ### Chile (12 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
@@ -160,30 +143,27 @@ Total: 130 escudos (0 de clubes brasileiros e 130 de fora).
 | Santiago Morning | La Pintana | `santiago-morning.png` |
 | Trasandino | Los Andes | `trasandino.png` |
 
-### Estados Unidos (2 clubes)
+### Estados Unidos (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Sporting Cascades | Estados Unidos | `sporting-cascades.png` |
-| Westchester | Condado de Westchester | `westchester.png` |
 
-### México (4 clubes)
+### México (3 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Acatlán | Jalisco | `acatlan.png` |
 | CDM | Mexico City | `cdm.png` |
 | Calor | State of Mexico | `calor.png` |
-| Vaqueros Reynosa | Tamaulipas | `vaqueros-reynosa.png` |
 
-### Peru (22 clubes)
+### Peru (21 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Carlos Stein | Lambayeque | `carlos-stein.png` |
 | Centro Social Pariacoto | Casma | `centro-social-pariacoto.png` |
 | Cultural Volante | Bambamarca | `cultural-volante.png` |
-| Deportivo Coopsol | Chancay | `deportivo-coopsol.png` |
 | Deportivo Lute | Peru | `deportivo-lute.png` |
 | Deportivo Ucrania | Peru | `deportivo-ucrania.png` |
 | Diablos Rojos | Peru | `diablos-rojos.png` |
