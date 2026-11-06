@@ -64,8 +64,8 @@ const CARTOES: Cartao[] = [
   { x: 100, y: 1980, w: 900, h: 860, conteudo: img("telas/cartao-tabela.png") },
   { x: 1060, y: 1960, w: 1000, h: 660, conteudo: img("telas/cartao-proximo.png") },
 ];
-const LARGURA = 2640;
-const ALTURA = 2900;
+export const LARGURA = 2640;
+export const ALTURA = 2900;
 
 /** Para onde a câmera olha em cada cena: centro (x, y) no mural e aproximação. */
 const ALVOS: [number, number, number][] = [
@@ -93,10 +93,27 @@ export function VersaoMural() {
   const fim = interpolate(f, [s(CENAS[7]) + 30, s(CENAS[7]) + 45], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
     <AbsoluteFill style={{ background: "radial-gradient(circle at 50% 40%, #f7f8f5 0%, #dfe3dc 75%)", perspective: 2600, overflow: "hidden" }}>
-      <div
+      <Plano cx={cx} cy={cy} z={z} inclinacao={24 + flutua} />
+      <Legenda estilo={{ top: 1560 }} tamanho={74} max={4} />
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: fim, background: `rgba(6,21,14,${0.55 * fim})`, gap: 50 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+          <Icone tamanho={150} desde={s(CENAS[7]) + 30} />
+          <span style={{ fontFamily: SERIFADA, fontSize: 150, color: "white" }}>Proffut</span>
+        </div>
+        <div style={{ background: COR.dourado, color: "#10221a", fontFamily: FONTE, fontWeight: 800, fontSize: 58, borderRadius: 999, padding: "30px 70px" }}>Segue para acompanhar</div>
+      </AbsoluteFill>
+      <Audio src={staticFile(VOZ)} />
+    </AbsoluteFill>
+  );
+}
+
+/** O mural inclinado, com a câmera olhando para (cx, cy) com aproximação z. */
+export function Plano({ cx, cy, z, inclinacao = 24 }: { cx: number; cy: number; z: number; inclinacao?: number }) {
+  return (
+    <div
         style={{
           position: "absolute", left: 0, top: 0, width: LARGURA, height: ALTURA, transformOrigin: "0 0",
-          transform: `translate(540px, 900px) rotateX(${24 + flutua}deg) rotateZ(-12deg) scale(${z}) translate(${-cx}px, ${-cy}px)`,
+          transform: `translate(540px, 900px) rotateX(${inclinacao}deg) rotateZ(-12deg) scale(${z}) translate(${-cx}px, ${-cy}px)`,
         }}
       >
         {CARTOES.map((c, n) => (
@@ -112,15 +129,5 @@ export function VersaoMural() {
           </div>
         ))}
       </div>
-      <Legenda estilo={{ top: 1560 }} tamanho={74} max={4} />
-      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: fim, background: `rgba(6,21,14,${0.55 * fim})`, gap: 50 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-          <Icone tamanho={150} desde={s(CENAS[7]) + 30} />
-          <span style={{ fontFamily: SERIFADA, fontSize: 150, color: "white" }}>Proffut</span>
-        </div>
-        <div style={{ background: COR.dourado, color: "#10221a", fontFamily: FONTE, fontWeight: 800, fontSize: 58, borderRadius: 999, padding: "30px 70px" }}>Segue para acompanhar</div>
-      </AbsoluteFill>
-      <Audio src={staticFile(VOZ)} />
-    </AbsoluteFill>
   );
 }

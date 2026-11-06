@@ -16,13 +16,13 @@ function useMola(desde: number, rigidez = 140) {
 }
 
 /** Flutua devagar para cima e para baixo. */
-function Flutua({ children, fase = 0, amplitude = 14, estilo }: { children: ReactNode; fase?: number; amplitude?: number; estilo?: CSSProperties }) {
+export function Flutua({ children, fase = 0, amplitude = 14, estilo }: { children: ReactNode; fase?: number; amplitude?: number; estilo?: CSSProperties }) {
   const f = useCurrentFrame();
   return <div style={{ transform: `translateY(${Math.sin(f / 22 + fase) * amplitude}px)`, ...estilo }}>{children}</div>;
 }
 
 /** Pílula grossa, com espessura embaixo e sombra (como os botões "Solve" e "Create" do exemplo). */
-function Pilula({ children, desde, fundo = "white", cor = TINTA, tamanho = 64, estilo }: { children: ReactNode; desde: number; fundo?: string; cor?: string; tamanho?: number; estilo?: CSSProperties }) {
+export function Pilula({ children, desde, fundo = "white", cor = TINTA, tamanho = 64, estilo }: { children: ReactNode; desde: number; fundo?: string; cor?: string; tamanho?: number; estilo?: CSSProperties }) {
   const m = useMola(desde, 170);
   return (
     <div
@@ -47,7 +47,7 @@ function Titulo({ texto, desde, estilo }: { texto: string; desde: number; estilo
 }
 
 /** Cartão inclinado em 3D com sombra. */
-function Cartao3D({ children, desde, girar = -14, largura = 920, estilo }: { children: ReactNode; desde: number; girar?: number; largura?: number; estilo?: CSSProperties }) {
+export function Cartao3D({ children, desde, girar = -14, largura = 920, estilo }: { children: ReactNode; desde: number; girar?: number; largura?: number; estilo?: CSSProperties }) {
   const f = useCurrentFrame();
   const m = useMola(desde, 90);
   return (
