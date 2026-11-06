@@ -429,6 +429,14 @@ Pare a geração de audios". O trabalho ficou no histórico (commits 46ddd8e, d9
 `main`. Não gerar áudios sem ele pedir. Ele pode mandar áudios gravados (a voz dele ou de quem deixar usar; nada de
 narração da TV ou do rádio): para voltar, refazer a partir desses commits com os arquivos dele no lugar dos gerados.
 
+**Vídeos do TikTok (nov/2026, pasta `videos/`, fora do jogo):** série de bastidores ("estou criando meu jogo, inspirado no
+Brasfoot"; roteiros dos 12 episódios combinados com o usuário). Feitos com Remotion (`videos/src`, `npm run render` lá dentro, com
+`--browser-executable=/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell`), em pé
+(1080 × 1920), no estilo do exemplo que ele mandou (fundo escuro, frases curtas animadas, pedaços do jogo ampliados, contadores e
+um botão no fim). Voz: ElevenLabs, voz "Liam" (`TX3LPaxmHKxFdv7VOQHJ`, `eleven_multilingual_v2`), escolhida por ele entre 5; a
+chave fica só na variável de ambiente. Os tempos de cada cena seguem as pausas da voz (`silencedetect` do ffmpeg). As telas vêm
+do jogo rodando (Playwright, iPhone 13, capturas em alta resolução).
+
 **Elencos (nov/2026):** o usuário testou pegar os elencos de 2026 da Série A pelo Claude no Chrome (CSV do Transfermarkt:
 clube, nome, posição, nascimento, nacionalidade, camisa, fonte; 97% dos 560 do jogo continuam nos clubes) e decidiu: "Jogadores
 vou esperar a próxima janela de transferências". Depois da janela: o mesmo comando para as Séries A, B e C e atualizar os
