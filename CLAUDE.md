@@ -435,7 +435,9 @@ Brasfoot"; roteiros dos 12 episódios combinados com o usuário). Feitos com Rem
 (1080 × 1920), no estilo do exemplo que ele mandou (fundo escuro, frases curtas animadas, pedaços do jogo ampliados, contadores e
 um botão no fim). Voz: ElevenLabs, voz "Liam" (`TX3LPaxmHKxFdv7VOQHJ`, `eleven_multilingual_v2`), escolhida por ele entre 5; a
 chave fica só na variável de ambiente. Os tempos de cada cena seguem as pausas da voz (`silencedetect` do ffmpeg). As telas vêm
-do jogo rodando (Playwright, iPhone 13, capturas em alta resolução).
+do jogo rodando (Playwright, iPhone 13, capturas em alta resolução). **Música (pedido do usuário):** "Sempre traga musicas de futebol para cada video": a cada
+vídeo, sugerir músicas de jogos de futebol (trilhas de FIFA, músicas de estádio e de Copa), para ele pôr pela biblioteca do
+TikTok, bem baixinha sob a voz. Já usadas: episódio 1 com "Love Me Again" (John Newman, FIFA 14). Não repetir sem ele pedir.
 
 **Elencos (nov/2026):** o usuário testou pegar os elencos de 2026 da Série A pelo Claude no Chrome (CSV do Transfermarkt:
 clube, nome, posição, nascimento, nacionalidade, camisa, fonte; 97% dos 560 do jogo continuam nos clubes) e decidiu: "Jogadores
