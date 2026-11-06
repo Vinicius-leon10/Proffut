@@ -450,7 +450,9 @@ ajustes de equilíbrio pelo que ele sentir jogando.
   com os oficiais e decidiu: "Não, quero que use os escudos que mandei agora. O app é particular, uso individual. Use os escudos que mandei, é uma ordem". Foi avisado de que o site e o
   repositório são públicos e os escudos são marcas dos clubes (se vier reclamação, o GitHub pode pedir para tirar; aí
   volta o escudo desenhado). Os 156 ficam em `public/escudos/<id>.png` (`tools/escudos/recortar.py` recorta a prancha;
-  a prancha não vai para o git). Em nov/2026 ele mandou os 276 dos times novos (`escudos-novos-276.zip`: um PNG por
+  a prancha não vai para o git). Em nov/2026 os 20 da Série A foram trocados por imagens maiores (`escudos_serie_a_2026.zip`, do
+  Google Imagens; 128 px em vez dos ~79 do recorte; fonte no mesmo CSV): Santos sem a coroa, Vitória sem a estrela e Mirassol
+  e Palmeiras com a estrela da versão oficial. Em nov/2026 ele mandou os 276 dos times novos (`escudos-novos-276.zip`: um PNG por
   clube com o nome da lista, a prancha e o manifesto com a fonte de cada um, guardado em
   `docs/ESCUDOS_TIMES_NOVOS_FONTES.csv`; o zip e a prancha ficam fora do git): `tools/escudos/preparar.py` converte para
   sRGB, deixa transparente o fundo liso claro, corta a margem e reduz para 128 px e 256 cores (18 MB → 1,25 MB, iguais na
