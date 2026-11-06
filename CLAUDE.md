@@ -441,6 +441,10 @@ ajustes de equilíbrio pelo que ele sentir jogando.
   então o momento não é pra se preocupar em limitar o jogo, lógico que podemos otimizar, mas de uma maneira que não afete
   a funcionalidade do jogo". Construir completo; otimizar só sem tirar nada do jogo.
 
+- **Escudos que chegam (pedido do usuário, nov/2026):** "Assim que receber os escudos e verificar se estão corretos já va
+  colocando no jogo": a cada pacote, conferir na prancha, preparar (`preparar.py --quantizar`), atualizar a lista
+  (`tools/times/lista.py`), verificar e publicar sem esperar outra ordem; os errados ficam de fora e ele é avisado.
+
 - **Não extrair nada do Brasfoot** (arquivos, APK, listas de jogadores, imagens). O usuário pediu e foi recusado; ele aceitou.
 - **Escudos: os que o usuário mandou** (out/2026). Antes a regra era não usar escudos oficiais; ele mandou uma prancha
   com os oficiais e decidiu: "Não, quero que use os escudos que mandei agora. O app é particular, uso individual. Use os escudos que mandei, é uma ordem". Foi avisado de que o site e o
