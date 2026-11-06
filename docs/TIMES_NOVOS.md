@@ -11,22 +11,9 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 107 escudos (0 de clubes brasileiros e 107 de fora).
+Total: 88 escudos (0 de clubes brasileiros e 88 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
-
-### Antígua e Barbuda (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Five Islands | São João | `five-islands.png` |
-
-### Jamaica (2 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Portmore United | Portmore | `portmore-united.png` |
-| Vere United | Hayes | `vere-united.png` |
 
 ### Suriname (4 clubes)
 
@@ -50,35 +37,30 @@ Total: 107 escudos (0 de clubes brasileiros e 107 de fora).
 
 ## Outros países da América: 2ª divisão de 2026
 
-### El Salvador (8 clubes)
+### El Salvador (6 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | A.D. Batanecos | San Vicente | `a-d-batanecos.png` |
 | C.D. Aruba | El Salvador | `c-d-aruba.png` |
-| C.D. Talleres Jr | Chalatenango | `c-d-talleres-jr.png` |
 | D Espartano | Sonsonate | `d-espartano.png` |
 | D Inca Súper Flat | La Libertad | `d-inca-super-flat.png` |
-| Fuerte Aguilares | El Salvador | `fuerte-aguilares.png` |
 | Juventud Independiente | San Salvador department | `juventud-independiente.png` |
 | Real Destroyer | Puerto de la Libertad | `real-destroyer.png` |
 
-### Guatemala (10 clubes)
+### Guatemala (7 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Carchá | Guatemala | `carcha.png` |
 | Chimaltenango | Guatemala | `chimaltenango.png` |
-| Coatepeque | Guatemala | `coatepeque.png` |
 | Nueva | Guatemala | `nueva.png` |
 | Sacachispas | Guatemala | `sacachispas.png` |
 | San Benito | San Benito | `san-benito.png` |
 | Sanarate | Guatemala | `sanarate.png` |
-| Sololá | Guatemala | `solola.png` |
 | USAC | Cidade da Guatemala | `usac.png` |
-| Zacapa | Zacapa | `zacapa.png` |
 
-### Honduras (16 clubes)
+### Honduras (7 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
@@ -86,31 +68,15 @@ Total: 107 escudos (0 de clubes brasileiros e 107 de fora).
 | Brasilia | Honduras | `brasilia.png` |
 | C.D. Social Sol | Olanchito | `c-d-social-sol.png` |
 | Cruz Azul Opoa | Honduras | `cruz-azul-opoa.png` |
-| Deportes Savio | Santa Rosa de Copán | `deportes-savio.png` |
 | Espartano | Honduras | `espartano.png` |
-| Gimnástico | Honduras | `gimnastico.png` |
 | Honduras Progreso | El Progreso | `honduras-progreso.png` |
-| Meluca Campamento | Honduras | `meluca-campamento.png` |
 | Palestino | San Pedro Sula | `palestino-hn.png` |
-| Parrillas One | Honduras | `parrillas-one.png` |
-| Pirata | Honduras | `pirata.png` |
-| Pumas | Honduras | `pumas.png` |
-| Santa Rosa | Honduras | `santa-rosa-hn.png` |
-| Tela | Atlántida Department | `tela.png` |
-| Vida | La Ceiba | `vida.png` |
 
-### México (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Mineros de Zacatecas | Zacatecas | `mineros-de-zacatecas.png` |
-
-### Panamá (12 clubes)
+### Panamá (11 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Alianza Fútbol Club II | Panamá | `alianza-futbol-club-ii.png` |
-| Atlético Chiriquí | Panama | `atletico-chiriqui.png` |
 | Atlético Nacional | Panamá | `atletico-nacional-pa.png` |
 | Bocas Junior | Changuinola | `bocas-junior.png` |
 | Champions FC Academy | Panamá | `champions-fc-academy.png` |
