@@ -429,6 +429,11 @@ Pare a geração de audios". O trabalho ficou no histórico (commits 46ddd8e, d9
 `main`. Não gerar áudios sem ele pedir. Ele pode mandar áudios gravados (a voz dele ou de quem deixar usar; nada de
 narração da TV ou do rádio): para voltar, refazer a partir desses commits com os arquivos dele no lugar dos gerados.
 
+**Elencos (nov/2026):** o usuário testou pegar os elencos de 2026 da Série A pelo Claude no Chrome (CSV do Transfermarkt:
+clube, nome, posição, nascimento, nacionalidade, camisa, fonte; 97% dos 560 do jogo continuam nos clubes) e decidiu: "Jogadores
+vou esperar a próxima janela de transferências". Depois da janela: o mesmo comando para as Séries A, B e C e atualizar os
+elencos (só valem em jogo novo).
+
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e
 segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
