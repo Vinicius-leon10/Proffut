@@ -10,15 +10,15 @@ export const CENAS = [0, 4.6, 8.6, 13.8, 18.4, 22.0, 25.0, 30.0, 37.8];
 export const DURACAO = s(CENAS[CENAS.length - 1]);
 export const VOZ = "voz-ep01-v2.mp3";
 
-const DESTAQUE = new Set(["programar", "jogo", "técnico", "brasfoot", "madrugada", "pequeno", "subir", "iphone", "2026", "mil", "clubes", "américa", "vivo", "minuto", "inteligência", "artificial", "português", "tudo", "certo", "errado", "acompanhar"]);
+const DESTAQUE = new Set(["programar", "jogo", "técnico", "brasfoot", "madrugada", "pequeno", "subir", "iphone", "2026", "mil", "clubes", "américa", "vivo", "minuto", "inteligência", "artificial", "português", "tudo", "certo", "errado", "acompanhar", "santa", "cruz", "náutico", "clássico", "invicto", "título", "mata-mata", "gigante", "um!"]);
 export const limpa = (p: string) => p.toLowerCase().replace(/[.,:?!]/g, "");
 export const ehDestaque = (p: string) => DESTAQUE.has(limpa(p));
 
 /** Grupos de até `max` palavras, quebrando nas pausas (vírgula, ponto, dois-pontos). */
-export function grupos(max = 3) {
+export function grupos(max = 3, fonte: typeof PALAVRAS = PALAVRAS) {
   const lista: { palavras: typeof PALAVRAS; i: number; f: number }[] = [];
   let atual: typeof PALAVRAS = [];
-  for (const w of PALAVRAS) {
+  for (const w of fonte) {
     atual.push(w);
     if (atual.length >= max || /[.,:?!]$/.test(w.p)) {
       lista.push({ palavras: atual, i: atual[0].i, f: atual[atual.length - 1].f });
@@ -30,13 +30,13 @@ export function grupos(max = 3) {
 }
 
 /** Legenda palavra por palavra: mostra o grupo da vez; a palavra falada agora cresce e muda de cor. */
-export function Legenda({ max = 3, estilo, cor = "white", corAgora = "#f5c72c", corDestaque = "#34b777", maiusculas = true, tamanho = 96, contorno = true }: {
-  max?: number; estilo?: CSSProperties; cor?: string; corAgora?: string; corDestaque?: string; maiusculas?: boolean; tamanho?: number; contorno?: boolean;
+export function Legenda({ palavras: fonte = PALAVRAS, max = 3, estilo, cor = "white", corAgora = "#f5c72c", corDestaque = "#34b777", maiusculas = true, tamanho = 96, contorno = true }: {
+  palavras?: typeof PALAVRAS; max?: number; estilo?: CSSProperties; cor?: string; corAgora?: string; corDestaque?: string; maiusculas?: boolean; tamanho?: number; contorno?: boolean;
 }) {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = f / fps;
-  const lista = grupos(max);
+  const lista = grupos(max, fonte);
   const g = lista.find((x, k) => t >= x.i - 0.05 && t < (lista[k + 1]?.i ?? x.f + 0.6) - 0.05);
   if (!g) return null;
   const entrada = spring({ frame: f - s(g.i), fps, config: { damping: 14, stiffness: 220, mass: 0.5 } });

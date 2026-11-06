@@ -439,6 +439,15 @@ do jogo rodando (Playwright, iPhone 13, capturas em alta resolução). **Música
 vídeo, sugerir músicas de jogos de futebol (trilhas de FIFA, músicas de estádio e de Copa), para ele pôr pela biblioteca do
 TikTok, bem baixinha sob a voz. Já usadas: episódio 1 com "Love Me Again" (John Newman, FIFA 14). Não repetir sem ele pedir.
 
+**Série "Do zero ao topo" (TikTok, nov/2026):** pedido "Podemos criar uma serie de um club da serie c e vendo como ele vai
+prosseguindo" e "Uma simulação, mas ainda vamos continuar criando os videos da serie tbm". Carreira simulada do Santa Cruz
+(`videos/carreira/simular.ts`, semente 2026, escalação automática; o jogo decide tudo e o vídeo é fiel ao resultado):
+`dados/temporada-2026.json` tem um registro por jogo (placar, gols, posição na C e no Pernambucano, caixa, confiança).
+`antes-do-jogo N` imprime o save do dia do N-ésimo jogo, que o Playwright importa e grava ao vivo (o placar ao vivo bate
+com a simulação). 2026: 1º e invicto no grupo do Pernambucano, final perdida para o Náutico (0 x 3), queda na 3ª fase da
+Copa do Brasil, 7º na C, sem acesso no quadrangular (objetivo era até 4º; não foi demitido). Episódios em
+`videos/src/carreira/` (estilo da versão D), voz do Liam com o tempo de cada palavra (`with-timestamps`).
+
 **Elencos (nov/2026):** o usuário testou pegar os elencos de 2026 da Série A pelo Claude no Chrome (CSV do Transfermarkt:
 clube, nome, posição, nascimento, nacionalidade, camisa, fonte; 97% dos 560 do jogo continuam nos clubes) e decidiu: "Jogadores
 vou esperar a próxima janela de transferências". Depois da janela: o mesmo comando para as Séries A, B e C e atualizar os

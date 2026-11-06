@@ -1,0 +1,1358 @@
+{
+ "clube": "santa-cruz",
+ "semente": 2026,
+ "objetivo": {
+  "descricao": "Classificar para os quadrangulares em boa posição (até 4º)",
+  "posicaoAlvo": 4
+ },
+ "serieC": {
+  "promovidos": [
+   "ferroviaria",
+   "figueirense",
+   "brusque",
+   "amazonas-fc"
+  ],
+  "campeao": "ferroviaria",
+  "fase": "encerrada"
+ },
+ "jogos": [
+  {
+   "jogo": 1,
+   "data": "2026-01-11",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "grupos",
+   "rodada": 1,
+   "emCasa": false,
+   "adversario": "nautico",
+   "nomeAdversario": "Náutico",
+   "pro": 2,
+   "contra": 1,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "9",
+     "nome": "Gabriel Gabriel"
+    },
+    {
+     "min": "57",
+     "nome": "Rodrigues"
+    }
+   ],
+   "publico": 15405,
+   "serieC": {
+    "pos": 12,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 3,
+    "total": 6
+   },
+   "caixa": 5070000,
+   "confianca": 62,
+   "torcida": 64,
+   "melhor": "Gabriel Gabriel",
+   "demitido": false
+  },
+  {
+   "jogo": 2,
+   "data": "2026-01-18",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "grupos",
+   "rodada": 2,
+   "emCasa": true,
+   "adversario": "jaguar",
+   "nomeAdversario": "Jaguar",
+   "pro": 3,
+   "contra": 0,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "38",
+     "nome": "Pedro Favela"
+    },
+    {
+     "min": "75",
+     "nome": "Gabriel Gabriel"
+    },
+    {
+     "min": "85",
+     "nome": "Pedro Favela"
+    }
+   ],
+   "publico": 18428,
+   "serieC": {
+    "pos": 12,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 6,
+    "total": 6
+   },
+   "caixa": 5600700,
+   "confianca": 64,
+   "torcida": 70,
+   "melhor": "Pedro Favela",
+   "demitido": false
+  },
+  {
+   "jogo": 3,
+   "data": "2026-01-25",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "grupos",
+   "rodada": 3,
+   "emCasa": false,
+   "adversario": "vitoria-pe",
+   "nomeAdversario": "Vitória-PE",
+   "pro": 4,
+   "contra": 1,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "46",
+     "nome": "Wagner"
+    },
+    {
+     "min": "54",
+     "nome": "Eurico"
+    },
+    {
+     "min": "77",
+     "nome": "Willian Jr."
+    },
+    {
+     "min": "78",
+     "nome": "Eurico"
+    }
+   ],
+   "publico": 3393,
+   "serieC": {
+    "pos": 12,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 9,
+    "total": 6
+   },
+   "caixa": 5670700,
+   "confianca": 66,
+   "torcida": 76,
+   "melhor": "Willian Jr.",
+   "demitido": false
+  },
+  {
+   "jogo": 4,
+   "data": "2026-02-01",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "grupos",
+   "rodada": 4,
+   "emCasa": true,
+   "adversario": "afogados-da-ingazeira",
+   "nomeAdversario": "Afogados da Ingazeira",
+   "pro": 0,
+   "contra": 0,
+   "resultado": "E",
+   "gols": [],
+   "publico": 20931,
+   "serieC": {
+    "pos": 12,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 10,
+    "total": 6
+   },
+   "caixa": 5514999,
+   "confianca": 64,
+   "torcida": 76,
+   "melhor": "Felipe Alves",
+   "demitido": false
+  },
+  {
+   "jogo": 5,
+   "data": "2026-02-08",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "grupos",
+   "rodada": 5,
+   "emCasa": false,
+   "adversario": "decisao",
+   "nomeAdversario": "Decisão",
+   "pro": 3,
+   "contra": 0,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "39",
+     "nome": "Gabriel Gabriel"
+    },
+    {
+     "min": "45+2",
+     "nome": "Matheus Vinícius"
+    },
+    {
+     "min": "61",
+     "nome": "Eurico"
+    }
+   ],
+   "publico": 1588,
+   "serieC": {
+    "pos": 12,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 5584999,
+   "confianca": 66,
+   "torcida": 82,
+   "melhor": "Willian Jr.",
+   "demitido": false
+  },
+  {
+   "jogo": 6,
+   "data": "2026-02-15",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "quartas",
+   "rodada": 1,
+   "emCasa": true,
+   "adversario": "afogados-da-ingazeira",
+   "nomeAdversario": "Afogados da Ingazeira",
+   "pro": 2,
+   "contra": 0,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "26",
+     "nome": "Eurico"
+    },
+    {
+     "min": "79",
+     "nome": "Thiago Galhardo"
+    }
+   ],
+   "publico": 19224,
+   "serieC": {
+    "pos": 12,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 6135599,
+   "confianca": 68,
+   "torcida": 86,
+   "melhor": "Thiago Galhardo",
+   "demitido": false
+  },
+  {
+   "jogo": 7,
+   "data": "2026-02-22",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "semi",
+   "rodada": 1,
+   "emCasa": true,
+   "adversario": "central",
+   "nomeAdversario": "Central",
+   "pro": 4,
+   "contra": 0,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "28",
+     "nome": "Willian Jr."
+    },
+    {
+     "min": "32",
+     "nome": "Thiaguinho"
+    },
+    {
+     "min": "57",
+     "nome": "Rodrigues"
+    },
+    {
+     "min": "87",
+     "nome": "Thiaguinho"
+    }
+   ],
+   "publico": 25487,
+   "serieC": {
+    "pos": 12,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 6842774,
+   "confianca": 70,
+   "torcida": 92,
+   "melhor": "Thiaguinho",
+   "demitido": false
+  },
+  {
+   "jogo": 8,
+   "data": "2026-03-01",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "final",
+   "rodada": 1,
+   "emCasa": true,
+   "adversario": "nautico",
+   "nomeAdversario": "Náutico",
+   "pro": 0,
+   "contra": 3,
+   "resultado": "D",
+   "gols": [],
+   "publico": 26189,
+   "serieC": {
+    "pos": 12,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 6818523,
+   "confianca": 64,
+   "torcida": 85,
+   "melhor": "Muriel",
+   "demitido": false
+  },
+  {
+   "jogo": 9,
+   "data": "2026-04-04",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 1,
+   "emCasa": false,
+   "adversario": "inter-de-limeira",
+   "nomeAdversario": "Inter de Limeira",
+   "pro": 2,
+   "contra": 2,
+   "resultado": "E",
+   "gols": [
+    {
+     "min": "21",
+     "nome": "Gabriel Gabriel"
+    },
+    {
+     "min": "45+3",
+     "nome": "Willian Jr."
+    }
+   ],
+   "publico": 5265,
+   "serieC": {
+    "pos": 10,
+    "pts": 1,
+    "j": 1
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 6139547,
+   "confianca": 66,
+   "torcida": 85,
+   "melhor": "Willian Jr.",
+   "demitido": false
+  },
+  {
+   "jogo": 10,
+   "data": "2026-04-11",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 2,
+   "emCasa": true,
+   "adversario": "ferroviaria",
+   "nomeAdversario": "Ferroviária",
+   "pro": 0,
+   "contra": 1,
+   "resultado": "D",
+   "gols": [],
+   "publico": 23774,
+   "serieC": {
+    "pos": 15,
+    "pts": 1,
+    "j": 2
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7218897,
+   "confianca": 62,
+   "torcida": 81,
+   "melhor": "Denis Júnior",
+   "demitido": false
+  },
+  {
+   "jogo": 11,
+   "data": "2026-04-15",
+   "competicao": "Copa do Brasil",
+   "serie": "CB",
+   "fase": "fase2",
+   "rodada": 1,
+   "emCasa": false,
+   "adversario": "operario-ms",
+   "nomeAdversario": "Operário-MS",
+   "pro": 2,
+   "contra": 0,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "17",
+     "nome": "Gabriel Gabriel"
+    },
+    {
+     "min": "39",
+     "nome": "Soares"
+    }
+   ],
+   "publico": 2786,
+   "serieC": {
+    "pos": 15,
+    "pts": 1,
+    "j": 2
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7693897,
+   "confianca": 64,
+   "torcida": 85,
+   "melhor": "Rodrigues",
+   "demitido": false
+  },
+  {
+   "jogo": 12,
+   "data": "2026-04-18",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 3,
+   "emCasa": false,
+   "adversario": "amazonas-fc",
+   "nomeAdversario": "Amazonas FC",
+   "pro": 0,
+   "contra": 1,
+   "resultado": "D",
+   "gols": [],
+   "publico": 7971,
+   "serieC": {
+    "pos": 18,
+    "pts": 1,
+    "j": 3
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7763897,
+   "confianca": 60,
+   "torcida": 81,
+   "melhor": "Fabiano",
+   "demitido": false
+  },
+  {
+   "jogo": 13,
+   "data": "2026-04-22",
+   "competicao": "Copa do Brasil",
+   "serie": "CB",
+   "fase": "fase3",
+   "rodada": 1,
+   "emCasa": false,
+   "adversario": "maranhao",
+   "nomeAdversario": "Maranhão",
+   "pro": 0,
+   "contra": 2,
+   "resultado": "D",
+   "gols": [],
+   "publico": 4937,
+   "serieC": {
+    "pos": 18,
+    "pts": 1,
+    "j": 3
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7763897,
+   "confianca": 56,
+   "torcida": 77,
+   "melhor": "Jean",
+   "demitido": false
+  },
+  {
+   "jogo": 14,
+   "data": "2026-04-25",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 4,
+   "emCasa": true,
+   "adversario": "brusque",
+   "nomeAdversario": "Brusque",
+   "pro": 0,
+   "contra": 0,
+   "resultado": "E",
+   "gols": [],
+   "publico": 20961,
+   "serieC": {
+    "pos": 18,
+    "pts": 2,
+    "j": 4
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8357922,
+   "confianca": 54,
+   "torcida": 77,
+   "melhor": "Matheus",
+   "demitido": false
+  },
+  {
+   "jogo": 15,
+   "data": "2026-05-02",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 5,
+   "emCasa": false,
+   "adversario": "confianca",
+   "nomeAdversario": "Confiança",
+   "pro": 3,
+   "contra": 2,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "12",
+     "nome": "Rodrigues"
+    },
+    {
+     "min": "45",
+     "nome": "Eurico"
+    },
+    {
+     "min": "71",
+     "nome": "Willian Jr."
+    }
+   ],
+   "publico": 9635,
+   "serieC": {
+    "pos": 14,
+    "pts": 5,
+    "j": 5
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7678946,
+   "confianca": 56,
+   "torcida": 81,
+   "melhor": "Eurico",
+   "demitido": false
+  },
+  {
+   "jogo": 16,
+   "data": "2026-05-09",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 6,
+   "emCasa": true,
+   "adversario": "maranhao",
+   "nomeAdversario": "Maranhão",
+   "pro": 3,
+   "contra": 0,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "15",
+     "nome": "Thiago Galhardo"
+    },
+    {
+     "min": "67",
+     "nome": "Wagner"
+    },
+    {
+     "min": "85",
+     "nome": "Matheus Vinícius"
+    }
+   ],
+   "publico": 21869,
+   "serieC": {
+    "pos": 10,
+    "pts": 8,
+    "j": 6
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8295671,
+   "confianca": 58,
+   "torcida": 87,
+   "melhor": "Thiago Galhardo",
+   "demitido": false
+  },
+  {
+   "jogo": 17,
+   "data": "2026-05-16",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 7,
+   "emCasa": false,
+   "adversario": "barra-sc",
+   "nomeAdversario": "Barra-SC",
+   "pro": 2,
+   "contra": 0,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "36",
+     "nome": "Rodrigues"
+    },
+    {
+     "min": "84",
+     "nome": "Gabriel Gabriel"
+    }
+   ],
+   "publico": 2967,
+   "serieC": {
+    "pos": 8,
+    "pts": 11,
+    "j": 7
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8365671,
+   "confianca": 60,
+   "torcida": 91,
+   "melhor": "Gabriel Gabriel",
+   "demitido": false
+  },
+  {
+   "jogo": 18,
+   "data": "2026-05-23",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 8,
+   "emCasa": true,
+   "adversario": "ituano",
+   "nomeAdversario": "Ituano",
+   "pro": 4,
+   "contra": 2,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "11",
+     "nome": "Gabriel Gabriel"
+    },
+    {
+     "min": "51",
+     "nome": "Gabriel Gabriel"
+    },
+    {
+     "min": "71",
+     "nome": "Rodrigues"
+    },
+    {
+     "min": "75",
+     "nome": "Nathan"
+    }
+   ],
+   "publico": 22510,
+   "serieC": {
+    "pos": 5,
+    "pts": 14,
+    "j": 8
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8998421,
+   "confianca": 63,
+   "torcida": 95,
+   "melhor": "Gabriel Gabriel",
+   "demitido": false
+  },
+  {
+   "jogo": 19,
+   "data": "2026-05-30",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 9,
+   "emCasa": false,
+   "adversario": "maringa",
+   "nomeAdversario": "Maringá",
+   "pro": 0,
+   "contra": 3,
+   "resultado": "D",
+   "gols": [],
+   "publico": 5292,
+   "serieC": {
+    "pos": 8,
+    "pts": 14,
+    "j": 9
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 9068421,
+   "confianca": 58,
+   "torcida": 88,
+   "melhor": "Lucas",
+   "demitido": false
+  },
+  {
+   "jogo": 20,
+   "data": "2026-06-06",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 10,
+   "emCasa": true,
+   "adversario": "figueirense",
+   "nomeAdversario": "Figueirense",
+   "pro": 1,
+   "contra": 1,
+   "resultado": "E",
+   "gols": [
+    {
+     "min": "7",
+     "nome": "Pedro Favela"
+    }
+   ],
+   "publico": 21415,
+   "serieC": {
+    "pos": 11,
+    "pts": 15,
+    "j": 10
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8924820,
+   "confianca": 56,
+   "torcida": 88,
+   "melhor": "Pedro Favela",
+   "demitido": false
+  },
+  {
+   "jogo": 21,
+   "data": "2026-06-13",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 11,
+   "emCasa": false,
+   "adversario": "floresta",
+   "nomeAdversario": "Floresta",
+   "pro": 1,
+   "contra": 1,
+   "resultado": "E",
+   "gols": [
+    {
+     "min": "31",
+     "nome": "Toty"
+    }
+   ],
+   "publico": 2382,
+   "serieC": {
+    "pos": 10,
+    "pts": 16,
+    "j": 11
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8994820,
+   "confianca": 56,
+   "torcida": 88,
+   "melhor": "Toty",
+   "demitido": false
+  },
+  {
+   "jogo": 22,
+   "data": "2026-06-20",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 12,
+   "emCasa": true,
+   "adversario": "volta-redonda",
+   "nomeAdversario": "Volta Redonda",
+   "pro": 1,
+   "contra": 2,
+   "resultado": "D",
+   "gols": [
+    {
+     "min": "35",
+     "nome": "Gabriel Gabriel"
+    }
+   ],
+   "publico": 22864,
+   "serieC": {
+    "pos": 10,
+    "pts": 16,
+    "j": 12
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 9636420,
+   "confianca": 52,
+   "torcida": 84,
+   "melhor": "Italo",
+   "demitido": false
+  },
+  {
+   "jogo": 23,
+   "data": "2026-06-27",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 13,
+   "emCasa": false,
+   "adversario": "ypiranga-rs",
+   "nomeAdversario": "Ypiranga-RS",
+   "pro": 1,
+   "contra": 0,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "77",
+     "nome": "Soares"
+    }
+   ],
+   "publico": 6250,
+   "serieC": {
+    "pos": 9,
+    "pts": 19,
+    "j": 13
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 9706420,
+   "confianca": 54,
+   "torcida": 88,
+   "melhor": "Soares",
+   "demitido": false
+  },
+  {
+   "jogo": 24,
+   "data": "2026-07-04",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 14,
+   "emCasa": true,
+   "adversario": "guarani",
+   "nomeAdversario": "Guarani",
+   "pro": 2,
+   "contra": 0,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "55",
+     "nome": "Rodrigues"
+    },
+    {
+     "min": "85",
+     "nome": "Thiago Galhardo"
+    }
+   ],
+   "publico": 25122,
+   "serieC": {
+    "pos": 7,
+    "pts": 22,
+    "j": 14
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 9655494,
+   "confianca": 57,
+   "torcida": 92,
+   "melhor": "Felipe Alves",
+   "demitido": false
+  },
+  {
+   "jogo": 25,
+   "data": "2026-07-11",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 15,
+   "emCasa": false,
+   "adversario": "anapolis",
+   "nomeAdversario": "Anápolis",
+   "pro": 2,
+   "contra": 2,
+   "resultado": "E",
+   "gols": [
+    {
+     "min": "24",
+     "nome": "Soares"
+    },
+    {
+     "min": "26",
+     "nome": "Gabriel Gabriel"
+    }
+   ],
+   "publico": 7611,
+   "serieC": {
+    "pos": 7,
+    "pts": 23,
+    "j": 15
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 9725494,
+   "confianca": 58,
+   "torcida": 92,
+   "melhor": "Gabriel Gabriel",
+   "demitido": false
+  },
+  {
+   "jogo": 26,
+   "data": "2026-07-18",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 16,
+   "emCasa": true,
+   "adversario": "caxias",
+   "nomeAdversario": "Caxias",
+   "pro": 3,
+   "contra": 0,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "17",
+     "nome": "Eurico"
+    },
+    {
+     "min": "90+1",
+     "nome": "Wagner"
+    },
+    {
+     "min": "90+3",
+     "nome": "Eurico"
+    }
+   ],
+   "publico": 27631,
+   "serieC": {
+    "pos": 7,
+    "pts": 26,
+    "j": 16
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 10486269,
+   "confianca": 61,
+   "torcida": 98,
+   "melhor": "Eurico",
+   "demitido": false
+  },
+  {
+   "jogo": 27,
+   "data": "2026-07-25",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 17,
+   "emCasa": false,
+   "adversario": "itabaiana",
+   "nomeAdversario": "Itabaiana",
+   "pro": 0,
+   "contra": 0,
+   "resultado": "E",
+   "gols": [],
+   "publico": 4663,
+   "serieC": {
+    "pos": 7,
+    "pts": 27,
+    "j": 17
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 10556269,
+   "confianca": 62,
+   "torcida": 98,
+   "melhor": "Felipe Alves",
+   "demitido": false
+  },
+  {
+   "jogo": 28,
+   "data": "2026-08-01",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 18,
+   "emCasa": false,
+   "adversario": "paysandu",
+   "nomeAdversario": "Paysandu",
+   "pro": 0,
+   "contra": 1,
+   "resultado": "D",
+   "gols": [],
+   "publico": 15057,
+   "serieC": {
+    "pos": 7,
+    "pts": 27,
+    "j": 18
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 9877293,
+   "confianca": 59,
+   "torcida": 94,
+   "melhor": "Matheus N.",
+   "demitido": false
+  },
+  {
+   "jogo": 29,
+   "data": "2026-08-08",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 19,
+   "emCasa": true,
+   "adversario": "botafogo-pb",
+   "nomeAdversario": "Botafogo-PB",
+   "pro": 5,
+   "contra": 3,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "26",
+     "nome": "Gabriel Gabriel"
+    },
+    {
+     "min": "39",
+     "nome": "Gabriel Gabriel"
+    },
+    {
+     "min": "45+2",
+     "nome": "Thiago Galhardo"
+    },
+    {
+     "min": "56",
+     "nome": "Thiago Galhardo"
+    },
+    {
+     "min": "85",
+     "nome": "Gabriel Gabriel"
+    }
+   ],
+   "publico": 23775,
+   "serieC": {
+    "pos": 7,
+    "pts": 30,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 10541668,
+   "confianca": 62,
+   "torcida": 98,
+   "melhor": "Gabriel Gabriel",
+   "demitido": false
+  },
+  {
+   "jogo": 30,
+   "data": "2026-08-15",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "quadrangulares",
+   "rodada": 1,
+   "emCasa": false,
+   "adversario": "brusque",
+   "nomeAdversario": "Brusque",
+   "pro": 1,
+   "contra": 2,
+   "resultado": "D",
+   "gols": [
+    {
+     "min": "26",
+     "nome": "Willian Jr."
+    }
+   ],
+   "publico": 5000,
+   "serieC": {
+    "pos": 7,
+    "pts": 30,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 10541668,
+   "confianca": 59,
+   "torcida": 94,
+   "melhor": "Jean Mangabeira",
+   "demitido": false
+  },
+  {
+   "jogo": 31,
+   "data": "2026-08-22",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "quadrangulares",
+   "rodada": 2,
+   "emCasa": false,
+   "adversario": "amazonas-fc",
+   "nomeAdversario": "Amazonas FC",
+   "pro": 0,
+   "contra": 1,
+   "resultado": "D",
+   "gols": [],
+   "publico": 8921,
+   "serieC": {
+    "pos": 7,
+    "pts": 30,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 10541668,
+   "confianca": 56,
+   "torcida": 90,
+   "melhor": "Renan Santos",
+   "demitido": false
+  },
+  {
+   "jogo": 32,
+   "data": "2026-08-29",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "quadrangulares",
+   "rodada": 3,
+   "emCasa": true,
+   "adversario": "anapolis",
+   "nomeAdversario": "Anápolis",
+   "pro": 2,
+   "contra": 0,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "2",
+     "nome": "Rodrigues"
+    },
+    {
+     "min": "23",
+     "nome": "Soares"
+    }
+   ],
+   "publico": 25876,
+   "serieC": {
+    "pos": 7,
+    "pts": 30,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 11188568,
+   "confianca": 59,
+   "torcida": 94,
+   "melhor": "Rodrigues",
+   "demitido": false
+  },
+  {
+   "jogo": 33,
+   "data": "2026-09-05",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "quadrangulares",
+   "rodada": 4,
+   "emCasa": true,
+   "adversario": "brusque",
+   "nomeAdversario": "Brusque",
+   "pro": 1,
+   "contra": 1,
+   "resultado": "E",
+   "gols": [
+    {
+     "min": "30",
+     "nome": "Thiaguinho"
+    }
+   ],
+   "publico": 24887,
+   "serieC": {
+    "pos": 7,
+    "pts": 30,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 11061767,
+   "confianca": 58,
+   "torcida": 94,
+   "melhor": "Jean Mangabeira",
+   "demitido": false
+  },
+  {
+   "jogo": 34,
+   "data": "2026-09-12",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "quadrangulares",
+   "rodada": 5,
+   "emCasa": true,
+   "adversario": "amazonas-fc",
+   "nomeAdversario": "Amazonas FC",
+   "pro": 2,
+   "contra": 0,
+   "resultado": "V",
+   "gols": [
+    {
+     "min": "21",
+     "nome": "Soares"
+    },
+    {
+     "min": "33",
+     "nome": "Eurico"
+    }
+   ],
+   "publico": 24868,
+   "serieC": {
+    "pos": 7,
+    "pts": 30,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 11683467,
+   "confianca": 61,
+   "torcida": 98,
+   "melhor": "Eurico",
+   "demitido": false
+  },
+  {
+   "jogo": 35,
+   "data": "2026-09-19",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "quadrangulares",
+   "rodada": 6,
+   "emCasa": false,
+   "adversario": "anapolis",
+   "nomeAdversario": "Anápolis",
+   "pro": 1,
+   "contra": 1,
+   "resultado": "E",
+   "gols": [
+    {
+     "min": "47",
+     "nome": "Eurico"
+    }
+   ],
+   "publico": 6474,
+   "serieC": {
+    "pos": 7,
+    "pts": 30,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 1,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 11683467,
+   "confianca": 62,
+   "torcida": 98,
+   "melhor": "Eurico",
+   "demitido": false
+  }
+ ]
+}
