@@ -11,7 +11,7 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 183 escudos (0 de clubes brasileiros e 183 de fora).
+Total: 130 escudos (0 de clubes brasileiros e 130 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
 
@@ -112,14 +112,11 @@ Total: 183 escudos (0 de clubes brasileiros e 183 de fora).
 | Tela | Atlántida Department | `tela.png` |
 | Vida | La Ceiba | `vida.png` |
 
-### México (4 clubes)
+### México (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Mineros de Zacatecas | Zacatecas | `mineros-de-zacatecas.png` |
-| Tepatitlán | Tepatitlán de Morelos | `tepatitlan.png` |
-| Tlaxcala | Tlaxcala de Xicohténcatl | `tlaxcala.png` |
-| Venados | Mérida | `venados.png` |
 
 ### Panamá (12 clubes)
 
@@ -140,36 +137,17 @@ Total: 183 escudos (0 de clubes brasileiros e 183 de fora).
 
 ## Outros países da América: 3ª divisão de 2026
 
-### Argentina (19 clubes)
+### Argentina (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Argentino de Quilmes | Quilmes | `argentino-de-quilmes.png` |
-| Arsenal de Sarandí | Sarandí | `arsenal-de-sarandi.png` |
-| Brown (Adrogué) | Adrogué | `brown-adrogue.png` |
-| Camioneros | 9 de Abril | `camioneros.png` |
-| Comunicaciones | Buenos Aires | `comunicaciones-ar.png` |
-| Defensores Unidos | Zárate | `defensores-unidos.png` |
-| Deportivo Armenio | Ingeniero Maschwitz | `deportivo-armenio.png` |
-| Deportivo Merlo | Parque San Martín | `deportivo-merlo.png` |
-| Excursionistas | Belgrano | `excursionistas.png` |
-| Flandria | Jáuregui | `flandria.png` |
-| Ituzaingó | Ituzaingó | `ituzaingo.png` |
-| Laferrere | La Matanza | `laferrere.png` |
-| Liniers | San Justo | `liniers.png` |
-| Real Pilar | Pilar | `real-pilar.png` |
-| Sportivo Italiano | Ciudad Evita | `sportivo-italiano.png` |
-| Talleres (RE) | Remedios de Escalada | `talleres-re.png` |
-| UAI Urquiza | Buenos Aires | `uai-urquiza.png` |
-| Villa Dálmine | Campana (Buenos Aires) | `villa-dalmine.png` |
 | Villa San Carlos | Berisso | `villa-san-carlos.png` |
 
-### Chile (14 clubes)
+### Chile (12 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Brujas de Salamanca | Salamanca | `brujas-de-salamanca.png` |
-| Colchagua | San Fernando | `colchagua.png` |
 | Concón National | Chile | `concon-national.png` |
 | Deportes Colina | Colina | `deportes-colina.png` |
 | Deportes Linares | Linares | `deportes-linares.png` |
@@ -179,54 +157,26 @@ Total: 183 escudos (0 de clubes brasileiros e 183 de fora).
 | Provincial Osorno | Chile | `provincial-osorno.png` |
 | Provincial Ovalle | Ovalle | `provincial-ovalle.png` |
 | Real San Joaquín | Chile | `real-san-joaquin.png` |
-| Santiago City | Las Condes | `santiago-city.png` |
 | Santiago Morning | La Pintana | `santiago-morning.png` |
 | Trasandino | Los Andes | `trasandino.png` |
 
-### Estados Unidos (18 clubes)
+### Estados Unidos (2 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| AV Alta | Lancaster | `av-alta.png` |
-| Athletic Club Boise | Garden City | `athletic-club-boise.png` |
-| Charlotte Independence | Charlotte | `charlotte-independence.png` |
-| Chattanooga Red Wolves | Chattanooga | `chattanooga-red-wolves.png` |
-| Corpus Christi | Corpus Christi | `corpus-christi.png` |
-| Fort Wayne | Estados Unidos | `fort-wayne.png` |
-| Forward Madison | Madison | `forward-madison.png` |
-| Greenville Triumph | Greenville | `greenville-triumph.png` |
-| Naples | Naples | `naples.png` |
-| New York Cosmos | Paterson | `new-york-cosmos.png` |
-| One Knoxville | Knoxville | `one-knoxville.png` |
-| Portland Hearts of Pine | Estados Unidos | `portland-hearts-of-pine.png` |
-| Richmond Kickers | Richmond | `richmond-kickers.png` |
-| Sarasota Paradise | Lakewood Ranch | `sarasota-paradise.png` |
-| Spokane Velocity | Spokane | `spokane-velocity.png` |
 | Sporting Cascades | Estados Unidos | `sporting-cascades.png` |
-| Union Omaha | Omaha | `union-omaha.png` |
 | Westchester | Condado de Westchester | `westchester.png` |
 
-### México (15 clubes)
+### México (4 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Acatlán | Jalisco | `acatlan.png` |
-| Artesanos Metepec | State of Mexico | `artesanos-metepec.png` |
 | CDM | Mexico City | `cdm.png` |
 | Calor | State of Mexico | `calor.png` |
-| Cañoneros | Milpa Alta | `canoneros.png` |
-| Ciervos | State of Mexico | `ciervos.png` |
-| Delfines de Coatzacoalcos | Veracruz | `delfines-de-coatzacoalcos.png` |
-| Dragones de Oaxaca | Oaxaca | `dragones-de-oaxaca.png` |
-| Guerreros de Autlán | Jalisco | `guerreros-de-autlan.png` |
-| Héroes de Zaci | Acámbaro | `heroes-de-zaci.png` |
-| Mineros de Fresnillo | Zacatecas | `mineros-de-fresnillo.png` |
-| Real Apodaca | Nuevo León | `real-apodaca.png` |
-| Saltillo Soccer | Coahuila | `saltillo-soccer.png` |
-| Santiago | Nuevo León | `santiago.png` |
 | Vaqueros Reynosa | Tamaulipas | `vaqueros-reynosa.png` |
 
-### Peru (24 clubes)
+### Peru (22 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
@@ -235,13 +185,11 @@ Total: 183 escudos (0 de clubes brasileiros e 183 de fora).
 | Cultural Volante | Bambamarca | `cultural-volante.png` |
 | Deportivo Coopsol | Chancay | `deportivo-coopsol.png` |
 | Deportivo Lute | Peru | `deportivo-lute.png` |
-| Deportivo Municipal | Lima | `deportivo-municipal.png` |
 | Deportivo Ucrania | Peru | `deportivo-ucrania.png` |
 | Diablos Rojos | Peru | `diablos-rojos.png` |
 | Ecosem Pasco | Cerro de Pasco | `ecosem-pasco.png` |
 | FCR San Antonio | Moquegua | `fcr-san-antonio.png` |
 | José Gálvez FBC | Chimbote | `jose-galvez-fbc.png` |
-| Juan Aurich | Chiclayo | `juan-aurich.png` |
 | Juventud Alfa | Peru | `juventud-alfa.png` |
 | Juventud Cautivo | San Miguel de El Faique | `juventud-cautivo.png` |
 | Juventud Santo Domingo | Peru | `juventud-santo-domingo.png` |
@@ -255,7 +203,7 @@ Total: 183 escudos (0 de clubes brasileiros e 183 de fora).
 | Unión Huaral | Huaral | `union-huaral.png` |
 | Unión Santo Domingo | Peru | `union-santo-domingo.png` |
 
-### Uruguai (22 clubes)
+### Uruguai (21 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
@@ -263,7 +211,6 @@ Total: 183 escudos (0 de clubes brasileiros e 183 de fora).
 | Basáñez | Montevidéu | `basanez.png` |
 | Bella Italia | Uruguai | `bella-italia.png` |
 | Bella Vista | Montevidéu | `bella-vista.png` |
-| Canadian Soccer Club | Montevidéu | `canadian-soccer-club.png` |
 | Centro Atlético Lito | Uruguai | `centro-atletico-lito.png` |
 | Deportivo Colonia | Juan L. Lacaze | `deportivo-colonia.png` |
 | Durazno | Durazno | `durazno.png` |
