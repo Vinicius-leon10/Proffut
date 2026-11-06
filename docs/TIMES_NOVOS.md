@@ -11,7 +11,7 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 88 escudos (0 de clubes brasileiros e 88 de fora).
+Total: 78 escudos (0 de clubes brasileiros e 78 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
 
@@ -72,7 +72,7 @@ Total: 88 escudos (0 de clubes brasileiros e 88 de fora).
 | Honduras Progreso | El Progreso | `honduras-progreso.png` |
 | Palestino | San Pedro Sula | `palestino-hn.png` |
 
-### Panamá (11 clubes)
+### Panamá (9 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
@@ -83,31 +83,21 @@ Total: 88 escudos (0 de clubes brasileiros e 88 de fora).
 | Colón C-3 | Panama | `colon-c-3.png` |
 | Costa del Este | Cidade do Panamá | `costa-del-este.png` |
 | Mario Méndez | Panamá | `mario-mendez.png` |
-| Panama City | Panamá | `panama-city.png` |
 | San Martín | Panamá | `san-martin.png` |
 | UDELAS | Panamá | `udelas.png` |
-| Águilas de la Universidad de Panamá | Panamá | `aguilas-de-la-universidad-de-panama.png` |
 
 ## Outros países da América: 3ª divisão de 2026
 
-### Chile (7 clubes)
+### Chile (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Brujas de Salamanca | Salamanca | `brujas-de-salamanca.png` |
-| Concón National | Chile | `concon-national.png` |
-| General Velásquez | San Vicente de Tagua Tagua | `general-velasquez.png` |
-| Provincial Osorno | Chile | `provincial-osorno.png` |
-| Real San Joaquín | Chile | `real-san-joaquin.png` |
 | Santiago Morning | La Pintana | `santiago-morning.png` |
-| Trasandino | Los Andes | `trasandino.png` |
 
-### México (3 clubes)
+### México (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Acatlán | Jalisco | `acatlan.png` |
-| CDM | Mexico City | `cdm.png` |
 | Calor | State of Mexico | `calor.png` |
 
 ### Peru (21 clubes)
