@@ -3,7 +3,16 @@ import { createPortal } from "react-dom";
 import { hashTexto } from "../engine/rng";
 import { bandeira, ehSelecao, paisDaSelecao } from "../engine/selecoes";
 import type { Clube, Posicao } from "../engine/tipos";
+import { bandeiraDaNacionalidade } from "./formatos";
 import { useLoja } from "./store";
+
+// ---- bandeira do jogador ----------------------------------------------------------
+
+/** A bandeira pequena do país do jogador, ao lado do nome (pedido do usuário, R97). */
+export function BandeiraJogador({ nacionalidade }: { nacionalidade: string }) {
+  const { bandeira, pais } = bandeiraDaNacionalidade(nacionalidade);
+  return <span className="bandeira-jogador" title={pais} role="img" aria-label={pais}>{bandeira}</span>;
+}
 
 // ---- escudo ------------------------------------------------------------------------
 

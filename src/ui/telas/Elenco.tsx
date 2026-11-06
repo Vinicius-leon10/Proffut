@@ -9,7 +9,7 @@ import { formatarNota, notaMedia } from "../../engine/notas";
 import { valorMercado } from "../../engine/gerador";
 import { dispensar, elencoDe, podeSair, precoPedido } from "../../engine/mercado";
 import type { Jogador, Posicao } from "../../engine/tipos";
-import { Barra, Cartao, Escudo, Folha, Opcoes, Pos } from "../componentes";
+import { BandeiraJogador, Barra, Cartao, Escudo, Folha, Opcoes, Pos } from "../componentes";
 import { NOMES_NACIONALIDADE } from "../formatos";
 import { useJogo, useLoja } from "../store";
 
@@ -42,6 +42,7 @@ export function LinhaJogador({ j, aoTocar, direita, semAVenda }: { j: Jogador; a
       <Pos pos={j.posicao} />
       <div className="cresce">
         <div className="linha" style={{ gap: 6 }}>
+          <BandeiraJogador nacionalidade={j.nacionalidade} />
           <span className="negrito corta pequeno">{j.nome}</span>
           <Situacao j={j} semAVenda={semAVenda} />
         </div>
@@ -153,7 +154,7 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
       <div className="linha" style={{ flexWrap: "wrap", gap: 6 }}>
         <Pos pos={j.posicao} />
         <span className="pequeno">{NOMES_POSICAO[j.posicao]}{j.posicao === "L" ? ` (${j.lado === "D" ? "direita" : "esquerda"})` : ""}</span>
-        <span className="pequeno fraco">· {j.idade} anos · {NOMES_NACIONALIDADE[j.nacionalidade] ?? j.nacionalidade}</span>
+        <span className="pequeno fraco">· {j.idade} anos · <BandeiraJogador nacionalidade={j.nacionalidade} /> {NOMES_NACIONALIDADE[j.nacionalidade] ?? j.nacionalidade}</span>
         <Situacao j={j} />
       </div>
       <div className="linha" style={{ gap: 6 }}>
@@ -268,7 +269,7 @@ export function Elenco() {
               <div key={j.id} className="linha pequeno">
                 <Pos pos={j.posicao} />
                 <div className="cresce" style={{ minWidth: 0 }}>
-                  <div className="negrito corta">{j.nome}</div>
+                  <div className="linha" style={{ gap: 6 }}><BandeiraJogador nacionalidade={j.nacionalidade} /><span className="negrito corta">{j.nome}</span></div>
                   <div className="mini fraco corta">{estado.clubes[j.clubeId!].nome} · volta no fim de {j.emprestimo!.ate}</div>
                 </div>
                 <Escudo clube={estado.clubes[j.clubeId!]} tamanho={24} />

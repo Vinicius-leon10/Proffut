@@ -56,3 +56,18 @@ export const NOMES_NACIONALIDADE: Record<string, string> = {
   // Os países da América que faltavam (as nacionalidades dos clubes e das seleções da Concacaf).
   ...Object.fromEntries(Object.values(PAISES).map((p) => [p.nacionalidade, p.pais])),
 };
+
+/** Código de duas letras do país de cada nacionalidade (para a bandeira em emoji ao lado do nome do jogador). */
+const PAIS_DA_NACIONALIDADE: Record<string, string> = {
+  BRA: "BR", POR: "PT", ESP: "ES", ITA: "IT", FRA: "FR", ALE: "DE", HOL: "NL", BEL: "BE", JAP: "JP",
+  ANG: "AO", NGA: "NG", GAN: "GH", CMR: "CM", CIV: "CI", SEN: "SN", MAR: "MA", CPV: "CV", MOC: "MZ", GNB: "GW",
+  ...Object.fromEntries(Object.entries(PAISES).map(([codigo, p]) => [p.nacionalidade, codigo])),
+};
+
+/** Bandeira (emoji) e nome do país do jogador pela nacionalidade ("ARG" → 🇦🇷 Argentina); sem país conhecido, a branca. */
+export function bandeiraDaNacionalidade(nacionalidade: string): { bandeira: string; pais: string } {
+  const codigo = PAIS_DA_NACIONALIDADE[nacionalidade];
+  const pais = NOMES_NACIONALIDADE[nacionalidade] ?? nacionalidade;
+  if (!codigo) return { bandeira: "🏳️", pais };
+  return { bandeira: String.fromCodePoint(...[...codigo].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65)), pais };
+}

@@ -8,7 +8,8 @@ import { salarioBase, valorMercado } from "../../engine/gerador";
 import { motivoParaNaoPegar, pegarEmprestado, taxaDeEmprestimo } from "../../engine/emprestimos";
 import { elencoDe, fazerOferta, livres, podeSair, precoPedido, propostasPendentes } from "../../engine/mercado";
 import type { Jogador, Posicao } from "../../engine/tipos";
-import { Escudo, Folha, Opcoes, Pos, Segmentado } from "../componentes";
+import { BandeiraJogador, Escudo, Folha, Opcoes, Pos, Segmentado } from "../componentes";
+import { NOMES_NACIONALIDADE } from "../formatos";
 import { useJogo, useLoja } from "../store";
 import { NOME_REGIAO, PAISES, type Regiao } from "../../engine/torneios";
 import { FolhaJogador, LinhaJogador, Situacao } from "./Elenco";
@@ -43,7 +44,7 @@ function FolhaOferta({ j, aoFechar }: { j: Jogador; aoFechar: () => void }) {
     <Folha titulo={j.nome} aoFechar={aoFechar}>
       <div className="linha" style={{ flexWrap: "wrap", gap: 6 }}>
         <Pos pos={j.posicao} />
-        <span className="pequeno">{NOMES_POSICAO[j.posicao]} · {j.idade} anos · força <b>{j.forca}</b></span>
+        <span className="pequeno">{NOMES_POSICAO[j.posicao]} · {j.idade} anos · <BandeiraJogador nacionalidade={j.nacionalidade} /> {NOMES_NACIONALIDADE[j.nacionalidade] ?? j.nacionalidade} · força <b>{j.forca}</b></span>
         <Situacao j={j} />
       </div>
       <div className="opcoes">{j.caracteristicas.map((c) => <span key={c} className="chip verde">{NOMES_CARACTERISTICA[c]}</span>)}</div>
@@ -218,7 +219,7 @@ export function Mercado() {
                 <button className="abrir-ficha cresce" onClick={() => setFicha(j.id)}>
                   <Pos pos={j.posicao} />
                   <div className="cresce">
-                    <div className="negrito corta pequeno">{j.nome}</div>
+                    <div className="linha" style={{ gap: 6 }}><BandeiraJogador nacionalidade={j.nacionalidade} /><span className="negrito corta pequeno">{j.nome}</span></div>
                     <div className="mini fraco corta">{j.idade} anos · força {j.forca}</div>
                   </div>
                 </button>

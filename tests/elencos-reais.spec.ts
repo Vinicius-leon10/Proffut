@@ -27,3 +27,29 @@ test("R19 o jogo novo traz os jogadores reais do clube, com o país por extenso"
     await ficha.getByRole("button", { name: "Fechar" }).click();
   }
 });
+
+test("R97 a bandeira pequena do país do jogador ao lado do nome: no Elenco, na ficha e na lista do Mercado", async ({ page }) => {
+  await novoJogo(page, { serie: "Série A", clube: "Flamengo" });
+  await aba(page, "Elenco");
+  const linhas = page.locator(".lista .item");
+  expect(await linhas.count()).toBeGreaterThan(20);
+  // Cada jogador do elenco tem a bandeira; o argentino com a da Argentina, o brasileiro com a do Brasil.
+  expect(await page.locator(".lista .item .bandeira-jogador").count()).toBe(await linhas.count());
+  const estrangeiro = elencos.flamengo.find((j) => j.nacionalidade === "ARG")!;
+  const brasileiro = elencos.flamengo.find((j) => !j.nacionalidade)!;
+  const linhaDe = (nome: string) => linhas.filter({ has: page.locator(".negrito", { hasText: exato(nome) }) });
+  await expect(linhaDe(estrangeiro.nome).locator(".bandeira-jogador")).toHaveText("🇦🇷");
+  await expect(linhaDe(estrangeiro.nome).locator(".bandeira-jogador")).toHaveAttribute("title", "Argentina");
+  await expect(linhaDe(brasileiro.nome).locator(".bandeira-jogador")).toHaveText("🇧🇷");
+  // Na ficha, a bandeira ao lado do país.
+  await linhaDe(estrangeiro.nome).click();
+  const ficha = page.getByRole("dialog");
+  await expect(ficha.locator(".bandeira-jogador")).toHaveText("🇦🇷");
+  await expect(ficha).toContainText("🇦🇷 Argentina");
+  await ficha.getByRole("button", { name: "Fechar" }).click();
+  // No Mercado, cada jogador da lista também.
+  await aba(page, "Mercado");
+  const mercado = page.locator("main .lista .item");
+  await expect(mercado.first()).toBeVisible();
+  expect(await page.locator("main .lista .item .bandeira-jogador").count()).toBe(await mercado.count());
+});

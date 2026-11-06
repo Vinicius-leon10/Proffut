@@ -684,3 +684,6 @@ p { margin: 0; }
 /* ---- escolha de jogador por posição (R53) ---------------------------------------------------- */
 
 .grupo-posicao h3 { margin: 4px 0 2px; text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.72rem; }
+
+/* A bandeira pequena do país do jogador, ao lado do nome (R97). */
+.bandeira-jogador { font-size: 0.95em; line-height: 1; flex-shrink: 0; }

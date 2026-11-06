@@ -8,7 +8,7 @@ import {
   ehCompeticaoDeSelecoes, notaDeConvocacao, rankingDasSelecoes, tabelasDeSelecoes,
 } from "../../engine/selecoes";
 import type { IdCompeticaoSelecoes, Jogador, Posicao } from "../../engine/tipos";
-import { Cartao, Escudo, Pos, Topo } from "../componentes";
+import { BandeiraJogador, Cartao, Escudo, Pos, Topo } from "../componentes";
 import { rotuloPartida } from "../formatos";
 import { useJogo, useLoja } from "../store";
 
@@ -123,7 +123,7 @@ export function Convocacao() {
                   <button key={j.id} className={`item${escolhidos.has(j.id) ? " meu" : ""}`} onClick={() => alternar(j)} aria-pressed={escolhidos.has(j.id)}>
                     <Pos pos={j.posicao} />
                     <div className="cresce" style={{ minWidth: 0 }}>
-                      <div className="pequeno negrito corta">{j.nome}</div>
+                      <div className="linha" style={{ gap: 6 }}><BandeiraJogador nacionalidade={j.nacionalidade} /><span className="pequeno negrito corta">{j.nome}</span></div>
                       <div className="mini fraco corta">{ondeJoga(estado, j)} · {j.idade} anos{j.selecao?.jogos ? ` · ${j.selecao.jogos} ${j.selecao.jogos === 1 ? "jogo" : "jogos"} pela seleção` : ""}{j.lesaoDias > 0 ? ` · lesão ${j.lesaoDias}d` : ""}</div>
                     </div>
                     <span className="forca num" title={NOMES_POSICAO[j.posicao]}>{j.forca}</span>
