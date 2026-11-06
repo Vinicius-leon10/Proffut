@@ -441,6 +441,9 @@ ajustes de equilíbrio pelo que ele sentir jogando.
   então o momento não é pra se preocupar em limitar o jogo, lógico que podemos otimizar, mas de uma maneira que não afete
   a funcionalidade do jogo". Construir completo; otimizar só sem tirar nada do jogo.
 
+- **Fonte dos escudos (nov/2026):** "Não usaremos mais a manus pra isso". Os escudos agora vêm do Claude no Chrome do
+  computador do usuário, por busca rápida no Google Imagens (comando com a lista e o nome do arquivo de cada clube; sem
+  entrar nos sites dos clubes); a conferência é feita aqui, na prancha. Não sugerir a Manus.
 - **Escudos que chegam (pedido do usuário, nov/2026):** "Assim que receber os escudos e verificar se estão corretos já va
   colocando no jogo": a cada pacote, conferir na prancha, preparar (`preparar.py --quantizar`), atualizar a lista
   (`tools/times/lista.py`), verificar e publicar sem esperar outra ordem; os errados ficam de fora e ele é avisado.
