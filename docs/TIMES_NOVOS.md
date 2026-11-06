@@ -11,138 +11,74 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 78 escudos (0 de clubes brasileiros e 78 de fora).
+Total: 24 escudos (0 de clubes brasileiros e 24 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
 
-### Suriname (4 clubes)
+### Suriname (3 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| ACoconut | Brokopondo | `acoconut.png` |
 | Botopasi | Suriname | `botopasi.png` |
 | S.V. Sophia | Suriname | `s-v-sophia.png` |
 | SNL | Paramaribo | `snl.png` |
 
-### Trinidad e Tobago (6 clubes)
+### Trinidad e Tobago (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| AC Port of Spain | Arima | `ac-port-of-spain.png` |
 | Central | Couva | `central-tt.png` |
-| Defence Force | Port of Spain | `defence-force.png` |
-| La Horquetta Rangers | Port of Spain | `la-horquetta-rangers.png` |
-| Morvant Caledonia United | Morvant | `morvant-caledonia-united.png` |
-| Police | Port of Spain | `police.png` |
 
 ## Outros países da América: 2ª divisão de 2026
 
-### El Salvador (6 clubes)
+### El Salvador (2 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| A.D. Batanecos | San Vicente | `a-d-batanecos.png` |
-| C.D. Aruba | El Salvador | `c-d-aruba.png` |
 | D Espartano | Sonsonate | `d-espartano.png` |
-| D Inca Súper Flat | La Libertad | `d-inca-super-flat.png` |
-| Juventud Independiente | San Salvador department | `juventud-independiente.png` |
 | Real Destroyer | Puerto de la Libertad | `real-destroyer.png` |
 
-### Guatemala (7 clubes)
+### Guatemala (3 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Carchá | Guatemala | `carcha.png` |
 | Chimaltenango | Guatemala | `chimaltenango.png` |
 | Nueva | Guatemala | `nueva.png` |
-| Sacachispas | Guatemala | `sacachispas.png` |
-| San Benito | San Benito | `san-benito.png` |
-| Sanarate | Guatemala | `sanarate.png` |
 | USAC | Cidade da Guatemala | `usac.png` |
 
-### Honduras (7 clubes)
+### Honduras (2 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Boca Juniors de Tocoa | Honduras | `boca-juniors-de-tocoa.png` |
-| Brasilia | Honduras | `brasilia.png` |
-| C.D. Social Sol | Olanchito | `c-d-social-sol.png` |
-| Cruz Azul Opoa | Honduras | `cruz-azul-opoa.png` |
-| Espartano | Honduras | `espartano.png` |
 | Honduras Progreso | El Progreso | `honduras-progreso.png` |
 | Palestino | San Pedro Sula | `palestino-hn.png` |
 
-### Panamá (9 clubes)
+### Panamá (3 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Alianza Fútbol Club II | Panamá | `alianza-futbol-club-ii.png` |
-| Atlético Nacional | Panamá | `atletico-nacional-pa.png` |
 | Bocas Junior | Changuinola | `bocas-junior.png` |
-| Champions FC Academy | Panamá | `champions-fc-academy.png` |
-| Colón C-3 | Panama | `colon-c-3.png` |
-| Costa del Este | Cidade do Panamá | `costa-del-este.png` |
-| Mario Méndez | Panamá | `mario-mendez.png` |
 | San Martín | Panamá | `san-martin.png` |
 | UDELAS | Panamá | `udelas.png` |
 
 ## Outros países da América: 3ª divisão de 2026
 
-### Chile (1 clube)
+### Peru (7 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Santiago Morning | La Pintana | `santiago-morning.png` |
-
-### México (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Calor | State of Mexico | `calor.png` |
-
-### Peru (21 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Carlos Stein | Lambayeque | `carlos-stein.png` |
-| Centro Social Pariacoto | Casma | `centro-social-pariacoto.png` |
 | Cultural Volante | Bambamarca | `cultural-volante.png` |
-| Deportivo Lute | Peru | `deportivo-lute.png` |
-| Deportivo Ucrania | Peru | `deportivo-ucrania.png` |
-| Diablos Rojos | Peru | `diablos-rojos.png` |
-| Ecosem Pasco | Cerro de Pasco | `ecosem-pasco.png` |
-| FCR San Antonio | Moquegua | `fcr-san-antonio.png` |
-| José Gálvez FBC | Chimbote | `jose-galvez-fbc.png` |
-| Juventud Alfa | Peru | `juventud-alfa.png` |
-| Juventud Cautivo | San Miguel de El Faique | `juventud-cautivo.png` |
 | Juventud Santo Domingo | Peru | `juventud-santo-domingo.png` |
 | Juventus | Peru | `juventus.png` |
 | Nacional | Mollendo | `nacional-pe.png` |
 | Pacífico | Lima | `pacifico.png` |
-| Patriotas | Peru | `patriotas.png` |
 | Rauker | Peru | `rauker.png` |
 | Ucayali | Peru | `ucayali.png` |
-| Unión Deportivo Ascensión | Huancavelica | `union-deportivo-ascension.png` |
-| Unión Huaral | Huaral | `union-huaral.png` |
-| Unión Santo Domingo | Peru | `union-santo-domingo.png` |
 
-### Uruguai (16 clubes)
+### Uruguai (3 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Alto Perú | Montevidéu | `alto-peru.png` |
-| Basáñez | Montevidéu | `basanez.png` |
-| Bella Italia | Uruguai | `bella-italia.png` |
-| Centro Atlético Lito | Uruguai | `centro-atletico-lito.png` |
-| Deportivo Colonia | Juan L. Lacaze | `deportivo-colonia.png` |
-| Durazno | Durazno | `durazno.png` |
-| Frontera Rivera Renegades | Uruguai | `frontera-rivera-renegades.png` |
-| Halcones | Uruguai | `halcones.png` |
 | Italiano | Uruguai | `italiano.png` |
-| Mar de Fondo | Montevidéu | `mar-de-fondo.png` |
-| Platense | Montevidéu | `platense-uy.png` |
 | Potencia | Montevidéu | `potencia.png` |
-| Rocha | Rocha | `rocha.png` |
-| Salto | Salto | `salto.png` |
-| Salus | Montevidéu | `salus.png` |
-| Terremoto | Uruguai | `terremoto.png` |
