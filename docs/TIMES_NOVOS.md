@@ -11,7 +11,7 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 120 escudos (0 de clubes brasileiros e 120 de fora).
+Total: 119 escudos (0 de clubes brasileiros e 119 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
 
@@ -183,7 +183,7 @@ Total: 120 escudos (0 de clubes brasileiros e 120 de fora).
 | Unión Huaral | Huaral | `union-huaral.png` |
 | Unión Santo Domingo | Peru | `union-santo-domingo.png` |
 
-### Uruguai (21 clubes)
+### Uruguai (20 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
@@ -196,7 +196,6 @@ Total: 120 escudos (0 de clubes brasileiros e 120 de fora).
 | Durazno | Durazno | `durazno.png` |
 | Frontera Rivera Renegades | Uruguai | `frontera-rivera-renegades.png` |
 | Halcones | Uruguai | `halcones.png` |
-| Huracán Buceo | Montevidéu | `huracan-buceo.png` |
 | Italiano | Uruguai | `italiano.png` |
 | Mar de Fondo | Montevidéu | `mar-de-fondo.png` |
 | Parque del Plata | Parque del Plata | `parque-del-plata.png` |
