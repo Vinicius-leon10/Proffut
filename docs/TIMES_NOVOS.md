@@ -11,7 +11,7 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 227 escudos (0 de clubes brasileiros e 227 de fora).
+Total: 183 escudos (0 de clubes brasileiros e 183 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
 
@@ -27,29 +27,13 @@ Total: 227 escudos (0 de clubes brasileiros e 227 de fora).
 |---|---|---|
 | Belmopan | Belmopan | `belmopan.png` |
 
-### Jamaica (5 clubes)
+### Jamaica (3 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Chapelton Maroons | Jamaica | `chapelton-maroons.png` |
-| Montego Bay United | Montego Bay | `montego-bay-united.png` |
 | Portmore United | Portmore | `portmore-united.png` |
 | Vere United | Hayes | `vere-united.png` |
 | Waterhouse | Kingston | `waterhouse.png` |
-
-### México (2 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Monterrey | Monterrei | `monterrey.png` |
-| Pumas UNAM | Cidade do México | `pumas-unam.png` |
-
-### República Dominicana (2 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Atlético Pantoja | São Domingos | `atletico-pantoja.png` |
-| Atlético San Cristóbal | Dominican Republic | `atletico-san-cristobal.png` |
 
 ### Suriname (5 clubes)
 
@@ -90,51 +74,19 @@ Total: 227 escudos (0 de clubes brasileiros e 227 de fora).
 | Juventud Independiente | San Salvador department | `juventud-independiente.png` |
 | Real Destroyer | Puerto de la Libertad | `real-destroyer.png` |
 
-### Estados Unidos (25 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Birmingham Legion | Birmingham | `birmingham-legion.png` |
-| Brooklyn FC | New York City | `brooklyn-fc.png` |
-| Charleston Battery | Charleston | `charleston-battery.png` |
-| Colorado Springs Switchbacks | Colorado Springs | `colorado-springs-switchbacks.png` |
-| Detroit City | Detroit | `detroit-city.png` |
-| El Paso Locomotive | El Paso | `el-paso-locomotive.png` |
-| FC Tulsa | Tulsa | `fc-tulsa.png` |
-| Hartford Athletic | Hartford | `hartford-athletic.png` |
-| Indy Eleven | Indianápolis | `indy-eleven.png` |
-| Las Vegas Lights | Las Vegas | `las-vegas-lights.png` |
-| Lexington | Lexington | `lexington.png` |
-| Loudoun United | Leesburg | `loudoun-united.png` |
-| Louisville City | Louisville | `louisville-city.png` |
-| Miami | Miami | `miami.png` |
-| Monterey Bay | Condado de Monterey | `monterey-bay.png` |
-| New Mexico United | Albuquerque | `new-mexico-united.png` |
-| Oakland Roots | Oakland | `oakland-roots.png` |
-| Orange County | Irvine | `orange-county.png` |
-| Phoenix Rising | Peoria | `phoenix-rising.png` |
-| Pittsburgh Riverhounds | Pittsburgh | `pittsburgh-riverhounds.png` |
-| Rhode Island | Estados Unidos | `rhode-island.png` |
-| Sacramento Republic | Sacramento | `sacramento-republic.png` |
-| San Antonio | Q975 | `san-antonio-us.png` |
-| Sporting JAX | Q16568 | `sporting-jax.png` |
-| Tampa Bay Rowdies | São Petersburgo | `tampa-bay-rowdies.png` |
-
-### Guatemala (13 clubes)
+### Guatemala (11 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Carchá | Guatemala | `carcha.png` |
 | Chimaltenango | Guatemala | `chimaltenango.png` |
 | Coatepeque | Guatemala | `coatepeque.png` |
-| Deportivo San Pedro | Guatemala | `deportivo-san-pedro.png` |
 | Nueva | Guatemala | `nueva.png` |
 | Puerto San José | Guatemala | `puerto-san-jose.png` |
 | Sacachispas | Guatemala | `sacachispas.png` |
 | San Benito | San Benito | `san-benito.png` |
 | Sanarate | Guatemala | `sanarate.png` |
 | Sololá | Guatemala | `solola.png` |
-| Suchi | Mazatenango | `suchi.png` |
 | USAC | Cidade da Guatemala | `usac.png` |
 | Zacapa | Zacapa | `zacapa.png` |
 
@@ -160,22 +112,11 @@ Total: 227 escudos (0 de clubes brasileiros e 227 de fora).
 | Tela | Atlántida Department | `tela.png` |
 | Vida | La Ceiba | `vida.png` |
 
-### México (15 clubes)
+### México (4 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Alebrijes de Oaxaca | Oaxaca de Juárez | `alebrijes-de-oaxaca.png` |
-| Atlante | Cidade do México | `atlante.png` |
-| Atlético La Paz | México | `atletico-la-paz.png` |
-| Atlético Morelia | Morelia | `atletico-morelia.png` |
-| Cancún | Cancún | `cancun.png` |
-| Correcaminos UAT | Ciudad Victoria | `correcaminos-uat.png` |
-| Dorados de Sinaloa | Culiacán | `dorados-de-sinaloa.png` |
-| Irapuato | Irapuato | `irapuato.png` |
-| Leones Negros UdeG | Guadalajara | `leones-negros-udeg.png` |
 | Mineros de Zacatecas | Zacatecas | `mineros-de-zacatecas.png` |
-| Tampico Madero | México | `tampico-madero.png` |
-| Tapatío | Guadalajara | `tapatio.png` |
 | Tepatitlán | Tepatitlán de Morelos | `tepatitlan.png` |
 | Tlaxcala | Tlaxcala de Xicohténcatl | `tlaxcala.png` |
 | Venados | Mérida | `venados.png` |
