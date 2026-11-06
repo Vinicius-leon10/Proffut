@@ -72,6 +72,17 @@ function posicaoNoEstadual(estado: EstadoJogo) {
   return undefined;
 }
 
+/** Tabela do grupo do quadrangular da Série C (clube, pontos e jogos). */
+function grupoDoQuadrangular(estado: EstadoJogo, grupo?: number) {
+  const ps = estado.partidas.filter((x) => x.serie === "C" && x.fase === "quadrangulares" && x.grupo === grupo && x.jogada);
+  const t: Record<string, { pts: number; j: number; sg: number }> = {};
+  for (const x of ps) for (const [id, a, b] of [[x.mandante, x.gm, x.gv], [x.visitante, x.gv, x.gm]] as [string, number, number][]) {
+    t[id] ??= { pts: 0, j: 0, sg: 0 };
+    t[id].j++; t[id].sg += a - b; t[id].pts += a > b ? 3 : a === b ? 1 : 0;
+  }
+  return Object.entries(t).sort((a, b) => b[1].pts - a[1].pts || b[1].sg - a[1].sg).map(([id, v]) => ({ nome: estado.clubes[id].nome, ...v }));
+}
+
 export function simularTemporada(semente: number, pararNoJogo?: number) {
   const estado = novoJogo({ nomeTecnico: "Vinicius", clubeId: CLUBE, semente });
   delete estado.tutorial;
@@ -117,6 +128,7 @@ export function simularTemporada(semente: number, pararNoJogo?: number) {
       serieC: c && { pos: c.pos, pts: c.pts, j: c.j }, estadual: posicaoNoEstadual(estado),
       caixa: estado.clubes[CLUBE].caixa, diretoria: estado.tecnico.confiancaDiretoria, torcidaAntes, torcida: estado.tecnico.confiancaTorcida,
       melhor: nome(p.melhor), demitido: !!estado.tecnico.demissao,
+      quadrangular: p.fase === "quadrangulares" ? grupoDoQuadrangular(estado, p.grupo) : undefined,
     });
     if (estado.tecnico.demissao) break;
   }

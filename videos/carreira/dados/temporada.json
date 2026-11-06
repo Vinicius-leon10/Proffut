@@ -1,0 +1,2373 @@
+{
+ "semente": 2,
+ "subiu": true,
+ "campeaoC": false,
+ "campeaoPE": false,
+ "objetivo": {
+  "descricao": "Classificar para os quadrangulares em boa posição (até 4º)",
+  "posicaoAlvo": 4
+ },
+ "contratacoes": [
+  {
+   "data": "2026-07-04",
+   "nome": "Edilson",
+   "posicao": "L",
+   "idade": 29,
+   "forca": 61,
+   "de": "Paysandu",
+   "valor": 2850000
+  }
+ ],
+ "jogos": [
+  {
+   "jogo": 1,
+   "data": "2026-01-11",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "grupos",
+   "rodada": 1,
+   "grupo": 2,
+   "emCasa": true,
+   "adversario": "vitoria-pe",
+   "nomeAdversario": "Vitória-PE",
+   "pro": 4,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 17576,
+   "gols": [
+    {
+     "min": "49",
+     "nome": "Matheus Vinícius"
+    },
+    {
+     "min": "51",
+     "nome": "Willian Jr."
+    },
+    {
+     "min": "53",
+     "nome": "Thiaguinho"
+    },
+    {
+     "min": "80",
+     "nome": "Thiago Galhardo"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "45+1",
+     "tipo": "lesao",
+     "nosso": true,
+     "jogador": "Eurico"
+    },
+    {
+     "min": "49",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Matheus Vinícius"
+    },
+    {
+     "min": "51",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Willian Jr."
+    },
+    {
+     "min": "53",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiaguinho"
+    },
+    {
+     "min": "80",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 20,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 3,
+    "total": 6
+   },
+   "caixa": 5509400,
+   "diretoria": 62,
+   "torcidaAntes": 60,
+   "torcida": 66,
+   "melhor": "Willian Jr.",
+   "demitido": false
+  },
+  {
+   "jogo": 2,
+   "data": "2026-01-18",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "grupos",
+   "rodada": 2,
+   "grupo": 2,
+   "emCasa": false,
+   "adversario": "afogados-da-ingazeira",
+   "nomeAdversario": "Afogados da Ingazeira",
+   "pro": 1,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 1735,
+   "gols": [
+    {
+     "min": "87",
+     "nome": "Soares"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "87",
+     "tipo": "gol-penalti",
+     "nosso": true,
+     "jogador": "Soares"
+    }
+   ],
+   "decidiuNoFim": true,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 20,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 6,
+    "total": 6
+   },
+   "caixa": 5579400,
+   "diretoria": 64,
+   "torcidaAntes": 66,
+   "torcida": 70,
+   "melhor": "Thiago Galhardo",
+   "demitido": false
+  },
+  {
+   "jogo": 3,
+   "data": "2026-01-25",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "grupos",
+   "rodada": 3,
+   "grupo": 2,
+   "emCasa": true,
+   "adversario": "decisao",
+   "nomeAdversario": "Decisão",
+   "pro": 2,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 21863,
+   "gols": [
+    {
+     "min": "22",
+     "nome": "Thiago Galhardo"
+    },
+    {
+     "min": "87",
+     "nome": "Pedro Favela"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "22",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    },
+    {
+     "min": "33",
+     "tipo": "lesao",
+     "nosso": true,
+     "jogador": "Rodrigues"
+    },
+    {
+     "min": "87",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Pedro Favela"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 20,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 9,
+    "total": 6
+   },
+   "caixa": 6195975,
+   "diretoria": 66,
+   "torcidaAntes": 70,
+   "torcida": 74,
+   "melhor": "Thiago Galhardo",
+   "demitido": false
+  },
+  {
+   "jogo": 4,
+   "data": "2026-02-01",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "grupos",
+   "rodada": 4,
+   "grupo": 2,
+   "emCasa": true,
+   "adversario": "jaguar",
+   "nomeAdversario": "Jaguar",
+   "pro": 2,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 25140,
+   "gols": [
+    {
+     "min": "84",
+     "nome": "Eurico"
+    },
+    {
+     "min": "90+2",
+     "nome": "Thiago Galhardo"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "56",
+     "tipo": "lesao",
+     "nosso": true,
+     "jogador": "Gabriel Gabriel"
+    },
+    {
+     "min": "84",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Eurico"
+    },
+    {
+     "min": "90+2",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 20,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 12,
+    "total": 6
+   },
+   "caixa": 6145499,
+   "diretoria": 68,
+   "torcidaAntes": 74,
+   "torcida": 78,
+   "melhor": "Willian Jr.",
+   "demitido": false
+  },
+  {
+   "jogo": 5,
+   "data": "2026-02-08",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "grupos",
+   "rodada": 5,
+   "grupo": 2,
+   "emCasa": false,
+   "adversario": "nautico",
+   "nomeAdversario": "Náutico",
+   "pro": 1,
+   "contra": 1,
+   "resultado": "E",
+   "publico": 17315,
+   "gols": [
+    {
+     "min": "30",
+     "nome": "Pedro Favela"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "1",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Bruno Mezenga"
+    },
+    {
+     "min": "30",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Pedro Favela"
+    },
+    {
+     "min": "46",
+     "tipo": "lesao",
+     "nosso": true,
+     "jogador": "Soares"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 20,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 6215499,
+   "diretoria": 68,
+   "torcidaAntes": 78,
+   "torcida": 78,
+   "melhor": "Bruno Mezenga",
+   "demitido": false
+  },
+  {
+   "jogo": 6,
+   "data": "2026-02-15",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "quartas",
+   "rodada": 1,
+   "emCasa": true,
+   "adversario": "decisao",
+   "nomeAdversario": "Decisão",
+   "pro": 2,
+   "contra": 1,
+   "resultado": "V",
+   "publico": 22759,
+   "gols": [
+    {
+     "min": "9",
+     "nome": "Gabriel Gabriel"
+    },
+    {
+     "min": "86",
+     "nome": "Willian Jr."
+    }
+   ],
+   "eventos": [
+    {
+     "min": "9",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Gabriel Gabriel"
+    },
+    {
+     "min": "22",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Fábio Ferreira"
+    },
+    {
+     "min": "86",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Willian Jr."
+    },
+    {
+     "min": "89",
+     "tipo": "vermelho",
+     "nosso": false,
+     "jogador": "Jean Mendes"
+    }
+   ],
+   "decidiuNoFim": true,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 20,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 6854474,
+   "diretoria": 70,
+   "torcidaAntes": 78,
+   "torcida": 82,
+   "melhor": "Gabriel Gabriel",
+   "demitido": false
+  },
+  {
+   "jogo": 7,
+   "data": "2026-02-22",
+   "competicao": "Campeonato Pernambucano",
+   "serie": "E-PE",
+   "fase": "semi",
+   "rodada": 1,
+   "emCasa": false,
+   "adversario": "sport",
+   "nomeAdversario": "Sport",
+   "pro": 0,
+   "contra": 1,
+   "resultado": "D",
+   "publico": 26418,
+   "gols": [],
+   "eventos": [
+    {
+     "min": "15",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Lucas Lima"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 20,
+    "pts": 0,
+    "j": 0
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 6924474,
+   "diretoria": 66,
+   "torcidaAntes": 82,
+   "torcida": 74,
+   "melhor": "Gabriel",
+   "demitido": false
+  },
+  {
+   "jogo": 8,
+   "data": "2026-04-04",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 1,
+   "emCasa": false,
+   "adversario": "figueirense",
+   "nomeAdversario": "Figueirense",
+   "pro": 1,
+   "contra": 3,
+   "resultado": "D",
+   "publico": 10239,
+   "gols": [
+    {
+     "min": "73",
+     "nome": "Soares"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "36",
+     "tipo": "gol-penalti",
+     "nosso": false,
+     "jogador": "Nicolas"
+    },
+    {
+     "min": "51",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Nicolas"
+    },
+    {
+     "min": "67",
+     "tipo": "vermelho",
+     "nosso": true,
+     "jogador": "Pedro Favela"
+    },
+    {
+     "min": "67",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Nicolas"
+    },
+    {
+     "min": "73",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "90",
+     "tipo": "vermelho",
+     "nosso": true,
+     "jogador": "Rodrigues"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 16,
+    "pts": 0,
+    "j": 1
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 5496522,
+   "diretoria": 62,
+   "torcidaAntes": 74,
+   "torcida": 70,
+   "melhor": "Nicolas",
+   "demitido": false
+  },
+  {
+   "jogo": 9,
+   "data": "2026-04-11",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 2,
+   "emCasa": false,
+   "adversario": "ypiranga-rs",
+   "nomeAdversario": "Ypiranga-RS",
+   "pro": 1,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 4990,
+   "gols": [
+    {
+     "min": "45",
+     "nome": "Soares"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "45",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 14,
+    "pts": 3,
+    "j": 2
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 5981522,
+   "diretoria": 64,
+   "torcidaAntes": 70,
+   "torcida": 74,
+   "melhor": "Felipe Alves",
+   "demitido": false
+  },
+  {
+   "jogo": 10,
+   "data": "2026-04-15",
+   "competicao": "Copa do Brasil",
+   "serie": "CB",
+   "fase": "fase2",
+   "rodada": 1,
+   "emCasa": false,
+   "adversario": "fluminense-pi",
+   "nomeAdversario": "Fluminense-PI",
+   "pro": 7,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 1840,
+   "gols": [
+    {
+     "min": "8",
+     "nome": "Soares"
+    },
+    {
+     "min": "12",
+     "nome": "Soares"
+    },
+    {
+     "min": "38",
+     "nome": "Soares"
+    },
+    {
+     "min": "40",
+     "nome": "Thiago Galhardo"
+    },
+    {
+     "min": "63",
+     "nome": "Toty"
+    },
+    {
+     "min": "90+2",
+     "nome": "Thiago Galhardo"
+    },
+    {
+     "min": "90+4",
+     "nome": "Thiago Galhardo"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "8",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "12",
+     "tipo": "gol-penalti",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "38",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "40",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    },
+    {
+     "min": "63",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Toty"
+    },
+    {
+     "min": "90+2",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    },
+    {
+     "min": "90+4",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 14,
+    "pts": 3,
+    "j": 2
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 6456522,
+   "diretoria": 66,
+   "torcidaAntes": 74,
+   "torcida": 80,
+   "melhor": "Soares",
+   "demitido": false
+  },
+  {
+   "jogo": 11,
+   "data": "2026-04-18",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 3,
+   "emCasa": true,
+   "adversario": "barra-sc",
+   "nomeAdversario": "Barra-SC",
+   "pro": 1,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 23025,
+   "gols": [
+    {
+     "min": "22",
+     "nome": "Soares"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "22",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 8,
+    "pts": 6,
+    "j": 3
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7102147,
+   "diretoria": 69,
+   "torcidaAntes": 80,
+   "torcida": 84,
+   "melhor": "Soares",
+   "demitido": false
+  },
+  {
+   "jogo": 12,
+   "data": "2026-04-22",
+   "competicao": "Copa do Brasil",
+   "serie": "CB",
+   "fase": "fase3",
+   "rodada": 1,
+   "emCasa": false,
+   "adversario": "itabaiana",
+   "nomeAdversario": "Itabaiana",
+   "pro": 2,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 5386,
+   "gols": [
+    {
+     "min": "25",
+     "nome": "Soares"
+    },
+    {
+     "min": "78",
+     "nome": "Soares"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "25",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "78",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 8,
+    "pts": 6,
+    "j": 3
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7637147,
+   "diretoria": 71,
+   "torcidaAntes": 84,
+   "torcida": 88,
+   "melhor": "Soares",
+   "demitido": false
+  },
+  {
+   "jogo": 13,
+   "data": "2026-04-25",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 4,
+   "emCasa": false,
+   "adversario": "amazonas-fc",
+   "nomeAdversario": "Amazonas FC",
+   "pro": 1,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 8518,
+   "gols": [
+    {
+     "min": "89",
+     "nome": "Eurico"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "15",
+     "tipo": "lesao",
+     "nosso": false,
+     "jogador": "Leonardo"
+    },
+    {
+     "min": "89",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Eurico"
+    }
+   ],
+   "decidiuNoFim": true,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 5,
+    "pts": 9,
+    "j": 4
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7707147,
+   "diretoria": 75,
+   "torcidaAntes": 88,
+   "torcida": 92,
+   "melhor": "Eurico",
+   "demitido": false
+  },
+  {
+   "jogo": 14,
+   "data": "2026-04-29",
+   "competicao": "Copa do Brasil",
+   "serie": "CB",
+   "fase": "fase4",
+   "rodada": 1,
+   "emCasa": false,
+   "adversario": "ituano",
+   "nomeAdversario": "Ituano",
+   "pro": 0,
+   "contra": 1,
+   "resultado": "D",
+   "publico": 6126,
+   "gols": [],
+   "eventos": [
+    {
+     "min": "69",
+     "tipo": "gol-penalti",
+     "nosso": false,
+     "jogador": "Vinícius P."
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 5,
+    "pts": 9,
+    "j": 4
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7707147,
+   "diretoria": 72,
+   "torcidaAntes": 92,
+   "torcida": 88,
+   "melhor": "Vagner",
+   "demitido": false
+  },
+  {
+   "jogo": 15,
+   "data": "2026-05-02",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 5,
+   "emCasa": true,
+   "adversario": "floresta",
+   "nomeAdversario": "Floresta",
+   "pro": 0,
+   "contra": 0,
+   "resultado": "E",
+   "publico": 21360,
+   "gols": [],
+   "eventos": [],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 6,
+    "pts": 10,
+    "j": 5
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7562171,
+   "diretoria": 71,
+   "torcidaAntes": 88,
+   "torcida": 88,
+   "melhor": "Felipe Alves",
+   "demitido": false
+  },
+  {
+   "jogo": 16,
+   "data": "2026-05-09",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 6,
+   "emCasa": false,
+   "adversario": "guarani",
+   "nomeAdversario": "Guarani",
+   "pro": 4,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 12868,
+   "gols": [
+    {
+     "min": "9",
+     "nome": "Toty"
+    },
+    {
+     "min": "58",
+     "nome": "Eurico"
+    },
+    {
+     "min": "63",
+     "nome": "Willian Jr."
+    },
+    {
+     "min": "89",
+     "nome": "Soares"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "9",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Toty"
+    },
+    {
+     "min": "58",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Eurico"
+    },
+    {
+     "min": "63",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Willian Jr."
+    },
+    {
+     "min": "89",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 3,
+    "pts": 13,
+    "j": 6
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7632171,
+   "diretoria": 75,
+   "torcidaAntes": 88,
+   "torcida": 94,
+   "melhor": "Toty",
+   "demitido": false
+  },
+  {
+   "jogo": 17,
+   "data": "2026-05-16",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 7,
+   "emCasa": true,
+   "adversario": "ferroviaria",
+   "nomeAdversario": "Ferroviária",
+   "pro": 0,
+   "contra": 3,
+   "resultado": "D",
+   "publico": 24137,
+   "gols": [],
+   "eventos": [
+    {
+     "min": "28",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Fabricio"
+    },
+    {
+     "min": "64",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Carlos Henrique"
+    },
+    {
+     "min": "86",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Fabricio"
+    },
+    {
+     "min": "89",
+     "tipo": "lesao",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 5,
+    "pts": 13,
+    "j": 7
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8305596,
+   "diretoria": 70,
+   "torcidaAntes": 94,
+   "torcida": 87,
+   "melhor": "Fabricio",
+   "demitido": false
+  },
+  {
+   "jogo": 18,
+   "data": "2026-05-23",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 8,
+   "emCasa": false,
+   "adversario": "maringa",
+   "nomeAdversario": "Maringá",
+   "pro": 1,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 5679,
+   "gols": [
+    {
+     "min": "19",
+     "nome": "Soares"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "19",
+     "tipo": "gol-penalti",
+     "nosso": true,
+     "jogador": "Soares"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 3,
+    "pts": 16,
+    "j": 8
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8375596,
+   "diretoria": 74,
+   "torcidaAntes": 87,
+   "torcida": 91,
+   "melhor": "Felipe Alves",
+   "demitido": false
+  },
+  {
+   "jogo": 19,
+   "data": "2026-05-30",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 9,
+   "emCasa": true,
+   "adversario": "ituano",
+   "nomeAdversario": "Ituano",
+   "pro": 1,
+   "contra": 1,
+   "resultado": "E",
+   "publico": 26009,
+   "gols": [
+    {
+     "min": "15",
+     "nome": "Thiago Galhardo"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "12",
+     "tipo": "lesao",
+     "nosso": false,
+     "jogador": "Osman Júnior"
+    },
+    {
+     "min": "12",
+     "tipo": "gol-penalti",
+     "nosso": false,
+     "jogador": "Walterson"
+    },
+    {
+     "min": "15",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 6,
+    "pts": 17,
+    "j": 9
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 9095821,
+   "diretoria": 73,
+   "torcidaAntes": 91,
+   "torcida": 91,
+   "melhor": "Thiago Galhardo",
+   "demitido": false
+  },
+  {
+   "jogo": 20,
+   "data": "2026-06-06",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 10,
+   "emCasa": false,
+   "adversario": "caxias",
+   "nomeAdversario": "Caxias",
+   "pro": 2,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 5553,
+   "gols": [
+    {
+     "min": "9",
+     "nome": "Rodrigues"
+    },
+    {
+     "min": "42",
+     "nome": "Pedro Favela"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "9",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Rodrigues"
+    },
+    {
+     "min": "42",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Pedro Favela"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 5,
+    "pts": 20,
+    "j": 10
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8416845,
+   "diretoria": 76,
+   "torcidaAntes": 91,
+   "torcida": 95,
+   "melhor": "Pedro Favela",
+   "demitido": false
+  },
+  {
+   "jogo": 21,
+   "data": "2026-06-13",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 11,
+   "emCasa": true,
+   "adversario": "confianca",
+   "nomeAdversario": "Confiança",
+   "pro": 3,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 26722,
+   "gols": [
+    {
+     "min": "19",
+     "nome": "Soares"
+    },
+    {
+     "min": "27",
+     "nome": "Soares"
+    },
+    {
+     "min": "83",
+     "nome": "Wagner"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "19",
+     "tipo": "gol-penalti",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "27",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "61",
+     "tipo": "vermelho",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "83",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Wagner"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 2,
+    "pts": 23,
+    "j": 11
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 9154895,
+   "diretoria": 80,
+   "torcidaAntes": 95,
+   "torcida": 100,
+   "melhor": "Felipe Alves",
+   "demitido": false
+  },
+  {
+   "jogo": 22,
+   "data": "2026-06-20",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 12,
+   "emCasa": false,
+   "adversario": "volta-redonda",
+   "nomeAdversario": "Volta Redonda",
+   "pro": 1,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 4761,
+   "gols": [
+    {
+     "min": "10",
+     "nome": "João Pedro"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "10",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "João Pedro"
+    },
+    {
+     "min": "90+5",
+     "tipo": "vermelho",
+     "nosso": false,
+     "jogador": "Rai"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 2,
+    "pts": 26,
+    "j": 12
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 9224895,
+   "diretoria": 84,
+   "torcidaAntes": 100,
+   "torcida": 100,
+   "melhor": "Felipe Alves",
+   "demitido": false
+  },
+  {
+   "jogo": 23,
+   "data": "2026-06-27",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 13,
+   "emCasa": true,
+   "adversario": "paysandu",
+   "nomeAdversario": "Paysandu",
+   "pro": 1,
+   "contra": 1,
+   "resultado": "E",
+   "publico": 23623,
+   "gols": [
+    {
+     "min": "85",
+     "nome": "Pedro Favela"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "83",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Leandro Vilela"
+    },
+    {
+     "min": "85",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Pedro Favela"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 2,
+    "pts": 27,
+    "j": 13
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 9885470,
+   "diretoria": 84,
+   "torcidaAntes": 100,
+   "torcida": 100,
+   "melhor": "Pedro Favela",
+   "demitido": false
+  },
+  {
+   "jogo": 24,
+   "data": "2026-07-04",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 14,
+   "emCasa": false,
+   "adversario": "botafogo-pb",
+   "nomeAdversario": "Botafogo-PB",
+   "pro": 2,
+   "contra": 2,
+   "resultado": "E",
+   "publico": 15464,
+   "gols": [
+    {
+     "min": "30",
+     "nome": "Thiago Galhardo"
+    },
+    {
+     "min": "47",
+     "nome": "Thiago Galhardo"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "15",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Henrique da"
+    },
+    {
+     "min": "30",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    },
+    {
+     "min": "45+2",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Gabriel Honorio"
+    },
+    {
+     "min": "47",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 3,
+    "pts": 28,
+    "j": 14
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 9206494,
+   "diretoria": 86,
+   "torcidaAntes": 100,
+   "torcida": 100,
+   "melhor": "Thiago Galhardo",
+   "demitido": false
+  },
+  {
+   "jogo": 25,
+   "data": "2026-07-11",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 15,
+   "emCasa": true,
+   "adversario": "inter-de-limeira",
+   "nomeAdversario": "Inter de Limeira",
+   "pro": 3,
+   "contra": 0,
+   "resultado": "V",
+   "publico": 23992,
+   "gols": [
+    {
+     "min": "3",
+     "nome": "Thiago Galhardo"
+    },
+    {
+     "min": "12",
+     "nome": "Soares"
+    },
+    {
+     "min": "81",
+     "nome": "Willian Jr."
+    }
+   ],
+   "eventos": [
+    {
+     "min": "3",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    },
+    {
+     "min": "12",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "81",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Willian Jr."
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 2,
+    "pts": 31,
+    "j": 15
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7026294,
+   "diretoria": 90,
+   "torcidaAntes": 100,
+   "torcida": 100,
+   "melhor": "Toty",
+   "demitido": false
+  },
+  {
+   "jogo": 26,
+   "data": "2026-07-18",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 16,
+   "emCasa": false,
+   "adversario": "maranhao",
+   "nomeAdversario": "Maranhão",
+   "pro": 0,
+   "contra": 1,
+   "resultado": "D",
+   "publico": 4489,
+   "gols": [],
+   "eventos": [
+    {
+     "min": "80",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Ryan"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 2,
+    "pts": 31,
+    "j": 16
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7096294,
+   "diretoria": 88,
+   "torcidaAntes": 100,
+   "torcida": 96,
+   "melhor": "Jean",
+   "demitido": false
+  },
+  {
+   "jogo": 27,
+   "data": "2026-07-25",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 17,
+   "emCasa": true,
+   "adversario": "brusque",
+   "nomeAdversario": "Brusque",
+   "pro": 4,
+   "contra": 1,
+   "resultado": "V",
+   "publico": 23137,
+   "gols": [
+    {
+     "min": "30",
+     "nome": "Soares"
+    },
+    {
+     "min": "79",
+     "nome": "Willian Jr."
+    },
+    {
+     "min": "81",
+     "nome": "Soares"
+    },
+    {
+     "min": "86",
+     "nome": "Thiago Galhardo"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "6",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Alex"
+    },
+    {
+     "min": "30",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "79",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Willian Jr."
+    },
+    {
+     "min": "81",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "86",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 2,
+    "pts": 34,
+    "j": 17
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7744719,
+   "diretoria": 92,
+   "torcidaAntes": 96,
+   "torcida": 100,
+   "melhor": "Soares",
+   "demitido": false
+  },
+  {
+   "jogo": 28,
+   "data": "2026-08-01",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 18,
+   "emCasa": false,
+   "adversario": "anapolis",
+   "nomeAdversario": "Anápolis",
+   "pro": 2,
+   "contra": 1,
+   "resultado": "V",
+   "publico": 4983,
+   "gols": [
+    {
+     "min": "16",
+     "nome": "Soares"
+    },
+    {
+     "min": "33",
+     "nome": "Soares"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "16",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "33",
+     "tipo": "gol-penalti",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "49",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "João P."
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 2,
+    "pts": 37,
+    "j": 18
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7021193,
+   "diretoria": 96,
+   "torcidaAntes": 100,
+   "torcida": 100,
+   "melhor": "Soares",
+   "demitido": false
+  },
+  {
+   "jogo": 29,
+   "data": "2026-08-08",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "primeira",
+   "rodada": 19,
+   "emCasa": true,
+   "adversario": "itabaiana",
+   "nomeAdversario": "Itabaiana",
+   "pro": 1,
+   "contra": 1,
+   "resultado": "E",
+   "publico": 22948,
+   "gols": [
+    {
+     "min": "42",
+     "nome": "Willian Jr."
+    }
+   ],
+   "eventos": [
+    {
+     "min": "42",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Willian Jr."
+    },
+    {
+     "min": "74",
+     "tipo": "gol-penalti",
+     "nosso": false,
+     "jogador": "Jackson"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 2,
+    "pts": 38,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 7664893,
+   "diretoria": 96,
+   "torcidaAntes": 100,
+   "torcida": 100,
+   "melhor": "Willian Jr.",
+   "demitido": false
+  },
+  {
+   "jogo": 30,
+   "data": "2026-08-15",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "quadrangulares",
+   "rodada": 1,
+   "grupo": 2,
+   "emCasa": true,
+   "adversario": "paysandu",
+   "nomeAdversario": "Paysandu",
+   "pro": 4,
+   "contra": 2,
+   "resultado": "V",
+   "publico": 21536,
+   "gols": [
+    {
+     "min": "13",
+     "nome": "Thiago Galhardo"
+    },
+    {
+     "min": "63",
+     "nome": "Soares"
+    },
+    {
+     "min": "70",
+     "nome": "Edilson"
+    },
+    {
+     "min": "83",
+     "nome": "Thiago Galhardo"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "13",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    },
+    {
+     "min": "33",
+     "tipo": "gol-penalti",
+     "nosso": false,
+     "jogador": "Rossi"
+    },
+    {
+     "min": "63",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "70",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Edilson"
+    },
+    {
+     "min": "83",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    },
+    {
+     "min": "90+2",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Rossi"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 2,
+    "pts": 38,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8203293,
+   "diretoria": 100,
+   "torcidaAntes": 100,
+   "torcida": 100,
+   "melhor": "Thiago Galhardo",
+   "demitido": false,
+   "quadrangular": [
+    {
+     "nome": "Santa Cruz",
+     "pts": 3,
+     "j": 1,
+     "sg": 2
+    },
+    {
+     "nome": "Brusque",
+     "pts": 1,
+     "j": 1,
+     "sg": 0
+    },
+    {
+     "nome": "Amazonas FC",
+     "pts": 1,
+     "j": 1,
+     "sg": 0
+    },
+    {
+     "nome": "Paysandu",
+     "pts": 0,
+     "j": 1,
+     "sg": -2
+    }
+   ]
+  },
+  {
+   "jogo": 31,
+   "data": "2026-08-22",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "quadrangulares",
+   "rodada": 2,
+   "grupo": 2,
+   "emCasa": false,
+   "adversario": "brusque",
+   "nomeAdversario": "Brusque",
+   "pro": 1,
+   "contra": 2,
+   "resultado": "D",
+   "publico": 4637,
+   "gols": [
+    {
+     "min": "36",
+     "nome": "Thiago Galhardo"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "34",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Jean Mangabeira"
+    },
+    {
+     "min": "36",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    },
+    {
+     "min": "47",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Jean Mangabeira"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 2,
+    "pts": 38,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8203293,
+   "diretoria": 98,
+   "torcidaAntes": 100,
+   "torcida": 96,
+   "melhor": "Jean Mangabeira",
+   "demitido": false,
+   "quadrangular": [
+    {
+     "nome": "Amazonas FC",
+     "pts": 4,
+     "j": 2,
+     "sg": 3
+    },
+    {
+     "nome": "Brusque",
+     "pts": 4,
+     "j": 2,
+     "sg": 1
+    },
+    {
+     "nome": "Santa Cruz",
+     "pts": 3,
+     "j": 2,
+     "sg": 1
+    },
+    {
+     "nome": "Paysandu",
+     "pts": 0,
+     "j": 2,
+     "sg": -5
+    }
+   ]
+  },
+  {
+   "jogo": 32,
+   "data": "2026-08-29",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "quadrangulares",
+   "rodada": 3,
+   "grupo": 2,
+   "emCasa": true,
+   "adversario": "amazonas-fc",
+   "nomeAdversario": "Amazonas FC",
+   "pro": 2,
+   "contra": 1,
+   "resultado": "V",
+   "publico": 26357,
+   "gols": [
+    {
+     "min": "50",
+     "nome": "Thiago Galhardo"
+    },
+    {
+     "min": "86",
+     "nome": "Soares"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "45+1",
+     "tipo": "gol-penalti",
+     "nosso": false,
+     "jogador": "H. Almeida"
+    },
+    {
+     "min": "50",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Thiago Galhardo"
+    },
+    {
+     "min": "66",
+     "tipo": "vermelho",
+     "nosso": true,
+     "jogador": "Matheus Vinícius"
+    },
+    {
+     "min": "86",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    }
+   ],
+   "decidiuNoFim": true,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 2,
+    "pts": 38,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8862218,
+   "diretoria": 100,
+   "torcidaAntes": 96,
+   "torcida": 100,
+   "melhor": "Thiago Galhardo",
+   "demitido": false,
+   "quadrangular": [
+    {
+     "nome": "Santa Cruz",
+     "pts": 6,
+     "j": 3,
+     "sg": 2
+    },
+    {
+     "nome": "Amazonas FC",
+     "pts": 4,
+     "j": 3,
+     "sg": 2
+    },
+    {
+     "nome": "Brusque",
+     "pts": 4,
+     "j": 3,
+     "sg": -2
+    },
+    {
+     "nome": "Paysandu",
+     "pts": 3,
+     "j": 3,
+     "sg": -2
+    }
+   ]
+  },
+  {
+   "jogo": 33,
+   "data": "2026-09-05",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "quadrangulares",
+   "rodada": 4,
+   "grupo": 2,
+   "emCasa": false,
+   "adversario": "paysandu",
+   "nomeAdversario": "Paysandu",
+   "pro": 3,
+   "contra": 2,
+   "resultado": "V",
+   "publico": 16200,
+   "gols": [
+    {
+     "min": "2",
+     "nome": "Willian Jr."
+    },
+    {
+     "min": "21",
+     "nome": "Soares"
+    },
+    {
+     "min": "42",
+     "nome": "Eurico"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "2",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Willian Jr."
+    },
+    {
+     "min": "4",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "André Lima"
+    },
+    {
+     "min": "21",
+     "tipo": "gol-penalti",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "42",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Eurico"
+    },
+    {
+     "min": "43",
+     "tipo": "vermelho",
+     "nosso": true,
+     "jogador": "Gabriel Gabriel"
+    },
+    {
+     "min": "66",
+     "tipo": "gol-penalti",
+     "nosso": false,
+     "jogador": "Rossi"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 2,
+    "pts": 38,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8068692,
+   "diretoria": 100,
+   "torcidaAntes": 100,
+   "torcida": 100,
+   "melhor": "Soares",
+   "demitido": false,
+   "quadrangular": [
+    {
+     "nome": "Santa Cruz",
+     "pts": 9,
+     "j": 4,
+     "sg": 3
+    },
+    {
+     "nome": "Amazonas FC",
+     "pts": 5,
+     "j": 4,
+     "sg": 2
+    },
+    {
+     "nome": "Brusque",
+     "pts": 5,
+     "j": 4,
+     "sg": -2
+    },
+    {
+     "nome": "Paysandu",
+     "pts": 3,
+     "j": 4,
+     "sg": -3
+    }
+   ]
+  },
+  {
+   "jogo": 34,
+   "data": "2026-09-12",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "quadrangulares",
+   "rodada": 5,
+   "grupo": 2,
+   "emCasa": true,
+   "adversario": "brusque",
+   "nomeAdversario": "Brusque",
+   "pro": 2,
+   "contra": 2,
+   "resultado": "E",
+   "publico": 23321,
+   "gols": [
+    {
+     "min": "63",
+     "nome": "Soares"
+    },
+    {
+     "min": "82",
+     "nome": "Soares"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "11",
+     "tipo": "lesao",
+     "nosso": false,
+     "jogador": "Alex Ruan"
+    },
+    {
+     "min": "55",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Thomaz Costa"
+    },
+    {
+     "min": "63",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "82",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Soares"
+    },
+    {
+     "min": "90+1",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "João Veras"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": true,
+   "serieC": {
+    "pos": 2,
+    "pts": 38,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8651717,
+   "diretoria": 100,
+   "torcidaAntes": 100,
+   "torcida": 100,
+   "melhor": "Soares",
+   "demitido": false,
+   "quadrangular": [
+    {
+     "nome": "Santa Cruz",
+     "pts": 10,
+     "j": 5,
+     "sg": 3
+    },
+    {
+     "nome": "Amazonas FC",
+     "pts": 8,
+     "j": 5,
+     "sg": 3
+    },
+    {
+     "nome": "Brusque",
+     "pts": 6,
+     "j": 5,
+     "sg": -2
+    },
+    {
+     "nome": "Paysandu",
+     "pts": 3,
+     "j": 5,
+     "sg": -4
+    }
+   ]
+  },
+  {
+   "jogo": 35,
+   "data": "2026-09-19",
+   "competicao": "Série C",
+   "serie": "C",
+   "fase": "quadrangulares",
+   "rodada": 6,
+   "grupo": 2,
+   "emCasa": false,
+   "adversario": "amazonas-fc",
+   "nomeAdversario": "Amazonas FC",
+   "pro": 1,
+   "contra": 2,
+   "resultado": "D",
+   "publico": 7075,
+   "gols": [
+    {
+     "min": "52",
+     "nome": "Pedro Favela"
+    }
+   ],
+   "eventos": [
+    {
+     "min": "2",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Erick Varao"
+    },
+    {
+     "min": "45",
+     "tipo": "gol",
+     "nosso": false,
+     "jogador": "Larry Vasquez"
+    },
+    {
+     "min": "52",
+     "tipo": "gol",
+     "nosso": true,
+     "jogador": "Pedro Favela"
+    }
+   ],
+   "decidiuNoFim": false,
+   "levouNoFim": false,
+   "serieC": {
+    "pos": 2,
+    "pts": 38,
+    "j": 19
+   },
+   "estadual": {
+    "pos": 2,
+    "pts": 13,
+    "total": 6
+   },
+   "caixa": 8651717,
+   "diretoria": 98,
+   "torcidaAntes": 100,
+   "torcida": 96,
+   "melhor": "Larry Vasquez",
+   "demitido": false,
+   "quadrangular": [
+    {
+     "nome": "Amazonas FC",
+     "pts": 11,
+     "j": 6,
+     "sg": 4
+    },
+    {
+     "nome": "Santa Cruz",
+     "pts": 10,
+     "j": 6,
+     "sg": 2
+    },
+    {
+     "nome": "Brusque",
+     "pts": 9,
+     "j": 6,
+     "sg": -1
+    },
+    {
+     "nome": "Paysandu",
+     "pts": 3,
+     "j": 6,
+     "sg": -5
+    }
+   ]
+  }
+ ]
+}
