@@ -149,10 +149,7 @@ writeFileSync("data/europa-2026/clubes.json", JSON.stringify({
   descricao: "Clubes das primeiras divisões da Inglaterra, Espanha, Itália, Alemanha, França, Portugal e Holanda (2025/26). Estádio do transfermarkt-datasets (CC0); nomes, cores e números do Proffut.",
   clubes: fichas,
 }, null, 1) + "\n");
-writeFileSync("data/europa-2026/jogadores.json", JSON.stringify({
-  fonte: "transfermarkt-datasets (CC0): elencos, posição, nascimento, nacionalidade e valor de mercado. Força calculada pelo Proffut.",
-  elencos,
-}) + "\n");
+
 
 // Convocados das seleções da América que jogam num desses clubes: passam a estar no clube do jogo.
 const conv = JSON.parse(readFileSync("data/selecoes-2026/convocados.json", "utf-8"));
@@ -186,11 +183,20 @@ for (const [pais, s] of Object.entries(conv.selecoes as Record<string, { convoca
       const nc = normalizar(c.clube);
       return nc.includes(normalizar(ficha.nome)) || normalizar(ficha.nome).includes(nc) || NOME_TM.get(nc) === a.clube;
     }) ?? (achados.length === 1 ? achados[0] : undefined) ?? porSobrenome(c.nome, c.clube) ?? mesmoNascimento(c.nome, c.nascimento);
-    if (clubeCerto) { c.clubeDoJogo = clubeCerto.clube; c.noJogo = clubeCerto.nome; ligados++; }
+    if (clubeCerto) {
+      // O nome fica o da convocação, como se fala na América ("Vinícius Júnior", não "Vinicius Junior").
+      const j = elencos[clubeCerto.clube].find((x) => x.nome === clubeCerto.nome);
+      if (j && !elencos[clubeCerto.clube].some((x) => x !== j && x.nome === c.nome)) j.nome = c.nome;
+      c.clubeDoJogo = clubeCerto.clube; c.noJogo = j?.nome ?? clubeCerto.nome; ligados++;
+    }
     else if ([...NOME_TM.keys()].some((n) => n.includes(normalizar(c.clube)) || normalizar(c.clube).includes(n))) naoAchados.push(`${pais}: ${c.nome} (${c.clube})`);
   }
 }
 writeFileSync("data/selecoes-2026/convocados.json", JSON.stringify(conv, null, 1) + "\n");
+writeFileSync("data/europa-2026/jogadores.json", JSON.stringify({
+  fonte: "transfermarkt-datasets (CC0): elencos, posição, nascimento, nacionalidade e valor de mercado. Força calculada pelo Proffut.",
+  elencos,
+}) + "\n");
 
 const total = Object.values(elencos).reduce((t, e) => t + e.length, 0);
 console.log(`Europa: ${fichas.length} clubes, ${total} jogadores`);

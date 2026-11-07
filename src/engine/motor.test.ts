@@ -1599,7 +1599,8 @@ describe("copas de clubes (Libertadores, Sul-Americana, Recopa, Concacaf, region
 
   it("todas as copas acabam com campeão e vice, sem jogo pendente", () => {
     expect(temporadaEncerrada(e)).toBe(true);
-    expect(Object.keys(e.copas!).length).toBe(DEFINICOES.length);
+    // A Supercopa da UEFA só começa em 2027 (a base não tem as finais de 2025/26).
+    expect(Object.keys(e.copas!).length).toBe(DEFINICOES.filter((d) => d.id !== "K-USC").length);
     for (const c of Object.values(e.copas!)) {
       expect(c!.fase, c!.id).toBe("encerrada");
       expect(c!.campeao, c!.id).toBeTruthy();
@@ -1720,12 +1721,18 @@ describe("seleções da América (nov/2026)", () => {
     expect(selecoes).toHaveLength(51);
     expect(e.clubes["sel-BR"].nome).toBe("Brasil");
     const br = e.selecoes!.convocados["sel-BR"].map((id) => e.jogadores[id]);
+    // Quem joga fora dos clubes do jogo (o Douglas Santos, do Zenit) fica ligado à seleção, sem contrato.
+    const douglas = br.find((j) => j.nome === "Douglas Santos")!;
+    expect(douglas.clubeId).toBe("sel-BR");
+    expect(douglas.clubeFora?.nome).toBe("Zenit Saint Petersburg");
+    expect(douglas.selecao!.jogos).toBeGreaterThanOrEqual(14);
+    expect(douglas.contratoAte).toBeUndefined();
+    // Desde a Europa (nov/2026), o Vinícius Júnior joga no Real Madrid do jogo, com os jogos pela seleção.
     const vini = br.find((j) => j.nome === "Vinícius Júnior")!;
-    expect(vini.clubeId).toBe("sel-BR");
-    expect(vini.clubeFora).toEqual({ nome: "Real Madrid", pais: "Espanha" });
+    expect(vini.clubeId).toBe("real-madrid");
+    expect(vini.clubeFora).toBeUndefined();
     expect(vini.selecao!.jogos).toBeGreaterThan(50);
     expect(vini.forca).toBeGreaterThanOrEqual(88);
-    expect(vini.contratoAte).toBeUndefined();
     // Do clube do jogo: o Pedro Morisco continua no Coritiba.
     const morisco = br.find((j) => j.nome === "Pedro Morisco")!;
     expect(morisco.clubeId).toBe("coritiba");
@@ -1742,7 +1749,7 @@ describe("seleções da América (nov/2026)", () => {
     expect(new Set(todos).size).toBe(todos.length);
     // O mercado do computador não leva quem joga fora.
     transferenciasDaIa(e, "teste-selecoes");
-    expect(e.jogadores[vini.id].clubeId).toBe("sel-BR");
+    expect(e.jogadores[douglas.id].clubeId).toBe("sel-BR");
     expect(checarEstado(e).filter((p) => p.gravidade === "erro")).toEqual([]);
   });
 
@@ -1781,9 +1788,9 @@ describe("seleções da América (nov/2026)", () => {
     expect(jogos.filter((p) => p.data.startsWith("2026-06") || p.data.startsWith("2026-07"))).toEqual([]);
     expect(jogos.filter((p) => p.jogada).length).toBeGreaterThanOrEqual(100);
     // Os jogos pela seleção contam na seleção, não na temporada do clube.
-    const vini = Object.values(e.jogadores).find((j) => j.nome === "Vinícius Júnior")!;
-    expect(vini.temporada.jogos).toBe(0);
-    expect(vini.selecao!.jogos).toBeGreaterThan(57);
+    const douglas = Object.values(e.jogadores).find((j) => j.nome === "Douglas Santos" && j.clubeId === "sel-BR")!;
+    expect(douglas.temporada.jogos).toBe(0);
+    expect(douglas.selecao!.jogos).toBeGreaterThan(14);
   });
 
   it("de 2026 a 2029: Copa Ouro (anos ímpares), Copa América (2028), Eliminatórias da Conmebol (18 rodadas, a tabela junta as temporadas, 6 vão à Copa e 1 à repescagem) e da Concacaf (3 fases)", { timeout: 240_000 }, () => {
