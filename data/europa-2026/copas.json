@@ -1,0 +1,81 @@
+{
+ "fonte": "Tabela final de 2025/26 das 7 ligas (jogos do transfermarkt-datasets, CC0), com as vagas do Proffut.",
+ "copas": {
+  "K-UCL": {
+   "grupos": [
+    "arsenal",
+    "manchester-city",
+    "manchester-united",
+    "aston-villa",
+    "liverpool-ing",
+    "barcelona-esp",
+    "real-madrid",
+    "villarreal",
+    "atletico-de-madrid",
+    "betis",
+    "inter-de-milao",
+    "napoli",
+    "roma",
+    "como",
+    "milan",
+    "bayern-de-munique",
+    "borussia-dortmund",
+    "rb-leipzig",
+    "stuttgart",
+    "hoffenheim",
+    "paris-saint-germain",
+    "lens",
+    "lille",
+    "lyon",
+    "porto-por",
+    "sporting-cp",
+    "benfica",
+    "braga",
+    "psv",
+    "feyenoord",
+    "nec",
+    "twente"
+   ]
+  },
+  "K-UEL": {
+   "grupos": [
+    "bournemouth",
+    "sunderland",
+    "celta",
+    "getafe",
+    "juventus-ita",
+    "atalanta",
+    "bayer-leverkusen",
+    "freiburg",
+    "olympique-de-marselha",
+    "rennes",
+    "monaco",
+    "famalicao",
+    "gil-vicente",
+    "moreirense",
+    "ajax",
+    "utrecht"
+   ]
+  },
+  "K-UECL": {
+   "grupos": [
+    "brighton",
+    "brentford",
+    "rayo-vallecano",
+    "valencia",
+    "bologna",
+    "lazio",
+    "eintracht-frankfurt",
+    "augsburg",
+    "strasbourg",
+    "toulouse",
+    "vitoria-de-guimaraes",
+    "arouca",
+    "estoril",
+    "az-alkmaar",
+    "heerenveen",
+    "groningen"
+   ]
+  }
+ }
+}

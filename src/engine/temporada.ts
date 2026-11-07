@@ -70,7 +70,7 @@ function reputacaoDasCopas(campeoes: Partial<Record<IdCopa, { campeao: string }>
   for (const [id, c] of Object.entries(campeoes)) {
     if (c?.campeao !== meuId) continue;
     const def = definicaoDaCopa(id);
-    soma += id === "K-LIB" ? REPUTACAO.libertadores : def?.grupo === "conmebol" || def?.grupo === "concacaf" ? REPUTACAO.continental : REPUTACAO.regional;
+    soma += id === "K-LIB" || id === "K-UCL" ? REPUTACAO.libertadores : def?.grupo === "conmebol" || def?.grupo === "concacaf" || def?.grupo === "uefa" ? REPUTACAO.continental : REPUTACAO.regional;
   }
   return soma;
 }

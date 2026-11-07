@@ -10,7 +10,7 @@ import { somarDias, turnoEReturno, turnoUnico } from "./calendario";
 import { SERIES, classificacao, nomeDaLigaDoClube, posicaoNaLiga, tabelaDaLiga, tabelaDoClube, temporadaEncerrada } from "./competicoes";
 import { MAX_SUBSTITUICOES, MINIMO_POSICAO } from "./constantes";
 import { desfechoDoConfronto, situacaoNaCopa } from "./copa";
-import { DEFINICOES, situacaoNaCopaDeClubes } from "./copas";
+import { DEFINICOES, VAGAS_UEFA, situacaoNaCopaDeClubes, vagasDasCopas } from "./copas";
 import { acertarParticipantes, assumirClube, juntarQuemJogavaFora, avancar, concluirJogos, jogosPendentesHoje, juntarAoSaveAntigo, novoJogo, prepararJogos, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
 import { checarEstado } from "./checagem";
 import { PAISES, competicoesDoUsuario, divisaoDaLiga, inicioDoAno, participantes, tabelaDoTorneio, vagasEntreDivisoes } from "./torneios";
@@ -25,6 +25,7 @@ import jogadoresJson from "../../data/brasil-2026/jogadores.json";
 import exteriorJson from "../../data/america-do-sul-2026/jogadores.json";
 import europaJson from "../../data/europa-2026/jogadores.json";
 import europaClubesJson from "../../data/europa-2026/clubes.json";
+import europaCopasJson from "../../data/europa-2026/copas.json";
 import { TV_EUROPA_MES } from "./constantes";
 import { processarMes } from "./financas";
 import convocadosJson from "../../data/selecoes-2026/convocados.json";
@@ -1956,6 +1957,38 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
     expect(elencoDe(e, "arsenal").length).toBe((europaJson.elencos as Record<string, unknown[]>).arsenal.length);
     juntarQuemJogavaFora(e, "arsenal");
     expect(Object.values(e.jogadores).filter((j) => j.nome === brasileiro.nome)).toHaveLength(1);
+  });
+
+  it("as copas da UEFA de 2026 têm os classificados da tabela final de 2025/26: 32 na Liga dos Campeões, 16 na Liga Europa e 16 na Conference", () => {
+    const copas = europaCopasJson.copas as Record<string, { grupos: string[] }>;
+    expect(estado.copas?.["K-UCL"]?.clubes.sort()).toEqual([...copas["K-UCL"].grupos].sort());
+    expect(estado.copas?.["K-UCL"]?.clubes).toHaveLength(32);
+    expect(estado.copas?.["K-UEL"]?.clubes).toHaveLength(16);
+    expect(estado.copas?.["K-UECL"]?.clubes).toHaveLength(16);
+    // O campeão de 2025/26 de cada liga está na Liga dos Campeões; ninguém joga duas copas.
+    for (const id of ["arsenal", "barcelona-esp", "inter-de-milao", "bayern-de-munique", "paris-saint-germain", "porto-por", "psv"]) expect(copas["K-UCL"].grupos).toContain(id);
+    const todos = [...copas["K-UCL"].grupos, ...copas["K-UEL"].grupos, ...copas["K-UECL"].grupos];
+    expect(new Set(todos).size).toBe(64);
+    // Sem a lista de 2026, a Supercopa da UEFA não se joga.
+    expect(estado.copas?.["K-USC"]).toBeUndefined();
+  });
+
+  it("as copas da UEFA vão até a final; na virada, as vagas saem das tabelas do jogo e a Supercopa da UEFA junta os campeões", () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 11 });
+    e.config.escalacaoAutomatica = true;
+    simularRestoDaTemporada(e);
+    for (const id of ["K-UCL", "K-UEL", "K-UECL"] as const) {
+      const c = e.copas?.[id];
+      expect(c?.campeao, id).toBeTruthy();
+      expect(e.partidas.filter((p) => p.serie === id && !p.jogada), id).toHaveLength(0);
+      expect(e.partidas.find((p) => p.serie === id && p.fase === "final")?.neutro, id).toBe(true);
+    }
+    expect(e.partidas.filter((p) => p.serie === "K-UCL")).toHaveLength(96 + 16 + 8 + 4 + 1);
+    const vagas = vagasDasCopas(e);
+    expect(vagas["K-UCL"]?.grupos).toHaveLength(32);
+    const tabelaEN = tabelaDoTorneio(e, e.torneios!["L-EN" as IdTorneio]!).map((l) => l.clubeId);
+    expect(vagas["K-UCL"]?.grupos.slice(0, VAGAS_UEFA.EN.ucl[1])).toEqual(tabelaEN.slice(0, VAGAS_UEFA.EN.ucl[1]));
+    expect(vagas["K-USC"]?.final).toEqual([e.copas!["K-UCL"]!.campeao, e.copas!["K-UEL"]!.campeao]);
   });
 
   it("no jogo novo, os convocados da América que jogam na Europa estão só no clube (sem cópia jogando fora)", () => {

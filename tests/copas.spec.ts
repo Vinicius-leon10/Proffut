@@ -14,7 +14,7 @@ async function abrirCopas(page: Page) {
   await page.getByRole("tab", { name: "Copas" }).click();
 }
 
-test("R88 Tabelas → Copas: todas as copas de 2026 no seletor (Brasil, América do Sul, Concacaf e copas nacionais), com os clubes de verdade: a 1ª fase da Libertadores com os 6 de 2026, a Supercopa Flamengo x Corinthians e a Recopa Lanús x Flamengo", async ({ page }) => {
+test("R88 Tabelas → Copas: todas as copas de 2026 no seletor (Brasil, América do Sul, Concacaf, Europa desde o R99 e copas nacionais), com os clubes de verdade: a 1ª fase da Libertadores com os 6 de 2026, a Supercopa Flamengo x Corinthians e a Recopa Lanús x Flamengo", async ({ page }) => {
   await novoJogo(page);
   await abrirCopas(page);
   // Quem joga a Copa do Brasil abre nela (como antes).
@@ -26,7 +26,7 @@ test("R88 Tabelas → Copas: todas as copas de 2026 no seletor (Brasil, América
     "Copa Chile", "Copa Colômbia", "U.S. Open Cup",
   ]) expect(opcoes, nome).toContain(nome);
   const grupos = await seletorDaCopa(page).locator("optgroup").evaluateAll((g) => g.map((x) => x.getAttribute("label")));
-  expect(grupos).toEqual(["Brasil", "América do Sul", "Concacaf", "Copas nacionais"]);
+  expect(grupos).toEqual(["Brasil", "América do Sul", "Concacaf", "Europa", "Copas nacionais"]);
 
   // Libertadores: a 1ª fase em ida e volta, com os 6 clubes de 2026.
   await seletorDaCopa(page).selectOption({ label: "Libertadores" });

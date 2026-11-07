@@ -18,6 +18,7 @@
 // Brasil (quartas), as ligas de fora e a Série D (domingo) e as datas FIFA; se ainda assim um clube já tem jogo um dia
 // antes ou depois, o jogo vai para outro dia da mesma semana (`escolherData`).
 import participantesJson from "../../data/copas-2026/participantes.json";
+import europaCopasJson from "../../data/europa-2026/copas.json";
 import { comArtigo, concorda } from "./artigos";
 import { inicioDaTemporada, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { chavesDaFase, classificacao, tabelaDaLiga, vencedorDaChave, type LinhaTabela } from "./competicoes";
@@ -97,7 +98,7 @@ export interface DefinicaoCopa {
   id: IdCopa;
   nome: string;
   /** Onde a copa aparece nas telas. */
-  grupo: "brasil" | "conmebol" | "concacaf" | "nacional";
+  grupo: "brasil" | "conmebol" | "concacaf" | "uefa" | "nacional";
   /** País da copa nacional. */
   pais?: string;
   fases: FaseCopa[];
@@ -356,6 +357,78 @@ function copaNacional(id: IdCopa, nome: string, pais: string, opcoes: { maximo?:
   };
 }
 
+// ---- Europa (nov/2026): Champions League, Liga Europa, Conference League e Supercopa da UEFA ----------------
+// Só com os clubes das 7 ligas do jogo, no formato clássico (grupos de 4 em turno e returno e mata-mata em ida e volta,
+// final em campo neutro). As ligas da Europa vão de janeiro a setembro aos domingos; as copas, às terças e quintas de
+// janeiro a maio, fora das datas FIFA de março.
+
+/** Vagas de cada liga da Europa nas copas da UEFA (posições na tabela, contando de 1). */
+export const VAGAS_UEFA: Record<string, { ucl: [number, number]; uel: [number, number]; uecl: [number, number] }> = {
+  EN: { ucl: [1, 5], uel: [6, 7], uecl: [8, 9] }, ES: { ucl: [1, 5], uel: [6, 7], uecl: [8, 9] },
+  IT: { ucl: [1, 5], uel: [6, 7], uecl: [8, 9] }, DE: { ucl: [1, 5], uel: [6, 7], uecl: [8, 9] },
+  FR: { ucl: [1, 4], uel: [5, 7], uecl: [8, 9] }, PT: { ucl: [1, 4], uel: [5, 7], uecl: [8, 10] },
+  NL: { ucl: [1, 4], uel: [5, 6], uecl: [7, 9] },
+};
+/** Quem joga as copas da UEFA em 2026 (tabela final de 2025/26, tools/europa/montar.ts). */
+const UEFA_2026 = europaCopasJson.copas as Record<string, Record<string, string[]>>;
+
+/** Classificados das copas da UEFA pelas tabelas das ligas (ou pela reputação, antes dos jogos). */
+function vagasDaUefa(estado: EstadoJogo, pelaTabela: boolean): VagasDasCopas {
+  const ucl: string[] = [], uel: string[] = [], uecl: string[] = [];
+  for (const [liga, v] of Object.entries(VAGAS_UEFA)) {
+    const t = ordemDaLiga(estado, liga, pelaTabela);
+    ucl.push(...t.slice(v.ucl[0] - 1, v.ucl[1]));
+    uel.push(...t.slice(v.uel[0] - 1, v.uel[1]));
+    uecl.push(...t.slice(v.uecl[0] - 1, v.uecl[1]));
+  }
+  return { "K-UCL": { grupos: ucl }, "K-UEL": { grupos: uel }, "K-UECL": { grupos: uecl } };
+}
+
+/** Os de 2026 (só os que existem no jogo) ou, numa temporada sem a lista, pela reputação. */
+function daUefa(estado: EstadoJogo, id: IdCopa, vagas?: VagasDasCopas): Record<string, string[]> | undefined {
+  if (vagas?.[id]) return vagas[id];
+  if (estado.temporada === 2026 && UEFA_2026[id]) return Object.fromEntries(Object.entries(UEFA_2026[id]).map(([f, ids]) => [f, ids.filter((c) => estado.clubes[c])]));
+  // Save de antes da Europa: as copas da UEFA começam quando os clubes já jogam as ligas.
+  if (!estado.torneios?.["L-EN"]) return undefined;
+  return vagasDaUefa(estado, false)[id];
+}
+
+/** Copa da UEFA com 8 ou 4 grupos de 4 (turno e returno) e mata-mata em ida e volta até a final em campo neutro. */
+function copaDaUefa(id: IdCopa, nome: string, grupos: 8 | 4, dia: Dia, premios: Record<string, number>): DefinicaoCopa {
+  const mata: FaseCopa[] = grupos === 8
+    ? [
+      { id: "oitavas", nome: "Oitavas de final", tipo: "mata", semanas: [1, 2], dia, pares: "primeiros-x-segundos" },
+      { id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [3, 4], dia, pares: "chave" },
+    ]
+    : [{ id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [3, 4], dia, pares: "primeiros-x-segundos" }];
+  return {
+    id, nome, grupo: "uefa",
+    fases: [
+      { id: "grupos", nome: "Fase de grupos", tipo: "grupos", semanas: [-10, -9, -7, -6, -5, -3], dia, grupos: { quantos: grupos, passam: 2, turnos: 2 } },
+      ...mata,
+      { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [5, 6], dia, pares: "chave" },
+      { id: "final", nome: "Final", tipo: "mata", semanas: [8], dia: id === "K-UCL" ? "sab" : dia, neutro: true, pares: "chave" },
+    ],
+    participantes: (estado, vagas) => daUefa(estado, id, vagas),
+    premios,
+  };
+}
+
+const championsLeague = copaDaUefa("K-UCL", "Liga dos Campeões", 8, "ter",
+  { grupos: 30 * MILHAO, oitavas: 15 * MILHAO, quartas: 20 * MILHAO, semi: 25 * MILHAO, campeao: 120 * MILHAO, vice: 50 * MILHAO });
+const ligaEuropa = copaDaUefa("K-UEL", "Liga Europa", 4, "qui",
+  { grupos: 8 * MILHAO, quartas: 6 * MILHAO, semi: 8 * MILHAO, campeao: 30 * MILHAO, vice: 12 * MILHAO });
+const conference = copaDaUefa("K-UECL", "Conference League", 4, "qui",
+  { grupos: 4 * MILHAO, quartas: 3 * MILHAO, semi: 4 * MILHAO, campeao: 15 * MILHAO, vice: 6 * MILHAO });
+const supercopaUefa: DefinicaoCopa = {
+  id: "K-USC", nome: "Supercopa da UEFA", grupo: "uefa",
+  // O campeão da Liga dos Campeões contra o da Liga Europa, em campo neutro, no começo do ano (sem lista em 2026: a base
+  // não tem as finais de 2025/26).
+  fases: [{ id: "final", nome: "Final", tipo: "mata", semanas: [-11], dia: "qua", neutro: true, pares: "chave" }],
+  participantes: (_estado, vagas) => vagas?.["K-USC"],
+  premios: { campeao: 8 * MILHAO, vice: 4 * MILHAO },
+};
+
 export const DEFINICOES: DefinicaoCopa[] = [
   supercopa, recopa, libertadores, sulAmericana, nordeste, copaVerde, sulSudeste,
   campeoesConcacaf, leaguesCup, centroAmericana, caribe,
@@ -368,6 +441,7 @@ export const DEFINICOES: DefinicaoCopa[] = [
   copaNacional("K-VE", "Copa Venezuela", "VE", { maximo: 16 }),
   copaNacional("K-US", "U.S. Open Cup", "US", { maximo: 32, semanas: SEMANAS_EUA, sem: CANADENSES_DA_MLS }),
   copaNacional("K-CA", "Campeonato Canadense", "CA", { maximo: 8, semanas: SEMANAS_EUA }),
+  supercopaUefa, championsLeague, ligaEuropa, conference,
 ];
 const POR_ID = new Map<string, DefinicaoCopa>(DEFINICOES.map((d) => [d.id, d]));
 export const definicaoDaCopa = (id: string) => POR_ID.get(id);
@@ -498,6 +572,10 @@ export function vagasDasCopas(estado: EstadoJogo): VagasDasCopas {
   if (oitavas.length + fase1.length >= 8) vagas["K-CONC"] = { oitavas, fase1: fase1.slice(0, 22) };
   vagas["K-CAM"] = { grupos: porPais(estado, VAGAS_CENTRO_AMERICANA, true) };
   vagas["K-CAR"] = { grupos: porPais(estado, VAGAS_CARIBE, true) };
+  // Europa: pelas tabelas das 7 ligas; a Supercopa da UEFA entre os campeões da Liga dos Campeões e da Liga Europa.
+  if (estado.torneios?.["L-EN"]) Object.assign(vagas, vagasDaUefa(estado, true));
+  const supercopa = unicos([campeao("K-UCL"), campeao("K-UEL")]);
+  if (supercopa.length === 2) vagas["K-USC"] = { final: supercopa };
   return vagas;
 }
 

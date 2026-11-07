@@ -409,6 +409,35 @@ competições e amistosos. Fim de temporada e histórico com os campeões e os c
 entram ao abrir (`juntarSelecoes`), com as competições que ainda não começaram e os amistosos da próxima data. Números:
 ~22.400 jogadores (885 de fora), temporada simulada ~7,5 s, save de 13 a 15 MB.
 
+**Europa (nov/2026, etapa 1):** pedido "Vamos fazer primeiro as 7 ligas principais da Europa e apenas a primeira divisão
+dessas ligas. Mas já introduza os principais campeonatos da Europa". **Dados:** fase "europa" do robô (`elencos.yml`,
+`tools/europa/filtrar.py`) baixa do transfermarkt-datasets (CC0) os clubes, jogadores e jogos das ligas e das copas da UEFA
+para a branch `dados-europa` (a rede daqui bloqueia a base); `npx tsx tools/europa/montar.ts <dados-europa>` grava
+`data/europa-2026/clubes.json` (132 clubes da temporada 2025/26: Inglaterra, Espanha e Itália com 20, Alemanha, França,
+Portugal e Holanda com 18), `jogadores.json` (os 30 mais valiosos de cada clube, guardando o mínimo por posição; força pelo
+valor de mercado e a idade: € 1 mi → 66, € 20 mi → 84, € 50 mi → 90, € 100 mi → 94, `forcaPeloValor`), `copas.json` (os
+classificados de 2026 pela tabela final de 2025/26) e liga em `data/selecoes-2026/convocados.json` os convocados da América
+que jogam nesses clubes (120; por nome, sobrenome no clube ou data de nascimento). Nomes como se fala no Brasil, siglas,
+cidades, cores, torcida e reputação: `tools/europa/fichas.ts` (ids com sufixo quando o nome já existia: `barcelona-esp`,
+`liverpool-ing`, `everton-ing`, `juventus-ita`, `real-sociedad-esp`, `porto-por`, `santa-clara-por`, `nacional-por`).
+**Motor:** `PAISES` com EN, ES, IT, DE, FR, PT e NL (`regiao: "europa"`, `NOME_REGIAO.europa`); os clubes entram em
+`FICHAS_EXTERIOR` e os elencos em `ELENCOS_REAIS` (jogo.ts). As ligas da Europa são sempre em turno e returno e começam
+em janeiro (`SEMANA_ESTADUAIS`, domingos até setembro). Sem segunda divisão: não há acesso nem queda. Jogos pela simulação
+rápida, menos os do clube do técnico. O clube da Europa do técnico recebe "Direitos de TV do mês" (`TV_EUROPA_MES` ×
+(reputação/100)³: a base de cada liga é a folha típica dela). Nacionalidades de fora da América em
+`src/engine/nacionalidades.ts` (`NACIONALIDADES_MUNDO`: código, nome e bandeira; `emojiDaBandeira` faz a da Inglaterra,
+Escócia e País de Gales). Save antigo: `acertarParticipantes` cria os clubes (a liga vale na temporada seguinte) e
+`juntarQuemJogavaFora` junta o jogador que a seleção tinha como "jogando fora" ao do elenco novo (mesmo nome e nacionalidade:
+fica o do save, com a convocação). **Copas da UEFA** (`copas.ts`, grupo "uefa", Tabelas → Copas → Europa): Liga dos Campeões
+(32: 8 grupos de 4 em turno e returno, oitavas, quartas, semi em ida e volta e final em campo neutro, às terças), Liga Europa
+e Conference League (16: 4 grupos, quartas, semi e final, às quintas), de janeiro a maio; vagas por liga em `VAGAS_UEFA`
+(Inglaterra, Espanha, Itália e Alemanha 5 na Liga dos Campeões...); Supercopa da UEFA (campeões das duas primeiras, em
+janeiro, a partir de 2027: a base não tem as finais de 2025/26). Prêmios grandes (Liga dos Campeões: 30 mi nos grupos, 120 mi
+ao campeão); a Liga dos Campeões dá a reputação da Libertadores. **Telas:** jogo novo com o continente Europa (7 países);
+Tabelas → Outros países com o grupo Europa. **Escudos:** os 132 faltam (`docs/TIMES_NOVOS.md`); até chegarem, o desenhado.
+Números: 1.180 clubes, ~26 mil jogadores, temporada simulada ~11 s, save ~20 MB. Testes R98 e R99 e "Europa" no motor.
+**Falta (etapas seguintes):** 2ª divisão das 7 ligas, outros países, seleções da Europa e a Copa do Mundo.
+
 **Espaços que acompanham o jogo (nov/2026, `salvamento.ts`, `store.ts`):** pedido "Quero que esse save embaixo seja
 automático, a cada rodada, posso alterna entre os saves sem me preocupar" (ele abriu um espaço antigo e perdeu o jogo
 mais avançado do Continuar). O jogo aberto tem um espaço ligado (`Loja.espaco`, guardado em `resumo:auto.ligado`):

@@ -2,6 +2,7 @@ import { nomeDaCompeticao } from "../engine/competicoes";
 import { NOME_FASE_COPA } from "../engine/copa";
 import { definicaoDaCopa, ehCopaDeClubes, nomeDaFaseDaCopa } from "../engine/copas";
 import { NOME_FASE_TORNEIO, PAISES, ehTorneio } from "../engine/torneios";
+import { NACIONALIDADES_MUNDO, emojiDaBandeira } from "../engine/nacionalidades";
 import { ehCompeticaoDeSelecoes, rotuloDeSelecoes } from "../engine/selecoes";
 import type { FaseCopa, Partida } from "../engine/tipos";
 
@@ -55,6 +56,8 @@ export const NOMES_NACIONALIDADE: Record<string, string> = {
   CPV: "Cabo Verde", MOC: "Moçambique", GNB: "Guiné-Bissau",
   // Os países da América que faltavam (as nacionalidades dos clubes e das seleções da Concacaf).
   ...Object.fromEntries(Object.values(PAISES).map((p) => [p.nacionalidade, p.pais])),
+  // Os de fora da América que chegaram com a Europa (nov/2026).
+  ...Object.fromEntries(Object.entries(NACIONALIDADES_MUNDO).map(([cod, n]) => [cod, n.nome])),
 };
 
 /** Código de duas letras do país de cada nacionalidade (para a bandeira em emoji ao lado do nome do jogador). */
@@ -62,6 +65,9 @@ const PAIS_DA_NACIONALIDADE: Record<string, string> = {
   BRA: "BR", POR: "PT", ESP: "ES", ITA: "IT", FRA: "FR", ALE: "DE", HOL: "NL", BEL: "BE", JAP: "JP",
   ANG: "AO", NGA: "NG", GAN: "GH", CMR: "CM", CIV: "CI", SEN: "SN", MAR: "MA", CPV: "CV", MOC: "MZ", GNB: "GW",
   ...Object.fromEntries(Object.entries(PAISES).map(([codigo, p]) => [p.nacionalidade, codigo])),
+  ...Object.fromEntries(Object.entries(NACIONALIDADES_MUNDO).map(([cod, n]) => [cod, n.iso2])),
+  // A Inglaterra é "EN" no jogo; a bandeira é a dela.
+  ING: "ENG",
 };
 
 /** Bandeira (emoji) e nome do país do jogador pela nacionalidade ("ARG" → 🇦🇷 Argentina); sem país conhecido, a branca. */
@@ -69,5 +75,5 @@ export function bandeiraDaNacionalidade(nacionalidade: string): { bandeira: stri
   const codigo = PAIS_DA_NACIONALIDADE[nacionalidade];
   const pais = NOMES_NACIONALIDADE[nacionalidade] ?? nacionalidade;
   if (!codigo) return { bandeira: "🏳️", pais };
-  return { bandeira: String.fromCodePoint(...[...codigo].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65)), pais };
+  return { bandeira: emojiDaBandeira(codigo), pais };
 }

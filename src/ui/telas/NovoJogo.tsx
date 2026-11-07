@@ -2,13 +2,18 @@ import { useMemo, useState, type ReactNode } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { FICHAS, FICHAS_ESTADUAIS, FICHAS_EXTERIOR, PARTICIPANTES_ESTADUAIS, RESERVA, forcaEstimada, novoJogo, type FichaClube } from "../../engine/jogo";
 import { NOME_REGIAO, PAISES, divisaoDaLiga, type Regiao } from "../../engine/torneios";
+import { emojiDaBandeira } from "../../engine/nacionalidades";
 import { formatarDinheiro } from "../../engine/financas";
 import { espacoLivre, pedirArmazenamentoPersistente, podeTrocarOContinuar } from "../../save/salvamento";
 import { Escudo, Segmentado, Topo } from "../componentes";
 import { useLoja } from "../store";
 
-/** Bandeira do país pelo código de duas letras (as letras viram os "indicadores regionais" do emoji: BR → 🇧🇷). */
+/**
+ * Bandeira do país pelo código de duas letras (as letras viram os "indicadores regionais" do emoji: BR → 🇧🇷). A
+ * Inglaterra ("EN" no jogo) tem a bandeira própria, a da cruz de São Jorge.
+ */
 export function bandeira(codigo: string): string {
+  if (codigo.toUpperCase() === "EN") return emojiDaBandeira("ENG");
   return String.fromCodePoint(...[...codigo.toUpperCase()].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65));
 }
 
@@ -33,8 +38,13 @@ const POR_REGIAO = (Object.keys(NOME_REGIAO) as Regiao[]).map((regiao) => ({
   paises: Object.keys(DIVISOES).filter((p) => (p === "BR" ? "sul" : PAISES[p].regiao) === regiao),
 })).filter((g) => g.paises.length);
 const NOME_PAIS: Record<string, string> = { BR: "Brasil", ...Object.fromEntries(Object.entries(PAISES).map(([k, v]) => [k, v.pais])) };
-/** Os países em ordem alfabética, numa lista só (R96: sem a divisão por região). */
-const PAISES_EM_ORDEM = POR_REGIAO.flatMap((g) => g.paises).sort((a, b) => NOME_PAIS[a].localeCompare(NOME_PAIS[b], "pt-BR"));
+/** Os continentes do jogo novo (R96; a Europa desde o R98), com os países em ordem alfabética, numa lista só. */
+type Continente = "america" | "europa";
+const CONTINENTES: { id: Continente; nome: string; icone: string }[] = [{ id: "america", nome: "América", icone: "🌎" }, { id: "europa", nome: "Europa", icone: "🌍" }];
+const PAISES_EM_ORDEM: Record<Continente, string[]> = {
+  america: POR_REGIAO.filter((g) => g.regiao !== "europa").flatMap((g) => g.paises).sort((a, b) => NOME_PAIS[a].localeCompare(NOME_PAIS[b], "pt-BR")),
+  europa: POR_REGIAO.filter((g) => g.regiao === "europa").flatMap((g) => g.paises).sort((a, b) => NOME_PAIS[a].localeCompare(NOME_PAIS[b], "pt-BR")),
+};
 const semAcento = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
 /** Jogo novo em três páginas (pedido do usuário, R94): o nome do técnico, o país (bandeiras) e o clube (divisões do país). */
@@ -44,6 +54,7 @@ export function NovoJogo() {
   const [busca, setBusca] = useState("");
   const [nome, setNome] = useState("");
   const [pais, setPais] = useState("BR");
+  const [continente, setContinente] = useState<Continente>("america");
   const [divisao, setDivisao] = useState("A");
   const [escolhido, setEscolhido] = useState<string | null>(null);
   const [criando, setCriando] = useState(false);
@@ -100,20 +111,22 @@ export function NovoJogo() {
     );
   }
 
-  // O continente (só a América por enquanto; os outros entram quando chegarem ao jogo), R96.
+  // O continente (R96): a América e, desde o R98, a Europa.
   if (passo === "continente") {
     return (
       <div className="app">
         <Topo titulo="Escolha o continente" sub={`Técnico: ${nome.trim() || "Técnico"}`} aoVoltar={() => setPasso("nome")} />
         <div className="conteudo">
           <div className="lista">
-            <button className="item" onClick={() => { setBusca(""); setPasso("pais"); }}>
-              <span className="bandeira" aria-hidden style={{ fontSize: 28 }}>🌎</span>
-              <div className="cresce">
-                <div className="negrito">América</div>
-                <div className="mini fraco">{PAISES_EM_ORDEM.length} países</div>
-              </div>
-            </button>
+            {CONTINENTES.map((c) => (
+              <button key={c.id} className="item" onClick={() => { setBusca(""); setContinente(c.id); setPasso("pais"); }}>
+                <span className="bandeira" aria-hidden style={{ fontSize: 28 }}>{c.icone}</span>
+                <div className="cresce">
+                  <div className="negrito">{c.nome}</div>
+                  <div className="mini fraco">{PAISES_EM_ORDEM[c.id].length} países</div>
+                </div>
+              </button>
+            ))}
           </div>
         </div>
       </div>
@@ -122,10 +135,10 @@ export function NovoJogo() {
 
   if (passo === "pais") {
     const termo = semAcento(busca.trim());
-    const lista = PAISES_EM_ORDEM.filter((p) => !termo || semAcento(NOME_PAIS[p]).includes(termo));
+    const lista = PAISES_EM_ORDEM[continente].filter((p) => !termo || semAcento(NOME_PAIS[p]).includes(termo));
     return (
       <div className="app">
-        <Topo titulo="Escolha o país" sub="América" aoVoltar={() => setPasso("continente")} />
+        <Topo titulo="Escolha o país" sub={CONTINENTES.find((c) => c.id === continente)!.nome} aoVoltar={() => setPasso("continente")} />
         <div className="conteudo">
           <input value={busca} onChange={(e) => setBusca(e.target.value)} placeholder="Nome do país" autoComplete="off" aria-label="Nome do país" />
           <div role="group" aria-label="País" className="lista">
