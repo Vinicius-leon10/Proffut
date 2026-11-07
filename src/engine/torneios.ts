@@ -7,7 +7,7 @@
 //   turno e returno e final; de 7 a 10: turno único, semifinal e final; 11 ou mais: dois grupos em turno único,
 //   quartas, semifinal e final. Mata-mata em jogo único na casa da melhor campanha, com pênaltis se empatar.
 // - Ligas de fora: pontos corridos, em turno e returno quando cabe nos domingos da temporada (até 18 clubes) e em
-//   turno único nas maiores. O campeão é o primeiro.
+//   turno único nas maiores; as da Europa sempre em turno e returno, de janeiro em diante. O campeão é o primeiro.
 import { comArtigo, concorda } from "./artigos";
 import { inicioDaTemporada, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { chavesDaFase, classificacao, vencedorDaChave, type LinhaTabela } from "./competicoes";
@@ -23,8 +23,8 @@ export const NOME_ESTADUAL: Record<string, string> = {
 };
 
 /** Região do país na América (para agrupar nas telas). */
-export type Regiao = "sul" | "norte" | "central" | "caribe";
-export const NOME_REGIAO: Record<Regiao, string> = { sul: "América do Sul", norte: "América do Norte", central: "América Central", caribe: "Caribe" };
+export type Regiao = "sul" | "norte" | "central" | "caribe" | "europa";
+export const NOME_REGIAO: Record<Regiao, string> = { sul: "América do Sul", norte: "América do Norte", central: "América Central", caribe: "Caribe", europa: "Europa" };
 
 /**
  * Os outros países da América: nome do país, do campeonato (em português), a nacionalidade dos jogadores (código de 3
@@ -82,6 +82,14 @@ export const PAISES: Record<string, { pais: string; liga: string; nacionalidade:
   VG: { pais: "Ilhas Virgens Britânicas", liga: "Campeonato das Ilhas Virgens Britânicas", nacionalidade: "VGB", regiao: "caribe" },
   VI: { pais: "Ilhas Virgens Americanas", liga: "Campeonato das Ilhas Virgens Americanas", nacionalidade: "VIR", regiao: "caribe" },
   TC: { pais: "Turks e Caicos", liga: "Campeonato de Turks e Caicos", nacionalidade: "TCA", regiao: "caribe" },
+  // Europa (nov/2026): as primeiras divisões das 7 ligas principais ("Vamos fazer primeiro as 7 ligas principais").
+  EN: { pais: "Inglaterra", liga: "Campeonato Inglês", nacionalidade: "ING", regiao: "europa" },
+  ES: { pais: "Espanha", liga: "Campeonato Espanhol", nacionalidade: "ESP", regiao: "europa" },
+  IT: { pais: "Itália", liga: "Campeonato Italiano", nacionalidade: "ITA", regiao: "europa" },
+  DE: { pais: "Alemanha", liga: "Campeonato Alemão", nacionalidade: "ALE", regiao: "europa" },
+  FR: { pais: "França", liga: "Campeonato Francês", nacionalidade: "FRA", regiao: "europa" },
+  PT: { pais: "Portugal", liga: "Campeonato Português", nacionalidade: "POR", regiao: "europa" },
+  NL: { pais: "Holanda", liga: "Campeonato Holandês", nacionalidade: "HOL", regiao: "europa" },
 };
 
 /** País e divisão de um código de liga: "AR" é a 1ª da Argentina, "AR2" a 2ª, "MX3" a 3ª do México. */
@@ -272,8 +280,12 @@ export function criarTorneios(estado: EstadoJogo, { semEstaduais = false } = {})
       }
     } else {
       const ida = turnoUnico(clubes, rng);
-      const rodadas = 2 * ida.length <= 35 ? [...ida, ...ida.map((jogos) => jogos.map(([a, b]) => [b, a] as Confronto))] : ida;
-      estado.partidas.push(...partidasDasRodadas(ano, id, "liga", rodadas, rodadas.map((_, r) => domingo(ano, r))));
+      // As ligas da Europa são sempre em turno e returno (38 rodadas com 20 clubes) e começam em janeiro, com os
+      // estaduais: os clubes de lá não jogam estadual e assim sobra o resto do ano para as copas da UEFA.
+      const europa = PAISES[divisaoDaLiga(id.slice(2)).pais]?.regiao === "europa";
+      const rodadas = europa || 2 * ida.length <= 35 ? [...ida, ...ida.map((jogos) => jogos.map(([a, b]) => [b, a] as Confronto))] : ida;
+      const inicio = europa ? SEMANA_ESTADUAIS : 0;
+      estado.partidas.push(...partidasDasRodadas(ano, id, "liga", rodadas, rodadas.map((_, r) => domingo(ano, inicio + r))));
     }
     torneios[id] = t;
   }

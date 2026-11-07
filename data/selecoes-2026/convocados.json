@@ -31,7 +31,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Torino",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "leeds",
+     "noJogo": "Lucas Perri"
     },
     {
      "nome": "Gabriel Magalhães",
@@ -40,7 +42,9 @@
      "jogos": 24,
      "gols": 1,
      "clube": "Arsenal",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "arsenal",
+     "noJogo": "Gabriel"
     },
     {
      "nome": "Douglas Santos",
@@ -58,7 +62,9 @@
      "jogos": 9,
      "gols": 1,
      "clube": "Monaco",
-     "paisDoClube": "FRA"
+     "paisDoClube": "FRA",
+     "clubeDoJogo": "monaco",
+     "noJogo": "Vanderson"
     },
     {
      "nome": "Wesley",
@@ -67,7 +73,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "Roma",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "roma",
+     "noJogo": "Wesley"
     },
     {
      "nome": "Carlos Augusto",
@@ -76,7 +84,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Inter Milan",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "inter-de-milao",
+     "noJogo": "Carlos Augusto"
     },
     {
      "nome": "Jair Cunha",
@@ -85,7 +95,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Nottingham Forest",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "nottingham-forest",
+     "noJogo": "Jair Cunha"
     },
     {
      "nome": "Arthur Dias",
@@ -105,7 +117,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Manchester City",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "girona",
+     "noJogo": "Vitor Reis"
     },
     {
      "nome": "Jonathan Jesus",
@@ -125,7 +139,9 @@
      "jogos": 51,
      "gols": 4,
      "clube": "Arsenal",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "newcastle",
+     "noJogo": "Bruno Guimarães"
     },
     {
      "nome": "Danilo",
@@ -145,7 +161,9 @@
      "jogos": 10,
      "gols": 0,
      "clube": "Aston Villa",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "wolverhampton",
+     "noJogo": "João Gomes"
     },
     {
      "nome": "Andrey Santos",
@@ -154,7 +172,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "Manchester United",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "chelsea",
+     "noJogo": "Andrey Santos"
     },
     {
      "nome": "Gabriel Bontempo",
@@ -194,7 +214,9 @@
      "jogos": 57,
      "gols": 14,
      "clube": "Real Madrid",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "real-madrid",
+     "noJogo": "Vinicius Junior"
     },
     {
      "nome": "Raphinha",
@@ -203,7 +225,9 @@
      "jogos": 43,
      "gols": 12,
      "clube": "Barcelona",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "barcelona-esp",
+     "noJogo": "Raphinha"
     },
     {
      "nome": "Endrick",
@@ -212,7 +236,9 @@
      "jogos": 24,
      "gols": 4,
      "clube": "Real Madrid",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "real-madrid",
+     "noJogo": "Endrick"
     },
     {
      "nome": "Estêvão",
@@ -221,7 +247,9 @@
      "jogos": 14,
      "gols": 6,
      "clube": "Chelsea",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "chelsea",
+     "noJogo": "Estêvão"
     },
     {
      "nome": "Rayan",
@@ -230,7 +258,9 @@
      "jogos": 8,
      "gols": 2,
      "clube": "Bournemouth",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "bournemouth",
+     "noJogo": "Rayan"
     },
     {
      "nome": "Alisson Santana",
@@ -262,7 +292,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Atlético Madrid",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "atletico-de-madrid",
+     "noJogo": "Juan Musso"
     },
     {
      "nome": "Gerónimo Rulli",
@@ -271,7 +303,9 @@
      "jogos": 9,
      "gols": 0,
      "clube": "Manchester City",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "olympique-de-marselha",
+     "noJogo": "Gerónimo Rulli"
     },
     {
      "nome": "Emiliano Martínez",
@@ -280,7 +314,9 @@
      "jogos": 70,
      "gols": 0,
      "clube": "Chelsea",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "aston-villa",
+     "noJogo": "Emiliano Martínez"
     },
     {
      "nome": "Santiago Beltrán",
@@ -300,7 +336,9 @@
      "jogos": 13,
      "gols": 0,
      "clube": "Roma",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "olympique-de-marselha",
+     "noJogo": "Leonardo Balerdi"
     },
     {
      "nome": "Nicolás Tagliafico",
@@ -309,7 +347,9 @@
      "jogos": 84,
      "gols": 1,
      "clube": "Lyon",
-     "paisDoClube": "FRA"
+     "paisDoClube": "FRA",
+     "clubeDoJogo": "lyon",
+     "noJogo": "Nicolás Tagliafico"
     },
     {
      "nome": "Agustín Giay",
@@ -329,7 +369,9 @@
      "jogos": 38,
      "gols": 2,
      "clube": "Manchester United",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "manchester-united",
+     "noJogo": "Lisandro Martínez"
     },
     {
      "nome": "Cristian Romero",
@@ -338,7 +380,9 @@
      "jogos": 61,
      "gols": 5,
      "clube": "Atlético Madrid",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "tottenham",
+     "noJogo": "Cristian Romero"
     },
     {
      "nome": "Nicolás Otamendi",
@@ -358,7 +402,9 @@
      "jogos": 16,
      "gols": 0,
      "clube": "Bayer Leverkusen",
-     "paisDoClube": "GER"
+     "paisDoClube": "GER",
+     "clubeDoJogo": "olympique-de-marselha",
+     "noJogo": "Facundo Medina"
     },
     {
      "nome": "Tomás Palacios",
@@ -387,7 +433,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Betis",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "betis",
+     "noJogo": "Valentín Gómez"
     },
     {
      "nome": "Equi Fernández",
@@ -396,7 +444,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Bayer Leverkusen",
-     "paisDoClube": "GER"
+     "paisDoClube": "GER",
+     "clubeDoJogo": "bayer-leverkusen",
+     "noJogo": "Equi Fernández"
     },
     {
      "nome": "Rodrigo De Paul",
@@ -416,7 +466,9 @@
      "jogos": 51,
      "gols": 8,
      "clube": "Manchester City",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "chelsea",
+     "noJogo": "Enzo Fernández"
     },
     {
      "nome": "Giovani Lo Celso",
@@ -425,7 +477,9 @@
      "jogos": 69,
      "gols": 5,
      "clube": "Betis",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "betis",
+     "noJogo": "Giovani Lo Celso"
     },
     {
      "nome": "Exequiel Palacios",
@@ -434,7 +488,9 @@
      "jogos": 44,
      "gols": 0,
      "clube": "Ipswich Town",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "bayer-leverkusen",
+     "noJogo": "Exequiel Palacios"
     },
     {
      "nome": "Nico Paz",
@@ -443,7 +499,9 @@
      "jogos": 14,
      "gols": 4,
      "clube": "Como",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "como",
+     "noJogo": "Nico Paz"
     },
     {
      "nome": "Alexis Mac Allister",
@@ -452,7 +510,9 @@
      "jogos": 57,
      "gols": 7,
      "clube": "Liverpool",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "liverpool-ing",
+     "noJogo": "Alexis Mac Allister"
     },
     {
      "nome": "Valentín Barco",
@@ -461,7 +521,9 @@
      "jogos": 7,
      "gols": 2,
      "clube": "Chelsea",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "strasbourg",
+     "noJogo": "Valentín Barco"
     },
     {
      "nome": "Santiago Simón",
@@ -481,7 +543,9 @@
      "jogos": 62,
      "gols": 16,
      "clube": "Atlético Madrid",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "atletico-de-madrid",
+     "noJogo": "Julián Alvarez"
     },
     {
      "nome": "Lionel Messi",
@@ -501,7 +565,9 @@
      "jogos": 60,
      "gols": 6,
      "clube": "Juventus",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "juventus-ita",
+     "noJogo": "Nico González"
     },
     {
      "nome": "Gianluca Prestianni",
@@ -510,7 +576,9 @@
      "jogos": 3,
      "gols": 1,
      "clube": "Benfica",
-     "paisDoClube": "POR"
+     "paisDoClube": "POR",
+     "clubeDoJogo": "benfica",
+     "noJogo": "Gianluca Prestianni"
     },
     {
      "nome": "Giuliano Simeone",
@@ -519,7 +587,9 @@
      "jogos": 17,
      "gols": 3,
      "clube": "Atlético Madrid",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "atletico-de-madrid",
+     "noJogo": "Giuliano Simeone"
     },
     {
      "nome": "José Manuel López",
@@ -538,7 +608,9 @@
      "jogos": 87,
      "gols": 42,
      "clube": "Internazionale",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "inter-de-milao",
+     "noJogo": "Lautaro Martínez"
     },
     {
      "nome": "Matías Soulé",
@@ -547,7 +619,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Roma",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "roma",
+     "noJogo": "Matías Soulé"
     },
     {
      "nome": "Santiago Castro",
@@ -556,7 +630,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Roma",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "bologna",
+     "noJogo": "Santiago Castro"
     },
     {
      "nome": "Franco Mastantuono",
@@ -565,7 +641,9 @@
      "jogos": 7,
      "gols": 1,
      "clube": "Fiorentina",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "real-madrid",
+     "noJogo": "Franco Mastantuono"
     },
     {
      "nome": "Leonel Flores",
@@ -658,7 +736,9 @@
      "jogos": 57,
      "gols": 1,
      "clube": "Akron Tolyatti",
-     "paisDoClube": "RUS"
+     "paisDoClube": "RUS",
+     "clubeDoJogo": "espanyol",
+     "noJogo": "Roberto Fernández"
     },
     {
      "nome": "Richet Gómez",
@@ -936,7 +1016,9 @@
      "jogos": 46,
      "gols": 0,
      "clube": "Sevilla",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "sevilla",
+     "noJogo": "Gabriel Suazo"
     },
     {
      "nome": "Francisco Salinas",
@@ -998,7 +1080,9 @@
      "jogos": 23,
      "gols": 2,
      "clube": "Pisa",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "pisa",
+     "noJogo": "Felipe Loyola"
     },
     {
      "nome": "Felipe Méndez",
@@ -1090,7 +1174,9 @@
      "jogos": 18,
      "gols": 4,
      "clube": "Elche",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "elche",
+     "noJogo": "Lucas Cepeda"
     },
     {
      "nome": "Maximiliano Gutiérrez",
@@ -1183,7 +1269,9 @@
      "jogos": 54,
      "gols": 5,
      "clube": "Nottingham Forest",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "crystal-palace",
+     "noJogo": "Daniel Muñoz"
     },
     {
      "nome": "Jhon Lucumí",
@@ -1192,7 +1280,9 @@
      "jogos": 44,
      "gols": 1,
      "clube": "Juventus",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "bologna",
+     "noJogo": "Jhon Lucumí"
     },
     {
      "nome": "Álvaro Angulo",
@@ -1261,7 +1351,9 @@
      "jogos": 29,
      "gols": 0,
      "clube": "Atlético Mineiro",
-     "paisDoClube": "BRA"
+     "paisDoClube": "BRA",
+     "clubeDoJogo": "estrela-da-amadora",
+     "noJogo": "Kevin Höög Jansson"
     },
     {
      "nome": "Richard Ríos",
@@ -1270,7 +1362,9 @@
      "jogos": 40,
      "gols": 2,
      "clube": "Al-Ittihad",
-     "paisDoClube": "KSA"
+     "paisDoClube": "KSA",
+     "clubeDoJogo": "benfica",
+     "noJogo": "Richard Ríos"
     },
     {
      "nome": "Gustavo Puerta",
@@ -1310,7 +1404,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Birmingham City",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "girona",
+     "noJogo": "Jhon Solís"
     },
     {
      "nome": "Matías Orozco",
@@ -1350,7 +1446,9 @@
      "jogos": 14,
      "gols": 2,
      "clube": "Girona",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "girona",
+     "noJogo": "Yáser Asprilla"
     },
     {
      "nome": "Óscar Perea",
@@ -1370,7 +1468,9 @@
      "jogos": 20,
      "gols": 6,
      "clube": "Sporting CP",
-     "paisDoClube": "POR"
+     "paisDoClube": "POR",
+     "clubeDoJogo": "sporting-cp",
+     "noJogo": "Luis Suárez"
     },
     {
      "nome": "Camilo Durán",
@@ -1466,7 +1566,9 @@
      "jogos": 41,
      "gols": 2,
      "clube": "Paris Saint-Germain",
-     "paisDoClube": "FRA"
+     "paisDoClube": "FRA",
+     "clubeDoJogo": "paris-saint-germain",
+     "noJogo": "Willian Pacho"
     },
     {
      "nome": "Pervis Estupiñán",
@@ -1475,7 +1577,9 @@
      "jogos": 58,
      "gols": 5,
      "clube": "Milan",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "milan",
+     "noJogo": "Pervis Estupiñán"
     },
     {
      "nome": "Ángelo Preciado",
@@ -1503,7 +1607,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Famalicão",
-     "paisDoClube": "POR"
+     "paisDoClube": "POR",
+     "clubeDoJogo": "famalicao",
+     "noJogo": "Léo Realpe"
     },
     {
      "nome": "Jackson Porozo",
@@ -1576,7 +1682,9 @@
      "jogos": 26,
      "gols": 2,
      "clube": "Middlesbrough",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "cremonese",
+     "noJogo": "Jeremy Sarmiento"
     },
     {
      "nome": "Denil Castillo",
@@ -1707,7 +1815,9 @@
      "jogos": 42,
      "gols": 3,
      "clube": "Sunderland",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "sunderland",
+     "noJogo": "Omar Alderete"
     },
     {
      "nome": "Juan Cáceres",
@@ -1799,7 +1909,9 @@
      "jogos": 30,
      "gols": 3,
      "clube": "Brighton & Hove Albion",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "brighton",
+     "noJogo": "Diego Gómez"
     },
     {
      "nome": "Miguel Almirón",
@@ -1882,7 +1994,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Wolverhampton Wanderers",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "wolverhampton",
+     "noJogo": "Enso González"
     },
     {
      "nome": "Hugo Benítez",
@@ -1913,7 +2027,9 @@
      "jogos": 39,
      "gols": 5,
      "clube": "Ipswich Town",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "strasbourg",
+     "noJogo": "Julio Enciso"
     },
     {
      "nome": "Robert Morales",
@@ -2205,7 +2321,9 @@
      "jogos": 3,
      "gols": 1,
      "clube": "Gil Vicente",
-     "paisDoClube": "POR"
+     "paisDoClube": "POR",
+     "clubeDoJogo": "gil-vicente",
+     "noJogo": "Bassco Soyer"
     },
     {
      "nome": "Piero Magallanes",
@@ -2273,7 +2391,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Arouca",
-     "paisDoClube": "POR"
+     "paisDoClube": "POR",
+     "clubeDoJogo": "arouca",
+     "noJogo": "Ignacio de Arruabarrena"
     },
     {
      "nome": "Sebastián Jaume",
@@ -2293,7 +2413,9 @@
      "jogos": 101,
      "gols": 8,
      "clube": "Deportivo A Coruña",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "atletico-de-madrid",
+     "noJogo": "José María Giménez"
     },
     {
      "nome": "Nahitan Nández",
@@ -2311,7 +2433,9 @@
      "jogos": 40,
      "gols": 2,
      "clube": "Napoli",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "napoli",
+     "noJogo": "Mathías Olivera"
     },
     {
      "nome": "Guillermo Varela",
@@ -2331,7 +2455,9 @@
      "jogos": 29,
      "gols": 1,
      "clube": "Liverpool",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "barcelona-esp",
+     "noJogo": "Ronald Araujo"
     },
     {
      "nome": "Sebastián Cáceres",
@@ -2409,7 +2535,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Villarreal",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "villarreal",
+     "noJogo": "Santiago Mouriño"
     },
     {
      "nome": "Juan Rodríguez",
@@ -2418,7 +2546,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Cagliari",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "cagliari",
+     "noJogo": "Juan Rodríguez"
     },
     {
      "nome": "Alexander Barboza",
@@ -2449,7 +2579,9 @@
      "jogos": 80,
      "gols": 3,
      "clube": "Tottenham Hotspur",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "tottenham",
+     "noJogo": "Rodrigo Bentancur"
     },
     {
      "nome": "Federico Valverde",
@@ -2458,7 +2590,9 @@
      "jogos": 76,
      "gols": 9,
      "clube": "Real Madrid",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "real-madrid",
+     "noJogo": "Federico Valverde"
     },
     {
      "nome": "Giorgian de Arrascaeta",
@@ -2517,7 +2651,9 @@
      "jogos": 34,
      "gols": 8,
      "clube": "Sporting CP",
-     "paisDoClube": "POR"
+     "paisDoClube": "POR",
+     "clubeDoJogo": "sporting-cp",
+     "noJogo": "Maxi Araújo"
     },
     {
      "nome": "Agustín Canobbio",
@@ -2537,7 +2673,9 @@
      "jogos": 11,
      "gols": 3,
      "clube": "Sporting CP",
-     "paisDoClube": "POR"
+     "paisDoClube": "POR",
+     "clubeDoJogo": "braga",
+     "noJogo": "Rodrigo Zalazar"
     },
     {
      "nome": "Emiliano Martínez",
@@ -2630,7 +2768,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Getafe",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "getafe",
+     "noJogo": "Martín Satriano"
     },
     {
      "nome": "Bruno Damiani",
@@ -2650,7 +2790,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Bournemouth",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "elche",
+     "noJogo": "Álvaro Rodríguez"
     }
    ]
   },
@@ -2888,7 +3030,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Athletic Bilbao",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "athletic-bilbao",
+     "noJogo": "Álex Padilla"
     },
     {
      "nome": "Jorge Sánchez",
@@ -2930,7 +3074,9 @@
      "jogos": 53,
      "gols": 3,
      "clube": "Genoa",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "genoa",
+     "noJogo": "Johan Vásquez"
     },
     {
      "nome": "Dagoberto Espinoza",
@@ -3045,7 +3191,9 @@
      "jogos": 13,
      "gols": 0,
      "clube": "Atlético Madrid",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "atletico-de-madrid",
+     "noJogo": "Obed Vargas"
     },
     {
      "nome": "Denzell García",
@@ -3096,7 +3244,9 @@
      "jogos": 54,
      "gols": 6,
      "clube": "Porto",
-     "paisDoClube": "POR"
+     "paisDoClube": "POR",
+     "clubeDoJogo": "milan",
+     "noJogo": "Santiago Gimenez"
     },
     {
      "nome": "Armando González",
@@ -3173,7 +3323,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Lyngby",
-     "paisDoClube": "DEN"
+     "paisDoClube": "DEN",
+     "clubeDoJogo": "barcelona-esp",
+     "noJogo": "Diego Kochen"
     },
     {
      "nome": "Chris Brady",
@@ -3203,7 +3355,9 @@
      "jogos": 46,
      "gols": 3,
      "clube": "PSV Eindhoven",
-     "paisDoClube": "NED"
+     "paisDoClube": "NED",
+     "clubeDoJogo": "psv",
+     "noJogo": "Sergiño Dest"
     },
     {
      "nome": "Chris Richards",
@@ -3212,7 +3366,9 @@
      "jogos": 43,
      "gols": 4,
      "clube": "Crystal Palace",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "crystal-palace",
+     "noJogo": "Chris Richards"
     },
     {
      "nome": "Antonee Robinson",
@@ -3221,7 +3377,9 @@
      "jogos": 62,
      "gols": 5,
      "clube": "Fulham",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "fulham",
+     "noJogo": "Antonee Robinson"
     },
     {
      "nome": "Auston Trusty",
@@ -3261,7 +3419,9 @@
      "jogos": 26,
      "gols": 3,
      "clube": "Villarreal",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "villarreal",
+     "noJogo": "Alex Freeman"
     },
     {
      "nome": "George Campbell",
@@ -3300,7 +3460,9 @@
      "jogos": 62,
      "gols": 2,
      "clube": "Bournemouth",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "bournemouth",
+     "noJogo": "Tyler Adams"
     },
     {
      "nome": "Gio Reyna",
@@ -3309,7 +3471,9 @@
      "jogos": 47,
      "gols": 10,
      "clube": "Strasbourg",
-     "paisDoClube": "FRA"
+     "paisDoClube": "FRA",
+     "clubeDoJogo": "borussia-dortmund",
+     "noJogo": "Giovanni Reyna"
     },
     {
      "nome": "Yunus Musah",
@@ -3318,7 +3482,9 @@
      "jogos": 50,
      "gols": 1,
      "clube": "AC Milan",
-     "paisDoClube": "ITA"
+     "paisDoClube": "ITA",
+     "clubeDoJogo": "milan",
+     "noJogo": "Yunus Musah"
     },
     {
      "nome": "Zavier Gozo",
@@ -3356,7 +3522,9 @@
      "jogos": 39,
      "gols": 7,
      "clube": "Bayer Leverkusen",
-     "paisDoClube": "GER"
+     "paisDoClube": "GER",
+     "clubeDoJogo": "bayer-leverkusen",
+     "noJogo": "Malik Tillman"
     },
     {
      "nome": "Adri Mehmeti",
@@ -3428,7 +3596,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "SV Elversberg",
-     "paisDoClube": "GER"
+     "paisDoClube": "GER",
+     "clubeDoJogo": "borussia-dortmund",
+     "noJogo": "Cole Campbell"
     }
    ]
   },
@@ -3484,7 +3654,9 @@
      "jogos": 59,
      "gols": 15,
      "clube": "Bayern Munich",
-     "paisDoClube": "GER"
+     "paisDoClube": "GER",
+     "clubeDoJogo": "bayern-de-munique",
+     "noJogo": "Alphonso Davies"
     },
     {
      "nome": "Niko Sigur",
@@ -3563,7 +3735,9 @@
      "jogos": 67,
      "gols": 8,
      "clube": "Villarreal",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "villarreal",
+     "noJogo": "Tajon Buchanan"
     },
     {
      "nome": "Liam Millar",
@@ -3621,7 +3795,9 @@
      "jogos": 85,
      "gols": 43,
      "clube": "Atlético Madrid",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "juventus-ita",
+     "noJogo": "Jonathan David"
     },
     {
      "nome": "Tani Oluwaseyi",
@@ -3630,7 +3806,9 @@
      "jogos": 31,
      "gols": 2,
      "clube": "Villarreal",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "villarreal",
+     "noJogo": "Tani Oluwaseyi"
     },
     {
      "nome": "Promise David",
@@ -3648,7 +3826,9 @@
      "jogos": 11,
      "gols": 0,
      "clube": "Toulouse",
-     "paisDoClube": "FRA"
+     "paisDoClube": "FRA",
+     "clubeDoJogo": "toulouse",
+     "noJogo": "Jacen Russell-Rowe"
     },
     {
      "nome": "Daniel Jebbison",
@@ -3671,7 +3851,9 @@
      "jogos": 18,
      "gols": 0,
      "clube": "Casa Pia",
-     "paisDoClube": "POR"
+     "paisDoClube": "POR",
+     "clubeDoJogo": "casa-pia",
+     "noJogo": "Patrick Sequeira"
     },
     {
      "nome": "Abraham Madriz",
@@ -4037,7 +4219,9 @@
      "jogos": 49,
      "gols": 4,
      "clube": "AEK Athens",
-     "paisDoClube": "GRE"
+     "paisDoClube": "GRE",
+     "clubeDoJogo": "levante",
+     "noJogo": "Kervin Arriaga"
     },
     {
      "nome": "Jonathan Toro",
@@ -4771,7 +4955,9 @@
      "jogos": 100,
      "gols": 9,
      "clube": "Beşiktaş",
-     "paisDoClube": "TUR"
+     "paisDoClube": "TUR",
+     "clubeDoJogo": "olympique-de-marselha",
+     "noJogo": "Amir Murillo"
     },
     {
      "nome": "Eduardo Anderson",
@@ -5674,7 +5860,9 @@
      "jogos": 41,
      "gols": 7,
      "clube": "Olympiacos",
-     "paisDoClube": "GRE"
+     "paisDoClube": "GRE",
+     "clubeDoJogo": "roma",
+     "noJogo": "Leon Bailey"
     },
     {
      "nome": "Renaldo Cephas",
@@ -5735,7 +5923,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Volendam",
-     "paisDoClube": "NED"
+     "paisDoClube": "NED",
+     "clubeDoJogo": "volendam",
+     "noJogo": "Déron Payne"
     },
     {
      "nome": "Kobi Henry",
@@ -5797,7 +5987,9 @@
      "jogos": 12,
      "gols": 0,
      "clube": "Bristol City",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "crystal-palace",
+     "noJogo": "Rio Cardines"
     },
     {
      "nome": "Noah Powder",
@@ -6045,7 +6237,9 @@
      "jogos": 60,
      "gols": 1,
      "clube": "Angers",
-     "paisDoClube": "FRA"
+     "paisDoClube": "FRA",
+     "clubeDoJogo": "angers",
+     "noJogo": "Carlens Arcus"
     },
     {
      "nome": "Francois Dulysse",
@@ -6141,7 +6335,9 @@
      "jogos": 17,
      "gols": 1,
      "clube": "Wolverhampton Wanderers",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "wolverhampton",
+     "noJogo": "Jean-Ricner Bellegarde"
     },
     {
      "nome": "Danley Jean Jacques",
@@ -6191,7 +6387,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Werder Bremen",
-     "paisDoClube": "GER"
+     "paisDoClube": "GER",
+     "clubeDoJogo": "le-havre",
+     "noJogo": "Kenny Quetant"
     },
     {
      "nome": "Louicius Deedson",
@@ -6229,7 +6427,9 @@
      "jogos": 11,
      "gols": 6,
      "clube": "Sunderland",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "sunderland",
+     "noJogo": "Wilson Isidor"
     },
     {
      "nome": "Yassin Fortuné",
@@ -6265,7 +6465,9 @@
      "jogos": 10,
      "gols": 0,
      "clube": "Dynamo Moscow",
-     "paisDoClube": "RUS"
+     "paisDoClube": "RUS",
+     "clubeDoJogo": "auxerre",
+     "noJogo": "Josué Casimir"
     }
    ]
   },
@@ -6318,7 +6520,9 @@
      "jogos": 18,
      "gols": 5,
      "clube": "Betis",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "betis",
+     "noJogo": "Junior Firpo"
     },
     {
      "nome": "Edgar Pujol",
@@ -6346,7 +6550,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "RKC Waalwijk",
-     "paisDoClube": "NED"
+     "paisDoClube": "NED",
+     "clubeDoJogo": "vitoria-de-guimaraes",
+     "noJogo": "Juan Castillo"
     },
     {
      "nome": "Luiyi de Lucas",
@@ -6374,7 +6580,9 @@
      "jogos": 14,
      "gols": 1,
      "clube": "Porto",
-     "paisDoClube": "POR"
+     "paisDoClube": "POR",
+     "clubeDoJogo": "nice",
+     "noJogo": "Pablo Rosario"
     },
     {
      "nome": "Heinz Mörschel",
@@ -6440,7 +6648,9 @@
      "jogos": 7,
      "gols": 5,
      "clube": "Alavés",
-     "paisDoClube": "ESP"
+     "paisDoClube": "ESP",
+     "clubeDoJogo": "alaves",
+     "noJogo": "Mariano Díaz"
     },
     {
      "nome": "Javier Roces",
@@ -6470,7 +6680,9 @@
      "jogos": 13,
      "gols": 2,
      "clube": "Górnik",
-     "paisDoClube": "POL"
+     "paisDoClube": "POL",
+     "clubeDoJogo": "getafe",
+     "noJogo": "Peter Federico"
     },
     {
      "nome": "Dorny Romero",
@@ -6992,7 +7204,9 @@
      "jogos": 19,
      "gols": 0,
      "clube": "Groningen",
-     "paisDoClube": "NED"
+     "paisDoClube": "NED",
+     "clubeDoJogo": "groningen",
+     "noJogo": "Etienne Vaessen"
     },
     {
      "nome": "Stefano Denswil",
@@ -7010,7 +7224,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Hapoel Tel Aviv",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "volendam",
+     "noJogo": "Yannick Leliendal"
     },
     {
      "nome": "Myenty Abena",
@@ -7055,7 +7271,9 @@
      "jogos": 15,
      "gols": 1,
      "clube": "SV Elversberg",
-     "paisDoClube": "GER"
+     "paisDoClube": "GER",
+     "clubeDoJogo": "hamburgo",
+     "noJogo": "Immanuel Pherai"
     },
     {
      "nome": "Justin Lonwijk",
@@ -7064,7 +7282,9 @@
      "jogos": 16,
      "gols": 5,
      "clube": "Dynamo Kyiv",
-     "paisDoClube": "UKR"
+     "paisDoClube": "UKR",
+     "clubeDoJogo": "fortuna-sittard",
+     "noJogo": "Justin Lonwijk"
     },
     {
      "nome": "Denzel Jubitana",
@@ -7127,7 +7347,9 @@
      "jogos": 17,
      "gols": 4,
      "clube": "Go Ahead Eagles",
-     "paisDoClube": "NED"
+     "paisDoClube": "NED",
+     "clubeDoJogo": "go-ahead-eagles",
+     "noJogo": "Richonell Margaret"
     },
     {
      "nome": "Denilho Cleonise",
@@ -7423,7 +7645,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Vitesse",
-     "paisDoClube": "NED"
+     "paisDoClube": "NED",
+     "clubeDoJogo": "telstar",
+     "noJogo": "Tyrick Bodak"
     },
     {
      "nome": "Kiyani Zeggen",
@@ -7450,7 +7674,9 @@
      "jogos": 35,
      "gols": 0,
      "clube": "PEC Zwolle",
-     "paisDoClube": "NED"
+     "paisDoClube": "NED",
+     "clubeDoJogo": "pec-zwolle",
+     "noJogo": "Sherel Floranus"
     },
     {
      "nome": "Roshon van Eijma",
@@ -7486,7 +7712,9 @@
      "jogos": 11,
      "gols": 0,
      "clube": "PSV Eindhoven",
-     "paisDoClube": "NED"
+     "paisDoClube": "NED",
+     "clubeDoJogo": "psv",
+     "noJogo": "Armando Obispo"
     },
     {
      "nome": "Shurandy Sambo",
@@ -7495,7 +7723,9 @@
      "jogos": 13,
      "gols": 0,
      "clube": "Burnley",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "sparta-roterda",
+     "noJogo": "Shurandy Sambo"
     },
     {
      "nome": "Deveron Fonville",
@@ -7504,7 +7734,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "NEC",
-     "paisDoClube": "NED"
+     "paisDoClube": "NED",
+     "clubeDoJogo": "nec",
+     "noJogo": "Deveron Fonville"
     },
     {
      "nome": "Leandro Bacuna",
@@ -8339,7 +8571,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Brest",
-     "paisDoClube": "FRA"
+     "paisDoClube": "FRA",
+     "clubeDoJogo": "brest",
+     "noJogo": "Kenny Lala"
     },
     {
      "nome": "Yanis Lelin",
@@ -8485,7 +8719,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Rennes",
-     "paisDoClube": "FRA"
+     "paisDoClube": "FRA",
+     "clubeDoJogo": "rennes",
+     "noJogo": "Ludovic Blas"
     },
     {
      "nome": "Jessy Breslau",
@@ -8729,7 +8965,9 @@
      "jogos": 37,
      "gols": 0,
      "clube": "Abha",
-     "paisDoClube": "KSA"
+     "paisDoClube": "KSA",
+     "clubeDoJogo": "auxerre",
+     "noJogo": "Donovan Léon"
     },
     {
      "nome": "Stéphane Roman",
@@ -11855,7 +12093,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "AFC Wimbledon",
-     "paisDoClube": "ENG"
+     "paisDoClube": "ENG",
+     "clubeDoJogo": "fulham",
+     "noJogo": "Ryan Sessegnon"
     },
     {
      "nome": "Anthony Stewart",

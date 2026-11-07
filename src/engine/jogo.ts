@@ -6,6 +6,8 @@ import estaduaisClubesJson from "../../data/brasil-2026/clubes-estaduais.json";
 import estaduaisJson from "../../data/brasil-2026/estaduais.json";
 import exteriorClubesJson from "../../data/america-do-sul-2026/clubes.json";
 import exteriorJogadoresJson from "../../data/america-do-sul-2026/jogadores.json";
+import europaClubesJson from "../../data/europa-2026/clubes.json";
+import europaJogadoresJson from "../../data/europa-2026/jogadores.json";
 import { comArtigo } from "./artigos";
 import { diasEntre, inicioDaTemporada, mesDe, somarDias } from "./calendario";
 import {
@@ -66,15 +68,16 @@ export const FICHAS: FichaClube[] = clubesJson.clubes as FichaClube[];
 export const RESERVA: FichaClube[] = reservaJson.clubes as FichaClube[];
 /** Clubes que jogam só o estadual. */
 export const FICHAS_ESTADUAIS: FichaClube[] = estaduaisClubesJson.clubes as FichaClube[];
-/** Clubes da primeira divisão dos outros países da Conmebol. */
-export const FICHAS_EXTERIOR: FichaClube[] = exteriorClubesJson.clubes as FichaClube[];
+/** Clubes de fora do Brasil: os outros países da América e as 7 ligas da Europa. */
+export const FICHAS_EXTERIOR: FichaClube[] = [...(exteriorClubesJson.clubes as FichaClube[]), ...(europaClubesJson.clubes as FichaClube[])];
 /** Quem joga cada estadual (sigla do estado → ids dos clubes). */
 export const PARTICIPANTES_ESTADUAIS = estaduaisJson.participantes as Record<string, string[]>;
 /**
  * Elencos de verdade (tools/elencos/montar.ts e tools/times/montar.ts): Séries A a D, clubes dos estaduais e das
  * ligas de fora. Clube sem elenco aqui ganha um gerado.
  */
-export const ELENCOS_REAIS = { ...(jogadoresJson.elencos as Record<string, JogadorReal[]>), ...(exteriorJogadoresJson.elencos as Record<string, JogadorReal[]>) };
+export const ELENCOS_REAIS = { ...(jogadoresJson.elencos as Record<string, JogadorReal[]>), ...(exteriorJogadoresJson.elencos as Record<string, JogadorReal[]>),
+  ...(europaJogadoresJson.elencos as Record<string, JogadorReal[]>) };
 
 /** Tática inicial dos clubes da IA: os fortes atacam mais, os fracos se fecham. */
 function taticaDaIa(ficha: FichaClube, rng: ReturnType<typeof criarRng>): Tatica {
@@ -131,8 +134,33 @@ export function juntarClubesNovos(estado: EstadoJogo, rng: ReturnType<typeof cri
     }
     if (comElenco.has(clube.id) || clube.leve) continue;
     criarElenco(estado, clube, rng);
+    if (estado.selecoes) juntarQuemJogavaFora(estado, clube.id);
   }
   return novos;
+}
+
+const semAcento = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+/**
+ * Save com as seleções que ganha um clube novo (os da Europa, nov/2026): quem a seleção tinha como jogando fora
+ * (`clubeFora`) e agora aparece no elenco do clube novo (mesmo nome e nacionalidade) é a mesma pessoa. Fica o jogador
+ * do save (com os jogos pela seleção e a convocação), agora no clube, com a força e o salário do elenco novo.
+ */
+export function juntarQuemJogavaFora(estado: EstadoJogo, clubeId: string) {
+  const deFora = new Map<string, Jogador>();
+  for (const j of Object.values(estado.jogadores)) if (j.clubeFora) deFora.set(`${semAcento(j.nome)}|${j.nacionalidade}`, j);
+  if (!deFora.size) return;
+  for (const novo of Object.values(estado.jogadores)) {
+    if (novo.clubeId !== clubeId) continue;
+    const antigo = deFora.get(`${semAcento(novo.nome)}|${novo.nacionalidade}`);
+    if (!antigo) continue;
+    Object.assign(antigo, { clubeId, posicao: novo.posicao, lado: novo.lado, forca: novo.forca, salario: novo.salario });
+    delete antigo.clubeFora;
+    delete estado.jogadores[novo.id];
+    deFora.delete(`${semAcento(novo.nome)}|${novo.nacionalidade}`);
+  }
+  const clube = estado.clubes[clubeId];
+  clube.escalacao = escalarAutomatico(elencoDe(estado, clubeId), clube.tatica.formacao, clube.tatica.jogadas);
 }
 
 function criarElenco(estado: EstadoJogo, clube: Clube, rng: ReturnType<typeof criarRng>) {

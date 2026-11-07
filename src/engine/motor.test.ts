@@ -11,7 +11,7 @@ import { SERIES, classificacao, nomeDaLigaDoClube, posicaoNaLiga, tabelaDaLiga, 
 import { MAX_SUBSTITUICOES, MINIMO_POSICAO } from "./constantes";
 import { desfechoDoConfronto, situacaoNaCopa } from "./copa";
 import { DEFINICOES, situacaoNaCopaDeClubes } from "./copas";
-import { acertarParticipantes, assumirClube, avancar, concluirJogos, jogosPendentesHoje, juntarAoSaveAntigo, novoJogo, prepararJogos, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
+import { acertarParticipantes, assumirClube, juntarQuemJogavaFora, avancar, concluirJogos, jogosPendentesHoje, juntarAoSaveAntigo, novoJogo, prepararJogos, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
 import { checarEstado } from "./checagem";
 import { PAISES, competicoesDoUsuario, divisaoDaLiga, inicioDoAno, participantes, tabelaDoTorneio, vagasEntreDivisoes } from "./torneios";
 import { dispensar, elencoDe, fazerOferta, limiteDaProposta, livres, pedirMais, transferenciasDaIa } from "./mercado";
@@ -23,6 +23,10 @@ import type { EstadoJogo, EstadoTorneio, IdTorneio, Partida, Posicao } from "./t
 import { exportarTexto, importarTexto } from "../save/salvamento";
 import jogadoresJson from "../../data/brasil-2026/jogadores.json";
 import exteriorJson from "../../data/america-do-sul-2026/jogadores.json";
+import europaJson from "../../data/europa-2026/jogadores.json";
+import europaClubesJson from "../../data/europa-2026/clubes.json";
+import { TV_EUROPA_MES } from "./constantes";
+import { processarMes } from "./financas";
 import convocadosJson from "../../data/selecoes-2026/convocados.json";
 import { candidatosDaSelecao, confirmarConvocacao, convitesDeSelecoes, nacionalidadeDoPais, rankingDasSelecoes, tabelasDeSelecoes } from "./selecoes";
 
@@ -1889,5 +1893,83 @@ describe("seleções da América (nov/2026)", () => {
     expect(aberto.selecoes!.competicoes["S-ELI-SUL-2030"]).toBeDefined();
     expect(aberto.selecoes!.agenda.filter((p) => p.serie === "S-ELI-SUL-2030")).toHaveLength(90);
     expect(checarEstado(aberto).filter((p) => p.gravidade === "erro")).toEqual([]);
+  });
+});
+
+describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", () => {
+  const estado = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 7 });
+
+  it("os 132 clubes jogam a liga do país, com o elenco de data/europa-2026/jogadores.json", () => {
+    const tamanhos: Record<string, number> = { EN: 20, ES: 20, IT: 20, DE: 18, FR: 18, PT: 18, NL: 18 };
+    for (const [liga, n] of Object.entries(tamanhos)) {
+      expect(PAISES[liga].regiao, liga).toBe("europa");
+      expect(estado.torneios?.[`L-${liga}` as IdTorneio]?.clubes.length, liga).toBe(n);
+    }
+    const elencos = europaJson.elencos as Record<string, { nome: string; posicao: string; forca: number }[]>;
+    expect(Object.keys(elencos)).toHaveLength(132);
+    for (const [clubeId, reais] of Object.entries(elencos)) {
+      const elenco = elencoDe(estado, clubeId);
+      expect(estado.clubes[clubeId].serie, clubeId).toBe("exterior");
+      for (const r of reais) expect(elenco.some((j) => j.nome === r.nome && j.posicao === r.posicao), `${r.nome} (${clubeId})`).toBe(true);
+    }
+    // Os grandes são mais fortes que os pequenos.
+    const media = (id: string) => elencoDe(estado, id).map((j) => j.forca).sort((a, b) => b - a).slice(0, 11).reduce((a, b) => a + b) / 11;
+    expect(media("real-madrid")).toBeGreaterThan(media("oviedo") + 8);
+    expect(media("bayern-de-munique")).toBeGreaterThan(media("heidenheim") + 8);
+  });
+
+  it("as ligas da Europa são em turno e returno (38 rodadas com 20 clubes) e começam em janeiro", () => {
+    const jogos = estado.partidas.filter((p) => p.serie === "L-EN");
+    expect(jogos).toHaveLength(380);
+    expect(Math.max(...jogos.map((p) => p.rodada))).toBe(38);
+    expect(jogos.map((p) => p.data).sort()[0] < "2026-02-01").toBe(true);
+    // Cada clube recebe cada adversário uma vez.
+    const mandos = new Set(jogos.map((p) => `${p.mandante}/${p.visitante}`));
+    expect(mandos.size).toBe(380);
+  });
+
+  it("o clube da Europa do usuário recebe os direitos de TV do mês, pela liga e pela reputação", () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "real-madrid", semente: 3 });
+    const c = e.clubes["real-madrid"];
+    const antes = c.resumoFinanceiro.tv ?? 0;
+    processarMes(e, "2026-02-01");
+    expect((c.resumoFinanceiro.tv ?? 0) - antes).toBe(Math.round(TV_EUROPA_MES.ES * (c.reputacao / 100) ** 3));
+  });
+
+  it("num save com as seleções, quem jogava fora e está no elenco do clube novo da Europa vira uma pessoa só", () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 9 });
+    // Como num save de antes da Europa: o Arsenal não existe e um jogador dele está ligado à seleção, jogando fora.
+    const doArsenal = elencoDe(e, "arsenal");
+    const unico = (nome: string) => Object.values(e.jogadores).filter((x) => x.nome === nome).length === 1;
+    const brasileiro = doArsenal.find((j) => j.nacionalidade === "BRA" && unico(j.nome))!;
+    expect(brasileiro).toBeDefined();
+    for (const j of doArsenal) if (j !== brasileiro) delete e.jogadores[j.id];
+    brasileiro.clubeId = "sel-BR";
+    brasileiro.clubeFora = { nome: "Arsenal", pais: "Inglaterra" };
+    delete e.clubes.arsenal;
+    acertarParticipantes(e);
+    const iguais = Object.values(e.jogadores).filter((j) => j.nome === brasileiro.nome && j.nacionalidade === "BRA");
+    expect(iguais).toHaveLength(1);
+    expect(iguais[0].id).toBe(brasileiro.id);
+    expect(iguais[0].clubeId).toBe("arsenal");
+    expect(iguais[0].clubeFora).toBeUndefined();
+    expect(elencoDe(e, "arsenal").length).toBe((europaJson.elencos as Record<string, unknown[]>).arsenal.length);
+    juntarQuemJogavaFora(e, "arsenal");
+    expect(Object.values(e.jogadores).filter((j) => j.nome === brasileiro.nome)).toHaveLength(1);
+  });
+
+  it("no jogo novo, os convocados da América que jogam na Europa estão só no clube (sem cópia jogando fora)", () => {
+    const europeus = new Set((europaClubesJson.clubes as { id: string }[]).map((c) => c.id));
+    let vistos = 0;
+    for (const s of Object.values(convocadosJson.selecoes as Record<string, { convocados: { clubeDoJogo?: string; noJogo?: string }[] }>)) {
+      for (const c of s.convocados) {
+        if (!c.clubeDoJogo || !europeus.has(c.clubeDoJogo)) continue;
+        vistos++;
+        const com = Object.values(estado.jogadores).filter((j) => j.nome === c.noJogo);
+        expect(com.some((j) => j.clubeId === c.clubeDoJogo), c.noJogo).toBe(true);
+        expect(com.filter((j) => j.clubeFora), c.noJogo).toHaveLength(0);
+      }
+    }
+    expect(vistos).toBeGreaterThan(100);
   });
 });

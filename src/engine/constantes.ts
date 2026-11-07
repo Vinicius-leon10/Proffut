@@ -128,6 +128,14 @@ export const COTA_TV_RODADA: Record<SerieId, number> = { A: 350_000, B: 120_000,
  * meses de salário à temporada).
  */
 export const COTA_TV_ESTADUAL: Record<SerieId, number> = { A: 250_000, B: 160_000, C: 70_000 };
+/**
+ * Direitos de TV por mês dos clubes da Europa (só o do usuário tem contas): valor da liga × (reputação/100)³. A base
+ * de cada liga é a folha salarial típica dela (a mediana de folha ÷ (reputação/100)³ no jogo novo), para o clube
+ * empatar as contas com a bilheteria e o patrocínio por cima; os grandes ganham muito mais que os pequenos.
+ */
+export const TV_EUROPA_MES: Record<string, number> = {
+  EN: 21_500_000, ES: 11_500_000, IT: 14_000_000, DE: 12_500_000, FR: 12_500_000, PT: 8_000_000, NL: 7_000_000,
+};
 export const PATROCINIO_MES: Record<SerieId, number> = { A: 1_200_000, B: 350_000, C: 150_000 };
 /** Patrocínio da Série D, como fração do da Série C. */
 export const PATROCINIO_SERIE_D = 0.6;

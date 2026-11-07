@@ -1,4 +1,4 @@
-import { COTA_TV_RODADA, MANUTENCAO_POR_LUGAR, PATROCINIO_MES, PATROCINIO_SERIE_D, PRECO_REFERENCIA, PREMIACAO, PUBLICO_POR_TORCIDA } from "./constantes";
+import { TV_EUROPA_MES, COTA_TV_RODADA, MANUTENCAO_POR_LUGAR, PATROCINIO_MES, PATROCINIO_SERIE_D, PRECO_REFERENCIA, PREMIACAO, PUBLICO_POR_TORCIDA } from "./constantes";
 import type { Rng } from "./rng";
 import type { Clube, EstadoJogo, SerieClube, SerieId, TipoLancamento } from "./tipos";
 
@@ -69,6 +69,9 @@ export function processarMes(estado: EstadoJogo, data: string) {
     // Série D, só do estadual e de fora: patrocínio menor que o da Série C.
     const patrocinio = clube.serie === "D" || fora ? PATROCINIO_MES.C * PATROCINIO_SERIE_D : PATROCINIO_MES[clube.serie as SerieId];
     lancar(clube, data, "patrocinio", "Patrocínio do mês", patrocinio * (0.6 + 0.8 * (clube.reputacao / 100)));
+    // Na Europa, os direitos de TV pagam a maior parte da folha (lá não há cota por rodada como nas séries).
+    const tvEuropa = clube.serie === "exterior" && clube.liga ? TV_EUROPA_MES[clube.liga] : undefined;
+    if (tvEuropa) lancar(clube, data, "tv", "Direitos de TV do mês", tvEuropa * (clube.reputacao / 100) ** 3);
     lancar(clube, data, "salarios", "Folha salarial", -(folhas.get(clube.id) ?? 0));
     lancar(clube, data, "estadio", "Manutenção do estádio", -clube.estadio.capacidade * MANUTENCAO_POR_LUGAR);
   }
