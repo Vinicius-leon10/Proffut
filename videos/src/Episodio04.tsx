@@ -1,8 +1,8 @@
 // Episódio 4: "100 testes antes de cada atualização". Sem voz: o usuário gera a voz no CapCut com o texto de cada cena
 // (videos/public/voz-ep04.txt, com o segundo em que cada cena começa). Os números são os de verdade (100 testes de tela,
 // a checagem diária às 6h17).
-import { AbsoluteFill, Img, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
-import { COR, Cena, FONTE, Fundo, Palavras, SERIFADA, Selo, titulo, useFontes, useMola } from "./estilo";
+import { AbsoluteFill, Audio, Img, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { COR, FONTE, Fundo, Palavras, SERIFADA, Selo, titulo, useFontes, useMola } from "./estilo";
 import { Icone } from "./pecas";
 
 const s = (segundos: number) => Math.round(segundos * 30);
@@ -21,14 +21,60 @@ export function Episodio04() {
         const ate = s(CENAS[i + 1]);
         return (
           <Sequence key={i} from={de} durationInFrames={ate - de}>
-            <Cena duracao={ate - de}>
+            <Troca duracao={ate - de}>
               <Parte />
-            </Cena>
+            </Troca>
           </Sequence>
         );
       })}
+      <Flashes />
+      <Sons />
     </AbsoluteFill>
   );
+}
+
+/** Efeitos sonoros (videos/public/sfx, feitos com ffmpeg), baixos para a voz do CapCut ficar por cima. */
+const EFEITOS: [number, string, number][] = [
+  // Troca de cena: whoosh um pouco antes do corte.
+  ...CENAS.slice(1, -1).map((t) => [t - 0.2, "whoosh", 0.55] as [number, string, number]),
+  [0.2, "riser", 0.35], [2.7, "boom", 0.7], [2.8, "apito", 0.3],
+  [4.5 + 1.6, "whoosh", 0.4], [4.5 + 2.2, "boom", 0.45],
+  ...[0, 1, 2, 3, 4].map((i) => [9 + 0.6 + i * 1.4 + 0.9, "tecla", 0.6] as [number, string, number]),
+  [17 + 0.8, "boom", 0.8], [17 + 0.85, "vaia", 0.25], [17 + 1.8, "apito", 0.35],
+  [21.5 + 0.2, "tique", 0.5], [21.5 + 2.4, "boom", 0.5],
+  [26 + 0.6, "boom", 0.5], [26 + 0.7, "torcida", 0.3],
+  [30.5 + 0.4, "boom", 0.6], [30.5 + 1.6, "tecla", 0.6],
+];
+function Sons() {
+  return (
+    <>
+      {EFEITOS.map(([t, nome, volume], i) => (
+        <Sequence key={i} from={Math.max(0, s(t))} durationInFrames={s(4)}>
+          <Audio src={staticFile(`sfx/${nome}.wav`)} volume={volume} />
+        </Sequence>
+      ))}
+    </>
+  );
+}
+
+/** Troca de cena com impacto: entra com zoom e desfoque rápidos e sai empurrada para cima. */
+function Troca({ duracao, children }: { duracao: number; children: React.ReactNode }) {
+  const f = useCurrentFrame();
+  const entra = interpolate(f, [0, 7], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (t) => 1 - (1 - t) ** 3 });
+  const sai = interpolate(f, [duracao - 6, duracao], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (t) => t * t });
+  return (
+    <AbsoluteFill style={{ opacity: Math.min(entra, 1 - sai), filter: `blur(${(1 - entra) * 18 + sai * 18}px)`, transform: `scale(${1.25 - entra * 0.25 + sai * 0.1}) translateY(${-sai * 160}px)` }}>
+      {children}
+    </AbsoluteFill>
+  );
+}
+
+/** Um flash branco curto em cada corte. */
+function Flashes() {
+  const f = useCurrentFrame();
+  const perto = Math.min(...CENAS.slice(1, -1).map((t) => Math.abs(f - s(t))));
+  const v = interpolate(perto, [0, 4], [0.55, 0], { extrapolateRight: "clamp" });
+  return <AbsoluteFill style={{ background: "white", opacity: v, pointerEvents: "none" }} />;
 }
 
 const meio = { alignItems: "center", justifyContent: "center" } as const;
