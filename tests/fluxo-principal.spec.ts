@@ -54,3 +54,9 @@ test("R24 a velocidade da partida só tem 1x e 2x, e um save que estava em 4x ab
   await page.getByRole("tab", { name: "1x" }).click();
   await expect(page.getByRole("tab", { name: "1x" })).toHaveAttribute("aria-selected", "true");
 });
+
+test("R100 o menu inicial diz só \"Seja o técnico.\", sem \"Séries A, B e C do Brasil\" (o jogo tem muito mais que isso)", async ({ page }) => {
+  await abrirSite(page);
+  await expect(page.getByText("Seja o técnico.", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Séries A, B e C/)).toHaveCount(0);
+});

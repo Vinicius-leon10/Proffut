@@ -72,7 +72,7 @@ export function Inicio() {
       <div className="marca">
         <img src="./icone-192.png" alt="" />
         <h1>Proffut</h1>
-        <p className="fraco">Seja o técnico. Séries A, B e C do Brasil.</p>
+        <p className="fraco">Seja o técnico.</p>
         {offline && <span className="chip verde" data-offline="pronto">✓ Disponível sem internet</span>}
       </div>
 
