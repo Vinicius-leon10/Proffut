@@ -64,12 +64,20 @@ test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 7 países 
   await expect(copa).toHaveValue("K-UCL");
   const opcoesEuropa = (await copa.locator('optgroup[label="Europa"] option').allTextContents()).map((t) => t.replace(" (seu time)", ""));
   expect(opcoesEuropa).toEqual(["Liga dos Campeões", "Liga Europa", "Conference League"]);
-  await expect(page.locator("main table.tabela")).toHaveCount(8);
-  const naTabela = (await page.locator("main table.tabela tbody td.clube .corta").allTextContents()).map((t) => t.trim());
+  // Um grupo por vez, pelo seletor (abre no grupo do Real Madrid); os 8 juntos têm os 32 classificados de 2025/26.
+  const grupo = page.getByRole("combobox", { name: "Grupo" });
+  await expect(grupo.locator("option")).toHaveCount(8);
   const nomeDe = (id: string) => europa.find((c) => c.id === id)!.nome;
-  for (const id of copas["K-UCL"].grupos) expect(naTabela, id).toContain(nomeDe(id));
-  await copa.selectOption({ label: "Liga Europa" });
-  await expect(page.locator("main table.tabela")).toHaveCount(4);
-  await copa.selectOption({ label: "Conference League" });
-  await expect(page.locator("main table.tabela")).toHaveCount(4);
+  const naCopa: string[] = [];
+  for (let g = 0; g < 8; g++) {
+    await grupo.selectOption({ index: g });
+    const linhas = page.locator("main table.tabela tbody td.clube .corta");
+    await expect(linhas).toHaveCount(4);
+    naCopa.push(...(await linhas.allTextContents()).map((t) => t.trim()));
+  }
+  expect(naCopa.sort()).toEqual(copas["K-UCL"].grupos.map(nomeDe).sort());
+  for (const nome of ["Liga Europa", "Conference League"]) {
+    await copa.selectOption({ label: nome });
+    await expect(grupo.locator("option")).toHaveCount(4);
+  }
 });
