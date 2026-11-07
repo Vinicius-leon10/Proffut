@@ -372,6 +372,15 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
   - Anúncios discretos (no máximo a cada N rodadas, nunca durante a partida), só na versão grátis.
 - **Nada de pagar para ganhar:** não vender dinheiro do clube, jogadores ou força.
 
+**Decisão do usuário (nov/2026), para depois da Europa completa e de mais seguidores:** venda direta e orgânica pelo
+Instagram ("Irei cobrar da forma orgânica", "Entrando em contato pelo insta"): R$ 10 por Pix e um **código de acesso de uso
+único**. Plano combinado: um "porteiro" grátis na Cloudflare (Workers + lista dos códigos: dono, usado ou não, aparelho e data);
+na primeira abertura o jogo pede o código e ativa pela internet (depois joga sem internet); quem já tem o jogo instalado e o
+aparelho do usuário ficam liberados; no GitHub, dois botões em Actions ("Gerar código" com o nome do comprador e "Liberar
+código" para troca de celular), com a chave da Cloudflare só nos segredos do repositório. Ele cria a conta da Cloudflare quando
+decidir começar. Lembrar: versão vendida sem os escudos oficiais (o comprador importa) e MEI se as vendas crescerem. A Lovable foi
+considerada e deixada de lado (gasta créditos; o jogo não sai do GitHub).
+
 **Custos:** hospedagem do site grátis; domínio próprio ~R$ 40/ano (opcional). Lojas, só na Fase 6: Google Play US$ 25 (uma vez), Apple Developer US$ 99/ano.
 
 ---
