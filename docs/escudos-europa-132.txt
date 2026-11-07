@@ -1,0 +1,184 @@
+# Escudos da Europa (132 clubes)
+
+Comando para o Claude no Chrome:
+
+```
+Preciso dos escudos destes 132 clubes de futebol da Europa. Para cada um, faça uma busca rápida no Google Imagens
+("<nome do clube> <país> escudo logo png") e baixe a melhor imagem. Não entre nos sites dos clubes.
+Regras:
+- Só o escudo atual do clube, inteiro e nítido, com pelo menos 200 px de largura, fundo transparente ou branco liso.
+- Nada de foto, faixa, texto em volta, bandeira, camisa ou dois escudos na mesma imagem.
+- Cuidado com os nomes repetidos: Barcelona é o da Espanha (não o do Equador), Liverpool e Everton são os da Inglaterra,
+  Juventus é a da Itália, Real Sociedad é a da Espanha, Porto, Santa Clara e Nacional são os de Portugal.
+- Salve cada um com o nome do arquivo da lista (exatamente igual).
+- Se não achar um escudo certo, pule e anote num arquivo nao_encontrados.csv.
+- Faça em lotes por país e, no fim, junte tudo num zip chamado escudos-europa.zip, com um manifesto.csv
+  (arquivo, clube, fonte).
+```
+
+## Inglaterra (20)
+
+| Clube | Cidade | Arquivo |
+|---|---|---|
+| Arsenal | Londres | arsenal.png |
+| Aston Villa | Birmingham | aston-villa.png |
+| Bournemouth | Bournemouth | bournemouth.png |
+| Brentford | Londres | brentford.png |
+| Brighton | Brighton | brighton.png |
+| Burnley | Burnley | burnley.png |
+| Chelsea | Londres | chelsea.png |
+| Crystal Palace | Londres | crystal-palace.png |
+| Everton | Liverpool | everton-ing.png |
+| Fulham | Londres | fulham.png |
+| Leeds United | Leeds | leeds.png |
+| Liverpool | Liverpool | liverpool-ing.png |
+| Manchester City | Manchester | manchester-city.png |
+| Manchester United | Manchester | manchester-united.png |
+| Newcastle | Newcastle | newcastle.png |
+| Nottingham Forest | Nottingham | nottingham-forest.png |
+| Sunderland | Sunderland | sunderland.png |
+| Tottenham | Londres | tottenham.png |
+| West Ham | Londres | west-ham.png |
+| Wolverhampton | Wolverhampton | wolverhampton.png |
+
+## Espanha (20)
+
+| Clube | Cidade | Arquivo |
+|---|---|---|
+| Alavés | Vitória | alaves.png |
+| Athletic Bilbao | Bilbao | athletic-bilbao.png |
+| Atlético de Madrid | Madri | atletico-de-madrid.png |
+| Barcelona | Barcelona | barcelona-esp.png |
+| Betis | Sevilha | betis.png |
+| Celta de Vigo | Vigo | celta.png |
+| Elche | Elche | elche.png |
+| Espanyol | Barcelona | espanyol.png |
+| Getafe | Getafe | getafe.png |
+| Girona | Girona | girona.png |
+| Levante | Valência | levante.png |
+| Mallorca | Palma | mallorca.png |
+| Osasuna | Pamplona | osasuna.png |
+| Rayo Vallecano | Madri | rayo-vallecano.png |
+| Real Madrid | Madri | real-madrid.png |
+| Real Oviedo | Oviedo | oviedo.png |
+| Real Sociedad | San Sebastián | real-sociedad-esp.png |
+| Sevilla | Sevilha | sevilla.png |
+| Valencia | Valência | valencia.png |
+| Villarreal | Vila-real | villarreal.png |
+
+## Itália (20)
+
+| Clube | Cidade | Arquivo |
+|---|---|---|
+| Atalanta | Bérgamo | atalanta.png |
+| Bologna | Bolonha | bologna.png |
+| Cagliari | Cagliari | cagliari.png |
+| Como | Como | como.png |
+| Cremonese | Cremona | cremonese.png |
+| Fiorentina | Florença | fiorentina.png |
+| Genoa | Gênova | genoa.png |
+| Hellas Verona | Verona | verona.png |
+| Inter de Milão | Milão | inter-de-milao.png |
+| Juventus | Turim | juventus-ita.png |
+| Lazio | Roma | lazio.png |
+| Lecce | Lecce | lecce.png |
+| Milan | Milão | milan.png |
+| Napoli | Nápoles | napoli.png |
+| Parma | Parma | parma.png |
+| Pisa | Pisa | pisa.png |
+| Roma | Roma | roma.png |
+| Sassuolo | Sassuolo | sassuolo.png |
+| Torino | Turim | torino.png |
+| Udinese | Údine | udinese.png |
+
+## Alemanha (18)
+
+| Clube | Cidade | Arquivo |
+|---|---|---|
+| Augsburg | Augsburgo | augsburg.png |
+| Bayer Leverkusen | Leverkusen | bayer-leverkusen.png |
+| Bayern de Munique | Munique | bayern-de-munique.png |
+| Borussia Dortmund | Dortmund | borussia-dortmund.png |
+| Borussia M'gladbach | Mönchengladbach | borussia-monchengladbach.png |
+| Colônia | Colônia | colonia.png |
+| Eintracht Frankfurt | Frankfurt | eintracht-frankfurt.png |
+| Freiburg | Friburgo | freiburg.png |
+| Hamburgo | Hamburgo | hamburgo.png |
+| Heidenheim | Heidenheim | heidenheim.png |
+| Hoffenheim | Sinsheim | hoffenheim.png |
+| Mainz 05 | Mainz | mainz.png |
+| RB Leipzig | Leipzig | rb-leipzig.png |
+| St. Pauli | Hamburgo | st-pauli.png |
+| Stuttgart | Stuttgart | stuttgart.png |
+| Union Berlin | Berlim | union-berlin.png |
+| Werder Bremen | Bremen | werder-bremen.png |
+| Wolfsburg | Wolfsburg | wolfsburg.png |
+
+## França (18)
+
+| Clube | Cidade | Arquivo |
+|---|---|---|
+| Angers | Angers | angers.png |
+| Auxerre | Auxerre | auxerre.png |
+| Brest | Brest | brest.png |
+| Le Havre | Le Havre | le-havre.png |
+| Lens | Lens | lens.png |
+| Lille | Lille | lille.png |
+| Lorient | Lorient | lorient.png |
+| Lyon | Lyon | lyon.png |
+| Metz | Metz | metz.png |
+| Monaco | Mônaco | monaco.png |
+| Nantes | Nantes | nantes.png |
+| Nice | Nice | nice.png |
+| Olympique de Marselha | Marselha | olympique-de-marselha.png |
+| Paris FC | Paris | paris-fc.png |
+| Paris Saint-Germain | Paris | paris-saint-germain.png |
+| Rennes | Rennes | rennes.png |
+| Strasbourg | Estrasburgo | strasbourg.png |
+| Toulouse | Toulouse | toulouse.png |
+
+## Portugal (18)
+
+| Clube | Cidade | Arquivo |
+|---|---|---|
+| AVS | Vila das Aves | avs.png |
+| Alverca | Alverca do Ribatejo | alverca.png |
+| Arouca | Arouca | arouca.png |
+| Benfica | Lisboa | benfica.png |
+| Braga | Braga | braga.png |
+| Casa Pia | Lisboa | casa-pia.png |
+| Estoril | Estoril | estoril.png |
+| Estrela da Amadora | Amadora | estrela-da-amadora.png |
+| Famalicão | Vila Nova de Famalicão | famalicao.png |
+| Gil Vicente | Barcelos | gil-vicente.png |
+| Moreirense | Moreira de Cónegos | moreirense.png |
+| Nacional da Madeira | Funchal | nacional-por.png |
+| Porto | Porto | porto-por.png |
+| Rio Ave | Vila do Conde | rio-ave.png |
+| Santa Clara | Ponta Delgada | santa-clara-por.png |
+| Sporting | Lisboa | sporting-cp.png |
+| Tondela | Tondela | tondela.png |
+| Vitória de Guimarães | Guimarães | vitoria-de-guimaraes.png |
+
+## Holanda (18)
+
+| Clube | Cidade | Arquivo |
+|---|---|---|
+| AZ Alkmaar | Alkmaar | az-alkmaar.png |
+| Ajax | Amsterdã | ajax.png |
+| Excelsior | Roterdã | excelsior.png |
+| Feyenoord | Roterdã | feyenoord.png |
+| Fortuna Sittard | Sittard | fortuna-sittard.png |
+| Go Ahead Eagles | Deventer | go-ahead-eagles.png |
+| Groningen | Groningen | groningen.png |
+| Heerenveen | Heerenveen | heerenveen.png |
+| Heracles | Almelo | heracles.png |
+| NAC Breda | Breda | nac-breda.png |
+| NEC | Nijmegen | nec.png |
+| PEC Zwolle | Zwolle | pec-zwolle.png |
+| PSV | Eindhoven | psv.png |
+| Sparta Roterdã | Roterdã | sparta-roterda.png |
+| Telstar | Velsen | telstar.png |
+| Twente | Enschede | twente.png |
+| Utrecht | Utrecht | utrecht.png |
+| Volendam | Volendam | volendam.png |
