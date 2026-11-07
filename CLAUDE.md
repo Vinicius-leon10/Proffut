@@ -434,7 +434,7 @@ e Conference League (16: 4 grupos, quartas, semi e final, às quintas), de janei
 (Inglaterra, Espanha, Itália e Alemanha 5 na Liga dos Campeões...); Supercopa da UEFA (campeões das duas primeiras, em
 janeiro, a partir de 2027: a base não tem as finais de 2025/26). Prêmios grandes (Liga dos Campeões: 30 mi nos grupos, 120 mi
 ao campeão); a Liga dos Campeões dá a reputação da Libertadores. **Telas:** jogo novo com o continente Europa (7 países);
-Tabelas → Outros países com o grupo Europa. **Escudos:** os 132 faltam (`docs/TIMES_NOVOS.md`); até chegarem, o desenhado.
+Tabelas → Outros países com o grupo Europa. **Escudos:** os 132 chegaram no `escudos-europa.zip` (Google Imagens, pelo Claude no Chrome; fonte no fim de `docs/ESCUDOS_TIMES_NOVOS_FONTES.csv`), todos certos.
 Números: 1.180 clubes, ~26 mil jogadores, temporada simulada ~11 s, save ~20 MB. Testes R98 e R99 e "Europa" no motor.
 **Falta (etapas seguintes):** 2ª divisão das 7 ligas, outros países, seleções da Europa e a Copa do Mundo.
 
