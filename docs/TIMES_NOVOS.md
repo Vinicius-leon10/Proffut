@@ -11,23 +11,9 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 3 escudos (0 de clubes brasileiros e 3 de fora).
-
-## Outros países da América: 1ª divisão de 2026
-
-### Trinidad e Tobago (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Central | Couva | `central-tt.png` |
+Total: 1 escudos (0 de clubes brasileiros e 1 de fora).
 
 ## Outros países da América: 3ª divisão de 2026
-
-### Peru (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Juventus | Peru | `juventus.png` |
 
 ### Uruguai (1 clube)
 
