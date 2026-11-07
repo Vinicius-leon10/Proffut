@@ -2,6 +2,7 @@ import { Composition } from "remotion";
 import { Episodio01, DURACAO_EP01 } from "./Episodio01";
 import { Episodio02, DURACAO_EP02 } from "./Episodio02";
 import { Episodio03, DURACAO_EP03 } from "./Episodio03";
+import { Episodio04, DURACAO_EP04 } from "./Episodio04";
 import { CarreiraEp01, DURACAO_CAR01 } from "./carreira/CarreiraEp01";
 import { DURACAO_T1E01, T1E01 } from "./carreira/T1E01";
 import { DURACAO } from "./variantes/comum";
@@ -17,6 +18,7 @@ export const Raiz = () => (
     <Composition id="Episodio01" component={Episodio01} durationInFrames={DURACAO_EP01} {...tela} />
     <Composition id="Episodio02" component={Episodio02} durationInFrames={DURACAO_EP02} {...tela} />
     <Composition id="Episodio03" component={Episodio03} durationInFrames={DURACAO_EP03} {...tela} />
+    <Composition id="Episodio04" component={Episodio04} durationInFrames={DURACAO_EP04} {...tela} />
     <Composition id="Ep01-A-Mural" component={VersaoMural} durationInFrames={DURACAO} {...tela} />
     <Composition id="Ep01-B-Legendas" component={VersaoLegendas} durationInFrames={DURACAO} {...tela} />
     <Composition id="Ep01-D-Completo" component={VersaoCompleta} durationInFrames={DURACAO} {...tela} />

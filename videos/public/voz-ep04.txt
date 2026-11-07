@@ -1,0 +1,9 @@
+VÍDEO 4: 100 testes antes de cada atualização (34 segundos)
+
+[0s] Meu jogo só vai para o ar se passar em cem testes.
+[4,5s] Toda mudança, até trocar um escudo, passa por eles.
+[9s] Um robô abre o jogo como se fosse um iPhone, joga uma partida, salva, fecha, abre de novo e confere se nada sumiu.
+[17s] Se um único teste falhar, a atualização não sai.
+[21,5s] E todo dia, de manhã, outro robô testa o jogo publicado.
+[26s] Foi assim que eu parei de perder o meu save.
+[30,5s] Segue para ver o próximo episódio.
