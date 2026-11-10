@@ -7,10 +7,10 @@ on:
   workflow_dispatch:
     inputs:
       fase:
-        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa) · selecoes-europa: convocações das 55 seleções da UEFA (branch dados-selecoes-europa) · europa-segundas: segunda divisão das 7 ligas da Europa (branch dados-europa-segundas)"
+        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa) · selecoes-europa: convocações das 55 seleções da UEFA (branch dados-selecoes-europa) · europa-segundas: segunda divisão das 7 ligas da Europa (branch dados-europa-segundas) · europa-terceiras: terceira divisão (branch dados-europa-terceiras) · europa-outros: outros países da Europa (branch dados-europa-outros) · selecoes-mundo: seleções da África, Ásia e Oceania (branch dados-selecoes-mundo)"
         type: choice
         default: elencos
-        options: [elencos, times, segundas, america, europa, selecoes-europa, europa-segundas]
+        options: [elencos, times, segundas, america, europa, selecoes-europa, europa-segundas, europa-terceiras, europa-outros, selecoes-mundo]
 
 permissions:
   contents: write
@@ -255,3 +255,70 @@ jobs:
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -q -m "Segundas divisões da Europa (${GITHUB_SHA::7})"
           git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-europa-segundas
+
+  europa-terceiras:
+    if: inputs.fase == 'europa-terceiras'
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v7
+      - name: Wikipédia e Wikidata (terceiras divisões da Europa)
+        run: |
+          python3 tools/times/wikipedia.py tools/europa/sementes-terceiras.json dados
+      - name: Gravar na branch dados-europa-terceiras
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dados
+          echo "Baixados em $(date -u +%Y-%m-%dT%H:%MZ) pelo workflow elencos.yml (fase europa-terceiras): terceiras divisões da Europa (Wikipédia CC BY-SA e Wikidata CC0)." > LEIAME.md
+          git init -q -b dados-europa-terceiras
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "terceiras divisões da Europa (Wikipédia CC BY-SA e Wikidata CC0) (${GITHUB_SHA::7})"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-europa-terceiras
+
+  europa-outros:
+    if: inputs.fase == 'europa-outros'
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v7
+      - name: Transfermarkt (outros países da Europa)
+        run: |
+          mkdir -p /tmp/tm
+          for f in players clubs competitions games; do
+            curl -sSfL "https://pub-e682421888d945d684bcae8890b0ec20.r2.dev/data/$f.csv.gz" -o "/tmp/tm/$f.csv.gz"
+          done
+          python3 tools/europa/filtrar.py /tmp/tm dados A1,BE1,C1,DK1,GR1,KR1,NO1,PL1,RO1,RU1,SC1,SE1,SER1,TR1,TS1,UKR1 | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Gravar na branch dados-europa-outros
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dados
+          echo "Baixados em $(date -u +%Y-%m-%dT%H:%MZ) pelo workflow elencos.yml (fase europa-outros): outros países da Europa (transfermarkt-datasets CC0)." > LEIAME.md
+          git init -q -b dados-europa-outros
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "outros países da Europa (transfermarkt-datasets CC0) (${GITHUB_SHA::7})"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-europa-outros
+
+  selecoes-mundo:
+    if: inputs.fase == 'selecoes-mundo'
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v7
+      - name: Wikipédia (páginas das seleções da África, Ásia e Oceania)
+        run: |
+          python3 tools/selecoes/baixar.py tools/selecoes/sementes-mundo.json dados | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Gravar na branch dados-selecoes-mundo
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dados
+          echo "Baixados em $(date -u +%Y-%m-%dT%H:%MZ) pelo workflow elencos.yml (fase selecoes-mundo): seleções da África, Ásia e Oceania (Wikipédia CC BY-SA)." > LEIAME.md
+          git init -q -b dados-selecoes-mundo
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "seleções da África, Ásia e Oceania (Wikipédia CC BY-SA) (${GITHUB_SHA::7})"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-selecoes-mundo

@@ -11,10 +11,11 @@ import os
 import sys
 
 entrada, saida = sys.argv[1], sys.argv[2]
+# Com o terceiro argumento (ligas separadas por vírgula), só essas ligas (os outros países da Europa).
 os.makedirs(saida, exist_ok=True)
 
 # Primeiras divisões: Inglaterra, Espanha, Itália, Alemanha, França, Portugal e Holanda.
-LIGAS = {"GB1", "ES1", "IT1", "L1", "FR1", "PO1", "NL1"}
+LIGAS = set(sys.argv[3].split(",")) if len(sys.argv) > 3 else {"GB1", "ES1", "IT1", "L1", "FR1", "PO1", "NL1"}
 # Copas da UEFA: Liga dos Campeões, Liga Europa, Conference, Supercopa e as fases prévias.
 COPAS = {"CL", "EL", "UCOL", "USC", "CLQ", "ELQ", "ECLQ"}
 
