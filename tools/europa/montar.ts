@@ -173,6 +173,16 @@ function porSobrenome(nome: string, clube: string) {
   });
   return candidatos.length === 1 ? { clube: ficha.id, nome: candidatos[0].nome } : undefined;
 }
+/**
+ * O único com o nome nasceu em outro ano: é outro jogador (o Roberto Fernández da Bolívia não é o do Espanyol). Só o
+ * ano: as fontes trocam o dia e o mês de alguns (Rio Cardines: 7 de janeiro numa, 1º de julho na outra).
+ */
+const nascimentoNoJogo = new Map<string, string>();
+for (const [dia, lista] of porNascimento) for (const x of lista) nascimentoNoJogo.set(`${x.clube}|${x.nome}`, dia);
+function outroNascimento(a: { clube: string; nome: string }, nascimento?: string) {
+  const dele = nascimentoNoJogo.get(`${a.clube}|${a.nome}`);
+  return !!nascimento && !!dele && dele.slice(0, 4) !== nascimento.slice(0, 4);
+}
 const naoAchados: string[] = [];
 for (const [pais, s] of Object.entries(conv.selecoes as Record<string, { convocados: { nome: string; nascimento?: string; clube: string; clubeDoJogo?: string; noJogo?: string }[] }>)) {
   for (const c of s.convocados) {
@@ -182,7 +192,7 @@ for (const [pais, s] of Object.entries(conv.selecoes as Record<string, { convoca
       const ficha = (fichas as { id: string; nome: string }[]).find((f) => f.id === a.clube)!;
       const nc = normalizar(c.clube);
       return nc.includes(normalizar(ficha.nome)) || normalizar(ficha.nome).includes(nc) || NOME_TM.get(nc) === a.clube;
-    }) ?? (achados.length === 1 ? achados[0] : undefined) ?? porSobrenome(c.nome, c.clube) ?? mesmoNascimento(c.nome, c.nascimento);
+    }) ?? (achados.length === 1 && !outroNascimento(achados[0], c.nascimento) ? achados[0] : undefined) ?? porSobrenome(c.nome, c.clube) ?? mesmoNascimento(c.nome, c.nascimento);
     if (clubeCerto) {
       // O nome fica o da convocação, como se fala na América ("Vinícius Júnior", não "Vinicius Junior").
       const j = elencos[clubeCerto.clube].find((x) => x.nome === clubeCerto.nome);
@@ -210,7 +220,7 @@ for (const liga of Object.values(LIGAS_EUROPA)) {
 }
 if (semFicha.length) console.log("Sem ficha:", semFicha.join("; "));
 if (nacionalidadesSemCodigo.size) console.log("Nacionalidades sem código:", [...nacionalidadesSemCodigo].map(([n, q]) => `${n} ${q}`).join(", "));
-console.log(`Convocados da América ligados a clubes da Europa: ${ligados}`);
+console.log(`Convocados ligados a clubes da Europa: ${ligados}`);
 if (naoAchados.length) console.log("Convocados em clubes da Europa sem achar no elenco:", naoAchados.join("; "));
 
 // ---- copas da UEFA de 2026: os classificados pela tabela final de 2025/26 de cada liga ----

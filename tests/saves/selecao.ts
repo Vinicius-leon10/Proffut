@@ -1,6 +1,7 @@
 // Monta com o motor do jogo saves para os testes das seleções (R91 a R93) e imprime no formato de exportação:
 //   npx tsx tests/saves/selecao.ts jogo      técnico do Flamengo e do Brasil, parado no dia do primeiro amistoso do Brasil
 //   npx tsx tests/saves/selecao.ts convite   técnico do Flamengo campeão da Série A (de mentira), com os convites de seleções
+//   npx tsx tests/saves/selecao.ts europa    técnico do Flamengo e da França, parado no dia do primeiro amistoso da França (R102)
 //   npx tsx tests/saves/selecao.ts data-fifa Palmeiras parado num dia de jogo dele na data FIFA de setembro, com convocados fora
 import { assumirSelecao, convitesDeSelecoes } from "../../src/engine/selecoes";
 import { avancar, meuJogoHoje, novoJogo, simularDia } from "../../src/engine/jogo";
@@ -25,9 +26,9 @@ let pronto = false;
 if (qual === "convite") {
   campeaoDaSerieA(estado);
   pronto = convitesDeSelecoes(estado, 95).length > 0;
-} else if (qual === "jogo") {
+} else if (qual === "jogo" || qual === "europa") {
   campeaoDaSerieA(estado);
-  assumirSelecao(estado, "sel-BR");
+  assumirSelecao(estado, qual === "europa" ? "sel-FR" : "sel-BR");
   estado.config.escalacaoAutomatica = true;
   for (let i = 0; i < 600; i++) {
     if (avancar(estado).tipo !== "jogos-hoje") break;

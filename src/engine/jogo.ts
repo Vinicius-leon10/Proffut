@@ -132,7 +132,8 @@ export function juntarClubesNovos(estado: EstadoJogo, rng: ReturnType<typeof cri
       delete clube.elencoDaCopa;
       comElenco.delete(clube.id);
     }
-    if (comElenco.has(clube.id) || clube.leve) continue;
+    // As seleções não têm elenco próprio (a da Espanha tem todos os convocados em clubes do jogo).
+    if (comElenco.has(clube.id) || clube.leve || clube.serie === "selecao") continue;
     criarElenco(estado, clube, rng);
     if (estado.selecoes) juntarQuemJogavaFora(estado, clube.id);
   }
