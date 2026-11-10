@@ -492,8 +492,10 @@ ajustes de equilíbrio pelo que ele sentir jogando.
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo (seleções da Europa e dos outros continentes e a própria Copa).
 (2) Deixar as partidas mais lentas (o relógio da partida ao vivo). (3) Substituição manual do jogador machucado (hoje o
-auxiliar troca sozinho). (4) Ajustar os ganhos e a premiação (a última palavra estava difícil de ler: confirmar com ele).
-(5) Ajustar a renovação por temporada (contratos). Um item riscado no papel ("Mercado de clubes"?) ficou de fora.
+auxiliar troca sozinho). (4) Ajustar vitórias e derrotas: os jogadores relatam partidas aleatórias demais (time muito mais forte perdendo ou
+empatando com frequência; um time da Série A empatar com um da Série D tem de ser bem raro). Pode haver surpresa, mas muito
+menos (ver `EXPOENTE_DISPUTA` e `npm run sim`). (5) Ajustar a evolução dos jogadores (temporada): um jogador comprou só
+jovens e em 5 anos eles estavam entre os melhores do mundo; a evolução dos jovens está forte demais. Um item riscado no papel ("Mercado de clubes"?) ficou de fora.
 
 ## Regras fixas do jogo
 
