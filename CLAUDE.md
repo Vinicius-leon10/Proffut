@@ -489,6 +489,12 @@ segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, fa
 **Próximas ideias:** o resto da lista de mudanças (PLANO.md §13: 3, 6, 9–15, 17, 18, 20), quando o usuário escolher, e
 ajustes de equilíbrio pelo que ele sentir jogando.
 
+**Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
+ele pedir. (1) Terminar as seleções para a Copa do Mundo (seleções da Europa e dos outros continentes e a própria Copa).
+(2) Deixar as partidas mais lentas (o relógio da partida ao vivo). (3) Substituição manual do jogador machucado (hoje o
+auxiliar troca sozinho). (4) Ajustar os ganhos e a premiação (a última palavra estava difícil de ler: confirmar com ele).
+(5) Ajustar a renovação por temporada (contratos). Um item riscado no papel ("Mercado de clubes"?) ficou de fora.
+
 ## Regras fixas do jogo
 
 - **Tamanho e peso (pedido do usuário, nov/2026):** "Quero que não se preocupe com isso agora, vamos construir da maneira
