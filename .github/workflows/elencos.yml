@@ -7,10 +7,10 @@ on:
   workflow_dispatch:
     inputs:
       fase:
-        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa) · selecoes-europa: convocações das 55 seleções da UEFA (branch dados-selecoes-europa)"
+        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa) · selecoes-europa: convocações das 55 seleções da UEFA (branch dados-selecoes-europa) · europa-segundas: segunda divisão das 7 ligas da Europa (branch dados-europa-segundas)"
         type: choice
         default: elencos
-        options: [elencos, times, segundas, america, europa, selecoes-europa]
+        options: [elencos, times, segundas, america, europa, selecoes-europa, europa-segundas]
 
 permissions:
   contents: write
@@ -233,3 +233,25 @@ jobs:
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -q -m "Convocações das seleções da Europa (${GITHUB_SHA::7})"
           git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-selecoes-europa
+
+  # Segunda divisão de 2025/26 das 7 ligas da Europa: páginas dos campeonatos e dos clubes (Wikipédia em inglês) e os
+  # dados dos clubes e dos jogadores (Wikidata). Quem monta os clubes do jogo é tools/europa/segundas.ts.
+  europa-segundas:
+    if: inputs.fase == 'europa-segundas'
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v7
+      - name: Wikipédia e Wikidata (segundas divisões da Europa)
+        run: python3 tools/times/wikipedia.py tools/europa/sementes-segundas.json dados
+      - name: Gravar na branch dados-europa-segundas
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dados
+          echo "Baixados em $(date -u +%Y-%m-%dT%H:%MZ) da Wikipédia em inglês (CC BY-SA) e do Wikidata (CC0) pelo workflow elencos.yml (fase europa-segundas)." > LEIAME.md
+          git init -q -b dados-europa-segundas
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Segundas divisões da Europa (${GITHUB_SHA::7})"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-europa-segundas

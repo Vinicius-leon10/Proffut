@@ -1,0 +1,136 @@
+{
+ "descricao": "Segunda divisão de 2025/26 das 7 ligas da Europa do jogo: páginas de partida do robô (tools/times/wikipedia.py), na Wikipédia em inglês.",
+ "sementes": [
+  {
+   "id": "europa2-EN2-en",
+   "liga": "EN2",
+   "lang": "en",
+   "paises": [
+    "Q21",
+    "Q145",
+    "Q25"
+   ],
+   "titulos": [
+    "2025–26 EFL Championship"
+   ],
+   "consultas": [
+    "2025–26 EFL Championship"
+   ],
+   "exige": [
+    "2025–26",
+    "Championship"
+   ]
+  },
+  {
+   "id": "europa2-ES2-en",
+   "liga": "ES2",
+   "lang": "en",
+   "paises": [
+    "Q29",
+    "Q228"
+   ],
+   "titulos": [
+    "2025–26 Segunda División"
+   ],
+   "consultas": [
+    "2025–26 Segunda División"
+   ],
+   "exige": [
+    "2025–26",
+    "Segunda"
+   ]
+  },
+  {
+   "id": "europa2-IT2-en",
+   "liga": "IT2",
+   "lang": "en",
+   "paises": [
+    "Q38"
+   ],
+   "titulos": [
+    "2025–26 Serie B"
+   ],
+   "consultas": [
+    "2025–26 Serie B"
+   ],
+   "exige": [
+    "2025–26",
+    "Serie B"
+   ]
+  },
+  {
+   "id": "europa2-DE2-en",
+   "liga": "DE2",
+   "lang": "en",
+   "paises": [
+    "Q183"
+   ],
+   "titulos": [
+    "2025–26 2. Bundesliga"
+   ],
+   "consultas": [
+    "2025–26 2. Bundesliga"
+   ],
+   "exige": [
+    "2025–26",
+    "Bundesliga"
+   ]
+  },
+  {
+   "id": "europa2-FR2-en",
+   "liga": "FR2",
+   "lang": "en",
+   "paises": [
+    "Q142",
+    "Q235"
+   ],
+   "titulos": [
+    "2025–26 Ligue 2"
+   ],
+   "consultas": [
+    "2025–26 Ligue 2"
+   ],
+   "exige": [
+    "2025–26",
+    "Ligue 2"
+   ]
+  },
+  {
+   "id": "europa2-PT2-en",
+   "liga": "PT2",
+   "lang": "en",
+   "paises": [
+    "Q45"
+   ],
+   "titulos": [
+    "2025–26 Liga Portugal 2"
+   ],
+   "consultas": [
+    "2025–26 Liga Portugal 2"
+   ],
+   "exige": [
+    "2025–26",
+    "Portugal 2"
+   ]
+  },
+  {
+   "id": "europa2-NL2-en",
+   "liga": "NL2",
+   "lang": "en",
+   "paises": [
+    "Q55",
+    "Q29999"
+   ],
+   "titulos": [
+    "2025–26 Eerste Divisie"
+   ],
+   "consultas": [
+    "2025–26 Eerste Divisie"
+   ],
+   "exige": [
+    "2025–26",
+    "Eerste"
+   ]
+  }
+ ]
+}
