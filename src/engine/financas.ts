@@ -1,4 +1,4 @@
-import { TV_EUROPA_MES, COTA_TV_RODADA, MANUTENCAO_POR_LUGAR, PATROCINIO_MES, PATROCINIO_SERIE_D, PRECO_REFERENCIA, PREMIACAO, PUBLICO_POR_TORCIDA } from "./constantes";
+import { TV_EUROPA_MES, TV_PISO_SEGUNDA, COTA_TV_RODADA, MANUTENCAO_POR_LUGAR, PATROCINIO_MES, PATROCINIO_SERIE_D, PRECO_REFERENCIA, PREMIACAO, PUBLICO_POR_TORCIDA } from "./constantes";
 import type { Rng } from "./rng";
 import type { Clube, EstadoJogo, SerieClube, SerieId, TipoLancamento } from "./tipos";
 
@@ -71,7 +71,8 @@ export function processarMes(estado: EstadoJogo, data: string) {
     lancar(clube, data, "patrocinio", "Patrocínio do mês", patrocinio * (0.6 + 0.8 * (clube.reputacao / 100)));
     // Na Europa, os direitos de TV pagam a maior parte da folha (lá não há cota por rodada como nas séries).
     const tvEuropa = clube.serie === "exterior" && clube.liga ? TV_EUROPA_MES[clube.liga] : undefined;
-    if (tvEuropa) lancar(clube, data, "tv", "Direitos de TV do mês", tvEuropa * (clube.reputacao / 100) ** 3);
+    const piso = clube.liga && clube.liga.length > 2 ? TV_PISO_SEGUNDA : 0;
+    if (tvEuropa) lancar(clube, data, "tv", "Direitos de TV do mês", tvEuropa * Math.max(piso, (clube.reputacao / 100) ** 3));
     lancar(clube, data, "salarios", "Folha salarial", -(folhas.get(clube.id) ?? 0));
     lancar(clube, data, "estadio", "Manutenção do estádio", -clube.estadio.capacidade * MANUTENCAO_POR_LUGAR);
   }

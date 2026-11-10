@@ -6,6 +6,7 @@ import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, pularTutorial, test
 
 type Ficha = { id: string; nome: string; pais: string };
 const europa = (JSON.parse(readFileSync("data/europa-2026/clubes.json", "utf8")) as { clubes: Ficha[] }).clubes;
+const segundas = (JSON.parse(readFileSync("data/europa-2026/clubes-segundas.json", "utf8")) as { clubes: (Ficha & { liga: string })[] }).clubes;
 const copas = (JSON.parse(readFileSync("data/europa-2026/copas.json", "utf8")) as { copas: Record<string, { grupos: string[] }> }).copas;
 
 test("R98 jogo novo na Europa: o continente Europa com os 7 países (cada um com a bandeira, a Inglaterra com a dela), a Inglaterra com os 20 clubes da 1ª divisão; assumindo o Arsenal, o painel mostra o Campeonato Inglês e a Liga dos Campeões", async ({ page }) => {
@@ -25,7 +26,8 @@ test("R98 jogo novo na Europa: o continente Europa com os 7 países (cada um com
   expect(await page.getByRole("button", { name: /Espanha/ }).locator(".bandeira").textContent()).toBe("🇪🇸");
   await page.getByRole("button", { name: /Inglaterra/ }).click();
   await expect(page.locator(".topo .titulo")).toHaveText("Inglaterra");
-  expect(await page.getByRole("tab").allTextContents()).toEqual(["1ª divisão"]);
+  // Com a 2ª divisão (R103): as duas, abrindo na 1ª.
+  expect(await page.getByRole("tab").allTextContents()).toEqual(["1ª divisão", "2ª divisão"]);
   await expect(page.locator(".lista .item")).toHaveCount(europa.filter((c) => c.pais === "EN").length);
   await botao(page, /Arsenal/).click();
   await botao(page, /^Assumir (o|a) /).click();
@@ -80,4 +82,33 @@ test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 7 países 
     await copa.selectOption({ label: nome });
     await expect(grupo.locator("option")).toHaveCount(4);
   }
+});
+
+// 2ª divisão das 7 ligas (pedido "Vamos começar a europa" → "Tudo, nessa ordem" e "todas as ligas, A e B, e das
+// principais, se tiver a C também", nov/2026).
+test("R103 2ª divisão da Europa: no jogo novo, a Inglaterra tem a 2ª divisão com os 24 clubes do Championship; assumindo o Leicester, o painel mostra o Campeonato Inglês – 2ª divisão; nas Tabelas, as duas divisões com a zona de queda na 1ª e a de acesso na 2ª", async ({ page }) => {
+  await abrirSite(page);
+  await botao(page, "Novo jogo").click();
+  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByRole("button", { name: "Próximo", exact: true }).click();
+  await page.getByRole("button", { name: /Europa/ }).click();
+  await page.getByRole("button", { name: /Inglaterra/ }).click();
+  await page.getByRole("tab", { name: "2ª divisão" }).click();
+  await expect(page.locator(".lista .item")).toHaveCount(segundas.filter((c) => c.liga === "EN2").length);
+  await expect(page.locator(".lista .item")).toHaveCount(24);
+  await botao(page, /Leicester City/).click();
+  await botao(page, /^Assumir (o|a) /).click();
+  await pularTutorial(page);
+  await expect(page.locator(".topo .titulo")).toHaveText("Leicester City");
+  await expect(page.getByRole("heading", { name: "Campeonato Inglês – 2ª divisão 2026" })).toBeVisible();
+  await aba(page, "Tabelas");
+  await page.getByRole("tab", { name: "Outros países" }).click();
+  await expect(page.getByRole("combobox", { name: "País" })).toHaveValue("EN");
+  // Abre na divisão do clube do técnico.
+  await expect(page.getByRole("tab", { name: "2ª divisão", exact: true })).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("main table.tabela tbody tr")).toHaveCount(24);
+  await expect(page.locator("main")).toContainText("sobem");
+  await page.getByRole("tab", { name: "1ª divisão", exact: true }).click();
+  await expect(page.locator("main table.tabela tbody tr")).toHaveCount(20);
+  await expect(page.locator("main")).toContainText("caem");
 });

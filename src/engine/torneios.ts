@@ -136,6 +136,8 @@ export function nomeDoTorneio(id: IdTorneio): string {
 export const SOBEM_E_CAEM: Record<string, number[]> = {
   AR: [2, 2], BO: [2, 2], CL: [2, 2], CO: [2, 2], EC: [2, 2], PY: [2, 2], PE: [2, 2], UY: [3, 2], VE: [1, 2],
   MX: [0, 0], US: [0, 0], CA: [0, 0],
+  // Europa (nov/2026, como em 2025/26, sem os playoffs): 3 na Inglaterra, Espanha e Itália; 2 nos outros.
+  EN: [3, 3], ES: [3, 4], IT: [3, 3], DE: [2, 2], FR: [2, 2], PT: [2, 2], NL: [2, 2],
 };
 
 /** Código da liga do país na divisão `nivel` ("AR", "AR2", "AR3"). */

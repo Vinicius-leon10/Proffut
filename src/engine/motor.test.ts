@@ -25,6 +25,7 @@ import jogadoresJson from "../../data/brasil-2026/jogadores.json";
 import exteriorJson from "../../data/america-do-sul-2026/jogadores.json";
 import europaJson from "../../data/europa-2026/jogadores.json";
 import europaClubesJson from "../../data/europa-2026/clubes.json";
+import segundasJson from "../../data/europa-2026/jogadores-segundas.json";
 import europaCopasJson from "../../data/europa-2026/copas.json";
 import { TV_EUROPA_MES } from "./constantes";
 import { processarMes } from "./financas";
@@ -2022,6 +2023,42 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
     const media = (id: string) => elencoDe(estado, id).map((j) => j.forca).sort((a, b) => b - a).slice(0, 11).reduce((a, b) => a + b) / 11;
     expect(media("real-madrid")).toBeGreaterThan(media("oviedo") + 8);
     expect(media("bayern-de-munique")).toBeGreaterThan(media("heidenheim") + 8);
+  });
+
+  it("2ª divisão das 7 ligas (nov/2026): os 132 clubes com o elenco de verdade, mais fracos que os da 1ª; sobem e caem na virada (3 na Inglaterra, Espanha e Itália; 2 nos outros)", { timeout: 300_000 }, () => {
+    const tamanhos: Record<string, number> = { EN2: 24, ES2: 21, IT2: 20, DE2: 18, FR2: 18, PT2: 15, NL2: 16 };
+    for (const [liga, n] of Object.entries(tamanhos)) expect(estado.torneios?.[`L-${liga}` as IdTorneio]?.clubes.length, liga).toBe(n);
+    const elencos = segundasJson.elencos as Record<string, { nome: string; posicao: string }[]>;
+    expect(Object.keys(elencos)).toHaveLength(132);
+    for (const [clubeId, reais] of Object.entries(elencos)) {
+      const elenco = elencoDe(estado, clubeId);
+      for (const r of reais.slice(0, 5)) expect(elenco.some((j) => j.nome === r.nome), `${r.nome} (${clubeId})`).toBe(true);
+    }
+    const media = (id: string) => elencoDe(estado, id).map((j) => j.forca).sort((a, b) => b - a).slice(0, 11).reduce((a, b) => a + b) / 11;
+    const t = (liga: string) => estado.torneios![`L-${liga}` as IdTorneio]!.clubes;
+    for (const pais of ["EN", "ES", "IT", "DE", "FR", "PT", "NL"]) {
+      const primeira = t(pais).map(media).sort((a, b) => a - b);
+      const segunda = t(`${pais}2`).map(media).sort((a, b) => b - a);
+      // O melhor da segunda é mais fraco que a média da primeira.
+      expect(segunda[0], pais).toBeLessThan(primeira.reduce((a, b) => a + b) / primeira.length);
+    }
+    // Uma temporada: na virada, os 3 últimos da Premier League descem e os 3 primeiros do Championship sobem.
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 71 });
+    for (let i = 0; i < 4000 && e.temporada === 2026; i++) {
+      const r = avancar(e);
+      if (r.tipo === "jogos-hoje") simularDia(e);
+      else if (r.tipo === "nada") break;
+    }
+    expect(e.temporada).toBe(2027);
+    const h = e.historico.at(-1)!;
+    expect(h.torneios?.["L-EN2" as IdTorneio]?.campeao).toBeDefined();
+    const ingleses = Object.values(e.clubes).filter((c) => c.pais === "EN");
+    expect(ingleses.filter((c) => c.liga === "EN")).toHaveLength(20);
+    expect(ingleses.filter((c) => c.liga === "EN2")).toHaveLength(24);
+    const subiram = ingleses.filter((c) => c.liga === "EN" && !(europaClubesJson.clubes as { id: string }[]).some((f) => f.id === c.id));
+    expect(subiram).toHaveLength(3);
+    const alemaes = Object.values(e.clubes).filter((c) => c.pais === "DE" && c.liga === "DE");
+    expect(alemaes.filter((c) => !(europaClubesJson.clubes as { id: string }[]).some((f) => f.id === c.id))).toHaveLength(2);
   });
 
   it("as ligas da Europa são em turno e returno (38 rodadas com 20 clubes) e começam em janeiro", () => {

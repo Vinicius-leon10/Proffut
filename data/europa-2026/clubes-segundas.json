@@ -1,0 +1,3438 @@
+{
+ "temporada": 2026,
+ "descricao": "Clubes da segunda divisão (2025/26) da Inglaterra, Espanha, Itália, Alemanha, França, Portugal e Holanda, sem os times B. Estádio do Wikidata (CC0); nomes, cores e números do Proffut.",
+ "clubes": [
+  {
+   "id": "birmingham-city",
+   "nome": "Birmingham City",
+   "sigla": "BIR",
+   "cidade": "Birmingham",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#0000FF",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "St Andrew's Stadium",
+    "capacidade": 30016
+   },
+   "fundacao": 1875,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 63,
+    "max": 80
+   },
+   "caixaInicial": 32000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "blackburn",
+   "nome": "Blackburn Rovers",
+   "sigla": "BLA",
+   "cidade": "Blackburn",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#009EE0",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Ewood Park",
+    "capacidade": 31367
+   },
+   "fundacao": 1875,
+   "rival": null,
+   "torcida": 25,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 60,
+    "max": 78
+   },
+   "caixaInicial": 28000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "bristol-city",
+   "nome": "Bristol City",
+   "sigla": "BRC",
+   "cidade": "Bristol",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#E21A23",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Ashton Gate Stadium",
+    "capacidade": 27000
+   },
+   "fundacao": 1894,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 60,
+    "max": 78
+   },
+   "caixaInicial": 28000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "charlton",
+   "nome": "Charlton Athletic",
+   "sigla": "CHA",
+   "cidade": "Londres",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#D4021D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "The Valley",
+    "capacidade": 27111
+   },
+   "fundacao": 1905,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 57,
+    "max": 76
+   },
+   "caixaInicial": 22000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "coventry",
+   "nome": "Coventry City",
+   "sigla": "COV",
+   "cidade": "Coventry",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#59CBE8",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Ricoh Arena",
+    "capacidade": 32609
+   },
+   "fundacao": 1883,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 60,
+    "max": 80
+   },
+   "caixaInicial": 32000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "derby-county",
+   "nome": "Derby County",
+   "sigla": "DER",
+   "cidade": "Derby",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Pride Park Stadium",
+    "capacidade": 33597
+   },
+   "fundacao": 1884,
+   "rival": null,
+   "torcida": 28,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 61,
+    "max": 78
+   },
+   "caixaInicial": 28000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "hull-city",
+   "nome": "Hull City",
+   "sigla": "HUL",
+   "cidade": "Hull",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#F5A12D",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "KCOM Stadium",
+    "capacidade": 25400
+   },
+   "fundacao": 1904,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 65,
+   "forcaElenco": {
+    "min": 59,
+    "max": 78
+   },
+   "caixaInicial": 27000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "ipswich",
+   "nome": "Ipswich Town",
+   "sigla": "IPS",
+   "cidade": "Ipswich",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#0044A9",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Portman Road",
+    "capacidade": 30311
+   },
+   "fundacao": 1878,
+   "rival": null,
+   "torcida": 25,
+   "reputacao": 71,
+   "forcaElenco": {
+    "min": 61,
+    "max": 81
+   },
+   "caixaInicial": 38000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "leicester",
+   "nome": "Leicester City",
+   "sigla": "LEI",
+   "cidade": "Leicester",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#003090",
+    "secundaria": "#FDBE11"
+   },
+   "estadio": {
+    "nome": "Leicester City Stadium",
+    "capacidade": 32261
+   },
+   "fundacao": 1884,
+   "rival": null,
+   "torcida": 40,
+   "reputacao": 74,
+   "forcaElenco": {
+    "min": 64,
+    "max": 83
+   },
+   "caixaInicial": 45000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "middlesbrough",
+   "nome": "Middlesbrough",
+   "sigla": "MID",
+   "cidade": "Middlesbrough",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#E11B22",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Riverside Stadium",
+    "capacidade": 34742
+   },
+   "fundacao": 1876,
+   "rival": null,
+   "torcida": 28,
+   "reputacao": 69,
+   "forcaElenco": {
+    "min": 61,
+    "max": 80
+   },
+   "caixaInicial": 34000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "millwall",
+   "nome": "Millwall",
+   "sigla": "MIL",
+   "cidade": "Londres",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#001D5E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "The Den",
+    "capacidade": 20146
+   },
+   "fundacao": 1885,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 65,
+   "forcaElenco": {
+    "min": 59,
+    "max": 78
+   },
+   "caixaInicial": 27000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "norwich",
+   "nome": "Norwich City",
+   "sigla": "NOR",
+   "cidade": "Norwich",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#FFF200",
+    "secundaria": "#00A650"
+   },
+   "estadio": {
+    "nome": "Carrow Road",
+    "capacidade": 27244
+   },
+   "fundacao": 1902,
+   "rival": null,
+   "torcida": 26,
+   "reputacao": 69,
+   "forcaElenco": {
+    "min": 61,
+    "max": 80
+   },
+   "caixaInicial": 34000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "oxford-united",
+   "nome": "Oxford United",
+   "sigla": "OXF",
+   "cidade": "Oxford",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#FFF200",
+    "secundaria": "#001958"
+   },
+   "estadio": {
+    "nome": "Kassam Stadium",
+    "capacidade": 12500
+   },
+   "fundacao": 1893,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 56,
+    "max": 75
+   },
+   "caixaInicial": 19000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "portsmouth",
+   "nome": "Portsmouth",
+   "sigla": "PMH",
+   "cidade": "Portsmouth",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#001489",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Fratton Park",
+    "capacidade": 21100
+   },
+   "fundacao": 1898,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 59,
+    "max": 77
+   },
+   "caixaInicial": 24000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "preston",
+   "nome": "Preston North End",
+   "sigla": "PNE",
+   "cidade": "Preston",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000055"
+   },
+   "estadio": {
+    "nome": "Deepdale",
+    "capacidade": 24500
+   },
+   "fundacao": 1880,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 59,
+    "max": 77
+   },
+   "caixaInicial": 24000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "qpr",
+   "nome": "Queens Park Rangers",
+   "sigla": "QPR",
+   "cidade": "Londres",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#1D5BA4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Loftus Road",
+    "capacidade": 18439
+   },
+   "fundacao": 1882,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 65,
+   "forcaElenco": {
+    "min": 56,
+    "max": 78
+   },
+   "caixaInicial": 27000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "sheffield-united",
+   "nome": "Sheffield United",
+   "sigla": "SHU",
+   "cidade": "Sheffield",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#EE2737",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Bramall Lane",
+    "capacidade": 32702
+   },
+   "fundacao": 1889,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 71,
+   "forcaElenco": {
+    "min": 60,
+    "max": 81
+   },
+   "caixaInicial": 38000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "sheffield-wednesday",
+   "nome": "Sheffield Wednesday",
+   "sigla": "SHW",
+   "cidade": "Sheffield",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#0033A0",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Hillsborough",
+    "capacidade": 39732
+   },
+   "fundacao": 1867,
+   "rival": null,
+   "torcida": 28,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 54,
+    "max": 76
+   },
+   "caixaInicial": 22000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "southampton",
+   "nome": "Southampton",
+   "sigla": "SOU",
+   "cidade": "Southampton",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#D71920",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "St Mary's Stadium",
+    "capacidade": 32589
+   },
+   "fundacao": 1885,
+   "rival": null,
+   "torcida": 35,
+   "reputacao": 73,
+   "forcaElenco": {
+    "min": 64,
+    "max": 82
+   },
+   "caixaInicial": 43000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "stoke-city",
+   "nome": "Stoke City",
+   "sigla": "STK",
+   "cidade": "Stoke-on-Trent",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#E03A3E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Britannia Stadium",
+    "capacidade": 27740
+   },
+   "fundacao": 1863,
+   "rival": null,
+   "torcida": 25,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 59,
+    "max": 78
+   },
+   "caixaInicial": 28000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "swansea",
+   "nome": "Swansea City",
+   "sigla": "SWA",
+   "cidade": "Swansea",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Liberty Stadium",
+    "capacidade": 20750
+   },
+   "fundacao": 1912,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 61,
+    "max": 77
+   },
+   "caixaInicial": 28000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "watford",
+   "nome": "Watford",
+   "sigla": "WAT",
+   "cidade": "Watford",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#FBEE23",
+    "secundaria": "#ED2127"
+   },
+   "estadio": {
+    "nome": "Vicarage Road",
+    "capacidade": 22000
+   },
+   "fundacao": 1881,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 67,
+   "forcaElenco": {
+    "min": 59,
+    "max": 78
+   },
+   "caixaInicial": 30000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "west-bromwich",
+   "nome": "West Bromwich",
+   "sigla": "WBA",
+   "cidade": "West Bromwich",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#122F67",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "The Hawthorns",
+    "capacidade": 26445
+   },
+   "fundacao": 1878,
+   "rival": null,
+   "torcida": 28,
+   "reputacao": 69,
+   "forcaElenco": {
+    "min": 59,
+    "max": 79
+   },
+   "caixaInicial": 34000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "wrexham",
+   "nome": "Wrexham",
+   "sigla": "WRE",
+   "cidade": "Wrexham",
+   "estado": "EN",
+   "pais": "EN",
+   "cores": {
+    "primaria": "#D71920",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Racecourse Ground",
+    "capacidade": 13341
+   },
+   "fundacao": 1864,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 57,
+    "max": 77
+   },
+   "caixaInicial": 25000000,
+   "liga": "EN2"
+  },
+  {
+   "id": "albacete",
+   "nome": "Albacete",
+   "sigla": "ALB",
+   "cidade": "Albacete",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Carlos Belmonte",
+    "capacidade": 17524
+   },
+   "fundacao": 1940,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 54,
+    "max": 72
+   },
+   "caixaInicial": 7000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "almeria",
+   "nome": "Almería",
+   "sigla": "ALM",
+   "cidade": "Almería",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#EE1119",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio de los Juegos Mediterráneos",
+    "capacidade": 22000
+   },
+   "fundacao": 1989,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 57,
+    "max": 76
+   },
+   "caixaInicial": 11000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "fc-andorra",
+   "nome": "FC Andorra",
+   "sigla": "AND",
+   "cidade": "Andorra-a-Velha",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#003DA5",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional de Andorra",
+    "capacidade": 3306
+   },
+   "fundacao": 1942,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 6000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "burgos",
+   "nome": "Burgos",
+   "sigla": "BGS",
+   "cidade": "Burgos",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Municipal de El Plantío",
+    "capacidade": 16000
+   },
+   "fundacao": 1985,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 7000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "cadiz",
+   "nome": "Cádiz",
+   "sigla": "CAD",
+   "cidade": "Cádiz",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#FFE500",
+    "secundaria": "#0045A7"
+   },
+   "estadio": {
+    "nome": "Estadio Ramón de Carranza",
+    "capacidade": 26000
+   },
+   "fundacao": 1910,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 56,
+    "max": 75
+   },
+   "caixaInicial": 10000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "castellon",
+   "nome": "Castellón",
+   "sigla": "CAS",
+   "cidade": "Castelló de la Plana",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Castalia",
+    "capacidade": 16000
+   },
+   "fundacao": 1922,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 50,
+    "max": 72
+   },
+   "caixaInicial": 7000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "ceuta",
+   "nome": "Ceuta",
+   "sigla": "CEU",
+   "cidade": "Ceuta",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Municipal Alfonso Murube",
+    "capacidade": 6500
+   },
+   "fundacao": 1956,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 5000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "cordoba",
+   "nome": "Córdoba",
+   "sigla": "COR",
+   "cidade": "Córdoba",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "Estadio Nuevo Arcángel",
+    "capacidade": 21822
+   },
+   "fundacao": 1954,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 55,
+    "max": 73
+   },
+   "caixaInicial": 8000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "cultural-leonesa",
+   "nome": "Cultural Leonesa",
+   "sigla": "CUL",
+   "cidade": "León",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#8B0000"
+   },
+   "estadio": {
+    "nome": "Estádio Reino de León",
+    "capacidade": 13451
+   },
+   "fundacao": 1923,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 53,
+    "max": 71
+   },
+   "caixaInicial": 5000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "deportivo-la-coruna",
+   "nome": "Deportivo La Coruña",
+   "sigla": "DEP",
+   "cidade": "La Coruña",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#1E5BC6",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Municipal de Riazor",
+    "capacidade": 32490
+   },
+   "fundacao": 1906,
+   "rival": null,
+   "torcida": 35,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 57,
+    "max": 77
+   },
+   "caixaInicial": 13000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "eibar",
+   "nome": "Eibar",
+   "sigla": "EIB",
+   "cidade": "Eibar",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#A50044",
+    "secundaria": "#004D98"
+   },
+   "estadio": {
+    "nome": "Estádio Municipal de Ipurua",
+    "capacidade": 8164
+   },
+   "fundacao": 1940,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 55,
+    "max": 74
+   },
+   "caixaInicial": 9000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "granada",
+   "nome": "Granada",
+   "sigla": "GRA",
+   "cidade": "Granada",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Nuevo Los Cármenes",
+    "capacidade": 19436
+   },
+   "fundacao": 1931,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 55,
+    "max": 76
+   },
+   "caixaInicial": 11000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "huesca",
+   "nome": "Huesca",
+   "sigla": "HUE",
+   "cidade": "Huesca",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#12284B",
+    "secundaria": "#A50021"
+   },
+   "estadio": {
+    "nome": "Estádio El Alcoraz",
+    "capacidade": 9000
+   },
+   "fundacao": 1960,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 53,
+    "max": 71
+   },
+   "caixaInicial": 7000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "las-palmas",
+   "nome": "Las Palmas",
+   "sigla": "LPA",
+   "cidade": "Las Palmas",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#FFE400",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Estádio Gran Canaria",
+    "capacidade": 32392
+   },
+   "fundacao": 1949,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 57,
+    "max": 77
+   },
+   "caixaInicial": 13000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "leganes",
+   "nome": "Leganés",
+   "sigla": "LEG",
+   "cidade": "Leganés",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Municipal de Butarque",
+    "capacidade": 11454
+   },
+   "fundacao": 1928,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 57,
+    "max": 76
+   },
+   "caixaInicial": 11000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "malaga",
+   "nome": "Málaga",
+   "sigla": "MAL",
+   "cidade": "Málaga",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#5BC2E7",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio La Rosaleda",
+    "capacidade": 30778
+   },
+   "fundacao": 1904,
+   "rival": null,
+   "torcida": 28,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 58,
+    "max": 75
+   },
+   "caixaInicial": 10000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "mirandes",
+   "nome": "Mirandés",
+   "sigla": "MIR",
+   "cidade": "Miranda de Ebro",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Municipal de Anduva",
+    "capacidade": 6000
+   },
+   "fundacao": 1927,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 53,
+    "max": 72
+   },
+   "caixaInicial": 7000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "racing-santander",
+   "nome": "Racing de Santander",
+   "sigla": "RAC",
+   "cidade": "Santander",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#00A650"
+   },
+   "estadio": {
+    "nome": "Campos de Sport de El Sardinero",
+    "capacidade": 3000
+   },
+   "fundacao": 1913,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 54,
+    "max": 75
+   },
+   "caixaInicial": 10000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "sporting-gijon",
+   "nome": "Sporting de Gijón",
+   "sigla": "SPG",
+   "cidade": "Gijón",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "El Molinón",
+    "capacidade": 29371
+   },
+   "fundacao": 1905,
+   "rival": null,
+   "torcida": 24,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 56,
+    "max": 75
+   },
+   "caixaInicial": 10000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "valladolid",
+   "nome": "Valladolid",
+   "sigla": "VLL",
+   "cidade": "Valladolid",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#6A1B9A",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio José Zorrilla",
+    "capacidade": 27618
+   },
+   "fundacao": 1928,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 67,
+   "forcaElenco": {
+    "min": 60,
+    "max": 77
+   },
+   "caixaInicial": 12000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "zaragoza",
+   "nome": "Zaragoza",
+   "sigla": "ZAR",
+   "cidade": "Saragoça",
+   "estado": "ES",
+   "pais": "ES",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#004B9B"
+   },
+   "estadio": {
+    "nome": "Novo estádio La Romareda",
+    "capacidade": 43110
+   },
+   "fundacao": 1932,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 55,
+    "max": 75
+   },
+   "caixaInicial": 9000000,
+   "liga": "ES2"
+  },
+  {
+   "id": "avellino",
+   "nome": "Avellino",
+   "sigla": "AVE",
+   "cidade": "Avellino",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#00A651",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Paternio",
+    "capacidade": 10125
+   },
+   "fundacao": 1912,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 54,
+    "max": 72
+   },
+   "caixaInicial": 7000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "bari",
+   "nome": "Bari",
+   "sigla": "BRI",
+   "cidade": "Bari",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#E30613"
+   },
+   "estadio": {
+    "nome": "Estádio San Nicola",
+    "capacidade": 58270
+   },
+   "fundacao": 1908,
+   "rival": null,
+   "torcida": 25,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 57,
+    "max": 75
+   },
+   "caixaInicial": 9000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "carrarese",
+   "nome": "Carrarese",
+   "sigla": "CAR",
+   "cidade": "Carrara",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#FFD700",
+    "secundaria": "#003DA5"
+   },
+   "estadio": {
+    "nome": "Estádio de Carrara",
+    "capacidade": 10000
+   },
+   "fundacao": 1908,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 5000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "catanzaro",
+   "nome": "Catanzaro",
+   "sigla": "CTZ",
+   "cidade": "Catanzaro",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#D50032"
+   },
+   "estadio": {
+    "nome": "Estadio Nicola Ceravolo",
+    "capacidade": 14650
+   },
+   "fundacao": 1929,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 51,
+    "max": 73
+   },
+   "caixaInicial": 8000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "cesena",
+   "nome": "Cesena",
+   "sigla": "CES",
+   "cidade": "Cesena",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stadio Dino Manuzzi",
+    "capacidade": 23860
+   },
+   "fundacao": 1940,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 55,
+    "max": 73
+   },
+   "caixaInicial": 8000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "empoli",
+   "nome": "Empoli",
+   "sigla": "EMP",
+   "cidade": "Empoli",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#00579C",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Carlo Castellani",
+    "capacidade": 19847
+   },
+   "fundacao": 1920,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 55,
+    "max": 76
+   },
+   "caixaInicial": 11000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "frosinone",
+   "nome": "Frosinone",
+   "sigla": "FRO",
+   "cidade": "Frosinone",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#FFDD00",
+    "secundaria": "#00529F"
+   },
+   "estadio": {
+    "nome": "Estádio Benito Stirpe",
+    "capacidade": 16227
+   },
+   "fundacao": 1906,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 57,
+    "max": 75
+   },
+   "caixaInicial": 9000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "juve-stabia",
+   "nome": "Juve Stabia",
+   "sigla": "JST",
+   "cidade": "Castellammare di Stabia",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#003DA5"
+   },
+   "estadio": {
+    "nome": "Estadio Romeo Menti (Castellammare di Stabia)",
+    "capacidade": 13000
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 51,
+    "max": 72
+   },
+   "caixaInicial": 7000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "mantova",
+   "nome": "Mantova",
+   "sigla": "MAN",
+   "cidade": "Mântua",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Danilo Martelli",
+    "capacidade": 7367
+   },
+   "fundacao": 1911,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 53,
+    "max": 71
+   },
+   "caixaInicial": 6000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "modena",
+   "nome": "Modena",
+   "sigla": "MOD",
+   "cidade": "Módena",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#002A5C"
+   },
+   "estadio": {
+    "nome": "Estádio Alberto Braglia",
+    "capacidade": 21151
+   },
+   "fundacao": 1912,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 55,
+    "max": 74
+   },
+   "caixaInicial": 8000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "monza",
+   "nome": "Monza",
+   "sigla": "MNZ",
+   "cidade": "Monza",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#E4002B",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadio Brianteo",
+    "capacidade": 17102
+   },
+   "fundacao": 1912,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 67,
+   "forcaElenco": {
+    "min": 55,
+    "max": 77
+   },
+   "caixaInicial": 12000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "padova",
+   "nome": "Padova",
+   "sigla": "PAD",
+   "cidade": "Pádua",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#D50032"
+   },
+   "estadio": {
+    "nome": "Estádio Euganeo",
+    "capacidade": 32420
+   },
+   "fundacao": 1910,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 6000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "palermo",
+   "nome": "Palermo",
+   "sigla": "PAL",
+   "cidade": "Palermo",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#F4A7B9",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Renzo Barbera",
+    "capacidade": 36365
+   },
+   "fundacao": 1900,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 58,
+    "max": 76
+   },
+   "caixaInicial": 11000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "pescara",
+   "nome": "Pescara",
+   "sigla": "PES",
+   "cidade": "Pescara",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#7BB7E3",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estadio Adriático",
+    "capacidade": 20515
+   },
+   "fundacao": 1936,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 54,
+    "max": 72
+   },
+   "caixaInicial": 7000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "reggiana",
+   "nome": "Reggiana",
+   "sigla": "REG",
+   "cidade": "Reggio Emilia",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#8B1A2B",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Mapei Stadium – Città del Tricolore",
+    "capacidade": 21525
+   },
+   "fundacao": 1919,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 55,
+    "max": 72
+   },
+   "caixaInicial": 7000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "sampdoria",
+   "nome": "Sampdoria",
+   "sigla": "SAM",
+   "cidade": "Gênova",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#005BAC",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Luigi Ferraris",
+    "capacidade": 33205
+   },
+   "fundacao": 1946,
+   "rival": null,
+   "torcida": 35,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 58,
+    "max": 76
+   },
+   "caixaInicial": 11000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "spezia",
+   "nome": "Spezia",
+   "sigla": "SPE",
+   "cidade": "La Spezia",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Alberto Picco",
+    "capacidade": 12037
+   },
+   "fundacao": 1906,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 56,
+    "max": 75
+   },
+   "caixaInicial": 9000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "sudtirol",
+   "nome": "Südtirol",
+   "sigla": "SUD",
+   "cidade": "Bolzano",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#E30613"
+   },
+   "estadio": {
+    "nome": "Estadio Druso",
+    "capacidade": 5500
+   },
+   "fundacao": 1995,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 54,
+    "max": 72
+   },
+   "caixaInicial": 7000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "venezia",
+   "nome": "Venezia",
+   "sigla": "VEN",
+   "cidade": "Veneza",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#F58220",
+    "secundaria": "#0B6E4F"
+   },
+   "estadio": {
+    "nome": "Estádio Pierluigi Penzo",
+    "capacidade": 10500
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 57,
+    "max": 76
+   },
+   "caixaInicial": 11000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "virtus-entella",
+   "nome": "Virtus Entella",
+   "sigla": "ENT",
+   "cidade": "Chiavari",
+   "estado": "IT",
+   "pais": "IT",
+   "cores": {
+    "primaria": "#5BC2E7",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadio Comunale (Chiavari)",
+    "capacidade": 5587
+   },
+   "fundacao": 1914,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 50,
+    "max": 70
+   },
+   "caixaInicial": 5000000,
+   "liga": "IT2"
+  },
+  {
+   "id": "arminia-bielefeld",
+   "nome": "Arminia Bielefeld",
+   "sigla": "BIE",
+   "cidade": "Bielefeld",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#004E95",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Bielefelder Alm",
+    "capacidade": 27300
+   },
+   "fundacao": 1905,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 56,
+    "max": 73
+   },
+   "caixaInicial": 10000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "bochum",
+   "nome": "Bochum",
+   "sigla": "BOC",
+   "cidade": "Bochum",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#005CA9",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "RewirpowerSTADION",
+    "capacidade": 29299
+   },
+   "fundacao": 1848,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 57,
+    "max": 76
+   },
+   "caixaInicial": 15000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "eintracht-braunschweig",
+   "nome": "Eintracht Braunschweig",
+   "sigla": "EBS",
+   "cidade": "Braunschweig",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#FDE100",
+    "secundaria": "#00589C"
+   },
+   "estadio": {
+    "nome": "Eintracht-Stadion",
+    "capacidade": 24406
+   },
+   "fundacao": 1895,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 54,
+    "max": 73
+   },
+   "caixaInicial": 10000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "darmstadt",
+   "nome": "Darmstadt 98",
+   "sigla": "DAR",
+   "cidade": "Darmstadt",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#004E9E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Merck-Stadion am Böllenfalltor",
+    "capacidade": 19000
+   },
+   "fundacao": 1898,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 56,
+    "max": 74
+   },
+   "caixaInicial": 12000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "dynamo-dresden",
+   "nome": "Dynamo Dresden",
+   "sigla": "DRE",
+   "cidade": "Dresden",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#FFDD00",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Glücksgas-Stadion",
+    "capacidade": 32085
+   },
+   "fundacao": 1953,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 54,
+    "max": 73
+   },
+   "caixaInicial": 10000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "fortuna-dusseldorf",
+   "nome": "Fortuna Düsseldorf",
+   "sigla": "DUS",
+   "cidade": "Düsseldorf",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#E2001A",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Merkur Spiel-Arena",
+    "capacidade": 60000
+   },
+   "fundacao": 1895,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 57,
+    "max": 75
+   },
+   "caixaInicial": 13000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "greuther-furth",
+   "nome": "Greuther Fürth",
+   "sigla": "FUR",
+   "cidade": "Fürth",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#009932",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion am Laubenweg",
+    "capacidade": 18500
+   },
+   "fundacao": 1903,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 54,
+    "max": 72
+   },
+   "caixaInicial": 10000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "hannover",
+   "nome": "Hannover 96",
+   "sigla": "HAN",
+   "cidade": "Hanôver",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#1C9E3E",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "HDI-Arena",
+    "capacidade": 49000
+   },
+   "fundacao": 1896,
+   "rival": null,
+   "torcida": 25,
+   "reputacao": 67,
+   "forcaElenco": {
+    "min": 59,
+    "max": 76
+   },
+   "caixaInicial": 14000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "hertha",
+   "nome": "Hertha Berlim",
+   "sigla": "HER",
+   "cidade": "Berlim",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#005CA9",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Olímpico de Berlim",
+    "capacidade": 60000
+   },
+   "fundacao": 1892,
+   "rival": null,
+   "torcida": 35,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 58,
+    "max": 77
+   },
+   "caixaInicial": 17000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "holstein-kiel",
+   "nome": "Holstein Kiel",
+   "sigla": "KIE",
+   "cidade": "Kiel",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#0063AA",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Holstein-Stadion",
+    "capacidade": 15034
+   },
+   "fundacao": 1900,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 56,
+    "max": 75
+   },
+   "caixaInicial": 13000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "kaiserslautern",
+   "nome": "Kaiserslautern",
+   "sigla": "KAI",
+   "cidade": "Kaiserslautern",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#E2001A",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Fritz-Walter-Stadion",
+    "capacidade": 49780
+   },
+   "fundacao": 1900,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 57,
+    "max": 75
+   },
+   "caixaInicial": 13000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "karlsruher",
+   "nome": "Karlsruher SC",
+   "sigla": "KSC",
+   "cidade": "Karlsruhe",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#0058A2",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Wildparkstadion",
+    "capacidade": 33180
+   },
+   "fundacao": 1894,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 54,
+    "max": 74
+   },
+   "caixaInicial": 12000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "magdeburg",
+   "nome": "Magdeburg",
+   "sigla": "MAG",
+   "cidade": "Magdeburgo",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#0068B4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Avnet Arena",
+    "capacidade": 30098
+   },
+   "fundacao": 1965,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 54,
+    "max": 73
+   },
+   "caixaInicial": 10000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "nurnberg",
+   "nome": "Nuremberg",
+   "sigla": "NUR",
+   "cidade": "Nuremberg",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#AD1732",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Frankenstadion",
+    "capacidade": 50000
+   },
+   "fundacao": 1900,
+   "rival": null,
+   "torcida": 28,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 57,
+    "max": 75
+   },
+   "caixaInicial": 13000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "paderborn",
+   "nome": "Paderborn",
+   "sigla": "PDB",
+   "cidade": "Paderborn",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#005CA9",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Benteler-Arena",
+    "capacidade": 15000
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 55,
+    "max": 74
+   },
+   "caixaInicial": 12000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "preussen-munster",
+   "nome": "Preussen Münster",
+   "sigla": "PRM",
+   "cidade": "Münster",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "Preußenstadion",
+    "capacidade": 45000
+   },
+   "fundacao": 1906,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 53,
+    "max": 71
+   },
+   "caixaInicial": 8000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "schalke",
+   "nome": "Schalke 04",
+   "sigla": "S04",
+   "cidade": "Gelsenkirchen",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#004D9D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Veltins-Arena",
+    "capacidade": 60000
+   },
+   "fundacao": 1904,
+   "rival": null,
+   "torcida": 55,
+   "reputacao": 72,
+   "forcaElenco": {
+    "min": 61,
+    "max": 78
+   },
+   "caixaInicial": 19000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "elversberg",
+   "nome": "Elversberg",
+   "sigla": "ELV",
+   "cidade": "Spiesen-Elversberg",
+   "estado": "DE",
+   "pais": "DE",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Waldstadion an der Kaiserlinde",
+    "capacidade": 10000
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 55,
+    "max": 73
+   },
+   "caixaInicial": 10000000,
+   "liga": "DE2"
+  },
+  {
+   "id": "amiens",
+   "nome": "Amiens",
+   "sigla": "AMI",
+   "cidade": "Amiens",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio de la Licorne",
+    "capacidade": 12097
+   },
+   "fundacao": 1901,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 53,
+    "max": 72
+   },
+   "caixaInicial": 6000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "annecy",
+   "nome": "Annecy",
+   "sigla": "ANN",
+   "cidade": "Annecy",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Parc des Sports",
+    "capacidade": 15714
+   },
+   "fundacao": 1927,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 53,
+    "max": 71
+   },
+   "caixaInicial": 5000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "bastia",
+   "nome": "Bastia",
+   "sigla": "BAS",
+   "cidade": "Bastia",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stade Armand Cesari",
+    "capacidade": 16000
+   },
+   "fundacao": 1905,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 53,
+    "max": 72
+   },
+   "caixaInicial": 6000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "boulogne",
+   "nome": "Boulogne",
+   "sigla": "BLG",
+   "cidade": "Boulogne-sur-Mer",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade de la Libération",
+    "capacidade": 6600
+   },
+   "fundacao": 1898,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 48,
+    "max": 69
+   },
+   "caixaInicial": 4000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "clermont",
+   "nome": "Clermont",
+   "sigla": "CLE",
+   "cidade": "Clermont-Ferrand",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#00529F"
+   },
+   "estadio": {
+    "nome": "Stade Gabriel-Montpied",
+    "capacidade": 11980
+   },
+   "fundacao": 1911,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 54,
+    "max": 72
+   },
+   "caixaInicial": 6000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "dunkerque",
+   "nome": "Dunkerque",
+   "sigla": "DUN",
+   "cidade": "Dunquerque",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#00529F",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stade Marcel-Tribut",
+    "capacidade": 4200
+   },
+   "fundacao": 1909,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 6000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "grenoble",
+   "nome": "Grenoble",
+   "sigla": "GRE",
+   "cidade": "Grenoble",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stade des Alpes",
+    "capacidade": 20068
+   },
+   "fundacao": 1892,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 6000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "guingamp",
+   "nome": "Guingamp",
+   "sigla": "GUI",
+   "cidade": "Guingamp",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade du Roudourou",
+    "capacidade": 18250
+   },
+   "fundacao": 1912,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 54,
+    "max": 72
+   },
+   "caixaInicial": 7000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "laval",
+   "nome": "Laval",
+   "sigla": "LAV",
+   "cidade": "Laval",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#F58220",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade Francis-Le-Basser",
+    "capacidade": 11107
+   },
+   "fundacao": 1902,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 54,
+    "max": 71
+   },
+   "caixaInicial": 6000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "le-mans",
+   "nome": "Le Mans",
+   "sigla": "LEM",
+   "cidade": "Le Mans",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "MMArena",
+    "capacidade": 25000
+   },
+   "fundacao": 1985,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 5000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "montpellier",
+   "nome": "Montpellier",
+   "sigla": "MTP",
+   "cidade": "Montpellier",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#F58220",
+    "secundaria": "#002D62"
+   },
+   "estadio": {
+    "nome": "Stade de la Mosson",
+    "capacidade": 32900
+   },
+   "fundacao": 1919,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 57,
+    "max": 76
+   },
+   "caixaInicial": 11000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "nancy",
+   "nome": "Nancy",
+   "sigla": "NAN",
+   "cidade": "Nancy",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stade Marcel Picot",
+    "capacidade": 20087
+   },
+   "fundacao": 1967,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 53,
+    "max": 70
+   },
+   "caixaInicial": 6000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "pau",
+   "nome": "Pau",
+   "sigla": "PAU",
+   "cidade": "Pau",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#00529F"
+   },
+   "estadio": {
+    "nome": "Nouste Camp",
+    "capacidade": 10000
+   },
+   "fundacao": 1959,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 5000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "red-star",
+   "nome": "Red Star",
+   "sigla": "RED",
+   "cidade": "Saint-Ouen",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stade Bauer",
+    "capacidade": 8000
+   },
+   "fundacao": 1897,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 50,
+    "max": 71
+   },
+   "caixaInicial": 6000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "reims",
+   "nome": "Reims",
+   "sigla": "REI",
+   "cidade": "Reims",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stade Auguste-Delaune",
+    "capacidade": 21684
+   },
+   "fundacao": 1931,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 58,
+    "max": 76
+   },
+   "caixaInicial": 11000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "rodez",
+   "nome": "Rodez",
+   "sigla": "ROD",
+   "cidade": "Rodez",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Stade Paul-Lignon",
+    "capacidade": 6761
+   },
+   "fundacao": 1929,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 5000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "saint-etienne",
+   "nome": "Saint-Étienne",
+   "sigla": "STE",
+   "cidade": "Saint-Étienne",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#00A650",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stade Geoffroy-Guichard",
+    "capacidade": 41965
+   },
+   "fundacao": 1919,
+   "rival": null,
+   "torcida": 45,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 58,
+    "max": 77
+   },
+   "caixaInicial": 12000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "troyes",
+   "nome": "Troyes",
+   "sigla": "TRO",
+   "cidade": "Troyes",
+   "estado": "FR",
+   "pais": "FR",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stade de l'Aube",
+    "capacidade": 20400
+   },
+   "fundacao": 1986,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 55,
+    "max": 73
+   },
+   "caixaInicial": 7000000,
+   "liga": "FR2"
+  },
+  {
+   "id": "academico-de-viseu",
+   "nome": "Académico de Viseu",
+   "sigla": "ACV",
+   "cidade": "Viseu",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio do Fontelo",
+    "capacidade": 6912
+   },
+   "fundacao": 1914,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 42,
+    "max": 62
+   },
+   "caixaInicial": 2000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "chaves",
+   "nome": "Chaves",
+   "sigla": "CHV",
+   "cidade": "Chaves",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Estádio Municipal Eng. Manuel Branco Teixeira",
+    "capacidade": 8400
+   },
+   "fundacao": 1949,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 48,
+    "max": 66
+   },
+   "caixaInicial": 2000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "farense",
+   "nome": "Farense",
+   "sigla": "FAR",
+   "cidade": "Faro",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Algarve",
+    "capacidade": 30305
+   },
+   "fundacao": 1910,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 49,
+    "max": 67
+   },
+   "caixaInicial": 3000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "feirense",
+   "nome": "Feirense",
+   "sigla": "FEI",
+   "cidade": "Santa Maria da Feira",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Marcolino de Castro",
+    "capacidade": 5401
+   },
+   "fundacao": 1918,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 44,
+    "max": 63
+   },
+   "caixaInicial": 2000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "felgueiras",
+   "nome": "Felgueiras",
+   "sigla": "FEL",
+   "cidade": "Felgueiras",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Estádio Dr. Machado de Matos",
+    "capacidade": 7540
+   },
+   "fundacao": 1932,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 42,
+    "max": 62
+   },
+   "caixaInicial": 2000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "leixoes",
+   "nome": "Leixões",
+   "sigla": "LEX",
+   "cidade": "Matosinhos",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio do Mar",
+    "capacidade": 6000
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 45,
+    "max": 64
+   },
+   "caixaInicial": 2000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "lusitania-lourosa",
+   "nome": "Lusitânia de Lourosa",
+   "sigla": "LUS",
+   "cidade": "Lourosa",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Lourosa",
+    "capacidade": 10000
+   },
+   "fundacao": 1924,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 44,
+    "max": 61
+   },
+   "caixaInicial": 1000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "maritimo-por",
+   "nome": "Marítimo",
+   "sigla": "MAR",
+   "cidade": "Funchal",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Estádio do Marítimo",
+    "capacidade": 10600
+   },
+   "fundacao": 1910,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 49,
+    "max": 67
+   },
+   "caixaInicial": 3000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "oliveirense",
+   "nome": "Oliveirense",
+   "sigla": "OLI",
+   "cidade": "Oliveira de Azeméis",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Estádio Carlos Osório",
+    "capacidade": 3000
+   },
+   "fundacao": 1922,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 62
+   },
+   "caixaInicial": 2000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "pacos-de-ferreira",
+   "nome": "Paços de Ferreira",
+   "sigla": "PAC",
+   "cidade": "Paços de Ferreira",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "Estádio Capital do Móvel",
+    "capacidade": 9076
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 2000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "penafiel",
+   "nome": "Penafiel",
+   "sigla": "PEN",
+   "cidade": "Penafiel",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Municipal 25 de Abril",
+    "capacidade": 5230
+   },
+   "fundacao": 1951,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 43,
+    "max": 62
+   },
+   "caixaInicial": 2000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "portimonense",
+   "nome": "Portimonense",
+   "sigla": "PTM",
+   "cidade": "Portimão",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Municipal de Portimão",
+    "capacidade": 4961
+   },
+   "fundacao": 1914,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 48,
+    "max": 66
+   },
+   "caixaInicial": 2000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "torreense",
+   "nome": "Torreense",
+   "sigla": "TOR",
+   "cidade": "Torres Vedras",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Estádio Manuel Marques",
+    "capacidade": 3000
+   },
+   "fundacao": 1917,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 45,
+    "max": 63
+   },
+   "caixaInicial": 2000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "uniao-de-leiria",
+   "nome": "União de Leiria",
+   "sigla": "UDL",
+   "cidade": "Leiria",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Dr. Magalhães Pessoa",
+    "capacidade": 23888
+   },
+   "fundacao": 1966,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 47,
+    "max": 64
+   },
+   "caixaInicial": 2000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "vizela",
+   "nome": "Vizela",
+   "sigla": "VIZ",
+   "cidade": "Vizela",
+   "estado": "PT",
+   "pais": "PT",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio do Futebol Clube de Vizela",
+    "capacidade": 6000
+   },
+   "fundacao": 1939,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 47,
+    "max": 66
+   },
+   "caixaInicial": 2000000,
+   "liga": "PT2"
+  },
+  {
+   "id": "ado-den-haag",
+   "nome": "ADO Den Haag",
+   "sigla": "ADO",
+   "cidade": "Haia",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "Estádio WerkTalent",
+    "capacidade": 15000
+   },
+   "fundacao": 1905,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 46,
+    "max": 65
+   },
+   "caixaInicial": 2000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "almere-city",
+   "nome": "Almere City",
+   "sigla": "ALC",
+   "cidade": "Almere",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Yanmar Hanasaka Stadion",
+    "capacidade": 4501
+   },
+   "fundacao": 2001,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 46,
+    "max": 65
+   },
+   "caixaInicial": 2000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "cambuur",
+   "nome": "Cambuur",
+   "sigla": "CAM",
+   "cidade": "Leeuwarden",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Cambuur Stadion",
+    "capacidade": 10500
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 46,
+    "max": 64
+   },
+   "caixaInicial": 2000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "de-graafschap",
+   "nome": "De Graafschap",
+   "sigla": "DGR",
+   "cidade": "Doetinchem",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio De Vijverberg",
+    "capacidade": 12600
+   },
+   "fundacao": 1954,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 45,
+    "max": 64
+   },
+   "caixaInicial": 2000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "den-bosch",
+   "nome": "Den Bosch",
+   "sigla": "DBO",
+   "cidade": "'s-Hertogenbosch",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Timmermans Infra Stadion De Vliert",
+    "capacidade": 9000
+   },
+   "fundacao": 1965,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 44,
+    "max": 62
+   },
+   "caixaInicial": 2000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "dordrecht",
+   "nome": "Dordrecht",
+   "sigla": "DOR",
+   "cidade": "Dordrecht",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "M-Scores Stadion",
+    "capacidade": 4235
+   },
+   "fundacao": 1883,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 40,
+    "max": 62
+   },
+   "caixaInicial": 2000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "fc-eindhoven",
+   "nome": "FC Eindhoven",
+   "sigla": "EIN",
+   "cidade": "Eindhoven",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio Jan Louwers",
+    "capacidade": 4500
+   },
+   "fundacao": 1909,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 43,
+    "max": 61
+   },
+   "caixaInicial": 1000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "emmen",
+   "nome": "Emmen",
+   "sigla": "EMM",
+   "cidade": "Emmen",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "JenS Vesting",
+    "capacidade": 8600
+   },
+   "fundacao": 1925,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 45,
+    "max": 63
+   },
+   "caixaInicial": 2000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "helmond-sport",
+   "nome": "Helmond Sport",
+   "sigla": "HEL",
+   "cidade": "Helmond",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "MySteel Stadion",
+    "capacidade": 3600
+   },
+   "fundacao": 1967,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 42,
+    "max": 61
+   },
+   "caixaInicial": 1000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "mvv",
+   "nome": "MVV Maastricht",
+   "sigla": "MVV",
+   "cidade": "Maastricht",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion De Geusselt",
+    "capacidade": 10000
+   },
+   "fundacao": 1902,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 42,
+    "max": 61
+   },
+   "caixaInicial": 1000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "roda-jc",
+   "nome": "Roda JC",
+   "sigla": "RJC",
+   "cidade": "Kerkrade",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Parkstad Limburg Stadion",
+    "capacidade": 19979
+   },
+   "fundacao": 1962,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 46,
+    "max": 63
+   },
+   "caixaInicial": 2000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "rkc-waalwijk",
+   "nome": "RKC Waalwijk",
+   "sigla": "RKC",
+   "cidade": "Waalwijk",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Mandemakers Stadion",
+    "capacidade": 7500
+   },
+   "fundacao": 1940,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 47,
+    "max": 64
+   },
+   "caixaInicial": 3000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "top-oss",
+   "nome": "TOP Oss",
+   "sigla": "TOP",
+   "cidade": "Oss",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#E30613",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Frans Heesen Stadion",
+    "capacidade": 4560
+   },
+   "fundacao": 1928,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 40,
+    "max": 60
+   },
+   "caixaInicial": 1000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "vitesse",
+   "nome": "Vitesse",
+   "sigla": "VIT",
+   "cidade": "Arnhem",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio GelreDome",
+    "capacidade": 41000
+   },
+   "fundacao": 1892,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 48,
+    "max": 65
+   },
+   "caixaInicial": 2000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "vvv-venlo",
+   "nome": "VVV-Venlo",
+   "sigla": "VVV",
+   "cidade": "Venlo",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "De Koel",
+    "capacidade": 7500
+   },
+   "fundacao": 1903,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 44,
+    "max": 62
+   },
+   "caixaInicial": 2000000,
+   "liga": "NL2"
+  },
+  {
+   "id": "willem-ii",
+   "nome": "Willem II",
+   "sigla": "WIL",
+   "cidade": "Tilburg",
+   "estado": "NL",
+   "pais": "NL",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Koning Willem II Stadion",
+    "capacidade": 14637
+   },
+   "fundacao": 1896,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 47,
+    "max": 66
+   },
+   "caixaInicial": 3000000,
+   "liga": "NL2"
+  }
+ ]
+}

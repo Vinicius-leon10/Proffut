@@ -135,7 +135,11 @@ export const COTA_TV_ESTADUAL: Record<SerieId, number> = { A: 250_000, B: 160_00
  */
 export const TV_EUROPA_MES: Record<string, number> = {
   EN: 21_500_000, ES: 11_500_000, IT: 14_000_000, DE: 12_500_000, FR: 12_500_000, PT: 8_000_000, NL: 7_000_000,
+  // 2ª divisão (nov/2026): bem menos, como lá; os pequenos recebem pelo menos 35% da base (`TV_PISO_SEGUNDA`).
+  EN2: 9_000_000, ES2: 3_500_000, IT2: 3_500_000, DE2: 4_500_000, FR2: 3_500_000, PT2: 2_200_000, NL2: 1_600_000,
 };
+/** Na 2ª divisão da Europa, a TV paga a todos pelo menos esta fração da base da liga (senão os pequenos quebram). */
+export const TV_PISO_SEGUNDA = 0.35;
 export const PATROCINIO_MES: Record<SerieId, number> = { A: 1_200_000, B: 350_000, C: 150_000 };
 /** Patrocínio da Série D, como fração do da Série C. */
 export const PATROCINIO_SERIE_D = 0.6;

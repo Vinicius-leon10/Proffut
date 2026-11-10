@@ -8,6 +8,8 @@ import exteriorClubesJson from "../../data/america-do-sul-2026/clubes.json";
 import exteriorJogadoresJson from "../../data/america-do-sul-2026/jogadores.json";
 import europaClubesJson from "../../data/europa-2026/clubes.json";
 import europaJogadoresJson from "../../data/europa-2026/jogadores.json";
+import europaSegundasJson from "../../data/europa-2026/clubes-segundas.json";
+import europaSegundasJogadoresJson from "../../data/europa-2026/jogadores-segundas.json";
 import { comArtigo } from "./artigos";
 import { diasEntre, inicioDaTemporada, mesDe, somarDias } from "./calendario";
 import {
@@ -68,8 +70,9 @@ export const FICHAS: FichaClube[] = clubesJson.clubes as FichaClube[];
 export const RESERVA: FichaClube[] = reservaJson.clubes as FichaClube[];
 /** Clubes que jogam só o estadual. */
 export const FICHAS_ESTADUAIS: FichaClube[] = estaduaisClubesJson.clubes as FichaClube[];
-/** Clubes de fora do Brasil: os outros países da América e as 7 ligas da Europa. */
-export const FICHAS_EXTERIOR: FichaClube[] = [...(exteriorClubesJson.clubes as FichaClube[]), ...(europaClubesJson.clubes as FichaClube[])];
+/** Clubes de fora do Brasil: os outros países da América e as 7 ligas da Europa (1ª e 2ª divisão). */
+export const FICHAS_EXTERIOR: FichaClube[] = [...(exteriorClubesJson.clubes as FichaClube[]), ...(europaClubesJson.clubes as FichaClube[]),
+  ...(europaSegundasJson.clubes as FichaClube[])];
 /** Quem joga cada estadual (sigla do estado → ids dos clubes). */
 export const PARTICIPANTES_ESTADUAIS = estaduaisJson.participantes as Record<string, string[]>;
 /**
@@ -77,7 +80,7 @@ export const PARTICIPANTES_ESTADUAIS = estaduaisJson.participantes as Record<str
  * ligas de fora. Clube sem elenco aqui ganha um gerado.
  */
 export const ELENCOS_REAIS = { ...(jogadoresJson.elencos as Record<string, JogadorReal[]>), ...(exteriorJogadoresJson.elencos as Record<string, JogadorReal[]>),
-  ...(europaJogadoresJson.elencos as Record<string, JogadorReal[]>) };
+  ...(europaJogadoresJson.elencos as Record<string, JogadorReal[]>), ...(europaSegundasJogadoresJson.elencos as Record<string, JogadorReal[]>) };
 
 /** Tática inicial dos clubes da IA: os fortes atacam mais, os fracos se fecham. */
 function taticaDaIa(ficha: FichaClube, rng: ReturnType<typeof criarRng>): Tatica {
