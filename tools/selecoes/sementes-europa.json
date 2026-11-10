@@ -1,0 +1,390 @@
+{
+ "descricao": "As 55 seleções da UEFA: páginas da Wikipédia em inglês (tools/selecoes/baixar.py).",
+ "sementes": [
+  {
+   "selecao": "ES",
+   "titulos": [
+    "Spain national football team",
+    "Spain men's national football team"
+   ]
+  },
+  {
+   "selecao": "FR",
+   "titulos": [
+    "France national football team",
+    "France men's national football team"
+   ]
+  },
+  {
+   "selecao": "EN",
+   "titulos": [
+    "England national football team",
+    "England men's national football team"
+   ]
+  },
+  {
+   "selecao": "PT",
+   "titulos": [
+    "Portugal national football team",
+    "Portugal men's national football team"
+   ]
+  },
+  {
+   "selecao": "DE",
+   "titulos": [
+    "Germany national football team",
+    "Germany men's national football team"
+   ]
+  },
+  {
+   "selecao": "NL",
+   "titulos": [
+    "Netherlands national football team",
+    "Netherlands men's national football team"
+   ]
+  },
+  {
+   "selecao": "IT",
+   "titulos": [
+    "Italy national football team",
+    "Italy men's national football team"
+   ]
+  },
+  {
+   "selecao": "HR",
+   "titulos": [
+    "Croatia national football team",
+    "Croatia men's national football team"
+   ]
+  },
+  {
+   "selecao": "BE",
+   "titulos": [
+    "Belgium national football team",
+    "Belgium men's national football team"
+   ]
+  },
+  {
+   "selecao": "NO",
+   "titulos": [
+    "Norway national football team",
+    "Norway men's national football team"
+   ]
+  },
+  {
+   "selecao": "CH",
+   "titulos": [
+    "Switzerland national football team",
+    "Switzerland men's national football team"
+   ]
+  },
+  {
+   "selecao": "DK",
+   "titulos": [
+    "Denmark national football team",
+    "Denmark men's national football team"
+   ]
+  },
+  {
+   "selecao": "TR",
+   "titulos": [
+    "Turkey national football team",
+    "Turkey men's national football team"
+   ]
+  },
+  {
+   "selecao": "AT",
+   "titulos": [
+    "Austria national football team",
+    "Austria men's national football team"
+   ]
+  },
+  {
+   "selecao": "UA",
+   "titulos": [
+    "Ukraine national football team",
+    "Ukraine men's national football team"
+   ]
+  },
+  {
+   "selecao": "XS",
+   "titulos": [
+    "Scotland national football team",
+    "Scotland men's national football team"
+   ]
+  },
+  {
+   "selecao": "RS",
+   "titulos": [
+    "Serbia national football team",
+    "Serbia men's national football team"
+   ]
+  },
+  {
+   "selecao": "SE",
+   "titulos": [
+    "Sweden national football team",
+    "Sweden men's national football team"
+   ]
+  },
+  {
+   "selecao": "HU",
+   "titulos": [
+    "Hungary national football team",
+    "Hungary men's national football team"
+   ]
+  },
+  {
+   "selecao": "PL",
+   "titulos": [
+    "Poland national football team",
+    "Poland men's national football team"
+   ]
+  },
+  {
+   "selecao": "GR",
+   "titulos": [
+    "Greece national football team",
+    "Greece men's national football team"
+   ]
+  },
+  {
+   "selecao": "CZ",
+   "titulos": [
+    "Czech Republic national football team",
+    "Czech Republic men's national football team"
+   ]
+  },
+  {
+   "selecao": "XW",
+   "titulos": [
+    "Wales national football team",
+    "Wales men's national football team"
+   ]
+  },
+  {
+   "selecao": "SI",
+   "titulos": [
+    "Slovenia national football team",
+    "Slovenia men's national football team"
+   ]
+  },
+  {
+   "selecao": "SK",
+   "titulos": [
+    "Slovakia national football team",
+    "Slovakia men's national football team"
+   ]
+  },
+  {
+   "selecao": "IE",
+   "titulos": [
+    "Republic of Ireland national football team",
+    "Republic of Ireland men's national football team"
+   ]
+  },
+  {
+   "selecao": "RU",
+   "titulos": [
+    "Russia national football team",
+    "Russia men's national football team"
+   ]
+  },
+  {
+   "selecao": "RO",
+   "titulos": [
+    "Romania national football team",
+    "Romania men's national football team"
+   ]
+  },
+  {
+   "selecao": "GE",
+   "titulos": [
+    "Georgia national football team",
+    "Georgia men's national football team"
+   ]
+  },
+  {
+   "selecao": "AL",
+   "titulos": [
+    "Albania national football team",
+    "Albania men's national football team"
+   ]
+  },
+  {
+   "selecao": "IL",
+   "titulos": [
+    "Israel national football team",
+    "Israel men's national football team"
+   ]
+  },
+  {
+   "selecao": "BA",
+   "titulos": [
+    "Bosnia and Herzegovina national football team",
+    "Bosnia and Herzegovina men's national football team"
+   ]
+  },
+  {
+   "selecao": "XK",
+   "titulos": [
+    "Kosovo national football team",
+    "Kosovo men's national football team"
+   ]
+  },
+  {
+   "selecao": "MK",
+   "titulos": [
+    "North Macedonia national football team",
+    "North Macedonia men's national football team"
+   ]
+  },
+  {
+   "selecao": "IS",
+   "titulos": [
+    "Iceland national football team",
+    "Iceland men's national football team"
+   ]
+  },
+  {
+   "selecao": "FI",
+   "titulos": [
+    "Finland national football team",
+    "Finland men's national football team"
+   ]
+  },
+  {
+   "selecao": "XN",
+   "titulos": [
+    "Northern Ireland national football team",
+    "Northern Ireland men's national football team"
+   ]
+  },
+  {
+   "selecao": "BG",
+   "titulos": [
+    "Bulgaria national football team",
+    "Bulgaria men's national football team"
+   ]
+  },
+  {
+   "selecao": "ME",
+   "titulos": [
+    "Montenegro national football team",
+    "Montenegro men's national football team"
+   ]
+  },
+  {
+   "selecao": "BY",
+   "titulos": [
+    "Belarus national football team",
+    "Belarus men's national football team"
+   ]
+  },
+  {
+   "selecao": "LU",
+   "titulos": [
+    "Luxembourg national football team",
+    "Luxembourg men's national football team"
+   ]
+  },
+  {
+   "selecao": "AM",
+   "titulos": [
+    "Armenia national football team",
+    "Armenia men's national football team"
+   ]
+  },
+  {
+   "selecao": "KZ",
+   "titulos": [
+    "Kazakhstan national football team",
+    "Kazakhstan men's national football team"
+   ]
+  },
+  {
+   "selecao": "AZ",
+   "titulos": [
+    "Azerbaijan national football team",
+    "Azerbaijan men's national football team"
+   ]
+  },
+  {
+   "selecao": "EE",
+   "titulos": [
+    "Estonia national football team",
+    "Estonia men's national football team"
+   ]
+  },
+  {
+   "selecao": "CY",
+   "titulos": [
+    "Cyprus national football team",
+    "Cyprus men's national football team"
+   ]
+  },
+  {
+   "selecao": "FO",
+   "titulos": [
+    "Faroe Islands national football team",
+    "Faroe Islands men's national football team"
+   ]
+  },
+  {
+   "selecao": "LV",
+   "titulos": [
+    "Latvia national football team",
+    "Latvia men's national football team"
+   ]
+  },
+  {
+   "selecao": "LT",
+   "titulos": [
+    "Lithuania national football team",
+    "Lithuania men's national football team"
+   ]
+  },
+  {
+   "selecao": "MD",
+   "titulos": [
+    "Moldova national football team",
+    "Moldova men's national football team"
+   ]
+  },
+  {
+   "selecao": "MT",
+   "titulos": [
+    "Malta national football team",
+    "Malta men's national football team"
+   ]
+  },
+  {
+   "selecao": "AD",
+   "titulos": [
+    "Andorra national football team",
+    "Andorra men's national football team"
+   ]
+  },
+  {
+   "selecao": "GI",
+   "titulos": [
+    "Gibraltar national football team",
+    "Gibraltar men's national football team"
+   ]
+  },
+  {
+   "selecao": "LI",
+   "titulos": [
+    "Liechtenstein national football team",
+    "Liechtenstein men's national football team"
+   ]
+  },
+  {
+   "selecao": "SM",
+   "titulos": [
+    "San Marino national football team",
+    "San Marino men's national football team"
+   ]
+  }
+ ]
+}

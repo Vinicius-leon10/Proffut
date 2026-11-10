@@ -7,10 +7,10 @@ on:
   workflow_dispatch:
     inputs:
       fase:
-        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa)"
+        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa) · selecoes-europa: convocações das 55 seleções da UEFA (branch dados-selecoes-europa)"
         type: choice
         default: elencos
-        options: [elencos, times, segundas, america, europa]
+        options: [elencos, times, segundas, america, europa, selecoes-europa]
 
 permissions:
   contents: write
@@ -211,3 +211,25 @@ jobs:
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -q -m "Dados da Europa (${GITHUB_SHA::7})"
           git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-europa
+
+  # Seleções da Europa: a página de cada uma das 55 da UEFA (a seção "Current squad" tem a última convocação).
+  # Quem lê os convocados é tools/selecoes/montar.ts.
+  selecoes-europa:
+    if: inputs.fase == 'selecoes-europa'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - name: Wikipédia (páginas das seleções)
+        run: python3 tools/selecoes/baixar.py tools/selecoes/sementes-europa.json dados | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Gravar na branch dados-selecoes-europa
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dados
+          echo "Baixados em $(date -u +%Y-%m-%dT%H:%MZ) da Wikipédia em inglês (CC BY-SA) pelo workflow elencos.yml (fase selecoes-europa)." > LEIAME.md
+          git init -q -b dados-selecoes-europa
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Convocações das seleções da Europa (${GITHUB_SHA::7})"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-selecoes-europa
