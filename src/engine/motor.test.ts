@@ -1693,7 +1693,12 @@ describe("copas de clubes (Libertadores, Sul-Americana, Recopa, Concacaf, region
     // Do Brasil, sete (fora os campeões continentais): o campeão da Copa do Brasil e os primeiros da Série A.
     const brasileiros = naLib.filter((id) => !e.clubes[id].pais && id !== campeoes["K-LIB"] && id !== campeoes["K-SUL"]);
     expect(brasileiros).toHaveLength(7);
-    for (const id of brasileiros) expect(id === copaDoBrasil || tabelaA.indexOf(id) < 8).toBe(true);
+    // As vagas descem na tabela quando os campeões já estão no alto dela (nov/2026: com Flamengo 1º e campeão da
+    // Libertadores, Corinthians 3º e campeão da Sul-Americana e Internacional 7º e campeão da Copa do Brasil, a última vaga
+    // foi para o 9º): o campeão da Copa do Brasil e os 6 primeiros da Série A que não são campeões.
+    const campeoesDoAno = new Set([campeoes["K-LIB"], campeoes["K-SUL"], copaDoBrasil]);
+    const daCopa = copaDoBrasil === campeoes["K-LIB"] || copaDoBrasil === campeoes["K-SUL"] ? [] : [copaDoBrasil];
+    expect([...brasileiros].sort()).toEqual([...daCopa, ...tabelaA.filter((id) => !campeoesDoAno.has(id)).slice(0, 7 - daCopa.length)].sort());
     // Da Sul-Americana, os 6 seguintes da Série A.
     expect(e.copas!["K-SUL"]!.entram.grupos.filter((id) => !e.clubes[id].pais)).toHaveLength(6);
     // Quem entra só nos grupos ainda não tem jogo marcado (a 1ª fase já tem).
