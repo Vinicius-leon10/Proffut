@@ -1,0 +1,185 @@
+<!doctype html>
+<!-- Modo Copa do Mundo — filme em um take só (skill onetake). Conceito: a bola dourada conduz a câmera pela Copa;
+     cada parada nasce da bola que chega, nada troca de cena. 1080×1920, 45,4 s, a voz do usuário por cima. -->
+<html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: Serif; src: url(serif.woff2) format("woff2"); }
+html,body { margin:0; width:1080px; height:1920px; overflow:hidden; background:#0b1530; }
+#ground { position:absolute; inset:0; background: radial-gradient(120% 70% at 50% 20%, #1d3266 0%, #0e1a33 55%, #070e1f 100%); }
+#grid { position:absolute; left:0; top:0; width:1px; height:1px; transform-origin:0 0; }
+#world { position:absolute; left:0; top:0; width:1px; height:1px; transform-origin:0 0; }
+.el { position:absolute; left:0; top:0; width:max-content; transform-origin:0 0; will-change:transform; }
+.serif { font-family: Serif, serif; color:#f5d77a; text-align:center; line-height:1.04; white-space:nowrap; }
+.sans { font-family: Inter, sans-serif; font-weight:800; white-space:nowrap; }
+.card { border-radius:34px; box-shadow: 0 50px 120px rgba(0,0,0,.55), 0 0 0 2px rgba(245,215,122,.18); display:block; }
+.pill { font-family: Inter, sans-serif; font-weight:800; border-radius:999px; padding:18px 40px; white-space:nowrap; }
+#path { position:absolute; left:0; top:0; overflow:visible; }
+#hud { position:absolute; left:10px; top:10px; color:#fff; font:20px monospace; }
+</style></head>
+<body>
+<div id="ground"></div>
+<svg id="grid" width="1" height="1" style="overflow:visible"></svg>
+<div id="world">
+  <svg id="path" width="1" height="1"><path id="trail" fill="none" stroke="#f5c72c" stroke-width="7" stroke-linecap="round" opacity=".55"/></svg>
+</div>
+<div id="screen"></div>
+<script src="motion.js"></script>
+<script>
+const W = 1080, H = 1920, DUR = 45.4;
+const OMo = { W, H };
+const { clamp, lerp, sstep } = OM;
+const world = document.getElementById('world'), screenL = document.getElementById('screen');
+const mk = (parent, html, cls = 'el') => { const d = document.createElement('div'); d.className = cls; d.innerHTML = html; parent.appendChild(d); return d; };
+const card = (src, w) => `<img class="card" src="${src}" style="width:${w}px">`;
+const pill = (txt, bg, fg, fs = 52) => `<div class="pill" style="background:${bg};color:${fg};font-size:${fs}px">${txt}</div>`;
+
+// Stops: where the ball lands and the camera rests. [t (camera arrives), x, y, zoom]
+const STOPS = [
+  [0.0,   540,  960, 1.0],   // 0 título
+  [6.1,  1700, 1500, 1.0],   // 1 o mundo para
+  [8.8,  2800,  900, 1.0],   // 2 clubes parados
+  [11.1, 3950, 1500, 1.0],   // 3 abertura
+  [17.0, 5150,  900, 1.0],   // 4 técnico (duas telas)
+  [24.2, 6300, 1500, 1.0],   // 5 você assiste
+  [26.1, 7450,  900, 1.0],   // 6 fases (duas telas)
+  [32.0, 8600, 1500, 1.0],   // 7 final ao vivo
+  [34.95,9750,  900, 1.0],   // 8 campeã
+];
+const PULL = 38.85, END = 42.3;
+const MOVE = 0.55;                                   // the snap between stops
+// Elements, in world coordinates (centre), each popping in when the ball arrives at its stop.
+const E = [];
+function add(stop, html, x, y, delay = 0, row = null) { const el = mk(world, html); E.push({ el, stop, x, y, delay, row }); return el; }
+const [s0, s1, s2, s3, s4, s5, s6, s7, s8] = STOPS;
+add(0, `<div style="font-size:250px;text-align:center">🏆</div>`, s0[1], s0[2] - 330, 0.2);
+add(0, `<div class="serif" style="font-size:118px">Começou a<br>Copa do Mundo</div>`, s0[1], s0[2] + 40, 0.9);
+add(0, pill('E AGORA, TÉCNICO?', '#f5c72c', '#10221a', 64), s0[1], s0[2] + 330, 2.5);
+add(1, `<div style="font-size:250px;text-align:center">⏸️</div>`, s1[1], s1[2] - 260, 0.05);
+add(1, `<div class="serif" style="font-size:132px">O mundo para</div>`, s1[1], s1[2] + 60, 0.3);
+add(1, pill('No Proffut', 'rgba(255,255,255,.12)', '#fff', 54), s1[1], s1[2] + 280, 0.9);
+add(2, pill('🏟️ Clubes parados', '#e5533d', '#fff', 66), s2[1], s2[2] - 250, 0.05);
+add(2, `<div class="sans" style="font-size:96px;color:#fff">11 jun → 19 jul</div>`, s2[1], s2[2], 0.6);
+add(2, pill('🌎 Entra a Copa', '#f5c72c', '#10221a', 66), s2[1], s2[2] + 250, 1.2);
+add(3, card('exemplo-1.png', 620), s3[1], s3[2] - 120, 0.05);
+add(3, pill('🏆 48 seleções', '#f5c72c', '#10221a', 50), s3[1], s3[2] + 640, 2.6);
+add(4, card('exemplo-2.png', 470), s4[1] - 255, s4[2] - 60, 0.05);
+add(4, card('exemplo-3.png', 470), s4[1] + 255, s4[2] - 60, 0.6);
+add(4, pill('Convocação', '#f5c72c', '#10221a', 44), 0, s4[2] + 600, 2.0, 'r4');
+add(4, pill('Grupo', '#fbfbf7', '#10221a', 44), 0, s4[2] + 600, 3.3, 'r4');
+add(4, pill('Ao vivo', '#34b777', '#fff', 44), 0, s4[2] + 600, 4.6, 'r4');
+add(5, `<div style="font-size:250px;text-align:center">👀</div>`, s5[1], s5[2] - 200, 0.05);
+add(5, `<div class="serif" style="font-size:132px">Você assiste</div>`, s5[1], s5[2] + 110, 0.3);
+add(6, card('exemplo-5.png', 470), s6[1] - 255, s6[2] - 60, 0.05);
+add(6, card('exemplo-6.png', 470), s6[1] + 255, s6[2] - 60, 0.6);
+['Grupos', 'Oitavas', 'Quartas', 'Semifinal'].forEach((n, i) => add(6, pill(n, i === 3 ? '#f5c72c' : '#fbfbf7', '#10221a', 40), 0, s6[2] + 600, [2.0, 3.6, 4.3, 5.1][i], 'r6'));
+add(7, card('exemplo-4.png', 620), s7[1], s7[2] - 120, 0.05);
+add(7, pill('🔴 A final ao vivo', '#34b777', '#fff', 54), s7[1], s7[2] + 640, 0.9);
+add(8, card('exemplo-7.png', 620), s8[1], s8[2] - 120, 0.05);
+['Campeã', 'Artilheiro', 'Melhor jogador', 'Zebra'].forEach((n, i) => add(8, pill(n, ['#f5c72c', '#fbfbf7', '#fbfbf7', '#e5533d'][i], i === 3 ? '#fff' : '#10221a', 34), 0, s8[2] + 640, [0.6, 1.5, 2.6, 3.3][i], 'r8'));
+// Pull-back (screen layer): the whole Copa seen from above, then the end card.
+const volta = mk(screenL, pill('▶️ A temporada volta', '#f5c72c', '#10221a', 64));
+const fim1 = mk(screenL, `<div class="serif" style="font-size:124px">Quem leva<br>essa Copa?</div>`);
+const fim2 = mk(screenL, `<div style="font-size:112px;letter-spacing:22px">🇧🇷🇦🇷🇫🇷🇪🇸🇩🇪</div>`);
+const fim3 = mk(screenL, pill('Comenta aí 👇', '#f5c72c', '#10221a', 66));
+const fim4 = mk(screenL, `<div class="serif" style="font-size:96px;color:#fff">Proffut</div>`);
+const painel = mk(world, card('painel.png', 620));
+const PAINEL = [10900, 1500];
+// The ball.
+const ball = mk(world, `<div style="width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3c4,#f5c72c 45%,#b8860b);box-shadow:0 0 50px rgba(245,199,44,.8)"></div>`);
+const trail = document.getElementById('trail');
+
+// Ball path: from each stop's foot to the next, a quadratic arc; it leaves 0.45 s before the camera's arrival.
+const FOOT = s => [s[1], s[2] + (s === s0 ? 470 : 800)];
+const LAND = i => [3, 4, 6, 7, 8].includes(i) ? 880 : 640;
+const LEGS = STOPS.slice(1).map((s, i) => ({ a: FOOT(STOPS[i]), b: [s[1], s[2] - LAND(i + 1)], t0: s[0] - MOVE - 0.05, t1: s[0] - 0.02 }));
+LEGS.push({ a: FOOT(s8), b: [PAINEL[0], PAINEL[1] - 880], t0: PULL + 0.3, t1: PULL + 1.6 });
+function legPt(L, k) { const c = [(L.a[0] + L.b[0]) / 2, Math.min(L.a[1], L.b[1]) - 500]; const u = 1 - k; return [u*u*L.a[0] + 2*u*k*c[0] + k*k*L.b[0], u*u*L.a[1] + 2*u*k*c[1] + k*k*L.b[1]]; }
+function ballAt(t) {
+  let pos = [s0[1], s0[2] - 600], live = 0;
+  for (const L of LEGS) {
+    if (t >= L.t1) pos = L.b;
+    else if (t > L.t0) { const k = OM.ease.expoInOut(OM.clamp((t - L.t0) / (L.t1 - L.t0), 0, 1)); pos = legPt(L, k); live = 1; break; }
+  }
+  return { pos, live };
+}
+// Camera: hold on each stop, snap to the next on expoInOut, a hand in the holds is zero (rests are still).
+const KEYS = [];
+STOPS.forEach((s, i) => {
+  if (i > 0) KEYS.push({ t: s[0] - MOVE, x: STOPS[i - 1][1], y: STOPS[i - 1][2], zoom: 1 });
+  KEYS.push({ t: s[0], x: s[1], y: s[2], zoom: s[3], curve: OM.ease.expoInOut });
+});
+KEYS.push({ t: PULL, x: s8[1], y: s8[2], zoom: 1 });
+KEYS.push({ t: PULL + 1.7, x: PAINEL[0], y: PAINEL[1], zoom: 1, curve: OM.ease.expoInOut });
+KEYS.push({ t: END - 0.2, x: PAINEL[0], y: PAINEL[1], zoom: 1 });
+KEYS.push({ t: END + 1.1, x: 5700, y: 1250, zoom: 0.088, curve: OM.ease.cubicInOut });
+const HITS = STOPS.slice(1).map(s => [s[0], 7, 10]).concat([[PULL + 1.7, 8, 10]]);
+function camAt(t) {
+  const c = OM.camera(t, KEYS, { W, H });
+  let x = c.x, y = c.y, rot = 0;
+  for (const [th, amp, decay] of HITS) { const s = OM.shake(t, th, { amp, decay, seed: Math.round(th * 100) }); x += s.x / c.zoom; y += s.y / c.zoom; rot += s.rot * 0.5; }
+  return { x, y, zoom: c.zoom, rot };
+}
+const css = m => `matrix(${m.join(',')})`;
+const mul = (A, B) => [A[0]*B[0]+A[2]*B[1], A[1]*B[0]+A[3]*B[1], A[0]*B[2]+A[2]*B[3], A[1]*B[2]+A[3]*B[3], A[0]*B[4]+A[2]*B[5]+A[4], A[1]*B[4]+A[3]*B[5]+A[5]];
+let SIZES = [];
+function measure() { SIZES = E.map(o => { const r = o.el.getBoundingClientRect(); return [r.width, r.height]; });
+  const ROWX = { r4: s4[1], r6: s6[1], r8: s8[1] };
+  for (const key of Object.keys(ROWX)) {
+    const ids = E.map((o, i) => o.row === key ? i : -1).filter(i => i >= 0), gap = 16;
+    const total = ids.reduce((a, i) => a + SIZES[i][0], 0) + gap * (ids.length - 1);
+    let x = ROWX[key] - total / 2;
+    for (const i of ids) { E[i].x = x + SIZES[i][0] / 2; x += SIZES[i][0] + gap; }
+  }
+  for (const el of [volta, fim1, fim2, fim3, fim4, painel, ball]) { const r = el.getBoundingClientRect(); el._w = r.width; el._h = r.height; } }
+function place(el, x, y, s, op, w, h, extra = '') {
+  if (op <= 0.001) { el.style.display = 'none'; return; }
+  el.style.display = 'block'; el.style.opacity = op;
+  el.style.transform = `translate(${x - w * s / 2}px, ${y - h * s / 2}px) scale(${s})${extra}`;
+}
+let CAM;
+const arrive = i => i === 0 ? 0 : STOPS[i][0] - 0.05;
+function seek(t) {
+  CAM = camAt(t);
+  const V = OM.view(CAM, { W, H });
+  world.style.transform = css(V);
+  world.style.opacity = 1 - 0.85 * sstep(END + 0.2, END + 0.9, t);
+  // a faint lattice farther back, so the moves read against something
+  const G = OM.lattice(CAM, { depth: 1.2, spacing: 90, px: 1.6, W, H });
+  // elements
+  E.forEach((o, i) => {
+    const t0 = arrive(o.stop) + o.delay;
+    const p = OM.popIn(t, t0, { rise: 40 });
+    place(o.el, o.x, o.y + p.dy, p.s, p.op, SIZES[i][0], SIZES[i][1]);
+  });
+  const pp = OM.popIn(t, PULL + 1.6, { rise: 40 });
+  place(painel, PAINEL[0], PAINEL[1] - 80 + pp.dy, pp.s, pp.op, painel._w, painel._h);
+  // ball and its trail
+  const b = ballAt(t);
+  place(ball, b.pos[0], b.pos[1], 1 + 0.25 * b.live, t < 0.2 ? sstep(0, 0.2, t) : 1, ball._w, ball._h);
+  let d = '';
+  for (const L of LEGS) {
+    if (t <= L.t0) break;
+    const k = t >= L.t1 ? 1 : OM.ease.expoInOut((t - L.t0) / (L.t1 - L.t0));
+    const N = 24; d += `M${L.a[0]},${L.a[1]}`;
+    for (let j = 1; j <= N; j++) { const q = legPt(L, k * j / N); d += ` L${q[0].toFixed(1)},${q[1].toFixed(1)}`; }
+  }
+  trail.setAttribute('d', d);
+  // screen layer: pull-back caption and the end card
+  const v = OM.popIn(t, PULL + 2.0, { rise: 40 }), vOut = 1 - sstep(END - 0.4, END, t);
+  place(volta, W / 2, H / 2 + 560 + v.dy, v.s, v.op * vOut, volta._w, volta._h);
+  const F = [[fim1, END + 0.6, -380], [fim2, END + 1.0, -60], [fim3, END + 1.4, 190], [fim4, END + 1.9, 430]];
+  for (const [el, t0, dy] of F) { const q = OM.wordRise(t, t0); place(el, W / 2, H / 2 + dy + q.y, q.s, q.op, el._w, el._h); }
+  TRACK = { ball: OM.projectBox(V, { x: b.pos[0] - 28, y: b.pos[1] - 28, w: 56, h: 56, op: 1 }) };
+  const pending = [...document.images].filter(i => !i.complete).map(i => i.decode().catch(() => {}));
+  return Promise.all(pending).then(() => true);
+}
+let TRACK = {};
+window.__meta = { dur: DUR, fps: 30 };
+window.__seek = async t => seek(t);
+window.__track = () => TRACK;
+window.__motion = (t0, t1) => Math.max(OM.screenTravel(camAt(t0), camAt(t1), camAt((t0 + t1) / 2), { W, H }), 0);
+window.__ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.decode().catch(() => {})))).then(() => { measure(); return seek(0); });
+const q = new URLSearchParams(location.search);
+if (q.has('t')) window.__ready.then(() => seek(+q.get('t')));
+if (q.has('play')) { const st = performance.now(); window.__ready.then(function f() { seek(((performance.now() - st) / 1000) % DUR); requestAnimationFrame(f); }); }
+</script></body></html>
