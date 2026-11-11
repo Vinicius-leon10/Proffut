@@ -143,6 +143,9 @@ export const TV_EUROPA_MES: Record<string, number> = {
   EN3: 2_500_000, ES3: 900_000, IT3: 900_000, DE3: 1_400_000, FR3: 900_000, PT3: 500_000, NL3: 400_000,
   // Ásia (nov/2026): o mesmo cálculo, pela folha típica de cada liga.
   SA: 9_000_000, JP: 3_500_000, KR: 2_500_000, AU: 1_500_000,
+  QA: 4_000_000, AE: 4_000_000, CN: 3_000_000, EG: 1_500_000, MA: 1_500_000, IR: 1_200_000, ZA: 1_500_000, DZ: 1_000_000,
+  TN: 1_000_000, UZ: 800_000, IQ: 700_000, TH: 900_000, ID: 800_000, IN: 900_000, MY: 600_000, VN: 500_000, KW: 600_000,
+  JO: 400_000, BH: 400_000, TZ: 400_000, NG: 300_000, GH: 300_000, AO: 400_000, ZM: 250_000, KE: 250_000,
 };
 /** Na 2ª divisão da Europa, a TV paga a todos pelo menos esta fração da base da liga (senão os pequenos quebram). */
 export const TV_PISO_SEGUNDA = 0.35;

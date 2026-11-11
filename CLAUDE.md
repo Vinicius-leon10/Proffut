@@ -624,9 +624,17 @@ clubes (`VAGAS_AFC`: Arábia Saudita 5, Japão 4, Coreia do Sul 4, Austrália 3;
 grupos de 4 em turno e returno às terças (semanas 1–7, fora das datas FIFA), quartas e semi em ida e volta, final em campo
 neutro (semana 24). `K-MUN` (grupo "mundial"): os campeões do ano anterior da Liga dos Campeões, da Libertadores, da Concacaf e
 da Ásia, semifinal (semana −10) e final (−9) em campo neutro, a partir de 2027; vale a reputação da Libertadores.
-**Falta da parte 2:** as ligas da África, das outras ligas da Ásia (China, Irã, Catar, Emirados...) e da Nova Zelândia, que já
-estão na branch `dados-asia-africa` (páginas da Wikipédia e elencos; montar como o `tools/times/montar.ts` faz com a América),
-e a Liga dos Campeões da África (que entra no Mundial quando existir).
+**África e o resto da Ásia (R110, `data/mundo-2026/`):** a 1ª divisão de 25 países, das páginas da Wikipédia em inglês da
+branch `dados-asia-africa`: África (Egito, Marrocos, Argélia, Tunísia, África do Sul, Nigéria, Gana, Tanzânia, Angola, Zâmbia,
+Quênia; `regiao: "africa"`, `NOME_REGIAO.africa`) e Ásia (China, Irã, Catar, Emirados, Uzbequistão, Índia, Tailândia, Iraque,
+Malásia, Indonésia, Vietnã, Jordânia, Kuwait, Bahrein). `npx tsx tools/mundo/montar.ts <dados-asia-africa>` (rodar depois de
+`tools/asia/montar.ts`): a lista dos clubes é a seção da página com o tamanho mais perto do da liga (`LIGAS`), a ordem pelo
+número de ligações no Wikidata dá a força (`forca`: do topo ao último) e a reputação; o elenco é o da página do clube
+(`lerElenco`, com o Wikidata), a força pela fama dentro da faixa; nacionalidade pelo código FIFA (`SELECOES_MUNDO`). 385
+clubes, 284 com elenco da página (7.852 jogadores; os outros, criados) e 280 convocados ligados. Ficaram de fora a Costa do
+Marfim, Senegal, Líbia, Omã e Sudão (a página não trouxe a lista), Camarões, Mali e RD Congo (outra temporada ou só parte) e
+a Nova Zelândia (três ligas regionais; os dois clubes profissionais jogam a liga australiana). Jogo novo com o continente
+África. TV em `TV_EUROPA_MES`. **Falta da parte 2:** a Liga dos Campeões da África (que entra no Mundial quando existir).
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).

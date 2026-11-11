@@ -11,9 +11,49 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 618 escudos (0 de clubes brasileiros e 618 de fora).
+Total: 1003 escudos (0 de clubes brasileiros e 1003 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
+
+### Angola (14 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Académica Petróleos do Lobito | Lobito | `academica-petroleos-do-lobito.png` |
+| Atlético Petróleos Luanda | Luanda | `atletico-petroleos-luanda.png` |
+| C.D. Huíla | Lubango | `c-d-huila.png` |
+| C.D. Lunda Sul | C.D. Lunda Sul | `c-d-lunda-sul.png` |
+| C.D. São Salvador | Angola | `c-d-sao-salvador.png` |
+| C.R.D. Libolo | Libolo | `c-r-d-libolo.png` |
+| Clube Desportivo Primeiro de Agosto | Luanda | `clube-desportivo-primeiro-de-agosto.png` |
+| Estrela Clube Primeiro de Maio | Benguela | `estrela-clube-primeiro-de-maio.png` |
+| F.C. Onze Bravos | Luena | `f-c-onze-bravos.png` |
+| G.D. Interclube | Luanda | `g-d-interclube.png` |
+| G.D. Sagrada Esperança | Dundo | `g-d-sagrada-esperanca.png` |
+| Kabuscorp | Luanda | `kabuscorp.png` |
+| Santa Rita de Cássia | Uíge | `santa-rita-de-cassia.png` |
+| Wiliete | Benguela | `wiliete.png` |
+
+### Argélia (16 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| ASO Chlef | Chlef | `aso-chlef.png` |
+| CR Belouizdad | Argel | `cr-belouizdad.png` |
+| CS Constantine | Constantina | `cs-constantine.png` |
+| ES Ben Aknoun | Ben Aknoun | `es-ben-aknoun.png` |
+| ES Mostaganem | Mostaganem | `es-mostaganem.png` |
+| ES Sétif | Setif | `es-setif.png` |
+| JS Kabylie | Tizi-Ouzou | `js-kabylie.png` |
+| JS Saoura | Méridja | `js-saoura.png` |
+| MB Rouissat | Rouissat | `mb-rouissat.png` |
+| MC Algiers | Argel | `mc-algiers.png` |
+| MC El Bayadh | El Bayadh | `mc-el-bayadh.png` |
+| Mouloudia Club of Oran | Orã | `mouloudia-club-of-oran.png` |
+| Olympique Akbou | Akbou | `olympique-akbou.png` |
+| Paradou | Argel | `paradou.png` |
+| USM Alger | Argel | `usm-alger.png` |
+| USM Khenchela | Khenchela | `usm-khenchela.png` |
 
 ### Arábia Saudita (18 clubes)
 
@@ -55,6 +95,21 @@ Total: 618 escudos (0 de clubes brasileiros e 618 de fora).
 | Wellington Phoenix | Wellington | `wellington-phoenix.png` |
 | Western Sydney Wanderers | Sydney | `western-sydney-wanderers.png` |
 
+### Bahrein (10 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| A'Ali | A'Ali | `a-ali.png` |
+| Al Hala | Al Muharraq | `al-hala.png` |
+| Al-Ahli | Manama | `al-ahli-bh.png` |
+| Al-Khaldiya | Al-Khaldiya | `al-khaldiya.png` |
+| Al-Muharraq | Al Muharraq | `al-muharraq.png` |
+| Al-Najma | Manama | `al-najma-bh.png` |
+| Al-Shabab | Manama | `al-shabab-bh.png` |
+| Bahrain | Al Muharraq | `bahrain.png` |
+| Hidd | Al Muharraq | `hidd.png` |
+| Riffa | Ar Rifa' | `riffa.png` |
+
 ### Bélgica (16 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
@@ -75,6 +130,44 @@ Total: 618 escudos (0 de clubes brasileiros e 618 de fora).
 | Union Saint-Gilloise | Bruxelas | `union-saint-gilloise.png` |
 | Westerlo | Westerlo | `westerlo.png` |
 | Zulte Waregem | Waregem | `zulte-waregem.png` |
+
+### Catar (12 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Al Ahli | Doha | `al-ahli-qa.png` |
+| Al Sadd | Doha | `al-sadd.png` |
+| Al-Arabi | Doha | `al-arabi.png` |
+| Al-Duhail | Doha | `al-duhail.png` |
+| Al-Gharafa | Doha | `al-gharafa.png` |
+| Al-Rayyan | Al Rayyan | `al-rayyan.png` |
+| Al-Sailiya | Doha | `al-sailiya.png` |
+| Al-Shahaniya | Al-Shahaniya | `al-shahaniya.png` |
+| Al-Shamal | Al Shamal | `al-shamal.png` |
+| Al-Wakrah | Al-Wakrah | `al-wakrah.png` |
+| Qatar | Doha | `qatar.png` |
+| Umm Salal | Umm Salal | `umm-salal.png` |
+
+### China (16 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Beijing Guoan | Pequim | `beijing-guoan.png` |
+| Changchun Yatai | Changchun | `changchun-yatai.png` |
+| Chengdu Rongcheng | Chengdu | `chengdu-rongcheng.png` |
+| Chongqing Tongliang Long | Chongqing | `chongqing-tongliang-long.png` |
+| Dalian Yingbo | Dalian | `dalian-yingbo.png` |
+| Henan | Zhengzhou | `henan.png` |
+| Liaoning Tieren | China | `liaoning-tieren.png` |
+| Meizhou Hakka | Meizhou | `meizhou-hakka.png` |
+| Qingdao Hainiu | Qingdao | `qingdao-hainiu.png` |
+| Qingdao Qingchundao | Qingdao | `qingdao-qingchundao.png` |
+| Shandong Taishan | Jinan | `shandong-taishan.png` |
+| Shanghai Port | Xangai | `shanghai-port.png` |
+| Shanghai Shenhua | Xangai | `shanghai-shenhua.png` |
+| Shenzhen Juniors | Shenzhen Juniors | `shenzhen-juniors.png` |
+| Shenzhen Peng City | Chengdu | `shenzhen-peng-city.png` |
+| Tianjin Jinmen Tiger | Tianjin | `tianjin-jinmen-tiger.png` |
 
 ### Coreia do Sul (12 clubes)
 
@@ -125,6 +218,51 @@ Total: 618 escudos (0 de clubes brasileiros e 618 de fora).
 | Vejle | Vejle | `vejle.png` |
 | Viborg | Viborg | `viborg.png` |
 
+### Egito (21 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Al Ahly | Cairo | `al-ahly.png` |
+| Al Ittihad Alexandria | Alexandria | `al-ittihad-alexandria.png` |
+| Al Masry | Porto Said | `al-masry.png` |
+| Al Mokawloon Al Arab | Madīnat an-Naṣr | `al-mokawloon-al-arab.png` |
+| Ceramica Cleopatra | Seis de Octubre | `ceramica-cleopatra.png` |
+| ENPPI | Novo Cairo | `enppi.png` |
+| El Gouna | El Gouna | `el-gouna.png` |
+| Ghazl El Mahalla | Al-Mahalla Al-Kubra | `ghazl-el-mahalla.png` |
+| Haras El-Hodood | Alexandria | `haras-el-hodood.png` |
+| Ismaily | Ismaília | `ismaily.png` |
+| Kahrbaa Ismailia | Kahrbaa Ismailia | `kahrbaa-ismailia.png` |
+| Modern | Cairo | `modern.png` |
+| National Bank of Egypt | Cairo | `national-bank-of-egypt.png` |
+| Petrojet | Suez | `petrojet.png` |
+| Pharco | Alexandria | `pharco.png` |
+| Pyramids | Cairo | `pyramids.png` |
+| Smouha | Alexandria | `smouha.png` |
+| Tala'ea El-Gaish | Cairo | `tala-ea-el-gaish.png` |
+| Wadi Degla | Cairo | `wadi-degla.png` |
+| ZED | ZED | `zed.png` |
+| Zamalek | Gizé | `zamalek.png` |
+
+### Emirados Árabes (14 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Ajman | Ajman | `ajman.png` |
+| Al Ain | Al Ain | `al-ain.png` |
+| Al Bataeh | Al Bataeh | `al-bataeh.png` |
+| Al Dhafra | Abu Dhabi | `al-dhafra.png` |
+| Al Jazira | Abu Dhabi | `al-jazira.png` |
+| Al Wasl | Dubai | `al-wasl.png` |
+| Al-Wahda | Abu Dhabi | `al-wahda.png` |
+| Alshariqa | Dubai | `alshariqa.png` |
+| Baniyas | Abu Dhabi | `baniyas.png` |
+| Dibba | Doba (Fujeira) | `dibba.png` |
+| Kalba | Quelba | `kalba.png` |
+| Khor Fakkan | Corfação | `khor-fakkan.png` |
+| Shabab AlAhli Dubai | Dubai | `shabab-alahli-dubai.png` |
+| Sharjah | Xarja | `sharjah.png` |
+
 ### Escócia (12 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
@@ -141,6 +279,28 @@ Total: 618 escudos (0 de clubes brasileiros e 618 de fora).
 | Motherwell | Motherwell | `motherwell.png` |
 | Rangers | Glasgow | `rangers.png` |
 | St. Mirren | Paisley | `st-mirren.png` |
+
+### Gana (17 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Accra Hearts of Oak | Acra | `accra-hearts-of-oak.png` |
+| Accra Lions | Acra | `accra-lions.png` |
+| Aduana Stars | Gana | `aduana-stars.png` |
+| All Blacks | Gana | `all-blacks.png` |
+| Asante Kotoko | Kumasi | `asante-kotoko.png` |
+| Bechem United | Región Ahafo | `bechem-united.png` |
+| Berekum Chelsea | Sunyani | `berekum-chelsea.png` |
+| Bibiani Gold Stars | Bibiani | `bibiani-gold-stars.png` |
+| Dreams | Dreams | `dreams.png` |
+| Heart of Lions | Gana | `heart-of-lions.png` |
+| Karela United | Karela United | `karela-united.png` |
+| Legon Cities | Acra | `legon-cities.png` |
+| Medeama | Tarkwa | `medeama.png` |
+| Nsoatreman | Nsoatreman | `nsoatreman.png` |
+| Samartex | Tarkwa | `samartex.png` |
+| Techiman Eleven Wonders | Techiman | `techiman-eleven-wonders.png` |
+| Vision | Vision | `vision.png` |
 
 ### Grécia (14 clubes)
 
@@ -160,6 +320,75 @@ Total: 618 escudos (0 de clubes brasileiros e 618 de fora).
 | Panetolikos | Agrinio | `panetolikos.png` |
 | Panserraikos | Serres | `panserraikos.png` |
 | Volos | Volos | `volos.png` |
+
+### Indonésia (18 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Arema | Malang | `arema.png` |
+| Bali United | Gianyar | `bali-united.png` |
+| Bhayangkara | Jacarta | `bhayangkara.png` |
+| Borneo F.C. Samarinda | Samarinda | `borneo-f-c-samarinda.png` |
+| Dewa United | Tangerang do Sul | `dewa-united.png` |
+| Madura United | Madura United | `madura-united.png` |
+| Malut United | Malut United | `malut-united.png` |
+| PSBS Biak Numfor | Isla de Biak | `psbs-biak-numfor.png` |
+| PSIM Yogyakarta | Yogyakarta | `psim-yogyakarta.png` |
+| PSM Makassar | Macáçar | `psm-makassar.png` |
+| Persebaya Surabaya | Surabaia | `persebaya-surabaya.png` |
+| Persib Bandung | Bandung | `persib-bandung.png` |
+| Persija Jakarta | Jacarta | `persija-jakarta.png` |
+| Persijap Jepara | Persijap Jepara | `persijap-jepara.png` |
+| Persik Kediri | Kediri | `persik-kediri.png` |
+| Persis Solo | Surakarta | `persis-solo.png` |
+| Persita Tangerang | Tangerang | `persita-tangerang.png` |
+| Semen Padang | Padang | `semen-padang.png` |
+
+### Iraque (20 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Al-Gharraf | Dicar | `al-gharraf.png` |
+| Al-Kahraba | Al-Kahraba | `al-kahraba.png` |
+| Al-Karkh | Bagdá | `al-karkh.png` |
+| Al-Karma | Al-Karmah | `al-karma.png` |
+| Al-Mina'a | Baçorá | `al-mina-a.png` |
+| Al-Naft | Bagdá | `al-naft.png` |
+| Al-Qasim | Al-Qasim | `al-qasim.png` |
+| Al-Quwa Al-Jawiya | Al-Rusafa | `al-quwa-al-jawiya.png` |
+| Al-Shorta Baghdad | Bagdá | `al-shorta-baghdad.png` |
+| Al-Zawra'a | Bagdá | `al-zawra-a.png` |
+| Baghdad | Baghdad | `baghdad.png` |
+| Diyala | Diyala | `diyala.png` |
+| Duhok | Dohuk | `duhok.png` |
+| Erbil | Arbil | `erbil.png` |
+| Mosul | Mossul | `mosul.png` |
+| Naft Maysan | Amara | `naft-maysan.png` |
+| Najaf | An-Najaf | `najaf.png` |
+| Newroz | As-Sulaymaniyah | `newroz.png` |
+| Talaba | Bagdá | `talaba.png` |
+| Zakho | Zakho | `zakho.png` |
+
+### Irã (16 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Aluminium Arak | Arak | `aluminium-arak.png` |
+| Chadormalu | Ardakan | `chadormalu.png` |
+| Esteghlal | Teerão | `esteghlal.png` |
+| Esteghlal Khuzestan | Ahvaz | `esteghlal-khuzestan.png` |
+| Fajr Sepasi | Xiraz | `fajr-sepasi.png` |
+| Foolad | Ahvaz | `foolad.png` |
+| Gol Gohar | Sirjan | `gol-gohar.png` |
+| Havadar | Havadar | `havadar.png` |
+| Kheybar Khorramabad | Kheybar Khorramabad | `kheybar-khorramabad.png` |
+| Malavan | Bandar-e Anzali | `malavan.png` |
+| Mes Rafsanjan | Rafsanjan | `mes-rafsanjan.png` |
+| Nassaji Mazandaran | Qaem Shahr | `nassaji-mazandaran.png` |
+| Paykan | Teerão | `paykan.png` |
+| Persepolis | Teerão | `persepolis.png` |
+| Sepahan | Isfahan | `sepahan.png` |
+| Shams Azar | Shams Azar | `shams-azar.png` |
 
 ### Japão (20 clubes)
 
@@ -185,6 +414,99 @@ Total: 618 escudos (0 de clubes brasileiros e 618 de fora).
 | V-Varen Nagasaki | Nagasaki | `v-varen-nagasaki.png` |
 | Vissel Kobe | Kobe | `vissel-kobe.png` |
 | Yokohama F. Marinos | Yokohama | `yokohama-marinos.png` |
+
+### Jordânia (10 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Al-Ahli | Amã | `al-ahli-jo.png` |
+| Al-Baqa'a | Amã | `al-baqa-a.png` |
+| Al-Faisaly | Amã | `al-faisaly.png` |
+| Al-Hussein | Irbid | `al-hussein.png` |
+| Al-Jazeera | Amã | `al-jazeera.png` |
+| Al-Ramtha | Ar Ramtha | `al-ramtha.png` |
+| Al-Salt | Salt | `al-salt.png` |
+| Al-Wehdat | Amã | `al-wehdat.png` |
+| Sama Al-Sarhan | Sama Al-Sarhan | `sama-al-sarhan.png` |
+| Shabab Al-Ordon | Amã | `shabab-al-ordon.png` |
+
+### Kuwait (10 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Al Jahra | Al Jahra | `al-jahra.png` |
+| Al Nasr | Kuwait | `al-nasr.png` |
+| Al-Arabi | Kuwait | `al-arabi-kw.png` |
+| Al-Fahaheel | Kuwait | `al-fahaheel.png` |
+| Al-Salmiya | Salmiya | `al-salmiya.png` |
+| Al-Shabab | Al-Shabab | `al-shabab-kw.png` |
+| Al-Tadamon | Al Farwaniyah | `al-tadamon.png` |
+| Kazma | Kuwait | `kazma.png` |
+| Kuwait | Kuwait | `kuwait.png` |
+| Qadsia | Kuwait | `qadsia.png` |
+
+### Malásia (12 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Immigration | Putrajaya | `immigration.png` |
+| Johor Darul Ta'zim | JDT Headquarters | `johor-darul-ta-zim.png` |
+| Kelantan The Real Warriors | Kota Bharu | `kelantan-the-real-warriors.png` |
+| Kuala Lumpur City | Kuala Lumpur | `kuala-lumpur-city.png` |
+| Kuching City | Kuching | `kuching-city.png` |
+| Melaka | Melaka | `melaka.png` |
+| Negeri Sembilan FA | Seremban | `negeri-sembilan-fa.png` |
+| Penang | Penang | `penang.png` |
+| Polis Di-Raja Malaysia FA | Malásia | `polis-di-raja-malaysia-fa.png` |
+| Sabah | Kota Kinabalu | `sabah.png` |
+| Selangor | Selangor | `selangor.png` |
+| Terengganu | Kuala Terenggan | `terengganu.png` |
+
+### Marrocos (16 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| COD Meknès | Meknès | `cod-meknes.png` |
+| Difaa Hassani El Jadidi | El Jadida | `difaa-hassani-el-jadidi.png` |
+| FAR Rabat | Rabat | `far-rabat.png` |
+| FUS de Rabat | Rabat | `fus-de-rabat.png` |
+| Hassania Agadir | Agadir | `hassania-agadir.png` |
+| IR Tanger | Tânger | `ir-tanger.png` |
+| Jeunesse Sportive Soualem | Soualem | `jeunesse-sportive-soualem.png` |
+| KACM | Marraquexe | `kacm.png` |
+| Maghreb of Fez | Fez | `maghreb-of-fez.png` |
+| Moghreb Atlético Tetuán | Tetuão | `moghreb-atletico-tetuan.png` |
+| Nahdat Zemamra | Zemamra | `nahdat-zemamra.png` |
+| Olympique Club de Safi | Safim | `olympique-club-de-safi.png` |
+| Olympique Dcheira | Dcheira El Jihadia | `olympique-dcheira.png` |
+| RS Berkane | Berkane | `rs-berkane.png` |
+| Raja Club Athletic | Casablanca | `raja-club-athletic.png` |
+| SCC Mohammédia | Mohammedia | `scc-mohammedia.png` |
+
+### Nigéria (20 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Abia Warriors | Umuahia | `abia-warriors.png` |
+| Barau | Kano | `barau.png` |
+| Bayelsa United | Sapele | `bayelsa-united.png` |
+| Bendel Insurance | Cidade do Benim | `bendel-insurance.png` |
+| El-Kanemi Warriors | Maiduguri | `el-kanemi-warriors.png` |
+| Enugu Rangers | Enugu | `enugu-rangers.png` |
+| Enyimba International | Aba | `enyimba-international.png` |
+| Ikorodu City | Ikorodu City | `ikorodu-city.png` |
+| Kano Pillars | Kano | `kano-pillars.png` |
+| Katsina United | Katsina | `katsina-united.png` |
+| Kun Khalifat | Kun Khalifat | `kun-khalifat.png` |
+| Kwara United | Ilorin | `kwara-united.png` |
+| Nasarawa United | Lafia | `nasarawa-united.png` |
+| Niger Tornadoes | Minna | `niger-tornadoes.png` |
+| Plateau United | Jos | `plateau-united.png` |
+| Remo Stars | Ikenne | `remo-stars.png` |
+| Rivers United | Port Harcourt | `rivers-united.png` |
+| Shooting Stars | Ibadã | `shooting-stars.png` |
+| Warri Wolves | Warri | `warri-wolves.png` |
+| Wikki Tourists | Bauchi | `wikki-tourists.png` |
 
 ### Noruega (16 clubes)
 
@@ -229,6 +551,29 @@ Total: 618 escudos (0 de clubes brasileiros e 618 de fora).
 | Widzew Łódź | Łódź | `widzew.png` |
 | Wisła Płock | Płock | `wisla-plock.png` |
 | Zagłębie Lubin | Lubin | `zaglebie-lubin.png` |
+
+### Quênia (18 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| A.F.C. Leopards | Nairóbi | `a-f-c-leopards.png` |
+| Administration Police | Nairóbi | `administration-police.png` |
+| Bandari | Mombaça | `bandari.png` |
+| Bidco United | Thika | `bidco-united.png` |
+| FC Talanta | Nairóbi | `fc-talanta.png` |
+| Gor Mahia | Nairóbi | `gor-mahia.png` |
+| Kakamega Homeboyz | Kakamega | `kakamega-homeboyz.png` |
+| Kariobangi Sharks | Kariobangi | `kariobangi-sharks.png` |
+| Kenya Commercial Bank | Nairóbi | `kenya-commercial-bank.png` |
+| Mara Sugar | Mara Sugar | `mara-sugar.png` |
+| Mathare United | Nairóbi | `mathare-united.png` |
+| Nairobi City Stars | Nairóbi | `nairobi-city-stars.png` |
+| Nairobi United | Nairóbi | `nairobi-united.png` |
+| Posta Rangers | Nairóbi | `posta-rangers.png` |
+| Shabana Kisii | Shabana Kisii | `shabana-kisii.png` |
+| Sofapaka | Nairóbi | `sofapaka.png` |
+| Tusker | Nairóbi | `tusker.png` |
+| Ulinzi Stars | Q239421 | `ulinzi-stars.png` |
 
 ### Romênia (16 clubes)
 
@@ -331,6 +676,48 @@ Total: 618 escudos (0 de clubes brasileiros e 618 de fora).
 | Čukarički | Belgrado | `cukaricki.png` |
 | Železničar Pančevo | Pančevo | `zeleznicar-pancevo.png` |
 
+### Tailândia (16 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Ayutthaya United | Ayutthaya | `ayutthaya-united.png` |
+| BG Pathum United | Tailândia | `bg-pathum-united.png` |
+| Bangkok United | Banguecoque | `bangkok-united.png` |
+| Buriram United | Buri Ram | `buriram-united.png` |
+| Chiangrai United | Tailândia | `chiangrai-united.png` |
+| Chonburi | cidade de Chomburi | `chonburi.png` |
+| Kanchanaburi | Kanchanaburi | `kanchanaburi.png` |
+| Lamphun Warrior | Muang Lamphun | `lamphun-warrior.png` |
+| Muangthong United | Pak Kret | `muangthong-united.png` |
+| Nakhon Ratchasima | Nakhon Ratchasima | `nakhon-ratchasima.png` |
+| Port | Banguecoque | `port.png` |
+| Prachuap | Prachuap Khiri Khan | `prachuap.png` |
+| Ratchaburi Mitr Phol | Ratchaburi | `ratchaburi-mitr-phol.png` |
+| Rayong | Rayong | `rayong.png` |
+| Sukhothai | Sukhothai | `sukhothai.png` |
+| Uthai Thani | Uthai Thani | `uthai-thani.png` |
+
+### Tanzânia (16 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Azam | Dar es Salaam | `azam.png` |
+| Coastal Union | Tanga | `coastal-union.png` |
+| Dodoma Jiji | Dodoma Jiji | `dodoma-jiji.png` |
+| JKT Ruvu Stars | Dodoma | `jkt-ruvu-stars.png` |
+| Kagera Sugar | Bukoba | `kagera-sugar.png` |
+| Kinondoni Municipal Council | Kinondoni Municipal Council | `kinondoni-municipal-council.png` |
+| Mbeya City | Beia | `mbeya-city.png` |
+| Mtibwa Sugar | Mtibwa Sugar | `mtibwa-sugar.png` |
+| Namungo | Namungo | `namungo.png` |
+| Pamba | Shinyanga | `pamba.png` |
+| Prisons | Beia | `prisons.png` |
+| Simba | Dar es Salaam | `simba.png` |
+| Singida Black Stars | Q6930466 | `singida-black-stars.png` |
+| Singida Fountain Gate | Singida | `singida-fountain-gate.png` |
+| Tabora United | Tabora United | `tabora-united.png` |
+| Young Africans | Dar es Salaam | `young-africans.png` |
+
 ### Tchéquia (16 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
@@ -351,6 +738,27 @@ Total: 618 escudos (0 de clubes brasileiros e 618 de fora).
 | Teplice | Teplice | `teplice.png` |
 | Viktoria Plzeň | Plzeň | `viktoria-plzen.png` |
 | Zlín | Zlín | `zlin.png` |
+
+### Tunísia (16 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| AS Gabès | Gabès | `as-gabes.png` |
+| AS Marsa | La Marsa | `as-marsa.png` |
+| AS Soliman | Soliman | `as-soliman.png` |
+| CA Bizertine | Bizerta | `ca-bizertine.png` |
+| CS Sfaxien | Sfax | `cs-sfaxien.png` |
+| Club Africain | Tunes | `club-africain.png` |
+| ES Zarzis | Zarzis | `es-zarzis.png` |
+| Espérance Sportive de Tunis | Tunes | `esperance-sportive-de-tunis.png` |
+| Etoile Sportive de Metlaoui | Métlaoui | `etoile-sportive-de-metlaoui.png` |
+| JS Kairouan | Kairouan | `js-kairouan.png` |
+| Jeunesse sportive d'El Omrane | El Omrane | `jeunesse-sportive-d-el-omrane.png` |
+| Olympique Béja | Béja | `olympique-beja.png` |
+| Stade Tunisien | Le Bardo | `stade-tunisien.png` |
+| US Ben Guerdane | Ben Gardane | `us-ben-guerdane.png` |
+| US Monastir | Monastir (Tunísia) | `us-monastir.png` |
+| Étoile Sportive du Sahel | Sousse | `etoile-sportive-du-sahel.png` |
 
 ### Turquia (18 clubes)
 
@@ -396,6 +804,90 @@ Total: 618 escudos (0 de clubes brasileiros e 618 de fora).
 | Veres Rivne | Rivne | `veres-rivne.png` |
 | Zorya Luhansk | Luhansk | `zorya.png` |
 
+### Uzbequistão (16 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| F.C. Bunyodkor | Tasquente | `f-c-bunyodkor.png` |
+| FC AGMK | Olmaliq | `fc-agmk.png` |
+| FC Khorazm | Urgench | `fc-khorazm.png` |
+| FC Neftchi Fergana | Fergana | `fc-neftchi-fergana.png` |
+| FC Surkhon Termez | Termez | `fc-surkhon-termez.png` |
+| FK Andijan | Andijon | `fk-andijan.png` |
+| FK Buxoro | Bucara | `fk-buxoro.png` |
+| FK Dinamo Samarqand | Samarcanda | `fk-dinamo-samarqand.png` |
+| FK Mash'al Mubarek | Muborak | `fk-mash-al-mubarek.png` |
+| Kokand 1912 | Kokand | `kokand-1912.png` |
+| Lokomotiv Tashkent | Tasquente | `lokomotiv-tashkent.png` |
+| Nasaf Qarshi | Qarshi | `nasaf-qarshi.png` |
+| Navbahor Namangan | Namangan | `navbahor-namangan.png` |
+| PFK Qizilqum | Zarafshan | `pfk-qizilqum.png` |
+| Pakhtakor Tashkent | Tasquente | `pakhtakor-tashkent.png` |
+| Sogdiana Jizzakh | Jizaque | `sogdiana-jizzakh.png` |
+
+### Vietnã (14 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Becamex Ho Chi Minh City | Thủ Dầu Một | `becamex-ho-chi-minh-city.png` |
+| Cong An Ha Noi | Hanói | `cong-an-ha-noi.png` |
+| Cong An Ho Chi Minh City | Cidade de Ho Chi Minh | `cong-an-ho-chi-minh-city.png` |
+| Haiphong | Haiphong | `haiphong.png` |
+| Hanoi | Hanói | `hanoi.png` |
+| Hoang Anh Gia Lai | Pleiku | `hoang-anh-gia-lai.png` |
+| Hong Linh Ha Tinh | Ha Tinh | `hong-linh-ha-tinh.png` |
+| MerryLand Quy Nhon Binh Dinh | Qui Nhơn | `merryland-quy-nhon-binh-dinh.png` |
+| Ninh Bình | Ninh Bình | `ninh-binh.png` |
+| PVF-CAND | PVF-CAND | `pvf-cand.png` |
+| QNK Quang Nam | Tam Kỳ | `qnk-quang-nam.png` |
+| SHB Da Nang | Đà Nẵng | `shb-da-nang.png` |
+| Sông Lam Nghệ An | Vinh | `song-lam-nghe-an.png` |
+| Thanh Hóa | Thanh Hoa | `thanh-hoa.png` |
+
+### Zâmbia (18 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Atletico Lusaka | Atletico Lusaka | `atletico-lusaka.png` |
+| Forest Rangers | Forest Rangers | `forest-rangers.png` |
+| Green Buffaloes | Lusaca | `green-buffaloes.png` |
+| Green Eagles | Choma | `green-eagles.png` |
+| Indeni | Indeni | `indeni.png` |
+| Kabwe Warriors | Kabwe | `kabwe-warriors.png` |
+| Kansanshi Dynamos | Kansanshi Dynamos | `kansanshi-dynamos.png` |
+| Konkola Blades | Chililabombwe | `konkola-blades.png` |
+| Lumwana Radiants | Lumwana Radiants | `lumwana-radiants.png` |
+| Maestro United Zambia | Maestro United Zambia | `maestro-united-zambia.png` |
+| Mines United | Mines United | `mines-united.png` |
+| Mufulira Wanderers | Mufulira | `mufulira-wanderers.png` |
+| Mutondo Stars | Mutondo Stars | `mutondo-stars.png` |
+| NAPSA Stars | Lusaca | `napsa-stars.png` |
+| Nchanga Rangers | Chingola | `nchanga-rangers.png` |
+| Nkana | Kitwe | `nkana.png` |
+| Nkwazi | Lusaca | `nkwazi.png` |
+| Red Arrows | Lusaca | `red-arrows.png` |
+
+### África do Sul (16 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| AmaZulu | Durban | `amazulu.png` |
+| Cape Town City | Cidade do Cabo | `cape-town-city.png` |
+| Chippa United | Porto Elizabeth | `chippa-united.png` |
+| Kaizer Chiefs | Soweto | `kaizer-chiefs.png` |
+| Lamontville Golden Arrows | Durban | `lamontville-golden-arrows.png` |
+| Magesi | Magesi | `magesi.png` |
+| Mamelodi Sundowns | Pretória | `mamelodi-sundowns.png` |
+| Maritzburg United | Pietermaritzburg | `maritzburg-united.png` |
+| Marumo Gallants | Polokwane | `marumo-gallants.png` |
+| Orbit College | Rustemburgo | `orbit-college.png` |
+| Orlando Pirates | Soweto | `orlando-pirates.png` |
+| Polokwane City | Polokwane Local Municipality | `polokwane-city.png` |
+| Real Kings | Durban | `real-kings.png` |
+| Richards Bay | Richards Bay | `richards-bay.png` |
+| Sekhukhune United | Polokwane | `sekhukhune-united.png` |
+| Siwelele | Siwelele | `siwelele.png` |
+
 ### Áustria (12 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
@@ -412,6 +904,24 @@ Total: 618 escudos (0 de clubes brasileiros e 618 de fora).
 | Sturm Graz | Graz | `sturm-graz.png` |
 | WSG Tirol | Wattens | `wsg-tirol.png` |
 | Wolfsberger AC | Wolfsberg | `wolfsberger.png` |
+
+### Índia (13 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Bengaluru | Bangalore | `bengaluru.png` |
+| Chennaiyin | Chennai | `chennaiyin.png` |
+| East Bengal | Calcutá | `east-bengal.png` |
+| FC Goa | Goa | `fc-goa.png` |
+| Inter Kashi | Inter Kashi | `inter-kashi.png` |
+| Jamshedpur | Jamshedpur | `jamshedpur.png` |
+| Kerala Blasters | Cochim | `kerala-blasters.png` |
+| Mohammedan | Calcutá | `mohammedan.png` |
+| Mohun Bagan Super Giant | Calcutá | `mohun-bagan-super-giant.png` |
+| Mumbai City | Bombaim | `mumbai-city.png` |
+| NorthEast United | Guwahati | `northeast-united.png` |
+| Odisha | Bhubaneswar | `odisha.png` |
+| Punjab | Mohali | `punjab.png` |
 
 ## Outros países da América: 2ª divisão de 2026
 

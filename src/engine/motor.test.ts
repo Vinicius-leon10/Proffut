@@ -30,6 +30,8 @@ import terceirasJson from "../../data/europa-2026/clubes-terceiras.json";
 import outrosJson from "../../data/europa-2026/jogadores-outros.json";
 import asiaClubesJson from "../../data/asia-2026/clubes.json";
 import asiaJogadoresJson from "../../data/asia-2026/jogadores.json";
+import mundoClubesJson from "../../data/mundo-2026/clubes.json";
+import mundoJogadoresJson from "../../data/mundo-2026/jogadores.json";
 import europaCopasJson from "../../data/europa-2026/copas.json";
 import { TV_EUROPA_MES } from "./constantes";
 import { processarMes } from "./financas";
@@ -2397,6 +2399,41 @@ describe("Ásia (projeto jogo completo, parte 2, nov/2026): a 1ª divisão do Ja
     const campeoes = ["K-UCL", "K-LIB", "K-CONC", "K-AFC"].map((id) => e.copas![id as `K-${string}`]!.campeao!);
     expect(vagas["K-MUN"]?.semi?.sort()).toEqual([...new Set(campeoes)].sort());
     expect(vagas["K-AFC"]?.grupos).toHaveLength(16);
+  });
+
+  it("África e o resto da Ásia: 25 ligas com os clubes das páginas, elencos de verdade onde a página tem e convocados no clube", () => {
+    const ligas = mundoClubesJson.ligas as Record<string, string>;
+    expect(Object.keys(ligas)).toHaveLength(25);
+    for (const [liga, regiao] of Object.entries(ligas)) {
+      expect(PAISES[liga]?.regiao, liga).toBe(regiao);
+      expect(estado.torneios?.[`L-${liga}` as IdTorneio]?.clubes.length, liga).toBeGreaterThanOrEqual(10);
+    }
+    expect(estado.torneios?.["L-EG" as IdTorneio]?.clubes).toContain("al-ahly");
+    const elencos = mundoJogadoresJson.elencos as Record<string, { nome: string }[]>;
+    expect(Object.keys(elencos).length).toBeGreaterThanOrEqual(250);
+    for (const [clubeId, reais] of Object.entries(elencos)) {
+      const elenco = elencoDe(estado, clubeId);
+      expect(elenco.length, clubeId).toBeGreaterThanOrEqual(18);
+      for (const r of reais.slice(0, 2)) expect(elenco.some((j) => j.nome === r.nome), `${r.nome} (${clubeId})`).toBe(true);
+    }
+    // Clube sem elenco na página ganha um criado, com o mínimo de cada posição.
+    const semElenco = (mundoClubesJson.clubes as { id: string }[]).find((c) => !elencos[c.id])!;
+    expect(elencoDe(estado, semElenco.id).length).toBeGreaterThanOrEqual(18);
+    const media = (id: string) => elencoDe(estado, id).map((j) => j.forca).sort((a, b) => b - a).slice(0, 11).reduce((a, b) => a + b) / 11;
+    expect(media("al-ahly")).toBeGreaterThan(media("kahrbaa-ismailia") + 6);
+    // Convocados que jogam nesses clubes: só no clube.
+    const doMundo = new Set((mundoClubesJson.clubes as { id: string }[]).map((c) => c.id));
+    let vistos = 0;
+    for (const [pais, s] of Object.entries(convocadosJson.selecoes as Record<string, { convocados: { clubeDoJogo?: string; noJogo?: string }[] }>)) {
+      for (const c of s.convocados) {
+        if (!c.clubeDoJogo || !doMundo.has(c.clubeDoJogo)) continue;
+        vistos++;
+        // Sem cópia "jogando fora" pela mesma seleção (há homônimos em seleções diferentes, como o Khaled Ibrahim).
+        const iguais = Object.values(estado.jogadores).filter((j) => j.nome === c.noJogo && (j.clubeId === c.clubeDoJogo || j.clubeId === `sel-${pais}`));
+        expect(iguais.map((j) => j.clubeId), c.noJogo).toEqual([c.clubeDoJogo]);
+      }
+    }
+    expect(vistos).toBeGreaterThanOrEqual(200);
   });
 
   it("save de antes da Ásia: abrir o jogo cria os clubes, que jogam a liga na temporada seguinte", () => {

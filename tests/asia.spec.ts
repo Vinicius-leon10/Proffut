@@ -5,6 +5,7 @@ import { aba, abrirSite, botao, expect, pularTutorial, test } from "./ajuda";
 
 type Ficha = { id: string; nome: string; pais: string };
 const asia = (JSON.parse(readFileSync("data/asia-2026/clubes.json", "utf8")) as { clubes: Ficha[] }).clubes;
+const mundo = (JSON.parse(readFileSync("data/mundo-2026/clubes.json", "utf8")) as { clubes: Ficha[] }).clubes;
 
 test("R108 Ásia no jogo novo: o continente Ásia com Arábia Saudita, Austrália, Coreia do Sul e Japão; o Japão com os 20 clubes da J1; assumindo o Urawa Reds, o painel mostra o Campeonato Japonês; nas Tabelas, Outros países com o grupo Ásia e o Japão com 20 clubes", async ({ page }) => {
   await abrirSite(page);
@@ -29,7 +30,7 @@ test("R108 Ásia no jogo novo: o continente Ásia com Arábia Saudita, Austráli
   const pais = page.getByRole("combobox", { name: "País" });
   await expect(pais).toHaveValue("JP");
   const daAsia = await pais.locator('optgroup[label="Ásia"] option').allTextContents();
-  expect(daAsia.sort()).toEqual(["Arábia Saudita", "Austrália", "Coreia do Sul", "Japão"]);
+  for (const p of ["Arábia Saudita", "Austrália", "Coreia do Sul", "Japão"]) expect(daAsia).toContain(p);
   await expect(page.locator("main table.tabela tbody tr")).toHaveCount(20);
 });
 
@@ -54,4 +55,31 @@ test("R109 Liga dos Campeões da Ásia: com o Urawa Reds, Tabelas → Copas abre
   await expect(grupo.locator("option")).toHaveCount(4);
   await expect(grupo.locator("option", { hasText: "(seu time)" })).toHaveCount(1);
   await expect(page.locator("main table.tabela tbody tr")).toHaveCount(4);
+});
+
+test("R110 África e o resto da Ásia: no jogo novo, o continente África com o Egito (21 clubes), Marrocos e a África do Sul; assumindo o Al Ahly, o painel mostra o Campeonato Egípcio; nas Tabelas, Outros países com o grupo África e o Egito com 21 clubes; a Ásia ganha China, Catar, Irã e outros", async ({ page }) => {
+  await abrirSite(page);
+  await botao(page, "Novo jogo").click();
+  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByRole("button", { name: "Próximo", exact: true }).click();
+  await page.getByRole("button", { name: /África/ }).click();
+  const paises = (await page.locator(".lista .item").allTextContents()).join(" | ");
+  for (const p of ["Egito", "Marrocos", "África do Sul", "Argélia", "Tunísia", "Nigéria"]) expect(paises, p).toContain(p);
+  await page.getByRole("button", { name: /Egito/ }).click();
+  await expect(page.locator(".topo .titulo")).toHaveText("Egito");
+  await expect(page.locator(".lista .item")).toHaveCount(mundo.filter((c) => c.pais === "EG").length);
+  await botao(page, /Al Ahly/).click();
+  await botao(page, /^Assumir (o|a) /).click();
+  await pularTutorial(page);
+  await expect(page.locator(".topo .titulo")).toHaveText("Al Ahly");
+  await expect(page.getByRole("heading", { name: "Campeonato Egípcio 2026" })).toBeVisible();
+  await aba(page, "Tabelas");
+  await page.getByRole("tab", { name: "Outros países" }).click();
+  const pais = page.getByRole("combobox", { name: "País" });
+  await expect(pais).toHaveValue("EG");
+  const daAfrica = await pais.locator('optgroup[label="África"] option').allTextContents();
+  for (const p of ["Egito", "Marrocos", "África do Sul", "Quênia"]) expect(daAfrica).toContain(p);
+  const daAsia = await pais.locator('optgroup[label="Ásia"] option').allTextContents();
+  for (const p of ["China", "Catar", "Irã", "Emirados Árabes", "Japão"]) expect(daAsia).toContain(p);
+  await expect(page.locator("main table.tabela tbody tr")).toHaveCount(21);
 });

@@ -726,7 +726,9 @@
      "jogos": 55,
      "gols": 2,
      "clube": "Khor Fakkan",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "khor-fakkan",
+     "noJogo": "Luis Haquín"
     },
     {
      "nome": "Efrain Morales",
@@ -829,7 +831,9 @@
      "jogos": 49,
      "gols": 5,
      "clube": "Khor Fakkan",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "khor-fakkan",
+     "noJogo": "Ramiro Vaca"
     },
     {
      "nome": "Robson Tomé",
@@ -17031,7 +17035,9 @@
      "jogos": 106,
      "gols": 64,
      "clube": "Al-Rayyan",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-rayyan",
+     "noJogo": "Aleksandar Mitrović"
     },
     {
      "nome": "Luka Jović",
@@ -20110,7 +20116,9 @@
      "jogos": 22,
      "gols": 3,
      "clube": "Al-Gharafa",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-gharafa",
+     "noJogo": "Florinel Coman"
     },
     {
      "nome": "Olimpiu Moruțan",
@@ -21842,7 +21850,9 @@
      "jogos": 111,
      "gols": 5,
      "clube": "Qatar SC",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "qatar",
+     "noJogo": "Aron Gunnarsson"
     },
     {
      "nome": "Mikael Egill Ellertsson",
@@ -27090,7 +27100,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "USM Alger",
-     "paisDoClube": "ALG"
+     "paisDoClube": "ALG",
+     "clubeDoJogo": "usm-alger",
+     "noJogo": "Oussama Benbot"
     },
     {
      "nome": "Melvin Mastil",
@@ -27108,7 +27120,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Olympique Akbou",
-     "paisDoClube": "ALG"
+     "paisDoClube": "ALG",
+     "clubeDoJogo": "olympique-akbou",
+     "noJogo": "Rayane Yesli"
     },
     {
      "nome": "Ramy Bensebaini",
@@ -27159,7 +27173,9 @@
      "jogos": 13,
      "gols": 1,
      "clube": "USM Alger",
-     "paisDoClube": "ALG"
+     "paisDoClube": "ALG",
+     "clubeDoJogo": "usm-alger",
+     "noJogo": "Achref Abada"
     },
     {
      "nome": "Sohaib Naïr",
@@ -27587,7 +27603,9 @@
      "jogos": 24,
      "gols": 0,
      "clube": "Zamalek",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "zamalek",
+     "noJogo": "Chico Banza"
     },
     {
      "nome": "Gilberto",
@@ -28688,7 +28706,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "USM Alger",
-     "paisDoClube": "ALG"
+     "paisDoClube": "ALG",
+     "clubeDoJogo": "usm-alger",
+     "noJogo": "Che Malone"
     },
     {
      "nome": "Kévin Keben",
@@ -28924,7 +28944,9 @@
      "jogos": 37,
      "gols": 2,
      "clube": "Sharjah",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "sharjah",
+     "noJogo": "Diney Borges"
     },
     {
      "nome": "Logan Costa",
@@ -28997,7 +29019,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Persebaya Surabaya",
-     "paisDoClube": "IDN"
+     "paisDoClube": "IDN",
+     "clubeDoJogo": "persebaya-surabaya",
+     "noJogo": "Yuran Fernandes"
     },
     {
      "nome": "Jamiro Monteiro",
@@ -29166,7 +29190,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Remo Stars",
-     "paisDoClube": "NGA"
+     "paisDoClube": "NGA",
+     "clubeDoJogo": "remo-stars",
+     "noJogo": "Alladum Kolimba"
     },
     {
      "nome": "Emmanuel Takoligba",
@@ -29785,7 +29811,9 @@
      "jogos": 45,
      "gols": 7,
      "clube": "Qatar SC",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "qatar",
+     "noJogo": "Faïz Selemani"
     },
     {
      "nome": "Aboubacar Ali",
@@ -30017,7 +30045,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Simba",
-     "paisDoClube": "TAN"
+     "paisDoClube": "TAN",
+     "clubeDoJogo": "simba",
+     "noJogo": "Inno Loemba"
     },
     {
      "nome": "Will Hondermarck",
@@ -30035,7 +30065,9 @@
      "jogos": 41,
      "gols": 16,
      "clube": "Persepolis",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "persepolis",
+     "noJogo": "Thievy Bifouma"
     },
     {
      "nome": "Guy Mbenza",
@@ -30044,7 +30076,9 @@
      "jogos": 21,
      "gols": 5,
      "clube": "Liaoning Tieren",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "liaoning-tieren",
+     "noJogo": "Guy Mbenza"
     },
     {
      "nome": "Mons Bassouamina",
@@ -30596,7 +30630,9 @@
      "jogos": 15,
      "gols": 0,
      "clube": "Al Ahly",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "al-ahly",
+     "noJogo": "Mostafa Shobeir"
     },
     {
      "nome": "Mohamed Alaa",
@@ -30614,7 +30650,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "National Bank of Egypt",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "national-bank-of-egypt",
+     "noJogo": "Abdelaziz El Balouti"
     },
     {
      "nome": "El Mahdy Soliman",
@@ -30623,7 +30661,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Zamalek",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "zamalek",
+     "noJogo": "El Mahdy Soliman"
     },
     {
      "nome": "Ramy Rabia",
@@ -30632,7 +30672,9 @@
      "jogos": 50,
      "gols": 5,
      "clube": "Al Ain",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-ain",
+     "noJogo": "Ramy Rabia"
     },
     {
      "nome": "Mohamed Hany",
@@ -30641,7 +30683,9 @@
      "jogos": 48,
      "gols": 0,
      "clube": "Al Ahly",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "al-ahly",
+     "noJogo": "Mohamed Hany"
     },
     {
      "nome": "Ahmed Fatouh",
@@ -30679,7 +30723,9 @@
      "jogos": 12,
      "gols": 0,
      "clube": "Pyramids",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "pyramids",
+     "noJogo": "Karim Hafez"
     },
     {
      "nome": "Tarek Alaa",
@@ -30688,7 +30734,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "ZED",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "zed",
+     "noJogo": "Tarek Alaa"
     },
     {
      "nome": "Omar Fayed",
@@ -30719,7 +30767,9 @@
      "jogos": 68,
      "gols": 5,
      "clube": "Al Ahly",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "al-ahly",
+     "noJogo": "Zizo"
     },
     {
      "nome": "Marwan Attia",
@@ -30728,7 +30778,9 @@
      "jogos": 39,
      "gols": 1,
      "clube": "Al Ahly",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "al-ahly",
+     "noJogo": "Marwan Attia"
     },
     {
      "nome": "Emam Ashour",
@@ -30737,7 +30789,9 @@
      "jogos": 35,
      "gols": 2,
      "clube": "Al Ahly",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "al-ahly",
+     "noJogo": "Emam Ashour"
     },
     {
      "nome": "Mohanad Lasheen",
@@ -30746,7 +30800,9 @@
      "jogos": 28,
      "gols": 0,
      "clube": "Pyramids",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "pyramids",
+     "noJogo": "Mohanad Lasheen"
     },
     {
      "nome": "Ibrahim Adel",
@@ -30766,7 +30822,9 @@
      "jogos": 18,
      "gols": 2,
      "clube": "Pyramids",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "pyramids",
+     "noJogo": "Mahmoud Saber"
     },
     {
      "nome": "Mostafa Ziko",
@@ -30775,7 +30833,9 @@
      "jogos": 8,
      "gols": 4,
      "clube": "Pyramids",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "pyramids",
+     "noJogo": "Mostafa Ziko"
     },
     {
      "nome": "Haissem Hassan",
@@ -30804,7 +30864,9 @@
      "jogos": 16,
      "gols": 0,
      "clube": "National Bank of Egypt",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "national-bank-of-egypt",
+     "noJogo": "Osama Faisal"
     },
     {
      "nome": "Omar Marmoush",
@@ -30847,7 +30909,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Sekhukhune United",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "sekhukhune-united",
+     "noJogo": "Manuel Sapunga"
     },
     {
      "nome": "Marcos Ondo",
@@ -30887,7 +30951,9 @@
      "jogos": 48,
      "gols": 2,
      "clube": "Johor Darul Ta'zim",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "johor-darul-ta-zim",
+     "noJogo": "Carlos Akapo"
     },
     {
      "nome": "Saúl Coco",
@@ -31003,7 +31069,9 @@
      "jogos": 63,
      "gols": 6,
      "clube": "Persita Tangerang",
-     "paisDoClube": "IDN"
+     "paisDoClube": "IDN",
+     "clubeDoJogo": "persita-tangerang",
+     "noJogo": "Pablo Ganet"
     },
     {
      "nome": "Josete Miranda",
@@ -31250,7 +31318,9 @@
      "jogos": 13,
      "gols": 6,
      "clube": "Al-Masry",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "al-masry",
+     "noJogo": "Ali Sulieman"
     },
     {
      "nome": "Romel Abdu",
@@ -32173,7 +32243,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Club Africain",
-     "paisDoClube": "TUN"
+     "paisDoClube": "TUN",
+     "clubeDoJogo": "club-africain",
+     "noJogo": "Saidou Khan"
     },
     {
      "nome": "Musa Barrow",
@@ -32885,7 +32957,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "FAR Rabat",
-     "paisDoClube": "MAR"
+     "paisDoClube": "MAR",
+     "clubeDoJogo": "far-rabat",
+     "noJogo": "Fallou Mendy"
     },
     {
      "nome": "Bura Nogueira",
@@ -33016,7 +33090,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Kaizer Chiefs",
-     "paisDoClube": "SAF"
+     "paisDoClube": "SAF",
+     "clubeDoJogo": "kaizer-chiefs",
+     "noJogo": "Flávio Silva"
     },
     {
      "nome": "Flinto Costa",
@@ -33972,7 +34048,9 @@
      "jogos": 21,
      "gols": 1,
      "clube": "ASO Chlef",
-     "paisDoClube": "ALG"
+     "paisDoClube": "ALG",
+     "clubeDoJogo": "aso-chlef",
+     "noJogo": "Edward Ledlum"
     },
     {
      "nome": "Peter Wilson",
@@ -34382,7 +34460,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "US Monastir",
-     "paisDoClube": "TUN"
+     "paisDoClube": "TUN",
+     "clubeDoJogo": "us-monastir",
+     "noJogo": "Behaja Tsirava"
     },
     {
      "nome": "Arnaud Randrianantenaina",
@@ -35050,7 +35130,9 @@
      "jogos": 30,
      "gols": 1,
      "clube": "JS Kabylie",
-     "paisDoClube": "ALG"
+     "paisDoClube": "ALG",
+     "clubeDoJogo": "js-kabylie",
+     "noJogo": "Nouh Mohamed El Abd"
     },
     {
      "nome": "Khadim Diaw",
@@ -35059,7 +35141,9 @@
      "jogos": 25,
      "gols": 0,
      "clube": "Olympique Akbou",
-     "paisDoClube": "ALG"
+     "paisDoClube": "ALG",
+     "clubeDoJogo": "olympique-akbou",
+     "noJogo": "Khadim Diaw"
     },
     {
      "nome": "Demine Saleck",
@@ -35491,7 +35575,9 @@
      "jogos": 52,
      "gols": 0,
      "clube": "RS Berkane",
-     "paisDoClube": "MAR"
+     "paisDoClube": "MAR",
+     "clubeDoJogo": "rs-berkane",
+     "noJogo": "Munir Mohamedi"
     },
     {
      "nome": "Ahmed Reda Tagnaouti",
@@ -35814,7 +35900,9 @@
      "jogos": 39,
      "gols": 0,
      "clube": "Newroz",
-     "paisDoClube": "IRQ"
+     "paisDoClube": "IRQ",
+     "clubeDoJogo": "newroz",
+     "noJogo": "Edmilson Dove"
     },
     {
      "nome": "Fernando Chamboco",
@@ -35900,7 +35988,9 @@
      "jogos": 42,
      "gols": 0,
      "clube": "Polokwane City",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "polokwane-city",
+     "noJogo": "Manuel Kambala"
     },
     {
      "nome": "Gildo Vilanculos",
@@ -36033,7 +36123,9 @@
      "jogos": 60,
      "gols": 0,
      "clube": "AmaZulu",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "amazulu",
+     "noJogo": "Riaan Hanamub"
     },
     {
      "nome": "Charles Hambira",
@@ -36113,7 +36205,9 @@
      "jogos": 86,
      "gols": 12,
      "clube": "Orlando Pirates",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "orlando-pirates",
+     "noJogo": "Deon Hotto"
     },
     {
      "nome": "Aprocius Petrus",
@@ -36338,7 +36432,9 @@
      "jogos": 75,
      "gols": 8,
      "clube": "Stade Tunisien",
-     "paisDoClube": "TUN"
+     "paisDoClube": "TUN",
+     "clubeDoJogo": "stade-tunisien",
+     "noJogo": "Youssouf Oumarou"
     },
     {
      "nome": "Amadou Sabo",
@@ -36479,7 +36575,9 @@
      "jogos": 36,
      "gols": 0,
      "clube": "Chippa United",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "chippa-united",
+     "noJogo": "Stanley Nwabali"
     },
     {
      "nome": "Arthur Okonkwo",
@@ -36768,7 +36866,9 @@
      "jogos": 46,
      "gols": 0,
      "clube": "Chennaiyin",
-     "paisDoClube": "IND"
+     "paisDoClube": "IND",
+     "clubeDoJogo": "chennaiyin",
+     "noJogo": "Emmanuel Imanishimwe"
     },
     {
      "nome": "Ange Mutsinzi",
@@ -36880,7 +36980,9 @@
      "jogos": 47,
      "gols": 3,
      "clube": "CS Constantine",
-     "paisDoClube": "ALG"
+     "paisDoClube": "ALG",
+     "clubeDoJogo": "cs-constantine",
+     "noJogo": "Djihad Bizimana"
     },
     {
      "nome": "Kevin Muhire",
@@ -37724,7 +37826,9 @@
      "jogos": 12,
      "gols": 0,
      "clube": "El Gouna",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "el-gouna",
+     "noJogo": "Alpha Turay"
     },
     {
      "nome": "Juma Bah",
@@ -38141,7 +38245,9 @@
      "jogos": 71,
      "gols": 0,
      "clube": "Mamelodi Sundowns",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "mamelodi-sundowns",
+     "noJogo": "Ronwen Williams"
     },
     {
      "nome": "Sipho Chaine",
@@ -38150,7 +38256,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Orlando Pirates",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "orlando-pirates",
+     "noJogo": "Sipho Chaine"
     },
     {
      "nome": "Ricardo Goss",
@@ -38159,7 +38267,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "Mamelodi Sundowns",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "mamelodi-sundowns",
+     "noJogo": "Ricardo Goss"
     },
     {
      "nome": "Aubrey Modiba",
@@ -38168,7 +38278,9 @@
      "jogos": 47,
      "gols": 1,
      "clube": "Mamelodi Sundowns",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "mamelodi-sundowns",
+     "noJogo": "Aubrey Modiba"
     },
     {
      "nome": "Samukele Kabini",
@@ -38188,7 +38300,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Mamelodi Sundowns",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "mamelodi-sundowns",
+     "noJogo": "Fawaaz Basadien"
     },
     {
      "nome": "Thapelo Morena",
@@ -38197,7 +38311,9 @@
      "jogos": 38,
      "gols": 3,
      "clube": "Mamelodi Sundowns",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "mamelodi-sundowns",
+     "noJogo": "Thapelo Morena"
     },
     {
      "nome": "Thabang Matuludi",
@@ -38206,7 +38322,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Mamelodi Sundowns",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "mamelodi-sundowns",
+     "noJogo": "Thabang Matuludi"
     },
     {
      "nome": "Olwethu Makhanya",
@@ -38224,7 +38342,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Orlando Pirates",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "orlando-pirates",
+     "noJogo": "Lebone Seema"
     },
     {
      "nome": "Ime Okon",
@@ -38255,7 +38375,9 @@
      "jogos": 58,
      "gols": 10,
      "clube": "Mamelodi Sundowns",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "mamelodi-sundowns",
+     "noJogo": "Teboho Mokoena"
     },
     {
      "nome": "Sphephelo Sithole",
@@ -38275,7 +38397,9 @@
      "jogos": 19,
      "gols": 1,
      "clube": "Mamelodi Sundowns",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "mamelodi-sundowns",
+     "noJogo": "Bathusi Aubaas"
     },
     {
      "nome": "Brooklyn Poggenpoel",
@@ -38293,7 +38417,9 @@
      "jogos": 20,
      "gols": 3,
      "clube": "Orlando Pirates",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "orlando-pirates",
+     "noJogo": "Thalente Mbatha"
     },
     {
      "nome": "Oswin Appollis",
@@ -38302,7 +38428,9 @@
      "jogos": 34,
      "gols": 8,
      "clube": "Orlando Pirates",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "orlando-pirates",
+     "noJogo": "Oswin Appollis"
     },
     {
      "nome": "Lyle Foster",
@@ -38321,7 +38449,9 @@
      "jogos": 27,
      "gols": 6,
      "clube": "Mamelodi Sundowns",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "mamelodi-sundowns",
+     "noJogo": "Iqraam Rayners"
     },
     {
      "nome": "Relebohile Mofokeng",
@@ -38339,7 +38469,9 @@
      "jogos": 14,
      "gols": 1,
      "clube": "Orlando Pirates",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "orlando-pirates",
+     "noJogo": "Tshepang Moremi"
     },
     {
      "nome": "Luther Singh",
@@ -38357,7 +38489,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Mamelodi Sundowns",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "mamelodi-sundowns",
+     "noJogo": "Cassius Mailula"
     },
     {
      "nome": "Puso Dithejane",
@@ -38377,7 +38511,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Mamelodi Sundowns",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "mamelodi-sundowns",
+     "noJogo": "Tashreeq Matthews"
     },
     {
      "nome": "Siyanda Ndlovu",
@@ -38897,7 +39033,9 @@
      "jogos": 17,
      "gols": 0,
      "clube": "Simba",
-     "paisDoClube": "TAN"
+     "paisDoClube": "TAN",
+     "clubeDoJogo": "simba",
+     "noJogo": "Nickson Kibabage"
     },
     {
      "nome": "Lameck Lawi",
@@ -38978,7 +39116,9 @@
      "jogos": 12,
      "gols": 0,
      "clube": "Simba",
-     "paisDoClube": "TAN"
+     "paisDoClube": "TAN",
+     "clubeDoJogo": "simba",
+     "noJogo": "Morice Abraham"
     },
     {
      "nome": "Kelvin Nashon",
@@ -39102,7 +39242,9 @@
      "jogos": 29,
      "gols": 0,
      "clube": "IR Tanger",
-     "paisDoClube": "MAR"
+     "paisDoClube": "MAR",
+     "clubeDoJogo": "ir-tanger",
+     "noJogo": "Malcolm Barcola"
     },
     {
      "nome": "Steven Mensah",
@@ -39244,7 +39386,9 @@
      "jogos": 17,
      "gols": 0,
      "clube": "Shanghai Port",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "shanghai-port",
+     "noJogo": "Kodjo Aziangbe"
     },
     {
      "nome": "Sadik Fofana",
@@ -39289,7 +39433,9 @@
      "jogos": 58,
      "gols": 20,
      "clube": "Sharjah",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "sharjah",
+     "noJogo": "Kodjo Fo-Doh Laba"
     },
     {
      "nome": "Kévin Denkey",
@@ -39309,7 +39455,9 @@
      "jogos": 14,
      "gols": 2,
      "clube": "National Bank of Egypt",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "national-bank-of-egypt",
+     "noJogo": "Yaw Annor"
     },
     {
      "nome": "Arnaud Komlavi",
@@ -39318,7 +39466,9 @@
      "jogos": 5,
      "gols": 1,
      "clube": "Tala'ea El Gaish",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "tala-ea-el-gaish",
+     "noJogo": "Arnaud Komlavi"
     },
     {
      "nome": "Charles Abi",
@@ -39352,7 +39502,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Club Africain",
-     "paisDoClube": "TUN"
+     "paisDoClube": "TUN",
+     "clubeDoJogo": "club-africain",
+     "noJogo": "Mouhib Chamakh"
     },
     {
      "nome": "Aymen Dahmen",
@@ -39430,7 +39582,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Club Africain",
-     "paisDoClube": "TUN"
+     "paisDoClube": "TUN",
+     "clubeDoJogo": "club-africain",
+     "noJogo": "Ghaith Zaalouni"
     },
     {
      "nome": "Omar Rekik",
@@ -39468,7 +39622,9 @@
      "jogos": 61,
      "gols": 7,
      "clube": "Al-Shamal",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-shamal",
+     "noJogo": "Mohamed Ali Ben Romdhane"
     },
     {
      "nome": "Hadj Mahmoud",
@@ -39488,7 +39644,9 @@
      "jogos": 104,
      "gols": 9,
      "clube": "Al-Gharafa",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-gharafa",
+     "noJogo": "Ferjani Sassi"
     },
     {
      "nome": "Anis Ben Slimane",
@@ -39517,7 +39675,9 @@
      "jogos": 60,
      "gols": 2,
      "clube": "Al-Wakrah",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-wakrah",
+     "noJogo": "Aïssa Laïdouni"
     },
     {
      "nome": "Moataz Zemzemi",
@@ -39578,7 +39738,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "CR Belouizdad",
-     "paisDoClube": "ALG"
+     "paisDoClube": "ALG",
+     "clubeDoJogo": "cr-belouizdad",
+     "noJogo": "Mohamed Ali Ben Hammouda"
     },
     {
      "nome": "Firas Chaouat",
@@ -39621,7 +39783,9 @@
      "jogos": 83,
      "gols": 0,
      "clube": "Mamelodi Sundowns",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "mamelodi-sundowns",
+     "noJogo": "Denis Onyango"
     },
     {
      "nome": "Akpan Udoh",
@@ -40032,7 +40196,9 @@
      "jogos": 17,
      "gols": 0,
      "clube": "Orlando Pirates",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "orlando-pirates",
+     "noJogo": "Gamphani Lungu"
     },
     {
      "nome": "Miguel Chaiwa",
@@ -40070,7 +40236,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "El Gouna",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "el-gouna",
+     "noJogo": "David Simukonda"
     },
     {
      "nome": "Given Kalusa",
@@ -40380,7 +40548,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "AmaZulu",
-     "paisDoClube": "RSA"
+     "paisDoClube": "RSA",
+     "clubeDoJogo": "amazulu",
+     "noJogo": "Thandolwenkosi Ngwenya"
     }
    ]
   },
@@ -40873,7 +41043,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Al-Khaldiya",
-     "paisDoClube": "BHR"
+     "paisDoClube": "BHR",
+     "clubeDoJogo": "al-khaldiya",
+     "noJogo": "Mohamed El Garably"
     },
     {
      "nome": "Amine Benaddi",
@@ -40882,7 +41054,9 @@
      "jogos": 42,
      "gols": 0,
      "clube": "Al-Muharraq",
-     "paisDoClube": "BHR"
+     "paisDoClube": "BHR",
+     "clubeDoJogo": "al-muharraq",
+     "noJogo": "Amine Benaddi"
     },
     {
      "nome": "Waleed Al Hayam",
@@ -40891,7 +41065,9 @@
      "jogos": 134,
      "gols": 0,
      "clube": "Al-Muharraq",
-     "paisDoClube": "BHR"
+     "paisDoClube": "BHR",
+     "clubeDoJogo": "al-muharraq",
+     "noJogo": "Waleed Al Hayam"
     },
     {
      "nome": "Hamad Al-Shamsan",
@@ -40936,7 +41112,9 @@
      "jogos": 29,
      "gols": 1,
      "clube": "Al-Muharraq",
-     "paisDoClube": "BHR"
+     "paisDoClube": "BHR",
+     "clubeDoJogo": "al-muharraq",
+     "noJogo": "Abdulla Al-Khulasi"
     },
     {
      "nome": "Sayed Dhiya Saeed",
@@ -40945,7 +41123,9 @@
      "jogos": 140,
      "gols": 8,
      "clube": "Al-Khaldiya",
-     "paisDoClube": "BHR"
+     "paisDoClube": "BHR",
+     "clubeDoJogo": "al-khaldiya",
+     "noJogo": "Sayed Dhiya Saeed"
     },
     {
      "nome": "Abbas Al-Asfoor",
@@ -40972,7 +41152,9 @@
      "jogos": 88,
      "gols": 19,
      "clube": "Kuwait SC",
-     "paisDoClube": "KUW"
+     "paisDoClube": "KUW",
+     "clubeDoJogo": "kuwait",
+     "noJogo": "Mohamed Marhoon"
     },
     {
      "nome": "Kamil Al-Aswad",
@@ -41035,7 +41217,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Al-Muharraq",
-     "paisDoClube": "BHR"
+     "paisDoClube": "BHR",
+     "clubeDoJogo": "al-muharraq",
+     "noJogo": "Hasan Al-Karrani"
     },
     {
      "nome": "Ali Al-Doseri",
@@ -41071,7 +41255,9 @@
      "jogos": 61,
      "gols": 20,
      "clube": "Al-Khaldiya",
-     "paisDoClube": "BHR"
+     "paisDoClube": "BHR",
+     "clubeDoJogo": "al-khaldiya",
+     "noJogo": "Mohamed Al-Romaihi"
     },
     {
      "nome": "Husain Abdulkarim",
@@ -41778,7 +41964,9 @@
      "jogos": 63,
      "gols": 0,
      "clube": "Shanghai Port",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "shanghai-port",
+     "noJogo": "Yan Junling"
     },
     {
      "nome": "Liu Dianzuo",
@@ -41787,7 +41975,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Chengdu Rongcheng",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "chengdu-rongcheng",
+     "noJogo": "Liu Dianzuo"
     },
     {
      "nome": "Yan Bingliang",
@@ -41796,7 +41986,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Tianjin Jinmen Tiger",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "tianjin-jinmen-tiger",
+     "noJogo": "Yan Bingliang"
     },
     {
      "nome": "Liu Yang",
@@ -41805,7 +41997,9 @@
      "jogos": 38,
      "gols": 0,
      "clube": "Shandong Taishan",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "shandong-taishan",
+     "noJogo": "Liu Yang"
     },
     {
      "nome": "Tyias Browning",
@@ -41823,7 +42017,9 @@
      "jogos": 21,
      "gols": 0,
      "clube": "Shandong Taishan",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "shandong-taishan",
+     "noJogo": "Gao Zhunyi"
     },
     {
      "nome": "Wei Zhen",
@@ -41832,7 +42028,9 @@
      "jogos": 9,
      "gols": 0,
      "clube": "Shanghai Port",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "shanghai-port",
+     "noJogo": "Wei Zhen"
     },
     {
      "nome": "Han Pengfei",
@@ -41841,7 +42039,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "Chengdu Rongcheng",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "chengdu-rongcheng",
+     "noJogo": "Han Pengfei"
     },
     {
      "nome": "Wang Gengrui",
@@ -41859,7 +42059,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Chengdu Rongcheng",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "chengdu-rongcheng",
+     "noJogo": "Li Yang"
     },
     {
      "nome": "Zhang Aihui",
@@ -41877,7 +42079,9 @@
      "jogos": 34,
      "gols": 1,
      "clube": "Henan FC",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "henan",
+     "noJogo": "Wang Shangyuan"
     },
     {
      "nome": "Dai Wai Tsun",
@@ -41886,7 +42090,9 @@
      "jogos": 17,
      "gols": 0,
      "clube": "Shenzhen Peng City",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "shenzhen-peng-city",
+     "noJogo": "Dai Wai Tsun"
     },
     {
      "nome": "Gao Tianyi",
@@ -41895,7 +42101,9 @@
      "jogos": 11,
      "gols": 0,
      "clube": "Shanghai Shenhua",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "shanghai-shenhua",
+     "noJogo": "Gao Tianyi"
     },
     {
      "nome": "Huang Jiahui",
@@ -41904,7 +42112,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "Tianjin Jinmen Tiger",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "tianjin-jinmen-tiger",
+     "noJogo": "Huang Jiahui"
     },
     {
      "nome": "Cheng Jin",
@@ -41940,7 +42150,9 @@
      "jogos": 45,
      "gols": 5,
      "clube": "Chengdu Rongcheng",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "chengdu-rongcheng",
+     "noJogo": "Wei Shihao"
     },
     {
      "nome": "Xie Wenneng",
@@ -41949,7 +42161,9 @@
      "jogos": 18,
      "gols": 1,
      "clube": "Shandong Taishan",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "shandong-taishan",
+     "noJogo": "Xie Wenneng"
     },
     {
      "nome": "Wang Ziming",
@@ -41958,7 +42172,9 @@
      "jogos": 13,
      "gols": 3,
      "clube": "Chengdu Rongcheng",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "chengdu-rongcheng",
+     "noJogo": "Wang Ziming"
     },
     {
      "nome": "Chen Pu",
@@ -41967,7 +42183,9 @@
      "jogos": 9,
      "gols": 0,
      "clube": "Shandong Taishan",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "shandong-taishan",
+     "noJogo": "Chen Pu"
     },
     {
      "nome": "Tao Qianglong",
@@ -41994,7 +42212,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Henan FC",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "henan",
+     "noJogo": "Zhong Yihao"
     },
     {
      "nome": "Du Yuezheng",
@@ -42012,7 +42232,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Dalian Yingbo",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "dalian-yingbo",
+     "noJogo": "Yang Mingrui"
     },
     {
      "nome": "Zhao Songyuan",
@@ -42579,7 +42801,9 @@
      "jogos": 33,
      "gols": 0,
      "clube": "Henan",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "henan",
+     "noJogo": "Oliver Gerbig"
     },
     {
      "nome": "Vas Nuñez",
@@ -42633,7 +42857,9 @@
      "jogos": 43,
      "gols": 0,
      "clube": "Beijing Guoan",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "beijing-guoan",
+     "noJogo": "Yue Tze Nam"
     },
     {
      "nome": "Tan Chun Lok",
@@ -42660,7 +42886,9 @@
      "jogos": 28,
      "gols": 0,
      "clube": "Qingdao Hainiu",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "qingdao-hainiu",
+     "noJogo": "Ngan Cheuk Pan"
     },
     {
      "nome": "Sohgo Ichikawa",
@@ -42696,7 +42924,9 @@
      "jogos": 51,
      "gols": 16,
      "clube": "Shanghai Port",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "shanghai-port",
+     "noJogo": "Matt Orr"
     },
     {
      "nome": "Everton Camargo",
@@ -42732,7 +42962,9 @@
      "jogos": 13,
      "gols": 5,
      "clube": "Shandong Taishan",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "shandong-taishan",
+     "noJogo": "Raphaël Merkies"
     },
     {
      "nome": "Sun Ming Him",
@@ -42741,7 +42973,9 @@
      "jogos": 48,
      "gols": 3,
      "clube": "Tianjin Jinmen Tiger",
-     "paisDoClube": "CHN"
+     "paisDoClube": "CHN",
+     "clubeDoJogo": "tianjin-jinmen-tiger",
+     "noJogo": "Sun Ming Him"
     }
    ]
   },
@@ -42791,7 +43025,9 @@
      "jogos": 37,
      "gols": 1,
      "clube": "Mumbai City",
-     "paisDoClube": "IND"
+     "paisDoClube": "IND",
+     "clubeDoJogo": "mumbai-city",
+     "noJogo": "Akash Mishra"
     },
     {
      "nome": "Bijoy Varghese",
@@ -42800,7 +43036,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Punjab",
-     "paisDoClube": "IND"
+     "paisDoClube": "IND",
+     "clubeDoJogo": "punjab",
+     "noJogo": "Bijoy Varghese"
     },
     {
      "nome": "Roshan Singh Naorem",
@@ -42809,7 +43047,9 @@
      "jogos": 19,
      "gols": 0,
      "clube": "Bengaluru",
-     "paisDoClube": "IND"
+     "paisDoClube": "IND",
+     "clubeDoJogo": "bengaluru",
+     "noJogo": "Roshan Singh Naorem"
     },
     {
      "nome": "Jay Gupta",
@@ -42818,7 +43058,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "East Bengal",
-     "paisDoClube": "IND"
+     "paisDoClube": "IND",
+     "clubeDoJogo": "east-bengal",
+     "noJogo": "Jay Gupta"
     },
     {
      "nome": "Pramveer Singh",
@@ -42845,7 +43087,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Bengaluru",
-     "paisDoClube": "IND"
+     "paisDoClube": "IND",
+     "clubeDoJogo": "bengaluru",
+     "noJogo": "Ricky Meetei Haobam"
     },
     {
      "nome": "Anirudh Thapa",
@@ -42863,7 +43107,9 @@
      "jogos": 45,
      "gols": 2,
      "clube": "Bengaluru",
-     "paisDoClube": "IND"
+     "paisDoClube": "IND",
+     "clubeDoJogo": "bengaluru",
+     "noJogo": "Ashique Kuruniyan"
     },
     {
      "nome": "Lalremtluanga Fanai",
@@ -42872,7 +43118,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Bengaluru",
-     "paisDoClube": "IND"
+     "paisDoClube": "IND",
+     "clubeDoJogo": "bengaluru",
+     "noJogo": "Lalremtluanga Fanai"
     },
     {
      "nome": "Jithin M. S.",
@@ -42908,7 +43156,9 @@
      "jogos": 7,
      "gols": 0,
      "clube": "Kerala Blasters",
-     "paisDoClube": "IND"
+     "paisDoClube": "IND",
+     "clubeDoJogo": "kerala-blasters",
+     "noJogo": "Mohammed Sanan"
     },
     {
      "nome": "Manvir Singh",
@@ -42935,7 +43185,9 @@
      "jogos": 5,
      "gols": 2,
      "clube": "Bengaluru",
-     "paisDoClube": "IND"
+     "paisDoClube": "IND",
+     "clubeDoJogo": "bengaluru",
+     "noJogo": "Ryan Williams"
     },
     {
      "nome": "David Lalhlansanga",
@@ -42944,7 +43196,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "East Bengal",
-     "paisDoClube": "IND"
+     "paisDoClube": "IND",
+     "clubeDoJogo": "east-bengal",
+     "noJogo": "David Lalhlansanga"
     },
     {
      "nome": "Muhammad Suhail",
@@ -42953,7 +43207,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Punjab",
-     "paisDoClube": "IND"
+     "paisDoClube": "IND",
+     "clubeDoJogo": "punjab",
+     "noJogo": "Muhammad Suhail"
     }
    ]
   },
@@ -42989,7 +43245,9 @@
      "jogos": 26,
      "gols": 0,
      "clube": "Persija Jakarta",
-     "paisDoClube": "IDN"
+     "paisDoClube": "IDN",
+     "clubeDoJogo": "persija-jakarta",
+     "noJogo": "Nadeo Argawinata"
     },
     {
      "nome": "Kevin Diks",
@@ -43009,7 +43267,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Persita Tangerang",
-     "paisDoClube": "IDN"
+     "paisDoClube": "IDN",
+     "clubeDoJogo": "persita-tangerang",
+     "noJogo": "Dion Markx"
     },
     {
      "nome": "Jordi Amat",
@@ -43018,7 +43278,9 @@
      "jogos": 25,
      "gols": 2,
      "clube": "Persija Jakarta",
-     "paisDoClube": "IDN"
+     "paisDoClube": "IDN",
+     "clubeDoJogo": "persija-jakarta",
+     "noJogo": "Jordi Amat"
     },
     {
      "nome": "Rizky Ridho",
@@ -43027,7 +43289,9 @@
      "jogos": 61,
      "gols": 5,
      "clube": "Persija Jakarta",
-     "paisDoClube": "IDN"
+     "paisDoClube": "IDN",
+     "clubeDoJogo": "persija-jakarta",
+     "noJogo": "Rizky Ridho"
     },
     {
      "nome": "Shayne Pattynama",
@@ -43036,7 +43300,9 @@
      "jogos": 18,
      "gols": 2,
      "clube": "Persija Jakarta",
-     "paisDoClube": "IDN"
+     "paisDoClube": "IDN",
+     "clubeDoJogo": "persija-jakarta",
+     "noJogo": "Shayne Pattynama"
     },
     {
      "nome": "Calvin Verdonk",
@@ -43089,7 +43355,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "PSM Makassar",
-     "paisDoClube": "IDN"
+     "paisDoClube": "IDN",
+     "clubeDoJogo": "psm-makassar",
+     "noJogo": "Rizky Eka Pratama"
     },
     {
      "nome": "Joey Pelupessy",
@@ -43107,7 +43375,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "Persija Jakarta",
-     "paisDoClube": "IDN"
+     "paisDoClube": "IDN",
+     "clubeDoJogo": "persija-jakarta",
+     "noJogo": "Rayhan Hannan"
     },
     {
      "nome": "Ivar Jenner",
@@ -43125,7 +43395,9 @@
      "jogos": 25,
      "gols": 3,
      "clube": "Persib Bandung",
-     "paisDoClube": "IDN"
+     "paisDoClube": "IDN",
+     "clubeDoJogo": "persib-bandung",
+     "noJogo": "Thom Haye"
     },
     {
      "nome": "Nathan Tjoe-A-On",
@@ -43199,7 +43471,9 @@
      "jogos": 16,
      "gols": 0,
      "clube": "Persepolis",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "persepolis",
+     "noJogo": "Payam Niazmand"
     },
     {
      "nome": "Habib Far Abbasi",
@@ -43208,7 +43482,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Esteghlal",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "esteghlal",
+     "noJogo": "Habib Far Abbasi"
     },
     {
      "nome": "Adib Zarei",
@@ -43217,7 +43493,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Shams Azar",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "shams-azar",
+     "noJogo": "Adib Zarei"
     },
     {
      "nome": "Mohammad Khalifeh",
@@ -43226,7 +43504,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Aluminium Arak",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "aluminium-arak",
+     "noJogo": "Mohammad Khalifeh"
     },
     {
      "nome": "Ali Nemati",
@@ -43244,7 +43524,9 @@
      "jogos": 22,
      "gols": 1,
      "clube": "Esteghlal",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "esteghlal",
+     "noJogo": "Saleh Hardani"
     },
     {
      "nome": "Arya Yousefi",
@@ -43253,7 +43535,9 @@
      "jogos": 17,
      "gols": 1,
      "clube": "Sepahan",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "sepahan",
+     "noJogo": "Arya Yousefi"
     },
     {
      "nome": "Amin Hazbavi",
@@ -43262,7 +43546,9 @@
      "jogos": 7,
      "gols": 0,
      "clube": "Sepahan",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "sepahan",
+     "noJogo": "Amin Hazbavi"
     },
     {
      "nome": "Aref Aghasi",
@@ -43271,7 +43557,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Esteghlal",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "esteghlal",
+     "noJogo": "Aref Aghasi"
     },
     {
      "nome": "Saman Fallah",
@@ -43280,7 +43568,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Esteghlal",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "esteghlal",
+     "noJogo": "Saman Fallah"
     },
     {
      "nome": "Jafar Salmani",
@@ -43298,7 +43588,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Foolad",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "foolad",
+     "noJogo": "Abolfazl Razzaghpour"
     },
     {
      "nome": "Hossein Goudarzi",
@@ -43307,7 +43599,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Esteghlal",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "esteghlal",
+     "noJogo": "Hossein Goudarzi"
     },
     {
      "nome": "Mohammad Mehdi Zare",
@@ -43336,7 +43630,9 @@
      "jogos": 43,
      "gols": 1,
      "clube": "Sepahan",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "sepahan",
+     "noJogo": "Omid Noorafkan"
     },
     {
      "nome": "Mohammad Mohebi",
@@ -43365,7 +43661,9 @@
      "jogos": 19,
      "gols": 0,
      "clube": "Al-Wahda",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-wahda",
+     "noJogo": "Mohammad Ghorbani"
     },
     {
      "nome": "Mohammad Mehdi Mohebi",
@@ -43394,7 +43692,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Esteghlal",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "esteghlal",
+     "noJogo": "Amirmohammad Razzaghinia"
     },
     {
      "nome": "Mehdi Limouchi",
@@ -43403,7 +43703,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Sepahan",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "sepahan",
+     "noJogo": "Mehdi Limouchi"
     },
     {
      "nome": "Afshin Sadeghi",
@@ -43412,7 +43714,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Nassaji Mazandaran",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "nassaji-mazandaran",
+     "noJogo": "Afshin Sadeghi"
     },
     {
      "nome": "Esmaeil Gholizadeh",
@@ -43421,7 +43725,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Esteghlal",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "esteghlal",
+     "noJogo": "Esmaeil Gholizadeh"
     },
     {
      "nome": "Amirhossein Farsi",
@@ -43448,7 +43754,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Sepahan",
-     "paisDoClube": "IRN"
+     "paisDoClube": "IRN",
+     "clubeDoJogo": "sepahan",
+     "noJogo": "Kasra Taheri"
     },
     {
      "nome": "Dennis Eckert",
@@ -43491,7 +43799,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Al-Quwa Al-Jawiya",
-     "paisDoClube": "IRQ"
+     "paisDoClube": "IRQ",
+     "clubeDoJogo": "al-quwa-al-jawiya",
+     "noJogo": "Mohammed Salih"
     },
     {
      "nome": "Kumel Al-Rekabe",
@@ -43645,7 +43955,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Ceramica Cleopatra",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "ceramica-cleopatra",
+     "noJogo": "Peter Gwargis"
     },
     {
      "nome": "Hiran Ahmed",
@@ -43694,7 +44006,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Al-Karma",
-     "paisDoClube": "IRQ"
+     "paisDoClube": "IRQ",
+     "clubeDoJogo": "al-karma",
+     "noJogo": "Amoori Faisal"
     },
     {
      "nome": "Aymen Hussein",
@@ -44055,7 +44369,9 @@
      "jogos": 12,
      "gols": 0,
      "clube": "Al-Faisaly",
-     "paisDoClube": "JOR"
+     "paisDoClube": "JOR",
+     "clubeDoJogo": "al-faisaly",
+     "noJogo": "Abdallah Al-Fakhouri"
     },
     {
      "nome": "Ahmad Al-Juaidi",
@@ -44064,7 +44380,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Al-Salt",
-     "paisDoClube": "JOR"
+     "paisDoClube": "JOR",
+     "clubeDoJogo": "al-salt",
+     "noJogo": "Ahmad Al-Juaidi"
     },
     {
      "nome": "Murad Al-Faluji",
@@ -44073,7 +44391,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Al-Ramtha",
-     "paisDoClube": "JOR"
+     "paisDoClube": "JOR",
+     "clubeDoJogo": "al-ramtha",
+     "noJogo": "Murad Al-Faluji"
     },
     {
      "nome": "Yazan Al-Arab",
@@ -44093,7 +44413,9 @@
      "jogos": 70,
      "gols": 3,
      "clube": "Al-Hussein",
-     "paisDoClube": "JOR"
+     "paisDoClube": "JOR",
+     "clubeDoJogo": "al-hussein",
+     "noJogo": "Abdallah Nasib"
     },
     {
      "nome": "Mohannad Abu Taha",
@@ -44120,7 +44442,9 @@
      "jogos": 10,
      "gols": 0,
      "clube": "ES Sétif",
-     "paisDoClube": "ALG"
+     "paisDoClube": "ALG",
+     "clubeDoJogo": "es-setif",
+     "noJogo": "Hadi Al-Hourani"
     },
     {
      "nome": "Mohammad Abu Hashish",
@@ -44129,7 +44453,9 @@
      "jogos": 57,
      "gols": 1,
      "clube": "Al-Karma",
-     "paisDoClube": "IRQ"
+     "paisDoClube": "IRQ",
+     "clubeDoJogo": "al-karma",
+     "noJogo": "Mohammad Abu Hashish"
     },
     {
      "nome": "Ahmad Assaf",
@@ -44138,7 +44464,9 @@
      "jogos": 7,
      "gols": 0,
      "clube": "Al-Hussein",
-     "paisDoClube": "JOR"
+     "paisDoClube": "JOR",
+     "clubeDoJogo": "al-hussein",
+     "noJogo": "Ahmad Assaf"
     },
     {
      "nome": "Anas Badawi",
@@ -44147,7 +44475,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Al-Faisaly",
-     "paisDoClube": "JOR"
+     "paisDoClube": "JOR",
+     "clubeDoJogo": "al-faisaly",
+     "noJogo": "Anas Badawi"
     },
     {
      "nome": "Mohammad Abu Ghoush",
@@ -44156,7 +44486,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Shabab Al-Ordon",
-     "paisDoClube": "JOR"
+     "paisDoClube": "JOR",
+     "clubeDoJogo": "shabab-al-ordon",
+     "noJogo": "Mohammad Abu Ghoush"
     },
     {
      "nome": "Ahmad Abdrabbo",
@@ -44174,7 +44506,9 @@
      "jogos": 73,
      "gols": 3,
      "clube": "Al-Faisaly",
-     "paisDoClube": "JOR"
+     "paisDoClube": "JOR",
+     "clubeDoJogo": "al-faisaly",
+     "noJogo": "Noor Al-Rawabdeh"
     },
     {
      "nome": "Ibrahim Sa'deh",
@@ -44219,7 +44553,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Al-Hussein",
-     "paisDoClube": "JOR"
+     "paisDoClube": "JOR",
+     "clubeDoJogo": "al-hussein",
+     "noJogo": "Yousef Qashi"
     },
     {
      "nome": "Ghaith Al-Madadha",
@@ -44228,7 +44564,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Al-Faisaly",
-     "paisDoClube": "JOR"
+     "paisDoClube": "JOR",
+     "clubeDoJogo": "al-faisaly",
+     "noJogo": "Ghaith Al-Madadha"
     },
     {
      "nome": "Musa Al-Taamari",
@@ -44246,7 +44584,9 @@
      "jogos": 93,
      "gols": 9,
      "clube": "Al-Hussein",
-     "paisDoClube": "JOR"
+     "paisDoClube": "JOR",
+     "clubeDoJogo": "al-hussein",
+     "noJogo": "Mahmoud Al-Mardi"
     },
     {
      "nome": "Ali Olwan",
@@ -44255,7 +44595,9 @@
      "jogos": 71,
      "gols": 31,
      "clube": "Al-Sailiya",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-sailiya",
+     "noJogo": "Ali Olwan"
     },
     {
      "nome": "Mohammad Abu Zrayq",
@@ -44273,7 +44615,9 @@
      "jogos": 14,
      "gols": 1,
      "clube": "Pyramids",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "pyramids",
+     "noJogo": "Odeh Al-Fakhouri"
     }
    ]
   },
@@ -44802,7 +45146,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Al-Salmiya",
-     "paisDoClube": "KUW"
+     "paisDoClube": "KUW",
+     "clubeDoJogo": "al-salmiya",
+     "noJogo": "Abdulrahman Al-Fadhli"
     },
     {
      "nome": "Fahad Al-Hajeri",
@@ -44856,7 +45202,9 @@
      "jogos": 7,
      "gols": 0,
      "clube": "Al-Arabi",
-     "paisDoClube": "KUW"
+     "paisDoClube": "KUW",
+     "clubeDoJogo": "al-arabi-kw",
+     "noJogo": "Abdulwahab Al-Awadi"
     },
     {
      "nome": "Mohammad Al-Sharifi",
@@ -44892,7 +45240,9 @@
      "jogos": 40,
      "gols": 1,
      "clube": "Al-Salmiya",
-     "paisDoClube": "KUW"
+     "paisDoClube": "KUW",
+     "clubeDoJogo": "al-salmiya",
+     "noJogo": "Fawaz Ayedh"
     },
     {
      "nome": "Athbi Shehab",
@@ -44910,7 +45260,9 @@
      "jogos": 19,
      "gols": 1,
      "clube": "Al-Salmiya",
-     "paisDoClube": "KUW"
+     "paisDoClube": "KUW",
+     "clubeDoJogo": "al-salmiya",
+     "noJogo": "Muath Al-Enezi"
     },
     {
      "nome": "Nasser Faleh",
@@ -44928,7 +45280,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Al-Arabi",
-     "paisDoClube": "KUW"
+     "paisDoClube": "KUW",
+     "clubeDoJogo": "al-arabi-kw",
+     "noJogo": "Khaled Al-Mershed"
     },
     {
      "nome": "Jasem Al-Mutar",
@@ -44973,7 +45327,9 @@
      "jogos": 45,
      "gols": 18,
      "clube": "Kazma",
-     "paisDoClube": "KUW"
+     "paisDoClube": "KUW",
+     "clubeDoJogo": "kazma",
+     "noJogo": "Shabaib Al-Khaldi"
     },
     {
      "nome": "Mohammad Daham",
@@ -44991,7 +45347,9 @@
      "jogos": 15,
      "gols": 1,
      "clube": "Al-Arabi",
-     "paisDoClube": "KUW"
+     "paisDoClube": "KUW",
+     "clubeDoJogo": "al-arabi-kw",
+     "noJogo": "Yousef Majed"
     }
    ]
   },
@@ -45877,7 +46235,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Terengganu",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "terengganu",
+     "noJogo": "Suhaimi Husin"
     },
     {
      "nome": "Haziq Nadzli",
@@ -45886,7 +46246,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Kuching City",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "kuching-city",
+     "noJogo": "Haziq Nadzli"
     },
     {
      "nome": "Haziq Aiman",
@@ -45895,7 +46257,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Kuching City",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "kuching-city",
+     "noJogo": "Haziq Aiman"
     },
     {
      "nome": "Safwan Mazlan",
@@ -45904,7 +46268,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Terengganu",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "terengganu",
+     "noJogo": "Safwan Mazlan"
     },
     {
      "nome": "Dominic Tan",
@@ -45922,7 +46288,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Kuching City",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "kuching-city",
+     "noJogo": "Ariff Farhan"
     },
     {
      "nome": "Quentin Cheng",
@@ -45931,7 +46299,9 @@
      "jogos": 18,
      "gols": 0,
      "clube": "Selangor",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "selangor",
+     "noJogo": "Quentin Cheng"
     },
     {
      "nome": "Rodney Celvin Akwensivie",
@@ -45940,7 +46310,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Kuching City",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "kuching-city",
+     "noJogo": "Rodney Celvin Akwensivie"
     },
     {
      "nome": "Ubaidullah Shamsul",
@@ -45949,7 +46321,9 @@
      "jogos": 13,
      "gols": 0,
      "clube": "Terengganu",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "terengganu",
+     "noJogo": "Ubaidullah Shamsul"
     },
     {
      "nome": "Azam Azmi",
@@ -45958,7 +46332,9 @@
      "jogos": 13,
      "gols": 0,
      "clube": "Terengganu",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "terengganu",
+     "noJogo": "Azam Azmi"
     },
     {
      "nome": "Dion Cools",
@@ -45987,7 +46363,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Kuching City",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "kuching-city",
+     "noJogo": "Ryan Lambert"
     },
     {
      "nome": "Safawi Rasid",
@@ -45996,7 +46374,9 @@
      "jogos": 73,
      "gols": 22,
      "clube": "Kuching City",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "kuching-city",
+     "noJogo": "Safawi Rasid"
     },
     {
      "nome": "Endrick",
@@ -46023,7 +46403,9 @@
      "jogos": 50,
      "gols": 11,
      "clube": "Kuala Lumpur City",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "kuala-lumpur-city",
+     "noJogo": "Syafiq Ahmad"
     },
     {
      "nome": "Romel Morales",
@@ -46032,7 +46414,9 @@
      "jogos": 13,
      "gols": 4,
      "clube": "Terengganu",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "terengganu",
+     "noJogo": "Romel Morales"
     },
     {
      "nome": "Fergus Tierney",
@@ -46050,7 +46434,9 @@
      "jogos": 40,
      "gols": 14,
      "clube": "Kuala Lumpur City",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "kuala-lumpur-city",
+     "noJogo": "Paulo Josué"
     },
     {
      "nome": "Richard Chin",
@@ -46068,7 +46454,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Kuching City",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "kuching-city",
+     "noJogo": "Ramadhan Saifullah"
     },
     {
      "nome": "G. Pavithran",
@@ -46077,7 +46465,9 @@
      "jogos": 10,
      "gols": 1,
      "clube": "Terengganu",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "terengganu",
+     "noJogo": "G. Pavithran"
     }
    ]
   },
@@ -46693,7 +47083,9 @@
      "jogos": 46,
      "gols": 1,
      "clube": "Melaka",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "melaka",
+     "noJogo": "Hein Htet Aung"
     }
    ]
   },
@@ -47027,7 +47419,9 @@
      "jogos": 73,
      "gols": 9,
      "clube": "Al-Faisaly",
-     "paisDoClube": "JOR"
+     "paisDoClube": "JOR",
+     "clubeDoJogo": "al-faisaly",
+     "noJogo": "Salaah Al-Yahyaei"
     },
     {
      "nome": "Harib Al-Saadi",
@@ -47045,7 +47439,9 @@
      "jogos": 67,
      "gols": 18,
      "clube": "Port",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "port",
+     "noJogo": "Issam Al-Sabhi"
     },
     {
      "nome": "Mohammed Al-Ghafri",
@@ -47353,7 +47749,9 @@
      "jogos": 13,
      "gols": 0,
      "clube": "ZED",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "zed",
+     "noJogo": "Wajdi Nabhan"
     },
     {
      "nome": "Khalid Abu El Haija",
@@ -47437,7 +47835,9 @@
      "jogos": 15,
      "gols": 0,
      "clube": "Al-Masry",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "al-masry",
+     "noJogo": "Ameed Sawafta"
     },
     {
      "nome": "Adam Ahmad",
@@ -47473,7 +47873,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "Zamalek",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "zamalek",
+     "noJogo": "Adam Kaied"
     },
     {
      "nome": "Agustín Manzur",
@@ -47510,7 +47912,9 @@
      "jogos": 10,
      "gols": 0,
      "clube": "Ceramica Cleopatra",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "ceramica-cleopatra",
+     "noJogo": "Khaled Al-Nabris"
     },
     {
      "nome": "Oday Dabbagh",
@@ -47519,7 +47923,9 @@
      "jogos": 57,
      "gols": 21,
      "clube": "Zamalek",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "zamalek",
+     "noJogo": "Oday Dabbagh"
     },
     {
      "nome": "Assad Al Hamlawi",
@@ -47539,7 +47945,9 @@
      "jogos": 27,
      "gols": 4,
      "clube": "Al-Arabi",
-     "paisDoClube": "KUW"
+     "paisDoClube": "KUW",
+     "clubeDoJogo": "al-arabi-kw",
+     "noJogo": "Zaid Qunbar"
     },
     {
      "nome": "Alaa Aldeen Hassan",
@@ -47548,7 +47956,9 @@
      "jogos": 10,
      "gols": 1,
      "clube": "Al-Gharafa",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-gharafa",
+     "noJogo": "Alaa Aldeen Hassan"
     },
     {
      "nome": "Bader Mousa",
@@ -47557,7 +47967,9 @@
      "jogos": 13,
      "gols": 0,
      "clube": "Petrojet",
-     "paisDoClube": "EGY"
+     "paisDoClube": "EGY",
+     "clubeDoJogo": "petrojet",
+     "noJogo": "Bader Mousa"
     },
     {
      "nome": "Ahmad Al-Qaq",
@@ -47581,7 +47993,9 @@
      "jogos": 19,
      "gols": 0,
      "clube": "Chonburi",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "chonburi",
+     "noJogo": "Kevin Ray Mendoza"
     },
     {
      "nome": "Michael Falkesgaard",
@@ -47590,7 +48004,9 @@
      "jogos": 15,
      "gols": 0,
      "clube": "Port",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "port",
+     "noJogo": "Michael Falkesgaard"
     },
     {
      "nome": "Quincy Kammeraad",
@@ -47599,7 +48015,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Kuala Lumpur City",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "kuala-lumpur-city",
+     "noJogo": "Quincy Kammeraad"
     },
     {
      "nome": "Scott Woods",
@@ -47626,7 +48044,9 @@
      "jogos": 30,
      "gols": 6,
      "clube": "Selangor",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "selangor",
+     "noJogo": "Jefferson Tabinas"
     },
     {
      "nome": "Jesper Nyholm",
@@ -47689,7 +48109,9 @@
      "jogos": 75,
      "gols": 4,
      "clube": "Terengganu",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "terengganu",
+     "noJogo": "Manny Ott"
     },
     {
      "nome": "Randy Schneider",
@@ -47709,7 +48131,9 @@
      "jogos": 24,
      "gols": 0,
      "clube": "Sabah",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "sabah",
+     "noJogo": "Oskari Kekkonen"
     },
     {
      "nome": "Cole Mrowka",
@@ -47768,7 +48192,9 @@
      "jogos": 41,
      "gols": 7,
      "clube": "Penang",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "penang",
+     "noJogo": "Jarvey Gayoso"
     },
     {
      "nome": "Bjørn Martin Kristensen",
@@ -47802,7 +48228,9 @@
      "jogos": 12,
      "gols": 0,
      "clube": "Al-Rayyan",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-rayyan",
+     "noJogo": "Mahmud Abunada"
     },
     {
      "nome": "Salah Zakaria",
@@ -47811,7 +48239,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "Al-Duhail",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-duhail",
+     "noJogo": "Salah Zakaria"
     },
     {
      "nome": "Shehab Ellethy",
@@ -47820,7 +48250,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Al-Shahaniya",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-shahaniya",
+     "noJogo": "Shehab Ellethy"
     },
     {
      "nome": "Pedro Miguel",
@@ -47829,7 +48261,9 @@
      "jogos": 118,
      "gols": 3,
      "clube": "Al-Sadd",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-sadd",
+     "noJogo": "Pedro Miguel"
     },
     {
      "nome": "Issa Laye",
@@ -47847,7 +48281,9 @@
      "jogos": 92,
      "gols": 0,
      "clube": "Al-Sadd",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-sadd",
+     "noJogo": "Tarek Salman"
     },
     {
      "nome": "Ayoub Al-Oui",
@@ -47856,7 +48292,9 @@
      "jogos": 12,
      "gols": 0,
      "clube": "Al-Gharafa",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-gharafa",
+     "noJogo": "Ayoub Al-Oui"
     },
     {
      "nome": "Homam Ahmed",
@@ -47876,7 +48314,9 @@
      "jogos": 39,
      "gols": 1,
      "clube": "Al-Rayyan",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-rayyan",
+     "noJogo": "Jassem Gaber"
     },
     {
      "nome": "Boualem Khoukhi",
@@ -47885,7 +48325,9 @@
      "jogos": 135,
      "gols": 22,
      "clube": "Al-Sadd",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-sadd",
+     "noJogo": "Boualem Khoukhi"
     },
     {
      "nome": "Sultan Al-Brake",
@@ -47894,7 +48336,9 @@
      "jogos": 22,
      "gols": 0,
      "clube": "Al-Duhail",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-duhail",
+     "noJogo": "Sultan Al-Brake"
     },
     {
      "nome": "Andri Syahputra",
@@ -47922,7 +48366,9 @@
      "jogos": 134,
      "gols": 6,
      "clube": "Al-Duhail",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-duhail",
+     "noJogo": "Karim Boudiaf"
     },
     {
      "nome": "Ahmed Fathy",
@@ -47940,7 +48386,9 @@
      "jogos": 56,
      "gols": 0,
      "clube": "Al-Duhail",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-duhail",
+     "noJogo": "Assim Madibo"
     },
     {
      "nome": "Mohamed Manai",
@@ -47949,7 +48397,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "Al-Sadd",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-sadd",
+     "noJogo": "Mohamed Manai"
     },
     {
      "nome": "Ahmed Alaaeldin",
@@ -47958,7 +48408,9 @@
      "jogos": 71,
      "gols": 9,
      "clube": "Al-Rayyan",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-rayyan",
+     "noJogo": "Ahmed Alaaeldin"
     },
     {
      "nome": "Edmilson Junior",
@@ -47967,7 +48419,9 @@
      "jogos": 22,
      "gols": 0,
      "clube": "Al-Duhail",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-duhail",
+     "noJogo": "Edmilson Junior"
     },
     {
      "nome": "Yusuf Abdurisag",
@@ -47976,7 +48430,9 @@
      "jogos": 44,
      "gols": 4,
      "clube": "Al-Sadd",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-sadd",
+     "noJogo": "Yusuf Abdurisag"
     },
     {
      "nome": "Hassan Al-Haydos",
@@ -47985,7 +48441,9 @@
      "jogos": 193,
      "gols": 43,
      "clube": "Al-Sadd",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-sadd",
+     "noJogo": "Hassan Al-Haydos"
     },
     {
      "nome": "Akram Afif",
@@ -47994,7 +48452,9 @@
      "jogos": 142,
      "gols": 41,
      "clube": "Al-Sadd",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-sadd",
+     "noJogo": "Akram Afif"
     },
     {
      "nome": "Ahmed Al-Ganehi",
@@ -48003,7 +48463,9 @@
      "jogos": 17,
      "gols": 1,
      "clube": "Al-Rayyan",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-rayyan",
+     "noJogo": "Ahmed Al-Ganehi"
     },
     {
      "nome": "Almoez Ali",
@@ -48012,7 +48474,9 @@
      "jogos": 132,
      "gols": 0,
      "clube": "Al-Duhail",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-duhail",
+     "noJogo": "Almoez Ali"
     },
     {
      "nome": "Tahsin Jamshid",
@@ -48021,7 +48485,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Al-Duhail",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-duhail",
+     "noJogo": "Tahsin Jamshid"
     },
     {
      "nome": "Hashim Ali",
@@ -48030,7 +48496,9 @@
      "jogos": 7,
      "gols": 0,
      "clube": "Al-Sadd",
-     "paisDoClube": "QAT"
+     "paisDoClube": "QAT",
+     "clubeDoJogo": "al-sadd",
+     "noJogo": "Hashim Ali"
     }
    ]
   },
@@ -48384,7 +48852,9 @@
      "jogos": 135,
      "gols": 14,
      "clube": "Selangor",
-     "paisDoClube": "MYS"
+     "paisDoClube": "MYS",
+     "clubeDoJogo": "selangor",
+     "noJogo": "Safuwan Baharudin"
     },
     {
      "nome": "Darren Teh",
@@ -48456,7 +48926,9 @@
      "jogos": 26,
      "gols": 3,
      "clube": "Chiangrai United",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "chiangrai-united",
+     "noJogo": "Harhys Stewart"
     },
     {
      "nome": "Hami Syahin",
@@ -48942,7 +49414,9 @@
      "jogos": 70,
      "gols": 31,
      "clube": "Al Wahda",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-wahda",
+     "noJogo": "Omar Khribin"
     },
     {
      "nome": "Omar Al Somah",
@@ -49059,7 +49533,9 @@
      "jogos": 62,
      "gols": 3,
      "clube": "Sogdiana Jizzakh",
-     "paisDoClube": "UZB"
+     "paisDoClube": "UZB",
+     "clubeDoJogo": "sogdiana-jizzakh",
+     "noJogo": "Zoir Dzhuraboyev"
     },
     {
      "nome": "Vahdat Hanonov",
@@ -49244,7 +49720,9 @@
      "jogos": 32,
      "gols": 0,
      "clube": "Bangkok United",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "bangkok-united",
+     "noJogo": "Patiwat Khammai"
     },
     {
      "nome": "Saranon Anuin",
@@ -49253,7 +49731,9 @@
      "jogos": 9,
      "gols": 0,
      "clube": "BG Pathum United",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "bg-pathum-united",
+     "noJogo": "Saranon Anuin"
     },
     {
      "nome": "Sorawat Phosaman",
@@ -49271,7 +49751,9 @@
      "jogos": 43,
      "gols": 1,
      "clube": "Buriram United",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "buriram-united",
+     "noJogo": "Narubadin Weerawatnodom"
     },
     {
      "nome": "Suphanan Bureerat",
@@ -49280,7 +49762,9 @@
      "jogos": 42,
      "gols": 3,
      "clube": "Port",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "port",
+     "noJogo": "Suphanan Bureerat"
     },
     {
      "nome": "Nicholas Mickelson",
@@ -49300,7 +49784,9 @@
      "jogos": 20,
      "gols": 0,
      "clube": "Bangkok United",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "bangkok-united",
+     "noJogo": "Suphan Thongsong"
     },
     {
      "nome": "Nattapong Sayriya",
@@ -49309,7 +49795,9 @@
      "jogos": 18,
      "gols": 0,
      "clube": "Chonburi",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "chonburi",
+     "noJogo": "Nattapong Sayriya"
     },
     {
      "nome": "Oussama Thiangkham",
@@ -49327,7 +49815,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Port",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "port",
+     "noJogo": "Peerawat Akkratum"
     },
     {
      "nome": "Theerathon Bunmathan",
@@ -49336,7 +49826,9 @@
      "jogos": 100,
      "gols": 9,
      "clube": "Buriram United",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "buriram-united",
+     "noJogo": "Theerathon Bunmathan"
     },
     {
      "nome": "Sarach Yooyen",
@@ -49345,7 +49837,9 @@
      "jogos": 99,
      "gols": 9,
      "clube": "BG Pathum United",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "bg-pathum-united",
+     "noJogo": "Sarach Yooyen"
     },
     {
      "nome": "Supachok Sarachat",
@@ -49363,7 +49857,9 @@
      "jogos": 50,
      "gols": 0,
      "clube": "Bangkok United",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "bangkok-united",
+     "noJogo": "Weerathep Pomphan"
     },
     {
      "nome": "Seksan Ratree",
@@ -49372,7 +49868,9 @@
      "jogos": 29,
      "gols": 8,
      "clube": "Port",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "port",
+     "noJogo": "Seksan Ratree"
     },
     {
      "nome": "Anan Yodsangwal",
@@ -49381,7 +49879,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "Buriram United",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "buriram-united",
+     "noJogo": "Anan Yodsangwal"
     },
     {
      "nome": "Kakana Khamyok",
@@ -49390,7 +49890,9 @@
      "jogos": 13,
      "gols": 3,
      "clube": "Bangkok United",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "bangkok-united",
+     "noJogo": "Kakana Khamyok"
     },
     {
      "nome": "Thanawat Suengchitthawon",
@@ -49426,7 +49928,9 @@
      "jogos": 37,
      "gols": 13,
      "clube": "Port",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "port",
+     "noJogo": "Teerasak Poeiphimai"
     },
     {
      "nome": "Suphanat Mueanta",
@@ -49444,7 +49948,9 @@
      "jogos": 9,
      "gols": 3,
      "clube": "Chonburi",
-     "paisDoClube": "THA"
+     "paisDoClube": "THA",
+     "clubeDoJogo": "chonburi",
+     "noJogo": "Yotsakorn Burapha"
     }
    ]
   },
@@ -49611,7 +50117,9 @@
      "jogos": 30,
      "gols": 9,
      "clube": "Kuching City",
-     "paisDoClube": "MAS"
+     "paisDoClube": "MAS",
+     "clubeDoJogo": "kuching-city",
+     "noJogo": "João Pedro"
     },
     {
      "nome": "Zion Cruz",
@@ -49837,7 +50345,9 @@
      "jogos": 98,
      "gols": 0,
      "clube": "Al Ain",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-ain",
+     "noJogo": "Khalid Eisa"
     },
     {
      "nome": "Fahad Al-Dhanhani",
@@ -49846,7 +50356,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Baniyas",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "baniyas",
+     "noJogo": "Fahad Al-Dhanhani"
     },
     {
      "nome": "Rúben Canedo",
@@ -49855,7 +50367,9 @@
      "jogos": 15,
      "gols": 0,
      "clube": "Al Jazira",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-jazira",
+     "noJogo": "Rúben Canedo"
     },
     {
      "nome": "Kouame Autonne",
@@ -49873,7 +50387,9 @@
      "jogos": 9,
      "gols": 1,
      "clube": "Al Wasl",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-wasl",
+     "noJogo": "Saša Ivković"
     },
     {
      "nome": "Ala Zhir",
@@ -49882,7 +50398,9 @@
      "jogos": 10,
      "gols": 0,
      "clube": "Al Wahda",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-wahda",
+     "noJogo": "Ala Zhir"
     },
     {
      "nome": "Khalifa Al Hammadi",
@@ -49891,7 +50409,9 @@
      "jogos": 55,
      "gols": 2,
      "clube": "Al Jazira",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-jazira",
+     "noJogo": "Khalifa Al Hammadi"
     },
     {
      "nome": "Yousif Al-Marzooqi",
@@ -49909,7 +50429,9 @@
      "jogos": 24,
      "gols": 2,
      "clube": "Al Jazira",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-jazira",
+     "noJogo": "Marcus Meloni"
     },
     {
      "nome": "Khaled Ibrahim",
@@ -49918,7 +50440,9 @@
      "jogos": 28,
      "gols": 1,
      "clube": "Sharjah",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "sharjah",
+     "noJogo": "Khaled Ibrahim"
     },
     {
      "nome": "Zayed Sultan",
@@ -49936,7 +50460,9 @@
      "jogos": 47,
      "gols": 8,
      "clube": "Sharjah",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "sharjah",
+     "noJogo": "Harib Abdalla"
     },
     {
      "nome": "Fábio Lima",
@@ -49945,7 +50471,9 @@
      "jogos": 48,
      "gols": 17,
      "clube": "Al Wasl",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-wasl",
+     "noJogo": "Fábio Lima"
     },
     {
      "nome": "Nicolás Giménez",
@@ -49954,7 +50482,9 @@
      "jogos": 16,
      "gols": 3,
      "clube": "Al Wasl",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-wasl",
+     "noJogo": "Nicolás Giménez"
     },
     {
      "nome": "Abdulla Hamad",
@@ -49963,7 +50493,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "Al Wahda",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-wahda",
+     "noJogo": "Abdulla Hamad"
     },
     {
      "nome": "Luanzinho",
@@ -49972,7 +50504,9 @@
      "jogos": 14,
      "gols": 3,
      "clube": "Sharjah",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "sharjah",
+     "noJogo": "Luanzinho"
     },
     {
      "nome": "Yahya Al-Ghassani",
@@ -49999,7 +50533,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Al Jazira",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-jazira",
+     "noJogo": "Mamadou Coulibaly"
     },
     {
      "nome": "Ali Saleh",
@@ -50008,7 +50544,9 @@
      "jogos": 59,
      "gols": 8,
      "clube": "Al Wasl",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-wasl",
+     "noJogo": "Ali Saleh"
     },
     {
      "nome": "Bruno",
@@ -50017,7 +50555,9 @@
      "jogos": 21,
      "gols": 2,
      "clube": "Al Jazira",
-     "paisDoClube": "UAE"
+     "paisDoClube": "UAE",
+     "clubeDoJogo": "al-jazira",
+     "noJogo": "Bruno"
     },
     {
      "nome": "Mohammed Juma",
@@ -50251,7 +50791,9 @@
      "jogos": 10,
      "gols": 1,
      "clube": "Navbahor Namangan",
-     "paisDoClube": "UZB"
+     "paisDoClube": "UZB",
+     "clubeDoJogo": "navbahor-namangan",
+     "noJogo": "Ruslanbek Jiyanov"
     },
     {
      "nome": "Diyor Kholmatov",
@@ -50260,7 +50802,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "Navbahor Namangan",
-     "paisDoClube": "UZB"
+     "paisDoClube": "UZB",
+     "clubeDoJogo": "navbahor-namangan",
+     "noJogo": "Diyor Kholmatov"
     },
     {
      "nome": "Umarali Rakhmonaliev",
@@ -50386,7 +50930,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Hoang Anh Gia Lai",
-     "paisDoClube": "VIE"
+     "paisDoClube": "VIE",
+     "clubeDoJogo": "hoang-anh-gia-lai",
+     "noJogo": "Trần Trung Kiên"
     },
     {
      "nome": "Nguyễn Văn Việt",
@@ -50404,7 +50950,9 @@
      "jogos": 44,
      "gols": 0,
      "clube": "Hanoi FC",
-     "paisDoClube": "VIE"
+     "paisDoClube": "VIE",
+     "clubeDoJogo": "hanoi",
+     "noJogo": "Nguyễn Thành Chung"
     },
     {
      "nome": "Phan Tuấn Tài",
@@ -50449,7 +50997,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Hanoi FC",
-     "paisDoClube": "VIE"
+     "paisDoClube": "VIE",
+     "clubeDoJogo": "hanoi",
+     "noJogo": "Nguyễn Đức Anh"
     },
     {
      "nome": "Nguyễn Hồng Phúc",
@@ -50458,7 +51008,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "SHB Da Nang",
-     "paisDoClube": "VIE"
+     "paisDoClube": "VIE",
+     "clubeDoJogo": "shb-da-nang",
+     "noJogo": "Nguyễn Hồng Phúc"
     },
     {
      "nome": "Khuất Văn Khang",
@@ -50494,7 +51046,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Hoang Anh Gia Lai",
-     "paisDoClube": "VIE"
+     "paisDoClube": "VIE",
+     "clubeDoJogo": "hoang-anh-gia-lai",
+     "noJogo": "Hoàng Vĩnh Nguyên"
     },
     {
      "nome": "Trần Ngọc Sơn",
@@ -50530,7 +51084,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Song Lam Nghe An",
-     "paisDoClube": "VIE"
+     "paisDoClube": "VIE",
+     "clubeDoJogo": "song-lam-nghe-an",
+     "noJogo": "Nguyễn Quang Vinh"
     },
     {
      "nome": "Nguyễn Đình Bắc",
@@ -50557,7 +51113,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Hanoi FC",
-     "paisDoClube": "VIE"
+     "paisDoClube": "VIE",
+     "clubeDoJogo": "hanoi",
+     "noJogo": "Nguyễn Văn Tùng"
     },
     {
      "nome": "Nguyễn Thanh Nhàn",
@@ -50725,7 +51283,9 @@
      "jogos": 76,
      "gols": 14,
      "clube": "Diyala",
-     "paisDoClube": "IRQ"
+     "paisDoClube": "IRQ",
+     "clubeDoJogo": "diyala",
+     "noJogo": "Abdulwasea Al-Matari"
     },
     {
      "nome": "Osama Anbar",

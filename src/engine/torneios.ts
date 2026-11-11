@@ -23,8 +23,10 @@ export const NOME_ESTADUAL: Record<string, string> = {
 };
 
 /** Região do país na América (para agrupar nas telas). */
-export type Regiao = "sul" | "norte" | "central" | "caribe" | "europa" | "asia";
-export const NOME_REGIAO: Record<Regiao, string> = { sul: "América do Sul", norte: "América do Norte", central: "América Central", caribe: "Caribe", europa: "Europa", asia: "Ásia" };
+export type Regiao = "sul" | "norte" | "central" | "caribe" | "europa" | "asia" | "africa";
+export const NOME_REGIAO: Record<Regiao, string> = {
+  sul: "América do Sul", norte: "América do Norte", central: "América Central", caribe: "Caribe", europa: "Europa", asia: "Ásia", africa: "África",
+};
 
 /**
  * Os outros países da América: nome do país, do campeonato (em português), a nacionalidade dos jogadores (código de 3
@@ -112,6 +114,32 @@ export const PAISES: Record<string, { pais: string; liga: string; nacionalidade:
   KR: { pais: "Coreia do Sul", liga: "Campeonato Sul-Coreano", nacionalidade: "COR", regiao: "asia" },
   SA: { pais: "Arábia Saudita", liga: "Campeonato Saudita", nacionalidade: "SAU", regiao: "asia" },
   AU: { pais: "Austrália", liga: "Campeonato Australiano", nacionalidade: "AUS", regiao: "asia" },
+  // África e o resto da Ásia (nov/2026): a 1ª divisão, sem acesso nem queda (data/mundo-2026, tools/mundo/montar.ts).
+  EG: { pais: "Egito", liga: "Campeonato Egípcio", nacionalidade: "EGI", regiao: "africa" },
+  MA: { pais: "Marrocos", liga: "Campeonato Marroquino", nacionalidade: "MAR", regiao: "africa" },
+  DZ: { pais: "Argélia", liga: "Campeonato Argelino", nacionalidade: "ALG", regiao: "africa" },
+  TN: { pais: "Tunísia", liga: "Campeonato Tunisiano", nacionalidade: "TUN", regiao: "africa" },
+  ZA: { pais: "África do Sul", liga: "Campeonato Sul-Africano", nacionalidade: "RSA", regiao: "africa" },
+  NG: { pais: "Nigéria", liga: "Campeonato Nigeriano", nacionalidade: "NGA", regiao: "africa" },
+  GH: { pais: "Gana", liga: "Campeonato Ganês", nacionalidade: "GAN", regiao: "africa" },
+  TZ: { pais: "Tanzânia", liga: "Campeonato Tanzaniano", nacionalidade: "TAN", regiao: "africa" },
+  AO: { pais: "Angola", liga: "Campeonato Angolano", nacionalidade: "ANG", regiao: "africa" },
+  ZM: { pais: "Zâmbia", liga: "Campeonato Zambiano", nacionalidade: "ZAM", regiao: "africa" },
+  KE: { pais: "Quênia", liga: "Campeonato Queniano", nacionalidade: "KEN", regiao: "africa" },
+  CN: { pais: "China", liga: "Campeonato Chinês", nacionalidade: "CHN", regiao: "asia" },
+  IR: { pais: "Irã", liga: "Campeonato Iraniano", nacionalidade: "IRN", regiao: "asia" },
+  QA: { pais: "Catar", liga: "Campeonato Catariano", nacionalidade: "QAT", regiao: "asia" },
+  AE: { pais: "Emirados Árabes", liga: "Campeonato Emiradense", nacionalidade: "EAU", regiao: "asia" },
+  UZ: { pais: "Uzbequistão", liga: "Campeonato Uzbeque", nacionalidade: "UZB", regiao: "asia" },
+  IN: { pais: "Índia", liga: "Campeonato Indiano", nacionalidade: "IND", regiao: "asia" },
+  TH: { pais: "Tailândia", liga: "Campeonato Tailandês", nacionalidade: "THA", regiao: "asia" },
+  IQ: { pais: "Iraque", liga: "Campeonato Iraquiano", nacionalidade: "IRQ", regiao: "asia" },
+  MY: { pais: "Malásia", liga: "Campeonato Malaio", nacionalidade: "MAS", regiao: "asia" },
+  ID: { pais: "Indonésia", liga: "Campeonato Indonésio", nacionalidade: "IDN", regiao: "asia" },
+  VN: { pais: "Vietnã", liga: "Campeonato Vietnamita", nacionalidade: "VIE", regiao: "asia" },
+  JO: { pais: "Jordânia", liga: "Campeonato Jordaniano", nacionalidade: "JOR", regiao: "asia" },
+  KW: { pais: "Kuwait", liga: "Campeonato Kuwaitiano", nacionalidade: "KUW", regiao: "asia" },
+  BH: { pais: "Bahrein", liga: "Campeonato Bareinita", nacionalidade: "BHR", regiao: "asia" },
 };
 
 /** País e divisão de um código de liga: "AR" é a 1ª da Argentina, "AR2" a 2ª, "MX3" a 3ª do México. */
