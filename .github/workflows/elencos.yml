@@ -7,10 +7,10 @@ on:
   workflow_dispatch:
     inputs:
       fase:
-        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa) · selecoes-europa: convocações das 55 seleções da UEFA (branch dados-selecoes-europa) · europa-segundas: segunda divisão das 7 ligas da Europa (branch dados-europa-segundas) · europa-terceiras: terceira divisão (branch dados-europa-terceiras) · europa-outros: outros países da Europa (branch dados-europa-outros) · selecoes-mundo: seleções da África, Ásia e Oceania (branch dados-selecoes-mundo)"
+        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa) · selecoes-europa: convocações das 55 seleções da UEFA (branch dados-selecoes-europa) · europa-segundas: segunda divisão das 7 ligas da Europa (branch dados-europa-segundas) · europa-terceiras: terceira divisão (branch dados-europa-terceiras) · europa-outros: outros países da Europa (branch dados-europa-outros) · selecoes-mundo: seleções da África, Ásia e Oceania (branch dados-selecoes-mundo) · asia-africa: clubes da África, da Ásia e da Nova Zelândia e as copas de lá (branch dados-asia-africa)"
         type: choice
         default: elencos
-        options: [elencos, times, segundas, america, europa, selecoes-europa, europa-segundas, europa-terceiras, europa-outros, selecoes-mundo]
+        options: [elencos, times, segundas, america, europa, selecoes-europa, europa-segundas, europa-terceiras, europa-outros, selecoes-mundo, asia-africa]
 
 permissions:
   contents: write
@@ -322,3 +322,42 @@ jobs:
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -q -m "seleções da África, Ásia e Oceania (Wikipédia CC BY-SA) (${GITHUB_SHA::7})"
           git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-selecoes-mundo
+
+  asia-africa:
+    if: inputs.fase == 'asia-africa'
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v7
+      - name: Transfermarkt (Japão, Coreia do Sul, Arábia Saudita e Austrália)
+        run: |
+          mkdir -p /tmp/tm dados/tm
+          for f in players clubs competitions games; do
+            curl -sSfL "https://pub-e682421888d945d684bcae8890b0ec20.r2.dev/data/$f.csv.gz" -o "/tmp/tm/$f.csv.gz"
+          done
+          python3 tools/europa/filtrar.py /tmp/tm dados/tm JAP1,RSK1,SA1,AUS1 | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Wikipédia e Wikidata (ligas da África, da Ásia e da Nova Zelândia e as copas de lá)
+        run: python3 tools/times/wikipedia.py tools/times/sementes-mundo.json dados
+      - name: Gravar na branch dados-asia-africa
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dados
+          {
+            echo "# Clubes da África, da Ásia e da Oceania"
+            echo
+            echo "Baixados em $(date -u +%Y-%m-%dT%H:%MZ) pelo workflow elencos.yml (fase asia-africa) do Proffut."
+            echo
+            echo "- transfermarkt-datasets (CC0), pasta tm: Japão, Coreia do Sul, Arábia Saudita e Austrália"
+            echo "- Wikipédia (CC BY-SA) e Wikidata (CC0): as outras ligas e as copas"
+            echo
+            echo "| Arquivo | Tamanho |"
+            echo "|---|---|"
+            find . -type f -not -name LEIAME.md | sort | while read -r f; do echo "| ${f#./} | $(du -h "$f" | cut -f1) |"; done
+          } > LEIAME.md
+          cat LEIAME.md >> "$GITHUB_STEP_SUMMARY"
+          git init -q -b dados-asia-africa
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Clubes da África, da Ásia e da Oceania (${GITHUB_SHA::7})"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-asia-africa
