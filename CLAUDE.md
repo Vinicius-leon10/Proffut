@@ -595,6 +595,10 @@ Austrália; o resto pela Wikipédia no robô) com Liga dos Campeões da Ásia e 
 Africana, Copa da Ásia e Copa da Oceania; 4) 2ª divisão dos 16 países novos, os ~30 países da Europa que faltam e a Nova
 Zelândia; 5) jogadores reais para os clubes leves (3ª divisões). Se o limite acabar, salvar (commit e push) e anotar aqui
 onde parou. No fim, listar o que não deu (jogadores reais para o usuário buscar com o Google, e os escudos).
+**Onde parou (11/nov/2026, manhã):** testes mais rápidos, parte 1 e parte 2 feitas e publicadas (R107–R111; ver abaixo).
+**Próximo: a parte 3** (Copa Africana, Copa da Ásia e Copa da Oceania em `selecoes.ts`, como a Copa América e a Copa Ouro;
+teste primeiro, R112). Depois as partes 4 e 5. O que não deu até aqui: Costa do Marfim, Senegal, Líbia, Omã, Sudão, Camarões,
+Mali e RD Congo (sem lista na página do robô) e os escudos dos clubes da Ásia e da África (na lista dos que faltam).
 
 **Testes mais rápidos (pedido do usuário, 11/nov/2026, "Deixe anotado para deixar mais rápido"; feito na mesma noite):**
 com o mundo todo a conferência no GitHub tinha passado de ~13 para ~35 minutos. Feito: `ci.yml` e `pages.yml` rodam os
