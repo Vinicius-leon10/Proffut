@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { agora, aba, cartaoDoProximoJogo, esperarInteiroNaTela, esperarSalvar, expect, novoJogo, test } from "./ajuda";
+import { aba, cartaoDoProximoJogo, esperarInteiroNaTela, esperarSalvar, expect, novoJogo, test } from "./ajuda";
 
 /** O nome exato, para achar a linha do jogador ("Pedro" está em "João Pedro"). */
 const exato = (nome: string) => new RegExp(`^${nome.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`);
@@ -40,8 +40,11 @@ async function receberProposta(page: Page, valor: number) {
 }
 
 test("R20 numa proposta por um jogador meu, dá para pedir mais e vender pelo valor pedido", async ({ page }) => {
+  // O save de qualquer momento desde o começo do teste (com "os últimos 5 s", numa máquina lenta o save de 20 MB do jogo
+  // novo já era mais velho que isso quando o jogo novo terminava, e a espera não acabava: falhou no GitHub, nov/2026).
+  const inicio = Date.now();
   await novoJogo(page);
-  await esperarSalvar(page, (await agora(page)) - 5_000);
+  await esperarSalvar(page, inicio);
   const nome = await receberProposta(page, 1_000_000);
 
   // A proposta fica em Mercado → Meus à venda, embaixo do jogador (saiu do painel do Clube, R63).
@@ -65,8 +68,11 @@ test("R20 numa proposta por um jogador meu, dá para pedir mais e vender pelo va
 });
 
 test("R62 em Mercado, Meus à venda mostra quem tem proposta (clube, valor e prazo), primeiro na lista, e dá para aceitar, pedir mais ou recusar ali mesmo", async ({ page }) => {
+  // O save de qualquer momento desde o começo do teste (com "os últimos 5 s", numa máquina lenta o save de 20 MB do jogo
+  // novo já era mais velho que isso quando o jogo novo terminava, e a espera não acabava: falhou no GitHub, nov/2026).
+  const inicio = Date.now();
   await novoJogo(page);
-  await esperarSalvar(page, (await agora(page)) - 5_000);
+  await esperarSalvar(page, inicio);
   // Três meias à venda: um com proposta do Flamengo, outro com proposta do Palmeiras e o mais forte sem proposta.
   const [doFlamengo, doPalmeiras, semProposta] = await page.evaluate(
     () =>
@@ -137,8 +143,11 @@ test("R62 em Mercado, Meus à venda mostra quem tem proposta (clube, valor e pra
 });
 
 test("R63 as propostas saem do painel do Clube: o Mercado, na barra de baixo, mostra quantas há e abre Meus à venda com elas, até a de quem não estava à venda", async ({ page }) => {
+  // O save de qualquer momento desde o começo do teste (com "os últimos 5 s", numa máquina lenta o save de 20 MB do jogo
+  // novo já era mais velho que isso quando o jogo novo terminava, e a espera não acabava: falhou no GitHub, nov/2026).
+  const inicio = Date.now();
   await novoJogo(page);
-  await esperarSalvar(page, (await agora(page)) - 5_000);
+  await esperarSalvar(page, inicio);
   // Duas propostas: por um meia à venda e por um zagueiro que não estava à venda.
   const [aVenda, foraDaVenda] = await page.evaluate(
     () =>

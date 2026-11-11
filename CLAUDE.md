@@ -802,6 +802,9 @@ Obras do estádio se pagam em 3 a 4 temporadas.
   (`allTextContents`), não pedaço de texto ("Pedro" está em "João Pedro"). Teste que joga a partida: a substituição
   automática de quem se machuca chama qualquer reserva, até o do meu time; antes de dizer que alguém não jogou, veja na
   narração se ele entrou ("Substituição: entra Fulano,", `entrouNoJogo` no R52).
+- Esperar o save logo depois do jogo novo: `esperarSalvar(page, inicio)` com a hora de antes do `novoJogo`, nunca "os
+  últimos 5 s" (`agora(page) - 5_000`): com o save de 20 MB, numa máquina lenta o `pularTutorial` termina com o save já
+  mais velho que isso e a espera não acaba (R20 falhou na publicação, nov/2026).
 - O save (`salvar` em `salvamento.ts`) marca no resumo a hora do jogo guardado (antes de gravar) e grava o jogo e o
   resumo juntos (`setMany`). Com a hora do fim da gravação, o save grande dos times novos (6 a 10 MB) fazia o
   salvamento de quando o jogo abre parecer mais novo do que a partida: o `esperarSalvar` do R07 aceitava esse e
