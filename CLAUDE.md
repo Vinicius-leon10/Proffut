@@ -573,6 +573,15 @@ segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, fa
 **Próximas ideias:** o resto da lista de mudanças (PLANO.md §13: 3, 6, 9–15, 17, 18, 20), quando o usuário escolher, e
 ajustes de equilíbrio pelo que ele sentir jogando.
 
+**Testes mais rápidos (pedido do usuário, 11/nov/2026, "Deixe anotado para deixar mais rápido"):** com o mundo todo
+(1.900 clubes, ~40 mil jogadores, save de ~30 MB), a conferência no GitHub passou de ~13 para ~35 minutos e o
+`npm run verificar` daqui, de ~25 para ~35. Ideias, sem tirar nem pular nenhum teste: dividir os testes de tela em
+partes paralelas no GitHub (`--shard` em 2 ou 3 jobs do `ci.yml`); saves de teste montados uma vez e reaproveitados
+(hoje cada teste roda `npx tsx tests/saves/...` e monta o mundo de novo); o teste longo do motor (2026 a 2030) e o da
+temporada completa num arquivo à parte, rodando em paralelo com os outros; e deixar a gravação do save mais leve (menos
+jogos antigos guardados), o que também ajuda no iPhone. Esperar a mudança no save com `esperarNoSave` ou lendo o resumo
+do espaço, nunca só `esperarSalvar` antes de recarregar (R36 e R84 falharam no GitHub por isso).
+
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).
 (2) Deixar as partidas mais lentas (o relógio da partida ao vivo). (3) Substituição manual do jogador machucado (hoje o
