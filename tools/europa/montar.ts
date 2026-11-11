@@ -8,7 +8,6 @@ import { gunzipSync } from "node:zlib";
 import { FICHAS_EUROPA, LIGAS_EUROPA } from "./fichas";
 import { FICHAS_OUTROS, LIGAS_OUTROS } from "./fichas-outros";
 import { NACIONALIDADES_MUNDO } from "../../src/engine/nacionalidades";
-import { VAGAS_UEFA } from "../../src/engine/copas";
 
 const pasta = process.argv[2];
 if (!pasta) throw new Error("Uso: npx tsx tools/europa/montar.ts <pasta da branch dados-europa>");
@@ -275,32 +274,4 @@ if (nacionalidadesSemCodigo.size) console.log("Nacionalidades sem código:", [..
 console.log(`Convocados ligados a clubes da Europa: ${ligados}`);
 if (naoAchados.length) console.log("Convocados em clubes da Europa sem achar no elenco:", naoAchados.join("; "));
 
-// ---- copas da UEFA de 2026: os classificados pela tabela final de 2025/26 de cada liga ----
-const jogosLigas = lerCsv("jogos-ligas").filter((g) => g.season === "2025");
-const doTm = new Map(Object.entries(FICHAS_EUROPA).map(([tm, f]) => [tm, f[0]]));
-const tabelas: Record<string, string[]> = {};
-for (const [comp, liga] of Object.entries(LIGAS_EUROPA)) {
-  const t = new Map<string, { pts: number; sg: number; gp: number }>();
-  for (const g of jogosLigas.filter((x) => x.competition_id === comp && x.home_club_goals !== "")) {
-    const [a, b] = [Number(g.home_club_goals), Number(g.away_club_goals)];
-    for (const [id, pro, contra] of [[g.home_club_id, a, b], [g.away_club_id, b, a]] as [string, number, number][]) {
-      const l = t.get(id) ?? { pts: 0, sg: 0, gp: 0 };
-      l.pts += pro > contra ? 3 : pro === contra ? 1 : 0; l.sg += pro - contra; l.gp += pro;
-      t.set(id, l);
-    }
-  }
-  tabelas[liga] = [...t].sort((x, y) => y[1].pts - x[1].pts || y[1].sg - x[1].sg || y[1].gp - x[1].gp).map(([tm]) => doTm.get(tm)!).filter(Boolean);
-}
-const copas: Record<string, Record<string, string[]>> = { "K-UCL": { grupos: [] }, "K-UEL": { grupos: [] }, "K-UECL": { grupos: [] } };
-for (const [liga, v] of Object.entries(VAGAS_UEFA)) {
-  const t = tabelas[liga];
-  copas["K-UCL"].grupos.push(...t.slice(v.ucl[0] - 1, v.ucl[1]));
-  copas["K-UEL"].grupos.push(...t.slice(v.uel[0] - 1, v.uel[1]));
-  copas["K-UECL"].grupos.push(...t.slice(v.uecl[0] - 1, v.uecl[1]));
-}
-writeFileSync("data/europa-2026/copas.json", JSON.stringify({
-  fonte: "Tabela final de 2025/26 das 7 ligas (jogos do transfermarkt-datasets, CC0), com as vagas do Proffut.",
-  copas,
-}, null, 1) + "\n");
-console.log("Copas da UEFA de 2026:", Object.entries(copas).map(([c, f]) => `${c} ${f.grupos.length}: ${f.grupos.slice(0, 6).join(", ")}...`).join(" | "));
-for (const [liga, t] of Object.entries(tabelas)) console.log(`Tabela 2025/26 ${liga}: ${t.slice(0, 5).join(", ")}`);
+// As tabelas de 2025/26 de cada liga (para as copas da UEFA de 2026) saem de tools/europa/tabelas.ts.

@@ -487,10 +487,10 @@ Romênia (RO), Rússia (RU), Escócia (XS, o mesmo código da seleção), Suéci
 Ucrânia (UA), em `PAISES` com `regiao: "europa"`. Dados: fase "europa-outros" do robô (`tools/europa/filtrar.py` com as
 ligas no 3º argumento; branch `dados-europa-outros`); `npx tsx tools/europa/montar.ts <dados-europa> <dados-europa-outros>`
 grava também `clubes-outros.json` e `jogadores-outros.json` (fichas em `tools/europa/fichas-outros.ts`; força pelo valor de
-mercado, como nas 7 ligas) e liga os convocados a eles. Sem 2ª divisão nesses países (não há acesso nem queda) e ainda
-sem vaga nas copas da UEFA (`VAGAS_UEFA` só tem as 7 ligas). TV do mês em `TV_EUROPA_MES`. **Ordem dos montadores:**
+mercado, como nas 7 ligas) e liga os convocados a eles. Sem 2ª divisão nesses países (não há acesso nem queda); vagas nas
+copas da UEFA desde o R107 (abaixo). TV do mês em `TV_EUROPA_MES`. **Ordem dos montadores:**
 `tools/selecoes/montar.ts` → `tools/europa/segundas.ts` → `tools/europa/montar.ts` (com as duas pastas) →
-`tools/europa/terceiras.ts`.
+`tools/europa/terceiras.ts` → `tools/europa/tabelas.ts`.
 
 **Copa do Mundo e as seleções do mundo (nov/2026, `selecoes.ts`, `selecoes-mundo.ts`, R104–R105):** pedido "coloque todos
 os times que participam de Copa do Mundo, todas as seleções, já com jogadores, porque eu quero que deixe a parte de
@@ -582,14 +582,30 @@ Africana, Copa da Ásia e Copa da Oceania; 4) 2ª divisão dos 16 países novos,
 Zelândia; 5) jogadores reais para os clubes leves (3ª divisões). Se o limite acabar, salvar (commit e push) e anotar aqui
 onde parou. No fim, listar o que não deu (jogadores reais para o usuário buscar com o Google, e os escudos).
 
-**Testes mais rápidos (pedido do usuário, 11/nov/2026, "Deixe anotado para deixar mais rápido"):** com o mundo todo
-(1.900 clubes, ~40 mil jogadores, save de ~30 MB), a conferência no GitHub passou de ~13 para ~35 minutos e o
-`npm run verificar` daqui, de ~25 para ~35. Ideias, sem tirar nem pular nenhum teste: dividir os testes de tela em
-partes paralelas no GitHub (`--shard` em 2 ou 3 jobs do `ci.yml`); saves de teste montados uma vez e reaproveitados
-(hoje cada teste roda `npx tsx tests/saves/...` e monta o mundo de novo); o teste longo do motor (2026 a 2030) e o da
-temporada completa num arquivo à parte, rodando em paralelo com os outros; e deixar a gravação do save mais leve (menos
-jogos antigos guardados), o que também ajuda no iPhone. Esperar a mudança no save com `esperarNoSave` ou lendo o resumo
-do espaço, nunca só `esperarSalvar` antes de recarregar (R36 e R84 falharam no GitHub por isso).
+**Testes mais rápidos (pedido do usuário, 11/nov/2026, "Deixe anotado para deixar mais rápido"; feito na mesma noite):**
+com o mundo todo a conferência no GitHub tinha passado de ~13 para ~35 minutos. Feito: `ci.yml` e `pages.yml` rodam os
+testes do motor numa máquina e os de tela em 3 partes ao mesmo tempo (`--shard`, job `tela` com `matrix.parte`); o
+workflow só fica verde com as 4 verdes e a publicação (job `publicar`, com `needs`) só vem depois delas. Saves de teste:
+`montarSave(script, ...args)` (`tests/ajuda.ts`) guarda cada save montado pelo motor numa pasta da rodada
+(`SAVES_DA_RODADA`, criada no `playwright.config.ts` a cada execução: nunca um save de outra versão do jogo). Ideias que
+ficaram: o teste longo do motor num arquivo à parte e a gravação do save mais leve. Esperar a mudança no save com
+`esperarNoSave` ou lendo o resumo do espaço, nunca só `esperarSalvar` antes de recarregar (R36 e R84 falharam no GitHub
+por isso).
+
+**Copas nacionais da Europa e vagas dos países novos nas copas da UEFA (nov/2026, parte 1 do "jogo completo", R107,
+`copas.ts`):** FA Cup, Copa do Rei, Copa da Itália, Copa da Alemanha, Copa da França, Taça de Portugal e Copa da Holanda
+(`COPAS_DA_EUROPA`, `copaNacional` com `SEMANAS_EUROPA` [-8, -4, 0, 7, 12, 16], às quartas, fora das semanas das copas da
+UEFA e das datas FIFA): os clubes das 3 divisões do país, 64 (Inglaterra, Espanha, Itália) ou 32, jogo único na casa do
+pior, final em campo neutro; prêmio do campeão 4 mi. Supercopas (`K-SEN`, `K-SES`...: campeão da liga x campeão da copa,
+ou o vice da liga), semana −12, a partir de 2027 (`vagasDasSupercopasDaEuropa`). O campeão da copa fica com a vaga da Liga
+Europa do país se não tem vaga melhor. **UEFA:** `VAGAS_UEFA` com 22 ligas (a Rússia fica de fora, suspensa pela UEFA):
+Liga dos Campeões com 26 direto nos grupos (Inglaterra, Espanha, Itália e Alemanha 4, França 3, Portugal e Holanda 2, e os
+campeões da Bélgica, da Turquia e da Áustria) e um **playoff** (semanas −12/−11, ida e volta, potes) entre os campeões de
+12 países (Suíça, Dinamarca, Grécia, Croácia, Noruega, Polônia, Romênia, Escócia, Suécia, Sérvia, Tchéquia e Ucrânia): 6
+vão aos grupos. Liga Europa e Conference continuam com 16 (4 grupos), com os vices e terceiros dos países novos. Em 2026,
+as vagas saem da tabela de 2025/26 de cada liga (`data/europa-2026/copas.json` agora guarda `tabelas`, gravado por
+`npx tsx tools/europa/tabelas.ts <dados-europa> <dados-europa-outros>`; o `montar.ts` não grava mais esse arquivo). Save
+antigo: as copas novas começam na temporada seguinte; uma Liga dos Campeões em andamento continua como estava.
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).

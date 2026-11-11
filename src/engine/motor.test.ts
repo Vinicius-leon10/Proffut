@@ -10,7 +10,7 @@ import { somarDias, turnoEReturno, turnoUnico } from "./calendario";
 import { SERIES, classificacao, nomeDaLigaDoClube, posicaoNaLiga, tabelaDaLiga, tabelaDoClube, temporadaEncerrada } from "./competicoes";
 import { MAX_SUBSTITUICOES, MINIMO_POSICAO } from "./constantes";
 import { desfechoDoConfronto, situacaoNaCopa } from "./copa";
-import { DEFINICOES, VAGAS_UEFA, situacaoNaCopaDeClubes, vagasDasCopas } from "./copas";
+import { DEFINICOES, VAGAS_UEFA, nomeDaCopa, situacaoNaCopaDeClubes, vagasDasCopas } from "./copas";
 import { acertarParticipantes, assumirClube, juntarQuemJogavaFora, avancar, concluirJogos, jogosPendentesHoje, juntarAoSaveAntigo, novoJogo, prepararJogos, provavelTime, simularDia, simularRestoDaTemporada } from "./jogo";
 import { checarEstado } from "./checagem";
 import { PAISES, competicoesDoUsuario, divisaoDaLiga, inicioDoAno, participantes, tabelaDoTorneio, vagasEntreDivisoes } from "./torneios";
@@ -2234,21 +2234,32 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
     expect(Object.values(e.jogadores).filter((j) => j.nome === brasileiro.nome)).toHaveLength(1);
   });
 
-  it("as copas da UEFA de 2026 têm os classificados da tabela final de 2025/26: 32 na Liga dos Campeões, 16 na Liga Europa e 16 na Conference", () => {
-    const copas = europaCopasJson.copas as Record<string, { grupos: string[] }>;
-    expect(estado.copas?.["K-UCL"]?.clubes.sort()).toEqual([...copas["K-UCL"].grupos].sort());
-    expect(estado.copas?.["K-UCL"]?.clubes).toHaveLength(32);
+  it("as copas da UEFA de 2026 saem da tabela de 2025/26 das 23 ligas: 26 direto nos grupos da Liga dos Campeões, 12 campeões no playoff, 16 na Liga Europa e 16 na Conference; a Rússia fica de fora", () => {
+    const tabelas = europaCopasJson.tabelas as Record<string, string[]>;
+    const ucl = estado.copas?.["K-UCL"];
+    expect(ucl?.entram.grupos).toHaveLength(26);
+    expect(ucl?.entram.playoff).toHaveLength(12);
+    expect(ucl?.fase).toBe("playoff");
     expect(estado.copas?.["K-UEL"]?.clubes).toHaveLength(16);
     expect(estado.copas?.["K-UECL"]?.clubes).toHaveLength(16);
-    // O campeão de 2025/26 de cada liga está na Liga dos Campeões; ninguém joga duas copas.
-    for (const id of ["arsenal", "barcelona-esp", "inter-de-milao", "bayern-de-munique", "paris-saint-germain", "porto-por", "psv"]) expect(copas["K-UCL"].grupos).toContain(id);
-    const todos = [...copas["K-UCL"].grupos, ...copas["K-UEL"].grupos, ...copas["K-UECL"].grupos];
-    expect(new Set(todos).size).toBe(64);
+    // Os campeões de 2025/26 das 7 ligas e da Bélgica, da Turquia e da Áustria vão direto aos grupos.
+    for (const liga of ["EN", "ES", "IT", "DE", "FR", "PT", "NL", "BE", "TR", "AT"]) expect(ucl?.entram.grupos, liga).toContain(tabelas[liga][0]);
+    // Os campeões dos outros 12 jogam o playoff; os vices de vários deles, a Liga Europa ou a Conference.
+    for (const liga of ["CH", "DK", "GR", "HR", "NO", "PL", "RO", "XS", "SE", "RS", "CZ", "UA"]) expect(ucl?.entram.playoff, liga).toContain(tabelas[liga][0]);
+    expect(estado.copas?.["K-UEL"]?.clubes).toContain(tabelas.TR[1]);
+    expect(estado.copas?.["K-UECL"]?.clubes).toContain(tabelas.UA[1]);
+    const todos = [...ucl!.clubes, ...estado.copas!["K-UEL"]!.clubes, ...estado.copas!["K-UECL"]!.clubes];
+    expect(new Set(todos).size).toBe(70);
+    expect(todos.filter((c) => estado.clubes[c].pais === "RU")).toEqual([]);
+    // O playoff: 6 confrontos de ida e volta entre os campeões, antes dos grupos.
+    const playoff = estado.partidas.filter((p) => p.serie === "K-UCL" && p.fase === "playoff");
+    expect(playoff).toHaveLength(12);
+    expect(playoff.every((p) => p.data >= inicioDoAno(2026))).toBe(true);
     // Sem a lista de 2026, a Supercopa da UEFA não se joga.
     expect(estado.copas?.["K-USC"]).toBeUndefined();
   });
 
-  it("as copas da UEFA vão até a final; na virada, as vagas saem das tabelas do jogo e a Supercopa da UEFA junta os campeões", () => {
+  it("as copas da UEFA vão até a final (a Liga dos Campeões com o playoff); na virada, as vagas saem das tabelas do jogo e a Supercopa da UEFA junta os campeões", () => {
     const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 11 });
     e.config.escalacaoAutomatica = true;
     simularRestoDaTemporada(e);
@@ -2258,12 +2269,48 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
       expect(e.partidas.filter((p) => p.serie === id && !p.jogada), id).toHaveLength(0);
       expect(e.partidas.find((p) => p.serie === id && p.fase === "final")?.neutro, id).toBe(true);
     }
-    expect(e.partidas.filter((p) => p.serie === "K-UCL")).toHaveLength(96 + 16 + 8 + 4 + 1);
+    expect(e.partidas.filter((p) => p.serie === "K-UCL")).toHaveLength(12 + 96 + 16 + 8 + 4 + 1);
+    expect(e.copas!["K-UCL"]!.grupos!.grupos.flat()).toHaveLength(32);
     const vagas = vagasDasCopas(e);
-    expect(vagas["K-UCL"]?.grupos).toHaveLength(32);
+    expect(vagas["K-UCL"]?.grupos).toHaveLength(26);
+    expect(vagas["K-UCL"]?.playoff).toHaveLength(12);
     const tabelaEN = tabelaDoTorneio(e, e.torneios!["L-EN" as IdTorneio]!).map((l) => l.clubeId);
-    expect(vagas["K-UCL"]?.grupos.slice(0, VAGAS_UEFA.EN.ucl[1])).toEqual(tabelaEN.slice(0, VAGAS_UEFA.EN.ucl[1]));
+    expect(vagas["K-UCL"]?.grupos.slice(0, VAGAS_UEFA.EN.ucl![1])).toEqual(tabelaEN.slice(0, VAGAS_UEFA.EN.ucl![1]));
     expect(vagas["K-USC"]?.final).toEqual([e.copas!["K-UCL"]!.campeao, e.copas!["K-UEL"]!.campeao]);
+    // A copa nacional: o campeão da FA Cup sem vaga na Liga dos Campeões fica com a da Liga Europa.
+    const faCup = e.copas!["K-EN"]!.campeao!;
+    if (!tabelaEN.slice(0, 4).includes(faCup)) expect(vagas["K-UEL"]?.grupos).toContain(faCup);
+    // Supercopa da Inglaterra: o campeão inglês contra o da FA Cup (ou o vice, se for o mesmo).
+    expect(vagas["K-SEN"]?.final).toEqual([tabelaEN[0], faCup === tabelaEN[0] ? tabelaEN[1] : faCup]);
+  });
+
+  it("copas nacionais da Europa (nov/2026): FA Cup, Copa do Rei, Copa da Itália, Copa da Alemanha, Copa da França, Taça de Portugal e Copa da Holanda com os clubes das 3 divisões do país, mata-mata até a final em campo neutro; as supercopas começam em 2027", () => {
+    const tamanhos: Record<string, number> = { "K-EN": 64, "K-ES": 64, "K-IT": 64, "K-DE": 32, "K-FR": 32, "K-PT": 32, "K-NL": 32 };
+    const paises: Record<string, string> = { "K-EN": "EN", "K-ES": "ES", "K-IT": "IT", "K-DE": "DE", "K-FR": "FR", "K-PT": "PT", "K-NL": "NL" };
+    for (const [id, n] of Object.entries(tamanhos)) {
+      const c = estado.copas?.[id as `K-${string}`];
+      expect(c?.clubes, id).toHaveLength(n);
+      expect(c?.clubes.every((x) => estado.clubes[x].pais === paises[id]), id).toBe(true);
+      // Os clubes da 1ª divisão estão todos.
+      for (const x of estado.torneios![`L-${paises[id]}` as IdTorneio]!.clubes) expect(c?.clubes, `${id} ${x}`).toContain(x);
+      expect(DEFINICOES.find((d) => d.id === id)?.grupo).toBe("nacional");
+    }
+    expect(nomeDaCopa("K-EN")).toBe("FA Cup");
+    expect(nomeDaCopa("K-DE")).toBe("Copa da Alemanha");
+    for (const id of ["K-SEN", "K-SES", "K-SIT", "K-SDE", "K-SFR", "K-SPT", "K-SNL"] as const) expect(estado.copas?.[id], id).toBeUndefined();
+    // Os jogos às quartas, sem bater com as copas da UEFA (terças e quintas) nem com a liga (domingo) do mesmo clube.
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 5 });
+    e.config.escalacaoAutomatica = true;
+    simularRestoDaTemporada(e);
+    for (const id of Object.keys(tamanhos)) {
+      const c = e.copas?.[id as `K-${string}`];
+      expect(c?.campeao, id).toBeTruthy();
+      expect(e.partidas.filter((p) => p.serie === id && !p.jogada), id).toHaveLength(0);
+      expect(e.partidas.find((p) => p.serie === id && p.fase === "final")?.neutro, id).toBe(true);
+    }
+    const porClube = new Map<string, string[]>();
+    for (const p of e.partidas) for (const c of [p.mandante, p.visitante]) if (e.clubes[c]?.pais === "EN") porClube.set(c, [...(porClube.get(c) ?? []), p.data]);
+    for (const [c, datas] of porClube) expect(new Set(datas).size, c).toBe(datas.length);
   });
 
   it("no jogo novo, os convocados (da América e da Europa) que jogam nos clubes da Europa estão só no clube (sem cópia jogando fora)", () => {

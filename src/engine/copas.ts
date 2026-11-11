@@ -330,7 +330,10 @@ const SEMANAS_NACIONAIS = [4, 6, 10, 14, 19, 28];
 const SEMANAS_EUA = [5, 6, 10, 13, 25];
 
 /** Copa nacional de um país: mata-mata em jogo único (até 64 clubes, os das divisões do país no jogo). */
-function copaNacional(id: IdCopa, nome: string, pais: string, opcoes: { maximo?: number; semanas?: number[]; neutra?: boolean; sem?: string[] } = {}): DefinicaoCopa {
+function copaNacional(
+  id: IdCopa, nome: string, pais: string,
+  opcoes: { maximo?: number; semanas?: number[]; neutra?: boolean; sem?: string[]; premios?: Record<string, number> } = {},
+): DefinicaoCopa {
   const maximo = opcoes.maximo ?? 64;
   const semanas = opcoes.semanas ?? SEMANAS_NACIONAIS;
   const NOMES: Record<number, string> = { 2: "Final", 4: "Semifinal", 8: "Quartas de final", 16: "Oitavas de final", 32: "16 avos de final", 64: "32 avos de final" };
@@ -353,8 +356,54 @@ function copaNacional(id: IdCopa, nome: string, pais: string, opcoes: { maximo?:
       // Copa menor que o máximo: começa numa fase mais adiante.
       return { [IDS[tamanho]]: ids.slice(0, tamanho) };
     },
-    premios: { campeao: 1.5 * MILHAO, vice: 0.6 * MILHAO },
+    premios: opcoes.premios ?? { campeao: 1.5 * MILHAO, vice: 0.6 * MILHAO },
   };
+}
+
+// ---- copas nacionais e supercopas da Europa (nov/2026) ----------------------------------------------------
+// As ligas da Europa vão de janeiro a setembro; as copas nacionais, às quartas-feiras das semanas sem as copas da UEFA
+// (que jogam às terças e quintas das semanas -10 a 8) e fora das datas FIFA de março. Até 64 clubes das 3 divisões do
+// país, final em campo neutro. A supercopa junta o campeão da liga e o da copa no começo do ano seguinte.
+
+/** Semanas das rodadas das copas nacionais da Europa (a última é a da final). */
+const SEMANAS_EUROPA = [-8, -4, 0, 7, 12, 16];
+const PREMIOS_COPA_EUROPA = { campeao: 4 * MILHAO, vice: 1.5 * MILHAO };
+
+const copaDaEuropa = (id: IdCopa, nome: string, pais: string) => copaNacional(id, nome, pais, { semanas: SEMANAS_EUROPA, premios: PREMIOS_COPA_EUROPA });
+
+/** Supercopa de um país da Europa: o campeão da liga contra o da copa (ou o vice da liga), em jogo único. */
+function supercopaDaEuropa(id: IdCopa, nome: string, pais: string, neutro: boolean): DefinicaoCopa {
+  return {
+    id, nome, grupo: "nacional", pais,
+    fases: [{ id: "final", nome: "Final", tipo: "mata", semanas: [-12], dia: "qua", neutro, pares: "chave" }],
+    // Sem os campeões de 2025/26 da copa no jogo, a primeira supercopa é a de 2027.
+    participantes: (_estado, vagas) => vagas?.[id],
+    premios: { campeao: 1 * MILHAO, vice: 0.5 * MILHAO },
+  };
+}
+
+/** Copa e supercopa de cada uma das 7 ligas da Europa. */
+const COPAS_DA_EUROPA: { liga: string; copa: [IdCopa, string]; supercopa: [IdCopa, string, boolean] }[] = [
+  { liga: "EN", copa: ["K-EN", "FA Cup"], supercopa: ["K-SEN", "Supercopa da Inglaterra", true] },
+  { liga: "ES", copa: ["K-ES", "Copa do Rei"], supercopa: ["K-SES", "Supercopa da Espanha", true] },
+  { liga: "IT", copa: ["K-IT", "Copa da Itália"], supercopa: ["K-SIT", "Supercopa da Itália", true] },
+  { liga: "DE", copa: ["K-DE", "Copa da Alemanha"], supercopa: ["K-SDE", "Supercopa da Alemanha", false] },
+  { liga: "FR", copa: ["K-FR", "Copa da França"], supercopa: ["K-SFR", "Supercopa da França", true] },
+  { liga: "PT", copa: ["K-PT", "Taça de Portugal"], supercopa: ["K-SPT", "Supertaça de Portugal", true] },
+  { liga: "NL", copa: ["K-NL", "Copa da Holanda"], supercopa: ["K-SNL", "Supercopa da Holanda", false] },
+];
+
+/** Supercopas da Europa na virada: o campeão da liga e o da copa (se é o mesmo, o vice da liga). */
+function vagasDasSupercopasDaEuropa(estado: EstadoJogo): VagasDasCopas {
+  const vagas: VagasDasCopas = {};
+  for (const { liga, copa, supercopa } of COPAS_DA_EUROPA) {
+    const tabela = ordemDaLiga(estado, liga, true);
+    const daCopa = estado.copas?.[copa[0]]?.campeao;
+    if (!tabela.length || !daCopa) continue;
+    const outro = daCopa === tabela[0] ? tabela[1] : daCopa;
+    if (outro) vagas[supercopa[0]] = { final: [tabela[0], outro] };
+  }
+  return vagas;
 }
 
 // ---- Europa (nov/2026): Champions League, Liga Europa, Conference League e Supercopa da UEFA ----------------
@@ -362,33 +411,54 @@ function copaNacional(id: IdCopa, nome: string, pais: string, opcoes: { maximo?:
 // final em campo neutro). As ligas da Europa vão de janeiro a setembro aos domingos; as copas, às terças e quintas de
 // janeiro a maio, fora das datas FIFA de março.
 
-/** Vagas de cada liga da Europa nas copas da UEFA (posições na tabela, contando de 1). */
-export const VAGAS_UEFA: Record<string, { ucl: [number, number]; uel: [number, number]; uecl: [number, number] }> = {
-  EN: { ucl: [1, 5], uel: [6, 7], uecl: [8, 9] }, ES: { ucl: [1, 5], uel: [6, 7], uecl: [8, 9] },
-  IT: { ucl: [1, 5], uel: [6, 7], uecl: [8, 9] }, DE: { ucl: [1, 5], uel: [6, 7], uecl: [8, 9] },
-  FR: { ucl: [1, 4], uel: [5, 7], uecl: [8, 9] }, PT: { ucl: [1, 4], uel: [5, 7], uecl: [8, 10] },
-  NL: { ucl: [1, 4], uel: [5, 6], uecl: [7, 9] },
+/**
+ * Vagas de cada liga da Europa nas copas da UEFA (posições na tabela, contando de 1; desde nov/2026 com os 16 países
+ * novos, menos a Rússia, suspensa pela UEFA). Liga dos Campeões: 26 direto nos grupos e 6 que saem do playoff, ida e
+ * volta entre os campeões de 12 países. O campeão da copa nacional (FA Cup, Copa do Rei...) fica com a vaga da Liga
+ * Europa do país se ainda não tem vaga melhor.
+ */
+export const VAGAS_UEFA: Record<string, { ucl?: [number, number]; playoff?: [number, number]; uel?: [number, number]; uecl?: [number, number] }> = {
+  EN: { ucl: [1, 4], uel: [5, 5], uecl: [6, 6] }, ES: { ucl: [1, 4], uel: [5, 5], uecl: [6, 6] },
+  IT: { ucl: [1, 4], uel: [5, 5], uecl: [6, 6] }, DE: { ucl: [1, 4], uel: [5, 5], uecl: [6, 6] },
+  FR: { ucl: [1, 3], uel: [4, 4], uecl: [5, 5] }, PT: { ucl: [1, 2], uel: [3, 3], uecl: [4, 4] },
+  NL: { ucl: [1, 2], uel: [3, 3], uecl: [4, 4] },
+  BE: { ucl: [1, 1], uel: [2, 2], uecl: [3, 3] }, TR: { ucl: [1, 1], uel: [2, 2], uecl: [3, 3] },
+  AT: { ucl: [1, 1], uel: [2, 2], uecl: [3, 3] },
+  CH: { playoff: [1, 1], uel: [2, 2] }, DK: { playoff: [1, 1], uel: [2, 2] }, GR: { playoff: [1, 1], uel: [2, 2] },
+  HR: { playoff: [1, 1], uel: [2, 2] }, NO: { playoff: [1, 1], uel: [2, 2] }, PL: { playoff: [1, 1], uel: [2, 2] },
+  RO: { playoff: [1, 1], uecl: [2, 2] }, XS: { playoff: [1, 1], uecl: [2, 2] }, SE: { playoff: [1, 1], uecl: [2, 2] },
+  RS: { playoff: [1, 1], uecl: [2, 2] }, CZ: { playoff: [1, 1], uecl: [2, 2] }, UA: { playoff: [1, 1], uecl: [2, 2] },
 };
-/** Quem joga as copas da UEFA em 2026 (tabela final de 2025/26, tools/europa/montar.ts). */
-const UEFA_2026 = europaCopasJson.copas as Record<string, Record<string, string[]>>;
+/** Tabela de 2025/26 de cada liga da Europa do jogo (tools/europa/tabelas.ts): as vagas das copas da UEFA de 2026. */
+const TABELAS_2025 = europaCopasJson.tabelas as Record<string, string[]>;
+/** Copa nacional de cada liga da Europa (o campeão ganha a vaga da Liga Europa). */
+const COPA_DA_LIGA_EUROPA: Record<string, IdCopa> = { EN: "K-EN", ES: "K-ES", IT: "K-IT", DE: "K-DE", FR: "K-FR", PT: "K-PT", NL: "K-NL" };
 
-/** Classificados das copas da UEFA pelas tabelas das ligas (ou pela reputação, antes dos jogos). */
+/**
+ * Classificados das copas da UEFA: pelas tabelas das ligas do jogo (na virada), pela tabela de 2025/26 (temporada
+ * 2026) ou pela reputação (save que ganhou a Europa no meio do caminho).
+ */
 function vagasDaUefa(estado: EstadoJogo, pelaTabela: boolean): VagasDasCopas {
-  const ucl: string[] = [], uel: string[] = [], uecl: string[] = [];
+  const ucl: string[] = [], playoff: string[] = [], uel: string[] = [], uecl: string[] = [];
+  const de2025 = !pelaTabela && estado.temporada === 2026;
   for (const [liga, v] of Object.entries(VAGAS_UEFA)) {
-    const t = ordemDaLiga(estado, liga, pelaTabela);
-    ucl.push(...t.slice(v.ucl[0] - 1, v.ucl[1]));
-    uel.push(...t.slice(v.uel[0] - 1, v.uel[1]));
-    uecl.push(...t.slice(v.uecl[0] - 1, v.uecl[1]));
+    const tabela = de2025 && TABELAS_2025[liga] ? TABELAS_2025[liga].filter((c) => estado.clubes[c]) : ordemDaLiga(estado, liga, pelaTabela);
+    if (!tabela.length) continue;
+    // O campeão da copa nacional entra no lugar da última vaga da Liga Europa, se não tem vaga melhor.
+    const copa = pelaTabela && COPA_DA_LIGA_EUROPA[liga] ? estado.copas?.[COPA_DA_LIGA_EUROPA[liga]]?.campeao : undefined;
+    const t = v.uel && copa ? unicos([...tabela.slice(0, v.uel[1] - 1), copa, ...tabela]) : tabela;
+    const fatia = (r?: [number, number]) => (r ? t.slice(r[0] - 1, r[1]) : []);
+    ucl.push(...fatia(v.ucl));
+    playoff.push(...fatia(v.playoff));
+    uel.push(...fatia(v.uel));
+    uecl.push(...fatia(v.uecl));
   }
-  return { "K-UCL": { grupos: ucl }, "K-UEL": { grupos: uel }, "K-UECL": { grupos: uecl } };
+  return { "K-UCL": { playoff, grupos: ucl }, "K-UEL": { grupos: uel }, "K-UECL": { grupos: uecl } };
 }
 
-/** Os de 2026 (só os que existem no jogo) ou, numa temporada sem a lista, pela reputação. */
+/** Os classificados (só com as ligas da Europa no jogo: save de antes da Europa começa as copas quando elas existem). */
 function daUefa(estado: EstadoJogo, id: IdCopa, vagas?: VagasDasCopas): Record<string, string[]> | undefined {
   if (vagas?.[id]) return vagas[id];
-  if (estado.temporada === 2026 && UEFA_2026[id]) return Object.fromEntries(Object.entries(UEFA_2026[id]).map(([f, ids]) => [f, ids.filter((c) => estado.clubes[c])]));
-  // Save de antes da Europa: as copas da UEFA começam quando os clubes já jogam as ligas.
   if (!estado.torneios?.["L-EN"]) return undefined;
   return vagasDaUefa(estado, false)[id];
 }
@@ -404,6 +474,9 @@ function copaDaUefa(id: IdCopa, nome: string, grupos: 8 | 4, dia: Dia, premios: 
   return {
     id, nome, grupo: "uefa",
     fases: [
+      ...(id === "K-UCL"
+        ? [{ id: "playoff", nome: "Playoff", tipo: "mata", semanas: [-12, -11], dia, pares: "potes", nota: "Os campeões de 12 países em ida e volta; os 6 vencedores vão à fase de grupos." } satisfies FaseCopa]
+        : []),
       { id: "grupos", nome: "Fase de grupos", tipo: "grupos", semanas: [-10, -9, -7, -6, -5, -3], dia, grupos: { quantos: grupos, passam: 2, turnos: 2 } },
       ...mata,
       { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [5, 6], dia, pares: "chave" },
@@ -415,7 +488,7 @@ function copaDaUefa(id: IdCopa, nome: string, grupos: 8 | 4, dia: Dia, premios: 
 }
 
 const championsLeague = copaDaUefa("K-UCL", "Liga dos Campeões", 8, "ter",
-  { grupos: 30 * MILHAO, oitavas: 15 * MILHAO, quartas: 20 * MILHAO, semi: 25 * MILHAO, campeao: 120 * MILHAO, vice: 50 * MILHAO });
+  { playoff: 3 * MILHAO, grupos: 30 * MILHAO, oitavas: 15 * MILHAO, quartas: 20 * MILHAO, semi: 25 * MILHAO, campeao: 120 * MILHAO, vice: 50 * MILHAO });
 const ligaEuropa = copaDaUefa("K-UEL", "Liga Europa", 4, "qui",
   { grupos: 8 * MILHAO, quartas: 6 * MILHAO, semi: 8 * MILHAO, campeao: 30 * MILHAO, vice: 12 * MILHAO });
 const conference = copaDaUefa("K-UECL", "Conference League", 4, "qui",
@@ -442,6 +515,7 @@ export const DEFINICOES: DefinicaoCopa[] = [
   copaNacional("K-US", "U.S. Open Cup", "US", { maximo: 32, semanas: SEMANAS_EUA, sem: CANADENSES_DA_MLS }),
   copaNacional("K-CA", "Campeonato Canadense", "CA", { maximo: 8, semanas: SEMANAS_EUA }),
   supercopaUefa, championsLeague, ligaEuropa, conference,
+  ...COPAS_DA_EUROPA.flatMap(({ liga, copa, supercopa }) => [supercopaDaEuropa(supercopa[0], supercopa[1], liga, supercopa[2]), copaDaEuropa(copa[0], copa[1], liga)]),
 ];
 const POR_ID = new Map<string, DefinicaoCopa>(DEFINICOES.map((d) => [d.id, d]));
 export const definicaoDaCopa = (id: string) => POR_ID.get(id);
@@ -573,7 +647,7 @@ export function vagasDasCopas(estado: EstadoJogo): VagasDasCopas {
   vagas["K-CAM"] = { grupos: porPais(estado, VAGAS_CENTRO_AMERICANA, true) };
   vagas["K-CAR"] = { grupos: porPais(estado, VAGAS_CARIBE, true) };
   // Europa: pelas tabelas das 7 ligas; a Supercopa da UEFA entre os campeões da Liga dos Campeões e da Liga Europa.
-  if (estado.torneios?.["L-EN"]) Object.assign(vagas, vagasDaUefa(estado, true));
+  if (estado.torneios?.["L-EN"]) Object.assign(vagas, vagasDaUefa(estado, true), vagasDasSupercopasDaEuropa(estado));
   const supercopa = unicos([campeao("K-UCL"), campeao("K-UEL")]);
   if (supercopa.length === 2) vagas["K-USC"] = { final: supercopa };
   return vagas;

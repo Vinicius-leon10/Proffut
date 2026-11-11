@@ -8,7 +8,7 @@ type Ficha = { id: string; nome: string; pais: string };
 const europa = (JSON.parse(readFileSync("data/europa-2026/clubes.json", "utf8")) as { clubes: Ficha[] }).clubes;
 const outros = (JSON.parse(readFileSync("data/europa-2026/clubes-outros.json", "utf8")) as { clubes: Ficha[] }).clubes;
 const segundas = (JSON.parse(readFileSync("data/europa-2026/clubes-segundas.json", "utf8")) as { clubes: (Ficha & { liga: string })[] }).clubes;
-const copas = (JSON.parse(readFileSync("data/europa-2026/copas.json", "utf8")) as { copas: Record<string, { grupos: string[] }> }).copas;
+const tabelas2025 = (JSON.parse(readFileSync("data/europa-2026/copas.json", "utf8")) as { tabelas: Record<string, string[]> }).tabelas;
 
 test("R98 jogo novo na Europa: o continente Europa com os 7 países (cada um com a bandeira, a Inglaterra com a dela), a Inglaterra com os 20 clubes da 1ª divisão; assumindo o Arsenal, o painel mostra o Campeonato Inglês e a Liga dos Campeões", async ({ page }) => {
   await abrirSite(page);
@@ -41,7 +41,7 @@ test("R98 jogo novo na Europa: o continente Europa com os 7 países (cada um com
   await expect(page.locator("main")).toContainText("Liga dos Campeões");
 });
 
-test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 7 países (a Inglaterra com 20 clubes); em Copas, o grupo Europa com a Supercopa fora (sem jogo em 2026), a Liga dos Campeões com 8 grupos dos classificados de 2025/26, a Liga Europa e a Conference com 4 grupos", async ({ page }) => {
+test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 23 países (a Inglaterra com 20 clubes); em Copas, o grupo Europa com a Liga dos Campeões, a Liga Europa e a Conference (a Supercopa fora, sem jogo em 2026)", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
   await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
@@ -66,25 +66,40 @@ test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 7 países 
 
   await page.getByRole("tab", { name: "Copas" }).click();
   const copa = page.getByRole("combobox", { name: "Copa" });
-  // Quem joga a Liga dos Campeões abre nela.
-  await expect(copa).toHaveValue("K-UCL");
   const opcoesEuropa = (await copa.locator('optgroup[label="Europa"] option').allTextContents()).map((t) => t.replace(" (seu time)", ""));
   expect(opcoesEuropa).toEqual(["Liga dos Campeões", "Liga Europa", "Conference League"]);
-  // Um grupo por vez, pelo seletor (abre no grupo do Real Madrid); os 8 juntos têm os 32 classificados de 2025/26.
-  const grupo = page.getByRole("combobox", { name: "Grupo" });
-  await expect(grupo.locator("option")).toHaveCount(8);
-  const nomeDe = (id: string) => europa.find((c) => c.id === id)!.nome;
-  const naCopa: string[] = [];
-  for (let g = 0; g < 8; g++) {
-    await grupo.selectOption({ index: g });
-    const linhas = page.locator("main table.tabela tbody td.clube .corta");
-    await expect(linhas).toHaveCount(4);
-    naCopa.push(...(await linhas.allTextContents()).map((t) => t.trim()));
-  }
-  expect(naCopa.sort()).toEqual(copas["K-UCL"].grupos.map(nomeDe).sort());
-  for (const nome of ["Liga Europa", "Conference League"]) {
-    await copa.selectOption({ label: nome });
-    await expect(grupo.locator("option")).toHaveCount(4);
+});
+
+// Copas nacionais da Europa e vagas dos 16 países novos nas copas da UEFA (projeto "jogo completo", pedido "trazer
+// tudo que está faltando, para deixar o jogo agora completo", nov/2026).
+test("R107 copas nacionais da Europa e os países novos nas copas da UEFA: com o Real Madrid, Copas abre na Copa do Rei (o primeiro jogo de copa dele), com os 64 clubes da Espanha; as 7 copas nacionais da Europa estão em Copas nacionais; a Liga dos Campeões começa no playoff com os campeões de 12 países novos", async ({ page }) => {
+  const nomes = new Map([...europa, ...outros, ...segundas].map((c) => [c.id, c.nome]));
+  await abrirSite(page);
+  await botao(page, "Novo jogo").click();
+  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByRole("button", { name: "Próximo", exact: true }).click();
+  await page.getByRole("button", { name: /Europa/ }).click();
+  await page.getByRole("button", { name: /Espanha/ }).click();
+  await botao(page, /Real Madrid/).click();
+  await botao(page, /^Assumir (o|a) /).click();
+  await pularTutorial(page);
+  await aba(page, "Tabelas");
+  await page.getByRole("tab", { name: "Copas" }).click();
+  const copa = page.getByRole("combobox", { name: "Copa" });
+  await expect(copa).toHaveValue("K-ES");
+  const nacionais = (await copa.locator('optgroup[label="Copas nacionais"] option').allTextContents()).map((t) => t.replace(" (seu time)", ""));
+  for (const c of ["FA Cup", "Copa do Rei", "Copa da Itália", "Copa da Alemanha", "Copa da França", "Taça de Portugal", "Copa da Holanda"]) expect(nacionais).toContain(c);
+  // As supercopas só começam em 2027 (sem os campeões das copas de 2025/26 no jogo).
+  expect(nacionais.filter((c) => c.startsWith("Super"))).toEqual([]);
+  // A Copa do Rei começa nos 32 avos: 32 jogos, o Real Madrid num deles.
+  await expect(page.locator("main")).toContainText("32 avos de final");
+  await expect(page.locator("main .jogo-rodada")).toHaveCount(32);
+  await expect(page.locator("main .jogo-rodada.meu")).toHaveCount(1);
+  await copa.selectOption({ label: "Liga dos Campeões" });
+  await expect(page.locator("main")).toContainText("Os campeões de 12 países em ida e volta");
+  await expect(page.locator("main .jogo-rodada")).toHaveCount(12);
+  for (const liga of ["CH", "DK", "GR", "HR", "NO", "PL", "RO", "XS", "SE", "RS", "CZ", "UA"]) {
+    await expect(page.locator("main"), liga).toContainText(nomes.get(tabelas2025[liga][0])!);
   }
 });
 
