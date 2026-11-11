@@ -4,8 +4,9 @@
 //   npx tsx tests/saves/selecao.ts copa      técnico do Flamengo e do Brasil, parado no dia da estreia do Brasil na Copa de 2026 (R105)
 //   npx tsx tests/saves/selecao.ts europa    técnico do Flamengo e da França, parado no dia do primeiro amistoso da França (R102)
 //   npx tsx tests/saves/selecao.ts data-fifa Palmeiras parado num dia de jogo dele na data FIFA de setembro, com convocados fora
+//   npx tsx tests/saves/selecao.ts continentais  Flamengo com 2026 jogado, no começo de 2027 (Copa Africana e Copa da Ásia, R112)
 import { assumirSelecao, convitesDeSelecoes } from "../../src/engine/selecoes";
-import { avancar, meuJogoHoje, novoJogo, simularDia } from "../../src/engine/jogo";
+import { avancar, meuJogoHoje, novoJogo, simularDia, simularRestoDaTemporada } from "../../src/engine/jogo";
 import { exportarTexto } from "../../src/save/salvamento";
 import type { EstadoJogo } from "../../src/engine/tipos";
 
@@ -38,6 +39,13 @@ if (qual === "convite") {
     simularDia(estado);
   }
   estado.config.escalacaoAutomatica = false;
+} else if (qual === "continentais") {
+  // A temporada de 2026 inteira e a virada: o técnico fica no clube (carência o ano todo e a diretoria confiante).
+  estado.tecnico.desde = "2026-12-31";
+  simularRestoDaTemporada(estado);
+  estado.tecnico.confiancaDiretoria = Math.max(estado.tecnico.confiancaDiretoria, 60);
+  avancar(estado);
+  pronto = estado.temporada === 2027 && estado.tecnico.clubeId === clube;
 } else if (qual === "data-fifa") {
   estado.config.escalacaoAutomatica = true;
   for (let i = 0; i < 600; i++) {

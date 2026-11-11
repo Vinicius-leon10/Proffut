@@ -522,7 +522,17 @@ const FASES_SELECOES: Record<EstadoCompeticaoSelecoes["tipo"], string[]> = {
   "eliminatorias-uefa": ["grupos", "rep-semi", "rep-final"], eurocopa: ["grupos", "oitavas", "quartas", "semi", "final"],
   "eliminatorias-caf": ["grupos"], "eliminatorias-afc": ["grupos"], "eliminatorias-ofc": ["grupos"], "repescagem-mundial": ["rep-semi", "rep-final"],
   "copa-do-mundo": ["grupos", "dezesseis", "oitavas", "quartas", "semi", "final"],
+  "copa-africana": ["grupos", "oitavas", "quartas", "semi", "final"], "copa-da-asia": ["grupos", "oitavas", "quartas", "semi", "final"],
+  "copa-da-oceania": ["grupos", "semi", "final"],
 };
+
+/** "Sede: Arábia Saudita" ou "Sedes: Quênia, Uganda e Tanzânia". */
+function textoDasSedes(c: EstadoCompeticaoSelecoes): string {
+  const nomes = (c.sedes ?? (c.sede ? [c.sede] : [])).map((id) => nomeDoPais(paisDaSelecao(id)));
+  if (!nomes.length) return "";
+  const lista = nomes.length === 1 ? nomes[0] : `${nomes.slice(0, -1).join(", ")} e ${nomes.at(-1)}`;
+  return `${nomes.length === 1 ? "Sede" : "Sedes"}: ${lista} (os outros jogos em campo neutro).`;
+}
 
 /** A regra de cada fase, embaixo dos jogos. */
 function regraDaFaseDeSelecoes(c: EstadoCompeticaoSelecoes, fase: string): string {
@@ -538,6 +548,8 @@ function regraDaFaseDeSelecoes(c: EstadoCompeticaoSelecoes, fase: string): strin
   if (c.tipo === "eliminatorias-ofc") return "2 grupos, turno e returno. O melhor primeiro vai à Copa do Mundo; o outro primeiro, à repescagem mundial.";
   if (c.tipo === "repescagem-mundial") return "6 seleções em campo neutro: as 2 melhores do ranking esperam na final; as outras 4 jogam a semifinal. Os 2 vencedores das finais vão à Copa do Mundo. Jogo único, empate vai para os pênaltis.";
   if (c.tipo === "copa-do-mundo" && fase === "grupos") return `48 seleções em 12 grupos de 4, turno único; os 2 primeiros e os 8 melhores terceiros vão aos 16 avos de final. Sedes: ${(c.sedes ?? [c.sede!]).map((id) => nomeDoPais(paisDaSelecao(id))).join(", ")} (os outros jogos em campo neutro).`;
+  if ((c.tipo === "copa-africana" || c.tipo === "copa-da-asia") && fase === "grupos") return `24 seleções em 6 grupos de 4 em turno único; os 2 primeiros e os 4 melhores terceiros vão às oitavas. ${textoDasSedes(c)}`;
+  if (c.tipo === "copa-da-oceania" && fase === "grupos") return `8 seleções em 2 grupos de 4 em turno único; os 2 primeiros vão à semifinal. ${textoDasSedes(c)}`;
   if (fase === "rep-semi" || fase === "rep-final") return "Jogo único na casa de quem foi melhor nos grupos; empate vai para os pênaltis. Quem vence a final da repescagem fica com a vaga.";
   if (fase === "grupos") return `4 grupos de 4 em turno único; os 2 primeiros vão às quartas. ${c.sede ? `Sede: ${nomeDoPais(paisDaSelecao(c.sede))} (os outros jogos em campo neutro).` : ""}`;
   return "Jogo único; empate vai para os pênaltis.";
@@ -557,7 +569,7 @@ function CompeticaoDeSelecoes({ c }: { c: EstadoCompeticaoSelecoes }) {
     if (fase === "ligas") return pos === 1 ? "classifica" : "";
     if (c.tipo === "eliminatorias-euro") return pos <= 2 ? "classifica" : pos === 3 ? "playoff" : "";
     if (c.tipo === "eliminatorias-uefa") return pos === 1 ? "classifica" : pos === 2 ? "playoff" : "";
-    if (c.tipo === "eurocopa" || c.tipo === "copa-do-mundo") return pos <= 2 ? "classifica" : pos === 3 ? "playoff" : "";
+    if (c.tipo === "eurocopa" || c.tipo === "copa-do-mundo" || c.tipo === "copa-africana" || c.tipo === "copa-da-asia") return pos <= 2 ? "classifica" : pos === 3 ? "playoff" : "";
     if (c.tipo === "eliminatorias-caf" || c.tipo === "eliminatorias-afc" || c.tipo === "eliminatorias-ofc") return pos === 1 ? "classifica" : pos === 2 ? "playoff" : "";
     if (fase === "grupos") return pos <= 2 ? "classifica" : "";
     return pos === 1 ? "classifica" : pos === 2 ? "playoff" : "";
@@ -647,7 +659,7 @@ function AmistososDoAno() {
   );
 }
 
-/** Seleções: o ranking, as competições (Eliminatórias, Copa América, Copa Ouro, Liga das Nações, Eurocopa) e os amistosos. */
+/** Seleções: o ranking, as competições (Eliminatórias, Copa América, Copa Ouro, Liga das Nações, Eurocopa, Copa Africana, Copa da Ásia, Copa da Oceania, Copa do Mundo) e os amistosos. */
 function Selecoes() {
   const estado = useJogo();
   const minha = estado.tecnico.selecao;

@@ -13,14 +13,16 @@ export type SerieClube = SerieId | "D" | "estadual" | "exterior" | "selecao";
  * `EstadoJogo.copas` ("K-LIB": Libertadores, Sul-Americana, as copas regionais e as nacionais dos outros países).
  */
 export type Competicao = SerieId | "CB" | "D" | `E-${string}` | `L-${string}` | IdCopa | IdCompeticaoSelecoes;
-/** Competição de seleções (selecoes.ts): "S-ELI-SUL-2030", "S-AME-2028", "S-OURO-2027", os amistosos "S-AMI". */
+/** Competição de seleções (selecoes.ts): "S-ELI-SUL-2030", "S-AME-2028", "S-OURO-2027", "S-CAN-2027", os amistosos "S-AMI". */
 export type IdCompeticaoSelecoes = `S-${string}`;
 export type TipoCompeticaoSelecoes =
   | "eliminatorias-sul" | "eliminatorias-concacaf" | "copa-america" | "copa-ouro"
   /** Europa (nov/2026): Liga das Nações, Eliminatórias da Eurocopa, Eurocopa e Eliminatórias da Copa do Mundo. */
   | "liga-das-nacoes" | "eliminatorias-euro" | "eurocopa" | "eliminatorias-uefa"
   /** Copa do Mundo (nov/2026): Eliminatórias da África, Ásia e Oceania, a repescagem mundial e a Copa. */
-  | "eliminatorias-caf" | "eliminatorias-afc" | "eliminatorias-ofc" | "repescagem-mundial" | "copa-do-mundo";
+  | "eliminatorias-caf" | "eliminatorias-afc" | "eliminatorias-ofc" | "repescagem-mundial" | "copa-do-mundo"
+  /** Torneios dos outros continentes (nov/2026, R112): Copa Africana de Nações, Copa da Ásia e Copa da Oceania. */
+  | "copa-africana" | "copa-da-asia" | "copa-da-oceania";
 /** Copa de clubes de `EstadoJogo.copas` (copas.ts): "K-LIB", "K-SUL", "K-NE", "K-AR"... */
 export type IdCopa = `K-${string}`;
 /** Torneio de `EstadoJogo.torneios`: Série D, estadual ou liga de outro país. */

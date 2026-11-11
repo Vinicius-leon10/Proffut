@@ -6,7 +6,7 @@ import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, jogarPartida, monta
 // seleção tenho que ganhar a liga principal de um país").
 
 /** Abre um save montado pelo motor (tests/saves/selecao.ts). */
-async function abrirSave(page: Page, qual: "jogo" | "convite" | "data-fifa" | "europa" | "copa") {
+async function abrirSave(page: Page, qual: "jogo" | "convite" | "data-fifa" | "europa" | "copa" | "continentais") {
   const save = montarSave("selecao", qual);
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
@@ -235,4 +235,32 @@ test("R105 Técnico do Brasil na Copa do Mundo de 2026: no dia da estreia, o Pai
   await expect(page.getByRole("combobox", { name: "Grupo" }).locator("option")).toHaveCount(12);
   await expect(page.locator("main table tbody tr")).toHaveCount(4);
   await expect(page.locator("main")).toContainText("48 seleções em 12 grupos de 4");
+});
+
+test("R112 Copa Africana de Nações e Copa da Ásia: em 2027, Tabelas → Seleções tem as duas, com 24 seleções em 6 grupos de 4, as sedes de verdade (Quênia, Uganda e Tanzânia na África; Arábia Saudita na Ásia) e a regra das oitavas", async ({ page }) => {
+  test.setTimeout(180_000);
+  await abrirSave(page, "continentais");
+  await abrirSelecoes(page);
+  const principal = page.locator("main");
+  const seletor = page.getByRole("combobox", { name: "Seleções" });
+  const grupos = page.getByRole("combobox", { name: "Grupo" });
+
+  await seletor.selectOption({ label: "Copa Africana de Nações 2027" });
+  await expect(principal).toContainText("24 seleções em 6 grupos de 4");
+  await expect(principal).toContainText("os 2 primeiros e os 4 melhores terceiros vão às oitavas");
+  await expect(principal).toContainText("Sedes: Quênia, Uganda e Tanzânia");
+  await expect(grupos.locator("option")).toHaveCount(6);
+  await expect(principal.locator("table tbody tr")).toHaveCount(4);
+  // A sede abre o grupo A, em casa.
+  await expect(principal.locator("table tbody tr").filter({ hasText: "Quênia" })).toHaveCount(1);
+  // Só seleções da África.
+  await expect(principal).not.toContainText("Japão");
+
+  await seletor.selectOption({ label: "Copa da Ásia 2027" });
+  await expect(principal).toContainText("24 seleções em 6 grupos de 4");
+  await expect(principal).toContainText("Sede: Arábia Saudita");
+  await expect(grupos.locator("option")).toHaveCount(6);
+  await expect(principal.locator("table tbody tr").filter({ hasText: "Arábia Saudita" })).toHaveCount(1);
+  // A Copa da Oceania é em 2028 (anos múltiplos de 4).
+  await expect(seletor.locator("option", { hasText: "Copa da Oceania" })).toHaveCount(0);
 });

@@ -14,8 +14,9 @@
 // Copa Ouro (anos ímpares). Eliminatórias da Copa do Mundo: na Conmebol, os 10 em turno e returno (18 rodadas, de
 // setembro de 3 anos antes da Copa a setembro do ano anterior; 6 vão à Copa e o 7º à repescagem); na Concacaf, três fases
 // (os 4 piores no mata-mata, 30 em 6 grupos de 5, 12 em 3 grupos de 4; os primeiros vão à Copa e os 2 melhores segundos à
-// repescagem). Nas datas sem jogo oficial, amistosos entre seleções de força parecida. A Copa do Mundo (com os outros
-// continentes) ainda não está no jogo.
+// repescagem). Nas datas sem jogo oficial, amistosos entre seleções de força parecida. Os outros continentes (a Europa, a
+// África, a Ásia e a Oceania) e a Copa do Mundo vieram depois (mais abaixo); em junho e julho também a Copa Africana de
+// Nações (anos ímpares), a Copa da Ásia (2027, 2031...) e a Copa da Oceania (2028, 2032...).
 //
 // Ranking: pontos do tipo Elo (começam perto dos de 2026 e mudam a cada jogo). Técnico: o convite de uma seleção só chega
 // a quem já ganhou a liga principal de um país (regra do usuário); ele treina a seleção junto com o clube.
@@ -531,6 +532,7 @@ const NOMES: Record<TipoCompeticaoSelecoes, string> = {
   "copa-ouro": "Copa Ouro", "liga-das-nacoes": "Liga das Nações", "eliminatorias-euro": "Eliminatórias da Eurocopa", eurocopa: "Eurocopa",
   "eliminatorias-uefa": "Eliminatórias da Europa", "eliminatorias-caf": "Eliminatórias da África", "eliminatorias-afc": "Eliminatórias da Ásia",
   "eliminatorias-ofc": "Eliminatórias da Oceania", "repescagem-mundial": "Repescagem mundial", "copa-do-mundo": "Copa do Mundo",
+  "copa-africana": "Copa Africana de Nações", "copa-da-asia": "Copa da Ásia", "copa-da-oceania": "Copa da Oceania",
 };
 
 /** Datas da Copa do Mundo (de meados de junho a meados de julho; 48 seleções, como em 2026). */
@@ -564,6 +566,9 @@ export function nomeDaCompeticaoDeSelecoes(estado: EstadoJogo | undefined, c: Id
   const comp = estado?.selecoes?.competicoes[c];
   if (comp) return comp.nome;
   if (c.startsWith("S-COPA")) return NOMES["copa-do-mundo"];
+  if (c.startsWith("S-CAN")) return NOMES["copa-africana"];
+  if (c.startsWith("S-ASIA")) return NOMES["copa-da-asia"];
+  if (c.startsWith("S-OCE")) return NOMES["copa-da-oceania"];
   if (c.startsWith("S-INT")) return NOMES["repescagem-mundial"];
   if (c.startsWith("S-ELI-CAF")) return NOMES["eliminatorias-caf"];
   if (c.startsWith("S-ELI-AFC")) return NOMES["eliminatorias-afc"];
@@ -705,6 +710,59 @@ function criarTorneio(estado: EstadoJogo, tipo: "copa-america" | "copa-ouro", an
 function mandoNoTorneio(sede: string | undefined, m: string, v: string): Partial<Partida> {
   if (v === sede) return { mandante: sede, visitante: m };
   return m === sede ? {} : { neutro: true };
+}
+
+// ---- África, Ásia e Oceania: Copa Africana de Nações, Copa da Ásia e Copa da Oceania (R112) ---------------------
+
+type TipoContinental = "copa-africana" | "copa-da-asia" | "copa-da-oceania";
+
+/**
+ * Os torneios dos outros continentes, em junho e julho como a Copa América (sem eliminatórias: a sede e as melhores do
+ * continente pelo ranking, como na Copa Ouro). Copa Africana de Nações: anos ímpares, 24 seleções em 6 grupos de 4, os 2
+ * primeiros e os 4 melhores terceiros vão às oitavas (como a Eurocopa). Copa da Ásia: de 4 em 4 anos (2027, 2031...), no
+ * mesmo formato (a de verdade é em janeiro; aqui fica com as outras, em junho e julho). Copa da Oceania: de 4 em 4 anos
+ * (2028, 2032...), 8 seleções em 2 grupos de 4, semifinal e final. Sedes de verdade quando já se sabe (2027: Quênia,
+ * Uganda e Tanzânia na África; Arábia Saudita na Ásia); depois, uma das mais fortes do continente.
+ */
+const CONTINENTAIS: Record<TipoContinental, { prefixo: string; conf: Confederacao; vagas: number; grupos: number; noAno: (ano: number) => boolean; sedes: Record<number, string[]> }> = {
+  "copa-africana": { prefixo: "S-CAN", conf: "caf", vagas: 24, grupos: 6, noAno: (ano) => ano % 2 === 1, sedes: { 2027: ["KE", "UG", "TZ"] } },
+  "copa-da-asia": { prefixo: "S-ASIA", conf: "afc", vagas: 24, grupos: 6, noAno: (ano) => ano % 4 === 3, sedes: { 2027: ["SA"] } },
+  "copa-da-oceania": { prefixo: "S-OCE", conf: "ofc", vagas: 8, grupos: 2, noAno: (ano) => ano % 4 === 0, sedes: {} },
+};
+
+/** As sedes de um torneio (a Copa Africana de 2027 tem três). */
+const sedesDoTorneio = (c: EstadoCompeticaoSelecoes) => c.sedes ?? (c.sede ? [c.sede] : []);
+
+/** Cria o torneio do continente no ano: a(s) sede(s) e as melhores do ranking, sorteadas em grupos (as sedes no pote 1). */
+function criarTorneioContinental(estado: EstadoJogo, tipo: TipoContinental, ano: number) {
+  const def = CONTINENTAIS[tipo];
+  const id = `${def.prefixo}-${ano}` as IdCompeticaoSelecoes;
+  const rng = rngPara(estado.semente, `torneio/${id}`);
+  const doContinente = peloRanking(estado, daConfederacao(def.conf));
+  const sedes = def.sedes[ano]?.map(idSelecao).filter((x) => doContinente.includes(x))
+    ?? [rngPara(estado.semente, `sede/${id}`).escolher(doContinente.slice(0, def.conf === "ofc" ? 4 : 12))];
+  const ranking = [...sedes, ...doContinente.filter((x) => !sedes.includes(x))].slice(0, def.vagas);
+  const grupos = sortearGrupos(rng, ranking, def.grupos, (x) => x);
+  const g = grupos.findIndex((x) => x.includes(sedes[0]));
+  [grupos[0], grupos[g]] = [grupos[g], grupos[0]];
+  estado.selecoes!.competicoes[id] = { id, tipo, nome: NOMES[tipo], ano, fase: "grupos", selecoes: ranking, grupos: { grupos }, sede: sedes[0], sedes };
+  const calendario = def.grupos === 6 ? DATAS_EURO : DATAS_TORNEIO;
+  const datas = [calendario.r1, calendario.r2, calendario.r3].map(([s, d]) => diaDaSemana(ano, s, d));
+  marcar(estado, grupos.flatMap((grupo, i) =>
+    jogosDasRodadas(id, "grupos", turnoUnico(grupo, rng), datas, i + 1, (m, v) => mandoNaCopa(sedes, m, v))));
+}
+
+/** Os torneios dos outros continentes que começam no ano e ainda não começaram (`desde`: a data de hoje no save aberto). */
+function criarTorneiosContinentais(estado: EstadoJogo, desde = "") {
+  const ano = estado.temporada;
+  for (const tipo of Object.keys(CONTINENTAIS) as TipoContinental[]) {
+    const def = CONTINENTAIS[tipo];
+    const calendario = def.grupos === 6 ? DATAS_EURO : DATAS_TORNEIO;
+    const id = `${def.prefixo}-${ano}` as IdCompeticaoSelecoes;
+    if (def.noAno(ano) && !estado.selecoes!.competicoes[id] && diaDaSemana(ano, calendario.r1[0], calendario.r1[1]) > desde) {
+      criarTorneioContinental(estado, tipo, ano);
+    }
+  }
 }
 
 // ---- Europa: Liga das Nações, Eliminatórias da Eurocopa, Eurocopa e Eliminatórias da Copa do Mundo ----------------
@@ -1166,6 +1224,7 @@ export function criarCompeticoesDoAno(estado: EstadoJogo, desde = "") {
   const r1 = diaDaSemana(ano, DATAS_TORNEIO.r1[0], DATAS_TORNEIO.r1[1]);
   if (ano % 4 === 0 && nova(`S-AME-${ano}`, r1)) criarTorneio(estado, "copa-america", ano);
   if (ano % 2 === 1 && nova(`S-OURO-${ano}`, r1)) criarTorneio(estado, "copa-ouro", ano);
+  criarTorneiosContinentais(estado, desde);
   // Europa: Liga das Nações (anos pares, de setembro a novembro), Eliminatórias da Eurocopa (um ano antes dela) e da
   // Copa do Mundo (um ano antes dela). No save de antes da Europa, as que ainda têm datas pela frente.
   if (ano % 2 === 0 && !sel.competicoes[`S-LN-${ano}`]) criarLigaDasNacoes(estado, ano, desde);
@@ -1355,17 +1414,19 @@ function avancarConcacaf(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes, rng
 
 function avancarTorneio(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes): string[] {
   const nome = (id: string) => estado.clubes[id]?.nome ?? id;
-  // A Eurocopa tem oitavas; as finais da Liga das Nações são em junho do ano seguinte ao da fase de ligas.
+  // A Eurocopa, a Copa Africana e a Copa da Ásia têm oitavas; as finais da Liga das Nações são em junho do ano seguinte
+  // ao da fase de ligas. As sedes jogam em casa (a Copa Africana de 2027 tem três); os outros jogos, em campo neutro.
   const daLiga = comp.tipo === "liga-das-nacoes";
-  const calendario = daLiga ? DATAS_LIGA_DAS_NACOES : comp.tipo === "eurocopa" ? DATAS_EURO : DATAS_TORNEIO;
+  const comOitavas = comp.tipo === "eurocopa" || comp.tipo === "copa-africana" || comp.tipo === "copa-da-asia";
+  const calendario = daLiga ? DATAS_LIGA_DAS_NACOES : comOitavas ? DATAS_EURO : DATAS_TORNEIO;
   const datas = (fase: string) => diaDaSemana(comp.ano + (daLiga ? 1 : 0), calendario[fase][0], calendario[fase][1]);
   const mata = (fase: string, pares: [string, string][]) => {
     comp.fase = fase;
-    marcar(estado, pares.map(([a, b], i) => jogo(`${comp.id}-${fase}-${i + 1}`, comp.id, fase, 1, datas(fase), a, b, { chave: i + 1, ...mandoNoTorneio(comp.sede, a, b) })));
+    marcar(estado, pares.map(([a, b], i) => jogo(`${comp.id}-${fase}-${i + 1}`, comp.id, fase, 1, datas(fase), a, b, { chave: i + 1, ...mandoNaCopa(sedesDoTorneio(comp), a, b) })));
   };
   const emPares = (v: string[]) => Array.from({ length: v.length / 2 }, (_, i) => [v[2 * i], v[2 * i + 1]] as [string, string]);
   const vencedores = (fase: string) => jogosDaFase(estado, comp.id, fase).sort((a, b) => (a.chave ?? 0) - (b.chave ?? 0)).map(vencedorDoJogo);
-  if (comp.fase === "grupos" && comp.tipo === "eurocopa") {
+  if (comp.fase === "grupos" && comOitavas) {
     // Os 6 primeiros, os 6 segundos e os 4 melhores terceiros, em ordem de campanha: 1º x 16º, 8º x 9º...
     const t = tabelasDeSelecoes(estado, comp.id, "grupos");
     const s = [0, 1, 2].flatMap((pos) => melhoresLinhas(estado, t.map((g) => g[pos]), pos === 2 ? 4 : 6));
@@ -1376,6 +1437,12 @@ function avancarTorneio(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes): str
     const v = vencedores("oitavas");
     mata("quartas", emPares(v));
     return [`${comp.nome}: nas quartas, ${v.map(nome).join(", ")}.`];
+  }
+  if (comp.fase === "grupos" && comp.tipo === "copa-da-oceania") {
+    // 2 grupos: 1º A x 2º B e 1º B x 2º A na semifinal.
+    const t = tabelasDeSelecoes(estado, comp.id, "grupos");
+    mata("semi", [[t[0][0].clubeId, t[1][1].clubeId], [t[1][0].clubeId, t[0][1].clubeId]]);
+    return [`${comp.nome}: semifinais ${nome(t[0][0].clubeId)} x ${nome(t[1][1].clubeId)} e ${nome(t[1][0].clubeId)} x ${nome(t[0][1].clubeId)}.`];
   }
   if (comp.fase === "grupos") {
     const t = tabelasDeSelecoes(estado, comp.id, "grupos");
@@ -1717,7 +1784,9 @@ function depoisDaCompeticao(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes) 
   if (comp.tipo === "repescagem-mundial") { if (comp.classificados?.includes(minha)) subir(3); return; }
   if (comp.campeao === minha) { subir(comp.tipo === "copa-do-mundo" ? 12 : comp.tipo === "liga-das-nacoes" ? 4 : 6); return; }
   if (comp.tipo === "liga-das-nacoes") return;
-  const primeiraDoMataMata = comp.tipo === "copa-do-mundo" ? "dezesseis" : comp.tipo === "eurocopa" ? "oitavas" : "quartas";
+  const primeiraDoMataMata = comp.tipo === "copa-do-mundo" ? "dezesseis"
+    : comp.tipo === "eurocopa" || comp.tipo === "copa-africana" || comp.tipo === "copa-da-asia" ? "oitavas"
+    : comp.tipo === "copa-da-oceania" ? "semi" : "quartas";
   const passou = jogosDaFase(estado, comp.id, primeiraDoMataMata).some((p) => p.mandante === minha || p.visitante === minha);
   if (!passou && favoritas.indexOf(minha) < 4) {
     subir(-6);
@@ -1794,6 +1863,8 @@ export function anoNovoDasSelecoes(estado: EstadoJogo, continuam: Partida[]) {
 export function juntarSelecoes(estado: EstadoJogo) {
   const tinha = !!estado.selecoes;
   const novas = criarSelecoes(estado);
+  // Save de antes da Copa Africana, da Copa da Ásia e da Copa da Oceania (R112): a do ano entra se ainda não começou.
+  if (tinha && !novas.length) criarTorneiosContinentais(estado, estado.data);
   if (!novas.length) return;
   const sel = estado.selecoes!;
   if (!tinha) sel.amistososAte = estado.data;

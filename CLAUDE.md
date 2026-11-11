@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R106 rodando a cada mudança, antes
+ponta R01–R112 rodando a cada mudança, antes
 de publicar e todo dia no site publicado. Bandeira pequena do país do jogador ao lado do nome (`BandeiraJogador` em `componentes.tsx`,
 `bandeiraDaNacionalidade` em `formatos.ts`: código de 3 letras do jogo → emoji; no Elenco, ficha, Mercado e Convocação;
 no campinho não, por falta de espaço; R97).
@@ -520,7 +520,7 @@ ranking. Amistosos por continente (`gruposDeAmistosos`: América, Europa, Áfric
 bate com jogo oficial novo sai. Ranking: Copa 60 (final 70), repescagem 40. Técnico de seleção: título da Copa +12 de
 reputação; favorita (entre as 4 mais fortes do grupo) que cai nos grupos, dispensado. Tabelas → Seleções: filtros Todas,
 América, Europa, África, Ásia e Oceania; a Copa no seletor (na fase "aguardando", a lista das classificadas). A Copa
-Africana e a Copa da Ásia ainda não estão no jogo.
+Africana, a Copa da Ásia e a Copa da Oceania entraram depois (R112, abaixo).
 
 **Espaços que acompanham o jogo (nov/2026, `salvamento.ts`, `store.ts`):** pedido "Quero que esse save embaixo seja
 automático, a cada rodada, posso alterna entre os saves sem me preocupar" (ele abriu um espaço antigo e perdeu o jogo
@@ -595,9 +595,9 @@ Austrália; o resto pela Wikipédia no robô) com Liga dos Campeões da Ásia e 
 Africana, Copa da Ásia e Copa da Oceania; 4) 2ª divisão dos 16 países novos, os ~30 países da Europa que faltam e a Nova
 Zelândia; 5) jogadores reais para os clubes leves (3ª divisões). Se o limite acabar, salvar (commit e push) e anotar aqui
 onde parou. No fim, listar o que não deu (jogadores reais para o usuário buscar com o Google, e os escudos).
-**Onde parou (11/nov/2026, manhã):** testes mais rápidos, parte 1 e parte 2 feitas e publicadas (R107–R111; ver abaixo).
-**Próximo: a parte 3** (Copa Africana, Copa da Ásia e Copa da Oceania em `selecoes.ts`, como a Copa América e a Copa Ouro;
-teste primeiro, R112). Depois as partes 4 e 5. O que não deu até aqui: Costa do Marfim, Senegal, Líbia, Omã, Sudão, Camarões,
+**Onde parou (11/nov/2026):** testes mais rápidos e as partes 1, 2 e 3 feitas (R107–R112; ver abaixo).
+**Próximo: a parte 4** (2ª divisão dos 16 países novos da Europa, os ~30 países da Europa que faltam e a Nova Zelândia;
+teste primeiro, R113). Depois a parte 5. O que não deu até aqui: Costa do Marfim, Senegal, Líbia, Omã, Sudão, Camarões,
 Mali e RD Congo (sem lista na página do robô) e os escudos dos clubes da Ásia e da África (na lista dos que faltam).
 
 **Testes mais rápidos (pedido do usuário, 11/nov/2026, "Deixe anotado para deixar mais rápido"; feito na mesma noite):**
@@ -655,8 +655,18 @@ a Nova Zelândia (três ligas regionais; os dois clubes profissionais jogam a li
 África. TV em `TV_EUROPA_MES`. **Liga dos Campeões da África (R111):** `K-CAF` (grupo "caf"), 16 clubes (`VAGAS_CAF`: Egito 3,
 Marrocos 3, África do Sul 2, Tunísia 2, Argélia 2, Nigéria, Gana, Tanzânia e Angola 1), no formato da asiática, às quartas.
 O Mundial de Clubes ganhou um playoff (semana −11) entre os campeões da Ásia e da África; o vencedor vai à semifinal com os da
-Liga dos Campeões, da Libertadores e da Concacaf. **Parte 2 concluída.** Próxima: a parte 3 (Copa Africana, Copa da Ásia e
-Copa da Oceania).
+Liga dos Campeões, da Libertadores e da Concacaf. **Parte 2 concluída.** A parte 3 também (R112, abaixo).
+
+**Copa Africana, Copa da Ásia e Copa da Oceania (nov/2026, parte 3 do "jogo completo", R112, `selecoes.ts`):** em junho e
+julho, como a Copa América, sem eliminatórias (a sede e as melhores do continente pelo ranking, como na Copa Ouro;
+`CONTINENTAIS`, `criarTorneioContinental`). Copa Africana de Nações (`S-CAN-<ano>`, anos ímpares) e Copa da Ásia
+(`S-ASIA-<ano>`, 2027, 2031...; a de verdade é em janeiro): 24 em 6 grupos de 4, os 2 primeiros e os 4 melhores terceiros
+vão às oitavas, nas datas da Eurocopa (`DATAS_EURO`). Copa da Oceania (`S-OCE-<ano>`, 2028, 2032...): 8 em 2 grupos de 4,
+semifinal (1º A x 2º B) e final. Sedes de verdade em 2027 (Quênia, Uganda e Tanzânia, as três em casa, `sedes`; Arábia
+Saudita); depois, sorteada entre as 12 melhores do continente (na Oceania, as 4). As sedes ficam no pote 1 (grupos
+diferentes, a primeira no grupo A) e jogam em casa; o resto em campo neutro (`mandoNaCopa` com `sedesDoTorneio`). Técnico
+de seleção: título +6; favorita (entre as 4 mais fortes) que cai nos grupos, dispensado. Save aberto antes de junho do ano
+de uma delas: entra ao abrir (`juntarSelecoes` → `criarTorneiosContinentais`). Tabelas → Seleções com a regra e as sedes.
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).

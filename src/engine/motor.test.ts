@@ -1953,6 +1953,44 @@ describe("seleções da América (nov/2026)", () => {
   it("de 2026 a 2030: na Europa, Liga das Nações, Eliminatórias e Eurocopa de 2028 e Eliminatórias da Copa de 2030; Copa Ouro (anos ímpares), Copa América (2028), Eliminatórias da Conmebol (18 rodadas, a tabela junta as temporadas, 6 vão à Copa e 1 à repescagem) e da Concacaf (3 fases)", { timeout: 400_000 }, () => {
     const e = novoJogo({ nomeTecnico: "T", clubeId: "palmeiras", semente: 43 });
     e.config.escalacaoAutomatica = true;
+    jogarAte(e, 2027);
+    // R112: Copa Africana de Nações (anos ímpares) e Copa da Ásia (2027, 2031...) em junho e julho, cada uma com 24 seleções
+    // do continente em 6 grupos de 4 (as sedes de verdade em 2027); a Copa da Oceania só em 2028.
+    const can = e.selecoes!.competicoes["S-CAN-2027"]!;
+    const asia = e.selecoes!.competicoes["S-ASIA-2027"]!;
+    expect(e.selecoes!.competicoes["S-OCE-2027"]).toBeUndefined();
+    expect(can.nome).toBe("Copa Africana de Nações");
+    expect(asia.nome).toBe("Copa da Ásia");
+    expect(can.sedes).toEqual(["sel-KE", "sel-UG", "sel-TZ"]);
+    expect(asia.sedes).toEqual(["sel-SA"]);
+    for (const [c, conf] of [[can, "caf"], [asia, "afc"]] as const) {
+      expect(new Set(c.selecoes).size).toBe(24);
+      for (const id of c.selecoes) expect(confederacao(paisDaSelecao(id)), id).toBe(conf);
+      expect(c.grupos!.grupos).toHaveLength(6);
+      expect(c.grupos!.grupos.every((g) => g.length === 4)).toBe(true);
+      // As sedes ficam em grupos diferentes, uma no grupo A.
+      expect(c.grupos!.grupos.filter((g) => g.some((id) => c.sedes!.includes(id)))).toHaveLength(c.sedes!.length);
+      expect(c.grupos!.grupos[0]).toContain(c.sedes![0]);
+      // Os 4 melhores do ranking do continente estão lá.
+      const ranking = Object.keys(e.selecoes!.ranking).filter((id) => confederacao(paisDaSelecao(id)) === conf)
+        .sort((a, b) => e.selecoes!.ranking[b] - e.selecoes!.ranking[a]);
+      for (const id of ranking.slice(0, 4)) expect(c.selecoes, id).toContain(id);
+    }
+    for (let i = 0; i < 600 && e.data < "2027-07-31"; i++) {
+      const r = avancar(e);
+      if (r.tipo === "jogos-hoje") simularDia(e);
+      else if (r.tipo === "nada") break;
+    }
+    for (const c of [can, asia]) {
+      expect(c.fase, c.nome).toBe("encerrada");
+      expect(c.selecoes).toContain(c.campeao);
+      expect(c.vice).not.toBe(c.campeao);
+      const jogos = e.partidas.filter((p) => p.serie === c.id);
+      expect(["grupos", "oitavas", "quartas", "semi", "final"].map((f) => jogos.filter((p) => p.fase === f).length)).toEqual([36, 8, 4, 2, 1]);
+      expect(jogos.every((p) => p.jogada && p.data >= "2027-06-01" && p.data <= "2027-07-31")).toBe(true);
+      // Fora das sedes, campo neutro.
+      expect(jogos.filter((p) => !p.neutro).every((p) => c.sedes!.includes(p.mandante))).toBe(true);
+    }
     jogarAte(e, 2029);
     const eli = e.selecoes!.competicoes["S-ELI-SUL-2030"]!;
     expect(eli.selecoes).toHaveLength(10);
@@ -1986,6 +2024,16 @@ describe("seleções da América (nov/2026)", () => {
     expect(repescagem).toHaveLength(8);
     expect(repescagem.every((p) => p.data.startsWith("2030-03"))).toBe(true);
     expect(h27.selecoes!["S-OURO-2027"]!.campeao).toMatch(/^sel-/);
+    // R112: a Copa da Oceania de 2028 (8 seleções: 2 grupos, semifinal e final) e a Copa Africana de 2029.
+    expect(h27.selecoes!["S-CAN-2027"]!.campeao).toMatch(/^sel-/);
+    expect(h27.selecoes!["S-ASIA-2027"]!.campeao).toMatch(/^sel-/);
+    const oce = h28.selecoes!["S-OCE-2028"]!;
+    expect(confederacao(paisDaSelecao(oce.campeao!))).toBe("ofc");
+    expect(oce.vice).not.toBe(oce.campeao);
+    expect(h28.selecoes!["S-CAN-2028"]).toBeUndefined();
+    expect(h28.selecoes!["S-ASIA-2028"]).toBeUndefined();
+    expect(confederacao(paisDaSelecao(h29.selecoes!["S-CAN-2029"]!.campeao!))).toBe("caf");
+    expect(h29.selecoes!["S-ASIA-2029"]).toBeUndefined();
     const america = h28.selecoes!["S-AME-2028"]!;
     expect(america.campeao).toMatch(/^sel-/);
     expect(america.vice).not.toBe(america.campeao);
