@@ -146,14 +146,16 @@ export const TV_EUROPA_MES: Record<string, number> = {
   QA: 4_000_000, AE: 4_000_000, CN: 3_000_000, EG: 1_500_000, MA: 1_500_000, IR: 1_200_000, ZA: 1_500_000, DZ: 1_000_000,
   TN: 1_000_000, UZ: 800_000, IQ: 700_000, TH: 900_000, ID: 800_000, IN: 900_000, MY: 600_000, VN: 500_000, KW: 600_000,
   JO: 400_000, BH: 400_000, TZ: 400_000, NG: 300_000, GH: 300_000, AO: 400_000, ZM: 250_000, KE: 250_000,
-  // O resto da Europa e a Nova Zelândia (parte 4, nov/2026): a 2ª divisão dos 16 países (cerca de 30% da 1ª; os pequenos
-  // recebem o piso de `TV_PISO_SEGUNDA`) e a 1ª dos 31 países que faltavam, pela folha típica de cada liga.
-  TR2: 2_700_000, RU2: 2_000_000, BE2: 1_400_000, GR2: 1_000_000, XS2: 1_000_000, AT2: 800_000, CH2: 900_000, DK2: 800_000,
-  PL2: 800_000, CZ2: 650_000, NO2: 600_000, SE2: 600_000, UA2: 550_000, HR2: 500_000, RO2: 500_000, RS2: 450_000,
-  HU: 1_800_000, IL: 1_800_000, CY: 1_600_000, SK: 900_000, BG: 900_000, KZ: 900_000, AZ: 900_000, SI: 700_000, BA: 450_000,
-  IE: 600_000, FI: 450_000, BY: 400_000, GE: 350_000, AM: 300_000, AL: 300_000, IS: 350_000, LV: 250_000, XN: 300_000,
-  MD: 200_000, XK: 200_000, ME: 200_000, MK: 200_000, LT: 250_000, EE: 200_000, XW: 200_000, LU: 200_000, MT: 250_000,
-  FO: 150_000, AD: 100_000, GI: 80_000, SM: 60_000, NZ: 150_000,
+  // O resto da Europa e a Nova Zelândia (parte 4, nov/2026), pela folha típica de cada liga no jogo novo (a mediana de
+  // folha ÷ (reputação/100)³): na 1ª divisão, a folha inteira (os grandes fecham o ano perto do zero, os pequenos sobram
+  // um pouco); na 2ª, 55% dela, porque os pequenos recebem o piso de `TV_PISO_SEGUNDA`.
+  TR2: 3_800_000, RU2: 4_000_000, BE2: 3_900_000, GR2: 2_900_000, XS2: 2_500_000, AT2: 2_800_000, CH2: 3_000_000,
+  DK2: 2_900_000, PL2: 2_200_000, CZ2: 2_200_000, NO2: 2_300_000, SE2: 2_900_000, UA2: 2_700_000, HR2: 3_000_000,
+  RO2: 2_700_000, RS2: 3_200_000,
+  HU: 7_200_000, IL: 6_700_000, CY: 6_400_000, SK: 6_300_000, SI: 5_900_000, BG: 5_400_000, KZ: 5_700_000, AZ: 6_500_000,
+  BA: 6_100_000, IE: 5_200_000, FI: 5_400_000, BY: 5_700_000, GE: 5_000_000, AM: 5_100_000, AL: 4_900_000, IS: 4_800_000,
+  LV: 5_500_000, XN: 5_000_000, MD: 4_200_000, XK: 5_200_000, ME: 5_600_000, MK: 5_100_000, LT: 4_900_000, EE: 4_800_000,
+  XW: 4_400_000, LU: 5_900_000, MT: 4_900_000, FO: 5_600_000, AD: 5_200_000, GI: 5_900_000, SM: 4_500_000, NZ: 4_600_000,
 };
 /** Na 2ª divisão da Europa, a TV paga a todos pelo menos esta fração da base da liga (senão os pequenos quebram). */
 export const TV_PISO_SEGUNDA = 0.35;

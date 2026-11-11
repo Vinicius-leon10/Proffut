@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R112 rodando a cada mudança, antes
+ponta R01–R114 rodando a cada mudança, antes
 de publicar e todo dia no site publicado. Bandeira pequena do país do jogador ao lado do nome (`BandeiraJogador` em `componentes.tsx`,
 `bandeiraDaNacionalidade` em `formatos.ts`: código de 3 letras do jogo → emoji; no Elenco, ficha, Mercado e Convocação;
 no campinho não, por falta de espaço; R97).
@@ -595,9 +595,8 @@ Austrália; o resto pela Wikipédia no robô) com Liga dos Campeões da Ásia e 
 Africana, Copa da Ásia e Copa da Oceania; 4) 2ª divisão dos 16 países novos, os ~30 países da Europa que faltam e a Nova
 Zelândia; 5) jogadores reais para os clubes leves (3ª divisões). Se o limite acabar, salvar (commit e push) e anotar aqui
 onde parou. No fim, listar o que não deu (jogadores reais para o usuário buscar com o Google, e os escudos).
-**Onde parou (11/nov/2026):** testes mais rápidos e as partes 1, 2 e 3 feitas (R107–R112; ver abaixo).
-**Próximo: a parte 4** (2ª divisão dos 16 países novos da Europa, os ~30 países da Europa que faltam e a Nova Zelândia;
-teste primeiro, R113). Depois a parte 5. O que não deu até aqui: Costa do Marfim, Senegal, Líbia, Omã, Sudão, Camarões,
+**Onde parou (11/nov/2026):** testes mais rápidos e as partes 1 a 4 feitas (R107–R114; ver abaixo). **Próximo: a parte
+5** (jogadores reais para os clubes leves), só quando o usuário pedir: depois da parte 4 ele disse "Termine apenas a 4". O que não deu até aqui: Costa do Marfim, Senegal, Líbia, Omã, Sudão, Camarões,
 Mali e RD Congo (sem lista na página do robô) e os escudos dos clubes da Ásia e da África (na lista dos que faltam).
 
 **Testes mais rápidos (pedido do usuário, 11/nov/2026, "Deixe anotado para deixar mais rápido"; feito na mesma noite):**
@@ -667,6 +666,27 @@ Saudita); depois, sorteada entre as 12 melhores do continente (na Oceania, as 4)
 diferentes, a primeira no grupo A) e jogam em casa; o resto em campo neutro (`mandoNaCopa` com `sedesDoTorneio`). Técnico
 de seleção: título +6; favorita (entre as 4 mais fortes) que cai nos grupos, dispensado. Save aberto antes de junho do ano
 de uma delas: entra ao abrir (`juntarSelecoes` → `criarTorneiosContinentais`). Tabelas → Seleções com a regra e as sedes.
+
+**O resto da Europa e a Nova Zelândia (nov/2026, parte 4 do "jogo completo", R113–R114, `data/europa-2026/clubes-resto.json`):**
+a 2ª divisão dos 16 países que já tinham a 1ª (Áustria, Bélgica, Suíça, Dinamarca, Grécia, Croácia, Noruega, Polônia,
+Romênia, Rússia, Escócia, Suécia, Sérvia, Turquia, Tchéquia e Ucrânia; `Clube.liga` "AT2"...; `SOBEM_E_CAEM` como em
+2025/26: 1 na Áustria, Suíça, Croácia e Escócia, 3 na Polônia e na Turquia, 2 nos outros), a 1ª divisão dos 31 países
+da Europa que faltavam (o Liechtenstein não tem liga; a Irlanda do Norte é XN e o País de Gales XW, como as seleções; sem
+acesso nem queda) e a liga da Nova Zelândia (a fase nacional, 9 clubes; região nova "oceania", `NOME_REGIAO.oceania`, e o
+continente Oceania no jogo novo). 610 clubes, 588 com o elenco da página do clube (15.466 jogadores); 377 convocados
+ligados. **Dados:** fase "europa-resto" do robô (`tools/europa/sementes_resto.py` gera `sementes-resto.json`; branch
+`dados-europa-resto`); `npx tsx tools/europa/resto.ts <dados-europa-resto>` (rodar com `data/selecoes-2026/convocados.json`
+antes da ligação: o montador só liga quem ainda não está ligado). O robô passou a reconhecer as seções "Stadiums",
+"Locations", "Team overview" e "Venues" (`PARTICIPANTES` em `wikipedia.py`; sem isso a 2ª da Rússia e da Tchéquia e o Chipre
+vinham vazios). O montador escolhe a seção com o tamanho mais perto do da liga (ou junta as de `secoes`: os dois grupos da
+2ª da Grécia; a "Personnel" da Nova Zelândia), tira times B (`RESERVAS`) e os conferidos à mão (`EXCLUIR`: times B ligados à
+página do clube principal, clubes que subiram ou caíram e já estão na outra divisão, uma ligação errada), usa o título da
+página em inglês (o rótulo do Wikidata do Tre Penne vinha vandalizado) e os nomes de `MANUAL_NOMES` (Ferencváros, HJK,
+KuPS, KR Reykjavík...). Força e reputação por liga em `LIGAS` (a 2ª abaixo do mais fraco da 1ª). TV do mês em
+`TV_EUROPA_MES` pela folha típica de cada liga (1ª: a folha inteira; 2ª: 55%, com o piso). O pacote do jogo passou de
+6 MB: `maximumFileSizeToCacheInBytes` em 12 MB (`vite.config.ts`). Números: 2.959 clubes, ~70 mil jogadores, temporada
+simulada ~45 s nesta máquina (antes ~33 s), save de ~31 → ~41 MB no começo e ~50 MB no fim do ano. Os escudos dos 610 estão
+na lista dos que faltam (`docs/TIMES_NOVOS.md`, 1.613 no total). Faltam as vagas dos países novos nas copas da UEFA.
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).

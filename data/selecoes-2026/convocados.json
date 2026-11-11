@@ -6870,7 +6870,9 @@
      "jogos": 43,
      "gols": 5,
      "clube": "Arsenal Tula",
-     "paisDoClube": "RUS"
+     "paisDoClube": "RUS",
+     "clubeDoJogo": "arsenal-tula",
+     "noJogo": "Edarlyn Reyes"
     }
    ]
   },
@@ -7980,7 +7982,9 @@
      "jogos": 29,
      "gols": 1,
      "clube": "Voluntari",
-     "paisDoClube": "ROU"
+     "paisDoClube": "ROU",
+     "clubeDoJogo": "voluntari",
+     "noJogo": "Godfried Roemeratoe"
     },
     {
      "nome": "Livano Comenencia",
@@ -9092,7 +9096,9 @@
      "jogos": 29,
      "gols": 9,
      "clube": "Omonia Aradippou",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "omonia-aradippou",
+     "noJogo": "Ange-Freddy Plumain"
     },
     {
      "nome": "Willis Francillonne",
@@ -20167,7 +20173,9 @@
      "jogos": 11,
      "gols": 0,
      "clube": "Pafos",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "pafos",
+     "noJogo": "Vlad Dragomir"
     },
     {
      "nome": "Cătălin Cîrjan",
@@ -21323,7 +21331,9 @@
      "jogos": 17,
      "gols": 0,
      "clube": "Pafos",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "pafos",
+     "noJogo": "Ivan Šunjić"
     },
     {
      "nome": "Ermin Mahmić",
@@ -22925,7 +22935,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "AEK Larnaca",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "aek-larnaca",
+     "noJogo": "Ivan Pankov"
     },
     {
      "nome": "Martin Minchev",
@@ -23173,7 +23185,9 @@
      "jogos": 18,
      "gols": 0,
      "clube": "Arsenal Tula",
-     "paisDoClube": "RUS"
+     "paisDoClube": "RUS",
+     "clubeDoJogo": "arsenal-tula",
+     "noJogo": "Miloš Brnović"
     },
     {
      "nome": "Milan Vukotić",
@@ -23215,7 +23229,9 @@
      "jogos": 95,
      "gols": 37,
      "clube": "AEL Limassol",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "ael-limassol",
+     "noJogo": "Stevan Jovetić"
     },
     {
      "nome": "Milutin Osmajić",
@@ -23346,7 +23362,9 @@
      "jogos": 18,
      "gols": 1,
      "clube": "Ural Yekaterinburg",
-     "paisDoClube": "RUS"
+     "paisDoClube": "RUS",
+     "clubeDoJogo": "ural-yekaterinburg",
+     "noJogo": "Vladislav Malkevich"
     },
     {
      "nome": "Gleb Shevchenko",
@@ -23355,7 +23373,9 @@
      "jogos": 16,
      "gols": 0,
      "clube": "Torpedo Moscow",
-     "paisDoClube": "RUS"
+     "paisDoClube": "RUS",
+     "clubeDoJogo": "torpedo-moscow",
+     "noJogo": "Gleb Shevchenko"
     },
     {
      "nome": "Roman Begunov",
@@ -23492,7 +23512,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Aris Limassol",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "aris-limassol",
+     "noJogo": "Daniil Galyata"
     },
     {
      "nome": "Anton Kovalev",
@@ -24683,7 +24705,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Pafos",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "pafos",
+     "noJogo": "Murad Mammadov"
     },
     {
      "nome": "Mahir Emreli",
@@ -25010,7 +25034,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "Omonia",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "omonia",
+     "noJogo": "Fabiano"
     },
     {
      "nome": "Andreas Paraskevas",
@@ -25019,7 +25045,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "AEK Larnaca",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "aek-larnaca",
+     "noJogo": "Andreas Paraskevas"
     },
     {
      "nome": "Konstantinos Laifis",
@@ -25028,7 +25056,9 @@
      "jogos": 71,
      "gols": 5,
      "clube": "APOEL",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "apoel",
+     "noJogo": "Konstantinos Laifis"
     },
     {
      "nome": "Nikolas Panagiotou",
@@ -25046,7 +25076,9 @@
      "jogos": 19,
      "gols": 1,
      "clube": "AEK Larnaca",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "aek-larnaca",
+     "noJogo": "Kostas Pileas"
     },
     {
      "nome": "Giorgos Malekkidis",
@@ -25064,7 +25096,9 @@
      "jogos": 3,
      "gols": 1,
      "clube": "Apollon Limassol",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "apollon-limassol",
+     "noJogo": "Leonidas Konomis"
     },
     {
      "nome": "Nick Tsaroulla",
@@ -25082,7 +25116,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "AEL Limassol",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "ael-limassol",
+     "noJogo": "Evagoras Antoniou"
     },
     {
      "nome": "Grigoris Kastanos",
@@ -25102,7 +25138,9 @@
      "jogos": 83,
      "gols": 1,
      "clube": "Anorthosis Famagusta",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "anorthosis-famagusta",
+     "noJogo": "Kostakis Artymatas"
     },
     {
      "nome": "Charalampos Kyriakou",
@@ -25122,7 +25160,9 @@
      "jogos": 32,
      "gols": 4,
      "clube": "Aris Limassol",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "aris-limassol",
+     "noJogo": "Charalampos Charalampous"
     },
     {
      "nome": "Ioannis Kosti",
@@ -25153,7 +25193,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Apollon Limassol",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "apollon-limassol",
+     "noJogo": "Morgan Brown"
     },
     {
      "nome": "Ioannis Pittas",
@@ -25193,7 +25235,9 @@
      "jogos": 41,
      "gols": 8,
      "clube": "Omonia",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "omonia",
+     "noJogo": "Andronikos Kakoullis"
     },
     {
      "nome": "Stavros Georgiou",
@@ -25202,7 +25246,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "APOEL",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "apoel",
+     "noJogo": "Stavros Georgiou"
     },
     {
      "nome": "Angelos Neophytou",
@@ -25211,7 +25257,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Omonia",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "omonia",
+     "noJogo": "Angelos Neophytou"
     },
     {
      "nome": "Marcus Edwards",
@@ -25242,7 +25290,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Olympiakos Nicosia",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "olympiakos-nicosia",
+     "noJogo": "Zanos Savva"
     }
    ]
   },
@@ -26121,7 +26171,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "Voluntari",
-     "paisDoClube": "ROM"
+     "paisDoClube": "ROM",
+     "clubeDoJogo": "voluntari",
+     "noJogo": "Daniel Dumbrăvanu"
     },
     {
      "nome": "Ioan-Călin Revenco",
@@ -26161,7 +26213,9 @@
      "jogos": 35,
      "gols": 3,
      "clube": "SKA-Khabarovsk",
-     "paisDoClube": "RUS"
+     "paisDoClube": "RUS",
+     "clubeDoJogo": "ska-khabarovsk",
+     "noJogo": "Nichita Moțpan"
     },
     {
      "nome": "Sergiu Perciun",
@@ -29069,7 +29123,9 @@
      "jogos": 31,
      "gols": 8,
      "clube": "Zbrojovka Brno",
-     "paisDoClube": "CZE"
+     "paisDoClube": "CZE",
+     "clubeDoJogo": "zbrojovka-brno",
+     "noJogo": "Bienvenue Kanakimana"
     },
     {
      "nome": "Mohamed Amissi",
@@ -30773,7 +30829,9 @@
      "jogos": 31,
      "gols": 0,
      "clube": "Aris Limassol",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "aris-limassol",
+     "noJogo": "Gédéon Kalulu"
     },
     {
      "nome": "Axel Tuanzebe",
@@ -32606,7 +32664,9 @@
      "jogos": 5,
      "gols": 1,
      "clube": "Aris Limassol",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "aris-limassol",
+     "noJogo": "Rody Junior Effaghe"
     },
     {
      "nome": "Orphé Mbina",
@@ -33475,9 +33535,7 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Balzan",
-     "paisDoClube": "MLT",
-     "clubeDoJogo": "balzan",
-     "noJogo": "Manuel Issufe Djaló"
+     "paisDoClube": "MLT"
     },
     {
      "nome": "Opa Sanganté",
@@ -33590,7 +33648,9 @@
      "jogos": 31,
      "gols": 0,
      "clube": "APOEL",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "apoel",
+     "noJogo": "Dálcio"
     },
     {
      "nome": "Renato Nhaga",
@@ -35733,7 +35793,9 @@
      "jogos": 30,
      "gols": 1,
      "clube": "Śląsk Wrocław",
-     "paisDoClube": "POL"
+     "paisDoClube": "POL",
+     "clubeDoJogo": "slask-wroc-aw",
+     "noJogo": "Lamine Ba"
     },
     {
      "nome": "Nouh Mohamed El Abd",
@@ -39126,7 +39188,9 @@
      "jogos": 11,
      "gols": 2,
      "clube": "AEL Limassol",
-     "paisDoClube": "CYP"
+     "paisDoClube": "CYP",
+     "clubeDoJogo": "ael-limassol",
+     "noJogo": "Luther Singh"
     },
     {
      "nome": "Cassius Mailula",
