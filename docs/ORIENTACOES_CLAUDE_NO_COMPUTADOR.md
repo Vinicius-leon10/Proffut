@@ -74,6 +74,19 @@ Mande cada lote **na conversa do Claude Code do Proffut** (a mesma em que o Vini
 arquivos, com uma mensagem curta: "Lote NN de escudos (ou jogadores): X arquivos; ficaram de fora: ...". Não espere
 resposta para começar o próximo lote. Se não conseguir anexar na conversa, deixe tudo em `Downloads/proffut/` e avise.
 
+## O ciclo com o Claude Code (até o trabalho ficar completo)
+
+O Claude Code confere cada lote e responde no arquivo de retorno:
+https://github.com/vinicius-leon10/proffut/blob/claude/ecstatic-thompson-nw204h/docs/RETORNO_DOS_LOTES.md
+
+1. **Antes de cada lote novo**, abra esse arquivo (recarregue a página) e faça primeiro o que estiver em "Refazer": os
+   escudos que vieram errados (outro clube, foto, bandeira, cortado) e os jogadores com problema (posição, data, clube).
+   Mande a correção como um lote novo, dizendo no nome que é refação (`escudos-lote-NN-refeito.zip`).
+2. Depois siga a lista na ordem, pulando o que já aparece como "Entraram no jogo".
+3. Continue assim, lote após lote, até as duas listas acabarem ou o limite da sessão encerrar. Não pare para esperar o
+   Vinicius.
+4. Se o Claude Code ainda não respondeu um lote, siga em frente com o próximo: o retorno chega com atraso.
+
 ## Ao terminar (ou quando o Vinicius voltar)
 
 Um relatório final em `Downloads/proffut/RELATORIO.md`: quantos escudos e quantos clubes de jogadores foram mandados, os
