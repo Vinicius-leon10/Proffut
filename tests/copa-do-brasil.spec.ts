@@ -1,6 +1,8 @@
 import { aba, abrirDepoisDoEstadual, botao, cartaoDoProximoJogo, expect, test } from "./ajuda";
 
 test("R22 Copa do Brasil: tabela com as fases, meu time da Série B entra na 2ª fase e joga a Copa ao vivo", async ({ page }) => {
+  // Avança até 8 dias jogando: com o mundo todo, numa máquina carregada passou de 60 s (falhou no GitHub, nov/2026).
+  test.setTimeout(120_000);
   // Depois do estadual (a Copa começa em abril, junto com as séries).
   await abrirDepoisDoEstadual(page, "avai");
 
