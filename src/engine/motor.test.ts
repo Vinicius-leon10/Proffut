@@ -1866,14 +1866,19 @@ describe("seleções da América (nov/2026)", () => {
     expect(selecoes).toHaveLength(51);
     expect(e.clubes["sel-BR"].nome).toBe("Brasil");
     const br = e.selecoes!.convocados["sel-BR"].map((id) => e.jogadores[id]);
-    // Quem joga fora dos clubes do jogo (o Bento, do Al-Nassr; o Douglas Santos era o exemplo até o Zenit entrar no jogo)
-    // fica ligado à seleção, sem contrato.
+    // Quem joga fora dos clubes do jogo (o Darwin Núñez, do Al-Diriyah; o Douglas Santos era o exemplo até o Zenit entrar no
+    // jogo, e o Bento até o Al-Nassr entrar) fica ligado à seleção, sem contrato.
+    const darwin = e.selecoes!.convocados["sel-UY"].map((id) => e.jogadores[id]).find((j) => j.nome === "Darwin Núñez")!;
+    expect(darwin.clubeId).toBe("sel-UY");
+    expect(darwin.clubeFora?.nome).toBe("Al-Diriyah");
+    expect(darwin.selecao!.jogos).toBeGreaterThanOrEqual(7);
+    expect(darwin.contratoAte).toBeUndefined();
+    // Desde a Ásia (nov/2026), o Bento joga no Al-Nassr do jogo, com os jogos pela seleção.
     const bento = br.find((j) => j.nome === "Bento")!;
-    expect(bento.clubeId).toBe("sel-BR");
-    expect(bento.clubeFora?.nome).toBe("Al-Nassr");
+    expect(bento.clubeId).toBe("al-nassr");
     expect(bento.selecao!.jogos).toBeGreaterThanOrEqual(7);
-    expect(bento.contratoAte).toBeUndefined();
-    const douglas = Object.values(e.jogadores).find((j) => j.nome === "Douglas Santos" && j.nacionalidade === "BRA")!;
+    // O convocado (há outro Douglas Santos, do Blumenau, que não é ele).
+    const douglas = br.find((j) => j.nome === "Douglas Santos")!;
     expect(douglas.clubeId).toBe("zenit");
     // Desde a Europa (nov/2026), o Vinícius Júnior joga no Real Madrid do jogo, com os jogos pela seleção.
     const vini = br.find((j) => j.nome === "Vinícius Júnior")!;
@@ -1897,7 +1902,7 @@ describe("seleções da América (nov/2026)", () => {
     expect(new Set(todos).size).toBe(todos.length);
     // O mercado do computador não leva quem joga fora.
     transferenciasDaIa(e, "teste-selecoes");
-    expect(e.jogadores[bento.id].clubeId).toBe("sel-BR");
+    expect(e.jogadores[darwin.id].clubeId).toBe("sel-UY");
     expect(checarEstado(e).filter((p) => p.gravidade === "erro")).toEqual([]);
   });
 
