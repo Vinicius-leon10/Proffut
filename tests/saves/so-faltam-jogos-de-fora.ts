@@ -13,6 +13,11 @@ delete estado.tutorial;
 estado.config.escalacaoAutomatica = true;
 delete estado.copa;
 estado.partidas = estado.partidas.filter((p) => p.serie !== "CB");
+// 2026 é ano de Copa do Mundo: as séries vão até 19 de dezembro (o playoff da B) e a 2ª da Argentina acaba antes, em 6 de
+// dezembro (R115). As 3 últimas rodadas dela passam para depois do playoff, como num ano em que ela termina por último.
+const ultimas = [...new Set(estado.partidas.filter((p) => p.serie === "L-AR2").map((p) => p.data))].sort().slice(-3);
+for (const p of estado.partidas) if (p.serie === "L-AR2" && ultimas.includes(p.data)) p.data = ["2026-12-20", "2026-12-23", "2026-12-27"][ultimas.indexOf(p.data)];
+estado.partidas.sort((x, y) => x.data.localeCompare(y.data) || x.serie.localeCompare(y.serie));
 const doUsuario = () => {
   const usuario = competicoesDoUsuario(estado);
   return estado.partidas.filter((p) => !p.jogada && usuario.has(p.serie));
