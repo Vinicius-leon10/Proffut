@@ -1,0 +1,5906 @@
+{
+ "temporada": 2026,
+ "descricao": "Clubes da primeira divisão (2025/26) de outros 16 países da Europa: Áustria, Bélgica, Suíça, Dinamarca, Grécia, Croácia, Noruega, Polônia, Romênia, Rússia, Escócia, Suécia, Sérvia, Turquia, Tchéquia e Ucrânia. Estádio do transfermarkt-datasets (CC0); nomes, cores e números do Proffut.",
+ "clubes": [
+  {
+   "id": "halmstad",
+   "nome": "Halmstad",
+   "sigla": "HBK",
+   "cidade": "Halmstad",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Örjans Vall",
+    "capacidade": 10873
+   },
+   "fundacao": 1914,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 64
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "sarpsborg",
+   "nome": "Sarpsborg 08",
+   "sigla": "SAR",
+   "cidade": "Sarpsborg",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Sarpsborg Stadion",
+    "capacidade": 8022
+   },
+   "fundacao": 2008,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "djurgarden",
+   "nome": "Djurgården",
+   "sigla": "DIF",
+   "cidade": "Estocolmo",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "3Arena",
+    "capacidade": 30000
+   },
+   "fundacao": 1891,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "kasimpasa",
+   "nome": "Kasımpaşa",
+   "sigla": "KAS",
+   "cidade": "Istambul",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Recep Tayyip Erdoğan Stadyumu",
+    "capacidade": 13797
+   },
+   "fundacao": 1921,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 52,
+    "max": 76
+   },
+   "caixaInicial": 20000000
+  },
+  {
+   "id": "hammarby",
+   "nome": "Hammarby",
+   "sigla": "HAM",
+   "cidade": "Estocolmo",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "3Arena",
+    "capacidade": 30000
+   },
+   "fundacao": 1915,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "viborg",
+   "nome": "Viborg",
+   "sigla": "VIB",
+   "cidade": "Viborg",
+   "estado": "DK",
+   "pais": "DK",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Energi Viborg Arena",
+    "capacidade": 9566
+   },
+   "fundacao": 1896,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 21000000
+  },
+  {
+   "id": "zorya",
+   "nome": "Zorya Luhansk",
+   "sigla": "ZOR",
+   "cidade": "Luhansk",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Valeriy Lobanovsky Stadion",
+    "capacidade": 16873
+   },
+   "fundacao": 1923,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "rostov",
+   "nome": "Rostov",
+   "sigla": "ROS",
+   "cidade": "Rostov do Don",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Rostov Arena",
+    "capacidade": 45415
+   },
+   "fundacao": 1930,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 22000000
+  },
+  {
+   "id": "paok",
+   "nome": "PAOK",
+   "sigla": "PAO",
+   "cidade": "Salônica",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Toumba Stadium",
+    "capacidade": 28703
+   },
+   "fundacao": 1926,
+   "rival": null,
+   "torcida": 40,
+   "reputacao": 78,
+   "forcaElenco": {
+    "min": 52,
+    "max": 83
+   },
+   "caixaInicial": 49000000
+  },
+  {
+   "id": "brommapojkarna",
+   "nome": "Brommapojkarna",
+   "sigla": "BP",
+   "cidade": "Estocolmo",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Grimsta IP",
+    "capacidade": 5000
+   },
+   "fundacao": 1942,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 64
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "antwerp",
+   "nome": "Antwerp",
+   "sigla": "ANT",
+   "cidade": "Antuérpia",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Bosuilstadion",
+    "capacidade": 21000
+   },
+   "fundacao": 1880,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 72,
+   "forcaElenco": {
+    "min": 56,
+    "max": 88
+   },
+   "caixaInicial": 61000000
+  },
+  {
+   "id": "brann",
+   "nome": "Brann",
+   "sigla": "BRA",
+   "cidade": "Bergen",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Brann Stadion",
+    "capacidade": 17500
+   },
+   "fundacao": 1908,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "elfsborg",
+   "nome": "Elfsborg",
+   "sigla": "ELF",
+   "cidade": "Borås",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Borås Arena",
+    "capacidade": 16200
+   },
+   "fundacao": 1904,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "hacken",
+   "nome": "Häcken",
+   "sigla": "HAC",
+   "cidade": "Gotemburgo",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Nordic Wellness Arena",
+    "capacidade": 6316
+   },
+   "fundacao": 1940,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "orgryte",
+   "nome": "Örgryte",
+   "sigla": "ORG",
+   "cidade": "Gotemburgo",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Gamla Ullevi",
+    "capacidade": 18454
+   },
+   "fundacao": 1887,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "lokomotiva-zagreb",
+   "nome": "Lokomotiva Zagreb",
+   "sigla": "LOK",
+   "cidade": "Zagreb",
+   "estado": "HR",
+   "pais": "HR",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Kranjceviceva",
+    "capacidade": 8850
+   },
+   "fundacao": 1914,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 65
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "alanyaspor",
+   "nome": "Alanyaspor",
+   "sigla": "ALA",
+   "cidade": "Alanya",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#FF6600",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "Alanya Oba Stadyumu",
+    "capacidade": 9727
+   },
+   "fundacao": 1948,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 52,
+    "max": 76
+   },
+   "caixaInicial": 25000000
+  },
+  {
+   "id": "besiktas",
+   "nome": "Beşiktaş",
+   "sigla": "BJK",
+   "cidade": "Istambul",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Beşiktaş Park",
+    "capacidade": 42684
+   },
+   "fundacao": 1903,
+   "rival": null,
+   "torcida": 70,
+   "reputacao": 82,
+   "forcaElenco": {
+    "min": 58,
+    "max": 86
+   },
+   "caixaInicial": 136000000
+  },
+  {
+   "id": "silkeborg",
+   "nome": "Silkeborg",
+   "sigla": "SIL",
+   "cidade": "Silkeborg",
+   "estado": "DK",
+   "pais": "DK",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "JYSK Park",
+    "capacidade": 10000
+   },
+   "fundacao": 1917,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "genk",
+   "nome": "Genk",
+   "sigla": "GNK",
+   "cidade": "Genk",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Cegeka Arena",
+    "capacidade": 23718
+   },
+   "fundacao": 1988,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 74,
+   "forcaElenco": {
+    "min": 58,
+    "max": 84
+   },
+   "caixaInicial": 95000000
+  },
+  {
+   "id": "falkirk",
+   "nome": "Falkirk",
+   "sigla": "FAL",
+   "cidade": "Falkirk",
+   "estado": "XS",
+   "pais": "XS",
+   "cores": {
+    "primaria": "#003DA5",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "The Falkirk Stadium",
+    "capacidade": 7937
+   },
+   "fundacao": 1876,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 65
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "kocaelispor",
+   "nome": "Kocaelispor",
+   "sigla": "KOC",
+   "cidade": "İzmit",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Turka Araç Muayene Kocaeli Stadyumu",
+    "capacidade": 34829
+   },
+   "fundacao": 1966,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "dinamo-moscou",
+   "nome": "Dínamo de Moscou",
+   "sigla": "DIN",
+   "cidade": "Moscou",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "VTB-Arena",
+    "capacidade": 25716
+   },
+   "fundacao": 1923,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 60,
+    "max": 83
+   },
+   "caixaInicial": 69000000
+  },
+  {
+   "id": "sturm-graz",
+   "nome": "Sturm Graz",
+   "sigla": "STU",
+   "cidade": "Graz",
+   "estado": "AT",
+   "pais": "AT",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Merkur Arena",
+    "capacidade": 16364
+   },
+   "fundacao": 1909,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 74,
+   "forcaElenco": {
+    "min": 56,
+    "max": 77
+   },
+   "caixaInicial": 38000000
+  },
+  {
+   "id": "rangers",
+   "nome": "Rangers",
+   "sigla": "RAN",
+   "cidade": "Glasgow",
+   "estado": "XS",
+   "pais": "XS",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Ibrox Stadium",
+    "capacidade": 50987
+   },
+   "fundacao": 1872,
+   "rival": null,
+   "torcida": 60,
+   "reputacao": 78,
+   "forcaElenco": {
+    "min": 57,
+    "max": 84
+   },
+   "caixaInicial": 63000000
+  },
+  {
+   "id": "livingston",
+   "nome": "Livingston",
+   "sigla": "LIV",
+   "cidade": "Livingston",
+   "estado": "XS",
+   "pais": "XS",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Home of the Set Fare Arena",
+    "capacidade": 9512
+   },
+   "fundacao": 1943,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 69
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "rizespor",
+   "nome": "Rizespor",
+   "sigla": "RIZ",
+   "cidade": "Rize",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Çaykur Didi",
+    "capacidade": 14879
+   },
+   "fundacao": 1953,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 77
+   },
+   "caixaInicial": 27000000
+  },
+  {
+   "id": "tromso",
+   "nome": "Tromsø",
+   "sigla": "TIL",
+   "cidade": "Tromsø",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Romssa Arena",
+    "capacidade": 7500
+   },
+   "fundacao": 1920,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 76
+   },
+   "caixaInicial": 20000000
+  },
+  {
+   "id": "jablonec",
+   "nome": "Jablonec",
+   "sigla": "JAB",
+   "cidade": "Jablonec nad Nisou",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Střelnice",
+    "capacidade": 6108
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "karvina",
+   "nome": "Karviná",
+   "sigla": "KAR",
+   "cidade": "Karviná",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Městský stadion",
+    "capacidade": 4833
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "austria-viena",
+   "nome": "Austria Viena",
+   "sigla": "FAK",
+   "cidade": "Viena",
+   "estado": "AT",
+   "pais": "AT",
+   "cores": {
+    "primaria": "#5A2D82",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Generali Arena",
+    "capacidade": 15600
+   },
+   "fundacao": 1911,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "galatasaray",
+   "nome": "Galatasaray",
+   "sigla": "GAL",
+   "cidade": "Istambul",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Ali Sami Yen Spor Kompleksi RAMS Park",
+    "capacidade": 53978
+   },
+   "fundacao": 1905,
+   "rival": null,
+   "torcida": 85,
+   "reputacao": 86,
+   "forcaElenco": {
+    "min": 54,
+    "max": 92
+   },
+   "caixaInicial": 171000000
+  },
+  {
+   "id": "rijeka",
+   "nome": "Rijeka",
+   "sigla": "RIJ",
+   "cidade": "Rijeka",
+   "estado": "HR",
+   "pais": "HR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Stadion Rujevica",
+    "capacidade": 8136
+   },
+   "fundacao": 1946,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 52,
+    "max": 79
+   },
+   "caixaInicial": 22000000
+  },
+  {
+   "id": "orenburg",
+   "nome": "Orenburg",
+   "sigla": "ORE",
+   "cidade": "Orenburg",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Gazovik",
+    "capacidade": 10046
+   },
+   "fundacao": 1976,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 56,
+    "max": 70
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "goztepe",
+   "nome": "Göztepe",
+   "sigla": "GOZ",
+   "cidade": "Esmirna",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Gürsel Aksel Stadyumu",
+    "capacidade": 23376
+   },
+   "fundacao": 1925,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 52,
+    "max": 81
+   },
+   "caixaInicial": 45000000
+  },
+  {
+   "id": "pardubice",
+   "nome": "Pardubice",
+   "sigla": "PAR",
+   "cidade": "Pardubice",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion Arnošta Košťála",
+    "capacidade": 4620
+   },
+   "fundacao": 2008,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "dundee-united",
+   "nome": "Dundee United",
+   "sigla": "DDU",
+   "cidade": "Dundee",
+   "estado": "XS",
+   "pais": "XS",
+   "cores": {
+    "primaria": "#FF6600",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Tannadice Park",
+    "capacidade": 14223
+   },
+   "fundacao": 1909,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 67
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "samsunspor",
+   "nome": "Samsunspor",
+   "sigla": "SAM",
+   "cidade": "Samsun",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Samsun Yeni 19 Mayıs",
+    "capacidade": 34303
+   },
+   "fundacao": 1965,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 52,
+    "max": 78
+   },
+   "caixaInicial": 31000000
+  },
+  {
+   "id": "spartak-subotica",
+   "nome": "Spartak Subotica",
+   "sigla": "SPS",
+   "cidade": "Subotica",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Gradski stadion Subotica",
+    "capacidade": 13020
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 65
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "gent",
+   "nome": "Gent",
+   "sigla": "GNT",
+   "cidade": "Gante",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Planet Group arena",
+    "capacidade": 20185
+   },
+   "fundacao": 1900,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 72,
+   "forcaElenco": {
+    "min": 58,
+    "max": 76
+   },
+   "caixaInicial": 35000000
+  },
+  {
+   "id": "estrela-vermelha",
+   "nome": "Estrela Vermelha",
+   "sigla": "CZV",
+   "cidade": "Belgrado",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Rajko Mitić",
+    "capacidade": 49167
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 50,
+   "reputacao": 76,
+   "forcaElenco": {
+    "min": 52,
+    "max": 82
+   },
+   "caixaInicial": 60000000
+  },
+  {
+   "id": "termalica",
+   "nome": "Termalica Nieciecza",
+   "sigla": "TER",
+   "cidade": "Nieciecza",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#FF6600",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stadion Bruk-Bet",
+    "capacidade": 4653
+   },
+   "fundacao": 1922,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 60
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "krasnodar",
+   "nome": "Krasnodar",
+   "sigla": "KRA",
+   "cidade": "Krasnodar",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "OZON Arena",
+    "capacidade": 35179
+   },
+   "fundacao": 2008,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 74,
+   "forcaElenco": {
+    "min": 52,
+    "max": 86
+   },
+   "caixaInicial": 69000000
+  },
+  {
+   "id": "zaglebie-lubin",
+   "nome": "Zagłębie Lubin",
+   "sigla": "ZAG",
+   "cidade": "Lubin",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#FF6600",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "KGHM Zagłębie Arena",
+    "capacidade": 16086
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "rapid-viena",
+   "nome": "Rapid Viena",
+   "sigla": "RAP",
+   "cidade": "Viena",
+   "estado": "AT",
+   "pais": "AT",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Allianz-Stadion",
+    "capacidade": 28345
+   },
+   "fundacao": 1899,
+   "rival": null,
+   "torcida": 38,
+   "reputacao": 72,
+   "forcaElenco": {
+    "min": 56,
+    "max": 74
+   },
+   "caixaInicial": 26000000
+  },
+  {
+   "id": "charleroi",
+   "nome": "Charleroi",
+   "sigla": "CHA",
+   "cidade": "Charleroi",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stade du Pays de Charleroi",
+    "capacidade": 14968
+   },
+   "fundacao": 1904,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 52,
+    "max": 76
+   },
+   "caixaInicial": 25000000
+  },
+  {
+   "id": "odense",
+   "nome": "Odense",
+   "sigla": "OB",
+   "cidade": "Odense",
+   "estado": "DK",
+   "pais": "DK",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Nature Energy Park",
+    "capacidade": 15761
+   },
+   "fundacao": 1887,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 69
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "oleksandriya",
+   "nome": "Oleksandriya",
+   "sigla": "OLE",
+   "cidade": "Oleksandriya",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "KSK Nika",
+    "capacidade": 7000
+   },
+   "fundacao": 1948,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "hradec-kralove",
+   "nome": "Hradec Králové",
+   "sigla": "HKR",
+   "cidade": "Hradec Králové",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "FINEP Arena",
+    "capacidade": 9300
+   },
+   "fundacao": 1905,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "copenhague",
+   "nome": "Copenhague",
+   "sigla": "FCK",
+   "cidade": "Copenhague",
+   "estado": "DK",
+   "pais": "DK",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Parken - connected by 3",
+    "capacidade": 38065
+   },
+   "fundacao": 1992,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 76,
+   "forcaElenco": {
+    "min": 52,
+    "max": 77
+   },
+   "caixaInicial": 40000000
+  },
+  {
+   "id": "rosenborg",
+   "nome": "Rosenborg",
+   "sigla": "RBK",
+   "cidade": "Trondheim",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Lerkendal Stadion",
+    "capacidade": 21510
+   },
+   "fundacao": 1917,
+   "rival": null,
+   "torcida": 25,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 55,
+    "max": 72
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "sparta-praga",
+   "nome": "Sparta Praga",
+   "sigla": "SPA",
+   "cidade": "Praga",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#8B1A2B",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "epet Arena",
+    "capacidade": 18243
+   },
+   "fundacao": 1893,
+   "rival": null,
+   "torcida": 35,
+   "reputacao": 74,
+   "forcaElenco": {
+    "min": 58,
+    "max": 78
+   },
+   "caixaInicial": 52000000
+  },
+  {
+   "id": "brondby",
+   "nome": "Brøndby",
+   "sigla": "BIF",
+   "cidade": "Brøndby",
+   "estado": "DK",
+   "pais": "DK",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Brøndby Stadion",
+    "capacidade": 28000
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 25,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 52,
+    "max": 76
+   },
+   "caixaInicial": 29000000
+  },
+  {
+   "id": "kristiansund",
+   "nome": "Kristiansund",
+   "sigla": "KBK",
+   "cidade": "Kristiansund",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Nordmøre stadion",
+    "capacidade": 4444
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "wisla-plock",
+   "nome": "Wisła Płock",
+   "sigla": "WPL",
+   "cidade": "Płock",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "ORLEN Stadion im. Kazimierza Górskiego",
+    "capacidade": 15004
+   },
+   "fundacao": 1947,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "blau-weiss-linz",
+   "nome": "Blau-Weiss Linz",
+   "sigla": "BWL",
+   "cidade": "Linz",
+   "estado": "AT",
+   "pais": "AT",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Hofmann Personal Stadion",
+    "capacidade": 5595
+   },
+   "fundacao": 1997,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "club-brugge",
+   "nome": "Club Brugge",
+   "sigla": "BRU",
+   "cidade": "Bruges",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Jan Breydelstadion",
+    "capacidade": 29062
+   },
+   "fundacao": 1891,
+   "rival": null,
+   "torcida": 35,
+   "reputacao": 80,
+   "forcaElenco": {
+    "min": 58,
+    "max": 88
+   },
+   "caixaInicial": 164000000
+  },
+  {
+   "id": "konyaspor",
+   "nome": "Konyaspor",
+   "sigla": "KON",
+   "cidade": "Konya",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Medaş Konya Büyükşehir Stadyumu",
+    "capacidade": 41600
+   },
+   "fundacao": 1922,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "jagiellonia",
+   "nome": "Jagiellonia",
+   "sigla": "JAG",
+   "cidade": "Białystok",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Chorten Arena",
+    "capacidade": 22372
+   },
+   "fundacao": 1920,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 22000000
+  },
+  {
+   "id": "sigma-olomouc",
+   "nome": "Sigma Olomouc",
+   "sigla": "SIG",
+   "cidade": "Olomouc",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Andrův stadion",
+    "capacidade": 12451
+   },
+   "fundacao": 1919,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 54,
+    "max": 72
+   },
+   "caixaInicial": 19000000
+  },
+  {
+   "id": "kfum-oslo",
+   "nome": "KFUM Oslo",
+   "sigla": "KFU",
+   "cidade": "Oslo",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "KFUM Arena",
+    "capacidade": 4000
+   },
+   "fundacao": 1939,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 63
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "spartak-moscou",
+   "nome": "Spartak de Moscou",
+   "sigla": "SPA",
+   "cidade": "Moscou",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Lukoil Arena",
+    "capacidade": 44571
+   },
+   "fundacao": 1922,
+   "rival": null,
+   "torcida": 50,
+   "reputacao": 74,
+   "forcaElenco": {
+    "min": 53,
+    "max": 83
+   },
+   "caixaInicial": 66000000
+  },
+  {
+   "id": "slaven-belupo",
+   "nome": "Slaven Belupo",
+   "sigla": "SLB",
+   "cidade": "Koprivnica",
+   "estado": "HR",
+   "pais": "HR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Gradski Stadion Ivan Kusek Apas",
+    "capacidade": 5000
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "lech-poznan",
+   "nome": "Lech Poznań",
+   "sigla": "LPO",
+   "cidade": "Poznań",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Enea Poznań",
+    "capacidade": 42837
+   },
+   "fundacao": 1922,
+   "rival": null,
+   "torcida": 28,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 59,
+    "max": 76
+   },
+   "caixaInicial": 33000000
+  },
+  {
+   "id": "viking",
+   "nome": "Viking",
+   "sigla": "VIK",
+   "cidade": "Stavanger",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Lyse Arena",
+    "capacidade": 15900
+   },
+   "fundacao": 1899,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 55,
+    "max": 76
+   },
+   "caixaInicial": 27000000
+  },
+  {
+   "id": "cska-moscou",
+   "nome": "CSKA Moscou",
+   "sigla": "CSK",
+   "cidade": "Moscou",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "VEB Arena",
+    "capacidade": 30114
+   },
+   "fundacao": 1911,
+   "rival": null,
+   "torcida": 40,
+   "reputacao": 72,
+   "forcaElenco": {
+    "min": 52,
+    "max": 82
+   },
+   "caixaInicial": 66000000
+  },
+  {
+   "id": "winterthur",
+   "nome": "Winterthur",
+   "sigla": "WIN",
+   "cidade": "Winterthur",
+   "estado": "CH",
+   "pais": "CH",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Schützenwiese",
+    "capacidade": 8700
+   },
+   "fundacao": 1896,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 65
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "aek-atenas",
+   "nome": "AEK Atenas",
+   "sigla": "AEK",
+   "cidade": "Atenas",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Allwyn Arena",
+    "capacidade": 32500
+   },
+   "fundacao": 1924,
+   "rival": null,
+   "torcida": 40,
+   "reputacao": 78,
+   "forcaElenco": {
+    "min": 52,
+    "max": 79
+   },
+   "caixaInicial": 50000000
+  },
+  {
+   "id": "wsg-tirol",
+   "nome": "WSG Tirol",
+   "sigla": "WSG",
+   "cidade": "Wattens",
+   "estado": "AT",
+   "pais": "AT",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Tivoli Stadion Tirol",
+    "capacidade": 15400
+   },
+   "fundacao": 1930,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "gorica",
+   "nome": "Gorica",
+   "sigla": "GOR",
+   "cidade": "Velika Gorica",
+   "estado": "HR",
+   "pais": "HR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "SRC Velika Gorica",
+    "capacidade": 5050
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "legia-varsovia",
+   "nome": "Legia Varsóvia",
+   "sigla": "LEG",
+   "cidade": "Varsóvia",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion Miejski im. Marszałka Józefa Piłsudskiego",
+    "capacidade": 31103
+   },
+   "fundacao": 1916,
+   "rival": null,
+   "torcida": 38,
+   "reputacao": 72,
+   "forcaElenco": {
+    "min": 56,
+    "max": 76
+   },
+   "caixaInicial": 20000000
+  },
+  {
+   "id": "kilmarnock",
+   "nome": "Kilmarnock",
+   "sigla": "KIL",
+   "cidade": "Kilmarnock",
+   "estado": "XS",
+   "pais": "XS",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "BBSP Stadium, Rugby Park",
+    "capacidade": 18128
+   },
+   "fundacao": 1869,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "st-gallen",
+   "nome": "St. Gallen",
+   "sigla": "STG",
+   "cidade": "St. Gallen",
+   "estado": "CH",
+   "pais": "CH",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "kybunpark",
+    "capacidade": 20660
+   },
+   "fundacao": 1879,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 52,
+    "max": 75
+   },
+   "caixaInicial": 24000000
+  },
+  {
+   "id": "basel",
+   "nome": "Basel",
+   "sigla": "BAS",
+   "cidade": "Basileia",
+   "estado": "CH",
+   "pais": "CH",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "St. Jakob-Park",
+    "capacidade": 38512
+   },
+   "fundacao": 1893,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 74,
+   "forcaElenco": {
+    "min": 52,
+    "max": 79
+   },
+   "caixaInicial": 41000000
+  },
+  {
+   "id": "zurich",
+   "nome": "Zürich",
+   "sigla": "ZUR",
+   "cidade": "Zurique",
+   "estado": "CH",
+   "pais": "CH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Stadion Letzigrund",
+    "capacidade": 26104
+   },
+   "fundacao": 1896,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "veres-rivne",
+   "nome": "Veres Rivne",
+   "sigla": "VER",
+   "cidade": "Rivne",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion Avangard (2022)",
+    "capacidade": 7122
+   },
+   "fundacao": 1957,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 64
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "panathinaikos",
+   "nome": "Panathinaikos",
+   "sigla": "PAN",
+   "cidade": "Atenas",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Apostolos Nikolaidis",
+    "capacidade": 15000
+   },
+   "fundacao": 1908,
+   "rival": null,
+   "torcida": 45,
+   "reputacao": 76,
+   "forcaElenco": {
+    "min": 62,
+    "max": 79
+   },
+   "caixaInicial": 54000000
+  },
+  {
+   "id": "ried",
+   "nome": "Ried",
+   "sigla": "RIE",
+   "cidade": "Ried im Innkreis",
+   "estado": "AT",
+   "pais": "AT",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "BWT X Oberösterreichische Arena",
+    "capacidade": 7300
+   },
+   "fundacao": 1912,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "start",
+   "nome": "Start",
+   "sigla": "STA",
+   "cidade": "Kristiansand",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Sparebanken Sør Arena",
+    "capacidade": 14300
+   },
+   "fundacao": 1905,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 67
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "levadiakos",
+   "nome": "Levadiakos",
+   "sigla": "LEV",
+   "cidade": "Livadeia",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadio Livadias \"Lampros Katsonis\"",
+    "capacidade": 5915
+   },
+   "fundacao": 1961,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 69
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "krylya-sovetov",
+   "nome": "Krylya Sovetov",
+   "sigla": "KRY",
+   "cidade": "Samara",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Solidarnost Samara Arena",
+    "capacidade": 42347
+   },
+   "fundacao": 1942,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 53,
+    "max": 72
+   },
+   "caixaInicial": 20000000
+  },
+  {
+   "id": "rubin-kazan",
+   "nome": "Rubin Kazan",
+   "sigla": "RUB",
+   "cidade": "Kazan",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#8B1A2B",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "Ak Bars Arena",
+    "capacidade": 45379
+   },
+   "fundacao": 1958,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 79
+   },
+   "caixaInicial": 32000000
+  },
+  {
+   "id": "mjallby",
+   "nome": "Mjällby",
+   "sigla": "MJA",
+   "cidade": "Hällevik",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Strandvallen",
+    "capacidade": 7500
+   },
+   "fundacao": 1939,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 76
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "aik",
+   "nome": "AIK",
+   "sigla": "AIK",
+   "cidade": "Estocolmo",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Strawberry Arena",
+    "capacidade": 50000
+   },
+   "fundacao": 1891,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "oh-leuven",
+   "nome": "OH Leuven",
+   "sigla": "OHL",
+   "cidade": "Lovaina",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "King Power at Den Dreef Stadion",
+    "capacidade": 9809
+   },
+   "fundacao": 2002,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 76
+   },
+   "caixaInicial": 20000000
+  },
+  {
+   "id": "baltika",
+   "nome": "Baltika",
+   "sigla": "BAL",
+   "cidade": "Kaliningrado",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Rostec Arena",
+    "capacidade": 30600
+   },
+   "fundacao": 1954,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 54,
+    "max": 74
+   },
+   "caixaInicial": 21000000
+  },
+  {
+   "id": "nordsjaelland",
+   "nome": "Nordsjælland",
+   "sigla": "FCN",
+   "cidade": "Farum",
+   "estado": "DK",
+   "pais": "DK",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Right to Dream Park",
+    "capacidade": 10300
+   },
+   "fundacao": 1991,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 52,
+    "max": 80
+   },
+   "caixaInicial": 39000000
+  },
+  {
+   "id": "lugano",
+   "nome": "Lugano",
+   "sigla": "LUG",
+   "cidade": "Lugano",
+   "estado": "CH",
+   "pais": "CH",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "AIL Arena",
+    "capacidade": 8793
+   },
+   "fundacao": 1908,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 52,
+    "max": 79
+   },
+   "caixaInicial": 24000000
+  },
+  {
+   "id": "gaziantep",
+   "nome": "Gaziantep",
+   "sigla": "GAZ",
+   "cidade": "Gaziantep",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Gaziantep Stadyumu",
+    "capacidade": 30320
+   },
+   "fundacao": 1988,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 56,
+    "max": 75
+   },
+   "caixaInicial": 21000000
+  },
+  {
+   "id": "unirea-slobozia",
+   "nome": "Unirea Slobozia",
+   "sigla": "UNS",
+   "cidade": "Slobozia",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "1 Mai",
+    "capacidade": 6000
+   },
+   "fundacao": 2004,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 64
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "farul",
+   "nome": "Farul Constanța",
+   "sigla": "FAR",
+   "cidade": "Constanța",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Central - Complex Gheorghe Hagi",
+    "capacidade": 4554
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 64
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "fcsb",
+   "nome": "FCSB",
+   "sigla": "FCS",
+   "cidade": "Bucareste",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Arena Națională",
+    "capacidade": 55634
+   },
+   "fundacao": 1947,
+   "rival": null,
+   "torcida": 40,
+   "reputacao": 72,
+   "forcaElenco": {
+    "min": 52,
+    "max": 75
+   },
+   "caixaInicial": 21000000
+  },
+  {
+   "id": "kifisia",
+   "nome": "Kifisia",
+   "sigla": "KIF",
+   "cidade": "Atenas",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Gipedo Neapolis",
+    "capacidade": 4999
+   },
+   "fundacao": 2012,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "standard-liege",
+   "nome": "Standard Liège",
+   "sigla": "STL",
+   "cidade": "Liège",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Maurice Dufrasne Stadion",
+    "capacidade": 27221
+   },
+   "fundacao": 1898,
+   "rival": null,
+   "torcida": 28,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 52,
+    "max": 77
+   },
+   "caixaInicial": 33000000
+  },
+  {
+   "id": "atromitos",
+   "nome": "Atromitos",
+   "sigla": "ATR",
+   "cidade": "Atenas",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadio Peristeriou",
+    "capacidade": 9050
+   },
+   "fundacao": 1923,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "dinamo-bucareste",
+   "nome": "Dinamo Bucareste",
+   "sigla": "DIN",
+   "cidade": "Bucareste",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "National Arena",
+    "capacidade": 55600
+   },
+   "fundacao": 1948,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "tsc",
+   "nome": "TSC Bačka Topola",
+   "sigla": "TSC",
+   "cidade": "Bačka Topola",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "TSC Arena",
+    "capacidade": 4500
+   },
+   "fundacao": 1913,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "grazer-ak",
+   "nome": "Grazer AK",
+   "sigla": "GAK",
+   "cidade": "Graz",
+   "estado": "AT",
+   "pais": "AT",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Merkur Arena",
+    "capacidade": 15322
+   },
+   "fundacao": 1902,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "kayserispor",
+   "nome": "Kayserispor",
+   "sigla": "KAY",
+   "cidade": "Kayseri",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "RHG Enertürk Enerji Stadyumu",
+    "capacidade": 31856
+   },
+   "fundacao": 1966,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "sion",
+   "nome": "Sion",
+   "sigla": "SIO",
+   "cidade": "Sion",
+   "estado": "CH",
+   "pais": "CH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Tourbillon",
+    "capacidade": 14850
+   },
+   "fundacao": 1909,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "imt-belgrado",
+   "nome": "IMT Belgrado",
+   "sigla": "IMT",
+   "cidade": "Belgrado",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion Lagator",
+    "capacidade": 8500
+   },
+   "fundacao": 1988,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "pogon-szczecin",
+   "nome": "Pogoń Szczecin",
+   "sigla": "POG",
+   "cidade": "Szczecin",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#8B1A2B"
+   },
+   "estadio": {
+    "nome": "Stadion Miejski im. Floriana Krygiera",
+    "capacidade": 21163
+   },
+   "fundacao": 1948,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "osijek",
+   "nome": "Osijek",
+   "sigla": "OSI",
+   "cidade": "Osijek",
+   "estado": "HR",
+   "pais": "HR",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Opus Arena",
+    "capacidade": 13005
+   },
+   "fundacao": 1947,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "radnik-surdulica",
+   "nome": "Radnik Surdulica",
+   "sigla": "RSU",
+   "cidade": "Surdulica",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Gradski stadion Surdulica",
+    "capacidade": 4000
+   },
+   "fundacao": 1926,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "dinamo-kiev",
+   "nome": "Dínamo de Kiev",
+   "sigla": "DKI",
+   "cidade": "Kiev",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Valeriy Lobanovsky Stadion",
+    "capacidade": 16873
+   },
+   "fundacao": 1927,
+   "rival": null,
+   "torcida": 45,
+   "reputacao": 74,
+   "forcaElenco": {
+    "min": 52,
+    "max": 80
+   },
+   "caixaInicial": 51000000
+  },
+  {
+   "id": "panserraikos",
+   "nome": "Panserraikos",
+   "sigla": "PSR",
+   "cidade": "Serres",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Dimotiko Gipedo Serron",
+    "capacidade": 9500
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 65
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "zulte-waregem",
+   "nome": "Zulte Waregem",
+   "sigla": "ZWA",
+   "cidade": "Waregem",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "Elindus Arena",
+    "capacidade": 12698
+   },
+   "fundacao": 2001,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "motor-lublin",
+   "nome": "Motor Lublin",
+   "sigla": "MOT",
+   "cidade": "Lublin",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Motor Lublin Arena",
+    "capacidade": 15247
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "lillestrom",
+   "nome": "Lillestrøm",
+   "sigla": "LSK",
+   "cidade": "Lillestrøm",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Åråsen stadion",
+    "capacidade": 11637
+   },
+   "fundacao": 1917,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "mechelen",
+   "nome": "Mechelen",
+   "sigla": "MEC",
+   "cidade": "Mechelen",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Achter de Kazerne",
+    "capacidade": 16672
+   },
+   "fundacao": 1904,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 52,
+    "max": 78
+   },
+   "caixaInicial": 36000000
+  },
+  {
+   "id": "altach",
+   "nome": "Altach",
+   "sigla": "ALT",
+   "cidade": "Altach",
+   "estado": "AT",
+   "pais": "AT",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Schnabelholz",
+    "capacidade": 8500
+   },
+   "fundacao": 1929,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 67
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "kryvbas",
+   "nome": "Kryvbas",
+   "sigla": "KRY",
+   "cidade": "Kryvyi Rih",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Girnyk",
+    "capacidade": 4000
+   },
+   "fundacao": 1959,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "fenerbahce",
+   "nome": "Fenerbahçe",
+   "sigla": "FEN",
+   "cidade": "Istambul",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Chobani Stadyumu FB Şükrü Saracoğlu Spor Kompleksi",
+    "capacidade": 47430
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 85,
+   "reputacao": 86,
+   "forcaElenco": {
+    "min": 52,
+    "max": 84
+   },
+   "caixaInicial": 116000000
+  },
+  {
+   "id": "degerfors",
+   "nome": "Degerfors",
+   "sigla": "DEG",
+   "cidade": "Degerfors",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stora Valla",
+    "capacidade": 5880
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 64
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "kalmar",
+   "nome": "Kalmar",
+   "sigla": "KAL",
+   "cidade": "Kalmar",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Guldfågeln Arena",
+    "capacidade": 12182
+   },
+   "fundacao": 1910,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 67
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "aberdeen",
+   "nome": "Aberdeen",
+   "sigla": "ABE",
+   "cidade": "Aberdeen",
+   "estado": "XS",
+   "pais": "XS",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Pittodrie Stadium",
+    "capacidade": 20866
+   },
+   "fundacao": 1903,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 54,
+    "max": 73
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "celtic",
+   "nome": "Celtic",
+   "sigla": "CEL",
+   "cidade": "Glasgow",
+   "estado": "XS",
+   "pais": "XS",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Celtic Park",
+    "capacidade": 60411
+   },
+   "fundacao": 1887,
+   "rival": null,
+   "torcida": 65,
+   "reputacao": 80,
+   "forcaElenco": {
+    "min": 54,
+    "max": 82
+   },
+   "caixaInicial": 80000000
+  },
+  {
+   "id": "akhmat-grozny",
+   "nome": "Akhmat Grozny",
+   "sigla": "AKH",
+   "cidade": "Grozny",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Akhmat-Arena",
+    "capacidade": 30200
+   },
+   "fundacao": 1946,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "csikszereda",
+   "nome": "Csíkszereda",
+   "sigla": "CSI",
+   "cidade": "Miercurea Ciuc",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Municipal Miercurea Ciuc",
+    "capacidade": 4000
+   },
+   "fundacao": 2013,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 64
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "metaloglobus",
+   "nome": "Metaloglobus",
+   "sigla": "MET",
+   "cidade": "Bucareste",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Clinceni Arena",
+    "capacidade": 4500
+   },
+   "fundacao": 1923,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 52,
+    "max": 65
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "banik-ostrava",
+   "nome": "Baník Ostrava",
+   "sigla": "BAN",
+   "cidade": "Ostrava",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Městský stadion  - Vitkovice Aréna",
+    "capacidade": 15123
+   },
+   "fundacao": 1922,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 54,
+    "max": 74
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "fredrikstad",
+   "nome": "Fredrikstad",
+   "sigla": "FFK",
+   "cidade": "Fredrikstad",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Fredrikstad Stadion",
+    "capacidade": 12560
+   },
+   "fundacao": 1903,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 69
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "la-louviere",
+   "nome": "La Louvière",
+   "sigla": "LAL",
+   "cidade": "La Louvière",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Easi Arena",
+    "capacidade": 8050
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "obolon",
+   "nome": "Obolon Kiev",
+   "sigla": "OBO",
+   "cidade": "Kiev",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Obolon-Arena",
+    "capacidade": 5103
+   },
+   "fundacao": 1992,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 61
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "union-saint-gilloise",
+   "nome": "Union Saint-Gilloise",
+   "sigla": "USG",
+   "cidade": "Bruxelas",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Stade Joseph Mariën",
+    "capacidade": 9512
+   },
+   "fundacao": 1897,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 74,
+   "forcaElenco": {
+    "min": 52,
+    "max": 83
+   },
+   "caixaInicial": 97000000
+  },
+  {
+   "id": "lechia-gdansk",
+   "nome": "Lechia Gdańsk",
+   "sigla": "LGD",
+   "cidade": "Gdańsk",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Polsat Plus Arena Gdańsk",
+    "capacidade": 41620
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 79
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "universitatea-craiova",
+   "nome": "Universitatea Craiova",
+   "sigla": "UCV",
+   "cidade": "Craiova",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Ion Oblemenco (2017)",
+    "capacidade": 30983
+   },
+   "fundacao": 1948,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 52,
+    "max": 76
+   },
+   "caixaInicial": 21000000
+  },
+  {
+   "id": "salzburg",
+   "nome": "Red Bull Salzburg",
+   "sigla": "RBS",
+   "cidade": "Salzburgo",
+   "estado": "AT",
+   "pais": "AT",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#D50032"
+   },
+   "estadio": {
+    "nome": "Red Bull Arena Salzburg",
+    "capacidade": 30188
+   },
+   "fundacao": 1933,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 78,
+   "forcaElenco": {
+    "min": 56,
+    "max": 84
+   },
+   "caixaInicial": 118000000
+  },
+  {
+   "id": "sochi",
+   "nome": "Sochi",
+   "sigla": "SOC",
+   "cidade": "Sochi",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Fisht Olympic Stadium",
+    "capacidade": 45994
+   },
+   "fundacao": 2018,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 54,
+    "max": 72
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "arges",
+   "nome": "Argeș Pitești",
+   "sigla": "ARG",
+   "cidade": "Pitești",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#8B1A2B",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Orășenesc Mioveni",
+    "capacidade": 10000
+   },
+   "fundacao": 1953,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 67
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "lask",
+   "nome": "LASK",
+   "sigla": "LAS",
+   "cidade": "Linz",
+   "estado": "AT",
+   "pais": "AT",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Raiffeisen Arena",
+    "capacidade": 19080
+   },
+   "fundacao": 1908,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 52,
+    "max": 77
+   },
+   "caixaInicial": 30000000
+  },
+  {
+   "id": "dinamo-zagreb",
+   "nome": "Dinamo Zagreb",
+   "sigla": "DIN",
+   "cidade": "Zagreb",
+   "estado": "HR",
+   "pais": "HR",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Maksimir",
+    "capacidade": 35123
+   },
+   "fundacao": 1911,
+   "rival": null,
+   "torcida": 40,
+   "reputacao": 76,
+   "forcaElenco": {
+    "min": 56,
+    "max": 81
+   },
+   "caixaInicial": 48000000
+  },
+  {
+   "id": "gornik-zabrze",
+   "nome": "Górnik Zabrze",
+   "sigla": "GOR",
+   "cidade": "Zabrze",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Arena Zabrze",
+    "capacidade": 28236
+   },
+   "fundacao": 1948,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 53,
+    "max": 74
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "hearts",
+   "nome": "Hearts",
+   "sigla": "HEA",
+   "cidade": "Edimburgo",
+   "estado": "XS",
+   "pais": "XS",
+   "cores": {
+    "primaria": "#8B1A2B",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Tynecastle Park",
+    "capacidade": 19852
+   },
+   "fundacao": 1874,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 53,
+    "max": 78
+   },
+   "caixaInicial": 19000000
+  },
+  {
+   "id": "hamkam",
+   "nome": "HamKam",
+   "sigla": "HAM",
+   "cidade": "Hamar",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Briskeby Stadion",
+    "capacidade": 6608
+   },
+   "fundacao": 1918,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "luzern",
+   "nome": "Luzern",
+   "sigla": "LUZ",
+   "cidade": "Lucerna",
+   "estado": "CH",
+   "pais": "CH",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "swissporarena",
+    "capacidade": 15680
+   },
+   "fundacao": 1901,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 52,
+    "max": 76
+   },
+   "caixaInicial": 24000000
+  },
+  {
+   "id": "vejle",
+   "nome": "Vejle",
+   "sigla": "VEJ",
+   "cidade": "Vejle",
+   "estado": "DK",
+   "pais": "DK",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Vejle Stadion",
+    "capacidade": 11060
+   },
+   "fundacao": 1891,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 64
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "wolfsberger",
+   "nome": "Wolfsberger AC",
+   "sigla": "WAC",
+   "cidade": "Wolfsberg",
+   "estado": "AT",
+   "pais": "AT",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Lavanttal-Arena",
+    "capacidade": 7300
+   },
+   "fundacao": 1931,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 77
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "hartberg",
+   "nome": "Hartberg",
+   "sigla": "HAR",
+   "cidade": "Hartberg",
+   "estado": "AT",
+   "pais": "AT",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Profertil Arena Hartberg",
+    "capacidade": 5024
+   },
+   "fundacao": 1946,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 69
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "hajduk-split",
+   "nome": "Hajduk Split",
+   "sigla": "HAJ",
+   "cidade": "Split",
+   "estado": "HR",
+   "pais": "HR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Poljud",
+    "capacidade": 34183
+   },
+   "fundacao": 1911,
+   "rival": null,
+   "torcida": 40,
+   "reputacao": 72,
+   "forcaElenco": {
+    "min": 52,
+    "max": 75
+   },
+   "caixaInicial": 25000000
+  },
+  {
+   "id": "vojvodina",
+   "nome": "Vojvodina",
+   "sigla": "VOJ",
+   "cidade": "Novi Sad",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion Karadjordje",
+    "capacidade": 14852
+   },
+   "fundacao": 1914,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 54,
+    "max": 75
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "trabzonspor",
+   "nome": "Trabzonspor",
+   "sigla": "TRA",
+   "cidade": "Trabzon",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#8B1A2B",
+    "secundaria": "#5BC2E7"
+   },
+   "estadio": {
+    "nome": "Papara Park",
+    "capacidade": 41000
+   },
+   "fundacao": 1967,
+   "rival": null,
+   "torcida": 40,
+   "reputacao": 76,
+   "forcaElenco": {
+    "min": 52,
+    "max": 83
+   },
+   "caixaInicial": 87000000
+  },
+  {
+   "id": "dukla-praga",
+   "nome": "Dukla Praga",
+   "sigla": "DUK",
+   "cidade": "Praga",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Stadion Juliska",
+    "capacidade": 8150
+   },
+   "fundacao": 1948,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "young-boys",
+   "nome": "Young Boys",
+   "sigla": "YB",
+   "cidade": "Berna",
+   "estado": "CH",
+   "pais": "CH",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stadion Wankdorf",
+    "capacidade": 31500
+   },
+   "fundacao": 1898,
+   "rival": null,
+   "torcida": 28,
+   "reputacao": 74,
+   "forcaElenco": {
+    "min": 52,
+    "max": 78
+   },
+   "caixaInicial": 39000000
+  },
+  {
+   "id": "rapid-bucareste",
+   "nome": "Rapid Bucareste",
+   "sigla": "RAP",
+   "cidade": "Bucareste",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#8B1A2B",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Superbet Arena - Giulești",
+    "capacidade": 14050
+   },
+   "fundacao": 1923,
+   "rival": null,
+   "torcida": 25,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "vukovar",
+   "nome": "Vukovar",
+   "sigla": "VUK",
+   "cidade": "Vukovar",
+   "estado": "HR",
+   "pais": "HR",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Gradski Stadion u Borovu naselju",
+    "capacidade": 6000
+   },
+   "fundacao": 1991,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "ael-larissa",
+   "nome": "AEL Larissa",
+   "sigla": "AEL",
+   "cidade": "Larissa",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#8B1A2B",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "AEL Novibet Arena",
+    "capacidade": 16118
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 54,
+    "max": 67
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "novi-pazar",
+   "nome": "Novi Pazar",
+   "sigla": "NPZ",
+   "cidade": "Novi Pazar",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Gradski stadion Novi Pazar",
+    "capacidade": 6900
+   },
+   "fundacao": 1928,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 69
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "radnicki-kragujevac",
+   "nome": "Radnički Kragujevac",
+   "sigla": "RKG",
+   "cidade": "Kragujevac",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Čika Dača Stadion",
+    "capacidade": 15100
+   },
+   "fundacao": 1923,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 65
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "st-mirren",
+   "nome": "St. Mirren",
+   "sigla": "STM",
+   "cidade": "Paisley",
+   "estado": "XS",
+   "pais": "XS",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "The SMISA Stadium",
+    "capacidade": 7937
+   },
+   "fundacao": 1877,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "sint-truiden",
+   "nome": "Sint-Truiden",
+   "sigla": "STV",
+   "cidade": "Sint-Truiden",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Daio Wasabi Stayen Stadium",
+    "capacidade": 11337
+   },
+   "fundacao": 1924,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 78
+   },
+   "caixaInicial": 33000000
+  },
+  {
+   "id": "kolos",
+   "nome": "Kolos Kovalivka",
+   "sigla": "KOL",
+   "cidade": "Kovalivka",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "Kolos",
+    "capacidade": 5050
+   },
+   "fundacao": 2012,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 67
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "rukh-lviv",
+   "nome": "Rukh Lviv",
+   "sigla": "RUK",
+   "cidade": "Lviv",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Arena Lviv",
+    "capacidade": 34725
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 51,
+    "max": 63
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "otelul-galati",
+   "nome": "Oțelul Galați",
+   "sigla": "OTE",
+   "cidade": "Galați",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Oţelul",
+    "capacidade": 13500
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "malmo",
+   "nome": "Malmö",
+   "sigla": "MFF",
+   "cidade": "Malmö",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#5BC2E7",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Eleda Stadion",
+    "capacidade": 22500
+   },
+   "fundacao": 1910,
+   "rival": null,
+   "torcida": 25,
+   "reputacao": 72,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "nizhny-novgorod",
+   "nome": "Nizhny Novgorod",
+   "sigla": "NIZ",
+   "cidade": "Nizhny Novgorod",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Nizhny Novgorod Stadium",
+    "capacidade": 44242
+   },
+   "fundacao": 2015,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 54,
+    "max": 72
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "bodo-glimt",
+   "nome": "Bodø/Glimt",
+   "sigla": "BOD",
+   "cidade": "Bodø",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Aspmyra Stadion",
+    "capacidade": 8500
+   },
+   "fundacao": 1916,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 76,
+   "forcaElenco": {
+    "min": 52,
+    "max": 81
+   },
+   "caixaInicial": 49000000
+  },
+  {
+   "id": "grasshopper",
+   "nome": "Grasshopper",
+   "sigla": "GCZ",
+   "cidade": "Zurique",
+   "estado": "CH",
+   "pais": "CH",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion Letzigrund",
+    "capacidade": 26104
+   },
+   "fundacao": 1886,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "dundee",
+   "nome": "Dundee",
+   "sigla": "DUN",
+   "cidade": "Dundee",
+   "estado": "XS",
+   "pais": "XS",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Kilmac Stadium at Dens Park",
+    "capacidade": 11850
+   },
+   "fundacao": 1893,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 69
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "cercle-brugge",
+   "nome": "Cercle Brugge",
+   "sigla": "CER",
+   "cidade": "Bruges",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Jan Breydelstadion",
+    "capacidade": 29062
+   },
+   "fundacao": 1899,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 75
+   },
+   "caixaInicial": 29000000
+  },
+  {
+   "id": "vasteras",
+   "nome": "Västerås",
+   "sigla": "VSK",
+   "cidade": "Västerås",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Hitachi Energy Arena",
+    "capacidade": 9100
+   },
+   "fundacao": 1904,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "lausanne",
+   "nome": "Lausanne",
+   "sigla": "LAU",
+   "cidade": "Lausanne",
+   "estado": "CH",
+   "pais": "CH",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stade de la Tuilière",
+    "capacidade": 12544
+   },
+   "fundacao": 1896,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 53,
+    "max": 74
+   },
+   "caixaInicial": 21000000
+  },
+  {
+   "id": "ofk-beograd",
+   "nome": "OFK Beograd",
+   "sigla": "OFK",
+   "cidade": "Belgrado",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Omladinski stadion",
+    "capacidade": 19000
+   },
+   "fundacao": 1911,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "polissya",
+   "nome": "Polissya Zhytomyr",
+   "sigla": "POL",
+   "cidade": "Zhytomyr",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Tsentralnyi Polissya",
+    "capacidade": 5928
+   },
+   "fundacao": 1959,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "slovacko",
+   "nome": "Slovácko",
+   "sigla": "SLO",
+   "cidade": "Uherské Hradiště",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Městský fotbalový stadion Miroslava Valenty",
+    "capacidade": 8000
+   },
+   "fundacao": 1927,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 61
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "zlin",
+   "nome": "Zlín",
+   "sigla": "ZLI",
+   "cidade": "Zlín",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Stadion Letná",
+    "capacidade": 5898
+   },
+   "fundacao": 1919,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 61
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "mlada-boleslav",
+   "nome": "Mladá Boleslav",
+   "sigla": "MBO",
+   "cidade": "Mladá Boleslav",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Lokotrans Arena",
+    "capacidade": 5000
+   },
+   "fundacao": 1902,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "metalist-1925",
+   "nome": "Metalist 1925",
+   "sigla": "MET",
+   "cidade": "Kharkiv",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Tsentralnyi Polissya",
+    "capacidade": 5928
+   },
+   "fundacao": 2016,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "aalesund",
+   "nome": "Aalesund",
+   "sigla": "AAF",
+   "cidade": "Ålesund",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#FF6600",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Color Line Stadion",
+    "capacidade": 10778
+   },
+   "fundacao": 1914,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 54,
+    "max": 69
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "cracovia",
+   "nome": "Cracovia",
+   "sigla": "CRA",
+   "cidade": "Cracóvia",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion Cracovii im. Józefa Piłsudskiego",
+    "capacidade": 15016
+   },
+   "fundacao": 1906,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "randers",
+   "nome": "Randers",
+   "sigla": "RFC",
+   "cidade": "Randers",
+   "estado": "DK",
+   "pais": "DK",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Cepheus Park Randers",
+    "capacidade": 10300
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 77
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "fredericia",
+   "nome": "Fredericia",
+   "sigla": "FRE",
+   "cidade": "Fredericia",
+   "estado": "DK",
+   "pais": "DK",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Monjasa Park",
+    "capacidade": 6000
+   },
+   "fundacao": 1991,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 65
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "anderlecht",
+   "nome": "Anderlecht",
+   "sigla": "AND",
+   "cidade": "Bruxelas",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#5A2D82",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Lotto Park",
+    "capacidade": 21900
+   },
+   "fundacao": 1908,
+   "rival": null,
+   "torcida": 38,
+   "reputacao": 76,
+   "forcaElenco": {
+    "min": 60,
+    "max": 82
+   },
+   "caixaInicial": 86000000
+  },
+  {
+   "id": "hermannstadt",
+   "nome": "Hermannstadt",
+   "sigla": "HER",
+   "cidade": "Sibiu",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Municipal Sibiu (2022)",
+    "capacidade": 12363
+   },
+   "fundacao": 2015,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "sonderjyske",
+   "nome": "Sønderjyske",
+   "sigla": "SJE",
+   "cidade": "Haderslev",
+   "estado": "DK",
+   "pais": "DK",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "AL Sydbank Park",
+    "capacidade": 10021
+   },
+   "fundacao": 2004,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "antalyaspor",
+   "nome": "Antalyaspor",
+   "sigla": "ANT",
+   "cidade": "Antália",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Corendon Airlines Park Antalya Stadı",
+    "capacidade": 29307
+   },
+   "fundacao": 1966,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "zeleznicar-pancevo",
+   "nome": "Železničar Pančevo",
+   "sigla": "ZEL",
+   "cidade": "Pančevo",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "SC Mladost Pančevo",
+    "capacidade": 4000
+   },
+   "fundacao": 1921,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "varazdin",
+   "nome": "Varaždin",
+   "sigla": "VAR",
+   "cidade": "Varaždin",
+   "estado": "HR",
+   "pais": "HR",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Gradski stadion Andelko Herjavec",
+    "capacidade": 10800
+   },
+   "fundacao": 2012,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "aris",
+   "nome": "Aris",
+   "sigla": "ARI",
+   "cidade": "Salônica",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Gipedo \"Kleanthis Vikelidis\"",
+    "capacidade": 22800
+   },
+   "fundacao": 1914,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 20000000
+  },
+  {
+   "id": "volos",
+   "nome": "Volos",
+   "sigla": "VOL",
+   "cidade": "Volos",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Panthessaliko Stadio",
+    "capacidade": 22700
+   },
+   "fundacao": 2017,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 65
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "servette",
+   "nome": "Servette",
+   "sigla": "SER",
+   "cidade": "Genebra",
+   "estado": "CH",
+   "pais": "CH",
+   "cores": {
+    "primaria": "#8B1A2B",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stade de Genève",
+    "capacidade": 30084
+   },
+   "fundacao": 1890,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 54,
+    "max": 72
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "arka-gdynia",
+   "nome": "Arka Gdynia",
+   "sigla": "ARK",
+   "cidade": "Gdynia",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Stadion GOSiR",
+    "capacidade": 15139
+   },
+   "fundacao": 1929,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 64
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "korona-kielce",
+   "nome": "Korona Kielce",
+   "sigla": "KOR",
+   "cidade": "Kielce",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Exbud Arena",
+    "capacidade": 15700
+   },
+   "fundacao": 1973,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "piast-gliwice",
+   "nome": "Piast Gliwice",
+   "sigla": "PIA",
+   "cidade": "Gliwice",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Stadion Miejski - Gliwice",
+    "capacidade": 9736
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "slavia-praga",
+   "nome": "Slavia Praga",
+   "sigla": "SLA",
+   "cidade": "Praga",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Fortuna Arena",
+    "capacidade": 19370
+   },
+   "fundacao": 1892,
+   "rival": null,
+   "torcida": 35,
+   "reputacao": 76,
+   "forcaElenco": {
+    "min": 52,
+    "max": 80
+   },
+   "caixaInicial": 67000000
+  },
+  {
+   "id": "lnz-cherkasy",
+   "nome": "LNZ Cherkasy",
+   "sigla": "LNZ",
+   "cidade": "Cherkasy",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Cherkasy-Arena",
+    "capacidade": 10321
+   },
+   "fundacao": 2005,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "sandefjord",
+   "nome": "Sandefjord",
+   "sigla": "SAN",
+   "cidade": "Sandefjord",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Jotun Arena",
+    "capacidade": 8000
+   },
+   "fundacao": 1998,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "panetolikos",
+   "nome": "Panetolikos",
+   "sigla": "PNE",
+   "cidade": "Agrinio",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Gipedo Panetolikou",
+    "capacidade": 7321
+   },
+   "fundacao": 1926,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "u-cluj",
+   "nome": "U Cluj",
+   "sigla": "UCJ",
+   "cidade": "Cluj-Napoca",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Cluj Arena",
+    "capacidade": 30246
+   },
+   "fundacao": 1919,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "gks-katowice",
+   "nome": "GKS Katowice",
+   "sigla": "GKS",
+   "cidade": "Katowice",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "Arena Katowice",
+    "capacidade": 15048
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "ofi-creta",
+   "nome": "OFI Creta",
+   "sigla": "OFI",
+   "cidade": "Heraklion",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Pankritio Stadio",
+    "capacidade": 25780
+   },
+   "fundacao": 1925,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "shakhtar",
+   "nome": "Shakhtar Donetsk",
+   "sigla": "SHA",
+   "cidade": "Donetsk",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#FF6600",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Arena Lviv",
+    "capacidade": 34725
+   },
+   "fundacao": 1936,
+   "rival": null,
+   "torcida": 40,
+   "reputacao": 76,
+   "forcaElenco": {
+    "min": 58,
+    "max": 86
+   },
+   "caixaInicial": 134000000
+  },
+  {
+   "id": "cukaricki",
+   "nome": "Čukarički",
+   "sigla": "CUK",
+   "cidade": "Belgrado",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion Cukaricki",
+    "capacidade": 4070
+   },
+   "fundacao": 1926,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "mladost-lucani",
+   "nome": "Mladost Lučani",
+   "sigla": "MLA",
+   "cidade": "Lučani",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "SRC Mr Radoš Milovanović",
+    "capacidade": 5944
+   },
+   "fundacao": 1952,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 51,
+    "max": 68
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "karagumruk",
+   "nome": "Fatih Karagümrük",
+   "sigla": "KAR",
+   "cidade": "Istambul",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Atatürk Olimpiyat",
+    "capacidade": 77563
+   },
+   "fundacao": 1926,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "asteras-tripolis",
+   "nome": "Asteras Tripolis",
+   "sigla": "AST",
+   "cidade": "Trípoli",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Gipedo Theodoros Kolokotronis",
+    "capacidade": 7423
+   },
+   "fundacao": 1931,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 67
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "partizan",
+   "nome": "Partizan",
+   "sigla": "PAR",
+   "cidade": "Belgrado",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Partizan Stadium",
+    "capacidade": 32712
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 45,
+   "reputacao": 74,
+   "forcaElenco": {
+    "min": 52,
+    "max": 76
+   },
+   "caixaInicial": 34000000
+  },
+  {
+   "id": "aarhus",
+   "nome": "AGF",
+   "sigla": "AGF",
+   "cidade": "Aarhus",
+   "estado": "DK",
+   "pais": "DK",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Ceres Park Vejlby",
+    "capacidade": 12000
+   },
+   "fundacao": 1880,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 52,
+    "max": 75
+   },
+   "caixaInicial": 21000000
+  },
+  {
+   "id": "olympiacos",
+   "nome": "Olympiacos",
+   "sigla": "OLY",
+   "cidade": "Pireu",
+   "estado": "GR",
+   "pais": "GR",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadio Georgios Karaiskakis",
+    "capacidade": 33345
+   },
+   "fundacao": 1925,
+   "rival": null,
+   "torcida": 55,
+   "reputacao": 82,
+   "forcaElenco": {
+    "min": 58,
+    "max": 84
+   },
+   "caixaInicial": 92000000
+  },
+  {
+   "id": "molde",
+   "nome": "Molde",
+   "sigla": "MOL",
+   "cidade": "Molde",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Aker Stadion",
+    "capacidade": 11800
+   },
+   "fundacao": 1911,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 19000000
+  },
+  {
+   "id": "basaksehir",
+   "nome": "Başakşehir",
+   "sigla": "IBF",
+   "cidade": "Istambul",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#FF6600",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Başakşehir Fatih Terim",
+    "capacidade": 17067
+   },
+   "fundacao": 1990,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 52,
+    "max": 79
+   },
+   "caixaInicial": 35000000
+  },
+  {
+   "id": "slovan-liberec",
+   "nome": "Slovan Liberec",
+   "sigla": "LIB",
+   "cidade": "Liberec",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion U Nisy",
+    "capacidade": 9900
+   },
+   "fundacao": 1958,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 53,
+    "max": 73
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "gais",
+   "nome": "GAIS",
+   "sigla": "GAI",
+   "cidade": "Gotemburgo",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Gamla Ullevi",
+    "capacidade": 18454
+   },
+   "fundacao": 1894,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 69
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "bohemians-praga",
+   "nome": "Bohemians Praga",
+   "sigla": "BOH",
+   "cidade": "Praga",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Ďolíček",
+    "capacidade": 6300
+   },
+   "fundacao": 1905,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 64
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "radomiak",
+   "nome": "Radomiak",
+   "sigla": "RAD",
+   "cidade": "Radom",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion im. Braci Czachorów",
+    "capacidade": 14440
+   },
+   "fundacao": 1910,
+   "rival": null,
+   "torcida": 5,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "eyupspor",
+   "nome": "Eyüpspor",
+   "sigla": "EYU",
+   "cidade": "Istambul",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#5A2D82",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Recep Tayyip Erdoğan Stadyumu",
+    "capacidade": 13797
+   },
+   "fundacao": 1919,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "akron-togliatti",
+   "nome": "Akron Togliatti",
+   "sigla": "AKR",
+   "cidade": "Togliatti",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Samara-Arena",
+    "capacidade": 44918
+   },
+   "fundacao": 2018,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "dinamo-makhachkala",
+   "nome": "Dínamo Makhachkala",
+   "sigla": "DMA",
+   "cidade": "Makhachkala",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Anzhi-Arena",
+    "capacidade": 24173
+   },
+   "fundacao": 1927,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "radnicki-nis",
+   "nome": "Radnički Niš",
+   "sigla": "RNI",
+   "cidade": "Niš",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Stadion Čair",
+    "capacidade": 18151
+   },
+   "fundacao": 1923,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "valerenga",
+   "nome": "Vålerenga",
+   "sigla": "VIF",
+   "cidade": "Oslo",
+   "estado": "NO",
+   "pais": "NO",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Intility Arena",
+    "capacidade": 16556
+   },
+   "fundacao": 1913,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 56,
+    "max": 70
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "cfr-cluj",
+   "nome": "CFR Cluj",
+   "sigla": "CFR",
+   "cidade": "Cluj-Napoca",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#8B1A2B",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Dr. Constantin Rădulescu",
+    "capacidade": 22198
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 52,
+    "max": 89
+   },
+   "caixaInicial": 35000000
+  },
+  {
+   "id": "napredak",
+   "nome": "Napredak Kruševac",
+   "sigla": "NAP",
+   "cidade": "Kruševac",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion Mladost",
+    "capacidade": 10331
+   },
+   "fundacao": 1946,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "sirius",
+   "nome": "Sirius",
+   "sigla": "SIR",
+   "cidade": "Uppsala",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Studenternas",
+    "capacidade": 11167
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "ifk-goteborg",
+   "nome": "IFK Göteborg",
+   "sigla": "IFK",
+   "cidade": "Gotemburgo",
+   "estado": "SE",
+   "pais": "SE",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Gamla Ullevi",
+    "capacidade": 18454
+   },
+   "fundacao": 1904,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 71
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "teplice",
+   "nome": "Teplice",
+   "sigla": "TEP",
+   "cidade": "Teplice",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Aréna Na Stínadlech",
+    "capacidade": 17078
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "poltava",
+   "nome": "Poltava",
+   "sigla": "POL",
+   "cidade": "Poltava",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Vorskla Butovsky Stadion",
+    "capacidade": 24600
+   },
+   "fundacao": 2023,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 52,
+    "max": 60
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "genclerbirligi",
+   "nome": "Gençlerbirliği",
+   "sigla": "GEN",
+   "cidade": "Ancara",
+   "estado": "TR",
+   "pais": "TR",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Eryaman Stadyumu",
+    "capacidade": 20000
+   },
+   "fundacao": 1923,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 73
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "epicentr",
+   "nome": "Epicentr Kamianets-Podilskyi",
+   "sigla": "EPI",
+   "cidade": "Kamianets-Podilskyi",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Stadion im. G. Tonkocheyeva",
+    "capacidade": 4000
+   },
+   "fundacao": 2021,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 52,
+    "max": 62
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "karpaty-lviv",
+   "nome": "Karpaty Lviv",
+   "sigla": "KAR",
+   "cidade": "Lviv",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Ukraina",
+    "capacidade": 28051
+   },
+   "fundacao": 1963,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 53,
+    "max": 74
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "midtjylland",
+   "nome": "Midtjylland",
+   "sigla": "FCM",
+   "cidade": "Herning",
+   "estado": "DK",
+   "pais": "DK",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "MCH Arena",
+    "capacidade": 12055
+   },
+   "fundacao": 1999,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 74,
+   "forcaElenco": {
+    "min": 52,
+    "max": 83
+   },
+   "caixaInicial": 70000000
+  },
+  {
+   "id": "kudrivka",
+   "nome": "Kudrivka",
+   "sigla": "KUD",
+   "cidade": "Kudrivka",
+   "estado": "UA",
+   "pais": "UA",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion Avangard (2022)",
+    "capacidade": 7122
+   },
+   "fundacao": 2020,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 52,
+    "max": 62
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "widzew",
+   "nome": "Widzew Łódź",
+   "sigla": "WID",
+   "cidade": "Łódź",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion Widzewa",
+    "capacidade": 18018
+   },
+   "fundacao": 1910,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 19000000
+  },
+  {
+   "id": "botosani",
+   "nome": "Botoșani",
+   "sigla": "BOT",
+   "cidade": "Botoșani",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Municipal Botoșani",
+    "capacidade": 7782
+   },
+   "fundacao": 2001,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "javor",
+   "nome": "Javor Ivanjica",
+   "sigla": "JAV",
+   "cidade": "Ivanjica",
+   "estado": "RS",
+   "pais": "RS",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Stadion kraj Moravice",
+    "capacidade": 4000
+   },
+   "fundacao": 1912,
+   "rival": null,
+   "torcida": 2,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 52,
+    "max": 65
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "dender",
+   "nome": "Dender",
+   "sigla": "DEN",
+   "cidade": "Denderleeuw",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Dender Football Complex",
+    "capacidade": 8548
+   },
+   "fundacao": 1943,
+   "rival": null,
+   "torcida": 3,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 72
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "hibernian",
+   "nome": "Hibernian",
+   "sigla": "HIB",
+   "cidade": "Edimburgo",
+   "estado": "XS",
+   "pais": "XS",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Easter Road Stadium",
+    "capacidade": 20250
+   },
+   "fundacao": 1875,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 78
+   },
+   "caixaInicial": 19000000
+  },
+  {
+   "id": "lokomotiv-moscou",
+   "nome": "Lokomotiv Moscou",
+   "sigla": "LOK",
+   "cidade": "Moscou",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "RZD Arena",
+    "capacidade": 27084
+   },
+   "fundacao": 1922,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 54,
+    "max": 82
+   },
+   "caixaInicial": 66000000
+  },
+  {
+   "id": "thun",
+   "nome": "Thun",
+   "sigla": "THU",
+   "cidade": "Thun",
+   "estado": "CH",
+   "pais": "CH",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Visana Stadion",
+    "capacidade": 10014
+   },
+   "fundacao": 1898,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 74
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "viktoria-plzen",
+   "nome": "Viktoria Plzeň",
+   "sigla": "PLZ",
+   "cidade": "Plzeň",
+   "estado": "CZ",
+   "pais": "CZ",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Doosan Aréna",
+    "capacidade": 11700
+   },
+   "fundacao": 1911,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 72,
+   "forcaElenco": {
+    "min": 54,
+    "max": 84
+   },
+   "caixaInicial": 42000000
+  },
+  {
+   "id": "petrolul",
+   "nome": "Petrolul Ploiești",
+   "sigla": "PET",
+   "cidade": "Ploiești",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Ilie Oană (2011)",
+    "capacidade": 15073
+   },
+   "fundacao": 1924,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 64
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "uta-arad",
+   "nome": "UTA Arad",
+   "sigla": "UTA",
+   "cidade": "Arad",
+   "estado": "RO",
+   "pais": "RO",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Francisc von Neumann (2020)",
+    "capacidade": 12584
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 66
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "zenit",
+   "nome": "Zenit",
+   "sigla": "ZEN",
+   "cidade": "São Petersburgo",
+   "estado": "RU",
+   "pais": "RU",
+   "cores": {
+    "primaria": "#0055A4",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Gazprom Arena",
+    "capacidade": 63026
+   },
+   "fundacao": 1925,
+   "rival": null,
+   "torcida": 40,
+   "reputacao": 78,
+   "forcaElenco": {
+    "min": 52,
+    "max": 85
+   },
+   "caixaInicial": 96000000
+  },
+  {
+   "id": "rakow",
+   "nome": "Raków Częstochowa",
+   "sigla": "RAK",
+   "cidade": "Częstochowa",
+   "estado": "PL",
+   "pais": "PL",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "zondacrypto Arena",
+    "capacidade": 5500
+   },
+   "fundacao": 1921,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 54,
+    "max": 79
+   },
+   "caixaInicial": 26000000
+  },
+  {
+   "id": "westerlo",
+   "nome": "Westerlo",
+   "sigla": "WES",
+   "cidade": "Westerlo",
+   "estado": "BE",
+   "pais": "BE",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#0055A4"
+   },
+   "estadio": {
+    "nome": "Het Kuipje",
+    "capacidade": 9062
+   },
+   "fundacao": 1933,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 52,
+    "max": 76
+   },
+   "caixaInicial": 39000000
+  },
+  {
+   "id": "motherwell",
+   "nome": "Motherwell",
+   "sigla": "MOT",
+   "cidade": "Motherwell",
+   "estado": "XS",
+   "pais": "XS",
+   "cores": {
+    "primaria": "#FFB81C",
+    "secundaria": "#8B1A2B"
+   },
+   "estadio": {
+    "nome": "Fir Park",
+    "capacidade": 13677
+   },
+   "fundacao": 1886,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 76
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "istra",
+   "nome": "Istra 1961",
+   "sigla": "IST",
+   "cidade": "Pula",
+   "estado": "HR",
+   "pais": "HR",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "Aldo Drosina",
+    "capacidade": 9056
+   },
+   "fundacao": 1961,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 70
+   },
+   "caixaInicial": 11000000
+  }
+ ]
+}

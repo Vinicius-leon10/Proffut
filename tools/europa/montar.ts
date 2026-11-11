@@ -1,10 +1,12 @@
 // Monta os clubes e os elencos das 7 ligas da Europa (temporada 2025/26) a partir da branch dados-europa (base livre
 // CC0 do transfermarkt-datasets) e liga os convocados das seleções da América que jogam nesses clubes.
 //   npx tsx tools/europa/montar.ts <pasta da branch dados-europa>
-// Grava data/europa-2026/clubes.json, data/europa-2026/jogadores.json e atualiza data/selecoes-2026/convocados.json.
+// Grava data/europa-2026/clubes.json, data/europa-2026/jogadores.json e atualiza data/selecoes-2026/convocados.json (e os
+// nomes dos convocados em data/europa-2026/jogadores-segundas.json: rodar depois de tools/europa/segundas.ts).
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { gunzipSync } from "node:zlib";
 import { FICHAS_EUROPA, LIGAS_EUROPA } from "./fichas";
+import { FICHAS_OUTROS, LIGAS_OUTROS } from "./fichas-outros";
 import { NACIONALIDADES_MUNDO } from "../../src/engine/nacionalidades";
 import { VAGAS_UEFA } from "../../src/engine/copas";
 
@@ -12,8 +14,8 @@ const pasta = process.argv[2];
 if (!pasta) throw new Error("Uso: npx tsx tools/europa/montar.ts <pasta da branch dados-europa>");
 
 /** CSV simples (com aspas), como o que o robô grava. */
-function lerCsv(nome: string): Record<string, string>[] {
-  const texto = gunzipSync(readFileSync(`${pasta}/${nome}.csv.gz`)).toString("utf-8");
+function lerCsv(nome: string, dir = pasta): Record<string, string>[] {
+  const texto = gunzipSync(readFileSync(`${dir}/${nome}.csv.gz`)).toString("utf-8");
   const linhas: string[][] = [];
   let campo = "", linha: string[] = [], aspas = false;
   for (let i = 0; i < texto.length; i++) {
@@ -47,7 +49,11 @@ const NACIONALIDADE: Record<string, string> = {
   Suriname: "SUR", Curacao: "CUW", Guadeloupe: "GLP", "French Guiana": "GUF",
   ...Object.fromEntries(Object.entries(NACIONALIDADES_MUNDO).flatMap(([cod, n]) => n.ingles.map((i) => [i, cod]))),
 };
-const DO_PAIS: Record<string, string> = { EN: "ING", ES: "ESP", IT: "ITA", DE: "ALE", FR: "FRA", PT: "POR", NL: "HOL" };
+const DO_PAIS: Record<string, string> = {
+  EN: "ING", ES: "ESP", IT: "ITA", DE: "ALE", FR: "FRA", PT: "POR", NL: "HOL",
+  AT: "AUT", BE: "BEL", CH: "SUI", DK: "DIN", GR: "GRE", HR: "CRO", NO: "NOR", PL: "POL", RO: "ROU", RU: "RUS", XS: "ESC", SE: "SUE",
+  RS: "SRB", TR: "TUR", CZ: "TCH", UA: "UCR",
+};
 
 function posicao(sub: string, geral: string): { posicao?: Pos; lado?: "D" | "E" } {
   if (sub === "Goalkeeper" || geral === "Goalkeeper") return { posicao: "G" };
@@ -81,8 +87,15 @@ function hash(texto: string): number {
   return ((h >>> 0) % 100000) / 100000;
 }
 
-const clubesTm = lerCsv("clubes").filter((c) => c.last_season === "2025" && LIGAS_EUROPA[c.domestic_competition_id]);
-const jogadoresTm = lerCsv("jogadores").filter((j) => j.last_season >= "2025");
+// Com a segunda pasta (fase "europa-outros" do robô), também a 1ª divisão de outros 16 países (fichas-outros.ts), gravada à
+// parte em clubes-outros.json e jogadores-outros.json.
+const pastaOutros = process.argv[3];
+const clubesTm = [
+  ...lerCsv("clubes").filter((c) => c.last_season === "2025" && LIGAS_EUROPA[c.domestic_competition_id]),
+  ...(pastaOutros ? lerCsv("clubes", pastaOutros).filter((c) => c.last_season === "2025" && LIGAS_OUTROS[c.domestic_competition_id]) : []),
+];
+const jogadoresTm = [...lerCsv("jogadores"), ...(pastaOutros ? lerCsv("jogadores", pastaOutros) : [])].filter((j) => j.last_season >= "2025");
+const dosOutros = new Set(Object.values(FICHAS_OUTROS).map((f) => f[0]));
 const porClube = new Map<string, Record<string, string>[]>();
 for (const j of jogadoresTm) porClube.set(j.current_club_id, [...(porClube.get(j.current_club_id) ?? []), j]);
 
@@ -97,10 +110,10 @@ const noJogo = new Map<string, { clube: string; nome: string }[]>(); // nome nor
 const normalizar = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 
 for (const c of clubesTm) {
-  const f = FICHAS_EUROPA[c.club_id];
+  const f = FICHAS_EUROPA[c.club_id] ?? FICHAS_OUTROS[c.club_id];
   if (!f) { semFicha.push(`${c.club_id} ${c.name}`); continue; }
   const [id, nome, sigla, cidade, fundacao, cor1, cor2, torcida, reputacao] = f;
-  const pais = LIGAS_EUROPA[c.domestic_competition_id];
+  const pais = LIGAS_EUROPA[c.domestic_competition_id] ?? LIGAS_OUTROS[c.domestic_competition_id];
   const todos = (porClube.get(c.club_id) ?? []).map((j) => {
     const { posicao: p, lado } = posicao(j.sub_position, j.position);
     const anos = idade(j.date_of_birth) ?? Math.round(19 + hash(`${j.player_id}/idade`) * 13);
@@ -147,13 +160,20 @@ mkdirSync("data/europa-2026", { recursive: true });
 writeFileSync("data/europa-2026/clubes.json", JSON.stringify({
   temporada: ANO,
   descricao: "Clubes das primeiras divisões da Inglaterra, Espanha, Itália, Alemanha, França, Portugal e Holanda (2025/26). Estádio do transfermarkt-datasets (CC0); nomes, cores e números do Proffut.",
-  clubes: fichas,
+  clubes: (fichas as { id: string }[]).filter((f) => !dosOutros.has(f.id)),
 }, null, 1) + "\n");
+if (pastaOutros) {
+  writeFileSync("data/europa-2026/clubes-outros.json", JSON.stringify({
+    temporada: ANO,
+    descricao: "Clubes da primeira divisão (2025/26) de outros 16 países da Europa: Áustria, Bélgica, Suíça, Dinamarca, Grécia, Croácia, Noruega, Polônia, Romênia, Rússia, Escócia, Suécia, Sérvia, Turquia, Tchéquia e Ucrânia. Estádio do transfermarkt-datasets (CC0); nomes, cores e números do Proffut.",
+    clubes: (fichas as { id: string }[]).filter((f) => dosOutros.has(f.id)),
+  }, null, 1) + "\n");
+}
 
 
 // Convocados das seleções da América que jogam num desses clubes: passam a estar no clube do jogo.
 const conv = JSON.parse(readFileSync("data/selecoes-2026/convocados.json", "utf-8"));
-const NOME_TM = new Map<string, string>(clubesTm.map((c) => [normalizar(c.name), FICHAS_EUROPA[c.club_id]?.[0]]));
+const NOME_TM = new Map<string, string>(clubesTm.map((c) => [normalizar(c.name), (FICHAS_EUROPA[c.club_id] ?? FICHAS_OUTROS[c.club_id])?.[0]]));
 let ligados = 0;
 /** Nascido no mesmo dia e com uma palavra do nome em comum ("Maximiliano Araújo" é o "Maxi Araújo"). */
 function mesmoNascimento(nome: string, nascimento?: string) {
@@ -202,15 +222,47 @@ for (const [pais, s] of Object.entries(conv.selecoes as Record<string, { convoca
     else if ([...NOME_TM.keys()].some((n) => n.includes(normalizar(c.clube)) || normalizar(c.clube).includes(n))) naoAchados.push(`${pais}: ${c.nome} (${c.clube})`);
   }
 }
+// Os que jogam na 2ª divisão (data/europa-2026/clubes-segundas.json, de tools/europa/segundas.ts, que roda antes): pelo
+// clube e pelo nome (igual, ou um dentro do outro); o nome fica o da convocação.
+const segundasClubes = JSON.parse(readFileSync("data/europa-2026/clubes-segundas.json", "utf-8")).clubes as { id: string; nome: string }[];
+const segundasArquivo = JSON.parse(readFileSync("data/europa-2026/jogadores-segundas.json", "utf-8"));
+const segundas = segundasArquivo.elencos as Record<string, JogadorReal[]>;
+let naSegunda = 0;
+for (const s of Object.values(conv.selecoes as Record<string, { convocados: { nome: string; clube: string; clubeDoJogo?: string; noJogo?: string }[] }>)) {
+  for (const c of s.convocados) {
+    if (c.clubeDoJogo || !c.clube) continue;
+    const nc = normalizar(c.clube.replace(/\b(f\.?c\.?|a\.?f\.?c\.?|cf|sc|ac|calcio|1\.)\b/gi, " "));
+    const ficha = segundasClubes.find((f) => nc && (nc.includes(normalizar(f.nome)) || normalizar(f.nome).includes(nc)));
+    if (!ficha || !segundas[ficha.id]) continue;
+    const p = normalizar(c.nome).split(" ");
+    const candidatos = segundas[ficha.id].filter((j) => {
+      const q = normalizar(j.nome).split(" ");
+      return normalizar(j.nome) === normalizar(c.nome) || p.every((x) => q.includes(x)) || q.every((x) => p.includes(x));
+    });
+    if (candidatos.length !== 1) continue;
+    const j = candidatos[0];
+    if (!segundas[ficha.id].some((x) => x !== j && x.nome === c.nome)) j.nome = c.nome;
+    c.clubeDoJogo = ficha.id; c.noJogo = j.nome; naSegunda++;
+  }
+}
+console.log(`Convocados ligados a clubes da 2ª divisão: ${naSegunda}`);
+writeFileSync("data/europa-2026/jogadores-segundas.json", JSON.stringify(segundasArquivo) + "\n");
 writeFileSync("data/selecoes-2026/convocados.json", JSON.stringify(conv, null, 1) + "\n");
+const separar = (outros: boolean) => Object.fromEntries(Object.entries(elencos).filter(([id]) => dosOutros.has(id) === outros));
 writeFileSync("data/europa-2026/jogadores.json", JSON.stringify({
   fonte: "transfermarkt-datasets (CC0): elencos, posição, nascimento, nacionalidade e valor de mercado. Força calculada pelo Proffut.",
-  elencos,
+  elencos: separar(false),
 }) + "\n");
+if (pastaOutros) {
+  writeFileSync("data/europa-2026/jogadores-outros.json", JSON.stringify({
+    fonte: "transfermarkt-datasets (CC0): elencos, posição, nascimento, nacionalidade e valor de mercado. Força calculada pelo Proffut.",
+    elencos: separar(true),
+  }) + "\n");
+}
 
 const total = Object.values(elencos).reduce((t, e) => t + e.length, 0);
 console.log(`Europa: ${fichas.length} clubes, ${total} jogadores`);
-for (const liga of Object.values(LIGAS_EUROPA)) {
+for (const liga of [...Object.values(LIGAS_EUROPA), ...(pastaOutros ? Object.values(LIGAS_OUTROS) : [])]) {
   const doPais = (fichas as { id: string; pais: string; forcaElenco: { max: number } }[]).filter((f) => f.pais === liga);
   const medias = doPais.map((f) => {
     const e = elencos[f.id].map((j) => j.forca).sort((a, b) => b - a).slice(0, 11);

@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { abrirSite, agora, botao, cartaoDoProximoJogo, esperarSalvar, expect, irParaOMeuJogo, test } from "./ajuda";
+import { abrirSite, agora, botao, cartaoDoProximoJogo, esperarNoSave, esperarSalvar, expect, irParaOMeuJogo, test } from "./ajuda";
 
 const nomeNoTopo = (page: import("@playwright/test").Page) => page.locator(".topo .titulo").first();
 
@@ -23,8 +23,10 @@ test("R36 demissão: com a diretoria sem paciência, uma derrota demite o técni
   const propostas = page.locator(".tela-cheia").getByRole("button", { name: /^Assumir (o|a) / });
   await expect(propostas).toHaveCount(3);
 
-  // Fechar e abrir o app: a demissão continua esperando a escolha.
+  // Fechar e abrir o app: a demissão continua esperando a escolha. Espera a demissão no save (com o save grande da
+  // Europa, um salvamento de antes dela bastava ao esperarSalvar e o app recarregava sem a demissão; falhou no GitHub).
   await esperarSalvar(page, desde);
+  await esperarNoSave(page, "!!estado.tecnico.demissao");
   await page.reload();
   await page.getByRole("button", { name: /Continuar/ }).first().click();
   await expect(titulo).toBeVisible();

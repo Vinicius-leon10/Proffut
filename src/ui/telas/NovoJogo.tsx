@@ -13,7 +13,9 @@ import { useLoja } from "../store";
  * Inglaterra ("EN" no jogo) tem a bandeira própria, a da cruz de São Jorge.
  */
 export function bandeira(codigo: string): string {
-  if (codigo.toUpperCase() === "EN") return emojiDaBandeira("ENG");
+  // Inglaterra (EN) e Escócia (XS, nov/2026) com as bandeiras delas.
+  const propria = { EN: "ENG", XS: "SCT" }[codigo.toUpperCase()];
+  if (propria) return emojiDaBandeira(propria);
   return String.fromCodePoint(...[...codigo.toUpperCase()].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65));
 }
 

@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R102 rodando a cada mudança, antes
+ponta R01–R106 rodando a cada mudança, antes
 de publicar e todo dia no site publicado. Bandeira pequena do país do jogador ao lado do nome (`BandeiraJogador` em `componentes.tsx`,
 `bandeiraDaNacionalidade` em `formatos.ts`: código de 3 letras do jogo → emoji; no Elenco, ficha, Mercado e Convocação;
 no campinho não, por falta de espaço; R97).
@@ -436,7 +436,7 @@ janeiro, a partir de 2027: a base não tem as finais de 2025/26). Prêmios grand
 ao campeão); a Liga dos Campeões dá a reputação da Libertadores. **Telas:** jogo novo com o continente Europa (7 países);
 Tabelas → Outros países com o grupo Europa. **Escudos:** os 132 chegaram no `escudos-europa.zip` (Google Imagens, pelo Claude no Chrome; fonte no fim de `docs/ESCUDOS_TIMES_NOVOS_FONTES.csv`), todos certos.
 Números: 1.180 clubes, ~26 mil jogadores, temporada simulada ~11 s, save ~20 MB. Testes R98 e R99 e "Europa" no motor.
-**Falta (etapas seguintes):** 2ª divisão das 7 ligas, outros países e a Copa do Mundo (as seleções da Europa estão prontas, abaixo).
+**Feito depois (abaixo):** a 2ª e a 3ª divisão das 7 ligas, a 1ª de outros 16 países, as seleções e a Copa do Mundo. Falta: vagas dos outros países nas copas da UEFA e as divisões de baixo deles.
 
 **Seleções da Europa (nov/2026, etapa 2 da Europa; `selecoes.ts`, R101–R102):** pedido "Vamos começar a europa" → ele escolheu
 "Tudo, nessa ordem" (seleções, depois a 2ª divisão das 7 ligas, depois outros países). As 55 da UEFA em `DADOS_EUROPA`
@@ -461,8 +461,66 @@ FIFA do ano (turno único se o save entrou no meio do ano). Amistosos por contin
 si, com o sorteio de antes; Europa entre si). Save com as seleções da América e sem as da Europa: `juntarSelecoes` →
 `criarSelecoes` cria só as que faltam, com as competições que ainda têm datas e os amistosos da próxima data. Telas:
 Tabelas → Seleções com o filtro Todas / América / Europa no ranking e as competições novas (`nomeDoGrupoDeSelecoes`:
-"Liga A · Grupo 2"). Números: 106 seleções, ~27.200 jogadores. **Falta para a Copa do Mundo:** as seleções da África, Ásia
-e Oceania e a própria Copa; depois, 2ª divisão das 7 ligas e outros países da Europa.
+"Liga A · Grupo 2"). Números: 106 seleções, ~27.200 jogadores. A Copa do Mundo, as
+seleções dos outros continentes e a 1ª divisão de outros 16 países ficaram prontas (acima).
+
+**2ª e 3ª divisão das 7 ligas da Europa (nov/2026, R103):** pedido "Tudo, nessa ordem" e "todas as ligas, A e B, e das
+principais, se tiver a C também". **2ª divisão** (132 clubes, sem os times B: Championship 24, Segunda 21, Serie B 20,
+2. Bundesliga 18, Ligue 2 18, Liga Portugal 2 15, Eerste Divisie 16): fase "europa-segundas" do robô
+(`tools/europa/sementes-segundas.json`, branch `dados-europa-segundas`); `npx tsx tools/europa/segundas.ts
+<dados-europa-segundas> <dados-europa>` grava `data/europa-2026/clubes-segundas.json` e `jogadores-segundas.json` (nomes,
+cores e reputação em `tools/europa/fichas-segundas.ts`; elenco da página de cada clube na Wikipédia em inglês, com o
+Wikidata e o valor do transfermarkt-datasets; força pela faixa da liga, `ALVO`: o melhor da 2ª abaixo da média da 1ª).
+Depois rodar `tools/europa/montar.ts`, que liga os convocados também aos elencos da 2ª. **3ª divisão** (188 clubes leves:
+League One 24, Primera Federación 32, Serie C 57, 3. Liga 20, National 17, Liga 3 20, Tweede Divisie 18; a página da
+Espanha e a da Itália não trazem todos): fase "europa-terceiras" (`sementes-terceiras.json`, branch
+`dados-europa-terceiras`); `npx tsx tools/europa/terceiras.ts <dados-europa-terceiras>` grava `clubes-terceiras.json`
+(nomes limpos com `MANUAL_NOMES`). Divisões de mais de 24 clubes jogam turno único e as de mais de 30, duas rodadas por
+semana (domingo e quarta). `SOBEM_E_CAEM` da Europa: Inglaterra 3 e 3, Espanha 3 e 4, Itália 3 e 4, Alemanha, França e
+Portugal 2 e 2, Holanda 2 e 0. TV da 2ª e da 3ª em `TV_EUROPA_MES` ("EN2", "EN3"...), com piso de 35% da base
+(`TV_PISO_SEGUNDA`): os pequenos fecham o ano perto do zero. Os 320 escudos novos estão na lista dos que faltam
+(`docs/TIMES_NOVOS.md`); até chegarem, o escudo é desenhado.
+
+**Outros países da Europa (nov/2026, R106):** pedido "todos os times que tem da Europa". A 1ª divisão de 16 países (236
+clubes): Áustria (AT), Bélgica (BE), Suíça (CH), Dinamarca (DK), Grécia (GR), Croácia (HR), Noruega (NO), Polônia (PL),
+Romênia (RO), Rússia (RU), Escócia (XS, o mesmo código da seleção), Suécia (SE), Sérvia (RS), Turquia (TR), Tchéquia (CZ) e
+Ucrânia (UA), em `PAISES` com `regiao: "europa"`. Dados: fase "europa-outros" do robô (`tools/europa/filtrar.py` com as
+ligas no 3º argumento; branch `dados-europa-outros`); `npx tsx tools/europa/montar.ts <dados-europa> <dados-europa-outros>`
+grava também `clubes-outros.json` e `jogadores-outros.json` (fichas em `tools/europa/fichas-outros.ts`; força pelo valor de
+mercado, como nas 7 ligas) e liga os convocados a eles. Sem 2ª divisão nesses países (não há acesso nem queda) e ainda
+sem vaga nas copas da UEFA (`VAGAS_UEFA` só tem as 7 ligas). TV do mês em `TV_EUROPA_MES`. **Ordem dos montadores:**
+`tools/selecoes/montar.ts` → `tools/europa/segundas.ts` → `tools/europa/montar.ts` (com as duas pastas) →
+`tools/europa/terceiras.ts`.
+
+**Copa do Mundo e as seleções do mundo (nov/2026, `selecoes.ts`, `selecoes-mundo.ts`, R104–R105):** pedido "coloque todos
+os times que participam de Copa do Mundo, todas as seleções, já com jogadores, porque eu quero que deixe a parte de
+seleções de Copa do Mundo já funcionando". As 111 seleções da África (54), Ásia (46) e Oceania (11) em `SELECOES_MUNDO`
+(nome, nacionalidade, sigla, cores, capital, Elo, confederação "caf"/"afc"/"ofc", artigo, nome em inglês); as
+nacionalidades novas entram em `NACIONALIDADES_MUNDO`. Convocações: fase "selecoes-mundo" do robô
+(`tools/selecoes/sementes-mundo.json`, branch `dados-selecoes-mundo`); `npx tsx tools/selecoes/montar.ts <dados-america>
+<dados-selecoes-europa> <dados-selecoes-mundo>` (110 das 111; o Butão não tem a seção e convoca os melhores do jogo).
+Seleção com menos de 23 convocados de verdade ganha base de fora para uma convocação inteira. Total: 217 seleções.
+**Competições:** Eliminatórias da África (`S-ELI-CAF-<copa>`, 9 grupos de 6), da Ásia (`S-ELI-AFC`, 8 grupos) e da
+Oceania (`S-ELI-OFC`, 2 grupos), no ano anterior à Copa, turno e returno nas datas FIFA; os primeiros vão à Copa (na
+Oceania, o melhor primeiro) e o melhor segundo (na Oceania, o outro primeiro) à **repescagem mundial** (`S-INT-<copa>`,
+março do ano da Copa, campo neutro: as 6 que vieram da Conmebol, Concacaf, África, Ásia e Oceania; as 2 melhores do
+ranking esperam na final). **Copa do Mundo** (`S-COPA-<ano>`, tipo "copa-do-mundo"): criada no ano anterior na fase
+"aguardando", com as sedes (`SEDES_DA_COPA`: 2026 EUA, México e Canadá; 2030 Espanha, Portugal e Marrocos; 2034 Arábia
+Saudita; depois uma das 24 melhores de outro continente); cada Eliminatória que acaba põe os classificados nela
+(`registrarNaCopa`, chamado em `depoisDaCompeticao`). Quando a repescagem mundial e a da Europa acabam (ou 10 dias antes),
+`montarCopa` fecha 48 (faltando, as melhores do continente das sedes), sorteia 12 grupos de 4 (`sortearGruposDaCopa`:
+potes pelo ranking, as sedes nos grupos A, B, C; no máximo 2 da Europa e 1 de cada outro continente por grupo) e marca os
+jogos de 11 de junho a 19 de julho (`DATAS_COPA`): grupos em turno único, os 2 primeiros e os 8 melhores terceiros vão aos
+16 avos (chaves de `ordemDasChaves`: os 2 melhores só se cruzam na final; dois do mesmo grupo não se pegam logo), oitavas,
+quartas, semifinal e final em jogo único (pênaltis no empate). As sedes jogam em casa; o resto em campo neutro.
+**2026:** o jogo novo já tem as 42 classificadas de verdade (`COPA_2026`), a repescagem da Europa de março (os 4 caminhos
+de verdade, `S-ELI-UEFA-2026`) e a mundial (Nova Caledônia x Jamaica e Bolívia x Suriname; RD Congo e Iraque esperam). O
+save que chega antes de junho de 2026 ganha a Copa; com março já passado, as vagas da repescagem vão às melhores do
+ranking. Amistosos por continente (`gruposDeAmistosos`: América, Europa, África, Ásia com a Oceania); amistoso marcado que
+bate com jogo oficial novo sai. Ranking: Copa 60 (final 70), repescagem 40. Técnico de seleção: título da Copa +12 de
+reputação; favorita (entre as 4 mais fortes do grupo) que cai nos grupos, dispensado. Tabelas → Seleções: filtros Todas,
+América, Europa, África, Ásia e Oceania; a Copa no seletor (na fase "aguardando", a lista das classificadas). A Copa
+Africana e a Copa da Ásia ainda não estão no jogo.
 
 **Espaços que acompanham o jogo (nov/2026, `salvamento.ts`, `store.ts`):** pedido "Quero que esse save embaixo seja
 automático, a cada rodada, posso alterna entre os saves sem me preocupar" (ele abriu um espaço antigo e perdeu o jogo
@@ -516,7 +574,7 @@ segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, fa
 ajustes de equilíbrio pelo que ele sentir jogando.
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
-ele pedir. (1) Terminar as seleções para a Copa do Mundo (seleções da Europa e dos outros continentes e a própria Copa).
+ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).
 (2) Deixar as partidas mais lentas (o relógio da partida ao vivo). (3) Substituição manual do jogador machucado (hoje o
 auxiliar troca sozinho). (4) Ajustar vitórias e derrotas: os jogadores relatam partidas aleatórias demais (time muito mais forte perdendo ou
 empatando com frequência; um time da Série A empatar com um da Série D tem de ser bem raro). Pode haver surpresa, mas muito

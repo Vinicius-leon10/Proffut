@@ -1,6 +1,8 @@
 // Nacionalidades de fora da América que chegaram com os clubes da Europa (nov/2026): código do jogo (3 letras, os
 // mesmos da FIFA quando o jogo ainda não tinha um), nome em português, código de duas letras do país (para a bandeira em
 // emoji; Inglaterra, Escócia e País de Gales têm bandeira própria) e o nome em inglês da base do Transfermarkt.
+import { SELECOES_MUNDO } from "./selecoes-mundo";
+
 export const NACIONALIDADES_MUNDO: Record<string, { nome: string; iso2: string; ingles: string[] }> = {
   ING: { nome: "Inglaterra", iso2: "ENG", ingles: ["England"] },
   ESC: { nome: "Escócia", iso2: "SCT", ingles: ["Scotland"] },
@@ -90,6 +92,12 @@ export const NACIONALIDADES_MUNDO: Record<string, { nome: string; iso2: string; 
   MAS: { nome: "Malásia", iso2: "MY", ingles: ["Malaysia"] },
   THA: { nome: "Tailândia", iso2: "TH", ingles: ["Thailand"] },
 };
+// As da África, Ásia e Oceania que ainda não estavam (nov/2026, com as seleções desses continentes).
+for (const [iso2, [nome, codigo, , , , , , , , ingles]] of Object.entries(SELECOES_MUNDO)) {
+  if (!NACIONALIDADES_MUNDO[codigo] && !["MAR", "SEN", "NGA", "CIV", "CMR", "CPV", "GAN", "ANG", "MOC", "GNB", "JAP"].includes(codigo)) {
+    NACIONALIDADES_MUNDO[codigo] = { nome, iso2, ingles: [ingles] };
+  }
+}
 
 /** Bandeira em emoji de um código de duas letras, ou de Inglaterra, Escócia e País de Gales. */
 export function emojiDaBandeira(iso2: string): string {

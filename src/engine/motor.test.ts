@@ -26,11 +26,13 @@ import exteriorJson from "../../data/america-do-sul-2026/jogadores.json";
 import europaJson from "../../data/europa-2026/jogadores.json";
 import europaClubesJson from "../../data/europa-2026/clubes.json";
 import segundasJson from "../../data/europa-2026/jogadores-segundas.json";
+import terceirasJson from "../../data/europa-2026/clubes-terceiras.json";
+import outrosJson from "../../data/europa-2026/jogadores-outros.json";
 import europaCopasJson from "../../data/europa-2026/copas.json";
 import { TV_EUROPA_MES } from "./constantes";
 import { processarMes } from "./financas";
 import convocadosJson from "../../data/selecoes-2026/convocados.json";
-import { candidatosDaSelecao, confederacao, confirmarConvocacao, convitesDeSelecoes, forcaDaSelecao, nacionalidadeDoPais, rankingDasSelecoes, tabelasDeSelecoes } from "./selecoes";
+import { candidatosDaSelecao, confederacao, confirmarConvocacao, paisDaSelecao, convitesDeSelecoes, forcaDaSelecao, nacionalidadeDoPais, rankingDasSelecoes, tabelasDeSelecoes } from "./selecoes";
 
 /** Quem foi convocado por uma seleção e joga num clube do jogo ganha a nacionalidade dela (os dados dos clubes nem sempre dizem). */
 const NACIONALIDADE_DA_CONVOCACAO = new Map(Object.entries(convocadosJson.selecoes as Record<string, { convocados: { noJogo?: string; clubeDoJogo?: string }[] }>)
@@ -1707,11 +1709,83 @@ describe("copas de clubes (Libertadores, Sul-Americana, Recopa, Concacaf, region
   });
 });
 
+describe("Copa do Mundo (nov/2026): as seleções da África, Ásia e Oceania e a Copa de 48", () => {
+  it("jogo novo: 217 seleções (as 111 novas com 23 ou mais convocados da nacionalidade delas); a Copa de 2026 com as 42 classificadas de verdade e as repescagens de março (Europa: 8 semifinais; mundial: 2 semifinais em campo neutro)", () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 81 });
+    const selecoes = Object.values(e.clubes).filter((c) => c.serie === "selecao");
+    expect(selecoes).toHaveLength(217);
+    const novas = selecoes.filter((c) => ["caf", "afc", "ofc"].includes(confederacao(c.pais!)));
+    expect(novas).toHaveLength(111);
+    expect(e.clubes["sel-MA"].nome).toBe("Marrocos");
+    expect(e.clubes["sel-JP"].nome).toBe("Japão");
+    for (const s of novas) {
+      const convocados = e.selecoes!.convocados[s.id].map((id) => e.jogadores[id]);
+      expect(convocados.length, s.nome).toBeGreaterThanOrEqual(23);
+      for (const j of convocados) expect(j.nacionalidade, `${j.nome} (${s.nome})`).toBe(nacionalidadeDoPais(s.pais!));
+    }
+    expect(forcaDaSelecao(e, "sel-JP")).toBeGreaterThan(forcaDaSelecao(e, "sel-AS") + 25);
+    // O Japão chama o Takefusa Kubo, da Real Sociedad (clube do jogo): é o mesmo jogador, não uma cópia jogando fora.
+    const kubo = Object.values(e.jogadores).filter((j) => j.nome === "Takefusa Kubo");
+    expect(kubo).toHaveLength(1);
+    expect(kubo[0].clubeId).toBe("real-sociedad-esp");
+    expect(e.selecoes!.convocados["sel-JP"]).toContain(kubo[0].id);
+    const copa = e.selecoes!.competicoes["S-COPA-2026"]!;
+    expect(copa.fase).toBe("aguardando");
+    expect(copa.selecoes).toHaveLength(42);
+    expect(copa.selecoes).toContain("sel-BR");
+    expect(copa.selecoes).not.toContain("sel-IT");
+    const europa = e.partidas.filter((p) => p.serie === "S-ELI-UEFA-2026");
+    expect(europa).toHaveLength(8);
+    expect(europa.every((p) => p.data === "2026-03-26")).toBe(true);
+    const mundial = e.partidas.filter((p) => p.serie === "S-INT-2026");
+    expect(mundial.map((p) => `${p.mandante} x ${p.visitante}`).sort()).toEqual(["sel-BO x sel-SR", "sel-NC x sel-JM"]);
+    expect(mundial.every((p) => p.neutro)).toBe(true);
+    // Quem joga a repescagem não tem amistoso em março.
+    const naRepescagem = new Set([...europa, ...mundial].flatMap((p) => [p.mandante, p.visitante]).concat(["sel-CD", "sel-IQ"]));
+    expect(e.partidas.filter((p) => p.serie === "S-AMI" && p.data.startsWith("2026-03") && (naRepescagem.has(p.mandante) || naRepescagem.has(p.visitante)))).toEqual([]);
+    expect(checarEstado(e).filter((p) => p.gravidade === "erro")).toEqual([]);
+  });
+
+  it("a Copa de 2026 se joga: em abril as 48 estão definidas (12 grupos de 4, as sedes nos grupos A, B e C, no máximo 2 da Europa por grupo); em julho há campeão, depois de 16 avos, oitavas, quartas, semifinal e final", { timeout: 300_000 }, () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 82 });
+    const jogarAte = (data: string) => {
+      for (let i = 0; i < 3000 && e.data < data; i++) {
+        const r = avancar(e);
+        if (r.tipo === "jogos-hoje") simularDia(e);
+        else if (r.tipo === "nada") break;
+      }
+    };
+    jogarAte("2026-04-05");
+    const copa = e.selecoes!.competicoes["S-COPA-2026"]!;
+    expect(copa.fase).toBe("grupos");
+    expect(new Set(copa.selecoes).size).toBe(48);
+    expect(copa.grupos!.grupos).toHaveLength(12);
+    expect(copa.grupos!.grupos.every((g) => g.length === 4)).toBe(true);
+    expect(copa.grupos!.grupos.slice(0, 3).map((g) => g[0])).toEqual(["sel-US", "sel-MX", "sel-CA"]);
+    for (const g of copa.grupos!.grupos) {
+      expect(g.filter((id) => confederacao(paisDaSelecao(id)) === "uefa").length).toBeLessThanOrEqual(2);
+      for (const c of ["conmebol", "caf", "afc"]) expect(g.filter((id) => confederacao(paisDaSelecao(id)) === c).length, c).toBeLessThanOrEqual(1);
+    }
+    // As 4 da repescagem da Europa e as 2 da mundial entraram.
+    expect(copa.selecoes.filter((id) => ["sel-IT", "sel-XN", "sel-XW", "sel-BA", "sel-UA", "sel-SE", "sel-PL", "sel-AL", "sel-TR", "sel-RO", "sel-SK", "sel-XK", "sel-DK", "sel-MK", "sel-CZ", "sel-IE"].includes(id))).toHaveLength(4);
+    expect(copa.selecoes.filter((id) => ["sel-CD", "sel-IQ", "sel-NC", "sel-JM", "sel-BO", "sel-SR"].includes(id))).toHaveLength(2);
+    jogarAte("2026-07-21");
+    expect(copa.fase).toBe("encerrada");
+    expect(copa.selecoes).toContain(copa.campeao);
+    expect(copa.vice).not.toBe(copa.campeao);
+    const jogos = e.partidas.filter((p) => p.serie === "S-COPA-2026");
+    expect(jogos.filter((p) => p.fase === "grupos")).toHaveLength(72);
+    expect(["dezesseis", "oitavas", "quartas", "semi", "final"].map((f) => jogos.filter((p) => p.fase === f).length)).toEqual([16, 8, 4, 2, 1]);
+    expect(jogos.every((p) => p.jogada)).toBe(true);
+    expect(jogos.filter((p) => p.data >= "2026-06-11" && p.data <= "2026-07-19")).toHaveLength(103);
+  });
+});
+
 describe("seleções da Europa (nov/2026)", () => {
   it("jogo novo: as 55 seleções da UEFA (106 com as da América), cada uma com 23 convocados ou mais da nacionalidade dela; a Liga das Nações de 2026 marcada (4 ligas, 14 grupos, de setembro a novembro)", () => {
     const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 61 });
     const selecoes = Object.values(e.clubes).filter((c) => c.serie === "selecao");
-    expect(selecoes).toHaveLength(106);
+    expect(selecoes).toHaveLength(217);
     const europa = selecoes.filter((c) => confederacao(c.pais!) === "uefa");
     expect(europa).toHaveLength(55);
     expect(e.clubes["sel-ES"].nome).toBe("Espanha");
@@ -1784,16 +1858,19 @@ describe("seleções da América (nov/2026)", () => {
 
   it("jogo novo: as 51 seleções da América com a convocação de verdade; quem joga fora fica ligado à seleção (sem contrato nem mercado) e quem joga num clube do jogo continua nele, com a nacionalidade da seleção", () => {
     const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 41 });
-    const selecoes = Object.values(e.clubes).filter((c) => c.serie === "selecao" && confederacao(c.pais!) !== "uefa");
+    const selecoes = Object.values(e.clubes).filter((c) => c.serie === "selecao" && ["conmebol", "concacaf"].includes(confederacao(c.pais!)));
     expect(selecoes).toHaveLength(51);
     expect(e.clubes["sel-BR"].nome).toBe("Brasil");
     const br = e.selecoes!.convocados["sel-BR"].map((id) => e.jogadores[id]);
-    // Quem joga fora dos clubes do jogo (o Douglas Santos, do Zenit) fica ligado à seleção, sem contrato.
-    const douglas = br.find((j) => j.nome === "Douglas Santos")!;
-    expect(douglas.clubeId).toBe("sel-BR");
-    expect(douglas.clubeFora?.nome).toBe("Zenit Saint Petersburg");
-    expect(douglas.selecao!.jogos).toBeGreaterThanOrEqual(14);
-    expect(douglas.contratoAte).toBeUndefined();
+    // Quem joga fora dos clubes do jogo (o Bento, do Al-Nassr; o Douglas Santos era o exemplo até o Zenit entrar no jogo)
+    // fica ligado à seleção, sem contrato.
+    const bento = br.find((j) => j.nome === "Bento")!;
+    expect(bento.clubeId).toBe("sel-BR");
+    expect(bento.clubeFora?.nome).toBe("Al-Nassr");
+    expect(bento.selecao!.jogos).toBeGreaterThanOrEqual(7);
+    expect(bento.contratoAte).toBeUndefined();
+    const douglas = Object.values(e.jogadores).find((j) => j.nome === "Douglas Santos" && j.nacionalidade === "BRA")!;
+    expect(douglas.clubeId).toBe("zenit");
     // Desde a Europa (nov/2026), o Vinícius Júnior joga no Real Madrid do jogo, com os jogos pela seleção.
     const vini = br.find((j) => j.nome === "Vinícius Júnior")!;
     expect(vini.clubeId).toBe("real-madrid");
@@ -1816,13 +1893,15 @@ describe("seleções da América (nov/2026)", () => {
     expect(new Set(todos).size).toBe(todos.length);
     // O mercado do computador não leva quem joga fora.
     transferenciasDaIa(e, "teste-selecoes");
-    expect(e.jogadores[douglas.id].clubeId).toBe("sel-BR");
+    expect(e.jogadores[bento.id].clubeId).toBe("sel-BR");
     expect(checarEstado(e).filter((p) => p.gravidade === "erro")).toEqual([]);
   });
 
-  it("datas FIFA: na concentração os convocados ficam fora dos clubes (escalação e partida) e voltam depois; sem jogos de seleção em junho de 2026 (Copa do Mundo)", () => {
+  it("datas FIFA: na concentração os convocados ficam fora dos clubes (escalação e partida) e voltam depois; em junho de 2026 só os jogos da Copa do Mundo", () => {
     const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 42 });
     e.config.escalacaoAutomatica = true;
+    const deFora = Object.values(e.jogadores).filter((j) => j.clubeId?.startsWith("sel-"));
+    const antes = new Map(deFora.map((j) => [j.id, j.selecao?.jogos ?? 0]));
     let conferidos = 0;
     let concentrados = 0;
     for (let i = 0; i < 600 && e.data < "2026-09-10"; i++) {
@@ -1852,12 +1931,12 @@ describe("seleções da América (nov/2026)", () => {
     expect(e.data >= "2026-09-12").toBe(true);
     expect(Object.values(e.jogadores).filter((j) => j.convocado)).toEqual([]);
     const jogos = e.partidas.filter((p) => p.serie.startsWith("S-"));
-    expect(jogos.filter((p) => p.data.startsWith("2026-06") || p.data.startsWith("2026-07"))).toEqual([]);
+    // Em junho e julho de 2026 só a Copa do Mundo (nov/2026): sem data FIFA, amistosos nem outros torneios.
+    expect(jogos.filter((p) => (p.data.startsWith("2026-06") || p.data.startsWith("2026-07")) && p.serie !== "S-COPA-2026")).toEqual([]);
     expect(jogos.filter((p) => p.jogada).length).toBeGreaterThanOrEqual(100);
     // Os jogos pela seleção contam na seleção, não na temporada do clube.
-    const douglas = Object.values(e.jogadores).find((j) => j.nome === "Douglas Santos" && j.clubeId === "sel-BR")!;
-    expect(douglas.temporada.jogos).toBe(0);
-    expect(douglas.selecao!.jogos).toBeGreaterThan(14);
+    for (const j of deFora) if (e.jogadores[j.id]) expect(e.jogadores[j.id].temporada.jogos, j.nome).toBe(0);
+    expect(deFora.filter((j) => (e.jogadores[j.id]?.selecao?.jogos ?? 0) > antes.get(j.id)!).length).toBeGreaterThan(200);
   });
 
   it("de 2026 a 2030: na Europa, Liga das Nações, Eliminatórias e Eurocopa de 2028 e Eliminatórias da Copa de 2030; Copa Ouro (anos ímpares), Copa América (2028), Eliminatórias da Conmebol (18 rodadas, a tabela junta as temporadas, 6 vão à Copa e 1 à repescagem) e da Concacaf (3 fases)", { timeout: 400_000 }, () => {
@@ -1919,6 +1998,19 @@ describe("seleções da América (nov/2026)", () => {
     }
     expect(e.selecoes!.competicoes["S-ELI-UEFA-2030"]!.fase).toBe("encerrada");
     expect(new Set(e.selecoes!.competicoes["S-ELI-UEFA-2030"]!.classificados).size).toBe(16);
+    // África, Ásia e Oceania em 2029: 9, 8 e 1 vão à Copa; a repescagem mundial em março de 2030 dá 2 vagas; a Copa de 2030
+    // (sedes Espanha, Portugal e Marrocos) com as 48 e os grupos marcados para junho.
+    expect(h29.selecoes!["S-ELI-CAF-2030"]!.classificados).toHaveLength(9);
+    expect(h29.selecoes!["S-ELI-AFC-2030"]!.classificados).toHaveLength(8);
+    expect(h29.selecoes!["S-ELI-OFC-2030"]!.classificados).toHaveLength(1);
+    const int = e.selecoes!.competicoes["S-INT-2030"]!;
+    expect(int.fase).toBe("encerrada");
+    expect(int.classificados).toHaveLength(2);
+    const copa30 = e.selecoes!.competicoes["S-COPA-2030"]!;
+    expect(copa30.fase).toBe("grupos");
+    expect(new Set(copa30.selecoes).size).toBe(48);
+    for (const sede of ["sel-ES", "sel-PT", "sel-MA"]) expect(copa30.selecoes).toContain(sede);
+    expect(e.partidas.filter((p) => p.serie === "S-COPA-2030")).toHaveLength(72);
     // O ranking mudou com os jogos.
     expect(rankingDasSelecoes(e).find((s) => s.id === "sel-BR")!.pontos).not.toBe(2050);
   });
@@ -1993,7 +2085,7 @@ describe("seleções da América (nov/2026)", () => {
     delete antigo.selecoes;
     const clubes = Object.keys(antigo.clubes).length;
     const aberto = importarTexto(exportarTexto(antigo));
-    expect(Object.keys(aberto.clubes).length).toBe(clubes + 106);
+    expect(Object.keys(aberto.clubes).length).toBe(clubes + 217);
     expect(aberto.partidas.filter((p) => p.serie === "S-AMI").length).toBeGreaterThanOrEqual(40);
     expect(aberto.partidas.filter((p) => p.serie === "S-AMI").every((p) => p.data > aberto.data)).toBe(true);
     // As Eliminatórias da próxima Copa já ficam marcadas (de setembro de 2027 a setembro de 2029, na agenda).
@@ -2059,6 +2151,47 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
     expect(subiram).toHaveLength(3);
     const alemaes = Object.values(e.clubes).filter((c) => c.pais === "DE" && c.liga === "DE");
     expect(alemaes.filter((c) => !(europaClubesJson.clubes as { id: string }[]).some((f) => f.id === c.id))).toHaveLength(2);
+    // 3ª divisão (clubes leves): os 3 primeiros da League One sobem para o Championship.
+    const terceiros = new Set((terceirasJson.clubes as { id: string }[]).map((c) => c.id));
+    expect(ingleses.filter((c) => c.liga === "EN2" && terceiros.has(c.id))).toHaveLength(3);
+    expect(ingleses.filter((c) => c.liga === "EN3")).toHaveLength(24);
+  });
+
+  it("outros 16 países da Europa (nov/2026): a 1ª divisão com os 236 clubes e os elencos de verdade (a Escócia é XS, como a seleção)", () => {
+    const tamanhos: Record<string, number> = { AT: 12, BE: 16, CH: 12, DK: 12, GR: 14, HR: 10, NO: 16, PL: 18, RO: 16, RU: 16, XS: 12, SE: 16, RS: 16, TR: 18, CZ: 16, UA: 16 };
+    for (const [liga, n] of Object.entries(tamanhos)) {
+      expect(PAISES[liga]?.regiao, liga).toBe("europa");
+      expect(estado.torneios?.[`L-${liga}` as IdTorneio]?.clubes.length, liga).toBe(n);
+    }
+    const elencos = outrosJson.elencos as Record<string, { nome: string }[]>;
+    expect(Object.keys(elencos)).toHaveLength(236);
+    for (const [clubeId, reais] of Object.entries(elencos)) {
+      const elenco = elencoDe(estado, clubeId);
+      for (const r of reais.slice(0, 3)) expect(elenco.some((j) => j.nome === r.nome), `${r.nome} (${clubeId})`).toBe(true);
+    }
+    expect(estado.clubes.celtic.pais).toBe("XS");
+    const media = (id: string) => elencoDe(estado, id).map((j) => j.forca).sort((a, b) => b - a).slice(0, 11).reduce((a, b) => a + b) / 11;
+    expect(media("galatasaray")).toBeGreaterThan(media("karagumruk") + 8);
+  });
+
+  it("3ª divisão das 7 ligas (nov/2026): clubes leves (sem jogadores até o técnico assumir), todos os jogos dentro do ano; a Serie C, com 57 clubes, joga duas rodadas por semana", () => {
+    const tamanhos: Record<string, number> = { EN3: 24, DE3: 20, FR3: 17, PT3: 20, NL3: 18 };
+    for (const [liga, n] of Object.entries(tamanhos)) expect(estado.torneios?.[`L-${liga}` as IdTorneio]?.clubes.length, liga).toBe(n);
+    const it3 = estado.torneios!["L-IT3" as IdTorneio]!;
+    expect(it3.clubes.length).toBeGreaterThanOrEqual(55);
+    for (const id of it3.clubes) {
+      expect(estado.clubes[id].leve, id).toBe(true);
+      expect(elencoDe(estado, id)).toHaveLength(0);
+    }
+    const jogos = estado.partidas.filter((p) => p.serie === "L-IT3" || p.serie === "L-ES3");
+    expect(jogos.length).toBeGreaterThan(1500);
+    expect(jogos.every((p) => p.data <= "2026-12-20")).toBe(true);
+    // Ninguém joga duas vezes no mesmo dia.
+    const dia = new Set<string>();
+    for (const p of jogos) for (const c of [p.mandante, p.visitante]) {
+      expect(dia.has(`${c}/${p.data}`), `${c} ${p.data}`).toBe(false);
+      dia.add(`${c}/${p.data}`);
+    }
   });
 
   it("as ligas da Europa são em turno e returno (38 rodadas com 20 clubes) e começam em janeiro", () => {

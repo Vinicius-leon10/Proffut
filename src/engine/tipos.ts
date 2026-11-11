@@ -18,7 +18,9 @@ export type IdCompeticaoSelecoes = `S-${string}`;
 export type TipoCompeticaoSelecoes =
   | "eliminatorias-sul" | "eliminatorias-concacaf" | "copa-america" | "copa-ouro"
   /** Europa (nov/2026): Liga das Nações, Eliminatórias da Eurocopa, Eurocopa e Eliminatórias da Copa do Mundo. */
-  | "liga-das-nacoes" | "eliminatorias-euro" | "eurocopa" | "eliminatorias-uefa";
+  | "liga-das-nacoes" | "eliminatorias-euro" | "eurocopa" | "eliminatorias-uefa"
+  /** Copa do Mundo (nov/2026): Eliminatórias da África, Ásia e Oceania, a repescagem mundial e a Copa. */
+  | "eliminatorias-caf" | "eliminatorias-afc" | "eliminatorias-ofc" | "repescagem-mundial" | "copa-do-mundo";
 /** Copa de clubes de `EstadoJogo.copas` (copas.ts): "K-LIB", "K-SUL", "K-NE", "K-AR"... */
 export type IdCopa = `K-${string}`;
 /** Torneio de `EstadoJogo.torneios`: Série D, estadual ou liga de outro país. */
@@ -359,6 +361,8 @@ export interface EstadoCompeticaoSelecoes {
   grupos?: Record<string, string[][]>;
   /** Sede do torneio (a única que joga em casa). */
   sede?: string;
+  /** Copa do Mundo: as sedes (todas jogam em casa; a primeira também em `sede`). */
+  sedes?: string[];
   /** Eliminatórias: os que vão à Copa do Mundo e os da repescagem. */
   classificados?: string[];
   repescagem?: string[];

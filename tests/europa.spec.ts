@@ -6,6 +6,7 @@ import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, pularTutorial, test
 
 type Ficha = { id: string; nome: string; pais: string };
 const europa = (JSON.parse(readFileSync("data/europa-2026/clubes.json", "utf8")) as { clubes: Ficha[] }).clubes;
+const outros = (JSON.parse(readFileSync("data/europa-2026/clubes-outros.json", "utf8")) as { clubes: Ficha[] }).clubes;
 const segundas = (JSON.parse(readFileSync("data/europa-2026/clubes-segundas.json", "utf8")) as { clubes: (Ficha & { liga: string })[] }).clubes;
 const copas = (JSON.parse(readFileSync("data/europa-2026/copas.json", "utf8")) as { copas: Record<string, { grupos: string[] }> }).copas;
 
@@ -20,14 +21,16 @@ test("R98 jogo novo na Europa: o continente Europa com os 7 países (cada um com
   await expect(page.locator(".topo")).toContainText("Europa");
   const paises = page.getByRole("group", { name: "País" }).getByRole("button");
   const nomes = (await paises.allTextContents()).map((t) => t.replace(/^\p{Extended_Pictographic}[\u{E0020}-\u{E007F}]*|^\p{Regional_Indicator}{2}/u, "").trim());
-  expect(nomes).toEqual(["Alemanha", "Espanha", "França", "Holanda", "Inglaterra", "Itália", "Portugal"]);
+  // As 7 ligas principais e, desde nov/2026 (R106), mais 16 países.
+  expect(nomes).toEqual(["Alemanha", "Áustria", "Bélgica", "Croácia", "Dinamarca", "Escócia", "Espanha", "França", "Grécia", "Holanda",
+    "Inglaterra", "Itália", "Noruega", "Polônia", "Portugal", "Romênia", "Rússia", "Sérvia", "Suécia", "Suíça", "Tchéquia", "Turquia", "Ucrânia"]);
   // A bandeira da Inglaterra (a da cruz de São Jorge, não a do Reino Unido) e a das outras pelos indicadores regionais.
   expect(await page.getByRole("button", { name: /Inglaterra/ }).locator(".bandeira").textContent()).toBe("\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}");
   expect(await page.getByRole("button", { name: /Espanha/ }).locator(".bandeira").textContent()).toBe("🇪🇸");
   await page.getByRole("button", { name: /Inglaterra/ }).click();
   await expect(page.locator(".topo .titulo")).toHaveText("Inglaterra");
-  // Com a 2ª divisão (R103): as duas, abrindo na 1ª.
-  expect(await page.getByRole("tab").allTextContents()).toEqual(["1ª divisão", "2ª divisão"]);
+  // Com a 2ª e a 3ª divisão (R103): as três, abrindo na 1ª.
+  expect(await page.getByRole("tab").allTextContents()).toEqual(["1ª divisão", "2ª divisão", "3ª divisão"]);
   await expect(page.locator(".lista .item")).toHaveCount(europa.filter((c) => c.pais === "EN").length);
   await botao(page, /Arsenal/).click();
   await botao(page, /^Assumir (o|a) /).click();
@@ -56,7 +59,8 @@ test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 7 países 
   const grupos = await pais.locator("optgroup").evaluateAll((g) => g.map((x) => (x as HTMLOptGroupElement).label));
   expect(grupos.at(-1)).toBe("Europa");
   const daEuropa = await pais.locator('optgroup[label="Europa"] option').allTextContents();
-  expect(daEuropa).toEqual(["Alemanha", "Espanha", "França", "Holanda", "Inglaterra", "Itália", "Portugal"]);
+  expect(daEuropa).toHaveLength(23);
+  for (const p of ["Alemanha", "Espanha", "França", "Holanda", "Inglaterra", "Itália", "Portugal", "Turquia", "Escócia"]) expect(daEuropa).toContain(p);
   await pais.selectOption({ label: "Inglaterra" });
   await expect(page.locator("main table.tabela tbody tr")).toHaveCount(20);
 
@@ -86,7 +90,7 @@ test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 7 países 
 
 // 2ª divisão das 7 ligas (pedido "Vamos começar a europa" → "Tudo, nessa ordem" e "todas as ligas, A e B, e das
 // principais, se tiver a C também", nov/2026).
-test("R103 2ª divisão da Europa: no jogo novo, a Inglaterra tem a 2ª divisão com os 24 clubes do Championship; assumindo o Leicester, o painel mostra o Campeonato Inglês – 2ª divisão; nas Tabelas, as duas divisões com a zona de queda na 1ª e a de acesso na 2ª", async ({ page }) => {
+test("R103 2ª e 3ª divisão da Europa: no jogo novo, a Inglaterra tem a 2ª divisão com os 24 clubes do Championship; assumindo o Leicester, o painel mostra o Campeonato Inglês – 2ª divisão; nas Tabelas, as duas divisões com a zona de queda na 1ª e a de acesso na 2ª", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
   await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
@@ -111,4 +115,30 @@ test("R103 2ª divisão da Europa: no jogo novo, a Inglaterra tem a 2ª divisão
   await page.getByRole("tab", { name: "1ª divisão", exact: true }).click();
   await expect(page.locator("main table.tabela tbody tr")).toHaveCount(20);
   await expect(page.locator("main")).toContainText("caem");
+  // A 3ª divisão (League One, 24 clubes): os 3 primeiros sobem.
+  await page.getByRole("tab", { name: "3ª divisão", exact: true }).click();
+  await expect(page.locator("main table.tabela tbody tr")).toHaveCount(24);
+  await expect(page.locator("main")).toContainText("os 3 primeiros sobem para a 2ª divisão");
+});
+
+// Outros países da Europa (pedido, nov/2026: "todos os times que tem da Europa").
+test("R106 Outros países da Europa: no jogo novo, a Escócia (com a bandeira dela) e a Turquia; assumindo o Galatasaray, o painel mostra o Campeonato Turco; nas Tabelas, a Turquia com 18 clubes", async ({ page }) => {
+  await abrirSite(page);
+  await botao(page, "Novo jogo").click();
+  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByRole("button", { name: "Próximo", exact: true }).click();
+  await page.getByRole("button", { name: /Europa/ }).click();
+  expect(await page.getByRole("button", { name: /Escócia/ }).locator(".bandeira").textContent()).toBe("\u{1F3F4}\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E0074}\u{E007F}");
+  await page.getByRole("button", { name: /Turquia/ }).click();
+  await expect(page.locator(".topo .titulo")).toHaveText("Turquia");
+  await expect(page.locator(".lista .item")).toHaveCount(outros.filter((c) => c.pais === "TR").length);
+  await botao(page, /Galatasaray/).click();
+  await botao(page, /^Assumir (o|a) /).click();
+  await pularTutorial(page);
+  await expect(page.locator(".topo .titulo")).toHaveText("Galatasaray");
+  await expect(page.getByRole("heading", { name: "Campeonato Turco 2026" })).toBeVisible();
+  await aba(page, "Tabelas");
+  await page.getByRole("tab", { name: "Outros países" }).click();
+  await expect(page.getByRole("combobox", { name: "País" })).toHaveValue("TR");
+  await expect(page.locator("main table.tabela tbody tr")).toHaveCount(18);
 });
