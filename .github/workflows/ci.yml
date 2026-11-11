@@ -5,7 +5,12 @@ name: Testes
 on:
   push:
     branches-ignore: [gh-pages, dados-elencos, dados-times, dados-segundas, dados-america]
+    # Os lotes de escudos e jogadores que o Claude no computador do usuário manda (pasta lotes/) são só arquivos para
+    # conferir: não mudam o jogo e não precisam da conferência inteira (nov/2026, cada envio gastava ~1 h de máquina).
+    paths-ignore: ["lotes/**"]
   pull_request:
+  # Rodar à mão (Actions → Testes → Run workflow), por exemplo quando o GitHub perde uma execução.
+  workflow_dispatch:
 
 jobs:
   motor:
