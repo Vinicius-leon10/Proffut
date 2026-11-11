@@ -10,7 +10,7 @@ const outros = (JSON.parse(readFileSync("data/europa-2026/clubes-outros.json", "
 const segundas = (JSON.parse(readFileSync("data/europa-2026/clubes-segundas.json", "utf8")) as { clubes: (Ficha & { liga: string })[] }).clubes;
 const tabelas2025 = (JSON.parse(readFileSync("data/europa-2026/copas.json", "utf8")) as { tabelas: Record<string, string[]> }).tabelas;
 
-test("R98 jogo novo na Europa: o continente Europa com os 7 países (cada um com a bandeira, a Inglaterra com a dela), a Inglaterra com os 20 clubes da 1ª divisão; assumindo o Arsenal, o painel mostra o Campeonato Inglês e a Liga dos Campeões", async ({ page }) => {
+test("R98 jogo novo na Europa: o continente Europa com os 54 países (7 até o R106) (cada um com a bandeira, a Inglaterra com a dela), a Inglaterra com os 20 clubes da 1ª divisão; assumindo o Arsenal, o painel mostra o Campeonato Inglês e a Liga dos Campeões", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
   await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
@@ -21,9 +21,12 @@ test("R98 jogo novo na Europa: o continente Europa com os 7 países (cada um com
   await expect(page.locator(".topo")).toContainText("Europa");
   const paises = page.getByRole("group", { name: "País" }).getByRole("button");
   const nomes = (await paises.allTextContents()).map((t) => t.replace(/^\p{Extended_Pictographic}[\u{E0020}-\u{E007F}]*|^\p{Regional_Indicator}{2}/u, "").trim());
-  // As 7 ligas principais e, desde nov/2026 (R106), mais 16 países.
-  expect(nomes).toEqual(["Alemanha", "Áustria", "Bélgica", "Croácia", "Dinamarca", "Escócia", "Espanha", "França", "Grécia", "Holanda",
-    "Inglaterra", "Itália", "Noruega", "Polônia", "Portugal", "Romênia", "Rússia", "Sérvia", "Suécia", "Suíça", "Tchéquia", "Turquia", "Ucrânia"]);
+  // As 7 ligas principais, desde nov/2026 (R106) mais 16 países e, desde o R113, os 31 que faltavam: 54.
+  expect(nomes).toEqual(["Albânia", "Alemanha", "Andorra", "Armênia", "Áustria", "Azerbaijão", "Belarus", "Bélgica", "Bósnia", "Bulgária",
+    "Cazaquistão", "Chipre", "Croácia", "Dinamarca", "Escócia", "Eslováquia", "Eslovênia", "Espanha", "Estônia", "Finlândia", "França",
+    "Geórgia", "Gibraltar", "Grécia", "Holanda", "Hungria", "Ilhas Faroé", "Inglaterra", "Irlanda", "Irlanda do Norte", "Islândia",
+    "Israel", "Itália", "Kosovo", "Letônia", "Lituânia", "Luxemburgo", "Macedônia do Norte", "Malta", "Moldávia", "Montenegro", "Noruega",
+    "País de Gales", "Polônia", "Portugal", "Romênia", "Rússia", "San Marino", "Sérvia", "Suécia", "Suíça", "Tchéquia", "Turquia", "Ucrânia"]);
   // A bandeira da Inglaterra (a da cruz de São Jorge, não a do Reino Unido) e a das outras pelos indicadores regionais.
   expect(await page.getByRole("button", { name: /Inglaterra/ }).locator(".bandeira").textContent()).toBe("\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}");
   expect(await page.getByRole("button", { name: /Espanha/ }).locator(".bandeira").textContent()).toBe("🇪🇸");
