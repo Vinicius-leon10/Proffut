@@ -372,6 +372,17 @@ Navegação por abas inferiores: **Clube · Elenco · Competições · Mercado �
   - Anúncios discretos (no máximo a cada N rodadas, nunca durante a partida), só na versão grátis.
 - **Nada de pagar para ganhar:** não vender dinheiro do clube, jogadores ou força.
 
+**Decisão do usuário (nov/2026), para depois da Europa completa e de mais seguidores:** venda direta e orgânica pelo
+Instagram ("Irei cobrar da forma orgânica", "Entrando em contato pelo insta"): R$ 10 por Pix e um **código de acesso de uso
+único**. Plano combinado: um "porteiro" grátis na Cloudflare (Workers + lista dos códigos: dono, usado ou não, aparelho e data);
+na primeira abertura o jogo pede o código e ativa pela internet (depois joga sem internet); quem já tem o jogo instalado e o
+aparelho do usuário ficam liberados; no GitHub, dois botões em Actions ("Gerar código" com o nome do comprador e "Liberar
+código" para troca de celular), com a chave da Cloudflare só nos segredos do repositório. Ele cria a conta da Cloudflare quando
+decidir começar. Lembrar: versão vendida sem os escudos oficiais (o comprador importa) e MEI se as vendas crescerem. A Lovable foi
+considerada e deixada de lado (gasta créditos; o jogo não sai do GitHub). **Floot** (conector do Claude que hospeda apps
+com banco, login e envio às lojas, usando a assinatura do Claude): opção a testar quando chegar a hora dos códigos ou das
+lojas, começando por uma peça pequena (o painel de códigos), com o jogo continuando no GitHub.
+
 **Custos:** hospedagem do site grátis; domínio próprio ~R$ 40/ano (opcional). Lojas, só na Fase 6: Google Play US$ 25 (uma vez), Apple Developer US$ 99/ano.
 
 ---
@@ -466,3 +477,12 @@ prontas. Tamanho: pequena (rápida), média ou grande (várias etapas).
 18. Editor dentro do jogo para mudar nomes, força e cores de clubes e jogadores. (média)
 19. ✅ Tutorial rápido para quem começa um jogo novo. (pequena)
 20. Ajustes de equilíbrio pelo que o usuário sentir jogando: gols, lesões, preços, dificuldade. (pequena, quando ele quiser)
+
+## Projeto futuro: imagem do estádio por nível (nov/2026)
+
+Pedido do usuário: na área do estádio, uma ilustração que muda com a capacidade, do campinho do interior ao estádio de Copa.
+8 níveis: 1 campinho do interior (até 3 mil), 2 municipal (3–8 mil), 3 regional (8–15 mil), 4 Série B (15–25 mil),
+5 Série A (25–40 mil), 6 arena moderna (40–55 mil), 7 grande arena (55–70 mil), 8 estádio de Copa (70–80 mil); a
+modernização (conforto) pode deixar a imagem mais bonita dentro do nível. **Estilo escolhido: 3D low-poly isométrico, tipo
+maquete de jogo de celular** (o "teste 2"), fundo liso, cores do jogo. Quando retomar: fazer os prompts dos 8 níveis com a
+mesma base, ele gera as imagens em outra IA, e eu coloco no jogo (com teste). "Não faça nada agora, projeto futuro isso".
