@@ -6,7 +6,7 @@ import { emprestar, interessadosNoEmprestimo, motivoParaNaoEmprestar, motivoPara
 import { folhaSalarial } from "./financas";
 import { capitaoDoTime, forcaDoTime } from "./forca";
 import { melhorEmCampo, notaMedia, notasDaPartida } from "./notas";
-import { somarDias, turnoEReturno, turnoUnico } from "./calendario";
+import { datasDaTemporada, somarDias, turnoEReturno, turnoUnico } from "./calendario";
 import { SERIES, classificacao, nomeDaLigaDoClube, posicaoNaLiga, tabelaDaLiga, tabelaDoClube, temporadaEncerrada } from "./competicoes";
 import { MAX_SUBSTITUICOES, MINIMO_POSICAO } from "./constantes";
 import { desfechoDoConfronto, situacaoNaCopa } from "./copa";
@@ -1791,6 +1791,39 @@ describe("Copa do Mundo (nov/2026): as seleções da África, Ásia e Oceania e 
     expect(["dezesseis", "oitavas", "quartas", "semi", "final"].map((f) => jogos.filter((p) => p.fase === f).length)).toEqual([16, 8, 4, 2, 1]);
     expect(jogos.every((p) => p.jogada)).toBe(true);
     expect(jogos.filter((p) => p.data >= "2026-06-11" && p.data <= "2026-07-19")).toHaveLength(103);
+  });
+});
+
+describe("R115 os clubes param durante a Copa do Mundo (Modo Copa, nov/2026)", () => {
+  it("em 2026, nenhum jogo de clube de 11 de junho a 19 de julho (séries, Copa do Brasil, Série D, estaduais, ligas e copas); a Série A tem as 38 rodadas e acaba quando acabaria; ninguém joga duas vezes no mesmo dia", { timeout: 400_000 }, () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 84 });
+    e.config.escalacaoAutomatica = true;
+    e.tecnico.desde = "2026-12-31";
+    simularRestoDaTemporada(e);
+    expect(e.temporada).toBe(2026);
+    const clubes = e.partidas.filter((p) => !p.serie.startsWith("S-"));
+    expect(clubes.filter((p) => p.data >= "2026-06-11" && p.data <= "2026-07-19").map((p) => `${p.serie} ${p.fase} ${p.data}`)).toEqual([]);
+    expect(clubes.every((p) => p.jogada)).toBe(true);
+    const a = clubes.filter((p) => p.serie === "A");
+    expect(a).toHaveLength(380);
+    // A última rodada da Série A no mesmo sábado de sempre (14 de novembro: as duas datas seguintes são do playoff da B).
+    expect(a.map((p) => p.data).sort().at(-1)).toBe("2026-11-14");
+    // A Copa do Brasil e as copas seguem (com final), e a Série D também.
+    expect(e.copa!.campeao).toBeDefined();
+    expect(e.torneios!.D!.campeao).toBeDefined();
+    expect(e.copas!["K-SUL"]!.campeao).toBeDefined();
+    // Ninguém joga duas vezes no mesmo dia.
+    const dia = new Set<string>();
+    for (const p of clubes) for (const c of [p.mandante, p.visitante]) {
+      expect(dia.has(`${c}/${p.data}`), `${c} ${p.data}`).toBe(false);
+      dia.add(`${c}/${p.data}`);
+    }
+  });
+
+  it("num ano sem Copa (2027) o calendário é o de sempre: a Série A joga em junho e julho", () => {
+    const datas = datasDaTemporada(2027).todas;
+    expect(datas.filter((d) => d >= "2027-06-11" && d <= "2027-07-19").length).toBeGreaterThan(5);
+    expect(datas).toHaveLength(40);
   });
 });
 

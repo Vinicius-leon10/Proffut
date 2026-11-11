@@ -3,7 +3,7 @@
 // agregado, pênaltis); final em jogo único, em campo neutro. A Série A entra na 5ª fase.
 // Como as fases iniciais de verdade são em fevereiro e março, aqui elas caem nas quartas-feiras de abril.
 import { comArtigo, concorda } from "./artigos";
-import { inicioDaTemporada, somarDias } from "./calendario";
+import { inicioDaTemporada, semanasDaCopaDoBrasil, somarDias } from "./calendario";
 import { agregado, chavesDaFase, vencedorDaChave } from "./competicoes";
 import { COTA_COPA, ESCALA_COPA, PREMIO_FINAL_COPA } from "./constantes";
 import { lancar } from "./financas";
@@ -27,10 +27,8 @@ function comFase(preposicao: "na" | "da", fase: FaseCopa): string {
 const IDA_E_VOLTA: FaseCopa[] = ["fase5", "oitavas", "quartas", "semi"];
 /** Fases em que o sorteio separa os clubes em dois potes pelo ranking (melhor metade contra pior metade). */
 const COM_POTES: FaseCopa[] = ["fase1", "fase2", "fase3", "fase4", "fase5"];
-/** Semanas (a partir do primeiro sábado de abril) das quartas-feiras de cada fase: [jogo] ou [ida, volta]. */
-const SEMANAS: Record<FaseCopa, number[]> = {
-  fase1: [0], fase2: [1], fase3: [2], fase4: [3], fase5: [4, 6], oitavas: [13, 14], quartas: [18, 19], semi: [28, 29], final: [34],
-};
+/** Semanas das quartas-feiras de cada fase (`SEMANAS_COPA_DO_BRASIL`, em calendario.ts; sem as da Copa do Mundo). */
+const SEMANAS = (ano: number) => semanasDaCopaDoBrasil(ano) as Record<FaseCopa, number[]>;
 /** Em 2026 entraram direto na 3ª fase os campeões da Copa Verde (Paysandu), da Série C (Ponte Preta)
  *  e da Série D de 2025 (Barra-SC), e o Confiança, no lugar do Bahia (Copa do Nordeste). */
 const DIRETOS_3A_FASE_2026 = ["paysandu", "ponte-preta", "barra-sc", "confianca"];
@@ -110,7 +108,7 @@ function sortear(estado: EstadoJogo, fase: FaseCopa, clubes: string[]) {
       pares.push(pos(a) < pos(b) ? [a, b] : [b, a]);
     }
   }
-  const datas = SEMANAS[fase].map((s) => quarta(ano, s));
+  const datas = SEMANAS(ano)[fase].map((s) => quarta(ano, s));
   const base = { serie: "CB" as const, fase, jogada: false, gm: 0, gv: 0, eventos: [] };
   pares.forEach(([melhor, pior], i) => {
     const chave = i + 1;

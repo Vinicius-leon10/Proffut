@@ -20,7 +20,7 @@
 import participantesJson from "../../data/copas-2026/participantes.json";
 import europaCopasJson from "../../data/europa-2026/copas.json";
 import { comArtigo, concorda } from "./artigos";
-import { inicioDaTemporada, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
+import { anoDeCopaDoMundo, inicioDaTemporada, semanasForaDaCopa, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { chavesDaFase, classificacao, tabelaDaLiga, vencedorDaChave, type LinhaTabela } from "./competicoes";
 import { lancar } from "./financas";
 import { enviarMensagem } from "./mensagens";
@@ -881,9 +881,31 @@ function rodadasCruzadas(a: string[], b: string[], rodadas: number): Confronto[]
     }));
 }
 
+/** As semanas das fases de cada copa num ano de Copa do Mundo (`semanasForaDaCopa`, todas as fases em ordem). */
+const SEMANAS_NA_COPA = new Map<string, Map<string, number[]>>();
+
+/**
+ * As semanas da fase no ano: num ano de Copa do Mundo, as que caíam na janela da Copa ficam para depois dela, e as fases
+ * seguintes andam só o necessário (R115: os clubes param durante a Copa).
+ */
+function semanasDaFase(ano: number, def: DefinicaoCopa, fase: FaseCopa): number[] {
+  if (!anoDeCopaDoMundo(ano)) return fase.semanas;
+  const chave = `${def.id}/${ano}`;
+  let porFase = SEMANAS_NA_COPA.get(chave);
+  if (!porFase) {
+    const todas = semanasForaDaCopa(ano, def.fases.flatMap((f) => f.semanas));
+    porFase = new Map();
+    let i = 0;
+    for (const f of def.fases) porFase.set(f.id, f.semanas.map(() => todas[i++]));
+    SEMANAS_NA_COPA.set(chave, porFase);
+  }
+  return porFase.get(fase.id) ?? fase.semanas;
+}
+
 /** Monta os jogos de uma fase e paga a cota de quem entra nela. `vindos`: quem passou da fase anterior. */
 function iniciarFase(estado: EstadoJogo, def: DefinicaoCopa, copa: EstadoCopaClubes, fase: FaseCopa, vindos: string[]) {
   const ano = estado.temporada;
+  const semanas = semanasDaFase(ano, def, fase);
   const rng = rngPara(estado.semente, `copa-clubes/${ano}/${def.id}/${fase.id}`);
   const ocupacao = ocupacaoAtual(estado);
   const amanha = somarDias(estado.data, 1);
@@ -913,7 +935,7 @@ function iniciarFase(estado: EstadoJogo, def: DefinicaoCopa, copa: EstadoCopaClu
     }
     for (const { grupo, rodadas } of rodadasDoGrupo) {
       rodadas.forEach((jogos, r) => {
-        const semana = fase.semanas[Math.min(r, fase.semanas.length - 1)];
+        const semana = semanas[Math.min(r, semanas.length - 1)];
         jogos.forEach(([mandante, visitante], i) => {
           novas.push({
             ...base, id: `${ano}-${def.id}-${fase.id}-g${grupo}-${r + 1}-${i}`, rodada: r + 1, ...(fase.tipo === "grupos" ? { grupo } : {}),
@@ -929,20 +951,20 @@ function iniciarFase(estado: EstadoJogo, def: DefinicaoCopa, copa: EstadoCopaClu
     const folga = clubes.filter((c) => !comPar.has(c));
     if (folga.length) (copa.entram[`${fase.id}-folga`] ??= []).push(...folga);
     pagarCota(estado, def, fase, [...comPar]);
-    const idaEVolta = fase.semanas.length === 2;
+    const idaEVolta = semanas.length === 2;
     pares.forEach(([x, y], i) => {
       const chave = i + 1;
       const [melhor, pior] = melhorDosDois(estado, copa, x, y);
       if (idaEVolta) {
-        const ida = escolherData(estado, ocupacao, pior, melhor, fase.semanas[0], fase.dia, amanha);
-        const volta = escolherData(estado, ocupacao, melhor, pior, fase.semanas[1], fase.dia, somarDias(ida, 3));
+        const ida = escolherData(estado, ocupacao, pior, melhor, semanas[0], fase.dia, amanha);
+        const volta = escolherData(estado, ocupacao, melhor, pior, semanas[1], fase.dia, somarDias(ida, 3));
         novas.push({ ...base, id: `${ano}-${def.id}-${fase.id}-${chave}-ida`, chave, rodada: 1, perna: 1, data: ida, mandante: pior, visitante: melhor });
         novas.push({ ...base, id: `${ano}-${def.id}-${fase.id}-${chave}-volta`, chave, rodada: 2, perna: 2, data: volta, mandante: melhor, visitante: pior });
       } else {
         const [mandante, visitante] = fase.casaDoPior && !fase.neutro ? [pior, melhor] : [melhor, pior];
         novas.push({
           ...base, id: `${ano}-${def.id}-${fase.id}-${chave}`, chave, rodada: 1, mandante, visitante,
-          data: escolherData(estado, ocupacao, mandante, visitante, fase.semanas[0], fase.dia, amanha), ...(fase.neutro ? { neutro: true } : {}),
+          data: escolherData(estado, ocupacao, mandante, visitante, semanas[0], fase.dia, amanha), ...(fase.neutro ? { neutro: true } : {}),
         });
       }
     });

@@ -6,7 +6,7 @@ import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, jogarPartida, monta
 // seleção tenho que ganhar a liga principal de um país").
 
 /** Abre um save montado pelo motor (tests/saves/selecao.ts). */
-async function abrirSave(page: Page, qual: "jogo" | "convite" | "data-fifa" | "europa" | "copa" | "continentais") {
+async function abrirSave(page: Page, qual: "jogo" | "convite" | "data-fifa" | "europa" | "copa" | "continentais" | "pausa") {
   const save = montarSave("selecao", qual);
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
@@ -263,4 +263,22 @@ test("R112 Copa Africana de Nações e Copa da Ásia: em 2027, Tabelas → Sele�
   await expect(principal.locator("table tbody tr").filter({ hasText: "Arábia Saudita" })).toHaveCount(1);
   // A Copa da Oceania é em 2028 (anos múltiplos de 4).
   await expect(seletor.locator("option", { hasText: "Copa da Oceania" })).toHaveCount(0);
+});
+
+test("R115 os clubes param durante a Copa do Mundo: em junho de 2026, logo antes da abertura (11 de junho), o próximo jogo do Flamengo no painel é depois da final (19 de julho)", async ({ page }) => {
+  test.setTimeout(180_000);
+  const save = montarSave("selecao", "pausa");
+  const estado = JSON.parse(save).estado as { partidas: { mandante: string; visitante: string; data: string; jogada: boolean; serie: string }[] };
+  // No save: nenhum jogo de clube marcado na janela da Copa, e o próximo do Flamengo vem depois dela.
+  const naCopa = estado.partidas.filter((p) => !p.serie.startsWith("S-") && p.data >= "2026-06-11" && p.data <= "2026-07-19");
+  expect(naCopa.map((p) => `${p.serie} ${p.data}`)).toEqual([]);
+  const proximo = estado.partidas.filter((p) => !p.jogada && (p.mandante === "flamengo" || p.visitante === "flamengo")).sort((a, b) => a.data.localeCompare(b.data))[0];
+  expect(proximo.data > "2026-07-19").toBe(true);
+  // Na tela: o painel mostra a data desse jogo ("qua, 22 jul").
+  await abrirSave(page, "pausa");
+  const [, mes, dia] = proximo.data.split("-").map(Number);
+  const dias = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+  const meses = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+  const texto = `${dias[new Date(Date.UTC(2026, mes - 1, dia)).getUTCDay()]}, ${String(dia).padStart(2, "0")} ${meses[mes - 1]}`;
+  await expect(page.locator(".cartao", { has: cartaoDoProximoJogo(page) })).toContainText(texto);
 });

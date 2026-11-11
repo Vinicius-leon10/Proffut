@@ -5,6 +5,7 @@
 //   npx tsx tests/saves/selecao.ts europa    técnico do Flamengo e da França, parado no dia do primeiro amistoso da França (R102)
 //   npx tsx tests/saves/selecao.ts data-fifa Palmeiras parado num dia de jogo dele na data FIFA de setembro, com convocados fora
 //   npx tsx tests/saves/selecao.ts continentais  Flamengo com 2026 jogado, no começo de 2027 (Copa Africana e Copa da Ásia, R112)
+//   npx tsx tests/saves/selecao.ts pausa  Flamengo em 8 de junho de 2026, logo antes da Copa do Mundo (os clubes param, R115)
 import { assumirSelecao, convitesDeSelecoes } from "../../src/engine/selecoes";
 import { avancar, meuJogoHoje, novoJogo, simularDia, simularRestoDaTemporada } from "../../src/engine/jogo";
 import { exportarTexto } from "../../src/save/salvamento";
@@ -46,6 +47,18 @@ if (qual === "convite") {
   estado.tecnico.confiancaDiretoria = Math.max(estado.tecnico.confiancaDiretoria, 60);
   avancar(estado);
   pronto = estado.temporada === 2027 && estado.tecnico.clubeId === clube;
+} else if (qual === "pausa") {
+  estado.tecnico.desde = "2026-12-31";
+  estado.config.escalacaoAutomatica = true;
+  // Para no último jogo do clube antes da Copa (ou em 8 de junho, se ele ainda joga depois disso).
+  const proximo = () => estado.partidas.filter((p) => !p.jogada && (p.mandante === clube || p.visitante === clube)).map((p) => p.data).sort()[0] ?? "9999";
+  for (let i = 0; i < 600 && estado.data < "2026-06-08" && !(estado.data >= "2026-06-01" && proximo() > "2026-06-10"); i++) {
+    const r = avancar(estado);
+    if (r.tipo === "jogos-hoje") simularDia(estado);
+    else if (r.tipo === "nada" || r.tipo === "fim-dos-jogos" || r.tipo === "nova-temporada") break;
+  }
+  estado.config.escalacaoAutomatica = false;
+  pronto = estado.data >= "2026-06-01" && estado.data < "2026-06-11";
 } else if (qual === "data-fifa") {
   estado.config.escalacaoAutomatica = true;
   for (let i = 0; i < 600; i++) {

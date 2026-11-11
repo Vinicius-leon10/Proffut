@@ -9,7 +9,7 @@
 // - Ligas de fora: pontos corridos, em turno e returno quando cabe nos domingos da temporada (até 18 clubes) e em
 //   turno único nas maiores; as da Europa sempre em turno e returno, de janeiro em diante. O campeão é o primeiro.
 import { comArtigo, concorda } from "./artigos";
-import { inicioDaTemporada, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
+import { depoisDaCopa, inicioDaTemporada, rodadasForaDaCopa, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { chavesDaFase, classificacao, vencedorDaChave, type LinhaTabela } from "./competicoes";
 import { hashTexto, rngPara } from "./rng";
 import { competicoesDaSelecao } from "./selecoes";
@@ -355,7 +355,7 @@ export function criarTorneios(estado: EstadoJogo, { semEstaduais = false } = {})
       t.fase = "grupos";
       t.grupos.forEach((g, k) => {
         const rodadas = turnoEReturno(g, rngPara(estado.semente, `torneio/${ano}/${id}/grupo${k}`));
-        estado.partidas.push(...partidasDasRodadas(ano, id, "grupos", rodadas, rodadas.map((_, r) => domingo(ano, r)), k + 1));
+        estado.partidas.push(...partidasDasRodadas(ano, id, "grupos", rodadas, rodadasForaDaCopa(rodadas.map((_, r) => domingo(ano, r))), k + 1));
       });
     } else if (t.tipo === "estadual") {
       const datas = Array.from({ length: DATAS_ESTADUAL }, (_, r) => domingo(ano, SEMANA_ESTADUAIS + r));
@@ -383,7 +383,8 @@ export function criarTorneios(estado: EstadoJogo, { semEstaduais = false } = {})
       const rodadas = (europa && !grande) || 2 * ida.length <= 35 ? [...ida, ...ida.map((jogos) => jogos.map(([a, b]) => [b, a] as Confronto))] : ida;
       const inicio = europa ? SEMANA_ESTADUAIS : 0;
       const data = (r: number) => (europa && clubes.length > MAXIMO_UMA_RODADA_POR_SEMANA ? somarDias(domingo(ano, inicio + Math.floor(r / 2)), r % 2 ? 3 : 0) : domingo(ano, inicio + r));
-      estado.partidas.push(...partidasDasRodadas(ano, id, "liga", rodadas, rodadas.map((_, r) => data(r))));
+      // Num ano de Copa do Mundo, as rodadas da janela da Copa vão para o meio da semana depois dela (R115).
+      estado.partidas.push(...partidasDasRodadas(ano, id, "liga", rodadas, rodadasForaDaCopa(rodadas.map((_, r) => data(r)))));
     }
     torneios[id] = t;
   }
@@ -424,7 +425,8 @@ function criarMataMata(estado: EstadoJogo, t: EstadoTorneio, clubes: string[]) {
   const ano = estado.temporada;
   const fase = FASE_DO_MATA_MATA[clubes.length] ?? `fase${clubes.length}`;
   const ordem = [...clubes].sort((a, b) => t.semeados!.indexOf(a) - t.semeados!.indexOf(b));
-  const proximo = somarDias(ultimaData(estado, t.id), 7);
+  // Sem jogo na janela da Copa do Mundo (R115): a fase que cairia lá fica para a semana depois da final.
+  const proximo = depoisDaCopa(somarDias(ultimaData(estado, t.id), 7));
   const idaEVolta = t.tipo === "serie-d";
   const base = { serie: t.id, fase, jogada: false, gm: 0, gv: 0, eventos: [] };
   for (let i = 0; i < ordem.length / 2; i++) {
@@ -432,7 +434,7 @@ function criarMataMata(estado: EstadoJogo, t: EstadoTorneio, clubes: string[]) {
     const chave = i + 1;
     if (idaEVolta) {
       estado.partidas.push({ ...base, id: `${ano}-${t.id}-${fase}-${chave}-ida`, chave, rodada: 1, perna: 1, data: proximo, mandante: pior, visitante: melhor });
-      estado.partidas.push({ ...base, id: `${ano}-${t.id}-${fase}-${chave}-volta`, chave, rodada: 2, perna: 2, data: somarDias(proximo, 7), mandante: melhor, visitante: pior });
+      estado.partidas.push({ ...base, id: `${ano}-${t.id}-${fase}-${chave}-volta`, chave, rodada: 2, perna: 2, data: depoisDaCopa(somarDias(proximo, 7)), mandante: melhor, visitante: pior });
     } else {
       estado.partidas.push({ ...base, id: `${ano}-${t.id}-${fase}-${chave}`, chave, rodada: 1, data: proximo, mandante: melhor, visitante: pior });
     }

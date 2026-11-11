@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R114 rodando a cada mudança, antes
+ponta R01–R115 rodando a cada mudança, antes
 de publicar e todo dia no site publicado. Bandeira pequena do país do jogador ao lado do nome (`BandeiraJogador` em `componentes.tsx`,
 `bandeiraDaNacionalidade` em `formatos.ts`: código de 3 letras do jogo → emoji; no Elenco, ficha, Mercado e Convocação;
 no campinho não, por falta de espaço; R97).
@@ -692,6 +692,21 @@ lista inteira, todo dia (`faseCompleta`, `resultadoDaFase`). Agora `fasesComplet
 temporada caiu para ~31 s (mais rápida que antes da parte 4) e o jogo novo para ~3,8 s, com a mesma impressão digital de
 uma temporada inteira (placares, campeões e caixas iguais). Os escudos dos 610 estão
 na lista dos que faltam (`docs/TIMES_NOVOS.md`, 1.613 no total). Faltam as vagas dos países novos nas copas da UEFA.
+
+**Modo Copa do Mundo (nov/2026, em andamento):** pedido "quero criar um ambiente diferente no jogo quando acontecer uma Copa
+do Mundo... o jogo todo vai parar para esse evento"; proposta com telas de exemplo no artifact "Modo Copa do Mundo"
+(claude.ai/artifact/VZDR4ZuLHSceJ93YauexT5), aprovada: "Gostei, tá aprovado. Vamos deixar um ambiente assim diferente só da
+Copa do Mundo" (as outras competições ficam como estão), com as 7 sugestões (1a a 7a) e os clubes parando durante a Copa
+("Param durante a Copa (A)"). **Parte 1, o calendário (R115, `calendario.ts`):** `janelaDaCopa` (anos de Copa: da quinta
+da semana 9 ao domingo da semana 15; 11 de junho a 19 de julho em 2026), `rodadasForaDaCopa` (as rodadas que caíam na
+janela vão para quartas depois da Copa, ou quintas e terças, a 2 dias de qualquer outra data do campeonato e das quartas da
+Copa do Brasil; o campeonato acaba na mesma data), `semanasForaDaCopa` (copas: as fases da janela vão para a semana
+depois dela e as seguintes andam o necessário; `semanasDaFase` em copas.ts, `semanasDaCopaDoBrasil`, com
+`SEMANAS_COPA_DO_BRASIL` agora em calendario.ts) e `depoisDaCopa` (mata-mata dos torneios). Séries (`datasDaTemporada`: a
+A e a B com as quartas novas; a C, só aos sábados, acaba umas semanas depois), Série D, estaduais, ligas e copas. As
+seleções não mudam. Save em andamento: os jogos já marcados ficam; a pausa vale nas temporadas novas. **A fazer (parte
+2):** as telas (abertura, painel da Copa do técnico, espectador uma fase por toque, chaveamento, final ao vivo só
+assistindo, campeão com prêmios, convocação final de 26, visual azul-noite e dourado).
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).
