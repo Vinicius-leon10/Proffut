@@ -8,6 +8,8 @@ import { Demissao } from "./Demissao";
 import { Elenco } from "./Elenco";
 import { Mercado } from "./Mercado";
 import { Painel } from "./Painel";
+import { ModoCopa } from "./ModoCopa";
+import { emModoCopa } from "../../engine/modoCopa";
 import { Tabelas } from "./Tabelas";
 import { Tatica } from "./Tatica";
 import { Tutorial } from "./Tutorial";
@@ -27,6 +29,8 @@ export function Principal() {
   const novas = naoLidas(estado);
   // As propostas pelos meus jogadores ficam no Mercado, com o número na barra de baixo (R63).
   const propostas = propostasPendentes(estado).length;
+  // Modo Copa do Mundo: durante a Copa, a aba do clube vira a tela da Copa (R116–R118).
+  const copa = emModoCopa(estado);
   // Demitido: precisa escolher um novo clube, também depois de fechar e abrir o app. Logo depois da virada, a tela do fim
   // da temporada já está aberta por cima com as propostas: aqui embaixo não se repete.
   if (estado.tecnico.demissao && sobreposta?.tipo === "fim-temporada") return null;
@@ -49,8 +53,8 @@ export function Principal() {
         <button className="icone-botao" onClick={() => abrir({ tipo: "config" })} aria-label="Configurações"><Icone nome="config" /></button>
       </header>
 
-      <main className="conteudo">
-        {aba === "clube" && <Painel />}
+      <main className={`conteudo${aba === "clube" && copa ? " modo-copa" : ""}`}>
+        {aba === "clube" && (copa ? <ModoCopa /> : <Painel />)}
         {aba === "elenco" && <Elenco />}
         {aba === "tatica" && <Tatica />}
         {aba === "tabelas" && <Tabelas />}

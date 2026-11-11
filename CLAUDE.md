@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R115 rodando a cada mudança, antes
+ponta R01–R118 rodando a cada mudança, antes
 de publicar e todo dia no site publicado. Bandeira pequena do país do jogador ao lado do nome (`BandeiraJogador` em `componentes.tsx`,
 `bandeiraDaNacionalidade` em `formatos.ts`: código de 3 letras do jogo → emoji; no Elenco, ficha, Mercado e Convocação;
 no campinho não, por falta de espaço; R97).
@@ -710,9 +710,17 @@ rodada (a A de 2026 acaba em 5 de dezembro e o playoff da B vai até 19 de dezem
 semanas com rodada das séries no meio da semana (20 e 25); a Copa do Brasil, só em ano de Copa, escolhe o dia (quinta para
 quem joga a Libertadores, terça para quem joga a Sul-Americana, `dataDoJogo` em copa.ts) e o `escolherData` das copas, só
 em ano de Copa, tenta também segunda e sexta, as duas semanas seguintes e, por fim, o primeiro dia livre (fora da janela). As
-seleções não mudam. Save em andamento: os jogos já marcados ficam; a pausa vale nas temporadas novas. **A fazer (parte
-2):** as telas (abertura, painel da Copa do técnico, espectador uma fase por toque, chaveamento, final ao vivo só
-assistindo, campeão com prêmios, convocação final de 26, visual azul-noite e dourado).
+seleções não mudam. Save em andamento: os jogos já marcados ficam; a pausa vale nas temporadas novas. **Parte 2, as telas (R116–R118,
+`src/engine/modoCopa.ts`, tela `ModoCopa.tsx`):** com a Copa montada e a data na janela, a aba do clube vira a tela da
+Copa (`emModoCopa`; `main.conteudo.modo-copa` redefine os tokens: azul-noite e dourado). O Avançar que passaria da
+abertura para nela (`pararNaAberturaDaCopa`, chamado em `avancarJogo` antes do `avancar` do motor, que não mudou). Abertura
+(sedes, 48 seleções, datas, o clube para e volta em tal dia; "Entrar na Copa" grava `EstadoJogo.modoCopa.abertura`).
+Técnico de seleção viva: painel da Copa (jogo de hoje, o grupo, Convocação, "Grupos e chaveamento") e o Avançar de
+sempre. Espectador (ou técnico eliminado): uma fase por toque (`avancarNaCopa`), zebra da fase, chaveamento das quartas à
+final, "Pular para o campeão"; antes da final, "Assistir à final ao vivo" (`modoCopa.assistir`: a final sai da simulação
+rápida e ganha estatísticas e campo 2D; AoVivo sem Substituir nem Tática) ou "Ver o resultado". Campeã com os prêmios
+(`premiosDaCopa`: artilheiro, melhor jogador, melhor goleiro, zebra) e "Continuar a temporada" (`modoCopa.fim`). Quem
+passa da Copa sem entrar (simulando) não vê a tela depois. Ainda não feito: a convocação final de 26.
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).

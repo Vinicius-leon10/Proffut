@@ -361,7 +361,7 @@ export function proximaDataComJogo(estado: EstadoJogo): string | undefined {
 }
 
 /** Passa os dias até `ate`: recuperação, lesões, virada de mês, propostas e janela de julho. */
-function processarDias(estado: EstadoJogo, ate: string) {
+export function processarDias(estado: EstadoJogo, ate: string) {
   const dias = diasEntre(estado.data, ate);
   const meu = estado.tecnico.clubeId;
   for (let i = 1; i <= dias; i++) {
@@ -467,7 +467,7 @@ export function prepararJogos(estado: EstadoJogo): PartidaViva[] {
       return montarLado(clube, estado.jogadores, elencos.get(id) ?? [], id === meu);
     });
     // Estatísticas e campo 2D só na partida do usuário, com sorteios próprios (não mudam o resultado).
-    const minha = p.mandante === meu || p.visitante === meu;
+    const minha = p.mandante === meu || p.visitante === meu || p.id === estado.modoCopa?.assistir;
     const proprio = (nome: string) => (minha ? rngPara(estado.semente, `${nome}/${p.id}`) : undefined);
     return iniciarPartida(p, lados[0], lados[1], rngPara(estado.semente, `partida/${p.id}`), proprio("estatisticas"), proprio("campo"));
   });

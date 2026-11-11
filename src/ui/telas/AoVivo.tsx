@@ -53,8 +53,12 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   const estado = useJogo();
   const { fechar, atualizar, avisar } = useLoja();
   // A partida do usuário: a do time que ele dirige hoje (o clube ou, no dia do jogo dela, a seleção).
-  const meu = vivas.find((v) => v.lados.some((l) => l.controlado)) ?? vivas.find((v) => v.lados.some((l) => l.clubeId === estado.tecnico.clubeId))!;
-  const meuLado: 0 | 1 = meu.lados[0].controlado ? 0 : meu.lados[1].controlado ? 1 : meu.lados[0].clubeId === estado.tecnico.clubeId ? 0 : 1;
+  // Modo Copa: a final que o espectador escolheu assistir (sem time dele: só assiste, sem trocas nem tática; R118).
+  const assistida = vivas.find((v) => v.partidaId === estado.modoCopa?.assistir);
+  const controlada = vivas.find((v) => v.lados.some((l) => l.controlado));
+  const soAssistir = !controlada && !!assistida;
+  const meu = controlada ?? assistida ?? vivas.find((v) => v.lados.some((l) => l.clubeId === estado.tecnico.clubeId))!;
+  const meuLado: 0 | 1 = meu.lados[0].controlado ? 0 : meu.lados[1].controlado ? 1 : soAssistir || meu.lados[0].clubeId === estado.tecnico.clubeId ? 0 : 1;
   const meuId = meu.lados[meuLado].clubeId;
   const partida = estado.partidas.find((p) => p.id === meu.partidaId)!;
 
@@ -144,6 +148,12 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
     concluirJogos(estado, vivas);
     atualizar();
     const p = estado.partidas.find((x) => x.id === meu.partidaId)!;
+    if (soAssistir) {
+      delete estado.modoCopa!.assistir;
+      atualizar();
+      fechar();
+      return;
+    }
     const pro = meuLado === 0 ? p.gm : p.gv;
     const contra = meuLado === 0 ? p.gv : p.gm;
     const placar = pro > contra ? `Vitória por ${pro} x ${contra}!` : pro === contra ? `Empate em ${pro} x ${contra}.` : `Derrota por ${contra} x ${pro}.`;
@@ -158,7 +168,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   const lances = useMemo(() => [...meu.narracao].reverse(), [meu.narracao, meu.narracao.length]);
   const adversario = meuLado === 0 ? clubeV : clubeM;
   // O adversário dominando os últimos 15 minutos: avisa e convida a mexer no time (no intervalo já há o convite).
-  const pressao = meu.estatisticas && !meu.terminada && !meu.intervalo ? sobPressao(meu.estatisticas, meuLado) : null;
+  const pressao = !soAssistir && meu.estatisticas && !meu.terminada && !meu.intervalo ? sobPressao(meu.estatisticas, meuLado) : null;
   // O escudo do adversário abre o time titular dele no campinho.
   // Cada time com a sua cor, como nas estatísticas: o meu em verde, o adversário em azul.
   const corDoLado = (lado: 0 | 1) => (lado === meuLado ? "var(--esmeralda)" : "var(--azul)");
@@ -204,7 +214,13 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
       )}
 
       {!iniciado ? (
-        <PreJogo meu={meu} meuLado={meuLado} aoComecar={comecar} aoVoltar={fechar} />
+        soAssistir ? (
+          <div className="conteudo coluna" style={{ gap: 10 }}>
+            <p className="pequeno fraco">Você assiste à final: sem substituições nem tática.</p>
+            <button className="botao primario grande cheio" onClick={comecar}>Começar o jogo</button>
+            <button className="botao cheio" onClick={fechar}>Voltar</button>
+          </div>
+        ) : <PreJogo meu={meu} meuLado={meuLado} aoComecar={comecar} aoVoltar={fechar} />
       ) : (
         <>
           <div className="linha" style={{ padding: "10px 16px", gap: 8, borderBottom: "1px solid var(--borda)" }}>
@@ -227,7 +243,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
           {/* Numa linha só: Substituir e Tática durante o jogo, Notas no fim (R45) e a caixa da Rodada no lugar das abas
               (R56). Com o campo 2D no alto (R60), sobra mais espaço para os lances. */}
           <div className="linha" style={{ padding: "8px 16px", gap: 8 }}>
-            {!meu.terminada && (
+            {!meu.terminada && !soAssistir && (
               <>
                 <button className="botao pequeno" style={{ flex: "1 1 auto" }} onClick={() => setPainel("trocas")}>
                   <Icone nome="troca" /> Substituir ({meu.lados[meuLado].substituicoes}/{MAX_SUBSTITUICOES})
@@ -248,7 +264,7 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
           )}
           {meu.intervalo && pausado && (
             <div className="cartao compacto" style={{ margin: "0 16px" }}>
-              <p className="pequeno"><b>Intervalo.</b> Faça substituições ou mude a tática, e toque em ▶ para o segundo tempo.</p>
+              <p className="pequeno"><b>Intervalo.</b> {soAssistir ? "Toque em ▶ para o segundo tempo." : "Faça substituições ou mude a tática, e toque em ▶ para o segundo tempo."}</p>
             </div>
           )}
           {/* As estatísticas ficam fixas na tela do jogo (R56), travadas em cima: só os lances rolam embaixo (R59). */}

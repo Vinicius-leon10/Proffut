@@ -505,4 +505,9 @@ export interface EstadoJogo {
   recordes?: { desde: number; clubes: Record<string, RecordesClube> };
   /** Tutorial rápido por ver: o jogo novo começa com ele (some ao terminar ou pular; Configurações mostra de novo). */
   tutorial?: boolean;
+  /**
+   * Modo Copa do Mundo (nov/2026): a temporada em que o usuário já viu a abertura da Copa e a em que ele voltou ao clube
+   * depois do campeão; `assistir` é a final que ele escolheu ver ao vivo (fica fora da simulação rápida).
+   */
+  modoCopa?: { abertura?: number; fim?: number; assistir?: string };
 }

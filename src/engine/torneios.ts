@@ -560,6 +560,8 @@ export function torneiosEncerrados(estado: EstadoJogo): boolean {
  */
 export function simulacaoRapida(estado: EstadoJogo, p: Partida, acompanha = competicoesDoUsuario(estado)): boolean {
   if (acompanha.has(p.serie)) return false;
+  // A final da Copa do Mundo que o espectador escolheu assistir ao vivo (Modo Copa).
+  if (p.id === estado.modoCopa?.assistir) return false;
   if (p.serie.startsWith("L-")) return true;
   // Jogos de seleções: só os da seleção do técnico têm a simulação completa (os outros, nem a competição ele acompanha).
   if (p.serie.startsWith("S-")) return !(estado.tecnico.selecao && (p.mandante === estado.tecnico.selecao || p.visitante === estado.tecnico.selecao));

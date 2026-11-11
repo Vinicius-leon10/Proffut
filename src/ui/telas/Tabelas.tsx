@@ -556,7 +556,7 @@ function regraDaFaseDeSelecoes(c: EstadoCompeticaoSelecoes, fase: string): strin
 }
 
 /** Uma competição de seleções: as fases, os grupos com a tabela e os confrontos. */
-function CompeticaoDeSelecoes({ c }: { c: EstadoCompeticaoSelecoes }) {
+export function CompeticaoDeSelecoes({ c }: { c: EstadoCompeticaoSelecoes }) {
   const estado = useJogo();
   const minha = estado.tecnico.selecao;
   const fases = FASES_SELECOES[c.tipo].filter((f) => estado.partidas.some((p) => p.serie === c.id && p.fase === f));

@@ -10,6 +10,10 @@ async function abrirSave(page: Page, qual: "jogo" | "convite" | "data-fifa" | "e
   const save = montarSave("selecao", qual);
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
+  // No dia da Copa do Mundo, a aba do clube abre com a tela de abertura da Copa (Modo Copa, R117).
+  const entrar = page.getByRole("button", { name: "Entrar na Copa", exact: true });
+  await expect(cartaoDoProximoJogo(page).or(entrar)).toBeVisible({ timeout: 20_000 });
+  if (qual === "copa") await entrar.click();
   await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
 }
 
