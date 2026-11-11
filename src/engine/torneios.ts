@@ -23,9 +23,10 @@ export const NOME_ESTADUAL: Record<string, string> = {
 };
 
 /** Região do país na América (para agrupar nas telas). */
-export type Regiao = "sul" | "norte" | "central" | "caribe" | "europa" | "asia" | "africa";
+export type Regiao = "sul" | "norte" | "central" | "caribe" | "europa" | "asia" | "africa" | "oceania";
 export const NOME_REGIAO: Record<Regiao, string> = {
   sul: "América do Sul", norte: "América do Norte", central: "América Central", caribe: "Caribe", europa: "Europa", asia: "Ásia", africa: "África",
+  oceania: "Oceania",
 };
 
 /**
@@ -140,6 +141,41 @@ export const PAISES: Record<string, { pais: string; liga: string; nacionalidade:
   JO: { pais: "Jordânia", liga: "Campeonato Jordaniano", nacionalidade: "JOR", regiao: "asia" },
   KW: { pais: "Kuwait", liga: "Campeonato Kuwaitiano", nacionalidade: "KUW", regiao: "asia" },
   BH: { pais: "Bahrein", liga: "Campeonato Bareinita", nacionalidade: "BHR", regiao: "asia" },
+  // O resto da Europa (projeto "jogo completo", parte 4, nov/2026): a 1ª divisão dos 31 países que faltavam (o Liechtenstein
+  // não tem liga), sem acesso nem queda; a Irlanda do Norte é XN e o País de Gales XW, como as seleções.
+  AL: { pais: "Albânia", liga: "Campeonato Albanês", nacionalidade: "ALB", regiao: "europa" },
+  AD: { pais: "Andorra", liga: "Campeonato Andorrano", nacionalidade: "AND", regiao: "europa" },
+  AM: { pais: "Armênia", liga: "Campeonato Armênio", nacionalidade: "ARM", regiao: "europa" },
+  AZ: { pais: "Azerbaijão", liga: "Campeonato Azeri", nacionalidade: "AZE", regiao: "europa" },
+  BY: { pais: "Belarus", liga: "Campeonato Bielorrusso", nacionalidade: "BLR", regiao: "europa" },
+  BA: { pais: "Bósnia", liga: "Campeonato Bósnio", nacionalidade: "BIH", regiao: "europa" },
+  BG: { pais: "Bulgária", liga: "Campeonato Búlgaro", nacionalidade: "BUL", regiao: "europa" },
+  CY: { pais: "Chipre", liga: "Campeonato Cipriota", nacionalidade: "CYP", regiao: "europa" },
+  EE: { pais: "Estônia", liga: "Campeonato Estoniano", nacionalidade: "EST", regiao: "europa" },
+  FO: { pais: "Ilhas Faroé", liga: "Campeonato Faroense", nacionalidade: "FRO", regiao: "europa" },
+  FI: { pais: "Finlândia", liga: "Campeonato Finlandês", nacionalidade: "FIN", regiao: "europa" },
+  GE: { pais: "Geórgia", liga: "Campeonato Georgiano", nacionalidade: "GEO", regiao: "europa" },
+  GI: { pais: "Gibraltar", liga: "Campeonato Gibraltarino", nacionalidade: "GIB", regiao: "europa" },
+  HU: { pais: "Hungria", liga: "Campeonato Húngaro", nacionalidade: "HUN", regiao: "europa" },
+  IS: { pais: "Islândia", liga: "Campeonato Islandês", nacionalidade: "ISL", regiao: "europa" },
+  IE: { pais: "Irlanda", liga: "Campeonato Irlandês", nacionalidade: "IRL", regiao: "europa" },
+  IL: { pais: "Israel", liga: "Campeonato Israelense", nacionalidade: "ISR", regiao: "europa" },
+  KZ: { pais: "Cazaquistão", liga: "Campeonato Cazaque", nacionalidade: "CAZ", regiao: "europa" },
+  XK: { pais: "Kosovo", liga: "Campeonato Kosovar", nacionalidade: "KOS", regiao: "europa" },
+  LV: { pais: "Letônia", liga: "Campeonato Letão", nacionalidade: "LVA", regiao: "europa" },
+  LT: { pais: "Lituânia", liga: "Campeonato Lituano", nacionalidade: "LTU", regiao: "europa" },
+  LU: { pais: "Luxemburgo", liga: "Campeonato Luxemburguês", nacionalidade: "LUX", regiao: "europa" },
+  MT: { pais: "Malta", liga: "Campeonato Maltês", nacionalidade: "MLT", regiao: "europa" },
+  MD: { pais: "Moldávia", liga: "Campeonato Moldávio", nacionalidade: "MDA", regiao: "europa" },
+  ME: { pais: "Montenegro", liga: "Campeonato Montenegrino", nacionalidade: "MNE", regiao: "europa" },
+  MK: { pais: "Macedônia do Norte", liga: "Campeonato Macedônio", nacionalidade: "MKD", regiao: "europa" },
+  XN: { pais: "Irlanda do Norte", liga: "Campeonato Norte-Irlandês", nacionalidade: "NIR", regiao: "europa" },
+  SM: { pais: "San Marino", liga: "Campeonato Samarinês", nacionalidade: "SMR", regiao: "europa" },
+  SK: { pais: "Eslováquia", liga: "Campeonato Eslovaco", nacionalidade: "SVK", regiao: "europa" },
+  SI: { pais: "Eslovênia", liga: "Campeonato Esloveno", nacionalidade: "SVN", regiao: "europa" },
+  XW: { pais: "País de Gales", liga: "Campeonato Galês", nacionalidade: "GAL", regiao: "europa" },
+  // Oceania: a liga nacional da Nova Zelândia (os dois clubes profissionais de lá jogam a liga australiana).
+  NZ: { pais: "Nova Zelândia", liga: "Campeonato Neozelandês", nacionalidade: "NZL", regiao: "oceania" },
 };
 
 /** País e divisão de um código de liga: "AR" é a 1ª da Argentina, "AR2" a 2ª, "MX3" a 3ª do México. */
@@ -188,6 +224,9 @@ export const SOBEM_E_CAEM: Record<string, number[]> = {
   MX: [0, 0], US: [0, 0], CA: [0, 0],
   // Europa (nov/2026, como em 2025/26, sem os playoffs): 3 na Inglaterra, Espanha e Itália; 2 nos outros.
   EN: [3, 3], ES: [3, 4], IT: [3, 4], DE: [2, 2], FR: [2, 2], PT: [2, 2], NL: [2, 0],
+  // A 2ª divisão dos outros 16 países (parte 4, nov/2026): os que sobem direto em 2025/26 (com o playoff, um a mais).
+  AT: [1], BE: [2], CH: [1], DK: [2], GR: [2], HR: [1], NO: [2], PL: [3], RO: [2], RU: [2], XS: [1], SE: [2], RS: [2], TR: [3],
+  CZ: [2], UA: [2],
 };
 
 /** Código da liga do país na divisão `nivel` ("AR", "AR2", "AR3"). */

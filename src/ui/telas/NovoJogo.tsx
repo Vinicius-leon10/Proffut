@@ -40,13 +40,13 @@ const POR_REGIAO = (Object.keys(NOME_REGIAO) as Regiao[]).map((regiao) => ({
   paises: Object.keys(DIVISOES).filter((p) => (p === "BR" ? "sul" : PAISES[p].regiao) === regiao),
 })).filter((g) => g.paises.length);
 const NOME_PAIS: Record<string, string> = { BR: "Brasil", ...Object.fromEntries(Object.entries(PAISES).map(([k, v]) => [k, v.pais])) };
-/** Os continentes do jogo novo (R96; a Europa desde o R98, a Ásia desde o R108, a África desde o R110), com os países em ordem alfabética, numa lista só. */
-type Continente = "america" | "europa" | "asia" | "africa";
+/** Os continentes do jogo novo (R96; a Europa desde o R98, a Ásia desde o R108, a África desde o R110, a Oceania desde o R114), com os países em ordem alfabética, numa lista só. */
+type Continente = "america" | "europa" | "asia" | "africa" | "oceania";
 const CONTINENTES: { id: Continente; nome: string; icone: string }[] = [
   { id: "america", nome: "América", icone: "🌎" }, { id: "europa", nome: "Europa", icone: "🌍" }, { id: "asia", nome: "Ásia", icone: "🌏" },
-  { id: "africa", nome: "África", icone: "🌍" },
+  { id: "africa", nome: "África", icone: "🌍" }, { id: "oceania", nome: "Oceania", icone: "🌏" },
 ];
-const continenteDa = (regiao: Regiao): Continente => (regiao === "europa" || regiao === "asia" || regiao === "africa" ? regiao : "america");
+const continenteDa = (regiao: Regiao): Continente => (regiao === "europa" || regiao === "asia" || regiao === "africa" || regiao === "oceania" ? regiao : "america");
 const PAISES_EM_ORDEM = Object.fromEntries(CONTINENTES.map(({ id }) => [id,
   POR_REGIAO.filter((g) => continenteDa(g.regiao) === id).flatMap((g) => g.paises).sort((a, b) => NOME_PAIS[a].localeCompare(NOME_PAIS[b], "pt-BR")),
 ])) as Record<Continente, string[]>;

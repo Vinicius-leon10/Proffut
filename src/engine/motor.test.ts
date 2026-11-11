@@ -32,6 +32,8 @@ import asiaClubesJson from "../../data/asia-2026/clubes.json";
 import asiaJogadoresJson from "../../data/asia-2026/jogadores.json";
 import mundoClubesJson from "../../data/mundo-2026/clubes.json";
 import mundoJogadoresJson from "../../data/mundo-2026/jogadores.json";
+import restoClubesJson from "../../data/europa-2026/clubes-resto.json";
+import restoJogadoresJson from "../../data/europa-2026/jogadores-resto.json";
 import europaCopasJson from "../../data/europa-2026/copas.json";
 import { TV_EUROPA_MES } from "./constantes";
 import { processarMes } from "./financas";
@@ -2204,6 +2206,10 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
     const h = e.historico.at(-1)!;
     expect(h.torneios?.["L-EN2" as IdTorneio]?.campeao).toBeDefined();
     const ingleses = Object.values(e.clubes).filter((c) => c.pais === "EN");
+    // R113: a 2ª divisão turca (parte 4): os 3 primeiros sobem e os 3 últimos da 1ª descem.
+    const turcosQueSubiram = Object.values(e.clubes).filter((c) => c.pais === "TR" && c.liga === "TR" && (restoClubesJson.clubes as { id: string }[]).some((f) => f.id === c.id));
+    expect(turcosQueSubiram).toHaveLength(3);
+    expect(Object.values(e.clubes).filter((c) => c.pais === "TR" && c.liga === "TR")).toHaveLength(18);
     expect(ingleses.filter((c) => c.liga === "EN")).toHaveLength(20);
     expect(ingleses.filter((c) => c.liga === "EN2")).toHaveLength(24);
     const subiram = ingleses.filter((c) => c.liga === "EN" && !(europaClubesJson.clubes as { id: string }[]).some((f) => f.id === c.id));
@@ -2231,6 +2237,36 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
     expect(estado.clubes.celtic.pais).toBe("XS");
     const media = (id: string) => elencoDe(estado, id).map((j) => j.forca).sort((a, b) => b - a).slice(0, 11).reduce((a, b) => a + b) / 11;
     expect(media("galatasaray")).toBeGreaterThan(media("karagumruk") + 8);
+  });
+
+  it("R113–R114 o resto da Europa e a Nova Zelândia (parte 4 do jogo completo): a 2ª divisão dos 16 países, a 1ª dos 31 que faltavam e a liga neozelandesa, com os elencos de verdade; a 2ª mais fraca que a 1ª", () => {
+    type F = { id: string; pais: string; liga?: string };
+    const fichas = restoClubesJson.clubes as F[];
+    const porLiga = new Map<string, string[]>();
+    for (const f of fichas) porLiga.set(f.liga ?? f.pais, [...(porLiga.get(f.liga ?? f.pais) ?? []), f.id]);
+    const segundas = ["AT", "BE", "CH", "DK", "GR", "HR", "NO", "PL", "RO", "RU", "XS", "SE", "RS", "TR", "CZ", "UA"].map((p) => `${p}2`);
+    const primeiras = ["AL", "AD", "AM", "AZ", "BY", "BA", "BG", "CY", "EE", "FO", "FI", "GE", "GI", "HU", "IS", "IE", "IL", "KZ", "XK", "LV", "LT",
+      "LU", "MT", "MD", "ME", "MK", "XN", "SM", "SK", "SI", "XW", "NZ"];
+    for (const liga of [...segundas, ...primeiras]) {
+      const ids = porLiga.get(liga) ?? [];
+      expect(ids.length, liga).toBeGreaterThanOrEqual(6);
+      expect([...(estado.torneios?.[`L-${liga}` as IdTorneio]?.clubes ?? [])].sort(), liga).toEqual([...ids].sort());
+    }
+    expect(PAISES.HU.regiao).toBe("europa");
+    expect(PAISES.NZ.regiao).toBe("oceania");
+    for (const [clubeId, reais] of Object.entries(restoJogadoresJson.elencos as Record<string, { nome: string }[]>)) {
+      const elenco = elencoDe(estado, clubeId);
+      for (const r of reais.slice(0, 3)) expect(elenco.some((j) => j.nome === r.nome), `${r.nome} (${clubeId})`).toBe(true);
+    }
+    // O melhor da 2ª é mais fraco que a média da 1ª, em cada país.
+    const media = (id: string) => elencoDe(estado, id).map((j) => j.forca).sort((a, b) => b - a).slice(0, 11).reduce((a, b) => a + b) / 11;
+    const t = (liga: string) => estado.torneios![`L-${liga}` as IdTorneio]!.clubes;
+    for (const liga of segundas) {
+      const primeira = t(liga.slice(0, 2)).map(media);
+      const segunda = t(liga).map(media).sort((a, b) => b - a);
+      expect(segunda[0], liga).toBeLessThan(primeira.reduce((a, b) => a + b) / primeira.length);
+    }
+    expect(checarEstado(estado).filter((p) => p.gravidade === "erro")).toEqual([]);
   });
 
   it("3ª divisão das 7 ligas (nov/2026): clubes leves (sem jogadores até o técnico assumir), todos os jogos dentro do ano; a Serie C, com 57 clubes, joga duas rodadas por semana", () => {
