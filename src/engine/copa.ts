@@ -3,7 +3,7 @@
 // agregado, pênaltis); final em jogo único, em campo neutro. A Série A entra na 5ª fase.
 // Como as fases iniciais de verdade são em fevereiro e março, aqui elas caem nas quartas-feiras de abril.
 import { comArtigo, concorda } from "./artigos";
-import { inicioDaTemporada, semanasDaCopaDoBrasil, somarDias } from "./calendario";
+import { anoDeCopaDoMundo, inicioDaTemporada, semanasDaCopaDoBrasil, somarDias } from "./calendario";
 import { agregado, chavesDaFase, vencedorDaChave } from "./competicoes";
 import { COTA_COPA, ESCALA_COPA, PREMIO_FINAL_COPA } from "./constantes";
 import { lancar } from "./financas";
@@ -110,16 +110,34 @@ function sortear(estado: EstadoJogo, fase: FaseCopa, clubes: string[]) {
   }
   const datas = SEMANAS(ano)[fase].map((s) => quarta(ano, s));
   const base = { serie: "CB" as const, fase, jogada: false, gm: 0, gv: 0, eventos: [] };
+  // Num ano de Copa do Mundo, as semanas depois dela ficam cheias (as rodadas e as fases das copas que saíram da janela):
+  // se um dos dois já joga na véspera ou no dia seguinte da quarta, o jogo vai para a terça, a quinta, a segunda ou a sexta
+  // (R115). Fora dos anos de Copa, sempre a quarta, como antes.
+  const ocupadas = new Map<string, Set<string>>();
+  if (anoDeCopaDoMundo(ano)) {
+    for (const p of estado.partidas) for (const id of [p.mandante, p.visitante]) (ocupadas.get(id) ?? ocupadas.set(id, new Set()).get(id)!).add(p.data);
+  }
+  const livre = (id: string, d: string) => ![-1, 0, 1].some((k) => ocupadas.get(id)?.has(somarDias(d, k)));
+  // Quem joga a Libertadores (às terças) prefere a quinta; quem joga a Sul-Americana (às quintas), a terça: as fases delas
+  // são marcadas depois e assim cabem na mesma semana.
+  const naCopa = (copa: string, id: string) => !!estado.copas?.[copa as keyof NonNullable<typeof estado.copas>]?.clubes.includes(id);
+  const dataDoJogo = (quartaFeira: string, a: string, b: string) => {
+    if (!anoDeCopaDoMundo(ano)) return quartaFeira;
+    const ordem = [a, b].some((id) => naCopa("K-LIB", id)) ? [1, 0, -1, -2, 2] : [a, b].some((id) => naCopa("K-SUL", id)) ? [-1, 0, 1, -2, 2] : [0, -1, 1, -2, 2];
+    const d = ordem.map((k) => somarDias(quartaFeira, k)).find((x) => x > estado.data && livre(a, x) && livre(b, x)) ?? quartaFeira;
+    for (const id of [a, b]) (ocupadas.get(id) ?? ocupadas.set(id, new Set()).get(id)!).add(d);
+    return d;
+  };
   pares.forEach(([melhor, pior], i) => {
     const chave = i + 1;
     if (fase === "final") {
-      estado.partidas.push({ ...base, id: `${ano}-CB-final`, chave, rodada: 1, data: datas[0], mandante: melhor, visitante: pior, neutro: true });
+      estado.partidas.push({ ...base, id: `${ano}-CB-final`, chave, rodada: 1, data: dataDoJogo(datas[0], melhor, pior), mandante: melhor, visitante: pior, neutro: true });
     } else if (IDA_E_VOLTA.includes(fase)) {
       // O mais bem colocado no ranking decide em casa.
-      estado.partidas.push({ ...base, id: `${ano}-CB-${fase}-${chave}-ida`, chave, rodada: 1, perna: 1, data: datas[0], mandante: pior, visitante: melhor });
-      estado.partidas.push({ ...base, id: `${ano}-CB-${fase}-${chave}-volta`, chave, rodada: 2, perna: 2, data: datas[1], mandante: melhor, visitante: pior });
+      estado.partidas.push({ ...base, id: `${ano}-CB-${fase}-${chave}-ida`, chave, rodada: 1, perna: 1, data: dataDoJogo(datas[0], pior, melhor), mandante: pior, visitante: melhor });
+      estado.partidas.push({ ...base, id: `${ano}-CB-${fase}-${chave}-volta`, chave, rodada: 2, perna: 2, data: dataDoJogo(datas[1], melhor, pior), mandante: melhor, visitante: pior });
     } else {
-      estado.partidas.push({ ...base, id: `${ano}-CB-${fase}-${chave}`, chave, rodada: 1, data: datas[0], mandante: pior, visitante: melhor });
+      estado.partidas.push({ ...base, id: `${ano}-CB-${fase}-${chave}`, chave, rodada: 1, data: dataDoJogo(datas[0], pior, melhor), mandante: pior, visitante: melhor });
     }
   });
   estado.partidas.sort((x, y) => x.data.localeCompare(y.data) || x.serie.localeCompare(y.serie));

@@ -1806,8 +1806,9 @@ describe("R115 os clubes param durante a Copa do Mundo (Modo Copa, nov/2026)", (
     expect(clubes.every((p) => p.jogada)).toBe(true);
     const a = clubes.filter((p) => p.serie === "A");
     expect(a).toHaveLength(380);
-    // A última rodada da Série A no mesmo sábado de sempre (14 de novembro: as duas datas seguintes são do playoff da B).
-    expect(a.map((p) => p.data).sort().at(-1)).toBe("2026-11-14");
+    // A Série A acaba no máximo três semanas depois do normal (14 de novembro): as rodadas da janela vão para quartas sem
+    // copa e, faltando lugar, para sábados depois da última rodada.
+    expect(a.map((p) => p.data).sort().at(-1)! <= "2026-12-06").toBe(true);
     // A Copa do Brasil e as copas seguem (com final), e a Série D também.
     expect(e.copa!.campeao).toBeDefined();
     expect(e.torneios!.D!.campeao).toBeDefined();

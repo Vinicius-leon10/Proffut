@@ -20,7 +20,7 @@
 import participantesJson from "../../data/copas-2026/participantes.json";
 import europaCopasJson from "../../data/europa-2026/copas.json";
 import { comArtigo, concorda } from "./artigos";
-import { anoDeCopaDoMundo, inicioDaTemporada, semanasForaDaCopa, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
+import { SEMANAS_COM_COPAS, anoDeCopaDoMundo, inicioDaTemporada, naJanelaDaCopa, semanasForaDaCopa, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { chavesDaFase, classificacao, tabelaDaLiga, vencedorDaChave, type LinhaTabela } from "./competicoes";
 import { lancar } from "./financas";
 import { enviarMensagem } from "./mensagens";
@@ -798,7 +798,17 @@ function escolherData(estado: EstadoJogo, ocupacao: Ocupacao, a: string, b: stri
     for (let k = -folga; k <= folga; k++) if (s.has(somarDias(d, k))) return false;
     return true;
   };
-  const escolhida = candidatas.find((d) => livre(a, d, 1) && livre(b, d, 1)) ?? candidatas.find((d) => livre(a, d, 0) && livre(b, d, 0)) ?? candidatas[0];
+  // Num ano de Copa do Mundo as semanas depois dela ficam cheias (as rodadas e as fases que saíram da janela): sem dia livre
+  // de terça a quinta, a segunda ou a sexta (R115; fora dos anos de Copa, nada muda).
+  const copa = anoDeCopaDoMundo(estado.temporada);
+  const extras = copa ? (["seg", "sex"] as Dia[]).map((d) => diaDaSemana(estado.temporada, semana, d)).filter((d) => d >= minimo && !naJanelaDaCopa(d)) : [];
+  // E, sem nenhum dia livre na semana, a semana seguinte (até duas semanas depois).
+  const depois = copa ? [1, 2].flatMap((k) => ([dia, ...OUTROS_DIAS[dia], "seg", "sex"] as Dia[]).map((d) => diaDaSemana(estado.temporada, semana + k, d))).filter((d) => !naJanelaDaCopa(d)) : [];
+  // Ainda sem dia: o primeiro dia livre para os dois a partir do mínimo, até 4 semanas depois.
+  const dias = copa ? Array.from({ length: 28 }, (_, k) => somarDias(minimo, k)).filter((d) => !naJanelaDaCopa(d)) : [];
+  const escolhida = [...candidatas, ...extras, ...depois].find((d) => d >= minimo && livre(a, d, 1) && livre(b, d, 1))
+    ?? dias.find((d) => livre(a, d, 1) && livre(b, d, 1))
+    ?? candidatas.find((d) => livre(a, d, 0) && livre(b, d, 0)) ?? dias.find((d) => livre(a, d, 0) && livre(b, d, 0)) ?? candidatas[0];
   for (const id of [a, b]) {
     let s = ocupacao.get(id);
     if (!s) ocupacao.set(id, (s = new Set()));
@@ -882,6 +892,12 @@ function rodadasCruzadas(a: string[], b: string[], rodadas: number): Confronto[]
 }
 
 /** As semanas das fases de cada copa num ano de Copa do Mundo (`semanasForaDaCopa`, todas as fases em ordem). */
+function registrarSemanasDasCopas() {
+  // As semanas que as copas usam num ano de Copa (as mesmas em todos): as rodadas que saem da janela da Copa não vão
+  // para elas (`rodadasForaDaCopa`).
+  for (const def of DEFINICOES) for (const semana of semanasForaDaCopa(2026, def.fases.flatMap((f) => f.semanas))) SEMANAS_COM_COPAS.add(semana);
+}
+
 const SEMANAS_NA_COPA = new Map<string, Map<string, number[]>>();
 
 /**
@@ -1248,5 +1264,7 @@ export function situacaoNaCopaDeClubes(estado: EstadoJogo, copaId: IdCopa, clube
   const faseDoProximo = proximo ? def.fases.find((f) => f.id === proximo.fase)! : undefined;
   return faseDoProximo ? `${nome} está ${naFase(faseDoProximo)} da ${def.nome}.` : `${nome} passou de fase na ${def.nome} e espera o sorteio da próxima.`;
 }
+
+registrarSemanasDasCopas();
 
 export { PAISES, divisaoDaLiga };

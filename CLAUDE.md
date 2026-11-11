@@ -703,7 +703,13 @@ janela vão para quartas depois da Copa, ou quintas e terças, a 2 dias de qualq
 Copa do Brasil; o campeonato acaba na mesma data), `semanasForaDaCopa` (copas: as fases da janela vão para a semana
 depois dela e as seguintes andam o necessário; `semanasDaFase` em copas.ts, `semanasDaCopaDoBrasil`, com
 `SEMANAS_COPA_DO_BRASIL` agora em calendario.ts) e `depoisDaCopa` (mata-mata dos torneios). Séries (`datasDaTemporada`: a
-A e a B com as quartas novas; a C, só aos sábados, acaba umas semanas depois), Série D, estaduais, ligas e copas. As
+A e a B com as quartas novas; a C, só aos sábados, acaba umas semanas depois), Série D, estaduais, ligas e copas.
+Para ninguém jogar em dias seguidos (o teste das copas confere isso em 2026): as rodadas extras só vão para semanas sem
+copa de clubes (`SEMANAS_COM_COPAS`, preenchido por copas.ts e pela Copa do Brasil) e, faltando lugar, para depois da última
+rodada (a A de 2026 acaba em 5 de dezembro e o playoff da B vai até 19 de dezembro); as fases de copa empurradas pulam as
+semanas com rodada das séries no meio da semana (20 e 25); a Copa do Brasil, só em ano de Copa, escolhe o dia (quinta para
+quem joga a Libertadores, terça para quem joga a Sul-Americana, `dataDoJogo` em copa.ts) e o `escolherData` das copas, só
+em ano de Copa, tenta também segunda e sexta, as duas semanas seguintes e, por fim, o primeiro dia livre (fora da janela). As
 seleções não mudam. Save em andamento: os jogos já marcados ficam; a pausa vale nas temporadas novas. **A fazer (parte
 2):** as telas (abertura, painel da Copa do técnico, espectador uma fase por toque, chaveamento, final ao vivo só
 assistindo, campeão com prêmios, convocação final de 26, visual azul-noite e dourado).

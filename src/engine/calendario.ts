@@ -82,10 +82,13 @@ export function semanasForaDaCopa(ano: number, semanas: number[]): number[] {
   if (!anoDeCopaDoMundo(ano)) return semanas;
   const resultado: number[] = [];
   let anterior = -Infinity;
+  const naJanela = (x: number) => x >= SEMANAS_DA_COPA.de && x <= SEMANAS_DA_COPA.ate;
   for (const s of semanas) {
-    let c = s >= SEMANAS_DA_COPA.de && s <= SEMANAS_DA_COPA.ate ? SEMANAS_DA_COPA.ate + 1 : s;
-    c = Math.max(c, anterior + 1);
-    if (c >= SEMANAS_DA_COPA.de && c <= SEMANAS_DA_COPA.ate) c = SEMANAS_DA_COPA.ate + 1;
+    let c = Math.max(naJanela(s) ? SEMANAS_DA_COPA.ate + 1 : s, anterior + 1);
+    if (naJanela(c)) c = SEMANAS_DA_COPA.ate + 1;
+    // A semana que andou não cai numa das semanas com rodada das séries no meio da semana (senão quem joga a copa na
+    // quinta joga também a série na quarta).
+    if (c !== s) while (SEMANAS_COM_MEIO_DE_SEMANA.includes(c) || naJanela(c)) c++;
     resultado.push(c);
     anterior = c;
   }
@@ -96,10 +99,23 @@ const DIAS = 86_400_000;
 const distancia = (a: string, b: string) => Math.abs(paraData(a).getTime() - paraData(b).getTime()) / DIAS;
 
 /**
+ * Semanas com jogo de alguma copa de clubes num ano de Copa do Mundo (preenchido por copas.ts e pela Copa do Brasil): as
+ * rodadas que saem da janela da Copa não vão para essas semanas, senão quem joga a copa na terça ou na quinta ficaria com
+ * jogos em dias seguidos.
+ */
+export const SEMANAS_COM_COPAS = new Set<number>();
+
+/** A semana da temporada de uma data (0: a do primeiro sábado de abril). */
+export function semanaDaData(data: string): number {
+  return Math.floor(diasEntre(inicioDaTemporada(Number(data.slice(0, 4))), data) / 7);
+}
+
+/**
  * As datas de um campeonato de rodadas (uma data por rodada, em ordem) num ano de Copa do Mundo: as rodadas que caíam na
- * janela vão para quartas-feiras depois da Copa (ou quintas e terças, se a quarta já tem jogo), sem passar da última data
- * do campeonato: ele acaba quando acabaria, com jogos no meio da semana, como na vida real. Cada data nova fica a pelo menos
- * 2 dias das outras do campeonato e das de `evitar` (a Copa do Brasil, para as séries). Fora dos anos de Copa, as mesmas.
+ * janela vão para quartas-feiras depois da Copa (ou quintas e terças) em semanas sem copa de clubes, sem passar da última
+ * data; faltando lugar, para depois da última rodada (no mesmo dia da semana, uma por semana): o campeonato acaba no
+ * máximo umas semanas depois do normal, como na vida real. Cada data nova fica a pelo menos 2 dias das outras do campeonato
+ * e das de `evitar` (a Copa do Brasil, para as séries). Fora dos anos de Copa, as mesmas.
  */
 export function rodadasForaDaCopa(datas: string[], evitar: string[] = []): string[] {
   if (!datas.length) return datas;
@@ -108,25 +124,21 @@ export function rodadasForaDaCopa(datas: string[], evitar: string[] = []): strin
   const fora = datas.filter((d) => d < janela.de || d > janela.ate);
   const faltam = datas.length - fora.length;
   if (!faltam) return datas;
-  const ultima = [...datas].sort().at(-1)!;
-  const primeira = [...datas].sort()[0];
+  const ordenadas = [...datas].sort();
+  const ultima = ordenadas.at(-1)!;
   const ocupadas = [...fora, ...evitar];
   const escolhidas: string[] = [];
   const livre = (d: string) => !naJanelaDaCopa(d) && [...ocupadas, ...escolhidas].every((o) => distancia(o, d) >= 2);
-  // Depois da Copa (até a última rodada), uma semana de cada vez: quarta, quinta ou terça.
-  const semanas: string[] = [];
-  for (let d = somarDias(janela.ate, 1); d <= ultima; d = somarDias(d, 7)) semanas.push(d);
-  // Faltando lugar, as semanas de antes da Copa (da mais perto para a mais longe).
-  for (let d = somarDias(janela.de, -7); d >= primeira; d = somarDias(d, -7)) semanas.push(d);
-  for (const inicioDaSemana of semanas) {
-    if (escolhidas.length === faltam) break;
-    // A segunda-feira da semana (a de `inicioDaSemana` ou a seguinte).
-    const segunda = somarDias(inicioDaSemana, (8 - paraData(inicioDaSemana).getUTCDay()) % 7);
-    const opcao = [2, 3, 1].map((k) => somarDias(segunda, k)).find((d) => d >= primeira && d <= ultima && livre(d));
+  // Depois da Copa e até a última rodada, nas semanas sem copa de clubes: quarta, quinta ou terça.
+  for (let segunda = somarDias(janela.ate, 1); segunda <= ultima && escolhidas.length < faltam; segunda = somarDias(segunda, 7)) {
+    if (SEMANAS_COM_COPAS.has(semanaDaData(segunda))) continue;
+    const opcao = [2, 3, 1].map((k) => somarDias(segunda, k)).find((d) => d <= ultima && livre(d));
     if (opcao) escolhidas.push(opcao);
   }
-  // Sem lugar até a última rodada (não acontece com os calendários do jogo), depois dela, uma por semana.
-  for (let d = somarDias(ultima, 3); escolhidas.length < faltam; d = somarDias(d, 7)) if (livre(d)) escolhidas.push(d);
+  // Faltando lugar, depois da última rodada (e da Copa), no mesmo dia da semana dela, uma por semana.
+  let d = somarDias(ultima, 7);
+  while (d <= janela.ate) d = somarDias(d, 7);
+  for (; escolhidas.length < faltam; d = somarDias(d, 7)) if (livre(d)) escolhidas.push(d);
   return [...fora, ...escolhidas].sort();
 }
 
@@ -153,6 +165,8 @@ export function semanasDaCopaDoBrasil(ano: number): Record<string, number[]> {
   for (const f of fases) resultado[f] = SEMANAS_COPA_DO_BRASIL[f].map(() => todas[i++]);
   return resultado;
 }
+// As semanas da Copa do Brasil num ano de Copa do Mundo (as mesmas em todos) entram nas semanas com copas.
+for (const semana of Object.values(semanasDaCopaDoBrasil(2026)).flat()) SEMANAS_COM_COPAS.add(semana);
 
 /**
  * As datas das séries: os sábados e as quartas das semanas com meio de semana. Num ano de Copa do Mundo, os sábados da
