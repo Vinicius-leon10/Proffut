@@ -1603,8 +1603,9 @@ describe("copas de clubes (Libertadores, Sul-Americana, Recopa, Concacaf, region
 
   it("todas as copas acabam com campeão e vice, sem jogo pendente", () => {
     expect(temporadaEncerrada(e)).toBe(true);
-    // A Supercopa da UEFA só começa em 2027 (a base não tem as finais de 2025/26).
-    expect(Object.keys(e.copas!).length).toBe(DEFINICOES.filter((d) => d.id !== "K-USC").length);
+    // A Supercopa da UEFA e as 7 supercopas nacionais da Europa só começam em 2027 (a base não tem as finais de 2025/26).
+    const so2027 = ["K-USC", "K-SEN", "K-SES", "K-SIT", "K-SDE", "K-SFR", "K-SPT", "K-SNL"];
+    expect(Object.keys(e.copas!).length).toBe(DEFINICOES.filter((d) => !so2027.includes(d.id)).length);
     for (const c of Object.values(e.copas!)) {
       expect(c!.fase, c!.id).toBe("encerrada");
       expect(c!.campeao, c!.id).toBeTruthy();
