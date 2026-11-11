@@ -85,9 +85,9 @@ test("R91 Técnico de seleção: o cartão da seleção no Painel, a convocaçã
   await jogarPartida(page);
   await abrirSelecoes(page);
   await page.getByRole("combobox", { name: "Seleções" }).selectOption({ label: "Amistosos" });
-  const jogo = page.locator("main .jogo-rodada.meu").first();
+  // O Brasil tem dois amistosos na data FIFA (o mais recente, ainda por jogar, vem primeiro): o jogado tem o placar.
+  const jogo = page.locator("main .jogo-rodada.meu").filter({ has: page.locator(".r", { hasText: /\d+ x \d+/ }) }).first();
   await expect(jogo).toContainText("Brasil");
-  await expect(jogo.locator(".r")).toHaveText(/\d+ x \d+/);
 });
 
 test("R92 Convite de seleção depois de ganhar a liga principal: aceitar faz do técnico o da seleção, junto com o clube; o outro convite cai", async ({ page }) => {
