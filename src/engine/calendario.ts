@@ -163,6 +163,8 @@ export function semanasDaCopaDoBrasil(ano: number): Record<string, number[]> {
   const resultado: Record<string, number[]> = {};
   let i = 0;
   for (const f of fases) resultado[f] = SEMANAS_COPA_DO_BRASIL[f].map(() => todas[i++]);
+  // Num ano de Copa as séries acabam mais tarde (19 de dezembro em 2026): a final continua o último jogo do ano no Brasil.
+  if (anoDeCopaDoMundo(ano)) resultado.final = [SABADOS_POR_TEMPORADA + 2];
   return resultado;
 }
 // As semanas da Copa do Brasil num ano de Copa do Mundo (as mesmas em todos) entram nas semanas com copas.
