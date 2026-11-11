@@ -466,7 +466,8 @@ um botão no fim). Voz: ElevenLabs, voz "Liam" (`TX3LPaxmHKxFdv7VOQHJ`, `eleven_
 chave fica só na variável de ambiente. Os tempos de cada cena seguem as pausas da voz (`silencedetect` do ffmpeg). As telas vêm
 do jogo rodando (Playwright, iPhone 13, capturas em alta resolução). **Música (pedido do usuário):** "Sempre traga musicas de futebol para cada video": a cada
 vídeo, sugerir músicas de jogos de futebol (trilhas de FIFA, músicas de estádio e de Copa), para ele pôr pela biblioteca do
-TikTok, bem baixinha sob a voz. Já usadas: episódio 1 com "Love Me Again" (John Newman, FIFA 14). Não repetir sem ele pedir.
+TikTok, bem baixinha sob a voz. Já usadas: episódio 1 com "Love Me Again" (John Newman, FIFA 14); episódio 9 ("Os jogadores de verdade", com a voz do
+usuário, `Episodio09.tsx`) com "Jerk It Out" (Caesars, FIFA Football 2004). Não repetir sem ele pedir.
 **Texto para gravar (pedido do usuário):** "Quando eu pedir o texto do vídeo você sempre vai mandar ele limpo, para eu
 gravar": mandar só o texto da fala, em parágrafos, sem título, dicas ou comentários. Ele grava e manda o áudio; o vídeo
 segue as pausas da gravação dele.
