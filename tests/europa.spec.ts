@@ -95,7 +95,7 @@ test("R107 copas nacionais da Europa e os países novos nas copas da UEFA: com o
   await expect(page.locator("main")).toContainText("16 avos de final");
   await expect(page.locator("main .jogo-rodada")).toHaveCount(16);
   await expect(page.locator("main .jogo-rodada.meu")).toHaveCount(1);
-  await copa.selectOption({ label: "Liga dos Campeões" });
+  await copa.selectOption("K-UCL");
   await expect(page.locator("main")).toContainText("Os campeões de 12 países em ida e volta");
   await expect(page.locator("main .jogo-rodada")).toHaveCount(12);
   for (const liga of ["CH", "DK", "GR", "HR", "NO", "PL", "RO", "XS", "SE", "RS", "CZ", "UA"]) {
