@@ -25,7 +25,7 @@ import { chavesDaFase, classificacao, tabelaDaLiga, vencedorDaChave, type LinhaT
 import { lancar } from "./financas";
 import { enviarMensagem } from "./mensagens";
 import { hashTexto, rngPara, type Rng } from "./rng";
-import { PAISES, divisaoDaLiga, tabelaDoTorneio } from "./torneios";
+import { MAXIMO_UMA_RODADA_POR_SEMANA, PAISES, divisaoDaLiga, tabelaDoTorneio } from "./torneios";
 import type { EstadoCopaClubes, EstadoJogo, IdCopa, Partida } from "./tipos";
 
 /** Quem joga cada copa em 2026, das páginas de verdade (copa → fase → clubes). */
@@ -332,7 +332,7 @@ const SEMANAS_EUA = [5, 6, 10, 13, 25];
 /** Copa nacional de um país: mata-mata em jogo único (até 64 clubes, os das divisões do país no jogo). */
 function copaNacional(
   id: IdCopa, nome: string, pais: string,
-  opcoes: { maximo?: number; semanas?: number[]; neutra?: boolean; sem?: string[]; premios?: Record<string, number> } = {},
+  opcoes: { maximo?: number; semanas?: number[]; neutra?: boolean; sem?: string[]; premios?: Record<string, number>; soQuemFolgaNaQuarta?: boolean } = {},
 ): DefinicaoCopa {
   const maximo = opcoes.maximo ?? 64;
   const semanas = opcoes.semanas ?? SEMANAS_NACIONAIS;
@@ -349,7 +349,9 @@ function copaNacional(
     id, nome, grupo: "nacional", pais, fases,
     participantes(estado) {
       // Os clubes das divisões do país no jogo, da 1ª para baixo, pela reputação; o tamanho é a maior potência de 2 que cabe.
-      const ligas = [1, 2, 3].map((n) => (n === 1 ? pais : `${pais}${n}`));
+      // Na Europa, a divisão que joga também às quartas (mais de 30 clubes) fica de fora: a copa é às quartas.
+      const ligas = [1, 2, 3].map((n) => (n === 1 ? pais : `${pais}${n}`))
+        .filter((l) => !opcoes.soQuemFolgaNaQuarta || (estado.torneios?.[`L-${l}`]?.clubes.length ?? 0) <= MAXIMO_UMA_RODADA_POR_SEMANA);
       const ids = ligas.flatMap((l) => ordemDaLiga(estado, l, false)).filter((c) => !opcoes.sem?.includes(c));
       if (ids.length < 8) return undefined;
       const tamanho = Math.min(maximo, 2 ** Math.floor(Math.log2(ids.length)));
@@ -369,7 +371,7 @@ function copaNacional(
 const SEMANAS_EUROPA = [-8, -4, 0, 7, 12, 16];
 const PREMIOS_COPA_EUROPA = { campeao: 4 * MILHAO, vice: 1.5 * MILHAO };
 
-const copaDaEuropa = (id: IdCopa, nome: string, pais: string) => copaNacional(id, nome, pais, { semanas: SEMANAS_EUROPA, premios: PREMIOS_COPA_EUROPA });
+const copaDaEuropa = (id: IdCopa, nome: string, pais: string) => copaNacional(id, nome, pais, { semanas: SEMANAS_EUROPA, premios: PREMIOS_COPA_EUROPA, soQuemFolgaNaQuarta: true });
 
 /** Supercopa de um país da Europa: o campeão da liga contra o da copa (ou o vice da liga), em jogo único. */
 function supercopaDaEuropa(id: IdCopa, nome: string, pais: string, neutro: boolean): DefinicaoCopa {

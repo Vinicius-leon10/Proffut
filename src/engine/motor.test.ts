@@ -1704,7 +1704,8 @@ describe("copas de clubes (Libertadores, Sul-Americana, Recopa, Concacaf, region
     expect(aberto.partidas.some((p) => p.serie.startsWith("K-"))).toBe(false);
     avancar(aberto);
     expect(aberto.temporada).toBe(2027);
-    expect(Object.keys(aberto.copas!).length).toBeGreaterThanOrEqual(DEFINICOES.length - 2);
+    // Sem copas em 2026, não há os campeões das copas nacionais da Europa: as 7 supercopas de lá ficam para 2028.
+    expect(Object.keys(aberto.copas!).length).toBeGreaterThanOrEqual(DEFINICOES.length - 2 - 7);
     expect(aberto.copas!["K-LIB"]!.clubes).toHaveLength(47);
   });
 });
@@ -2284,13 +2285,15 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
     expect(vagas["K-SEN"]?.final).toEqual([tabelaEN[0], faCup === tabelaEN[0] ? tabelaEN[1] : faCup]);
   });
 
-  it("copas nacionais da Europa (nov/2026): FA Cup, Copa do Rei, Copa da Itália, Copa da Alemanha, Copa da França, Taça de Portugal e Copa da Holanda com os clubes das 3 divisões do país, mata-mata até a final em campo neutro; as supercopas começam em 2027", () => {
-    const tamanhos: Record<string, number> = { "K-EN": 64, "K-ES": 64, "K-IT": 64, "K-DE": 32, "K-FR": 32, "K-PT": 32, "K-NL": 32 };
+  it("copas nacionais da Europa (nov/2026): FA Cup, Copa do Rei, Copa da Itália, Copa da Alemanha, Copa da França, Taça de Portugal e Copa da Holanda com os clubes das divisões do país (sem a que joga também às quartas), mata-mata até a final em campo neutro; as supercopas começam em 2027", () => {
+    const tamanhos: Record<string, number> = { "K-EN": 64, "K-ES": 32, "K-IT": 32, "K-DE": 32, "K-FR": 32, "K-PT": 32, "K-NL": 32 };
     const paises: Record<string, string> = { "K-EN": "EN", "K-ES": "ES", "K-IT": "IT", "K-DE": "DE", "K-FR": "FR", "K-PT": "PT", "K-NL": "NL" };
     for (const [id, n] of Object.entries(tamanhos)) {
       const c = estado.copas?.[id as `K-${string}`];
       expect(c?.clubes, id).toHaveLength(n);
       expect(c?.clubes.every((x) => estado.clubes[x].pais === paises[id]), id).toBe(true);
+      // A 3ª da Espanha (32 clubes) e a da Itália (57) jogam também às quartas: ficam fora da copa, que é às quartas.
+      expect(c?.clubes.some((x) => (estado.torneios![`L-${estado.clubes[x].liga}` as IdTorneio]?.clubes.length ?? 0) > 30), id).toBe(false);
       // Os clubes da 1ª divisão estão todos.
       for (const x of estado.torneios![`L-${paises[id]}` as IdTorneio]!.clubes) expect(c?.clubes, `${id} ${x}`).toContain(x);
       expect(DEFINICOES.find((d) => d.id === id)?.grupo).toBe("nacional");

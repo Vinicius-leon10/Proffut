@@ -205,6 +205,9 @@ export function domingo(ano: number, semana: number): string {
   return somarDias(inicioDaTemporada(ano), semana * 7 + 1);
 }
 
+/** Divisão da Europa com mais clubes que isso joga duas rodadas por semana (domingo e quarta). */
+export const MAXIMO_UMA_RODADA_POR_SEMANA = 30;
+
 /** Dia em que a temporada começa: uma semana antes dos estaduais. */
 export function inicioDoAno(ano: number): string {
   return somarDias(domingo(ano, SEMANA_ESTADUAIS), -8);
@@ -307,7 +310,7 @@ export function criarTorneios(estado: EstadoJogo, { semEstaduais = false } = {})
       const grande = europa && clubes.length > 24;
       const rodadas = (europa && !grande) || 2 * ida.length <= 35 ? [...ida, ...ida.map((jogos) => jogos.map(([a, b]) => [b, a] as Confronto))] : ida;
       const inicio = europa ? SEMANA_ESTADUAIS : 0;
-      const data = (r: number) => (europa && clubes.length > 30 ? somarDias(domingo(ano, inicio + Math.floor(r / 2)), r % 2 ? 3 : 0) : domingo(ano, inicio + r));
+      const data = (r: number) => (europa && clubes.length > MAXIMO_UMA_RODADA_POR_SEMANA ? somarDias(domingo(ano, inicio + Math.floor(r / 2)), r % 2 ? 3 : 0) : domingo(ano, inicio + r));
       estado.partidas.push(...partidasDasRodadas(ano, id, "liga", rodadas, rodadas.map((_, r) => data(r))));
     }
     torneios[id] = t;

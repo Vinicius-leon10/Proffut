@@ -72,7 +72,7 @@ test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 23 países
 
 // Copas nacionais da Europa e vagas dos 16 países novos nas copas da UEFA (projeto "jogo completo", pedido "trazer
 // tudo que está faltando, para deixar o jogo agora completo", nov/2026).
-test("R107 copas nacionais da Europa e os países novos nas copas da UEFA: com o Real Madrid, Copas abre na Copa do Rei (o primeiro jogo de copa dele), com os 64 clubes da Espanha; as 7 copas nacionais da Europa estão em Copas nacionais; a Liga dos Campeões começa no playoff com os campeões de 12 países novos", async ({ page }) => {
+test("R107 copas nacionais da Europa e os países novos nas copas da UEFA: com o Real Madrid, Copas abre na Copa do Rei (o primeiro jogo de copa dele), com os 32 clubes da 1ª e da 2ª divisão da Espanha; as 7 copas nacionais da Europa estão em Copas nacionais; a Liga dos Campeões começa no playoff com os campeões de 12 países novos", async ({ page }) => {
   const nomes = new Map([...europa, ...outros, ...segundas].map((c) => [c.id, c.nome]));
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
@@ -91,9 +91,9 @@ test("R107 copas nacionais da Europa e os países novos nas copas da UEFA: com o
   for (const c of ["FA Cup", "Copa do Rei", "Copa da Itália", "Copa da Alemanha", "Copa da França", "Taça de Portugal", "Copa da Holanda"]) expect(nacionais).toContain(c);
   // As supercopas só começam em 2027 (sem os campeões das copas de 2025/26 no jogo).
   expect(nacionais.filter((c) => c.startsWith("Super"))).toEqual([]);
-  // A Copa do Rei começa nos 32 avos: 32 jogos, o Real Madrid num deles.
-  await expect(page.locator("main")).toContainText("32 avos de final");
-  await expect(page.locator("main .jogo-rodada")).toHaveCount(32);
+  // A Copa do Rei começa nos 16 avos: 16 jogos, o Real Madrid num deles (a 3ª divisão, que joga também às quartas, fica de fora).
+  await expect(page.locator("main")).toContainText("16 avos de final");
+  await expect(page.locator("main .jogo-rodada")).toHaveCount(16);
   await expect(page.locator("main .jogo-rodada.meu")).toHaveCount(1);
   await copa.selectOption({ label: "Liga dos Campeões" });
   await expect(page.locator("main")).toContainText("Os campeões de 12 países em ida e volta");

@@ -595,7 +595,7 @@ por isso).
 **Copas nacionais da Europa e vagas dos países novos nas copas da UEFA (nov/2026, parte 1 do "jogo completo", R107,
 `copas.ts`):** FA Cup, Copa do Rei, Copa da Itália, Copa da Alemanha, Copa da França, Taça de Portugal e Copa da Holanda
 (`COPAS_DA_EUROPA`, `copaNacional` com `SEMANAS_EUROPA` [-8, -4, 0, 7, 12, 16], às quartas, fora das semanas das copas da
-UEFA e das datas FIFA): os clubes das 3 divisões do país, 64 (Inglaterra, Espanha, Itália) ou 32, jogo único na casa do
+UEFA e das datas FIFA): os clubes das divisões do país, menos a que joga também às quartas (mais de 30 clubes: a 3ª da Espanha e a da Itália, `MAXIMO_UMA_RODADA_POR_SEMANA`), 64 (Inglaterra) ou 32, jogo único na casa do
 pior, final em campo neutro; prêmio do campeão 4 mi. Supercopas (`K-SEN`, `K-SES`...: campeão da liga x campeão da copa,
 ou o vice da liga), semana −12, a partir de 2027 (`vagasDasSupercopasDaEuropa`). O campeão da copa fica com a vaga da Liga
 Europa do país se não tem vaga melhor. **UEFA:** `VAGAS_UEFA` com 22 ligas (a Rússia fica de fora, suspensa pela UEFA):
