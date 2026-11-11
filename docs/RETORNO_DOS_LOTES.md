@@ -5,21 +5,16 @@ O Claude Code do Proffut confere cada lote que chega e escreve aqui o resultado.
 
 ## Refazer (prioridade)
 
-Todos os 417 escudos dos lotes 01 a 09 estavam certos. Ficaram faltando estes (procure em outra fonte além da Wikipédia,
-como Google Imagens, FotMob, Soccerway ou o site/Instagram do clube):
+Lotes 10 a 17 e a refação dos lotes 01–09: os 422 escudos estavam certos e entraram no jogo. Ainda faltam (tente de novo
+só se achar uma fonte segura; senão deixe de fora, sem problema):
 
-- Sem escudo na página: c-d-sao-salvador, nsoatreman, jkt-ruvu-stars, kagera-sugar, kinondoni-municipal-council,
-  as-marsa, atletico-lusaka, forest-rangers, indeni, lumwana-radiants, nairobi-united, konkola-blades, real-kings.
-- Fundo quadrado escuro (pode mandar assim mesmo, se for o escudo certo): bandari, warri-wolves, namungo.
-- Dúvida do clube: azam (Azam FC, Dar es Salaam), mbeya-city (Mbeya City FC), young-africans (Young Africans SC /
-  Yanga, Dar es Salaam), singida-fountain-gate (Fountain Gate FC, antigo Singida Fountain Gate), maritzburg-united
-  (se o clube virou Durban City, mande o escudo do Durban City), hidd (Al-Hidd SCC, Bahrein), qingdao-qingchundao
-  (Qingdao Red Lions / West Coast, Superliga Chinesa 2026), alshariqa (o da lista; se não achar, deixe de fora),
-  baghdad (Baghdad FC, Iraque), immigration (Immigration FC, Malásia), sama-al-sarhan (Sama Al-Sarhan SC, Jordânia).
-- Nova Zelândia (jogam a liga australiana): auckland-fc (Auckland FC, fundado em 2024), wellington-phoenix.
-- Quase invisível: bangkok-united (procure uma versão colorida ou com fundo).
+- Da Ásia e da África: jkt-ruvu-stars, kagera-sugar, mbeya-city, immigration, alshariqa, baghdad, real-kings,
+  bangkok-united (uma versão colorida, com fundo, serve).
+- Da Europa: si-s-rvagur (Ilhas Faroé), kazincbarcika (Hungria), kauno-zalgiris (Lituânia: o Kauno Žalgiris de futebol,
+  fundado em 2004).
+- Os clubes com nome de cidade do lote 11 (anderlecht, genk, gent...), como você já disse que vai refazer.
 
-Depois disso, siga a ordem: 1ª divisão dos países novos da Europa.
+Depois, siga a lista dos que faltam na ordem (Europa, depois 2ª divisão).
 
 ## Lotes conferidos
 
@@ -34,3 +29,12 @@ Depois disso, siga a ordem: 1ª divisão dos países novos da Europa.
 | 07 | escudos | todos os enviados | ver "Refazer" |
 | 08 | escudos | todos os enviados | ver "Refazer" |
 | 09 | escudos | todos os enviados | ver "Refazer" |
+| 01–09 refeito | escudos | 22 | ver "Refazer" |
+| 10 | escudos | todos os enviados | ver "Refazer" |
+| 11 | escudos | todos os enviados | ver "Refazer" |
+| 12 | escudos | todos os enviados | ver "Refazer" |
+| 13 | escudos | todos os enviados | ver "Refazer" |
+| 14 | escudos | todos os enviados | ver "Refazer" |
+| 15 | escudos | todos os enviados | ver "Refazer" |
+| 16 | escudos | todos os enviados | ver "Refazer" |
+| 17 | escudos | todos os enviados | ver "Refazer" |

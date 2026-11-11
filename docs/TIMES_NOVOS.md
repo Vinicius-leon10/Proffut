@@ -11,244 +11,69 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 1196 escudos (0 de clubes brasileiros e 1196 de fora).
+Total: 774 escudos (0 de clubes brasileiros e 774 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
 
-### Albânia (10 clubes)
+### Albânia (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| AF Elbasani | Elbasan | `af-elbasani.png` |
-| Bylis | Ballsh | `bylis.png` |
-| Dinamo City | Tirana | `dinamo-city.png` |
-| Egnatia | Rrogozhinë | `egnatia.png` |
-| Flamurtari | Vlorë | `flamurtari.png` |
-| Partizani Tirana | Tirana | `partizani-tirana.png` |
-| Teuta | Durrës | `teuta.png` |
 | Tirana | Tirana | `tirana.png` |
-| Vllaznia | Shkodër | `vllaznia.png` |
-| Vora | Vorë | `vora.png` |
 
-### Andorra (8 clubes)
+### Andorra (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Atlètic Club d'Escaldes | Escaldes-Engordany | `atletic-club-d-escaldes.png` |
-| Carroi | Andorra-a-Velha | `carroi.png` |
-| Esperança d'Andorra | Andorra-a-Velha | `esperanca-d-andorra.png` |
 | La Massana | La Massana | `la-massana.png` |
-| Ordino | Ordino | `ordino.png` |
-| Pas de la Casa | Pas de la Casa | `pas-de-la-casa.png` |
-| Rànger's | Andorra-a-Velha | `ranger-s.png` |
-| Santa Coloma | Santa Coloma de Andorra | `santa-coloma.png` |
 
-### Angola (1 clube)
+### Azerbaijão (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| C.D. São Salvador | Angola | `c-d-sao-salvador.png` |
-
-### Armênia (10 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Alashkert | Erevã | `alashkert.png` |
-| Ararat Yerevan | Erevã | `ararat-yerevan.png` |
-| Ararat-Armenia | Erevã | `ararat-armenia.png` |
-| BKMA Yerevan | Erevã | `bkma-yerevan.png` |
-| FC Van | Charentsavan | `fc-van.png` |
-| Gandzasar Kapan | Kapan | `gandzasar-kapan.png` |
-| Noah | Erevã | `noah.png` |
-| Pyunik | Erevã | `pyunik.png` |
-| Shirak | Guiumri | `shirak.png` |
-| Urartu | Erevã | `urartu.png` |
-
-### Austrália (2 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Auckland FC | Auckland | `auckland-fc.png` |
-| Wellington Phoenix | Wellington | `wellington-phoenix.png` |
-
-### Azerbaijão (12 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Araz-Naxçıvan | Naquichevão | `araz-naxc-van.png` |
-| Kapaz | Ganja | `kapaz.png` |
-| Karvan İK | Yevlax | `karvan-ik.png` |
-| Neftçi | Baku | `neftci.png` |
-| Qabala İK | Qabala | `qabala-ik.png` |
-| Qarabağ | Ağdam | `qarabag.png` |
-| Sabah | naval rating | `sabah-az.png` |
-| Sumgayit | Sumqayit | `sumgayit.png` |
-| Turan Tovuz | Tovuz | `turan-tovuz.png` |
-| Zira | Zira | `zira.png` |
 | İmişli | İmişli | `imisli.png` |
-| Şamaxı | Baku | `samax.png` |
 
-### Bahrein (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Hidd | Al Muharraq | `hidd.png` |
-
-### Belarus (16 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Arsenal Dzerzhinsk | Dziarzhynsk | `arsenal-dzerzhinsk.png` |
-| BATE Borisov | Barysaŭ | `bate-borisov.png` |
-| Baranovichi | Baranavičy | `baranovichi.png` |
-| Belshina Bobruisk | Babruysk | `belshina-bobruisk.png` |
-| Dinamo Minsk | Minsk | `dinamo-minsk.png` |
-| Dnepr Mogilev | Mahilou | `dnepr-mogilev.png` |
-| Dynamo Brest | Brest | `dynamo-brest.png` |
-| Gomel | Gomel | `gomel.png` |
-| Isloch Minsk Raion | Minsk | `isloch-minsk-raion.png` |
-| Maxline Vitebsk | Vitebsk | `maxline-vitebsk.png` |
-| Minsk | Minsk | `minsk.png` |
-| Molodechno | Maladziechna | `molodechno.png` |
-| Naftan Novopolotsk | Navapolatsk | `naftan-novopolotsk.png` |
-| Neman Grodno | Hrodna | `neman-grodno.png` |
-| Slavia Mozyr | Mazyr | `slavia-mozyr.png` |
-| Slutsk | Slutsk | `slutsk.png` |
-
-### Bulgária (16 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Arda Kardzhali | Kardzhali | `arda-kardzhali.png` |
-| Beroe Stara Zagora | Stara Zagora | `beroe-stara-zagora.png` |
-| Botev Plovdiv | Plovdiv | `botev-plovdiv.png` |
-| Botev Vratsa | Vratsa | `botev-vratsa.png` |
-| CSKA 1948 Sofia | Sófia | `cska-1948-sofia.png` |
-| CSKA Sofia | Sófia | `cska-sofia.png` |
-| Cherno More Varna | Varna | `cherno-more-varna.png` |
-| Dobrudzha Dobrich | Dobrich | `dobrudzha-dobrich.png` |
-| Levski Sofia | Sófia | `levski-sofia.png` |
-| Lokomotiv Plovdiv | Plovdiv | `lokomotiv-plovdiv.png` |
-| Lokomotiv Sofia | Sófia | `lokomotiv-sofia.png` |
-| Ludogorets Razgrad | Razgrad | `ludogorets-razgrad.png` |
-| Montana | Montana | `montana.png` |
-| Septemvri Sofia | Sófia | `septemvri-sofia.png` |
-| Slavia Sofia | Sófia | `slavia-sofia.png` |
-| Spartak Varna | Varna | `spartak-varna.png` |
-
-### Bélgica (16 clubes)
+### Bélgica (8 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Anderlecht | Bruxelas | `anderlecht.png` |
-| Antwerp | Antuérpia | `antwerp.png` |
-| Cercle Brugge | Bruges | `cercle-brugge.png` |
 | Charleroi | Charleroi | `charleroi.png` |
-| Club Brugge | Bruges | `club-brugge.png` |
-| Dender | Denderleeuw | `dender.png` |
 | Genk | Genk | `genk.png` |
 | Gent | Gante | `gent.png` |
 | La Louvière | La Louvière | `la-louviere.png` |
 | Mechelen | Mechelen | `mechelen.png` |
-| OH Leuven | Lovaina | `oh-leuven.png` |
 | Sint-Truiden | Sint-Truiden | `sint-truiden.png` |
-| Standard Liège | Liège | `standard-liege.png` |
-| Union Saint-Gilloise | Bruxelas | `union-saint-gilloise.png` |
 | Westerlo | Westerlo | `westerlo.png` |
-| Zulte Waregem | Waregem | `zulte-waregem.png` |
 
-### Bósnia (12 clubes)
+### Bósnia (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Borac Banja Luka | Banja Luka | `borac-banja-luka.png` |
-| GOŠK Gabela | Gabela | `gosk-gabela.png` |
-| Igman Konjic | Konjic | `igman-konjic.png` |
 | Posušje | Posušje | `posusje.png` |
-| Radnik Bijeljina | Bijeljina | `radnik-bijeljina.png` |
-| Rudar Prijedor | Prijedor | `rudar-prijedor.png` |
-| Sarajevo | Sarajevo | `sarajevo.png` |
-| Sloboda Tuzla | Tuzla | `sloboda-tuzla.png` |
-| Sloga Doboj | Sloga Doboj | `sloga-doboj.png` |
-| Velež Mostar | Mostar | `velez-mostar.png` |
-| Zrinjski Mostar | Mostar | `zrinjski-mostar.png` |
-| Željezničar Sarajevo | Sarajevo | `zeljeznicar-sarajevo.png` |
 
-### Cazaquistão (14 clubes)
+### Cazaquistão (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Aktobe | Aqtöbe | `aktobe.png` |
-| Altai | Semey | `altai.png` |
-| Astana | Astana | `astana.png` |
-| Atyrau | Atyrau | `atyrau.png` |
-| Caspiy | Aktau | `caspiy.png` |
 | Irtysh Pavlodar | Pavlodar | `irtysh-pavlodar.png` |
-| Kairat | Almaty | `kairat.png` |
-| Kaisar | Qyzylorda | `kaisar.png` |
-| Kyzylzhar | Petropavl | `kyzylzhar.png` |
-| Okzhetpes | Kokshetau | `okzhetpes.png` |
-| Ordabasy | Shymkent | `ordabasy.png` |
-| Tobol | Qostanay | `tobol.png` |
-| Ulytau | Ulytau | `ulytau.png` |
-| Yelimay | Semey | `yelimay.png` |
 
-### China (1 clube)
+### Croácia (4 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Qingdao Qingchundao | Qingdao | `qingdao-qingchundao.png` |
-
-### Chipre (14 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| AEK Larnaca | Larnaca | `aek-larnaca.png` |
-| AEL Limassol | Limassol | `ael-limassol.png` |
-| APOEL | Nicósia | `apoel.png` |
-| Akritas Chlorakas | Chloraka | `akritas-chlorakas.png` |
-| Anorthosis Famagusta | Larnaca | `anorthosis-famagusta.png` |
-| Apollon Limassol | Limassol | `apollon-limassol.png` |
-| Aris Limassol | Limassol | `aris-limassol.png` |
-| Enosis Neon Paralimni | Paralimni | `enosis-neon-paralimni.png` |
-| Ethnikos Achna | Dasaki Achnas | `ethnikos-achna.png` |
-| Krasava ENY Ypsonas | Ypsonas | `krasava-eny-ypsonas.png` |
-| Olympiakos Nicosia | Nicósia | `olympiakos-nicosia.png` |
-| Omonia | Nicósia | `omonia.png` |
-| Omonia Aradippou | Aradippou | `omonia-aradippou.png` |
-| Pafos | Pafos | `pafos.png` |
-
-### Croácia (10 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Dinamo Zagreb | Zagreb | `dinamo-zagreb.png` |
-| Gorica | Velika Gorica | `gorica.png` |
-| Hajduk Split | Split | `hajduk-split.png` |
-| Istra 1961 | Pula | `istra.png` |
-| Lokomotiva Zagreb | Zagreb | `lokomotiva-zagreb.png` |
 | Osijek | Osijek | `osijek.png` |
 | Rijeka | Rijeka | `rijeka.png` |
-| Slaven Belupo | Koprivnica | `slaven-belupo.png` |
 | Varaždin | Varaždin | `varazdin.png` |
 | Vukovar | Vukovar | `vukovar.png` |
 
-### Dinamarca (12 clubes)
+### Dinamarca (3 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| AGF | Aarhus | `aarhus.png` |
-| Brøndby | Brøndby | `brondby.png` |
-| Copenhague | Copenhague | `copenhague.png` |
-| Fredericia | Fredericia | `fredericia.png` |
-| Midtjylland | Herning | `midtjylland.png` |
-| Nordsjælland | Farum | `nordsjaelland.png` |
 | Odense | Odense | `odense.png` |
-| Randers | Randers | `randers.png` |
 | Silkeborg | Silkeborg | `silkeborg.png` |
-| Sønderjyske | Haderslev | `sonderjyske.png` |
 | Vejle | Vejle | `vejle.png` |
-| Viborg | Viborg | `viborg.png` |
 
 ### Emirados Árabes (1 clube)
 
@@ -256,144 +81,43 @@ Total: 1196 escudos (0 de clubes brasileiros e 1196 de fora).
 |---|---|---|
 | Alshariqa | Dubai | `alshariqa.png` |
 
-### Escócia (12 clubes)
+### Eslováquia (4 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Aberdeen | Aberdeen | `aberdeen.png` |
-| Celtic | Glasgow | `celtic.png` |
-| Dundee | Dundee | `dundee.png` |
-| Dundee United | Dundee | `dundee-united.png` |
-| Falkirk | Falkirk | `falkirk.png` |
-| Hearts | Edimburgo | `hearts.png` |
-| Hibernian | Edimburgo | `hibernian.png` |
-| Kilmarnock | Kilmarnock | `kilmarnock.png` |
-| Livingston | Livingston | `livingston.png` |
-| Motherwell | Motherwell | `motherwell.png` |
-| Rangers | Glasgow | `rangers.png` |
-| St. Mirren | Paisley | `st-mirren.png` |
-
-### Eslováquia (12 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| DAC Dunajská Streda | Dunajská Streda | `dac-dunajska-streda.png` |
-| KFC Komárno | KFC Komárno | `kfc-komarno.png` |
-| Košice | Košice | `kosice.png` |
 | Podbrezová | Podbrezová | `podbrezova.png` |
 | Ružomberok | Ružomberok | `ruzomberok.png` |
 | Skalica | Skalica | `skalica.png` |
-| Slovan Bratislava | Bratislava | `slovan-bratislava.png` |
-| Spartak Trnava | Trnava | `spartak-trnava.png` |
-| Tatran Prešov | Prešov | `tatran-presov.png` |
-| Trenčín | Trenčín | `trencin.png` |
-| Zemplín Michalovce | Michalovce | `zemplin-michalovce.png` |
 | Žilina | Žilina | `zilina.png` |
 
-### Eslovênia (10 clubes)
+### Eslovênia (4 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Aluminij | Kidričevo | `aluminij.png` |
-| Bravo | Liubliana | `bravo.png` |
 | Celje | Celje | `celje.png` |
 | Domžale | Domžale | `domzale.png` |
-| Koper | Koper | `koper.png` |
 | Maribor | Maribor | `maribor.png` |
-| ND Primorje | Ajdovščina | `nd-primorje.png` |
-| NŠ Mura | Murska Sobota | `ns-mura.png` |
-| Olimpija Ljubljana | Liubliana | `olimpija-ljubljana.png` |
 | Radomlje | Radomlje | `radomlje.png` |
 
-### Estônia (10 clubes)
+### Estônia (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Flora | Tallinn | `flora.png` |
-| Harju | Laagri | `harju.png` |
-| Kuressaare | Kuressaare | `kuressaare.png` |
-| Levadia Tallinn | Tallinn | `levadia-tallinn.png` |
-| Narva Trans | Narva | `narva-trans.png` |
-| Nõmme Kalju | Tallinn | `nomme-kalju.png` |
-| Nõmme United | Tallinn | `nomme-united.png` |
 | Paide | Paide | `paide.png` |
-| Tartu JK Tammeka | Tartu | `tartu-jk-tammeka.png` |
-| Vaprus | Pärnu | `vaprus.png` |
 
-### Finlândia (12 clubes)
+### Finlândia (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| FF Jaro | Jakobstad | `ff-jaro.png` |
-| HJK | Helsínquia | `hjk.png` |
-| IF Gnistan | Helsínquia | `if-gnistan.png` |
-| Ilves | Tampere | `ilves.png` |
-| Inter Turku | Turku | `inter-turku.png` |
-| KuPS | Kuopio | `kups.png` |
-| Lahti | Lahti | `lahti.png` |
 | Mariehamn | Mariehamn | `mariehamn.png` |
-| Oulu | Heinäpää football stadium | `oulu.png` |
-| Seinäjoen Jalkapallokerho | Seinäjoki | `seinajoen-jalkapallokerho.png` |
-| TPS | Turku | `tps.png` |
-| Vaasan Palloseura | Vaasa | `vaasan-palloseura.png` |
 
-### Gana (1 clube)
+### Grécia (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Nsoatreman | Nsoatreman | `nsoatreman.png` |
-
-### Geórgia (10 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Dila Gori | Gori | `dila-gori.png` |
-| Dinamo Batumi | Batumi | `dinamo-batumi.png` |
-| Dinamo Tbilisi | Tiblíssi | `dinamo-tbilisi.png` |
-| Gagra | Gagra | `gagra.png` |
-| Iberia 1999 | Tiblíssi | `iberia-1999.png` |
-| Meshakhte Tkibuli | Tkibuli | `meshakhte-tkibuli.png` |
-| Rustavi | Rustavi | `rustavi.png` |
-| Samgurali Tskaltubo | Tsqaltubo | `samgurali-tskaltubo.png` |
-| Spaeri | Tiblíssi | `spaeri.png` |
-| Torpedo Kutaisi | Kutaisi | `torpedo-kutaisi.png` |
-
-### Gibraltar (11 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Calpe City Magpies | Calpe City Magpies | `calpe-city-magpies.png` |
-| College 1975 | Gibraltar | `college-1975.png` |
-| Europa | Gibraltar | `europa.png` |
-| Europa Point | Gibraltar | `europa-point.png` |
-| Glacis United | Gibraltar | `glacis-united.png` |
-| Hound Dogs | Hound Dogs | `hound-dogs.png` |
-| Lincoln Red Imps | Gibraltar | `lincoln-red-imps.png` |
-| Lions Gibraltar | Gibraltar | `lions-gibraltar.png` |
-| Lynx | Gibraltar | `lynx.png` |
-| Magpies | Gibraltar | `magpies.png` |
-| Manchester 62 | Gibraltar | `manchester-62.png` |
-
-### Grécia (14 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| AEK Atenas | Atenas | `aek-atenas.png` |
-| AEL Larissa | Larissa | `ael-larissa.png` |
 | Aris | Salônica | `aris.png` |
-| Asteras Tripolis | Trípoli | `asteras-tripolis.png` |
-| Atromitos | Atenas | `atromitos.png` |
-| Kifisia | Atenas | `kifisia.png` |
-| Levadiakos | Livadeia | `levadiakos.png` |
-| OFI Creta | Heraklion | `ofi-creta.png` |
-| Olympiacos | Pireu | `olympiacos.png` |
-| PAOK | Salônica | `paok.png` |
-| Panathinaikos | Atenas | `panathinaikos.png` |
-| Panetolikos | Agrinio | `panetolikos.png` |
-| Panserraikos | Serres | `panserraikos.png` |
-| Volos | Volos | `volos.png` |
 
-### Hungria (12 clubes)
+### Hungria (7 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
@@ -402,28 +126,14 @@ Total: 1196 escudos (0 de clubes brasileiros e 1196 de fora).
 | Ferencváros | Budapeste | `ferencvaros.png` |
 | Győr | Győr | `gyor.png` |
 | Kazincbarcika | Kazincbarcika | `kazincbarcika.png` |
-| Kisvárda | Kisvárda | `kisvarda.png` |
-| MTK Budapest | Budapeste | `mtk-budapest.png` |
 | Nyíregyháza | Nyíregyháza | `nyiregyhaza.png` |
-| Paks | Paks | `paks.png` |
-| Puskás Akadémia | Felcsút | `puskas-akademia.png` |
 | Zalaegerszeg | Zalaegerszeg | `zalaegerszeg.png` |
-| Újpest | Budapeste | `ujpest.png` |
 
-### Ilhas Faroé (10 clubes)
+### Ilhas Faroé (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| 07 Vestur | Sandavágur | `07-vestur.png` |
-| B36 Tórshavn | Tórshavn | `b36-torshavn.png` |
-| B68 Toftir | Toftir | `b68-toftir.png` |
-| EB/Streymur | Eiði | `eb-streymur.png` |
-| KÍ Klaksvík | Klaksvík | `ki-klaksvik.png` |
-| NSÍ Runavík | Runavík | `nsi-runavik.png` |
-| Skála ÍF | Skáli | `skala-if.png` |
-| Suðuroy | Vágur | `su-uroy.png` |
 | SÍ Sørvágur | Sørvágs Municipality | `si-s-rvagur.png` |
-| Víkingur Gøta | Leirvík | `vikingur-g-ta.png` |
 
 ### Iraque (1 clube)
 
@@ -431,179 +141,48 @@ Total: 1196 escudos (0 de clubes brasileiros e 1196 de fora).
 |---|---|---|
 | Baghdad | Baghdad | `baghdad.png` |
 
-### Irlanda (10 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Bohemian | Dublin | `bohemian.png` |
-| Derry City | Derry | `derry-city.png` |
-| Drogheda United | Drogheda | `drogheda-united.png` |
-| Dundalk | Dundalk | `dundalk.png` |
-| Galway United | Galway | `galway-united.png` |
-| Shamrock Rovers | Dublin | `shamrock-rovers.png` |
-| Shelbourne | Dublin | `shelbourne.png` |
-| Sligo Rovers | Sligo | `sligo-rovers.png` |
-| St Patrick's Athletic | Dublin | `st-patrick-s-athletic.png` |
-| Waterford | Waterford | `waterford.png` |
-
-### Irlanda do Norte (12 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Ballymena United | Ballymena | `ballymena-united.png` |
-| Bangor | Bangor | `bangor.png` |
-| Carrick Rangers | Carrickfergus | `carrick-rangers.png` |
-| Cliftonville | Belfast | `cliftonville.png` |
-| Coleraine | Coleraine | `coleraine.png` |
-| Crusaders | Belfast | `crusaders.png` |
-| Dungannon Swifts | Dungannon | `dungannon-swifts.png` |
-| Glenavon | Lurgan | `glenavon.png` |
-| Glentoran | Belfast | `glentoran.png` |
-| Larne | Larne | `larne.png` |
-| Linfield | Belfast | `linfield.png` |
-| Portadown | Portadown | `portadown.png` |
-
-### Islândia (12 clubes)
+### Islândia (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Breiðablik | Kópavogur | `brei-ablik.png` |
-| FH | FH | `fh.png` |
-| Fram | Reykjavík | `fram.png` |
-| KA | Akureyri | `ka.png` |
-| KR Reykjavík | Reykjavík | `kr-reykjavik.png` |
-| Keflavík | Keflavík | `keflavik.png` |
-| Stjarnan | Garðabær | `stjarnan.png` |
-| Valur | Reykjavík | `valur.png` |
-| Víkingur Reykjavík | Reykjavík | `vikingur-reykjavik.png` |
-| ÍA | Akranes | `ia.png` |
-| ÍBV | Heimaey | `ibv.png` |
-| Þór Akureyri | Akureyri | `or-akureyri.png` |
 
-### Israel (14 clubes)
+### Israel (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Ashdod | Ashdod | `ashdod.png` |
-| Beitar Jerusalem | Jerusalém | `beitar-jerusalem.png` |
-| Bnei Sakhnin | Sakhnin | `bnei-sakhnin.png` |
-| Hapoel Be'er Sheva | Bersebá | `hapoel-be-er-sheva.png` |
-| Hapoel Haifa | Haifa | `hapoel-haifa.png` |
-| Hapoel Ironi Kiryat Shmona | Qiryat-Chemoná | `hapoel-ironi-kiryat-shmona.png` |
-| Hapoel Jerusalem | Jerusalém | `hapoel-jerusalem.png` |
-| Hapoel Petah Tikva | Petah Tikva | `hapoel-petah-tikva.png` |
-| Hapoel Tel Aviv | Tel Aviv | `hapoel-tel-aviv.png` |
-| Ironi Tiberias | Ironi Tiberias | `ironi-tiberias.png` |
 | Maccabi Bnei Reineh | Reineh | `maccabi-bnei-reineh.png` |
-| Maccabi Haifa | Haifa | `maccabi-haifa.png` |
-| Maccabi Netanya | Netanya | `maccabi-netanya.png` |
-| Maccabi Tel Aviv | Tel Aviv | `maccabi-tel-aviv.png` |
 
-### Jordânia (1 clube)
+### Kosovo (2 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Sama Al-Sarhan | Sama Al-Sarhan | `sama-al-sarhan.png` |
-
-### Kosovo (10 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Ballkani | Suva Reka | `ballkani.png` |
-| Drenica | Skënderaj | `drenica.png` |
-| Drita | Gjilan | `drita.png` |
-| Dukagjini | Klina | `dukagjini.png` |
-| Ferizaj | Uroševac | `ferizaj.png` |
-| Feronikeli 74 | Glogovac | `feronikeli-74.png` |
-| Llapi | Podujeva | `llapi.png` |
 | Malisheva | Malisevo | `malisheva.png` |
 | Prishtina | Pristina | `prishtina.png` |
-| Suhareka | Suhareka | `suhareka.png` |
 
-### Letônia (10 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Auda | Riga | `auda.png` |
-| Daugavpils | Daugavpils | `daugavpils.png` |
-| FK RFS | Riga | `fk-rfs.png` |
-| Grobiņa | Grobiņa | `grobina.png` |
-| Jelgava | Jelgava | `jelgava.png` |
-| Liepāja | Liepāja | `liepaja.png` |
-| Metta | Riga | `metta.png` |
-| Ogre United | Ogre | `ogre-united.png` |
-| Rīga | Riga | `riga.png` |
-| Tukums 2000 | Tukums | `tukums-2000.png` |
-
-### Lituânia (10 clubes)
+### Lituânia (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Banga Gargždai | Gargždai | `banga-gargzdai.png` |
-| Dainava | Alytus | `dainava.png` |
-| Džiugas Telšiai | Telšiai | `dziugas-telsiai.png` |
-| Hegelmann | Kaunas | `hegelmann.png` |
 | Kauno Žalgiris | Kaunas | `kauno-zalgiris.png` |
-| Panevėžys | Panevėžys | `panevezys.png` |
-| Riteriai | Trakai | `riteriai.png` |
-| Sūduva | Marijampolė | `suduva.png` |
-| TransINVEST | FK Transinvest stadium | `transinvest.png` |
-| Šiauliai | Šiauliai | `siauliai.png` |
 
-### Luxemburgo (16 clubes)
+### Luxemburgo (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Atert Bissen | Bissen | `atert-bissen.png` |
-| Differdange 03 | Differdange | `differdange-03.png` |
-| F91 Dudelange | Dudelange | `f91-dudelange.png` |
-| Jeunesse Canach | Lenningen | `jeunesse-canach.png` |
-| Jeunesse Esch | Esch-sur-Alzette | `jeunesse-esch.png` |
-| Mamer 32 | Mamer | `mamer-32.png` |
-| Progrès Niederkorn | Niederkorn | `progres-niederkorn.png` |
-| Racing Union | Luxemburgo | `racing-union.png` |
-| Rodange 91 | Rodange | `rodange-91.png` |
-| Swift Hesperange | Hesperange | `swift-hesperange.png` |
 | UN Käerjéng 97 | Bascharage | `un-kaerjeng-97.png` |
-| UNA Strassen | Strassen | `una-strassen.png` |
-| US Hostert | US Hostert | `us-hostert.png` |
-| US Mondorf-les-Bains | Mondorf-les-Bains | `us-mondorf-les-bains.png` |
-| Victoria Rosport | Rosport | `victoria-rosport.png` |
-| Wiltz 71 | Wiltz | `wiltz-71.png` |
 
-### Macedônia do Norte (12 clubes)
+### Macedônia do Norte (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| AP Brera Strumica | Strumica | `ap-brera-strumica.png` |
 | Arsimi | Arsimi | `arsimi.png` |
-| Bashkimi 1947 | Bashkimi 1947 | `bashkimi-1947.png` |
-| Makedonija G.P. | Skopje | `makedonija-g-p.png` |
-| Pelister | Bitola | `pelister.png` |
-| Rabotnicki | Skopje | `rabotnicki.png` |
-| Shkupi | Skopje | `shkupi.png` |
-| Shkëndija | Tetovo | `shkendija.png` |
-| Sileks | Kratovo | `sileks.png` |
-| Struga | Município de Struga | `struga.png` |
-| Tikvesh | Kavadarci | `tikvesh.png` |
-| Vardar | Skopje | `vardar.png` |
 
-### Malta (12 clubes)
+### Malta (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Birkirkara | Birkirkara | `birkirkara.png` |
-| Floriana | Floriana | `floriana.png` |
-| Gżira United | Gżira | `gzira-united.png` |
-| Hamrun Spartans | Ħamrun | `hamrun-spartans.png` |
-| Hibernians | Paola | `hibernians.png` |
-| Marsaxlokk | Marsaxlokk | `marsaxlokk.png` |
-| Mosta | Mosta | `mosta.png` |
 | Naxxar Lions | Lija | `naxxar-lions.png` |
-| Sliema Wanderers | Sliema | `sliema-wanderers.png` |
-| Tarxien Rainbows | Tarxien | `tarxien-rainbows.png` |
-| Valletta | Valeta | `valletta.png` |
-| Żabbar St. Patrick | Żabbar | `zabbar-st-patrick.png` |
 
 ### Malásia (1 clube)
 
@@ -611,120 +190,26 @@ Total: 1196 escudos (0 de clubes brasileiros e 1196 de fora).
 |---|---|---|
 | Immigration | Putrajaya | `immigration.png` |
 
-### Moldávia (7 clubes)
+### Noruega (4 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Dacia Buiucani | Chișinău | `dacia-buiucani.png` |
-| Milsami Orhei | Orhei | `milsami-orhei.png` |
-| Petrocub Hîncești | Sărata-Galbenă | `petrocub-hincesti.png` |
-| Politehnica UTM Chișinău | Politehnica UTM Chișinău | `politehnica-utm-chisinau.png` |
-| Sheriff Tiraspol | Tiraspol | `sheriff-tiraspol.png` |
-| Spartanii Sportul | Spartanii Sportul | `spartanii-sportul.png` |
-| Zimbru Chișinău | Chișinău | `zimbru-chisinau.png` |
-
-### Montenegro (10 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Arsenal Tivat | Tivat | `arsenal-tivat.png` |
-| Bokelj | Kotor | `bokelj.png` |
-| Budućnost Podgorica | Podgorica | `buducnost-podgorica.png` |
-| Dečić | Tuzi | `decic.png` |
-| Jedinstvo Bijelo Polje | Bijelo Polje (município) | `jedinstvo-bijelo-polje.png` |
-| Jezero | Plav | `jezero.png` |
-| Mladost Donja Gorica | Mladost Donja Gorica | `mladost-donja-gorica.png` |
-| Mornar | Bar | `mornar.png` |
-| Petrovac | Petrovac | `petrovac.png` |
-| Sutjeska Nikšić | Nikšić | `sutjeska-niksic.png` |
-
-### Nigéria (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Warri Wolves | Warri | `warri-wolves.png` |
-
-### Noruega (16 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Aalesund | Ålesund | `aalesund.png` |
-| Bodø/Glimt | Bodø | `bodo-glimt.png` |
 | Brann | Bergen | `brann.png` |
-| Fredrikstad | Fredrikstad | `fredrikstad.png` |
-| HamKam | Hamar | `hamkam.png` |
-| KFUM Oslo | Oslo | `kfum-oslo.png` |
-| Kristiansund | Kristiansund | `kristiansund.png` |
-| Lillestrøm | Lillestrøm | `lillestrom.png` |
-| Molde | Molde | `molde.png` |
-| Rosenborg | Trondheim | `rosenborg.png` |
 | Sandefjord | Sandefjord | `sandefjord.png` |
-| Sarpsborg 08 | Sarpsborg | `sarpsborg.png` |
 | Start | Kristiansand | `start.png` |
 | Tromsø | Tromsø | `tromso.png` |
-| Viking | Stavanger | `viking.png` |
-| Vålerenga | Oslo | `valerenga.png` |
 
-### Nova Zelândia (9 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Auckland City | Auckland | `auckland-city.png` |
-| Auckland United | Auckland United | `auckland-united.png` |
-| Birkenhead United | Auckland | `birkenhead-united.png` |
-| Cashmere Technical | Christchurch | `cashmere-technical.png` |
-| Eastern Suburbs | Auckland | `eastern-suburbs.png` |
-| Ferrymead Bays | Christchurch | `ferrymead-bays.png` |
-| Miramar Rangers | Wellington | `miramar-rangers.png` |
-| Napier City Rovers | Napier | `napier-city-rovers.png` |
-| Wellington Olympic | Wellington Olympic | `wellington-olympic.png` |
-
-### País de Gales (12 clubes)
+### País de Gales (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Bala Town | Bala | `bala-town.png` |
-| Barry Town United | Barry | `barry-town-united.png` |
-| Briton Ferry Llansawel | Briton Ferry Llansawel | `briton-ferry-llansawel.png` |
-| Caernarfon Town | Caernarfon | `caernarfon-town.png` |
-| Cardiff Met | Cardiff | `cardiff-met.png` |
-| Colwyn Bay | Colwyn Bay | `colwyn-bay.png` |
-| Connah's Quay Nomads | Connah's Quay | `connah-s-quay-nomads.png` |
-| Flint Town United | Flint | `flint-town-united.png` |
-| Haverfordwest County | Haverfordwest | `haverfordwest-county.png` |
-| Llanelli Town | Llanelli | `llanelli-town.png` |
-| Penybont | Bridgend | `penybont.png` |
-| The New Saints | Whittington | `the-new-saints.png` |
 
-### Polônia (18 clubes)
+### Polônia (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Arka Gdynia | Gdynia | `arka-gdynia.png` |
 | Cracovia | Cracóvia | `cracovia.png` |
-| GKS Katowice | Katowice | `gks-katowice.png` |
-| Górnik Zabrze | Zabrze | `gornik-zabrze.png` |
-| Jagiellonia | Białystok | `jagiellonia.png` |
-| Korona Kielce | Kielce | `korona-kielce.png` |
-| Lech Poznań | Poznań | `lech-poznan.png` |
-| Lechia Gdańsk | Gdańsk | `lechia-gdansk.png` |
-| Legia Varsóvia | Varsóvia | `legia-varsovia.png` |
-| Motor Lublin | Lublin | `motor-lublin.png` |
-| Piast Gliwice | Gliwice | `piast-gliwice.png` |
-| Pogoń Szczecin | Szczecin | `pogon-szczecin.png` |
-| Radomiak | Radom | `radomiak.png` |
-| Raków Częstochowa | Częstochowa | `rakow.png` |
-| Termalica Nieciecza | Nieciecza | `termalica.png` |
-| Widzew Łódź | Łódź | `widzew.png` |
-| Wisła Płock | Płock | `wisla-plock.png` |
-| Zagłębie Lubin | Lubin | `zaglebie-lubin.png` |
-
-### Quênia (2 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Bandari | Mombaça | `bandari.png` |
-| Nairobi United | Nairóbi | `nairobi-united.png` |
 
 ### Romênia (16 clubes)
 
@@ -853,18 +338,13 @@ Total: 1196 escudos (0 de clubes brasileiros e 1196 de fora).
 |---|---|---|
 | Bangkok United | Banguecoque | `bangkok-united.png` |
 
-### Tanzânia (8 clubes)
+### Tanzânia (3 clubes)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Azam | Dar es Salaam | `azam.png` |
 | JKT Ruvu Stars | Dodoma | `jkt-ruvu-stars.png` |
 | Kagera Sugar | Bukoba | `kagera-sugar.png` |
-| Kinondoni Municipal Council | Kinondoni Municipal Council | `kinondoni-municipal-council.png` |
 | Mbeya City | Beia | `mbeya-city.png` |
-| Namungo | Namungo | `namungo.png` |
-| Singida Fountain Gate | Singida | `singida-fountain-gate.png` |
-| Young Africans | Dar es Salaam | `young-africans.png` |
 
 ### Tchéquia (16 clubes)
 
@@ -886,12 +366,6 @@ Total: 1196 escudos (0 de clubes brasileiros e 1196 de fora).
 | Teplice | Teplice | `teplice.png` |
 | Viktoria Plzeň | Plzeň | `viktoria-plzen.png` |
 | Zlín | Zlín | `zlin.png` |
-
-### Tunísia (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| AS Marsa | La Marsa | `as-marsa.png` |
 
 ### Turquia (18 clubes)
 
@@ -937,21 +411,10 @@ Total: 1196 escudos (0 de clubes brasileiros e 1196 de fora).
 | Veres Rivne | Rivne | `veres-rivne.png` |
 | Zorya Luhansk | Luhansk | `zorya.png` |
 
-### Zâmbia (5 clubes)
+### África do Sul (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Atletico Lusaka | Atletico Lusaka | `atletico-lusaka.png` |
-| Forest Rangers | Forest Rangers | `forest-rangers.png` |
-| Indeni | Indeni | `indeni.png` |
-| Konkola Blades | Chililabombwe | `konkola-blades.png` |
-| Lumwana Radiants | Lumwana Radiants | `lumwana-radiants.png` |
-
-### África do Sul (2 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Maritzburg United | Pietermaritzburg | `maritzburg-united.png` |
 | Real Kings | Durban | `real-kings.png` |
 
 ### Áustria (12 clubes)

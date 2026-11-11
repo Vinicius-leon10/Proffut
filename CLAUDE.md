@@ -635,7 +635,7 @@ tools/asia/montar.ts <dados-asia-africa>` grava `data/asia-2026/clubes.json` e `
 `tools/asia/fichas.ts`; força pelo valor de mercado, como na Europa, com piso por liga, `PISO`) e liga em
 `data/selecoes-2026/convocados.json` os convocados que jogam nesses clubes (69; rodar depois de `tools/europa/montar.ts`).
 Jogo novo com o continente Ásia (`NovoJogo.tsx`, 🌏); Tabelas → Outros países com o grupo Ásia depois da Europa. Save antigo:
-`acertarParticipantes` cria os clubes (a liga vale na temporada seguinte). Os escudos chegaram nos lotes 01 a 09 do Claude no computador do usuário (417 da Ásia e da África, nov/2026; ver `docs/RETORNO_DOS_LOTES.md`).
+`acertarParticipantes` cria os clubes (a liga vale na temporada seguinte). Os escudos chegaram nos lotes 01 a 09 do Claude no computador do usuário (417 da Ásia e da África e, nos lotes 10 a 17, 400 da Europa e da Nova Zelândia, nov/2026; ver `docs/RETORNO_DOS_LOTES.md`).
 **Liga dos Campeões da Ásia e Mundial de Clubes (R109, `copas.ts`):** `K-AFC` (grupo "afc", Tabelas → Copas → Ásia): 16
 clubes (`VAGAS_AFC`: Arábia Saudita 5, Japão 4, Coreia do Sul 4, Austrália 3; em 2026 pela reputação, depois pela tabela), 4
 grupos de 4 em turno e returno às terças (semanas 1–7, fora das datas FIFA), quartas e semi em ida e volta, final em campo
