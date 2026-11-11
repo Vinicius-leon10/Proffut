@@ -1,0 +1,1235 @@
+{
+ "descricao": "Páginas de partida do robô para a 2ª divisão dos 16 países da Europa, a 1ª dos países da Europa que faltam e a da Nova Zelândia (gerado por tools/europa/sementes_resto.py).",
+ "paises": {
+  "AT": {
+   "nome": "Áustria",
+   "itens": [
+    "Q40"
+   ]
+  },
+  "BE": {
+   "nome": "Bélgica",
+   "itens": [
+    "Q31"
+   ]
+  },
+  "CH": {
+   "nome": "Suíça",
+   "itens": [
+    "Q39",
+    "Q347"
+   ]
+  },
+  "DK": {
+   "nome": "Dinamarca",
+   "itens": [
+    "Q35"
+   ]
+  },
+  "GR": {
+   "nome": "Grécia",
+   "itens": [
+    "Q41"
+   ]
+  },
+  "HR": {
+   "nome": "Croácia",
+   "itens": [
+    "Q224"
+   ]
+  },
+  "NO": {
+   "nome": "Noruega",
+   "itens": [
+    "Q20"
+   ]
+  },
+  "PL": {
+   "nome": "Polônia",
+   "itens": [
+    "Q36"
+   ]
+  },
+  "RO": {
+   "nome": "Romênia",
+   "itens": [
+    "Q218"
+   ]
+  },
+  "RU": {
+   "nome": "Rússia",
+   "itens": [
+    "Q159"
+   ]
+  },
+  "XS": {
+   "nome": "Escócia",
+   "itens": [
+    "Q22",
+    "Q145"
+   ]
+  },
+  "SE": {
+   "nome": "Suécia",
+   "itens": [
+    "Q34"
+   ]
+  },
+  "RS": {
+   "nome": "Sérvia",
+   "itens": [
+    "Q403"
+   ]
+  },
+  "TR": {
+   "nome": "Turquia",
+   "itens": [
+    "Q43"
+   ]
+  },
+  "CZ": {
+   "nome": "Tchéquia",
+   "itens": [
+    "Q213"
+   ]
+  },
+  "UA": {
+   "nome": "Ucrânia",
+   "itens": [
+    "Q212"
+   ]
+  },
+  "AL": {
+   "nome": "Albânia",
+   "itens": [
+    "Q222"
+   ]
+  },
+  "AD": {
+   "nome": "Andorra",
+   "itens": [
+    "Q228"
+   ]
+  },
+  "AM": {
+   "nome": "Armênia",
+   "itens": [
+    "Q399"
+   ]
+  },
+  "AZ": {
+   "nome": "Azerbaijão",
+   "itens": [
+    "Q227"
+   ]
+  },
+  "BY": {
+   "nome": "Belarus",
+   "itens": [
+    "Q184"
+   ]
+  },
+  "BA": {
+   "nome": "Bósnia",
+   "itens": [
+    "Q225"
+   ]
+  },
+  "BG": {
+   "nome": "Bulgária",
+   "itens": [
+    "Q219"
+   ]
+  },
+  "CY": {
+   "nome": "Chipre",
+   "itens": [
+    "Q229"
+   ]
+  },
+  "EE": {
+   "nome": "Estônia",
+   "itens": [
+    "Q191"
+   ]
+  },
+  "FO": {
+   "nome": "Ilhas Faroé",
+   "itens": [
+    "Q4628",
+    "Q35"
+   ]
+  },
+  "FI": {
+   "nome": "Finlândia",
+   "itens": [
+    "Q33"
+   ]
+  },
+  "GE": {
+   "nome": "Geórgia",
+   "itens": [
+    "Q230"
+   ]
+  },
+  "GI": {
+   "nome": "Gibraltar",
+   "itens": [
+    "Q1410",
+    "Q145"
+   ]
+  },
+  "HU": {
+   "nome": "Hungria",
+   "itens": [
+    "Q28"
+   ]
+  },
+  "IS": {
+   "nome": "Islândia",
+   "itens": [
+    "Q189"
+   ]
+  },
+  "IE": {
+   "nome": "Irlanda",
+   "itens": [
+    "Q27"
+   ]
+  },
+  "IL": {
+   "nome": "Israel",
+   "itens": [
+    "Q801"
+   ]
+  },
+  "KZ": {
+   "nome": "Cazaquistão",
+   "itens": [
+    "Q232"
+   ]
+  },
+  "XK": {
+   "nome": "Kosovo",
+   "itens": [
+    "Q1246"
+   ]
+  },
+  "LV": {
+   "nome": "Letônia",
+   "itens": [
+    "Q211"
+   ]
+  },
+  "LT": {
+   "nome": "Lituânia",
+   "itens": [
+    "Q37"
+   ]
+  },
+  "LU": {
+   "nome": "Luxemburgo",
+   "itens": [
+    "Q32"
+   ]
+  },
+  "MT": {
+   "nome": "Malta",
+   "itens": [
+    "Q233"
+   ]
+  },
+  "MD": {
+   "nome": "Moldávia",
+   "itens": [
+    "Q217"
+   ]
+  },
+  "ME": {
+   "nome": "Montenegro",
+   "itens": [
+    "Q236"
+   ]
+  },
+  "MK": {
+   "nome": "Macedônia do Norte",
+   "itens": [
+    "Q221"
+   ]
+  },
+  "XN": {
+   "nome": "Irlanda do Norte",
+   "itens": [
+    "Q26",
+    "Q145"
+   ]
+  },
+  "SM": {
+   "nome": "San Marino",
+   "itens": [
+    "Q238"
+   ]
+  },
+  "SK": {
+   "nome": "Eslováquia",
+   "itens": [
+    "Q214"
+   ]
+  },
+  "SI": {
+   "nome": "Eslovênia",
+   "itens": [
+    "Q215"
+   ]
+  },
+  "XW": {
+   "nome": "País de Gales",
+   "itens": [
+    "Q25",
+    "Q145"
+   ]
+  },
+  "NZ": {
+   "nome": "Nova Zelândia",
+   "itens": [
+    "Q664"
+   ]
+  }
+ },
+ "sementes": [
+  {
+   "id": "resto-AT2-en",
+   "liga": "AT2",
+   "lang": "en",
+   "pais": "Q40",
+   "paises": [
+    "Q40"
+   ],
+   "titulos": [
+    "2025–26 2. Liga (Austria)",
+    "2025–26 Austrian Football Second League"
+   ],
+   "consultas": [
+    "2025-26 2. Liga (Austria)",
+    "Austria football league 2025-26"
+   ],
+   "exige": [
+    "2. Liga"
+   ]
+  },
+  {
+   "id": "resto-BE2-en",
+   "liga": "BE2",
+   "lang": "en",
+   "pais": "Q31",
+   "paises": [
+    "Q31"
+   ],
+   "titulos": [
+    "2025–26 Challenger Pro League"
+   ],
+   "consultas": [
+    "2025-26 Challenger Pro League",
+    "Belgium football league 2025-26"
+   ],
+   "exige": [
+    "Challenger Pro League"
+   ]
+  },
+  {
+   "id": "resto-CH2-en",
+   "liga": "CH2",
+   "lang": "en",
+   "pais": "Q39",
+   "paises": [
+    "Q39",
+    "Q347"
+   ],
+   "titulos": [
+    "2025–26 Swiss Challenge League"
+   ],
+   "consultas": [
+    "2025-26 Swiss Challenge League",
+    "Switzerland football league 2025-26"
+   ],
+   "exige": [
+    "Challenge League"
+   ]
+  },
+  {
+   "id": "resto-DK2-en",
+   "liga": "DK2",
+   "lang": "en",
+   "pais": "Q35",
+   "paises": [
+    "Q35"
+   ],
+   "titulos": [
+    "2025–26 Danish 1st Division"
+   ],
+   "consultas": [
+    "2025-26 Danish 1st Division",
+    "Denmark football league 2025-26"
+   ],
+   "exige": [
+    "1st Division"
+   ]
+  },
+  {
+   "id": "resto-GR2-en",
+   "liga": "GR2",
+   "lang": "en",
+   "pais": "Q41",
+   "paises": [
+    "Q41"
+   ],
+   "titulos": [
+    "2025–26 Super League Greece 2"
+   ],
+   "consultas": [
+    "2025-26 Super League Greece 2",
+    "Greece football league 2025-26"
+   ],
+   "exige": [
+    "Super League"
+   ]
+  },
+  {
+   "id": "resto-HR2-en",
+   "liga": "HR2",
+   "lang": "en",
+   "pais": "Q224",
+   "paises": [
+    "Q224"
+   ],
+   "titulos": [
+    "2025–26 Prva NL",
+    "2025–26 First Football League (Croatia)"
+   ],
+   "consultas": [
+    "2025-26 Prva NL",
+    "Croatia football league 2025-26"
+   ],
+   "exige": [
+    "Prva"
+   ]
+  },
+  {
+   "id": "resto-NO2-en",
+   "liga": "NO2",
+   "lang": "en",
+   "pais": "Q20",
+   "paises": [
+    "Q20"
+   ],
+   "titulos": [
+    "2026 Norwegian First Division",
+    "2025 Norwegian First Division"
+   ],
+   "consultas": [
+    "2026 Norwegian First Division",
+    "Norway football league 2025-26"
+   ],
+   "exige": [
+    "Norwegian First Division"
+   ]
+  },
+  {
+   "id": "resto-PL2-en",
+   "liga": "PL2",
+   "lang": "en",
+   "pais": "Q36",
+   "paises": [
+    "Q36"
+   ],
+   "titulos": [
+    "2025–26 I liga"
+   ],
+   "consultas": [
+    "2025-26 I liga",
+    "Poland football league 2025-26"
+   ],
+   "exige": [
+    "I liga"
+   ]
+  },
+  {
+   "id": "resto-RO2-en",
+   "liga": "RO2",
+   "lang": "en",
+   "pais": "Q218",
+   "paises": [
+    "Q218"
+   ],
+   "titulos": [
+    "2025–26 Liga II"
+   ],
+   "consultas": [
+    "2025-26 Liga II",
+    "Romania football league 2025-26"
+   ],
+   "exige": [
+    "Liga II"
+   ]
+  },
+  {
+   "id": "resto-RU2-en",
+   "liga": "RU2",
+   "lang": "en",
+   "pais": "Q159",
+   "paises": [
+    "Q159"
+   ],
+   "titulos": [
+    "2025–26 Russian First League"
+   ],
+   "consultas": [
+    "2025-26 Russian First League",
+    "Russia football league 2025-26"
+   ],
+   "exige": [
+    "Russian First League"
+   ]
+  },
+  {
+   "id": "resto-XS2-en",
+   "liga": "XS2",
+   "lang": "en",
+   "pais": "Q22",
+   "paises": [
+    "Q22",
+    "Q145"
+   ],
+   "titulos": [
+    "2025–26 Scottish Championship"
+   ],
+   "consultas": [
+    "2025-26 Scottish Championship",
+    "Scotland football league 2025-26"
+   ],
+   "exige": [
+    "Scottish Championship"
+   ]
+  },
+  {
+   "id": "resto-SE2-en",
+   "liga": "SE2",
+   "lang": "en",
+   "pais": "Q34",
+   "paises": [
+    "Q34"
+   ],
+   "titulos": [
+    "2026 Superettan",
+    "2025 Superettan"
+   ],
+   "consultas": [
+    "2026 Superettan",
+    "Sweden football league 2025-26"
+   ],
+   "exige": [
+    "Superettan"
+   ]
+  },
+  {
+   "id": "resto-RS2-en",
+   "liga": "RS2",
+   "lang": "en",
+   "pais": "Q403",
+   "paises": [
+    "Q403"
+   ],
+   "titulos": [
+    "2025–26 Serbian First League"
+   ],
+   "consultas": [
+    "2025-26 Serbian First League",
+    "Serbia football league 2025-26"
+   ],
+   "exige": [
+    "Serbian First League"
+   ]
+  },
+  {
+   "id": "resto-TR2-en",
+   "liga": "TR2",
+   "lang": "en",
+   "pais": "Q43",
+   "paises": [
+    "Q43"
+   ],
+   "titulos": [
+    "2025–26 TFF 1. Lig"
+   ],
+   "consultas": [
+    "2025-26 TFF 1. Lig",
+    "Turkey football league 2025-26"
+   ],
+   "exige": [
+    "1. Lig"
+   ]
+  },
+  {
+   "id": "resto-CZ2-en",
+   "liga": "CZ2",
+   "lang": "en",
+   "pais": "Q213",
+   "paises": [
+    "Q213"
+   ],
+   "titulos": [
+    "2025–26 Czech National Football League"
+   ],
+   "consultas": [
+    "2025-26 Czech National Football League",
+    "Czech Republic football league 2025-26"
+   ],
+   "exige": [
+    "National Football League"
+   ]
+  },
+  {
+   "id": "resto-UA2-en",
+   "liga": "UA2",
+   "lang": "en",
+   "pais": "Q212",
+   "paises": [
+    "Q212"
+   ],
+   "titulos": [
+    "2025–26 Ukrainian First League"
+   ],
+   "consultas": [
+    "2025-26 Ukrainian First League",
+    "Ukraine football league 2025-26"
+   ],
+   "exige": [
+    "Ukrainian First League"
+   ]
+  },
+  {
+   "id": "resto-AL-en",
+   "liga": "AL",
+   "lang": "en",
+   "pais": "Q222",
+   "paises": [
+    "Q222"
+   ],
+   "titulos": [
+    "2025–26 Kategoria Superiore"
+   ],
+   "consultas": [
+    "2025-26 Kategoria Superiore",
+    "Albania football league 2025-26"
+   ],
+   "exige": [
+    "Kategoria Superiore"
+   ]
+  },
+  {
+   "id": "resto-AD-en",
+   "liga": "AD",
+   "lang": "en",
+   "pais": "Q228",
+   "paises": [
+    "Q228"
+   ],
+   "titulos": [
+    "2025–26 Primera Divisió"
+   ],
+   "consultas": [
+    "2025-26 Primera Divisió",
+    "Andorra football league 2025-26"
+   ],
+   "exige": [
+    "Primera Divisi"
+   ]
+  },
+  {
+   "id": "resto-AM-en",
+   "liga": "AM",
+   "lang": "en",
+   "pais": "Q399",
+   "paises": [
+    "Q399"
+   ],
+   "titulos": [
+    "2025–26 Armenian Premier League"
+   ],
+   "consultas": [
+    "2025-26 Armenian Premier League",
+    "Armenia football league 2025-26"
+   ],
+   "exige": [
+    "Armenian Premier League"
+   ]
+  },
+  {
+   "id": "resto-AZ-en",
+   "liga": "AZ",
+   "lang": "en",
+   "pais": "Q227",
+   "paises": [
+    "Q227"
+   ],
+   "titulos": [
+    "2025–26 Azerbaijan Premier League"
+   ],
+   "consultas": [
+    "2025-26 Azerbaijan Premier League",
+    "Azerbaijan football league 2025-26"
+   ],
+   "exige": [
+    "Azerbaijan Premier League"
+   ]
+  },
+  {
+   "id": "resto-BY-en",
+   "liga": "BY",
+   "lang": "en",
+   "pais": "Q184",
+   "paises": [
+    "Q184"
+   ],
+   "titulos": [
+    "2026 Belarusian Premier League",
+    "2025 Belarusian Premier League"
+   ],
+   "consultas": [
+    "2026 Belarusian Premier League",
+    "Belarus football league 2025-26"
+   ],
+   "exige": [
+    "Belarusian Premier League"
+   ]
+  },
+  {
+   "id": "resto-BA-en",
+   "liga": "BA",
+   "lang": "en",
+   "pais": "Q225",
+   "paises": [
+    "Q225"
+   ],
+   "titulos": [
+    "2025–26 Premier League of Bosnia and Herzegovina"
+   ],
+   "consultas": [
+    "2025-26 Premier League of Bosnia and Herzegovina",
+    "Bosnia and Herzegovina football league 2025-26"
+   ],
+   "exige": [
+    "Bosnia"
+   ]
+  },
+  {
+   "id": "resto-BG-en",
+   "liga": "BG",
+   "lang": "en",
+   "pais": "Q219",
+   "paises": [
+    "Q219"
+   ],
+   "titulos": [
+    "2025–26 First Professional Football League (Bulgaria)",
+    "2025–26 Bulgarian First League"
+   ],
+   "consultas": [
+    "2025-26 First Professional Football League (Bulgaria)",
+    "Bulgaria football league 2025-26"
+   ],
+   "exige": [
+    "Bulgaria"
+   ]
+  },
+  {
+   "id": "resto-CY-en",
+   "liga": "CY",
+   "lang": "en",
+   "pais": "Q229",
+   "paises": [
+    "Q229"
+   ],
+   "titulos": [
+    "2025–26 Cypriot First Division"
+   ],
+   "consultas": [
+    "2025-26 Cypriot First Division",
+    "Cyprus football league 2025-26"
+   ],
+   "exige": [
+    "Cypriot First Division"
+   ]
+  },
+  {
+   "id": "resto-EE-en",
+   "liga": "EE",
+   "lang": "en",
+   "pais": "Q191",
+   "paises": [
+    "Q191"
+   ],
+   "titulos": [
+    "2026 Meistriliiga",
+    "2025 Meistriliiga"
+   ],
+   "consultas": [
+    "2026 Meistriliiga",
+    "Estonia football league 2025-26"
+   ],
+   "exige": [
+    "Meistriliiga"
+   ]
+  },
+  {
+   "id": "resto-FO-en",
+   "liga": "FO",
+   "lang": "en",
+   "pais": "Q4628",
+   "paises": [
+    "Q4628",
+    "Q35"
+   ],
+   "titulos": [
+    "2026 Faroe Islands Premier League",
+    "2025 Faroe Islands Premier League"
+   ],
+   "consultas": [
+    "2026 Faroe Islands Premier League",
+    "Faroe Islands football league 2025-26"
+   ],
+   "exige": [
+    "Faroe Islands Premier League"
+   ]
+  },
+  {
+   "id": "resto-FI-en",
+   "liga": "FI",
+   "lang": "en",
+   "pais": "Q33",
+   "paises": [
+    "Q33"
+   ],
+   "titulos": [
+    "2026 Veikkausliiga",
+    "2025 Veikkausliiga"
+   ],
+   "consultas": [
+    "2026 Veikkausliiga",
+    "Finland football league 2025-26"
+   ],
+   "exige": [
+    "Veikkausliiga"
+   ]
+  },
+  {
+   "id": "resto-GE-en",
+   "liga": "GE",
+   "lang": "en",
+   "pais": "Q230",
+   "paises": [
+    "Q230"
+   ],
+   "titulos": [
+    "2026 Erovnuli Liga",
+    "2025 Erovnuli Liga"
+   ],
+   "consultas": [
+    "2026 Erovnuli Liga",
+    "Georgia football league 2025-26"
+   ],
+   "exige": [
+    "Erovnuli Liga"
+   ]
+  },
+  {
+   "id": "resto-GI-en",
+   "liga": "GI",
+   "lang": "en",
+   "pais": "Q1410",
+   "paises": [
+    "Q1410",
+    "Q145"
+   ],
+   "titulos": [
+    "2025–26 Gibraltar Football League"
+   ],
+   "consultas": [
+    "2025-26 Gibraltar Football League",
+    "Gibraltar football league 2025-26"
+   ],
+   "exige": [
+    "Gibraltar Football League"
+   ]
+  },
+  {
+   "id": "resto-HU-en",
+   "liga": "HU",
+   "lang": "en",
+   "pais": "Q28",
+   "paises": [
+    "Q28"
+   ],
+   "titulos": [
+    "2025–26 Nemzeti Bajnokság I"
+   ],
+   "consultas": [
+    "2025-26 Nemzeti Bajnokság I",
+    "Hungary football league 2025-26"
+   ],
+   "exige": [
+    "Nemzeti Bajnokság I"
+   ]
+  },
+  {
+   "id": "resto-IS-en",
+   "liga": "IS",
+   "lang": "en",
+   "pais": "Q189",
+   "paises": [
+    "Q189"
+   ],
+   "titulos": [
+    "2026 Besta deild karla",
+    "2025 Besta deild karla"
+   ],
+   "consultas": [
+    "2026 Besta deild karla",
+    "Iceland football league 2025-26"
+   ],
+   "exige": [
+    "Besta deild"
+   ]
+  },
+  {
+   "id": "resto-IE-en",
+   "liga": "IE",
+   "lang": "en",
+   "pais": "Q27",
+   "paises": [
+    "Q27"
+   ],
+   "titulos": [
+    "2026 League of Ireland Premier Division",
+    "2025 League of Ireland Premier Division"
+   ],
+   "consultas": [
+    "2026 League of Ireland Premier Division",
+    "Republic of Ireland football league 2025-26"
+   ],
+   "exige": [
+    "League of Ireland"
+   ]
+  },
+  {
+   "id": "resto-IL-en",
+   "liga": "IL",
+   "lang": "en",
+   "pais": "Q801",
+   "paises": [
+    "Q801"
+   ],
+   "titulos": [
+    "2025–26 Israeli Premier League"
+   ],
+   "consultas": [
+    "2025-26 Israeli Premier League",
+    "Israel football league 2025-26"
+   ],
+   "exige": [
+    "Israeli Premier League"
+   ]
+  },
+  {
+   "id": "resto-KZ-en",
+   "liga": "KZ",
+   "lang": "en",
+   "pais": "Q232",
+   "paises": [
+    "Q232"
+   ],
+   "titulos": [
+    "2026 Kazakhstan Premier League",
+    "2025 Kazakhstan Premier League"
+   ],
+   "consultas": [
+    "2026 Kazakhstan Premier League",
+    "Kazakhstan football league 2025-26"
+   ],
+   "exige": [
+    "Kazakhstan Premier League"
+   ]
+  },
+  {
+   "id": "resto-XK-en",
+   "liga": "XK",
+   "lang": "en",
+   "pais": "Q1246",
+   "paises": [
+    "Q1246"
+   ],
+   "titulos": [
+    "2025–26 Football Superleague of Kosovo"
+   ],
+   "consultas": [
+    "2025-26 Football Superleague of Kosovo",
+    "Kosovo football league 2025-26"
+   ],
+   "exige": [
+    "Kosovo"
+   ]
+  },
+  {
+   "id": "resto-LV-en",
+   "liga": "LV",
+   "lang": "en",
+   "pais": "Q211",
+   "paises": [
+    "Q211"
+   ],
+   "titulos": [
+    "2026 Latvian Higher League",
+    "2025 Latvian Higher League"
+   ],
+   "consultas": [
+    "2026 Latvian Higher League",
+    "Latvia football league 2025-26"
+   ],
+   "exige": [
+    "Latvian Higher League"
+   ]
+  },
+  {
+   "id": "resto-LT-en",
+   "liga": "LT",
+   "lang": "en",
+   "pais": "Q37",
+   "paises": [
+    "Q37"
+   ],
+   "titulos": [
+    "2026 A Lyga",
+    "2025 A Lyga"
+   ],
+   "consultas": [
+    "2026 A Lyga",
+    "Lithuania football league 2025-26"
+   ],
+   "exige": [
+    "A Lyga"
+   ]
+  },
+  {
+   "id": "resto-LU-en",
+   "liga": "LU",
+   "lang": "en",
+   "pais": "Q32",
+   "paises": [
+    "Q32"
+   ],
+   "titulos": [
+    "2025–26 Luxembourg National Division"
+   ],
+   "consultas": [
+    "2025-26 Luxembourg National Division",
+    "Luxembourg football league 2025-26"
+   ],
+   "exige": [
+    "Luxembourg National Division"
+   ]
+  },
+  {
+   "id": "resto-MT-en",
+   "liga": "MT",
+   "lang": "en",
+   "pais": "Q233",
+   "paises": [
+    "Q233"
+   ],
+   "titulos": [
+    "2025–26 Maltese Premier League"
+   ],
+   "consultas": [
+    "2025-26 Maltese Premier League",
+    "Malta football league 2025-26"
+   ],
+   "exige": [
+    "Maltese Premier League"
+   ]
+  },
+  {
+   "id": "resto-MD-en",
+   "liga": "MD",
+   "lang": "en",
+   "pais": "Q217",
+   "paises": [
+    "Q217"
+   ],
+   "titulos": [
+    "2025–26 Moldovan Super Liga"
+   ],
+   "consultas": [
+    "2025-26 Moldovan Super Liga",
+    "Moldova football league 2025-26"
+   ],
+   "exige": [
+    "Moldovan"
+   ]
+  },
+  {
+   "id": "resto-ME-en",
+   "liga": "ME",
+   "lang": "en",
+   "pais": "Q236",
+   "paises": [
+    "Q236"
+   ],
+   "titulos": [
+    "2025–26 Montenegrin First League"
+   ],
+   "consultas": [
+    "2025-26 Montenegrin First League",
+    "Montenegro football league 2025-26"
+   ],
+   "exige": [
+    "Montenegrin First League"
+   ]
+  },
+  {
+   "id": "resto-MK-en",
+   "liga": "MK",
+   "lang": "en",
+   "pais": "Q221",
+   "paises": [
+    "Q221"
+   ],
+   "titulos": [
+    "2025–26 Macedonian First Football League"
+   ],
+   "consultas": [
+    "2025-26 Macedonian First Football League",
+    "North Macedonia football league 2025-26"
+   ],
+   "exige": [
+    "Macedonian First"
+   ]
+  },
+  {
+   "id": "resto-XN-en",
+   "liga": "XN",
+   "lang": "en",
+   "pais": "Q26",
+   "paises": [
+    "Q26",
+    "Q145"
+   ],
+   "titulos": [
+    "2025–26 NIFL Premiership"
+   ],
+   "consultas": [
+    "2025-26 NIFL Premiership",
+    "Northern Ireland football league 2025-26"
+   ],
+   "exige": [
+    "NIFL Premiership"
+   ]
+  },
+  {
+   "id": "resto-SM-en",
+   "liga": "SM",
+   "lang": "en",
+   "pais": "Q238",
+   "paises": [
+    "Q238"
+   ],
+   "titulos": [
+    "2025–26 Campionato Sammarinese di Calcio"
+   ],
+   "consultas": [
+    "2025-26 Campionato Sammarinese di Calcio",
+    "San Marino football league 2025-26"
+   ],
+   "exige": [
+    "Sammarinese"
+   ]
+  },
+  {
+   "id": "resto-SK-en",
+   "liga": "SK",
+   "lang": "en",
+   "pais": "Q214",
+   "paises": [
+    "Q214"
+   ],
+   "titulos": [
+    "2025–26 Slovak First Football League"
+   ],
+   "consultas": [
+    "2025-26 Slovak First Football League",
+    "Slovakia football league 2025-26"
+   ],
+   "exige": [
+    "Slovak First Football League"
+   ]
+  },
+  {
+   "id": "resto-SI-en",
+   "liga": "SI",
+   "lang": "en",
+   "pais": "Q215",
+   "paises": [
+    "Q215"
+   ],
+   "titulos": [
+    "2025–26 Slovenian PrvaLiga"
+   ],
+   "consultas": [
+    "2025-26 Slovenian PrvaLiga",
+    "Slovenia football league 2025-26"
+   ],
+   "exige": [
+    "PrvaLiga"
+   ]
+  },
+  {
+   "id": "resto-XW-en",
+   "liga": "XW",
+   "lang": "en",
+   "pais": "Q25",
+   "paises": [
+    "Q25",
+    "Q145"
+   ],
+   "titulos": [
+    "2025–26 Cymru Premier"
+   ],
+   "consultas": [
+    "2025-26 Cymru Premier",
+    "Wales football league 2025-26"
+   ],
+   "exige": [
+    "Cymru Premier"
+   ]
+  },
+  {
+   "id": "resto-NZ-en",
+   "liga": "NZ",
+   "lang": "en",
+   "pais": "Q664",
+   "paises": [
+    "Q664"
+   ],
+   "titulos": [
+    "2026 New Zealand National League",
+    "2025 New Zealand National League"
+   ],
+   "consultas": [
+    "2026 New Zealand National League",
+    "New Zealand football league 2025-26"
+   ],
+   "exige": [
+    "New Zealand National League"
+   ]
+  }
+ ]
+}

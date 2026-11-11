@@ -7,10 +7,10 @@ on:
   workflow_dispatch:
     inputs:
       fase:
-        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa) · selecoes-europa: convocações das 55 seleções da UEFA (branch dados-selecoes-europa) · europa-segundas: segunda divisão das 7 ligas da Europa (branch dados-europa-segundas) · europa-terceiras: terceira divisão (branch dados-europa-terceiras) · europa-outros: outros países da Europa (branch dados-europa-outros) · selecoes-mundo: seleções da África, Ásia e Oceania (branch dados-selecoes-mundo) · asia-africa: clubes da África, da Ásia e da Nova Zelândia e as copas de lá (branch dados-asia-africa)"
+        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa) · selecoes-europa: convocações das 55 seleções da UEFA (branch dados-selecoes-europa) · europa-segundas: segunda divisão das 7 ligas da Europa (branch dados-europa-segundas) · europa-terceiras: terceira divisão (branch dados-europa-terceiras) · europa-outros: outros países da Europa (branch dados-europa-outros) · selecoes-mundo: seleções da África, Ásia e Oceania (branch dados-selecoes-mundo) · asia-africa: clubes da África, da Ásia e da Nova Zelândia e as copas de lá (branch dados-asia-africa) · europa-resto: 2ª divisão dos 16 países da Europa, 1ª dos países da Europa que faltam e a da Nova Zelândia (branch dados-europa-resto)"
         type: choice
         default: elencos
-        options: [elencos, times, segundas, america, europa, selecoes-europa, europa-segundas, europa-terceiras, europa-outros, selecoes-mundo, asia-africa]
+        options: [elencos, times, segundas, america, europa, selecoes-europa, europa-segundas, europa-terceiras, europa-outros, selecoes-mundo, asia-africa, europa-resto]
 
 permissions:
   contents: write
@@ -361,3 +361,35 @@ jobs:
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -q -m "Clubes da África, da Ásia e da Oceania (${GITHUB_SHA::7})"
           git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-asia-africa
+
+  # Parte 4 do projeto "jogo completo" (nov/2026): a 2ª divisão dos 16 países da Europa que já têm a 1ª no jogo, a 1ª dos
+  # 31 países da Europa que faltam e a liga da Nova Zelândia, da Wikipédia em inglês e do Wikidata. Quem monta os clubes
+  # do jogo é tools/europa/resto.ts.
+  europa-resto:
+    if: inputs.fase == 'europa-resto'
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v7
+      - name: Wikipédia e Wikidata (2ª divisão dos 16 países, 1ª dos que faltam e a Nova Zelândia)
+        run: python3 tools/times/wikipedia.py tools/europa/sementes-resto.json dados
+      - name: Gravar na branch dados-europa-resto
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dados
+          {
+            echo "# O resto da Europa e a Nova Zelândia"
+            echo
+            echo "Baixados em $(date -u +%Y-%m-%dT%H:%MZ) pelo workflow elencos.yml (fase europa-resto) do Proffut: Wikipédia em inglês (CC BY-SA) e Wikidata (CC0)."
+            echo
+            echo "| Arquivo | Tamanho |"
+            echo "|---|---|"
+            find . -type f -not -name LEIAME.md | sort | while read -r f; do echo "| ${f#./} | $(du -h "$f" | cut -f1) |"; done
+          } > LEIAME.md
+          cat LEIAME.md >> "$GITHUB_STEP_SUMMARY"
+          git init -q -b dados-europa-resto
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "O resto da Europa e a Nova Zelândia (${GITHUB_SHA::7})"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-europa-resto
