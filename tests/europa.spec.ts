@@ -41,7 +41,7 @@ test("R98 jogo novo na Europa: o continente Europa com os 7 países (cada um com
   await expect(page.locator("main")).toContainText("Liga dos Campeões");
 });
 
-test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 23 países (a Inglaterra com 20 clubes); em Copas, o grupo Europa com a Liga dos Campeões, a Liga Europa e a Conference (a Supercopa fora, sem jogo em 2026)", async ({ page }) => {
+test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 54 países (23 até o R113; a Inglaterra com 20 clubes); em Copas, o grupo Europa com a Liga dos Campeões, a Liga Europa e a Conference (a Supercopa fora, sem jogo em 2026)", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
   await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
@@ -57,10 +57,12 @@ test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 23 países
   // O país do clube do técnico abre escolhido.
   await expect(pais).toHaveValue("ES");
   const grupos = await pais.locator("optgroup").evaluateAll((g) => g.map((x) => (x as HTMLOptGroupElement).label));
-  // A Europa e, desde o R108 e o R110, a Ásia e a África depois dela.
-  expect(grupos.slice(-3)).toEqual(["Europa", "Ásia", "África"]);
+  // A Europa e, desde o R108 e o R110, a Ásia e a África depois dela; desde o R114, a Oceania no fim.
+  expect(grupos.slice(-4)).toEqual(["Europa", "Ásia", "África", "Oceania"]);
   const daEuropa = await pais.locator('optgroup[label="Europa"] option').allTextContents();
-  expect(daEuropa).toHaveLength(23);
+  // 23 países até a parte 4 do jogo completo; com os 31 que faltavam (R113), 54.
+  expect(daEuropa).toHaveLength(54);
+  for (const p of ["Hungria", "Chipre", "País de Gales", "San Marino"]) expect(daEuropa).toContain(p);
   for (const p of ["Alemanha", "Espanha", "França", "Holanda", "Inglaterra", "Itália", "Portugal", "Turquia", "Escócia"]) expect(daEuropa).toContain(p);
   await pais.selectOption({ label: "Inglaterra" });
   await expect(page.locator("main table.tabela tbody tr")).toHaveCount(20);
