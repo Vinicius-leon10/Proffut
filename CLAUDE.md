@@ -573,6 +573,15 @@ segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, fa
 **Próximas ideias:** o resto da lista de mudanças (PLANO.md §13: 3, 6, 9–15, 17, 18, 20), quando o usuário escolher, e
 ajustes de equilíbrio pelo que ele sentir jogando.
 
+**Projeto "jogo completo" (combinado em 11/nov/2026, a fazer numa conversa nova, esforço Alto):** pedido "trazer tudo que
+está faltando, para deixar o jogo agora completo". Ordem, publicando cada parte: 1) copas nacionais da Europa (FA Cup, Copa
+do Rei, Copa da Itália, DFB-Pokal, Copa da França, Taça de Portugal, Copa da Holanda e supercopas) e vagas nas copas da UEFA
+para os 16 países novos; 2) clubes da Ásia e da África (transfermarkt-datasets tem Arábia Saudita, Japão, Coreia e
+Austrália; o resto pela Wikipédia no robô) com Liga dos Campeões da Ásia e da África e o Mundial de Clubes; 3) Copa
+Africana, Copa da Ásia e Copa da Oceania; 4) 2ª divisão dos 16 países novos, os ~30 países da Europa que faltam e a Nova
+Zelândia; 5) jogadores reais para os clubes leves (3ª divisões). Se o limite acabar, salvar (commit e push) e anotar aqui
+onde parou. No fim, listar o que não deu (jogadores reais para o usuário buscar com o Google, e os escudos).
+
 **Testes mais rápidos (pedido do usuário, 11/nov/2026, "Deixe anotado para deixar mais rápido"):** com o mundo todo
 (1.900 clubes, ~40 mil jogadores, save de ~30 MB), a conferência no GitHub passou de ~13 para ~35 minutos e o
 `npm run verificar` daqui, de ~25 para ~35. Ideias, sem tirar nem pular nenhum teste: dividir os testes de tela em
