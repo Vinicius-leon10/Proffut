@@ -42,7 +42,8 @@ export function ModoCopaVideo() {
         );
       })}
       <Flashes cenas={CENAS} />
-      <Sons cenas={CENAS} efeitos={EFEITOS} />
+      {/* Efeitos bem mais baixos que a voz (pedido do usuário: "Os efeitos ficaram muito alto"). */}
+      <Sons cenas={CENAS} efeitos={EFEITOS} escala={0.3} />
       <Audio src={staticFile("copa/fala.mp3")} volume={1} />
     </AbsoluteFill>
   );

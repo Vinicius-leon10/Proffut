@@ -51,13 +51,13 @@ export function Flashes({ cenas }: { cenas: number[] }) {
 }
 
 /** Efeitos sonoros de public/sfx: [segundo, nome, volume]; mais o whoosh antes de cada corte. */
-export function Sons({ cenas, efeitos }: { cenas: number[]; efeitos: [number, string, number][] }) {
+export function Sons({ cenas, efeitos, escala = 1 }: { cenas: number[]; efeitos: [number, string, number][]; escala?: number }) {
   const todos: [number, string, number][] = [...cenas.slice(1, -1).map((t) => [t - 0.2, "whoosh", 0.55] as [number, string, number]), ...efeitos];
   return (
     <>
       {todos.map(([t, nome, volume], i) => (
         <Sequence key={i} from={Math.max(0, s(t))} durationInFrames={s(4)}>
-          <Audio src={staticFile(`sfx/${nome}.wav`)} volume={volume} />
+          <Audio src={staticFile(`sfx/${nome}.wav`)} volume={volume * escala} />
         </Sequence>
       ))}
     </>
