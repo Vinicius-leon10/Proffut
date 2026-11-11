@@ -83,3 +83,25 @@ test("R110 África e o resto da Ásia: no jogo novo, o continente África com o 
   for (const p of ["China", "Catar", "Irã", "Emirados Árabes", "Japão"]) expect(daAsia).toContain(p);
   await expect(page.locator("main table.tabela tbody tr")).toHaveCount(21);
 });
+
+test("R111 Liga dos Campeões da África: com o Al Ahly, Tabelas → Copas abre na Liga dos Campeões da África (grupo África), com 4 grupos de 4 e o Al Ahly num deles", async ({ page }) => {
+  await abrirSite(page);
+  await botao(page, "Novo jogo").click();
+  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByRole("button", { name: "Próximo", exact: true }).click();
+  await page.getByRole("button", { name: /África/ }).click();
+  await page.getByRole("button", { name: /Egito/ }).click();
+  await botao(page, /Al Ahly/).click();
+  await botao(page, /^Assumir (o|a) /).click();
+  await pularTutorial(page);
+  await aba(page, "Tabelas");
+  await page.getByRole("tab", { name: "Copas" }).click();
+  const copa = page.getByRole("combobox", { name: "Copa" });
+  await expect(copa).toHaveValue("K-CAF");
+  const daAfrica = (await copa.locator('optgroup[label="África"] option').allTextContents()).map((t) => t.replace(" (seu time)", ""));
+  expect(daAfrica).toEqual(["Liga dos Campeões da África"]);
+  const grupo = page.getByRole("combobox", { name: "Grupo" });
+  await expect(grupo.locator("option")).toHaveCount(4);
+  await expect(grupo.locator("option", { hasText: "(seu time)" })).toHaveCount(1);
+  await expect(page.locator("main table.tabela tbody tr")).toHaveCount(4);
+});

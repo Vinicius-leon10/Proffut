@@ -634,7 +634,11 @@ número de ligações no Wikidata dá a força (`forca`: do topo ao último) e a
 clubes, 284 com elenco da página (7.852 jogadores; os outros, criados) e 280 convocados ligados. Ficaram de fora a Costa do
 Marfim, Senegal, Líbia, Omã e Sudão (a página não trouxe a lista), Camarões, Mali e RD Congo (outra temporada ou só parte) e
 a Nova Zelândia (três ligas regionais; os dois clubes profissionais jogam a liga australiana). Jogo novo com o continente
-África. TV em `TV_EUROPA_MES`. **Falta da parte 2:** a Liga dos Campeões da África (que entra no Mundial quando existir).
+África. TV em `TV_EUROPA_MES`. **Liga dos Campeões da África (R111):** `K-CAF` (grupo "caf"), 16 clubes (`VAGAS_CAF`: Egito 3,
+Marrocos 3, África do Sul 2, Tunísia 2, Argélia 2, Nigéria, Gana, Tanzânia e Angola 1), no formato da asiática, às quartas.
+O Mundial de Clubes ganhou um playoff (semana −11) entre os campeões da Ásia e da África; o vencedor vai à semifinal com os da
+Liga dos Campeões, da Libertadores e da Concacaf. **Parte 2 concluída.** Próxima: a parte 3 (Copa Africana, Copa da Ásia e
+Copa da Oceania).
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).

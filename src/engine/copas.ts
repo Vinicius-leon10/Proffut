@@ -98,7 +98,7 @@ export interface DefinicaoCopa {
   id: IdCopa;
   nome: string;
   /** Onde a copa aparece nas telas. */
-  grupo: "brasil" | "conmebol" | "concacaf" | "uefa" | "afc" | "mundial" | "nacional";
+  grupo: "brasil" | "conmebol" | "concacaf" | "uefa" | "afc" | "caf" | "mundial" | "nacional";
   /** País da copa nacional. */
   pais?: string;
   fases: FaseCopa[];
@@ -512,9 +512,12 @@ const supercopaUefa: DefinicaoCopa = {
 /** Vagas de cada liga da Ásia na Liga dos Campeões da Ásia (os primeiros da tabela). */
 export const VAGAS_AFC: Record<string, number> = { SA: 5, JP: 4, KR: 4, AU: 3 };
 
-/** Classificados da Liga dos Campeões da Ásia: pela tabela (na virada) ou pela reputação (2026 e save novo na Ásia). */
-function vagasDaAfc(estado: EstadoJogo, pelaTabela: boolean): string[] {
-  return Object.entries(VAGAS_AFC).flatMap(([liga, n]) => ordemDaLiga(estado, liga, pelaTabela).slice(0, n));
+/** Vagas de cada liga da África na Liga dos Campeões da África. */
+export const VAGAS_CAF: Record<string, number> = { EG: 3, MA: 3, ZA: 2, TN: 2, DZ: 2, NG: 1, GH: 1, TZ: 1, AO: 1 };
+
+/** Classificados de uma Liga dos Campeões: os primeiros de cada liga, pela tabela (na virada) ou pela reputação (2026). */
+function vagasPorLiga(estado: EstadoJogo, vagas: Record<string, number>, pelaTabela: boolean): string[] {
+  return Object.entries(vagas).flatMap(([liga, n]) => ordemDaLiga(estado, liga, pelaTabela).slice(0, n));
 }
 
 const campeoesDaAsia: DefinicaoCopa = {
@@ -529,18 +532,37 @@ const campeoesDaAsia: DefinicaoCopa = {
     if (vagas?.["K-AFC"]) return vagas["K-AFC"];
     // Só com as ligas da Ásia no jogo (save de antes da Ásia: começa quando elas existem).
     if (!estado.torneios?.["L-JP"]) return undefined;
-    return { grupos: vagasDaAfc(estado, false) };
+    return { grupos: vagasPorLiga(estado, VAGAS_AFC, false) };
   },
   premios: { grupos: 2 * MILHAO, quartas: 2 * MILHAO, semi: 3 * MILHAO, campeao: 12 * MILHAO, vice: 5 * MILHAO },
+};
+
+/** Liga dos Campeões da África: como a da Ásia, às quartas, com os clubes da África do jogo. */
+const campeoesDaAfrica: DefinicaoCopa = {
+  id: "K-CAF", nome: "Liga dos Campeões da África", grupo: "caf",
+  fases: [
+    { id: "grupos", nome: "Fase de grupos", tipo: "grupos", semanas: [1, 2, 3, 5, 6, 7], dia: "qua", grupos: { quantos: 4, passam: 2, turnos: 2 } },
+    { id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [14, 15], dia: "qua", pares: "primeiros-x-segundos" },
+    { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [18, 19], dia: "qua", pares: "chave" },
+    { id: "final", nome: "Final", tipo: "mata", semanas: [24], dia: "dom", neutro: true, pares: "chave" },
+  ],
+  participantes(estado, vagas) {
+    if (vagas?.["K-CAF"]) return vagas["K-CAF"];
+    if (!estado.torneios?.["L-EG"]) return undefined;
+    return { grupos: vagasPorLiga(estado, VAGAS_CAF, false) };
+  },
+  premios: { grupos: 1 * MILHAO, quartas: 1 * MILHAO, semi: 1.5 * MILHAO, campeao: 6 * MILHAO, vice: 3 * MILHAO },
 };
 
 const mundialDeClubes: DefinicaoCopa = {
   id: "K-MUN", nome: "Mundial de Clubes", grupo: "mundial",
   fases: [
+    { id: "playoff", nome: "Playoff", tipo: "mata", semanas: [-11], dia: "qua", neutro: true, pares: "potes", nota: "O campeão da Ásia contra o da África; o vencedor vai à semifinal." },
     { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [-10], dia: "qua", neutro: true, pares: "potes" },
     { id: "final", nome: "Final", tipo: "mata", semanas: [-9], dia: "sab", neutro: true, pares: "chave" },
   ],
-  // Os campeões do ano anterior da Liga dos Campeões, da Libertadores, da Concacaf e da Ásia (sem lista em 2026).
+  // Os campeões do ano anterior: os da Ásia e da África no playoff; os da Liga dos Campeões, da Libertadores e da Concacaf
+  // na semifinal (sem lista em 2026).
   participantes: (_estado, vagas) => vagas?.["K-MUN"],
   premios: { semi: 5 * MILHAO, campeao: 25 * MILHAO, vice: 10 * MILHAO },
 };
@@ -557,7 +579,7 @@ export const DEFINICOES: DefinicaoCopa[] = [
   copaNacional("K-VE", "Copa Venezuela", "VE", { maximo: 16 }),
   copaNacional("K-US", "U.S. Open Cup", "US", { maximo: 32, semanas: SEMANAS_EUA, sem: CANADENSES_DA_MLS }),
   copaNacional("K-CA", "Campeonato Canadense", "CA", { maximo: 8, semanas: SEMANAS_EUA }),
-  supercopaUefa, championsLeague, ligaEuropa, conference, campeoesDaAsia, mundialDeClubes,
+  supercopaUefa, championsLeague, ligaEuropa, conference, campeoesDaAsia, campeoesDaAfrica, mundialDeClubes,
   ...COPAS_DA_EUROPA.flatMap(({ liga, copa, supercopa }) => [supercopaDaEuropa(supercopa[0], supercopa[1], liga, supercopa[2]), copaDaEuropa(copa[0], copa[1], liga)]),
 ];
 const POR_ID = new Map<string, DefinicaoCopa>(DEFINICOES.map((d) => [d.id, d]));
@@ -691,10 +713,12 @@ export function vagasDasCopas(estado: EstadoJogo): VagasDasCopas {
   vagas["K-CAR"] = { grupos: porPais(estado, VAGAS_CARIBE, true) };
   // Europa: pelas tabelas das 7 ligas; a Supercopa da UEFA entre os campeões da Liga dos Campeões e da Liga Europa.
   if (estado.torneios?.["L-EN"]) Object.assign(vagas, vagasDaUefa(estado, true), vagasDasSupercopasDaEuropa(estado));
-  if (estado.torneios?.["L-JP"]) vagas["K-AFC"] = { grupos: vagasDaAfc(estado, true) };
+  if (estado.torneios?.["L-JP"]) vagas["K-AFC"] = { grupos: vagasPorLiga(estado, VAGAS_AFC, true) };
+  if (estado.torneios?.["L-EG"]) vagas["K-CAF"] = { grupos: vagasPorLiga(estado, VAGAS_CAF, true) };
   // Mundial de Clubes: os campeões continentais do ano (sem repetir; com menos de 2, não se joga).
-  const mundial = unicos(["K-UCL", "K-LIB", "K-CONC", "K-AFC"].map((id) => campeao(id as IdCopa)));
-  if (mundial.length >= 2) vagas["K-MUN"] = { semi: mundial };
+  const semi = unicos(["K-UCL", "K-LIB", "K-CONC"].map((id) => campeao(id as IdCopa)));
+  const playoff = unicos(["K-AFC", "K-CAF"].map((id) => campeao(id as IdCopa))).filter((c) => !semi.includes(c));
+  if (semi.length + playoff.length >= 2) vagas["K-MUN"] = { playoff, semi };
   const supercopa = unicos([campeao("K-UCL"), campeao("K-UEL")]);
   if (supercopa.length === 2) vagas["K-USC"] = { final: supercopa };
   return vagas;

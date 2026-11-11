@@ -2396,8 +2396,10 @@ describe("Ásia (projeto jogo completo, parte 2, nov/2026): a 1ª divisão do Ja
     expect(e.partidas.filter((p) => p.serie === "K-AFC" && !p.jogada)).toHaveLength(0);
     expect(e.partidas.find((p) => p.serie === "K-AFC" && p.fase === "final")?.neutro).toBe(true);
     const vagas = vagasDasCopas(e);
-    const campeoes = ["K-UCL", "K-LIB", "K-CONC", "K-AFC"].map((id) => e.copas![id as `K-${string}`]!.campeao!);
+    // Desde a Liga dos Campeões da África: o campeão da Ásia joga o playoff (com o da África); os outros, a semifinal.
+    const campeoes = ["K-UCL", "K-LIB", "K-CONC"].map((id) => e.copas![id as `K-${string}`]!.campeao!);
     expect(vagas["K-MUN"]?.semi?.sort()).toEqual([...new Set(campeoes)].sort());
+    expect(vagas["K-MUN"]?.playoff).toContain(e.copas!["K-AFC"]!.campeao);
     expect(vagas["K-AFC"]?.grupos).toHaveLength(16);
   });
 
@@ -2434,6 +2436,25 @@ describe("Ásia (projeto jogo completo, parte 2, nov/2026): a 1ª divisão do Ja
       }
     }
     expect(vistos).toBeGreaterThanOrEqual(200);
+  });
+
+  it("Liga dos Campeões da África: 16 clubes (Egito 3, Marrocos 3, África do Sul 2, Tunísia 2, Argélia 2, Nigéria, Gana, Tanzânia e Angola 1) em 4 grupos; vai até a final em campo neutro; o campeão vai ao Mundial de Clubes", () => {
+    const caf = estado.copas?.["K-CAF"];
+    expect(caf?.clubes).toHaveLength(16);
+    const porPais = (pais: string) => caf!.clubes.filter((c) => estado.clubes[c].pais === pais).length;
+    expect(["EG", "MA", "ZA", "TN", "DZ", "NG", "GH", "TZ", "AO"].map(porPais)).toEqual([3, 3, 2, 2, 2, 1, 1, 1, 1]);
+    expect(caf?.grupos?.grupos).toHaveLength(4);
+    expect(nomeDaCopa("K-CAF")).toBe("Liga dos Campeões da África");
+    expect(DEFINICOES.find((d) => d.id === "K-CAF")?.grupo).toBe("caf");
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 24 });
+    e.config.escalacaoAutomatica = true;
+    simularRestoDaTemporada(e);
+    expect(e.copas?.["K-CAF"]?.campeao).toBeTruthy();
+    expect(e.partidas.filter((p) => p.serie === "K-CAF" && !p.jogada)).toHaveLength(0);
+    expect(e.partidas.find((p) => p.serie === "K-CAF" && p.fase === "final")?.neutro).toBe(true);
+    const vagas = vagasDasCopas(e);
+    expect(vagas["K-MUN"]?.playoff).toContain(e.copas!["K-CAF"]!.campeao);
+    expect(vagas["K-CAF"]?.grupos).toHaveLength(16);
   });
 
   it("save de antes da Ásia: abrir o jogo cria os clubes, que jogam a liga na temporada seguinte", () => {
