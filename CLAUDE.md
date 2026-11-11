@@ -607,6 +607,22 @@ as vagas saem da tabela de 2025/26 de cada liga (`data/europa-2026/copas.json` a
 `npx tsx tools/europa/tabelas.ts <dados-europa> <dados-europa-outros>`; o `montar.ts` não grava mais esse arquivo). Save
 antigo: as copas novas começam na temporada seguinte; uma Liga dos Campeões em andamento continua como estava.
 
+**Ásia, primeira etapa (nov/2026, parte 2 do "jogo completo", R108):** a 1ª divisão do Japão (JP, 20 clubes da J1), da
+Coreia do Sul (KR, 12), da Arábia Saudita (SA, 18) e da Austrália (AU, 12, com o Auckland FC e o Wellington Phoenix, da Nova
+Zelândia), em `PAISES` com `regiao: "asia"` (`NOME_REGIAO.asia` = "Ásia"): sem acesso nem queda, liga aos domingos a partir de
+abril (como a América), simulação rápida fora o clube do técnico, TV do mês em `TV_EUROPA_MES` (SA 9 mi, JP 3,5 mi, KR 2,5
+mi, AU 1,5 mi). **Dados:** fase "asia-africa" do robô (`elencos.yml`; `tools/times/sementes_mundo.py` gera
+`sementes-mundo.json`; branch `dados-asia-africa`: pasta `tm` com o transfermarkt-datasets das 4 ligas e, da Wikipédia e do
+Wikidata, ~30 ligas da África, da Ásia e a da Nova Zelândia, com 1.488 elencos, e as páginas das copas de lá); `npx tsx
+tools/asia/montar.ts <dados-asia-africa>` grava `data/asia-2026/clubes.json` e `jogadores.json` (fichas em
+`tools/asia/fichas.ts`; força pelo valor de mercado, como na Europa, com piso por liga, `PISO`) e liga em
+`data/selecoes-2026/convocados.json` os convocados que jogam nesses clubes (69; rodar depois de `tools/europa/montar.ts`).
+Jogo novo com o continente Ásia (`NovoJogo.tsx`, 🌏); Tabelas → Outros países com o grupo Ásia depois da Europa. Save antigo:
+`acertarParticipantes` cria os clubes (a liga vale na temporada seguinte). Os 62 escudos estão na lista dos que faltam.
+**Falta da parte 2:** as ligas da África, das outras ligas da Ásia (China, Irã, Catar, Emirados...) e da Nova Zelândia, que já
+estão na branch `dados-asia-africa` (páginas da Wikipédia e elencos; montar como o `tools/times/montar.ts` faz com a América),
+a Liga dos Campeões da Ásia e da África e o Mundial de Clubes.
+
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).
 (2) Deixar as partidas mais lentas (o relógio da partida ao vivo). (3) Substituição manual do jogador machucado (hoje o

@@ -57,7 +57,8 @@ test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 23 países
   // O país do clube do técnico abre escolhido.
   await expect(pais).toHaveValue("ES");
   const grupos = await pais.locator("optgroup").evaluateAll((g) => g.map((x) => (x as HTMLOptGroupElement).label));
-  expect(grupos.at(-1)).toBe("Europa");
+  // A Europa e, desde o R108, a Ásia depois dela.
+  expect(grupos.slice(-2)).toEqual(["Europa", "Ásia"]);
   const daEuropa = await pais.locator('optgroup[label="Europa"] option').allTextContents();
   expect(daEuropa).toHaveLength(23);
   for (const p of ["Alemanha", "Espanha", "França", "Holanda", "Inglaterra", "Itália", "Portugal", "Turquia", "Escócia"]) expect(daEuropa).toContain(p);

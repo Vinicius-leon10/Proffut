@@ -40,13 +40,15 @@ const POR_REGIAO = (Object.keys(NOME_REGIAO) as Regiao[]).map((regiao) => ({
   paises: Object.keys(DIVISOES).filter((p) => (p === "BR" ? "sul" : PAISES[p].regiao) === regiao),
 })).filter((g) => g.paises.length);
 const NOME_PAIS: Record<string, string> = { BR: "Brasil", ...Object.fromEntries(Object.entries(PAISES).map(([k, v]) => [k, v.pais])) };
-/** Os continentes do jogo novo (R96; a Europa desde o R98), com os países em ordem alfabética, numa lista só. */
-type Continente = "america" | "europa";
-const CONTINENTES: { id: Continente; nome: string; icone: string }[] = [{ id: "america", nome: "América", icone: "🌎" }, { id: "europa", nome: "Europa", icone: "🌍" }];
-const PAISES_EM_ORDEM: Record<Continente, string[]> = {
-  america: POR_REGIAO.filter((g) => g.regiao !== "europa").flatMap((g) => g.paises).sort((a, b) => NOME_PAIS[a].localeCompare(NOME_PAIS[b], "pt-BR")),
-  europa: POR_REGIAO.filter((g) => g.regiao === "europa").flatMap((g) => g.paises).sort((a, b) => NOME_PAIS[a].localeCompare(NOME_PAIS[b], "pt-BR")),
-};
+/** Os continentes do jogo novo (R96; a Europa desde o R98, a Ásia desde o R108), com os países em ordem alfabética, numa lista só. */
+type Continente = "america" | "europa" | "asia";
+const CONTINENTES: { id: Continente; nome: string; icone: string }[] = [
+  { id: "america", nome: "América", icone: "🌎" }, { id: "europa", nome: "Europa", icone: "🌍" }, { id: "asia", nome: "Ásia", icone: "🌏" },
+];
+const continenteDa = (regiao: Regiao): Continente => (regiao === "europa" || regiao === "asia" ? regiao : "america");
+const PAISES_EM_ORDEM = Object.fromEntries(CONTINENTES.map(({ id }) => [id,
+  POR_REGIAO.filter((g) => continenteDa(g.regiao) === id).flatMap((g) => g.paises).sort((a, b) => NOME_PAIS[a].localeCompare(NOME_PAIS[b], "pt-BR")),
+])) as Record<Continente, string[]>;
 const semAcento = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
 /** Jogo novo em três páginas (pedido do usuário, R94): o nome do técnico, o país (bandeiras) e o clube (divisões do país). */
@@ -113,7 +115,7 @@ export function NovoJogo() {
     );
   }
 
-  // O continente (R96): a América e, desde o R98, a Europa.
+  // O continente (R96): a América e, desde o R98, a Europa; desde o R108, a Ásia.
   if (passo === "continente") {
     return (
       <div className="app">

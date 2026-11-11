@@ -1,0 +1,1556 @@
+{
+ "temporada": 2026,
+ "descricao": "Clubes da primeira divisão do Japão (J1 League 2025), da Coreia do Sul (K League 1 2025), da Arábia Saudita (Saudi Pro League 2025/26) e da Austrália (A-League Men 2025/26, com o Auckland FC e o Wellington Phoenix, da Nova Zelândia). Estádio do transfermarkt-datasets (CC0); nomes, cores e números do Proffut.",
+ "clubes": [
+  {
+   "id": "cerezo-osaka",
+   "nome": "Cerezo Osaka",
+   "sigla": "CER",
+   "cidade": "Osaka",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#E4007F",
+    "secundaria": "#1A237E"
+   },
+   "estadio": {
+    "nome": "YANMAR Hanasaka Stadium",
+    "capacidade": 24481
+   },
+   "fundacao": 1957,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 57,
+    "max": 69
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "shimizu-s-pulse",
+   "nome": "Shimizu S-Pulse",
+   "sigla": "SHI",
+   "cidade": "Shizuoka",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#F39800",
+    "secundaria": "#003DA5"
+   },
+   "estadio": {
+    "nome": "IAI Stadium Nihondaira",
+    "capacidade": 20299
+   },
+   "fundacao": 1991,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 60,
+    "max": 66
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "nagoya-grampus",
+   "nome": "Nagoya Grampus",
+   "sigla": "NAG",
+   "cidade": "Nagoya",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#D71920",
+    "secundaria": "#F5A800"
+   },
+   "estadio": {
+    "nome": "Toyota Stadium",
+    "capacidade": 45000
+   },
+   "fundacao": 1939,
+   "rival": null,
+   "torcida": 24,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 58,
+    "max": 69
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "al-hilal",
+   "nome": "Al-Hilal",
+   "sigla": "HIL",
+   "cidade": "Riad",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#0033A0",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Kingdom Arena",
+    "capacidade": 30000
+   },
+   "fundacao": 1957,
+   "rival": null,
+   "torcida": 44,
+   "reputacao": 78,
+   "forcaElenco": {
+    "min": 58,
+    "max": 86
+   },
+   "caixaInicial": 109000000
+  },
+  {
+   "id": "auckland-fc",
+   "nome": "Auckland FC",
+   "sigla": "AUC",
+   "cidade": "Auckland",
+   "estado": "AU",
+   "pais": "AU",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#00A0E9"
+   },
+   "estadio": {
+    "nome": "Mount Smart Stadium",
+    "capacidade": 25000
+   },
+   "fundacao": 2023,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 55,
+    "max": 66
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "al-ahli",
+   "nome": "Al-Ahli",
+   "sigla": "AHL",
+   "cidade": "Jidá",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "King Abdullah Sports City",
+    "capacidade": 62345
+   },
+   "fundacao": 1937,
+   "rival": null,
+   "torcida": 36,
+   "reputacao": 75,
+   "forcaElenco": {
+    "min": 58,
+    "max": 86
+   },
+   "caixaInicial": 99000000
+  },
+  {
+   "id": "al-nassr",
+   "nome": "Al-Nassr",
+   "sigla": "NAS",
+   "cidade": "Riad",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#003DA5"
+   },
+   "estadio": {
+    "nome": "Al-Awwal Park",
+    "capacidade": 25000
+   },
+   "fundacao": 1955,
+   "rival": null,
+   "torcida": 42,
+   "reputacao": 77,
+   "forcaElenco": {
+    "min": 58,
+    "max": 86
+   },
+   "caixaInicial": 81000000
+  },
+  {
+   "id": "jeju-sk",
+   "nome": "Jeju SK",
+   "sigla": "JEJ",
+   "cidade": "Jeju",
+   "estado": "KR",
+   "pais": "KR",
+   "cores": {
+    "primaria": "#F39800",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Jeju World Cup Stadium",
+    "capacidade": 29791
+   },
+   "fundacao": 1982,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 56,
+    "max": 67
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "gangwon",
+   "nome": "Gangwon FC",
+   "sigla": "GAN",
+   "cidade": "Chuncheon",
+   "estado": "KR",
+   "pais": "KR",
+   "cores": {
+    "primaria": "#F39800",
+    "secundaria": "#003DA5"
+   },
+   "estadio": {
+    "nome": "Gangneung High1 Arena",
+    "capacidade": 21416
+   },
+   "fundacao": 2008,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 58,
+    "max": 65
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "mito-hollyhock",
+   "nome": "Mito HollyHock",
+   "sigla": "MIT",
+   "cidade": "Mito",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#1D2088",
+    "secundaria": "#E60012"
+   },
+   "estadio": {
+    "nome": "K's denki Stadium Mito",
+    "capacidade": 12000
+   },
+   "fundacao": 1990,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 60,
+    "max": 66
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "fagiano-okayama",
+   "nome": "Fagiano Okayama",
+   "sigla": "FAG",
+   "cidade": "Okayama",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#B71C1C",
+    "secundaria": "#1A237E"
+   },
+   "estadio": {
+    "nome": "JFE Hare no Kuni Stadium",
+    "capacidade": 20000
+   },
+   "fundacao": 1975,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 60,
+    "max": 67
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "kashima-antlers",
+   "nome": "Kashima Antlers",
+   "sigla": "KAS",
+   "cidade": "Kashima",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#B71C1C",
+    "secundaria": "#1A237E"
+   },
+   "estadio": {
+    "nome": "Kashima Soccer Stadium",
+    "capacidade": 40728
+   },
+   "fundacao": 1947,
+   "rival": null,
+   "torcida": 30,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 60,
+    "max": 73
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "machida-zelvia",
+   "nome": "Machida Zelvia",
+   "sigla": "MAC",
+   "cidade": "Machida",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#003DA5",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Machida GION Stadium",
+    "capacidade": 15320
+   },
+   "fundacao": 1989,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 60,
+    "max": 70
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "v-varen-nagasaki",
+   "nome": "V-Varen Nagasaki",
+   "sigla": "NGS",
+   "cidade": "Nagasaki",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#003DA5",
+    "secundaria": "#F39800"
+   },
+   "estadio": {
+    "nome": "Peace Stadium connected by SoftBank",
+    "capacidade": 20027
+   },
+   "fundacao": 2005,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 60,
+    "max": 70
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "melbourne-city",
+   "nome": "Melbourne City",
+   "sigla": "MCI",
+   "cidade": "Melbourne",
+   "estado": "AU",
+   "pais": "AU",
+   "cores": {
+    "primaria": "#6CABDD",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "AAMI Park",
+    "capacidade": 30050
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 54,
+    "max": 64
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "al-qadsiah",
+   "nome": "Al-Qadsiah",
+   "sigla": "QAD",
+   "cidade": "Khobar",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Prince Mohamed bin Fahd Stadium",
+    "capacidade": 26000
+   },
+   "fundacao": 1967,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 58,
+    "max": 87
+   },
+   "caixaInicial": 71000000
+  },
+  {
+   "id": "sanfrecce-hiroshima",
+   "nome": "Sanfrecce Hiroshima",
+   "sigla": "SAN",
+   "cidade": "Hiroshima",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#5B2C83",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "EDION Peace Wing Hiroshima",
+    "capacidade": 28529
+   },
+   "fundacao": 1938,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 67,
+   "forcaElenco": {
+    "min": 60,
+    "max": 71
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "al-fateh",
+   "nome": "Al-Fateh",
+   "sigla": "FAT",
+   "cidade": "Al-Hasa",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#003DA5",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Al-Fateh Club Stadium",
+    "capacidade": 11000
+   },
+   "fundacao": 1958,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 58,
+    "max": 81
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "al-taawoun",
+   "nome": "Al-Taawoun",
+   "sigla": "TAA",
+   "cidade": "Buraidá",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#003DA5"
+   },
+   "estadio": {
+    "nome": "Al-Taawoun Club Stadium",
+    "capacidade": 5961
+   },
+   "fundacao": 1956,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 65,
+   "forcaElenco": {
+    "min": 58,
+    "max": 77
+   },
+   "caixaInicial": 20000000
+  },
+  {
+   "id": "incheon-united",
+   "nome": "Incheon United",
+   "sigla": "INC",
+   "cidade": "Incheon",
+   "estado": "KR",
+   "pais": "KR",
+   "cores": {
+    "primaria": "#003DA5",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Incheon Football Stadium",
+    "capacidade": 20356
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 54,
+    "max": 67
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "gwangju",
+   "nome": "Gwangju FC",
+   "sigla": "GWA",
+   "cidade": "Gwangju",
+   "estado": "KR",
+   "pais": "KR",
+   "cores": {
+    "primaria": "#F5C400",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "Gwangju World Cup Stadium",
+    "capacidade": 39655
+   },
+   "fundacao": 2010,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 54,
+    "max": 64
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "al-riyadh",
+   "nome": "Al-Riyadh",
+   "sigla": "RIY",
+   "cidade": "Riad",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Prince Turki bin Abdul Aziz Stadium",
+    "capacidade": 15000
+   },
+   "fundacao": 1953,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 54,
+    "max": 75
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "pohang-steelers",
+   "nome": "Pohang Steelers",
+   "sigla": "POH",
+   "cidade": "Pohang",
+   "estado": "KR",
+   "pais": "KR",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Pohang Steelyard",
+    "capacidade": 17443
+   },
+   "fundacao": 1973,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 58,
+    "max": 65
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "al-najma",
+   "nome": "Al-Najma",
+   "sigla": "NAJ",
+   "cidade": "Unaizah",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#003DA5",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Department of Education Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1960,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 58,
+    "max": 71
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "neom",
+   "nome": "Neom",
+   "sigla": "NEO",
+   "cidade": "Neom",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#C8A951"
+   },
+   "estadio": {
+    "nome": "King Khalid Sport City Stadium",
+    "capacidade": 12000
+   },
+   "fundacao": 1999,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 58,
+    "max": 81
+   },
+   "caixaInicial": 46000000
+  },
+  {
+   "id": "ulsan-hd",
+   "nome": "Ulsan HD",
+   "sigla": "ULS",
+   "cidade": "Ulsan",
+   "estado": "KR",
+   "pais": "KR",
+   "cores": {
+    "primaria": "#003DA5",
+    "secundaria": "#F39800"
+   },
+   "estadio": {
+    "nome": "Ulsan Munsu Football Stadium",
+    "capacidade": 44474
+   },
+   "fundacao": 1983,
+   "rival": null,
+   "torcida": 24,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 56,
+    "max": 69
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "bucheon-1995",
+   "nome": "Bucheon FC 1995",
+   "sigla": "BUC",
+   "cidade": "Bucheon",
+   "estado": "KR",
+   "pais": "KR",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Bucheon Sports Complex",
+    "capacidade": 35000
+   },
+   "fundacao": 2007,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 54,
+    "max": 65
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "western-sydney-wanderers",
+   "nome": "Western Sydney Wanderers",
+   "sigla": "WSW",
+   "cidade": "Sydney",
+   "estado": "AU",
+   "pais": "AU",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "CommBank Stadium",
+    "capacidade": 30000
+   },
+   "fundacao": 2012,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 55,
+    "max": 71
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "tokyo-verdy",
+   "nome": "Tokyo Verdy",
+   "sigla": "VER",
+   "cidade": "Tóquio",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Ajinomoto Stadium",
+    "capacidade": 49970
+   },
+   "fundacao": 1969,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 60,
+    "max": 66
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "yokohama-marinos",
+   "nome": "Yokohama F. Marinos",
+   "sigla": "YFM",
+   "cidade": "Yokohama",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#003DA5",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "NISSAN Stadium",
+    "capacidade": 72327
+   },
+   "fundacao": 1972,
+   "rival": null,
+   "torcida": 28,
+   "reputacao": 67,
+   "forcaElenco": {
+    "min": 57,
+    "max": 68
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "fc-anyang",
+   "nome": "FC Anyang",
+   "sigla": "ANY",
+   "cidade": "Anyang",
+   "estado": "KR",
+   "pais": "KR",
+   "cores": {
+    "primaria": "#5B2C83",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Anyang Sports Complex Stadium",
+    "capacidade": 25000
+   },
+   "fundacao": 2013,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 58,
+    "max": 67
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "vissel-kobe",
+   "nome": "Vissel Kobe",
+   "sigla": "VIS",
+   "cidade": "Kobe",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#8B0000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "NOEVIR Stadium Kobe",
+    "capacidade": 30132
+   },
+   "fundacao": 1966,
+   "rival": null,
+   "torcida": 24,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 60,
+    "max": 70
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "al-fayha",
+   "nome": "Al-Fayha",
+   "sigla": "FAY",
+   "cidade": "Al-Majma'ah",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#F39800",
+    "secundaria": "#003DA5"
+   },
+   "estadio": {
+    "nome": "Al-Majma'ah Sports City",
+    "capacidade": 7000
+   },
+   "fundacao": 1953,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 55,
+    "max": 74
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "damac",
+   "nome": "Damac",
+   "sigla": "DAM",
+   "cidade": "Khamis Mushait",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Damac Club Stadium",
+    "capacidade": 5000
+   },
+   "fundacao": 1972,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 54,
+    "max": 70
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "newcastle-jets",
+   "nome": "Newcastle Jets",
+   "sigla": "NEW",
+   "cidade": "Newcastle (Austrália)",
+   "estado": "AU",
+   "pais": "AU",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#003DA5"
+   },
+   "estadio": {
+    "nome": "McDonald Jones Stadium",
+    "capacidade": 33000
+   },
+   "fundacao": 2000,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 55,
+    "max": 64
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "kyoto-sanga",
+   "nome": "Kyoto Sanga",
+   "sigla": "KYO",
+   "cidade": "Kyoto",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#6B2C91",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Sanga Stadium by KYOCERA",
+    "capacidade": 21600
+   },
+   "fundacao": 1922,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 60,
+    "max": 73
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "gamba-osaka",
+   "nome": "Gamba Osaka",
+   "sigla": "GAM",
+   "cidade": "Suita",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#0033A0",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "PANASONIC Stadium Suita",
+    "capacidade": 39694
+   },
+   "fundacao": 1980,
+   "rival": null,
+   "torcida": 26,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 60,
+    "max": 73
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "al-khaleej",
+   "nome": "Al-Khaleej",
+   "sigla": "KHA",
+   "cidade": "Saihat",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Prince Mohamed bin Fahd Stadium",
+    "capacidade": 22042
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 54,
+    "max": 73
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "daejeon-hana",
+   "nome": "Daejeon Hana Citizen",
+   "sigla": "DAE",
+   "cidade": "Daejeon",
+   "estado": "KR",
+   "pais": "KR",
+   "cores": {
+    "primaria": "#5B2C83",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "Daejeon World Cup Stadium",
+    "capacidade": 42176
+   },
+   "fundacao": 1997,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 57,
+    "max": 68
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "fc-seoul",
+   "nome": "FC Seoul",
+   "sigla": "SEO",
+   "cidade": "Seul",
+   "estado": "KR",
+   "pais": "KR",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Seoul World Cup Stadium",
+    "capacidade": 66704
+   },
+   "fundacao": 1983,
+   "rival": null,
+   "torcida": 26,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 57,
+    "max": 67
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "jeonbuk-hyundai",
+   "nome": "Jeonbuk Hyundai Motors",
+   "sigla": "JEO",
+   "cidade": "Jeonju",
+   "estado": "KR",
+   "pais": "KR",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Jeonju World Cup Stadium",
+    "capacidade": 50000
+   },
+   "fundacao": 1994,
+   "rival": null,
+   "torcida": 26,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 58,
+    "max": 71
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "gimcheon-sangmu",
+   "nome": "Gimcheon Sangmu",
+   "sigla": "GIM",
+   "cidade": "Gimcheon",
+   "estado": "KR",
+   "pais": "KR",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Gimcheon Sports Complex",
+    "capacidade": 25000
+   },
+   "fundacao": 1984,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 58,
+    "max": 63
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "fc-tokyo",
+   "nome": "FC Tokyo",
+   "sigla": "TOK",
+   "cidade": "Tóquio",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#003DA5",
+    "secundaria": "#E60012"
+   },
+   "estadio": {
+    "nome": "AJINOMOTO Stadium",
+    "capacidade": 49970
+   },
+   "fundacao": 1935,
+   "rival": null,
+   "torcida": 24,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 60,
+    "max": 71
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "kashiwa-reysol",
+   "nome": "Kashiwa Reysol",
+   "sigla": "KSR",
+   "cidade": "Kashiwa",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#FFE600",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "SANKYO FRONTIER Kashiwa Stadium",
+    "capacidade": 15349
+   },
+   "fundacao": 1940,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 60,
+    "max": 68
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "jef-united",
+   "nome": "JEF United Chiba",
+   "sigla": "JEF",
+   "cidade": "Chiba",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#FFE600",
+    "secundaria": "#00843D"
+   },
+   "estadio": {
+    "nome": "Fukuda Denshi Arena",
+    "capacidade": 19781
+   },
+   "fundacao": 1946,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 60,
+    "max": 70
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "central-coast-mariners",
+   "nome": "Central Coast Mariners",
+   "sigla": "CCM",
+   "cidade": "Gosford",
+   "estado": "AU",
+   "pais": "AU",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#003DA5"
+   },
+   "estadio": {
+    "nome": "Polytec Stadium",
+    "capacidade": 20059
+   },
+   "fundacao": 2004,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 54,
+    "max": 62
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "melbourne-victory",
+   "nome": "Melbourne Victory",
+   "sigla": "MVI",
+   "cidade": "Melbourne",
+   "estado": "AU",
+   "pais": "AU",
+   "cores": {
+    "primaria": "#003DA5",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "AAMI Park",
+    "capacidade": 30050
+   },
+   "fundacao": 2004,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 55,
+    "max": 67
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "macarthur",
+   "nome": "Macarthur FC",
+   "sigla": "MAF",
+   "cidade": "Sydney",
+   "estado": "AU",
+   "pais": "AU",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#C8A951"
+   },
+   "estadio": {
+    "nome": "Campbelltown Stadium",
+    "capacidade": 20000
+   },
+   "fundacao": 2017,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 53,
+    "max": 66
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "al-okhdood",
+   "nome": "Al-Okhdood",
+   "sigla": "OKH",
+   "cidade": "Najran",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Prince Hathloul bin Abdulaziz Sports City Stadium",
+    "capacidade": 12000
+   },
+   "fundacao": 1976,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 54,
+    "max": 72
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "al-ettifaq",
+   "nome": "Al-Ettifaq",
+   "sigla": "ETT",
+   "cidade": "Dammam",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#00843D",
+    "secundaria": "#C8102E"
+   },
+   "estadio": {
+    "nome": "EGO Stadium",
+    "capacidade": 15000
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 67,
+   "forcaElenco": {
+    "min": 58,
+    "max": 79
+   },
+   "caixaInicial": 19000000
+  },
+  {
+   "id": "brisbane-roar",
+   "nome": "Brisbane Roar",
+   "sigla": "BRI",
+   "cidade": "Brisbane",
+   "estado": "AU",
+   "pais": "AU",
+   "cores": {
+    "primaria": "#F39800",
+    "secundaria": "#5B2C83"
+   },
+   "estadio": {
+    "nome": "Suncorp Stadium",
+    "capacidade": 52500
+   },
+   "fundacao": 2004,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 52,
+    "max": 63
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "al-ittihad",
+   "nome": "Al-Ittihad",
+   "sigla": "ITT",
+   "cidade": "Jidá",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "King Abdullah Sports City",
+    "capacidade": 62345
+   },
+   "fundacao": 1927,
+   "rival": null,
+   "torcida": 40,
+   "reputacao": 76,
+   "forcaElenco": {
+    "min": 58,
+    "max": 86
+   },
+   "caixaInicial": 66000000
+  },
+  {
+   "id": "sydney-fc",
+   "nome": "Sydney FC",
+   "sigla": "SYD",
+   "cidade": "Sydney",
+   "estado": "AU",
+   "pais": "AU",
+   "cores": {
+    "primaria": "#6CABDD",
+    "secundaria": "#003DA5"
+   },
+   "estadio": {
+    "nome": "Allianz Stadium Sydney",
+    "capacidade": 45500
+   },
+   "fundacao": 2004,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 55,
+    "max": 71
+   },
+   "caixaInicial": 8000000
+  },
+  {
+   "id": "urawa-reds",
+   "nome": "Urawa Reds",
+   "sigla": "URA",
+   "cidade": "Saitama",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#E60012",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Saitama Stadium 2002",
+    "capacidade": 63700
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 34,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 58,
+    "max": 71
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "wellington-phoenix",
+   "nome": "Wellington Phoenix",
+   "sigla": "WEL",
+   "cidade": "Wellington",
+   "estado": "AU",
+   "pais": "AU",
+   "cores": {
+    "primaria": "#FFD100",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Hnry Stadium",
+    "capacidade": 36000
+   },
+   "fundacao": 2007,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 53,
+    "max": 64
+   },
+   "caixaInicial": 5000000
+  },
+  {
+   "id": "adelaide-united",
+   "nome": "Adelaide United",
+   "sigla": "ADE",
+   "cidade": "Adelaide",
+   "estado": "AU",
+   "pais": "AU",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Coopers Stadium",
+    "capacidade": 16500
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "al-hazem",
+   "nome": "Al-Hazem",
+   "sigla": "HAZ",
+   "cidade": "Ar Rass",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#C8102E",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Al-Hazem Club Stadium",
+    "capacidade": 8000
+   },
+   "fundacao": 1957,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 54,
+    "max": 73
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "al-kholood",
+   "nome": "Al-Kholood",
+   "sigla": "KHO",
+   "cidade": "Ar Rass",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFD100"
+   },
+   "estadio": {
+    "nome": "Al-Hazem Club Stadium",
+    "capacidade": 8000
+   },
+   "fundacao": 1962,
+   "rival": null,
+   "torcida": 4,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 54,
+    "max": 74
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "avispa-fukuoka",
+   "nome": "Avispa Fukuoka",
+   "sigla": "AVI",
+   "cidade": "Fukuoka",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#1D2088",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Best Denki Stadium",
+    "capacidade": 21562
+   },
+   "fundacao": 1982,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 60,
+    "max": 66
+   },
+   "caixaInicial": 7000000
+  },
+  {
+   "id": "kawasaki-frontale",
+   "nome": "Kawasaki Frontale",
+   "sigla": "KAW",
+   "cidade": "Kawasaki",
+   "estado": "JP",
+   "pais": "JP",
+   "cores": {
+    "primaria": "#00A0E9",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Uvance Todoroki Stadium by Fujitsu",
+    "capacidade": 27495
+   },
+   "fundacao": 1955,
+   "rival": null,
+   "torcida": 24,
+   "reputacao": 67,
+   "forcaElenco": {
+    "min": 60,
+    "max": 70
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "perth-glory",
+   "nome": "Perth Glory",
+   "sigla": "PER",
+   "cidade": "Perth",
+   "estado": "AU",
+   "pais": "AU",
+   "cores": {
+    "primaria": "#5B2C83",
+    "secundaria": "#F39800"
+   },
+   "estadio": {
+    "nome": "HBF Park",
+    "capacidade": 20500
+   },
+   "fundacao": 1995,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 55,
+    "max": 69
+   },
+   "caixaInicial": 6000000
+  },
+  {
+   "id": "al-shabab",
+   "nome": "Al-Shabab",
+   "sigla": "SHA",
+   "cidade": "Riad",
+   "estado": "SA",
+   "pais": "SA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "SHG Arena",
+    "capacidade": 15000
+   },
+   "fundacao": 1947,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 55,
+    "max": 80
+   },
+   "caixaInicial": 22000000
+  }
+ ]
+}

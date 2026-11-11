@@ -23,8 +23,8 @@ export const NOME_ESTADUAL: Record<string, string> = {
 };
 
 /** Região do país na América (para agrupar nas telas). */
-export type Regiao = "sul" | "norte" | "central" | "caribe" | "europa";
-export const NOME_REGIAO: Record<Regiao, string> = { sul: "América do Sul", norte: "América do Norte", central: "América Central", caribe: "Caribe", europa: "Europa" };
+export type Regiao = "sul" | "norte" | "central" | "caribe" | "europa" | "asia";
+export const NOME_REGIAO: Record<Regiao, string> = { sul: "América do Sul", norte: "América do Norte", central: "América Central", caribe: "Caribe", europa: "Europa", asia: "Ásia" };
 
 /**
  * Os outros países da América: nome do país, do campeonato (em português), a nacionalidade dos jogadores (código de 3
@@ -107,6 +107,11 @@ export const PAISES: Record<string, { pais: string; liga: string; nacionalidade:
   TR: { pais: "Turquia", liga: "Campeonato Turco", nacionalidade: "TUR", regiao: "europa" },
   CZ: { pais: "Tchéquia", liga: "Campeonato Tcheco", nacionalidade: "TCH", regiao: "europa" },
   UA: { pais: "Ucrânia", liga: "Campeonato Ucraniano", nacionalidade: "UCR", regiao: "europa" },
+  // Ásia (projeto "jogo completo", nov/2026): a 1ª divisão, sem acesso nem queda. A Austrália tem dois clubes da Nova Zelândia.
+  JP: { pais: "Japão", liga: "Campeonato Japonês", nacionalidade: "JAP", regiao: "asia" },
+  KR: { pais: "Coreia do Sul", liga: "Campeonato Sul-Coreano", nacionalidade: "COR", regiao: "asia" },
+  SA: { pais: "Arábia Saudita", liga: "Campeonato Saudita", nacionalidade: "SAU", regiao: "asia" },
+  AU: { pais: "Austrália", liga: "Campeonato Australiano", nacionalidade: "AUS", regiao: "asia" },
 };
 
 /** País e divisão de um código de liga: "AR" é a 1ª da Argentina, "AR2" a 2ª, "MX3" a 3ª do México. */

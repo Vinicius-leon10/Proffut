@@ -28,6 +28,8 @@ import europaClubesJson from "../../data/europa-2026/clubes.json";
 import segundasJson from "../../data/europa-2026/jogadores-segundas.json";
 import terceirasJson from "../../data/europa-2026/clubes-terceiras.json";
 import outrosJson from "../../data/europa-2026/jogadores-outros.json";
+import asiaClubesJson from "../../data/asia-2026/clubes.json";
+import asiaJogadoresJson from "../../data/asia-2026/jogadores.json";
 import europaCopasJson from "../../data/europa-2026/copas.json";
 import { TV_EUROPA_MES } from "./constantes";
 import { processarMes } from "./financas";
@@ -2331,5 +2333,54 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
       }
     }
     expect(vistos).toBeGreaterThan(100);
+  });
+});
+
+describe("Ásia (projeto jogo completo, parte 2, nov/2026): a 1ª divisão do Japão, da Coreia do Sul, da Arábia Saudita e da Austrália", () => {
+  const estado = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 21 });
+
+  it("as 4 ligas com os 62 clubes e os elencos de verdade", () => {
+    const tamanhos: Record<string, number> = { JP: 20, KR: 12, SA: 18, AU: 12 };
+    for (const [liga, n] of Object.entries(tamanhos)) {
+      expect(PAISES[liga]?.regiao, liga).toBe("asia");
+      expect(estado.torneios?.[`L-${liga}` as IdTorneio]?.clubes.length, liga).toBe(n);
+    }
+    expect((asiaClubesJson.clubes as { id: string }[]).length).toBe(62);
+    const elencos = asiaJogadoresJson.elencos as Record<string, { nome: string }[]>;
+    for (const [clubeId, reais] of Object.entries(elencos)) {
+      const elenco = elencoDe(estado, clubeId);
+      expect(elenco.length, clubeId).toBeGreaterThanOrEqual(18);
+      for (const r of reais.slice(0, 3)) expect(elenco.some((j) => j.nome === r.nome), `${r.nome} (${clubeId})`).toBe(true);
+    }
+    const media = (id: string) => elencoDe(estado, id).map((j) => j.forca).sort((a, b) => b - a).slice(0, 11).reduce((a, b) => a + b) / 11;
+    expect(media("al-hilal")).toBeGreaterThan(media("al-hazem") + 8);
+    // A Ásia joga a liga sem acesso nem queda e fica fora das copas da UEFA.
+    for (const id of ["K-UCL", "K-UEL", "K-UECL"] as const) expect(estado.copas?.[id]?.clubes.some((c) => estado.clubes[c].pais === "JP")).toBe(false);
+  });
+
+  it("os convocados que jogam nesses clubes estão só no clube (sem cópia jogando fora)", () => {
+    const asiaticos = new Set((asiaClubesJson.clubes as { id: string }[]).map((c) => c.id));
+    let vistos = 0;
+    for (const s of Object.values(convocadosJson.selecoes as Record<string, { convocados: { clubeDoJogo?: string; noJogo?: string }[] }>)) {
+      for (const c of s.convocados) {
+        if (!c.clubeDoJogo || !asiaticos.has(c.clubeDoJogo)) continue;
+        vistos++;
+        const iguais = Object.values(estado.jogadores).filter((j) => j.nome === c.noJogo && (j.clubeId === c.clubeDoJogo || j.clubeFora));
+        expect(iguais.map((j) => j.clubeId), c.noJogo).toEqual([c.clubeDoJogo]);
+      }
+    }
+    expect(vistos).toBeGreaterThanOrEqual(50);
+  });
+
+  it("save de antes da Ásia: abrir o jogo cria os clubes, que jogam a liga na temporada seguinte", () => {
+    const antigo = novoJogo({ nomeTecnico: "T", clubeId: "bahia", semente: 22 });
+    for (const id of Object.keys(antigo.clubes)) if (["JP", "KR", "SA", "AU"].includes(antigo.clubes[id].pais ?? "")) delete antigo.clubes[id];
+    for (const j of Object.values(antigo.jogadores)) if (j.clubeId && !antigo.clubes[j.clubeId]) delete antigo.jogadores[j.id];
+    for (const t of ["L-JP", "L-KR", "L-SA", "L-AU"] as IdTorneio[]) delete antigo.torneios![t];
+    antigo.partidas = antigo.partidas.filter((p) => antigo.clubes[p.mandante] && antigo.clubes[p.visitante]);
+    acertarParticipantes(antigo);
+    expect(antigo.clubes["urawa-reds"]?.liga).toBe("JP");
+    expect(elencoDe(antigo, "urawa-reds").length).toBeGreaterThanOrEqual(18);
+    expect(checarEstado(antigo).filter((p) => p.gravidade === "erro")).toEqual([]);
   });
 });

@@ -11,9 +11,49 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 556 escudos (0 de clubes brasileiros e 556 de fora).
+Total: 618 escudos (0 de clubes brasileiros e 618 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
+
+### Arábia Saudita (18 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Al-Ahli | Jidá | `al-ahli.png` |
+| Al-Ettifaq | Dammam | `al-ettifaq.png` |
+| Al-Fateh | Al-Hasa | `al-fateh.png` |
+| Al-Fayha | Al-Majma'ah | `al-fayha.png` |
+| Al-Hazem | Ar Rass | `al-hazem.png` |
+| Al-Hilal | Riad | `al-hilal.png` |
+| Al-Ittihad | Jidá | `al-ittihad.png` |
+| Al-Khaleej | Saihat | `al-khaleej.png` |
+| Al-Kholood | Ar Rass | `al-kholood.png` |
+| Al-Najma | Unaizah | `al-najma.png` |
+| Al-Nassr | Riad | `al-nassr.png` |
+| Al-Okhdood | Najran | `al-okhdood.png` |
+| Al-Qadsiah | Khobar | `al-qadsiah.png` |
+| Al-Riyadh | Riad | `al-riyadh.png` |
+| Al-Shabab | Riad | `al-shabab.png` |
+| Al-Taawoun | Buraidá | `al-taawoun.png` |
+| Damac | Khamis Mushait | `damac.png` |
+| Neom | Neom | `neom.png` |
+
+### Austrália (12 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Adelaide United | Adelaide | `adelaide-united.png` |
+| Auckland FC | Auckland | `auckland-fc.png` |
+| Brisbane Roar | Brisbane | `brisbane-roar.png` |
+| Central Coast Mariners | Gosford | `central-coast-mariners.png` |
+| Macarthur FC | Sydney | `macarthur.png` |
+| Melbourne City | Melbourne | `melbourne-city.png` |
+| Melbourne Victory | Melbourne | `melbourne-victory.png` |
+| Newcastle Jets | Newcastle (Austrália) | `newcastle-jets.png` |
+| Perth Glory | Perth | `perth-glory.png` |
+| Sydney FC | Sydney | `sydney-fc.png` |
+| Wellington Phoenix | Wellington | `wellington-phoenix.png` |
+| Western Sydney Wanderers | Sydney | `western-sydney-wanderers.png` |
 
 ### Bélgica (16 clubes)
 
@@ -35,6 +75,23 @@ Total: 556 escudos (0 de clubes brasileiros e 556 de fora).
 | Union Saint-Gilloise | Bruxelas | `union-saint-gilloise.png` |
 | Westerlo | Westerlo | `westerlo.png` |
 | Zulte Waregem | Waregem | `zulte-waregem.png` |
+
+### Coreia do Sul (12 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Bucheon FC 1995 | Bucheon | `bucheon-1995.png` |
+| Daejeon Hana Citizen | Daejeon | `daejeon-hana.png` |
+| FC Anyang | Anyang | `fc-anyang.png` |
+| FC Seoul | Seul | `fc-seoul.png` |
+| Gangwon FC | Chuncheon | `gangwon.png` |
+| Gimcheon Sangmu | Gimcheon | `gimcheon-sangmu.png` |
+| Gwangju FC | Gwangju | `gwangju.png` |
+| Incheon United | Incheon | `incheon-united.png` |
+| Jeju SK | Jeju | `jeju-sk.png` |
+| Jeonbuk Hyundai Motors | Jeonju | `jeonbuk-hyundai.png` |
+| Pohang Steelers | Pohang | `pohang-steelers.png` |
+| Ulsan HD | Ulsan | `ulsan-hd.png` |
 
 ### Croácia (10 clubes)
 
@@ -103,6 +160,31 @@ Total: 556 escudos (0 de clubes brasileiros e 556 de fora).
 | Panetolikos | Agrinio | `panetolikos.png` |
 | Panserraikos | Serres | `panserraikos.png` |
 | Volos | Volos | `volos.png` |
+
+### Japão (20 clubes)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Avispa Fukuoka | Fukuoka | `avispa-fukuoka.png` |
+| Cerezo Osaka | Osaka | `cerezo-osaka.png` |
+| FC Tokyo | Tóquio | `fc-tokyo.png` |
+| Fagiano Okayama | Okayama | `fagiano-okayama.png` |
+| Gamba Osaka | Suita | `gamba-osaka.png` |
+| JEF United Chiba | Chiba | `jef-united.png` |
+| Kashima Antlers | Kashima | `kashima-antlers.png` |
+| Kashiwa Reysol | Kashiwa | `kashiwa-reysol.png` |
+| Kawasaki Frontale | Kawasaki | `kawasaki-frontale.png` |
+| Kyoto Sanga | Kyoto | `kyoto-sanga.png` |
+| Machida Zelvia | Machida | `machida-zelvia.png` |
+| Mito HollyHock | Mito | `mito-hollyhock.png` |
+| Nagoya Grampus | Nagoya | `nagoya-grampus.png` |
+| Sanfrecce Hiroshima | Hiroshima | `sanfrecce-hiroshima.png` |
+| Shimizu S-Pulse | Shizuoka | `shimizu-s-pulse.png` |
+| Tokyo Verdy | Tóquio | `tokyo-verdy.png` |
+| Urawa Reds | Saitama | `urawa-reds.png` |
+| V-Varen Nagasaki | Nagasaki | `v-varen-nagasaki.png` |
+| Vissel Kobe | Kobe | `vissel-kobe.png` |
+| Yokohama F. Marinos | Yokohama | `yokohama-marinos.png` |
 
 ### Noruega (16 clubes)
 
