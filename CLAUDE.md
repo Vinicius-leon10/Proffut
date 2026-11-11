@@ -467,6 +467,9 @@ chave fica só na variável de ambiente. Os tempos de cada cena seguem as pausas
 do jogo rodando (Playwright, iPhone 13, capturas em alta resolução). **Música (pedido do usuário):** "Sempre traga musicas de futebol para cada video": a cada
 vídeo, sugerir músicas de jogos de futebol (trilhas de FIFA, músicas de estádio e de Copa), para ele pôr pela biblioteca do
 TikTok, bem baixinha sob a voz. Já usadas: episódio 1 com "Love Me Again" (John Newman, FIFA 14). Não repetir sem ele pedir.
+**Texto para gravar (pedido do usuário):** "Quando eu pedir o texto do vídeo você sempre vai mandar ele limpo, para eu
+gravar": mandar só o texto da fala, em parágrafos, sem título, dicas ou comentários. Ele grava e manda o áudio; o vídeo
+segue as pausas da gravação dele.
 
 **Série "Do zero ao topo" (TikTok, nov/2026):** pedido "Podemos criar uma serie de um club da serie c e vendo como ele vai
 prosseguindo" e "Uma simulação, mas ainda vamos continuar criando os videos da serie tbm". Carreira simulada do Santa Cruz
