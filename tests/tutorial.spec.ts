@@ -11,7 +11,8 @@ test("R43 tutorial rápido: no jogo novo, o tutorial mostra os passos principais
 
   // Os passos, um de cada vez, com o objetivo da diretoria logo no primeiro.
   const tutorial = page.getByRole("dialog");
-  await expect(tutorial.getByRole("heading")).toHaveText(PASSOS[0]);
+  // O jogo novo monta o mundo todo antes de abrir (no GitHub passou de 10 s, nov/2026): a mesma espera do `pularTutorial`.
+  await expect(tutorial.getByRole("heading")).toHaveText(PASSOS[0], { timeout: 30_000 });
   await expect(tutorial).toContainText("A diretoria espera");
   for (const [i, titulo] of PASSOS.entries()) {
     await expect(tutorial.getByRole("heading")).toHaveText(titulo);
