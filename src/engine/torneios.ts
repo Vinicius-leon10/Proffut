@@ -463,9 +463,18 @@ export function torneioDecidePorPenaltis(p: Partida): boolean {
 
 // ---- andamento ------------------------------------------------------------------------------
 
-function faseCompleta(estado: EstadoJogo, id: IdTorneio, fase: string): boolean {
-  const jogos = estado.partidas.filter((p) => p.serie === id && p.fase === fase);
-  return jogos.length > 0 && jogos.every((p) => p.jogada);
+/**
+ * Fases dos torneios em que todos os jogos já foram jogados ("L-AR|liga"), numa passada só pelos jogos do ano: com ~200
+ * torneios, procurar os jogos de cada um na lista inteira, todo dia, era a parte mais lenta do dia simulado (nov/2026).
+ */
+function fasesCompletas(estado: EstadoJogo): Set<string> {
+  const tudoJogado = new Map<string, boolean>();
+  for (const p of estado.partidas) {
+    if (!ehTorneio(p.serie)) continue;
+    const chave = `${p.serie}|${p.fase}`;
+    tudoJogado.set(chave, (tudoJogado.get(chave) ?? true) && p.jogada);
+  }
+  return new Set([...tudoJogado].filter(([, ok]) => ok).map(([chave]) => chave));
 }
 
 /** Torneios que o clube do usuário joga nesta temporada. */
@@ -482,8 +491,10 @@ export function avancarTorneios(estado: EstadoJogo): string[] {
   const meu = estado.tecnico.clubeId;
   const nome = (id: string) => estado.clubes[id]?.nome ?? id;
   let acabouUmEstadual = false;
+  // As fases completas no começo do dia (as fases novas que um torneio cria aqui só são vistas no dia seguinte, como antes).
+  const completas = fasesCompletas(estado);
   for (const t of Object.values(estado.torneios ?? {})) {
-    if (!t || t.fase === "encerrada" || !faseCompleta(estado, t.id, t.fase)) continue;
+    if (!t || t.fase === "encerrada" || !completas.has(`${t.id}|${t.fase}`)) continue;
     const doUsuario = t.clubes.includes(meu);
     if (t.fase === "liga" || t.fase === "grupos") {
       if (t.tipo === "liga") {

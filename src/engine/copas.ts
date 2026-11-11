@@ -1073,8 +1073,8 @@ function faseTerminada(estado: EstadoJogo, copaId: IdCopa, faseId: string): bool
 }
 
 /** Resultado da fase em andamento, se todos os jogos dela já foram jogados. */
-function resultadoDaFase(estado: EstadoJogo, def: DefinicaoCopa, copa: EstadoCopaClubes, fase: FaseCopa): ResultadoFase | undefined {
-  const jogos = estado.partidas.filter((p) => p.serie === def.id && p.fase === fase.id);
+function resultadoDaFase(estado: EstadoJogo, def: DefinicaoCopa, copa: EstadoCopaClubes, fase: FaseCopa, porFase?: Map<string, Partida[]>): ResultadoFase | undefined {
+  const jogos = porFase ? porFase.get(`${def.id}|${fase.id}`) ?? [] : estado.partidas.filter((p) => p.serie === def.id && p.fase === fase.id);
   if (!jogos.length || jogos.some((p) => !p.jogada)) return undefined;
   if (fase.tipo === "mata") {
     const chaves = [...new Set(jogos.map((p) => p.chave!))].sort((a, b) => a - b);
@@ -1107,13 +1107,24 @@ export function avancarCopasDeClubes(estado: EstadoJogo): string[] {
   const meu = estado.tecnico.clubeId;
   // Duas passadas: uma fase que acaba hoje pode liberar a fase que esperava por ela em outra copa.
   for (let passada = 0; passada < 2; passada++) {
+    // Os jogos das copas por fase, numa passada só pela lista do ano (procurar os de cada copa na lista inteira, todo dia,
+    // pesava no dia simulado com o mundo todo, nov/2026). Os jogos que uma copa marca nesta passada são de fases que ainda
+    // não acabaram: não mudam o resultado de nenhuma fase.
+    const porFase = new Map<string, Partida[]>();
+    for (const p of estado.partidas) {
+      if (!p.serie.startsWith("K-")) continue;
+      const chave = `${p.serie}|${p.fase}`;
+      const lista = porFase.get(chave);
+      if (lista) lista.push(p);
+      else porFase.set(chave, [p]);
+    }
     for (const def of DEFINICOES) {
       const copa = estado.copas[def.id];
       if (!copa || copa.fase === "encerrada") continue;
       const i = def.fases.findIndex((f) => f.id === copa.fase);
       const fase = def.fases[i];
       if (copa.classificados == null) {
-        const r = resultadoDaFase(estado, def, copa, fase);
+        const r = resultadoDaFase(estado, def, copa, fase, porFase);
         if (!r) continue;
         const seguem = def.aoTerminar?.(estado, copa, fase, r) ?? r.passaram;
         if (i === def.fases.length - 1) {

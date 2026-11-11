@@ -286,8 +286,17 @@ export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente
 
   const meu = estado.clubes[opcoes.clubeId];
   meu.tatica = { formacao: "4-4-2", estilo: "equilibrado", marcacao: "normal", jogadas: "meio" };
+  // Os elencos de todos os clubes numa passada só (na mesma ordem de `elencoDe`): um `elencoDe` por clube varria os ~70
+  // mil jogadores ~3 mil vezes e deixava o jogo novo lento (nov/2026).
+  const elencos = new Map<string, Jogador[]>();
+  for (const j of Object.values(estado.jogadores)) {
+    if (!j.clubeId) continue;
+    const lista = elencos.get(j.clubeId);
+    if (lista) lista.push(j);
+    else elencos.set(j.clubeId, [j]);
+  }
   for (const clube of Object.values(estado.clubes)) {
-    clube.escalacao = escalarAutomatico(elencoDe(estado, clube.id), clube.tatica.formacao, clube.tatica.jogadas);
+    clube.escalacao = escalarAutomatico(elencos.get(clube.id) ?? [], clube.tatica.formacao, clube.tatica.jogadas);
   }
 
   criarTemporada(estado);
