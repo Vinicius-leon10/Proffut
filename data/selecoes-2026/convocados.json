@@ -708,7 +708,9 @@
      "jogos": 9,
      "gols": 0,
      "clube": "Hapoel Petah Tikva",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "hapoel-petah-tikva",
+     "noJogo": "Diego Arroyo"
     },
     {
      "nome": "Diego Medina",
@@ -2340,7 +2342,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Hapoel Be'er Sheva",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "hapoel-be-er-sheva",
+     "noJogo": "Adrián Ugarriza"
     },
     {
      "nome": "Gianluca Lapadula",
@@ -3025,7 +3029,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Kalamata",
-     "paisDoClube": "GRE"
+     "paisDoClube": "GRE",
+     "clubeDoJogo": "kalamata",
+     "noJogo": "Jovanny Bolívar"
     },
     {
      "nome": "Edson Tortolero",
@@ -3056,7 +3062,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Liefering",
-     "paisDoClube": "AUT"
+     "paisDoClube": "AUT",
+     "clubeDoJogo": "liefering",
+     "noJogo": "Yerwin Sulbarán"
     }
    ]
   },
@@ -3787,7 +3795,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Sarajevo",
-     "paisDoClube": "BIH"
+     "paisDoClube": "BIH",
+     "clubeDoJogo": "sarajevo",
+     "noJogo": "Jovan Ivanišević"
     },
     {
      "nome": "Jonathan Osorio",
@@ -4039,7 +4049,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Zalaegerszeg",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "zalaegerszeg",
+     "noJogo": "Joseth Peraza"
     },
     {
      "nome": "Farbod Samadian",
@@ -4432,7 +4444,9 @@
      "jogos": 4,
      "gols": 1,
      "clube": "BATE Borisov",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "bate-borisov",
+     "noJogo": "Erick Puerto"
     },
     {
      "nome": "Bryan Róchez",
@@ -4452,7 +4466,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Manisa",
-     "paisDoClube": "TUR"
+     "paisDoClube": "TUR",
+     "clubeDoJogo": "manisa",
+     "noJogo": "Alenis Vargas"
     }
    ]
   },
@@ -5002,7 +5018,9 @@
      "jogos": 45,
      "gols": 3,
      "clube": "Slovan Bratislava",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "slovan-bratislava",
+     "noJogo": "César Blackman"
     },
     {
      "nome": "Martín Krug",
@@ -5086,7 +5104,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Sheriff Tiraspol",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "sheriff-tiraspol",
+     "noJogo": "Jair Modelo"
     },
     {
      "nome": "Víctor Griffith",
@@ -5106,7 +5126,9 @@
      "jogos": 71,
      "gols": 2,
      "clube": "Slovan Bratislava",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "slovan-bratislava",
+     "noJogo": "Cristian Martínez"
     },
     {
      "nome": "José Luis Rodríguez",
@@ -5417,7 +5439,9 @@
      "jogos": 52,
      "gols": 16,
      "clube": "KuPS",
-     "paisDoClube": "FIN"
+     "paisDoClube": "FIN",
+     "clubeDoJogo": "kups",
+     "noJogo": "Jaime Moreno"
     },
     {
      "nome": "Byron Bonilla",
@@ -5949,7 +5973,9 @@
      "jogos": 24,
      "gols": 4,
      "clube": "Hapoel Be'er Sheva",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "hapoel-be-er-sheva",
+     "noJogo": "Javon East"
     },
     {
      "nome": "Tajay Grant",
@@ -6372,7 +6398,9 @@
      "jogos": 15,
      "gols": 0,
      "clube": "Vllaznia",
-     "paisDoClube": "ALB"
+     "paisDoClube": "ALB",
+     "clubeDoJogo": "vllaznia",
+     "noJogo": "Francois Dulysse"
     },
     {
      "nome": "Garven Metusala",
@@ -6414,7 +6442,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Stade Nyonnais",
-     "paisDoClube": "SUI"
+     "paisDoClube": "SUI",
+     "clubeDoJogo": "stade-nyonnais",
+     "noJogo": "Keeto Thermoncy"
     },
     {
      "nome": "Jean-Kévin Duverne",
@@ -6535,7 +6565,9 @@
      "jogos": 22,
      "gols": 3,
      "clube": "Bodrum",
-     "paisDoClube": "TUR"
+     "paisDoClube": "TUR",
+     "clubeDoJogo": "bodrum",
+     "noJogo": "Ruben Providence"
     },
     {
      "nome": "Lovend's Delinois",
@@ -7481,7 +7513,9 @@
      "jogos": 18,
      "gols": 2,
      "clube": "Sheriff Tiraspol",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "sheriff-tiraspol",
+     "noJogo": "Dhoraso Klas"
     },
     {
      "nome": "Gyrano Kerk",
@@ -7512,7 +7546,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Maxline Vitebsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "maxline-vitebsk",
+     "noJogo": "Denilho Cleonise"
     },
     {
      "nome": "Ché Nunnely",
@@ -7543,7 +7579,9 @@
      "jogos": 37,
      "gols": 15,
      "clube": "Újpest",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "ujpest",
+     "noJogo": "Gleofilo Vlijter"
     }
    ]
   },
@@ -7643,7 +7681,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Sumgayit",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "sumgayit",
+     "noJogo": "Imani Barker"
     },
     {
      "nome": "Nathan Moriah-Welsh",
@@ -7863,7 +7903,9 @@
      "jogos": 17,
      "gols": 1,
      "clube": "Borac Banja Luka",
-     "paisDoClube": "BIH"
+     "paisDoClube": "BIH",
+     "clubeDoJogo": "borac-banja-luka",
+     "noJogo": "Jurich Carolina"
     },
     {
      "nome": "Armando Obispo",
@@ -7905,7 +7947,9 @@
      "jogos": 79,
      "gols": 17,
      "clube": "Iğdır",
-     "paisDoClube": "TUR"
+     "paisDoClube": "TUR",
+     "clubeDoJogo": "igd-r",
+     "noJogo": "Leandro Bacuna"
     },
     {
      "nome": "Juninho Bacuna",
@@ -7967,7 +8011,9 @@
      "jogos": 43,
      "gols": 10,
      "clube": "Maccabi Haifa",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "maccabi-haifa",
+     "noJogo": "Kenji Gorré"
     },
     {
      "nome": "Jearl Margaritha",
@@ -7976,7 +8022,9 @@
      "jogos": 26,
      "gols": 5,
      "clube": "Beveren",
-     "paisDoClube": "BEL"
+     "paisDoClube": "BEL",
+     "clubeDoJogo": "beveren",
+     "noJogo": "Jearl Margaritha"
     },
     {
      "nome": "Tahith Chong",
@@ -8068,7 +8116,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Glacis United",
-     "paisDoClube": "GIB"
+     "paisDoClube": "GIB",
+     "clubeDoJogo": "glacis-united",
+     "noJogo": "Gladwin Curiel"
     },
     {
      "nome": "Tyrese Gijsbertha",
@@ -8713,7 +8763,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "Kauno Žalgiris",
-     "paisDoClube": "LIT"
+     "paisDoClube": "LIT",
+     "clubeDoJogo": "kauno-zalgiris",
+     "noJogo": "Joris Moutachy"
     },
     {
      "nome": "Ghislain Arbaut",
@@ -9471,7 +9523,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "FC Rodange 91",
-     "paisDoClube": "LUX"
+     "paisDoClube": "LUX",
+     "clubeDoJogo": "rodange-91",
+     "noJogo": "Yanis Montantin"
     },
     {
      "nome": "Sacha Barakat",
@@ -10849,7 +10903,9 @@
      "jogos": 83,
      "gols": 0,
      "clube": "Valletta",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "valletta",
+     "noJogo": "Julani Archibald"
     },
     {
      "nome": "Xander Parke",
@@ -16772,7 +16828,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Qarabağ",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "qarabag",
+     "noJogo": "Oleksiy Kashchuk"
     }
    ]
   },
@@ -17358,7 +17416,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Zalaegerszeg",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "zalaegerszeg",
+     "noJogo": "Bence Gundel-Takács"
     },
     {
      "nome": "Willi Orbán",
@@ -17389,7 +17449,9 @@
      "jogos": 40,
      "gols": 3,
      "clube": "Puskás Akadémia",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "puskas-akademia",
+     "noJogo": "Zsolt Nagy"
     },
     {
      "nome": "Bendegúz Bolla",
@@ -17420,7 +17482,9 @@
      "jogos": 10,
      "gols": 0,
      "clube": "Ferencváros",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "ferencvaros",
+     "noJogo": "Attila Osváth"
     },
     {
      "nome": "Márk Csinger",
@@ -17531,7 +17595,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Paks",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "paks",
+     "noJogo": "Milán Pető"
     },
     {
      "nome": "Jozef Urblík",
@@ -17571,7 +17637,9 @@
      "jogos": 13,
      "gols": 2,
      "clube": "Puskás Akadémia",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "puskas-akademia",
+     "noJogo": "Dániel Lukács"
     },
     {
      "nome": "Damir Redzic",
@@ -17591,7 +17659,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "MTK Budapest",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "mtk-budapest",
+     "noJogo": "Gábor Jurek"
     },
     {
      "nome": "Ákos Szendrei",
@@ -17600,7 +17670,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Debrecen",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "debrecen",
+     "noJogo": "Ákos Szendrei"
     }
    ]
   },
@@ -17625,7 +17697,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Wieczysta Kraków",
-     "paisDoClube": "POL"
+     "paisDoClube": "POL",
+     "clubeDoJogo": "wieczysta-krakow",
+     "noJogo": "Mateusz Kochalski"
     },
     {
      "nome": "Sławomir Abramowicz",
@@ -17689,7 +17763,9 @@
      "jogos": 16,
      "gols": 0,
      "clube": "Sabah",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "sabah-az",
+     "noJogo": "Tymoteusz Puchacz"
     },
     {
      "nome": "Kamil Piątkowski",
@@ -18750,7 +18826,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Olimpija Ljubljana",
-     "paisDoClube": "SVN"
+     "paisDoClube": "SVN",
+     "clubeDoJogo": "olimpija-ljubljana",
+     "noJogo": "Matevž Vidovšek"
     },
     {
      "nome": "Jaka Bijol",
@@ -18770,7 +18848,9 @@
      "jogos": 52,
      "gols": 2,
      "clube": "Maribor",
-     "paisDoClube": "SVN"
+     "paisDoClube": "SVN",
+     "clubeDoJogo": "maribor",
+     "noJogo": "Žan Karničnik"
     },
     {
      "nome": "Erik Janža",
@@ -18834,7 +18914,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Olimpija Ljubljana",
-     "paisDoClube": "SVN"
+     "paisDoClube": "SVN",
+     "clubeDoJogo": "olimpija-ljubljana",
+     "noJogo": "Jošt Urbančič"
     },
     {
      "nome": "Žan Zaletel",
@@ -18909,7 +18991,9 @@
      "jogos": 7,
      "gols": 0,
      "clube": "Celje",
-     "paisDoClube": "SVN"
+     "paisDoClube": "SVN",
+     "clubeDoJogo": "celje",
+     "noJogo": "Mark Zabukovnik"
     },
     {
      "nome": "Tjaš Begić",
@@ -18929,7 +19013,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "MTK Budapest",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "mtk-budapest",
+     "noJogo": "Adrian Zeljković"
     },
     {
      "nome": "Andraž Šporar",
@@ -18980,7 +19066,9 @@
      "jogos": 9,
      "gols": 2,
      "clube": "Újpest",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "ujpest",
+     "noJogo": "Aljoša Matko"
     }
    ]
   },
@@ -19027,7 +19115,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Slovan Bratislava",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "slovan-bratislava",
+     "noJogo": "Dominik Takáč"
     },
     {
      "nome": "Milan Škriniar",
@@ -19113,7 +19203,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Žilina",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "zilina",
+     "noJogo": "Timotej Hranica"
     },
     {
      "nome": "Tobiáš Pališčák",
@@ -19144,7 +19236,9 @@
      "jogos": 50,
      "gols": 1,
      "clube": "Ferencvárosi",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "ferencvaros",
+     "noJogo": "Matúš Bero"
     },
     {
      "nome": "Tomáš Suslov",
@@ -19197,7 +19291,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Slovan Bratislava",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "slovan-bratislava",
+     "noJogo": "Artur Gajdoš"
     },
     {
      "nome": "Peter Pokorný",
@@ -19206,7 +19302,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Slovan Bratislava",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "slovan-bratislava",
+     "noJogo": "Peter Pokorný"
     },
     {
      "nome": "Sebastian Nebyla",
@@ -19303,7 +19401,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Slovan Bratislava",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "slovan-bratislava",
+     "noJogo": "Nino Marcelli"
     },
     {
      "nome": "Matej Trusa",
@@ -19312,7 +19412,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "DAC Dunajska Streda",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "dac-dunajska-streda",
+     "noJogo": "Matej Trusa"
     }
    ]
   },
@@ -20085,7 +20187,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Ferencváros",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "ferencvaros",
+     "noJogo": "Marius Corbu"
     },
     {
      "nome": "Ianis Hagi",
@@ -20198,7 +20302,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Dinamo Batumi",
-     "paisDoClube": "GEO"
+     "paisDoClube": "GEO",
+     "clubeDoJogo": "dinamo-batumi",
+     "noJogo": "Nodari Kalichava"
     },
     {
      "nome": "Otar Kakabadze",
@@ -20363,7 +20469,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "Dinamo Batumi",
-     "paisDoClube": "GEO"
+     "paisDoClube": "GEO",
+     "clubeDoJogo": "dinamo-batumi",
+     "noJogo": "Sandro Altunashvili"
     },
     {
      "nome": "Irakli Yegoian",
@@ -20394,7 +20502,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Spartak Trnava",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "spartak-trnava",
+     "noJogo": "Giorgi Moistsrapishvili"
     },
     {
      "nome": "Georges Mikautadze",
@@ -20481,7 +20591,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Egnatia",
-     "paisDoClube": "ALB"
+     "paisDoClube": "ALB",
+     "clubeDoJogo": "egnatia",
+     "noJogo": "Mario Dajsinani"
     },
     {
      "nome": "Mario Mitaj",
@@ -20521,7 +20633,9 @@
      "jogos": 19,
      "gols": 0,
      "clube": "Dinamo City",
-     "paisDoClube": "ALB"
+     "paisDoClube": "ALB",
+     "clubeDoJogo": "dinamo-city",
+     "noJogo": "Naser Aliji"
     },
     {
      "nome": "Klisman Cake",
@@ -20572,7 +20686,9 @@
      "jogos": 41,
      "gols": 1,
      "clube": "Bodrum",
-     "paisDoClube": "TUR"
+     "paisDoClube": "TUR",
+     "clubeDoJogo": "bodrum",
+     "noJogo": "Arlind Ajeti"
     },
     {
      "nome": "Ysni Ismaili",
@@ -20581,7 +20697,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Dinamo City",
-     "paisDoClube": "ALB"
+     "paisDoClube": "ALB",
+     "clubeDoJogo": "dinamo-city",
+     "noJogo": "Ysni Ismaili"
     },
     {
      "nome": "Feta Fetai",
@@ -20674,7 +20792,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Dinamo City",
-     "paisDoClube": "ALB"
+     "paisDoClube": "ALB",
+     "clubeDoJogo": "dinamo-city",
+     "noJogo": "Klevi Qefalija"
     },
     {
      "nome": "Qazim Laçi",
@@ -20694,7 +20814,9 @@
      "jogos": 49,
      "gols": 13,
      "clube": "Sivasspor",
-     "paisDoClube": "TUR"
+     "paisDoClube": "TUR",
+     "clubeDoJogo": "sivasspor",
+     "noJogo": "Rey Manaj"
     },
     {
      "nome": "Myrto Uzuni",
@@ -20763,7 +20885,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Hapoel Tel Aviv",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "hapoel-tel-aviv",
+     "noJogo": "Assaf Tzur"
     },
     {
      "nome": "Eli Dasa",
@@ -20783,7 +20907,9 @@
      "jogos": 24,
      "gols": 2,
      "clube": "Maccabi Tel Aviv",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "maccabi-tel-aviv",
+     "noJogo": "Raz Shlomo"
     },
     {
      "nome": "Roy Revivo",
@@ -20801,7 +20927,9 @@
      "jogos": 21,
      "gols": 0,
      "clube": "Hapoel Be'er Sheva",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "hapoel-be-er-sheva",
+     "noJogo": "Idan Nachmias"
     },
     {
      "nome": "Guy Mizrahi",
@@ -20810,7 +20938,9 @@
      "jogos": 10,
      "gols": 1,
      "clube": "Hapoel Be'er Sheva",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "hapoel-be-er-sheva",
+     "noJogo": "Guy Mizrahi"
     },
     {
      "nome": "Nikita Stoinov",
@@ -20850,7 +20980,9 @@
      "jogos": 59,
      "gols": 10,
      "clube": "Maccabi Tel Aviv",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "maccabi-tel-aviv",
+     "noJogo": "Dor Peretz"
     },
     {
      "nome": "Oscar Gloukh",
@@ -20870,7 +21002,9 @@
      "jogos": 23,
      "gols": 1,
      "clube": "Maccabi Tel Aviv",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "maccabi-tel-aviv",
+     "noJogo": "Gabi Kanichowsky"
     },
     {
      "nome": "Omri Gandelman",
@@ -20890,7 +21024,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Maccabi Haifa",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "maccabi-haifa",
+     "noJogo": "Ethan Azoulay"
     },
     {
      "nome": "Yarin Levi",
@@ -20899,7 +21035,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Maccabi Haifa",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "maccabi-haifa",
+     "noJogo": "Yarin Levi"
     },
     {
      "nome": "Niv Yehoshua",
@@ -20908,7 +21046,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Hapoel Be'er Sheva",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "hapoel-be-er-sheva",
+     "noJogo": "Niv Yehoshua"
     },
     {
      "nome": "Manor Solomon",
@@ -20950,7 +21090,9 @@
      "jogos": 9,
      "gols": 2,
      "clube": "Beitar Jerusalem",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "beitar-jerusalem",
+     "noJogo": "Yarden Shua"
     },
     {
      "nome": "Idan Gorno",
@@ -20969,7 +21111,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Hapoel Be'er Sheva",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "hapoel-be-er-sheva",
+     "noJogo": "Zahi Ahmed"
     }
    ]
   },
@@ -21005,7 +21149,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Borac Banja Luka",
-     "paisDoClube": "BIH"
+     "paisDoClube": "BIH",
+     "clubeDoJogo": "borac-banja-luka",
+     "noJogo": "Mladen Jurkas"
     },
     {
      "nome": "Sead Kolašinac",
@@ -21135,7 +21281,9 @@
      "jogos": 24,
      "gols": 1,
      "clube": "Astana",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "astana",
+     "noJogo": "Ivan Bašić"
     },
     {
      "nome": "Dženis Burnić",
@@ -21239,7 +21387,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Borac Banja Luka",
-     "paisDoClube": "BIH"
+     "paisDoClube": "BIH",
+     "clubeDoJogo": "borac-banja-luka",
+     "noJogo": "Matej Deket"
     }
    ]
   },
@@ -21264,7 +21414,9 @@
      "jogos": 11,
      "gols": 0,
      "clube": "Tirana",
-     "paisDoClube": "ALB"
+     "paisDoClube": "ALB",
+     "clubeDoJogo": "tirana",
+     "noJogo": "Visar Bekaj"
     },
     {
      "nome": "Amir Saipi",
@@ -21427,7 +21579,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Celje",
-     "paisDoClube": "SVN"
+     "paisDoClube": "SVN",
+     "clubeDoJogo": "celje",
+     "noJogo": "Milot Avdyli"
     },
     {
      "nome": "Dion Kacuri",
@@ -21547,7 +21701,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Vardar",
-     "paisDoClube": "MKD"
+     "paisDoClube": "MKD",
+     "clubeDoJogo": "vardar",
+     "noJogo": "Davor Taleski"
     },
     {
      "nome": "Ezgjan Alioski",
@@ -21587,7 +21743,9 @@
      "jogos": 12,
      "gols": 0,
      "clube": "Tirana",
-     "paisDoClube": "ALB"
+     "paisDoClube": "ALB",
+     "clubeDoJogo": "tirana",
+     "noJogo": "Bojan Ilievski"
     },
     {
      "nome": "Sebastián Herrera",
@@ -21636,7 +21794,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Shkëndija",
-     "paisDoClube": "MKD"
+     "paisDoClube": "MKD",
+     "clubeDoJogo": "shkendija",
+     "noJogo": "Anes Meliqi"
     },
     {
      "nome": "Enis Bardhi",
@@ -21667,7 +21827,9 @@
      "jogos": 51,
      "gols": 4,
      "clube": "Vardar",
-     "paisDoClube": "MKD"
+     "paisDoClube": "MKD",
+     "clubeDoJogo": "vardar",
+     "noJogo": "Boban Nikolov"
     },
     {
      "nome": "Jani Atanasov",
@@ -21687,7 +21849,9 @@
      "jogos": 18,
      "gols": 0,
      "clube": "Sarajevo",
-     "paisDoClube": "BIH"
+     "paisDoClube": "BIH",
+     "clubeDoJogo": "sarajevo",
+     "noJogo": "Agon Elezi"
     },
     {
      "nome": "Luka Stankovski",
@@ -21756,7 +21920,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Vardar",
-     "paisDoClube": "MKD"
+     "paisDoClube": "MKD",
+     "clubeDoJogo": "vardar",
+     "noJogo": "Azer Omeragikj"
     },
     {
      "nome": "Hristijan Maleski",
@@ -21765,7 +21931,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Struga",
-     "paisDoClube": "MKD"
+     "paisDoClube": "MKD",
+     "clubeDoJogo": "struga",
+     "noJogo": "Hristijan Maleski"
     },
     {
      "nome": "Marko Gjorgjievski",
@@ -21774,7 +21942,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Shkëndija",
-     "paisDoClube": "MKD"
+     "paisDoClube": "MKD",
+     "clubeDoJogo": "shkendija",
+     "noJogo": "Marko Gjorgjievski"
     }
    ]
   },
@@ -21810,7 +21980,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Breiðablik",
-     "paisDoClube": "ISL"
+     "paisDoClube": "ISL",
+     "clubeDoJogo": "brei-ablik",
+     "noJogo": "Anton Ari Einarsson"
     },
     {
      "nome": "Logi Tómasson",
@@ -21841,7 +22013,9 @@
      "jogos": 62,
      "gols": 6,
      "clube": "Horsens",
-     "paisDoClube": "DEN"
+     "paisDoClube": "DEN",
+     "clubeDoJogo": "horsens",
+     "noJogo": "Victor Pálsson"
     },
     {
      "nome": "Aron Gunnarsson",
@@ -21905,7 +22079,9 @@
      "jogos": 90,
      "gols": 28,
      "clube": "Víkingur Reykjavík",
-     "paisDoClube": "ISL"
+     "paisDoClube": "ISL",
+     "clubeDoJogo": "vikingur-reykjavik",
+     "noJogo": "Gylfi Sigurðsson"
     },
     {
      "nome": "Kristall Máni Ingason",
@@ -22568,7 +22744,9 @@
      "jogos": 16,
      "gols": 0,
      "clube": "Botev Plovdiv",
-     "paisDoClube": "BGR"
+     "paisDoClube": "BGR",
+     "clubeDoJogo": "botev-plovdiv",
+     "noJogo": "Daniel Naumov"
     },
     {
      "nome": "Plamen Andreev",
@@ -22597,7 +22775,9 @@
      "jogos": 27,
      "gols": 0,
      "clube": "Dinamo Batumi",
-     "paisDoClube": "GEO"
+     "paisDoClube": "GEO",
+     "clubeDoJogo": "dinamo-batumi",
+     "noJogo": "Ivan Turitsov"
     },
     {
      "nome": "Dimitar Velkovski",
@@ -22626,7 +22806,9 @@
      "jogos": 11,
      "gols": 0,
      "clube": "Hapoel Be'er Sheva",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "hapoel-be-er-sheva",
+     "noJogo": "Yoni Stoyanov"
     },
     {
      "nome": "Emil Tsenov",
@@ -22668,7 +22850,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "CSKA Sofia",
-     "paisDoClube": "BGR"
+     "paisDoClube": "BGR",
+     "clubeDoJogo": "cska-sofia",
+     "noJogo": "Teodor Ivanov"
     },
     {
      "nome": "Simeon Shishkov",
@@ -22677,7 +22861,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Ludogorets Razgrad",
-     "paisDoClube": "BGR"
+     "paisDoClube": "BGR",
+     "clubeDoJogo": "ludogorets-razgrad",
+     "noJogo": "Simeon Shishkov"
     },
     {
      "nome": "Ivaylo Chochev",
@@ -22686,7 +22872,9 @@
      "jogos": 51,
      "gols": 4,
      "clube": "Ludogorets Razgrad",
-     "paisDoClube": "BGR"
+     "paisDoClube": "BGR",
+     "clubeDoJogo": "ludogorets-razgrad",
+     "noJogo": "Ivaylo Chochev"
     },
     {
      "nome": "Ilia Gruev",
@@ -22715,7 +22903,9 @@
      "jogos": 22,
      "gols": 1,
      "clube": "Hapoel Tel Aviv",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "hapoel-tel-aviv",
+     "noJogo": "Andrian Kraev"
     },
     {
      "nome": "Asen Chandarov",
@@ -22724,7 +22914,9 @@
      "jogos": 3,
      "gols": 1,
      "clube": "Botev Plovdiv",
-     "paisDoClube": "BGR"
+     "paisDoClube": "BGR",
+     "clubeDoJogo": "botev-plovdiv",
+     "noJogo": "Asen Chandarov"
     },
     {
      "nome": "Ivan Pankov",
@@ -22793,7 +22985,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Cherno More Varna",
-     "paisDoClube": "BGR"
+     "paisDoClube": "BGR",
+     "clubeDoJogo": "cherno-more-varna",
+     "noJogo": "Georgi Lazarov"
     }
    ]
   },
@@ -22807,7 +23001,9 @@
      "jogos": 29,
      "gols": 0,
      "clube": "Liepāja",
-     "paisDoClube": "LVA"
+     "paisDoClube": "LVA",
+     "clubeDoJogo": "liepaja",
+     "noJogo": "Danijel Petković"
     },
     {
      "nome": "Igor Nikić",
@@ -22944,7 +23140,9 @@
      "jogos": 64,
      "gols": 1,
      "clube": "Qarabağ",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "qarabag",
+     "noJogo": "Marko Janković"
     },
     {
      "nome": "Sead Hakšabanović",
@@ -23079,7 +23277,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Košice",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "kosice",
+     "noJogo": "Aleksa Maraš"
     }
    ]
   },
@@ -23093,7 +23293,9 @@
      "jogos": 17,
      "gols": 0,
      "clube": "Maxline Vitebsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "maxline-vitebsk",
+     "noJogo": "Pavel Pavlyuchenko"
     },
     {
      "nome": "Fyodor Lapoukhov",
@@ -23102,7 +23304,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "CSKA Sofia",
-     "paisDoClube": "BUL"
+     "paisDoClube": "BUL",
+     "clubeDoJogo": "cska-sofia",
+     "noJogo": "Fyodor Lapoukhov"
     },
     {
      "nome": "Andrey Kudravets",
@@ -23111,7 +23315,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Dinamo Minsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "dinamo-minsk",
+     "noJogo": "Andrey Kudravets"
     },
     {
      "nome": "Kiryl Pyachenin",
@@ -23129,7 +23335,9 @@
      "jogos": 22,
      "gols": 0,
      "clube": "Maxline Vitebsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "maxline-vitebsk",
+     "noJogo": "Zakhar Volkov"
     },
     {
      "nome": "Vladislav Malkevich",
@@ -23156,7 +23364,9 @@
      "jogos": 11,
      "gols": 0,
      "clube": "Dinamo Minsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "dinamo-minsk",
+     "noJogo": "Roman Begunov"
     },
     {
      "nome": "Vladislav Kalinin",
@@ -23165,7 +23375,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Dinamo Minsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "dinamo-minsk",
+     "noJogo": "Vladislav Kalinin"
     },
     {
      "nome": "Ivan Tikhomirov",
@@ -23174,7 +23386,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Isloch Minsk Raion",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "isloch-minsk-raion",
+     "noJogo": "Ivan Tikhomirov"
     },
     {
      "nome": "Kirill Gomanov",
@@ -23183,7 +23397,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Maxline Vitebsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "maxline-vitebsk",
+     "noJogo": "Kirill Gomanov"
     },
     {
      "nome": "Max Ebong",
@@ -23192,7 +23408,9 @@
      "jogos": 54,
      "gols": 5,
      "clube": "CSKA Sofia",
-     "paisDoClube": "BUL"
+     "paisDoClube": "BUL",
+     "clubeDoJogo": "cska-sofia",
+     "noJogo": "Max Ebong"
     },
     {
      "nome": "Yevgeny Yablonsky",
@@ -23210,7 +23428,9 @@
      "jogos": 30,
      "gols": 4,
      "clube": "Maxline Vitebsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "maxline-vitebsk",
+     "noJogo": "Valery Gromyko"
     },
     {
      "nome": "Valery Bocherov",
@@ -23219,7 +23439,9 @@
      "jogos": 21,
      "gols": 1,
      "clube": "Maxline Vitebsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "maxline-vitebsk",
+     "noJogo": "Valery Bocherov"
     },
     {
      "nome": "Artem Kontsevoy",
@@ -23228,7 +23450,9 @@
      "jogos": 15,
      "gols": 2,
      "clube": "Maxline Vitebsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "maxline-vitebsk",
+     "noJogo": "Artem Kontsevoy"
     },
     {
      "nome": "Aleksandr Selyava",
@@ -23237,7 +23461,9 @@
      "jogos": 13,
      "gols": 0,
      "clube": "Dinamo Minsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "dinamo-minsk",
+     "noJogo": "Aleksandr Selyava"
     },
     {
      "nome": "Yevgeny Malashevich",
@@ -23246,7 +23472,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Dinamo Minsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "dinamo-minsk",
+     "noJogo": "Yevgeny Malashevich"
     },
     {
      "nome": "Artyom Shumansky",
@@ -23282,7 +23510,9 @@
      "jogos": 28,
      "gols": 7,
      "clube": "Tobol",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "tobol",
+     "noJogo": "Vitaly Lisakovich"
     },
     {
      "nome": "German Barkovsky",
@@ -23311,7 +23541,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Gomel",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "gomel",
+     "noJogo": "Timofey Simanenka"
     }
    ]
   },
@@ -23405,7 +23637,9 @@
      "jogos": 11,
      "gols": 0,
      "clube": "Atert Bissen",
-     "paisDoClube": "LUX"
+     "paisDoClube": "LUX",
+     "clubeDoJogo": "atert-bissen",
+     "noJogo": "Eric Veiga"
     },
     {
      "nome": "Laurent Jans",
@@ -23414,7 +23648,9 @@
      "jogos": 126,
      "gols": 1,
      "clube": "Beveren",
-     "paisDoClube": "BEL"
+     "paisDoClube": "BEL",
+     "clubeDoJogo": "beveren",
+     "noJogo": "Laurent Jans"
     },
     {
      "nome": "Enes Mahmutović",
@@ -23434,7 +23670,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "UNA Strassen",
-     "paisDoClube": "LUX"
+     "paisDoClube": "LUX",
+     "clubeDoJogo": "una-strassen",
+     "noJogo": "Tim Hall"
     },
     {
      "nome": "Tomás Moreira",
@@ -23483,7 +23721,9 @@
      "jogos": 50,
      "gols": 2,
      "clube": "Differdange 03",
-     "paisDoClube": "LUX"
+     "paisDoClube": "LUX",
+     "clubeDoJogo": "differdange-03",
+     "noJogo": "Sébastien Thill"
     },
     {
      "nome": "Farid Ikene",
@@ -23521,7 +23761,9 @@
      "jogos": 16,
      "gols": 0,
      "clube": "Helsingborgs",
-     "paisDoClube": "SWE"
+     "paisDoClube": "SWE",
+     "clubeDoJogo": "helsingborgs",
+     "noJogo": "Timothé Rupil"
     },
     {
      "nome": "Vincent Thill",
@@ -23539,7 +23781,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "UNA Strassen",
-     "paisDoClube": "LUX"
+     "paisDoClube": "LUX",
+     "clubeDoJogo": "una-strassen",
+     "noJogo": "Omar Natami"
     },
     {
      "nome": "Hamza Kadamani",
@@ -23582,7 +23826,9 @@
      "jogos": 19,
      "gols": 0,
      "clube": "Alashkert",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "alashkert",
+     "noJogo": "Arsen Beglaryan"
     },
     {
      "nome": "Aleksandr Mishiev",
@@ -23609,7 +23855,9 @@
      "jogos": 35,
      "gols": 1,
      "clube": "Puskás Akadémia",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "puskas-akademia",
+     "noJogo": "Georgy Arutyunyan"
     },
     {
      "nome": "Nair Tiknizyan",
@@ -23640,7 +23888,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "Urartu",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "urartu",
+     "noJogo": "Erik Piloyan"
     },
     {
      "nome": "Edgar Grigoryan",
@@ -23649,7 +23899,9 @@
      "jogos": 10,
      "gols": 0,
      "clube": "Ararat-Armenia",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "ararat-armenia",
+     "noJogo": "Edgar Grigoryan"
     },
     {
      "nome": "Artyom Bandikyan",
@@ -23669,7 +23921,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "BKMA Yerevan",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "bkma-yerevan",
+     "noJogo": "Argishti Petrosyan"
     },
     {
      "nome": "Arman Ghazaryan",
@@ -23678,7 +23932,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Urartu",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "urartu",
+     "noJogo": "Arman Ghazaryan"
     },
     {
      "nome": "Khariton Ayvazyan",
@@ -23687,7 +23943,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Urartu",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "urartu",
+     "noJogo": "Khariton Ayvazyan"
     },
     {
      "nome": "Ugochukwu Iwu",
@@ -23718,7 +23976,9 @@
      "jogos": 16,
      "gols": 0,
      "clube": "Pyunik",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "pyunik",
+     "noJogo": "Hovhannes Harutyunyan"
     },
     {
      "nome": "Karen Muradyan",
@@ -23727,7 +23987,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "Ararat-Armenia",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "ararat-armenia",
+     "noJogo": "Karen Muradyan"
     },
     {
      "nome": "Gor Manvelyan",
@@ -23736,7 +23998,9 @@
      "jogos": 13,
      "gols": 1,
      "clube": "Noah",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "noah",
+     "noJogo": "Gor Manvelyan"
     },
     {
      "nome": "Karlen Hovhannisyan",
@@ -23754,7 +24018,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Alashkert",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "alashkert",
+     "noJogo": "Karen Nalbandyan"
     },
     {
      "nome": "Edgar Piloyan",
@@ -23763,7 +24029,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Alashkert",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "alashkert",
+     "noJogo": "Edgar Piloyan"
     },
     {
      "nome": "Artur Serobyan",
@@ -23772,7 +24040,9 @@
      "jogos": 31,
      "gols": 2,
      "clube": "Ararat-Armenia",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "ararat-armenia",
+     "noJogo": "Artur Serobyan"
     },
     {
      "nome": "Grant-Leon Ranos",
@@ -23792,7 +24062,9 @@
      "jogos": 26,
      "gols": 1,
      "clube": "Ararat-Armenia",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "ararat-armenia",
+     "noJogo": "Zhirayr Shaghoyan"
     },
     {
      "nome": "Artur Miranyan",
@@ -23801,7 +24073,9 @@
      "jogos": 24,
      "gols": 1,
      "clube": "Ironi Tiberias",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "ironi-tiberias",
+     "noJogo": "Artur Miranyan"
     },
     {
      "nome": "Narek Grigoryan",
@@ -23844,7 +24118,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Ordabasy",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "ordabasy",
+     "noJogo": "Bekkhan Shayzada"
     },
     {
      "nome": "Temirlan Anarbekov",
@@ -23853,7 +24129,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Kairat",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "kairat",
+     "noJogo": "Temirlan Anarbekov"
     },
     {
      "nome": "Aleksandr Zarutskiy",
@@ -23871,7 +24149,9 @@
      "jogos": 31,
      "gols": 0,
      "clube": "Sabah",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "sabah-az",
+     "noJogo": "Stas Pokatilov"
     },
     {
      "nome": "Serhiy Malyi",
@@ -23880,7 +24160,9 @@
      "jogos": 76,
      "gols": 2,
      "clube": "Ordabasy",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "ordabasy",
+     "noJogo": "Serhiy Malyi"
     },
     {
      "nome": "Nuraly Alip",
@@ -23900,7 +24182,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "Tobol",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "tobol",
+     "noJogo": "Nauryzbek Zhagorov"
     },
     {
      "nome": "Alibek Kasym",
@@ -23909,7 +24193,9 @@
      "jogos": 17,
      "gols": 2,
      "clube": "Astana",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "astana",
+     "noJogo": "Alibek Kasym"
     },
     {
      "nome": "Yan Vorogovsky",
@@ -23918,7 +24204,9 @@
      "jogos": 66,
      "gols": 6,
      "clube": "Astana",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "astana",
+     "noJogo": "Yan Vorogovsky"
     },
     {
      "nome": "Aleksandr Mrynskiy",
@@ -23927,7 +24215,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Kairat",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "kairat",
+     "noJogo": "Aleksandr Mrynskiy"
     },
     {
      "nome": "Yerkin Tapalov",
@@ -23936,7 +24226,9 @@
      "jogos": 26,
      "gols": 0,
      "clube": "Kairat",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "kairat",
+     "noJogo": "Yerkin Tapalov"
     },
     {
      "nome": "Temirlan Yerlanov",
@@ -23954,7 +24246,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Yelimay",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "yelimay",
+     "noJogo": "Arsen Ashirbek"
     },
     {
      "nome": "Alexander Shirobokov",
@@ -23963,7 +24257,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Kairat",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "kairat",
+     "noJogo": "Alexander Shirobokov"
     },
     {
      "nome": "Damir Kasabulat",
@@ -23972,7 +24268,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Kairat",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "kairat",
+     "noJogo": "Damir Kasabulat"
     },
     {
      "nome": "Zhasulan Amir",
@@ -23981,7 +24279,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Ordabasy",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "ordabasy",
+     "noJogo": "Zhasulan Amir"
     },
     {
      "nome": "Bauyrzhan Islamkhan",
@@ -23990,7 +24290,9 @@
      "jogos": 58,
      "gols": 4,
      "clube": "Astana",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "astana",
+     "noJogo": "Bauyrzhan Islamkhan"
     },
     {
      "nome": "Georgy Zhukov",
@@ -23999,7 +24301,9 @@
      "jogos": 27,
      "gols": 0,
      "clube": "Aktobe",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "aktobe",
+     "noJogo": "Georgy Zhukov"
     },
     {
      "nome": "Dinmukhamed Karaman",
@@ -24008,7 +24312,9 @@
      "jogos": 13,
      "gols": 1,
      "clube": "Astana",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "astana",
+     "noJogo": "Dinmukhamed Karaman"
     },
     {
      "nome": "Ramazan Orazov",
@@ -24017,7 +24323,9 @@
      "jogos": 43,
      "gols": 2,
      "clube": "Yelimay",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "yelimay",
+     "noJogo": "Ramazan Orazov"
     },
     {
      "nome": "Islambek Kuat",
@@ -24035,7 +24343,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Kairat",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "kairat",
+     "noJogo": "Ismail Bekbolat"
     },
     {
      "nome": "Galymzhan Kenzhebek",
@@ -24055,7 +24365,9 @@
      "jogos": 12,
      "gols": 0,
      "clube": "Aktobe",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "aktobe",
+     "noJogo": "Artur Shushenachev"
     },
     {
      "nome": "Azamat Tuyakbaev",
@@ -24064,7 +24376,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Kairat",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "kairat",
+     "noJogo": "Azamat Tuyakbaev"
     },
     {
      "nome": "Stanislav Basmanov",
@@ -24073,7 +24387,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Astana",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "astana",
+     "noJogo": "Stanislav Basmanov"
     },
     {
      "nome": "Ramazan Karimov",
@@ -24082,7 +24398,9 @@
      "jogos": 7,
      "gols": 1,
      "clube": "Astana",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "astana",
+     "noJogo": "Ramazan Karimov"
     },
     {
      "nome": "Elkhan Astanov",
@@ -24091,7 +24409,9 @@
      "jogos": 24,
      "gols": 1,
      "clube": "Ordabasy",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "ordabasy",
+     "noJogo": "Elkhan Astanov"
     },
     {
      "nome": "Maksim Samorodov",
@@ -24127,7 +24447,9 @@
      "jogos": 36,
      "gols": 0,
      "clube": "Qarabağ",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "qarabag",
+     "noJogo": "Shakhruddin Magomedaliyev"
     },
     {
      "nome": "Emil Balayev",
@@ -24136,7 +24458,9 @@
      "jogos": 18,
      "gols": 0,
      "clube": "Neftçi",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "neftci",
+     "noJogo": "Emil Balayev"
     },
     {
      "nome": "Aydın Bayramov",
@@ -24145,7 +24469,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Zira",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "zira",
+     "noJogo": "Aydın Bayramov"
     },
     {
      "nome": "Badavi Guseynov",
@@ -24154,7 +24480,9 @@
      "jogos": 83,
      "gols": 1,
      "clube": "Qarabağ",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "qarabag",
+     "noJogo": "Badavi Guseynov"
     },
     {
      "nome": "Anton Kryvotsyuk",
@@ -24183,7 +24511,9 @@
      "jogos": 29,
      "gols": 0,
      "clube": "Turan Tovuz",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "turan-tovuz",
+     "noJogo": "Rahil Mammadov"
     },
     {
      "nome": "Qismət Alıyev",
@@ -24192,7 +24522,9 @@
      "jogos": 21,
      "gols": 0,
      "clube": "Zira",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "zira",
+     "noJogo": "Qismət Alıyev"
     },
     {
      "nome": "Elvin Badalov",
@@ -24201,7 +24533,9 @@
      "jogos": 21,
      "gols": 0,
      "clube": "Neftçi",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "neftci",
+     "noJogo": "Elvin Badalov"
     },
     {
      "nome": "Tellur Mutallimov",
@@ -24210,7 +24544,9 @@
      "jogos": 12,
      "gols": 0,
      "clube": "Sabah",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "sabah-az",
+     "noJogo": "Tellur Mutallimov"
     },
     {
      "nome": "Rahman Dashdamirov",
@@ -24219,7 +24555,9 @@
      "jogos": 11,
      "gols": 1,
      "clube": "Sabah",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "sabah-az",
+     "noJogo": "Rahman Dashdamirov"
     },
     {
      "nome": "Rüfat Abbasov",
@@ -24228,7 +24566,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Neftçi",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "neftci",
+     "noJogo": "Rüfat Abbasov"
     },
     {
      "nome": "Eshqin Ahmadov",
@@ -24246,7 +24586,9 @@
      "jogos": 65,
      "gols": 16,
      "clube": "Neftçi",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "neftci",
+     "noJogo": "Emin Mahmudov"
     },
     {
      "nome": "Namiq Ələsgərov",
@@ -24255,7 +24597,9 @@
      "jogos": 39,
      "gols": 0,
      "clube": "Kapaz",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "kapaz",
+     "noJogo": "Namiq Ələsgərov"
     },
     {
      "nome": "Aleksey Isayev",
@@ -24264,7 +24608,9 @@
      "jogos": 35,
      "gols": 1,
      "clube": "Sabah",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "sabah-az",
+     "noJogo": "Aleksey Isayev"
     },
     {
      "nome": "Abdulakh Khaybulayev",
@@ -24273,7 +24619,9 @@
      "jogos": 11,
      "gols": 0,
      "clube": "Sabah",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "sabah-az",
+     "noJogo": "Abdulakh Khaybulayev"
     },
     {
      "nome": "Khayal Aliyev",
@@ -24282,7 +24630,9 @@
      "jogos": 9,
      "gols": 0,
      "clube": "Sabah",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "sabah-az",
+     "noJogo": "Khayal Aliyev"
     },
     {
      "nome": "Emil Mustafayev",
@@ -24291,7 +24641,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Sumgayit",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "sumgayit",
+     "noJogo": "Emil Mustafayev"
     },
     {
      "nome": "Rufat Abdullazade",
@@ -24320,7 +24672,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Şamaxı",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "samax",
+     "noJogo": "Oruc Mammadov"
     },
     {
      "nome": "Murad Mammadov",
@@ -24347,7 +24701,9 @@
      "jogos": 26,
      "gols": 4,
      "clube": "Qarabağ",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "qarabag",
+     "noJogo": "Musa Qurbanlı"
     },
     {
      "nome": "Nihad Ahmadzada",
@@ -24483,7 +24839,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Flora",
-     "paisDoClube": "EST"
+     "paisDoClube": "EST",
+     "clubeDoJogo": "flora",
+     "noJogo": "Mihhail Kolobov"
     },
     {
      "nome": "Tanel Tammik",
@@ -24501,7 +24859,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Zemplín Michalovce",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "zemplin-michalovce",
+     "noJogo": "Nikita Mihhailov"
     },
     {
      "nome": "Mattias Käit",
@@ -24532,7 +24892,9 @@
      "jogos": 25,
      "gols": 1,
      "clube": "Košice",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "kosice",
+     "noJogo": "Kevor Palumets"
     },
     {
      "nome": "Mihkel Ainsalu",
@@ -24568,7 +24930,9 @@
      "jogos": 41,
      "gols": 2,
      "clube": "Paide Linnameeskond",
-     "paisDoClube": "EST"
+     "paisDoClube": "EST",
+     "clubeDoJogo": "paide",
+     "noJogo": "Martin Miller"
     },
     {
      "nome": "Markus Poom",
@@ -24577,7 +24941,9 @@
      "jogos": 39,
      "gols": 0,
      "clube": "Trenčín",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "trencin",
+     "noJogo": "Markus Poom"
     },
     {
      "nome": "Vladislav Kreida",
@@ -24586,7 +24952,9 @@
      "jogos": 25,
      "gols": 0,
      "clube": "Flora",
-     "paisDoClube": "EST"
+     "paisDoClube": "EST",
+     "clubeDoJogo": "flora",
+     "noJogo": "Vladislav Kreida"
     },
     {
      "nome": "Karel Mustmaa",
@@ -24615,7 +24983,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Nõmme Kalju",
-     "paisDoClube": "EST"
+     "paisDoClube": "EST",
+     "clubeDoJogo": "nomme-kalju",
+     "noJogo": "Mattias Männilaan"
     }
    ]
   },
@@ -24792,7 +25162,9 @@
      "jogos": 62,
      "gols": 11,
      "clube": "CSKA Sofia",
-     "paisDoClube": "BUL"
+     "paisDoClube": "BUL",
+     "clubeDoJogo": "cska-sofia",
+     "noJogo": "Ioannis Pittas"
     },
     {
      "nome": "Loizos Loizou",
@@ -24859,7 +25231,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Pyunik",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "pyunik",
+     "noJogo": "Iasonas Pikis"
     },
     {
      "nome": "Zanos Savva",
@@ -24893,7 +25267,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "ÍBV",
-     "paisDoClube": "ISL"
+     "paisDoClube": "ISL",
+     "clubeDoJogo": "ibv",
+     "noJogo": "Ari Petersen"
     },
     {
      "nome": "Bárður á Reynatrøð",
@@ -24902,7 +25278,9 @@
      "jogos": 16,
      "gols": 0,
      "clube": "Víkingur Gøta",
-     "paisDoClube": "FRO"
+     "paisDoClube": "FRO",
+     "clubeDoJogo": "vikingur-g-ta",
+     "noJogo": "Bárður á Reynatrøð"
     },
     {
      "nome": "Jóannes Danielsen",
@@ -24920,7 +25298,9 @@
      "jogos": 96,
      "gols": 7,
      "clube": "NSÍ Runavík",
-     "paisDoClube": "FRO"
+     "paisDoClube": "FRO",
+     "clubeDoJogo": "nsi-runavik",
+     "noJogo": "Viljormur Davidsen"
     },
     {
      "nome": "Samuel Chukwudi",
@@ -24987,7 +25367,9 @@
      "jogos": 4,
      "gols": 1,
      "clube": "Víkingur Gøta",
-     "paisDoClube": "FRO"
+     "paisDoClube": "FRO",
+     "clubeDoJogo": "vikingur-g-ta",
+     "noJogo": "Arnbjørn Svensson"
     },
     {
      "nome": "Jann Benjaminsen",
@@ -25014,7 +25396,9 @@
      "jogos": 32,
      "gols": 5,
      "clube": "NK Aluminij",
-     "paisDoClube": "SLO"
+     "paisDoClube": "SLO",
+     "clubeDoJogo": "aluminij",
+     "noJogo": "Hanus Sørensen"
     },
     {
      "nome": "Géza Dávid Turi",
@@ -25052,7 +25436,9 @@
      "jogos": 46,
      "gols": 3,
      "clube": "Kyzylzhar",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "kyzylzhar",
+     "noJogo": "Jóannes Bjartalíð"
     },
     {
      "nome": "Áki Samuelsen",
@@ -25099,7 +25485,9 @@
      "jogos": 24,
      "gols": 2,
      "clube": "Horsens",
-     "paisDoClube": "DEN"
+     "paisDoClube": "DEN",
+     "clubeDoJogo": "horsens",
+     "noJogo": "Adrian Justinussen"
     }
    ]
   },
@@ -25113,7 +25501,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Auda",
-     "paisDoClube": "LVA"
+     "paisDoClube": "LVA",
+     "clubeDoJogo": "auda",
+     "noJogo": "Nils Puriņš"
     },
     {
      "nome": "Frenks Orols",
@@ -25142,7 +25532,9 @@
      "jogos": 28,
      "gols": 1,
      "clube": "Auda",
-     "paisDoClube": "LVA"
+     "paisDoClube": "LVA",
+     "clubeDoJogo": "auda",
+     "noJogo": "Daniels Balodis"
     },
     {
      "nome": "Oskars Vientiess",
@@ -25160,7 +25552,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Auda",
-     "paisDoClube": "LVA"
+     "paisDoClube": "LVA",
+     "clubeDoJogo": "auda",
+     "noJogo": "Oskars Rubenis"
     },
     {
      "nome": "Roberts Savaļnieks",
@@ -25236,7 +25630,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Jelgava",
-     "paisDoClube": "LVA"
+     "paisDoClube": "LVA",
+     "clubeDoJogo": "jelgava",
+     "noJogo": "Gļebs Žaleiko"
     },
     {
      "nome": "Eduards Emsis",
@@ -25272,7 +25668,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Ogre United",
-     "paisDoClube": "LVA"
+     "paisDoClube": "LVA",
+     "clubeDoJogo": "ogre-united",
+     "noJogo": "Kristers Čudars"
     },
     {
      "nome": "Markuss Strods",
@@ -25299,7 +25697,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Dila Gori",
-     "paisDoClube": "GEO"
+     "paisDoClube": "GEO",
+     "clubeDoJogo": "dila-gori",
+     "noJogo": "Kristaps Grabovskis"
     },
     {
      "nome": "Danila Patijčuks",
@@ -25308,7 +25708,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Liepāja",
-     "paisDoClube": "LVA"
+     "paisDoClube": "LVA",
+     "clubeDoJogo": "liepaja",
+     "noJogo": "Danila Patijčuks"
     },
     {
      "nome": "Eduards Dašķevičs",
@@ -25317,7 +25719,9 @@
      "jogos": 29,
      "gols": 1,
      "clube": "Auda",
-     "paisDoClube": "LVA"
+     "paisDoClube": "LVA",
+     "clubeDoJogo": "auda",
+     "noJogo": "Eduards Dašķevičs"
     },
     {
      "nome": "Vladislavs Gutkovskis",
@@ -25378,7 +25782,9 @@
      "jogos": 21,
      "gols": 0,
      "clube": "FK Kauno Žalgiris",
-     "paisDoClube": "LTU"
+     "paisDoClube": "LTU",
+     "clubeDoJogo": "kauno-zalgiris",
+     "noJogo": "Tomas Švedkauskas"
     },
     {
      "nome": "Vincentas Šarkauskas",
@@ -25396,7 +25802,9 @@
      "jogos": 26,
      "gols": 0,
      "clube": "NK Celje",
-     "paisDoClube": "SVN"
+     "paisDoClube": "SVN",
+     "clubeDoJogo": "celje",
+     "noJogo": "Artemijus Tutyškinas"
     },
     {
      "nome": "Žygimantas Baltrūnas",
@@ -25405,7 +25813,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "FK Sūduva",
-     "paisDoClube": "LTU"
+     "paisDoClube": "LTU",
+     "clubeDoJogo": "suduva",
+     "noJogo": "Žygimantas Baltrūnas"
     },
     {
      "nome": "Kipras Kažukolovas",
@@ -25414,7 +25824,9 @@
      "jogos": 20,
      "gols": 0,
      "clube": "FC Astana",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "astana",
+     "noJogo": "Kipras Kažukolovas"
     },
     {
      "nome": "Justas Lasickas",
@@ -25434,7 +25846,9 @@
      "jogos": 31,
      "gols": 4,
      "clube": "NK Celje",
-     "paisDoClube": "SVN"
+     "paisDoClube": "SVN",
+     "clubeDoJogo": "celje",
+     "noJogo": "Pijus Širvys"
     },
     {
      "nome": "Vilius Armalas",
@@ -25443,7 +25857,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "MTK Budapest FC",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "mtk-budapest",
+     "noJogo": "Vilius Armalas"
     },
     {
      "nome": "Rokas Lekiatas",
@@ -25452,7 +25868,9 @@
      "jogos": 17,
      "gols": 0,
      "clube": "FK Kauno Žalgiris",
-     "paisDoClube": "LTU"
+     "paisDoClube": "LTU",
+     "clubeDoJogo": "kauno-zalgiris",
+     "noJogo": "Rokas Lekiatas"
     },
     {
      "nome": "Deividas Šešplaukis",
@@ -25481,7 +25899,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "FK Transinvest",
-     "paisDoClube": "LTU"
+     "paisDoClube": "LTU",
+     "clubeDoJogo": "transinvest",
+     "noJogo": "Domantas Šluta"
     },
     {
      "nome": "Eligijus Jankauskas",
@@ -25499,7 +25919,9 @@
      "jogos": 77,
      "gols": 3,
      "clube": "FK Kauno Žalgiris",
-     "paisDoClube": "LTU"
+     "paisDoClube": "LTU",
+     "clubeDoJogo": "kauno-zalgiris",
+     "noJogo": "Vykintas Slivka"
     },
     {
      "nome": "Gvidas Gineitis",
@@ -25528,7 +25950,9 @@
      "jogos": 10,
      "gols": 0,
      "clube": "FK Kauno Žalgiris",
-     "paisDoClube": "LTU"
+     "paisDoClube": "LTU",
+     "clubeDoJogo": "kauno-zalgiris",
+     "noJogo": "Motiejus Burba"
     },
     {
      "nome": "Paulius Golubickas",
@@ -25548,7 +25972,9 @@
      "jogos": 30,
      "gols": 3,
      "clube": "FK Kauno Žalgiris",
-     "paisDoClube": "LTU"
+     "paisDoClube": "LTU",
+     "clubeDoJogo": "kauno-zalgiris",
+     "noJogo": "Gratas Sirgėdas"
     },
     {
      "nome": "Matas Vareika",
@@ -25575,7 +26001,9 @@
      "jogos": 23,
      "gols": 8,
      "clube": "NK Celje",
-     "paisDoClube": "SVN"
+     "paisDoClube": "SVN",
+     "clubeDoJogo": "celje",
+     "noJogo": "Armandas Kučys"
     },
     {
      "nome": "Edgaras Dubickas",
@@ -25598,7 +26026,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Sheriff Tiraspol",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "sheriff-tiraspol",
+     "noJogo": "Emil Tîmbur"
     },
     {
      "nome": "Dumitru Celeadnic",
@@ -25607,7 +26037,9 @@
      "jogos": 17,
      "gols": 0,
      "clube": "Kyzylzhar",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "kyzylzhar",
+     "noJogo": "Dumitru Celeadnic"
     },
     {
      "nome": "Andrei Cojuhar",
@@ -25656,7 +26088,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Petrocub Hîncești",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "petrocub-hincesti",
+     "noJogo": "Cătălin Cucoș"
     },
     {
      "nome": "Mihail Gherasimencov",
@@ -25696,7 +26130,9 @@
      "jogos": 32,
      "gols": 1,
      "clube": "Petrocub Hîncești",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "petrocub-hincesti",
+     "noJogo": "Ioan-Călin Revenco"
     },
     {
      "nome": "Denis Marandici",
@@ -25705,7 +26141,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "Turan Tovuz",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "turan-tovuz",
+     "noJogo": "Denis Marandici"
     },
     {
      "nome": "Stephan Negru",
@@ -25763,7 +26201,9 @@
      "jogos": 12,
      "gols": 0,
      "clube": "Petrocub Hîncești",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "petrocub-hincesti",
+     "noJogo": "Serafim Cojocari"
     },
     {
      "nome": "Vladimir Fratea",
@@ -25772,7 +26212,9 @@
      "jogos": 8,
      "gols": 0,
      "clube": "Sheriff Tiraspol",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "sheriff-tiraspol",
+     "noJogo": "Vladimir Fratea"
     },
     {
      "nome": "Danila Forov",
@@ -25781,7 +26223,9 @@
      "jogos": 9,
      "gols": 0,
      "clube": "Sheriff Tiraspol",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "sheriff-tiraspol",
+     "noJogo": "Danila Forov"
     },
     {
      "nome": "Ovidiu David",
@@ -25790,7 +26234,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Petrocub Hîncești",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "petrocub-hincesti",
+     "noJogo": "Ovidiu David"
     },
     {
      "nome": "Vadim Rață",
@@ -25810,7 +26256,9 @@
      "jogos": 19,
      "gols": 4,
      "clube": "Petrocub Hîncești",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "petrocub-hincesti",
+     "noJogo": "Victor Bogaciuc"
     },
     {
      "nome": "Petru Popescu",
@@ -25819,7 +26267,9 @@
      "jogos": 8,
      "gols": 2,
      "clube": "Petrocub Hîncești",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "petrocub-hincesti",
+     "noJogo": "Petru Popescu"
     },
     {
      "nome": "Nicky Cleșcenco",
@@ -25839,7 +26289,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Zimbru Chișinău",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "zimbru-chisinau",
+     "noJogo": "Alexandru Bețivu"
     }
    ]
   },
@@ -25853,7 +26305,9 @@
      "jogos": 78,
      "gols": 0,
      "clube": "Sliema Wanderers",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "sliema-wanderers",
+     "noJogo": "Henry Bonello"
     },
     {
      "nome": "Rashed Al-Tumi",
@@ -25862,7 +26316,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Birkirkara",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "birkirkara",
+     "noJogo": "Rashed Al-Tumi"
     },
     {
      "nome": "James Sissons",
@@ -25880,7 +26336,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Valletta",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "valletta",
+     "noJogo": "Liam Frendo"
     },
     {
      "nome": "Zach Muscat",
@@ -25889,7 +26347,9 @@
      "jogos": 86,
      "gols": 4,
      "clube": "Birkirkara",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "birkirkara",
+     "noJogo": "Zach Muscat"
     },
     {
      "nome": "Ryan Camenzuli",
@@ -25907,7 +26367,9 @@
      "jogos": 43,
      "gols": 0,
      "clube": "Marsaxlokk",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "marsaxlokk",
+     "noJogo": "Enrico Pepe"
     },
     {
      "nome": "Juan Carlos Corbalan",
@@ -25916,7 +26378,9 @@
      "jogos": 42,
      "gols": 1,
      "clube": "Marsaxlokk",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "marsaxlokk",
+     "noJogo": "Juan Carlos Corbalan"
     },
     {
      "nome": "Kurt Shaw",
@@ -25925,7 +26389,9 @@
      "jogos": 41,
      "gols": 0,
      "clube": "Hibernians",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "hibernians",
+     "noJogo": "Kurt Shaw"
     },
     {
      "nome": "Jean Borg",
@@ -25934,7 +26400,9 @@
      "jogos": 34,
      "gols": 0,
      "clube": "Sliema Wanderers",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "sliema-wanderers",
+     "noJogo": "Jean Borg"
     },
     {
      "nome": "Myles Beerman",
@@ -25943,7 +26411,9 @@
      "jogos": 17,
      "gols": 0,
      "clube": "Floriana",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "floriana",
+     "noJogo": "Myles Beerman"
     },
     {
      "nome": "Gabriel Mentz",
@@ -25952,7 +26422,9 @@
      "jogos": 11,
      "gols": 0,
      "clube": "Gżira United",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "gzira-united",
+     "noJogo": "Gabriel Mentz"
     },
     {
      "nome": "Carlo Zammit Lonardelli",
@@ -25961,7 +26433,9 @@
      "jogos": 9,
      "gols": 0,
      "clube": "Floriana",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "floriana",
+     "noJogo": "Carlo Zammit Lonardelli"
     },
     {
      "nome": "Kean Scicluna",
@@ -26001,7 +26475,9 @@
      "jogos": 50,
      "gols": 5,
      "clube": "Sliema Wanderers",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "sliema-wanderers",
+     "noJogo": "Alexander Satariano"
     },
     {
      "nome": "Jake Grech",
@@ -26019,7 +26495,9 @@
      "jogos": 20,
      "gols": 0,
      "clube": "Valletta",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "valletta",
+     "noJogo": "Brandon Paiber"
     },
     {
      "nome": "Adam Magri Overend",
@@ -26028,7 +26506,9 @@
      "jogos": 13,
      "gols": 0,
      "clube": "Sliema Wanderers",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "sliema-wanderers",
+     "noJogo": "Adam Magri Overend"
     },
     {
      "nome": "Jake Azzopardi",
@@ -26037,7 +26517,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "Valletta",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "valletta",
+     "noJogo": "Jake Azzopardi"
     },
     {
      "nome": "Jayden Roe",
@@ -26046,7 +26528,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Hibernians",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "hibernians",
+     "noJogo": "Jayden Roe"
     },
     {
      "nome": "Joseph Mbong",
@@ -26055,7 +26539,9 @@
      "jogos": 77,
      "gols": 6,
      "clube": "Hibernians",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "hibernians",
+     "noJogo": "Joseph Mbong"
     },
     {
      "nome": "Paul Mbong",
@@ -26106,7 +26592,9 @@
      "jogos": 7,
      "gols": 0,
      "clube": "Valletta",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "valletta",
+     "noJogo": "Keyon Ewurum"
     },
     {
      "nome": "Andrea Zammit",
@@ -26115,7 +26603,9 @@
      "jogos": 7,
      "gols": 1,
      "clube": "Valletta",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "valletta",
+     "noJogo": "Andrea Zammit"
     },
     {
      "nome": "Kevin Cannavò",
@@ -26205,7 +26695,9 @@
      "jogos": 105,
      "gols": 1,
      "clube": "FC Santa Coloma",
-     "paisDoClube": "AND"
+     "paisDoClube": "AND",
+     "clubeDoJogo": "santa-coloma",
+     "noJogo": "Moisés San Nicolás"
     },
     {
      "nome": "Jesús Rubio",
@@ -26324,7 +26816,9 @@
      "jogos": 17,
      "gols": 2,
      "clube": "FC Santa Coloma",
-     "paisDoClube": "AND"
+     "paisDoClube": "AND",
+     "clubeDoJogo": "santa-coloma",
+     "noJogo": "Guillaume López"
     },
     {
      "nome": "Albert Rosas",
@@ -26365,7 +26859,9 @@
      "jogos": 11,
      "gols": 0,
      "clube": "Lincoln Red Imps",
-     "paisDoClube": "GIB"
+     "paisDoClube": "GIB",
+     "clubeDoJogo": "lincoln-red-imps",
+     "noJogo": "Jaylan Hankins"
     },
     {
      "nome": "Harry Victor",
@@ -26374,7 +26870,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Glacis United",
-     "paisDoClube": "GIB"
+     "paisDoClube": "GIB",
+     "clubeDoJogo": "glacis-united",
+     "noJogo": "Harry Victor"
     },
     {
      "nome": "Louie Annesley",
@@ -26401,7 +26899,9 @@
      "jogos": 48,
      "gols": 0,
      "clube": "Lincoln Red Imps",
-     "paisDoClube": "GIB"
+     "paisDoClube": "GIB",
+     "clubeDoJogo": "lincoln-red-imps",
+     "noJogo": "Ethan Jolley"
     },
     {
      "nome": "Ethan Britto",
@@ -26410,7 +26910,9 @@
      "jogos": 47,
      "gols": 1,
      "clube": "Lincoln Red Imps",
-     "paisDoClube": "GIB"
+     "paisDoClube": "GIB",
+     "clubeDoJogo": "lincoln-red-imps",
+     "noJogo": "Ethan Britto"
     },
     {
      "nome": "Bernardo Lopes",
@@ -26419,7 +26921,9 @@
      "jogos": 43,
      "gols": 1,
      "clube": "Lincoln Red Imps",
-     "paisDoClube": "GIB"
+     "paisDoClube": "GIB",
+     "clubeDoJogo": "lincoln-red-imps",
+     "noJogo": "Bernardo Lopes"
     },
     {
      "nome": "Julian Valarino",
@@ -26446,7 +26950,9 @@
      "jogos": 43,
      "gols": 1,
      "clube": "Lincoln Red Imps",
-     "paisDoClube": "GIB"
+     "paisDoClube": "GIB",
+     "clubeDoJogo": "lincoln-red-imps",
+     "noJogo": "Graeme Torrilla"
     },
     {
      "nome": "Nicholas Pozo",
@@ -26473,7 +26979,9 @@
      "jogos": 21,
      "gols": 2,
      "clube": "Larne",
-     "paisDoClube": "NIR"
+     "paisDoClube": "NIR",
+     "clubeDoJogo": "larne",
+     "noJogo": "Dan Bent"
     },
     {
      "nome": "Liam Jessop",
@@ -26482,7 +26990,9 @@
      "jogos": 9,
      "gols": 1,
      "clube": "Portadown",
-     "paisDoClube": "NIR"
+     "paisDoClube": "NIR",
+     "clubeDoJogo": "portadown",
+     "noJogo": "Liam Jessop"
     },
     {
      "nome": "Jesse Gomez",
@@ -26509,7 +27019,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "FC Magpies",
-     "paisDoClube": "GIB"
+     "paisDoClube": "GIB",
+     "clubeDoJogo": "magpies",
+     "noJogo": "Han Stevens"
     },
     {
      "nome": "Luke Schofield",
@@ -26554,7 +27066,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "FC Magpies",
-     "paisDoClube": "GIB"
+     "paisDoClube": "GIB",
+     "clubeDoJogo": "magpies",
+     "noJogo": "Julian Del Rio"
     },
     {
      "nome": "Leon Mason",
@@ -26563,7 +27077,9 @@
      "jogos": 5,
      "gols": 1,
      "clube": "Lincoln Red Imps",
-     "paisDoClube": "GIB"
+     "paisDoClube": "GIB",
+     "clubeDoJogo": "lincoln-red-imps",
+     "noJogo": "Leon Mason"
     }
    ]
   },
@@ -26577,7 +27093,9 @@
      "jogos": 85,
      "gols": 0,
      "clube": "Vaduz",
-     "paisDoClube": "LIE"
+     "paisDoClube": "LIE",
+     "clubeDoJogo": "vaduz",
+     "noJogo": "Benjamin Büchel"
     },
     {
      "nome": "Justin Ospelt",
@@ -26676,7 +27194,9 @@
      "jogos": 114,
      "gols": 7,
      "clube": "Vaduz",
-     "paisDoClube": "LIE"
+     "paisDoClube": "LIE",
+     "clubeDoJogo": "vaduz",
+     "noJogo": "Nicolas Hasler"
     },
     {
      "nome": "Aron Sele",
@@ -26861,7 +27381,9 @@
      "jogos": 27,
      "gols": 0,
      "clube": "Gzira United",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "gzira-united",
+     "noJogo": "Edoardo Colombo"
     },
     {
      "nome": "Pietro Amici",
@@ -26969,7 +27491,9 @@
      "jogos": 69,
      "gols": 2,
      "clube": "Virtus",
-     "paisDoClube": "SMR"
+     "paisDoClube": "SMR",
+     "clubeDoJogo": "virtus",
+     "noJogo": "Alessandro Golinucci"
     },
     {
      "nome": "Marcello Mularoni",
@@ -26978,7 +27502,9 @@
      "jogos": 58,
      "gols": 0,
      "clube": "La Fiorita",
-     "paisDoClube": "SMR"
+     "paisDoClube": "SMR",
+     "clubeDoJogo": "la-fiorita",
+     "noJogo": "Marcello Mularoni"
     },
     {
      "nome": "Lorenzo Capicchioni",
@@ -27490,7 +28016,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Slovan Bratislava",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "slovan-bratislava",
+     "noJogo": "Sandro Cruz"
     },
     {
      "nome": "Jeovanni Dianganga",
@@ -27675,7 +28203,9 @@
      "jogos": 13,
      "gols": 0,
      "clube": "CSKA Sofia",
-     "paisDoClube": "BUL"
+     "paisDoClube": "BUL",
+     "clubeDoJogo": "cska-sofia",
+     "noJogo": "Tamimou Ouorou"
     },
     {
      "nome": "Amiro Amadou",
@@ -27704,7 +28234,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "TPS",
-     "paisDoClube": "FIN"
+     "paisDoClube": "FIN",
+     "clubeDoJogo": "tps",
+     "noJogo": "Charlemagne Azongnitode"
     },
     {
      "nome": "Mohamed Tijani",
@@ -27760,7 +28292,9 @@
      "jogos": 45,
      "gols": 1,
      "clube": "Neftçi",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "neftci",
+     "noJogo": "Sessi D'Almeida"
     },
     {
      "nome": "Junior Olaitan",
@@ -27818,7 +28352,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Horsens",
-     "paisDoClube": "DEN"
+     "paisDoClube": "DEN",
+     "clubeDoJogo": "horsens",
+     "noJogo": "Yamirou Ouorou"
     },
     {
      "nome": "Olatoundji Tessilimi",
@@ -27865,7 +28401,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Liepāja",
-     "paisDoClube": "LAT"
+     "paisDoClube": "LAT",
+     "clubeDoJogo": "liepaja",
+     "noJogo": "Ede Oloko"
     }
    ]
   },
@@ -28210,7 +28748,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Sheriff Tiraspol",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "sheriff-tiraspol",
+     "noJogo": "Mamoutou Ouédraogo"
     },
     {
      "nome": "Arsène Kouassi",
@@ -28230,7 +28770,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "DAC Dunajska Streda",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "dac-dunajska-streda",
+     "noJogo": "Julien Bationo"
     },
     {
      "nome": "Lohann Doucet",
@@ -28478,7 +29020,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Nordic United",
-     "paisDoClube": "SWE"
+     "paisDoClube": "SWE",
+     "clubeDoJogo": "nordic-united",
+     "noJogo": "Emanuel Swedi"
     },
     {
      "nome": "Gaël Bigirimana",
@@ -28487,7 +29031,9 @@
      "jogos": 22,
      "gols": 0,
      "clube": "Dungannon Swifts",
-     "paisDoClube": "NIR"
+     "paisDoClube": "NIR",
+     "clubeDoJogo": "dungannon-swifts",
+     "noJogo": "Gaël Bigirimana"
     },
     {
      "nome": "Elie Mokono",
@@ -28750,7 +29296,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Levski Sofia",
-     "paisDoClube": "BUL"
+     "paisDoClube": "BUL",
+     "clubeDoJogo": "levski-sofia",
+     "noJogo": "Oliver Kamdem"
     },
     {
      "nome": "Patrick Nkoa",
@@ -29063,7 +29611,9 @@
      "jogos": 36,
      "gols": 1,
      "clube": "Ludogorets Razgrad",
-     "paisDoClube": "BUL"
+     "paisDoClube": "BUL",
+     "clubeDoJogo": "ludogorets-razgrad",
+     "noJogo": "Deroy Duarte"
     },
     {
      "nome": "Laros Duarte",
@@ -29072,7 +29622,9 @@
      "jogos": 22,
      "gols": 1,
      "clube": "Puskás Akadémia",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "puskas-akademia",
+     "noJogo": "Laros Duarte"
     },
     {
      "nome": "Elson Mendes",
@@ -29218,7 +29770,9 @@
      "jogos": 22,
      "gols": 1,
      "clube": "Skalica",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "skalica",
+     "noJogo": "Peter Guinari"
     },
     {
      "nome": "Noah Ato-Zandanga",
@@ -29285,7 +29839,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "CSKA Sofia",
-     "paisDoClube": "BUL"
+     "paisDoClube": "BUL",
+     "clubeDoJogo": "cska-sofia",
+     "noJogo": "Isaac Solet"
     },
     {
      "nome": "Séverin Tatolna",
@@ -29294,7 +29850,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "Livyi Bereh Kyiv",
-     "paisDoClube": "UKR"
+     "paisDoClube": "UKR",
+     "clubeDoJogo": "livyi-bereh-kyiv",
+     "noJogo": "Séverin Tatolna"
     },
     {
      "nome": "Ghislain Mounguide",
@@ -29390,7 +29948,9 @@
      "jogos": 10,
      "gols": 0,
      "clube": "Dinamo Minsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "dinamo-minsk",
+     "noJogo": "Moustapha Djimet"
     },
     {
      "nome": "Delphin Mokonou",
@@ -29605,7 +30165,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Gandzasar Kapan",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "gandzasar-kapan",
+     "noJogo": "Bertrand Mani"
     },
     {
      "nome": "Ahmat Mahamat Abakar",
@@ -29646,7 +30208,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Ararat Yerevan",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "ararat-yerevan",
+     "noJogo": "Adel Anzimati"
     },
     {
      "nome": "Ismaël Boura",
@@ -29695,7 +30259,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Francs Borains",
-     "paisDoClube": "BEL"
+     "paisDoClube": "BEL",
+     "clubeDoJogo": "francs-borains",
+     "noJogo": "Yannis Kari"
     },
     {
      "nome": "Kassim M'Dahoma",
@@ -29822,7 +30388,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Francs Borains",
-     "paisDoClube": "BEL"
+     "paisDoClube": "BEL",
+     "clubeDoJogo": "francs-borains",
+     "noJogo": "Aboubacar Ali"
     },
     {
      "nome": "Rafiki Saïd",
@@ -30714,7 +31282,9 @@
      "jogos": 16,
      "gols": 0,
      "clube": "Ludogorets Razgrad",
-     "paisDoClube": "BUL"
+     "paisDoClube": "BUL",
+     "clubeDoJogo": "ludogorets-razgrad",
+     "noJogo": "Hossam Abdelmaguid"
     },
     {
      "nome": "Karim Hafez",
@@ -31080,7 +31650,9 @@
      "jogos": 53,
      "gols": 4,
      "clube": "Kalamata",
-     "paisDoClube": "GRE"
+     "paisDoClube": "GRE",
+     "clubeDoJogo": "kalamata",
+     "noJogo": "Josete Miranda"
     },
     {
      "nome": "Luis Nlavo",
@@ -31138,7 +31710,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Nõmme Kalju",
-     "paisDoClube": "EST"
+     "paisDoClube": "EST",
+     "clubeDoJogo": "nomme-kalju",
+     "noJogo": "Enrique Esono"
     }
    ]
   },
@@ -31215,7 +31789,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Milsami Orhei",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "milsami-orhei",
+     "noJogo": "Hennos Asmelash"
     },
     {
      "nome": "Victor Fors",
@@ -31860,7 +32436,9 @@
      "jogos": 29,
      "gols": 2,
      "clube": "Hapoel Petah Tikva",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "hapoel-petah-tikva",
+     "noJogo": "Alex Moucketou-Moussounda"
     },
     {
      "nome": "Jacques Ekomié",
@@ -31933,7 +32511,9 @@
      "jogos": 82,
      "gols": 4,
      "clube": "Sarıyer",
-     "paisDoClube": "TUR"
+     "paisDoClube": "TUR",
+     "clubeDoJogo": "sar-yer",
+     "noJogo": "André Biyogo Poko"
     },
     {
      "nome": "Guélor Kanga",
@@ -31942,7 +32522,9 @@
      "jogos": 77,
      "gols": 6,
      "clube": "Esenler Erokspor",
-     "paisDoClube": "TUR"
+     "paisDoClube": "TUR",
+     "clubeDoJogo": "esenler-erokspor",
+     "noJogo": "Guélor Kanga"
     },
     {
      "nome": "Didier Ndong",
@@ -32033,7 +32615,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Sabah",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "sabah-az",
+     "noJogo": "Orphé Mbina"
     },
     {
      "nome": "André-Jordy Ella",
@@ -32056,7 +32640,9 @@
      "jogos": 29,
      "gols": 0,
      "clube": "Shkëndija",
-     "paisDoClube": "MKD"
+     "paisDoClube": "MKD",
+     "clubeDoJogo": "shkendija",
+     "noJogo": "Baboucarr Gaye"
     },
     {
      "nome": "Ebrima Jarju",
@@ -32065,7 +32651,9 @@
      "jogos": 10,
      "gols": 0,
      "clube": "Paide",
-     "paisDoClube": "EST"
+     "paisDoClube": "EST",
+     "clubeDoJogo": "paide",
+     "noJogo": "Ebrima Jarju"
     },
     {
      "nome": "Sheikh Sibi",
@@ -32143,7 +32731,9 @@
      "jogos": 10,
      "gols": 0,
      "clube": "Horsens",
-     "paisDoClube": "DEN"
+     "paisDoClube": "DEN",
+     "clubeDoJogo": "horsens",
+     "noJogo": "Alagie Saine"
     },
     {
      "nome": "Yaya Bojang",
@@ -32172,7 +32762,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "KF Tirana",
-     "paisDoClube": "ALB"
+     "paisDoClube": "ALB",
+     "clubeDoJogo": "tirana",
+     "noJogo": "Joseph Colley"
     },
     {
      "nome": "Ebou Adams",
@@ -32396,7 +32988,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "St Patrick's Athletic",
-     "paisDoClube": "IRL"
+     "paisDoClube": "IRL",
+     "clubeDoJogo": "st-patrick-s-athletic",
+     "noJogo": "Joseph Anang"
     },
     {
      "nome": "Benjamin Asare",
@@ -32513,7 +33107,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Slovan Bratislava",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "slovan-bratislava",
+     "noJogo": "Rahim Ibrahim"
     },
     {
      "nome": "Abdul Fatawu",
@@ -32646,7 +33242,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Étoile Carouge",
-     "paisDoClube": "SUI"
+     "paisDoClube": "SUI",
+     "clubeDoJogo": "etoile-carouge",
+     "noJogo": "Mussa Diallo"
     },
     {
      "nome": "Sekou Sylla",
@@ -32877,7 +33475,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Balzan",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "balzan",
+     "noJogo": "Manuel Issufe Djaló"
     },
     {
      "nome": "Opa Sanganté",
@@ -32928,7 +33528,9 @@
      "jogos": 5,
      "gols": 0,
      "clube": "Oulu",
-     "paisDoClube": "FIN"
+     "paisDoClube": "FIN",
+     "clubeDoJogo": "oulu",
+     "noJogo": "Adramane Cassamá"
     },
     {
      "nome": "Iano Imbeni",
@@ -33963,7 +34565,9 @@
      "jogos": 13,
      "gols": 0,
      "clube": "Sheriff Tiraspol",
-     "paisDoClube": "MDA"
+     "paisDoClube": "MDA",
+     "clubeDoJogo": "sheriff-tiraspol",
+     "noJogo": "Natus Swen"
     },
     {
      "nome": "Nelson Laomie",
@@ -33992,7 +34596,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Neman Grodno",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "neman-grodno",
+     "noJogo": "Tito Yormie"
     },
     {
      "nome": "Oscar Dorley",
@@ -34098,7 +34704,9 @@
      "jogos": 4,
      "gols": 0,
      "clube": "IK Oddevold",
-     "paisDoClube": "SWE"
+     "paisDoClube": "SWE",
+     "clubeDoJogo": "oddevold",
+     "noJogo": "Emmanuel Gono"
     },
     {
      "nome": "Prince Martor Jr.",
@@ -34319,7 +34927,9 @@
      "jogos": 10,
      "gols": 0,
      "clube": "Atert Bissen",
-     "paisDoClube": "LUX"
+     "paisDoClube": "LUX",
+     "clubeDoJogo": "atert-bissen",
+     "noJogo": "Geordan Dupire"
     },
     {
      "nome": "Thomas Fontaine",
@@ -34520,7 +35130,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Septemvri Sofia",
-     "paisDoClube": "BUL"
+     "paisDoClube": "BUL",
+     "clubeDoJogo": "septemvri-sofia",
+     "noJogo": "Nicolas Fontaine"
     }
    ]
   },
@@ -35931,7 +36543,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Ararat-Armenia",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "ararat-armenia",
+     "noJogo": "Bruno Wilson"
     },
     {
      "nome": "Oscar Cherene",
@@ -36008,7 +36622,9 @@
      "jogos": 25,
      "gols": 2,
      "clube": "Zira",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "zira",
+     "noJogo": "Guima"
     },
     {
      "nome": "Alfons Amade",
@@ -36017,7 +36633,9 @@
      "jogos": 20,
      "gols": 1,
      "clube": "Dunfermline Athletic",
-     "paisDoClube": "SCO"
+     "paisDoClube": "SCO",
+     "clubeDoJogo": "dunfermline-athletic",
+     "noJogo": "Alfons Amade"
     },
     {
      "nome": "Candinho",
@@ -36403,7 +37021,9 @@
      "jogos": 12,
      "gols": 0,
      "clube": "Bylis",
-     "paisDoClube": "ALB"
+     "paisDoClube": "ALB",
+     "clubeDoJogo": "bylis",
+     "noJogo": "Aboubacar Camara"
     },
     {
      "nome": "Abraham Adamou Gora",
@@ -36443,7 +37063,9 @@
      "jogos": 30,
      "gols": 3,
      "clube": "Sūduva",
-     "paisDoClube": "LTU"
+     "paisDoClube": "LTU",
+     "clubeDoJogo": "suduva",
+     "noJogo": "Amadou Sabo"
     },
     {
      "nome": "Ousseini Badamassi",
@@ -36461,7 +37083,9 @@
      "jogos": 54,
      "gols": 0,
      "clube": "Maccabi Haifa",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "maccabi-haifa",
+     "noJogo": "Ali Mohamed"
     },
     {
      "nome": "Konan N'Dri",
@@ -36507,7 +37131,9 @@
      "jogos": 36,
      "gols": 14,
      "clube": "Aktobe",
-     "paisDoClube": "KAZ"
+     "paisDoClube": "KAZ",
+     "clubeDoJogo": "aktobe",
+     "noJogo": "Daniel Sosah"
     },
     {
      "nome": "Kairou Amoustapha",
@@ -36877,7 +37503,9 @@
      "jogos": 30,
      "gols": 1,
      "clube": "Zira",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "zira",
+     "noJogo": "Ange Mutsinzi"
     },
     {
      "nome": "Gilbert Mugisha",
@@ -37055,7 +37683,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Sabah",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "sabah-az",
+     "noJogo": "Joy-Lance Mickels"
     },
     {
      "nome": "Joy-Slayd Mickels",
@@ -37064,7 +37694,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Hibernians",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "hibernians",
+     "noJogo": "Joy-Slayd Mickels"
     },
     {
      "nome": "Taiba Mbonyumwami",
@@ -37747,7 +38379,9 @@
      "jogos": 7,
      "gols": 0,
      "clube": "Briton Ferry Llansawel",
-     "paisDoClube": "WAL"
+     "paisDoClube": "WAL",
+     "clubeDoJogo": "briton-ferry-llansawel",
+     "noJogo": "Tyrone Cadeau"
     },
     {
      "nome": "Samuel Okolie",
@@ -37779,7 +38413,9 @@
      "jogos": 13,
      "gols": 0,
      "clube": "Alashkert",
-     "paisDoClube": "ARM"
+     "paisDoClube": "ARM",
+     "clubeDoJogo": "alashkert",
+     "noJogo": "Ibrahim Sesay"
     },
     {
      "nome": "Francis Koroma",
@@ -37806,7 +38442,9 @@
      "jogos": 29,
      "gols": 0,
      "clube": "Košice",
-     "paisDoClube": "SVK"
+     "paisDoClube": "SVK",
+     "clubeDoJogo": "kosice",
+     "noJogo": "Osman Kakay"
     },
     {
      "nome": "Emmanuel Samadia",
@@ -37875,7 +38513,9 @@
      "jogos": 9,
      "gols": 1,
      "clube": "Stjarnan",
-     "paisDoClube": "ISL"
+     "paisDoClube": "ISL",
+     "clubeDoJogo": "stjarnan",
+     "noJogo": "Ibrahim Turay"
     },
     {
      "nome": "Momoh Kamara",
@@ -37942,7 +38582,9 @@
      "jogos": 8,
      "gols": 2,
      "clube": "Inter Turku",
-     "paisDoClube": "FIN"
+     "paisDoClube": "FIN",
+     "clubeDoJogo": "inter-turku",
+     "noJogo": "Alie Conteh"
     },
     {
      "nome": "Daniel Kanu",
@@ -37978,7 +38620,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Arsenal Tivat",
-     "paisDoClube": "MNE"
+     "paisDoClube": "MNE",
+     "clubeDoJogo": "arsenal-tivat",
+     "noJogo": "Santigie Sesay"
     },
     {
      "nome": "Raees Bangura-Williams",
@@ -38175,7 +38819,9 @@
      "jogos": 12,
      "gols": 1,
      "clube": "Sliema Wanderers",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "sliema-wanderers",
+     "noJogo": "Mohamed Awad"
     },
     {
      "nome": "Sak Hassan",
@@ -39024,7 +39670,9 @@
      "jogos": 20,
      "gols": 0,
      "clube": "Patro Eisden",
-     "paisDoClube": "BEL"
+     "paisDoClube": "BEL",
+     "clubeDoJogo": "patro-eisden",
+     "noJogo": "Haji Mnoga"
     },
     {
      "nome": "Nickson Kibabage",
@@ -39424,7 +40072,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Hapoel Jerusalem",
-     "paisDoClube": "ISR"
+     "paisDoClube": "ISR",
+     "clubeDoJogo": "hapoel-jerusalem",
+     "noJogo": "Zuberu Sharani"
     },
     {
      "nome": "Kodjo Fo-Doh Laba",
@@ -39593,7 +40243,9 @@
      "jogos": 8,
      "gols": 1,
      "clube": "Ludogorets Razgrad",
-     "paisDoClube": "BUL"
+     "paisDoClube": "BUL",
+     "clubeDoJogo": "ludogorets-razgrad",
+     "noJogo": "Omar Rekik"
     },
     {
      "nome": "Mohamed Dräger",
@@ -39794,7 +40446,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Mosta",
-     "paisDoClube": "MLT"
+     "paisDoClube": "MLT",
+     "clubeDoJogo": "mosta",
+     "noJogo": "Akpan Udoh"
     },
     {
      "nome": "David Lukwago",
@@ -39973,7 +40627,9 @@
      "jogos": 7,
      "gols": 0,
      "clube": "Dunfermline Athletic",
-     "paisDoClube": "SCO"
+     "paisDoClube": "SCO",
+     "clubeDoJogo": "dunfermline-athletic",
+     "noJogo": "Allan Oyirwoth"
     },
     {
      "nome": "Abdoulaye Sissako",
@@ -40051,7 +40707,9 @@
      "jogos": 1,
      "gols": 1,
      "clube": "K Beerschot VA",
-     "paisDoClube": "BEL"
+     "paisDoClube": "BEL",
+     "clubeDoJogo": "beerschot",
+     "noJogo": "Arnold Vula"
     },
     {
      "nome": "Sadam Masereka",
@@ -40167,7 +40825,9 @@
      "jogos": 0,
      "gols": 0,
      "clube": "Nõmme United",
-     "paisDoClube": "EST"
+     "paisDoClube": "EST",
+     "clubeDoJogo": "nomme-united",
+     "noJogo": "Ricky Chanda"
     },
     {
      "nome": "Owen Mwamba",
@@ -40414,7 +41074,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Sarajevo",
-     "paisDoClube": "BIH"
+     "paisDoClube": "BIH",
+     "clubeDoJogo": "sarajevo",
+     "noJogo": "Shane Maroodza"
     },
     {
      "nome": "Kelvin Moyo",
@@ -41011,7 +41673,9 @@
      "jogos": 11,
      "gols": 1,
      "clube": "Ferencváros",
-     "paisDoClube": "HUN"
+     "paisDoClube": "HUN",
+     "clubeDoJogo": "ferencvaros",
+     "noJogo": "Daniel Arzani"
     }
    ]
   },
@@ -43366,7 +44030,9 @@
      "jogos": 14,
      "gols": 0,
      "clube": "Lommel",
-     "paisDoClube": "BEL"
+     "paisDoClube": "BEL",
+     "clubeDoJogo": "lommel",
+     "noJogo": "Joey Pelupessy"
     },
     {
      "nome": "Rayhan Hannan",
@@ -44433,7 +45099,9 @@
      "jogos": 19,
      "gols": 0,
      "clube": "Corvinul Hunedoara",
-     "paisDoClube": "ROM"
+     "paisDoClube": "ROM",
+     "clubeDoJogo": "corvinul-hunedoara",
+     "noJogo": "Mohammad Abualnadi"
     },
     {
      "nome": "Hadi Al-Hourani",
@@ -45462,7 +46130,9 @@
      "jogos": 50,
      "gols": 6,
      "clube": "Dinamo Minsk",
-     "paisDoClube": "BLR"
+     "paisDoClube": "BLR",
+     "clubeDoJogo": "dinamo-minsk",
+     "noJogo": "Gulzhigit Alykulov"
     },
     {
      "nome": "Alimardon Shukurov",
@@ -45998,7 +46668,9 @@
      "jogos": 7,
      "gols": 0,
      "clube": "IK Oddevold",
-     "paisDoClube": "SWE"
+     "paisDoClube": "SWE",
+     "clubeDoJogo": "oddevold",
+     "noJogo": "Leonardo Shahin"
     },
     {
      "nome": "Jimmy Kazan",
@@ -46445,7 +47117,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Ross County",
-     "paisDoClube": "SCO"
+     "paisDoClube": "SCO",
+     "clubeDoJogo": "ross-county",
+     "noJogo": "Richard Chin"
     },
     {
      "nome": "Ramadhan Saifullah",
@@ -47511,7 +48185,9 @@
      "jogos": 13,
      "gols": 0,
      "clube": "Sumgayit",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "sumgayit",
+     "noJogo": "Easah Suliman"
     },
     {
      "nome": "Mamoon Moosa Khan",
@@ -47654,7 +48330,9 @@
      "jogos": 17,
      "gols": 2,
      "clube": "Kolding IF",
-     "paisDoClube": "DEN"
+     "paisDoClube": "DEN",
+     "clubeDoJogo": "kolding",
+     "noJogo": "Abdul Arshad"
     },
     {
      "nome": "Shayak Dost",
@@ -47846,7 +48524,9 @@
      "jogos": 1,
      "gols": 0,
      "clube": "Esbjerg fB",
-     "paisDoClube": "DEN"
+     "paisDoClube": "DEN",
+     "clubeDoJogo": "esbjerg-fb",
+     "noJogo": "Adam Ahmad"
     },
     {
      "nome": "Hamed Hamdan",
@@ -47864,7 +48544,9 @@
      "jogos": 3,
      "gols": 0,
      "clube": "Velež Mostar",
-     "paisDoClube": "BIH"
+     "paisDoClube": "BIH",
+     "clubeDoJogo": "velez-mostar",
+     "noJogo": "Ayham Shhade"
     },
     {
      "nome": "Adam Kaied",
@@ -49506,7 +50188,9 @@
      "jogos": 9,
      "gols": 0,
      "clube": "Turan Tovuz",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "turan-tovuz",
+     "noJogo": "Oleg Baklov"
     },
     {
      "nome": "Daler Azizov",
@@ -49598,7 +50282,9 @@
      "jogos": 75,
      "gols": 11,
      "clube": "Lokomotiv Plovdiv",
-     "paisDoClube": "BUL"
+     "paisDoClube": "BUL",
+     "clubeDoJogo": "lokomotiv-plovdiv",
+     "noJogo": "Parvizdzhon Umarbayev"
     },
     {
      "nome": "Amirbek Juraboev",
@@ -50813,7 +51499,9 @@
      "jogos": 2,
      "gols": 0,
      "clube": "Sabah",
-     "paisDoClube": "AZE"
+     "paisDoClube": "AZE",
+     "clubeDoJogo": "sabah-az",
+     "noJogo": "Umarali Rakhmonaliev"
     },
     {
      "nome": "Jasurbek Jaloliddinov",
@@ -51589,7 +52277,9 @@
      "jogos": 6,
      "gols": 0,
      "clube": "Auckland United",
-     "paisDoClube": "NZL"
+     "paisDoClube": "NZL",
+     "clubeDoJogo": "auckland-united",
+     "noJogo": "Ngereine Maro"
     },
     {
      "nome": "Emmett Connolly",

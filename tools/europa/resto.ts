@@ -37,14 +37,15 @@ const ITENS: Record<string, string[]> = Object.fromEntries(Object.entries(
  * a faixa de força do elenco (o melhor clube e o mais fraco) e de reputação. A 2ª divisão fica abaixo do mais fraco da 1ª do
  * país (a média dos 11 melhores do último da 1ª, `npx tsx` em data/europa-2026/clubes-outros.json).
  */
-type Liga = { tamanho: number; forca: [number, number]; reputacao: [number, number] };
+type Liga = { tamanho: number; forca: [number, number]; reputacao: [number, number]; secoes?: RegExp };
 const LIGAS: Record<string, Liga> = {
   // 2ª divisão dos 16 países
   AT2: { tamanho: 16, forca: [61, 53], reputacao: [54, 40] },
   BE2: { tamanho: 16, forca: [64, 55], reputacao: [54, 40] },
   CH2: { tamanho: 10, forca: [60, 54], reputacao: [54, 42] },
   DK2: { tamanho: 12, forca: [60, 53], reputacao: [52, 40] },
-  GR2: { tamanho: 16, forca: [61, 52], reputacao: [54, 38] },
+  // Dois grupos (Norte e Sul): os clubes das duas tabelas de equipes.
+  GR2: { tamanho: 20, forca: [61, 52], reputacao: [54, 38], secoes: /^Teams, stadiums and locations$/ },
   HR2: { tamanho: 12, forca: [59, 52], reputacao: [50, 38] },
   NO2: { tamanho: 16, forca: [59, 52], reputacao: [54, 40] },
   PL2: { tamanho: 18, forca: [58, 51], reputacao: [54, 40] },
@@ -89,8 +90,45 @@ const LIGAS: Record<string, Liga> = {
   GI: { tamanho: 11, forca: [50, 44], reputacao: [38, 26] },
   SM: { tamanho: 16, forca: [48, 42], reputacao: [36, 24] },
   // Oceania
-  NZ: { tamanho: 10, forca: [58, 50], reputacao: [50, 36] },
+  // A fase nacional (os 10 que se classificam nas três ligas regionais): a seção "Personnel" da página.
+  NZ: { tamanho: 10, forca: [58, 50], reputacao: [50, 36], secoes: /^Personnel$/ },
 };
+
+/**
+ * Clubes que a página lista mas não jogam a divisão (conferidos um a um, nov/2026): times B ligados à página do clube
+ * principal (Jong Gent, Rapid II, Young Violets, Asteras B, Dynamo-2), clubes que subiram para a 1ª (Ried, Thun,
+ * Fredericia, Vukovar, Aalesund, Start, Termalica, Argeș, Kalmar) ou caíram dela e já estão nela no jogo (Gençlerbirliği,
+ * Karagümrük, Dinamo Bucareste), uma ligação errada (Atlético Morelia na Turquia) e um repetido (Keflavík ÍF).
+ */
+const EXCLUIR: Record<string, string[]> = {
+  AT2: ["Rapid Wien", "Austria Wien", "SV Ried"], BE2: ["KAA Gent", "K.R.C. Genk"], CH2: ["FC Thun"], DK2: ["FC Fredericia"],
+  GR2: ["Asteras Tripoli"], HR2: ["Vukovar 1991"], NO2: ["Aalesunds", "IK Start"], PL2: ["LKS Nieciecza"],
+  RO2: ["FC Argeș", "Dinamo București"], SE2: ["Kalmar FF"], TR2: ["Gençlerbirliği S.K.", "Fatih Karagümrük S.K.", "Atlético Morelia"],
+  UA2: ["Dynamo Kyiv"], IS: ["Keflavík ÍF"],
+};
+
+/** Nomes como se fala no Brasil (ou como o clube é conhecido), no lugar do nome completo da página. */
+const MANUAL_NOMES: Record<string, string> = {
+  "Ferencvárosi": "Ferencváros", "Ferenc Puskás Football Academy": "Puskás Akadémia", "Debreceni VSC": "Debrecen", "Paksi": "Paks",
+  "Diósgyőri VTK": "Diósgyőr", "Zalaegerszegi TE": "Zalaegerszeg", "Kazincbarcikai": "Kazincbarcika", "Győri ETO": "Győr",
+  "Nyíregyháza Spartacus": "Nyíregyháza", "Helsingin Jalkapalloklubi": "HJK", "Kuopion Palloseura": "KuPS",
+  "Kotkan Työväen Palloilijat": "KTP", "Knattspyrnufélagið Víkingur": "Víkingur Reykjavík", "Íþróttabandalag Akraness": "ÍA",
+  "Knattspyrnufélagið Fram": "Fram", "Breiðablik men's football": "Breiðablik", "Knattspyrnufélag Akureyrar": "KA",
+  "Íþróttabandalag Vestmannaeyja": "ÍBV", "FH men's football": "FH", "Football Club Victoria Rosport": "Victoria Rosport",
+  "Racing FC Union Luxembourg": "Racing Union", "R.F.C. de Liège": "RFC Liège", "R.O.C. de Charleroi-Marchienne": "Olympic Charleroi",
+  "K. Patro Eisden Maasmechelen": "Patro Eisden", "K Beerschot VA": "Beerschot", "Sportkring Beveren": "Beveren",
+  "DAC 1904 Dunajská Streda": "DAC Dunajská Streda", "1. FC Tatran Prešov": "Tatran Prešov", "ŽP Šport Podbrezová": "Podbrezová",
+  "Cardiff Metropolitan University": "Cardiff Met", "Gap Connah's Quay": "Connah's Quay", "MKE Ankaragücü": "Ankaragücü",
+  "Lokomotiv 1929 Sofia": "Lokomotiv Sofia", "Ludogorets 1945": "Ludogorets", "Septemvri Sofia PFC": "Septemvri Sofia",
+  "Paide Linnameeskond": "Paide", "Harju JK Laagri": "Harju", "Pärnu JK Vaprus": "Vaprus", "JK Tallinna Kalev": "Tallinna Kalev",
+  "SP Tre Penne": "Tre Penne", "Tre Fiori FC": "Tre Fiori", "Ferizaj": "Ferizaj", "Makedonija Gjorče Petrov": "Makedonija GP",
+  "Ankara Keçiörengücü S.K.": "Keçiörengücü", "Sarıyer G.K.": "Sarıyer", "Amed S.F.K.": "Amed",
+  "Knattspyrnufélag Reykjavíkur": "KR Reykjavík", "Knattspyrnudeild Keflavík": "Keflavík", "Klaksvíkar Ítróttarfelag": "KÍ Klaksvík",
+  "Sørvágs Ítróttarfelag": "SÍ Sørvágur", "Turun Palloseura": "TPS", "Patro Eisden Maasmechelen": "Patro Eisden",
+  "Železiarne Podbrezová": "Podbrezová", "KAS Eupen": "Eupen", "KV Kortrijk": "Kortrijk", "KSC Lokeren": "Lokeren",
+};
+/** Prefixos que saem do começo do nome ("FC Kairat" → "Kairat", "K.F. Tirana" → "Tirana"). */
+const PREFIXO = /^(F\.?C\.?|F\.?K\.?|K\.?F\.?|N\.?K\.?|ŠK|MŠK|HŠK|MFK|A\.?S\.?|A\.?C\.?|S\.?S\.?|S\.?P\.?|S\.?C\.?|BFC|DFK|FCI|JK|OFK|POFC|PFC|PFK|GFK|CSF|CE|CF|FS|SK|SV|KS|FA|U\.N\.|G\.S\.|A\.O\.|K\.V\.|K\.A\.S\.|K\.S\.C\.|IFK|IK)\s+/;
 
 /** Times B e de reservas (não sobem: ficam de fora, como nas outras segundas divisões). */
 const RESERVAS = /\b(B|II|U-?2[1-3]|U-?19|Futures|NXT|Jong|Reserves?|Juniors?|Akademie|Amateure)\b/i;
@@ -115,13 +153,22 @@ for (const arquivo of ["data/brasil-2026/clubes.json", "data/brasil-2026/serie-d
 }
 const slug = (t: string) => normalizar(t).replace(/ /g, "-");
 
-/** "Ferencvárosi TC" → "Ferencvárosi"; "Shamrock Rovers F.C." → "Shamrock Rovers" (sem o "FC" e o que vem entre parênteses). */
+/**
+ * O nome do clube no jogo: o da lista manual ou o título da página sem o que vem entre parênteses, os prefixos ("FC",
+ * "K.F.") e os sufixos ("F.C.", "TC"). "Ferencvárosi TC" → "Ferencváros"; "Shamrock Rovers F.C." → "Shamrock Rovers".
+ */
 function nomeLimpo(titulo: string): string {
+  if (MANUAL_NOMES[titulo]) return MANUAL_NOMES[titulo];
   let n = titulo.replace(/\s*\(.*?\)\s*/g, " ").trim();
-  n = n.replace(/^(F\.?\s?C\.?|FK|NK|HNK|GNK|SK|KF|FC|AFC|PFC|CS|ACS|SC|KS)\s+/i, (m) => (n.split(" ").length > 2 ? "" : m)).trim();
-  n = n.replace(/\s+(F\.?\s?C\.?|S\.?\s?C\.?|C\.?\s?F\.?|A\.?\s?F\.?\s?C\.?|Football Club|FK|SK|TC|SE|FC|AC|SC|IF|BK)$/i, "").trim();
-  return n || titulo;
+  if (MANUAL_NOMES[n]) return MANUAL_NOMES[n];
+  const sem = n.replace(PREFIXO, "").trim();
+  // O prefixo sai se sobra um nome de verdade ("FC RFS" fica; "R.F.C. de Liège" está na lista manual).
+  if (sem.length >= 4 && /^[A-ZÀ-ÖØ-ÞĀ-ž0-9]/.test(sem)) n = sem;
+  n = n.replace(/\s+(F\.?\s?C\.?|S\.?\s?C\.?|C\.?\s?F\.?|A\.?\s?F\.?\s?C\.?|Football Club|FK|SK|TC|SE|FC|AC|SC|IF|BK|PFC|PFK|S\.K\.|F\.K\.)$/i, "").trim();
+  return MANUAL_NOMES[n] ?? (n || titulo);
 }
+/** O nome do clube: o título da página em inglês (o rótulo do Wikidata às vezes vem vandalizado: "gil paja"). */
+const nomeDoClube = (c: ClubeNaPagina) => nomeLimpo(clubesWd[c.qid].enwiki ?? clubesWd[c.qid].en ?? c.titulo);
 
 /** A sigla de 3 letras: a primeira palavra que não é "FC", "FK"... */
 function sigla(nome: string, usadas: Set<string>): string {
@@ -133,14 +180,25 @@ function sigla(nome: string, usadas: Set<string>): string {
   return s;
 }
 
-/** A lista dos clubes da liga: entre as seções da página, a que tem o tamanho mais perto do da liga (só clubes do país). */
-function clubesDaLiga(s: Semente, pais: string, tamanho: number): ClubeNaPagina[] {
+/**
+ * A lista dos clubes da liga: entre as seções da página, a que tem o tamanho mais perto do da liga (só clubes do país);
+ * com `secoes`, todas as seções com esse nome juntas (os grupos da 2ª da Grécia).
+ */
+function clubesDaLiga(s: Semente, pais: string, cfg: Liga): ClubeNaPagina[] {
   const itens = ITENS[pais] ?? [];
+  const tamanho = cfg.tamanho;
+  const doPais = (lista: ClubeNaPagina[]) => [...new Map(lista.filter((c) => clubesWd[c.qid] && (!clubesWd[c.qid].paises.length || clubesWd[c.qid].paises.some((x) => itens.includes(x))))
+    .map((c) => [c.qid, c])).values()];
+  if (cfg.secoes) {
+    for (const p of s.paginas) {
+      const lista = doPais(p.participantes.filter((l) => cfg.secoes!.test(l.secao)).flatMap((l) => l.clubes));
+      if (lista.length >= 6) return lista;
+    }
+  }
   let melhor: ClubeNaPagina[] = [];
   for (const p of s.paginas) {
     for (const l of p.participantes) {
-      const lista = [...new Map(l.clubes.filter((c) => clubesWd[c.qid] && (!clubesWd[c.qid].paises.length || clubesWd[c.qid].paises.some((x) => itens.includes(x))))
-        .map((c) => [c.qid, c])).values()];
+      const lista = doPais(l.clubes);
       if (lista.length < 6) continue;
       const d = Math.abs(lista.length - tamanho), dm = Math.abs(melhor.length - tamanho);
       // Mais perto do tamanho; no empate, a que tem a mais (a seção "Teams" traz todos; a de uniformes às vezes não).
@@ -148,7 +206,7 @@ function clubesDaLiga(s: Semente, pais: string, tamanho: number): ClubeNaPagina[
     }
     if (melhor.length) break;
   }
-  return melhor.slice(0, tamanho);
+  return melhor;
 }
 
 /** Posição pelo Wikidata. */
@@ -189,16 +247,18 @@ for (const [liga, cfg] of Object.entries(LIGAS)) {
   const segunda = liga !== pais;
   const s = sementes.find((x) => x.id === `resto-${liga}-en`);
   if (!s) { relatorio.push(`${liga}: sem página`); continue; }
-  const lista = clubesDaLiga(s, pais, cfg.tamanho + (segunda ? 4 : 0))
+  const excluir = new Set((EXCLUIR[liga] ?? []).map(normalizar));
+  const lista = clubesDaLiga(s, pais, cfg)
     .filter((c) => !RESERVAS.test(clubesWd[c.qid].en ?? c.titulo) && !RESERVAS.test(c.titulo))
-    .filter((c) => !nomesNoPais.has(`${pais}|${normalizar(nomeLimpo(clubesWd[c.qid].en ?? c.titulo))}`))
+    .filter((c) => !excluir.has(normalizar(nomeDoClube(c))) && !excluir.has(normalizar(nomeLimpo(clubesWd[c.qid].en ?? c.titulo))))
+    .filter((c) => !nomesNoPais.has(`${pais}|${normalizar(nomeDoClube(c))}`))
     .slice(0, cfg.tamanho);
   // Do mais conhecido ao menos conhecido (ligações no Wikidata): o primeiro fica com a força e a reputação do topo.
   const ordem = [...lista].sort((a, b) => Number(clubesWd[b.qid].links ?? 0) - Number(clubesWd[a.qid].links ?? 0) || a.qid.localeCompare(b.qid));
   let comElenco = 0, entraram = 0;
   ordem.forEach((c, i) => {
     const wd = clubesWd[c.qid];
-    const nome = nomeLimpo(wd.en ?? c.titulo);
+    const nome = nomeDoClube(c);
     let id = slug(nome);
     if (idsUsados.has(id)) id = `${id}-${pais.toLowerCase()}`;
     if (idsUsados.has(id)) return;

@@ -28,11 +28,13 @@ PAISES.update({"EG": "Egito", "MA": "Marrocos", "DZ": "Argélia", "TN": "Tunísi
                "TZ": "Tanzânia", "AO": "Angola", "ZM": "Zâmbia", "KE": "Quênia", "CN": "China", "IR": "Irã", "QA": "Catar",
                "AE": "Emirados Árabes", "UZ": "Uzbequistão", "IN": "Índia", "TH": "Tailândia", "IQ": "Iraque", "MY": "Malásia",
                "ID": "Indonésia", "VN": "Vietnã", "JO": "Jordânia", "KW": "Kuwait", "BH": "Bahrein"})
+# O resto da Europa e a Nova Zelândia (parte 4 do jogo completo, nov/2026).
+PAISES.update({k: v["nome"] for k, v in json.load(open("tools/europa/sementes-resto.json", encoding="utf-8"))["paises"].items()})
 
 escudos = {f[:-4] for f in os.listdir("public/escudos") if f.endswith(".png")}
 estaduais = [c for arquivo in ["clubes.json", "serie-d-reserva.json", "clubes-estaduais.json"]
              for c in json.load(open(f"data/brasil-2026/{arquivo}", encoding="utf-8"))["clubes"] if c["id"] not in escudos]
-exterior = [c for arquivo in ["data/america-do-sul-2026/clubes.json", "data/europa-2026/clubes.json", "data/europa-2026/clubes-segundas.json", "data/europa-2026/clubes-terceiras.json", "data/europa-2026/clubes-outros.json", "data/asia-2026/clubes.json", "data/mundo-2026/clubes.json"]
+exterior = [c for arquivo in ["data/america-do-sul-2026/clubes.json", "data/europa-2026/clubes.json", "data/europa-2026/clubes-segundas.json", "data/europa-2026/clubes-terceiras.json", "data/europa-2026/clubes-outros.json", "data/asia-2026/clubes.json", "data/mundo-2026/clubes.json", "data/europa-2026/clubes-resto.json"]
             for c in json.load(open(arquivo, encoding="utf-8"))["clubes"] if c["id"] not in escudos]
 
 
