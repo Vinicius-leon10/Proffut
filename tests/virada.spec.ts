@@ -1,9 +1,8 @@
-import { execFileSync } from "node:child_process";
-import { abrirSite, botao, esperarNoSave, expect, test } from "./ajuda";
+import { abrirSite, botao, esperarNoSave, expect, montarSave, test } from "./ajuda";
 
 test("R75 na virada, os clubes do computador dispensam os excedentes sem deixar posição nenhuma abaixo do mínimo (o Progreso, com o elenco cheio e os goleiros como os mais fracos, ficava com 1 goleiro)", async ({ page }) => {
   test.setTimeout(120_000);
-  const save = execFileSync("npx", ["tsx", "tests/saves/virada-goleiros.ts"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("virada-goleiros");
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   // Quem não renovou sai de graça: o jogo pergunta antes de encerrar.

@@ -16,7 +16,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  publicar:
+  motor:
+    name: Testes do motor
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -27,16 +28,46 @@ jobs:
       - run: npm ci
       - name: Testes do motor
         run: npm test
+
+  # Testes de tela em 3 partes ao mesmo tempo (--shard), como no workflow "Testes".
+  tela:
+    name: Testes de tela (parte ${{ matrix.parte }} de 3)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        parte: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
       - name: Verificação de tipos e geração do site
         run: npm run build
       - run: npx playwright install --with-deps chromium
       - name: Testes de ponta a ponta antes de publicar
-        run: npm run test:e2e
+        run: npx playwright test --shard=${{ matrix.parte }}/3
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: testes
+          name: testes-parte-${{ matrix.parte }}
           path: tests/resultado/
+
+  publicar:
+    # Só publica com todos os testes verdes (o motor e as 3 partes de tela).
+    needs: [motor, tela]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Geração do site
+        run: npm run build
       - name: Publicar na branch gh-pages
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}

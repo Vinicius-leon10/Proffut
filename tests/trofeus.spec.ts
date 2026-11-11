@@ -1,10 +1,9 @@
-import { execFileSync } from "node:child_process";
-import { abrirSite, botao, cartaoDoProximoJogo, expect, test, voltar } from "./ajuda";
+import { abrirSite, botao, cartaoDoProximoJogo, expect, montarSave, test, voltar } from "./ajuda";
 
 test("R42 sala de troféus e recordes: recordes do clube (maior goleada, maior público, artilheiros) e, depois da virada, os títulos do clube e da carreira", async ({ page }) => {
   test.setTimeout(120_000);
   // Jogo montado pelo motor: a Ponte Preta, com um elenco muito forte, jogou a Série B de 2026 inteira.
-  const save = execFileSync("npx", ["tsx", "tests/saves/fim-da-temporada.ts", "ponte-preta", "forte"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("fim-da-temporada", "ponte-preta", "forte");
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(botao(page, "Encerrar a temporada 2026")).toBeVisible();

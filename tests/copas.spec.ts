@@ -1,6 +1,5 @@
-import { execFileSync } from "node:child_process";
 import type { Page } from "@playwright/test";
-import { aba, abrirSite, cartaoDoProximoJogo, expect, jogarPartida, novoJogo, test } from "./ajuda";
+import { aba, abrirSite, cartaoDoProximoJogo, expect, jogarPartida, montarSave, novoJogo, test } from "./ajuda";
 
 // Copas de clubes da América (pedido: "Faça 1 e 2", da lista "copas continentais e nacionais" e "seleções"; "traga tudo
 // que tem da América"): Libertadores, Sul-Americana, Recopa, as da Concacaf, as regionais do Brasil e as nacionais.
@@ -49,7 +48,7 @@ test("R88 Tabelas → Copas: todas as copas de 2026 no seletor (Brasil, América
 
 test("R89 Libertadores do Flamengo: o jogo da fase de grupos no painel, o grupo dele na tabela (4 clubes, a regra dos grupos) e, depois de jogar, o resultado na tabela do grupo", async ({ page }) => {
   test.setTimeout(120_000);
-  const save = execFileSync("npx", ["tsx", "tests/saves/libertadores-grupos.ts"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("libertadores-grupos");
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });

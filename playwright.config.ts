@@ -1,9 +1,16 @@
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { defineConfig, devices } from "@playwright/test";
 
 // Testes de ponta a ponta (pasta tests/): o jogo inteiro num navegador com tela de iPhone.
 //   npm run build && npm run test:e2e                                        → testa o site gerado em dist/
 //   BASE_URL=https://vinicius-leon10.github.io/Proffut/ npm run test:e2e     → testa o site publicado
 const site = process.env.BASE_URL;
+
+// Saves montados pelo motor ficam numa pasta desta rodada (`montarSave` em tests/ajuda.ts): o mesmo save pedido por
+// vários testes é montado uma vez só. A configuração roda antes dos testes, que herdam a variável; pasta nova a cada
+// execução, para nunca usar um save de outra versão do jogo.
+process.env.SAVES_DA_RODADA ??= join(tmpdir(), `proffut-saves-${process.pid}-${Date.now()}`);
 
 export default defineConfig({
   testDir: "tests",

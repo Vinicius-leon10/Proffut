@@ -1,4 +1,6 @@
 import { execFileSync } from "node:child_process";
+import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 // Passos que vários testes repetem. Os testes em si ficam nos arquivos *.spec.ts.
 import { test as base, expect, type Locator, type Page } from "@playwright/test";
 
@@ -155,10 +157,29 @@ export async function irParaOMeuJogo(page: Page) {
  * tests/saves/depois-dos-estaduais.ts): para os testes do calendário das séries, sem jogar o estadual de janeiro.
  */
 export async function abrirDepoisDoEstadual(page: Page, clube: string) {
-  const save = execFileSync("npx", ["tsx", "tests/saves/depois-dos-estaduais.ts", clube], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("depois-dos-estaduais", clube);
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
+}
+
+/**
+ * Save montado pelo motor (`npx tsx tests/saves/<script>.ts <args>`), guardado durante a rodada de testes: o mesmo
+ * save pedido por outro teste sai da pasta da rodada (`SAVES_DA_RODADA`, criada no playwright.config.ts a cada
+ * execução) em vez de montar o mundo de novo. Pasta nova a cada rodada: nunca um save de uma versão antiga do jogo.
+ */
+export function montarSave(script: string, ...args: string[]): string {
+  const pasta = process.env.SAVES_DA_RODADA;
+  const arquivo = pasta ? join(pasta, [script, ...args].join("__") + ".json") : undefined;
+  if (arquivo && existsSync(arquivo)) return readFileSync(arquivo, "utf8");
+  const save = execFileSync("npx", ["tsx", `tests/saves/${script}.ts`, ...args], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  if (arquivo) {
+    mkdirSync(pasta!, { recursive: true });
+    const temporario = `${arquivo}.${process.pid}.tmp`;
+    writeFileSync(temporario, save);
+    renameSync(temporario, arquivo); // troca de uma vez: outro teste nunca lê um save pela metade
+  }
+  return save;
 }
 
 /** Relógio da página, para usar com `esperarSalvar`. */

@@ -1,6 +1,5 @@
-import { execFileSync } from "node:child_process";
 import type { Page } from "@playwright/test";
-import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, jogarPartida, novoJogo, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, jogarPartida, montarSave, novoJogo, test } from "./ajuda";
 
 // Seleções da América (pedido: "Faça 1 e 2", da lista "copas continentais e nacionais" e "seleções"; "traga tudo que tem
 // da América ... E a seleção de todos esses países"; e a regra do usuário: "pra ser chamado para ser técnico de qualquer
@@ -8,7 +7,7 @@ import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, jogarPartida, novoJ
 
 /** Abre um save montado pelo motor (tests/saves/selecao.ts). */
 async function abrirSave(page: Page, qual: "jogo" | "convite" | "data-fifa" | "europa" | "copa") {
-  const save = execFileSync("npx", ["tsx", "tests/saves/selecao.ts", qual], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("selecao", qual);
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
