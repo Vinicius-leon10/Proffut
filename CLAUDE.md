@@ -684,8 +684,13 @@ página do clube principal, clubes que subiram ou caíram e já estão na outra 
 página em inglês (o rótulo do Wikidata do Tre Penne vinha vandalizado) e os nomes de `MANUAL_NOMES` (Ferencváros, HJK,
 KuPS, KR Reykjavík...). Força e reputação por liga em `LIGAS` (a 2ª abaixo do mais fraco da 1ª). TV do mês em
 `TV_EUROPA_MES` pela folha típica de cada liga (1ª: a folha inteira; 2ª: 55%, com o piso). O pacote do jogo passou de
-6 MB: `maximumFileSizeToCacheInBytes` em 12 MB (`vite.config.ts`). Números: 2.959 clubes, ~70 mil jogadores, temporada
-simulada ~45 s nesta máquina (antes ~33 s), save de ~31 → ~41 MB no começo e ~50 MB no fim do ano. Os escudos dos 610 estão
+6 MB: `maximumFileSizeToCacheInBytes` em 12 MB (`vite.config.ts`). Números: 2.959 clubes, ~70 mil jogadores, save de ~31 → ~41 MB
+no começo e ~50 MB no fim do ano. **Desempenho:** com as ligas novas a temporada simulada foi de ~33 s para ~49 s nesta
+máquina e 6 testes do motor estouraram o tempo; o perfil mostrou que cada torneio e cada copa procuravam os próprios jogos na
+lista inteira, todo dia (`faseCompleta`, `resultadoDaFase`). Agora `fasesCompletas` (torneios.ts) e o índice `porFase`
+(`avancarCopasDeClubes`) fazem uma passada só por dia, e o jogo novo monta os elencos de todos os clubes numa passada só: a
+temporada caiu para ~31 s (mais rápida que antes da parte 4) e o jogo novo para ~3,8 s, com a mesma impressão digital de
+uma temporada inteira (placares, campeões e caixas iguais). Os escudos dos 610 estão
 na lista dos que faltam (`docs/TIMES_NOVOS.md`, 1.613 no total). Faltam as vagas dos países novos nas copas da UEFA.
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
@@ -843,7 +848,8 @@ Obras do estádio se pagam em 3 a 4 temporadas.
 - **Virada só no botão:** o `avancar` faz a virada apenas quando é chamado com a temporada já encerrada (o botão
   "Encerrar a temporada", que pergunta antes quem sai de graça). Se ele mesmo joga os últimos jogos do ano (todos de fora
   do Brasil), devolve `fim-dos-jogos` e para (R79). Laço que simula temporadas: trate `fim-dos-jogos` como "acabou o ano".
-- **Nada de `elencoDe` dentro de laço grande:** ele varre os ~16 mil jogadores. Para muitos clubes ou muitas perguntas,
+- **Nada de `elencoDe` nem de `estado.partidas.filter` dentro de laço grande:** eles varrem os ~70 mil jogadores e os
+  ~15 mil jogos do ano (nov/2026: torneios e copas faziam isso todo dia, um por um). Para muitos clubes ou muitas perguntas,
   monte os elencos (ou as contagens) uma vez, como `concluirJogos` e `transferenciasDaIa` fazem.
 - Ao rodar comandos, não use `pkill` genérico (já derrubou o próprio terminal). Nem `pgrep -f "<texto>"` seguido
   de `kill`: o próprio terminal tem o texto na linha de comando. Guarde o PID ao abrir o processo (`$!`).
