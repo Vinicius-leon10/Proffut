@@ -266,7 +266,8 @@ function CopaDoBrasil() {
 /** Onde cada copa aparece no seletor. */
 const GRUPOS_DAS_COPAS: { grupo: DefinicaoCopa["grupo"]; rotulo: string }[] = [
   { grupo: "brasil", rotulo: "Brasil" }, { grupo: "conmebol", rotulo: "América do Sul" }, { grupo: "concacaf", rotulo: "Concacaf" },
-  { grupo: "uefa", rotulo: "Europa" }, { grupo: "nacional", rotulo: "Copas nacionais" },
+  { grupo: "uefa", rotulo: "Europa" }, { grupo: "afc", rotulo: "Ásia" }, { grupo: "mundial", rotulo: "Mundial" },
+  { grupo: "nacional", rotulo: "Copas nacionais" },
 ];
 
 /** Confrontos de uma fase do mata-mata (jogo único ou ida e volta, com o agregado). */

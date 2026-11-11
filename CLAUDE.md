@@ -619,9 +619,14 @@ tools/asia/montar.ts <dados-asia-africa>` grava `data/asia-2026/clubes.json` e `
 `data/selecoes-2026/convocados.json` os convocados que jogam nesses clubes (69; rodar depois de `tools/europa/montar.ts`).
 Jogo novo com o continente Ásia (`NovoJogo.tsx`, 🌏); Tabelas → Outros países com o grupo Ásia depois da Europa. Save antigo:
 `acertarParticipantes` cria os clubes (a liga vale na temporada seguinte). Os 62 escudos estão na lista dos que faltam.
+**Liga dos Campeões da Ásia e Mundial de Clubes (R109, `copas.ts`):** `K-AFC` (grupo "afc", Tabelas → Copas → Ásia): 16
+clubes (`VAGAS_AFC`: Arábia Saudita 5, Japão 4, Coreia do Sul 4, Austrália 3; em 2026 pela reputação, depois pela tabela), 4
+grupos de 4 em turno e returno às terças (semanas 1–7, fora das datas FIFA), quartas e semi em ida e volta, final em campo
+neutro (semana 24). `K-MUN` (grupo "mundial"): os campeões do ano anterior da Liga dos Campeões, da Libertadores, da Concacaf e
+da Ásia, semifinal (semana −10) e final (−9) em campo neutro, a partir de 2027; vale a reputação da Libertadores.
 **Falta da parte 2:** as ligas da África, das outras ligas da Ásia (China, Irã, Catar, Emirados...) e da Nova Zelândia, que já
 estão na branch `dados-asia-africa` (páginas da Wikipédia e elencos; montar como o `tools/times/montar.ts` faz com a América),
-a Liga dos Campeões da Ásia e da África e o Mundial de Clubes.
+e a Liga dos Campeões da África (que entra no Mundial quando existir).
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).

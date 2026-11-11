@@ -66,7 +66,7 @@ export function titulosDoClube(estado: EstadoJogo, clubeId: string): Titulo[] {
       const def = definicaoDaCopa(id);
       if (!c || !def) continue;
       if (c.campeao === clubeId) lista.push({ temporada: r.temporada, titulo: `Campeão da ${def.nome}`, clubeId });
-      else if (c.vice === clubeId && (def.grupo === "conmebol" || def.grupo === "concacaf")) lista.push({ temporada: r.temporada, titulo: `Vice da ${def.nome}`, clubeId });
+      else if (c.vice === clubeId && (def.grupo === "conmebol" || def.grupo === "concacaf" || def.grupo === "uefa" || def.grupo === "afc" || def.grupo === "mundial")) lista.push({ temporada: r.temporada, titulo: `Vice da ${def.nome}`, clubeId });
     }
     const subiu = (["B", "C"] as SerieId[]).find((s) => r.promovidos[s]?.includes(clubeId));
     if (subiu) lista.push({ temporada: r.temporada, titulo: `Acesso à ${NOME_SERIE[subiu === "B" ? "A" : "B"]}`, clubeId });

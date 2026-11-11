@@ -1605,8 +1605,8 @@ describe("copas de clubes (Libertadores, Sul-Americana, Recopa, Concacaf, region
 
   it("todas as copas acabam com campeão e vice, sem jogo pendente", () => {
     expect(temporadaEncerrada(e)).toBe(true);
-    // A Supercopa da UEFA e as 7 supercopas nacionais da Europa só começam em 2027 (a base não tem as finais de 2025/26).
-    const so2027 = ["K-USC", "K-SEN", "K-SES", "K-SIT", "K-SDE", "K-SFR", "K-SPT", "K-SNL"];
+    // A Supercopa da UEFA, as 7 supercopas nacionais da Europa e o Mundial de Clubes só começam em 2027 (com os campeões do jogo).
+    const so2027 = ["K-USC", "K-SEN", "K-SES", "K-SIT", "K-SDE", "K-SFR", "K-SPT", "K-SNL", "K-MUN"];
     expect(Object.keys(e.copas!).length).toBe(DEFINICOES.filter((d) => !so2027.includes(d.id)).length);
     for (const c of Object.values(e.copas!)) {
       expect(c!.fase, c!.id).toBe("encerrada");
@@ -1708,7 +1708,7 @@ describe("copas de clubes (Libertadores, Sul-Americana, Recopa, Concacaf, region
     avancar(aberto);
     expect(aberto.temporada).toBe(2027);
     // Sem copas em 2026, não há os campeões das copas nacionais da Europa: as 7 supercopas de lá ficam para 2028.
-    expect(Object.keys(aberto.copas!).length).toBeGreaterThanOrEqual(DEFINICOES.length - 2 - 7);
+    expect(Object.keys(aberto.copas!).length).toBeGreaterThanOrEqual(DEFINICOES.length - 2 - 7 - 1);
     expect(aberto.copas!["K-LIB"]!.clubes).toHaveLength(47);
   });
 });
@@ -2375,6 +2375,28 @@ describe("Ásia (projeto jogo completo, parte 2, nov/2026): a 1ª divisão do Ja
       }
     }
     expect(vistos).toBeGreaterThanOrEqual(50);
+  });
+
+  it("Liga dos Campeões da Ásia: 16 clubes (Arábia Saudita 5, Japão 4, Coreia do Sul 4, Austrália 3) em 4 grupos; vai até a final em campo neutro; o campeão vai ao Mundial de Clubes com os da Liga dos Campeões, da Libertadores e da Concacaf", () => {
+    const afc = estado.copas?.["K-AFC"];
+    expect(afc?.clubes).toHaveLength(16);
+    const porPais = (pais: string) => afc!.clubes.filter((c) => estado.clubes[c].pais === pais).length;
+    expect([porPais("SA"), porPais("JP"), porPais("KR"), porPais("AU")]).toEqual([5, 4, 4, 3]);
+    expect(afc?.grupos?.grupos).toHaveLength(4);
+    expect(nomeDaCopa("K-AFC")).toBe("Liga dos Campeões da Ásia");
+    expect(DEFINICOES.find((d) => d.id === "K-AFC")?.grupo).toBe("afc");
+    // O Mundial de Clubes só começa em 2027 (com os campeões de 2026).
+    expect(estado.copas?.["K-MUN"]).toBeUndefined();
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 23 });
+    e.config.escalacaoAutomatica = true;
+    simularRestoDaTemporada(e);
+    expect(e.copas?.["K-AFC"]?.campeao).toBeTruthy();
+    expect(e.partidas.filter((p) => p.serie === "K-AFC" && !p.jogada)).toHaveLength(0);
+    expect(e.partidas.find((p) => p.serie === "K-AFC" && p.fase === "final")?.neutro).toBe(true);
+    const vagas = vagasDasCopas(e);
+    const campeoes = ["K-UCL", "K-LIB", "K-CONC", "K-AFC"].map((id) => e.copas![id as `K-${string}`]!.campeao!);
+    expect(vagas["K-MUN"]?.semi?.sort()).toEqual([...new Set(campeoes)].sort());
+    expect(vagas["K-AFC"]?.grupos).toHaveLength(16);
   });
 
   it("save de antes da Ásia: abrir o jogo cria os clubes, que jogam a liga na temporada seguinte", () => {

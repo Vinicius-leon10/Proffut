@@ -25,7 +25,8 @@ test("R88 Tabelas → Copas: todas as copas de 2026 no seletor (Brasil, América
     "Copa Chile", "Copa Colômbia", "U.S. Open Cup",
   ]) expect(opcoes, nome).toContain(nome);
   const grupos = await seletorDaCopa(page).locator("optgroup").evaluateAll((g) => g.map((x) => x.getAttribute("label")));
-  expect(grupos).toEqual(["Brasil", "América do Sul", "Concacaf", "Europa", "Copas nacionais"]);
+  // A Ásia desde o R109 (o Mundial de Clubes só a partir de 2027).
+  expect(grupos).toEqual(["Brasil", "América do Sul", "Concacaf", "Europa", "Ásia", "Copas nacionais"]);
 
   // Libertadores: a 1ª fase em ida e volta, com os 6 clubes de 2026.
   await seletorDaCopa(page).selectOption({ label: "Libertadores" });

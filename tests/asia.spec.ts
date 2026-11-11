@@ -32,3 +32,26 @@ test("R108 Ásia no jogo novo: o continente Ásia com Arábia Saudita, Austráli
   expect(daAsia.sort()).toEqual(["Arábia Saudita", "Austrália", "Coreia do Sul", "Japão"]);
   await expect(page.locator("main table.tabela tbody tr")).toHaveCount(20);
 });
+
+test("R109 Liga dos Campeões da Ásia: com o Urawa Reds, Tabelas → Copas abre na Liga dos Campeões da Ásia (grupo Ásia), com 4 grupos de 4 e o Urawa num deles; o Mundial de Clubes só aparece a partir de 2027", async ({ page }) => {
+  await abrirSite(page);
+  await botao(page, "Novo jogo").click();
+  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByRole("button", { name: "Próximo", exact: true }).click();
+  await page.getByRole("button", { name: /Ásia/ }).click();
+  await page.getByRole("button", { name: /Japão/ }).click();
+  await botao(page, /Urawa Reds/).click();
+  await botao(page, /^Assumir (o|a) /).click();
+  await pularTutorial(page);
+  await aba(page, "Tabelas");
+  await page.getByRole("tab", { name: "Copas" }).click();
+  const copa = page.getByRole("combobox", { name: "Copa" });
+  await expect(copa).toHaveValue("K-AFC");
+  const daAsia = (await copa.locator('optgroup[label="Ásia"] option').allTextContents()).map((t) => t.replace(" (seu time)", ""));
+  expect(daAsia).toEqual(["Liga dos Campeões da Ásia"]);
+  expect(await copa.locator('optgroup[label="Mundial"]').count()).toBe(0);
+  const grupo = page.getByRole("combobox", { name: "Grupo" });
+  await expect(grupo.locator("option")).toHaveCount(4);
+  await expect(grupo.locator("option", { hasText: "(seu time)" })).toHaveCount(1);
+  await expect(page.locator("main table.tabela tbody tr")).toHaveCount(4);
+});
