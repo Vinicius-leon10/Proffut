@@ -1,16 +1,22 @@
 name: Testes
 
-# Os testes do motor e os de tela rodam ao mesmo tempo, em máquinas separadas: os de tela em 3 partes (--shard),
-# cada uma com um terço dos testes. Nenhum teste fica de fora: o workflow só fica verde com as 4 máquinas verdes.
+# Os testes do motor e os de tela rodam ao mesmo tempo, em máquinas separadas: os de tela em 5 partes (--shard),
+# cada uma com um quinto dos testes. Nenhum teste fica de fora: o workflow só fica verde com as 6 máquinas verdes.
 on:
   push:
     branches-ignore: [gh-pages, dados-elencos, dados-times, dados-segundas, dados-america]
     # Os lotes de escudos e jogadores que o Claude no computador do usuário manda (pasta lotes/) são só arquivos para
     # conferir: não mudam o jogo e não precisam da conferência inteira (nov/2026, cada envio gastava ~1 h de máquina).
-    paths-ignore: ["lotes/**"]
+    # Também as mudanças só em textos de anotação (.md), que não mexem no jogo.
+    paths-ignore: ["lotes/**", "**.md"]
   pull_request:
   # Rodar à mão (Actions → Testes → Run workflow), por exemplo quando o GitHub perde uma execução.
   workflow_dispatch:
+
+# Um envio novo na mesma branch cancela a conferência que ainda roda do envio anterior (só a última importa).
+concurrency:
+  group: testes-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   motor:
@@ -27,12 +33,12 @@ jobs:
         run: npm test
 
   tela:
-    name: Testes de tela (parte ${{ matrix.parte }} de 3)
+    name: Testes de tela (parte ${{ matrix.parte }} de 5)
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        parte: [1, 2, 3]
+        parte: [1, 2, 3, 4, 5]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -42,9 +48,20 @@ jobs:
       - run: npm ci
       - name: Verificação de tipos e geração do site
         run: npm run build
-      - run: npx playwright install --with-deps chromium
+      # O navegador do Playwright fica guardado entre as conferências (só as bibliotecas do sistema são instaladas de novo).
+      - id: versao-playwright
+        run: echo "v=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+      - id: cache-playwright
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.versao-playwright.outputs.v }}
+      - if: steps.cache-playwright.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+      - if: steps.cache-playwright.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
       - name: Testes de ponta a ponta (tela de iPhone, inclusive sem internet)
-        run: npx playwright test --shard=${{ matrix.parte }}/3
+        run: npx playwright test --shard=${{ matrix.parte }}/5
       - uses: actions/upload-artifact@v7
         if: always()
         with:

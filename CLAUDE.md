@@ -601,10 +601,13 @@ Mali e RD Congo (sem lista na página do robô) e os escudos dos clubes da Ásia
 
 **Testes mais rápidos (pedido do usuário, 11/nov/2026, "Deixe anotado para deixar mais rápido"; feito na mesma noite):**
 com o mundo todo a conferência no GitHub tinha passado de ~13 para ~35 minutos. Feito: `ci.yml` e `pages.yml` rodam os
-testes do motor numa máquina e os de tela em 3 partes ao mesmo tempo (`--shard`, job `tela` com `matrix.parte`); o
-workflow só fica verde com as 4 verdes e a publicação (job `publicar`, com `needs`) só vem depois delas. Saves de teste:
+testes do motor numa máquina e os de tela em 5 partes ao mesmo tempo (eram 3 até nov/2026) (`--shard`, job `tela` com `matrix.parte`); o
+workflow só fica verde com as 6 verdes e a publicação (job `publicar`, com `needs`) só vem depois delas. Saves de teste:
 `montarSave(script, ...args)` (`tests/ajuda.ts`) guarda cada save montado pelo motor numa pasta da rodada
-(`SAVES_DA_RODADA`, criada no `playwright.config.ts` a cada execução: nunca um save de outra versão do jogo). Ideias que
+(`SAVES_DA_RODADA`, criada no `playwright.config.ts` a cada execução: nunca um save de outra versão do jogo). Depois (nov/2026, pedido "temos como otimizar o github?"; o repositório virou privado, os 3.000 minutos do Pro
+acabaram e o usuário o deixou público de novo): envio novo cancela a conferência em andamento da mesma branch
+(`concurrency`), envios só com `lotes/**` ou `.md` não rodam o "Testes" (`paths-ignore`), o navegador do Playwright fica em
+cache (`actions/cache`, chave pela versão) e o "Testes" pode ser rodado à mão (`workflow_dispatch`). Ideias que
 ficaram: o teste longo do motor num arquivo à parte e a gravação do save mais leve. Esperar a mudança no save com
 `esperarNoSave` ou lendo o resumo do espaço, nunca só `esperarSalvar` antes de recarregar (R36 e R84 falharam no GitHub
 por isso).

@@ -29,14 +29,14 @@ jobs:
       - name: Testes do motor
         run: npm test
 
-  # Testes de tela em 3 partes ao mesmo tempo (--shard), como no workflow "Testes".
+  # Testes de tela em 5 partes ao mesmo tempo (--shard), como no workflow "Testes".
   tela:
-    name: Testes de tela (parte ${{ matrix.parte }} de 3)
+    name: Testes de tela (parte ${{ matrix.parte }} de 5)
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        parte: [1, 2, 3]
+        parte: [1, 2, 3, 4, 5]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -46,9 +46,20 @@ jobs:
       - run: npm ci
       - name: Verificação de tipos e geração do site
         run: npm run build
-      - run: npx playwright install --with-deps chromium
+      # O navegador do Playwright fica guardado entre as conferências (só as bibliotecas do sistema são instaladas de novo).
+      - id: versao-playwright
+        run: echo "v=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+      - id: cache-playwright
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.versao-playwright.outputs.v }}
+      - if: steps.cache-playwright.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+      - if: steps.cache-playwright.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
       - name: Testes de ponta a ponta antes de publicar
-        run: npx playwright test --shard=${{ matrix.parte }}/3
+        run: npx playwright test --shard=${{ matrix.parte }}/5
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -56,7 +67,7 @@ jobs:
           path: tests/resultado/
 
   publicar:
-    # Só publica com todos os testes verdes (o motor e as 3 partes de tela).
+    # Só publica com todos os testes verdes (o motor e as 5 partes de tela).
     needs: [motor, tela]
     runs-on: ubuntu-latest
     steps:
