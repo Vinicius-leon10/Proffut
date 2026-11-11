@@ -472,6 +472,11 @@ usuário, `Episodio09.tsx`) com "Jerk It Out" (Caesars, FIFA Football 2004). Nã
 gravar": mandar só o texto da fala, em parágrafos, sem título, dicas ou comentários. Ele grava e manda o áudio; o vídeo
 segue as pausas da gravação dele.
 
+**Nova série "O que o jogo tem" (TikTok, nov/2026, no lugar dos bastidores):** pedido "tô achando vídeos muito técnicos...
+Os seguidores estão preocupados o que é que o jogo entrega". Vídeos do ponto de vista de quem vai jogar (o que dá para
+fazer, sem programação). 1: o futebol brasileiro completo (Séries A a D, estaduais, Copa do Brasil, regionais, vaga na
+Libertadores e na Sul-Americana); depois: mercado (comprar e vender com elencos e preços prontos), as copas, a partida ao
+vivo, a carreira do técnico, a América e a Europa, as seleções.
 **Série "Do zero ao topo" (TikTok, nov/2026):** pedido "Podemos criar uma serie de um club da serie c e vendo como ele vai
 prosseguindo" e "Uma simulação, mas ainda vamos continuar criando os videos da serie tbm". Carreira simulada do Santa Cruz
 (`videos/carreira/simular.ts`, semente 2026, escalação automática; o jogo decide tudo e o vídeo é fiel ao resultado):
