@@ -506,7 +506,8 @@ const supercopaUefa: DefinicaoCopa = {
 
 // ---- Ásia e Mundial de Clubes (nov/2026, projeto "jogo completo", parte 2) ---------------------------------
 // As ligas da Ásia do jogo (Japão, Coreia do Sul, Arábia Saudita e Austrália) vão de abril a dezembro aos domingos; a Liga
-// dos Campeões da Ásia joga às terças, fora das datas FIFA. O Mundial de Clubes junta os campeões continentais do ano
+// dos Campeões da Ásia joga às terças, fora das datas FIFA, e as finais (a da Ásia, a da África e a do Mundial) são às
+// quartas: no sábado ou no domingo, o finalista jogava em dias seguidos com a liga. O Mundial de Clubes junta os campeões continentais do ano
 // anterior em fevereiro (semifinal e final em campo neutro), a partir de 2027.
 
 /** Vagas de cada liga da Ásia na Liga dos Campeões da Ásia (os primeiros da tabela). */
@@ -526,7 +527,7 @@ const campeoesDaAsia: DefinicaoCopa = {
     { id: "grupos", nome: "Fase de grupos", tipo: "grupos", semanas: [1, 2, 3, 5, 6, 7], dia: "ter", grupos: { quantos: 4, passam: 2, turnos: 2 } },
     { id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [14, 15], dia: "ter", pares: "primeiros-x-segundos" },
     { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [18, 19], dia: "ter", pares: "chave" },
-    { id: "final", nome: "Final", tipo: "mata", semanas: [24], dia: "sab", neutro: true, pares: "chave" },
+    { id: "final", nome: "Final", tipo: "mata", semanas: [24], dia: "qua", neutro: true, pares: "chave" },
   ],
   participantes(estado, vagas) {
     if (vagas?.["K-AFC"]) return vagas["K-AFC"];
@@ -544,7 +545,7 @@ const campeoesDaAfrica: DefinicaoCopa = {
     { id: "grupos", nome: "Fase de grupos", tipo: "grupos", semanas: [1, 2, 3, 5, 6, 7], dia: "qua", grupos: { quantos: 4, passam: 2, turnos: 2 } },
     { id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [14, 15], dia: "qua", pares: "primeiros-x-segundos" },
     { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [18, 19], dia: "qua", pares: "chave" },
-    { id: "final", nome: "Final", tipo: "mata", semanas: [24], dia: "dom", neutro: true, pares: "chave" },
+    { id: "final", nome: "Final", tipo: "mata", semanas: [24], dia: "qua", neutro: true, pares: "chave" },
   ],
   participantes(estado, vagas) {
     if (vagas?.["K-CAF"]) return vagas["K-CAF"];
@@ -559,7 +560,7 @@ const mundialDeClubes: DefinicaoCopa = {
   fases: [
     { id: "playoff", nome: "Playoff", tipo: "mata", semanas: [-11], dia: "qua", neutro: true, pares: "potes", nota: "O campeão da Ásia contra o da África; o vencedor vai à semifinal." },
     { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [-10], dia: "qua", neutro: true, pares: "potes" },
-    { id: "final", nome: "Final", tipo: "mata", semanas: [-9], dia: "sab", neutro: true, pares: "chave" },
+    { id: "final", nome: "Final", tipo: "mata", semanas: [-9], dia: "qua", neutro: true, pares: "chave" },
   ],
   // Os campeões do ano anterior: os da Ásia e da África no playoff; os da Liga dos Campeões, da Libertadores e da Concacaf
   // na semifinal (sem lista em 2026).
