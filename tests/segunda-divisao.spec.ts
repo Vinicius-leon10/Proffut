@@ -1,7 +1,6 @@
-import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import type { Page } from "@playwright/test";
-import { aba, abrirSite, botao, cartaoDoProximoJogo, esperarNoSave, expect, novoJogo, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, esperarNoSave, expect, montarSave, novoJogo, test } from "./ajuda";
 
 // Segunda divisão dos 9 países da América do Sul, com acesso e queda (pedido: "Conseguimos esta colocando as outras
 // series dos paises da america do sul ?"; escolha "Com acesso e queda").
@@ -46,7 +45,7 @@ test("R77 Tabelas → Outros países: cada um dos 9 países tem a 1ª e a 2ª di
 
 test("R78 na virada, em cada país da América do Sul, os últimos da 1ª divisão caem para a 2ª e os primeiros da 2ª sobem; continua assim depois de fechar e abrir o app", async ({ page }) => {
   test.setTimeout(150_000);
-  const save = execFileSync("npx", ["tsx", "tests/saves/fim-da-temporada.ts", "ponte-preta"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("fim-da-temporada", "ponte-preta");
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(botao(page, "Encerrar a temporada 2026")).toBeVisible();
@@ -101,7 +100,7 @@ test("R78 na virada, em cada país da América do Sul, os últimos da 1ª divis�
 
 test("R79 quando os últimos jogos do ano são só de fora do Brasil (a 2ª divisão da Argentina termina depois da final da Série C num save de antes da Copa), o Avançar joga esses jogos e para: a virada espera o botão Encerrar a temporada, que pergunta antes quem sai de graça", async ({ page }) => {
   test.setTimeout(150_000);
-  const save = execFileSync("npx", ["tsx", "tests/saves/so-faltam-jogos-de-fora.ts"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("so-faltam-jogos-de-fora");
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   const avancar = botao(page, /^Avançar/);

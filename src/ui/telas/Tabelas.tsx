@@ -5,7 +5,7 @@ import { FASE_LIGA, SERIES, ZONAS, agregado, chavesDaFase, classificacao, tabela
 import { FASES_COPA, NOME_FASE_COPA, agregadoDoConfronto, faseDeEntrada, jogosDaCopa, situacaoNaCopa } from "../../engine/copa";
 import { DEFINICOES, definicaoDaCopa, regraDaFaseDaCopa, situacaoNaCopaDeClubes, tabelasDaCopa, type DefinicaoCopa } from "../../engine/copas";
 import { NOME_ESTADUAL, NOME_FASE_TORNEIO, NOME_REGIAO, PAISES, divisaoDaLiga, tabelaDoTorneio, vagasEntreDivisoes, type Regiao } from "../../engine/torneios";
-import { AMISTOSOS, NOME_FASE_SELECOES, nomeDoPais, paisDaSelecao, rankingDasSelecoes, tabelasDeSelecoes } from "../../engine/selecoes";
+import { AMISTOSOS, NOME_FASE_SELECOES, confederacao, nomeDoGrupoDeSelecoes, nomeDoPais, paisDaSelecao, rankingDasSelecoes, tabelasDeSelecoes } from "../../engine/selecoes";
 import type { Competicao, EstadoCompeticaoSelecoes, EstadoTorneio, FaseCopa, IdCopa, Partida, SerieId } from "../../engine/tipos";
 import { letraDoGrupo } from "../formatos";
 import { Escudo, Folha, Opcoes, Segmentado } from "../componentes";
@@ -266,7 +266,8 @@ function CopaDoBrasil() {
 /** Onde cada copa aparece no seletor. */
 const GRUPOS_DAS_COPAS: { grupo: DefinicaoCopa["grupo"]; rotulo: string }[] = [
   { grupo: "brasil", rotulo: "Brasil" }, { grupo: "conmebol", rotulo: "América do Sul" }, { grupo: "concacaf", rotulo: "Concacaf" },
-  { grupo: "uefa", rotulo: "Europa" }, { grupo: "nacional", rotulo: "Copas nacionais" },
+  { grupo: "uefa", rotulo: "Europa" }, { grupo: "afc", rotulo: "Ásia" }, { grupo: "mundial", rotulo: "Mundial" },
+  { grupo: "nacional", rotulo: "Copas nacionais" },
 ];
 
 /** Confrontos de uma fase do mata-mata (jogo único ou ida e volta, com o agregado). */
@@ -503,6 +504,12 @@ function Torneio({ t }: { t: EstadoTorneio }) {
 function nomeDaCompeticaoNoSeletor(c: EstadoCompeticaoSelecoes): string {
   if (c.tipo === "eliminatorias-sul") return `Eliminatórias da Copa de ${c.ano}`;
   if (c.tipo === "eliminatorias-concacaf") return `Eliminatórias da Concacaf (Copa de ${c.ano})`;
+  if (c.tipo === "eliminatorias-uefa") return `Eliminatórias da Europa (Copa de ${c.ano})`;
+  if (c.tipo === "eliminatorias-euro") return `Eliminatórias da Eurocopa de ${c.ano}`;
+  if (c.tipo === "eliminatorias-caf") return `Eliminatórias da África (Copa de ${c.ano})`;
+  if (c.tipo === "eliminatorias-afc") return `Eliminatórias da Ásia (Copa de ${c.ano})`;
+  if (c.tipo === "eliminatorias-ofc") return `Eliminatórias da Oceania (Copa de ${c.ano})`;
+  if (c.tipo === "repescagem-mundial") return `Repescagem mundial (Copa de ${c.ano})`;
   return `${c.nome} ${c.ano}`;
 }
 
@@ -510,6 +517,10 @@ function nomeDaCompeticaoNoSeletor(c: EstadoCompeticaoSelecoes): string {
 const FASES_SELECOES: Record<EstadoCompeticaoSelecoes["tipo"], string[]> = {
   "eliminatorias-sul": ["liga"], "eliminatorias-concacaf": ["fase1", "fase2", "fase3"],
   "copa-america": ["grupos", "quartas", "semi", "final"], "copa-ouro": ["grupos", "quartas", "semi", "final"],
+  "liga-das-nacoes": ["ligas", "semi", "final"], "eliminatorias-euro": ["grupos", "rep-semi", "rep-final"],
+  "eliminatorias-uefa": ["grupos", "rep-semi", "rep-final"], eurocopa: ["grupos", "oitavas", "quartas", "semi", "final"],
+  "eliminatorias-caf": ["grupos"], "eliminatorias-afc": ["grupos"], "eliminatorias-ofc": ["grupos"], "repescagem-mundial": ["rep-semi", "rep-final"],
+  "copa-do-mundo": ["grupos", "dezesseis", "oitavas", "quartas", "semi", "final"],
 };
 
 /** A regra de cada fase, embaixo dos jogos. */
@@ -518,6 +529,15 @@ function regraDaFaseDeSelecoes(c: EstadoCompeticaoSelecoes, fase: string): strin
   if (fase === "fase1") return "Os 4 piores do ranking em ida e volta; os 2 vencedores vão à 2ª fase.";
   if (fase === "fase2") return "6 grupos de 5 em turno único; os primeiros e os 3 melhores segundos vão à 3ª fase (com os 3 melhores do ranking).";
   if (fase === "fase3") return "3 grupos de 4 em turno e returno; os primeiros vão à Copa do Mundo e os 2 melhores segundos, à repescagem.";
+  if (fase === "ligas") return "4 ligas (A, B e C com 4 grupos de 4; D com 2 grupos), turno e returno. Os primeiros dos grupos da Liga A decidem o título em junho do ano seguinte; os primeiros das outras sobem de liga e os últimos descem.";
+  if (c.tipo === "eliminatorias-euro" && fase === "grupos") return `10 grupos de 5 ou 6, turno e returno. Os 2 primeiros vão à Eurocopa; os terceiros e os 2 melhores quartos, à repescagem de março (3 vagas).${c.sede ? ` A sede, ${nomeDoPais(paisDaSelecao(c.sede))}, já está classificada.` : ""}`;
+  if (c.tipo === "eliminatorias-uefa" && fase === "grupos") return "12 grupos de 4 ou 5, turno e returno. Os primeiros vão à Copa do Mundo; os segundos e os 4 melhores terceiros, à repescagem de março (4 vagas).";
+  if (c.tipo === "eurocopa" && fase === "grupos") return `6 grupos de 4 em turno único; os 2 primeiros e os 4 melhores terceiros vão às oitavas. ${c.sede ? `Sede: ${nomeDoPais(paisDaSelecao(c.sede))} (os outros jogos em campo neutro).` : ""}`;
+  if (c.tipo === "eliminatorias-caf" || c.tipo === "eliminatorias-afc") return `${c.tipo === "eliminatorias-caf" ? 9 : 8} grupos, turno e returno. Os primeiros vão à Copa do Mundo; o melhor segundo, à repescagem mundial.`;
+  if (c.tipo === "eliminatorias-ofc") return "2 grupos, turno e returno. O melhor primeiro vai à Copa do Mundo; o outro primeiro, à repescagem mundial.";
+  if (c.tipo === "repescagem-mundial") return "6 seleções em campo neutro: as 2 melhores do ranking esperam na final; as outras 4 jogam a semifinal. Os 2 vencedores das finais vão à Copa do Mundo. Jogo único, empate vai para os pênaltis.";
+  if (c.tipo === "copa-do-mundo" && fase === "grupos") return `48 seleções em 12 grupos de 4, turno único; os 2 primeiros e os 8 melhores terceiros vão aos 16 avos de final. Sedes: ${(c.sedes ?? [c.sede!]).map((id) => nomeDoPais(paisDaSelecao(id))).join(", ")} (os outros jogos em campo neutro).`;
+  if (fase === "rep-semi" || fase === "rep-final") return "Jogo único na casa de quem foi melhor nos grupos; empate vai para os pênaltis. Quem vence a final da repescagem fica com a vaga.";
   if (fase === "grupos") return `4 grupos de 4 em turno único; os 2 primeiros vão às quartas. ${c.sede ? `Sede: ${nomeDoPais(paisDaSelecao(c.sede))} (os outros jogos em campo neutro).` : ""}`;
   return "Jogo único; empate vai para os pênaltis.";
 }
@@ -528,11 +548,16 @@ function CompeticaoDeSelecoes({ c }: { c: EstadoCompeticaoSelecoes }) {
   const minha = estado.tecnico.selecao;
   const fases = FASES_SELECOES[c.tipo].filter((f) => estado.partidas.some((p) => p.serie === c.id && p.fase === f));
   const [fase, setFase] = useState(fases.includes(c.fase) ? c.fase : fases.at(-1) ?? FASES_SELECOES[c.tipo][0]);
-  const tabelas = fase === "liga" || fase.startsWith("fase2") || fase === "fase3" || fase === "grupos" ? tabelasDeSelecoes(estado, c.id, fase) : [];
+  const tabelas = fase === "liga" || fase.startsWith("fase2") || fase === "fase3" || fase === "grupos" || fase === "ligas" ? tabelasDeSelecoes(estado, c.id, fase) : [];
   const meuGrupo = Math.max(0, tabelas.findIndex((t) => t.some((l) => l.clubeId === minha)));
   const [grupo, setGrupo] = useState(meuGrupo);
   const zona = (pos: number) => {
     if (fase === "liga") return pos <= 6 ? "classifica" : pos === 7 ? "playoff" : "";
+    if (fase === "ligas") return pos === 1 ? "classifica" : "";
+    if (c.tipo === "eliminatorias-euro") return pos <= 2 ? "classifica" : pos === 3 ? "playoff" : "";
+    if (c.tipo === "eliminatorias-uefa") return pos === 1 ? "classifica" : pos === 2 ? "playoff" : "";
+    if (c.tipo === "eurocopa" || c.tipo === "copa-do-mundo") return pos <= 2 ? "classifica" : pos === 3 ? "playoff" : "";
+    if (c.tipo === "eliminatorias-caf" || c.tipo === "eliminatorias-afc" || c.tipo === "eliminatorias-ofc") return pos === 1 ? "classifica" : pos === 2 ? "playoff" : "";
     if (fase === "grupos") return pos <= 2 ? "classifica" : "";
     return pos === 1 ? "classifica" : pos === 2 ? "playoff" : "";
   };
@@ -542,7 +567,10 @@ function CompeticaoDeSelecoes({ c }: { c: EstadoCompeticaoSelecoes }) {
   return (
     <>
       {c.campeao && <p className="chip amarelo">Campeão: {nome(c.campeao)}</p>}
-      {c.classificados && <p className="pequeno">Vão à Copa do Mundo de {c.ano}: {c.classificados.map(nome).join(", ")}.{c.repescagem?.length ? ` Repescagem: ${c.repescagem.map(nome).join(" e ")}.` : ""}</p>}
+      {c.fase === "aguardando" && (
+        <p className="pequeno">Classificadas ({c.selecoes.length} de 48, com as sedes): {c.selecoes.map(nome).join(", ")}. Os grupos são sorteados quando as repescagens de março acabam.</p>
+      )}
+      {c.classificados && <p className="pequeno">Vão à {c.tipo === "eliminatorias-euro" ? "Eurocopa" : "Copa do Mundo"} de {c.ano}: {c.classificados.map(nome).join(", ")}.{c.repescagem?.length ? ` Repescagem: ${c.repescagem.map(nome).join(" e ")}.` : ""}</p>}
       {fases.length > 1 && <Opcoes opcoes={fases.map((f) => ({ valor: f, rotulo: NOME_FASE_SELECOES[f] ?? f }))} valor={fase} aoMudar={(f) => { setFase(f); setGrupo(0); }} />}
       {!fases.length && <p className="vazio">Os jogos ainda não foram marcados.</p>}
       <p className="mini muito-fraco">{regraDaFaseDeSelecoes(c, fase)}</p>
@@ -550,12 +578,12 @@ function CompeticaoDeSelecoes({ c }: { c: EstadoCompeticaoSelecoes }) {
         <>
           {muitos && (
             <select value={grupo} onChange={(e) => setGrupo(Number(e.target.value))} aria-label="Grupo">
-              {tabelas.map((t, i) => <option key={i} value={i}>Grupo {letraDoGrupo(i + 1)}{t.some((l) => l.clubeId === minha) ? " (sua seleção)" : ""}</option>)}
+              {tabelas.map((t, i) => <option key={i} value={i}>{nomeDoGrupoDeSelecoes(c.id, i + 1)}{t.some((l) => l.clubeId === minha) ? " (sua seleção)" : ""}</option>)}
             </select>
           )}
           {visiveis.map((g) => (
             <div key={g} className="cartao compacto">
-              {tabelas.length > 1 && <h3 className="pequeno fraco" style={{ marginBottom: 6 }}>Grupo {letraDoGrupo(g + 1)}</h3>}
+              {tabelas.length > 1 && <h3 className="pequeno fraco" style={{ marginBottom: 6 }}>{nomeDoGrupoDeSelecoes(c.id, g + 1)}</h3>}
               <TabelaClassificacao linhas={tabelas[g]} zona={zona} meu={minha} rotulo="Seleção" />
             </div>
           ))}
@@ -566,19 +594,27 @@ function CompeticaoDeSelecoes({ c }: { c: EstadoCompeticaoSelecoes }) {
   );
 }
 
-/** O ranking das seleções da América (pontos do tipo Elo, que mudam a cada jogo). */
+/** O ranking das seleções (pontos do tipo Elo, que mudam a cada jogo): todas, só as da América ou só as da Europa. */
 function RankingDasSelecoes() {
   const estado = useJogo();
   const minha = estado.tecnico.selecao;
+  const [onde, setOnde] = useState<"mundo" | "america" | "europa" | "africa" | "asia">("mundo");
+  const continente = (id: string) => {
+    const c = confederacao(paisDaSelecao(id));
+    return c === "uefa" ? "europa" : c === "caf" ? "africa" : c === "afc" || c === "ofc" ? "asia" : "america";
+  };
+  const lista = rankingDasSelecoes(estado).filter((s) => onde === "mundo" || continente(s.id) === onde);
   return (
     <>
+      <Opcoes opcoes={[{ valor: "mundo", rotulo: "Todas" }, { valor: "america", rotulo: "América" }, { valor: "europa", rotulo: "Europa" },
+        { valor: "africa", rotulo: "África" }, { valor: "asia", rotulo: "Ásia e Oceania" }]} valor={onde} aoMudar={setOnde} />
       <p className="mini muito-fraco">Os pontos mudam a cada jogo: vencer um time mais forte vale mais, e os jogos oficiais valem mais que os amistosos.</p>
       <div className="lista">
-        {rankingDasSelecoes(estado).map((s) => {
+        {lista.map((s, i) => {
           const c = estado.clubes[s.id];
           return (
             <div key={s.id} className={`item${s.id === minha ? " meu" : ""}`}>
-              <span className="colocacao num">{s.pos}º</span>
+              <span className="colocacao num">{i + 1}º</span>
               <Escudo clube={c} tamanho={24} />
               <span className="cresce pequeno negrito corta">{c.nome}</span>
               <span className="num pequeno">{s.pontos}</span>
@@ -610,12 +646,12 @@ function AmistososDoAno() {
   );
 }
 
-/** Seleções: o ranking, as competições (Eliminatórias, Copa América, Copa Ouro) e os amistosos. */
+/** Seleções: o ranking, as competições (Eliminatórias, Copa América, Copa Ouro, Liga das Nações, Eurocopa) e os amistosos. */
 function Selecoes() {
   const estado = useJogo();
   const minha = estado.tecnico.selecao;
   const comps = Object.values(estado.selecoes?.competicoes ?? {}).filter((c): c is EstadoCompeticaoSelecoes => !!c)
-    .sort((a, b) => a.ano - b.ano || a.id.localeCompare(b.id));
+    .sort((a, b) => a.ano - b.ano || (b.tipo === "copa-do-mundo" ? 1 : 0) - (a.tipo === "copa-do-mundo" ? 1 : 0) || a.id.localeCompare(b.id));
   // Abre na competição do próximo jogo da seleção do técnico; senão, no ranking.
   const proximo = minha ? estado.partidas.find((p) => !p.jogada && p.serie.startsWith("S-") && (p.mandante === minha || p.visitante === minha)) : undefined;
   const [qual, setQual] = useState<string>(proximo?.serie ?? "ranking");

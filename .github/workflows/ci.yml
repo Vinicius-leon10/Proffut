@@ -1,12 +1,15 @@
 name: Testes
 
+# Os testes do motor e os de tela rodam ao mesmo tempo, em máquinas separadas: os de tela em 3 partes (--shard),
+# cada uma com um terço dos testes. Nenhum teste fica de fora: o workflow só fica verde com as 4 máquinas verdes.
 on:
   push:
     branches-ignore: [gh-pages, dados-elencos, dados-times, dados-segundas, dados-america]
   pull_request:
 
 jobs:
-  testes:
+  motor:
+    name: Testes do motor
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -17,13 +20,28 @@ jobs:
       - run: npm ci
       - name: Testes do motor
         run: npm test
+
+  tela:
+    name: Testes de tela (parte ${{ matrix.parte }} de 3)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        parte: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
       - name: Verificação de tipos e geração do site
         run: npm run build
       - run: npx playwright install --with-deps chromium
       - name: Testes de ponta a ponta (tela de iPhone, inclusive sem internet)
-        run: npm run test:e2e
+        run: npx playwright test --shard=${{ matrix.parte }}/3
       - uses: actions/upload-artifact@v7
         if: always()
         with:
-          name: testes
+          name: testes-parte-${{ matrix.parte }}
           path: tests/resultado/

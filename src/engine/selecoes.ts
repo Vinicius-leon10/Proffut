@@ -29,6 +29,8 @@ import { criarJogador, limitar } from "./gerador";
 import { enviarMensagem } from "./mensagens";
 import { melhorEmCampo, notasDaPartida } from "./notas";
 import { disputarPenaltis, eventosParaGuardar, type PartidaViva } from "./partida";
+import { emojiDaBandeira } from "./nacionalidades";
+import { SELECOES_MUNDO, type ConfederacaoMundo } from "./selecoes-mundo";
 import { hashTexto, rngPara, type Rng } from "./rng";
 import { PAISES } from "./torneios";
 import type {
@@ -43,9 +45,11 @@ export const idSelecao = (pais: string) => `${PREFIXO_SELECAO}${pais}`;
 export const ehSelecao = (id: string | null | undefined): boolean => !!id?.startsWith(PREFIXO_SELECAO);
 export const paisDaSelecao = (id: string) => id.slice(PREFIXO_SELECAO.length);
 
-type Confederacao = "conmebol" | "concacaf";
+export type Confederacao = "conmebol" | "concacaf" | "uefa" | ConfederacaoMundo;
 
 interface DadosSelecao {
+  /** As da Europa, África, Ásia e Oceania dizem a confederação; as da América, pela região do país. */
+  conf?: "uefa" | ConfederacaoMundo;
   /** Sigla da FIFA (a do placar). */
   sigla: string;
   cores: [string, string];
@@ -111,24 +115,122 @@ export const DADOS_SELECOES: Record<string, DadosSelecao> = {
   TC: { sigla: "TCA", cores: ["#00247D", "#FFFFFF"], estadio: ["TCIFA National Academy", 3_000, "Providenciales"], elo: 760 },
 };
 
-/** Os países das seleções, na ordem da lista (Conmebol primeiro). */
+/**
+ * As 55 seleções da UEFA (nov/2026, pedido "Vamos começar a Europa" → "Tudo, nessa ordem": seleções, 2ª divisão, outros
+ * países). Os 7 países com liga no jogo usam o código da liga (EN, ES, IT, DE, FR, PT, NL); os outros, o código de duas
+ * letras do país (Escócia, País de Gales e Irlanda do Norte: XS, XW e XN, que não são de nenhum país).
+ */
+const DADOS_EUROPA: Record<string, DadosSelecao> = {
+  ES: { sigla: "ESP", cores: ["#C60B1E", "#FFC400"], estadio: ["Santiago Bernabéu", 83_186, "Madri"], elo: 2150 },
+  FR: { sigla: "FRA", cores: ["#002395", "#FFFFFF"], estadio: ["Stade de France", 80_698, "Saint-Denis"], elo: 2080 },
+  EN: { sigla: "ENG", cores: ["#FFFFFF", "#00247D"], estadio: ["Wembley", 90_000, "Londres"], elo: 2040 },
+  PT: { sigla: "POR", cores: ["#C8102E", "#006600"], estadio: ["Estádio da Luz", 64_642, "Lisboa"], elo: 2020 },
+  DE: { sigla: "GER", cores: ["#FFFFFF", "#000000"], estadio: ["Allianz Arena", 75_000, "Munique"], elo: 1990 },
+  NL: { sigla: "NED", cores: ["#F36C21", "#FFFFFF"], estadio: ["Johan Cruijff Arena", 55_865, "Amsterdã"], elo: 1990 },
+  IT: { sigla: "ITA", cores: ["#0066B2", "#FFFFFF"], estadio: ["Olímpico", 70_634, "Roma"], elo: 1930 },
+  HR: { sigla: "CRO", cores: ["#FF0000", "#FFFFFF"], estadio: ["Maksimir", 24_851, "Zagreb"], elo: 1930 },
+  NO: { sigla: "NOR", cores: ["#BA0C2F", "#00205B"], estadio: ["Ullevaal", 27_182, "Oslo"], elo: 1920 },
+  BE: { sigla: "BEL", cores: ["#E30613", "#000000"], estadio: ["Rei Balduíno", 50_093, "Bruxelas"], elo: 1900 },
+  CH: { sigla: "SUI", cores: ["#D52B1E", "#FFFFFF"], estadio: ["Wankdorf", 31_783, "Berna"], elo: 1900 },
+  DK: { sigla: "DEN", cores: ["#C60C30", "#FFFFFF"], estadio: ["Parken", 38_065, "Copenhague"], elo: 1890 },
+  TR: { sigla: "TUR", cores: ["#E30A17", "#FFFFFF"], estadio: ["Olímpico Atatürk", 74_753, "Istambul"], elo: 1880 },
+  AT: { sigla: "AUT", cores: ["#ED2939", "#FFFFFF"], estadio: ["Ernst Happel", 50_865, "Viena"], elo: 1850 },
+  UA: { sigla: "UKR", cores: ["#FFD500", "#005BBB"], estadio: ["Olímpico de Kiev", 70_050, "Kiev"], elo: 1800 },
+  RU: { sigla: "RUS", cores: ["#D52B1E", "#FFFFFF"], estadio: ["Lujniki", 78_011, "Moscou"], elo: 1780 },
+  XS: { sigla: "SCO", cores: ["#0A1F44", "#FFFFFF"], estadio: ["Hampden Park", 51_866, "Glasgow"], elo: 1790 },
+  RS: { sigla: "SRB", cores: ["#C6363C", "#0C4076"], estadio: ["Rajko Mitić", 51_755, "Belgrado"], elo: 1790 },
+  GR: { sigla: "GRE", cores: ["#0D5EAF", "#FFFFFF"], estadio: ["Olímpico de Atenas", 69_618, "Atenas"], elo: 1790 },
+  HU: { sigla: "HUN", cores: ["#CE2939", "#FFFFFF"], estadio: ["Puskás Aréna", 67_215, "Budapeste"], elo: 1760 },
+  PL: { sigla: "POL", cores: ["#FFFFFF", "#DC143C"], estadio: ["Nacional de Varsóvia", 58_580, "Varsóvia"], elo: 1760 },
+  CZ: { sigla: "CZE", cores: ["#D7141A", "#11457E"], estadio: ["Fortuna Arena", 19_370, "Praga"], elo: 1760 },
+  SE: { sigla: "SWE", cores: ["#FECC02", "#006AA7"], estadio: ["Strawberry Arena", 50_653, "Solna"], elo: 1740 },
+  XW: { sigla: "WAL", cores: ["#C8102E", "#00B140"], estadio: ["Cardiff City Stadium", 33_280, "Cardiff"], elo: 1740 },
+  SK: { sigla: "SVK", cores: ["#0B4EA2", "#FFFFFF"], estadio: ["Tehelné pole", 22_500, "Bratislava"], elo: 1730 },
+  SI: { sigla: "SVN", cores: ["#FFFFFF", "#005DA4"], estadio: ["Stožice", 16_038, "Liubliana"], elo: 1720 },
+  IE: { sigla: "IRL", cores: ["#169B62", "#FFFFFF"], estadio: ["Aviva Stadium", 51_700, "Dublin"], elo: 1720 },
+  RO: { sigla: "ROU", cores: ["#FCD116", "#002B7F"], estadio: ["Arena Nacional", 55_634, "Bucareste"], elo: 1720 },
+  AL: { sigla: "ALB", cores: ["#E41E20", "#000000"], estadio: ["Arena Kombëtare", 22_500, "Tirana"], elo: 1700 },
+  GE: { sigla: "GEO", cores: ["#FFFFFF", "#E8112D"], estadio: ["Boris Paichadze", 54_202, "Tbilisi"], elo: 1690 },
+  XK: { sigla: "KOS", cores: ["#244AA5", "#D0A650"], estadio: ["Fadil Vokrri", 13_980, "Pristina"], elo: 1680 },
+  IL: { sigla: "ISR", cores: ["#0038B8", "#FFFFFF"], estadio: ["Sammy Ofer", 30_780, "Haifa"], elo: 1650 },
+  BA: { sigla: "BIH", cores: ["#002395", "#FECB00"], estadio: ["Bilino Polje", 13_862, "Zenica"], elo: 1650 },
+  MK: { sigla: "MKD", cores: ["#D20000", "#FFE600"], estadio: ["Toše Proeski", 33_011, "Escópia"], elo: 1640 },
+  IS: { sigla: "ISL", cores: ["#02529C", "#FFFFFF"], estadio: ["Laugardalsvöllur", 9_800, "Reykjavik"], elo: 1620 },
+  XN: { sigla: "NIR", cores: ["#00703C", "#FFFFFF"], estadio: ["Windsor Park", 18_434, "Belfast"], elo: 1620 },
+  FI: { sigla: "FIN", cores: ["#FFFFFF", "#003580"], estadio: ["Olímpico de Helsinque", 36_251, "Helsinque"], elo: 1600 },
+  ME: { sigla: "MNE", cores: ["#C40308", "#D4AF37"], estadio: ["Estádio de Podgorica", 11_080, "Podgorica"], elo: 1560 },
+  BY: { sigla: "BLR", cores: ["#CF101A", "#007C30"], estadio: ["Dinamo", 22_246, "Minsk"], elo: 1540 },
+  BG: { sigla: "BUL", cores: ["#FFFFFF", "#00966E"], estadio: ["Vasil Levski", 43_230, "Sófia"], elo: 1520 },
+  KZ: { sigla: "KAZ", cores: ["#00AFCA", "#FEC50C"], estadio: ["Astana Arena", 30_244, "Astana"], elo: 1500 },
+  AM: { sigla: "ARM", cores: ["#D90012", "#0033A0"], estadio: ["Vazgen Sargsyan", 14_403, "Erevan"], elo: 1490 },
+  LU: { sigla: "LUX", cores: ["#ED2939", "#00A1DE"], estadio: ["Stade de Luxembourg", 9_386, "Luxemburgo"], elo: 1480 },
+  AZ: { sigla: "AZE", cores: ["#0092BC", "#E4002B"], estadio: ["Olímpico de Baku", 68_700, "Baku"], elo: 1420 },
+  FO: { sigla: "FRO", cores: ["#FFFFFF", "#005EB8"], estadio: ["Tórsvøllur", 6_500, "Tórshavn"], elo: 1420 },
+  CY: { sigla: "CYP", cores: ["#004B9B", "#FFFFFF"], estadio: ["AEK Arena", 7_400, "Larnaca"], elo: 1410 },
+  EE: { sigla: "EST", cores: ["#0072CE", "#000000"], estadio: ["Lilleküla", 14_336, "Tallinn"], elo: 1400 },
+  LV: { sigla: "LVA", cores: ["#9E3039", "#FFFFFF"], estadio: ["Daugava", 10_461, "Riga"], elo: 1390 },
+  LT: { sigla: "LTU", cores: ["#FDB913", "#006A44"], estadio: ["Darius e Girėnas", 15_026, "Kaunas"], elo: 1380 },
+  MD: { sigla: "MDA", cores: ["#0046AE", "#FFD200"], estadio: ["Zimbru", 10_400, "Chisinau"], elo: 1340 },
+  MT: { sigla: "MLT", cores: ["#CF142B", "#FFFFFF"], estadio: ["Ta' Qali", 16_997, "Ta' Qali"], elo: 1300 },
+  AD: { sigla: "AND", cores: ["#D0103A", "#FEDF00"], estadio: ["Nacional de Andorra", 3_306, "Andorra-a-Velha"], elo: 1200 },
+  GI: { sigla: "GIB", cores: ["#DA000C", "#FFFFFF"], estadio: ["Europa Point", 2_000, "Gibraltar"], elo: 1050 },
+  LI: { sigla: "LIE", cores: ["#002B7F", "#CE1126"], estadio: ["Rheinpark", 7_584, "Vaduz"], elo: 1020 },
+  SM: { sigla: "SMR", cores: ["#5EB6E4", "#FFFFFF"], estadio: ["Olímpico de San Marino", 6_664, "Serravalle"], elo: 880 },
+};
+for (const d of Object.values(DADOS_EUROPA)) d.conf = "uefa";
+Object.assign(DADOS_SELECOES, DADOS_EUROPA);
+// África, Ásia e Oceania (selecoes-mundo.ts): o estádio nacional na capital, maior nas mais fortes.
+for (const [pais, [, , sigla, cor1, cor2, capital, elo, conf]] of Object.entries(SELECOES_MUNDO)) {
+  const capacidade = Math.round(limitar(10_000 + (elo - 800) * 45, 8_000, 70_000) / 1_000) * 1_000;
+  DADOS_SELECOES[pais] = { sigla, cores: [cor1, cor2], estadio: ["Estádio Nacional", capacidade, capital], elo, conf };
+}
+
+/** Países da Europa que só têm a seleção no jogo (sem liga): nome e nacionalidade dos jogadores (código do jogo). */
+const PAISES_SO_COM_SELECAO: Record<string, { pais: string; nacionalidade: string }> = {
+  HR: { pais: "Croácia", nacionalidade: "CRO" }, NO: { pais: "Noruega", nacionalidade: "NOR" }, BE: { pais: "Bélgica", nacionalidade: "BEL" },
+  CH: { pais: "Suíça", nacionalidade: "SUI" }, DK: { pais: "Dinamarca", nacionalidade: "DIN" }, TR: { pais: "Turquia", nacionalidade: "TUR" },
+  AT: { pais: "Áustria", nacionalidade: "AUT" }, UA: { pais: "Ucrânia", nacionalidade: "UCR" }, RU: { pais: "Rússia", nacionalidade: "RUS" },
+  XS: { pais: "Escócia", nacionalidade: "ESC" }, RS: { pais: "Sérvia", nacionalidade: "SRB" }, GR: { pais: "Grécia", nacionalidade: "GRE" },
+  HU: { pais: "Hungria", nacionalidade: "HUN" }, PL: { pais: "Polônia", nacionalidade: "POL" }, CZ: { pais: "Tchéquia", nacionalidade: "TCH" },
+  SE: { pais: "Suécia", nacionalidade: "SUE" }, XW: { pais: "País de Gales", nacionalidade: "GAL" }, SK: { pais: "Eslováquia", nacionalidade: "SVK" },
+  SI: { pais: "Eslovênia", nacionalidade: "SVN" }, IE: { pais: "Irlanda", nacionalidade: "IRL" }, RO: { pais: "Romênia", nacionalidade: "ROU" },
+  AL: { pais: "Albânia", nacionalidade: "ALB" }, GE: { pais: "Geórgia", nacionalidade: "GEO" }, XK: { pais: "Kosovo", nacionalidade: "KOS" },
+  IL: { pais: "Israel", nacionalidade: "ISR" }, BA: { pais: "Bósnia", nacionalidade: "BIH" }, MK: { pais: "Macedônia do Norte", nacionalidade: "MKD" },
+  IS: { pais: "Islândia", nacionalidade: "ISL" }, XN: { pais: "Irlanda do Norte", nacionalidade: "NIR" }, FI: { pais: "Finlândia", nacionalidade: "FIN" },
+  ME: { pais: "Montenegro", nacionalidade: "MNE" }, BY: { pais: "Belarus", nacionalidade: "BLR" }, BG: { pais: "Bulgária", nacionalidade: "BUL" },
+  KZ: { pais: "Cazaquistão", nacionalidade: "CAZ" }, AM: { pais: "Armênia", nacionalidade: "ARM" }, LU: { pais: "Luxemburgo", nacionalidade: "LUX" },
+  AZ: { pais: "Azerbaijão", nacionalidade: "AZE" }, FO: { pais: "Ilhas Faroé", nacionalidade: "FRO" }, CY: { pais: "Chipre", nacionalidade: "CYP" },
+  EE: { pais: "Estônia", nacionalidade: "EST" }, LV: { pais: "Letônia", nacionalidade: "LVA" }, LT: { pais: "Lituânia", nacionalidade: "LTU" },
+  MD: { pais: "Moldávia", nacionalidade: "MDA" }, MT: { pais: "Malta", nacionalidade: "MLT" }, AD: { pais: "Andorra", nacionalidade: "AND" },
+  GI: { pais: "Gibraltar", nacionalidade: "GIB" }, LI: { pais: "Liechtenstein", nacionalidade: "LIE" }, SM: { pais: "San Marino", nacionalidade: "SMR" },
+};
+
+/** Os países das seleções, na ordem da lista (Conmebol primeiro, depois a Concacaf e a Europa). */
 export const PAISES_SELECOES = Object.keys(DADOS_SELECOES);
 
 export function confederacao(pais: string): Confederacao {
+  const conf = DADOS_SELECOES[pais]?.conf;
+  if (conf) return conf;
   return pais === "BR" || PAISES[pais]?.regiao === "sul" ? "conmebol" : "concacaf";
 }
 
+/** A seleção é da Europa? (pelo id: "sel-FR"). */
+export const ehDaEuropa = (selId: string) => confederacao(paisDaSelecao(selId)) === "uefa";
+
 export function nomeDoPais(pais: string): string {
-  return pais === "BR" ? "Brasil" : PAISES[pais]?.pais ?? pais;
+  return pais === "BR" ? "Brasil" : PAISES[pais]?.pais ?? PAISES_SO_COM_SELECAO[pais]?.pais ?? SELECOES_MUNDO[pais]?.[0] ?? pais;
 }
 
 /** Nacionalidade dos jogadores do país (o código de 3 letras do jogo: "BRA", "ARG", "EUA"...). */
 export function nacionalidadeDoPais(pais: string): string {
-  return pais === "BR" ? "BRA" : PAISES[pais]?.nacionalidade ?? pais;
+  return pais === "BR" ? "BRA" : PAISES[pais]?.nacionalidade ?? PAISES_SO_COM_SELECAO[pais]?.nacionalidade ?? SELECOES_MUNDO[pais]?.[1] ?? pais;
 }
 
 /** Bandeira do país pelo código de duas letras (as letras viram os "indicadores regionais" do emoji: BR → 🇧🇷). */
 export function bandeira(codigo: string): string {
+  // Inglaterra, Escócia e País de Gales têm bandeira própria; a Irlanda do Norte usa a do Reino Unido.
+  const propria = { EN: "ENG", XS: "SCT", XW: "WLS", XN: "GB" }[codigo.toUpperCase()];
+  if (propria) return emojiDaBandeira(propria);
   return String.fromCodePoint(...[...codigo.toUpperCase()].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65));
 }
 
@@ -160,6 +262,10 @@ const PAIS_DO_CLUBE: Record<string, string> = {
   SVK: "Eslováquia", SWE: "Suécia", SXM: "São Martinho", TCA: "Turks e Caicos", THA: "Tailândia", TRI: "Trinidad e Tobago",
   TTO: "Trinidad e Tobago", TUR: "Turquia", UAE: "Emirados Árabes", UKR: "Ucrânia", USA: "Estados Unidos", VEN: "Venezuela",
   VIR: "Ilhas Virgens Americanas", WAL: "País de Gales",
+  AND: "Andorra", ARM: "Armênia", AUS: "Austrália", CHN: "China", EGY: "Egito", EST: "Estônia", FRO: "Ilhas Faroé", GEO: "Geórgia",
+  IRL: "Irlanda", IRN: "Irã", ISL: "Islândia", JPN: "Japão", KAZ: "Cazaquistão", KOR: "Coreia do Sul", KOS: "Kosovo", LIE: "Liechtenstein",
+  LTU: "Lituânia", MAR: "Marrocos", MKD: "Macedônia do Norte", MNE: "Montenegro", NOR: "Noruega", QAT: "Catar", SMR: "San Marino",
+  SVN: "Eslovênia", RSA: "África do Sul", UZB: "Uzbequistão", IND: "Índia", MAS: "Malásia", SIN: "Singapura", VIE: "Vietnã",
 };
 
 /** Clubes grandes da Europa: quem joga neles é dos melhores da seleção. */
@@ -232,13 +338,19 @@ export const CONVOCADOS_POR_SELECAO = Object.values(CONVOCACAO).reduce((a, b) =>
  * (a base de fora de cada uma), a nacionalidade e os jogos pela seleção de quem foi convocado e joga num clube do jogo, a
  * primeira convocação (a de verdade) e o ranking.
  */
-export function criarSelecoes(estado: EstadoJogo) {
-  if (estado.selecoes) return;
+export function criarSelecoes(estado: EstadoJogo): string[] {
+  // As que faltam: todas no jogo novo e no save de antes das seleções; só as da Europa no save de antes delas.
+  const novos = PAISES_SELECOES.filter((p) => !estado.clubes[idSelecao(p)] || !estado.selecoes?.convocados[idSelecao(p)]);
+  if (!novos.length) return [];
   const elencos = new Map<string, Jogador[]>();
-  for (const j of Object.values(estado.jogadores)) if (j.clubeId) elencos.set(j.clubeId, [...(elencos.get(j.clubeId) ?? []), j]);
-  const sel: EstadoSelecoes = { ranking: {}, convocados: {}, concentradas: [], competicoes: {}, agenda: [], base: {} };
-  estado.selecoes = sel;
-  for (const pais of PAISES_SELECOES) {
+  for (const j of Object.values(estado.jogadores)) {
+    if (!j.clubeId) continue;
+    const lista = elencos.get(j.clubeId);
+    if (lista) lista.push(j);
+    else elencos.set(j.clubeId, [j]);
+  }
+  const sel: EstadoSelecoes = estado.selecoes ??= { ranking: {}, convocados: {}, concentradas: [], competicoes: {}, agenda: [], base: {} };
+  for (const pais of novos) {
     const id = idSelecao(pais);
     const rng = rngPara(estado.semente, `selecao/${pais}`);
     estado.clubes[id] = criarClubeSelecao(pais);
@@ -279,12 +391,12 @@ export function criarSelecoes(estado: EstadoJogo) {
     sel.base[id] = base;
     sel.convocados[id] = convocados;
   }
-  completarBases(estado, "inicio");
+  completarBases(estado, "inicio", novos, new Set(novos.filter((p) => sel.convocados[idSelecao(p)].length < CONVOCADOS_POR_SELECAO)));
   // Quem não tem a convocação de verdade (ou tem menos de 23) completa com os melhores; listas compridas demais (a página
   // do Uruguai traz 42) ficam com os 26 melhores.
   const porNacionalidade = agruparPorNacionalidade(estado);
-  sel.primeiraConvocacao = PAISES_SELECOES.map(idSelecao);
-  for (const pais of PAISES_SELECOES) {
+  sel.primeiraConvocacao = [...(sel.primeiraConvocacao ?? []), ...novos.map(idSelecao)];
+  for (const pais of novos) {
     const id = idSelecao(pais);
     if (sel.convocados[id].length > CONVOCADOS_POR_SELECAO + 3) {
       sel.convocados[id] = sel.convocados[id].map((x) => estado.jogadores[x]).sort((a, b) => notaDeConvocacao(b) - notaDeConvocacao(a) || a.id - b.id)
@@ -296,17 +408,18 @@ export function criarSelecoes(estado: EstadoJogo) {
     }
     estado.clubes[id].escalacao = escalarAutomatico(elencoDaSelecao(estado, id), estado.clubes[id].tatica.formacao, estado.clubes[id].tatica.jogadas, true);
   }
+  return novos.map(idSelecao);
 }
 
 /**
  * Mantém a base de fora de cada seleção: quem se aposentou dá lugar a um jovem de fora (o mesmo número por posição que
  * havia no começo) e nenhuma posição fica com menos que o mínimo à disposição (base de fora mais os dos clubes do jogo).
  */
-export function completarBases(estado: EstadoJogo, chave: string) {
+export function completarBases(estado: EstadoJogo, chave: string, paises: string[] = PAISES_SELECOES, curtas = new Set<string>()) {
   const sel = estado.selecoes;
   if (!sel) return;
   const porNacionalidade = agruparPorNacionalidade(estado);
-  for (const pais of PAISES_SELECOES) {
+  for (const pais of paises) {
     const id = idSelecao(pais);
     const rng = rngPara(estado.semente, `base-selecao/${pais}/${chave}`);
     const nivel = nivelPeloElo(sel.ranking[id] ?? DADOS_SELECOES[pais].elo);
@@ -325,12 +438,14 @@ export function completarBases(estado: EstadoJogo, chave: string) {
       estado.jogadores[j.id] = j;
       disponiveis.push(j);
     };
+    // Sem a convocação de verdade (ou com menos de 23), a seleção precisa de gente para uma convocação inteira.
+    const minimo = curtas.has(pais) || (CONVOCADOS_2026[pais]?.convocados.length ?? 0) < CONVOCADOS_POR_SELECAO ? CONVOCACAO : MINIMO_NA_SELECAO;
     for (const posicao of Object.keys(MINIMO_NA_SELECAO) as Posicao[]) {
       const naBase = disponiveis.filter((j) => j.clubeId === id && j.posicao === posicao).length;
       for (let i = naBase; i < (sel.base[id]?.[posicao] ?? 0); i++) criar(posicao, true);
       // Só contam os dos clubes que chegariam perto do nível da seleção.
       const aproveitaveis = disponiveis.filter((j) => j.posicao === posicao && (j.clubeId === id || j.forca >= nivel - 15)).length;
-      for (let i = aproveitaveis; i < MINIMO_NA_SELECAO[posicao]; i++) criar(posicao, false);
+      for (let i = aproveitaveis; i < minimo[posicao]; i++) criar(posicao, false);
     }
     porNacionalidade.set(nacionalidade, disponiveis);
   }
@@ -413,19 +528,50 @@ const DATAS_TORNEIO: Record<string, [number, Dia]> = {
 
 const NOMES: Record<TipoCompeticaoSelecoes, string> = {
   "eliminatorias-sul": "Eliminatórias", "eliminatorias-concacaf": "Eliminatórias da Concacaf", "copa-america": "Copa América",
-  "copa-ouro": "Copa Ouro",
+  "copa-ouro": "Copa Ouro", "liga-das-nacoes": "Liga das Nações", "eliminatorias-euro": "Eliminatórias da Eurocopa", eurocopa: "Eurocopa",
+  "eliminatorias-uefa": "Eliminatórias da Europa", "eliminatorias-caf": "Eliminatórias da África", "eliminatorias-afc": "Eliminatórias da Ásia",
+  "eliminatorias-ofc": "Eliminatórias da Oceania", "repescagem-mundial": "Repescagem mundial", "copa-do-mundo": "Copa do Mundo",
 };
+
+/** Datas da Copa do Mundo (de meados de junho a meados de julho; 48 seleções, como em 2026). */
+const DATAS_COPA: Record<string, [number, Dia]> = {
+  r1: [9, "qui"], r2: [10, "qua"], r3: [11, "ter"], dezesseis: [12, "seg"], oitavas: [13, "sab"], quartas: [13, "qui"], semi: [14, "ter"], final: [15, "dom"],
+};
+
+/** Datas da Eurocopa (junho e julho, 24 seleções): 3 rodadas de grupos, oitavas, quartas, semifinal e final. */
+const DATAS_EURO: Record<string, [number, Dia]> = {
+  r1: [10, "sab"], r2: [10, "qua"], r3: [11, "dom"], oitavas: [11, "qui"], quartas: [12, "seg"], semi: [12, "qui"], final: [13, "dom"],
+};
+/** Finais da Liga das Nações (junho do ano seguinte ao da fase de ligas, depois da data FIFA). */
+const DATAS_LIGA_DAS_NACOES: Record<string, [number, Dia]> = { semi: [10, "qua"], final: [11, "dom"] };
 
 export const NOME_FASE_SELECOES: Record<string, string> = {
   liga: "Turno e returno", fase1: "1ª fase", fase2: "2ª fase", fase3: "3ª fase", grupos: "Fase de grupos", quartas: "Quartas de final",
-  semi: "Semifinal", final: "Final", amistoso: "Amistoso",
+  semi: "Semifinal", final: "Final", amistoso: "Amistoso", ligas: "Fase de ligas", oitavas: "Oitavas de final",
+  "rep-semi": "Repescagem (semifinal)", "rep-final": "Repescagem (final)", dezesseis: "16 avos de final", aguardando: "Classificadas",
 };
+
+/** O nome do grupo: "Grupo B"; na Liga das Nações, a liga e o grupo dela ("Liga A · Grupo 2"). */
+export function nomeDoGrupoDeSelecoes(serie: string, grupo: number): string {
+  if (!serie.startsWith("S-LN")) return `Grupo ${String.fromCharCode(64 + grupo)}`;
+  const liga = Math.min(3, Math.floor((grupo - 1) / 4));
+  return `Liga ${"ABCD"[liga]} · Grupo ${grupo - liga * 4}`;
+}
 
 /** "Eliminatórias", "Copa América", "Copa Ouro", "Amistoso". */
 export function nomeDaCompeticaoDeSelecoes(estado: EstadoJogo | undefined, c: IdCompeticaoSelecoes): string {
   if (c === AMISTOSOS) return "Amistoso";
   const comp = estado?.selecoes?.competicoes[c];
   if (comp) return comp.nome;
+  if (c.startsWith("S-COPA")) return NOMES["copa-do-mundo"];
+  if (c.startsWith("S-INT")) return NOMES["repescagem-mundial"];
+  if (c.startsWith("S-ELI-CAF")) return NOMES["eliminatorias-caf"];
+  if (c.startsWith("S-ELI-AFC")) return NOMES["eliminatorias-afc"];
+  if (c.startsWith("S-ELI-OFC")) return NOMES["eliminatorias-ofc"];
+  if (c.startsWith("S-ELI-EURO")) return NOMES["eliminatorias-euro"];
+  if (c.startsWith("S-ELI-UEFA")) return NOMES["eliminatorias-uefa"];
+  if (c.startsWith("S-EURO")) return NOMES.eurocopa;
+  if (c.startsWith("S-LN")) return NOMES["liga-das-nacoes"];
   if (c.startsWith("S-ELI-SUL")) return NOMES["eliminatorias-sul"];
   if (c.startsWith("S-ELI-CCF")) return NOMES["eliminatorias-concacaf"];
   if (c.startsWith("S-AME")) return NOMES["copa-america"];
@@ -439,13 +585,13 @@ export function rotuloDeSelecoes(estado: EstadoJogo | undefined, p: Partida): st
   if (p.serie === AMISTOSOS) return "Amistoso";
   if (p.fase === "liga") return `${nome} · ${p.rodada}ª rodada`;
   const fase = NOME_FASE_SELECOES[p.fase] ?? p.fase;
-  if (p.grupo != null) return `${nome} · ${p.fase === "grupos" ? "" : `${fase} · `}Grupo ${String.fromCharCode(64 + p.grupo)} · ${p.rodada}ª rodada`;
+  if (p.grupo != null) return `${nome} · ${p.fase === "grupos" || p.fase === "ligas" ? "" : `${fase} · `}${nomeDoGrupoDeSelecoes(p.serie, p.grupo)} · ${p.rodada}ª rodada`;
   return `${nome} · ${fase}${p.perna ? ` (${p.perna === 1 ? "ida" : "volta"})` : ""}`;
 }
 
 /** Empate vai para os pênaltis: no mata-mata dos torneios (jogo único) e na volta da 1ª fase da Concacaf (agregado). */
 export function selecoesDecidePorPenaltis(p: Partida): boolean {
-  if (p.fase === "quartas" || p.fase === "semi" || p.fase === "final") return true;
+  if (["dezesseis", "oitavas", "quartas", "semi", "final", "rep-semi", "rep-final"].includes(p.fase)) return true;
   return p.fase === "fase1" && p.perna === 2;
 }
 
@@ -453,6 +599,8 @@ const elo = (estado: EstadoJogo, id: string) => estado.selecoes?.ranking[id] ?? 
 const peloRanking = (estado: EstadoJogo, ids: string[]) =>
   [...ids].sort((a, b) => elo(estado, b) - elo(estado, a) || a.localeCompare(b));
 const conmebol = () => PAISES_SELECOES.filter((p) => confederacao(p) === "conmebol").map(idSelecao);
+const uefa = () => PAISES_SELECOES.filter((p) => confederacao(p) === "uefa").map(idSelecao);
+const daConfederacao = (c: Confederacao) => PAISES_SELECOES.filter((p) => confederacao(p) === c).map(idSelecao);
 const concacaf = (soFifa = false) =>
   PAISES_SELECOES.filter((p) => confederacao(p) === "concacaf" && (!soFifa || !DADOS_SELECOES[p].semFifa)).map(idSelecao);
 
@@ -559,6 +707,445 @@ function mandoNoTorneio(sede: string | undefined, m: string, v: string): Partial
   return m === sede ? {} : { neutro: true };
 }
 
+// ---- Europa: Liga das Nações, Eliminatórias da Eurocopa, Eurocopa e Eliminatórias da Copa do Mundo ----------------
+
+/** As datas FIFA do ano que ainda não passaram (as 10 de março a novembro; junho fica de fora nos anos de Copa). */
+const datasLivres = (ano: number, desde: string, janelas: Janela[] = ORDEM_JANELAS) =>
+  janelas.filter((j) => !(j === "jun" && anoDeCopa(ano))).flatMap((j) => datasDaJanela(ano, j)).filter((d) => d > desde);
+
+/**
+ * Marca os jogos de grupos nas últimas datas: turno e returno quando as datas dão (10 rodadas com 5 ou 6 seleções, 6 com 3
+ * ou 4); com menos datas pela frente (save de antes da Europa aberto no meio do ano), turno único. Sem datas nem para isso,
+ * devolve falso e nada é marcado.
+ */
+function marcarGrupos(estado: EstadoJogo, id: IdCompeticaoSelecoes, fase: string, grupos: string[][], datas: string[]): boolean {
+  const jogos: Partida[] = [];
+  for (const [i, g] of grupos.entries()) {
+    const rng = rngPara(estado.semente, `${id}/${fase}/grupo${i + 1}`);
+    const ida = turnoUnico(g, rng);
+    const rodadas = datas.length >= 2 * ida.length ? [...ida, ...ida.map((r) => r.map(([a, b]) => [b, a] as Confronto))] : ida;
+    if (datas.length < rodadas.length) return false;
+    jogos.push(...jogosDasRodadas(id, fase, rodadas, datas.slice(-rodadas.length), i + 1));
+  }
+  marcar(estado, jogos);
+  return true;
+}
+
+/**
+ * Liga das Nações (anos pares, de setembro a novembro): as 55 da Europa em 4 ligas (A, B e C com 16 em 4 grupos de 4; a D
+ * com 7 em 2 grupos), turno e returno. Na primeira edição as ligas saem do ranking; depois, sobe e desce. Os 4 primeiros
+ * da Liga A decidem o título em junho do ano seguinte (semifinal e final, em campo neutro).
+ */
+function criarLigaDasNacoes(estado: EstadoJogo, ano: number, desde = ""): boolean {
+  const id: IdCompeticaoSelecoes = `S-LN-${ano}`;
+  const sel = estado.selecoes!;
+  const todas = peloRanking(estado, uefa());
+  if (!sel.ligaDasNacoes || todas.some((x) => !sel.ligaDasNacoes![x])) {
+    sel.ligaDasNacoes = Object.fromEntries(todas.map((x, i) => [x, i < 16 ? 1 : i < 32 ? 2 : i < 48 ? 3 : 4]));
+  }
+  const grupos: string[][] = [];
+  for (const liga of [1, 2, 3, 4]) {
+    const membros = todas.filter((x) => sel.ligaDasNacoes![x] === liga);
+    const doNivel = sortearGrupos(rngPara(estado.semente, `${id}/liga${liga}`), membros, liga === 4 ? 2 : 4, (x) => x);
+    grupos.push(...doNivel.sort((a, b) => b.length - a.length));
+  }
+  if (!marcarGrupos(estado, id, "ligas", grupos, datasLivres(ano, desde, ["set", "out", "nov"]))) return false;
+  sel.competicoes[id] = { id, tipo: "liga-das-nacoes", nome: NOMES["liga-das-nacoes"], ano, fase: "ligas", selecoes: todas, grupos: { ligas: grupos } };
+  return true;
+}
+
+/** Fim da fase de ligas: sobe e desce entre as ligas e as semifinais entre os primeiros dos grupos da Liga A. */
+function fimDasLigas(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes): string[] {
+  const nome = (id: string) => estado.clubes[id]?.nome ?? id;
+  const ligas = estado.selecoes!.ligaDasNacoes ?? {};
+  const t = tabelasDeSelecoes(estado, comp.id, "ligas");
+  const primeiros = (de: number, ate: number) => t.slice(de, ate).map((g) => g[0]);
+  const ultimos = (de: number, ate: number) => t.slice(de, ate).map((g) => g[g.length - 1]);
+  const piores = (linhas: LinhaTabela[], quantos: number) => melhoresLinhas(estado, linhas, linhas.length).slice(-quantos);
+  // A ↔ B e B ↔ C: 4 e 4; C ↔ D: os 2 primeiros da D sobem e os 2 piores últimos da C descem.
+  const sobem = [...primeiros(4, 8), ...primeiros(8, 12), ...primeiros(12, 14)].map((l) => l.clubeId);
+  const caem = [...ultimos(0, 4).map((l) => l.clubeId), ...ultimos(4, 8).map((l) => l.clubeId), ...piores(ultimos(8, 12), 2)];
+  for (const id of sobem) ligas[id] = Math.max(1, (ligas[id] ?? 4) - 1);
+  for (const id of caem) ligas[id] = Math.min(4, (ligas[id] ?? 1) + 1);
+  // Semifinais: o melhor primeiro contra o pior, o 2º contra o 3º.
+  const finalistas = melhoresLinhas(estado, primeiros(0, 4), 4);
+  comp.fase = "semi";
+  const data = diaDaSemana(comp.ano + 1, DATAS_LIGA_DAS_NACOES.semi[0], DATAS_LIGA_DAS_NACOES.semi[1]);
+  marcar(estado, ([[finalistas[0], finalistas[3]], [finalistas[1], finalistas[2]]] as [string, string][])
+    .map(([a, b], i) => jogo(`${comp.id}-semi-${i + 1}`, comp.id, "semi", 1, data, a, b, { chave: i + 1, neutro: true })));
+  return [`Liga das Nações: ${finalistas.map(nome).join(", ")} decidem o título em junho de ${comp.ano + 1}.`];
+}
+
+/** Sede da Eurocopa: uma das 8 melhores do ranking da Europa. */
+const sedeDaEuro = (estado: EstadoJogo, ano: number) => rngPara(estado.semente, `sede-euro/${ano}`).escolher(peloRanking(estado, uefa()).slice(0, 8));
+
+/**
+ * Eliminatórias da Eurocopa de `euro` (no ano anterior, de março a novembro): as 54 sem a sede em 10 grupos de 5 ou 6,
+ * turno e returno. Os 2 primeiros de cada grupo vão à Eurocopa com a sede (21); as outras 3 vagas saem da repescagem de
+ * março do ano da Eurocopa (os 10 terceiros e os 2 melhores quartos).
+ */
+function criarEliminatoriasDaEuro(estado: EstadoJogo, euro: number, desde = ""): boolean {
+  const id: IdCompeticaoSelecoes = `S-ELI-EURO-${euro}`;
+  const sede = sedeDaEuro(estado, euro);
+  const selecoes = peloRanking(estado, uefa().filter((x) => x !== sede));
+  const grupos = sortearGrupos(rngPara(estado.semente, `eliminatorias/${id}`), selecoes, 10, (x) => x);
+  if (!marcarGrupos(estado, id, "grupos", grupos, datasLivres(euro - 1, desde))) return false;
+  estado.selecoes!.competicoes[id] = { id, tipo: "eliminatorias-euro", nome: NOMES["eliminatorias-euro"], ano: euro, fase: "grupos", selecoes, grupos: { grupos }, sede };
+  return true;
+}
+
+/**
+ * Eliminatórias da Europa para a Copa de `copa` (no ano anterior): as 55 em 12 grupos de 4 ou 5, turno e returno (os
+ * grupos de 5 de março a novembro, os de 4 de setembro a novembro). Os 12 primeiros vão à Copa; as outras 4 vagas saem da
+ * repescagem de março do ano da Copa (os 12 segundos e os 4 melhores terceiros).
+ */
+function criarEliminatoriasDaEuropa(estado: EstadoJogo, copa: number, desde = ""): boolean {
+  const id: IdCompeticaoSelecoes = `S-ELI-UEFA-${copa}`;
+  const selecoes = peloRanking(estado, uefa());
+  const grupos = sortearGrupos(rngPara(estado.semente, `eliminatorias/${id}`), selecoes, 12, (x) => x);
+  if (!marcarGrupos(estado, id, "grupos", grupos, datasLivres(copa - 1, desde))) return false;
+  estado.selecoes!.competicoes[id] = { id, tipo: "eliminatorias-uefa", nome: NOMES["eliminatorias-uefa"], ano: copa, fase: "grupos", selecoes, grupos: { grupos } };
+  return true;
+}
+
+/** Fases das Eliminatórias da Europa (da Eurocopa e da Copa): grupos, semifinal e final da repescagem. */
+function avancarEliminatoriasDaEuropa(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes): string[] {
+  const nome = (id: string) => estado.clubes[id]?.nome ?? id;
+  const daEuro = comp.tipo === "eliminatorias-euro";
+  const destino = daEuro ? `à Eurocopa de ${comp.ano}` : `à Copa do Mundo de ${comp.ano}`;
+  const [quinta, terca] = datasDaJanela(comp.ano, "mar");
+  if (comp.fase === "grupos") {
+    const t = tabelasDeSelecoes(estado, comp.id, "grupos");
+    const linha = (pos: number) => t.map((g) => g[pos]).filter(Boolean);
+    let repescagem: string[];
+    if (daEuro) {
+      comp.classificados = [...(comp.sede ? [comp.sede] : []), ...linha(0).map((l) => l.clubeId), ...linha(1).map((l) => l.clubeId)];
+      repescagem = [...melhoresLinhas(estado, linha(2), 10), ...melhoresLinhas(estado, linha(3), 2)];
+    } else {
+      comp.classificados = linha(0).map((l) => l.clubeId);
+      repescagem = [...melhoresLinhas(estado, linha(1), 12), ...melhoresLinhas(estado, linha(2), 4)];
+    }
+    comp.repescagem = repescagem;
+    // Caminhos de 4: o 1º contra o último e os dois do meio entre si; a casa é de quem foi melhor nos grupos.
+    const n = repescagem.length, caminhos = n / 4;
+    const pares: [string, string][] = [];
+    for (let i = 0; i < caminhos; i++) pares.push([repescagem[i], repescagem[n - 1 - i]], [repescagem[2 * caminhos - 1 - i], repescagem[2 * caminhos + i]]);
+    comp.fase = "rep-semi";
+    marcar(estado, pares.map(([a, b], i) => jogo(`${comp.id}-rep-semi-${i + 1}`, comp.id, "rep-semi", 1, quinta, a, b, { chave: i + 1 })));
+    return [`${comp.nome}: ${comp.classificados.map(nome).join(", ")} vão ${destino}. As outras ${caminhos} vagas saem da repescagem de março.`];
+  }
+  const vencedores = (fase: string) => jogosDaFase(estado, comp.id, fase).sort((a, b) => (a.chave ?? 0) - (b.chave ?? 0)).map(vencedorDoJogo);
+  if (comp.fase === "rep-semi") {
+    const v = vencedores("rep-semi");
+    comp.fase = "rep-final";
+    const jogos: Partida[] = [];
+    for (let i = 0; i + 1 < v.length; i += 2) jogos.push(jogo(`${comp.id}-rep-final-${i / 2 + 1}`, comp.id, "rep-final", 1, terca, v[i], v[i + 1], { chave: i / 2 + 1 }));
+    marcar(estado, jogos);
+    return [`${comp.nome}: finais da repescagem ${jogos.map((p) => `${nome(p.mandante)} x ${nome(p.visitante)}`).join(", ")}.`];
+  }
+  const ultimos = vencedores("rep-final");
+  comp.classificados = [...(comp.classificados ?? []), ...ultimos];
+  comp.repescagem = [];
+  comp.fase = "encerrada";
+  depoisDaCompeticao(estado, comp);
+  if (daEuro) criarEurocopa(estado, comp.ano, comp.classificados, comp.sede);
+  return [`${comp.nome}: ${ultimos.map(nome).join(", ")} ficam com as últimas vagas e vão ${destino}.`];
+}
+
+/** Eurocopa (anos múltiplos de 4, junho e julho): 24 seleções em 6 grupos de 4; passam os 2 primeiros e os 4 melhores terceiros. */
+function criarEurocopa(estado: EstadoJogo, ano: number, classificados: string[], sede = sedeDaEuro(estado, ano)) {
+  const id: IdCompeticaoSelecoes = `S-EURO-${ano}`;
+  const rng = rngPara(estado.semente, `torneio/${id}`);
+  const ranking = [sede, ...peloRanking(estado, classificados.filter((x) => x !== sede))];
+  const grupos = sortearGrupos(rng, ranking, 6, (x) => x);
+  const g = grupos.findIndex((x) => x.includes(sede));
+  [grupos[0], grupos[g]] = [grupos[g], grupos[0]];
+  estado.selecoes!.competicoes[id] = { id, tipo: "eurocopa", nome: NOMES.eurocopa, ano, fase: "grupos", selecoes: ranking, grupos: { grupos }, sede };
+  const datas = [DATAS_EURO.r1, DATAS_EURO.r2, DATAS_EURO.r3].map(([s, d]) => diaDaSemana(ano, s, d));
+  marcar(estado, grupos.flatMap((grupo, i) =>
+    jogosDasRodadas(id, "grupos", turnoUnico(grupo, rng), datas, i + 1, (m, v) => mandoNoTorneio(sede, m, v))));
+}
+
+// ---- Copa do Mundo: Eliminatórias da África, Ásia e Oceania, repescagem mundial e a Copa (48 seleções) -------------
+
+/** Sedes de cada Copa: as de verdade até 2034; depois, uma das mais fortes de outro continente que o da Copa anterior. */
+const SEDES_DA_COPA: Record<number, string[]> = { 2026: ["US", "MX", "CA"], 2030: ["ES", "PT", "MA"], 2034: ["SA"] };
+function sedesDaCopa(estado: EstadoJogo, ano: number): string[] {
+  const fixas = SEDES_DA_COPA[ano];
+  if (fixas) return fixas.map(idSelecao);
+  const anterior = sedesDaCopa(estado, ano - 4)[0];
+  const candidatas = rankingDasSelecoes(estado).slice(0, 24).map((s) => s.id).filter((id) => confederacao(paisDaSelecao(id)) !== confederacao(paisDaSelecao(anterior)));
+  return [rngPara(estado.semente, `sede-copa/${ano}`).escolher(candidatas)];
+}
+
+/** Grupos e vagas das Eliminatórias de cada continente (as da América e da Europa ficam nas funções delas). */
+const ELIMINATORIAS_MUNDO: Record<"caf" | "afc" | "ofc", { id: string; tipo: TipoCompeticaoSelecoes; grupos: number }> = {
+  caf: { id: "CAF", tipo: "eliminatorias-caf", grupos: 9 },
+  afc: { id: "AFC", tipo: "eliminatorias-afc", grupos: 8 },
+  ofc: { id: "OFC", tipo: "eliminatorias-ofc", grupos: 2 },
+};
+
+/**
+ * Eliminatórias da África (9 grupos de 6), da Ásia (8 grupos de 5 ou 6) e da Oceania (2 grupos) para a Copa de `copa`, no
+ * ano anterior, turno e returno nas datas FIFA. Na África e na Ásia os primeiros vão à Copa e o melhor segundo à
+ * repescagem mundial; na Oceania o melhor primeiro vai à Copa e o outro primeiro à repescagem.
+ */
+function criarEliminatoriasDoMundo(estado: EstadoJogo, conf: "caf" | "afc" | "ofc", copa: number, desde = ""): boolean {
+  const def = ELIMINATORIAS_MUNDO[conf];
+  const id: IdCompeticaoSelecoes = `S-ELI-${def.id}-${copa}`;
+  const selecoes = peloRanking(estado, daConfederacao(conf));
+  const grupos = sortearGrupos(rngPara(estado.semente, `eliminatorias/${id}`), selecoes, def.grupos, (x) => x);
+  if (!marcarGrupos(estado, id, "grupos", grupos, datasLivres(copa - 1, desde))) return false;
+  estado.selecoes!.competicoes[id] = { id, tipo: def.tipo, nome: NOMES[def.tipo], ano: copa, fase: "grupos", selecoes, grupos: { grupos } };
+  return true;
+}
+
+function avancarEliminatoriasDoMundo(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes): string[] {
+  const nome = (id: string) => estado.clubes[id]?.nome ?? id;
+  const t = tabelasDeSelecoes(estado, comp.id, "grupos");
+  const primeiros = t.map((g) => g[0]);
+  if (comp.tipo === "eliminatorias-ofc") {
+    const [melhor, outro] = melhoresLinhas(estado, primeiros, 2);
+    comp.classificados = [melhor];
+    comp.repescagem = outro ? [outro] : [];
+  } else {
+    comp.classificados = primeiros.map((l) => l.clubeId);
+    comp.repescagem = melhoresLinhas(estado, t.map((g) => g[1]).filter(Boolean), 1);
+  }
+  comp.fase = "encerrada";
+  depoisDaCompeticao(estado, comp);
+  return [`${comp.nome}: ${comp.classificados.map(nome).join(", ")} vão à Copa do Mundo de ${comp.ano}; ${comp.repescagem.map(nome).join(" e ")} vai à repescagem mundial.`];
+}
+
+/** As Eliminatórias que mandam seleções à repescagem mundial (uma vaga cada; a Concacaf, duas). */
+const ANTES_DA_REPESCAGEM: TipoCompeticaoSelecoes[] = ["eliminatorias-sul", "eliminatorias-concacaf", "eliminatorias-caf", "eliminatorias-afc", "eliminatorias-ofc"];
+
+/**
+ * A Copa do Mundo de `ano` começa a ser montada no ano anterior (fase "aguardando"): as sedes já estão nela e cada
+ * Eliminatória que acaba põe os classificados (`selecoes`) e quem vai à repescagem mundial (`entram.repescagem`).
+ */
+function criarCopaDoMundo(estado: EstadoJogo, ano: number): EstadoCompeticaoSelecoes {
+  const id: IdCompeticaoSelecoes = `S-COPA-${ano}`;
+  const sedes = sedesDaCopa(estado, ano);
+  const comp: EstadoCompeticaoSelecoes = {
+    id, tipo: "copa-do-mundo", nome: NOMES["copa-do-mundo"], ano, fase: "aguardando", selecoes: [...sedes], sede: sedes[0], sedes,
+    entram: { repescagem: [], fechadas: [] },
+  };
+  estado.selecoes!.competicoes[id] = comp;
+  // Eliminatórias que já acabaram (save que ganha a Copa no meio do caminho).
+  for (const c of Object.values(estado.selecoes!.competicoes)) if (c && c.ano === ano && c.fase === "encerrada") registrarNaCopa(estado, c);
+  return comp;
+}
+
+/** Eliminatória que acabou: os classificados entram na Copa e quem vai à repescagem mundial fica guardado. */
+function registrarNaCopa(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes) {
+  if (!comp.tipo.startsWith("eliminatorias") && comp.tipo !== "repescagem-mundial") return;
+  if (comp.tipo === "eliminatorias-euro") return;
+  const copa = estado.selecoes?.competicoes[`S-COPA-${comp.ano}` as IdCompeticaoSelecoes];
+  if (!copa || copa.fase !== "aguardando") return;
+  const entram = (copa.entram ??= {});
+  const fechadas = (entram.fechadas ??= []);
+  if (fechadas.includes(comp.tipo)) return;
+  fechadas.push(comp.tipo);
+  for (const id of comp.classificados ?? []) if (!copa.selecoes.includes(id)) copa.selecoes.push(id);
+  if (ANTES_DA_REPESCAGEM.includes(comp.tipo)) {
+    entram.repescagem = [...new Set([...(entram.repescagem ?? []), ...(comp.repescagem ?? [])])].filter((id) => !copa.selecoes.includes(id));
+    if (ANTES_DA_REPESCAGEM.every((t) => fechadas.includes(t))) criarRepescagemMundial(estado, comp.ano, entram.repescagem);
+  }
+}
+
+/**
+ * Repescagem mundial (março do ano da Copa, campo neutro): as 6 que vieram das Eliminatórias; as 2 melhores do ranking
+ * esperam na final e as outras 4 jogam a semifinal (3ª x 6ª, 4ª x 5ª). Os 2 vencedores vão à Copa. Com a data de março
+ * já passada (save antigo), vão as 2 melhores do ranking.
+ */
+function criarRepescagemMundial(estado: EstadoJogo, ano: number, times: string[], semifinais?: [string, string][], esperam?: string[]) {
+  const id: IdCompeticaoSelecoes = `S-INT-${ano}`;
+  const sel = estado.selecoes!;
+  if (sel.competicoes[id]) return;
+  const ordem = peloRanking(estado, times);
+  const [quinta] = datasDaJanela(ano, "mar");
+  const comp: EstadoCompeticaoSelecoes = {
+    id, tipo: "repescagem-mundial", nome: NOMES["repescagem-mundial"], ano, fase: "rep-semi", selecoes: ordem, repescagem: [...ordem],
+    entram: { final: esperam ?? ordem.slice(0, 2) },
+  };
+  sel.competicoes[id] = comp;
+  if (quinta <= estado.data || ordem.length < 4) {
+    comp.classificados = ordem.slice(0, 2);
+    comp.repescagem = [];
+    comp.fase = "encerrada";
+    registrarNaCopa(estado, comp);
+    return;
+  }
+  const pares = semifinais ?? [[ordem[3], ordem[4]], [ordem[2], ordem[5]]];
+  marcar(estado, pares.map(([a, b], i) => jogo(`${id}-rep-semi-${i + 1}`, id, "rep-semi", 1, quinta, a, b, { chave: i + 1, neutro: true })));
+}
+
+function avancarRepescagemMundial(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes): string[] {
+  const nome = (id: string) => estado.clubes[id]?.nome ?? id;
+  const vencedores = (fase: string) => jogosDaFase(estado, comp.id, fase).sort((a, b) => (a.chave ?? 0) - (b.chave ?? 0)).map(vencedorDoJogo);
+  if (comp.fase === "rep-semi") {
+    const v = vencedores("rep-semi");
+    const esperam = comp.entram?.final ?? [];
+    const terca = datasDaJanela(comp.ano, "mar")[1];
+    comp.fase = "rep-final";
+    const jogos = esperam.map((a, i) => jogo(`${comp.id}-rep-final-${i + 1}`, comp.id, "rep-final", 1, terca, a, v[i], { chave: i + 1, neutro: true }));
+    marcar(estado, jogos);
+    return [`Repescagem mundial: as finais são ${jogos.map((p) => `${nome(p.mandante)} x ${nome(p.visitante)}`).join(" e ")}.`];
+  }
+  comp.classificados = vencedores("rep-final");
+  comp.repescagem = [];
+  comp.fase = "encerrada";
+  depoisDaCompeticao(estado, comp);
+  return [`Repescagem mundial: ${comp.classificados.map(nome).join(" e ")} vão à Copa do Mundo de ${comp.ano}.`];
+}
+
+/** A Copa de 2026 no jogo novo (e no save que chega antes dela): as 42 que já estavam classificadas de verdade e as repescagens de março. */
+const COPA_2026 = {
+  classificadas: ["US", "MX", "CA", "JP", "IR", "UZ", "KR", "JO", "AU", "QA", "SA", "MA", "TN", "EG", "DZ", "GH", "CV", "ZA", "SN", "CI",
+    "AR", "BR", "EC", "UY", "CO", "PY", "NZ", "PA", "HT", "CW", "EN", "FR", "HR", "PT", "NO", "DE", "NL", "ES", "BE", "AT", "CH", "XS"],
+  /** Repescagem da Europa: 4 caminhos (semifinal e final). */
+  europa: [["IT", "XN"], ["XW", "BA"], ["UA", "SE"], ["PL", "AL"], ["TR", "RO"], ["SK", "XK"], ["DK", "MK"], ["CZ", "IE"]],
+  /** Repescagem mundial: RD Congo e Iraque esperam na final. */
+  mundial: { semifinais: [["NC", "JM"], ["BO", "SR"]], esperam: ["CD", "IQ"] },
+};
+
+function criarCopaDe2026(estado: EstadoJogo, desde: string) {
+  const sel = estado.selecoes!;
+  const copa = criarCopaDoMundo(estado, 2026);
+  copa.selecoes = COPA_2026.classificadas.map(idSelecao);
+  copa.entram = { repescagem: [], fechadas: [...ANTES_DA_REPESCAGEM] };
+  const [quinta] = datasDaJanela(2026, "mar");
+  // Repescagem da Europa (4 vagas): os caminhos de verdade.
+  const idEuropa: IdCompeticaoSelecoes = "S-ELI-UEFA-2026";
+  if (!sel.competicoes[idEuropa]) {
+    const pares = COPA_2026.europa.map(([a, b]) => [idSelecao(a), idSelecao(b)] as [string, string]);
+    const comp: EstadoCompeticaoSelecoes = {
+      id: idEuropa, tipo: "eliminatorias-uefa", nome: NOMES["eliminatorias-uefa"], ano: 2026, fase: "rep-semi", selecoes: peloRanking(estado, uefa()),
+      classificados: ["EN", "FR", "HR", "PT", "NO", "DE", "NL", "ES", "BE", "AT", "CH", "XS"].map(idSelecao), repescagem: pares.flat(),
+    };
+    sel.competicoes[idEuropa] = comp;
+    if (quinta > desde) marcar(estado, pares.map(([a, b], i) => jogo(`${idEuropa}-rep-semi-${i + 1}`, idEuropa, "rep-semi", 1, quinta, a, b, { chave: i + 1 })));
+    else {
+      // Março já passou: vão os 4 melhores do ranking entre os da repescagem.
+      comp.classificados = [...(comp.classificados ?? []), ...peloRanking(estado, comp.repescagem ?? []).slice(0, 4)];
+      comp.repescagem = [];
+      comp.fase = "encerrada";
+      registrarNaCopa(estado, comp);
+    }
+  }
+  const m = COPA_2026.mundial;
+  criarRepescagemMundial(estado, 2026, [...m.semifinais.flat(), ...m.esperam].map(idSelecao),
+    m.semifinais.map(([a, b]) => [idSelecao(a), idSelecao(b)] as [string, string]), m.esperam.map(idSelecao));
+}
+
+/** Os grupos da Copa: potes de 12 pelo ranking (as sedes no primeiro, nos grupos A, B, C...), no máximo 2 da Europa e 1 de cada outro continente por grupo. */
+function sortearGruposDaCopa(estado: EstadoJogo, rng: Rng, sedes: string[], times: string[]): string[][] {
+  const ordem = [...sedes, ...peloRanking(estado, times.filter((x) => !sedes.includes(x)))];
+  const potes = [0, 1, 2, 3].map((k) => ordem.slice(k * 12, k * 12 + 12));
+  const conf = (id: string) => confederacao(paisDaSelecao(id));
+  const cabe = (g: string[], id: string) => g.filter((x) => conf(x) === conf(id)).length < (conf(id) === "uefa" ? 2 : 1);
+  for (let tentativa = 0; tentativa < 300; tentativa++) {
+    const grupos: string[][] = Array.from({ length: 12 }, () => []);
+    let ok = true;
+    potes.forEach((pote, k) => {
+      if (!ok) return;
+      const sorteados = k === 0 ? [...pote.slice(0, sedes.length), ...rng.embaralhar(pote.slice(sedes.length))] : rng.embaralhar([...pote]);
+      for (const id of sorteados) {
+        const livres = grupos.map((_, i) => i).filter((i) => grupos[i].length === k);
+        const bons = livres.filter((i) => cabe(grupos[i], id));
+        const opcoes = k === 0 ? livres.slice(0, 1) : bons.length ? bons : tentativa === 299 ? livres : [];
+        if (!opcoes.length) { ok = false; return; }
+        grupos[k === 0 ? opcoes[0] : rng.escolher(opcoes)].push(id);
+      }
+    });
+    if (ok) return grupos;
+  }
+  return Array.from({ length: 12 }, (_, i) => potes.map((p) => p[i]).filter(Boolean));
+}
+
+/** No jogo de Copa, as sedes jogam em casa; os outros jogos são em campo neutro. */
+function mandoNaCopa(sedes: string[], m: string, v: string): Partial<Partida> {
+  if (sedes.includes(m)) return {};
+  if (sedes.includes(v)) return { mandante: v, visitante: m };
+  return { neutro: true };
+}
+
+/** Fecha a lista da Copa (48: as que se classificaram e, faltando, as melhores do continente das sedes) e marca os grupos. */
+function montarCopa(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes) {
+  const sedes = comp.sedes ?? [comp.sede!];
+  const lista = [...new Set(comp.selecoes)];
+  const continentes = [...new Set(sedes.map((id) => confederacao(paisDaSelecao(id))))];
+  const reserva = peloRanking(estado, PAISES_SELECOES.map(idSelecao).filter((id) => !lista.includes(id) && !DADOS_SELECOES[paisDaSelecao(id)].semFifa));
+  for (let k = 0; lista.length < 48 && k < 400; k++) {
+    const conf = continentes[k % continentes.length];
+    const proxima = reserva.find((id) => !lista.includes(id) && confederacao(paisDaSelecao(id)) === conf) ?? reserva.find((id) => !lista.includes(id));
+    if (proxima) lista.push(proxima);
+  }
+  const participantes = [...sedes, ...peloRanking(estado, lista.filter((x) => !sedes.includes(x)))].slice(0, 48);
+  const rng = rngPara(estado.semente, `torneio/${comp.id}`);
+  const grupos = sortearGruposDaCopa(estado, rng, sedes, participantes);
+  comp.selecoes = participantes;
+  comp.grupos = { grupos };
+  comp.fase = "grupos";
+  const datas = [DATAS_COPA.r1, DATAS_COPA.r2, DATAS_COPA.r3].map(([s, d]) => diaDaSemana(comp.ano, s, d));
+  marcar(estado, grupos.flatMap((grupo, i) => jogosDasRodadas(comp.id, "grupos", turnoUnico(grupo, rng), datas, i + 1, (m, v) => mandoNaCopa(sedes, m, v))));
+}
+
+/** Ordem das chaves do mata-mata para `n` (1 x n, e os 2 melhores só se encontram na final). */
+function ordemDasChaves(n: number): number[] {
+  let ordem = [1, 2];
+  while (ordem.length < n) ordem = ordem.flatMap((s) => [s, 2 * ordem.length + 1 - s]);
+  return ordem;
+}
+
+function avancarCopaDoMundo(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes): string[] {
+  const nome = (id: string) => estado.clubes[id]?.nome ?? id;
+  const sedes = comp.sedes ?? [comp.sede!];
+  const data = (fase: string) => diaDaSemana(comp.ano, DATAS_COPA[fase][0], DATAS_COPA[fase][1]);
+  const mata = (fase: string, pares: [string, string][]) => {
+    comp.fase = fase;
+    marcar(estado, pares.map(([a, b], i) => jogo(`${comp.id}-${fase}-${i + 1}`, comp.id, fase, 1, data(fase), a, b, { chave: i + 1, ...mandoNaCopa(sedes, a, b) })));
+  };
+  const vencedores = (fase: string) => jogosDaFase(estado, comp.id, fase).sort((a, b) => (a.chave ?? 0) - (b.chave ?? 0)).map(vencedorDoJogo);
+  const emPares = (v: string[]) => Array.from({ length: v.length / 2 }, (_, i) => [v[2 * i], v[2 * i + 1]] as [string, string]);
+  const seguinte: Record<string, string> = { dezesseis: "oitavas", oitavas: "quartas", quartas: "semi", semi: "final" };
+  if (comp.fase === "grupos") {
+    // Os 12 primeiros, os 12 segundos e os 8 melhores terceiros, pela campanha: o 1º pega o 32º, e assim por diante.
+    const t = tabelasDeSelecoes(estado, comp.id, "grupos");
+    const s = [0, 1, 2].flatMap((pos) => melhoresLinhas(estado, t.map((g) => g[pos]), pos === 2 ? 8 : 12));
+    const grupoDe = (id: string) => t.findIndex((g) => g.some((l) => l.clubeId === id));
+    const ordem = ordemDasChaves(32);
+    const pares: [string, string][] = [];
+    for (let i = 0; i < 32; i += 2) pares.push([s[ordem[i] - 1], s[ordem[i + 1] - 1]]);
+    // Dois do mesmo grupo não se enfrentam já: troca o adversário com o do jogo seguinte.
+    for (let i = 0; i < pares.length; i++) {
+      if (grupoDe(pares[i][0]) !== grupoDe(pares[i][1])) continue;
+      for (let j = 0; j < pares.length; j++) {
+        if (j === i) continue;
+        if (grupoDe(pares[i][0]) !== grupoDe(pares[j][1]) && grupoDe(pares[j][0]) !== grupoDe(pares[i][1])) {
+          [pares[i][1], pares[j][1]] = [pares[j][1], pares[i][1]];
+          break;
+        }
+      }
+    }
+    mata("dezesseis", pares);
+    return [`Copa do Mundo: estão nos 16 avos de final ${s.map(nome).join(", ")}.`];
+  }
+  if (seguinte[comp.fase]) {
+    const v = vencedores(comp.fase);
+    const proxima = seguinte[comp.fase];
+    mata(proxima, emPares(v));
+    return proxima === "final" ? [`Copa do Mundo: a final é ${nome(v[0])} x ${nome(v[1])}.`] : [`Copa do Mundo: seguem ${v.map(nome).join(", ")}.`];
+  }
+  const [final] = jogosDaFase(estado, comp.id, "final");
+  comp.campeao = vencedorDoJogo(final);
+  comp.vice = comp.campeao === final.mandante ? final.visitante : final.mandante;
+  comp.fase = "encerrada";
+  depoisDaCompeticao(estado, comp);
+  return [`${nome(comp.campeao)} é campeão da Copa do Mundo de ${comp.ano}!`];
+}
+
 /**
  * Competições que começam no ano (na virada, no jogo novo e no save de antes das seleções): as Eliminatórias da Conmebol
  * (setembro, 3 anos antes da Copa), as da Concacaf (março, 2 anos antes), a Copa América (anos múltiplos de 4) e a Copa
@@ -579,6 +1166,25 @@ export function criarCompeticoesDoAno(estado: EstadoJogo, desde = "") {
   const r1 = diaDaSemana(ano, DATAS_TORNEIO.r1[0], DATAS_TORNEIO.r1[1]);
   if (ano % 4 === 0 && nova(`S-AME-${ano}`, r1)) criarTorneio(estado, "copa-america", ano);
   if (ano % 2 === 1 && nova(`S-OURO-${ano}`, r1)) criarTorneio(estado, "copa-ouro", ano);
+  // Europa: Liga das Nações (anos pares, de setembro a novembro), Eliminatórias da Eurocopa (um ano antes dela) e da
+  // Copa do Mundo (um ano antes dela). No save de antes da Europa, as que ainda têm datas pela frente.
+  if (ano % 2 === 0 && !sel.competicoes[`S-LN-${ano}`]) criarLigaDasNacoes(estado, ano, desde);
+  if (ano % 4 === 3 && !sel.competicoes[`S-ELI-EURO-${ano + 1}`]) criarEliminatoriasDaEuro(estado, ano + 1, desde);
+  if (anoDeCopa(ano + 1) && !sel.competicoes[`S-ELI-UEFA-${ano + 1}`]) criarEliminatoriasDaEuropa(estado, ano + 1, desde);
+  // Copa do Mundo: a do ano seguinte começa a ser montada (as Eliminatórias da África, Ásia e Oceania são no ano anterior a
+  // ela); a de 2026, no jogo novo, já tem as 42 classificadas de verdade e as repescagens de março.
+  if (ano === 2026 && !sel.competicoes["S-COPA-2026"] && diaDaSemana(2026, DATAS_COPA.r1[0], DATAS_COPA.r1[1]) > desde) criarCopaDe2026(estado, desde);
+  if (anoDeCopa(ano + 1)) {
+    if (!sel.competicoes[`S-COPA-${ano + 1}`]) criarCopaDoMundo(estado, ano + 1);
+    for (const conf of ["caf", "afc", "ofc"] as const) {
+      if (!sel.competicoes[`S-ELI-${ELIMINATORIAS_MUNDO[conf].id}-${ano + 1}`]) criarEliminatoriasDoMundo(estado, conf, ano + 1, desde);
+    }
+  }
+  // Eurocopa sem as Eliminatórias (save de antes da Europa aberto no ano dela): a sede e as 23 melhores do ranking.
+  if (ano % 4 === 0 && nova(`S-EURO-${ano}`, r1) && !sel.competicoes[`S-ELI-EURO-${ano}`]) {
+    const sede = sedeDaEuro(estado, ano);
+    criarEurocopa(estado, ano, [sede, ...peloRanking(estado, uefa().filter((x) => x !== sede)).slice(0, 23)], sede);
+  }
 }
 
 /**
@@ -594,14 +1200,39 @@ export function marcarAmistosos(estado: EstadoJogo) {
   const antes = estado.partidas.some((p) => ehCompeticaoDeSelecoes(p.serie) && !p.jogada && p.data < proxima.datas[0]);
   if (antes) return;
   sel.amistososAte = proxima.datas[1];
-  const rng = rngPara(estado.semente, `amistosos/${proxima.datas[0]}`);
-  const todas = PAISES_SELECOES.map(idSelecao);
+  marcar(estado, gruposDeAmistosos(PAISES_SELECOES.map(idSelecao)).flatMap(([ids, sufixo]) => amistososDaJanela(estado, proxima.datas, ids, sufixo)));
+}
+
+/**
+ * As seleções em grupos que fazem amistosos entre si (com o sufixo do sorteio e dos ids de cada grupo): América, Europa,
+ * África e Ásia com a Oceania.
+ */
+function gruposDeAmistosos(ids: string[], extra = ""): [string[], string][] {
+  const conf = (id: string) => confederacao(paisDaSelecao(id));
+  return ([
+    [ids.filter((id) => conf(id) === "conmebol" || conf(id) === "concacaf"), ""],
+    [ids.filter((id) => conf(id) === "uefa"), "-eu"],
+    [ids.filter((id) => conf(id) === "caf"), "-af"],
+    [ids.filter((id) => conf(id) === "afc" || conf(id) === "ofc"), "-as"],
+  ] as [string[], string][]).filter(([lista]) => lista.length > 1).map(([lista, sufixo]) => [lista, `${sufixo}${extra}`]);
+}
+
+/**
+ * Amistosos das duas datas de uma data FIFA entre as seleções de `todas` (as da América entre si e as da Europa entre si)
+ * que estão livres. `sufixo` separa o sorteio e os ids dos jogos de cada continente.
+ */
+function amistososDaJanela(estado: EstadoJogo, datas: [string, string], todas: string[], sufixo: string): Partida[] {
+  const rng = rngPara(estado.semente, `amistosos${sufixo}/${datas[0]}`);
   const jogos: Partida[] = [];
-  proxima.datas.forEach((data, k) => {
+  // Quem joga a repescagem nessa data FIFA (semifinal na quinta, final na terça) fica sem amistoso nas duas datas.
+  const naRepescagem = new Set(Object.values(estado.selecoes?.competicoes ?? {})
+    .filter((c) => c && (c.fase === "rep-semi" || c.fase === "rep-final"))
+    .flatMap((c) => [...(c!.repescagem ?? []), ...(c!.entram?.final ?? [])]));
+  datas.forEach((data, k) => {
     // Ocupadas: jogo oficial no dia ou a 2 dias dele (a Copa América começa logo depois da data de junho).
     const ocupadas = new Set(estado.partidas.filter((p) => ehCompeticaoDeSelecoes(p.serie) && Math.abs(diasEntre(p.data, data)) <= 2)
       .flatMap((p) => [p.mandante, p.visitante]));
-    const livres = peloRanking(estado, todas.filter((x) => !ocupadas.has(x)));
+    const livres = peloRanking(estado, todas.filter((x) => !ocupadas.has(x) && !naRepescagem.has(x)));
     // Em blocos de 4 pela força; na segunda data os blocos andam 2 casas (outro adversário).
     const ordem = k === 1 ? [...livres.slice(2), ...livres.slice(0, 2)] : livres;
     const pares: [string, string][] = [];
@@ -609,9 +1240,9 @@ export function marcarAmistosos(estado: EstadoJogo) {
       const bloco = rng.embaralhar(ordem.slice(i, i + 4));
       for (let a = 0; a + 1 < bloco.length; a += 2) pares.push(rng.chance(0.5) ? [bloco[a], bloco[a + 1]] : [bloco[a + 1], bloco[a]]);
     }
-    pares.forEach(([m, v], i) => jogos.push(jogo(`${AMISTOSOS}-${data}-${i + 1}`, AMISTOSOS, "amistoso", k + 1, data, m, v)));
+    pares.forEach(([m, v], i) => jogos.push(jogo(`${AMISTOSOS}-${data}${sufixo}-${i + 1}`, AMISTOSOS, "amistoso", k + 1, data, m, v)));
   });
-  marcar(estado, jogos);
+  return jogos;
 }
 
 /** Jogos de uma fase (em `partidas` e na agenda). */
@@ -648,6 +1279,16 @@ export function avancarSelecoes(estado: EstadoJogo): string[] {
   const nome = (id: string) => estado.clubes[id]?.nome ?? id;
   for (const comp of Object.values(sel.competicoes)) {
     if (!comp || comp.fase === "encerrada") continue;
+    if (comp.fase === "aguardando") {
+      // A Copa fecha a lista quando a repescagem mundial e a da Europa acabam (ou, sem elas, 10 dias antes de começar).
+      const acabou = (id: string) => sel.competicoes[id as IdCompeticaoSelecoes]?.fase === "encerrada";
+      const inicio = diaDaSemana(comp.ano, DATAS_COPA.r1[0], DATAS_COPA.r1[1]);
+      if ((acabou(`S-INT-${comp.ano}`) && acabou(`S-ELI-UEFA-${comp.ano}`)) || diasEntre(estado.data, inicio) <= 10) {
+        montarCopa(estado, comp);
+        noticias.push(`Copa do Mundo de ${comp.ano}: as 48 seleções estão definidas e os grupos foram sorteados.`);
+      }
+      continue;
+    }
     const jogos = jogosDaFase(estado, comp.id, comp.fase);
     if (!jogos.length || jogos.some((p) => !p.jogada)) continue;
     const rng = rngPara(estado.semente, `${comp.id}/${comp.fase}`);
@@ -660,6 +1301,16 @@ export function avancarSelecoes(estado: EstadoJogo): string[] {
       depoisDaCompeticao(estado, comp);
     } else if (comp.tipo === "eliminatorias-concacaf") {
       noticias.push(...avancarConcacaf(estado, comp, rng));
+    } else if (comp.tipo === "eliminatorias-euro" || comp.tipo === "eliminatorias-uefa") {
+      noticias.push(...avancarEliminatoriasDaEuropa(estado, comp));
+    } else if (comp.tipo === "liga-das-nacoes" && comp.fase === "ligas") {
+      noticias.push(...fimDasLigas(estado, comp));
+    } else if (comp.tipo === "eliminatorias-caf" || comp.tipo === "eliminatorias-afc" || comp.tipo === "eliminatorias-ofc") {
+      noticias.push(...avancarEliminatoriasDoMundo(estado, comp));
+    } else if (comp.tipo === "repescagem-mundial") {
+      noticias.push(...avancarRepescagemMundial(estado, comp));
+    } else if (comp.tipo === "copa-do-mundo") {
+      noticias.push(...avancarCopaDoMundo(estado, comp));
     } else {
       noticias.push(...avancarTorneio(estado, comp));
     }
@@ -704,12 +1355,28 @@ function avancarConcacaf(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes, rng
 
 function avancarTorneio(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes): string[] {
   const nome = (id: string) => estado.clubes[id]?.nome ?? id;
-  const datas = (fase: string) => diaDaSemana(comp.ano, DATAS_TORNEIO[fase][0], DATAS_TORNEIO[fase][1]);
+  // A Eurocopa tem oitavas; as finais da Liga das Nações são em junho do ano seguinte ao da fase de ligas.
+  const daLiga = comp.tipo === "liga-das-nacoes";
+  const calendario = daLiga ? DATAS_LIGA_DAS_NACOES : comp.tipo === "eurocopa" ? DATAS_EURO : DATAS_TORNEIO;
+  const datas = (fase: string) => diaDaSemana(comp.ano + (daLiga ? 1 : 0), calendario[fase][0], calendario[fase][1]);
   const mata = (fase: string, pares: [string, string][]) => {
     comp.fase = fase;
     marcar(estado, pares.map(([a, b], i) => jogo(`${comp.id}-${fase}-${i + 1}`, comp.id, fase, 1, datas(fase), a, b, { chave: i + 1, ...mandoNoTorneio(comp.sede, a, b) })));
   };
+  const emPares = (v: string[]) => Array.from({ length: v.length / 2 }, (_, i) => [v[2 * i], v[2 * i + 1]] as [string, string]);
   const vencedores = (fase: string) => jogosDaFase(estado, comp.id, fase).sort((a, b) => (a.chave ?? 0) - (b.chave ?? 0)).map(vencedorDoJogo);
+  if (comp.fase === "grupos" && comp.tipo === "eurocopa") {
+    // Os 6 primeiros, os 6 segundos e os 4 melhores terceiros, em ordem de campanha: 1º x 16º, 8º x 9º...
+    const t = tabelasDeSelecoes(estado, comp.id, "grupos");
+    const s = [0, 1, 2].flatMap((pos) => melhoresLinhas(estado, t.map((g) => g[pos]), pos === 2 ? 4 : 6));
+    mata("oitavas", [[s[0], s[15]], [s[7], s[8]], [s[3], s[12]], [s[4], s[11]], [s[1], s[14]], [s[6], s[9]], [s[2], s[13]], [s[5], s[10]]]);
+    return [`${comp.nome}: nas oitavas, ${s.map(nome).join(", ")}.`];
+  }
+  if (comp.fase === "oitavas") {
+    const v = vencedores("oitavas");
+    mata("quartas", emPares(v));
+    return [`${comp.nome}: nas quartas, ${v.map(nome).join(", ")}.`];
+  }
   if (comp.fase === "grupos") {
     const t = tabelasDeSelecoes(estado, comp.id, "grupos");
     // 1º A x 2º B, 1º B x 2º A, 1º C x 2º D, 1º D x 2º C.
@@ -853,7 +1520,8 @@ export function confirmarConvocacao(estado: EstadoJogo, ids: number[]) {
 /** Peso do jogo no ranking: amistoso 20, eliminatórias 40, torneio 50, final 60. */
 function pesoNoRanking(p: Partida): number {
   if (p.serie === AMISTOSOS) return 20;
-  if (p.serie.startsWith("S-ELI")) return 40;
+  if (p.serie.startsWith("S-ELI") || p.serie.startsWith("S-INT") || (p.serie.startsWith("S-LN") && p.fase === "ligas")) return 40;
+  if (p.serie.startsWith("S-COPA")) return p.fase === "final" ? 70 : 60;
   return p.fase === "final" ? 60 : 50;
 }
 
@@ -951,6 +1619,11 @@ const ARTIGO_DO_PAIS: Record<string, "o" | "a" | "os" | "as" | ""> = {
   CR: "a", HN: "", GT: "a", SV: "", PA: "o", NI: "a", BZ: "", JM: "a", TT: "", HT: "o", DO: "a", CU: "", PR: "", SR: "o",
   GY: "a", CW: "", AW: "", SX: "", BQ: "", MQ: "a", GP: "", GF: "a", MF: "", BB: "", BS: "as", BM: "as", KY: "as", LC: "",
   GD: "", VC: "", KN: "", AG: "", DM: "a", MS: "", AI: "", VG: "as", VI: "as", TC: "",
+  ES: "a", FR: "a", EN: "a", PT: "", DE: "a", NL: "a", IT: "a", HR: "a", NO: "a", BE: "a", CH: "a", DK: "a", TR: "a", AT: "a",
+  UA: "a", RU: "a", XS: "a", RS: "a", GR: "a", HU: "a", PL: "a", CZ: "a", SE: "a", XW: "o", SK: "a", SI: "a", IE: "a", RO: "a",
+  AL: "a", GE: "a", XK: "o", IL: "", BA: "a", MK: "a", IS: "a", XN: "a", FI: "a", ME: "", BY: "", BG: "a", KZ: "o", AM: "a",
+  LU: "", AZ: "o", FO: "as", CY: "", EE: "a", LV: "a", LT: "a", MD: "a", MT: "", AD: "", GI: "", LI: "", SM: "",
+  ...Object.fromEntries(Object.entries(SELECOES_MUNDO).map(([pais, linha]) => [pais, linha[8]])),
 };
 const FORMAS_DO_PAIS: Record<"o" | "O" | "do" | "ao", Record<"o" | "a" | "os" | "as" | "", string>> = {
   o: { o: "o ", a: "a ", os: "os ", as: "as ", "": "" },
@@ -984,7 +1657,7 @@ export function convitesDeSelecoes(estado: EstadoJogo, reputacao: number): strin
   for (const id of escolhidas) {
     enviarMensagem(estado, {
       tipo: "convite", titulo: `Convite ${comArtigoDaSelecao("do", id, estado)}`,
-      texto: `A federação ${comArtigoDaSelecao("do", id, estado)} quer você como técnico da seleção, junto com o clube. ${rankingDasSelecoes(estado).find((s) => s.id === id)!.pos}º no ranking da América. Responda até ${validaAte.split("-").reverse().join("/")}.`,
+      texto: `A federação ${comArtigoDaSelecao("do", id, estado)} quer você como técnico da seleção, junto com o clube. ${rankingDasSelecoes(estado).find((s) => s.id === id)!.pos}º no ranking. Responda até ${validaAte.split("-").reverse().join("/")}.`,
       convite: { clubeId: id, validaAte },
     });
   }
@@ -1025,22 +1698,27 @@ export function deixarSelecao(estado: EstadoJogo, motivo?: string) {
  * dispensa quando uma das favoritas fica de fora (Eliminatórias) ou cai nos grupos (torneio).
  */
 function depoisDaCompeticao(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes) {
+  registrarNaCopa(estado, comp);
   const minha = estado.tecnico.selecao;
   if (!minha || !comp.selecoes.includes(minha)) return;
   const t = estado.tecnico;
   const subir = (d: number) => { t.reputacao = limitar((t.reputacao ?? 60) + d, REPUTACAO.minimo, REPUTACAO.maximo); };
   const favoritas = peloRanking(estado, comp.selecoes);
-  if (comp.tipo === "eliminatorias-sul" || comp.tipo === "eliminatorias-concacaf") {
+  if (comp.tipo.startsWith("eliminatorias")) {
     if (comp.classificados?.includes(minha)) { subir(4); return; }
-    const vagas = comp.tipo === "eliminatorias-sul" ? 6 : 3;
+    const vagas = { "eliminatorias-sul": 6, "eliminatorias-concacaf": 3, "eliminatorias-euro": 16, "eliminatorias-uefa": 10, "eliminatorias-caf": 7, "eliminatorias-afc": 6, "eliminatorias-ofc": 1 }[comp.tipo as string] ?? 3;
     if (!comp.repescagem?.includes(minha) && favoritas.indexOf(minha) < vagas) {
       subir(-6);
-      deixarSelecao(estado, `${comArtigoDaSelecao("O", minha, estado)} ficou fora da Copa do Mundo e a federação decidiu trocar de técnico.`);
+      const torneio = comp.tipo === "eliminatorias-euro" ? "da Eurocopa" : "da Copa do Mundo";
+      deixarSelecao(estado, `${comArtigoDaSelecao("O", minha, estado)} ficou fora ${torneio} e a federação decidiu trocar de técnico.`);
     }
     return;
   }
-  if (comp.campeao === minha) { subir(6); return; }
-  const passou = jogosDaFase(estado, comp.id, "quartas").some((p) => p.mandante === minha || p.visitante === minha);
+  if (comp.tipo === "repescagem-mundial") { if (comp.classificados?.includes(minha)) subir(3); return; }
+  if (comp.campeao === minha) { subir(comp.tipo === "copa-do-mundo" ? 12 : comp.tipo === "liga-das-nacoes" ? 4 : 6); return; }
+  if (comp.tipo === "liga-das-nacoes") return;
+  const primeiraDoMataMata = comp.tipo === "copa-do-mundo" ? "dezesseis" : comp.tipo === "eurocopa" ? "oitavas" : "quartas";
+  const passou = jogosDaFase(estado, comp.id, primeiraDoMataMata).some((p) => p.mandante === minha || p.visitante === minha);
   if (!passou && favoritas.indexOf(minha) < 4) {
     subir(-6);
     deixarSelecao(estado, `${comArtigoDaSelecao("O", minha, estado)} caiu na fase de grupos da ${comp.nome} e a federação decidiu trocar de técnico.`);
@@ -1057,7 +1735,11 @@ export function selecoesDaTemporadaEmTexto(estado: EstadoJogo, r: RegistroTempor
     const ano = id.split("-").at(-1);
     if (x.campeao) return [`${nomeDaCompeticaoDeSelecoes(undefined, id)} ${ano}: ${nome(x.campeao)}${x.vice ? ` (vice: ${nome(x.vice)})` : ""}`];
     const repescagem = x.repescagem?.length ? `; repescagem: ${x.repescagem.map(nome).join(" e ")}` : "";
-    return [`${nomeDaCompeticaoDeSelecoes(undefined, id)} da Copa de ${ano}: ${(x.classificados ?? []).map(nome).join(", ")}${repescagem}`];
+    const nomeDaComp = nomeDaCompeticaoDeSelecoes(undefined, id);
+    // Na Europa são muitas (24 na Eurocopa, 16 na Copa): só a conta; a lista fica nas Tabelas até a virada.
+    const classificados = x.classificados ?? [];
+    const quem = classificados.length > 8 ? `${classificados.length} seleções classificadas` : classificados.map(nome).join(", ");
+    return [`${nomeDaComp} ${id.startsWith("S-ELI-EURO") ? "de" : "da Copa de"} ${ano}: ${quem}${repescagem}`];
   });
 }
 
@@ -1110,10 +1792,26 @@ export function anoNovoDasSelecoes(estado: EstadoJogo, continuam: Partida[]) {
 
 /** Save de antes das seleções: entram as seleções, as competições que ainda não começaram e os amistosos da próxima data. */
 export function juntarSelecoes(estado: EstadoJogo) {
-  if (estado.selecoes) return;
-  criarSelecoes(estado);
-  estado.selecoes!.amistososAte = estado.data;
+  const tinha = !!estado.selecoes;
+  const novas = criarSelecoes(estado);
+  if (!novas.length) return;
+  const sel = estado.selecoes!;
+  if (!tinha) sel.amistososAte = estado.data;
   criarCompeticoesDoAno(estado, estado.data);
+  // Save com as seleções da América e sem as da Europa: se os amistosos da próxima data FIFA já estavam marcados, as
+  // novas ganham os delas nessa data.
+  if (tinha) {
+    // Amistoso marcado antes que bate com um jogo oficial novo (as repescagens de março de 2026) sai.
+    const oficiais = estado.partidas.filter((p) => ehCompeticaoDeSelecoes(p.serie) && p.serie !== AMISTOSOS && !p.jogada);
+    estado.partidas = estado.partidas.filter((p) => p.serie !== AMISTOSOS || p.jogada ||
+      !oficiais.some((o) => Math.abs(diasEntre(o.data, p.data)) <= 2 && [o.mandante, o.visitante].some((x) => x === p.mandante || x === p.visitante)));
+    for (const { datas } of janelasDoAno(estado.temporada)) {
+      if (datas[0] > estado.data && datas[1] <= (sel.amistososAte ?? "")) {
+        const novos = gruposDeAmistosos(novas, `-n${estado.temporada}`).flatMap(([ids, sufixo]) => amistososDaJanela(estado, datas, ids, sufixo));
+        marcar(estado, novos.filter((p) => !estado.partidas.some((x) => x.id === p.id)));
+      }
+    }
+  }
   marcarAmistosos(estado);
   atualizarConcentracoes(estado);
 }

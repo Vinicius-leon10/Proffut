@@ -1,12 +1,11 @@
-import { execFileSync } from "node:child_process";
-import { abrirSite, agora, botao, cartaoDoProximoJogo, esperarSalvar, expect, irParaOMeuJogo, test } from "./ajuda";
+import { abrirSite, agora, botao, cartaoDoProximoJogo, esperarNoSave, esperarSalvar, expect, irParaOMeuJogo, montarSave, test } from "./ajuda";
 
 const nomeNoTopo = (page: import("@playwright/test").Page) => page.locator(".topo .titulo").first();
 
 test("R36 demissão: com a diretoria sem paciência, uma derrota demite o técnico; ele escolhe uma das propostas e assume o novo clube", async ({ page }) => {
   // Jogo montado pelo motor: diretoria quase sem paciência, técnico no clube há tempo e um time sem força para ganhar.
   // A semente é fixa para o primeiro jogo ser uma derrota (num jogo novo sorteado, às vezes dava empate fora de casa).
-  const save = execFileSync("npx", ["tsx", "tests/saves/diretoria-sem-paciencia.ts"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("diretoria-sem-paciencia");
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(cartaoDoProximoJogo(page)).toBeVisible();
@@ -23,8 +22,10 @@ test("R36 demissão: com a diretoria sem paciência, uma derrota demite o técni
   const propostas = page.locator(".tela-cheia").getByRole("button", { name: /^Assumir (o|a) / });
   await expect(propostas).toHaveCount(3);
 
-  // Fechar e abrir o app: a demissão continua esperando a escolha.
+  // Fechar e abrir o app: a demissão continua esperando a escolha. Espera a demissão no save (com o save grande da
+  // Europa, um salvamento de antes dela bastava ao esperarSalvar e o app recarregava sem a demissão; falhou no GitHub).
   await esperarSalvar(page, desde);
+  await esperarNoSave(page, "!!estado.tecnico.demissao");
   await page.reload();
   await page.getByRole("button", { name: /Continuar/ }).first().click();
   await expect(titulo).toBeVisible();
@@ -41,7 +42,7 @@ test("R36 demissão: com a diretoria sem paciência, uma derrota demite o técni
 test("R37 convite: quem vai bem até o meio da temporada recebe o convite de um clube maior e pode aceitar", async ({ page }) => {
   test.setTimeout(120_000);
   // Jogo montado pelo motor: a Ponte Preta lidera a Série B, logo antes do jogo do meio da fase de liga.
-  const save = execFileSync("npx", ["tsx", "tests/saves/meio-da-temporada.ts", "ponte-preta"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("meio-da-temporada", "ponte-preta");
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(cartaoDoProximoJogo(page)).toBeVisible();

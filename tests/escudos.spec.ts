@@ -94,7 +94,7 @@ test("R73 os times novos têm os escudos que o usuário mandou: todo clube do jo
   // Todo clube do jogo (séries, Série D, só do estadual e de fora) tem o seu arquivo, menos os que ainda estão na lista
   // dos que faltam (docs/TIMES_NOVOS.md, de tools/times/lista.py): o usuário decidiu publicar sem eles ("Pode deixar tudo
   // no jogo, depois colocamos os escudos"); até chegarem, o jogo desenha o escudo com as cores e a sigla.
-  const ids = ["data/brasil-2026/clubes.json", "data/brasil-2026/serie-d-reserva.json", "data/brasil-2026/clubes-estaduais.json", "data/america-do-sul-2026/clubes.json", "data/europa-2026/clubes.json"]
+  const ids = ["data/brasil-2026/clubes.json", "data/brasil-2026/serie-d-reserva.json", "data/brasil-2026/clubes-estaduais.json", "data/america-do-sul-2026/clubes.json", "data/europa-2026/clubes.json", "data/europa-2026/clubes-segundas.json", "data/europa-2026/clubes-terceiras.json", "data/europa-2026/clubes-outros.json", "data/asia-2026/clubes.json", "data/mundo-2026/clubes.json"]
     .flatMap((arquivo) => (JSON.parse(readFileSync(arquivo, "utf8")) as { clubes: { id: string }[] }).clubes.map((c) => c.id));
   expect(ids.length).toBeGreaterThan(400);
   const faltam = new Set([...readFileSync("docs/TIMES_NOVOS.md", "utf8").matchAll(/`([a-z0-9-]+)\.png`/g)].map((m) => m[1]));

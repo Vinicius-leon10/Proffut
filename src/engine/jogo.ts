@@ -8,6 +8,15 @@ import exteriorClubesJson from "../../data/america-do-sul-2026/clubes.json";
 import exteriorJogadoresJson from "../../data/america-do-sul-2026/jogadores.json";
 import europaClubesJson from "../../data/europa-2026/clubes.json";
 import europaJogadoresJson from "../../data/europa-2026/jogadores.json";
+import europaSegundasJson from "../../data/europa-2026/clubes-segundas.json";
+import europaSegundasJogadoresJson from "../../data/europa-2026/jogadores-segundas.json";
+import europaTerceirasJson from "../../data/europa-2026/clubes-terceiras.json";
+import europaOutrosJson from "../../data/europa-2026/clubes-outros.json";
+import europaOutrosJogadoresJson from "../../data/europa-2026/jogadores-outros.json";
+import asiaClubesJson from "../../data/asia-2026/clubes.json";
+import asiaJogadoresJson from "../../data/asia-2026/jogadores.json";
+import mundoClubesJson from "../../data/mundo-2026/clubes.json";
+import mundoJogadoresJson from "../../data/mundo-2026/jogadores.json";
 import { comArtigo } from "./artigos";
 import { diasEntre, inicioDaTemporada, mesDe, somarDias } from "./calendario";
 import {
@@ -68,8 +77,14 @@ export const FICHAS: FichaClube[] = clubesJson.clubes as FichaClube[];
 export const RESERVA: FichaClube[] = reservaJson.clubes as FichaClube[];
 /** Clubes que jogam só o estadual. */
 export const FICHAS_ESTADUAIS: FichaClube[] = estaduaisClubesJson.clubes as FichaClube[];
-/** Clubes de fora do Brasil: os outros países da América e as 7 ligas da Europa. */
-export const FICHAS_EXTERIOR: FichaClube[] = [...(exteriorClubesJson.clubes as FichaClube[]), ...(europaClubesJson.clubes as FichaClube[])];
+/**
+ * Clubes de fora do Brasil: os outros países da América, as 7 ligas da Europa (1ª, 2ª e 3ª divisão; a 3ª, leve), a 1ª
+ * divisão de outros 16 países da Europa e a 1ª do Japão, da Coreia do Sul, da Arábia Saudita, da Austrália e de 25 países da
+ * África e da Ásia.
+ */
+export const FICHAS_EXTERIOR: FichaClube[] = [...(exteriorClubesJson.clubes as FichaClube[]), ...(europaClubesJson.clubes as FichaClube[]),
+  ...(europaSegundasJson.clubes as FichaClube[]), ...(europaTerceirasJson.clubes as FichaClube[]), ...(europaOutrosJson.clubes as FichaClube[]),
+  ...(asiaClubesJson.clubes as FichaClube[]), ...(mundoClubesJson.clubes as FichaClube[])];
 /** Quem joga cada estadual (sigla do estado → ids dos clubes). */
 export const PARTICIPANTES_ESTADUAIS = estaduaisJson.participantes as Record<string, string[]>;
 /**
@@ -77,7 +92,9 @@ export const PARTICIPANTES_ESTADUAIS = estaduaisJson.participantes as Record<str
  * ligas de fora. Clube sem elenco aqui ganha um gerado.
  */
 export const ELENCOS_REAIS = { ...(jogadoresJson.elencos as Record<string, JogadorReal[]>), ...(exteriorJogadoresJson.elencos as Record<string, JogadorReal[]>),
-  ...(europaJogadoresJson.elencos as Record<string, JogadorReal[]>) };
+  ...(europaJogadoresJson.elencos as Record<string, JogadorReal[]>), ...(europaSegundasJogadoresJson.elencos as Record<string, JogadorReal[]>),
+  ...(europaOutrosJogadoresJson.elencos as Record<string, JogadorReal[]>), ...(asiaJogadoresJson.elencos as Record<string, JogadorReal[]>),
+  ...(mundoJogadoresJson.elencos as Record<string, JogadorReal[]>) };
 
 /** Tática inicial dos clubes da IA: os fortes atacam mais, os fracos se fecham. */
 function taticaDaIa(ficha: FichaClube, rng: ReturnType<typeof criarRng>): Tatica {
@@ -132,7 +149,8 @@ export function juntarClubesNovos(estado: EstadoJogo, rng: ReturnType<typeof cri
       delete clube.elencoDaCopa;
       comElenco.delete(clube.id);
     }
-    if (comElenco.has(clube.id) || clube.leve) continue;
+    // As seleções não têm elenco próprio (a da Espanha tem todos os convocados em clubes do jogo).
+    if (comElenco.has(clube.id) || clube.leve || clube.serie === "selecao") continue;
     criarElenco(estado, clube, rng);
     if (estado.selecoes) juntarQuemJogavaFora(estado, clube.id);
   }

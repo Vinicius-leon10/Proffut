@@ -135,7 +135,20 @@ export const COTA_TV_ESTADUAL: Record<SerieId, number> = { A: 250_000, B: 160_00
  */
 export const TV_EUROPA_MES: Record<string, number> = {
   EN: 21_500_000, ES: 11_500_000, IT: 14_000_000, DE: 12_500_000, FR: 12_500_000, PT: 8_000_000, NL: 7_000_000,
+  // 2ª divisão (nov/2026): bem menos, como lá; os pequenos recebem pelo menos 35% da base (`TV_PISO_SEGUNDA`).
+  EN2: 9_000_000, ES2: 3_500_000, IT2: 3_500_000, DE2: 4_500_000, FR2: 3_500_000, PT2: 2_200_000, NL2: 1_600_000,
+  // Outros países (só a 1ª divisão): a folha típica de cada liga.
+  TR: 9_000_000, RU: 7_000_000, BE: 5_000_000, AT: 3_000_000, CH: 3_500_000, DK: 3_000_000, GR: 4_000_000, HR: 2_000_000,
+  NO: 2_000_000, PL: 2_500_000, RO: 2_000_000, XS: 4_000_000, SE: 2_000_000, RS: 2_000_000, CZ: 2_500_000, UA: 2_500_000,
+  EN3: 2_500_000, ES3: 900_000, IT3: 900_000, DE3: 1_400_000, FR3: 900_000, PT3: 500_000, NL3: 400_000,
+  // Ásia (nov/2026): o mesmo cálculo, pela folha típica de cada liga.
+  SA: 9_000_000, JP: 3_500_000, KR: 2_500_000, AU: 1_500_000,
+  QA: 4_000_000, AE: 4_000_000, CN: 3_000_000, EG: 1_500_000, MA: 1_500_000, IR: 1_200_000, ZA: 1_500_000, DZ: 1_000_000,
+  TN: 1_000_000, UZ: 800_000, IQ: 700_000, TH: 900_000, ID: 800_000, IN: 900_000, MY: 600_000, VN: 500_000, KW: 600_000,
+  JO: 400_000, BH: 400_000, TZ: 400_000, NG: 300_000, GH: 300_000, AO: 400_000, ZM: 250_000, KE: 250_000,
 };
+/** Na 2ª divisão da Europa, a TV paga a todos pelo menos esta fração da base da liga (senão os pequenos quebram). */
+export const TV_PISO_SEGUNDA = 0.35;
 export const PATROCINIO_MES: Record<SerieId, number> = { A: 1_200_000, B: 350_000, C: 150_000 };
 /** Patrocínio da Série D, como fração do da Série C. */
 export const PATROCINIO_SERIE_D = 0.6;

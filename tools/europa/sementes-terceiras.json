@@ -1,0 +1,136 @@
+{
+ "descricao": "Terceira divisão de 2025/26 das 7 ligas da Europa do jogo (tools/times/wikipedia.py).",
+ "sementes": [
+  {
+   "id": "europa3-EN3-en",
+   "liga": "EN3",
+   "lang": "en",
+   "paises": [
+    "Q21",
+    "Q145",
+    "Q25"
+   ],
+   "titulos": [
+    "2025–26 EFL League One"
+   ],
+   "consultas": [
+    "2025–26 EFL League One"
+   ],
+   "exige": [
+    "2025–26",
+    "League One"
+   ]
+  },
+  {
+   "id": "europa3-ES3-en",
+   "liga": "ES3",
+   "lang": "en",
+   "paises": [
+    "Q29",
+    "Q228"
+   ],
+   "titulos": [
+    "2025–26 Primera Federación"
+   ],
+   "consultas": [
+    "2025–26 Primera Federación"
+   ],
+   "exige": [
+    "2025–26",
+    "Primera Federación"
+   ]
+  },
+  {
+   "id": "europa3-IT3-en",
+   "liga": "IT3",
+   "lang": "en",
+   "paises": [
+    "Q38",
+    "Q238"
+   ],
+   "titulos": [
+    "2025–26 Serie C"
+   ],
+   "consultas": [
+    "2025–26 Serie C"
+   ],
+   "exige": [
+    "2025–26",
+    "Serie C"
+   ]
+  },
+  {
+   "id": "europa3-DE3-en",
+   "liga": "DE3",
+   "lang": "en",
+   "paises": [
+    "Q183"
+   ],
+   "titulos": [
+    "2025–26 3. Liga"
+   ],
+   "consultas": [
+    "2025–26 3. Liga"
+   ],
+   "exige": [
+    "2025–26",
+    "3. Liga"
+   ]
+  },
+  {
+   "id": "europa3-FR3-en",
+   "liga": "FR3",
+   "lang": "en",
+   "paises": [
+    "Q142",
+    "Q235"
+   ],
+   "titulos": [
+    "2025–26 Championnat National"
+   ],
+   "consultas": [
+    "2025–26 Championnat National"
+   ],
+   "exige": [
+    "2025–26",
+    "National"
+   ]
+  },
+  {
+   "id": "europa3-PT3-en",
+   "liga": "PT3",
+   "lang": "en",
+   "paises": [
+    "Q45"
+   ],
+   "titulos": [
+    "2025–26 Liga 3"
+   ],
+   "consultas": [
+    "2025–26 Liga 3"
+   ],
+   "exige": [
+    "2025–26",
+    "Liga 3"
+   ]
+  },
+  {
+   "id": "europa3-NL3-en",
+   "liga": "NL3",
+   "lang": "en",
+   "paises": [
+    "Q55"
+   ],
+   "titulos": [
+    "2025–26 Tweede Divisie"
+   ],
+   "consultas": [
+    "2025–26 Tweede Divisie"
+   ],
+   "exige": [
+    "2025–26",
+    "Tweede"
+   ]
+  }
+ ]
+}

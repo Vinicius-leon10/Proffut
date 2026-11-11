@@ -1,0 +1,9658 @@
+{
+ "temporada": 2026,
+ "descricao": "Clubes da 1ª divisão de 2025/26 (ou 2026) de países da África e da Ásia, das páginas da Wikipédia em inglês (CC BY-SA) e do Wikidata (CC0). Nomes, siglas e números do Proffut.",
+ "ligas": {
+  "EG": "africa",
+  "MA": "africa",
+  "DZ": "africa",
+  "TN": "africa",
+  "ZA": "africa",
+  "NG": "africa",
+  "GH": "africa",
+  "TZ": "africa",
+  "AO": "africa",
+  "ZM": "africa",
+  "KE": "africa",
+  "CN": "asia",
+  "IR": "asia",
+  "QA": "asia",
+  "AE": "asia",
+  "UZ": "asia",
+  "IN": "asia",
+  "TH": "asia",
+  "IQ": "asia",
+  "MY": "asia",
+  "ID": "asia",
+  "VN": "asia",
+  "JO": "asia",
+  "KW": "asia",
+  "BH": "asia"
+ },
+ "clubes": [
+  {
+   "id": "al-ahly",
+   "nome": "Al Ahly",
+   "sigla": "AHL",
+   "cidade": "Cairo",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#FF0000"
+   },
+   "estadio": {
+    "nome": "Estádio Internacional do Cairo",
+    "capacidade": 90000
+   },
+   "fundacao": 1907,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 72,
+   "forcaElenco": {
+    "min": 60,
+    "max": 76
+   },
+   "caixaInicial": 21000000
+  },
+  {
+   "id": "zamalek",
+   "nome": "Zamalek",
+   "sigla": "ZAM",
+   "cidade": "Gizé",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#FF0000"
+   },
+   "estadio": {
+    "nome": "Estádio Internacional do Cairo",
+    "capacidade": 90000
+   },
+   "fundacao": 1911,
+   "rival": null,
+   "torcida": 22,
+   "reputacao": 71,
+   "forcaElenco": {
+    "min": 59,
+    "max": 75
+   },
+   "caixaInicial": 21000000
+  },
+  {
+   "id": "al-masry",
+   "nome": "Al Masry",
+   "sigla": "MAS",
+   "cidade": "Porto Said",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#00FF00"
+   },
+   "estadio": {
+    "nome": "Estádio de Porto Saíde",
+    "capacidade": 18000
+   },
+   "fundacao": 1920,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 58,
+    "max": 74
+   },
+   "caixaInicial": 20000000
+  },
+  {
+   "id": "ismaily",
+   "nome": "Ismaily",
+   "sigla": "ISM",
+   "cidade": "Ismaília",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Ismaília",
+    "capacidade": 23525
+   },
+   "fundacao": 1924,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 69,
+   "forcaElenco": {
+    "min": 57,
+    "max": 73
+   },
+   "caixaInicial": 20000000
+  },
+  {
+   "id": "pyramids",
+   "nome": "Pyramids",
+   "sigla": "PYR",
+   "cidade": "Cairo",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio 30 de Junho",
+    "capacidade": 30000
+   },
+   "fundacao": 2008,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 56,
+    "max": 72
+   },
+   "caixaInicial": 19000000
+  },
+  {
+   "id": "al-mokawloon-al-arab",
+   "nome": "Al Mokawloon Al Arab",
+   "sigla": "MOK",
+   "cidade": "Madīnat an-Naṣr",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Osman Ahmed Osman",
+    "capacidade": 35000
+   },
+   "fundacao": 1973,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 67,
+   "forcaElenco": {
+    "min": 55,
+    "max": 71
+   },
+   "caixaInicial": 19000000
+  },
+  {
+   "id": "ghazl-el-mahalla",
+   "nome": "Ghazl El Mahalla",
+   "sigla": "GHA",
+   "cidade": "Al-Mahalla Al-Kubra",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio El Mahalla",
+    "capacidade": 20000
+   },
+   "fundacao": 1936,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 65,
+   "forcaElenco": {
+    "min": 55,
+    "max": 71
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "enppi",
+   "nome": "ENPPI",
+   "sigla": "ENP",
+   "cidade": "Novo Cairo",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Petro Sport",
+    "capacidade": 25000
+   },
+   "fundacao": 1985,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 54,
+    "max": 70
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "al-ittihad-alexandria",
+   "nome": "Al Ittihad Alexandria",
+   "sigla": "ITT",
+   "cidade": "Alexandria",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Alexandria",
+    "capacidade": 13000
+   },
+   "fundacao": 1914,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "smouha",
+   "nome": "Smouha",
+   "sigla": "SMO",
+   "cidade": "Alexandria",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Alexandria",
+    "capacidade": 13000
+   },
+   "fundacao": 1949,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "haras-el-hodood",
+   "nome": "Haras El-Hodood",
+   "sigla": "HAR",
+   "cidade": "Alexandria",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Harras El-Hedoud",
+    "capacidade": 22000
+   },
+   "fundacao": 1932,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "tala-ea-el-gaish",
+   "nome": "Tala'ea El-Gaish",
+   "sigla": "TAL",
+   "cidade": "Cairo",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Cairo Military Academy Stadium",
+    "capacidade": 22000
+   },
+   "fundacao": 1997,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "wadi-degla",
+   "nome": "Wadi Degla",
+   "sigla": "WAD",
+   "cidade": "Cairo",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Cairo Military Academy Stadium",
+    "capacidade": 22000
+   },
+   "fundacao": 2002,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "petrojet",
+   "nome": "Petrojet",
+   "sigla": "PET",
+   "cidade": "Suez",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#0000FF"
+   },
+   "estadio": {
+    "nome": "Estádio de Suez",
+    "capacidade": 25000
+   },
+   "fundacao": 1980,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "el-gouna",
+   "nome": "El Gouna",
+   "sigla": "GOU",
+   "cidade": "El Gouna",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Khaled Bichara Stadium",
+    "capacidade": 12000
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "modern",
+   "nome": "Modern",
+   "sigla": "MOD",
+   "cidade": "Cairo",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Cairo",
+    "capacidade": 10000
+   },
+   "fundacao": 2011,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "ceramica-cleopatra",
+   "nome": "Ceramica Cleopatra",
+   "sigla": "CER",
+   "cidade": "Seis de Octubre",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Seis de Octubre",
+    "capacidade": 10000
+   },
+   "fundacao": 2007,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "national-bank-of-egypt",
+   "nome": "National Bank of Egypt",
+   "sigla": "NAT",
+   "cidade": "Cairo",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Cairo",
+    "capacidade": 10000
+   },
+   "fundacao": 1951,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "pharco",
+   "nome": "Pharco",
+   "sigla": "PHA",
+   "cidade": "Alexandria",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Borg El Arab",
+    "capacidade": 86000
+   },
+   "fundacao": 2010,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "zed",
+   "nome": "ZED",
+   "sigla": "ZED",
+   "cidade": "ZED",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Internacional do Cairo",
+    "capacidade": 90000
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "kahrbaa-ismailia",
+   "nome": "Kahrbaa Ismailia",
+   "sigla": "KAH",
+   "cidade": "Kahrbaa Ismailia",
+   "estado": "EG",
+   "pais": "EG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Kahrbaa Ismailia",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "raja-club-athletic",
+   "nome": "Raja Club Athletic",
+   "sigla": "RAJ",
+   "cidade": "Casablanca",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#00FF00",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Mohammed V",
+    "capacidade": 67000
+   },
+   "fundacao": 1949,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 70,
+   "forcaElenco": {
+    "min": 59,
+    "max": 75
+   },
+   "caixaInicial": 20000000
+  },
+  {
+   "id": "far-rabat",
+   "nome": "FAR Rabat",
+   "sigla": "FAR",
+   "cidade": "Rabat",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Príncipe Moulay Abdellah",
+    "capacidade": 68095
+   },
+   "fundacao": 1958,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 69,
+   "forcaElenco": {
+    "min": 58,
+    "max": 74
+   },
+   "caixaInicial": 20000000
+  },
+  {
+   "id": "moghreb-atletico-tetuan",
+   "nome": "Moghreb Atlético Tetuán",
+   "sigla": "MOG",
+   "cidade": "Tetuão",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade Saniat Rmel",
+    "capacidade": 15000
+   },
+   "fundacao": 1956,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 67,
+   "forcaElenco": {
+    "min": 56,
+    "max": 72
+   },
+   "caixaInicial": 19000000
+  },
+  {
+   "id": "rs-berkane",
+   "nome": "RS Berkane",
+   "sigla": "RSX",
+   "cidade": "Berkane",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Berkane",
+    "capacidade": 10000
+   },
+   "fundacao": 1938,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 55,
+    "max": 71
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "maghreb-of-fez",
+   "nome": "Maghreb of Fez",
+   "sigla": "MAG",
+   "cidade": "Fez",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Complexo Desportivo de Fez",
+    "capacidade": 45000
+   },
+   "fundacao": 1946,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 65,
+   "forcaElenco": {
+    "min": 54,
+    "max": 70
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "fus-de-rabat",
+   "nome": "FUS de Rabat",
+   "sigla": "FUS",
+   "cidade": "Rabat",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade Belvédère",
+    "capacidade": 15000
+   },
+   "fundacao": 1946,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 54,
+    "max": 70
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "scc-mohammedia",
+   "nome": "SCC Mohammédia",
+   "sigla": "SCC",
+   "cidade": "Mohammedia",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade El Bachir",
+    "capacidade": 15000
+   },
+   "fundacao": 1948,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "hassania-agadir",
+   "nome": "Hassania Agadir",
+   "sigla": "HAS",
+   "cidade": "Agadir",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade d'Agadir",
+    "capacidade": 42000
+   },
+   "fundacao": 1946,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "olympique-club-de-safi",
+   "nome": "Olympique Club de Safi",
+   "sigla": "OLY",
+   "cidade": "Safim",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade El Massira",
+    "capacidade": 10000
+   },
+   "fundacao": 1921,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "difaa-hassani-el-jadidi",
+   "nome": "Difaa Hassani El Jadidi",
+   "sigla": "DIF",
+   "cidade": "El Jadida",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio El Abdi",
+    "capacidade": 15000
+   },
+   "fundacao": 1956,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "kacm",
+   "nome": "KACM",
+   "sigla": "KAC",
+   "cidade": "Marraquexe",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade de Marrakech",
+    "capacidade": 45240
+   },
+   "fundacao": 1947,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "ir-tanger",
+   "nome": "IR Tanger",
+   "sigla": "IRX",
+   "cidade": "Tânger",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Ibn Batouta",
+    "capacidade": 75000
+   },
+   "fundacao": 1957,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "cod-meknes",
+   "nome": "COD Meknès",
+   "sigla": "COD",
+   "cidade": "Meknès",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade d'Honneur (Mequinez)",
+    "capacidade": 20000
+   },
+   "fundacao": 1962,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "nahdat-zemamra",
+   "nome": "Nahdat Zemamra",
+   "sigla": "NAH",
+   "cidade": "Zemamra",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Zemamra",
+    "capacidade": 10000
+   },
+   "fundacao": 1977,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "olympique-dcheira",
+   "nome": "Olympique Dcheira",
+   "sigla": "OLM",
+   "cidade": "Dcheira El Jihadia",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Dcheira El Jihadia",
+    "capacidade": 10000
+   },
+   "fundacao": 1940,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "jeunesse-sportive-soualem",
+   "nome": "Jeunesse Sportive Soualem",
+   "sigla": "JEU",
+   "cidade": "Soualem",
+   "estado": "MA",
+   "pais": "MA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Soualem",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "js-kabylie",
+   "nome": "JS Kabylie",
+   "sigla": "JSX",
+   "cidade": "Tizi-Ouzou",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#00FF00",
+    "secundaria": "#FFFF00"
+   },
+   "estadio": {
+    "nome": "Stade Abdelkader Khalef",
+    "capacidade": 50000
+   },
+   "fundacao": 1946,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 56,
+    "max": 72
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "mc-algiers",
+   "nome": "MC Algiers",
+   "sigla": "MCX",
+   "cidade": "Argel",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#00FF00"
+   },
+   "estadio": {
+    "nome": "Estádio 5 de Julho de 1962",
+    "capacidade": 76200
+   },
+   "fundacao": 1921,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 55,
+    "max": 71
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "usm-alger",
+   "nome": "USM Alger",
+   "sigla": "USM",
+   "cidade": "Argel",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FF0000"
+   },
+   "estadio": {
+    "nome": "Stade Omar-Hamadi",
+    "capacidade": 17000
+   },
+   "fundacao": 1937,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 54,
+    "max": 70
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "es-setif",
+   "nome": "ES Sétif",
+   "sigla": "ESX",
+   "cidade": "Setif",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFFFF"
+   },
+   "estadio": {
+    "nome": "Estádio 8 de Maio de 1945",
+    "capacidade": 25000
+   },
+   "fundacao": 1958,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "mouloudia-club-of-oran",
+   "nome": "Mouloudia Club of Oran",
+   "sigla": "MOU",
+   "cidade": "Orã",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Olímpico de Orã",
+    "capacidade": 40143
+   },
+   "fundacao": 1917,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "cr-belouizdad",
+   "nome": "CR Belouizdad",
+   "sigla": "CRX",
+   "cidade": "Argel",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#FF0000"
+   },
+   "estadio": {
+    "nome": "Estádio 20 de Agosto de 1955",
+    "capacidade": 15000
+   },
+   "fundacao": 1962,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "aso-chlef",
+   "nome": "ASO Chlef",
+   "sigla": "ASO",
+   "cidade": "Chlef",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade Mohamed Boumezrag",
+    "capacidade": 25000
+   },
+   "fundacao": 1947,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "cs-constantine",
+   "nome": "CS Constantine",
+   "sigla": "CSX",
+   "cidade": "Constantina",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Mohamed Hamlaoui",
+    "capacidade": 22968
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "paradou",
+   "nome": "Paradou",
+   "sigla": "PAR",
+   "cidade": "Argel",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#FFFF00",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade Omar-Hamadi",
+    "capacidade": 17000
+   },
+   "fundacao": 1994,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "js-saoura",
+   "nome": "JS Saoura",
+   "sigla": "JSX",
+   "cidade": "Méridja",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade 20 Août 1955",
+    "capacidade": 20000
+   },
+   "fundacao": 2008,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "es-mostaganem",
+   "nome": "ES Mostaganem",
+   "sigla": "ESX",
+   "cidade": "Mostaganem",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade Mohamed Bensaïd",
+    "capacidade": 18000
+   },
+   "fundacao": 1940,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "usm-khenchela",
+   "nome": "USM Khenchela",
+   "sigla": "USM",
+   "cidade": "Khenchela",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Amar Hamam Stadium",
+    "capacidade": 8000
+   },
+   "fundacao": 1943,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "es-ben-aknoun",
+   "nome": "ES Ben Aknoun",
+   "sigla": "ESX",
+   "cidade": "Ben Aknoun",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Ben Aknoun",
+    "capacidade": 10000
+   },
+   "fundacao": 1935,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "olympique-akbou",
+   "nome": "Olympique Akbou",
+   "sigla": "OLP",
+   "cidade": "Akbou",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Akbou",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "mc-el-bayadh",
+   "nome": "MC El Bayadh",
+   "sigla": "MCX",
+   "cidade": "El Bayadh",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de El Bayadh",
+    "capacidade": 10000
+   },
+   "fundacao": 1936,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "mb-rouissat",
+   "nome": "MB Rouissat",
+   "sigla": "MBX",
+   "cidade": "Rouissat",
+   "estado": "DZ",
+   "pais": "DZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Rouissat",
+    "capacidade": 10000
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "esperance-sportive-de-tunis",
+   "nome": "Espérance Sportive de Tunis",
+   "sigla": "ESP",
+   "cidade": "Tunes",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Olímpico de Radès",
+    "capacidade": 65000
+   },
+   "fundacao": 1919,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 57,
+    "max": 73
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "us-ben-guerdane",
+   "nome": "US Ben Guerdane",
+   "sigla": "USX",
+   "cidade": "Ben Gardane",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio 7 de Março",
+    "capacidade": 10000
+   },
+   "fundacao": 1936,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 65,
+   "forcaElenco": {
+    "min": 56,
+    "max": 72
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "club-africain",
+   "nome": "Club Africain",
+   "sigla": "AFR",
+   "cidade": "Tunes",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Olímpico de Radès",
+    "capacidade": 65000
+   },
+   "fundacao": 1920,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 54,
+    "max": 70
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "etoile-sportive-du-sahel",
+   "nome": "Étoile Sportive du Sahel",
+   "sigla": "ETO",
+   "cidade": "Sousse",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Olímpico de Sousse",
+    "capacidade": 42000
+   },
+   "fundacao": 1925,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "cs-sfaxien",
+   "nome": "CS Sfaxien",
+   "sigla": "CSX",
+   "cidade": "Sfax",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Taïeb Mhiri",
+    "capacidade": 11000
+   },
+   "fundacao": 1912,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "stade-tunisien",
+   "nome": "Stade Tunisien",
+   "sigla": "STA",
+   "cidade": "Le Bardo",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade Chedli Zouiten",
+    "capacidade": 18000
+   },
+   "fundacao": 1948,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "ca-bizertine",
+   "nome": "CA Bizertine",
+   "sigla": "CAX",
+   "cidade": "Bizerta",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio 15 de Outubro",
+    "capacidade": 20000
+   },
+   "fundacao": 1928,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "us-monastir",
+   "nome": "US Monastir",
+   "sigla": "USX",
+   "cidade": "Monastir (Tunísia)",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Mustapha Ben Jannet",
+    "capacidade": 20000
+   },
+   "fundacao": 1923,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "as-marsa",
+   "nome": "AS Marsa",
+   "sigla": "ASX",
+   "cidade": "La Marsa",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade Abdelaziz Chtioui",
+    "capacidade": 6000
+   },
+   "fundacao": 1939,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "olympique-beja",
+   "nome": "Olympique Béja",
+   "sigla": "OLI",
+   "cidade": "Béja",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Boujemaa Kmiti Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1929,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "es-zarzis",
+   "nome": "ES Zarzis",
+   "sigla": "ESX",
+   "cidade": "Zarzis",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Abdessalem Kazouz sports complex",
+    "capacidade": 8000
+   },
+   "fundacao": 1934,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "js-kairouan",
+   "nome": "JS Kairouan",
+   "sigla": "JSX",
+   "cidade": "Kairouan",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade Ali Zouaoui",
+    "capacidade": 15000
+   },
+   "fundacao": 1942,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "as-gabes",
+   "nome": "AS Gabès",
+   "sigla": "ASX",
+   "cidade": "Gabès",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Stade Municipal de Gabès",
+    "capacidade": 15000
+   },
+   "fundacao": 1978,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "etoile-sportive-de-metlaoui",
+   "nome": "Etoile Sportive de Metlaoui",
+   "sigla": "ETI",
+   "cidade": "Métlaoui",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Métlaoui",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "as-soliman",
+   "nome": "AS Soliman",
+   "sigla": "ASX",
+   "cidade": "Soliman",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Soliman",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "jeunesse-sportive-d-el-omrane",
+   "nome": "Jeunesse sportive d'El Omrane",
+   "sigla": "JEN",
+   "cidade": "El Omrane",
+   "estado": "TN",
+   "pais": "TN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de El Omrane",
+    "capacidade": 10000
+   },
+   "fundacao": 1943,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "kaizer-chiefs",
+   "nome": "Kaizer Chiefs",
+   "sigla": "KAI",
+   "cidade": "Soweto",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Soccer City",
+    "capacidade": 90000
+   },
+   "fundacao": 1970,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 68,
+   "forcaElenco": {
+    "min": 58,
+    "max": 74
+   },
+   "caixaInicial": 19000000
+  },
+  {
+   "id": "mamelodi-sundowns",
+   "nome": "Mamelodi Sundowns",
+   "sigla": "MAM",
+   "cidade": "Pretória",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Loftus Versfeld",
+    "capacidade": 51762
+   },
+   "fundacao": 1970,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 67,
+   "forcaElenco": {
+    "min": 57,
+    "max": 73
+   },
+   "caixaInicial": 19000000
+  },
+  {
+   "id": "orlando-pirates",
+   "nome": "Orlando Pirates",
+   "sigla": "ORL",
+   "cidade": "Soweto",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Orlando",
+    "capacidade": 40000
+   },
+   "fundacao": 1937,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 65,
+   "forcaElenco": {
+    "min": 55,
+    "max": 71
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "amazulu",
+   "nome": "AmaZulu",
+   "sigla": "AMA",
+   "cidade": "Durban",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Moses Mabhida",
+    "capacidade": 62760
+   },
+   "fundacao": 1932,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 54,
+    "max": 70
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "lamontville-golden-arrows",
+   "nome": "Lamontville Golden Arrows",
+   "sigla": "LAM",
+   "cidade": "Durban",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio King Zwelithini",
+    "capacidade": 10000
+   },
+   "fundacao": 1943,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "maritzburg-united",
+   "nome": "Maritzburg United",
+   "sigla": "MAR",
+   "cidade": "Pietermaritzburg",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Harry Gwala Stadium",
+    "capacidade": 12000
+   },
+   "fundacao": 1988,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "chippa-united",
+   "nome": "Chippa United",
+   "sigla": "CHI",
+   "cidade": "Porto Elizabeth",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Athlone",
+    "capacidade": 34000
+   },
+   "fundacao": 2010,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "cape-town-city",
+   "nome": "Cape Town City",
+   "sigla": "CAP",
+   "cidade": "Cidade do Cabo",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio da Cidade do Cabo",
+    "capacidade": 58309
+   },
+   "fundacao": 2016,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "polokwane-city",
+   "nome": "Polokwane City",
+   "sigla": "POL",
+   "cidade": "Polokwane Local Municipality",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Peter Mokaba",
+    "capacidade": 41733
+   },
+   "fundacao": 2012,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "sekhukhune-united",
+   "nome": "Sekhukhune United",
+   "sigla": "SEK",
+   "cidade": "Polokwane",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Polokwane",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "siwelele",
+   "nome": "Siwelele",
+   "sigla": "SIW",
+   "cidade": "Siwelele",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Siwelele",
+    "capacidade": 10000
+   },
+   "fundacao": 2025,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "real-kings",
+   "nome": "Real Kings",
+   "sigla": "REA",
+   "cidade": "Durban",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Chatsworth Stadium",
+    "capacidade": 22000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "marumo-gallants",
+   "nome": "Marumo Gallants",
+   "sigla": "MAU",
+   "cidade": "Polokwane",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Polokwane",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "richards-bay",
+   "nome": "Richards Bay",
+   "sigla": "RIC",
+   "cidade": "Richards Bay",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Richards Bay",
+    "capacidade": 10000
+   },
+   "fundacao": 2017,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "magesi",
+   "nome": "Magesi",
+   "sigla": "MAE",
+   "cidade": "Magesi",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Magesi",
+    "capacidade": 10000
+   },
+   "fundacao": 2011,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "orbit-college",
+   "nome": "Orbit College",
+   "sigla": "ORB",
+   "cidade": "Rustemburgo",
+   "estado": "ZA",
+   "pais": "ZA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Rustemburgo",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "enyimba-international",
+   "nome": "Enyimba International",
+   "sigla": "ENY",
+   "cidade": "Aba",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Internacional Enyimba",
+    "capacidade": 16000
+   },
+   "fundacao": 1976,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "enugu-rangers",
+   "nome": "Enugu Rangers",
+   "sigla": "ENU",
+   "cidade": "Enugu",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Nnamdi Azikiwe",
+    "capacidade": 25000
+   },
+   "fundacao": 1970,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "kano-pillars",
+   "nome": "Kano Pillars",
+   "sigla": "KAN",
+   "cidade": "Kano",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Sani Abacha",
+    "capacidade": 25000
+   },
+   "fundacao": 1990,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "shooting-stars",
+   "nome": "Shooting Stars",
+   "sigla": "SHO",
+   "cidade": "Ibadã",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Lekan Salami Stadium",
+    "capacidade": 18000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "warri-wolves",
+   "nome": "Warri Wolves",
+   "sigla": "WAR",
+   "cidade": "Warri",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Warri Stadium",
+    "capacidade": 20000
+   },
+   "fundacao": 1998,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "wikki-tourists",
+   "nome": "Wikki Tourists",
+   "sigla": "WIK",
+   "cidade": "Bauchi",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Abubarkar Tafawa Balewa Stadium Estádio",
+    "capacidade": 25000
+   },
+   "fundacao": 1991,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "nasarawa-united",
+   "nome": "Nasarawa United",
+   "sigla": "NAS",
+   "cidade": "Lafia",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Lafia Township Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "bayelsa-united",
+   "nome": "Bayelsa United",
+   "sigla": "BAY",
+   "cidade": "Sapele",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Sapele Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2000,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "bendel-insurance",
+   "nome": "Bendel Insurance",
+   "sigla": "BEN",
+   "cidade": "Cidade do Benim",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Samuel Ogbemudia Stadium",
+    "capacidade": 20000
+   },
+   "fundacao": 1972,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "niger-tornadoes",
+   "nome": "Niger Tornadoes",
+   "sigla": "NIG",
+   "cidade": "Minna",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Minna Township Stadium",
+    "capacidade": 5000
+   },
+   "fundacao": 1977,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "el-kanemi-warriors",
+   "nome": "El-Kanemi Warriors",
+   "sigla": "KAE",
+   "cidade": "Maiduguri",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "El-Kanemi Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1986,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "plateau-united",
+   "nome": "Plateau United",
+   "sigla": "PLA",
+   "cidade": "Jos",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Rwang Pam Stadium",
+    "capacidade": 15000
+   },
+   "fundacao": 1975,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "abia-warriors",
+   "nome": "Abia Warriors",
+   "sigla": "ABI",
+   "cidade": "Umuahia",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Umuahia Township Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "rivers-united",
+   "nome": "Rivers United",
+   "sigla": "RIV",
+   "cidade": "Port Harcourt",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Yakubu Gowon",
+    "capacidade": 25000
+   },
+   "fundacao": 2016,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "kwara-united",
+   "nome": "Kwara United",
+   "sigla": "KWA",
+   "cidade": "Ilorin",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Kwara State Stadium",
+    "capacidade": 18000
+   },
+   "fundacao": 1997,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "katsina-united",
+   "nome": "Katsina United",
+   "sigla": "KAT",
+   "cidade": "Katsina",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Muhammadu Dikko Stadium",
+    "capacidade": 35000
+   },
+   "fundacao": 1994,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "remo-stars",
+   "nome": "Remo Stars",
+   "sigla": "REM",
+   "cidade": "Ikenne",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Ikenne",
+    "capacidade": 10000
+   },
+   "fundacao": 2004,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "ikorodu-city",
+   "nome": "Ikorodu City",
+   "sigla": "IKO",
+   "cidade": "Ikorodu City",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Mobolaji Johnson Arena",
+    "capacidade": 10000
+   },
+   "fundacao": 2022,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "barau",
+   "nome": "Barau",
+   "sigla": "BAR",
+   "cidade": "Kano",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Kano",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 40,
+    "max": 56
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "kun-khalifat",
+   "nome": "Kun Khalifat",
+   "sigla": "KUN",
+   "cidade": "Kun Khalifat",
+   "estado": "NG",
+   "pais": "NG",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Kun Khalifat",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 40,
+    "max": 56
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "asante-kotoko",
+   "nome": "Asante Kotoko",
+   "sigla": "ASA",
+   "cidade": "Kumasi",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Baba Yara",
+    "capacidade": 40000
+   },
+   "fundacao": 1935,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "accra-hearts-of-oak",
+   "nome": "Accra Hearts of Oak",
+   "sigla": "ACC",
+   "cidade": "Acra",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Ohene Djan",
+    "capacidade": 40000
+   },
+   "fundacao": 1911,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "aduana-stars",
+   "nome": "Aduana Stars",
+   "sigla": "ADU",
+   "cidade": "Gana",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Agyeman Badu Stadium",
+    "capacidade": 5000
+   },
+   "fundacao": 1985,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "medeama",
+   "nome": "Medeama",
+   "sigla": "MED",
+   "cidade": "Tarkwa",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "TNA Park",
+    "capacidade": 12000
+   },
+   "fundacao": 2002,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "legon-cities",
+   "nome": "Legon Cities",
+   "sigla": "LEG",
+   "cidade": "Acra",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Ohene Djan",
+    "capacidade": 40000
+   },
+   "fundacao": 2006,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "heart-of-lions",
+   "nome": "Heart of Lions",
+   "sigla": "HEA",
+   "cidade": "Gana",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Kpando Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2002,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "berekum-chelsea",
+   "nome": "Berekum Chelsea",
+   "sigla": "BER",
+   "cidade": "Sunyani",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Berekum Sports Stadium",
+    "capacidade": 5000
+   },
+   "fundacao": 2000,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "accra-lions",
+   "nome": "Accra Lions",
+   "sigla": "ACR",
+   "cidade": "Acra",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Ohene Djan",
+    "capacidade": 40000
+   },
+   "fundacao": 2015,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "dreams",
+   "nome": "Dreams",
+   "sigla": "DRE",
+   "cidade": "Dreams",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Dawu Sports Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "bechem-united",
+   "nome": "Bechem United",
+   "sigla": "BEC",
+   "cidade": "Región Ahafo",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Región Ahafo",
+    "capacidade": 10000
+   },
+   "fundacao": 1966,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "bibiani-gold-stars",
+   "nome": "Bibiani Gold Stars",
+   "sigla": "BIB",
+   "cidade": "Bibiani",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Bibiani",
+    "capacidade": 10000
+   },
+   "fundacao": 1998,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "samartex",
+   "nome": "Samartex",
+   "sigla": "SAM",
+   "cidade": "Tarkwa",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Tarkwa",
+    "capacidade": 10000
+   },
+   "fundacao": 1995,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "nsoatreman",
+   "nome": "Nsoatreman",
+   "sigla": "NSO",
+   "cidade": "Nsoatreman",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Nsoatreman",
+    "capacidade": 10000
+   },
+   "fundacao": 2021,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "karela-united",
+   "nome": "Karela United",
+   "sigla": "KAR",
+   "cidade": "Karela United",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Karela United",
+    "capacidade": 10000
+   },
+   "fundacao": 2013,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "all-blacks",
+   "nome": "All Blacks",
+   "sigla": "ALL",
+   "cidade": "Gana",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Swedru Sports Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "vision",
+   "nome": "Vision",
+   "sigla": "VIS",
+   "cidade": "Vision",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Vision",
+    "capacidade": 10000
+   },
+   "fundacao": 1999,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "techiman-eleven-wonders",
+   "nome": "Techiman Eleven Wonders",
+   "sigla": "TEC",
+   "cidade": "Techiman",
+   "estado": "GH",
+   "pais": "GH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Techiman",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 40,
+    "max": 56
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "simba",
+   "nome": "Simba",
+   "sigla": "SIM",
+   "cidade": "Dar es Salaam",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional Benjamin Mkapa",
+    "capacidade": 60000
+   },
+   "fundacao": 1936,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "young-africans",
+   "nome": "Young Africans",
+   "sigla": "YOU",
+   "cidade": "Dar es Salaam",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#00FF00",
+    "secundaria": "#FFFF00"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional Benjamin Mkapa",
+    "capacidade": 60000
+   },
+   "fundacao": 1935,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "azam",
+   "nome": "Azam",
+   "sigla": "AZA",
+   "cidade": "Dar es Salaam",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Chamazi Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2007,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "prisons",
+   "nome": "Prisons",
+   "sigla": "PRI",
+   "cidade": "Beia",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Sokoine Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "mtibwa-sugar",
+   "nome": "Mtibwa Sugar",
+   "sigla": "MTI",
+   "cidade": "Mtibwa Sugar",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Jamhuri Stadium",
+    "capacidade": 20000
+   },
+   "fundacao": 1988,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "namungo",
+   "nome": "Namungo",
+   "sigla": "NAM",
+   "cidade": "Namungo",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Namungo",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "pamba",
+   "nome": "Pamba",
+   "sigla": "PAM",
+   "cidade": "Shinyanga",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "CCM Kirumba Stadium",
+    "capacidade": 35000
+   },
+   "fundacao": 1968,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "coastal-union",
+   "nome": "Coastal Union",
+   "sigla": "COA",
+   "cidade": "Tanga",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Mkwakwani Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1948,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "jkt-ruvu-stars",
+   "nome": "JKT Ruvu Stars",
+   "sigla": "JKT",
+   "cidade": "Dodoma",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Uhuru Stadium",
+    "capacidade": 25000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "mbeya-city",
+   "nome": "Mbeya City",
+   "sigla": "MBE",
+   "cidade": "Beia",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Beia",
+    "capacidade": 10000
+   },
+   "fundacao": 2011,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "kagera-sugar",
+   "nome": "Kagera Sugar",
+   "sigla": "KAG",
+   "cidade": "Bukoba",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Kaitaba Stadium",
+    "capacidade": 5000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "tabora-united",
+   "nome": "Tabora United",
+   "sigla": "TAB",
+   "cidade": "Tabora United",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Tabora United",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "singida-fountain-gate",
+   "nome": "Singida Fountain Gate",
+   "sigla": "SIN",
+   "cidade": "Singida",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Singida",
+    "capacidade": 10000
+   },
+   "fundacao": 2010,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "singida-black-stars",
+   "nome": "Singida Black Stars",
+   "sigla": "SIG",
+   "cidade": "Q6930466",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Q6930466",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "kinondoni-municipal-council",
+   "nome": "Kinondoni Municipal Council",
+   "sigla": "KIN",
+   "cidade": "Kinondoni Municipal Council",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional Benjamin Mkapa",
+    "capacidade": 60000
+   },
+   "fundacao": 2014,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "dodoma-jiji",
+   "nome": "Dodoma Jiji",
+   "sigla": "DOD",
+   "cidade": "Dodoma Jiji",
+   "estado": "TZ",
+   "pais": "TZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Dodoma Jiji",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 40,
+    "max": 56
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "atletico-petroleos-luanda",
+   "nome": "Atlético Petróleos Luanda",
+   "sigla": "ATL",
+   "cidade": "Luanda",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional 11 de Novembro",
+    "capacidade": 50000
+   },
+   "fundacao": 1980,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "clube-desportivo-primeiro-de-agosto",
+   "nome": "Clube Desportivo Primeiro de Agosto",
+   "sigla": "CLU",
+   "cidade": "Luanda",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio da Cidadela",
+    "capacidade": 40000
+   },
+   "fundacao": 1977,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "g-d-interclube",
+   "nome": "G.D. Interclube",
+   "sigla": "INT",
+   "cidade": "Luanda",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Joaquim Dinis",
+    "capacidade": 10000
+   },
+   "fundacao": 1953,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "c-r-d-libolo",
+   "nome": "C.R.D. Libolo",
+   "sigla": "LIB",
+   "cidade": "Libolo",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Municipal de Calulo",
+    "capacidade": 10000
+   },
+   "fundacao": 1942,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "kabuscorp",
+   "nome": "Kabuscorp",
+   "sigla": "KAB",
+   "cidade": "Luanda",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#FF0000"
+   },
+   "estadio": {
+    "nome": "Estádio dos Coqueiros",
+    "capacidade": 12000
+   },
+   "fundacao": 1994,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "estrela-clube-primeiro-de-maio",
+   "nome": "Estrela Clube Primeiro de Maio",
+   "sigla": "EST",
+   "cidade": "Benguela",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Municipal Edelfride Palhares da Costa",
+    "capacidade": 6000
+   },
+   "fundacao": 1955,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "g-d-sagrada-esperanca",
+   "nome": "G.D. Sagrada Esperança",
+   "sigla": "SAG",
+   "cidade": "Dundo",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Quintalão",
+    "capacidade": 10000
+   },
+   "fundacao": 1976,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "c-d-huila",
+   "nome": "C.D. Huíla",
+   "sigla": "HUI",
+   "cidade": "Lubango",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio da Ferrovia",
+    "capacidade": 10000
+   },
+   "fundacao": 1998,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "academica-petroleos-do-lobito",
+   "nome": "Académica Petróleos do Lobito",
+   "sigla": "ACA",
+   "cidade": "Lobito",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio do Buraco",
+    "capacidade": 15000
+   },
+   "fundacao": 1970,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "f-c-onze-bravos",
+   "nome": "F.C. Onze Bravos",
+   "sigla": "ONZ",
+   "cidade": "Luena",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Mundunduleno",
+    "capacidade": 10000
+   },
+   "fundacao": 1983,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "santa-rita-de-cassia",
+   "nome": "Santa Rita de Cássia",
+   "sigla": "SAN",
+   "cidade": "Uíge",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio 4 de Janeiro",
+    "capacidade": 12000
+   },
+   "fundacao": 2015,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "wiliete",
+   "nome": "Wiliete",
+   "sigla": "WIL",
+   "cidade": "Benguela",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Benguela",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "c-d-lunda-sul",
+   "nome": "C.D. Lunda Sul",
+   "sigla": "LUN",
+   "cidade": "C.D. Lunda Sul",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de C.D. Lunda Sul",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "c-d-sao-salvador",
+   "nome": "C.D. São Salvador",
+   "sigla": "SAO",
+   "cidade": "Angola",
+   "estado": "AO",
+   "pais": "AO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Angola",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 40,
+    "max": 56
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "nkana",
+   "nome": "Nkana",
+   "sigla": "NKA",
+   "cidade": "Kitwe",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Nkana Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1935,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "kabwe-warriors",
+   "nome": "Kabwe Warriors",
+   "sigla": "KAW",
+   "cidade": "Kabwe",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Railways Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1922,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "green-buffaloes",
+   "nome": "Green Buffaloes",
+   "sigla": "GRE",
+   "cidade": "Lusaca",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Independence Stadium (Shreveport)",
+    "capacidade": 49427
+   },
+   "fundacao": 1965,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "red-arrows",
+   "nome": "Red Arrows",
+   "sigla": "RED",
+   "cidade": "Lusaca",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Nkoloma",
+    "capacidade": 5000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "mufulira-wanderers",
+   "nome": "Mufulira Wanderers",
+   "sigla": "MUF",
+   "cidade": "Mufulira",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Shinde Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1953,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "konkola-blades",
+   "nome": "Konkola Blades",
+   "sigla": "KON",
+   "cidade": "Chililabombwe",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Konkola Stadium",
+    "capacidade": 17000
+   },
+   "fundacao": 1956,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "nchanga-rangers",
+   "nome": "Nchanga Rangers",
+   "sigla": "NCH",
+   "cidade": "Chingola",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Nchanga Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1960,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "green-eagles",
+   "nome": "Green Eagles",
+   "sigla": "GRN",
+   "cidade": "Choma",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Choma",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "forest-rangers",
+   "nome": "Forest Rangers",
+   "sigla": "FOR",
+   "cidade": "Forest Rangers",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Dola Hill Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1975,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "napsa-stars",
+   "nome": "NAPSA Stars",
+   "sigla": "NAP",
+   "cidade": "Lusaca",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Woodlands Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "nkwazi",
+   "nome": "Nkwazi",
+   "sigla": "NKW",
+   "cidade": "Lusaca",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Edwin Imboela Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1978,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "indeni",
+   "nome": "Indeni",
+   "sigla": "IND",
+   "cidade": "Indeni",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Indeni",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "maestro-united-zambia",
+   "nome": "Maestro United Zambia",
+   "sigla": "MAT",
+   "cidade": "Maestro United Zambia",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Maestro United Zambia",
+    "capacidade": 10000
+   },
+   "fundacao": 2007,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "mutondo-stars",
+   "nome": "Mutondo Stars",
+   "sigla": "MUT",
+   "cidade": "Mutondo Stars",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Mutondo Stars",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "atletico-lusaka",
+   "nome": "Atletico Lusaka",
+   "sigla": "ATE",
+   "cidade": "Atletico Lusaka",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Atletico Lusaka",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 40,
+    "max": 56
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "mines-united",
+   "nome": "Mines United",
+   "sigla": "MIN",
+   "cidade": "Mines United",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Mines United",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 40,
+    "max": 56
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "lumwana-radiants",
+   "nome": "Lumwana Radiants",
+   "sigla": "LUM",
+   "cidade": "Lumwana Radiants",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Lumwana Radiants",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 41,
+   "forcaElenco": {
+    "min": 39,
+    "max": 55
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "kansanshi-dynamos",
+   "nome": "Kansanshi Dynamos",
+   "sigla": "KAS",
+   "cidade": "Kansanshi Dynamos",
+   "estado": "ZM",
+   "pais": "ZM",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Kansanshi Dynamos",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 40,
+   "forcaElenco": {
+    "min": 39,
+    "max": 55
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "gor-mahia",
+   "nome": "Gor Mahia",
+   "sigla": "GOR",
+   "cidade": "Nairóbi",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio de la Ciudad de Nairobi",
+    "capacidade": 15000
+   },
+   "fundacao": 1968,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "tusker",
+   "nome": "Tusker",
+   "sigla": "TUS",
+   "cidade": "Nairóbi",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Complexo Desportivo Internacional de Kasarani",
+    "capacidade": 60000
+   },
+   "fundacao": 1970,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "mathare-united",
+   "nome": "Mathare United",
+   "sigla": "MAH",
+   "cidade": "Nairóbi",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Complexo Desportivo Internacional de Kasarani",
+    "capacidade": 60000
+   },
+   "fundacao": 1994,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "a-f-c-leopards",
+   "nome": "A.F.C. Leopards",
+   "sigla": "LEO",
+   "cidade": "Nairóbi",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional de Nyayo",
+    "capacidade": 30000
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "sofapaka",
+   "nome": "Sofapaka",
+   "sigla": "SOF",
+   "cidade": "Nairóbi",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional de Nyayo",
+    "capacidade": 30000
+   },
+   "fundacao": 2004,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "ulinzi-stars",
+   "nome": "Ulinzi Stars",
+   "sigla": "ULI",
+   "cidade": "Q239421",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Afraha Stadium",
+    "capacidade": 8200
+   },
+   "fundacao": 1995,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "kenya-commercial-bank",
+   "nome": "Kenya Commercial Bank",
+   "sigla": "KEN",
+   "cidade": "Nairóbi",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio de la Ciudad de Nairobi",
+    "capacidade": 15000
+   },
+   "fundacao": 1993,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "bandari",
+   "nome": "Bandari",
+   "sigla": "BAN",
+   "cidade": "Mombaça",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Mombasa Municipal Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1985,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "kariobangi-sharks",
+   "nome": "Kariobangi Sharks",
+   "sigla": "KAO",
+   "cidade": "Kariobangi",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio de la Ciudad de Nairobi",
+    "capacidade": 15000
+   },
+   "fundacao": 2000,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "nairobi-city-stars",
+   "nome": "Nairobi City Stars",
+   "sigla": "NAI",
+   "cidade": "Nairóbi",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Hope Centre",
+    "capacidade": 5000
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "administration-police",
+   "nome": "Administration Police",
+   "sigla": "ADM",
+   "cidade": "Nairóbi",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Nairóbi",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "shabana-kisii",
+   "nome": "Shabana Kisii",
+   "sigla": "SHA",
+   "cidade": "Shabana Kisii",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Gusii Stadium",
+    "capacidade": 5000
+   },
+   "fundacao": 1980,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "nairobi-united",
+   "nome": "Nairobi United",
+   "sigla": "NAR",
+   "cidade": "Nairóbi",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Nairóbi",
+    "capacidade": 10000
+   },
+   "fundacao": 2015,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 40,
+    "max": 56
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "posta-rangers",
+   "nome": "Posta Rangers",
+   "sigla": "POS",
+   "cidade": "Nairóbi",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Kipchoge Keino Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1980,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 40,
+    "max": 56
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "mara-sugar",
+   "nome": "Mara Sugar",
+   "sigla": "MAA",
+   "cidade": "Mara Sugar",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Mara Sugar",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 39,
+    "max": 55
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "kakamega-homeboyz",
+   "nome": "Kakamega Homeboyz",
+   "sigla": "KAK",
+   "cidade": "Kakamega",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Bukhungu",
+    "capacidade": 5000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 41,
+   "forcaElenco": {
+    "min": 39,
+    "max": 55
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "bidco-united",
+   "nome": "Bidco United",
+   "sigla": "BID",
+   "cidade": "Thika",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Thika",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 41,
+   "forcaElenco": {
+    "min": 38,
+    "max": 54
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "fc-talanta",
+   "nome": "FC Talanta",
+   "sigla": "TAA",
+   "cidade": "Nairóbi",
+   "estado": "KE",
+   "pais": "KE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio de la Ciudad de Nairobi",
+    "capacidade": 15000
+   },
+   "fundacao": 2012,
+   "rival": null,
+   "torcida": 6,
+   "reputacao": 40,
+   "forcaElenco": {
+    "min": 38,
+    "max": 54
+   },
+   "caixaInicial": 9000000
+  },
+  {
+   "id": "shanghai-shenhua",
+   "nome": "Shanghai Shenhua",
+   "sigla": "SHN",
+   "cidade": "Xangai",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Hongkou",
+    "capacidade": 33060
+   },
+   "fundacao": 1993,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 57,
+    "max": 73
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "shanghai-port",
+   "nome": "Shanghai Port",
+   "sigla": "SHG",
+   "cidade": "Xangai",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Shanghai",
+    "capacidade": 80000
+   },
+   "fundacao": 2005,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 56,
+    "max": 72
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "shandong-taishan",
+   "nome": "Shandong Taishan",
+   "sigla": "SHD",
+   "cidade": "Jinan",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Jinan Olympic Sports Center Stadium",
+    "capacidade": 60000
+   },
+   "fundacao": 1993,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 55,
+    "max": 71
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "beijing-guoan",
+   "nome": "Beijing Guoan",
+   "sigla": "BEI",
+   "cidade": "Pequim",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio dos Trabalhadores",
+    "capacidade": 66161
+   },
+   "fundacao": 1992,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 54,
+    "max": 70
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "tianjin-jinmen-tiger",
+   "nome": "Tianjin Jinmen Tiger",
+   "sigla": "TIA",
+   "cidade": "Tianjin",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Centro Olímpico de Tianjin",
+    "capacidade": 60000
+   },
+   "fundacao": 1998,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "changchun-yatai",
+   "nome": "Changchun Yatai",
+   "sigla": "CHA",
+   "cidade": "Changchun",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Changchun",
+    "capacidade": 38000
+   },
+   "fundacao": 1996,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "henan",
+   "nome": "Henan",
+   "sigla": "HEN",
+   "cidade": "Zhengzhou",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Zhengzhou Hanghai",
+    "capacidade": 30000
+   },
+   "fundacao": 1994,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "qingdao-hainiu",
+   "nome": "Qingdao Hainiu",
+   "sigla": "QIN",
+   "cidade": "Qingdao",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Qingdao Tiantai Stadium",
+    "capacidade": 20525
+   },
+   "fundacao": 1990,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "chengdu-rongcheng",
+   "nome": "Chengdu Rongcheng",
+   "sigla": "CHE",
+   "cidade": "Chengdu",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Chengdu Phoenix Hill Football Stadium",
+    "capacidade": 50695
+   },
+   "fundacao": 2018,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "meizhou-hakka",
+   "nome": "Meizhou Hakka",
+   "sigla": "MEI",
+   "cidade": "Meizhou",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Wuhua County Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2013,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "shenzhen-peng-city",
+   "nome": "Shenzhen Peng City",
+   "sigla": "SHE",
+   "cidade": "Chengdu",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Chengdu Longquanyi",
+    "capacidade": 30800
+   },
+   "fundacao": 2006,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "qingdao-qingchundao",
+   "nome": "Qingdao Qingchundao",
+   "sigla": "QIG",
+   "cidade": "Qingdao",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Qingdao",
+    "capacidade": 10000
+   },
+   "fundacao": 2007,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "liaoning-tieren",
+   "nome": "Liaoning Tieren",
+   "sigla": "LIA",
+   "cidade": "China",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de China",
+    "capacidade": 10000
+   },
+   "fundacao": 2015,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "dalian-yingbo",
+   "nome": "Dalian Yingbo",
+   "sigla": "DAL",
+   "cidade": "Dalian",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Dalian Suoyuwan Football Stadium",
+    "capacidade": 63667
+   },
+   "fundacao": 2021,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "chongqing-tongliang-long",
+   "nome": "Chongqing Tongliang Long",
+   "sigla": "CHO",
+   "cidade": "Chongqing",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Chongqing",
+    "capacidade": 10000
+   },
+   "fundacao": 2021,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "shenzhen-juniors",
+   "nome": "Shenzhen Juniors",
+   "sigla": "SHZ",
+   "cidade": "Shenzhen Juniors",
+   "estado": "CN",
+   "pais": "CN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Shenzhen Juniors",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "persepolis",
+   "nome": "Persepolis",
+   "sigla": "PER",
+   "cidade": "Teerão",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#FF0000"
+   },
+   "estadio": {
+    "nome": "Estádio Azadi",
+    "capacidade": 84000
+   },
+   "fundacao": 1963,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 56,
+    "max": 72
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "esteghlal",
+   "nome": "Esteghlal",
+   "sigla": "ESE",
+   "cidade": "Teerão",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#0000FF"
+   },
+   "estadio": {
+    "nome": "Estádio Azadi",
+    "capacidade": 84000
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 55,
+    "max": 71
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "sepahan",
+   "nome": "Sepahan",
+   "sigla": "SEP",
+   "cidade": "Isfahan",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Naghsh-e-Jahan",
+    "capacidade": 45000
+   },
+   "fundacao": 1953,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 54,
+    "max": 70
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "foolad",
+   "nome": "Foolad",
+   "sigla": "FOO",
+   "cidade": "Ahvaz",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Ghadir",
+    "capacidade": 51000
+   },
+   "fundacao": 1971,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "nassaji-mazandaran",
+   "nome": "Nassaji Mazandaran",
+   "sigla": "NAA",
+   "cidade": "Qaem Shahr",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Vatani Stadium",
+    "capacidade": 15000
+   },
+   "fundacao": 1959,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "paykan",
+   "nome": "Paykan",
+   "sigla": "PAY",
+   "cidade": "Teerão",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Takhti",
+    "capacidade": 30122
+   },
+   "fundacao": 1967,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "malavan",
+   "nome": "Malavan",
+   "sigla": "MAL",
+   "cidade": "Bandar-e Anzali",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Takhti Stadium",
+    "capacidade": 12000
+   },
+   "fundacao": 1969,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "esteghlal-khuzestan",
+   "nome": "Esteghlal Khuzestan",
+   "sigla": "ESG",
+   "cidade": "Ahvaz",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Takhti Stadium",
+    "capacidade": 30000
+   },
+   "fundacao": 2011,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "gol-gohar",
+   "nome": "Gol Gohar",
+   "sigla": "GOL",
+   "cidade": "Sirjan",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Sirjan",
+    "capacidade": 10000
+   },
+   "fundacao": 1997,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "fajr-sepasi",
+   "nome": "Fajr Sepasi",
+   "sigla": "FAJ",
+   "cidade": "Xiraz",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Pars Shiraz",
+    "capacidade": 50000
+   },
+   "fundacao": 1988,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "mes-rafsanjan",
+   "nome": "Mes Rafsanjan",
+   "sigla": "MES",
+   "cidade": "Rafsanjan",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Rafsanjan",
+    "capacidade": 10000
+   },
+   "fundacao": 1997,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "aluminium-arak",
+   "nome": "Aluminium Arak",
+   "sigla": "ALU",
+   "cidade": "Arak",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Imam Khomeini",
+    "capacidade": 15000
+   },
+   "fundacao": 2001,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "chadormalu",
+   "nome": "Chadormalu",
+   "sigla": "CHD",
+   "cidade": "Ardakan",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Ardakan",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "kheybar-khorramabad",
+   "nome": "Kheybar Khorramabad",
+   "sigla": "KHE",
+   "cidade": "Kheybar Khorramabad",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Takhti Stadium (Khorramabad)",
+    "capacidade": 10000
+   },
+   "fundacao": 1984,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "havadar",
+   "nome": "Havadar",
+   "sigla": "HAV",
+   "cidade": "Havadar",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Havadar",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "shams-azar",
+   "nome": "Shams Azar",
+   "sigla": "SHM",
+   "cidade": "Shams Azar",
+   "estado": "IR",
+   "pais": "IR",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Sardar-e Azadegan Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2012,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "al-sadd",
+   "nome": "Al Sadd",
+   "sigla": "SAD",
+   "cidade": "Doha",
+   "estado": "QA",
+   "pais": "QA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Jassim Bin Hamad",
+    "capacidade": 12946
+   },
+   "fundacao": 1969,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 61,
+    "max": 77
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "al-rayyan",
+   "nome": "Al-Rayyan",
+   "sigla": "RAY",
+   "cidade": "Al Rayyan",
+   "estado": "QA",
+   "pais": "QA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Ahmed bin Ali",
+    "capacidade": 44740
+   },
+   "fundacao": 1967,
+   "rival": null,
+   "torcida": 18,
+   "reputacao": 65,
+   "forcaElenco": {
+    "min": 59,
+    "max": 75
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "al-gharafa",
+   "nome": "Al-Gharafa",
+   "sigla": "GHR",
+   "cidade": "Doha",
+   "estado": "QA",
+   "pais": "QA",
+   "cores": {
+    "primaria": "#0000FF",
+    "secundaria": "#FFFF00"
+   },
+   "estadio": {
+    "nome": "Estádio Al-Gharafa",
+    "capacidade": 44740
+   },
+   "fundacao": 1979,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 63,
+   "forcaElenco": {
+    "min": 58,
+    "max": 74
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "al-duhail",
+   "nome": "Al-Duhail",
+   "sigla": "DUH",
+   "cidade": "Doha",
+   "estado": "QA",
+   "pais": "QA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "estádio Abdullah bin Khalifa",
+    "capacidade": 9000
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 56,
+    "max": 72
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "al-arabi",
+   "nome": "Al-Arabi",
+   "sigla": "ARA",
+   "cidade": "Doha",
+   "estado": "QA",
+   "pais": "QA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Grand Hamad",
+    "capacidade": 13000
+   },
+   "fundacao": 1972,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 55,
+    "max": 71
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "al-wakrah",
+   "nome": "Al-Wakrah",
+   "sigla": "WAK",
+   "cidade": "Al-Wakrah",
+   "estado": "QA",
+   "pais": "QA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Al Janoub",
+    "capacidade": 20000
+   },
+   "fundacao": 1959,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 54,
+    "max": 70
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "qatar",
+   "nome": "Qatar",
+   "sigla": "QAT",
+   "cidade": "Doha",
+   "estado": "QA",
+   "pais": "QA",
+   "cores": {
+    "primaria": "#000000",
+    "secundaria": "#FFFF00"
+   },
+   "estadio": {
+    "nome": "Estadio Qatar SC",
+    "capacidade": 12000
+   },
+   "fundacao": 1959,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "al-ahli-qa",
+   "nome": "Al Ahli",
+   "sigla": "AHI",
+   "cidade": "Doha",
+   "estado": "QA",
+   "pais": "QA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Al-Ahli",
+    "capacidade": 20000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "umm-salal",
+   "nome": "Umm Salal",
+   "sigla": "UMM",
+   "cidade": "Umm Salal",
+   "estado": "QA",
+   "pais": "QA",
+   "cores": {
+    "primaria": "#FFA500",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Al-Gharafa",
+    "capacidade": 44740
+   },
+   "fundacao": 1979,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "al-sailiya",
+   "nome": "Al-Sailiya",
+   "sigla": "SAI",
+   "cidade": "Doha",
+   "estado": "QA",
+   "pais": "QA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Ahmed bin Ali",
+    "capacidade": 44740
+   },
+   "fundacao": 1995,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "al-shamal",
+   "nome": "Al-Shamal",
+   "sigla": "SHL",
+   "cidade": "Al Shamal",
+   "estado": "QA",
+   "pais": "QA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Al-Shamal SC Stadium",
+    "capacidade": 5000
+   },
+   "fundacao": 1980,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "al-shahaniya",
+   "nome": "Al-Shahaniya",
+   "sigla": "SHH",
+   "cidade": "Al-Shahaniya",
+   "estado": "QA",
+   "pais": "QA",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Ahmed bin Ali",
+    "capacidade": 44740
+   },
+   "fundacao": 1998,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "al-ain",
+   "nome": "Al Ain",
+   "sigla": "AIN",
+   "cidade": "Al Ain",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Hazza bin Zayed",
+    "capacidade": 25000
+   },
+   "fundacao": 1968,
+   "rival": null,
+   "torcida": 20,
+   "reputacao": 66,
+   "forcaElenco": {
+    "min": 60,
+    "max": 76
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "shabab-alahli-dubai",
+   "nome": "Shabab AlAhli Dubai",
+   "sigla": "SHB",
+   "cidade": "Dubai",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FF0000",
+    "secundaria": "#00FF00"
+   },
+   "estadio": {
+    "nome": "Estadio Rashid",
+    "capacidade": 18000
+   },
+   "fundacao": 1958,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 65,
+   "forcaElenco": {
+    "min": 58,
+    "max": 74
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "al-wahda",
+   "nome": "Al-Wahda",
+   "sigla": "WAH",
+   "cidade": "Abu Dhabi",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Al Nahyan",
+    "capacidade": 15894
+   },
+   "fundacao": 1974,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 64,
+   "forcaElenco": {
+    "min": 57,
+    "max": 73
+   },
+   "caixaInicial": 18000000
+  },
+  {
+   "id": "al-jazira",
+   "nome": "Al Jazira",
+   "sigla": "JAZ",
+   "cidade": "Abu Dhabi",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Al Jazira Mohammed Bin Zayed Stadium",
+    "capacidade": 42056
+   },
+   "fundacao": 1974,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 62,
+   "forcaElenco": {
+    "min": 56,
+    "max": 72
+   },
+   "caixaInicial": 17000000
+  },
+  {
+   "id": "al-wasl",
+   "nome": "Al Wasl",
+   "sigla": "WAS",
+   "cidade": "Dubai",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Zabeel",
+    "capacidade": 18000
+   },
+   "fundacao": 1974,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 61,
+   "forcaElenco": {
+    "min": 55,
+    "max": 71
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "sharjah",
+   "nome": "Sharjah",
+   "sigla": "SHR",
+   "cidade": "Xarja",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Sharjah",
+    "capacidade": 12000
+   },
+   "fundacao": 1966,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 60,
+   "forcaElenco": {
+    "min": 54,
+    "max": 70
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "alshariqa",
+   "nome": "Alshariqa",
+   "sigla": "ALS",
+   "cidade": "Dubai",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Al-Maktoum",
+    "capacidade": 12000
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 59,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 16000000
+  },
+  {
+   "id": "baniyas",
+   "nome": "Baniyas",
+   "sigla": "BAI",
+   "cidade": "Abu Dhabi",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Baniyas Stadium",
+    "capacidade": 9570
+   },
+   "fundacao": 1981,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "ajman",
+   "nome": "Ajman",
+   "sigla": "AJM",
+   "cidade": "Ajman",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Ajman Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1974,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "al-dhafra",
+   "nome": "Al Dhafra",
+   "sigla": "DHA",
+   "cidade": "Abu Dhabi",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Al Dhafra Stadium",
+    "capacidade": 12000
+   },
+   "fundacao": 2000,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "kalba",
+   "nome": "Kalba",
+   "sigla": "KAL",
+   "cidade": "Quelba",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Quelba",
+    "capacidade": 10000
+   },
+   "fundacao": 1972,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "khor-fakkan",
+   "nome": "Khor Fakkan",
+   "sigla": "KHO",
+   "cidade": "Corfação",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Corfação",
+    "capacidade": 10000
+   },
+   "fundacao": 1981,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "dibba",
+   "nome": "Dibba",
+   "sigla": "DIB",
+   "cidade": "Doba (Fujeira)",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Fujairah Club",
+    "capacidade": 5000
+   },
+   "fundacao": 1976,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "al-bataeh",
+   "nome": "Al Bataeh",
+   "sigla": "BAT",
+   "cidade": "Al Bataeh",
+   "estado": "AE",
+   "pais": "AE",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Al Bataeh",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "pakhtakor-tashkent",
+   "nome": "Pakhtakor Tashkent",
+   "sigla": "PAK",
+   "cidade": "Tasquente",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Pakhtakor Markaziy",
+    "capacidade": 35000
+   },
+   "fundacao": 1956,
+   "rival": null,
+   "torcida": 17,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "f-c-bunyodkor",
+   "nome": "F.C. Bunyodkor",
+   "sigla": "BUN",
+   "cidade": "Tasquente",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#00FF00",
+    "secundaria": "#FFFF00"
+   },
+   "estadio": {
+    "nome": "Estadio Bunyodkor",
+    "capacidade": 34000
+   },
+   "fundacao": 2005,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "nasaf-qarshi",
+   "nome": "Nasaf Qarshi",
+   "sigla": "NAF",
+   "cidade": "Qarshi",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Markaziy",
+    "capacidade": 14750
+   },
+   "fundacao": 1986,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "fc-neftchi-fergana",
+   "nome": "FC Neftchi Fergana",
+   "sigla": "NEF",
+   "cidade": "Fergana",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Istiqlol",
+    "capacidade": 10000
+   },
+   "fundacao": 1962,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "navbahor-namangan",
+   "nome": "Navbahor Namangan",
+   "sigla": "NAV",
+   "cidade": "Namangan",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Markasiy (Namangán)",
+    "capacidade": 33000
+   },
+   "fundacao": 1978,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "lokomotiv-tashkent",
+   "nome": "Lokomotiv Tashkent",
+   "sigla": "LOK",
+   "cidade": "Tasquente",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Lokomotiv Stadium",
+    "capacidade": 17500
+   },
+   "fundacao": 2002,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "sogdiana-jizzakh",
+   "nome": "Sogdiana Jizzakh",
+   "sigla": "SOG",
+   "cidade": "Jizaque",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Markaziy Stadium",
+    "capacidade": 9000
+   },
+   "fundacao": 1970,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "fc-agmk",
+   "nome": "FC AGMK",
+   "sigla": "AGM",
+   "cidade": "Olmaliq",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio OKMK",
+    "capacidade": 11000
+   },
+   "fundacao": 2004,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "fk-buxoro",
+   "nome": "FK Buxoro",
+   "sigla": "FKX",
+   "cidade": "Bucara",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Buxoro Arena",
+    "capacidade": 25520
+   },
+   "fundacao": 1989,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "fk-dinamo-samarqand",
+   "nome": "FK Dinamo Samarqand",
+   "sigla": "FKX",
+   "cidade": "Samarcanda",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Dynamo Samarkand Stadium",
+    "capacidade": 16000
+   },
+   "fundacao": 1960,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "fk-andijan",
+   "nome": "FK Andijan",
+   "sigla": "FKX",
+   "cidade": "Andijon",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Soghlom Avlod Stadium",
+    "capacidade": 18360
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "kokand-1912",
+   "nome": "Kokand 1912",
+   "sigla": "KOK",
+   "cidade": "Kokand",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Kokand",
+    "capacidade": 10000
+   },
+   "fundacao": 1912,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "pfk-qizilqum",
+   "nome": "PFK Qizilqum",
+   "sigla": "PFK",
+   "cidade": "Zarafshan",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Zarafshan",
+    "capacidade": 10000
+   },
+   "fundacao": 1994,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "fk-mash-al-mubarek",
+   "nome": "FK Mash'al Mubarek",
+   "sigla": "FKX",
+   "cidade": "Muborak",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Bahrom Vafoev Stadium",
+    "capacidade": 11000
+   },
+   "fundacao": 1991,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "fc-surkhon-termez",
+   "nome": "FC Surkhon Termez",
+   "sigla": "SUR",
+   "cidade": "Termez",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Termez",
+    "capacidade": 10000
+   },
+   "fundacao": 1968,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "fc-khorazm",
+   "nome": "FC Khorazm",
+   "sigla": "KHR",
+   "cidade": "Urgench",
+   "estado": "UZ",
+   "pais": "UZ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Xorazm Stadium",
+    "capacidade": 25000
+   },
+   "fundacao": 1972,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "mumbai-city",
+   "nome": "Mumbai City",
+   "sigla": "MUM",
+   "cidade": "Bombaim",
+   "estado": "IN",
+   "pais": "IN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio DY Patil",
+    "capacidade": 45300
+   },
+   "fundacao": 2014,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "odisha",
+   "nome": "Odisha",
+   "sigla": "ODI",
+   "cidade": "Bhubaneswar",
+   "estado": "IN",
+   "pais": "IN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Jawaharlal Nehru",
+    "capacidade": 60254
+   },
+   "fundacao": 2014,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "fc-goa",
+   "nome": "FC Goa",
+   "sigla": "GOA",
+   "cidade": "Goa",
+   "estado": "IN",
+   "pais": "IN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Fatorda",
+    "capacidade": 19000
+   },
+   "fundacao": 2014,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "bengaluru",
+   "nome": "Bengaluru",
+   "sigla": "BEG",
+   "cidade": "Bangalore",
+   "estado": "IN",
+   "pais": "IN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#FF0000"
+   },
+   "estadio": {
+    "nome": "Estadio Sree Kanteerava",
+    "capacidade": 40000
+   },
+   "fundacao": 2013,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "east-bengal",
+   "nome": "East Bengal",
+   "sigla": "EAS",
+   "cidade": "Calcutá",
+   "estado": "IN",
+   "pais": "IN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Salt Lake",
+    "capacidade": 68000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "chennaiyin",
+   "nome": "Chennaiyin",
+   "sigla": "CHN",
+   "cidade": "Chennai",
+   "estado": "IN",
+   "pais": "IN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Jawaharlal Nehru",
+    "capacidade": 40000
+   },
+   "fundacao": 2014,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "mohun-bagan-super-giant",
+   "nome": "Mohun Bagan Super Giant",
+   "sigla": "MOH",
+   "cidade": "Calcutá",
+   "estado": "IN",
+   "pais": "IN",
+   "cores": {
+    "primaria": "#C32148",
+    "secundaria": "#800000"
+   },
+   "estadio": {
+    "nome": "Estádio Salt Lake",
+    "capacidade": 68000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "kerala-blasters",
+   "nome": "Kerala Blasters",
+   "sigla": "KER",
+   "cidade": "Cochim",
+   "estado": "IN",
+   "pais": "IN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Jawaharlal Nehru",
+    "capacidade": 60000
+   },
+   "fundacao": 2014,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "northeast-united",
+   "nome": "NorthEast United",
+   "sigla": "NOR",
+   "cidade": "Guwahati",
+   "estado": "IN",
+   "pais": "IN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Atlético Indira Gandhi",
+    "capacidade": 30000
+   },
+   "fundacao": 2014,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "mohammedan",
+   "nome": "Mohammedan",
+   "sigla": "MOA",
+   "cidade": "Calcutá",
+   "estado": "IN",
+   "pais": "IN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Salt Lake",
+    "capacidade": 68000
+   },
+   "fundacao": 1891,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "jamshedpur",
+   "nome": "Jamshedpur",
+   "sigla": "JAM",
+   "cidade": "Jamshedpur",
+   "estado": "IN",
+   "pais": "IN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "JRD Tata Sports Complex",
+    "capacidade": 10000
+   },
+   "fundacao": 2017,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "punjab",
+   "nome": "Punjab",
+   "sigla": "PUN",
+   "cidade": "Mohali",
+   "estado": "IN",
+   "pais": "IN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Jawaharlal Nehru",
+    "capacidade": 60254
+   },
+   "fundacao": 2020,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "inter-kashi",
+   "nome": "Inter Kashi",
+   "sigla": "INE",
+   "cidade": "Inter Kashi",
+   "estado": "IN",
+   "pais": "IN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Inter Kashi",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "buriram-united",
+   "nome": "Buriram United",
+   "sigla": "BUR",
+   "cidade": "Buri Ram",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio New I-Mobile",
+    "capacidade": 32600
+   },
+   "fundacao": 1970,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 53,
+    "max": 69
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "muangthong-united",
+   "nome": "Muangthong United",
+   "sigla": "MUA",
+   "cidade": "Pak Kret",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "SCG Stadium",
+    "capacidade": 15000
+   },
+   "fundacao": 1989,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "bg-pathum-united",
+   "nome": "BG Pathum United",
+   "sigla": "BGX",
+   "cidade": "Tailândia",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Leo Stadium",
+    "capacidade": 13000
+   },
+   "fundacao": 2006,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "bangkok-united",
+   "nome": "Bangkok United",
+   "sigla": "BAG",
+   "cidade": "Banguecoque",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Thai-Japanese Stadium",
+    "capacidade": 10320
+   },
+   "fundacao": 1988,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "chonburi",
+   "nome": "Chonburi",
+   "sigla": "CHB",
+   "cidade": "cidade de Chomburi",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Chonburi",
+    "capacidade": 8500
+   },
+   "fundacao": 1997,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "chiangrai-united",
+   "nome": "Chiangrai United",
+   "sigla": "CHG",
+   "cidade": "Tailândia",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "United Stadium of Chiangrai",
+    "capacidade": 15000
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "port",
+   "nome": "Port",
+   "sigla": "POR",
+   "cidade": "Banguecoque",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "PAT Stadium",
+    "capacidade": 12308
+   },
+   "fundacao": 1967,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "ratchaburi-mitr-phol",
+   "nome": "Ratchaburi Mitr Phol",
+   "sigla": "RAT",
+   "cidade": "Ratchaburi",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Ratchaburi Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2004,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "prachuap",
+   "nome": "Prachuap",
+   "sigla": "PRA",
+   "cidade": "Prachuap Khiri Khan",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Prachuap Khiri Khan Province Stadium",
+    "capacidade": 5000
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "nakhon-ratchasima",
+   "nome": "Nakhon Ratchasima",
+   "sigla": "NAK",
+   "cidade": "Nakhon Ratchasima",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "His Majesty the King's 80th Birthday Anniversary, 5th December 2007 Sports Complex",
+    "capacidade": 20141
+   },
+   "fundacao": 1999,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "sukhothai",
+   "nome": "Sukhothai",
+   "sigla": "SUK",
+   "cidade": "Sukhothai",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Thung Thalay Luang",
+    "capacidade": 10000
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "rayong",
+   "nome": "Rayong",
+   "sigla": "RAO",
+   "cidade": "Rayong",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Rayong Province Central Stadium",
+    "capacidade": 4512
+   },
+   "fundacao": 2008,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "uthai-thani",
+   "nome": "Uthai Thani",
+   "sigla": "UTH",
+   "cidade": "Uthai Thani",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Uthai Thani Province Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2010,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "lamphun-warrior",
+   "nome": "Lamphun Warrior",
+   "sigla": "LAP",
+   "cidade": "Muang Lamphun",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Lamphun Province Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2011,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "ayutthaya-united",
+   "nome": "Ayutthaya United",
+   "sigla": "AYU",
+   "cidade": "Ayutthaya",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Ayutthaya Province Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2007,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "kanchanaburi",
+   "nome": "Kanchanaburi",
+   "sigla": "KAA",
+   "cidade": "Kanchanaburi",
+   "estado": "TH",
+   "pais": "TH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Kanchanaburi",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "al-shorta-baghdad",
+   "nome": "Al-Shorta Baghdad",
+   "sigla": "SHT",
+   "cidade": "Bagdá",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Al-Shaab",
+    "capacidade": 35000
+   },
+   "fundacao": 1932,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 52,
+    "max": 68
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "al-quwa-al-jawiya",
+   "nome": "Al-Quwa Al-Jawiya",
+   "sigla": "QUW",
+   "cidade": "Al-Rusafa",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Q2117452",
+    "capacidade": 10000
+   },
+   "fundacao": 1931,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "al-zawra-a",
+   "nome": "Al-Zawra'a",
+   "sigla": "ZAW",
+   "cidade": "Bagdá",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Al-Zawraa",
+    "capacidade": 20000
+   },
+   "fundacao": 1969,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "talaba",
+   "nome": "Talaba",
+   "sigla": "TAA",
+   "cidade": "Bagdá",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Al Talaba Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1969,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "erbil",
+   "nome": "Erbil",
+   "sigla": "ERB",
+   "cidade": "Arbil",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Franso Hariri",
+    "capacidade": 40000
+   },
+   "fundacao": 1968,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "duhok",
+   "nome": "Duhok",
+   "sigla": "DUO",
+   "cidade": "Dohuk",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#0000FF",
+    "secundaria": "#FFFF00"
+   },
+   "estadio": {
+    "nome": "Estadio de Duhok",
+    "capacidade": 22800
+   },
+   "fundacao": 1970,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "al-karkh",
+   "nome": "Al-Karkh",
+   "sigla": "KAH",
+   "cidade": "Bagdá",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Al Karkh",
+    "capacidade": 6000
+   },
+   "fundacao": 1963,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "zakho",
+   "nome": "Zakho",
+   "sigla": "ZAK",
+   "cidade": "Zakho",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Zakho",
+    "capacidade": 10000
+   },
+   "fundacao": 1987,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "al-mina-a",
+   "nome": "Al-Mina'a",
+   "sigla": "MIA",
+   "cidade": "Baçorá",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Al Mina'a Stadium",
+    "capacidade": 30000
+   },
+   "fundacao": 1931,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "najaf",
+   "nome": "Najaf",
+   "sigla": "NAJ",
+   "cidade": "An-Najaf",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "An-Najaf Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1961,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "al-naft",
+   "nome": "Al-Naft",
+   "sigla": "NAT",
+   "cidade": "Bagdá",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Al Naft Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1979,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "baghdad",
+   "nome": "Baghdad",
+   "sigla": "BAH",
+   "cidade": "Baghdad",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Baghdad FC Stadium",
+    "capacidade": 5000
+   },
+   "fundacao": 1957,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "al-kahraba",
+   "nome": "Al-Kahraba",
+   "sigla": "KAA",
+   "cidade": "Al-Kahraba",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Al-Kahraba",
+    "capacidade": 10000
+   },
+   "fundacao": 2001,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "naft-maysan",
+   "nome": "Naft Maysan",
+   "sigla": "NAT",
+   "cidade": "Amara",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Amara",
+    "capacidade": 10000
+   },
+   "fundacao": 2003,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "mosul",
+   "nome": "Mosul",
+   "sigla": "MOS",
+   "cidade": "Mossul",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Al Mosul University Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1957,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "al-karma",
+   "nome": "Al-Karma",
+   "sigla": "KAM",
+   "cidade": "Al-Karmah",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Al-Fallujah Stadium",
+    "capacidade": 7000
+   },
+   "fundacao": 2020,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "newroz",
+   "nome": "Newroz",
+   "sigla": "NEW",
+   "cidade": "As-Sulaymaniyah",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de As-Sulaymaniyah",
+    "capacidade": 10000
+   },
+   "fundacao": 1994,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "al-qasim",
+   "nome": "Al-Qasim",
+   "sigla": "QAS",
+   "cidade": "Al-Qasim",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Al-Qasim",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "diyala",
+   "nome": "Diyala",
+   "sigla": "DIY",
+   "cidade": "Diyala",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Al Ba'quba Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1957,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "al-gharraf",
+   "nome": "Al-Gharraf",
+   "sigla": "GHF",
+   "cidade": "Dicar",
+   "estado": "IQ",
+   "pais": "IQ",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Dicar",
+    "capacidade": 10000
+   },
+   "fundacao": 1994,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "johor-darul-ta-zim",
+   "nome": "Johor Darul Ta'zim",
+   "sigla": "JOH",
+   "cidade": "JDT Headquarters",
+   "estado": "MY",
+   "pais": "MY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Tan Sri Dato Hj Hassan Yunos",
+    "capacidade": 30000
+   },
+   "fundacao": 1972,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "selangor",
+   "nome": "Selangor",
+   "sigla": "SEL",
+   "cidade": "Selangor",
+   "estado": "MY",
+   "pais": "MY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Shah Alam Stadium",
+    "capacidade": 80372
+   },
+   "fundacao": 1936,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "sabah",
+   "nome": "Sabah",
+   "sigla": "SAB",
+   "cidade": "Kota Kinabalu",
+   "estado": "MY",
+   "pais": "MY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio de Likas",
+    "capacidade": 35000
+   },
+   "fundacao": 1963,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "penang",
+   "nome": "Penang",
+   "sigla": "PEN",
+   "cidade": "Penang",
+   "estado": "MY",
+   "pais": "MY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "City Stadium",
+    "capacidade": 20000
+   },
+   "fundacao": 1921,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "terengganu",
+   "nome": "Terengganu",
+   "sigla": "TER",
+   "cidade": "Kuala Terenggan",
+   "estado": "MY",
+   "pais": "MY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Sultan Ismail Nasiruddin Shah",
+    "capacidade": 15000
+   },
+   "fundacao": 1972,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "kuala-lumpur-city",
+   "nome": "Kuala Lumpur City",
+   "sigla": "KUA",
+   "cidade": "Kuala Lumpur",
+   "estado": "MY",
+   "pais": "MY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio KLFA",
+    "capacidade": 18000
+   },
+   "fundacao": 1974,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "negeri-sembilan-fa",
+   "nome": "Negeri Sembilan FA",
+   "sigla": "NEG",
+   "cidade": "Seremban",
+   "estado": "MY",
+   "pais": "MY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Tuanku Abdul Rahman",
+    "capacidade": 40000
+   },
+   "fundacao": 1923,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "kuching-city",
+   "nome": "Kuching City",
+   "sigla": "KUC",
+   "cidade": "Kuching",
+   "estado": "MY",
+   "pais": "MY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Sarawak State Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2015,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "polis-di-raja-malaysia-fa",
+   "nome": "Polis Di-Raja Malaysia FA",
+   "sigla": "POI",
+   "cidade": "Malásia",
+   "estado": "MY",
+   "pais": "MY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Hang Jebat",
+    "capacidade": 40000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "immigration",
+   "nome": "Immigration",
+   "sigla": "IMM",
+   "cidade": "Putrajaya",
+   "estado": "MY",
+   "pais": "MY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Putrajaya",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "kelantan-the-real-warriors",
+   "nome": "Kelantan The Real Warriors",
+   "sigla": "KEL",
+   "cidade": "Kota Bharu",
+   "estado": "MY",
+   "pais": "MY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Sultan Mohammad IV",
+    "capacidade": 30000
+   },
+   "fundacao": 2016,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "melaka",
+   "nome": "Melaka",
+   "sigla": "MEL",
+   "cidade": "Melaka",
+   "estado": "MY",
+   "pais": "MY",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Melaka",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 40,
+    "max": 56
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "persija-jakarta",
+   "nome": "Persija Jakarta",
+   "sigla": "PES",
+   "cidade": "Jacarta",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Gelora Bung Karno",
+    "capacidade": 77193
+   },
+   "fundacao": 1928,
+   "rival": null,
+   "torcida": 16,
+   "reputacao": 58,
+   "forcaElenco": {
+    "min": 51,
+    "max": 67
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "persib-bandung",
+   "nome": "Persib Bandung",
+   "sigla": "PEI",
+   "cidade": "Bandung",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Siliwangi Stadium",
+    "capacidade": 25000
+   },
+   "fundacao": 1919,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 57,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 15000000
+  },
+  {
+   "id": "arema",
+   "nome": "Arema",
+   "sigla": "ARE",
+   "cidade": "Malang",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Kanjuruhan",
+    "capacidade": 40000
+   },
+   "fundacao": 1987,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 56,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "persebaya-surabaya",
+   "nome": "Persebaya Surabaya",
+   "sigla": "PEE",
+   "cidade": "Surabaia",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Gelora Bung Tomo",
+    "capacidade": 45000
+   },
+   "fundacao": 1927,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 55,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "bali-united",
+   "nome": "Bali United",
+   "sigla": "BAL",
+   "cidade": "Gianyar",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Kapten I Wayan Dipta",
+    "capacidade": 25000
+   },
+   "fundacao": 2015,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "psm-makassar",
+   "nome": "PSM Makassar",
+   "sigla": "PSM",
+   "cidade": "Macáçar",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Andi Mattalata Stadium",
+    "capacidade": 30000
+   },
+   "fundacao": 1915,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "madura-united",
+   "nome": "Madura United",
+   "sigla": "MAD",
+   "cidade": "Madura United",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Jalak Harupat",
+    "capacidade": 27000
+   },
+   "fundacao": 1986,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "persik-kediri",
+   "nome": "Persik Kediri",
+   "sigla": "PEK",
+   "cidade": "Kediri",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Brawijaya Stadium",
+    "capacidade": 20000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "semen-padang",
+   "nome": "Semen Padang",
+   "sigla": "SEM",
+   "cidade": "Padang",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Haji Agus Salim",
+    "capacidade": 15000
+   },
+   "fundacao": 1980,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "borneo-f-c-samarinda",
+   "nome": "Borneo F.C. Samarinda",
+   "sigla": "BOR",
+   "cidade": "Samarinda",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Palaran",
+    "capacidade": 65000
+   },
+   "fundacao": 2014,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "bhayangkara",
+   "nome": "Bhayangkara",
+   "sigla": "BHA",
+   "cidade": "Jacarta",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Patriota Candrabaga",
+    "capacidade": 10000
+   },
+   "fundacao": 2015,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "dewa-united",
+   "nome": "Dewa United",
+   "sigla": "DEW",
+   "cidade": "Tangerang do Sul",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Tangerang do Sul",
+    "capacidade": 10000
+   },
+   "fundacao": 2009,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "persita-tangerang",
+   "nome": "Persita Tangerang",
+   "sigla": "PEA",
+   "cidade": "Tangerang",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Indomilk Arena",
+    "capacidade": 30000
+   },
+   "fundacao": 1953,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "persijap-jepara",
+   "nome": "Persijap Jepara",
+   "sigla": "PEJ",
+   "cidade": "Persijap Jepara",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Gelora Bumi Kartini Stadium",
+    "capacidade": 20000
+   },
+   "fundacao": 1954,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "persis-solo",
+   "nome": "Persis Solo",
+   "sigla": "PES",
+   "cidade": "Surakarta",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Manahan",
+    "capacidade": 35000
+   },
+   "fundacao": 1923,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "psim-yogyakarta",
+   "nome": "PSIM Yogyakarta",
+   "sigla": "PSI",
+   "cidade": "Yogyakarta",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Mandala Krida Stadium",
+    "capacidade": 25000
+   },
+   "fundacao": 1929,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "malut-united",
+   "nome": "Malut United",
+   "sigla": "MAT",
+   "cidade": "Malut United",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Malut United",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "psbs-biak-numfor",
+   "nome": "PSBS Biak Numfor",
+   "sigla": "PSB",
+   "cidade": "Isla de Biak",
+   "estado": "ID",
+   "pais": "ID",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Cendrawasih Stadium",
+    "capacidade": 15000
+   },
+   "fundacao": 1968,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "hanoi",
+   "nome": "Hanoi",
+   "sigla": "HAN",
+   "cidade": "Hanói",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Hàng Đẫy",
+    "capacidade": 22000
+   },
+   "fundacao": 2006,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "thanh-hoa",
+   "nome": "Thanh Hóa",
+   "sigla": "THA",
+   "cidade": "Thanh Hoa",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Thanh Hoa Stadium",
+    "capacidade": 14000
+   },
+   "fundacao": 1962,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "song-lam-nghe-an",
+   "nome": "Sông Lam Nghệ An",
+   "sigla": "SON",
+   "cidade": "Vinh",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Vinh",
+    "capacidade": 12000
+   },
+   "fundacao": 1979,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "shb-da-nang",
+   "nome": "SHB Da Nang",
+   "sigla": "SHB",
+   "cidade": "Đà Nẵng",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Hòa Xuân Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1976,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "becamex-ho-chi-minh-city",
+   "nome": "Becamex Ho Chi Minh City",
+   "sigla": "BEA",
+   "cidade": "Thủ Dầu Một",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Gò Đậu Stadium",
+    "capacidade": 18250
+   },
+   "fundacao": 1976,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "cong-an-ho-chi-minh-city",
+   "nome": "Cong An Ho Chi Minh City",
+   "sigla": "CON",
+   "cidade": "Cidade de Ho Chi Minh",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Thống Nhất",
+    "capacidade": 25000
+   },
+   "fundacao": 2013,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "hoang-anh-gia-lai",
+   "nome": "Hoang Anh Gia Lai",
+   "sigla": "HOA",
+   "cidade": "Pleiku",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Pleiku Stadium",
+    "capacidade": 12000
+   },
+   "fundacao": 2001,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "cong-an-ha-noi",
+   "nome": "Cong An Ha Noi",
+   "sigla": "COG",
+   "cidade": "Hanói",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Hàng Đẫy",
+    "capacidade": 22000
+   },
+   "fundacao": 2008,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "haiphong",
+   "nome": "Haiphong",
+   "sigla": "HAI",
+   "cidade": "Haiphong",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Lạch Tray",
+    "capacidade": 28000
+   },
+   "fundacao": 1952,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "merryland-quy-nhon-binh-dinh",
+   "nome": "MerryLand Quy Nhon Binh Dinh",
+   "sigla": "MER",
+   "cidade": "Qui Nhơn",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Quy Nhơn Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 2001,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "qnk-quang-nam",
+   "nome": "QNK Quang Nam",
+   "sigla": "QNK",
+   "cidade": "Tam Kỳ",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Tam Kỳ Stadium",
+    "capacidade": 15000
+   },
+   "fundacao": 1997,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "hong-linh-ha-tinh",
+   "nome": "Hong Linh Ha Tinh",
+   "sigla": "HON",
+   "cidade": "Ha Tinh",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Hàng Đẫy",
+    "capacidade": 22000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "ninh-binh",
+   "nome": "Ninh Bình",
+   "sigla": "NIN",
+   "cidade": "Ninh Bình",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Ninh Bình",
+    "capacidade": 22000
+   },
+   "fundacao": 2015,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "pvf-cand",
+   "nome": "PVF-CAND",
+   "sigla": "PVF",
+   "cidade": "PVF-CAND",
+   "estado": "VN",
+   "pais": "VN",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de PVF-CAND",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 40,
+    "max": 56
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "al-faisaly",
+   "nome": "Al-Faisaly",
+   "sigla": "FAI",
+   "cidade": "Amã",
+   "estado": "JO",
+   "pais": "JO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Internacional de Amã",
+    "capacidade": 25000
+   },
+   "fundacao": 1932,
+   "rival": null,
+   "torcida": 15,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 49,
+    "max": 65
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "al-wehdat",
+   "nome": "Al-Wehdat",
+   "sigla": "WEH",
+   "cidade": "Amã",
+   "estado": "JO",
+   "pais": "JO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Rey Abdullah",
+    "capacidade": 20000
+   },
+   "fundacao": 1956,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "al-hussein",
+   "nome": "Al-Hussein",
+   "sigla": "HUS",
+   "cidade": "Irbid",
+   "estado": "JO",
+   "pais": "JO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Al-Hassan",
+    "capacidade": 15000
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "shabab-al-ordon",
+   "nome": "Shabab Al-Ordon",
+   "sigla": "SHB",
+   "cidade": "Amã",
+   "estado": "JO",
+   "pais": "JO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Internacional de Amã",
+    "capacidade": 25000
+   },
+   "fundacao": 2002,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "al-jazeera",
+   "nome": "Al-Jazeera",
+   "sigla": "JAE",
+   "cidade": "Amã",
+   "estado": "JO",
+   "pais": "JO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Internacional de Amã",
+    "capacidade": 25000
+   },
+   "fundacao": 1947,
+   "rival": null,
+   "torcida": 14,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "al-ahli-jo",
+   "nome": "Al-Ahli",
+   "sigla": "AHI",
+   "cidade": "Amã",
+   "estado": "JO",
+   "pais": "JO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Petra Stadium",
+    "capacidade": 5000
+   },
+   "fundacao": 1944,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "al-ramtha",
+   "nome": "Al-Ramtha",
+   "sigla": "RAM",
+   "cidade": "Ar Ramtha",
+   "estado": "JO",
+   "pais": "JO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Prince Hashim Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1966,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "al-baqa-a",
+   "nome": "Al-Baqa'a",
+   "sigla": "BAQ",
+   "cidade": "Amã",
+   "estado": "JO",
+   "pais": "JO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Petra Stadium",
+    "capacidade": 5000
+   },
+   "fundacao": 1968,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "al-salt",
+   "nome": "Al-Salt",
+   "sigla": "SAL",
+   "cidade": "Salt",
+   "estado": "JO",
+   "pais": "JO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Salt",
+    "capacidade": 10000
+   },
+   "fundacao": 1965,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "sama-al-sarhan",
+   "nome": "Sama Al-Sarhan",
+   "sigla": "SAA",
+   "cidade": "Sama Al-Sarhan",
+   "estado": "JO",
+   "pais": "JO",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Sama Al-Sarhan",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 40,
+    "max": 56
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "kuwait",
+   "nome": "Kuwait",
+   "sigla": "KUW",
+   "cidade": "Kuwait",
+   "estado": "KW",
+   "pais": "KW",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Al Kuwait Sports Club",
+    "capacidade": 18500
+   },
+   "fundacao": 1960,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 54,
+   "forcaElenco": {
+    "min": 50,
+    "max": 66
+   },
+   "caixaInicial": 14000000
+  },
+  {
+   "id": "qadsia",
+   "nome": "Qadsia",
+   "sigla": "QAD",
+   "cidade": "Kuwait",
+   "estado": "KW",
+   "pais": "KW",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Mohammed Al-Hamad",
+    "capacidade": 22000
+   },
+   "fundacao": 1960,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 53,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "al-arabi-kw",
+   "nome": "Al-Arabi",
+   "sigla": "ARB",
+   "cidade": "Kuwait",
+   "estado": "KW",
+   "pais": "KW",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Sabah Al Salem",
+    "capacidade": 22000
+   },
+   "fundacao": 1960,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "al-salmiya",
+   "nome": "Al-Salmiya",
+   "sigla": "SAY",
+   "cidade": "Salmiya",
+   "estado": "KW",
+   "pais": "KW",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Thamir Stadium",
+    "capacidade": 16105
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "kazma",
+   "nome": "Kazma",
+   "sigla": "KAZ",
+   "cidade": "Kuwait",
+   "estado": "KW",
+   "pais": "KW",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Al-Sadaqua Walsalam",
+    "capacidade": 16000
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "al-jahra",
+   "nome": "Al Jahra",
+   "sigla": "JAH",
+   "cidade": "Al Jahra",
+   "estado": "KW",
+   "pais": "KW",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Al Shabab Mubarak Alaiar Stadium",
+    "capacidade": 14000
+   },
+   "fundacao": 1972,
+   "rival": null,
+   "torcida": 10,
+   "reputacao": 47,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "al-fahaheel",
+   "nome": "Al-Fahaheel",
+   "sigla": "FAH",
+   "cidade": "Kuwait",
+   "estado": "KW",
+   "pais": "KW",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Nayef Al-Dabbous",
+    "capacidade": 10000
+   },
+   "fundacao": 1964,
+   "rival": null,
+   "torcida": 8,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "al-tadamon",
+   "nome": "Al-Tadamon",
+   "sigla": "TAD",
+   "cidade": "Al Farwaniyah",
+   "estado": "KW",
+   "pais": "KW",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Farwaniya Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1965,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "al-nasr",
+   "nome": "Al Nasr",
+   "sigla": "NAR",
+   "cidade": "Kuwait",
+   "estado": "KW",
+   "pais": "KW",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estadio Ali Al-Salem Al-Sabah",
+    "capacidade": 10000
+   },
+   "fundacao": 1965,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "al-shabab-kw",
+   "nome": "Al-Shabab",
+   "sigla": "SHB",
+   "cidade": "Al-Shabab",
+   "estado": "KW",
+   "pais": "KW",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Al-Ahmadi Stadium",
+    "capacidade": 18000
+   },
+   "fundacao": 1963,
+   "rival": null,
+   "torcida": 7,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "al-muharraq",
+   "nome": "Al-Muharraq",
+   "sigla": "MUH",
+   "cidade": "Al Muharraq",
+   "estado": "BH",
+   "pais": "BH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional de Bahrein",
+    "capacidade": 24000
+   },
+   "fundacao": 1928,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 52,
+   "forcaElenco": {
+    "min": 48,
+    "max": 64
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "riffa",
+   "nome": "Riffa",
+   "sigla": "RIF",
+   "cidade": "Ar Rifa'",
+   "estado": "BH",
+   "pais": "BH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional de Bahrein",
+    "capacidade": 24000
+   },
+   "fundacao": 1953,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 51,
+   "forcaElenco": {
+    "min": 47,
+    "max": 63
+   },
+   "caixaInicial": 13000000
+  },
+  {
+   "id": "hidd",
+   "nome": "Hidd",
+   "sigla": "HID",
+   "cidade": "Al Muharraq",
+   "estado": "BH",
+   "pais": "BH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional de Bahrein",
+    "capacidade": 24000
+   },
+   "fundacao": 1945,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 50,
+   "forcaElenco": {
+    "min": 46,
+    "max": 62
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "al-ahli-bh",
+   "nome": "Al-Ahli",
+   "sigla": "AHI",
+   "cidade": "Manama",
+   "estado": "BH",
+   "pais": "BH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Al Ahli Stadium",
+    "capacidade": 10000
+   },
+   "fundacao": 1936,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 49,
+   "forcaElenco": {
+    "min": 45,
+    "max": 61
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "al-najma-bh",
+   "nome": "Al-Najma",
+   "sigla": "NAA",
+   "cidade": "Manama",
+   "estado": "BH",
+   "pais": "BH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional de Bahrein",
+    "capacidade": 24000
+   },
+   "fundacao": 1943,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 48,
+   "forcaElenco": {
+    "min": 44,
+    "max": 60
+   },
+   "caixaInicial": 12000000
+  },
+  {
+   "id": "al-khaldiya",
+   "nome": "Al-Khaldiya",
+   "sigla": "KHA",
+   "cidade": "Al-Khaldiya",
+   "estado": "BH",
+   "pais": "BH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de Al-Khaldiya",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 9,
+   "reputacao": 46,
+   "forcaElenco": {
+    "min": 43,
+    "max": 59
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "al-hala",
+   "nome": "Al Hala",
+   "sigla": "HAL",
+   "cidade": "Al Muharraq",
+   "estado": "BH",
+   "pais": "BH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional de Bahrein",
+    "capacidade": 24000
+   },
+   "fundacao": 1952,
+   "rival": null,
+   "torcida": 13,
+   "reputacao": 45,
+   "forcaElenco": {
+    "min": 42,
+    "max": 58
+   },
+   "caixaInicial": 11000000
+  },
+  {
+   "id": "al-shabab-bh",
+   "nome": "Al-Shabab",
+   "sigla": "SHB",
+   "cidade": "Manama",
+   "estado": "BH",
+   "pais": "BH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional de Bahrein",
+    "capacidade": 24000
+   },
+   "fundacao": 2001,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 44,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "bahrain",
+   "nome": "Bahrain",
+   "sigla": "BAA",
+   "cidade": "Al Muharraq",
+   "estado": "BH",
+   "pais": "BH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio Nacional de Bahrein",
+    "capacidade": 24000
+   },
+   "fundacao": 1936,
+   "rival": null,
+   "torcida": 12,
+   "reputacao": 43,
+   "forcaElenco": {
+    "min": 41,
+    "max": 57
+   },
+   "caixaInicial": 10000000
+  },
+  {
+   "id": "a-ali",
+   "nome": "A'Ali",
+   "sigla": "ALI",
+   "cidade": "A'Ali",
+   "estado": "BH",
+   "pais": "BH",
+   "cores": {
+    "primaria": "#FFFFFF",
+    "secundaria": "#000000"
+   },
+   "estadio": {
+    "nome": "Estádio de A'Ali",
+    "capacidade": 10000
+   },
+   "fundacao": 1950,
+   "rival": null,
+   "torcida": 11,
+   "reputacao": 42,
+   "forcaElenco": {
+    "min": 40,
+    "max": 56
+   },
+   "caixaInicial": 10000000
+  }
+ ]
+}

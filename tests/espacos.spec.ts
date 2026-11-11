@@ -17,6 +17,20 @@ async function irAoMenu(page: Page) {
   await expect(page.getByRole("heading", { name: "Proffut" })).toBeVisible();
 }
 
+/** A data do jogo guardado no espaço (o resumo no banco do aparelho). */
+function dataDoEspaco(page: Page, espaco: string): Promise<string | undefined> {
+  return page.evaluate((espaco) => new Promise<string | undefined>((ok, falha) => {
+    const pedido = indexedDB.open("proffut");
+    pedido.onerror = () => falha(pedido.error);
+    pedido.onsuccess = () => {
+      const banco = pedido.result;
+      const leitura = banco.transaction("saves", "readonly").objectStore("saves").get(`resumo:${espaco}`);
+      leitura.onerror = () => falha(leitura.error);
+      leitura.onsuccess = () => { banco.close(); ok(leitura.result?.data); };
+    };
+  }), espaco);
+}
+
 async function abrirEspaco(page: Page, n: number) {
   await espaco(page, n).click();
   await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
@@ -43,11 +57,15 @@ test("R84 cada jogo novo vai sozinho para um espaço livre, que salva junto a ca
   // Volta para a Ponte Preta no ponto em que parou e joga mais uma rodada.
   await abrirEspaco(page, 1);
   expect(await dataNoTopo(page)).toBe(dataPonte);
+  const dataPonteIso = await dataDoEspaco(page, "1");
   const antes = await agora(page);
   await jogarPartida(page);
   const dataPonte2 = await dataNoTopo(page);
   await esperarSalvar(page, antes);
   expect(dataPonte2).not.toBe(dataPonte);
+  // Espera o espaço 1 gravado com a rodada nova (com o save grande do mundo todo, o esperarSalvar aceitava a gravação de
+  // quando a partida abriu e o app recarregava antes; falhou no GitHub, nov/2026).
+  await expect.poll(() => dataDoEspaco(page, "1"), { timeout: 20_000 }).not.toBe(dataPonteIso);
 
   // Fecha e abre o app: o espaço 1 está na rodada nova, e o Avaí continua no espaço 2.
   await page.reload();

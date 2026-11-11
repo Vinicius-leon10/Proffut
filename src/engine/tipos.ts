@@ -15,7 +15,12 @@ export type SerieClube = SerieId | "D" | "estadual" | "exterior" | "selecao";
 export type Competicao = SerieId | "CB" | "D" | `E-${string}` | `L-${string}` | IdCopa | IdCompeticaoSelecoes;
 /** Competição de seleções (selecoes.ts): "S-ELI-SUL-2030", "S-AME-2028", "S-OURO-2027", os amistosos "S-AMI". */
 export type IdCompeticaoSelecoes = `S-${string}`;
-export type TipoCompeticaoSelecoes = "eliminatorias-sul" | "eliminatorias-concacaf" | "copa-america" | "copa-ouro";
+export type TipoCompeticaoSelecoes =
+  | "eliminatorias-sul" | "eliminatorias-concacaf" | "copa-america" | "copa-ouro"
+  /** Europa (nov/2026): Liga das Nações, Eliminatórias da Eurocopa, Eurocopa e Eliminatórias da Copa do Mundo. */
+  | "liga-das-nacoes" | "eliminatorias-euro" | "eurocopa" | "eliminatorias-uefa"
+  /** Copa do Mundo (nov/2026): Eliminatórias da África, Ásia e Oceania, a repescagem mundial e a Copa. */
+  | "eliminatorias-caf" | "eliminatorias-afc" | "eliminatorias-ofc" | "repescagem-mundial" | "copa-do-mundo";
 /** Copa de clubes de `EstadoJogo.copas` (copas.ts): "K-LIB", "K-SUL", "K-NE", "K-AR"... */
 export type IdCopa = `K-${string}`;
 /** Torneio de `EstadoJogo.torneios`: Série D, estadual ou liga de outro país. */
@@ -346,7 +351,7 @@ export interface EstadoCompeticaoSelecoes {
   nome: string;
   /** Ano da Copa do Mundo (Eliminatórias) ou do torneio. */
   ano: number;
-  /** "liga" (Eliminatórias da Conmebol), "fase1" a "fase3" (Concacaf), "grupos", "quartas", "semi", "final"; "encerrada" no fim. */
+  /** "liga" (Eliminatórias da Conmebol), "fase1" a "fase3" (Concacaf), "grupos", "ligas" (Liga das Nações), "oitavas", "quartas", "semi", "final", "rep-semi" e "rep-final" (repescagem da Europa); "encerrada" no fim. */
   fase: string;
   /** Todas as seleções que jogam, da mais forte para a mais fraca no começo. */
   selecoes: string[];
@@ -356,6 +361,8 @@ export interface EstadoCompeticaoSelecoes {
   grupos?: Record<string, string[][]>;
   /** Sede do torneio (a única que joga em casa). */
   sede?: string;
+  /** Copa do Mundo: as sedes (todas jogam em casa; a primeira também em `sede`). */
+  sedes?: string[];
   /** Eliminatórias: os que vão à Copa do Mundo e os da repescagem. */
   classificados?: string[];
   repescagem?: string[];
@@ -385,6 +392,8 @@ export interface EstadoSelecoes {
   amistososAte?: string;
   /** Quantos de cada posição cada seleção tinha fora dos clubes do jogo no começo: a base de fora se mantém. */
   base: Record<string, Partial<Record<Posicao, number>>>;
+  /** Liga de cada seleção da Europa na Liga das Nações (1 = A ... 4 = D): muda no fim de cada edição, com o sobe e desce. */
+  ligaDasNacoes?: Record<string, number>;
 }
 
 export interface RegistroTemporada {

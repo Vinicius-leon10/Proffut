@@ -1,10 +1,9 @@
-import { execFileSync } from "node:child_process";
-import { aba, abrirSite, botao, cartaoDoProximoJogo, esperarNoSave, expect, irParaOMeuJogo, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, esperarNoSave, expect, irParaOMeuJogo, montarSave, test } from "./ajuda";
 
 test("R40 batedor de pênalti e capitão: escolhidos na Tática, o capitão ganha a braçadeira no campinho antes do jogo e o batedor escolhido cobra o pênalti", async ({ page }) => {
   test.setTimeout(120_000);
   // Jogo montado pelo motor: na primeira partida do Flamengo há um pênalti a favor dele.
-  const save = execFileSync("npx", ["tsx", "tests/saves/penalti-a-favor.ts", "flamengo"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("penalti-a-favor", "flamengo");
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(cartaoDoProximoJogo(page)).toBeVisible();

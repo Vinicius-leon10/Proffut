@@ -1,0 +1,1051 @@
+{
+ "descricao": "Páginas de partida do robô para os clubes da África, da Ásia e da Oceania (gerado por tools/times/sementes_mundo.py).",
+ "paises": {
+  "EG": {
+   "nome": "Egito",
+   "itens": [
+    "Q79"
+   ]
+  },
+  "MA": {
+   "nome": "Marrocos",
+   "itens": [
+    "Q1028"
+   ]
+  },
+  "DZ": {
+   "nome": "Argélia",
+   "itens": [
+    "Q262"
+   ]
+  },
+  "TN": {
+   "nome": "Tunísia",
+   "itens": [
+    "Q948"
+   ]
+  },
+  "ZA": {
+   "nome": "África do Sul",
+   "itens": [
+    "Q258"
+   ]
+  },
+  "NG": {
+   "nome": "Nigéria",
+   "itens": [
+    "Q1033"
+   ]
+  },
+  "GH": {
+   "nome": "Gana",
+   "itens": [
+    "Q117"
+   ]
+  },
+  "CI": {
+   "nome": "Costa do Marfim",
+   "itens": [
+    "Q1008"
+   ]
+  },
+  "SN": {
+   "nome": "Senegal",
+   "itens": [
+    "Q1041"
+   ]
+  },
+  "CM": {
+   "nome": "Camarões",
+   "itens": [
+    "Q1009"
+   ]
+  },
+  "CD": {
+   "nome": "RD Congo",
+   "itens": [
+    "Q974"
+   ]
+  },
+  "TZ": {
+   "nome": "Tanzânia",
+   "itens": [
+    "Q924"
+   ]
+  },
+  "AO": {
+   "nome": "Angola",
+   "itens": [
+    "Q916"
+   ]
+  },
+  "ZM": {
+   "nome": "Zâmbia",
+   "itens": [
+    "Q953"
+   ]
+  },
+  "ML": {
+   "nome": "Mali",
+   "itens": [
+    "Q912"
+   ]
+  },
+  "LY": {
+   "nome": "Líbia",
+   "itens": [
+    "Q1016"
+   ]
+  },
+  "KE": {
+   "nome": "Quênia",
+   "itens": [
+    "Q114"
+   ]
+  },
+  "SD": {
+   "nome": "Sudão",
+   "itens": [
+    "Q1049"
+   ]
+  },
+  "JP": {
+   "nome": "Japão",
+   "itens": [
+    "Q17"
+   ]
+  },
+  "KR": {
+   "nome": "Coreia do Sul",
+   "itens": [
+    "Q884"
+   ]
+  },
+  "SA": {
+   "nome": "Arábia Saudita",
+   "itens": [
+    "Q851"
+   ]
+  },
+  "AU": {
+   "nome": "Austrália",
+   "itens": [
+    "Q408"
+   ]
+  },
+  "CN": {
+   "nome": "China",
+   "itens": [
+    "Q148"
+   ]
+  },
+  "IR": {
+   "nome": "Irã",
+   "itens": [
+    "Q794"
+   ]
+  },
+  "QA": {
+   "nome": "Catar",
+   "itens": [
+    "Q846"
+   ]
+  },
+  "AE": {
+   "nome": "Emirados Árabes",
+   "itens": [
+    "Q878"
+   ]
+  },
+  "UZ": {
+   "nome": "Uzbequistão",
+   "itens": [
+    "Q265"
+   ]
+  },
+  "IN": {
+   "nome": "Índia",
+   "itens": [
+    "Q668"
+   ]
+  },
+  "TH": {
+   "nome": "Tailândia",
+   "itens": [
+    "Q869"
+   ]
+  },
+  "IQ": {
+   "nome": "Iraque",
+   "itens": [
+    "Q796"
+   ]
+  },
+  "MY": {
+   "nome": "Malásia",
+   "itens": [
+    "Q833"
+   ]
+  },
+  "ID": {
+   "nome": "Indonésia",
+   "itens": [
+    "Q252"
+   ]
+  },
+  "VN": {
+   "nome": "Vietnã",
+   "itens": [
+    "Q881"
+   ]
+  },
+  "JO": {
+   "nome": "Jordânia",
+   "itens": [
+    "Q810"
+   ]
+  },
+  "KW": {
+   "nome": "Kuwait",
+   "itens": [
+    "Q817"
+   ]
+  },
+  "BH": {
+   "nome": "Bahrein",
+   "itens": [
+    "Q398"
+   ]
+  },
+  "OM": {
+   "nome": "Omã",
+   "itens": [
+    "Q842"
+   ]
+  },
+  "NZ": {
+   "nome": "Nova Zelândia",
+   "itens": [
+    "Q664"
+   ]
+  }
+ },
+ "sementes": [
+  {
+   "id": "mundo-EG-en",
+   "liga": "EG",
+   "lang": "en",
+   "pais": "Q79",
+   "paises": [
+    "Q79"
+   ],
+   "titulos": [
+    "2025–26 Egyptian Premier League"
+   ],
+   "consultas": [
+    "2025-26 Egyptian Premier League",
+    "Egypt football league 2026"
+   ],
+   "exige": [
+    "Egyptian"
+   ]
+  },
+  {
+   "id": "mundo-MA-en",
+   "liga": "MA",
+   "lang": "en",
+   "pais": "Q1028",
+   "paises": [
+    "Q1028"
+   ],
+   "titulos": [
+    "2025–26 Botola Pro",
+    "2025–26 Botola"
+   ],
+   "consultas": [
+    "2025-26 Botola Pro",
+    "Morocco football league 2026"
+   ],
+   "exige": [
+    "Botola"
+   ]
+  },
+  {
+   "id": "mundo-DZ-en",
+   "liga": "DZ",
+   "lang": "en",
+   "pais": "Q262",
+   "paises": [
+    "Q262"
+   ],
+   "titulos": [
+    "2025–26 Algerian Ligue Professionnelle 1"
+   ],
+   "consultas": [
+    "2025-26 Algerian Ligue Professionnelle 1",
+    "Algeria football league 2026"
+   ],
+   "exige": [
+    "Algerian"
+   ]
+  },
+  {
+   "id": "mundo-TN-en",
+   "liga": "TN",
+   "lang": "en",
+   "pais": "Q948",
+   "paises": [
+    "Q948"
+   ],
+   "titulos": [
+    "2025–26 Tunisian Ligue Professionnelle 1"
+   ],
+   "consultas": [
+    "2025-26 Tunisian Ligue Professionnelle 1",
+    "Tunisia football league 2026"
+   ],
+   "exige": [
+    "Tunisian"
+   ]
+  },
+  {
+   "id": "mundo-ZA-en",
+   "liga": "ZA",
+   "lang": "en",
+   "pais": "Q258",
+   "paises": [
+    "Q258"
+   ],
+   "titulos": [
+    "2025–26 South African Premiership",
+    "2025–26 South African Premier Division"
+   ],
+   "consultas": [
+    "2025-26 South African Premiership",
+    "South Africa football league 2026"
+   ],
+   "exige": [
+    "South African"
+   ]
+  },
+  {
+   "id": "mundo-NG-en",
+   "liga": "NG",
+   "lang": "en",
+   "pais": "Q1033",
+   "paises": [
+    "Q1033"
+   ],
+   "titulos": [
+    "2025–26 Nigeria Premier Football League",
+    "2025–26 Nigeria Professional Football League"
+   ],
+   "consultas": [
+    "2025-26 Nigeria Premier Football League",
+    "Nigeria football league 2026"
+   ],
+   "exige": [
+    "Nigeria"
+   ]
+  },
+  {
+   "id": "mundo-GH-en",
+   "liga": "GH",
+   "lang": "en",
+   "pais": "Q117",
+   "paises": [
+    "Q117"
+   ],
+   "titulos": [
+    "2025–26 Ghana Premier League"
+   ],
+   "consultas": [
+    "2025-26 Ghana Premier League",
+    "Ghana football league 2026"
+   ],
+   "exige": [
+    "Ghana"
+   ]
+  },
+  {
+   "id": "mundo-CI-en",
+   "liga": "CI",
+   "lang": "en",
+   "pais": "Q1008",
+   "paises": [
+    "Q1008"
+   ],
+   "titulos": [
+    "2025–26 Ligue 1 (Ivory Coast)",
+    "2025–26 Ivorian Ligue 1"
+   ],
+   "consultas": [
+    "2025-26 Ligue 1 (Ivory Coast)",
+    "Ivory Coast football league 2026"
+   ],
+   "exige": [
+    "Ligue 1"
+   ]
+  },
+  {
+   "id": "mundo-SN-en",
+   "liga": "SN",
+   "lang": "en",
+   "pais": "Q1041",
+   "paises": [
+    "Q1041"
+   ],
+   "titulos": [
+    "2025–26 Senegal Premier League",
+    "2025–26 Senegalese Ligue 1"
+   ],
+   "consultas": [
+    "2025-26 Senegal Premier League",
+    "Senegal football league 2026"
+   ],
+   "exige": [
+    "Senegal"
+   ]
+  },
+  {
+   "id": "mundo-CM-en",
+   "liga": "CM",
+   "lang": "en",
+   "pais": "Q1009",
+   "paises": [
+    "Q1009"
+   ],
+   "titulos": [
+    "2025–26 Elite One"
+   ],
+   "consultas": [
+    "2025-26 Elite One",
+    "Cameroon football league 2026"
+   ],
+   "exige": [
+    "Elite One"
+   ]
+  },
+  {
+   "id": "mundo-CD-en",
+   "liga": "CD",
+   "lang": "en",
+   "pais": "Q974",
+   "paises": [
+    "Q974"
+   ],
+   "titulos": [
+    "2025–26 Linafoot",
+    "2025–26 Linafoot Ligue 1"
+   ],
+   "consultas": [
+    "2025-26 Linafoot",
+    "DR Congo football league 2026"
+   ],
+   "exige": [
+    "Linafoot"
+   ]
+  },
+  {
+   "id": "mundo-TZ-en",
+   "liga": "TZ",
+   "lang": "en",
+   "pais": "Q924",
+   "paises": [
+    "Q924"
+   ],
+   "titulos": [
+    "2025–26 Tanzanian Premier League"
+   ],
+   "consultas": [
+    "2025-26 Tanzanian Premier League",
+    "Tanzania football league 2026"
+   ],
+   "exige": [
+    "Tanzania"
+   ]
+  },
+  {
+   "id": "mundo-AO-en",
+   "liga": "AO",
+   "lang": "en",
+   "pais": "Q916",
+   "paises": [
+    "Q916"
+   ],
+   "titulos": [
+    "2025–26 Girabola"
+   ],
+   "consultas": [
+    "2025-26 Girabola",
+    "Angola football league 2026"
+   ],
+   "exige": [
+    "Girabola"
+   ]
+  },
+  {
+   "id": "mundo-ZM-en",
+   "liga": "ZM",
+   "lang": "en",
+   "pais": "Q953",
+   "paises": [
+    "Q953"
+   ],
+   "titulos": [
+    "2025–26 Zambia Super League"
+   ],
+   "consultas": [
+    "2025-26 Zambia Super League",
+    "Zambia football league 2026"
+   ],
+   "exige": [
+    "Zambia"
+   ]
+  },
+  {
+   "id": "mundo-ML-en",
+   "liga": "ML",
+   "lang": "en",
+   "pais": "Q912",
+   "paises": [
+    "Q912"
+   ],
+   "titulos": [
+    "2025–26 Malian Première Division"
+   ],
+   "consultas": [
+    "2025-26 Malian Première Division",
+    "Mali football league 2026"
+   ],
+   "exige": [
+    "Malian"
+   ]
+  },
+  {
+   "id": "mundo-LY-en",
+   "liga": "LY",
+   "lang": "en",
+   "pais": "Q1016",
+   "paises": [
+    "Q1016"
+   ],
+   "titulos": [
+    "2025–26 Libyan Premier League"
+   ],
+   "consultas": [
+    "2025-26 Libyan Premier League",
+    "Libya football league 2026"
+   ],
+   "exige": [
+    "Libyan"
+   ]
+  },
+  {
+   "id": "mundo-KE-en",
+   "liga": "KE",
+   "lang": "en",
+   "pais": "Q114",
+   "paises": [
+    "Q114"
+   ],
+   "titulos": [
+    "2025–26 Kenyan Premier League"
+   ],
+   "consultas": [
+    "2025-26 Kenyan Premier League",
+    "Kenya football league 2026"
+   ],
+   "exige": [
+    "Kenyan"
+   ]
+  },
+  {
+   "id": "mundo-SD-en",
+   "liga": "SD",
+   "lang": "en",
+   "pais": "Q1049",
+   "paises": [
+    "Q1049"
+   ],
+   "titulos": [
+    "2025–26 Sudan Premier League"
+   ],
+   "consultas": [
+    "2025-26 Sudan Premier League",
+    "Sudan football league 2026"
+   ],
+   "exige": [
+    "Sudan"
+   ]
+  },
+  {
+   "id": "mundo-JP-en",
+   "liga": "JP",
+   "lang": "en",
+   "pais": "Q17",
+   "paises": [
+    "Q17"
+   ],
+   "titulos": [
+    "2026 J1 League",
+    "2026 J1 100 Year Vision League"
+   ],
+   "consultas": [
+    "2026 J1 League",
+    "Japan football league 2026"
+   ],
+   "exige": [
+    "J1"
+   ]
+  },
+  {
+   "id": "mundo-KR-en",
+   "liga": "KR",
+   "lang": "en",
+   "pais": "Q884",
+   "paises": [
+    "Q884"
+   ],
+   "titulos": [
+    "2026 K League 1"
+   ],
+   "consultas": [
+    "2026 K League 1",
+    "South Korea football league 2026"
+   ],
+   "exige": [
+    "K League"
+   ]
+  },
+  {
+   "id": "mundo-SA-en",
+   "liga": "SA",
+   "lang": "en",
+   "pais": "Q851",
+   "paises": [
+    "Q851"
+   ],
+   "titulos": [
+    "2025–26 Saudi Pro League"
+   ],
+   "consultas": [
+    "2025-26 Saudi Pro League",
+    "Saudi Arabia football league 2026"
+   ],
+   "exige": [
+    "Saudi"
+   ]
+  },
+  {
+   "id": "mundo-AU-en",
+   "liga": "AU",
+   "lang": "en",
+   "pais": "Q408",
+   "paises": [
+    "Q408"
+   ],
+   "titulos": [
+    "2025–26 A-League Men"
+   ],
+   "consultas": [
+    "2025-26 A-League Men",
+    "Australia football league 2026"
+   ],
+   "exige": [
+    "A-League"
+   ]
+  },
+  {
+   "id": "mundo-CN-en",
+   "liga": "CN",
+   "lang": "en",
+   "pais": "Q148",
+   "paises": [
+    "Q148"
+   ],
+   "titulos": [
+    "2026 Chinese Super League"
+   ],
+   "consultas": [
+    "2026 Chinese Super League",
+    "China football league 2026"
+   ],
+   "exige": [
+    "Chinese Super League"
+   ]
+  },
+  {
+   "id": "mundo-IR-en",
+   "liga": "IR",
+   "lang": "en",
+   "pais": "Q794",
+   "paises": [
+    "Q794"
+   ],
+   "titulos": [
+    "2025–26 Persian Gulf Pro League"
+   ],
+   "consultas": [
+    "2025-26 Persian Gulf Pro League",
+    "Iran football league 2026"
+   ],
+   "exige": [
+    "Persian Gulf"
+   ]
+  },
+  {
+   "id": "mundo-QA-en",
+   "liga": "QA",
+   "lang": "en",
+   "pais": "Q846",
+   "paises": [
+    "Q846"
+   ],
+   "titulos": [
+    "2025–26 Qatar Stars League"
+   ],
+   "consultas": [
+    "2025-26 Qatar Stars League",
+    "Qatar football league 2026"
+   ],
+   "exige": [
+    "Qatar"
+   ]
+  },
+  {
+   "id": "mundo-AE-en",
+   "liga": "AE",
+   "lang": "en",
+   "pais": "Q878",
+   "paises": [
+    "Q878"
+   ],
+   "titulos": [
+    "2025–26 UAE Pro League"
+   ],
+   "consultas": [
+    "2025-26 UAE Pro League",
+    "United Arab Emirates football league 2026"
+   ],
+   "exige": [
+    "UAE"
+   ]
+  },
+  {
+   "id": "mundo-UZ-en",
+   "liga": "UZ",
+   "lang": "en",
+   "pais": "Q265",
+   "paises": [
+    "Q265"
+   ],
+   "titulos": [
+    "2026 Uzbekistan Super League"
+   ],
+   "consultas": [
+    "2026 Uzbekistan Super League",
+    "Uzbekistan football league 2026"
+   ],
+   "exige": [
+    "Uzbekistan"
+   ]
+  },
+  {
+   "id": "mundo-IN-en",
+   "liga": "IN",
+   "lang": "en",
+   "pais": "Q668",
+   "paises": [
+    "Q668"
+   ],
+   "titulos": [
+    "2025–26 Indian Super League"
+   ],
+   "consultas": [
+    "2025-26 Indian Super League",
+    "India football league 2026"
+   ],
+   "exige": [
+    "Indian Super League"
+   ]
+  },
+  {
+   "id": "mundo-TH-en",
+   "liga": "TH",
+   "lang": "en",
+   "pais": "Q869",
+   "paises": [
+    "Q869"
+   ],
+   "titulos": [
+    "2025–26 Thai League 1"
+   ],
+   "consultas": [
+    "2025-26 Thai League 1",
+    "Thailand football league 2026"
+   ],
+   "exige": [
+    "Thai League"
+   ]
+  },
+  {
+   "id": "mundo-IQ-en",
+   "liga": "IQ",
+   "lang": "en",
+   "pais": "Q796",
+   "paises": [
+    "Q796"
+   ],
+   "titulos": [
+    "2025–26 Iraq Stars League"
+   ],
+   "consultas": [
+    "2025-26 Iraq Stars League",
+    "Iraq football league 2026"
+   ],
+   "exige": [
+    "Iraq"
+   ]
+  },
+  {
+   "id": "mundo-MY-en",
+   "liga": "MY",
+   "lang": "en",
+   "pais": "Q833",
+   "paises": [
+    "Q833"
+   ],
+   "titulos": [
+    "2025–26 Malaysia Super League"
+   ],
+   "consultas": [
+    "2025-26 Malaysia Super League",
+    "Malaysia football league 2026"
+   ],
+   "exige": [
+    "Malaysia"
+   ]
+  },
+  {
+   "id": "mundo-ID-en",
+   "liga": "ID",
+   "lang": "en",
+   "pais": "Q252",
+   "paises": [
+    "Q252"
+   ],
+   "titulos": [
+    "2025–26 Super League (Indonesia)",
+    "2025–26 Liga 1 (Indonesia)"
+   ],
+   "consultas": [
+    "2025-26 Super League (Indonesia)",
+    "Indonesia football league 2026"
+   ],
+   "exige": [
+    "Indonesia"
+   ]
+  },
+  {
+   "id": "mundo-VN-en",
+   "liga": "VN",
+   "lang": "en",
+   "pais": "Q881",
+   "paises": [
+    "Q881"
+   ],
+   "titulos": [
+    "2025–26 V.League 1"
+   ],
+   "consultas": [
+    "2025-26 V.League 1",
+    "Vietnam football league 2026"
+   ],
+   "exige": [
+    "V.League"
+   ]
+  },
+  {
+   "id": "mundo-JO-en",
+   "liga": "JO",
+   "lang": "en",
+   "pais": "Q810",
+   "paises": [
+    "Q810"
+   ],
+   "titulos": [
+    "2025–26 Jordanian Pro League"
+   ],
+   "consultas": [
+    "2025-26 Jordanian Pro League",
+    "Jordan football league 2026"
+   ],
+   "exige": [
+    "Jordan"
+   ]
+  },
+  {
+   "id": "mundo-KW-en",
+   "liga": "KW",
+   "lang": "en",
+   "pais": "Q817",
+   "paises": [
+    "Q817"
+   ],
+   "titulos": [
+    "2025–26 Kuwaiti Premier League"
+   ],
+   "consultas": [
+    "2025-26 Kuwaiti Premier League",
+    "Kuwait football league 2026"
+   ],
+   "exige": [
+    "Kuwait"
+   ]
+  },
+  {
+   "id": "mundo-BH-en",
+   "liga": "BH",
+   "lang": "en",
+   "pais": "Q398",
+   "paises": [
+    "Q398"
+   ],
+   "titulos": [
+    "2025–26 Bahraini Premier League"
+   ],
+   "consultas": [
+    "2025-26 Bahraini Premier League",
+    "Bahrain football league 2026"
+   ],
+   "exige": [
+    "Bahrain"
+   ]
+  },
+  {
+   "id": "mundo-OM-en",
+   "liga": "OM",
+   "lang": "en",
+   "pais": "Q842",
+   "paises": [
+    "Q842"
+   ],
+   "titulos": [
+    "2025–26 Oman Professional League"
+   ],
+   "consultas": [
+    "2025-26 Oman Professional League",
+    "Oman football league 2026"
+   ],
+   "exige": [
+    "Oman"
+   ]
+  },
+  {
+   "id": "mundo-NZ-en",
+   "liga": "NZ",
+   "lang": "en",
+   "pais": "Q664",
+   "paises": [
+    "Q664"
+   ],
+   "titulos": [
+    "2026 New Zealand National League",
+    "2025 New Zealand National League"
+   ],
+   "consultas": [
+    "2026 New Zealand National League",
+    "New Zealand football league 2026"
+   ],
+   "exige": [
+    "National League"
+   ]
+  },
+  {
+   "id": "copa-afc-elite",
+   "copa": true,
+   "lang": "en",
+   "titulos": [
+    "2025–26 AFC Champions League Elite"
+   ],
+   "consultas": [
+    "2025-26 AFC Champions League Elite"
+   ],
+   "exige": [
+    "Champions League Elite"
+   ]
+  },
+  {
+   "id": "copa-afc-two",
+   "copa": true,
+   "lang": "en",
+   "titulos": [
+    "2025–26 AFC Champions League Two"
+   ],
+   "consultas": [
+    "2025-26 AFC Champions League Two"
+   ],
+   "exige": [
+    "Champions League Two"
+   ]
+  },
+  {
+   "id": "copa-caf",
+   "copa": true,
+   "lang": "en",
+   "titulos": [
+    "2025–26 CAF Champions League"
+   ],
+   "consultas": [
+    "2025-26 CAF Champions League"
+   ],
+   "exige": [
+    "CAF Champions League"
+   ]
+  },
+  {
+   "id": "copa-caf-confed",
+   "copa": true,
+   "lang": "en",
+   "titulos": [
+    "2025–26 CAF Confederation Cup"
+   ],
+   "consultas": [
+    "2025-26 CAF Confederation Cup"
+   ],
+   "exige": [
+    "Confederation Cup"
+   ]
+  },
+  {
+   "id": "copa-ofc",
+   "copa": true,
+   "lang": "en",
+   "titulos": [
+    "2026 OFC Professional League",
+    "2026 OFC Champions League"
+   ],
+   "consultas": [
+    "2026 OFC Professional League"
+   ],
+   "exige": [
+    "OFC"
+   ]
+  },
+  {
+   "id": "copa-mundial",
+   "copa": true,
+   "lang": "en",
+   "titulos": [
+    "2025 FIFA Club World Cup"
+   ],
+   "consultas": [
+    "2025 FIFA Club World Cup"
+   ],
+   "exige": [
+    "Club World Cup"
+   ]
+  }
+ ]
+}

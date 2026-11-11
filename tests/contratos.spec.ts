@@ -1,6 +1,5 @@
-import { execFileSync } from "node:child_process";
 import type { Locator, Page } from "@playwright/test";
-import { aba, abrirSite, botao, cartaoDoProximoJogo, esperarInteiroNaTela, expect, novoJogo, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, esperarInteiroNaTela, expect, montarSave, novoJogo, test } from "./ajuda";
 
 /** O nome exato, para achar a linha do jogador ("Pedro" está em "João Pedro"). */
 const exato = (nome: string) => new RegExp(`^${nome.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`);
@@ -20,7 +19,7 @@ async function contratosTerminando(page: Page) {
 test("R38 contratos: no último ano do contrato dá para renovar (o jogador pede um salário e escolho os anos); quem não renova sai de graça na virada", async ({ page }) => {
   test.setTimeout(120_000);
   // Jogo montado pelo motor: a temporada de 2026 da Ponte Preta inteira jogada, logo antes da virada.
-  const save = execFileSync("npx", ["tsx", "tests/saves/fim-da-temporada.ts", "ponte-preta"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("fim-da-temporada", "ponte-preta");
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(botao(page, "Encerrar a temporada 2026")).toBeVisible();

@@ -1,14 +1,13 @@
-import { execFileSync } from "node:child_process";
 import type { Page } from "@playwright/test";
-import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, jogarPartida, novoJogo, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, jogarPartida, montarSave, novoJogo, test } from "./ajuda";
 
 // Seleções da América (pedido: "Faça 1 e 2", da lista "copas continentais e nacionais" e "seleções"; "traga tudo que tem
 // da América ... E a seleção de todos esses países"; e a regra do usuário: "pra ser chamado para ser técnico de qualquer
 // seleção tenho que ganhar a liga principal de um país").
 
 /** Abre um save montado pelo motor (tests/saves/selecao.ts). */
-async function abrirSave(page: Page, qual: "jogo" | "convite" | "data-fifa") {
-  const save = execFileSync("npx", ["tsx", "tests/saves/selecao.ts", qual], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+async function abrirSave(page: Page, qual: "jogo" | "convite" | "data-fifa" | "europa" | "copa") {
+  const save = montarSave("selecao", qual);
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
@@ -26,12 +25,15 @@ const nomeCurto = (nome: string) => {
   return partes.length > 1 ? `${partes[0]} ${partes[partes.length - 1][0]}.` : nome.slice(0, 11) + "…";
 };
 
-test("R90 Tabelas → Seleções: o ranking das 51 seleções da América com as bandeiras (Argentina e Brasil na frente) e os amistosos da data FIFA de março", async ({ page }) => {
+test("R90 Tabelas → Seleções: o ranking das seleções com as bandeiras (as 51 da América no filtro América, Argentina e Brasil na frente) e os amistosos da data FIFA de março", async ({ page }) => {
   await novoJogo(page);
   await abrirSelecoes(page);
   const seletor = page.getByRole("combobox", { name: "Seleções" });
   await expect(seletor).toHaveValue("ranking");
   const linhas = page.locator("main .lista .item");
+  // Todas: as 51 da América, as 55 da Europa (R101) e as 111 da África, Ásia e Oceania (R104).
+  await expect(linhas).toHaveCount(217);
+  await page.locator("main").getByRole("button", { name: "América", exact: true }).click();
   await expect(linhas).toHaveCount(51);
   await expect(linhas.nth(0)).toContainText("Argentina");
   await expect(linhas.nth(1)).toContainText("Brasil");
@@ -52,7 +54,7 @@ test("R91 Técnico de seleção: o cartão da seleção no Painel, a convocaçã
   await expect(hoje).toContainText("Brasil");
   const cartao = page.locator(".cartao", { has: page.getByRole("heading", { name: "Seleção: Brasil" }) });
   await expect(cartao).toBeVisible();
-  await expect(cartao).toContainText("no ranking da América");
+  await expect(cartao).toContainText("no ranking");
 
   // Convocação: os 26 de verdade; tira o Pedro Morisco e confirma.
   await cartao.getByRole("button", { name: "Convocar", exact: true }).click();
@@ -82,9 +84,9 @@ test("R91 Técnico de seleção: o cartão da seleção no Painel, a convocaçã
   await jogarPartida(page);
   await abrirSelecoes(page);
   await page.getByRole("combobox", { name: "Seleções" }).selectOption({ label: "Amistosos" });
-  const jogo = page.locator("main .jogo-rodada.meu").first();
+  // O Brasil tem dois amistosos na data FIFA (o mais recente, ainda por jogar, vem primeiro): o jogado tem o placar.
+  const jogo = page.locator("main .jogo-rodada.meu").filter({ has: page.locator(".r", { hasText: /\d+ x \d+/ }) }).first();
   await expect(jogo).toContainText("Brasil");
-  await expect(jogo.locator(".r")).toHaveText(/\d+ x \d+/);
 });
 
 test("R92 Convite de seleção depois de ganhar a liga principal: aceitar faz do técnico o da seleção, junto com o clube; o outro convite cai", async ({ page }) => {
@@ -120,4 +122,117 @@ test("R93 Data FIFA: quem foi convocado aparece com a seleção no elenco (e os 
   const noCampo = (await page.locator(".vaga .nome").allTextContents()).map((t) => t.trim());
   expect(noCampo).toHaveLength(11);
   for (const n of nomes) expect(noCampo, n).not.toContain(nomeCurto(n));
+});
+
+// Seleções da Europa (pedido "Vamos começar a Europa" → "Tudo, nessa ordem": seleções, 2ª divisão, outros países; e o
+// item "Terminar seleções para Copa do Mundo" da lista à mão, nov/2026).
+
+/** A bandeira da Inglaterra (a da cruz de São Jorge, não a do Reino Unido). */
+const INGLATERRA = String.fromCodePoint(0x1f3f4, ...[..."gbeng"].map((c) => 0xe0000 + c.charCodeAt(0)), 0xe007f);
+
+test("R101 Seleções da Europa: o ranking com o filtro Europa (55 seleções, a Espanha na frente, a Inglaterra com a bandeira dela), a Liga das Nações de 2026 com as 4 ligas e os 14 grupos, e os amistosos de março entre as da Europa", async ({ page }) => {
+  await novoJogo(page);
+  await abrirSelecoes(page);
+  const principal = page.locator("main");
+  const linhas = principal.locator(".lista .item");
+  // Todas: a Espanha na frente da Argentina.
+  await expect(linhas).toHaveCount(217);
+  await expect(linhas.nth(0)).toContainText("Espanha");
+  await expect(linhas.nth(1)).toContainText("Argentina");
+  await principal.getByRole("button", { name: "Europa", exact: true }).click();
+  await expect(linhas).toHaveCount(55);
+  await expect(linhas.nth(0)).toContainText("Espanha");
+  await expect(linhas.nth(0).locator(".bandeira-escudo")).toHaveText("🇪🇸");
+  await expect(linhas.nth(1)).toContainText("França");
+  await expect(linhas.nth(2)).toContainText("Inglaterra");
+  await expect(linhas.nth(2).locator(".bandeira-escudo")).toHaveText(INGLATERRA);
+  await expect(linhas.nth(54)).toContainText("San Marino");
+
+  // Liga das Nações: a Liga A tem as mais fortes; 14 grupos no seletor, cada um com a tabela e os jogos.
+  const seletor = page.getByRole("combobox", { name: "Seleções" });
+  await seletor.selectOption({ label: "Liga das Nações 2026" });
+  await expect(principal).toContainText("4 ligas (A, B e C com 4 grupos de 4; D com 2 grupos)");
+  const grupos = page.getByRole("combobox", { name: "Grupo" });
+  await expect(grupos.locator("option")).toHaveCount(14);
+  await expect(grupos.locator("option").first()).toHaveText("Liga A · Grupo 1");
+  await expect(grupos.locator("option").last()).toHaveText("Liga D · Grupo 2");
+  await expect(principal.locator("table tbody tr")).toHaveCount(4);
+  // Uma rodada por vez: os 2 jogos da 1ª rodada do grupo, em setembro.
+  await expect(principal).toContainText("1ª rodada");
+  await expect(principal).toContainText("qui, 03 set");
+  await expect(principal.locator(".jogo-rodada")).toHaveCount(2);
+  await grupos.selectOption({ label: "Liga D · Grupo 2" });
+  await expect(principal.locator("table tbody tr")).toHaveCount(3);
+
+  // Amistosos de março: as da Europa jogam entre si.
+  await seletor.selectOption({ label: "Amistosos" });
+  const jogos = principal.locator(".jogo-rodada");
+  expect(await jogos.count()).toBeGreaterThanOrEqual(90);
+  const daEspanha = jogos.filter({ hasText: "Espanha" }).first();
+  await expect(daEspanha).toBeVisible();
+  for (const americana of ["Brasil", "Argentina", "México", "Estados Unidos", "Uruguai", "Colômbia"]) await expect(daEspanha).not.toContainText(americana);
+});
+
+test("R102 Técnico de uma seleção da Europa: o cartão da França no Painel, a convocação de verdade (Kylian Mbappé, do Real Madrid, com a bandeira) e o jogo da França ao vivo com ele no campinho", async ({ page }) => {
+  test.setTimeout(120_000);
+  await abrirSave(page, "europa");
+  const hoje = page.locator(".cartao", { has: cartaoDoProximoJogo(page) });
+  await expect(hoje).toContainText("Amistoso");
+  await expect(hoje).toContainText("França");
+  const cartao = page.locator(".cartao", { has: page.getByRole("heading", { name: "Seleção: França" }) });
+  await expect(cartao).toBeVisible();
+  await expect(cartao).toContainText("no ranking");
+  await cartao.getByRole("button", { name: "Convocar", exact: true }).click();
+  const tela = page.locator(".tela-cheia");
+  await expect(page.locator(".tela-cheia .topo .titulo")).toHaveText("Convocação");
+  const mbappe = tela.getByRole("button", { name: /Kylian Mbappé/ });
+  await expect(mbappe).toHaveAttribute("aria-pressed", "true");
+  await expect(mbappe).toContainText("🇫🇷");
+  await expect(mbappe).toContainText("Real Madrid");
+  await botao(page, "Voltar").click();
+  await botao(page, "Ir para o jogo").click();
+  await expect(botao(page, "Começar o jogo")).toBeVisible({ timeout: 15_000 });
+  await expect(page.locator(".placar")).toContainText("França");
+  await expect(page.locator(".vaga .nome", { hasText: "Kylian M." })).toBeVisible();
+});
+
+// Copa do Mundo (pedido, nov/2026: "coloque todos os times que participam de Copa do Mundo, todas as seleções, já com
+// jogadores, porque eu quero que deixe a parte de seleções de Copa do Mundo já funcionando").
+
+test("R104 Copa do Mundo: no ranking, os filtros África (54, Marrocos na frente) e Ásia e Oceania (57); a Copa do Mundo de 2026 no seletor com as 42 classificadas, e as repescagens de março (a mundial com Nova Caledônia x Jamaica e Bolívia x Suriname)", async ({ page }) => {
+  await novoJogo(page);
+  await abrirSelecoes(page);
+  const principal = page.locator("main");
+  const linhas = principal.locator(".lista .item");
+  await principal.getByRole("button", { name: "África", exact: true }).click();
+  await expect(linhas).toHaveCount(54);
+  await expect(linhas.nth(0)).toContainText("Marrocos");
+  await expect(linhas.nth(0).locator(".bandeira-escudo")).toHaveText("🇲🇦");
+  await principal.getByRole("button", { name: "Ásia e Oceania", exact: true }).click();
+  await expect(linhas).toHaveCount(57);
+  await expect(linhas.nth(0)).toContainText("Japão");
+  const seletor = page.getByRole("combobox", { name: "Seleções" });
+  await seletor.selectOption({ label: "Copa do Mundo 2026" });
+  await expect(principal).toContainText("Classificadas (42 de 48, com as sedes)");
+  await expect(principal).toContainText("Estados Unidos");
+  await expect(principal).toContainText("Japão");
+  await seletor.selectOption({ label: "Repescagem mundial (Copa de 2026)" });
+  await expect(principal).toContainText("Nova Caledônia");
+  await expect(principal).toContainText("Jamaica");
+  await expect(principal).toContainText("Suriname");
+});
+
+test("R105 Técnico do Brasil na Copa do Mundo de 2026: no dia da estreia, o Painel mostra o jogo da Copa (grupo e rodada) e a Copa nas Tabelas com os 12 grupos", async ({ page }) => {
+  test.setTimeout(180_000);
+  await abrirSave(page, "copa");
+  const hoje = page.locator(".cartao", { has: cartaoDoProximoJogo(page) });
+  await expect(hoje).toContainText("Copa do Mundo");
+  await expect(hoje).toContainText(/Grupo [A-L] · 1ª rodada/);
+  await expect(hoje).toContainText("Brasil");
+  await abrirSelecoes(page);
+  const seletor = page.getByRole("combobox", { name: "Seleções" });
+  await expect(seletor).toHaveValue("S-COPA-2026");
+  await expect(page.getByRole("combobox", { name: "Grupo" }).locator("option")).toHaveCount(12);
+  await expect(page.locator("main table tbody tr")).toHaveCount(4);
+  await expect(page.locator("main")).toContainText("48 seleções em 12 grupos de 4");
 });

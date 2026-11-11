@@ -1,10 +1,9 @@
-import { execFileSync } from "node:child_process";
-import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, montarSave, test } from "./ajuda";
 
 test("R39 empréstimos: empresto um jogador meu e pego um emprestado até o fim da temporada; na virada os dois voltam para os seus clubes", async ({ page }) => {
   test.setTimeout(120_000);
   // Jogo montado pelo motor: a temporada de 2026 da Ponte Preta inteira jogada, logo antes da virada.
-  const save = execFileSync("npx", ["tsx", "tests/saves/fim-da-temporada.ts", "ponte-preta"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("fim-da-temporada", "ponte-preta");
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(botao(page, "Encerrar a temporada 2026")).toBeVisible();

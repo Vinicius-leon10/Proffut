@@ -1,5 +1,4 @@
-import { execFileSync } from "node:child_process";
-import { abrirSite, botao, cartaoDoProximoJogo, expect, irParaOMeuJogo, novoJogo, test } from "./ajuda";
+import { abrirSite, botao, cartaoDoProximoJogo, expect, irParaOMeuJogo, montarSave, novoJogo, test } from "./ajuda";
 
 // O que o rótulo do campo diz em cada lance.
 const ACOES = [
@@ -11,7 +10,7 @@ const ACOES = [
 test("R60 na partida, o campo 2D fica em cima, no lugar do placar grande e dos escudos: a cada minuto a bola anda, o time com a bola tem a sombra e o lance aparece com o time; no gol, a bola entra e aparece quem fez", async ({ page }) => {
   test.setTimeout(120_000);
   // Jogo montado pelo motor: a primeira partida do Flamengo tem pênalti e gol.
-  const save = execFileSync("npx", ["tsx", "tests/saves/penalti-e-gol.ts"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("penalti-e-gol");
   await page.clock.install();
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });

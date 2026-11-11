@@ -23,12 +23,12 @@ test("R82 a Concacaf no jogo: o técnico assume um clube do México e o painel m
   await expect(cartaoDoProximoJogo(page)).toBeVisible();
 });
 
-test("R83 Tabelas → Outros países: os países por região (América do Sul, do Norte, Central e Caribe, e a Europa desde o R99); a Jamaica com a liga dela e a Argentina com a 1ª, a 2ª e a 3ª divisão (a 3ª de clubes leves, com tabela e a regra do acesso)", async ({ page }) => {
+test("R83 Tabelas → Outros países: os países por região (América do Sul, do Norte, Central e Caribe, a Europa desde o R99, a Ásia desde o R108 e a África desde o R110); a Jamaica com a liga dela e a Argentina com a 1ª, a 2ª e a 3ª divisão (a 3ª de clubes leves, com tabela e a regra do acesso)", async ({ page }) => {
   await novoJogo(page);
   await aba(page, "Tabelas");
   await page.getByRole("tab", { name: "Outros países" }).click();
   const pais = page.getByRole("combobox", { name: "País" });
-  expect(await pais.locator("optgroup").evaluateAll((g) => g.map((x) => (x as HTMLOptGroupElement).label))).toEqual(["América do Sul", "América do Norte", "América Central", "Caribe", "Europa"]);
+  expect(await pais.locator("optgroup").evaluateAll((g) => g.map((x) => (x as HTMLOptGroupElement).label))).toEqual(["América do Sul", "América do Norte", "América Central", "Caribe", "Europa", "Ásia", "África"]);
   const linhas = page.locator("main table.tabela tbody tr");
   await pais.selectOption({ label: "Jamaica" });
   await expect(linhas).toHaveCount(daLiga("JM").length);

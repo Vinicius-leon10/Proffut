@@ -1,6 +1,5 @@
-import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
-import { aba, abrirSite, botao, cartaoDoProximoJogo, dataNoTopo, esperarNoSave, expect, novoJogo, pularTutorial, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, dataNoTopo, esperarNoSave, expect, montarSave, novoJogo, pularTutorial, test } from "./ajuda";
 
 type Ficha = { nome: string; pais?: string; liga?: string };
 const ler = (arquivo: string) => JSON.parse(readFileSync(arquivo, "utf8")) as { clubes: Ficha[] };
@@ -65,7 +64,7 @@ test("R68 o jogo novo começa em janeiro com o estadual: o primeiro jogo é do C
 });
 
 test("R69 save de antes dos times novos: ao abrir, os clubes da Série D, dos estaduais e de fora chegam com jogadores; os campeonatos novos começam na próxima temporada", async ({ page }) => {
-  const save = execFileSync("npx", ["tsx", "tests/saves/save-antigo.ts"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("save-antigo");
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
@@ -109,7 +108,7 @@ test("R80 jogo novo: o técnico escolhe o país pela bandeira, a divisão e o cl
 
 test("R81 o técnico treina qualquer clube: com o clube rebaixado para a Série D, ele continua no clube e começa 2027 na Série D (antes era obrigado a escolher um clube da Série C)", async ({ page }) => {
   test.setTimeout(120_000);
-  const save = execFileSync("npx", ["tsx", "tests/saves/rebaixado-para-d.ts", "brusque"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("rebaixado-para-d", "brusque");
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   // Quem não renovou sai de graça: o jogo pergunta antes de encerrar.

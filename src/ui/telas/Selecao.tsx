@@ -49,7 +49,7 @@ export function CartaoDaSelecao() {
           </div>
         </div>
         {comp && linha && <p className="pequeno">{comp.nome}: {linha.pos}º {tabela && tabela.length < comp.selecoes.length ? "no grupo" : "lugar"} ({linha.pts} pts em {linha.j} jogos)</p>}
-        {ranking && <p className="mini fraco">{ranking.pos}º no ranking da América ({ranking.pontos} pontos).</p>}
+        {ranking && <p className="mini fraco">{ranking.pos}º no ranking ({ranking.pontos} pontos).</p>}
         <p className="mini fraco">
           {concentrada ? "A seleção está concentrada: os convocados estão fora dos clubes." : sel?.convocacaoFeita ? "Convocação feita para a próxima data." : "Se você não convocar, o auxiliar chama os melhores 3 dias antes do jogo."}
         </p>

@@ -1,0 +1,893 @@
+{
+ "descricao": "As seleções da África, Ásia e Oceania: páginas da Wikipédia em inglês (tools/selecoes/baixar.py).",
+ "sementes": [
+  {
+   "selecao": "DZ",
+   "titulos": [
+    "Algeria national football team",
+    "Algeria men's national football team",
+    "Algeria national soccer team"
+   ]
+  },
+  {
+   "selecao": "AO",
+   "titulos": [
+    "Angola national football team",
+    "Angola men's national football team",
+    "Angola national soccer team"
+   ]
+  },
+  {
+   "selecao": "BJ",
+   "titulos": [
+    "Benin national football team",
+    "Benin men's national football team",
+    "Benin national soccer team"
+   ]
+  },
+  {
+   "selecao": "BW",
+   "titulos": [
+    "Botswana national football team",
+    "Botswana men's national football team",
+    "Botswana national soccer team"
+   ]
+  },
+  {
+   "selecao": "BF",
+   "titulos": [
+    "Burkina Faso national football team",
+    "Burkina Faso men's national football team",
+    "Burkina Faso national soccer team"
+   ]
+  },
+  {
+   "selecao": "BI",
+   "titulos": [
+    "Burundi national football team",
+    "Burundi men's national football team",
+    "Burundi national soccer team"
+   ]
+  },
+  {
+   "selecao": "CM",
+   "titulos": [
+    "Cameroon national football team",
+    "Cameroon men's national football team",
+    "Cameroon national soccer team"
+   ]
+  },
+  {
+   "selecao": "CV",
+   "titulos": [
+    "Cape Verde national football team",
+    "Cape Verde men's national football team",
+    "Cape Verde national soccer team"
+   ]
+  },
+  {
+   "selecao": "CF",
+   "titulos": [
+    "Central African Republic national football team",
+    "Central African Republic men's national football team",
+    "Central African Republic national soccer team"
+   ]
+  },
+  {
+   "selecao": "TD",
+   "titulos": [
+    "Chad national football team",
+    "Chad men's national football team",
+    "Chad national soccer team"
+   ]
+  },
+  {
+   "selecao": "KM",
+   "titulos": [
+    "Comoros national football team",
+    "Comoros men's national football team",
+    "Comoros national soccer team"
+   ]
+  },
+  {
+   "selecao": "CG",
+   "titulos": [
+    "Congo national football team",
+    "Congo men's national football team",
+    "Congo national soccer team"
+   ]
+  },
+  {
+   "selecao": "CD",
+   "titulos": [
+    "DR Congo national football team",
+    "DR Congo men's national football team",
+    "DR Congo national soccer team"
+   ]
+  },
+  {
+   "selecao": "DJ",
+   "titulos": [
+    "Djibouti national football team",
+    "Djibouti men's national football team",
+    "Djibouti national soccer team"
+   ]
+  },
+  {
+   "selecao": "EG",
+   "titulos": [
+    "Egypt national football team",
+    "Egypt men's national football team",
+    "Egypt national soccer team"
+   ]
+  },
+  {
+   "selecao": "GQ",
+   "titulos": [
+    "Equatorial Guinea national football team",
+    "Equatorial Guinea men's national football team",
+    "Equatorial Guinea national soccer team"
+   ]
+  },
+  {
+   "selecao": "ER",
+   "titulos": [
+    "Eritrea national football team",
+    "Eritrea men's national football team",
+    "Eritrea national soccer team"
+   ]
+  },
+  {
+   "selecao": "SZ",
+   "titulos": [
+    "Eswatini national football team",
+    "Eswatini men's national football team",
+    "Eswatini national soccer team"
+   ]
+  },
+  {
+   "selecao": "ET",
+   "titulos": [
+    "Ethiopia national football team",
+    "Ethiopia men's national football team",
+    "Ethiopia national soccer team"
+   ]
+  },
+  {
+   "selecao": "GA",
+   "titulos": [
+    "Gabon national football team",
+    "Gabon men's national football team",
+    "Gabon national soccer team"
+   ]
+  },
+  {
+   "selecao": "GM",
+   "titulos": [
+    "Gambia national football team",
+    "Gambia men's national football team",
+    "Gambia national soccer team"
+   ]
+  },
+  {
+   "selecao": "GH",
+   "titulos": [
+    "Ghana national football team",
+    "Ghana men's national football team",
+    "Ghana national soccer team"
+   ]
+  },
+  {
+   "selecao": "GN",
+   "titulos": [
+    "Guinea national football team",
+    "Guinea men's national football team",
+    "Guinea national soccer team"
+   ]
+  },
+  {
+   "selecao": "GW",
+   "titulos": [
+    "Guinea-Bissau national football team",
+    "Guinea-Bissau men's national football team",
+    "Guinea-Bissau national soccer team"
+   ]
+  },
+  {
+   "selecao": "CI",
+   "titulos": [
+    "Ivory Coast national football team",
+    "Ivory Coast men's national football team",
+    "Ivory Coast national soccer team"
+   ]
+  },
+  {
+   "selecao": "KE",
+   "titulos": [
+    "Kenya national football team",
+    "Kenya men's national football team",
+    "Kenya national soccer team"
+   ]
+  },
+  {
+   "selecao": "LS",
+   "titulos": [
+    "Lesotho national football team",
+    "Lesotho men's national football team",
+    "Lesotho national soccer team"
+   ]
+  },
+  {
+   "selecao": "LR",
+   "titulos": [
+    "Liberia national football team",
+    "Liberia men's national football team",
+    "Liberia national soccer team"
+   ]
+  },
+  {
+   "selecao": "LY",
+   "titulos": [
+    "Libya national football team",
+    "Libya men's national football team",
+    "Libya national soccer team"
+   ]
+  },
+  {
+   "selecao": "MG",
+   "titulos": [
+    "Madagascar national football team",
+    "Madagascar men's national football team",
+    "Madagascar national soccer team"
+   ]
+  },
+  {
+   "selecao": "MW",
+   "titulos": [
+    "Malawi national football team",
+    "Malawi men's national football team",
+    "Malawi national soccer team"
+   ]
+  },
+  {
+   "selecao": "ML",
+   "titulos": [
+    "Mali national football team",
+    "Mali men's national football team",
+    "Mali national soccer team"
+   ]
+  },
+  {
+   "selecao": "MR",
+   "titulos": [
+    "Mauritania national football team",
+    "Mauritania men's national football team",
+    "Mauritania national soccer team"
+   ]
+  },
+  {
+   "selecao": "MU",
+   "titulos": [
+    "Mauritius national football team",
+    "Mauritius men's national football team",
+    "Mauritius national soccer team"
+   ]
+  },
+  {
+   "selecao": "MA",
+   "titulos": [
+    "Morocco national football team",
+    "Morocco men's national football team",
+    "Morocco national soccer team"
+   ]
+  },
+  {
+   "selecao": "MZ",
+   "titulos": [
+    "Mozambique national football team",
+    "Mozambique men's national football team",
+    "Mozambique national soccer team"
+   ]
+  },
+  {
+   "selecao": "NA",
+   "titulos": [
+    "Namibia national football team",
+    "Namibia men's national football team",
+    "Namibia national soccer team"
+   ]
+  },
+  {
+   "selecao": "NE",
+   "titulos": [
+    "Niger national football team",
+    "Niger men's national football team",
+    "Niger national soccer team"
+   ]
+  },
+  {
+   "selecao": "NG",
+   "titulos": [
+    "Nigeria national football team",
+    "Nigeria men's national football team",
+    "Nigeria national soccer team"
+   ]
+  },
+  {
+   "selecao": "RW",
+   "titulos": [
+    "Rwanda national football team",
+    "Rwanda men's national football team",
+    "Rwanda national soccer team"
+   ]
+  },
+  {
+   "selecao": "ST",
+   "titulos": [
+    "São Tomé and Príncipe national football team",
+    "São Tomé and Príncipe men's national football team",
+    "São Tomé and Príncipe national soccer team"
+   ]
+  },
+  {
+   "selecao": "SN",
+   "titulos": [
+    "Senegal national football team",
+    "Senegal men's national football team",
+    "Senegal national soccer team"
+   ]
+  },
+  {
+   "selecao": "SC",
+   "titulos": [
+    "Seychelles national football team",
+    "Seychelles men's national football team",
+    "Seychelles national soccer team"
+   ]
+  },
+  {
+   "selecao": "SL",
+   "titulos": [
+    "Sierra Leone national football team",
+    "Sierra Leone men's national football team",
+    "Sierra Leone national soccer team"
+   ]
+  },
+  {
+   "selecao": "SO",
+   "titulos": [
+    "Somalia national football team",
+    "Somalia men's national football team",
+    "Somalia national soccer team"
+   ]
+  },
+  {
+   "selecao": "ZA",
+   "titulos": [
+    "South Africa national football team",
+    "South Africa men's national football team",
+    "South Africa national soccer team"
+   ]
+  },
+  {
+   "selecao": "SS",
+   "titulos": [
+    "South Sudan national football team",
+    "South Sudan men's national football team",
+    "South Sudan national soccer team"
+   ]
+  },
+  {
+   "selecao": "SD",
+   "titulos": [
+    "Sudan national football team",
+    "Sudan men's national football team",
+    "Sudan national soccer team"
+   ]
+  },
+  {
+   "selecao": "TZ",
+   "titulos": [
+    "Tanzania national football team",
+    "Tanzania men's national football team",
+    "Tanzania national soccer team"
+   ]
+  },
+  {
+   "selecao": "TG",
+   "titulos": [
+    "Togo national football team",
+    "Togo men's national football team",
+    "Togo national soccer team"
+   ]
+  },
+  {
+   "selecao": "TN",
+   "titulos": [
+    "Tunisia national football team",
+    "Tunisia men's national football team",
+    "Tunisia national soccer team"
+   ]
+  },
+  {
+   "selecao": "UG",
+   "titulos": [
+    "Uganda national football team",
+    "Uganda men's national football team",
+    "Uganda national soccer team"
+   ]
+  },
+  {
+   "selecao": "ZM",
+   "titulos": [
+    "Zambia national football team",
+    "Zambia men's national football team",
+    "Zambia national soccer team"
+   ]
+  },
+  {
+   "selecao": "ZW",
+   "titulos": [
+    "Zimbabwe national football team",
+    "Zimbabwe men's national football team",
+    "Zimbabwe national soccer team"
+   ]
+  },
+  {
+   "selecao": "AF",
+   "titulos": [
+    "Afghanistan national football team",
+    "Afghanistan men's national football team",
+    "Afghanistan national soccer team"
+   ]
+  },
+  {
+   "selecao": "AU",
+   "titulos": [
+    "Australia national football team",
+    "Australia men's national football team",
+    "Australia national soccer team"
+   ]
+  },
+  {
+   "selecao": "BH",
+   "titulos": [
+    "Bahrain national football team",
+    "Bahrain men's national football team",
+    "Bahrain national soccer team"
+   ]
+  },
+  {
+   "selecao": "BD",
+   "titulos": [
+    "Bangladesh national football team",
+    "Bangladesh men's national football team",
+    "Bangladesh national soccer team"
+   ]
+  },
+  {
+   "selecao": "BT",
+   "titulos": [
+    "Bhutan national football team",
+    "Bhutan men's national football team",
+    "Bhutan national soccer team"
+   ]
+  },
+  {
+   "selecao": "BN",
+   "titulos": [
+    "Brunei national football team",
+    "Brunei men's national football team",
+    "Brunei national soccer team"
+   ]
+  },
+  {
+   "selecao": "KH",
+   "titulos": [
+    "Cambodia national football team",
+    "Cambodia men's national football team",
+    "Cambodia national soccer team"
+   ]
+  },
+  {
+   "selecao": "CN",
+   "titulos": [
+    "China national football team",
+    "China men's national football team",
+    "China national soccer team"
+   ]
+  },
+  {
+   "selecao": "TW",
+   "titulos": [
+    "Chinese Taipei national football team",
+    "Chinese Taipei men's national football team",
+    "Chinese Taipei national soccer team"
+   ]
+  },
+  {
+   "selecao": "GU",
+   "titulos": [
+    "Guam national football team",
+    "Guam men's national football team",
+    "Guam national soccer team"
+   ]
+  },
+  {
+   "selecao": "HK",
+   "titulos": [
+    "Hong Kong national football team",
+    "Hong Kong men's national football team",
+    "Hong Kong national soccer team"
+   ]
+  },
+  {
+   "selecao": "IN",
+   "titulos": [
+    "India national football team",
+    "India men's national football team",
+    "India national soccer team"
+   ]
+  },
+  {
+   "selecao": "ID",
+   "titulos": [
+    "Indonesia national football team",
+    "Indonesia men's national football team",
+    "Indonesia national soccer team"
+   ]
+  },
+  {
+   "selecao": "IR",
+   "titulos": [
+    "Iran national football team",
+    "Iran men's national football team",
+    "Iran national soccer team"
+   ]
+  },
+  {
+   "selecao": "IQ",
+   "titulos": [
+    "Iraq national football team",
+    "Iraq men's national football team",
+    "Iraq national soccer team"
+   ]
+  },
+  {
+   "selecao": "JP",
+   "titulos": [
+    "Japan national football team",
+    "Japan men's national football team",
+    "Japan national soccer team"
+   ]
+  },
+  {
+   "selecao": "JO",
+   "titulos": [
+    "Jordan national football team",
+    "Jordan men's national football team",
+    "Jordan national soccer team"
+   ]
+  },
+  {
+   "selecao": "KP",
+   "titulos": [
+    "North Korea national football team",
+    "North Korea men's national football team",
+    "North Korea national soccer team"
+   ]
+  },
+  {
+   "selecao": "KR",
+   "titulos": [
+    "South Korea national football team",
+    "South Korea men's national football team",
+    "South Korea national soccer team"
+   ]
+  },
+  {
+   "selecao": "KW",
+   "titulos": [
+    "Kuwait national football team",
+    "Kuwait men's national football team",
+    "Kuwait national soccer team"
+   ]
+  },
+  {
+   "selecao": "KG",
+   "titulos": [
+    "Kyrgyzstan national football team",
+    "Kyrgyzstan men's national football team",
+    "Kyrgyzstan national soccer team"
+   ]
+  },
+  {
+   "selecao": "LA",
+   "titulos": [
+    "Laos national football team",
+    "Laos men's national football team",
+    "Laos national soccer team"
+   ]
+  },
+  {
+   "selecao": "LB",
+   "titulos": [
+    "Lebanon national football team",
+    "Lebanon men's national football team",
+    "Lebanon national soccer team"
+   ]
+  },
+  {
+   "selecao": "MO",
+   "titulos": [
+    "Macau national football team",
+    "Macau men's national football team",
+    "Macau national soccer team"
+   ]
+  },
+  {
+   "selecao": "MY",
+   "titulos": [
+    "Malaysia national football team",
+    "Malaysia men's national football team",
+    "Malaysia national soccer team"
+   ]
+  },
+  {
+   "selecao": "MV",
+   "titulos": [
+    "Maldives national football team",
+    "Maldives men's national football team",
+    "Maldives national soccer team"
+   ]
+  },
+  {
+   "selecao": "MN",
+   "titulos": [
+    "Mongolia national football team",
+    "Mongolia men's national football team",
+    "Mongolia national soccer team"
+   ]
+  },
+  {
+   "selecao": "MM",
+   "titulos": [
+    "Myanmar national football team",
+    "Myanmar men's national football team",
+    "Myanmar national soccer team"
+   ]
+  },
+  {
+   "selecao": "NP",
+   "titulos": [
+    "Nepal national football team",
+    "Nepal men's national football team",
+    "Nepal national soccer team"
+   ]
+  },
+  {
+   "selecao": "OM",
+   "titulos": [
+    "Oman national football team",
+    "Oman men's national football team",
+    "Oman national soccer team"
+   ]
+  },
+  {
+   "selecao": "PK",
+   "titulos": [
+    "Pakistan national football team",
+    "Pakistan men's national football team",
+    "Pakistan national soccer team"
+   ]
+  },
+  {
+   "selecao": "PS",
+   "titulos": [
+    "Palestine national football team",
+    "Palestine men's national football team",
+    "Palestine national soccer team"
+   ]
+  },
+  {
+   "selecao": "PH",
+   "titulos": [
+    "Philippines national football team",
+    "Philippines men's national football team",
+    "Philippines national soccer team"
+   ]
+  },
+  {
+   "selecao": "QA",
+   "titulos": [
+    "Qatar national football team",
+    "Qatar men's national football team",
+    "Qatar national soccer team"
+   ]
+  },
+  {
+   "selecao": "SA",
+   "titulos": [
+    "Saudi Arabia national football team",
+    "Saudi Arabia men's national football team",
+    "Saudi Arabia national soccer team"
+   ]
+  },
+  {
+   "selecao": "SG",
+   "titulos": [
+    "Singapore national football team",
+    "Singapore men's national football team",
+    "Singapore national soccer team"
+   ]
+  },
+  {
+   "selecao": "LK",
+   "titulos": [
+    "Sri Lanka national football team",
+    "Sri Lanka men's national football team",
+    "Sri Lanka national soccer team"
+   ]
+  },
+  {
+   "selecao": "SY",
+   "titulos": [
+    "Syria national football team",
+    "Syria men's national football team",
+    "Syria national soccer team"
+   ]
+  },
+  {
+   "selecao": "TJ",
+   "titulos": [
+    "Tajikistan national football team",
+    "Tajikistan men's national football team",
+    "Tajikistan national soccer team"
+   ]
+  },
+  {
+   "selecao": "TH",
+   "titulos": [
+    "Thailand national football team",
+    "Thailand men's national football team",
+    "Thailand national soccer team"
+   ]
+  },
+  {
+   "selecao": "TL",
+   "titulos": [
+    "Timor-Leste national football team",
+    "Timor-Leste men's national football team",
+    "Timor-Leste national soccer team"
+   ]
+  },
+  {
+   "selecao": "TM",
+   "titulos": [
+    "Turkmenistan national football team",
+    "Turkmenistan men's national football team",
+    "Turkmenistan national soccer team"
+   ]
+  },
+  {
+   "selecao": "AE",
+   "titulos": [
+    "United Arab Emirates national football team",
+    "United Arab Emirates men's national football team",
+    "United Arab Emirates national soccer team"
+   ]
+  },
+  {
+   "selecao": "UZ",
+   "titulos": [
+    "Uzbekistan national football team",
+    "Uzbekistan men's national football team",
+    "Uzbekistan national soccer team"
+   ]
+  },
+  {
+   "selecao": "VN",
+   "titulos": [
+    "Vietnam national football team",
+    "Vietnam men's national football team",
+    "Vietnam national soccer team"
+   ]
+  },
+  {
+   "selecao": "YE",
+   "titulos": [
+    "Yemen national football team",
+    "Yemen men's national football team",
+    "Yemen national soccer team"
+   ]
+  },
+  {
+   "selecao": "AS",
+   "titulos": [
+    "American Samoa national football team",
+    "American Samoa men's national football team",
+    "American Samoa national soccer team"
+   ]
+  },
+  {
+   "selecao": "CK",
+   "titulos": [
+    "Cook Islands national football team",
+    "Cook Islands men's national football team",
+    "Cook Islands national soccer team"
+   ]
+  },
+  {
+   "selecao": "FJ",
+   "titulos": [
+    "Fiji national football team",
+    "Fiji men's national football team",
+    "Fiji national soccer team"
+   ]
+  },
+  {
+   "selecao": "NC",
+   "titulos": [
+    "New Caledonia national football team",
+    "New Caledonia men's national football team",
+    "New Caledonia national soccer team"
+   ]
+  },
+  {
+   "selecao": "NZ",
+   "titulos": [
+    "New Zealand national football team",
+    "New Zealand men's national football team",
+    "New Zealand national soccer team"
+   ]
+  },
+  {
+   "selecao": "PG",
+   "titulos": [
+    "Papua New Guinea national football team",
+    "Papua New Guinea men's national football team",
+    "Papua New Guinea national soccer team"
+   ]
+  },
+  {
+   "selecao": "WS",
+   "titulos": [
+    "Samoa national football team",
+    "Samoa men's national football team",
+    "Samoa national soccer team"
+   ]
+  },
+  {
+   "selecao": "SB",
+   "titulos": [
+    "Solomon Islands national football team",
+    "Solomon Islands men's national football team",
+    "Solomon Islands national soccer team"
+   ]
+  },
+  {
+   "selecao": "PF",
+   "titulos": [
+    "Tahiti national football team",
+    "Tahiti men's national football team",
+    "Tahiti national soccer team"
+   ]
+  },
+  {
+   "selecao": "TO",
+   "titulos": [
+    "Tonga national football team",
+    "Tonga men's national football team",
+    "Tonga national soccer team"
+   ]
+  },
+  {
+   "selecao": "VU",
+   "titulos": [
+    "Vanuatu national football team",
+    "Vanuatu men's national football team",
+    "Vanuatu national soccer team"
+   ]
+  }
+ ]
+}

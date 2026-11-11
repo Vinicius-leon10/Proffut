@@ -1,12 +1,19 @@
 // Relatório em português: tests/resultado/resumo.md e, no GitHub, o resumo da execução.
 import { mkdirSync, writeFileSync } from "node:fs";
-import type { FullResult, Reporter, TestCase, TestResult } from "@playwright/test/reporter";
+import type { FullConfig, FullResult, Reporter, TestCase, TestResult } from "@playwright/test/reporter";
 
 const ICONE: Record<TestResult["status"], string> = { passed: "✅", failed: "❌", timedOut: "❌", skipped: "⏭️", interrupted: "⚠️" };
 const semCores = (texto: string) => texto.replace(/\u001b\[[0-9;]*m/g, "");
 
 export default class Resumo implements Reporter {
   private linhas: { titulo: string; status: TestResult["status"]; detalhe: string; ms: number }[] = [];
+
+  private parte = "";
+
+  onBegin(config: FullConfig) {
+    // No GitHub os testes de tela rodam em partes ao mesmo tempo (--shard): cada parte escreve o seu resumo.
+    if (config.shard) this.parte = ` (parte ${config.shard.current} de ${config.shard.total})`;
+  }
 
   printsToStdio() {
     return false;
@@ -20,7 +27,7 @@ export default class Resumo implements Reporter {
   onEnd(resultado: FullResult) {
     const linhas = [...this.linhas].sort((a, b) => a.titulo.localeCompare(b.titulo));
     const texto = [
-      "# Testes do Proffut",
+      `# Testes do Proffut${this.parte}`,
       "",
       `- Site: ${process.env.BASE_URL ?? "site gerado em dist/"}`,
       `- Quando: ${new Date().toISOString()}`,

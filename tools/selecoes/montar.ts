@@ -2,7 +2,10 @@
 // países"): lê as páginas das seleções que o robô baixou (fase "america" do elencos.yml, branch dados-america; a seção
 // "Current squad" da Wikipédia em inglês, com a última convocação) e grava data/selecoes-2026/convocados.json.
 //
-//   npx tsx tools/selecoes/montar.ts <pasta da branch dados-america>
+//   npx tsx tools/selecoes/montar.ts <pasta da branch dados-america> [<pasta da branch dados-selecoes-europa>]
+//
+// Com a segunda pasta (fase "selecoes-europa" do robô, tools/selecoes/baixar.py), entram as 55 seleções da UEFA. Os
+// convocados que jogam nos clubes da Europa do jogo são ligados aos elencos por tools/europa/montar.ts (rodar depois).
 //
 // De cada convocado: nome, posição (GK, DF, MF, FW), nascimento, jogos e gols pela seleção e o clube. Quando o clube está
 // no jogo, o convocado é procurado no elenco dele (pelo nome); achado, o jogo usa esse jogador (`noJogo`). Os outros
@@ -134,11 +137,15 @@ function nomeSemModelo(valor: string): string {
 const POSICAO: Record<string, string> = { GK: "G", DF: "Z", MF: "M", FW: "A" };
 
 function main() {
-  const pasta = process.argv[2];
-  if (!pasta) throw new Error("Uso: npx tsx tools/selecoes/montar.ts <pasta da branch dados-america>");
-  const arquivo = (nome: string) => join(pasta, existsSync(join(pasta, nome)) ? nome : `${nome}.gz`);
-  const paginas: Record<string, string> = ler(arquivo("paginas.json"));
-  const sementes: { selecao: string; lang: string; pagina?: string }[] = ler(arquivo("selecoes.json"));
+  const pastas = process.argv.slice(2);
+  if (!pastas.length) throw new Error("Uso: npx tsx tools/selecoes/montar.ts <pasta da branch dados-america> [<pasta da branch dados-selecoes-europa>]");
+  const paginas: Record<string, string> = {};
+  const sementes: { selecao: string; lang: string; pagina?: string }[] = [];
+  for (const pasta of pastas) {
+    const arquivo = (nome: string) => join(pasta, existsSync(join(pasta, nome)) ? nome : `${nome}.gz`);
+    Object.assign(paginas, ler(arquivo("paginas.json")));
+    sementes.push(...ler(arquivo("selecoes.json")));
+  }
   const saida: Record<string, { pagina: string; convocados: Record<string, unknown>[] }> = {};
   let noJogo = 0, total = 0;
   for (const s of sementes) {
@@ -178,7 +185,7 @@ function main() {
   }
   mkdirSync(join(RAIZ, "data", "selecoes-2026"), { recursive: true });
   writeFileSync(join(RAIZ, "data", "selecoes-2026", "convocados.json"), JSON.stringify({
-    fonte: "Wikipédia em inglês (CC BY-SA), seção Current squad das páginas das seleções, baixadas pelo robô (fase america do elencos.yml); montado por tools/selecoes/montar.ts",
+    fonte: "Wikipédia em inglês (CC BY-SA), seção Current squad das páginas das seleções, baixadas pelo robô (fases america e selecoes-europa do elencos.yml); montado por tools/selecoes/montar.ts",
     selecoes: saida,
   }, null, 1) + "\n");
   console.log(`${Object.keys(saida).length} seleções, ${total} convocados, ${noJogo} achados num elenco do jogo.`);

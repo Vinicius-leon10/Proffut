@@ -23,8 +23,10 @@ export const NOME_ESTADUAL: Record<string, string> = {
 };
 
 /** Região do país na América (para agrupar nas telas). */
-export type Regiao = "sul" | "norte" | "central" | "caribe" | "europa";
-export const NOME_REGIAO: Record<Regiao, string> = { sul: "América do Sul", norte: "América do Norte", central: "América Central", caribe: "Caribe", europa: "Europa" };
+export type Regiao = "sul" | "norte" | "central" | "caribe" | "europa" | "asia" | "africa";
+export const NOME_REGIAO: Record<Regiao, string> = {
+  sul: "América do Sul", norte: "América do Norte", central: "América Central", caribe: "Caribe", europa: "Europa", asia: "Ásia", africa: "África",
+};
 
 /**
  * Os outros países da América: nome do país, do campeonato (em português), a nacionalidade dos jogadores (código de 3
@@ -90,6 +92,54 @@ export const PAISES: Record<string, { pais: string; liga: string; nacionalidade:
   FR: { pais: "França", liga: "Campeonato Francês", nacionalidade: "FRA", regiao: "europa" },
   PT: { pais: "Portugal", liga: "Campeonato Português", nacionalidade: "POR", regiao: "europa" },
   NL: { pais: "Holanda", liga: "Campeonato Holandês", nacionalidade: "HOL", regiao: "europa" },
+  // Outros 16 países da Europa (nov/2026, só a 1ª divisão); a Escócia é XS, como a seleção.
+  AT: { pais: "Áustria", liga: "Campeonato Austríaco", nacionalidade: "AUT", regiao: "europa" },
+  BE: { pais: "Bélgica", liga: "Campeonato Belga", nacionalidade: "BEL", regiao: "europa" },
+  CH: { pais: "Suíça", liga: "Campeonato Suíço", nacionalidade: "SUI", regiao: "europa" },
+  DK: { pais: "Dinamarca", liga: "Campeonato Dinamarquês", nacionalidade: "DIN", regiao: "europa" },
+  GR: { pais: "Grécia", liga: "Campeonato Grego", nacionalidade: "GRE", regiao: "europa" },
+  HR: { pais: "Croácia", liga: "Campeonato Croata", nacionalidade: "CRO", regiao: "europa" },
+  NO: { pais: "Noruega", liga: "Campeonato Norueguês", nacionalidade: "NOR", regiao: "europa" },
+  PL: { pais: "Polônia", liga: "Campeonato Polonês", nacionalidade: "POL", regiao: "europa" },
+  RO: { pais: "Romênia", liga: "Campeonato Romeno", nacionalidade: "ROU", regiao: "europa" },
+  RU: { pais: "Rússia", liga: "Campeonato Russo", nacionalidade: "RUS", regiao: "europa" },
+  XS: { pais: "Escócia", liga: "Campeonato Escocês", nacionalidade: "ESC", regiao: "europa" },
+  SE: { pais: "Suécia", liga: "Campeonato Sueco", nacionalidade: "SUE", regiao: "europa" },
+  RS: { pais: "Sérvia", liga: "Campeonato Sérvio", nacionalidade: "SRB", regiao: "europa" },
+  TR: { pais: "Turquia", liga: "Campeonato Turco", nacionalidade: "TUR", regiao: "europa" },
+  CZ: { pais: "Tchéquia", liga: "Campeonato Tcheco", nacionalidade: "TCH", regiao: "europa" },
+  UA: { pais: "Ucrânia", liga: "Campeonato Ucraniano", nacionalidade: "UCR", regiao: "europa" },
+  // Ásia (projeto "jogo completo", nov/2026): a 1ª divisão, sem acesso nem queda. A Austrália tem dois clubes da Nova Zelândia.
+  JP: { pais: "Japão", liga: "Campeonato Japonês", nacionalidade: "JAP", regiao: "asia" },
+  KR: { pais: "Coreia do Sul", liga: "Campeonato Sul-Coreano", nacionalidade: "COR", regiao: "asia" },
+  SA: { pais: "Arábia Saudita", liga: "Campeonato Saudita", nacionalidade: "SAU", regiao: "asia" },
+  AU: { pais: "Austrália", liga: "Campeonato Australiano", nacionalidade: "AUS", regiao: "asia" },
+  // África e o resto da Ásia (nov/2026): a 1ª divisão, sem acesso nem queda (data/mundo-2026, tools/mundo/montar.ts).
+  EG: { pais: "Egito", liga: "Campeonato Egípcio", nacionalidade: "EGI", regiao: "africa" },
+  MA: { pais: "Marrocos", liga: "Campeonato Marroquino", nacionalidade: "MAR", regiao: "africa" },
+  DZ: { pais: "Argélia", liga: "Campeonato Argelino", nacionalidade: "ALG", regiao: "africa" },
+  TN: { pais: "Tunísia", liga: "Campeonato Tunisiano", nacionalidade: "TUN", regiao: "africa" },
+  ZA: { pais: "África do Sul", liga: "Campeonato Sul-Africano", nacionalidade: "RSA", regiao: "africa" },
+  NG: { pais: "Nigéria", liga: "Campeonato Nigeriano", nacionalidade: "NGA", regiao: "africa" },
+  GH: { pais: "Gana", liga: "Campeonato Ganês", nacionalidade: "GAN", regiao: "africa" },
+  TZ: { pais: "Tanzânia", liga: "Campeonato Tanzaniano", nacionalidade: "TAN", regiao: "africa" },
+  AO: { pais: "Angola", liga: "Campeonato Angolano", nacionalidade: "ANG", regiao: "africa" },
+  ZM: { pais: "Zâmbia", liga: "Campeonato Zambiano", nacionalidade: "ZAM", regiao: "africa" },
+  KE: { pais: "Quênia", liga: "Campeonato Queniano", nacionalidade: "KEN", regiao: "africa" },
+  CN: { pais: "China", liga: "Campeonato Chinês", nacionalidade: "CHN", regiao: "asia" },
+  IR: { pais: "Irã", liga: "Campeonato Iraniano", nacionalidade: "IRN", regiao: "asia" },
+  QA: { pais: "Catar", liga: "Campeonato Catariano", nacionalidade: "QAT", regiao: "asia" },
+  AE: { pais: "Emirados Árabes", liga: "Campeonato Emiradense", nacionalidade: "EAU", regiao: "asia" },
+  UZ: { pais: "Uzbequistão", liga: "Campeonato Uzbeque", nacionalidade: "UZB", regiao: "asia" },
+  IN: { pais: "Índia", liga: "Campeonato Indiano", nacionalidade: "IND", regiao: "asia" },
+  TH: { pais: "Tailândia", liga: "Campeonato Tailandês", nacionalidade: "THA", regiao: "asia" },
+  IQ: { pais: "Iraque", liga: "Campeonato Iraquiano", nacionalidade: "IRQ", regiao: "asia" },
+  MY: { pais: "Malásia", liga: "Campeonato Malaio", nacionalidade: "MAS", regiao: "asia" },
+  ID: { pais: "Indonésia", liga: "Campeonato Indonésio", nacionalidade: "IDN", regiao: "asia" },
+  VN: { pais: "Vietnã", liga: "Campeonato Vietnamita", nacionalidade: "VIE", regiao: "asia" },
+  JO: { pais: "Jordânia", liga: "Campeonato Jordaniano", nacionalidade: "JOR", regiao: "asia" },
+  KW: { pais: "Kuwait", liga: "Campeonato Kuwaitiano", nacionalidade: "KUW", regiao: "asia" },
+  BH: { pais: "Bahrein", liga: "Campeonato Bareinita", nacionalidade: "BHR", regiao: "asia" },
 };
 
 /** País e divisão de um código de liga: "AR" é a 1ª da Argentina, "AR2" a 2ª, "MX3" a 3ª do México. */
@@ -136,6 +186,8 @@ export function nomeDoTorneio(id: IdTorneio): string {
 export const SOBEM_E_CAEM: Record<string, number[]> = {
   AR: [2, 2], BO: [2, 2], CL: [2, 2], CO: [2, 2], EC: [2, 2], PY: [2, 2], PE: [2, 2], UY: [3, 2], VE: [1, 2],
   MX: [0, 0], US: [0, 0], CA: [0, 0],
+  // Europa (nov/2026, como em 2025/26, sem os playoffs): 3 na Inglaterra, Espanha e Itália; 2 nos outros.
+  EN: [3, 3], ES: [3, 4], IT: [3, 4], DE: [2, 2], FR: [2, 2], PT: [2, 2], NL: [2, 0],
 };
 
 /** Código da liga do país na divisão `nivel` ("AR", "AR2", "AR3"). */
@@ -185,6 +237,9 @@ export function trocarDivisoes(estado: EstadoJogo): Record<string, { sobem: stri
 export function domingo(ano: number, semana: number): string {
   return somarDias(inicioDaTemporada(ano), semana * 7 + 1);
 }
+
+/** Divisão da Europa com mais clubes que isso joga duas rodadas por semana (domingo e quarta). */
+export const MAXIMO_UMA_RODADA_POR_SEMANA = 30;
 
 /** Dia em que a temporada começa: uma semana antes dos estaduais. */
 export function inicioDoAno(ano: number): string {
@@ -283,9 +338,13 @@ export function criarTorneios(estado: EstadoJogo, { semEstaduais = false } = {})
       // As ligas da Europa são sempre em turno e returno (38 rodadas com 20 clubes) e começam em janeiro, com os
       // estaduais: os clubes de lá não jogam estadual e assim sobra o resto do ano para as copas da UEFA.
       const europa = PAISES[divisaoDaLiga(id.slice(2)).pais]?.regiao === "europa";
-      const rodadas = europa || 2 * ida.length <= 35 ? [...ida, ...ida.map((jogos) => jogos.map(([a, b]) => [b, a] as Confronto))] : ida;
+      // Na Europa, as divisões de mais de 24 clubes (a 3ª da Espanha e da Itália, que lá são em grupos) jogam turno único,
+      // e as de mais de 30, duas rodadas por semana (domingo e quarta): tudo dentro do ano.
+      const grande = europa && clubes.length > 24;
+      const rodadas = (europa && !grande) || 2 * ida.length <= 35 ? [...ida, ...ida.map((jogos) => jogos.map(([a, b]) => [b, a] as Confronto))] : ida;
       const inicio = europa ? SEMANA_ESTADUAIS : 0;
-      estado.partidas.push(...partidasDasRodadas(ano, id, "liga", rodadas, rodadas.map((_, r) => domingo(ano, inicio + r))));
+      const data = (r: number) => (europa && clubes.length > MAXIMO_UMA_RODADA_POR_SEMANA ? somarDias(domingo(ano, inicio + Math.floor(r / 2)), r % 2 ? 3 : 0) : domingo(ano, inicio + r));
+      estado.partidas.push(...partidasDasRodadas(ano, id, "liga", rodadas, rodadas.map((_, r) => data(r))));
     }
     torneios[id] = t;
   }

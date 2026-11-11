@@ -1,0 +1,77 @@
+// Fichas dos clubes da primeira divisão do Japão, da Coreia do Sul, da Arábia Saudita e da Austrália (temporada 2025 ou
+// 2025/26; projeto "jogo completo", nov/2026), pelo id do clube no Transfermarkt: id do jogo, nome como se fala no Brasil,
+// sigla, cidade, fundação, cores, torcida (1 a 100) e reputação (1 a 100). Os nomes e os números são do Proffut; o estádio
+// e os jogadores vêm da base livre do transfermarkt-datasets (tools/asia/montar.ts).
+import type { FichaEuropa } from "../europa/fichas";
+
+/** Liga do Transfermarkt → código do país no jogo (o mesmo da seleção). */
+export const LIGAS_ASIA: Record<string, string> = { JAP1: "JP", RSK1: "KR", SA1: "SA", AUS1: "AU" };
+
+export const FICHAS_ASIA: Record<string, FichaEuropa> = {
+  // Japão (J1 League 2025)
+  "3958": ["vissel-kobe", "Vissel Kobe", "VIS", "Kobe", 1966, "#8B0000", "#FFFFFF", 24, 68],
+  "9598": ["kawasaki-frontale", "Kawasaki Frontale", "KAW", "Kawasaki", 1955, "#00A0E9", "#000000", 24, 67],
+  "3828": ["yokohama-marinos", "Yokohama F. Marinos", "YFM", "Yokohama", 1972, "#003DA5", "#FFFFFF", 28, 67],
+  "828": ["urawa-reds", "Urawa Reds", "URA", "Saitama", 1950, "#E60012", "#000000", 34, 68],
+  "2241": ["kashima-antlers", "Kashima Antlers", "KAS", "Kashima", 1947, "#B71C1C", "#1A237E", 30, 68],
+  "2697": ["sanfrecce-hiroshima", "Sanfrecce Hiroshima", "SAN", "Hiroshima", 1938, "#5B2C83", "#FFFFFF", 22, 67],
+  "596": ["gamba-osaka", "Gamba Osaka", "GAM", "Suita", 1980, "#0033A0", "#000000", 26, 66],
+  "1022": ["cerezo-osaka", "Cerezo Osaka", "CER", "Osaka", 1957, "#E4007F", "#1A237E", 22, 64],
+  "1066": ["nagoya-grampus", "Nagoya Grampus", "NAG", "Nagoya", 1939, "#D71920", "#F5A800", 24, 64],
+  "6631": ["fc-tokyo", "FC Tokyo", "TOK", "Tóquio", 1935, "#003DA5", "#E60012", 24, 64],
+  "6632": ["kashiwa-reysol", "Kashiwa Reysol", "KSR", "Kashiwa", 1940, "#FFE600", "#000000", 20, 64],
+  "23568": ["machida-zelvia", "Machida Zelvia", "MAC", "Machida", 1989, "#003DA5", "#FFFFFF", 10, 63],
+  "593": ["kyoto-sanga", "Kyoto Sanga", "KYO", "Kyoto", 1922, "#6B2C91", "#FFFFFF", 14, 62],
+  "1062": ["shimizu-s-pulse", "Shimizu S-Pulse", "SHI", "Shizuoka", 1991, "#F39800", "#003DA5", 18, 61],
+  "9597": ["avispa-fukuoka", "Avispa Fukuoka", "AVI", "Fukuoka", 1982, "#1D2088", "#FFFFFF", 12, 61],
+  "3734": ["tokyo-verdy", "Tokyo Verdy", "VER", "Tóquio", 1969, "#00843D", "#FFFFFF", 14, 61],
+  "22171": ["fagiano-okayama", "Fagiano Okayama", "FAG", "Okayama", 1975, "#B71C1C", "#1A237E", 8, 59],
+  "21975": ["mito-hollyhock", "Mito HollyHock", "MIT", "Mito", 1990, "#1D2088", "#E60012", 6, 57],
+  "23581": ["v-varen-nagasaki", "V-Varen Nagasaki", "NGS", "Nagasaki", 2005, "#003DA5", "#F39800", 8, 58],
+  "672": ["jef-united", "JEF United Chiba", "JEF", "Chiba", 1946, "#FFE600", "#00843D", 12, 58],
+  // Coreia do Sul (K League 1 2025)
+  "6502": ["jeonbuk-hyundai", "Jeonbuk Hyundai Motors", "JEO", "Jeonju", 1994, "#00843D", "#FFFFFF", 26, 66],
+  "3535": ["ulsan-hd", "Ulsan HD", "ULS", "Ulsan", 1983, "#003DA5", "#F39800", 24, 66],
+  "6500": ["fc-seoul", "FC Seoul", "SEO", "Seul", 1983, "#C8102E", "#000000", 26, 64],
+  "311": ["pohang-steelers", "Pohang Steelers", "POH", "Pohang", 1973, "#C8102E", "#000000", 20, 63],
+  "6499": ["daejeon-hana", "Daejeon Hana Citizen", "DAE", "Daejeon", 1997, "#5B2C83", "#00843D", 14, 61],
+  "6505": ["gimcheon-sangmu", "Gimcheon Sangmu", "GIM", "Gimcheon", 1984, "#C8102E", "#FFFFFF", 6, 60],
+  "30925": ["gwangju", "Gwangju FC", "GWA", "Gwangju", 2010, "#F5C400", "#C8102E", 8, 60],
+  "21459": ["gangwon", "Gangwon FC", "GAN", "Chuncheon", 2008, "#F39800", "#003DA5", 8, 59],
+  "19684": ["jeju-sk", "Jeju SK", "JEJ", "Jeju", 1982, "#F39800", "#000000", 10, 59],
+  "38898": ["fc-anyang", "FC Anyang", "ANY", "Anyang", 2013, "#5B2C83", "#FFFFFF", 6, 57],
+  "2996": ["incheon-united", "Incheon United", "INC", "Incheon", 2003, "#003DA5", "#000000", 12, 58],
+  "35759": ["bucheon-1995", "Bucheon FC 1995", "BUC", "Bucheon", 2007, "#C8102E", "#000000", 6, 56],
+  // Arábia Saudita (Saudi Pro League 2025/26)
+  "1114": ["al-hilal", "Al-Hilal", "HIL", "Riad", 1957, "#0033A0", "#FFFFFF", 44, 78],
+  "18544": ["al-nassr", "Al-Nassr", "NAS", "Riad", 1955, "#FFD100", "#003DA5", 42, 77],
+  "8023": ["al-ittihad", "Al-Ittihad", "ITT", "Jidá", 1927, "#FFD100", "#000000", 40, 76],
+  "18487": ["al-ahli", "Al-Ahli", "AHL", "Jidá", 1937, "#00843D", "#FFFFFF", 36, 75],
+  "26069": ["al-qadsiah", "Al-Qadsiah", "QAD", "Khobar", 1967, "#C8102E", "#FFD100", 12, 70],
+  "9840": ["al-shabab", "Al-Shabab", "SHA", "Riad", 1947, "#FFFFFF", "#000000", 18, 68],
+  "7732": ["al-ettifaq", "Al-Ettifaq", "ETT", "Dammam", 1945, "#00843D", "#C8102E", 16, 67],
+  "34911": ["neom", "Neom", "NEO", "Neom", 1999, "#000000", "#C8A951", 4, 66],
+  "28844": ["al-taawoun", "Al-Taawoun", "TAA", "Buraidá", 1956, "#FFD100", "#003DA5", 10, 65],
+  "27221": ["al-fateh", "Al-Fateh", "FAT", "Al-Hasa", 1958, "#003DA5", "#FFFFFF", 10, 64],
+  "6070": ["al-khaleej", "Al-Khaleej", "KHA", "Saihat", 1945, "#00843D", "#FFD100", 8, 63],
+  "50532": ["damac", "Damac", "DAM", "Khamis Mushait", 1972, "#C8102E", "#FFD100", 6, 63],
+  "50531": ["al-fayha", "Al-Fayha", "FAY", "Al-Majma'ah", 1953, "#F39800", "#003DA5", 6, 63],
+  "31008": ["al-riyadh", "Al-Riyadh", "RIY", "Riad", 1953, "#C8102E", "#000000", 6, 62],
+  "71665": ["al-okhdood", "Al-Okhdood", "OKH", "Najran", 1976, "#00843D", "#FFFFFF", 4, 62],
+  "9131": ["al-hazem", "Al-Hazem", "HAZ", "Ar Rass", 1957, "#C8102E", "#FFFFFF", 4, 61],
+  "91427": ["al-kholood", "Al-Kholood", "KHO", "Ar Rass", 1962, "#000000", "#FFD100", 4, 61],
+  "32328": ["al-najma", "Al-Najma", "NAJ", "Unaizah", 1960, "#003DA5", "#FFFFFF", 4, 60],
+  // Austrália (A-League Men 2025/26; o Auckland FC e o Wellington Phoenix são da Nova Zelândia e jogam a liga australiana)
+  "25580": ["melbourne-city", "Melbourne City", "MCI", "Melbourne", 2009, "#6CABDD", "#FFFFFF", 14, 60],
+  "7006": ["melbourne-victory", "Melbourne Victory", "MVI", "Melbourne", 2004, "#003DA5", "#FFFFFF", 20, 60],
+  "8054": ["sydney-fc", "Sydney FC", "SYD", "Sydney", 2004, "#6CABDD", "#003DA5", 18, 60],
+  "36100": ["western-sydney-wanderers", "Western Sydney Wanderers", "WSW", "Sydney", 2012, "#C8102E", "#000000", 16, 59],
+  "118373": ["auckland-fc", "Auckland FC", "AUC", "Auckland", 2023, "#000000", "#00A0E9", 10, 59],
+  "6954": ["central-coast-mariners", "Central Coast Mariners", "CCM", "Gosford", 2004, "#FFD100", "#003DA5", 10, 58],
+  "5551": ["newcastle-jets", "Newcastle Jets", "NEW", "Newcastle (Austrália)", 2000, "#FFD100", "#003DA5", 10, 57],
+  "875": ["adelaide-united", "Adelaide United", "ADE", "Adelaide", 2003, "#C8102E", "#FFD100", 12, 58],
+  "7831": ["brisbane-roar", "Brisbane Roar", "BRI", "Brisbane", 2004, "#F39800", "#5B2C83", 10, 56],
+  "970": ["perth-glory", "Perth Glory", "PER", "Perth", 1995, "#5B2C83", "#F39800", 10, 56],
+  "71085": ["macarthur", "Macarthur FC", "MAF", "Sydney", 2017, "#000000", "#C8A951", 4, 56],
+  "8445": ["wellington-phoenix", "Wellington Phoenix", "WEL", "Wellington", 2007, "#FFD100", "#000000", 8, 56],
+};

@@ -1,10 +1,9 @@
-import { execFileSync } from "node:child_process";
-import { abrirSite, botao, cartaoDoProximoJogo, escutarSons, expect, test, voltar } from "./ajuda";
+import { abrirSite, botao, cartaoDoProximoJogo, escutarSons, expect, montarSave, test, voltar } from "./ajuda";
 
 test("R25 sons da partida: apito no início, pênalti com narrador e apito final; desligados, nada toca", async ({ page }) => {
   test.setTimeout(120_000);
   // Jogo montado pelo motor: a primeira partida do Flamengo tem pênalti e gol.
-  const save = execFileSync("npx", ["tsx", "tests/saves/penalti-e-gol.ts"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("penalti-e-gol");
   await page.clock.install();
   const sons = await escutarSons(page);
   const apitos = async () => (await sons()).filter((s) => s.tipo === "tom" && s.hz >= 2000).length;
@@ -59,7 +58,7 @@ test("R25 sons da partida: apito no início, pênalti com narrador e apito final
 test("R27 gol sem narrador: a torcida comemora alto o gol do meu time e vaia o gol do adversário", async ({ page }) => {
   test.setTimeout(120_000);
   // Jogo montado pelo motor: na primeira partida do Flamengo há gol dele e gol do adversário.
-  const save = execFileSync("npx", ["tsx", "tests/saves/gols-pro-e-contra.ts", "flamengo"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  const save = montarSave("gols-pro-e-contra", "flamengo");
   await page.clock.install();
   const sons = await escutarSons(page);
 
