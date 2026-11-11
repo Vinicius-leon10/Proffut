@@ -97,7 +97,10 @@ def texto_da_pagina(lang, titulo):
 
 # Seções que listam os participantes (as de quem subiu ou caiu ficam de fora: citam clubes de outras divisões).
 PARTICIPANTES = re.compile(r"particip|equipes|clubes|times|teams|equipos|club information|informaci[óo]n|localiza|stadia|"
-                           r"est[áa]dios|personnel|grupo|group|serie [ab]\b|zona", re.I)
+                           r"est[áa]dios|personnel|grupo|group|serie [ab]\b|zona|"
+                           # Páginas em inglês que listam os clubes no mapa ou na visão geral (nov/2026: "Stadiums by
+                           # locations" na 2ª da Rússia, "Team overview" na 2ª da Tchéquia, "Stadiums and locations" no Chipre).
+                           r"stadiums|locations|team overview|venues", re.I)
 FORA_DOS_PARTICIPANTES = re.compile(r"relevo|changes|altas|ascens|descens|rebaix|acesso|promo|relega|cambio|entrenador|"
                                     r"managerial|[áa]rbitr|transmiss|direitos|broadcast|estat[íi]stic|statistic|goleador|"
                                     r"artilh|scorer|p[úu]blico|attendance|premia|award|campe[õo]es|champions|final", re.I)
