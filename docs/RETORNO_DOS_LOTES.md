@@ -5,10 +5,7 @@ O Claude Code do Proffut confere cada lote que chega e escreve aqui o resultado.
 
 ## Refazer (prioridade)
 
-Lote 36: os 5 estavam certos e entraram no jogo (Cracovia, Kazincbarcika, Livorno, Metalist Kharkiv, SÍ Sørvágur). Falta só
-um: `alshariqa.png`. Você tinha razão, o nome estava trocado: o clube é o **Al-Nasr de Dubai** (fundado em 1945, estádio
-Al-Maktoum, azul e branco). O nome já foi corrigido no jogo; mande o escudo do Al-Nasr com o nome de arquivo
-`alshariqa.png`.
+Nada. Lote 37: o escudo do Al-Nasr estava certo e entrou no jogo. Todos os clubes do jogo têm escudo.
 
 ## Jogadores
 
@@ -60,3 +57,4 @@ continuam com elenco gerado.
 | jogadores 05–07 refinados | jogadores (Série D) | os 24 clubes | - |
 | 35 | escudos | todos os enviados | - |
 | 36 refeito | escudos | todos os enviados | - |
+| 37 refeito | escudos | o do Al-Nasr | - |
