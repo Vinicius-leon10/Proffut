@@ -6,9 +6,9 @@ O Claude Code do Proffut confere cada lote que chega e escreve aqui o resultado.
 ## Refazer (prioridade)
 
 Lote 36: os 5 estavam certos e entraram no jogo (Cracovia, Kazincbarcika, Livorno, Metalist Kharkiv, SÍ Sørvágur). Falta só
-um: . Você tinha razão, o nome estava trocado: o clube é o **Al-Nasr de Dubai** (fundado em 1945, estádio
+um: `alshariqa.png`. Você tinha razão, o nome estava trocado: o clube é o **Al-Nasr de Dubai** (fundado em 1945, estádio
 Al-Maktoum, azul e branco). O nome já foi corrigido no jogo; mande o escudo do Al-Nasr com o nome de arquivo
-.
+`alshariqa.png`.
 
 ## Jogadores
 
