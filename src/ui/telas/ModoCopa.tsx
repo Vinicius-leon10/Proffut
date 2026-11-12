@@ -10,10 +10,10 @@ import {
   FASES_DA_COPA, avancarNaCopa, copaDoMundoDoAno, faseDaCopaJogada, finalDaCopa, jogosDaFaseDaCopa, minhaSelecaoNaCopa,
   premiosDaCopa, proximaFaseDaCopa, ultimaFaseJogada, vencedorNaCopa, type FaseDaCopa,
 } from "../../engine/modoCopa";
-import { NOME_FASE_SELECOES, bandeira, comArtigoDaSelecao, nomeDoPais, paisDaSelecao, tabelasDeSelecoes } from "../../engine/selecoes";
+import { NOME_FASE_SELECOES, comArtigoDaSelecao, nomeDoPais, paisDaSelecao, tabelasDeSelecoes } from "../../engine/selecoes";
 import type { EstadoCompeticaoSelecoes, Partida } from "../../engine/tipos";
 import { avancarJogo } from "../acoes";
-import { Cartao, Escudo } from "../componentes";
+import { Bandeira, Cartao, Escudo } from "../componentes";
 import { rotuloPartida } from "../formatos";
 import { useJogo, useLoja } from "../store";
 import { CompeticaoDeSelecoes } from "./Tabelas";
@@ -56,7 +56,7 @@ function AberturaDaCopa({ comp }: { comp: EstadoCompeticaoSelecoes }) {
   const janela = janelaDaCopa(estado.temporada)!;
   const clube = estado.clubes[estado.tecnico.clubeId];
   const volta = proximoJogoDoClube(estado);
-  const sedes = (comp.sedes ?? [comp.sede!]).map((id) => `${bandeira(paisDaSelecao(id))} ${nomeDoPais(paisDaSelecao(id))}`);
+  const sedes = comp.sedes ?? [comp.sede!];
   const minha = minhaSelecaoNaCopa(estado);
   const total = estado.partidas.filter((p) => p.serie === comp.id).length + (comp.fase === "grupos" ? 31 : 0);
   const entrar = () => {
@@ -68,7 +68,7 @@ function AberturaDaCopa({ comp }: { comp: EstadoCompeticaoSelecoes }) {
       <Taca />
       <div>
         <h1 className="copa-titulo">Copa do Mundo {comp.ano}</h1>
-        <p className="mini copa-fraco">{sedes.join(" · ")} · {comp.selecoes.length} seleções</p>
+        <p className="mini copa-fraco">{sedes.map((id) => <span key={id}><Bandeira pais={paisDaSelecao(id)} altura={12} /> {nomeDoPais(paisDaSelecao(id))} · </span>)}{comp.selecoes.length} seleções</p>
       </div>
       <div className="copa-contagem">
         <div><b>{formatarData(janela.de).slice(5)}</b><span className="mini">abertura</span></div>
@@ -144,7 +144,7 @@ function PainelDoTecnico({ comp, selId }: { comp: EstadoCompeticaoSelecoes; selI
 function Chaveamento() {
   const estado = useJogo();
   const coluna = (fase: string) => jogosDaFaseDaCopa(estado, fase).sort((a, b) => (a.chave ?? 0) - (b.chave ?? 0));
-  const sigla = (id: string) => `${bandeira(paisDaSelecao(id))} ${estado.clubes[id].sigla}`;
+  const sigla = (id: string) => <><Escudo clube={estado.clubes[id]} tamanho={16} /> {estado.clubes[id].sigla}</>;
   const linha = (p: Partida, lado: "mandante" | "visitante") => {
     const id = p[lado];
     const gols = lado === "mandante" ? p.gm : p.gv;
@@ -242,7 +242,7 @@ function CampeaoDaCopa({ comp }: { comp: EstadoCompeticaoSelecoes }) {
       <div className="copa-campeao">
         <Taca tamanho={72} />
         <span className="mini copa-fraco">Campeã da Copa do Mundo {comp.ano}</span>
-        <h1 className="copa-titulo">{bandeira(paisDaSelecao(premios.campeao))} {campeao.nome}</h1>
+        <h1 className="copa-titulo"><Escudo clube={campeao} tamanho={40} /> {campeao.nome}</h1>
         <span className="mini copa-fraco">Final em {formatarData(f.data)} · {nome(f.mandante)} {f.gm} × {f.gv} {nome(f.visitante)}{f.penaltis ? ` (pênaltis ${f.penaltis[0]} a ${f.penaltis[1]})` : ""}</span>
       </div>
       <Cartao titulo="Prêmios">

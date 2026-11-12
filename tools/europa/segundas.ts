@@ -18,6 +18,7 @@ import { NACIONALIDADES_MUNDO } from "../../src/engine/nacionalidades";
 import { PAISES } from "../../src/engine/torneios";
 import { lerElenco, normalizar, type Pos } from "../times/wiki";
 import { FICHAS_SEGUNDAS } from "./fichas-segundas";
+import { nacionalidadeDaFonte } from "../comum/nacionalidades";
 
 const [pasta, pastaTm] = process.argv.slice(2);
 if (!pasta || !pastaTm) throw new Error("Uso: npx tsx tools/europa/segundas.ts <dados-europa-segundas> <dados-europa>");
@@ -122,7 +123,7 @@ function nacionalidade(texto?: string): string | undefined {
   if (!texto) return undefined;
   const t = texto.trim();
   const codigo = FIFA[t.toUpperCase()] ?? (CODIGOS_DO_JOGO.has(t.toUpperCase()) && t.length === 3 ? t.toUpperCase() : undefined);
-  return codigo && CODIGOS_DO_JOGO.has(codigo) ? codigo : POR_NOME_EM_INGLES.get(normalizar(t));
+  return codigo && CODIGOS_DO_JOGO.has(codigo) ? codigo : POR_NOME_EM_INGLES.get(normalizar(t)) ?? nacionalidadeDaFonte(t);
 }
 
 const DATA_INICIO = "2026-01-03";

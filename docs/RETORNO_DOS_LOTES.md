@@ -58,3 +58,8 @@ continuam com elenco gerado.
 | 35 | escudos | todos os enviados | - |
 | 36 refeito | escudos | todos os enviados | - |
 | 37 refeito | escudos | o do Al-Nasr | - |
+
+## Seleções (escudos e bandeiras)
+
+Lotes `selecoes-lote-01` a `06` (12/nov/2026): conferidos um a um, todos certos. Entraram no jogo os 217 escudos e as 217
+bandeiras. Nada a refazer.

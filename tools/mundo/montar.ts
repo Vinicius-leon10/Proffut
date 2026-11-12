@@ -10,6 +10,7 @@ import { gunzipSync } from "node:zlib";
 import { lerElenco, normalizar, type Pos } from "../times/wiki";
 import { SELECOES_MUNDO } from "../../src/engine/selecoes-mundo";
 import { NACIONALIDADES_MUNDO } from "../../src/engine/nacionalidades";
+import { nacionalidadeDaFonte } from "../comum/nacionalidades";
 
 const pasta = process.argv[2];
 if (!pasta) throw new Error("Uso: npx tsx tools/mundo/montar.ts <pasta da branch dados-asia-africa>");
@@ -130,7 +131,7 @@ const DA_FIFA = new Map<string, string>(Object.values(SELECOES_MUNDO).map((s) =>
 function nacionalidade(codigo?: string): string | undefined {
   if (!codigo) return undefined;
   const c = codigo.toUpperCase().trim();
-  return DA_FIFA.get(c) ?? (NACIONALIDADES_MUNDO[c] ? c : undefined);
+  return DA_FIFA.get(c) ?? (NACIONALIDADES_MUNDO[c] ? c : undefined) ?? nacionalidadeDaFonte(codigo);
 }
 const DO_PAIS: Record<string, string> = Object.fromEntries(Object.entries(SELECOES_MUNDO).map(([iso, s]) => [iso, s[1]]));
 

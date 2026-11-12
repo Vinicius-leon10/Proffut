@@ -38,14 +38,14 @@ test("R97 a bandeira pequena do país do jogador ao lado do nome: no Elenco, na 
   const estrangeiro = elencos.flamengo.find((j) => j.nacionalidade === "ARG")!;
   const brasileiro = elencos.flamengo.find((j) => !j.nacionalidade)!;
   const linhaDe = (nome: string) => linhas.filter({ has: page.locator(".negrito", { hasText: exato(nome) }) });
-  await expect(linhaDe(estrangeiro.nome).locator(".bandeira-jogador")).toHaveText("🇦🇷");
+  await expect(linhaDe(estrangeiro.nome).locator(".bandeira-jogador")).toHaveAttribute("data-pais", "AR");
   await expect(linhaDe(estrangeiro.nome).locator(".bandeira-jogador")).toHaveAttribute("title", "Argentina");
-  await expect(linhaDe(brasileiro.nome).locator(".bandeira-jogador")).toHaveText("🇧🇷");
+  await expect(linhaDe(brasileiro.nome).locator(".bandeira-jogador")).toHaveAttribute("data-pais", "BR");
   // Na ficha, a bandeira ao lado do país.
   await linhaDe(estrangeiro.nome).click();
   const ficha = page.getByRole("dialog");
-  await expect(ficha.locator(".bandeira-jogador")).toHaveText("🇦🇷");
-  await expect(ficha).toContainText("🇦🇷 Argentina");
+  await expect(ficha.locator(".bandeira-jogador")).toHaveAttribute("data-pais", "AR");
+  await expect(ficha).toContainText("Argentina");
   await ficha.getByRole("button", { name: "Fechar" }).click();
   // No Mercado, cada jogador da lista também.
   await aba(page, "Mercado");

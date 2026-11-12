@@ -3,15 +3,42 @@ import { createPortal } from "react-dom";
 import { hashTexto } from "../engine/rng";
 import { bandeira, ehSelecao, paisDaSelecao } from "../engine/selecoes";
 import type { Clube, Posicao } from "../engine/tipos";
+import FOLHA_BANDEIRAS from "./bandeiras.json";
 import { bandeiraDaNacionalidade } from "./formatos";
 import { useLoja } from "./store";
 
-// ---- bandeira do jogador ----------------------------------------------------------
+// ---- bandeiras ----------------------------------------------------------------------
+
+const POSICAO_NA_FOLHA = new Map(FOLHA_BANDEIRAS.codigos.map((c, i) => [c, i]));
+
+/**
+ * Bandeira de um país (o código das seleções do jogo: "BR", "EN", "XS"...), da folha `public/bandeiras.png`
+ * (`tools/bandeiras/folha.py`): imagem, porque o Windows não desenha a bandeira em emoji (R124). Sem o país na folha, o
+ * emoji. `altura` em px; a largura é 3:2.
+ */
+export function Bandeira({ pais, altura = 14, className = "bandeira", titulo }: { pais?: string; altura?: number; className?: string; titulo?: string }) {
+  const codigo = pais?.toUpperCase();
+  const i = codigo ? POSICAO_NA_FOLHA.get(codigo) : undefined;
+  const acessivel = titulo ? { title: titulo, role: "img", "aria-label": titulo } : { "aria-hidden": true };
+  if (i === undefined) {
+    return <span className={className} data-pais={codigo ?? ""} {...acessivel}>{codigo ? bandeira(codigo) : "🏳️"}</span>;
+  }
+  const f = FOLHA_BANDEIRAS;
+  const escala = altura / f.altura;
+  const style = {
+    display: "inline-block", flexShrink: 0, verticalAlign: "middle",
+    width: Math.round(f.largura * escala), height: altura,
+    backgroundImage: "url(bandeiras.png)", backgroundRepeat: "no-repeat",
+    backgroundSize: `${f.colunas * f.largura * escala}px ${f.linhas * f.altura * escala}px`,
+    backgroundPosition: `-${(i % f.colunas) * f.largura * escala}px -${Math.floor(i / f.colunas) * f.altura * escala}px`,
+  };
+  return <span className={className} data-pais={codigo} style={style} {...acessivel} />;
+}
 
 /** A bandeira pequena do país do jogador, ao lado do nome (pedido do usuário, R97). */
 export function BandeiraJogador({ nacionalidade }: { nacionalidade: string }) {
-  const { bandeira, pais } = bandeiraDaNacionalidade(nacionalidade);
-  return <span className="bandeira-jogador" title={pais} role="img" aria-label={pais}>{bandeira}</span>;
+  const { codigo, pais } = bandeiraDaNacionalidade(nacionalidade);
+  return <Bandeira pais={codigo} altura={12} className="bandeira-jogador" titulo={pais} />;
 }
 
 // ---- escudo ------------------------------------------------------------------------
@@ -35,19 +62,19 @@ const ESCUDOS_QUE_FALTAM = new Set<string>();
 export function Escudo({ clube, tamanho = 32 }: { clube: Pick<Clube, "id" | "sigla" | "cores">; tamanho?: number }) {
   const importado = useLoja((s) => s.escudos[clube.id]);
   const [falharam, setFalharam] = useState<string[]>([]);
-  // Seleção: a bandeira do país no lugar do escudo.
-  if (ehSelecao(clube.id) && !importado) {
-    return (
-      <span className="escudo bandeira-escudo" aria-hidden="true" style={{ width: tamanho, height: tamanho, fontSize: Math.round(tamanho * 0.82) }}>
-        {bandeira(paisDaSelecao(clube.id))}
-      </span>
-    );
-  }
   const imagem = [importado, `escudos/${clube.id}.png`].find((src): src is string => !!src && !falharam.includes(src) && !ESCUDOS_QUE_FALTAM.has(src));
   if (imagem) {
     return (
       <img className="escudo" src={imagem} width={tamanho} height={tamanho} alt="" style={{ flexShrink: 0, objectFit: "contain" }}
         onError={() => { ESCUDOS_QUE_FALTAM.add(imagem); setFalharam((f) => [...f, imagem]); }} />
+    );
+  }
+  // Seleção sem a imagem do escudo (`escudos/sel-<país>.png`, R124): a bandeira do país, no mesmo tamanho.
+  if (ehSelecao(clube.id)) {
+    return (
+      <span className="escudo bandeira-escudo" aria-hidden="true" style={{ width: tamanho, height: tamanho }}>
+        <Bandeira pais={paisDaSelecao(clube.id)} altura={Math.round(tamanho * 0.6)} className="bandeira" />
+      </span>
     );
   }
   const { primaria, secundaria } = clube.cores;

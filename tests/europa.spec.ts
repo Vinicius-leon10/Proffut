@@ -28,8 +28,8 @@ test("R98 jogo novo na Europa: o continente Europa com os 54 países (7 até o R
     "Israel", "Itália", "Kosovo", "Letônia", "Lituânia", "Luxemburgo", "Macedônia do Norte", "Malta", "Moldávia", "Montenegro", "Noruega",
     "País de Gales", "Polônia", "Portugal", "Romênia", "Rússia", "San Marino", "Sérvia", "Suécia", "Suíça", "Tchéquia", "Turquia", "Ucrânia"]);
   // A bandeira da Inglaterra (a da cruz de São Jorge, não a do Reino Unido) e a das outras pelos indicadores regionais.
-  expect(await page.getByRole("button", { name: /Inglaterra/ }).locator(".bandeira").textContent()).toBe("\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}");
-  expect(await page.getByRole("button", { name: /Espanha/ }).locator(".bandeira").textContent()).toBe("🇪🇸");
+  await expect(page.getByRole("button", { name: /Inglaterra/ }).locator(".bandeira")).toHaveAttribute("data-pais", "EN");
+  await expect(page.getByRole("button", { name: /Espanha/ }).locator(".bandeira")).toHaveAttribute("data-pais", "ES");
   await page.getByRole("button", { name: /Inglaterra/ }).click();
   await expect(page.locator(".topo .titulo")).toHaveText("Inglaterra");
   // Com a 2ª e a 3ª divisão (R103): as três, abrindo na 1ª.
@@ -149,7 +149,7 @@ test("R106 Outros países da Europa: no jogo novo, a Escócia (com a bandeira de
   await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: /Europa/ }).click();
-  expect(await page.getByRole("button", { name: /Escócia/ }).locator(".bandeira").textContent()).toBe("\u{1F3F4}\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E0074}\u{E007F}");
+  await expect(page.getByRole("button", { name: /Escócia/ }).locator(".bandeira")).toHaveAttribute("data-pais", "XS");
   await page.getByRole("button", { name: /Turquia/ }).click();
   await expect(page.locator(".topo .titulo")).toHaveText("Turquia");
   await expect(page.locator(".lista .item")).toHaveCount(outros.filter((c) => c.pais === "TR").length);

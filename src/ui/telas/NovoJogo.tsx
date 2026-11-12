@@ -2,22 +2,10 @@ import { useMemo, useState, type ReactNode } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { FICHAS, FICHAS_ESTADUAIS, FICHAS_EXTERIOR, PARTICIPANTES_ESTADUAIS, RESERVA, forcaEstimada, novoJogo, type FichaClube } from "../../engine/jogo";
 import { NOME_REGIAO, PAISES, divisaoDaLiga, type Regiao } from "../../engine/torneios";
-import { emojiDaBandeira } from "../../engine/nacionalidades";
 import { formatarDinheiro } from "../../engine/financas";
 import { espacoLivre, pedirArmazenamentoPersistente, podeTrocarOContinuar } from "../../save/salvamento";
-import { Escudo, Segmentado, Topo } from "../componentes";
+import { Bandeira, Escudo, Segmentado, Topo } from "../componentes";
 import { useLoja } from "../store";
-
-/**
- * Bandeira do país pelo código de duas letras (as letras viram os "indicadores regionais" do emoji: BR → 🇧🇷). A
- * Inglaterra ("EN" no jogo) tem a bandeira própria, a da cruz de São Jorge.
- */
-export function bandeira(codigo: string): string {
-  // Inglaterra (EN) e Escócia (XS, nov/2026) com as bandeiras delas.
-  const propria = { EN: "ENG", XS: "SCT" }[codigo.toUpperCase()];
-  if (propria) return emojiDaBandeira(propria);
-  return String.fromCodePoint(...[...codigo.toUpperCase()].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65));
-}
 
 /** Países em que o técnico pode começar e as divisões de cada um (o técnico treina qualquer clube, nov/2026). */
 const NOS_ESTADUAIS = new Set(Object.values(PARTICIPANTES_ESTADUAIS).flat());
@@ -149,7 +137,7 @@ export function NovoJogo() {
           <div role="group" aria-label="País" className="lista">
             {lista.map((p) => (
               <button key={p} className="item" aria-pressed={p === pais} onClick={() => escolherPais(p)}>
-                <span className="bandeira" aria-hidden style={{ fontSize: 26 }}>{bandeira(p)}</span>
+                <Bandeira pais={p} altura={22} />
                 <span className="cresce negrito corta">{NOME_PAIS[p]}</span>
               </button>
             ))}

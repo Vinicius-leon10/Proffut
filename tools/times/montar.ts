@@ -27,6 +27,7 @@ import { montar as montarDasSumulas, type JogadorReal } from "../elencos/montar"
 import { FONTES_CLUBES, type NomesNasFontes } from "../elencos/fontes-clubes";
 import { formatarNome } from "../elencos/sumulas";
 import { ano, cor, ficha, lerElenco, normalizar, numero, textoVisivel, type Pos } from "./wiki";
+import { nacionalidadeDaFonte } from "../comum/nacionalidades";
 
 // ---- tipos do que o robô grava ----------------------------------------------------------------
 
@@ -116,7 +117,7 @@ Object.assign(NACIONALIDADE, {
   mex: "MEX", usa: "EUA", can: "CAN", cri: "CRC", hnd: "HON", gtm: "GUA", slv: "SLV", pan: "PAN", nic: "NCA", blz: "BLZ",
   jam: "JAM", tto: "TRI", hti: "HAI", dom: "DOM", cub: "CUB", pri: "PUR", sur: "SUR", guy: "GUY", cuw: "CUW", abw: "ARU",
 });
-const nacionalidade = (texto?: string) => (texto ? NACIONALIDADE[normalizar(texto)] : undefined);
+const nacionalidade = (texto?: string) => (texto ? NACIONALIDADE[normalizar(texto)] ?? nacionalidadeDaFonte(texto) : undefined);
 const NACIONALIDADE_DO_PAIS: Record<string, string> = {
   AR: "ARG", BO: "BOL", CL: "CHI", CO: "COL", EC: "EQU", PY: "PAR", PE: "PER", UY: "URU", VE: "VEN",
   MX: "MEX", US: "EUA", CA: "CAN", CR: "CRC", HN: "HON", GT: "GUA", SV: "SLV", PA: "PAN", NI: "NCA", BZ: "BLZ", JM: "JAM", TT: "TRI", HT: "HAI",

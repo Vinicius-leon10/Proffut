@@ -47,7 +47,7 @@ import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoA
 import { jogarRapido } from "./rapida";
 import {
   aplicarJogoDeSelecoes, atualizarConcentracoes, avancarSelecoes, depoisDoJogoRapido, ehCompeticaoDeSelecoes, elencoDaSelecao,
-  ehSelecao, selecoesDoJogoNovo,
+  ehSelecao, nacionalidadeDoPais, paisDaSelecao, selecoesDoJogoNovo,
 } from "./selecoes";
 import type { Clube, Estilo, EstadoJogo, Formacao, Jogador, Partida, SerieClube, Tatica } from "./tipos";
 
@@ -181,6 +181,39 @@ export function juntarQuemJogavaFora(estado: EstadoJogo, clubeId: string) {
   }
   const clube = estado.clubes[clubeId];
   clube.escalacao = escalarAutomatico(elencoDe(estado, clubeId), clube.tatica.formacao, clube.tatica.jogadas);
+}
+
+/**
+ * Nacionalidades corrigidas (R123, nov/2026, "Cristiano Ronaldo estava com bandeira da Arábia Saudita"): os montadores das
+ * listas davam a nacionalidade do país do clube a quem vinha de um país que eles não conheciam. No save já começado, quem
+ * tem nas listas uma nacionalidade diferente da do país do clube (nome único nas listas) e ainda está com a do país do
+ * clube ganha a certa; sai da convocação da seleção errada e perde os jogos por ela. Rodar de novo não muda nada.
+ */
+export function acertarNacionalidades(estado: EstadoJogo) {
+  const certa = new Map<string, { nac: string; errada: string } | null>();
+  for (const [clubeId, reais] of Object.entries(ELENCOS_REAIS)) {
+    const pais = estado.clubes[clubeId]?.pais;
+    const doPais = pais ? PAISES[pais]?.nacionalidade : undefined;
+    if (!doPais) continue;
+    for (const r of reais) {
+      if (!r.nacionalidade || r.nacionalidade === doPais) continue;
+      certa.set(r.nome, certa.has(r.nome) ? null : { nac: r.nacionalidade, errada: doPais });
+    }
+  }
+  const mudaram = new Set<number>();
+  for (const j of Object.values(estado.jogadores)) {
+    const c = certa.get(j.nome);
+    if (!c || j.nacionalidade !== c.errada) continue;
+    j.nacionalidade = c.nac;
+    delete j.selecao;
+    delete j.convocado;
+    mudaram.add(j.id);
+  }
+  if (!mudaram.size || !estado.selecoes) return;
+  for (const [selId, ids] of Object.entries(estado.selecoes.convocados)) {
+    const nac = nacionalidadeDoPais(paisDaSelecao(selId));
+    estado.selecoes.convocados[selId] = ids.filter((id) => !mudaram.has(id) || estado.jogadores[id]?.nacionalidade === nac);
+  }
 }
 
 function criarElenco(estado: EstadoJogo, clube: Clube, rng: ReturnType<typeof criarRng>) {

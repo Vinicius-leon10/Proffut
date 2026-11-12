@@ -9,6 +9,7 @@ import { join } from "node:path";
 import { gunzipSync } from "node:zlib";
 import { FICHAS_ASIA, LIGAS_ASIA } from "./fichas";
 import { NACIONALIDADES_MUNDO } from "../../src/engine/nacionalidades";
+import { nacionalidadeDaFonte } from "../comum/nacionalidades";
 
 const pasta = process.argv[2];
 if (!pasta) throw new Error("Uso: npx tsx tools/asia/montar.ts <pasta da branch dados-asia-africa>");
@@ -101,7 +102,7 @@ for (const c of clubesTm) {
     const { posicao: p, lado } = posicao(j.sub_position, j.position);
     const anos = idade(j.date_of_birth) ?? Math.round(19 + hash(`${j.player_id}/idade`) * 13);
     const valor = Number(j.market_value_in_eur) || 0;
-    const nac = NACIONALIDADE[j.country_of_citizenship] ?? DO_PAIS[pais];
+    const nac = NACIONALIDADE[j.country_of_citizenship] ?? nacionalidadeDaFonte(j.country_of_citizenship) ?? DO_PAIS[pais];
     return { j, p, lado: lado ?? (j.foot === "left" ? "E" : j.foot === "right" ? "D" : hash(`${j.player_id}/lado`) < 0.5 ? "D" : "E") as "D" | "E", anos, valor, nac };
   }).filter((x) => x.p);
   // Os mais valiosos, guardando o mínimo de cada posição (no máximo 4 goleiros).

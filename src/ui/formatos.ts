@@ -2,7 +2,7 @@ import { nomeDaCompeticao } from "../engine/competicoes";
 import { NOME_FASE_COPA } from "../engine/copa";
 import { definicaoDaCopa, ehCopaDeClubes, nomeDaFaseDaCopa } from "../engine/copas";
 import { NOME_FASE_TORNEIO, PAISES, ehTorneio } from "../engine/torneios";
-import { NACIONALIDADES_MUNDO, emojiDaBandeira } from "../engine/nacionalidades";
+import { NACIONALIDADES_MUNDO } from "../engine/nacionalidades";
 import { ehCompeticaoDeSelecoes, rotuloDeSelecoes } from "../engine/selecoes";
 import type { FaseCopa, Partida } from "../engine/tipos";
 
@@ -60,7 +60,7 @@ export const NOMES_NACIONALIDADE: Record<string, string> = {
   ...Object.fromEntries(Object.entries(NACIONALIDADES_MUNDO).map(([cod, n]) => [cod, n.nome])),
 };
 
-/** Código de duas letras do país de cada nacionalidade (para a bandeira em emoji ao lado do nome do jogador). */
+/** Código de duas letras do país de cada nacionalidade (para a bandeira ao lado do nome do jogador). */
 const PAIS_DA_NACIONALIDADE: Record<string, string> = {
   BRA: "BR", POR: "PT", ESP: "ES", ITA: "IT", FRA: "FR", ALE: "DE", HOL: "NL", BEL: "BE", JAP: "JP",
   ANG: "AO", NGA: "NG", GAN: "GH", CMR: "CM", CIV: "CI", SEN: "SN", MAR: "MA", CPV: "CV", MOC: "MZ", GNB: "GW",
@@ -70,10 +70,16 @@ const PAIS_DA_NACIONALIDADE: Record<string, string> = {
   ING: "ENG",
 };
 
-/** Bandeira (emoji) e nome do país do jogador pela nacionalidade ("ARG" → 🇦🇷 Argentina); sem país conhecido, a branca. */
-export function bandeiraDaNacionalidade(nacionalidade: string): { bandeira: string; pais: string } {
-  const codigo = PAIS_DA_NACIONALIDADE[nacionalidade];
+/** Os códigos de bandeira que não são os das seleções do jogo (Inglaterra, Escócia, Gales e Irlanda do Norte). */
+const DA_SELECAO: Record<string, string> = { ENG: "EN", SCT: "XS", WLS: "XW", GB: "XN" };
+
+/**
+ * País (o código das seleções do jogo: "AR", "EN"...) e nome do país do jogador pela nacionalidade ("ARG" → AR,
+ * Argentina); sem país conhecido, `codigo` fica vazio (a bandeira branca). A bandeira é a imagem da folha
+ * `bandeiras.png` (`Bandeira` em componentes.tsx; o emoji não aparece no Windows, R124).
+ */
+export function bandeiraDaNacionalidade(nacionalidade: string): { codigo?: string; pais: string } {
+  const iso = PAIS_DA_NACIONALIDADE[nacionalidade];
   const pais = NOMES_NACIONALIDADE[nacionalidade] ?? nacionalidade;
-  if (!codigo) return { bandeira: "🏳️", pais };
-  return { bandeira: emojiDaBandeira(codigo), pais };
+  return { codigo: iso ? DA_SELECAO[iso] ?? iso.toUpperCase() : undefined, pais };
 }

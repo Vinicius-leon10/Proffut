@@ -12,6 +12,7 @@ import { DADOS_SELECOES, nacionalidadeDoPais } from "../../src/engine/selecoes";
 import { SELECOES_MUNDO } from "../../src/engine/selecoes-mundo";
 import { NACIONALIDADES_MUNDO } from "../../src/engine/nacionalidades";
 import { PAISES } from "../../src/engine/torneios";
+import { nacionalidadeDaFonte } from "../comum/nacionalidades";
 
 const pasta = process.argv[2];
 if (!pasta) throw new Error("Uso: npx tsx tools/europa/resto.ts <pasta da branch dados-europa-resto>");
@@ -231,7 +232,7 @@ const CODIGOS_DO_JOGO = new Set<string>([...Object.values(PAISES).map((p) => p.n
 function nacionalidade(codigo?: string): string | undefined {
   if (!codigo) return undefined;
   const c = codigo.toUpperCase().trim();
-  return DA_FIFA.get(c) ?? (CODIGOS_DO_JOGO.has(c) ? c : undefined);
+  return DA_FIFA.get(c) ?? (CODIGOS_DO_JOGO.has(c) ? c : undefined) ?? nacionalidadeDaFonte(codigo);
 }
 
 type JogadorReal = { nome: string; posicao: Pos; lado: "D" | "E"; idade: number; forca: number; nacionalidade?: string };

@@ -87,7 +87,8 @@ test("R80 jogo novo: o técnico escolhe o país pela bandeira, a divisão e o cl
   const comClubes = new Set(exterior.clubes.map((c) => c.pais)).size + 1;
   const paises = page.getByRole("group", { name: "País" }).getByRole("button");
   await expect(paises).toHaveCount(comClubes);
-  for (const texto of await paises.allTextContents()) expect(texto, texto).toMatch(/^\p{Regional_Indicator}{2}/u);
+  // Cada país com a bandeira (imagem desde o R124; antes, emoji).
+  for (const pais of await paises.all()) await expect(pais.locator(".bandeira[data-pais]")).toHaveCount(1);
   await expect(page.getByRole("button", { name: /Brasil/ })).toHaveAttribute("aria-pressed", "true");
   await page.getByRole("button", { name: /Brasil/ }).click();
   expect(await page.getByRole("tab").allTextContents()).toEqual(["Série A", "Série B", "Série C", "Série D", "Só estadual"]);

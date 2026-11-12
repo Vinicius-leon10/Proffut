@@ -556,14 +556,24 @@ TikTok, bem baixinha sob a voz. Já usadas: episódio 1 com "Love Me Again" (Joh
 nenhum clube sem escudo), os elencos de 2026 das Séries B, C e 24 clubes da D pelo Transfermarkt (R119, R120;
 `tools/elencos/transfermarkt.ts`), o "Alshariqa" virou Al-Nasr (R121). Os lotes chegam na pasta `lotes/` da branch
 `claude/ecstatic-thompson-nw204h` (o Claude do computador do usuário manda lá); o retorno fica em `docs/RETORNO_DOS_LOTES.md`.
-**Escudos das seleções (pedido de 12/nov/2026):** "O escudo e a bandeira dos países são diferentes. Então, a bandeira vai
-para o jogador ali para dizer nacionalidade. E os escudos eu quero que você use quando eu for técnico e for na Copa do
-Mundo... vai aparecer o escudo da seleção e não a bandeira". Hoje `Escudo` (componentes.tsx) mostra a bandeira em emoji para
-as seleções. A fazer: `Escudo` da seleção usa `public/escudos/sel-<código minúsculo>.png` quando existir (a bandeira emoji
-fica só de reserva); teste novo. A lista das 217 com o nome dos arquivos (`sel-br.png`, `bandeira-br.png`) está em
-`docs/ESCUDOS_SELECOES.md`; o Claude do computador do usuário vai mandar em lotes `lotes/selecoes-lote-NN/` (branch
-`claude/ecstatic-thompson-nw204h`). Em aberto, perguntar: trocar a bandeira emoji ao lado do nome do jogador pelas imagens
-`bandeira-*.png` ou deixar o emoji.
+**Escudos das seleções e bandeiras em imagem (12/nov/2026, R124):** pedido "O escudo e a bandeira dos países são
+diferentes. Então, a bandeira vai para o jogador ali para dizer nacionalidade. E os escudos eu quero que você use quando eu
+for técnico e for na Copa do Mundo" e "o jogo no pc não tem as bandeira" (o Windows não desenha a bandeira em emoji). Os 6
+lotes `lotes/selecoes-lote-01` a `06` (217 escudos do football-logos.cc e 217 bandeiras do flagcdn.com, lista em
+`docs/ESCUDOS_SELECOES.md`) conferidos, todos certos. Escudos: `public/escudos/sel-<PAÍS>.png` (o id da seleção, maiúsculo;
+`preparar.py --quantizar`); `Escudo` usa a imagem e, só se ela falhar, a bandeira. Bandeiras: uma folha só,
+`public/bandeiras.png` (60 × 40 cada, 52 KB, vai com o app no service worker), posições em `src/ui/bandeiras.json`
+(`tools/bandeiras/folha.py`); componente `Bandeira` (`componentes.tsx`, `data-pais` com o código da seleção: "BR", "EN",
+"XS"...; sem o país na folha, o emoji), usado em `BandeiraJogador`, no jogo novo e nas sedes do Modo Copa (no chaveamento e
+na campeã do Modo Copa, o escudo). `bandeiraDaNacionalidade` (formatos.ts) devolve o código da seleção.
+**Nacionalidades corrigidas (12/nov/2026, R123):** "Cristiano Ronaldo estava com bandeira da Arábia Saudita": os
+montadores (`tools/asia`, `tools/mundo`, `tools/times`, `tools/europa/resto.ts` e `segundas.ts`) davam a nacionalidade do
+país do clube a quem vinha de um país que a lista deles não conhecia. Agora usam `tools/comum/nacionalidades.ts`
+(`nacionalidadeDaFonte`: código da FIFA, ISO de 3 ou 2 letras, nome em inglês, espanhol ou português; ISO em
+`tools/comum/paises-iso.json`, do pacote i18n-iso-countries, MIT; "GBR" fica sem). Rodados de novo e levada para as listas
+só a troca de nacionalidade (os nomes acertados à mão ficaram): ~1.200 jogadores (132 da Ásia, 724 da África e do resto da
+Ásia, 307 da América, 43 da Europa). Save começado: `acertarNacionalidades` (jogo.ts, em `migrar`) corrige quem ainda está
+com a do país do clube e o tira da convocação da seleção errada.
 **Imagens dos estádios (12/nov/2026, R122, branch `claude/intelligent-franklin-m1mk5p`):** as 8 imagens que o usuário
 mandou (`estadios-evolucao.zip`, maquete 3D low-poly isométrica, PLANO.md) ficam em `public/estadios/estadio-1.webp` a
 `estadio-8.webp` (`tools/estadios/preparar.py`: corta a margem, fundo marfim vira branco, 640 px, WebP, ~460 KB; vão no

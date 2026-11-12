@@ -42,7 +42,7 @@ test("R90 Tabelas → Seleções: o ranking das seleções com as bandeiras (as 
   await expect(linhas.nth(0)).toContainText("Argentina");
   await expect(linhas.nth(1)).toContainText("Brasil");
   // A bandeira no lugar do escudo.
-  await expect(linhas.nth(1).locator(".bandeira-escudo")).toHaveText("🇧🇷");
+  await expect(linhas.nth(1).locator("img.escudo")).toHaveAttribute("src", /sel-BR\.png$/);
   await seletor.selectOption({ label: "Amistosos" });
   await expect(page.locator("main")).toContainText("qui, 26 mar 2026");
   await expect(page.locator("main")).toContainText("ter, 31 mar 2026");
@@ -132,7 +132,6 @@ test("R93 Data FIFA: quem foi convocado aparece com a seleção no elenco (e os 
 // item "Terminar seleções para Copa do Mundo" da lista à mão, nov/2026).
 
 /** A bandeira da Inglaterra (a da cruz de São Jorge, não a do Reino Unido). */
-const INGLATERRA = String.fromCodePoint(0x1f3f4, ...[..."gbeng"].map((c) => 0xe0000 + c.charCodeAt(0)), 0xe007f);
 
 test("R101 Seleções da Europa: o ranking com o filtro Europa (55 seleções, a Espanha na frente, a Inglaterra com a bandeira dela), a Liga das Nações de 2026 com as 4 ligas e os 14 grupos, e os amistosos de março entre as da Europa", async ({ page }) => {
   await novoJogo(page);
@@ -146,10 +145,10 @@ test("R101 Seleções da Europa: o ranking com o filtro Europa (55 seleções, a
   await principal.getByRole("button", { name: "Europa", exact: true }).click();
   await expect(linhas).toHaveCount(55);
   await expect(linhas.nth(0)).toContainText("Espanha");
-  await expect(linhas.nth(0).locator(".bandeira-escudo")).toHaveText("🇪🇸");
+  await expect(linhas.nth(0).locator("img.escudo")).toHaveAttribute("src", /sel-ES\.png$/);
   await expect(linhas.nth(1)).toContainText("França");
   await expect(linhas.nth(2)).toContainText("Inglaterra");
-  await expect(linhas.nth(2).locator(".bandeira-escudo")).toHaveText(INGLATERRA);
+  await expect(linhas.nth(2).locator("img.escudo")).toHaveAttribute("src", /sel-EN\.png$/);
   await expect(linhas.nth(54)).toContainText("San Marino");
 
   // Liga das Nações: a Liga A tem as mais fortes; 14 grupos no seletor, cada um com a tabela e os jogos.
@@ -191,7 +190,7 @@ test("R102 Técnico de uma seleção da Europa: o cartão da França no Painel, 
   await expect(page.locator(".tela-cheia .topo .titulo")).toHaveText("Convocação");
   const mbappe = tela.getByRole("button", { name: /Kylian Mbappé/ });
   await expect(mbappe).toHaveAttribute("aria-pressed", "true");
-  await expect(mbappe).toContainText("🇫🇷");
+  await expect(mbappe.locator(".bandeira-jogador")).toHaveAttribute("data-pais", "FR");
   await expect(mbappe).toContainText("Real Madrid");
   await botao(page, "Voltar").click();
   await botao(page, "Ir para o jogo").click();
@@ -211,7 +210,7 @@ test("R104 Copa do Mundo: no ranking, os filtros África (54, Marrocos na frente
   await principal.getByRole("button", { name: "África", exact: true }).click();
   await expect(linhas).toHaveCount(54);
   await expect(linhas.nth(0)).toContainText("Marrocos");
-  await expect(linhas.nth(0).locator(".bandeira-escudo")).toHaveText("🇲🇦");
+  await expect(linhas.nth(0).locator("img.escudo")).toHaveAttribute("src", /sel-MA\.png$/);
   await principal.getByRole("button", { name: "Ásia e Oceania", exact: true }).click();
   await expect(linhas).toHaveCount(57);
   await expect(linhas.nth(0)).toContainText("Japão");
