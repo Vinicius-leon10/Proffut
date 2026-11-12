@@ -357,6 +357,8 @@ export interface EstadoCompeticaoSelecoes {
   fase: string;
   /** Todas as seleções que jogam, da mais forte para a mais fraca no começo. */
   selecoes: string[];
+  /** Copa do Mundo: as listas finais de 26 já saíram (o dia da convocação, 10 dias antes da abertura; R131). */
+  listasFinais?: boolean;
   /** Quem entra em cada fase (Concacaf). */
   entram?: Record<string, string[]>;
   /** Grupos de cada fase de grupos. */

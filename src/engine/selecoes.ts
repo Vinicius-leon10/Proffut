@@ -21,7 +21,7 @@
 // Ranking: pontos do tipo Elo (começam perto dos de 2026 e mudam a cada jogo). Técnico: o convite de uma seleção só chega
 // a quem já ganhou a liga principal de um país (regra do usuário); ele treina a seleção junto com o clube.
 import convocadosJson from "../../data/selecoes-2026/convocados.json";
-import { diasEntre, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
+import { diasEntre, janelaDaCopa, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { chavesDaFase, classificacao, vencedorDaChave, type LinhaTabela } from "./competicoes";
 import { diaDaSemana, sortearGrupos, type Dia } from "./copas";
 import { DIAS_LESAO, REPUTACAO } from "./constantes";
@@ -333,6 +333,11 @@ const MINIMO_NA_SELECAO: Record<Posicao, number> = { G: 3, L: 3, Z: 4, M: 6, A: 
 /** Convocação: quantos de cada posição (23 no total). */
 const CONVOCACAO: Record<Posicao, number> = { G: 3, L: 4, Z: 4, M: 7, A: 5 };
 export const CONVOCADOS_POR_SELECAO = Object.values(CONVOCACAO).reduce((a, b) => a + b, 0);
+/** Lista final da Copa do Mundo (R131): 26, com 3 goleiros. */
+const CONVOCACAO_COPA: Record<Posicao, number> = { G: 3, L: 4, Z: 5, M: 8, A: 6 };
+export const CONVOCADOS_NA_COPA = Object.values(CONVOCACAO_COPA).reduce((a, b) => a + b, 0);
+/** Lesão de mais dias que isto, antes da estreia na Copa: o jogador é cortado e outro da posição entra (R131). */
+const DIAS_PARA_CORTE = 7;
 
 /**
  * As 51 seleções no jogo (jogo novo e save de antes delas): os "clubes" das seleções, quem joga fora dos clubes do jogo
@@ -474,14 +479,19 @@ export function candidatosDaSelecao(estado: EstadoJogo, selId: string, porNacion
 /** Nota para a convocação: a força, com um pouco a mais para quem já tem muitos jogos pela seleção. */
 export const notaDeConvocacao = (j: Jogador) => j.forca + Math.min(3, (j.selecao?.jogos ?? 0) / 20);
 
-/** Convocação do computador: os melhores de cada posição (3 goleiros, 4 laterais, 4 zagueiros, 7 meias e 5 atacantes). */
-export function convocarAutomatico(estado: EstadoJogo, selId: string, porNacionalidade?: Map<string, Jogador[]>): number[] {
+/**
+ * Convocação do computador: os melhores de cada posição (3 goleiros, 4 laterais, 4 zagueiros, 7 meias e 5 atacantes); para
+ * a Copa do Mundo (`copa`), a lista final de 26 (3, 4, 5, 8 e 6).
+ */
+export function convocarAutomatico(estado: EstadoJogo, selId: string, porNacionalidade?: Map<string, Jogador[]>, copa = false): number[] {
   const aptos = candidatosDaSelecao(estado, selId, porNacionalidade).filter((j) => j.lesaoDias <= 3)
     .sort((a, b) => notaDeConvocacao(b) - notaDeConvocacao(a) || a.id - b.id);
+  const tabela = copa ? CONVOCACAO_COPA : CONVOCACAO;
+  const total = copa ? CONVOCADOS_NA_COPA : CONVOCADOS_POR_SELECAO;
   const escolhidos: Jogador[] = [];
-  for (const posicao of Object.keys(CONVOCACAO) as Posicao[]) escolhidos.push(...aptos.filter((j) => j.posicao === posicao).slice(0, CONVOCACAO[posicao]));
+  for (const posicao of Object.keys(tabela) as Posicao[]) escolhidos.push(...aptos.filter((j) => j.posicao === posicao).slice(0, tabela[posicao]));
   for (const j of aptos) {
-    if (escolhidos.length >= CONVOCADOS_POR_SELECAO) break;
+    if (escolhidos.length >= total) break;
     if (!escolhidos.includes(j)) escolhidos.push(j);
   }
   return escolhidos.map((j) => j.id);
@@ -1492,17 +1502,42 @@ export function atualizarConcentracoes(estado: EstadoJogo) {
   const hoje = estado.data;
   const proximo = new Map<string, string>();
   const anterior = new Map<string, string>();
+  // Copa do Mundo (R131): quem tem o próximo jogo nela e quem já estreou (a lista final fica fechada).
+  const proximoNaCopa = new Map<string, boolean>();
+  const estreou = new Set<string>();
   for (const p of estado.partidas) {
     if (!ehCompeticaoDeSelecoes(p.serie)) continue;
     for (const id of [p.mandante, p.visitante]) {
-      if (!p.jogada && p.data >= hoje) { if (!proximo.has(id) || p.data < proximo.get(id)!) proximo.set(id, p.data); }
-      else if (p.data <= hoje && (!anterior.has(id) || p.data > anterior.get(id)!)) anterior.set(id, p.data);
+      if (!p.jogada && p.data >= hoje) {
+        if (!proximo.has(id) || p.data < proximo.get(id)!) { proximo.set(id, p.data); proximoNaCopa.set(id, p.serie.startsWith("S-COPA")); }
+      } else if (p.data <= hoje && (!anterior.has(id) || p.data > anterior.get(id)!)) anterior.set(id, p.data);
+      if (p.jogada && p.serie.startsWith("S-COPA") && p.data.slice(0, 4) === hoje.slice(0, 4)) estreou.add(id);
     }
   }
   const agora = new Set<string>();
   for (const [id, data] of proximo) {
     const antes = anterior.get(id);
     if (diasEntre(hoje, data) <= 3 || (antes && diasEntre(antes, data) <= 6)) agora.add(id);
+  }
+  // Dia da convocação da Copa do Mundo (R131): 10 dias antes da abertura, as seleções da Copa anunciam a lista final de 26.
+  // A do técnico sai pelo auxiliar, e ele pode mudar até a concentração (3 dias antes da estreia).
+  const janela = janelaDaCopa(Number(hoje.slice(0, 4)));
+  const copaDoAno = janela && sel.competicoes[`S-COPA-${hoje.slice(0, 4)}` as IdCompeticaoSelecoes];
+  if (janela && copaDoAno && copaDoAno.fase === "grupos" && !copaDoAno.listasFinais && hoje >= somarDias(janela.de, -10)) {
+    copaDoAno.listasFinais = true;
+    const porNac = agruparPorNacionalidade(estado);
+    for (const id of copaDoAno.selecoes) {
+      if (id === estado.tecnico.selecao && sel.convocacaoFeita) continue;
+      sel.convocados[id] = convocarAutomatico(estado, id, porNac, true);
+      sel.primeiraConvocacao = sel.primeiraConvocacao?.filter((x) => x !== id);
+    }
+    const minha = estado.tecnico.selecao;
+    if (minha && copaDoAno.selecoes.includes(minha) && !sel.convocacaoFeita) {
+      enviarMensagem(estado, {
+        tipo: "diretoria", titulo: "Lista final da Copa do Mundo",
+        texto: `O auxiliar preparou a lista ${comArtigoDaSelecao("do", minha, estado)} para a Copa: os ${sel.convocados[minha].length} melhores, com 3 goleiros. Você pode mudar no Painel (Seleção → Convocar) até 3 dias antes da estreia; depois ela fecha e só sai quem se machucar.`,
+      });
+    }
   }
   const eram = new Set(sel.concentradas);
   // Saem da concentração: os convocados voltam aos clubes.
@@ -1516,7 +1551,23 @@ export function atualizarConcentracoes(estado: EstadoJogo) {
   let porNacionalidade: Map<string, Jogador[]> | undefined;
   for (const id of agora) {
     if (eram.has(id)) continue;
-    if (id === minhaSelecao && sel.convocacaoFeita) sel.convocacaoFeita = false;
+    const naCopa = !!proximoNaCopa.get(id);
+    // Já estreou na Copa: a lista final continua a mesma até o fim (só a lesão antes da estreia trocava alguém).
+    if (naCopa && estreou.has(id)) { /* lista fechada */ }
+    else if (id === minhaSelecao && sel.convocacaoFeita) sel.convocacaoFeita = false;
+    // A primeira concentração usa a convocação de verdade, menos a da Copa: a lista final é de 26.
+    else if (naCopa && copaDoAno?.listasFinais) { /* a lista do dia da convocação vale */ }
+    else if (naCopa) {
+      sel.primeiraConvocacao = sel.primeiraConvocacao?.filter((x) => x !== id);
+      porNacionalidade ??= agruparPorNacionalidade(estado);
+      sel.convocados[id] = convocarAutomatico(estado, id, porNacionalidade, true);
+      if (id === minhaSelecao) {
+        enviarMensagem(estado, {
+          tipo: "noticia", titulo: "Lista final da Copa do Mundo",
+          texto: `Seu auxiliar fechou a lista ${comArtigoDaSelecao("do", id, estado)} para a Copa: os ${sel.convocados[id].length} melhores à disposição. Até a estreia, só sai quem se machucar.`,
+        });
+      }
+    }
     // A primeira concentração usa a convocação de verdade.
     else if (sel.primeiraConvocacao?.includes(id)) sel.primeiraConvocacao = sel.primeiraConvocacao.filter((x) => x !== id);
     else {
@@ -1540,6 +1591,35 @@ export function atualizarConcentracoes(estado: EstadoJogo) {
     }
   }
   sel.concentradas = [...agora];
+  // Corte por lesão antes da estreia na Copa (R131): sai quem tem lesão longa, entra o melhor da posição que está fora.
+  for (const id of agora) {
+    if (!proximoNaCopa.get(id) || estreou.has(id)) continue;
+    const lista = sel.convocados[id] ?? [];
+    for (const j of lista.map((x) => estado.jogadores[x]).filter((x): x is Jogador => !!x)) {
+      if (j.lesaoDias <= DIAS_PARA_CORTE) continue;
+      porNacionalidade ??= agruparPorNacionalidade(estado);
+      const naLista = new Set(sel.convocados[id]);
+      const novo = candidatosDaSelecao(estado, id, porNacionalidade)
+        .filter((c) => c.posicao === j.posicao && !naLista.has(c.id) && c.lesaoDias <= 3)
+        .sort((a, b) => notaDeConvocacao(b) - notaDeConvocacao(a) || a.id - b.id)[0];
+      if (!novo) continue;
+      sel.convocados[id] = sel.convocados[id].map((x) => (x === j.id ? novo.id : x));
+      if (j.convocado === id) delete j.convocado;
+      novo.convocado = id;
+      const c = estado.clubes[id];
+      c.escalacao = {
+        titulares: c.escalacao.titulares.map((x) => (x === j.id ? null : x)),
+        reservas: c.escalacao.reservas.filter((x) => x !== j.id),
+      };
+      if (id !== minhaSelecao || estado.config.escalacaoAutomatica) c.escalacao = escalarAutomatico(elencoDaSelecao(estado, id), c.tatica.formacao, c.tatica.jogadas, true);
+      if (id === minhaSelecao) {
+        enviarMensagem(estado, {
+          tipo: "noticia", titulo: "Corte na lista da Copa",
+          texto: `${j.nome} se machucou (${j.lesaoDias} dias) e foi cortado. Entra ${novo.nome}.`,
+        });
+      }
+    }
+  }
   if (chamadosDoMeuClube.length) {
     enviarMensagem(estado, {
       tipo: "noticia", titulo: "Convocados para as seleções",
@@ -1559,15 +1639,37 @@ function avisarConvocacao(estado: EstadoJogo, proximo: Map<string, string>) {
   sel.avisoConvocacao = data;
   enviarMensagem(estado, {
     tipo: "diretoria", titulo: "Convocação da seleção",
-    texto: `${comArtigoDaSelecao("O", minha, estado)} joga em ${data.split("-").reverse().slice(0, 2).join("/")}. Escolha os convocados no Painel (Seleção → Convocar) até 3 dias antes; senão o auxiliar convoca os melhores.`,
+    texto: proximoJogoNaCopa(estado, minha)
+      ? `A Copa do Mundo começa para ${comArtigoDaSelecao("o", minha, estado)} em ${data.split("-").reverse().slice(0, 2).join("/")}. Escolha a lista final de ${CONVOCADOS_NA_COPA} (com 3 goleiros) no Painel (Seleção → Convocar) até 3 dias antes; depois ela fecha e só sai quem se machucar. Sem a sua escolha, o auxiliar convoca os melhores.`
+      : `${comArtigoDaSelecao("O", minha, estado)} joga em ${data.split("-").reverse().slice(0, 2).join("/")}. Escolha os convocados no Painel (Seleção → Convocar) até 3 dias antes; senão o auxiliar convoca os melhores.`,
   });
 }
 
-/** O técnico confirma os convocados da próxima concentração da seleção dele. */
-export function confirmarConvocacao(estado: EstadoJogo, ids: number[]) {
+/** O próximo jogo da seleção é da Copa do Mundo (a lista é a final, de 26: R131). */
+export function proximoJogoNaCopa(estado: EstadoJogo, selId: string): boolean {
+  let proximo: Partida | undefined;
+  for (const p of estado.partidas) {
+    if (p.jogada || p.data < estado.data || (p.mandante !== selId && p.visitante !== selId) || !ehCompeticaoDeSelecoes(p.serie)) continue;
+    if (!proximo || p.data < proximo.data) proximo = p;
+  }
+  return !!proximo?.serie.startsWith("S-COPA");
+}
+
+/**
+ * A lista final da Copa do Mundo está fechada (R131): a seleção já está concentrada para a Copa. Até a estreia, só o corte
+ * por lesão troca alguém; depois, ninguém.
+ */
+export function listaDaCopaFechada(estado: EstadoJogo, selId: string): boolean {
+  const sel = estado.selecoes;
+  return !!sel?.concentradas.includes(selId) && proximoJogoNaCopa(estado, selId);
+}
+
+/** O técnico confirma os convocados da próxima concentração da seleção dele (a lista fechada da Copa não muda: false). */
+export function confirmarConvocacao(estado: EstadoJogo, ids: number[]): boolean {
   const sel = estado.selecoes;
   const minha = estado.tecnico.selecao;
-  if (!sel || !minha) return;
+  if (!sel || !minha) return false;
+  if (listaDaCopaFechada(estado, minha)) return false;
   sel.convocados[minha] = [...new Set(ids)].filter((id) => !!estado.jogadores[id]);
   if (sel.primeiraConvocacao) sel.primeiraConvocacao = sel.primeiraConvocacao.filter((x) => x !== minha);
   // Já concentrada: a lista nova vale na hora; senão, vale quando a concentração começar.
@@ -1580,6 +1682,7 @@ export function confirmarConvocacao(estado: EstadoJogo, ids: number[]) {
   c.escalacao.titulares = c.escalacao.titulares.map((id) => (id != null && ficou.has(id) ? id : null));
   c.escalacao.reservas = c.escalacao.reservas.filter((id) => ficou.has(id));
   if (c.escalacao.titulares.every((id) => id == null)) c.escalacao = escalarAutomatico(elencoDaSelecao(estado, minha), c.tatica.formacao, c.tatica.jogadas, true);
+  return true;
 }
 
 // ---- resultado dos jogos -----------------------------------------------------------------------------------

@@ -4,8 +4,8 @@ import { useMemo, useState } from "react";
 import { formatarData } from "../../engine/calendario";
 import { NOMES_POSICAO } from "../../engine/forca";
 import {
-  CONVOCADOS_POR_SELECAO, candidatosDaSelecao, comArtigoDaSelecao, confirmarConvocacao, convocarAutomatico, deixarSelecao,
-  ehCompeticaoDeSelecoes, notaDeConvocacao, rankingDasSelecoes, tabelasDeSelecoes,
+  CONVOCADOS_NA_COPA, CONVOCADOS_POR_SELECAO, candidatosDaSelecao, comArtigoDaSelecao, confirmarConvocacao, convocarAutomatico,
+  deixarSelecao, ehCompeticaoDeSelecoes, listaDaCopaFechada, notaDeConvocacao, proximoJogoNaCopa, rankingDasSelecoes, tabelasDeSelecoes,
 } from "../../engine/selecoes";
 import type { IdCompeticaoSelecoes, Jogador, Posicao } from "../../engine/tipos";
 import { BandeiraJogador, Cartao, Escudo, Pos, Topo } from "../componentes";
@@ -85,6 +85,11 @@ export function Convocacao() {
     [estado, id],
   );
   const escolhidos = new Set(lista);
+  // Copa do Mundo (R131, R132): lista final de 26 (3 goleiros); fechada quando a seleção já está concentrada para a Copa.
+  const naCopa = proximoJogoNaCopa(estado, id);
+  const fechada = listaDaCopaFechada(estado, id);
+  const normal = naCopa ? CONVOCADOS_NA_COPA : CONVOCADOS_POR_SELECAO;
+  const goleiros = lista.filter((x) => estado.jogadores[x]?.posicao === "G").length;
   // Quem já esteve na lista continua aparecendo depois de sair (senão sumiria entre os outros candidatos).
   const [vistos, setVistos] = useState<Set<number>>(() => new Set(lista));
   const alternar = (j: Jogador) => {
@@ -92,8 +97,16 @@ export function Convocacao() {
     setLista((l) => (l.includes(j.id) ? l.filter((x) => x !== j.id) : [...l, j.id]));
   };
   const confirmar = () => {
-    if (lista.length < 16 && !window.confirm(`Só ${lista.length} convocados (o normal é ${CONVOCADOS_POR_SELECAO}). Confirmar assim mesmo?`)) return;
-    confirmarConvocacao(estado, lista);
+    if (naCopa && lista.length > CONVOCADOS_NA_COPA) {
+      avisar(`A lista da Copa tem no máximo ${CONVOCADOS_NA_COPA}: tire ${lista.length - CONVOCADOS_NA_COPA}.`);
+      return;
+    }
+    if (naCopa && goleiros < 3 && !window.confirm(`Só ${goleiros} ${goleiros === 1 ? "goleiro" : "goleiros"} para a Copa (o normal é 3). Confirmar assim mesmo?`)) return;
+    if (lista.length < 16 && !window.confirm(`Só ${lista.length} convocados (o normal é ${normal}). Confirmar assim mesmo?`)) return;
+    if (!confirmarConvocacao(estado, lista)) {
+      avisar("A lista da Copa já está fechada: só sai quem se machucar.");
+      return;
+    }
     atualizar();
     avisar(`Convocação ${comArtigoDaSelecao("do", id, estado)} confirmada: ${lista.length} jogadores.`);
     fechar();
@@ -102,13 +115,25 @@ export function Convocacao() {
     <div className="tela-cheia">
       <Topo titulo="Convocação" sub={selecao.nome} aoVoltar={fechar} />
       <div className="conteudo">
-        <p className="pequeno">
-          <b>{lista.length}</b> convocados (o normal é {CONVOCADOS_POR_SELECAO}). Toque num jogador para chamar ou tirar. Quem joga num clube
-          fica fora dele de 3 dias antes de cada jogo da seleção até o jogo.
-        </p>
+        {naCopa ? (
+          <div className="cartao compacto">
+            <h3 className="pequeno negrito">Lista final da Copa do Mundo</h3>
+            <p className="pequeno">
+              <b>{lista.length} convocados</b> ({goleiros} {goleiros === 1 ? "goleiro" : "goleiros"}; a lista final tem {CONVOCADOS_NA_COPA}, com 3 goleiros).{" "}
+              {fechada
+                ? "A seleção já está concentrada para a Copa: lista fechada. Até a estreia, só sai quem se machucar (o auxiliar chama outro da posição)."
+                : "Toque num jogador para chamar ou tirar. Ela fecha 3 dias antes da estreia."}
+            </p>
+          </div>
+        ) : (
+          <p className="pequeno">
+            <b>{lista.length}</b> convocados (o normal é {CONVOCADOS_POR_SELECAO}). Toque num jogador para chamar ou tirar. Quem joga num clube
+            fica fora dele de 3 dias antes de cada jogo da seleção até o jogo.
+          </p>
+        )}
         <div className="linha" style={{ gap: 8 }}>
-          <button className="botao cresce" onClick={() => setLista(convocarAutomatico(estado, id))}>Convocar os melhores</button>
-          <button className="botao primario cresce" onClick={confirmar}>Confirmar</button>
+          <button className="botao cresce" disabled={fechada} onClick={() => setLista(convocarAutomatico(estado, id, undefined, naCopa))}>Convocar os melhores</button>
+          <button className="botao primario cresce" disabled={fechada} onClick={confirmar}>Confirmar</button>
         </div>
         {ORDEM.map((pos) => {
           const daPosicao = candidatos.filter((j) => j.posicao === pos);
@@ -120,7 +145,7 @@ export function Convocacao() {
               <h3 className="pequeno fraco">{PLURAL[pos]} · {naLista.length} {naLista.length === 1 ? "convocado" : "convocados"}</h3>
               <div className="lista">
                 {[...naLista, ...outros].map((j) => (
-                  <button key={j.id} className={`item${escolhidos.has(j.id) ? " meu" : ""}`} onClick={() => alternar(j)} aria-pressed={escolhidos.has(j.id)}>
+                  <button key={j.id} className={`item${escolhidos.has(j.id) ? " meu" : ""}`} onClick={() => alternar(j)} aria-pressed={escolhidos.has(j.id)} disabled={fechada}>
                     <Pos pos={j.posicao} />
                     <div className="cresce" style={{ minWidth: 0 }}>
                       <div className="linha" style={{ gap: 6 }}><BandeiraJogador nacionalidade={j.nacionalidade} /><span className="pequeno negrito corta">{j.nome}</span></div>

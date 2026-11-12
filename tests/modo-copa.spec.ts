@@ -77,3 +77,26 @@ test("R118 Modo Copa, a final ao vivo só assistindo: o espectador assiste à fi
   await page.getByRole("button", { name: "Continuar", exact: true }).click();
   await expect(page.locator("main")).toContainText("Campeã da Copa do Mundo 2026", { timeout: 60_000 });
 });
+
+// R132: a convocação final de 26 na tela. Pedido "Então resolva o 1 e 2" (o 1: "Convocação final de 26 do Modo Copa").
+test("R132 Copa do Mundo: a lista final do Brasil tem 26 e está fechada no dia da estreia; no Modo Copa dá para ver os 26 de cada seleção", async ({ page }) => {
+  test.setTimeout(300_000);
+  await abrirSave(page, "copa");
+  await entrar(page).click();
+  await page.getByRole("button", { name: "Convocação", exact: true }).click();
+  const tela = page.locator(".tela-cheia");
+  await expect(tela).toContainText("Lista final da Copa do Mundo");
+  await expect(tela).toContainText("26 convocados");
+  await expect(tela).toContainText("lista fechada");
+  // Fechada: não dá para mexer nem confirmar.
+  await expect(tela.getByRole("button", { name: "Confirmar" })).toBeDisabled();
+  await expect(tela.getByRole("button", { name: "Convocar os melhores" })).toBeDisabled();
+  await expect(tela.locator(".item[aria-pressed]").first()).toBeDisabled();
+  await tela.getByRole("button", { name: "Voltar", exact: true }).click();
+  // Os 26 de qualquer seleção da Copa.
+  await page.getByRole("button", { name: "Listas dos 26" }).click();
+  const folha = page.getByRole("dialog");
+  await folha.getByRole("combobox", { name: "Seleção" }).selectOption({ label: "Argentina" });
+  await expect(folha.locator(".lista .item")).toHaveCount(26);
+  await expect(folha).toContainText("Goleiros");
+});

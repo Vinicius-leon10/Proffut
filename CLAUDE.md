@@ -590,8 +590,7 @@ lugares" e o selo "Modernizado ★☆☆" (`.selo-modernizacao`, só com confort
 prévia aprovada: "Aplique esse mudança da área finanças, gostei de como ficou"):** o cartão Estádio é o primeiro (imagem,
 lugares, conforto, público esperado com barrinha, obra em andamento) e termina com "Ampliar ou modernizar" e o botão
 Melhorar, que abre a `Folha` "Melhorar o Castelão" (`MelhorarEstadio` em Financas.tsx; `artigoDoEstadio`: "a Arena...")
-com o caixa, "Fechar" escrito, as três ampliações e a modernização, como a imagem que ele mandou ("Quero assim"). **Próximo:** convocação
-final de 26 do Modo Copa; parte 5 do "jogo completo" (só quando ele pedir); estilo de vídeo (de sempre ou onetake).
+com o caixa, "Fechar" escrito, as três ampliações e a modernização, como a imagem que ele mandou ("Quero assim"). **Próximo:** parte 5 do "jogo completo" (só quando ele pedir); estilo de vídeo (de sempre ou onetake).
 
 **Onde parou (11/nov/2026, noite):** publicados na `main` o Modo Copa (partes 1 e 2, R115–R118) e 839 escudos dos lotes
 do Claude no computador do usuário (lotes 01–17; em 12/nov mais 33 do lote 18 323 dos lotes 19–25 384 dos lotes 26–34 28 do lote 35 5 do lote 36 e o do Al-Nasr no lote 37: todos os clubes têm escudo; o "Alshariqa" dos Emirados era o Al-Nasr de Dubai, nome corrigido em `NOME_CERTO` de `tools/mundo/montar.ts` com o mesmo id, R121; retorno e o que falta em `docs/RETORNO_DOS_LOTES.md`; o outro Claude manda
@@ -786,7 +785,14 @@ sempre. Espectador (ou técnico eliminado): uma fase por toque (`avancarNaCopa`)
 final, "Pular para o campeão"; antes da final, "Assistir à final ao vivo" (`modoCopa.assistir`: a final sai da simulação
 rápida e ganha estatísticas e campo 2D; AoVivo sem Substituir nem Tática) ou "Ver o resultado". Campeã com os prêmios
 (`premiosDaCopa`: artilheiro, melhor jogador, melhor goleiro, zebra) e "Continuar a temporada" (`modoCopa.fim`). Quem
-passa da Copa sem entrar (simulando) não vê a tela depois. Ainda não feito: a convocação final de 26.
+passa da Copa sem entrar (simulando) não vê a tela depois. **Convocação final de 26 (12/nov/2026, R131–R132):** no dia da
+convocação (10 dias antes da abertura, `atualizarConcentracoes`, `EstadoCompeticaoSelecoes.listasFinais`) as 48 anunciam a
+lista final (`convocarAutomatico(..., copa)`, `CONVOCACAO_COPA`: 3 goleiros, 4 laterais, 5 zagueiros, 8 meias e 6 atacantes;
+`CONVOCADOS_NA_COPA`); a do técnico sai pelo auxiliar, com mensagem, e ele muda na Convocação até a concentração (3 dias
+antes da estreia; a tela pede no máximo 26 e avisa com menos de 3 goleiros). Concentrada para a Copa, a lista fica fechada
+(`listaDaCopaFechada`, `confirmarConvocacao` devolve false; a tela desliga os botões); antes da estreia, lesão de mais de 7
+dias (`DIAS_PARA_CORTE`) corta o jogador e entra o melhor da posição; depois da estreia ninguém muda (na volta da
+concentração entre fases a lista não é refeita). Modo Copa: "Listas dos 26" (`BotaoListas`) mostra os 26 de cada seleção.
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).

@@ -10,10 +10,11 @@ import {
   FASES_DA_COPA, avancarNaCopa, copaDoMundoDoAno, faseDaCopaJogada, finalDaCopa, jogosDaFaseDaCopa, minhaSelecaoNaCopa,
   premiosDaCopa, proximaFaseDaCopa, ultimaFaseJogada, vencedorNaCopa, type FaseDaCopa,
 } from "../../engine/modoCopa";
-import { NOME_FASE_SELECOES, comArtigoDaSelecao, nomeDoPais, paisDaSelecao, tabelasDeSelecoes } from "../../engine/selecoes";
+import { NOME_FASE_SELECOES, comArtigoDaSelecao, elencoDaSelecao, nomeDoPais, paisDaSelecao, tabelasDeSelecoes } from "../../engine/selecoes";
+import type { Posicao } from "../../engine/tipos";
 import type { EstadoCompeticaoSelecoes, Partida } from "../../engine/tipos";
 import { avancarJogo } from "../acoes";
-import { Bandeira, Cartao, Escudo } from "../componentes";
+import { Bandeira, BandeiraJogador, Cartao, Escudo, Folha, Pos } from "../componentes";
 import { rotuloPartida } from "../formatos";
 import { useJogo, useLoja } from "../store";
 import { CompeticaoDeSelecoes } from "./Tabelas";
@@ -135,6 +136,7 @@ function PainelDoTecnico({ comp, selId }: { comp: EstadoCompeticaoSelecoes; selI
         <button className="botao cresce" onClick={() => abrir({ tipo: "convocacao" })}>Convocação</button>
         <button className="botao cresce" onClick={() => setVerTudo((x) => !x)}>{verTudo ? "Esconder a Copa" : "Grupos e chaveamento"}</button>
       </div>
+      <BotaoListas comp={comp} inicial={selId} />
       {verTudo && <CompeticaoDeSelecoes c={comp} />}
     </>
   );
@@ -213,8 +215,57 @@ function Espectador({ comp }: { comp: EstadoCompeticaoSelecoes }) {
           <button className="botao cheio" onClick={() => verProxima("final")}>Pular para o campeão</button>
         </>
       ) : null}
+      <BotaoListas comp={comp} />
       <Chaveamento />
       <CompeticaoDeSelecoes key={vista ?? "inicio"} c={comp} />
+    </>
+  );
+}
+
+const ORDEM_POSICOES: Posicao[] = ["G", "L", "Z", "M", "A"];
+const PLURAL_POSICOES: Record<Posicao, string> = { G: "Goleiros", L: "Laterais", Z: "Zagueiros", M: "Meio-campistas", A: "Atacantes" };
+
+/** "Listas dos 26" (R132): a lista final de cada seleção da Copa, por posição, com a bandeira e o clube de cada um. */
+function BotaoListas({ comp, inicial }: { comp: EstadoCompeticaoSelecoes; inicial?: string }) {
+  const estado = useJogo();
+  const [aberto, setAberto] = useState(false);
+  const selecoes = [...comp.selecoes].sort((a, b) => estado.clubes[a].nome.localeCompare(estado.clubes[b].nome, "pt"));
+  const [escolhida, setEscolhida] = useState(inicial ?? selecoes[0]);
+  const lista = elencoDaSelecao(estado, escolhida);
+  const clubeDe = (clubeId: string | null | undefined, fora?: { nome: string }) =>
+    fora?.nome ?? (clubeId && !clubeId.startsWith("sel-") ? estado.clubes[clubeId]?.nome : "") ?? "";
+  return (
+    <>
+      <button className="botao cheio" onClick={() => setAberto(true)}>Listas dos 26</button>
+      {aberto && (
+        <Folha titulo="Listas dos 26" aoFechar={() => setAberto(false)}>
+          <select value={escolhida} onChange={(e) => setEscolhida(e.target.value)} aria-label="Seleção">
+            {selecoes.map((id) => <option key={id} value={id}>{estado.clubes[id].nome}</option>)}
+          </select>
+          <p className="mini fraco">{lista.length} convocados {comArtigoDaSelecao("do", escolhida, estado)}.</p>
+          {ORDEM_POSICOES.map((pos) => {
+            const daPosicao = lista.filter((j) => j.posicao === pos).sort((a, b) => b.forca - a.forca);
+            if (!daPosicao.length) return null;
+            return (
+              <div key={pos} className="grupo-posicao">
+                <h3 className="pequeno fraco">{PLURAL_POSICOES[pos]}</h3>
+                <div className="lista">
+                  {daPosicao.map((j) => (
+                    <div key={j.id} className="item">
+                      <Pos pos={j.posicao} />
+                      <div className="cresce" style={{ minWidth: 0 }}>
+                        <div className="linha" style={{ gap: 6 }}><BandeiraJogador nacionalidade={j.nacionalidade} /><span className="pequeno negrito corta">{j.nome}</span></div>
+                        <div className="mini fraco corta">{clubeDe(j.clubeId, j.clubeFora)} · {j.idade} anos</div>
+                      </div>
+                      <span className="forca num">{j.forca}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </Folha>
+      )}
     </>
   );
 }
