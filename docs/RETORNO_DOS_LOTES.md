@@ -15,6 +15,12 @@ se achar fonte segura; senão deixe de fora, sem problema.
 Dica: escudo com o miolo branco encostando na borda perde o branco quando o fundo é tirado; aqui ele fica com o fundo
 branco. Pode mandar assim mesmo.
 
+## Jogadores
+
+Lotes 01 e 02 (Série B): entraram no jogo (os 20 clubes, até 30 por clube; a força é calculada aqui). Lotes 03 e 04
+(Série C): ficaram de fora porque trazem quem já saiu do clube durante o ano (até 60 por clube). Mande de novo a Série C só
+com o elenco atual (sem quem saiu, sem os garotos da base só relacionados), no mesmo formato.
+
 ## Lotes conferidos
 
 | Lote | Tipo | Entraram no jogo | Ficaram de fora (motivo) |
@@ -54,3 +60,5 @@ branco. Pode mandar assim mesmo.
 | 32 | escudos | todos os enviados | - |
 | 33 | escudos | todos os enviados | - |
 | 34 refeito | escudos | todos os enviados | - |
+| jogadores 01–02 | jogadores (Série B) | os 20 clubes | - |
+| jogadores 03–04 | jogadores (Série C) | nenhum | lista com quem já saiu: refazer só com os atuais |

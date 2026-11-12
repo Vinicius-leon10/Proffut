@@ -123,3 +123,7 @@ SOFTWARE.
 
 transfermarkt-datasets e Wikidata são de domínio público (CC0). Os dados do Cartola são da Globo; usamos só nome,
 posição, clube, jogos e preço do mercado, para um jogo pessoal e sem fins comerciais.
+
+Série B (elencos de 2026): a lista de cada clube vem da página "Plantel detalhado" do Transfermarkt, copiada no navegador
+do dono do jogo (`transfermarkt/serie-b-2026.csv`: nome, posição, nascimento, país e camisa; a página de cada clube na coluna
+"fonte"). Só esses dados; a força é calculada pelo Proffut. Uso pessoal e sem fins comerciais.

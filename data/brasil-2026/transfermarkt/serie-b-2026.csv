@@ -1,0 +1,662 @@
+clube_id,nome,posicao,nascimento,nacionalidade,camisa,fonte
+america-mg,Gustavo,G,1993-03-10,Brasil,1,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Cássio,G,2002-02-08,Brasil,27,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Bruno Brígido,G,1991-03-09,Brasil,91,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,William,G,1998-01-21,Brasil,19,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Italo Brito,G,2006-05-29,Brasil,52,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Luca Sosa,Z,1994-06-11,Argentina,3,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Ricardo Silva,Z,1992-08-13,Brasil,45,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Rafa Barcelos,Z,2004-01-25,Brasil,4,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Manoel,Z,1990-02-26,Brasil,26,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Emerson,Z,1995-04-05,Brasil,2,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Thallyson,Z,2006-04-11,Brasil,44,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Tobias Ostchega,L,1998-08-26,Argentina,25,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Alex Silva,L,1994-05-15,Brasil,15,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Fábio,L,2001-07-31,Brasil,31,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Heitor,L,2004-04-19,Brasil,13,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Val Soares,M,1997-03-12,Brasil,97,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Gustavo Barreto,M,1995-12-10,Brasil,88,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Alê,M,1990-06-06,Brasil,16,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Jorge Jiménez,M,1993-02-27,Paraguai,93,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Felipe Amaral,M,2003-07-08,Brasil,8,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Eduardo Person,M,1997-01-24,Brasil,21,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Gabriel Domingos,M,2001-02-09,Brasil,6,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Otávio Gonçalves,M,2006-03-22,Brasil,55,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Fernando Elizari,M,1991-04-05,Argentina,5,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Paulo Victor,A,2001-03-21,Brasil,20,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Matías Segovia,A,2003-01-04,Paraguai,77,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Rodrigo Piñeiro,A,1999-05-05,Uruguai,14,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Guilherme Parede,A,1995-09-19,Brasil,7,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Willian Bigode,A,1986-11-19,Brasil,9,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Gonzalo Mastriani,A,1993-04-28,Uruguai,17,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+america-mg,Marcelo Maçola,A,2002-10-23,Brasil,99,https://www.transfermarkt.com.br/america-mineiro/kader/verein/2863/saison_id/2025/plus/1
+athletic-club,Luan Polli,G,1993-04-06,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Glauco,G,1995-02-11,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Tony Batista,G,1992-09-25,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Eduardo Freire,G,2004-05-25,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Lucas Belezi,Z,2003-05-08,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Jhonathan,Z,1999-07-13,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Philipe Sampaio,Z,1994-11-11,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Jhan Torres,Z,2001-04-15,Colômbia,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Sidimar,Z,1992-07-09,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Felipe Vieira,Z,2005-02-09,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Marcelo Henrique,L,2005-03-01,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Enzo,L,2002-07-18,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Zeca,L,1994-05-16,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Diogo Batista,L,2003-08-29,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Douglas Pelé,L,1999-08-25,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Felipe Negrucci,M,2004-05-14,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,João Miguel,M,2004-02-26,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Kauan Rodrigues,M,2005-04-16,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Yago Santos,M,2003-04-03,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Jota,M,2004-02-06,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Gian Cabezas,M,2003-01-01,Colômbia,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Fabrício Isidoro,M,1992-01-28,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Gustavinho,M,2001-10-29,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Kauan Lindes,M,2003-11-28,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Pedro Oliveira,M,1998-07-11,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Alexandre Pena,M,2005-02-21,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Assis,M,2001-11-16,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Dixon Vera,A,2003-04-06,Equador,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Yarlen,A,2006-02-20,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Max,A,2002-06-28,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Bruninho,A,2003-02-24,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Carlinhos,A,1997-02-12,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Ronaldo Tavares,A,1997-07-22,Portugal,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Wilinton Aponzá,A,2000-03-29,Colômbia,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+athletic-club,Gustavão,A,2005-01-04,Brasil,,https://www.transfermarkt.com.br/athletic-club/kader/verein/64918/saison_id/2025/plus/1
+atletico-go,Paulo Vítor,G,1988-11-21,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Vladimir,G,1989-07-16,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Paulo Henrique,G,1994-05-12,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Léo,G,2002-05-05,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Natã,Z,2001-06-05,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Adriano Martins,Z,1997-04-01,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Junior Barreto,Z,1998-01-13,Paraguai,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Tito,Z,2000-07-26,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Guilherme Lopes,L,2002-02-14,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Yuri,L,1996-01-08,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Gustavo Daniel,L,2005-03-07,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Ewerthon,L,2000-11-10,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Warley,L,1999-09-17,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Felipe Guimarães,L,2004-04-08,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Leandro Vilela,M,1995-06-29,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Geovane,M,1989-02-20,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Daniel Peixoto,M,1997-06-30,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Netinho,M,1997-12-18,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Henrique Freitas,M,1999-05-06,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Cristiano,M,2000-02-22,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Matheusinho,M,1998-02-11,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,David Terans,M,1994-08-11,Uruguai,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Guilherme,M,1991-05-21,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Gustavo Maia,A,2001-01-22,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Geovany Soares,A,2000-07-28,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Marrony,A,1999-02-05,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Bruno José,A,1998-03-31,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Léo Tocantins,A,1999-07-03,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,Gustavo Coutinho,A,1999-01-19,Brasil,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+atletico-go,João Pedro,A,1996-11-13,Guiné Bissau,,https://www.transfermarkt.com.br/atletico-clube-goianiense/kader/verein/15172/saison_id/2025/plus/1
+avai,Igor Bohn,G,1996-02-05,Brasil,1,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Bruno Ferreira,G,1994-03-16,Brasil,94,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Otávio,G,1993-01-21,Brasil,21,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Guilherme Aquino,Z,2004-01-13,Brasil,15,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Jefferson,Z,2003-05-28,Brasil,38,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Pedrão,Z,2004-01-06,Brasil,35,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Allyson,Z,1990-10-23,Brasil,3,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Reynaldo,Z,1997-01-03,Brasil,40,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Gabriel Simples,Z,2005-01-18,Brasil,4,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Quaresma,L,1996-08-22,Brasil,66,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Douglas Teixeira,L,2001-03-29,Brasil,36,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Wallison,L,2001-07-24,Brasil,2,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,João Vitor,L,2002-07-25,Brasil,22,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Paulo Vitor,M,2004-08-26,Brasil,25,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Zé Ricardo,M,1996-03-09,Brasil,77,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Wenderson,M,1999-04-27,Brasil,95,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Romildo Del Piage,M,2000-04-12,Brasil,5,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Hyan,M,2004-03-24,Brasil,18,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Pedro Cuiabá,M,2002-03-04,Brasil,27,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Daniel Penha,M,1998-10-17,Brasil,14,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Rildo,M,2000-01-21,Brasil,37,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Luiz Henrique,M,1999-03-18,Brasil,8,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Jean Lucas,M,1995-03-21,Brasil,10,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Léo Chú,A,2000-04-06,Brasil,7,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Gaspar,A,2002-07-31,Brasil,70,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Juan Rocha,A,2004-09-05,Brasil,17,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Isaías,A,2004-10-30,Brasil,20,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Gabriel Cipriano,A,2000-01-01,Brasil,23,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Filipinho,A,2006-02-13,Brasil,59,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Felipe Vizeu,A,1997-03-12,Brasil,11,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Léo Gamalho,A,1986-01-30,Brasil,9,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+avai,Caio Suassuna,A,2007-03-23,Brasil,19,https://www.transfermarkt.com.br/avai-fc/kader/verein/2035/saison_id/2025/plus/1
+botafogo-sp,Victor Souza,G,1992-08-31,Brasil,1,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Jordan,G,1998-02-06,Brasil,12,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Brenno Klippel,G,2003-02-17,Brasil,25,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Wallace,Z,1994-10-14,Brasil,13,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Guilherme Mariano,Z,1999-12-12,Brasil,15,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Vilar,Z,2000-04-18,Brasil,4,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Carlão,Z,2001-03-12,Brasil,14,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Darlan,Z,2004-03-03,Brasil,27,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Badaró,Z,2005-06-29,Brasil,34,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Patrick Brey,L,1997-06-05,Brasil,6,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Felipe Vieira,L,1999-05-04,Brasil,26,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Pedrinho,L,2006-10-23,Brasil,31,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Gabriel Inocêncio,L,1994-08-20,Brasil,22,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Jonathan,L,1992-08-25,Brasil,2,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Ericson,L,1999-05-11,Brasil,3,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Leandro Maciel,M,1995-12-29,Argentina,5,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Matheus Sales,M,1995-05-13,Brasil,16,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Marco Antônio,M,2000-07-09,Brasil,28,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Thiaguinho,M,1998-06-09,Brasil,29,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Erik Rebello,M,2005-03-06,Brasil,33,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Everton Morelli,M,1997-11-04,Brasil,8,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Yuri Felipe,M,2006-06-14,Brasil,20,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Rafael Gava,M,1993-05-20,Brasil,10,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Arthur Caíke,A,1992-06-15,Brasil,18,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Zé Hugo,A,1999-10-17,Brasil,30,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Jefferson Nem,A,1996-04-10,Brasil,11,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Wesley Santos,A,2000-08-31,Brasil,23,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Kelvin,A,1997-08-18,Brasil,7,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Jadson,A,2005-08-10,Brasil,21,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Hygor,A,1992-08-13,Brasil,9,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+botafogo-sp,Guilherme Queiróz,A,1990-05-23,Brasil,17,https://www.transfermarkt.com.br/botafogo-fc/kader/verein/9030/saison_id/2025/plus/1
+ceara,Matheus Nogueira,G,1997-09-20,Brasil,22,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Richard Costa,G,1991-03-01,Brasil,1,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Caíque França,G,1995-06-03,Brasil,23,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Luizão,Z,1992-10-09,Brasil,4,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Thalisson,Z,2002-01-20,Brasil,3,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Júlio César,Z,2003-09-28,Brasil,18,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Éder,Z,1995-04-05,Brasil,33,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Luiz Otávio,Z,1988-09-14,Brasil,13,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Stanley Boateng,Z,2005-03-22,Gana,19,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Pedro Gilmar,Z,2006-04-02,Brasil,63,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Sávio,L,1995-05-26,Brasil,6,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Sánchez,L,1995-09-28,Brasil,12,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Rafael Ramos,L,1995-01-09,Portugal,2,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Bryan Borges,L,1996-08-03,Brasil,31,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Enzo Lodovico,L,2006-06-23,Brasil,60,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Zanocelo,M,2001-01-30,Brasil,25,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Richardson,M,1991-08-17,Brasil,26,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,João Gabriel,M,2006-04-15,Brasil,81,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Giovanni Pavani,M,1996-11-22,Brasil,7,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Matheus Araújo,M,2002-05-22,Brasil,8,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Melk,M,2006-07-28,Brasil,40,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Vina,M,1991-04-15,Brasil,29,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Lucas Mugni,M,1992-01-12,Argentina,10,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Lenny Lobato,A,2001-02-03,Brasil,77,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Nicolás Ferreira,A,2002-02-07,Uruguai,11,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Rian Santana,A,2001-01-23,Brasil,16,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Kauã,A,2006-03-01,Brasil,90,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Wendel,A,2000-08-02,Brasil,9,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Saulo Mineiro,A,1997-06-17,Brasil,73,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Renzo López,A,1994-04-16,Uruguai,94,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+ceara,Lucca,A,2003-04-02,Brasil,99,https://www.transfermarkt.com.br/ceara-sc/kader/verein/2029/saison_id/2025/plus/1
+crb,Matheus Albino,G,1995-02-04,Brasil,12,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Vitor Caetano,G,1999-07-01,Brasil,1,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Fábio Henrique,G,2002-10-20,Brasil,23,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Pablo,G,2004-05-24,Brasil,,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Henri,Z,2002-02-19,Brasil,44,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Fábio Alemão,Z,1996-10-08,Brasil,27,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Darlisson,Z,2003-12-01,Brasil,,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Bressan,Z,1993-01-15,Brasil,22,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Lyncon,Z,2005-05-07,Brasil,33,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Lucas Lovat,L,1997-01-15,Brasil,36,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Reverson,L,1997-02-02,Brasil,6,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Léo Campos,L,1992-07-03,Brasil,77,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Hereda,L,1998-09-20,Brasil,32,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Kevin,L,1997-09-07,Brasil,2,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Mateus Pureza,L,2004-03-03,Brasil,,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Patrick de Lucca,M,2000-03-02,Brasil,45,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Lucas Kallyel,M,2004-03-01,Brasil,,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Luizão,M,1998-02-20,Brasil,50,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Crystopher,M,1998-06-07,Brasil,8,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Geovane,M,1999-03-02,Brasil,18,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Pedro Castro,M,1993-02-05,Brasil,21,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Anderson Dias,M,2005-04-29,Brasil,,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Danielzinho,M,1996-01-11,Brasil,10,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Estêvão,M,2002-02-03,Brasil,26,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Guilherme Pato,A,2001-02-17,Brasil,11,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Ygor Catatau,A,1995-07-01,Brasil,95,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Thiaguinho,A,2001-03-13,Brasil,17,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Douglas Baggio,A,1995-02-02,Brasil,7,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Dadá Belmonte,A,1997-02-08,Brasil,97,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Rodriguinho,A,2004-12-22,Brasil,,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Vinícius Barata,A,1999-02-12,Brasil,20,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Mikael,A,1999-05-28,Brasil,28,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,Luiz Phellype,A,1993-09-27,Brasil,19,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+crb,João Neto,A,2003-07-10,Brasil,9,https://www.transfermarkt.com.br/CRB/kader/verein/11449/saison_id/2025/plus/1
+criciuma,Alisson,G,1995-06-08,Brasil,1,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Airton,G,1994-05-29,Brasil,32,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Kauã Moroso,G,2004-03-11,Brasil,73,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Pedro Santos,G,2005-04-19,Brasil,70,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Rômulo,Z,2004-01-31,Brasil,47,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,César Martins,Z,1992-12-28,Brasil,37,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Bruno Alves,Z,1991-04-16,Brasil,34,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Ruan Carvalho,Z,2006-10-21,Brasil,43,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Luciano Castán,Z,1989-09-13,Brasil,4,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Rodrigo,Z,1987-03-10,Brasil,3,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Erick,Z,2005-06-04,Brasil,,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Octávio Henrique,Z,2005-01-07,Brasil,15,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Marcelo Hermes,L,1995-02-01,Brasil,22,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Hiago Alves,L,2005-09-02,Brasil,31,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Willean Lepo,L,1997-01-16,Brasil,97,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Marcinho,L,1996-05-16,Brasil,6,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Kaik Viçoza,L,2004-04-02,Brasil,,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Ronald,M,1997-06-18,Brasil,14,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Eduardo,M,1997-01-09,Brasil,5,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Jean Irmer,M,1994-09-26,Brasil,41,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Thiaguinho,M,2006-02-01,Brasil,50,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Guilherme Lobo,M,1999-10-14,Brasil,8,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Rómulo Otero,M,1992-11-09,Venezuela,91,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Fellipe Mateus,M,1991-02-12,Brasil,7,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Diego Gonçalves,A,1994-09-22,Brasil,77,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Waguininho,A,1990-01-30,Brasil,13,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Jhonata Robert,A,1999-10-26,Brasil,10,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Romarinho,A,1994-03-01,Brasil,11,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,João Carlos,A,2001-06-21,Brasil,21,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Cauê,A,2002-11-16,Brasil,88,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Yuri Tanque,A,1998-06-12,Brasil,33,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Thales,A,2006-11-04,Brasil,19,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+criciuma,Nicolas,A,1989-10-04,Brasil,9,https://www.transfermarkt.com.br/criciuma-ec/kader/verein/7178/saison_id/2025/plus/1
+cuiaba,Marcelo Carné,G,1990-02-06,Brasil,31,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,João Carlos,G,1988-04-06,Brasil,1,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Gustavo Busatto,G,1990-10-23,Brasil,12,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Jean,G,2000-07-24,Brasil,34,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Pedro Mello,G,2006-05-03,Brasil,78,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,João Basso,Z,1997-01-13,Brasil,13,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Alan Empereur,Z,1994-03-10,Brasil,33,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Vitão,Z,2000-09-17,Brasil,,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Vitor Mendes,Z,1999-02-13,Brasil,4,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Luis Soares,Z,2005-07-17,Brasil,91,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Eric,L,2000-08-07,Brasil,14,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Lorenzo,L,2007-07-06,Brasil,36,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Tarcísio,L,2003-08-30,Brasil,59,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Igor Inocêncio,L,1998-04-20,Brasil,2,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Railan,L,2000-03-10,Brasil,37,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Raul,M,1996-07-11,Brasil,30,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Calebe Costa,M,2003-06-07,Brasil,5,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Luiz Otávio,M,1997-03-18,Brasil,97,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Weverson,M,2003-08-11,Brasil,53,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Wesley Dias,M,1995-06-22,Brasil,70,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Pepê,M,1998-01-06,Brasil,8,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Luiz Felipe,M,2004-08-07,Brasil,,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,David Miguel,M,2007-03-11,Brasil,20,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Marcos Júnior,M,1993-01-19,Brasil,23,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Eliel,A,2003-01-26,Brasil,11,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Kauan Cristtyan,A,2006-01-24,Brasil,41,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Jean Dias,A,1990-10-22,Brasil,77,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Pedro Henrique,A,1996-11-08,Brasil,96,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Rodrigo Rodrigues,A,2000-04-21,Brasil,27,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Fábio Gomes,A,1997-05-25,Brasil,90,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Vinicius Peixoto,A,2003-10-31,Brasil,29,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Nathan Cruz,A,2007-02-14,Brasil,99,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+cuiaba,Ramon,A,2000-07-12,Brasil,7,https://www.transfermarkt.com.br/cuiaba-ec/kader/verein/28022/saison_id/2025/plus/1
+fortaleza,João Ricardo,G,1988-09-06,Brasil,1,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Magrão,G,2000-05-15,Brasil,15,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Vinícius,G,1994-03-28,Brasil,25,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Lucas Gazal,Z,1999-08-06,Brasil,3,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Tomás Cardona,Z,1995-10-10,Argentina,6,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Bastos,Z,1991-03-27,Angola,15,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Luan Freitas,Z,2001-01-20,Brasil,4,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Kauã Rocha,Z,2007-03-13,Brasil,33,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Neris,Z,1992-06-17,Brasil,23,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Gabriel Fuentes,L,1997-02-09,Colômbia,18,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Kaio Henrique,L,2006-03-22,Brasil,12,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Maurício Mucuri,L,2001-05-11,Brasil,13,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Maílton,L,1998-05-31,Brasil,22,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Paulinho,L,2005-05-23,Brasil,28,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Ryan,M,2003-07-15,Brasil,37,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Ronald,M,2003-02-11,Brasil,8,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Jailson,M,1995-09-07,Brasil,20,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Rodrigo Santos,M,2000-09-18,Brasil,29,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Lucas Sasha,M,1990-03-01,Brasil,88,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Pierre,M,2002-03-12,Brasil,5,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Lucca Prior,M,2004-02-12,Brasil,38,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Lucas Crispim,M,1994-06-19,Brasil,10,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Lucas Emanoel,M,2006-07-14,Brasil,19,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Luiz Fernando,A,1996-10-16,Brasil,32,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Rodriguinho,A,2003-06-05,Brasil,75,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Paulo Baya,A,1999-07-26,Brasil,77,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Vitinho,A,2001-04-23,Brasil,11,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Welliton,A,2000-07-14,Brasil,31,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Pedro Henrique,A,1990-06-16,Brasil,16,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Juan Miritello,A,1999-02-08,Argentina,9,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Nathan Fogaça,A,1999-06-09,Brasil,17,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Chico da Costa,A,1995-05-05,Brasil,91,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+fortaleza,Juan Cantillo,A,2003-01-08,Colômbia,21,https://www.transfermarkt.com.br/fortaleza-ec/kader/verein/10870/saison_id/2025/plus/1
+goias,Tadeu,G,1992-02-04,Brasil,23,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Ezequiel Oliveira,G,2003-06-13,Brasil,41,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Thiago Rodrigues,G,1988-10-20,Brasil,1,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Lucas Ribeiro,Z,1999-01-19,Brasil,14,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Luisão,Z,2003-09-09,Brasil,25,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Ramon Menezes,Z,1995-05-03,Brasil,4,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Luiz Felipe,Z,1993-09-09,Brasil,3,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Nicolas,L,1997-02-24,Brasil,6,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Djalma Silva,L,1994-09-19,Brasil,54,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Danilo Cunha,L,2007-05-12,Brasil,66,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Rodrigo Soares,L,1992-12-26,Brasil,2,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Marcos Vinícius,L,1997-03-26,Brasil,63,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Filipe Machado,M,1996-01-20,Brasil,5,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Baldória,M,2005-04-21,Brasil,55,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Lucas Rodrigues,M,2007-10-29,Brasil,35,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Juninho,M,1987-10-23,Brasil,8,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Lourenço,M,1997-09-07,Brasil,97,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Lucas Lima,M,1990-07-09,Brasil,10,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Gegê,M,1994-01-28,Brasil,28,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Brayann,M,1997-10-25,Brasil,88,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Jean Carlos,M,2005-05-08,Brasil,21,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Esli García,A,2000-07-14,Venezuela,15,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Kadu,A,2002-03-03,Brasil,40,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Pedrinho,A,2004-03-23,Brasil,17,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Wellington Rato,A,1992-06-18,Brasil,27,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Halerrandrio,A,2006-07-08,Brasil,77,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Vitor Hugo,A,2004-02-24,Brasil,,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Cadu,A,2004-05-24,Brasil,18,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Anselmo Ramon,A,1988-06-23,Brasil,9,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+goias,Felipe Clemente,A,1999-06-17,Brasil,11,https://www.transfermarkt.com.br/goias-ec/kader/verein/3197/saison_id/2025/plus/1
+juventude,Jandrei,G,1993-03-01,Brasil,93,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Pedro Rocha,G,1998-06-01,Brasil,12,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Ruan Carneiro,G,1990-03-28,Brasil,21,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Zé Henrique,G,2004-10-23,Brasil,31,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Messias,Z,1994-11-03,Brasil,4,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Rodrigo Sam,Z,1995-07-24,Brasil,34,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Marcos Paulo,Z,2003-01-18,Brasil,47,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Gabriel Pinheiro,Z,1997-04-19,Brasil,97,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Titi,Z,1988-03-12,Brasil,3,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Patryck,L,2003-01-18,Brasil,30,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Wadson,L,2000-09-02,Brasil,6,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Diogo Barbosa,L,1992-08-17,Brasil,16,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Alan Ruschel,L,1989-08-23,Brasil,28,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Nathan,L,2001-09-05,Brasil,22,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Raí Ramos,L,1994-05-06,Brasil,2,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Aderlan,L,1990-08-18,Brasil,13,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Lucas Mineiro,M,1996-02-24,Brasil,8,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Gabriel Pires,M,1993-09-18,Brasil,29,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Luan Martins,M,1998-10-20,Brasil,5,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Iba Ly,M,2003-01-22,Senegal,26,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Davi Góes,M,2005-06-22,Brasil,88,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Mandaca,M,2001-10-02,Brasil,44,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Pablo Roberto,M,1999-11-14,Brasil,7,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Raí,M,2002-04-21,Brasil,75,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Ray Breno,M,2004-08-31,Brasil,27,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Marcos Paulo,A,2001-02-01,Portugal,10,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Allanzinho,A,2000-04-04,Brasil,20,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Fábio Lima,A,1996-12-22,Brasil,11,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Manuel Castro,A,1995-09-27,Uruguai,17,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Juan Christian,A,2001-03-10,Brasil,70,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Lucas Alves,A,2002-04-21,Brasil,72,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Alisson Safira,A,1995-03-17,Brasil,25,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Luis Amarilla,A,1995-08-25,Paraguai,18,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+juventude,Alan Kardec,A,1989-01-12,Brasil,9,https://www.transfermarkt.com.br/ec-juventude/kader/verein/10492/saison_id/2025/plus/1
+londrina,Mauricio Kozlinski,G,1991-06-18,Brasil,30,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Luan Ribeiro,G,1997-06-17,Brasil,1,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Zanella,G,2004-05-12,Brasil,12,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Heron,Z,2000-08-17,Brasil,34,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Gabriel Lacerda,Z,1999-08-29,Brasil,15,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Wallace,Z,1987-12-26,Brasil,4,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Caio,Z,2004-08-23,Brasil,44,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Kevyn,L,1997-12-28,Brasil,33,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Rafael Monteiro,L,2004-02-14,Brasil,6,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Artur,L,1994-08-05,Brasil,22,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Rafael Soares,L,2004-12-27,Brasil,,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,André Dhominique,L,2003-10-07,Brasil,13,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Weverton,L,1999-06-15,Brasil,2,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Nino Paraíba,L,1986-01-10,Brasil,2,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Kauê Leonardo,L,2005-04-11,Brasil,75,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Chumbinho,M,2003-09-22,Brasil,55,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Fabiano,M,2005-06-11,Brasil,20,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Tarik,M,1993-02-18,Brasil,5,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,João Tavares,M,2004-02-23,Brasil,32,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Victor Feitosa,M,1996-03-10,Brasil,3,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,André Cardoso,M,2003-05-17,Brasil,17,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Murilo Chico,M,2005-01-24,Brasil,27,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,João Vitor,M,1998-03-31,Brasil,20,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Geovane Meurer,M,2002-05-25,Brasil,38,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Lucas Marques,M,1995-05-24,Brasil,8,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Juninho,M,1999-02-02,Brasil,18,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Thalis,M,1996-03-19,Brasil,96,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Guilherme Portuga,M,1998-07-16,Brasil,77,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Caio Maia,A,2005-04-01,Brasil,28,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Guilherme Cachoeira,A,2002-04-25,Brasil,27,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Raí Nascimento,A,1998-05-18,Brasil,28,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Athyrson,A,2004-01-06,Brasil,,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Fabricio,A,2004-01-19,Brasil,21,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Herbert,A,1999-11-10,Brasil,28,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,William Pottker,A,1993-12-22,Brasil,23,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Vitinho Mota,A,2003-07-27,Brasil,7,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Pablo Dyego,A,1994-03-08,Brasil,11,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Fellipinho,A,2004-05-13,Brasil,21,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Gilberto,A,1989-06-05,Brasil,9,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,João Andrade,A,2006-06-15,Brasil,17,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+londrina,Igor Bahia,A,1993-02-25,Brasil,99,https://www.transfermarkt.com.br/londrina-ec/kader/verein/1693/saison_id/2025/plus/1
+novorizontino,Jordi,G,1993-09-03,Brasil,93,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,César,G,1995-02-16,Brasil,31,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Lucas,G,1998-06-21,Brasil,1,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,João Scapin,G,2004-02-12,Brasil,12,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Paulo Henrique,G,1991-04-14,Brasil,29,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Patrick,Z,1999-04-09,Brasil,4,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Alexis Alvariño,Z,2001-02-01,Argentina,22,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Carlinhos,Z,1995-06-16,Brasil,3,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Eduardo Brock,Z,1991-05-06,Brasil,14,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Gabriel Bahia,Z,1998-11-24,Brasil,26,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Renato Palm,Z,1991-10-14,Brasil,33,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Maykon Jesus,L,2005-12-07,Brasil,66,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Sander,L,1990-10-03,Brasil,5,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Jhilmar Lora,L,2000-10-24,Perú,24,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Madson,L,1992-01-13,Brasil,2,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Léo Naldi,M,2001-08-18,Brasil,18,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Luís Oyama,M,1997-01-30,Brasil,6,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Marlon,M,1990-02-26,Brasil,28,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Luiz Gabriel,M,2005-01-22,Brasil,23,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Matheus Bianqui,M,1998-01-31,Brasil,17,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Tavinho,M,2004-07-19,Brasil,15,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Diego Galo,M,2005-06-04,Brasil,19,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Rômulo,M,2001-10-07,Brasil,10,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Juninho,M,2001-01-23,Brasil,50,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Christian Ortíz,M,1992-08-20,Argentina,8,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Vinícius Paiva,A,2001-03-01,Brasil,16,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Robson,A,1991-05-30,Brasil,11,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Ronald Barcellos,A,2002-03-02,Brasil,7,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Hélio Borges,A,2000-05-15,Brasil,77,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Hector Bianchi,A,2005-06-21,Brasil,35,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Reidiney,A,2006-12-14,Brasil,41,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Jardiel,A,2005-03-21,Brasil,40,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Carlão,A,1992-07-03,Brasil,9,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Diego Mathias,A,1999-06-12,Brasil,27,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+novorizontino,Nicolas Careca,A,1997-05-18,Brasil,30,https://www.transfermarkt.com.br/gremio-novorizontino/kader/verein/37474/saison_id/2025/plus/1
+nautico,Gastón Guruceaga,G,1995-03-15,Uruguai,55,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Muriel,G,1987-02-14,Brasil,1,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Léo,G,2004-03-05,Brasil,,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Betão,Z,1999-06-21,Brasil,3,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Mateus Silva,Z,1995-07-03,Brasil,25,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Índio,Z,2004-03-08,Brasil,13,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Wanderson,Z,1994-10-24,Brasil,34,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Gustavo Henrique,Z,2005-10-18,Brasil,46,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Felipe Santana,Z,2005-03-08,Brasil,,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Igor Fernandes,L,1992-06-06,Brasil,23,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Ryan Carlos,L,2002-05-14,Brasil,6,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Luiz Paulo,L,1993-04-24,Brasil,60,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Matheus Ribeiro,L,1993-02-23,Brasil,14,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Luiz Felipe,L,1998-01-27,Brasil,27,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Reginaldo,L,1993-02-22,Brasil,93,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Arnaldo,L,1992-04-15,Brasil,2,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Wenderson,M,1998-06-07,Brasil,8,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Samuel,M,2004-01-02,Brasil,41,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Léo Oliveira,M,1996-04-22,Brasil,15,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Auremir,M,1991-09-10,Brasil,5,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Guilherme,M,2005-09-28,Brasil,48,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Jean Carlos,M,1992-02-15,Brasil,10,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Patricio Núñez,M,1999-04-19,Argentina,22,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Felipe Redaelli,M,2003-07-10,Brasil,21,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Caio Soares,M,2005-07-22,Brasil,88,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Vinícius,A,1993-08-03,Brasil,7,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Victor Andrade,A,1995-09-30,Brasil,11,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Benjamín Borasi,A,1997-11-11,Argentina,24,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Danielzinho,A,2000-10-13,Brasil,78,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Derek,A,1997-12-02,Brasil,72,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Júnior Todinho,A,1993-12-13,Brasil,29,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Paulo Sérgio,A,1989-06-11,Brasil,9,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Luiz Claudio,A,2005-05-14,Brasil,16,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+nautico,Kauã Maranhão,A,2004-01-02,Brasil,19,https://www.transfermarkt.com.br/clube-nautico-capibaribe/kader/verein/2646/saison_id/2025/plus/1
+operario-pr,Elias Curzel,G,1995-07-12,Brasil,1,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Talles,G,1997-02-12,Brasil,12,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Vagner,G,1986-06-06,Brasil,33,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Diego Monteiro,G,2000-01-26,Brasil,41,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Miranda,Z,2000-01-19,Brasil,16,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,José Cuenú,Z,1995-02-17,Colômbia,22,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,William Klaus,Z,1994-01-11,Brasil,4,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,André,Z,1999-05-26,Brasil,18,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Joseph,Z,1994-12-30,Brasil,43,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Renan Gustavo,Z,2005-02-16,Brasil,34,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Gabriel Feliciano,L,2001-07-26,Brasil,27,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Moraes,L,1997-10-03,Brasil,6,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Mikael Doka,L,2000-01-24,Brasil,2,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Maguinho,L,1992-01-06,Brasil,26,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Nicolas Schulz,L,2000-07-15,Brasil,17,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,João Gabriel,L,2006-05-25,Brasil,23,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Matheus Trindade,M,1996-03-05,Brasil,39,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Índio,M,1992-10-30,Brasil,5,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Charles Raphael,M,1995-04-10,Brasil,32,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Pedro Vilhena,M,2002-02-18,Brasil,30,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Juan Zuluaga,M,1993-06-15,Colômbia,8,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Neto Paraíba,M,1992-07-02,Brasil,88,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Gabriel Boschilia,M,1996-03-05,Brasil,10,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Vinícius Diniz,M,1999-07-25,Brasil,20,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Brenno Pereira,M,2005-05-16,Brasil,21,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Maxwell,A,1995-02-11,Brasil,77,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Ángel Torres,A,2000-04-06,Colômbia,7,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Berto,A,1996-03-02,Cabo Verde,14,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Dudu Mosconi,A,2006-06-19,Brasil,28,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Vinicius Mingotti,A,2000-01-07,Brasil,9,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Pablo,A,1992-06-23,Brasil,92,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Caio Dantas,A,1993-02-19,Brasil,99,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+operario-pr,Aylon,A,1992-04-07,Brasil,11,https://www.transfermarkt.com.br/operario-fec/kader/verein/27214/saison_id/2025/plus/1
+ponte-preta,Vinicius Ferrari,G,2003-02-18,Brasil,30,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,José Luiz,G,2008-01-21,Brasil,,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Guilherme Viana,G,2003-08-25,Brasil,1,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Lucas Cunha,Z,1997-01-23,Brasil,3,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Sergio Palacios,Z,2005-02-14,Colômbia,23,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Gabriel Caran,Z,1998-09-28,Brasil,15,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Diego Leão,Z,2005-02-11,Brasil,4,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Gustavo Almeida,Z,2006-01-04,Brasil,44,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Kevyson,L,2004-03-29,Brasil,32,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Danilo Barcelos,L,1991-08-17,Brasil,14,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Diego Porfírio,L,1999-08-01,Brasil,13,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Jota,L,2002-10-26,Brasil,6,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Guilherme Martins,L,2005-03-05,Brasil,,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Kawann,L,2005-01-18,Brasil,,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Júlio,L,2007-06-25,Brasil,2,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Di Mauro,L,2006-09-16,Brasil,32,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,André Lima,M,2000-04-07,Brasil,8,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Murilo,M,1999-03-15,Brasil,20,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Rodrigo Souza,M,1987-10-27,Brasil,5,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Gustavo Telles,M,2005-04-28,Brasil,35,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Karl,M,1993-04-07,Brasil,16,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Denis,M,2004-01-08,Brasil,22,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Élvis,M,1990-09-09,Brasil,10,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Diogo Mora,M,2002-01-22,Brasil,,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Manu,M,2006-04-03,Brasil,7,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Miguel Morais,M,2005-06-09,Brasil,17,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,David da Hora,A,2000-01-09,Brasil,18,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Jonathan Cafu,A,1991-07-10,Brasil,19,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Peu,A,2003-03-22,Brasil,,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Brandão,A,2004-06-25,Brasil,9,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+ponte-preta,Vitor Ribeiro,A,1999-03-14,Brasil,21,https://www.transfermarkt.com.br/aa-ponte-preta/kader/verein/1134/saison_id/2025/plus/1
+sport,Thiago Couto,G,1999-03-26,Brasil,26,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Brenno,G,1999-04-01,Brasil,21,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Denis,G,1987-04-14,Brasil,12,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Adriano,G,2003-03-07,Brasil,42,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Marcelo Benevenuto,Z,1996-01-07,Brasil,5,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Habraão,Z,2001-06-26,Brasil,28,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Kayky Almeida,Z,2005-05-01,Brasil,33,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Marcelo Ajul,Z,2002-08-26,Brasil,3,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Matheus Baraka,Z,2003-01-21,Brasil,40,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Patrick,Z,2005-02-27,Brasil,63,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Felipinho,L,1997-01-13,Brasil,60,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Raí,L,2000-03-28,Brasil,76,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Edson Lucas,L,2000-07-30,Brasil,96,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Claudinho,L,2000-09-24,Brasil,27,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Augusto Pucci,L,2007-11-03,Brasil,68,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Patrick de Paula,M,1999-09-08,Brasil,7,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Zé Gabriel,M,1999-01-21,Brasil,23,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Murilo Rhikman,M,2006-03-13,Brasil,15,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Willian Oliveira,M,1993-05-16,Brasil,29,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Luciano,M,2003-02-26,Brasil,,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Fernando Sobral,M,1994-12-17,Brasil,88,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Fábio Matheus,M,2003-04-13,Brasil,47,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Juan Alano,M,1996-09-02,Brasil,8,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Kervin Andrade,M,2005-04-13,Venezuela,80,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Biel Fonseca,M,2002-03-19,Brasil,6,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Diego Hernández,A,2000-06-22,Uruguai,20,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Carlos de Pena,A,1992-03-11,Uruguai,10,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Clayson,A,1995-03-19,Brasil,25,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Marlon,A,1997-09-15,Brasil,31,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Chrystian Barletta,A,2001-07-05,Brasil,30,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Dudu Teodora,A,1999-08-10,Brasil,77,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Perotti,A,1997-11-22,Brasil,9,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sport,Neto Pessoa,A,1994-05-16,Brasil,19,https://www.transfermarkt.com.br/sport-club-do-recife/kader/verein/8718/saison_id/2025/plus/1
+sao-bernardo,Alex Alves,G,1986-11-08,Brasil,1,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Júnior Oliveira,G,1990-01-02,Brasil,12,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Léo Lang,G,1998-08-05,Brasil,22,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Jemerson,Z,1992-08-24,Brasil,35,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Augusto,Z,1997-04-16,Brasil,97,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Luizão,Z,2002-03-08,Brasil,90,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Hélder Maciel,Z,1990-05-24,Brasil,3,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Matheus Salustiano,Z,1993-04-19,Brasil,5,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Wellington,Z,2001-06-05,Brasil,25,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Pará,L,1995-08-23,Brasil,6,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Mário Sérgio,L,1994-04-26,Brasil,33,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Jota,L,2005-04-27,Brasil,16,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Rodrigo Ferreira,L,1995-03-29,Brasil,2,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Hugo Sanches,L,1994-07-09,Brasil,21,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Lucas Lima,M,2000-07-04,Brasil,14,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Romisson,M,1996-09-09,Brasil,17,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Rodrigo Andrade,M,1997-02-03,Brasil,32,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Foguinho,M,1992-06-15,Brasil,8,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Marcão,M,1991-01-14,Brasil,77,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Galdino,M,2005-07-31,Brasil,36,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Dudu Miraíma,M,2000-06-15,Brasil,26,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Lucas Fernandes,M,1997-09-20,Brasil,31,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Hyoran,M,1993-05-25,Brasil,42,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Breno Melo,M,2005-04-27,Brasil,30,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Pedrinho,A,1999-11-10,Brasil,29,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Pedro Vitor,A,1998-03-20,Brasil,11,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Echaporã,A,2000-02-17,Brasil,27,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Daniel Davi,A,2005-06-15,Brasil,37,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Fabrício Daniel,A,1997-07-23,Brasil,10,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Felipe Garcia,A,1990-11-06,Brasil,9,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Léo Jabá,A,1998-08-02,Brasil,98,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Lucas Rian,A,2000-06-03,Brasil,7,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Matheus Goiás,A,2004-10-08,Brasil,,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Daniel Amorim,A,1989-09-15,Brasil,89,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+sao-bernardo,Lucas Reis,A,2001-06-14,Brasil,70,https://www.transfermarkt.com.br/sao-bernardo-fc/kader/verein/16439/saison_id/2025/plus/1
+vila-nova,Gabriel Átila,G,2003-01-22,Brasil,30,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Helton Leite,G,1990-11-02,Brasil,1,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Dalberson,G,1997-01-13,Brasil,29,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Douglas Mendes,Z,2004-06-13,Brasil,4,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Anderson,Z,1995-03-02,Brasil,14,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Tiago Pagnussat,Z,1990-06-17,Brasil,3,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Jonathan Costa,Z,1995-04-19,Brasil,4,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Breno Bora,Z,2002-05-22,Brasil,23,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Higor,L,2004-12-27,Brasil,6,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Willian Formiga,L,1995-01-22,Brasil,13,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Igor Cariús,L,1993-05-01,Brasil,16,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Hayner,L,1995-10-02,Brasil,22,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Higor Meritão,M,1994-06-23,Brasil,21,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Willian Maranhão,M,1995-12-14,Brasil,8,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,João Vieira,M,1997-11-08,Brasil,5,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Dudu,M,2001-12-03,Brasil,15,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Nathan Camargo,M,2005-07-25,Brasil,20,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Enzo,M,2003-04-30,Brasil,18,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Bruno Xavier,M,1996-11-27,Brasil,33,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Gustavo Cabral,M,2001-09-12,Brasil,,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Marquinhos Gabriel,M,1990-07-21,Brasil,10,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Ryan,A,2001-06-18,Brasil,11,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Emerson Urso,A,2001-05-13,Brasil,70,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Dodô,A,1994-09-05,Brasil,31,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Everton Galdino,A,1997-03-17,Brasil,17,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Janderson,A,1999-02-26,Brasil,99,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,André Luis,A,1997-04-21,Brasil,7,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,João Lucas,A,2000-08-18,Brasil,,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Lincoln,A,2000-12-16,Brasil,9,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Dellatorre,A,1992-05-01,Brasil,49,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Gustavo Puskas,A,2008-02-26,Brasil,9,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1
+vila-nova,Rafa Silva,A,1992-04-04,Brasil,9,https://www.transfermarkt.com.br/vila-nova-fc/kader/verein/5677/saison_id/2025/plus/1

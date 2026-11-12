@@ -53,3 +53,28 @@ test("R97 a bandeira pequena do país do jogador ao lado do nome: no Elenco, na 
   await expect(mercado.first()).toBeVisible();
   expect(await page.locator("main .lista .item .bandeira-jogador").count()).toBe(await mercado.count());
 });
+
+test("R119 a Série B com os elencos de 2026 do Transfermarkt: o jogo novo no Fortaleza traz quem está lá em 2026", async ({ page }) => {
+  // A lista do Transfermarkt (lotes de jogadores do Claude do computador do usuário) fica no projeto.
+  const csv = readFileSync(new URL("../data/brasil-2026/transfermarkt/serie-b-2026.csv", import.meta.url), "utf8").trim().split("\n").slice(1);
+  const semAcento = (t: string) => t.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().trim();
+  const lista = new Map<string, Set<string>>();
+  for (const l of csv) {
+    const [clube, nome] = l.split(",");
+    lista.set(clube, (lista.get(clube) ?? new Set()).add(semAcento(nome)));
+  }
+  expect(lista.size, "os 20 clubes da Série B").toBe(20);
+  for (const [clube, nomes] of lista) {
+    const elenco = elencos[clube] ?? [];
+    expect(elenco.length, `elenco do ${clube}`).toBeGreaterThanOrEqual(25);
+    expect(elenco.length, `elenco do ${clube}`).toBeLessThanOrEqual(30);
+    const deFora = elenco.filter((j) => !nomes.has(semAcento(j.nome))).map((j) => j.nome);
+    expect(deFora, `jogadores do ${clube} que não estão na lista de 2026`).toEqual([]);
+  }
+
+  await novoJogo(page, { serie: "Série B", clube: "Fortaleza" });
+  await aba(page, "Elenco");
+  const nomes = page.locator(".lista .item .negrito");
+  await expect(nomes.filter({ hasText: exato("Paulo Baya") }), "Paulo Baya, do Fortaleza em 2026").toHaveCount(1);
+  await expect(nomes.filter({ hasText: exato("Deyverson") }), "Deyverson não está no Fortaleza de 2026").toHaveCount(0);
+});

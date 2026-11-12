@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R118 rodando a cada mudança, antes
+ponta R01–R119 rodando a cada mudança, antes
 de publicar e todo dia no site publicado. Bandeira pequena do país do jogador ao lado do nome (`BandeiraJogador` em `componentes.tsx`,
 `bandeiraDaNacionalidade` em `formatos.ts`: código de 3 letras do jogo → emoji; no Elenco, ficha, Mercado e Convocação;
 no campinho não, por falta de espaço; R97).
@@ -590,7 +590,14 @@ Copa do Brasil, 7º na C, sem acesso no quadrangular (objetivo era até 4º; nã
 **Elencos (nov/2026):** o usuário testou pegar os elencos de 2026 da Série A pelo Claude no Chrome (CSV do Transfermarkt:
 clube, nome, posição, nascimento, nacionalidade, camisa, fonte; 97% dos 560 do jogo continuam nos clubes) e decidiu: "Jogadores
 vou esperar a próxima janela de transferências". Depois da janela: o mesmo comando para as Séries A, B e C e atualizar os
-elencos (só valem em jogo novo).
+elencos (só valem em jogo novo). **Série B feita (12/nov/2026):** o Claude do computador do usuário mandou os elencos de 2026 pelo
+Transfermarkt (lotes de jogadores na pasta `lotes/`: clube_id, nome, posição G/L/Z/M/A, nascimento, país, camisa, fonte),
+guardados em `data/brasil-2026/transfermarkt/serie-b-2026.csv`; `npx tsx tools/elencos/transfermarkt.ts <csv...>` troca os
+elencos desses clubes em `jogadores.json` (até 30 por clube, o mínimo por posição garantido). A força do time continua a de
+antes: os jogadores são ordenados (força de antes se já estavam no clube; de outro clube só com nome único, mesma posição e
+idade; os outros pela idade e pela camisa) e recebem as forças que o elenco antigo tinha, do melhor ao pior (sem isso a B
+ficava ~5 pontos mais fraca). R119. **Série C:** a lista veio com quem já saiu (até 60 por clube); o usuário vai pedir a
+lista filtrada só com os atuais; quando chegar, `transfermarkt.ts` com o CSV da C (guardar em `transfermarkt/serie-c-2026.csv`).
 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e
