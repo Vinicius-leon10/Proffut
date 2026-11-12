@@ -47,12 +47,16 @@ test("R125 em Finanças, o Estádio vem primeiro e ampliar/modernizar abrem num 
   await expect(tela.getByRole("button", { name: "Modernizar" })).toHaveCount(0);
   await primeiro.getByRole("button", { name: "Melhorar" }).click();
   const folha = page.getByRole("dialog");
-  await expect(folha.getByRole("heading", { name: "Melhorar o estádio" })).toBeVisible();
-  await expect(folha).toContainText("Castelão");
+  // Como a imagem que o usuário mandou ("Quero assim"): o nome do estádio no título, o caixa, "Fechar" escrito e sem o
+  // texto comprido de explicação.
+  await expect(folha.getByRole("heading", { name: "Melhorar o Castelão" })).toBeVisible();
   await expect(folha).toContainText("Caixa:");
+  await expect(folha).toContainText("uma obra por vez");
+  await expect(folha.getByRole("button", { name: "Fechar", exact: true })).toHaveText("Fechar");
+  await expect(folha).not.toContainText("Estimativa para");
   // As três ampliações (a que não cabe no caixa diz "Caixa insuficiente") e a modernização.
   await expect(folha.getByText(/^\+[\d.]+ lugares$/)).toHaveCount(3);
   await expect(folha.getByText("Conforto nível 1 (+10% de público)")).toBeVisible();
-  await folha.getByRole("button", { name: "Fechar" }).click();
+  await folha.getByRole("button", { name: "Fechar", exact: true }).click();
   await expect(folha).toHaveCount(0);
 });

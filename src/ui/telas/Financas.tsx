@@ -5,7 +5,7 @@ import { NOMES_LANCAMENTO, folhaSalarial, formatarDinheiro, publicoEsperado, ser
 import type { TipoLancamento } from "../../engine/tipos";
 import {
   AMPLIACOES, CAPACIDADE_MAXIMA, CONFORTO_MAXIMO, SEMANAS_MODERNIZACAO, ampliarEstadio, custoAmpliacao, custoModernizacao,
-  impactoAmpliacao, impactoModernizacao, jogosEmCasa, modernizarEstadio, nivelDoEstadio, NIVEIS_ESTADIO, semanasDeAmpliacao, type Impacto,
+  impactoAmpliacao, impactoModernizacao, modernizarEstadio, nivelDoEstadio, NIVEIS_ESTADIO, semanasDeAmpliacao, type Impacto,
 } from "../../engine/estadio";
 import type { Clube } from "../../engine/tipos";
 import { Barra, Cartao, Folha, Topo } from "../componentes";
@@ -160,6 +160,9 @@ function ObraEmAndamento({ clube }: { clube: Clube }) {
   );
 }
 
+/** "o Castelão", "a Arena Condá": o artigo do nome do estádio no título do cartão de obras. */
+const artigoDoEstadio = (nome: string) => (/^(arena|vila|ilha|fonte|baixada|toca|fazendinha|ressacada)\b/i.test(nome) ? "a" : "o");
+
 /** O cartão de baixo para cima com as obras: ampliar (mais torcida) e modernizar (mais conforto). */
 function MelhorarEstadio({ clube, aoFechar }: { clube: Clube; aoFechar: () => void }) {
   const estado = useJogo();
@@ -176,20 +179,18 @@ function MelhorarEstadio({ clube, aoFechar }: { clube: Clube; aoFechar: () => vo
   };
 
   return (
-    <Folha titulo="Melhorar o estádio" aoFechar={aoFechar}>
-      <p className="pequeno fraco">{estadio.nome} · Caixa: <b className="texto">{formatarDinheiro(clube.caixa)}</b> · uma obra por vez</p>
+    <Folha aoFechar={aoFechar}>
+      <div className="cabeca-folha">
+        <h2 className="cresce">Melhorar {artigoDoEstadio(estadio.nome)} {estadio.nome}</h2>
+        <button className="botao pequeno fechar-folha" onClick={aoFechar}>Fechar</button>
+      </div>
+      <p className="pequeno fraco">Caixa: <b className="texto">{formatarDinheiro(clube.caixa)}</b> · uma obra por vez</p>
       {estadio.obra ? <ObraEmAndamento clube={clube} /> : (
-        <div className="coluna" style={{ marginTop: 8, gap: 14 }}>
-          <p className="mini muito-fraco">
-            {lotado
-              ? "Seu estádio lota com o ingresso atual: ampliar aumenta a renda."
-              : "Seu estádio não lota com o ingresso atual: modernizar atrai mais torcedores; ampliar só ajuda se o público crescer."}
-            {" "}Estimativa para {jogosEmCasa(clube)} jogos em casa por temporada, com o ingresso atual.
-          </p>
+        <div className="coluna" style={{ marginTop: 6, gap: 14 }}>
 
           <div className="coluna" style={{ gap: 8 }}>
             <h3 className="titulo-secao">Ampliar (mais torcida)</h3>
-            {AMPLIACOES.map((lugares) => {
+            {AMPLIACOES.map((lugares, i) => {
               const custo = custoAmpliacao(clube, lugares);
               const cabe = estadio.capacidade + lugares <= CAPACIDADE_MAXIMA;
               return (
@@ -198,10 +199,13 @@ function MelhorarEstadio({ clube, aoFechar }: { clube: Clube; aoFechar: () => vo
                     <span className="negrito pequeno">+{lugares.toLocaleString("pt-BR")} lugares</span>
                     <span className="pequeno">{formatarDinheiro(custo)} · {semanasDeAmpliacao(lugares)} semanas</span>
                   </div>
-                  <p className="mini fraco" style={{ margin: "6px 0 8px" }}>
-                    {cabe ? <TextoImpacto i={impactoAmpliacao(clube, lugares)} /> : `O limite é ${CAPACIDADE_MAXIMA.toLocaleString("pt-BR")} lugares.`}
-                  </p>
-                  <button className="botao pequeno cheio primario" disabled={!cabe || clube.caixa < custo} onClick={() => executar(`Ampliar o estádio em ${lugares.toLocaleString("pt-BR")} lugares`, custo, () => ampliarEstadio(estado, lugares))}>
+                  {(!cabe || lotado || i === 0) && (
+                    <p className="mini fraco" style={{ margin: "4px 0 0" }}>
+                      {!cabe ? `O limite é ${CAPACIDADE_MAXIMA.toLocaleString("pt-BR")} lugares.`
+                        : lotado ? <TextoImpacto i={impactoAmpliacao(clube, lugares)} /> : "Só ajuda quando o estádio lota."}
+                    </p>
+                  )}
+                  <button className="botao pequeno primario" style={{ marginTop: 8 }} disabled={!cabe || clube.caixa < custo} onClick={() => executar(`Ampliar o estádio em ${lugares.toLocaleString("pt-BR")} lugares`, custo, () => ampliarEstadio(estado, lugares))}>
                     {clube.caixa < custo ? "Caixa insuficiente" : "Ampliar"}
                   </button>
                 </div>
@@ -217,10 +221,10 @@ function MelhorarEstadio({ clube, aoFechar }: { clube: Clube; aoFechar: () => vo
                 <div className="cartao compacto">
                   <div className="linha entre">
                     <span className="negrito pequeno">Conforto nível {conforto + 1} (+10% de público)</span>
-                    <span className="pequeno">{formatarDinheiro(custo)} · {SEMANAS_MODERNIZACAO} semanas</span>
+                    <span className="pequeno">{formatarDinheiro(custo)} · {SEMANAS_MODERNIZACAO} sem.</span>
                   </div>
-                  <p className="mini fraco" style={{ margin: "6px 0 8px" }}><TextoImpacto i={impactoModernizacao(clube)} /></p>
-                  <button className="botao pequeno cheio primario" disabled={clube.caixa < custo} onClick={() => executar("Modernizar o estádio", custo, () => modernizarEstadio(estado))}>
+                  <p className="mini fraco" style={{ margin: "4px 0 8px" }}><TextoImpacto i={impactoModernizacao(clube)} /></p>
+                  <button className="botao pequeno primario" disabled={clube.caixa < custo} onClick={() => executar("Modernizar o estádio", custo, () => modernizarEstadio(estado))}>
                     {clube.caixa < custo ? "Caixa insuficiente" : "Modernizar"}
                   </button>
                 </div>

@@ -583,8 +583,8 @@ service worker, `webp` em `globPatterns`). `nivelDoEstadio` (`estadio.ts`, `NIVE
 lugares" e o selo "Modernizado ★☆☆" (`.selo-modernizacao`, só com conforto ≥ 1). **Estádio no alto de Finanças (12/nov/2026, R125;
 prévia aprovada: "Aplique esse mudança da área finanças, gostei de como ficou"):** o cartão Estádio é o primeiro (imagem,
 lugares, conforto, público esperado com barrinha, obra em andamento) e termina com "Ampliar ou modernizar" e o botão
-Melhorar, que abre a `Folha` "Melhorar o estádio" (`MelhorarEstadio` em Financas.tsx) com o caixa, as três ampliações e a
-modernização. **Próximo:** convocação
+Melhorar, que abre a `Folha` "Melhorar o Castelão" (`MelhorarEstadio` em Financas.tsx; `artigoDoEstadio`: "a Arena...")
+com o caixa, "Fechar" escrito, as três ampliações e a modernização, como a imagem que ele mandou ("Quero assim"). **Próximo:** convocação
 final de 26 do Modo Copa; parte 5 do "jogo completo" (só quando ele pedir); estilo de vídeo (de sempre ou onetake).
 
 **Onde parou (11/nov/2026, noite):** publicados na `main` o Modo Copa (partes 1 e 2, R115–R118) e 839 escudos dos lotes

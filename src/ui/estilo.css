@@ -753,3 +753,5 @@ p { margin: 0; }
 .estadio-acao { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--borda); color: var(--floresta); }
 .titulo-secao { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800; color: var(--texto); }
 .texto { color: var(--texto); }
+.fechar-folha { background: transparent; border: 1px solid var(--borda); border-radius: 99px; color: var(--texto); }
+.folha .cartao.compacto { background: #fff; }
