@@ -11,7 +11,7 @@ from PIL import Image, ImageCms
 LADO = 128
 TOLERANCIA = 40  # diferença máxima (por canal) para a cor do fundo nos cantos
 # Escudos brancos sem contorno: tirar o fundo apagaria o branco de dentro (conferido na prancha, nov/2026).
-MANTER_FUNDO = {"galo-maringa", "maranguape", "sao-raimundo-pa"}
+MANTER_FUNDO = {"galo-maringa", "maranguape", "sao-raimundo-pa", "croatia-zmijavci", "partick-thistle", "sesvete", "aab-fodbold", "almeria"}
 
 def tirar_fundo(im):
     """Fundo liso e claro nos 4 cantos: o que está ligado à borda e perto dessa cor fica transparente."""
