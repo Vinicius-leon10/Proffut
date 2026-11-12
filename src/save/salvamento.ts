@@ -1,6 +1,6 @@
 // Salva o jogo no próprio celular (IndexedDB) e exporta/importa em arquivo.
 import { createStore, del, get, set, setMany } from "idb-keyval";
-import { acertarNacionalidades, acertarParticipantes, juntarAoSaveAntigo } from "../engine/jogo";
+import { acertarNacionalidades, acertarParticipantes, juntarAoSaveAntigo, tirarRepetidos } from "../engine/jogo";
 import { garantirContratos } from "../engine/contratos";
 import { montarRecordes } from "../engine/trofeus";
 import { juntarSelecoes } from "../engine/selecoes";
@@ -150,6 +150,8 @@ function migrar(estado: EstadoJogo): EstadoJogo {
   acertarParticipantes(estado);
   // Nacionalidades corrigidas (R123, nov/2026): antes das seleções, para ninguém ser convocado pelo país errado.
   acertarNacionalidades(estado);
+  // Jogador em dois clubes (R130, nov/2026): a cópia que as listas não têm mais sai.
+  tirarRepetidos(estado);
   // Seleções (nov/2026): depois de todos os clubes no save, para os convocados que jogam neles serem os jogadores deles.
   juntarSelecoes(estado);
   // Contratos chegaram em out/2026: no save de antes, ninguém sai de graça na temporada em andamento.

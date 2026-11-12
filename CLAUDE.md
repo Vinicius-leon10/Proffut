@@ -574,6 +574,12 @@ país do clube a quem vinha de um país que a lista deles não conhecia. Agora u
 só a troca de nacionalidade (os nomes acertados à mão ficaram): ~1.200 jogadores (132 da Ásia, 724 da África e do resto da
 Ásia, 307 da América, 43 da Europa). Save começado: `acertarNacionalidades` (jogo.ts, em `migrar`) corrige quem ainda está
 com a do país do clube e o tira da convocação da seleção errada.
+**Jogador em dois clubes (12/nov/2026, R130):** as listas da Wikipédia traziam jogadores que já tinham saído (ou emprestados)
+também no clube antigo (o Mahrez no Al-Ahli e no Al-Shamal). `npx tsx tools/elencos/repetidos.ts` tira as cópias de todos os
+`data/*/jogadores*.json`: mesma pessoa = nome de duas palavras ou mais, mesma nacionalidade (a da lista ou a do país do clube) e
+idade a até 1 ano; fica o clube da convocação de verdade (`clubeDoJogo`), senão a lista do Transfermarkt (Europa 7 ligas e
+outros 16, Ásia, Brasil A–D), senão a força maior. Saíram ~2.260 (América 751, resto da Europa 675, 2ª da Europa 474, mundo
+226, Brasil 114). Rodar de novo depois de qualquer montador. Save começado: `tirarRepetidos` (jogo.ts, em `migrar`).
 **Imagens dos estádios (12/nov/2026, R122, branch `claude/intelligent-franklin-m1mk5p`):** as 8 imagens que o usuário
 mandou (`estadios-evolucao.zip`, maquete 3D low-poly isométrica, PLANO.md) ficam em `public/estadios/estadio-1.webp` a
 `estadio-8.webp` (`tools/estadios/preparar.py`: corta a margem, fundo marfim vira branco, 640 px, WebP, ~460 KB; vão no

@@ -25,7 +25,7 @@ import {
   FASE_LIGA, agregado, avancarFases, chaveDaPartida, criarTemporada, decidePorPenaltis, ehSerie, temporadaEncerrada,
 } from "./competicoes";
 import { avancarCopasDeClubes, criarCopasDeClubes } from "./copas";
-import { COTA_TV_ESTADUAL, COTA_TV_RODADA, DIAS_LESAO, RECUPERACAO_POR_DIA, TEMPORADA_INICIAL } from "./constantes";
+import { COTA_TV_ESTADUAL, COTA_TV_RODADA, DIAS_LESAO, MINIMO_POSICAO, RECUPERACAO_POR_DIA, TEMPORADA_INICIAL } from "./constantes";
 import { depoisDoMeuJogo, expirarConvites } from "./carreira";
 import { avisarContratos, garantirContratos } from "./contratos";
 import { melhorEmCampo, notasDaPartida } from "./notas";
@@ -213,6 +213,47 @@ export function acertarNacionalidades(estado: EstadoJogo) {
   for (const [selId, ids] of Object.entries(estado.selecoes.convocados)) {
     const nac = nacionalidadeDoPais(paisDaSelecao(selId));
     estado.selecoes.convocados[selId] = ids.filter((id) => !mudaram.has(id) || estado.jogadores[id]?.nacionalidade === nac);
+  }
+}
+
+/**
+ * Jogador em dois clubes (R130, nov/2026: "o Riyad Mahrez aparece em dois clubes ao mesmo tempo"): as listas tiraram a cópia
+ * que sobrava (`tools/elencos/repetidos.ts`). No save começado, a cópia que está num clube cuja lista não tem mais o jogador
+ * sai, se houver outra (mesmo nome, mesma nacionalidade, idade a até 1 ano) num clube cuja lista tem. Nunca sai jogador do
+ * clube do usuário, convocado, emprestado ou ligado a uma seleção, nem quem deixaria a posição abaixo do mínimo. Rodar de
+ * novo não muda nada.
+ */
+export function tirarRepetidos(estado: EstadoJogo) {
+  const naLista = (clubeId: string | null | undefined, nome: string) => !!clubeId && !!ELENCOS_REAIS[clubeId]?.some((r) => r.nome === nome);
+  const porNome = new Map<string, Jogador[]>();
+  for (const j of Object.values(estado.jogadores)) {
+    if (!j.nome.includes(" ") || !j.clubeId) continue;
+    porNome.set(j.nome, [...(porNome.get(j.nome) ?? []), j]);
+  }
+  const meu = estado.tecnico.clubeId;
+  // Quantos cada clube tem em cada posição (uma passada só: são ~70 mil jogadores).
+  const contagem = new Map<string, number>();
+  for (const x of Object.values(estado.jogadores)) if (x.clubeId) contagem.set(`${x.clubeId}|${x.posicao}`, (contagem.get(`${x.clubeId}|${x.posicao}`) ?? 0) + 1);
+  const conta = (clubeId: string, pos: string) => `${clubeId}|${pos}`;
+  for (const [nome, js] of porNome) {
+    if (js.length < 2) continue;
+    for (const j of js) {
+      if (!ELENCOS_REAIS[j.clubeId!] || naLista(j.clubeId, nome)) continue;
+      if (j.clubeId === meu || j.convocado || j.emprestimo || j.clubeFora || ehSelecao(j.clubeId!)) continue;
+      const outro = js.find((o) => o !== j && o.clubeId !== j.clubeId && o.nacionalidade === j.nacionalidade && Math.abs(o.idade - j.idade) <= 1 && naLista(o.clubeId, nome));
+      if (!outro) continue;
+      const k = conta(j.clubeId!, j.posicao);
+      if (contagem.get(k)! <= MINIMO_POSICAO[j.posicao]) continue;
+      contagem.set(k, contagem.get(k)! - 1);
+      const clube = estado.clubes[j.clubeId!];
+      delete estado.jogadores[j.id];
+      if (clube?.escalacao) {
+        clube.escalacao = {
+          titulares: clube.escalacao.titulares.map((id) => (id === j.id ? null : id)),
+          reservas: clube.escalacao.reservas.filter((id) => id !== j.id),
+        };
+      }
+    }
   }
 }
 
