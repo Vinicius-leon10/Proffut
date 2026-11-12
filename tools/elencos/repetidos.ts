@@ -63,7 +63,10 @@ for (const [chave, lugares] of porNome) {
     if (new Set(g.map((l) => l.clube)).size < 2) continue;
     const nota = (l: Lugar) => (convocados.has(`${l.clube}|${nome}`) ? 100 : 0) + confianca(l.arq, l.clube) * 10 + l.j.forca / 100;
     const fica = [...g].sort((a, b) => nota(b) - nota(a))[0];
-    for (const l of g) if (l.clube !== fica.clube) sai.add(l.j);
+    // Duas listas atuais do Transfermarkt com o mesmo nome são duas pessoas (o "Luiz Felipe" do Decisão e o de outro
+    // clube): nenhuma sai por causa da outra.
+    const atuais = g.filter((l) => confianca(l.arq, l.clube) === 2 && !convocados.has(`${l.clube}|${nome}`));
+    for (const l of g) if (l.clube !== fica.clube && !(atuais.length >= 2 && atuais.includes(l) && atuais.includes(fica))) sai.add(l.j);
     if (exemplos.length < 15) exemplos.push(`${nome}: fica em ${fica.clube}, sai de ${g.filter((l) => l.clube !== fica.clube).map((l) => l.clube).join(", ")}`);
   }
 }

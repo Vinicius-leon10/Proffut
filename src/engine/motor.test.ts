@@ -2731,6 +2731,14 @@ describe("jogador em dois clubes (R130)", () => {
     const idades = new Map<string, { idade: number; clube: string }[]>();
     const repetidos: string[] = [];
     // Mesma nacionalidade também (a da lista ou a do país do clube): o "Lucas González" do Paraguai e o da Argentina são dois.
+    // Duas listas atuais do Transfermarkt com o mesmo nome são duas pessoas (o "Luiz Felipe" do Decisão e o de outro clube).
+    const daSerie = new Set<string>([
+      ...JSON.parse(readFileSync("data/brasil-2026/clubes.json", "utf8")).clubes.map((c: { id: string }) => c.id),
+      ...JSON.parse(readFileSync("data/brasil-2026/serie-d-reserva.json", "utf8")).clubes.map((c: { id: string }) => c.id),
+    ]);
+    const atual = (arq: string, clube: string) =>
+      ["europa-2026/jogadores.json", "europa-2026/jogadores-outros.json", "asia-2026/jogadores.json"].includes(arq) || (arq === "brasil-2026/jogadores.json" && daSerie.has(clube));
+    const atuais = new Set<string>();
     const paisDoClube = new Map<string, string>();
     for (const pasta of readdirSync("data").filter((x) => !x.includes("."))) for (const arq of readdirSync(`data/${pasta}`).filter((a) => /^clubes.*\.json$/.test(a))) {
       for (const c of JSON.parse(readFileSync(`data/${pasta}/${arq}`, "utf8")).clubes ?? []) if (c.pais) paisDoClube.set(c.id, c.pais);
@@ -2746,7 +2754,11 @@ describe("jogador em dois clubes (R130)", () => {
             const nac = j.nacionalidade ?? (pais ? PAISES[pais]?.nacionalidade ?? pais : "BRA");
             const chave = `${j.nome}|${nac}`;
             const outros = idades.get(chave) ?? [];
-            for (const o of outros) if (o.clube !== clube && Math.abs(o.idade - j.idade) <= 1) repetidos.push(`${j.nome} (${o.clube} e ${clube})`);
+            if (atual(`${pasta}/${arq}`, clube)) atuais.add(clube);
+            for (const o of outros) {
+              if (o.clube === clube || Math.abs(o.idade - j.idade) > 1 || (atuais.has(o.clube) && atuais.has(clube))) continue;
+              repetidos.push(`${j.nome} (${o.clube} e ${clube})`);
+            }
             idades.set(chave, [...outros, { idade: j.idade, clube }]);
             vistos.set(j.nome, clube);
           }
