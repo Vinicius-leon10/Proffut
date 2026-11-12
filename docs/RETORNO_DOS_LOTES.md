@@ -5,15 +5,10 @@ O Claude Code do Proffut confere cada lote que chega e escreve aqui o resultado.
 
 ## Refazer (prioridade)
 
-Lotes 26 a 34: os 384 estavam certos e entraram no jogo. Faltam só 34 clubes no jogo inteiro (lista em
-`docs/TIMES_NOVOS.md`): alshariqa, arenas-de-getxo, athens-kallithea, blackburn, blackpool, caen, chelyabinsk, chernihiv, cittadella, cracovia, cs-concordia-chiajna, cs-dinamo-bucuresti, gks-gornik-eczna, helmond-sport, helsingborgs, jkt-ruvu-stars, kazincbarcika, leixoes, lierse, livorno, livyi-bereh-kyiv, metalist-kharkiv, pacos-de-ferreira, palermo, pas-giannina, pau, peterborough-united, queen-s-park, rfk-graficar-beograd, si-s-rvagur, su-dinamo-jug, usce-novi-beograd, vaduz, zbrojovka-brno.
-
-Também ficaram de fora antes: cracovia (veio o do Wisła Kraków; o do Cracovia tem listras vermelhas e brancas e
-"KS Cracovia") e kazincbarcika (só amarelo, sem fundo: mande uma versão com fundo azul ou contorno escuro). Tente de novo só
-se achar fonte segura; senão deixe de fora, sem problema.
-
-Dica: escudo com o miolo branco encostando na borda perde o branco quando o fundo é tirado; aqui ele fica com o fundo
-branco. Pode mandar assim mesmo.
+Lote 35: os 28 estavam certos e entraram no jogo (o Palermo fica com o fundo branco). Faltam só 6 clubes no jogo inteiro:
+alshariqa, si-s-rvagur, livorno, metalist-kharkiv (os que você já disse que não achou), cracovia (o do Cracovia tem listras
+vermelhas e brancas e "KS Cracovia"; da outra vez veio o do Wisła) e kazincbarcika (veio só em amarelo, sem fundo: serve
+uma versão com fundo azul ou contorno escuro). Só se achar fonte segura; senão, deixe de fora.
 
 ## Jogadores
 
@@ -63,3 +58,4 @@ continuam com elenco gerado.
 | jogadores 01–02 | jogadores (Série B) | os 20 clubes | - |
 | jogadores 03–04 refinados | jogadores (Série C) | os 20 clubes | - |
 | jogadores 05–07 refinados | jogadores (Série D) | os 24 clubes | - |
+| 35 | escudos | todos os enviados | - |
