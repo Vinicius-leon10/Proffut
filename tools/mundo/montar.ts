@@ -134,6 +134,9 @@ function nacionalidade(codigo?: string): string | undefined {
 }
 const DO_PAIS: Record<string, string> = Object.fromEntries(Object.entries(SELECOES_MUNDO).map(([iso, s]) => [iso, s[1]]));
 
+/** Nome trocado na fonte (id de antes → nome certo). "Alshariqa": o Al-Nasr de Dubai (1945, estádio Al-Maktoum; R121). */
+const NOME_CERTO: Record<string, string> = { alshariqa: "Al-Nasr" };
+
 type JogadorReal = { nome: string; posicao: Pos; lado: "D" | "E"; idade: number; forca: number; nacionalidade?: string };
 const MINIMO: Record<Pos, number> = { G: 3, L: 3, Z: 4, M: 6, A: 4 };
 const ORDEM: Pos[] = ["G", "L", "Z", "M", "A"];
@@ -152,8 +155,10 @@ for (const [pais, liga] of Object.entries(LIGAS)) {
   let comElenco = 0;
   ordem.forEach((c, i) => {
     const wd = clubesWd[c.qid];
-    const nome = nomeLimpo(wd.en ?? c.titulo);
-    let id = slug(nome);
+    const certo = NOME_CERTO[slug(nomeLimpo(wd.en ?? c.titulo))];
+    const nome = certo ?? nomeLimpo(wd.en ?? c.titulo);
+    // Com o nome corrigido, o id continua o de antes: os saves já guardam o clube por ele.
+    let id = certo ? slug(nomeLimpo(wd.en ?? c.titulo)) : slug(nome);
     if (idsUsados.has(id)) id = `${id}-${pais.toLowerCase()}`;
     if (idsUsados.has(id)) return;
     idsUsados.add(id);

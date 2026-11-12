@@ -19,7 +19,7 @@ Total: 6 escudos (0 de clubes brasileiros e 6 de fora).
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Alshariqa | Dubai | `alshariqa.png` |
+| Al-Nasr | Dubai | `alshariqa.png` |
 
 ### Hungria (1 clube)
 

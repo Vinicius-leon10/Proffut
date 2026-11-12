@@ -102,3 +102,12 @@ test("R120 as Séries C e D com os elencos de 2026 do Transfermarkt (só quem es
   await aba(page, "Elenco");
   await expect(page.locator(".lista .item .negrito").filter({ hasText: exato("Rodrigo Lindoso") }), "Rodrigo Lindoso, do Madureira em 2026").toHaveCount(1);
 });
+
+test("R121 o clube de Dubai fundado em 1945 (estádio Al-Maktoum) é o Al-Nasr, não \"Alshariqa\" (nome trocado na fonte)", async ({ page }) => {
+  const mundo = JSON.parse(readFileSync(new URL("../data/mundo-2026/clubes.json", import.meta.url), "utf8")) as { id: string; nome: string; cidade: string }[] | { clubes: { id: string; nome: string; cidade: string }[] };
+  const clubes = Array.isArray(mundo) ? mundo : mundo.clubes;
+  const clube = clubes.find((c) => c.id === "alshariqa");
+  expect(clube?.nome).toBe("Al-Nasr");
+  expect(clubes.some((c) => /shariqa/i.test(c.nome)), "nenhum clube chamado Alshariqa").toBe(false);
+  await page.goto("about:blank");
+});

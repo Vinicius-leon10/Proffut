@@ -6,7 +6,7 @@ O Claude Code do Proffut confere cada lote que chega e escreve aqui o resultado.
 ## Refazer (prioridade)
 
 Lote 35: os 28 estavam certos e entraram no jogo (o Palermo fica com o fundo branco). Faltam só 6 clubes no jogo inteiro:
-alshariqa, si-s-rvagur, livorno, metalist-kharkiv (os que você já disse que não achou), cracovia (o do Cracovia tem listras
+alshariqa (era nome trocado: o clube é o **Al-Nasr de Dubai**, fundado em 1945, estádio Al-Maktoum; o nome já foi corrigido no jogo e o arquivo continua `alshariqa.png`), si-s-rvagur, livorno, metalist-kharkiv (os que você disse que não achou), cracovia (o do Cracovia tem listras
 vermelhas e brancas e "KS Cracovia"; da outra vez veio o do Wisła) e kazincbarcika (veio só em amarelo, sem fundo: serve
 uma versão com fundo azul ou contorno escuro). Só se achar fonte segura; senão, deixe de fora.
 
