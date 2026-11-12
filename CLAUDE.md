@@ -556,6 +556,14 @@ TikTok, bem baixinha sob a voz. Já usadas: episódio 1 com "Love Me Again" (Joh
 nenhum clube sem escudo), os elencos de 2026 das Séries B, C e 24 clubes da D pelo Transfermarkt (R119, R120;
 `tools/elencos/transfermarkt.ts`), o "Alshariqa" virou Al-Nasr (R121). Os lotes chegam na pasta `lotes/` da branch
 `claude/ecstatic-thompson-nw204h` (o Claude do computador do usuário manda lá); o retorno fica em `docs/RETORNO_DOS_LOTES.md`.
+**Escudos das seleções (pedido de 12/nov/2026):** "O escudo e a bandeira dos países são diferentes. Então, a bandeira vai
+para o jogador ali para dizer nacionalidade. E os escudos eu quero que você use quando eu for técnico e for na Copa do
+Mundo... vai aparecer o escudo da seleção e não a bandeira". Hoje `Escudo` (componentes.tsx) mostra a bandeira em emoji para
+as seleções. A fazer: `Escudo` da seleção usa `public/escudos/sel-<código minúsculo>.png` quando existir (a bandeira emoji
+fica só de reserva); teste novo. A lista das 217 com o nome dos arquivos (`sel-br.png`, `bandeira-br.png`) está em
+`docs/ESCUDOS_SELECOES.md`; o Claude do computador do usuário vai mandar em lotes `lotes/selecoes-lote-NN/` (branch
+`claude/ecstatic-thompson-nw204h`). Em aberto, perguntar: trocar a bandeira emoji ao lado do nome do jogador pelas imagens
+`bandeira-*.png` ou deixar o emoji.
 **Próximo, numa conversa nova:** as imagens dos estádios (8 faixas de capacidade + selo de modernização). Depois: convocação
 final de 26 do Modo Copa; parte 5 do "jogo completo" (só quando ele pedir); estilo de vídeo (de sempre ou onetake).
 
