@@ -157,6 +157,14 @@ export function trocarElencos(
       }
       grupo.forEach((j, i) => { j.forca = antes[Math.round((i * (antes.length - 1)) / Math.max(1, grupo.length - 1))]; });
     }
+    // Nome repetido no clube (a lista não traz sobrenome: dois "Denilson" na Ferroviária): o mais velho fica com o nome,
+    // os outros ganham "II", "III". O jogo acha o jogador pelo nome e pela posição.
+    const porNome = new Map<string, JogadorReal[]>();
+    for (const j of escolhidos) porNome.set(normalizar(j.nome), [...(porNome.get(normalizar(j.nome)) ?? []), j]);
+    for (const iguais of porNome.values()) {
+      if (iguais.length < 2) continue;
+      iguais.sort((a, b) => b.idade - a.idade).forEach((j, i) => { if (i > 0) j.nome = `${j.nome} ${"I".repeat(i + 1)}`; });
+    }
     escolhidos.sort((a, b) => ORDEM.indexOf(a.posicao) - ORDEM.indexOf(b.posicao) || b.forca - a.forca);
     novos[clube] = escolhidos;
     relatorio.push(`${clube}: ${escolhidos.length} de ${lista.length} (${ORDEM.map((p) => `${p} ${escolhidos.filter((j) => j.posicao === p).length}`).join(", ")}) · já no clube ${mesmos}, de outro clube ${deOutro}, sem histórico ${semHistorico}`);

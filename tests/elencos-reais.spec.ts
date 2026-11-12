@@ -68,7 +68,7 @@ test("R119 a Série B com os elencos de 2026 do Transfermarkt: o jogo novo no Fo
     const elenco = elencos[clube] ?? [];
     expect(elenco.length, `elenco do ${clube}`).toBeGreaterThanOrEqual(25);
     expect(elenco.length, `elenco do ${clube}`).toBeLessThanOrEqual(30);
-    const deFora = elenco.filter((j) => !nomes.has(semAcento(j.nome))).map((j) => j.nome);
+    const deFora = elenco.filter((j) => !nomes.has(semAcento(j.nome).replace(/ i+$/, ""))).map((j) => j.nome);
     expect(deFora, `jogadores do ${clube} que não estão na lista de 2026`).toEqual([]);
   }
 
@@ -93,7 +93,7 @@ test("R120 as Séries C e D com os elencos de 2026 do Transfermarkt (só quem es
       const elenco = elencos[clube] ?? [];
       expect(elenco.length, `elenco do ${clube}`).toBeGreaterThanOrEqual(Math.min(18, nomes.size));
       expect(elenco.length, `elenco do ${clube}`).toBeLessThanOrEqual(30);
-      const deFora = elenco.filter((j) => !nomes.has(semAcento(j.nome))).map((j) => j.nome);
+      const deFora = elenco.filter((j) => !nomes.has(semAcento(j.nome).replace(/ i+$/, ""))).map((j) => j.nome);
       expect(deFora, `jogadores do ${clube} que não estão na lista de 2026`).toEqual([]);
     }
   }
