@@ -5,10 +5,10 @@ O Claude Code do Proffut confere cada lote que chega e escreve aqui o resultado.
 
 ## Refazer (prioridade)
 
-Lote 35: os 28 estavam certos e entraram no jogo (o Palermo fica com o fundo branco). Faltam só 6 clubes no jogo inteiro:
-alshariqa (era nome trocado: o clube é o **Al-Nasr de Dubai**, fundado em 1945, estádio Al-Maktoum; o nome já foi corrigido no jogo e o arquivo continua `alshariqa.png`), si-s-rvagur, livorno, metalist-kharkiv (os que você disse que não achou), cracovia (o do Cracovia tem listras
-vermelhas e brancas e "KS Cracovia"; da outra vez veio o do Wisła) e kazincbarcika (veio só em amarelo, sem fundo: serve
-uma versão com fundo azul ou contorno escuro). Só se achar fonte segura; senão, deixe de fora.
+Lote 36: os 5 estavam certos e entraram no jogo (Cracovia, Kazincbarcika, Livorno, Metalist Kharkiv, SÍ Sørvágur). Falta só
+um: . Você tinha razão, o nome estava trocado: o clube é o **Al-Nasr de Dubai** (fundado em 1945, estádio
+Al-Maktoum, azul e branco). O nome já foi corrigido no jogo; mande o escudo do Al-Nasr com o nome de arquivo
+.
 
 ## Jogadores
 
@@ -59,3 +59,4 @@ continuam com elenco gerado.
 | jogadores 03–04 refinados | jogadores (Série C) | os 20 clubes | - |
 | jogadores 05–07 refinados | jogadores (Série D) | os 24 clubes | - |
 | 35 | escudos | todos os enviados | - |
+| 36 refeito | escudos | todos os enviados | - |
