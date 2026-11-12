@@ -5,16 +5,15 @@ O Claude Code do Proffut confere cada lote que chega e escreve aqui o resultado.
 
 ## Refazer (prioridade)
 
-Lotes 10 a 17 e a refação dos lotes 01–09: os 422 escudos estavam certos e entraram no jogo. Ainda faltam (tente de novo
-só se achar uma fonte segura; senão deixe de fora, sem problema):
+Lote 18 (refação): 33 dos 34 estavam certos e entraram no jogo (Baghdad, Star City no lugar do Immigration, Kauno
+Žalgiris, Kagera Sugar, Mbeya City, Real Kings, Bangkok United e os 26 clubes com nome de cidade). Ainda faltam (tente de
+novo só se achar uma fonte segura; senão deixe de fora, sem problema):
 
-- Da Ásia e da África: jkt-ruvu-stars, kagera-sugar, mbeya-city, immigration, alshariqa, baghdad, real-kings,
-  bangkok-united (uma versão colorida, com fundo, serve).
-- Da Europa: si-s-rvagur (Ilhas Faroé), kazincbarcika (Hungria), kauno-zalgiris (Lituânia: o Kauno Žalgiris de futebol,
-  fundado em 2004).
-- Os clubes com nome de cidade do lote 11 (anderlecht, genk, gent...), como você já disse que vai refazer.
+- kazincbarcika (Hungria): o escudo veio só em amarelo, sem fundo, e quase some no fundo claro do jogo. Mande uma versão
+  com o fundo azul (ou com contorno escuro), se achar.
+- Os que você já listou: jkt-ruvu-stars, alshariqa, si-s-rvagur, charleroi, imisli, rijeka, aris e irtysh-pavlodar.
 
-Depois, siga a lista dos que faltam na ordem (Europa, depois 2ª divisão).
+Depois, siga a lista dos que faltam na ordem (`docs/TIMES_NOVOS.md`: Europa, depois 2ª divisão).
 
 ## Lotes conferidos
 
@@ -38,3 +37,4 @@ Depois, siga a lista dos que faltam na ordem (Europa, depois 2ª divisão).
 | 15 | escudos | todos os enviados | ver "Refazer" |
 | 16 | escudos | todos os enviados | ver "Refazer" |
 | 17 | escudos | todos os enviados | ver "Refazer" |
+| 18 refeito | escudos | 33 | kazincbarcika (só amarelo, sem fundo: some no fundo claro) |

@@ -11,21 +11,9 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Total: 774 escudos (0 de clubes brasileiros e 774 de fora).
+Total: 741 escudos (0 de clubes brasileiros e 741 de fora).
 
 ## Outros países da América: 1ª divisão de 2026
-
-### Albânia (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Tirana | Tirana | `tirana.png` |
-
-### Andorra (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| La Massana | La Massana | `la-massana.png` |
 
 ### Azerbaijão (1 clube)
 
@@ -33,24 +21,11 @@ Total: 774 escudos (0 de clubes brasileiros e 774 de fora).
 |---|---|---|
 | İmişli | İmişli | `imisli.png` |
 
-### Bélgica (8 clubes)
+### Bélgica (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Anderlecht | Bruxelas | `anderlecht.png` |
 | Charleroi | Charleroi | `charleroi.png` |
-| Genk | Genk | `genk.png` |
-| Gent | Gante | `gent.png` |
-| La Louvière | La Louvière | `la-louviere.png` |
-| Mechelen | Mechelen | `mechelen.png` |
-| Sint-Truiden | Sint-Truiden | `sint-truiden.png` |
-| Westerlo | Westerlo | `westerlo.png` |
-
-### Bósnia (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Posušje | Posušje | `posusje.png` |
 
 ### Cazaquistão (1 clube)
 
@@ -58,58 +33,17 @@ Total: 774 escudos (0 de clubes brasileiros e 774 de fora).
 |---|---|---|
 | Irtysh Pavlodar | Pavlodar | `irtysh-pavlodar.png` |
 
-### Croácia (4 clubes)
+### Croácia (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
-| Osijek | Osijek | `osijek.png` |
 | Rijeka | Rijeka | `rijeka.png` |
-| Varaždin | Varaždin | `varazdin.png` |
-| Vukovar | Vukovar | `vukovar.png` |
-
-### Dinamarca (3 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Odense | Odense | `odense.png` |
-| Silkeborg | Silkeborg | `silkeborg.png` |
-| Vejle | Vejle | `vejle.png` |
 
 ### Emirados Árabes (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Alshariqa | Dubai | `alshariqa.png` |
-
-### Eslováquia (4 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Podbrezová | Podbrezová | `podbrezova.png` |
-| Ružomberok | Ružomberok | `ruzomberok.png` |
-| Skalica | Skalica | `skalica.png` |
-| Žilina | Žilina | `zilina.png` |
-
-### Eslovênia (4 clubes)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Celje | Celje | `celje.png` |
-| Domžale | Domžale | `domzale.png` |
-| Maribor | Maribor | `maribor.png` |
-| Radomlje | Radomlje | `radomlje.png` |
-
-### Estônia (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Paide | Paide | `paide.png` |
-
-### Finlândia (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Mariehamn | Mariehamn | `mariehamn.png` |
 
 ### Grécia (1 clube)
 
@@ -135,12 +69,6 @@ Total: 774 escudos (0 de clubes brasileiros e 774 de fora).
 |---|---|---|
 | SÍ Sørvágur | Sørvágs Municipality | `si-s-rvagur.png` |
 
-### Iraque (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Baghdad | Baghdad | `baghdad.png` |
-
 ### Islândia (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
@@ -160,12 +88,6 @@ Total: 774 escudos (0 de clubes brasileiros e 774 de fora).
 | Malisheva | Malisevo | `malisheva.png` |
 | Prishtina | Pristina | `prishtina.png` |
 
-### Lituânia (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Kauno Žalgiris | Kaunas | `kauno-zalgiris.png` |
-
 ### Luxemburgo (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
@@ -183,12 +105,6 @@ Total: 774 escudos (0 de clubes brasileiros e 774 de fora).
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | Naxxar Lions | Lija | `naxxar-lions.png` |
-
-### Malásia (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Immigration | Putrajaya | `immigration.png` |
 
 ### Noruega (4 clubes)
 
@@ -332,19 +248,11 @@ Total: 774 escudos (0 de clubes brasileiros e 774 de fora).
 | Čukarički | Belgrado | `cukaricki.png` |
 | Železničar Pančevo | Pančevo | `zeleznicar-pancevo.png` |
 
-### Tailândia (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Bangkok United | Banguecoque | `bangkok-united.png` |
-
-### Tanzânia (3 clubes)
+### Tanzânia (1 clube)
 
 | Clube | Cidade | Arquivo do escudo |
 |---|---|---|
 | JKT Ruvu Stars | Dodoma | `jkt-ruvu-stars.png` |
-| Kagera Sugar | Bukoba | `kagera-sugar.png` |
-| Mbeya City | Beia | `mbeya-city.png` |
 
 ### Tchéquia (16 clubes)
 
@@ -410,12 +318,6 @@ Total: 774 escudos (0 de clubes brasileiros e 774 de fora).
 | Shakhtar Donetsk | Donetsk | `shakhtar.png` |
 | Veres Rivne | Rivne | `veres-rivne.png` |
 | Zorya Luhansk | Luhansk | `zorya.png` |
-
-### África do Sul (1 clube)
-
-| Clube | Cidade | Arquivo do escudo |
-|---|---|---|
-| Real Kings | Durban | `real-kings.png` |
 
 ### Áustria (12 clubes)
 
