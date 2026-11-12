@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { formatarData } from "../../engine/calendario";
 import { PRECO_REFERENCIA } from "../../engine/constantes";
 import { NOMES_LANCAMENTO, folhaSalarial, formatarDinheiro, publicoEsperado, serieDoClube } from "../../engine/financas";
@@ -7,7 +8,7 @@ import {
   impactoAmpliacao, impactoModernizacao, jogosEmCasa, modernizarEstadio, nivelDoEstadio, NIVEIS_ESTADIO, semanasDeAmpliacao, type Impacto,
 } from "../../engine/estadio";
 import type { Clube } from "../../engine/tipos";
-import { Cartao, Topo } from "../componentes";
+import { Barra, Cartao, Folha, Topo } from "../componentes";
 import { useJogo, useLoja } from "../store";
 
 export function Financas() {
@@ -25,6 +26,8 @@ export function Financas() {
     <div className="tela-cheia">
       <Topo titulo="Finanças" sub={clube.nome} aoVoltar={fechar} />
       <div className="conteudo">
+        <Estadio clube={clube} />
+
         <Cartao>
           <div className="linha entre">
             <div><div className="mini fraco">Caixa</div><div className={`negrito num ${clube.caixa < 0 ? "vermelho" : ""}`} style={{ fontSize: "1.5rem" }}>{formatarDinheiro(clube.caixa)}</div></div>
@@ -50,8 +53,6 @@ export function Financas() {
           </p>
           <p className="mini muito-fraco">Ingresso caro afasta torcedor; barato demais deixa dinheiro na mesa. Clássicos e boa fase enchem o estádio.</p>
         </Cartao>
-
-        <Estadio clube={clube} />
 
         <Cartao titulo={`Temporada ${estado.temporada}`}>
           {resumo.length === 0 ? <p className="pequeno fraco">Ainda sem movimentação.</p> : (
@@ -119,7 +120,48 @@ function ImagemDoEstadio({ capacidade, conforto }: { capacidade: number; confort
   );
 }
 
+/**
+ * O Estádio no alto de Finanças (R125): imagem, lugares, conforto e o público esperado; ampliar e modernizar ficam no
+ * cartão que abre no "Melhorar" (prévia aprovada pelo usuário, nov/2026).
+ */
 function Estadio({ clube }: { clube: Clube }) {
+  const [aberto, setAberto] = useState(false);
+  const { estadio } = clube;
+  const conforto = estadio.conforto ?? 0;
+  const publico = Math.min(publicoEsperado(clube), estadio.capacidade);
+  const ocupacao = Math.round((publico / estadio.capacidade) * 100);
+
+  return (
+    <Cartao titulo="Estádio">
+      <div className="negrito">{estadio.nome}</div>
+      <div className="pequeno fraco">{estadio.capacidade.toLocaleString("pt-BR")} lugares · conforto {"★".repeat(conforto)}{"☆".repeat(CONFORTO_MAXIMO - conforto)}</div>
+      <ImagemDoEstadio capacidade={estadio.capacidade} conforto={conforto} />
+      <p className="pequeno fraco" style={{ marginTop: 8 }}>
+        Público esperado: <b className="texto">{publico.toLocaleString("pt-BR")}</b> por jogo ({ocupacao}% cheio)
+      </p>
+      <Barra valor={ocupacao} cor="var(--esmeralda)" />
+      {estadio.obra && <ObraEmAndamento clube={clube} />}
+      <div className="estadio-acao">
+        <span className="negrito">Ampliar ou modernizar</span>
+        <button className="botao pequeno primario" onClick={() => setAberto(true)}>Melhorar ›</button>
+      </div>
+      {aberto && <MelhorarEstadio clube={clube} aoFechar={() => setAberto(false)} />}
+    </Cartao>
+  );
+}
+
+function ObraEmAndamento({ clube }: { clube: Clube }) {
+  const obra = clube.estadio.obra!;
+  return (
+    <p className="pequeno amarelo" style={{ marginTop: 10 }}>
+      Obra em andamento: {obra.tipo === "ampliacao" ? `ampliação de ${obra.lugares?.toLocaleString("pt-BR")} lugares` : "modernização"}.
+      Fica pronta em {formatarData(obra.terminaEm)}.
+    </p>
+  );
+}
+
+/** O cartão de baixo para cima com as obras: ampliar (mais torcida) e modernizar (mais conforto). */
+function MelhorarEstadio({ clube, aoFechar }: { clube: Clube; aoFechar: () => void }) {
   const estado = useJogo();
   const { atualizar, avisar } = useLoja();
   const { estadio } = clube;
@@ -134,21 +176,10 @@ function Estadio({ clube }: { clube: Clube }) {
   };
 
   return (
-    <Cartao titulo="Estádio">
-      <div className="linha entre">
-        <div>
-          <div className="negrito">{estadio.nome}</div>
-          <div className="pequeno fraco">{estadio.capacidade.toLocaleString("pt-BR")} lugares · conforto {"★".repeat(conforto)}{"☆".repeat(CONFORTO_MAXIMO - conforto)}</div>
-        </div>
-      </div>
-      <ImagemDoEstadio capacidade={estadio.capacidade} conforto={conforto} />
-      {estadio.obra ? (
-        <p className="pequeno amarelo" style={{ marginTop: 10 }}>
-          Obra em andamento: {estadio.obra.tipo === "ampliacao" ? `ampliação de ${estadio.obra.lugares?.toLocaleString("pt-BR")} lugares` : "modernização"}.
-          Fica pronta em {formatarData(estadio.obra.terminaEm)}.
-        </p>
-      ) : (
-        <div className="coluna" style={{ marginTop: 12, gap: 12 }}>
+    <Folha titulo="Melhorar o estádio" aoFechar={aoFechar}>
+      <p className="pequeno fraco">{estadio.nome} · Caixa: <b className="texto">{formatarDinheiro(clube.caixa)}</b> · uma obra por vez</p>
+      {estadio.obra ? <ObraEmAndamento clube={clube} /> : (
+        <div className="coluna" style={{ marginTop: 8, gap: 14 }}>
           <p className="mini muito-fraco">
             {lotado
               ? "Seu estádio lota com o ingresso atual: ampliar aumenta a renda."
@@ -157,7 +188,7 @@ function Estadio({ clube }: { clube: Clube }) {
           </p>
 
           <div className="coluna" style={{ gap: 8 }}>
-            <h3 className="pequeno fraco">Ampliar</h3>
+            <h3 className="titulo-secao">Ampliar (mais torcida)</h3>
             {AMPLIACOES.map((lugares) => {
               const custo = custoAmpliacao(clube, lugares);
               const cabe = estadio.capacidade + lugares <= CAPACIDADE_MAXIMA;
@@ -170,7 +201,7 @@ function Estadio({ clube }: { clube: Clube }) {
                   <p className="mini fraco" style={{ margin: "6px 0 8px" }}>
                     {cabe ? <TextoImpacto i={impactoAmpliacao(clube, lugares)} /> : `O limite é ${CAPACIDADE_MAXIMA.toLocaleString("pt-BR")} lugares.`}
                   </p>
-                  <button className="botao pequeno cheio" disabled={!cabe || clube.caixa < custo} onClick={() => executar(`Ampliar o estádio em ${lugares.toLocaleString("pt-BR")} lugares`, custo, () => ampliarEstadio(estado, lugares))}>
+                  <button className="botao pequeno cheio primario" disabled={!cabe || clube.caixa < custo} onClick={() => executar(`Ampliar o estádio em ${lugares.toLocaleString("pt-BR")} lugares`, custo, () => ampliarEstadio(estado, lugares))}>
                     {clube.caixa < custo ? "Caixa insuficiente" : "Ampliar"}
                   </button>
                 </div>
@@ -179,7 +210,7 @@ function Estadio({ clube }: { clube: Clube }) {
           </div>
 
           <div className="coluna" style={{ gap: 8 }}>
-            <h3 className="pequeno fraco">Modernizar</h3>
+            <h3 className="titulo-secao">Modernizar (mais conforto)</h3>
             {conforto >= CONFORTO_MAXIMO ? <p className="pequeno fraco">O estádio já está no nível máximo de conforto.</p> : (() => {
               const custo = custoModernizacao(clube);
               return (
@@ -189,7 +220,7 @@ function Estadio({ clube }: { clube: Clube }) {
                     <span className="pequeno">{formatarDinheiro(custo)} · {SEMANAS_MODERNIZACAO} semanas</span>
                   </div>
                   <p className="mini fraco" style={{ margin: "6px 0 8px" }}><TextoImpacto i={impactoModernizacao(clube)} /></p>
-                  <button className="botao pequeno cheio" disabled={clube.caixa < custo} onClick={() => executar("Modernizar o estádio", custo, () => modernizarEstadio(estado))}>
+                  <button className="botao pequeno cheio primario" disabled={clube.caixa < custo} onClick={() => executar("Modernizar o estádio", custo, () => modernizarEstadio(estado))}>
                     {clube.caixa < custo ? "Caixa insuficiente" : "Modernizar"}
                   </button>
                 </div>
@@ -198,6 +229,6 @@ function Estadio({ clube }: { clube: Clube }) {
           </div>
         </div>
       )}
-    </Cartao>
+    </Folha>
   );
 }

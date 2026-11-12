@@ -748,3 +748,8 @@ p { margin: 0; }
   box-shadow: 0 2px 6px rgba(16, 34, 26, 0.25);
 }
 .selo-modernizacao .estrelas { color: var(--dourado); margin-left: 2px; }
+
+/* Estádio em Finanças (R125): a linha do "Melhorar" e os títulos das seções do cartão de obras. */
+.estadio-acao { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--borda); color: var(--floresta); }
+.titulo-secao { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800; color: var(--texto); }
+.texto { color: var(--texto); }

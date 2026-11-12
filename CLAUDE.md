@@ -580,7 +580,11 @@ mandou (`estadios-evolucao.zip`, maquete 3D low-poly isométrica, PLANO.md) fica
 service worker, `webp` em `globPatterns`). `nivelDoEstadio` (`estadio.ts`, `NIVEIS_ESTADIO`): até 3 mil, 8 mil, 15 mil,
 25 mil, 40 mil, 55 mil, 70 mil e acima. Tela: `ImagemDoEstadio` no cartão Estádio de Finanças (`.estadio-imagem`, com
 `mix-blend-mode: multiply` para o fundo sumir no cartão), com o nome do nível, "Nível N de 8", "Próximo nível com X
-lugares" e o selo "Modernizado ★☆☆" (`.selo-modernizacao`, só com conforto ≥ 1). **Próximo:** convocação
+lugares" e o selo "Modernizado ★☆☆" (`.selo-modernizacao`, só com conforto ≥ 1). **Estádio no alto de Finanças (12/nov/2026, R125;
+prévia aprovada: "Aplique esse mudança da área finanças, gostei de como ficou"):** o cartão Estádio é o primeiro (imagem,
+lugares, conforto, público esperado com barrinha, obra em andamento) e termina com "Ampliar ou modernizar" e o botão
+Melhorar, que abre a `Folha` "Melhorar o estádio" (`MelhorarEstadio` em Financas.tsx) com o caixa, as três ampliações e a
+modernização. **Próximo:** convocação
 final de 26 do Modo Copa; parte 5 do "jogo completo" (só quando ele pedir); estilo de vídeo (de sempre ou onetake).
 
 **Onde parou (11/nov/2026, noite):** publicados na `main` o Modo Copa (partes 1 e 2, R115–R118) e 839 escudos dos lotes
