@@ -564,7 +564,13 @@ fica só de reserva); teste novo. A lista das 217 com o nome dos arquivos (`sel-
 `docs/ESCUDOS_SELECOES.md`; o Claude do computador do usuário vai mandar em lotes `lotes/selecoes-lote-NN/` (branch
 `claude/ecstatic-thompson-nw204h`). Em aberto, perguntar: trocar a bandeira emoji ao lado do nome do jogador pelas imagens
 `bandeira-*.png` ou deixar o emoji.
-**Próximo, numa conversa nova:** as imagens dos estádios (8 faixas de capacidade + selo de modernização). Depois: convocação
+**Imagens dos estádios (12/nov/2026, R122, branch `claude/intelligent-franklin-m1mk5p`):** as 8 imagens que o usuário
+mandou (`estadios-evolucao.zip`, maquete 3D low-poly isométrica, PLANO.md) ficam em `public/estadios/estadio-1.webp` a
+`estadio-8.webp` (`tools/estadios/preparar.py`: corta a margem, fundo marfim vira branco, 640 px, WebP, ~460 KB; vão no
+service worker, `webp` em `globPatterns`). `nivelDoEstadio` (`estadio.ts`, `NIVEIS_ESTADIO`): até 3 mil, 8 mil, 15 mil,
+25 mil, 40 mil, 55 mil, 70 mil e acima. Tela: `ImagemDoEstadio` no cartão Estádio de Finanças (`.estadio-imagem`, com
+`mix-blend-mode: multiply` para o fundo sumir no cartão), com o nome do nível, "Nível N de 8", "Próximo nível com X
+lugares" e o selo "Modernizado ★☆☆" (`.selo-modernizacao`, só com conforto ≥ 1). **Próximo:** convocação
 final de 26 do Modo Copa; parte 5 do "jogo completo" (só quando ele pedir); estilo de vídeo (de sempre ou onetake).
 
 **Onde parou (11/nov/2026, noite):** publicados na `main` o Modo Copa (partes 1 e 2, R115–R118) e 839 escudos dos lotes

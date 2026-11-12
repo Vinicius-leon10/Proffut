@@ -13,6 +13,26 @@ export const CONFORTO_MAXIMO = 3;
 export const BONUS_CONFORTO = 0.1;
 export const SEMANAS_MODERNIZACAO = 8;
 
+/** Os 8 níveis da imagem do estádio (Finanças): até `ate` lugares. O último vai até a capacidade máxima. */
+export const NIVEIS_ESTADIO: { ate: number; nome: string }[] = [
+  { ate: 3_000, nome: "Campinho do interior" },
+  { ate: 8_000, nome: "Estádio municipal" },
+  { ate: 15_000, nome: "Estádio regional" },
+  { ate: 25_000, nome: "Estádio de Série B" },
+  { ate: 40_000, nome: "Estádio de Série A" },
+  { ate: 55_000, nome: "Arena moderna" },
+  { ate: 70_000, nome: "Grande arena" },
+  { ate: Infinity, nome: "Estádio de Copa" },
+];
+
+/** Nível do estádio pela capacidade (1 a 8), o nome e quantos lugares levam ao próximo (null no último). */
+export function nivelDoEstadio(capacidade: number): { nivel: number; nome: string; proximo: number | null } {
+  const i = NIVEIS_ESTADIO.findIndex((n) => capacidade <= n.ate);
+  const nivel = i + 1;
+  const proximo = nivel < NIVEIS_ESTADIO.length ? NIVEIS_ESTADIO[i].ate + 1 : null;
+  return { nivel, nome: NIVEIS_ESTADIO[i].nome, proximo };
+}
+
 export function semanasDeAmpliacao(lugares: number): number {
   return lugares <= 2_000 ? 6 : lugares <= 5_000 ? 10 : 16;
 }

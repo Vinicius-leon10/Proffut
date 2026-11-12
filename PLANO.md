@@ -478,7 +478,7 @@ prontas. Tamanho: pequena (rápida), média ou grande (várias etapas).
 19. ✅ Tutorial rápido para quem começa um jogo novo. (pequena)
 20. Ajustes de equilíbrio pelo que o usuário sentir jogando: gols, lesões, preços, dificuldade. (pequena, quando ele quiser)
 
-## Projeto futuro: imagem do estádio por nível (nov/2026)
+## Imagem do estádio por nível (nov/2026, feito: R122)
 
 Pedido do usuário: na área do estádio, uma ilustração que muda com a capacidade, do campinho do interior ao estádio de Copa.
 8 níveis: 1 campinho do interior (até 3 mil), 2 municipal (3–8 mil), 3 regional (8–15 mil), 4 Série B (15–25 mil),
@@ -486,3 +486,5 @@ Pedido do usuário: na área do estádio, uma ilustração que muda com a capaci
 modernização (conforto) pode deixar a imagem mais bonita dentro do nível. **Estilo escolhido: 3D low-poly isométrico, tipo
 maquete de jogo de celular** (o "teste 2"), fundo liso, cores do jogo. Quando retomar: fazer os prompts dos 8 níveis com a
 mesma base, ele gera as imagens em outra IA, e eu coloco no jogo (com teste). "Não faça nada agora, projeto futuro isso".
+**Feito em 12/nov/2026:** ele mandou as 8 imagens (`estadios-evolucao.zip`); ficam em `public/estadios/estadio-N.webp`
+(`tools/estadios/preparar.py`), no cartão Estádio de Finanças, com o selo "Modernizado ★☆☆" quando há conforto.

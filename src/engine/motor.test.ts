@@ -552,6 +552,21 @@ describe("estádio", () => {
     expect(ampliarEstadio(estado, 2_000).ok).toBe(false);
     expect(estado.clubes.brusque.estadio.obra).toBeUndefined();
   });
+
+  it("nível da imagem do estádio pela capacidade (R122)", async () => {
+    const { nivelDoEstadio, CAPACIDADE_MAXIMA } = await import("./estadio");
+    const casos: [number, number][] = [[0, 1], [3_000, 1], [3_001, 2], [8_000, 2], [8_001, 3], [15_000, 3], [25_000, 4],
+      [25_001, 5], [40_000, 5], [55_000, 6], [70_000, 7], [70_001, 8], [CAPACIDADE_MAXIMA, 8], [200_000, 8]];
+    for (const [capacidade, nivel] of casos) expect(nivelDoEstadio(capacidade).nivel, String(capacidade)).toBe(nivel);
+    expect(nivelDoEstadio(2_500).proximo).toBe(3_001);
+    expect(nivelDoEstadio(75_000)).toEqual({ nivel: 8, nome: "Estádio de Copa", proximo: null });
+    // todo clube do jogo cai num dos 8 níveis
+    const estado = novoJogo({ nomeTecnico: "T", clubeId: "vasco", semente: 33 });
+    for (const c of Object.values(estado.clubes)) {
+      const n = nivelDoEstadio(c.estadio.capacidade).nivel;
+      expect(n >= 1 && n <= 8, c.id).toBe(true);
+    }
+  });
 });
 
 describe("elencos reais", () => {

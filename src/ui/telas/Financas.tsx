@@ -4,7 +4,7 @@ import { NOMES_LANCAMENTO, folhaSalarial, formatarDinheiro, publicoEsperado, ser
 import type { TipoLancamento } from "../../engine/tipos";
 import {
   AMPLIACOES, CAPACIDADE_MAXIMA, CONFORTO_MAXIMO, SEMANAS_MODERNIZACAO, ampliarEstadio, custoAmpliacao, custoModernizacao,
-  impactoAmpliacao, impactoModernizacao, jogosEmCasa, modernizarEstadio, semanasDeAmpliacao, type Impacto,
+  impactoAmpliacao, impactoModernizacao, jogosEmCasa, modernizarEstadio, nivelDoEstadio, NIVEIS_ESTADIO, semanasDeAmpliacao, type Impacto,
 } from "../../engine/estadio";
 import type { Clube } from "../../engine/tipos";
 import { Cartao, Topo } from "../componentes";
@@ -100,6 +100,25 @@ function TextoImpacto({ i }: { i: Impacto }) {
   );
 }
 
+/** Ilustração do estádio: 8 níveis pela capacidade (`public/estadios/estadio-N.webp`) e o selo da modernização. */
+function ImagemDoEstadio({ capacidade, conforto }: { capacidade: number; conforto: number }) {
+  const { nivel, nome, proximo } = nivelDoEstadio(capacidade);
+  return (
+    <figure className="estadio-imagem">
+      <img src={`estadios/estadio-${nivel}.webp`} alt={nome} width={640} height={560} />
+      {conforto > 0 && (
+        <span className="selo-modernizacao" aria-label={`Modernizado: conforto ${conforto} de ${CONFORTO_MAXIMO}`}>
+          Modernizado <span className="estrelas">{"★".repeat(conforto)}{"☆".repeat(CONFORTO_MAXIMO - conforto)}</span>
+        </span>
+      )}
+      <figcaption>
+        <span className="negrito">{nome}</span> · Nível {nivel} de {NIVEIS_ESTADIO.length}
+        {proximo !== null && <span className="proximo mini fraco">Próximo nível com {proximo.toLocaleString("pt-BR")} lugares</span>}
+      </figcaption>
+    </figure>
+  );
+}
+
 function Estadio({ clube }: { clube: Clube }) {
   const estado = useJogo();
   const { atualizar, avisar } = useLoja();
@@ -122,6 +141,7 @@ function Estadio({ clube }: { clube: Clube }) {
           <div className="pequeno fraco">{estadio.capacidade.toLocaleString("pt-BR")} lugares · conforto {"★".repeat(conforto)}{"☆".repeat(CONFORTO_MAXIMO - conforto)}</div>
         </div>
       </div>
+      <ImagemDoEstadio capacidade={estadio.capacidade} conforto={conforto} />
       {estadio.obra ? (
         <p className="pequeno amarelo" style={{ marginTop: 10 }}>
           Obra em andamento: {estadio.obra.tipo === "ampliacao" ? `ampliação de ${estadio.obra.lugares?.toLocaleString("pt-BR")} lugares` : "modernização"}.

@@ -48,7 +48,8 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
+        // As 8 imagens dos estádios (public/estadios, ~460 KB) vão junto, para a tela de Finanças sem internet.
+        globPatterns: ["**/*.{js,css,html,svg,png,webp,woff2}"],
         // O pacote do jogo leva os dados de todos os clubes e jogadores do mundo (passou de 2 MB, o limite padrão, com
         // as copas, e de 6 MB com o resto da Europa, nov/2026): precisa ser guardado inteiro para jogar sem internet.
         maximumFileSizeToCacheInBytes: 12 * 1024 * 1024,
