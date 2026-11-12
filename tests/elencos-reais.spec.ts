@@ -78,3 +78,27 @@ test("R119 a Série B com os elencos de 2026 do Transfermarkt: o jogo novo no Fo
   await expect(nomes.filter({ hasText: exato("Paulo Baya") }), "Paulo Baya, do Fortaleza em 2026").toHaveCount(1);
   await expect(nomes.filter({ hasText: exato("Deyverson") }), "Deyverson não está no Fortaleza de 2026").toHaveCount(0);
 });
+
+test("R120 as Séries C e D com os elencos de 2026 do Transfermarkt (só quem está no clube hoje): o jogo novo no Madureira traz o elenco de verdade", async ({ page }) => {
+  const semAcento = (t: string) => t.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().trim();
+  for (const [arquivo, clubes] of [["serie-c-2026.csv", 20], ["serie-d-2026.csv", 24]] as const) {
+    const csv = readFileSync(new URL(`../data/brasil-2026/transfermarkt/${arquivo}`, import.meta.url), "utf8").trim().split("\n").slice(1);
+    const lista = new Map<string, Set<string>>();
+    for (const l of csv) {
+      const [clube, nome] = l.split(",");
+      lista.set(clube, (lista.get(clube) ?? new Set()).add(semAcento(nome)));
+    }
+    expect(lista.size, `clubes em ${arquivo}`).toBe(clubes);
+    for (const [clube, nomes] of lista) {
+      const elenco = elencos[clube] ?? [];
+      expect(elenco.length, `elenco do ${clube}`).toBeGreaterThanOrEqual(Math.min(18, nomes.size));
+      expect(elenco.length, `elenco do ${clube}`).toBeLessThanOrEqual(30);
+      const deFora = elenco.filter((j) => !nomes.has(semAcento(j.nome))).map((j) => j.nome);
+      expect(deFora, `jogadores do ${clube} que não estão na lista de 2026`).toEqual([]);
+    }
+  }
+
+  await novoJogo(page, { serie: "Série D", clube: "Madureira" });
+  await aba(page, "Elenco");
+  await expect(page.locator(".lista .item .negrito").filter({ hasText: exato("Rodrigo Lindoso") }), "Rodrigo Lindoso, do Madureira em 2026").toHaveCount(1);
+});

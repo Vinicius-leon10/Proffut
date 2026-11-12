@@ -14,6 +14,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { formatarNome, normalizar } from "./sumulas";
 import type { JogadorReal, Pos } from "./montar";
+import { NOMES_NACIONALIDADE } from "../../src/ui/formatos";
 
 const DATA_INICIO = "2026-03-28";
 const TAMANHO = 30;
@@ -30,6 +31,12 @@ export const PAIS_TM: Record<string, string> = {
   Honduras: "HON", Haiti: "HAI", "Japão": "JAP", "Nigéria": "NGA", "Camarões": "CMR", "Costa do Marfim": "CIV",
   Marrocos: "MAR", "Moçambique": "MOC",
 };
+
+/** Código do jogo pelo nome do país: a lista de cima e, para os outros, os nomes que o próprio jogo usa. */
+const PELO_NOME = new Map(Object.entries(NOMES_NACIONALIDADE).map(([cod, nome]) => [normalizar(nome), cod]));
+function codigoDoPais(nome: string): string | undefined {
+  return PAIS_TM[nome] ?? PELO_NOME.get(normalizar(nome));
+}
 
 interface Linha { clube_id: string; nome: string; posicao: string; nascimento: string; nacionalidade: string; camisa: string }
 
@@ -118,7 +125,7 @@ export function trocarElencos(
         semHistorico++;
       }
       lado ??= hash(clube + chave + "l") < 0.5 ? "D" : "E";
-      const pais = l.nacionalidade && l.nacionalidade !== "Brasil" ? PAIS_TM[l.nacionalidade] : undefined;
+      const pais = l.nacionalidade && l.nacionalidade !== "Brasil" ? codigoDoPais(l.nacionalidade) : undefined;
       if (l.nacionalidade && l.nacionalidade !== "Brasil" && !pais) throw new Error(`País sem código: ${l.nacionalidade}`);
       const jogador: JogadorReal = {
         nome: formatarNome(l.nome), posicao: l.posicao as Pos, lado, idade: Math.max(16, Math.min(42, idade)),
@@ -142,7 +149,12 @@ export function trocarElencos(
     for (const goleiro of [true, false]) {
       const grupo = escolhidos.filter((j) => (j.posicao === "G") === goleiro).sort((a, b) => b.forca - a.forca);
       const antes = velhos.filter((j) => (j.posicao === "G") === goleiro).map((j) => j.forca).sort((a, b) => b - a);
-      if (antes.length < 2) continue;
+      // Clube sem elenco de verdade no jogo (os da Série D tinham elenco gerado): do topo ao fim da faixa dele, como
+      // o montador dos elencos faz com o uso de cada um (relevância^0,9).
+      if (antes.length < 2) {
+        antes.length = 0;
+        grupo.forEach((_, i) => antes.push(Math.round(min + (max - min) * (1 - i / Math.max(1, grupo.length - 1)) ** 0.9)));
+      }
       grupo.forEach((j, i) => { j.forca = antes[Math.round((i * (antes.length - 1)) / Math.max(1, grupo.length - 1))]; });
     }
     escolhidos.sort((a, b) => ORDEM.indexOf(a.posicao) - ORDEM.indexOf(b.posicao) || b.forca - a.forca);
@@ -157,12 +169,12 @@ if (/elencos[\\/]transfermarkt\.ts$/.test(process.argv[1] ?? "")) {
   if (!arquivos.length) throw new Error("Uso: npx tsx tools/elencos/transfermarkt.ts <arquivo.csv> [...]");
   const caminho = "data/brasil-2026/jogadores.json";
   const atual = JSON.parse(readFileSync(caminho, "utf8")) as { fonte: string; baixadoEm: string; elencos: Record<string, JogadorReal[]> };
-  const clubes = (JSON.parse(readFileSync("data/brasil-2026/clubes.json", "utf8")) as { clubes: { id: string; forcaElenco: { min: number; max: number } }[] }).clubes;
+  type Ficha = { id: string; forcaElenco: { min: number; max: number } };
+  const lerFichas = (arquivo: string): Ficha[] => { const j = JSON.parse(readFileSync(arquivo, "utf8")); return Array.isArray(j) ? j : j.clubes; };
+  const clubes = ["clubes.json", "serie-d-reserva.json", "clubes-estaduais.json"].flatMap((a) => lerFichas(`data/brasil-2026/${a}`));
   const linhas = arquivos.flatMap((a) => lerCsv(readFileSync(a, "utf8")));
   const { elencos, relatorio } = trocarElencos(atual.elencos, clubes, linhas);
-  const fonte = atual.fonte.includes("Transfermarkt (elencos de 2026")
-    ? atual.fonte
-    : atual.fonte.replace(/\. Força calculada/, "; Transfermarkt (elencos de 2026 da Série B). Força calculada");
+  const fonte = atual.fonte.replace(/; Transfermarkt \(elencos de 2026[^)]*\)/, "").replace(/\. Força calculada/, "; Transfermarkt (elencos de 2026 das Séries B, C e parte da D). Força calculada");
   writeFileSync(caminho, JSON.stringify({ ...atual, fonte, elencos }, null, 0) + "\n");
   console.log(relatorio.join("\n"));
 }

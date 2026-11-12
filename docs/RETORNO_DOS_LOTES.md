@@ -17,9 +17,9 @@ branco. Pode mandar assim mesmo.
 
 ## Jogadores
 
-Lotes 01 e 02 (Série B): entraram no jogo (os 20 clubes, até 30 por clube; a força é calculada aqui). Lotes 03 e 04
-(Série C): ficaram de fora porque trazem quem já saiu do clube durante o ano (até 60 por clube). Mande de novo a Série C só
-com o elenco atual (sem quem saiu, sem os garotos da base só relacionados), no mesmo formato.
+Lotes 01 a 07 (refinados): entraram no jogo os 20 clubes da Série B, os 20 da C e os 24 da D (até 30 por clube; a força é
+calculada aqui). Os 6 da D que ficaram de fora (abecat, crac, guapore, guarany-de-bage, primavera-mt, serra-branca)
+continuam com elenco gerado.
 
 ## Lotes conferidos
 
@@ -61,4 +61,5 @@ com o elenco atual (sem quem saiu, sem os garotos da base só relacionados), no 
 | 33 | escudos | todos os enviados | - |
 | 34 refeito | escudos | todos os enviados | - |
 | jogadores 01–02 | jogadores (Série B) | os 20 clubes | - |
-| jogadores 03–04 | jogadores (Série C) | nenhum | lista com quem já saiu: refazer só com os atuais |
+| jogadores 03–04 refinados | jogadores (Série C) | os 20 clubes | - |
+| jogadores 05–07 refinados | jogadores (Série D) | os 24 clubes | - |

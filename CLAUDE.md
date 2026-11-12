@@ -50,7 +50,7 @@ placar), visual claro "opção 3", estatísticas da partida com aviso de pressã
 (reputação do técnico), contratos com renovação, empréstimos, batedor de pênalti e capitão, notas dos jogadores,
 sala de troféus e recordes, tutorial rápido no jogo novo, força média no placar, tática e campinho da escalação antes do
 jogo (arrastar para trocar, toque para pôr um reserva, barrinha de energia, escolha por posição e botão Reservas), testes de ponta a
-ponta R01–R119 rodando a cada mudança, antes
+ponta R01–R120 rodando a cada mudança, antes
 de publicar e todo dia no site publicado. Bandeira pequena do país do jogador ao lado do nome (`BandeiraJogador` em `componentes.tsx`,
 `bandeiraDaNacionalidade` em `formatos.ts`: código de 3 letras do jogo → emoji; no Elenco, ficha, Mercado e Convocação;
 no campinho não, por falta de espaço; R97).
@@ -596,8 +596,11 @@ guardados em `data/brasil-2026/transfermarkt/serie-b-2026.csv`; `npx tsx tools/e
 elencos desses clubes em `jogadores.json` (até 30 por clube, o mínimo por posição garantido). A força do time continua a de
 antes: os jogadores são ordenados (força de antes se já estavam no clube; de outro clube só com nome único, mesma posição e
 idade; os outros pela idade e pela camisa) e recebem as forças que o elenco antigo tinha, do melhor ao pior (sem isso a B
-ficava ~5 pontos mais fraca). R119. **Série C:** a lista veio com quem já saiu (até 60 por clube); o usuário vai pedir a
-lista filtrada só com os atuais; quando chegar, `transfermarkt.ts` com o CSV da C (guardar em `transfermarkt/serie-c-2026.csv`).
+ficava ~5 pontos mais fraca). R119. **Séries C e D (12/nov/2026):** a lista refeita só com quem está no clube hoje (até
+18 com quem jogou em 2026); os 20 da C e 24 clubes da D que tinham elenco gerado (`transfermarkt/serie-c-2026.csv` e
+`serie-d-2026.csv`). Clube sem elenco antigo: forças do topo ao fim da faixa dele (relevância^0,9); posição com pouca
+gente é completada pelo `elencoReal` com reservas gerados. Os países vêm de `NOMES_NACIONALIDADE`. R120. Ficaram de fora da
+D (lista curta no Transfermarkt): abecat, crac, guapore, guarany-de-bage, primavera-mt, serra-branca.
 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e
