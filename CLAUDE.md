@@ -579,7 +579,9 @@ também no clube antigo (o Mahrez no Al-Ahli e no Al-Shamal). `npx tsx tools/ele
 `data/*/jogadores*.json`: mesma pessoa = nome de duas palavras ou mais, mesma nacionalidade (a da lista ou a do país do clube) e
 idade a até 1 ano; fica o clube da convocação de verdade (`clubeDoJogo`), senão a lista do Transfermarkt (Europa 7 ligas e
 outros 16, Ásia, Brasil A–D), senão a força maior. Saíram ~2.260 (América 751, resto da Europa 675, 2ª da Europa 474, mundo
-226, Brasil 114). Rodar de novo depois de qualquer montador. Save começado: `tirarRepetidos` (jogo.ts, em `migrar`).
+226, Brasil 114). Rodar de novo depois de qualquer montador: ele acrescenta as cópias tiradas (clube|nome) em
+`data/repetidos-removidos.json`, e no save começado `tirarRepetidos` (jogo.ts, em `migrar`) tira só essas (sem a lista, abrir
+um jogo novo tirava jogadores criados pelo jogo com o nome de um de verdade).
 **Imagens dos estádios (12/nov/2026, R122, branch `claude/intelligent-franklin-m1mk5p`):** as 8 imagens que o usuário
 mandou (`estadios-evolucao.zip`, maquete 3D low-poly isométrica, PLANO.md) ficam em `public/estadios/estadio-1.webp` a
 `estadio-8.webp` (`tools/estadios/preparar.py`: corta a margem, fundo marfim vira branco, 640 px, WebP, ~460 KB; vão no

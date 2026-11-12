@@ -2683,31 +2683,35 @@ describe("evolução dos jovens (R127)", () => {
 describe("menos zebras (R126)", () => {
   // Pedido do usuário: "os jogadores relatam partidas aleatórias demais (time muito mais forte perdendo ou empatando com
   // frequência; um time da Série A empatar com um da Série D tem de ser bem raro)".
-  it("time bem mais forte (20 pontos de força a mais) vence quase sempre, na simulação completa e na rápida", async () => {
+  it("time bem mais forte (20 pontos de força a mais) vence quase sempre, na simulação completa e na rápida", { timeout: 120_000 }, async () => {
     const { montarLado, iniciarPartida, simularAteOFim } = await import("./partida");
     const { placarRapido } = await import("./rapida");
     const estado = novoJogo({ nomeTecnico: "T", clubeId: "vasco", semente: 5 });
     const forca = (id: string) => forcaDoTime(elencoDe(estado, id));
-    const forte = "flamengo";
-    const fraco = Object.values(estado.clubes)
-      .filter((c) => ["A", "B", "C", "D"].includes(c.serie as string) && elencoDe(estado, c.id).length >= 18)
-      .map((c) => c.id)
-      .sort((a, b) => Math.abs(forca(forte) - forca(a) - 20) - Math.abs(forca(forte) - forca(b) - 20))[0];
-    const diferenca = forca(forte) - forca(fraco);
-    expect(diferenca).toBeGreaterThan(15);
-    expect(diferenca).toBeLessThan(25);
-    let v = 0, e = 0;
-    const n = 300;
-    for (let k = 0; k < n; k++) {
-      const [m, vi] = k % 2 ? [forte, fraco] : [fraco, forte];
-      const p = { id: `z${k}`, mandante: m, visitante: vi, data: estado.data, serie: "A", rodada: 1, jogada: false, gm: 0, gv: 0 } as never;
-      const pv = iniciarPartida(p, montarLado(estado.clubes[m], estado.jogadores, elencoDe(estado, m), false),
-        montarLado(estado.clubes[vi], estado.jogadores, elencoDe(estado, vi), false), criarRng(7000 + k));
-      simularAteOFim(pv, estado.jogadores);
-      const [gf, gc] = m === forte ? [pv.lados[0].gols, pv.lados[1].gols] : [pv.lados[1].gols, pv.lados[0].gols];
-      if (gf > gc) v++; else if (gf === gc) e++;
+    // Vários pares de clubes das séries com 17 a 23 pontos de força de diferença (um par só dependia demais dos dois elencos).
+    const clubes = Object.values(estado.clubes).filter((c) => ["A", "B", "C", "D"].includes(c.serie as string) && elencoDe(estado, c.id).length >= 18);
+    const f = new Map(clubes.map((c) => [c.id, forca(c.id)]));
+    const pares: [string, string][] = [];
+    for (const a of clubes) {
+      if (pares.length >= 8) break;
+      const b = clubes.find((x) => f.get(a.id)! - f.get(x.id)! >= 17 && f.get(a.id)! - f.get(x.id)! <= 23 && !pares.some((p) => p.includes(x.id)));
+      if (b && !pares.some((p) => p.includes(a.id))) pares.push([a.id, b.id]);
     }
-    expect(v / n).toBeGreaterThan(0.8); // antes do ajuste: 65%
+    expect(pares.length).toBeGreaterThanOrEqual(6);
+    let v = 0, e = 0, n = 0;
+    for (const [k0, [forte, fraco]] of pares.entries()) {
+      for (let k = 0; k < 50; k++) {
+        const [m, vi] = k % 2 ? [forte, fraco] : [fraco, forte];
+        const p = { id: `z${k0}-${k}`, mandante: m, visitante: vi, data: estado.data, serie: "A", rodada: 1, jogada: false, gm: 0, gv: 0 } as never;
+        const pv = iniciarPartida(p, montarLado(estado.clubes[m], estado.jogadores, elencoDe(estado, m), false),
+          montarLado(estado.clubes[vi], estado.jogadores, elencoDe(estado, vi), false), criarRng(7000 + k0 * 100 + k));
+        simularAteOFim(pv, estado.jogadores);
+        const [gf, gc] = m === forte ? [pv.lados[0].gols, pv.lados[1].gols] : [pv.lados[1].gols, pv.lados[0].gols];
+        n++;
+        if (gf > gc) v++; else if (gf === gc) e++;
+      }
+    }
+    expect(v / n).toBeGreaterThan(0.85); // antes do ajuste: ~80%
     expect(e / n).toBeLessThan(0.12);
     // A simulação rápida (os jogos que o usuário só acompanha) segue a mesma régua.
     let vr = 0;
@@ -2728,10 +2732,10 @@ describe("jogador em dois clubes (R130)", () => {
     const repetidos: string[] = [];
     // Mesma nacionalidade também (a da lista ou a do país do clube): o "Lucas González" do Paraguai e o da Argentina são dois.
     const paisDoClube = new Map<string, string>();
-    for (const pasta of readdirSync("data")) for (const arq of readdirSync(`data/${pasta}`).filter((a) => /^clubes.*\.json$/.test(a))) {
+    for (const pasta of readdirSync("data").filter((x) => !x.includes("."))) for (const arq of readdirSync(`data/${pasta}`).filter((a) => /^clubes.*\.json$/.test(a))) {
       for (const c of JSON.parse(readFileSync(`data/${pasta}/${arq}`, "utf8")).clubes ?? []) if (c.pais) paisDoClube.set(c.id, c.pais);
     }
-    for (const pasta of readdirSync("data")) {
+    for (const pasta of readdirSync("data").filter((x) => !x.includes("."))) {
       for (const arq of readdirSync(`data/${pasta}`).filter((a) => /^jogadores.*\.json$/.test(a))) {
         const elencos = JSON.parse(readFileSync(`data/${pasta}/${arq}`, "utf8")).elencos as Record<string, { nome: string; idade: number; nacionalidade?: string }[]>;
         for (const [clube, js] of Object.entries(elencos)) {
@@ -2756,6 +2760,10 @@ describe("jogador em dois clubes (R130)", () => {
   it("no save começado, a cópia que sobrou sai ao abrir (fora do clube do usuário)", async () => {
     const { tirarRepetidos } = await import("./jogo");
     const estado = novoJogo({ nomeTecnico: "T", clubeId: "vasco", semente: 43 });
+    // Num jogo novo não sai ninguém (nem quem o jogo criou com o nome de um jogador de verdade).
+    const total = Object.keys(estado.jogadores).length;
+    tirarRepetidos(estado);
+    expect(Object.keys(estado.jogadores).length).toBe(total);
     const mahrez = Object.values(estado.jogadores).find((j) => j.nome === "Riyad Mahrez")!;
     // Como no save antigo: uma segunda cópia no Al-Shamal, que a lista não tem mais.
     const copia = { ...structuredClone(mahrez), id: estado.proximoIdJogador++, clubeId: "al-shamal", idade: mahrez.idade + 1 };

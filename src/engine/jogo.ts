@@ -19,6 +19,7 @@ import mundoClubesJson from "../../data/mundo-2026/clubes.json";
 import mundoJogadoresJson from "../../data/mundo-2026/jogadores.json";
 import restoClubesJson from "../../data/europa-2026/clubes-resto.json";
 import restoJogadoresJson from "../../data/europa-2026/jogadores-resto.json";
+import repetidosJson from "../../data/repetidos-removidos.json";
 import { comArtigo } from "./artigos";
 import { diasEntre, inicioDaTemporada, mesDe, somarDias } from "./calendario";
 import {
@@ -224,6 +225,9 @@ export function acertarNacionalidades(estado: EstadoJogo) {
  * novo não muda nada.
  */
 export function tirarRepetidos(estado: EstadoJogo) {
+  // Só as cópias que a ferramenta tirou das listas (clube|nome): um jogador criado pelo jogo com o mesmo nome de um de
+  // verdade nunca sai (sem isso, abrir um jogo novo tirava uns 12 assim).
+  const removidos = new Set(repetidosJson.removidos);
   const naLista = (clubeId: string | null | undefined, nome: string) => !!clubeId && !!ELENCOS_REAIS[clubeId]?.some((r) => r.nome === nome);
   const porNome = new Map<string, Jogador[]>();
   for (const j of Object.values(estado.jogadores)) {
@@ -238,7 +242,7 @@ export function tirarRepetidos(estado: EstadoJogo) {
   for (const [nome, js] of porNome) {
     if (js.length < 2) continue;
     for (const j of js) {
-      if (!ELENCOS_REAIS[j.clubeId!] || naLista(j.clubeId, nome)) continue;
+      if (!removidos.has(`${j.clubeId}|${nome}`) || naLista(j.clubeId, nome)) continue;
       if (j.clubeId === meu || j.convocado || j.emprestimo || j.clubeFora || ehSelecao(j.clubeId!)) continue;
       const outro = js.find((o) => o !== j && o.clubeId !== j.clubeId && o.nacionalidade === j.nacionalidade && Math.abs(o.idade - j.idade) <= 1 && naLista(o.clubeId, nome));
       if (!outro) continue;
