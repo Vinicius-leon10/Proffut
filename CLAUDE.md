@@ -645,6 +645,16 @@ ficava ~5 pontos mais fraca). R119. **Séries C e D (12/nov/2026):** a lista ref
 gente é completada pelo `elencoReal` com reservas gerados. Os países vêm de `NOMES_NACIONALIDADE`. R120. Ficaram de fora da
 D (lista curta no Transfermarkt): abecat, crac, guapore, guarany-de-bage, primavera-mt, serra-branca.
 
+**Camisas no campinho (guardado para depois, 12/nov/2026):** o usuário aprovou a prévia "Campinho com camisas"
+(artifact claude.ai/artifact/NwJwK2gbN7JeJS1BDSsD75, estilo **D · Faixa**): "Gostei dessa, guarde que usaremos outro
+momento". Não fazer sem ele pedir. Como ficou: no lugar da bolinha, a camisa do clube desenhada no jogo (SVG próprio, nada
+copiado: corpo, mangas e gola; modelos liso, listras horizontais, listras verticais, faixa diagonal e meio a meio, nas cores
+`Clube.cores`; o goleiro com outra cor) com o **número real da camisa** (das listas: Transfermarkt da Série B quase toda,
+súmulas da CBF, páginas da Wikipédia; sem número, um pela posição, sem repetir no clube); o **nome em cima** da camisa; e a
+**força numa faixinha colorida embaixo** (verde bem, amarelo cansado/improvisado, vermelho muito cansado ou fora de posição);
+o "C" do capitão no canto esquerdo. Onde: campinho antes do jogo, escolha de quem entra e time titular do adversário.
+Falta saber o modelo de cada clube (listrada, faixa...): acertar à mão os conhecidos e escolher pelos tons nos outros.
+
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e
 segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.

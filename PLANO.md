@@ -488,3 +488,9 @@ maquete de jogo de celular** (o "teste 2"), fundo liso, cores do jogo. Quando re
 mesma base, ele gera as imagens em outra IA, e eu coloco no jogo (com teste). "Não faça nada agora, projeto futuro isso".
 **Feito em 12/nov/2026:** ele mandou as 8 imagens (`estadios-evolucao.zip`); ficam em `public/estadios/estadio-N.webp`
 (`tools/estadios/preparar.py`), no cartão Estádio de Finanças, com o selo "Modernizado ★☆☆" quando há conforto.
+
+## Camisas no campinho (guardado, nov/2026)
+
+Prévia aprovada (artifact "Campinho com camisas", claude.ai/artifact/NwJwK2gbN7JeJS1BDSsD75, estilo D): camisa do clube com o
+número real, nome em cima e a força numa faixinha colorida embaixo. "Gostei dessa, guarde que usaremos outro momento".
+Detalhes no CLAUDE.md ("Camisas no campinho").
