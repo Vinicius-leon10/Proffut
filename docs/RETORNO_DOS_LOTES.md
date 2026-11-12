@@ -5,23 +5,15 @@ O Claude Code do Proffut confere cada lote que chega e escreve aqui o resultado.
 
 ## Refazer (prioridade)
 
-Lotes 19 a 25: 323 dos 324 estavam certos e entraram no jogo. Ficou de fora:
+Lotes 26 a 34: os 384 estavam certos e entraram no jogo. Faltam só 34 clubes no jogo inteiro (lista em
+`docs/TIMES_NOVOS.md`): alshariqa, arenas-de-getxo, athens-kallithea, blackburn, blackpool, caen, chelyabinsk, chernihiv, cittadella, cracovia, cs-concordia-chiajna, cs-dinamo-bucuresti, gks-gornik-eczna, helmond-sport, helsingborgs, jkt-ruvu-stars, kazincbarcika, leixoes, lierse, livorno, livyi-bereh-kyiv, metalist-kharkiv, pacos-de-ferreira, palermo, pas-giannina, pau, peterborough-united, queen-s-park, rfk-graficar-beograd, si-s-rvagur, su-dinamo-jug, usce-novi-beograd, vaduz, zbrojovka-brno.
 
-- cracovia (Polônia): veio o escudo do Wisła Kraków ("TS Wisła 1906"), o rival. O do Cracovia tem listras vermelhas e
-  brancas e "KS Cracovia".
+Também ficaram de fora antes: cracovia (veio o do Wisła Kraków; o do Cracovia tem listras vermelhas e brancas e
+"KS Cracovia") e kazincbarcika (só amarelo, sem fundo: mande uma versão com fundo azul ou contorno escuro). Tente de novo só
+se achar fonte segura; senão deixe de fora, sem problema.
 
-Ainda faltam (tente de novo só se achar uma fonte segura; senão deixe de fora, sem problema):
-
-- kazincbarcika (Hungria): o escudo veio só em amarelo, sem fundo, e quase some no fundo claro do jogo. Mande uma versão
-  com o fundo azul (ou com contorno escuro), se achar.
-- Os que você já listou: jkt-ruvu-stars, alshariqa, si-s-rvagur, imisli, irtysh-pavlodar, hradec-kralove, lierse,
-  queen-s-park, clermont, pau, laval, saint-etienne, athens-kallithea, pas-giannina, helmond-sport, swansea, blackburn.
-  (O nurnberg já veio no lote 24.)
-
-Depois, siga a lista dos que faltam na ordem (`docs/TIMES_NOVOS.md`: 418 clubes).
-
-Dica: escudo com o miolo branco encostando na borda (Croatia Zmijavci, Partick Thistle, Sesvete) perde o branco quando o
-fundo é tirado; aqui eles ficam com o fundo branco. Pode mandar assim mesmo.
+Dica: escudo com o miolo branco encostando na borda perde o branco quando o fundo é tirado; aqui ele fica com o fundo
+branco. Pode mandar assim mesmo.
 
 ## Lotes conferidos
 
@@ -53,3 +45,12 @@ fundo é tirado; aqui eles ficam com o fundo branco. Pode mandar assim mesmo.
 | 23 | escudos | todos os enviados | - |
 | 24 | escudos | todos os enviados | - |
 | 25 | escudos | todos os enviados | - |
+| 26 | escudos | todos os enviados | - |
+| 27 | escudos | todos os enviados | - |
+| 28 | escudos | todos os enviados | - |
+| 29 | escudos | todos os enviados | - |
+| 30 | escudos | todos os enviados | - |
+| 31 | escudos | todos os enviados | - |
+| 32 | escudos | todos os enviados | - |
+| 33 | escudos | todos os enviados | - |
+| 34 refeito | escudos | todos os enviados | - |
