@@ -35,15 +35,19 @@ function artilheiro(estado: EstadoJogo, serie: SerieId): RegistroTemporada["arti
   return j ? { jogadorId: j.id, nome: j.nome, clubeId: j.clubeId ?? "", gols: melhor[1] } : null;
 }
 
-function evoluir(rng: Rng, j: Jogador) {
+export function evoluir(rng: Rng, j: Jogador) {
   const jogou = j.temporada.jogos;
   let delta: number;
-  if (j.idade <= 21) delta = rng.int(1, 4) + (jogou >= 15 ? 2 : jogou >= 5 ? 1 : 0);
-  else if (j.idade <= 25) delta = rng.int(0, 3) + (jogou >= 20 ? 1 : 0);
+  // Mais devagar desde nov/2026 (R127): "um jogador comprou só jovens e em 5 anos eles estavam entre os melhores do mundo".
+  // Antes, até 21 anos subia de 3 a 6 por temporada jogando; um 70 de 18 anos chegava a ~90 aos 23.
+  if (j.idade <= 21) delta = rng.int(0, 3) + (jogou >= 15 ? 1 : 0);
+  else if (j.idade <= 25) delta = rng.int(0, 2) + (jogou >= 20 && rng.chance(0.5) ? 1 : 0);
   else if (j.idade <= 29) delta = rng.int(-1, 1);
   else if (j.idade <= 31) delta = rng.int(-2, 0);
   else if (j.idade <= 33) delta = rng.int(-4, -1);
   else delta = rng.int(-6, -2);
+  // Perto do topo fica mais difícil: acima de 80, cada ponto a mais custa mais.
+  if (delta > 0 && j.forca >= 80) delta = Math.round(delta * (j.forca >= 86 ? 0.4 : 0.7));
   if (delta > 0) j.forca = Math.min(j.potencial, j.forca + delta);
   else j.forca = limitar(j.forca + delta, 1, 99);
   j.potencial = Math.max(j.potencial, j.forca);

@@ -11,16 +11,18 @@ export const PESO_LANCE = { chance: 50, escanteio: 18, falta: 32 };
 /** Conversão máxima de uma chance em gol (multiplica a disputa ataque × defesa). */
 export const CONVERSAO = 0.52;
 /** Expoente que amplia a diferença de força nas disputas (1 = proporcional). */
-export const EXPOENTE_DISPUTA = 2.5;
+export const EXPOENTE_DISPUTA = 3.8;
+/** Expoente da disputa pelo meio-campo: quem fica com a bola no lance do minuto. */
+export const EXPOENTE_POSSE = 5;
 
 /**
  * Simulação rápida (rapida.ts) dos campeonatos que o usuário só acompanha: média de gols de cada time, vantagem de jogar
  * em casa e peso de cada ponto de força de diferença. Ajustados para dar os números da simulação completa nas ligas de
  * fora (nov/2026: ~2,25 gols por jogo, mandante vence ~43%, ~29% de empates).
  */
-export const RAPIDA = { gols: 1.11, mando: 0.13, inclinacao: 0.025 };
+export const RAPIDA = { gols: 1.11, mando: 0.13, inclinacao: 0.05 };
 /** Vantagem do mandante, multiplicando a força de cada setor. */
-export const MANDO = { ataque: 1.08, meio: 1.06, defesa: 1.05 };
+export const MANDO = { ataque: 1.05, meio: 1.03, defesa: 1.035 };
 export const PROB_CABECEIO_ESCANTEIO = 0.28;
 export const PROB_PENALTI_FALTA = 0.06;
 export const PROB_AMARELO_FALTA = 0.6;

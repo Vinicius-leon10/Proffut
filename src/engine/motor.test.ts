@@ -2646,3 +2646,75 @@ describe("Ásia (projeto jogo completo, parte 2, nov/2026): a 1ª divisão do Ja
     expect(checarEstado(antigo).filter((p) => p.gravidade === "erro")).toEqual([]);
   });
 });
+
+describe("evolução dos jovens (R127)", () => {
+  it("um jovem de 18 anos e força 70 que joga sempre não vira craque mundial em 5 temporadas", async () => {
+    // Pedido do usuário: "um jogador comprou só jovens e em 5 anos eles estavam entre os melhores do mundo".
+    const { evoluir } = await import("./temporada");
+    const finais: number[] = [];
+    for (let k = 0; k < 400; k++) {
+      const rng = criarRng(1000 + k);
+      const j = { forca: 70, potencial: 95, idade: 18, temporada: { jogos: 30 } } as unknown as Parameters<typeof evoluir>[1];
+      for (let t = 0; t < 5; t++) evoluir(rng, j);
+      finais.push(j.forca);
+    }
+    const media = finais.reduce((s, f) => s + f, 0) / finais.length;
+    expect(media).toBeGreaterThan(76); // ainda evolui bem
+    expect(media).toBeLessThan(83);
+    expect(finais.filter((f) => f >= 88).length / finais.length).toBeLessThan(0.05);
+  });
+
+  it("quem joga pouco evolui menos, e o veterano cai", async () => {
+    const { evoluir } = await import("./temporada");
+    const media = (idade: number, jogos: number) => {
+      let soma = 0;
+      for (let k = 0; k < 400; k++) {
+        const j = { forca: 70, potencial: 90, idade, temporada: { jogos } } as unknown as Parameters<typeof evoluir>[1];
+        evoluir(criarRng(k), j);
+        soma += j.forca - 70;
+      }
+      return soma / 400;
+    };
+    expect(media(19, 30)).toBeGreaterThan(media(19, 0));
+    expect(media(34, 30)).toBeLessThan(0);
+  });
+});
+
+describe("menos zebras (R126)", () => {
+  // Pedido do usuário: "os jogadores relatam partidas aleatórias demais (time muito mais forte perdendo ou empatando com
+  // frequência; um time da Série A empatar com um da Série D tem de ser bem raro)".
+  it("time bem mais forte (20 pontos de força a mais) vence quase sempre, na simulação completa e na rápida", async () => {
+    const { montarLado, iniciarPartida, simularAteOFim } = await import("./partida");
+    const { placarRapido } = await import("./rapida");
+    const estado = novoJogo({ nomeTecnico: "T", clubeId: "vasco", semente: 5 });
+    const forca = (id: string) => forcaDoTime(elencoDe(estado, id));
+    const forte = "flamengo";
+    const fraco = Object.values(estado.clubes)
+      .filter((c) => ["A", "B", "C", "D"].includes(c.serie as string) && elencoDe(estado, c.id).length >= 18)
+      .map((c) => c.id)
+      .sort((a, b) => Math.abs(forca(forte) - forca(a) - 20) - Math.abs(forca(forte) - forca(b) - 20))[0];
+    const diferenca = forca(forte) - forca(fraco);
+    expect(diferenca).toBeGreaterThan(15);
+    expect(diferenca).toBeLessThan(25);
+    let v = 0, e = 0;
+    const n = 300;
+    for (let k = 0; k < n; k++) {
+      const [m, vi] = k % 2 ? [forte, fraco] : [fraco, forte];
+      const p = { id: `z${k}`, mandante: m, visitante: vi, data: estado.data, serie: "A", rodada: 1, jogada: false, gm: 0, gv: 0 } as never;
+      const pv = iniciarPartida(p, montarLado(estado.clubes[m], estado.jogadores, elencoDe(estado, m), false),
+        montarLado(estado.clubes[vi], estado.jogadores, elencoDe(estado, vi), false), criarRng(7000 + k));
+      simularAteOFim(pv, estado.jogadores);
+      const [gf, gc] = m === forte ? [pv.lados[0].gols, pv.lados[1].gols] : [pv.lados[1].gols, pv.lados[0].gols];
+      if (gf > gc) v++; else if (gf === gc) e++;
+    }
+    expect(v / n).toBeGreaterThan(0.8); // antes do ajuste: 65%
+    expect(e / n).toBeLessThan(0.12);
+    // A simulação rápida (os jogos que o usuário só acompanha) segue a mesma régua.
+    let vr = 0;
+    for (let k = 0; k < 2000; k++) {
+      const [gm, gv] = placarRapido(criarRng(9000 + k), 80, 60, k % 2 === 0);
+      if (gm > gv) vr++;
+    }
+    expect(vr / 2000).toBeGreaterThan(0.82);
+  });
+});

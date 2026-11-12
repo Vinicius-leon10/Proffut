@@ -96,7 +96,7 @@ export interface OpcoesJogador {
 export function criarJogador(rng: Rng, o: OpcoesJogador): Jogador {
   const nacionalidade = o.nacionalidade ?? "BRA";
   const forca = Math.round(limitar(o.forca, 1, 99));
-  const margem = o.idade <= 20 ? rng.int(5, 25) : o.idade <= 23 ? rng.int(2, 15) : o.idade <= 27 ? rng.int(0, 5) : 0;
+  const margem = o.idade <= 20 ? rng.int(4, 20) : o.idade <= 23 ? rng.int(2, 12) : o.idade <= 27 ? rng.int(0, 5) : 0;
   return {
     id: o.id,
     nome: gerarNome(rng, nacionalidade),

@@ -53,6 +53,10 @@ export const cartaoDoProximoJogo = (page: Page) => page.getByRole("heading", { n
 export const voltar = (page: Page) => page.getByRole("button", { name: "Voltar", exact: true }).click();
 export const aba = (page: Page, nome: string) => page.locator("nav").getByRole("button", { name: nome }).click();
 
+/** Um minuto de jogo na partida ao vivo, em ms (como `INTERVALO_MS` em AoVivo.tsx): 2x, o padrão, e 1x. R128. */
+export const MINUTO_2X = 650;
+export const MINUTO_1X = 1300;
+
 export async function abrirSite(page: Page) {
   await page.goto("./");
   await expect(page.getByRole("heading", { name: "Proffut" })).toBeVisible({ timeout: 20_000 });

@@ -1,4 +1,4 @@
-import { aba, botao, expect, irParaOMeuJogo, novoJogo, test } from "./ajuda";
+import { aba, botao, expect, irParaOMeuJogo, novoJogo, test, MINUTO_2X } from "./ajuda";
 
 const numero = (texto: string) => Number(texto.trim().replace(",", "."));
 
@@ -64,7 +64,7 @@ test("R45 as Notas só aparecem no fim da partida: durante o jogo e no intervalo
 
   // No intervalo também não. Minuto a minuto até lá, como no R35.
   const relogio = page.locator(".relogio");
-  for (let i = 0; i < 60 && (await relogio.textContent()) !== "Intervalo"; i++) await page.clock.runFor(340);
+  for (let i = 0; i < 60 && (await relogio.textContent()) !== "Intervalo"; i++) await page.clock.runFor(MINUTO_2X);
   await expect(relogio).toHaveText("Intervalo");
   await expect(caixa("Notas")).toHaveCount(0);
 

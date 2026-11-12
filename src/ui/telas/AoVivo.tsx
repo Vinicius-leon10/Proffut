@@ -5,7 +5,7 @@ import { FORMACOES, corForca, forcaEfetiva } from "../../engine/forca";
 import { desfechoDoConfronto } from "../../engine/copa";
 import { concluirJogos, elencoDoTime } from "../../engine/jogo";
 import {
-  avancarMinuto, cartoes, formatarMinuto, montarLado, mudarTatica, posseDeBola, simularAteOFim, sobPressao, substituir,
+  avancarMinuto, cartoes, formatarMinuto, montarLado, mudarTatica, posseDeBola, simularAteOFim, sobPressao, substituir, trocarQuemEntrou,
   type EstatisticasLado, type LadoVivo, type PartidaViva,
 } from "../../engine/partida";
 import type { Clube, Competicao, Estilo, EventoPartida, Formacao, Partida } from "../../engine/tipos";
@@ -19,7 +19,8 @@ import { useJogo, useLoja } from "../store";
 import { CampoDaPartida } from "./CampoDaPartida";
 import { CampoDaEscalacao, FolhaDoTime, FolhaDosReservas, forcaMediaDoTime, mudarTaticaDoClube } from "./Tatica";
 
-const INTERVALO_MS: Record<1 | 2, number> = { 1: 700, 2: 340 };
+/** Um minuto de jogo, em ms. Mais devagar desde nov/2026 (R128, "Deixar as partidas mais lentas"): eram 700 e 340. */
+const INTERVALO_MS: Record<1 | 2, number> = { 1: 1300, 2: 650 };
 /** Pausa depois de um pênalti marcado, antes da cobrança (o narrador grita e a torcida reage). */
 const SUSPENSE_PENALTI_MS = 2500;
 
@@ -68,6 +69,8 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
   // A rodada e as notas abrem por cima do jogo, que segue (ao contrário das trocas e da tática).
   const [folha, setFolha] = useState<"rodada" | "notas" | null>(null);
   const [painel, setPainel] = useState<"trocas" | "tatica" | "adversario" | null>(null);
+  // Lesão no meu time (R129): a partida para e o usuário escolhe quem entra (o auxiliar já pôs alguém).
+  const [lesao, setLesao] = useState(false);
   const [, setTick] = useState(0);
   const avisosVistos = useRef(0);
   const concluido = useRef(false);
@@ -91,16 +94,21 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
     lancesOuvidos.current = meu.narracao.length;
     if (novos.some((e) => e.tipo === "penalti")) suspense.current = Date.now() + SUSPENSE_PENALTI_MS;
     if (som.current) tocarLances(novos, meuLado);
+    const machucou = !soAssistir && !meu.terminada && meu.lesaoNoMeuTime?.lado === meuLado;
     if (meu.avisos.length > avisosVistos.current) {
-      avisar(meu.avisos[meu.avisos.length - 1]);
+      if (!machucou) avisar(meu.avisos[meu.avisos.length - 1]);
       avisosVistos.current = meu.avisos.length;
+    }
+    if (machucou) {
+      setPausado(true);
+      setLesao(true);
     }
     if (meu.intervalo) {
       noIntervalo.current = true;
       setPausado(true);
     }
     setTick((t) => t + 1);
-  }, [vivas, estado.jogadores, meu, meuLado, avisar]);
+  }, [vivas, estado.jogadores, meu, meuLado, avisar, soAssistir]);
 
   useEffect(() => {
     if (!iniciado || pausado || painel || todasTerminadas) return;
@@ -290,6 +298,9 @@ export function AoVivo({ vivas }: { vivas: PartidaViva[] }) {
 
       {folha === "rodada" && <Folha titulo="Rodada" aoFechar={() => setFolha(null)}><OutrosJogos vivas={vivas} meuId={meuId} /></Folha>}
       {folha === "notas" && <Folha titulo="Notas" aoFechar={() => setFolha(null)}><NotasDaPartida pv={meu} meuLado={meuLado} /></Folha>}
+      {lesao && meu.lesaoNoMeuTime && (
+        <FolhaDaLesao pv={meu} aoFechar={() => { meu.lesaoNoMeuTime = undefined; setLesao(false); setPausado(false); }} />
+      )}
       {painel === "trocas" && <PainelTrocas pv={meu} lado={meuLado} aoFechar={() => setPainel(null)} />}
       {painel === "tatica" && <PainelTatica pv={meu} lado={meuLado} aoFechar={() => setPainel(null)} />}
       {painel === "adversario" && <FolhaDoTime lado={meu.lados[meuLado === 0 ? 1 : 0]} aoFechar={() => setPainel(null)} />}
@@ -497,6 +508,50 @@ function LinhaAoVivo({ pv, meuId, p }: { pv: PartidaViva; meuId: string; p: Part
       </div>
       <div className="v"><Escudo clube={estado.clubes[v.clubeId]} tamanho={22} /><span className="corta">{estado.clubes[v.clubeId].nome}</span></div>
     </div>
+  );
+}
+
+/**
+ * Lesão no time do usuário (R129, pedido "Substituição manual do jogador machucado (hoje o auxiliar troca sozinho)"): o
+ * jogo para; o auxiliar já pôs um reserva, e o usuário mantém ou escolhe outro do banco (sem gastar outra troca).
+ */
+function FolhaDaLesao({ pv, aoFechar }: { pv: PartidaViva; aoFechar: () => void }) {
+  const estado = useJogo();
+  const { avisar } = useLoja();
+  const l = pv.lesaoNoMeuTime!;
+  const lado = pv.lados[l.lado];
+  const machucado = estado.jogadores[l.machucado];
+  const vaga = lado.emCampo.find((a) => a.jogadorId === l.entrou)?.vaga;
+  const opcoes = [l.entrou, ...lado.banco];
+  const escolher = (id: number) => {
+    const erro = trocarQuemEntrou(pv, id, estado.jogadores);
+    if (erro) avisar(erro);
+    else avisar(`Entra ${estado.jogadores[id].nome} no lugar de ${machucado.nome}.`);
+    aoFechar();
+  };
+  return (
+    <Folha titulo={`${machucado.nome} se machucou`} aoFechar={aoFechar}>
+      <p className="pequeno fraco">
+        Aos {l.minuto}', {machucado.nome} não tem condições de continuar. O auxiliar colocou <b>{estado.jogadores[l.entrou].nome}</b>.
+        Quem entra? (não gasta outra substituição)
+      </p>
+      <div className="lista">
+        {opcoes.map((id) => {
+          const j = estado.jogadores[id];
+          const ef = vaga ? Math.round(forcaEfetiva(j, vaga, lado.energia[id] ?? j.energia, lado.tatica.jogadas)) : j.forca;
+          return (
+            <button key={id} className="item" onClick={() => escolher(id)}>
+              <Pos pos={j.posicao} />
+              <div className="cresce">
+                <div className="pequeno negrito corta">{j.nome}</div>
+                <div className="mini fraco">{id === l.entrou ? "escolha do auxiliar · " : ""}força {j.forca} · energia {Math.round(lado.energia[id] ?? j.energia)}%</div>
+              </div>
+              <span className={`forca ${corForca(ef, j.forca)}`}>{ef}</span>
+            </button>
+          );
+        })}
+      </div>
+    </Folha>
   );
 }
 

@@ -2,7 +2,7 @@
 // assistido ao vivo (a tela chama `avancarMinuto` no ritmo do relógio) e para os
 // jogos simulados de uma vez (`simularAteOFim`).
 import {
-  AVISO_PRESSAO, CHANCE_EVENTO, CONVERSAO, CONVERSAO_PENALTI, ESTATISTICAS, ESTILOS, EXPOENTE_DISPUTA, MANDO,
+  AVISO_PRESSAO, CHANCE_EVENTO, CONVERSAO, CONVERSAO_PENALTI, ESTATISTICAS, ESTILOS, EXPOENTE_DISPUTA, EXPOENTE_POSSE, MANDO,
   MAX_SUBSTITUICOES, PESO_LANCE, PRESSAO, PROB_AMARELO_FALTA, PROB_ASSISTENCIA, PROB_CABECEIO_ESCANTEIO,
   PROB_LESAO_JOGO, PROB_PENALTI_FALTA, PROB_VERMELHO_FALTA,
 } from "./constantes";
@@ -115,6 +115,11 @@ export interface PartidaViva {
   estatisticas?: Estatisticas;
   /** O campo 2D (R60), também só na partida do usuário e só na memória. */
   campo?: CampoAoVivo;
+  /**
+   * Lesão no time do usuário (R129): o auxiliar já pôs um reserva (`entrou`) no lugar de quem se machucou, e a tela para
+   * o jogo para o usuário confirmar ou escolher outro do banco (`trocarQuemEntrou`). Só na memória.
+   */
+  lesaoNoMeuTime?: { lado: 0 | 1; machucado: number; entrou: number; minuto: number };
   rng: Rng;
 }
 
@@ -546,6 +551,31 @@ export function substituir(pv: PartidaViva, iLado: 0 | 1, saiId: number, entraId
   return null;
 }
 
+/**
+ * Lesão no time do usuário (R129): troca quem o auxiliar pôs em campo por outro do banco, no mesmo minuto. Não gasta outra
+ * substituição; quem tinha entrado volta para o banco e a narração da troca passa a citar o escolhido.
+ */
+export function trocarQuemEntrou(pv: PartidaViva, novoId: number, jogadores: Jogadores): string | null {
+  const l = pv.lesaoNoMeuTime;
+  if (!l) return "Não há lesão esperando a troca.";
+  const lado = pv.lados[l.lado];
+  if (novoId === l.entrou) { pv.lesaoNoMeuTime = undefined; return null; }
+  const atuacao = lado.emCampo.find((a) => a.jogadorId === l.entrou);
+  if (!atuacao) return "Quem entrou já não está em campo.";
+  if (!lado.banco.includes(novoId)) return "Esse jogador não está no banco.";
+  atuacao.jogadorId = novoId;
+  lado.banco = lado.banco.map((id) => (id === novoId ? l.entrou : id));
+  lado.jogaram = lado.jogaram.filter((id) => id !== l.entrou);
+  if (!lado.jogaram.includes(novoId)) lado.jogaram.push(novoId);
+  const evento = [...pv.narracao].reverse().find((e) => e.tipo === "substituicao" && e.jogador === l.entrou && e.outro === l.machucado);
+  if (evento) {
+    evento.jogador = novoId;
+    evento.texto = `Substituição: entra ${jogadores[novoId].nome}, sai ${jogadores[l.machucado].nome}.`;
+  }
+  pv.lesaoNoMeuTime = undefined;
+  return null;
+}
+
 /** Muda a tática; se a formação mudar, redistribui quem está em campo pelas novas vagas. */
 export function mudarTatica(pv: PartidaViva, iLado: 0 | 1, tatica: Tatica, jogadores: Jogadores) {
   const lado = pv.lados[iLado];
@@ -642,7 +672,10 @@ function verificarLesoes(pv: PartidaViva, iLado: 0 | 1, jogadores: Jogadores) {
     const entra = lado.substituicoes < MAX_SUBSTITUICOES ? melhorReserva(lado, a.vaga, jogadores) : undefined;
     if (entra != null) {
       substituir(pv, iLado, j.id, entra, jogadores);
-      if (lado.controlado) pv.avisos.push(`${j.nome} se lesionou. Entrou ${jogadores[entra].nome} no lugar dele.`);
+      if (lado.controlado) {
+        pv.avisos.push(`${j.nome} se lesionou. Entrou ${jogadores[entra].nome} no lugar dele.`);
+        pv.lesaoNoMeuTime = { lado: iLado, machucado: j.id, entrou: entra, minuto: pv.minuto };
+      }
     } else {
       lado.emCampo = lado.emCampo.filter((x) => x.jogadorId !== j.id);
       if (lado.controlado) pv.avisos.push(`${j.nome} se lesionou e o time ficou com um a menos (sem substituições).`);
@@ -667,6 +700,7 @@ export function avancarMinuto(pv: PartidaViva, jogadores: Jogadores): EventoPart
     }
   }
 
+  pv.lesaoNoMeuTime = undefined;
   pv.minuto++;
   pv.estatisticas?.perigososPorMinuto.push([0, 0]);
   const [mandante, visitante] = pv.lados;
@@ -695,7 +729,7 @@ export function avancarMinuto(pv: PartidaViva, jogadores: Jogadores): EventoPart
     const forcas = () => (setores ??= [setoresDoLado(mandante, jogadores, !pv.neutro), setoresDoLado(visitante, jogadores, false)]);
     if (pv.rng.chance(CHANCE_EVENTO)) {
       const [sM, sV] = forcas();
-      const casaAtaca = pv.rng.chance(disputa(sM.meio, sV.meio, 2));
+      const casaAtaca = pv.rng.chance(disputa(sM.meio, sV.meio, EXPOENTE_POSSE));
       const iAtk: 0 | 1 = casaAtaca ? 0 : 1;
       const atk = casaAtaca ? sM : sV;
       const def = casaAtaca ? sV : sM;
@@ -730,6 +764,9 @@ export function avancarMinuto(pv: PartidaViva, jogadores: Jogadores): EventoPart
     }
   }
   const eventos = pv.narracao.slice(antes);
+  // Quem o auxiliar pôs no lugar do machucado já participou de um lance neste minuto: fica ele (R129).
+  const lesao = pv.lesaoNoMeuTime as PartidaViva["lesaoNoMeuTime"]; // (verificarLesoes pode ter marcado)
+  if (lesao && eventos.some((e) => e.tipo !== "substituicao" && (e.jogador === lesao.entrou || e.outro === lesao.entrou))) pv.lesaoNoMeuTime = undefined;
   if (pv.campo) {
     const depois = numerosAntes && numerosDasEstatisticas(pv.estatisticas!);
     const numeros: MinutoEmNumeros | undefined = numerosAntes && depois && {

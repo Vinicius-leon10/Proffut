@@ -784,11 +784,14 @@ passa da Copa sem entrar (simulando) não vê a tela depois. Ainda não feito: a
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).
-(2) Deixar as partidas mais lentas (o relógio da partida ao vivo). (3) Substituição manual do jogador machucado (hoje o
-auxiliar troca sozinho). (4) Ajustar vitórias e derrotas: os jogadores relatam partidas aleatórias demais (time muito mais forte perdendo ou
-empatando com frequência; um time da Série A empatar com um da Série D tem de ser bem raro). Pode haver surpresa, mas muito
-menos (ver `EXPOENTE_DISPUTA` e `npm run sim`). (5) Ajustar a evolução dos jogadores (temporada): um jogador comprou só
-jovens e em 5 anos eles estavam entre os melhores do mundo; a evolução dos jovens está forte demais. Um item riscado no papel ("Mercado de clubes"?) ficou de fora.
+(2) a (5) feitos em 12/nov/2026 ("Pode aplicar o 4,5,6,7"): **partidas mais lentas** (R128: `INTERVALO_MS` em AoVivo.tsx,
+1x 1,3 s e 2x 650 ms por minuto; eram 700 e 340), **troca manual do machucado** (R129: `PartidaViva.lesaoNoMeuTime`, o
+auxiliar põe um reserva como antes e a tela para com `FolhaDaLesao` para o usuário manter ou trocar por outro do banco,
+`trocarQuemEntrou`, sem gastar outra substituição; o motor e o sorteio não mudam), **menos zebras** (R126: `EXPOENTE_DISPUTA`
+3,8, `EXPOENTE_POSSE` 5 no lance do minuto, `MANDO` { ataque 1,05, meio 1,03, defesa 1,035 }, `RAPIDA.inclinacao` 0,05; por
+diferença de força 8–15: o forte vence 80% (era 62%), 16–23: 93% (era 80%), 24+: 96–98%, empates de 15% a 2–6%) e **evolução
+dos jovens mais lenta** (R127: `evoluir` em temporada.ts, até 21 anos +0 a +4 por temporada, 22–25 anos +0 a +3, acima de 80
+de força o ganho cai; potencial dos jovens criados `margem` 4–20; um 70 de 18 anos chega a ~80 em 5 anos, antes ~90). Um item riscado no papel ("Mercado de clubes"?) ficou de fora.
 
 ## Regras fixas do jogo
 
@@ -887,6 +890,8 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 ## Calibragem atual (`npm run sim`)
 
 ~2,3 gols por jogo, mandante vence 42–45%, empates 25–29%, correlação força × pontos 0,57–0,79, nenhum clube no vermelho
+(nov/2026, com menos zebras, R126: Série A 2,45 gols, mandante 44%, empates 22%, correlação 0,83, o mais forte termina em
+média em 1,7º; Série C 2,1 gols, 2 de 120 clubes da C com caixa pouco abaixo de zero; zebras na Copa 24%)
 (conferido de novo com os elencos reais, com a Copa e, em nov/2026, com os estaduais, a Série D e as ligas de fora; a Série
 C fica no limite: mandante ~40–43%, empates ~28–31%). 3 temporadas × 2 sementes levam ~80 s.
 Copa do Brasil no `npm run sim`: campeão quase sempre da Série A, ~30% de zebras por confronto, ~20% dos jogos nos

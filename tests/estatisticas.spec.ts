@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { botao, expect, irParaOMeuJogo, mexerNoSave, nomeDoAdversario, novoJogo, test } from "./ajuda";
+import { botao, expect, irParaOMeuJogo, mexerNoSave, nomeDoAdversario, novoJogo, test, MINUTO_2X } from "./ajuda";
 
 // As da tela do jogo: as do print do usuário (R58). Os chutes saíram da tela; o motor ainda confere (motor.test.ts).
 const ESTATISTICAS = ["Ataques", "Ataques perigosos", "Posse de bola", "Escanteios", "Cartões amarelos", "Cartões vermelhos"];
@@ -72,7 +72,7 @@ test("R35 aviso de pressão: quando o adversário domina os últimos 15 minutos,
 
   // Minuto a minuto até o aviso aparecer, ainda no primeiro tempo.
   const aviso = page.locator(".tela-cheia").getByRole("status").filter({ hasText: "pressionando" });
-  for (let i = 0; i < 40 && !(await aviso.isVisible()); i++) await page.clock.runFor(340);
+  for (let i = 0; i < 40 && !(await aviso.isVisible()); i++) await page.clock.runFor(MINUTO_2X);
   await expect(aviso).toBeVisible();
   await page.getByRole("button", { name: "Pausar" }).click();
   await expect(aviso).toContainText(nomeDele);
@@ -91,7 +91,7 @@ test("R35 aviso de pressão: quando o adversário domina os últimos 15 minutos,
   // de uma vez, o relógio de teste dispara um minuto atrás do outro e passa do intervalo antes de a tela parar.
   await page.getByRole("button", { name: "Continuar", exact: true }).click();
   const relogio = page.locator(".relogio");
-  for (let i = 0; i < 60 && (await relogio.textContent()) !== "Intervalo"; i++) await page.clock.runFor(340);
+  for (let i = 0; i < 60 && (await relogio.textContent()) !== "Intervalo"; i++) await page.clock.runFor(MINUTO_2X);
   await expect(relogio).toHaveText("Intervalo");
   await expect(page.getByText("Faça substituições ou mude a tática")).toBeVisible();
   await expect(aviso).toHaveCount(0);
@@ -112,7 +112,7 @@ test("R56 na partida, as estatísticas ficam fixas na tela do jogo, no lugar da 
 
   // Os lances continuam, embaixo das estatísticas.
   const lance = conteudo.locator(".lance").first();
-  for (let i = 0; i < 60 && !(await lance.count()); i++) await page.clock.runFor(340);
+  for (let i = 0; i < 60 && !(await lance.count()); i++) await page.clock.runFor(MINUTO_2X);
   await expect(lance).toBeVisible();
   const estatisticas = (await tela.locator(".estatisticas").boundingBox())!;
   expect((await lance.boundingBox())!.y, "os lances ficam embaixo das estatísticas").toBeGreaterThanOrEqual(estatisticas.y + estatisticas.height - 1);
