@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+*{box-sizing:border-box}body{margin:0;background:#f3f3ec;font-family:-apple-system,system-ui,sans-serif;width:390px}
+.topo{background:linear-gradient(#143826,#1a4a31);color:#fff;padding:14px 16px 12px;text-align:center}
+.comp{color:#cfe0d5;font-size:12px;margin-bottom:6px}
+.placar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.time{display:flex;flex-direction:column;align-items:center;gap:4px}
+.fm{background:#ffffff1a;color:#e6efe9;font-size:11px;padding:2px 9px;border-radius:10px}.fm b{color:#fff}
+.time img{width:48px;height:48px;object-fit:contain}.time span{font-weight:700;font-size:14px}
+.gols{font:900 40px system-ui}.min{color:#f5c72c;font-weight:800;font-size:15px}
+.barra{height:6px;border-radius:3px;background:#ffffff26;margin-top:10px}
+.bts{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 16px 0}
+.bts div{background:#e4e8e2;border-radius:12px;padding:12px;text-align:center;font-weight:800;font-size:15px;color:#10221a}
+.campo{position:relative;margin:10px 16px;height:480px;border-radius:16px;background:repeating-linear-gradient(#1b7a45 0 37px,#1e8049 37px 74px);border:3px solid #2a8d55;box-shadow:inset 0 0 30px #0003}
+.l{position:absolute;border:1.5px solid #ffffffb0}
+.vaga{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;width:94px}
+.cam{position:relative;width:58px;height:50px}
+.cam img,.cam svg{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 3px 3px #0007)}
+.num{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);color:#fff;font:900 11px system-ui;-webkit-text-stroke:2.5px #10221a;paint-order:stroke fill;text-align:center}
+.f{margin-top:-9px;position:relative;background:#143826;color:#fff;font:800 12px system-ui;padding:1px 8px;border-radius:10px;border:2px solid #34b777}
+.f.am{border-color:#f5c72c}.f.vm{border-color:#ef6a5a}
+.nome{margin-top:3px;background:#10221ae0;color:#fff;font:700 11.5px system-ui;padding:2px 9px;border-radius:7px;white-space:nowrap;max-width:94px;overflow:hidden;text-overflow:ellipsis}
+.c{position:absolute;right:-2px;top:-6px;background:#f5c72c;color:#10221a;font:900 10px system-ui;padding:1px 4px;border-radius:4px}
+.comecar{margin:4px 16px 16px;background:#f5c72c;border-radius:14px;padding:15px;text-align:center;font:800 19px system-ui;color:#10221a;box-shadow:0 3px 0 #d3a91a}
+</style></head><body><div id="r"></div><script>
+const T={palmeiras:{nome:"Palmeiras",fm:86,js:[["Weverton",21,91,50,89,1],["Piquerez",22,87,13,66],["Murilo",26,90,37,69],["G. Gómez",15,92,63,69,0,1],["Giay",4,86,87,66],["F. Anderson",7,86,13,43],["A. Moreno",5,88,37,45],["R. Veiga",23,89,63,45],["Estêvão",41,93,87,43],["Vitor Roque",9,91,37,17],["Flaco López",42,84,63,17]]},
+santos:{nome:"Santos",fm:82,js:[["G. Brazão",77,86,50,89,1],["Escobar",31,83,13,66],["Zé Ivaldo",5,85,37,69],["L. Basso",4,84,63,69,0],["Mayke",2,82,87,66],["Rollheiser",32,85,13,43],["Zé Rafael",8,86,37,45],["Neymar",10,90,63,45,0,1],["Barreal",22,84,87,43],["Guilherme",11,85,37,17],["Tiquinho",9,83,63,17]]}};
+function tela(casa,fora,meu){const t=T[meu];let h=`<div class="topo"><div class="comp">Campeonato Paulista · 1ª rodada</div><div class="placar">
+<div class="time"><span class="fm">força média <b>${T[casa].fm}</b></span><img src="esc-${casa}.png"><span>${T[casa].nome}</span></div>
+<div><div class="gols">0 x 0</div><div class="min">0'</div></div>
+<div class="time"><span class="fm">força média <b>${T[fora].fm}</b></span><img src="esc-${fora}.png"><span>${T[fora].nome}</span></div></div><div class="barra"></div></div>
+<div class="bts"><div>▦ Mudar a tática</div><div>👥 Reservas</div></div><div class="campo">
+<div class="l" style="inset:8px"></div><div class="l" style="left:8px;right:8px;top:50%;height:0;border-width:1.5px 0 0"></div>
+<div class="l" style="left:50%;top:50%;width:72px;height:72px;margin:-36px;border-radius:50%"></div>
+<div class="l" style="left:24%;right:24%;top:8px;height:60px;border-top:0"></div><div class="l" style="left:38%;right:38%;top:8px;height:24px;border-top:0"></div>
+<div class="l" style="left:24%;right:24%;bottom:8px;height:60px;border-bottom:0"></div><div class="l" style="left:38%;right:38%;bottom:8px;height:24px;border-bottom:0"></div>`;
+for(const [n,nu,f,x,y,g,c] of t.js){const cl=f<83?"vm":f<86?"am":"";
+const img=g?`<svg viewBox="0 0 40 36"><path d="M12 2l8 3 8-3 11 7-5 8-4-2v19H10V15l-4 2-5-8z" fill="#f2cf3c" stroke="#b8961c"/></svg>`:`<img src="cam-${meu}.png">`;
+h+=`<div class="vaga" style="left:${x}%;top:${y}%"><div class="cam">${img}<span class="num">${nu}</span>${c?'<span class="c">C</span>':''}</div><span class="f ${cl}">${f}</span><span class="nome">${n}</span></div>`}
+return h+`</div><div class="comecar">▶&nbsp; Começar o jogo</div>`}
+const q=new URLSearchParams(location.search);document.getElementById("r").innerHTML=tela(q.get("c"),q.get("f"),q.get("m"));
+</script></body></html>

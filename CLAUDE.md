@@ -670,6 +670,15 @@ ficam de fora e o desenho vale para eles), preparar as imagens (fundo transparen
 escudos) e então aplicar o campinho com camisas, com teste antes. Combinar com ele o nome dos arquivos (o id do clube, como
 nos escudos) se o outro Claude perguntar.
 
+**Camisas oficiais (13/nov/2026):** modelo aprovado ("Pronto, esse vai ser o modelo que vamos usar"): o do Gemini refeito
+com as camisas oficiais (prévia em `docs/previas/campinho-camisas-modelo.html`): placar grande em cima, botões "Mudar a tática" e
+"Reservas", campinho com a camisa oficial, o número branco **sem fundo** com contorno escuro fino (11 px), a força num anel
+(verde/amarelo/vermelho) logo embaixo, o nome por último (com "..." se não couber) e o "C" amarelo no canto da camisa; goleiro com
+camisa desenhada amarela. Lotes `lotes/camisas-*` (um país por lote): conferir na prancha, `preparar.py --quantizar` para
+`data/camisas/<id>.png`, retorno em `docs/RETORNO_DOS_LOTES.md`. Regra do usuário: "Assim que ele terminar o lote do Brasil vc ja
+coloca no jogo e vai colocando por país" (montar o campinho quando o Brasil estiver completo; depois, cada país que chegar vai
+direto para o jogo). Lote 01 (Brasil): 183 de 189 certas; faltam 77 do Brasil.
+
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e
 segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
