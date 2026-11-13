@@ -63,3 +63,25 @@ continuam com elenco gerado.
 
 Lotes `selecoes-lote-01` a `06` (12/nov/2026): conferidos um a um, todos certos. Entraram no jogo os 217 escudos e as 217
 bandeiras. Nada a refazer.
+
+## Camisas oficiais
+
+As camisas conferidas e preparadas (sem fundo, até 128 px, 256 cores) ficam em `data/camisas/<id>.png`; a fonte de cada
+uma em `docs/CAMISAS_FONTES.csv`. Entram na tela quando o campinho com camisas ficar pronto.
+
+### Refazer (camisas)
+
+| Clube | Motivo |
+|---|---|
+| tirol | veio a camisa do Tirol Innsbruck, da Áustria (o Tirol do jogo é o de Fortaleza-CE) |
+| sao-bernardo | camisa amarela genérica da Champion, sem o escudo do clube |
+| confianca | foto das costas da camisa; precisa ser a da frente |
+| botafogo | foto das costas da camisa (o endereço diz "verso"); precisa ser a da frente |
+| sao-raimundo e sao-raimundo-rr | a mesma imagem nos dois arquivos: um é o São Raimundo de Manaus (AM), o outro o de Boa Vista (RR) |
+| sao-paulo e santa-cruz | certas, mas o fundo branco/cinza não saiu (a camisa branca encosta no fundo): se achar com fundo transparente, mande |
+
+E os 71 que ficaram de fora no lote 01 (lista no `LEIA-camisas-lote-01.md`), se achar depois.
+
+| Lote | Entraram | Ficaram de fora (motivo) |
+|---|---|---|
+| camisas 01 (Brasil) | 183 de 189 | ver "Refazer (camisas)"; princesa-do-solimoes e manauara entraram (manequim; talvez reserva) |
