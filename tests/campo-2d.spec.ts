@@ -1,4 +1,4 @@
-import { abrirSite, botao, cartaoDoProximoJogo, expect, irParaOMeuJogo, montarSave, novoJogo, test, MINUTO_2X } from "./ajuda";
+import { abrirSite, botao, cartaoDoProximoJogo, expect, irParaOMeuJogo, montarSave, novoJogo, test, MINUTO_2X, andar } from "./ajuda";
 
 // O que o rótulo do campo diz em cada lance.
 const ACOES = [
@@ -54,7 +54,7 @@ test("R60 na partida, o campo 2D fica em cima, no lugar do placar grande e dos e
   for (let i = 0; i < 300 && (await campo.getAttribute("data-acao")) !== "gol"; i++) {
     if ((await relogio.textContent()) === "Intervalo") await page.getByRole("button", { name: "Continuar", exact: true }).click();
     const antes = await campo.getAttribute("data-lance");
-    await page.clock.runFor(MINUTO_2X);
+    await andar(page, MINUTO_2X);
     // Na espera do pênalti o minuto não anda.
     if ((await campo.getAttribute("data-lance")) === antes) continue;
     minutos++;

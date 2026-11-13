@@ -57,6 +57,26 @@ export const aba = (page: Page, nome: string) => page.locator("nav").getByRole("
 export const MINUTO_2X = 650;
 export const MINUTO_1X = 1300;
 
+/**
+ * Lesão no meu time (R129): a partida para no cartão "Fulano se machucou" até a escolha. Nos testes que fazem o relógio
+ * andar, fica a escolha do auxiliar (a primeira da lista) e o jogo segue. Devolve se havia o cartão.
+ */
+export async function fecharLesao(page: Page): Promise<boolean> {
+  const titulo = page.getByRole("dialog").getByRole("heading", { name: / se machucou$/ });
+  if (!(await titulo.isVisible())) return false;
+  await page.getByRole("dialog").locator(".item").first().click();
+  await expect(titulo).toHaveCount(0);
+  return true;
+}
+
+/** Faz o relógio do teste andar `ms`, de minuto em minuto de jogo, fechando o cartão de lesão quando ele aparece. */
+export async function andar(page: Page, ms: number) {
+  for (let resta = ms; resta > 0; resta -= MINUTO_2X) {
+    await page.clock.runFor(Math.min(MINUTO_2X, resta));
+    await fecharLesao(page);
+  }
+}
+
 export async function abrirSite(page: Page) {
   await page.goto("./");
   await expect(page.getByRole("heading", { name: "Proffut" })).toBeVisible({ timeout: 20_000 });

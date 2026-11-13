@@ -1,4 +1,4 @@
-import { abrirSite, botao, cartaoDoProximoJogo, escutarSons, expect, montarSave, test, voltar } from "./ajuda";
+import { abrirSite, botao, cartaoDoProximoJogo, escutarSons, expect, montarSave, test, voltar, andar } from "./ajuda";
 
 test("R25 sons da partida: apito no início, pênalti com narrador e apito final; desligados, nada toca", async ({ page }) => {
   test.setTimeout(120_000);
@@ -21,9 +21,9 @@ test("R25 sons da partida: apito no início, pênalti com narrador e apito final
 
   // Primeiro tempo até o intervalo, volta do intervalo e segundo tempo, com o relógio adiantado.
   const continuar = page.getByRole("button", { name: "Continuar", exact: true });
-  await page.clock.runFor(90_000);
+  await andar(page, 90_000);
   await continuar.click();
-  await page.clock.runFor(90_000);
+  await andar(page, 90_000);
   await expect(page.locator(".relogio")).toHaveText("Fim");
 
   const tudo = await sons();
@@ -68,9 +68,9 @@ test("R27 gol sem narrador: a torcida comemora alto o gol do meu time e vaia o g
   await botao(page, /Avançar|Ir para o jogo/).click();
   await botao(page, "Começar o jogo").click();
   const continuar = page.getByRole("button", { name: "Continuar", exact: true });
-  await page.clock.runFor(90_000);
+  await andar(page, 90_000);
   await continuar.click();
-  await page.clock.runFor(90_000);
+  await andar(page, 90_000);
   await expect(page.locator(".relogio")).toHaveText("Fim");
 
   // Placar final do ponto de vista do Flamengo.
