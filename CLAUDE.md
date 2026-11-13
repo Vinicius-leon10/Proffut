@@ -677,7 +677,15 @@ com as camisas oficiais (prévia em `docs/previas/campinho-camisas-modelo.html`)
 camisa desenhada amarela. Lotes `lotes/camisas-*` (um país por lote): conferir na prancha, `preparar.py --quantizar` para
 `data/camisas/<id>.png`, retorno em `docs/RETORNO_DOS_LOTES.md`. Regra do usuário: "Assim que ele terminar o lote do Brasil vc ja
 coloca no jogo e vai colocando por país" (montar o campinho quando o Brasil estiver completo; depois, cada país que chegar vai
-direto para o jogo). Lote 01 (Brasil): 183 de 189 certas; faltam 77 do Brasil.
+direto para o jogo). **No jogo desde 13/nov/2026 (R133):** `public/camisas/<id>.png` (lotes 01 e 02 do Brasil e a seleção
+brasileira: 226 dos 260 clubes do Brasil e `sel-BR`), fora da fila do service worker (`globIgnores`) e num cache só delas
+(`camisas-<hash>`, `runtimeCaching`), lista em `__CAMISAS__` (vite.config.ts). `Uniforme` e `CamisaDesenhada` em `Tatica.tsx`
+(clube sem a oficial ou imagem que falha: desenhada em `Clube.cores`; goleiro amarelo `#f2cf3c`); `numerosDoTime` dá o número
+pela posição (os melhores com 1, 2/6, 3/4, 5/8/10/7, 9/11; os outros do 13 em diante; só depende do elenco). Os testes
+olham `.vaga .uniforme` (img ou `svg.camisa-desenhada`, `.numero`) e `.vaga .camisa` continua sendo a força (agora o anel).
+Campinho mais alto (`aspect-ratio: 0.7`). Novo lote: conferir, `preparar.py --quantizar` direto em `public/camisas`, fontes em
+`docs/CAMISAS_FONTES.csv`, retorno, verificar e publicar. Números reais das camisas ainda não (o jogador não guarda o número).
+Escudos trocados (R134): o Tirol estava com o do Decisão e o Bala Town com o do Barry Town; saíram (desenhados até chegar o certo).
 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e

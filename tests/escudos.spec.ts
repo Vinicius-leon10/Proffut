@@ -177,3 +177,48 @@ test("R76 a versão nova fica pronta logo: os escudos não entram na fila do ser
   await escudosDasTabelas(page);
   await context.setOffline(false);
 });
+
+test("R134 o escudo de um clube não é o de outro: nenhuma imagem de escudo é igual à de outro clube (o Tirol estava com o do Decisão e o Bala Town com o do Barry Town)", async ({ page }) => {
+  await abrirSite(page);
+  // Mesmo clube com dois ids (o Nancy na 2ª e na 3ª divisão da França): o mesmo escudo vale.
+  const MESMO_CLUBE = [["nancy", "nancy-lorraine"]];
+  const ids = readdirSync("public/escudos").filter((f) => f.endsWith(".png") && !f.startsWith("sel-")).map((f) => f.slice(0, -4));
+  // Cada escudo sobre fundo branco, reduzido a 17 × 16 em tons de cinza; o resumo diz, em cada linha, se o tom clareia ou
+  // escurece de um ponto para o próximo (256 sinais). Imagens iguais, mesmo regravadas em outro tamanho, dão o mesmo resumo.
+  const resumos: Record<string, string> = await page.evaluate(async (ids) => {
+    const tela = document.createElement("canvas");
+    tela.width = 17;
+    tela.height = 16;
+    const ctx = tela.getContext("2d", { willReadFrequently: true })!;
+    const saida: Record<string, string> = {};
+    for (let i = 0; i < ids.length; i += 50) {
+      const imagens = await Promise.all(ids.slice(i, i + 50).map((id) => new Promise<[string, HTMLImageElement]>((ok, falha) => {
+        const img = new Image();
+        img.onload = () => ok([id, img]);
+        img.onerror = () => falha(new Error(`escudo ${id} não abriu`));
+        img.src = `escudos/${id}.png`;
+      })));
+      for (const [id, img] of imagens) {
+        ctx.fillStyle = "#fff";
+        ctx.fillRect(0, 0, 17, 16);
+        ctx.drawImage(img, 0, 0, 17, 16);
+        const px = ctx.getImageData(0, 0, 17, 16).data;
+        const tom = (x: number, y: number) => px[(y * 17 + x) * 4] + px[(y * 17 + x) * 4 + 1] + px[(y * 17 + x) * 4 + 2];
+        let r = "";
+        for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) r += tom(x, y) < tom(x + 1, y) ? "1" : "0";
+        saida[id] = r;
+      }
+    }
+    return saida;
+  }, ids);
+  // A mesma imagem (até 6 dos 256 sinais diferentes) em dois clubes. Escudos parecidos de verdade (o Santos e o
+  // Santos-AP) ficam bem mais longe; os pares que o usuário achou trocados também não podem ficar perto (até 40).
+  const PARES_CONFERIDOS = [["tirol", "decisao"]];
+  const lista = Object.entries(resumos).map(([id, r]) => [id, BigInt("0b" + r)] as const);
+  const diferenca = (a: bigint, b: bigint) => { let x = a ^ b, n = 0; while (x) { x &= x - 1n; n++; } return n; };
+  const iguais: string[][] = [];
+  for (let i = 0; i < lista.length; i++)
+    for (let k = i + 1; k < lista.length; k++)
+      if (diferenca(lista[i][1], lista[k][1]) <= (PARES_CONFERIDOS.some((p) => p.includes(lista[i][0]) && p.includes(lista[k][0])) ? 40 : 6) && !MESMO_CLUBE.some((m) => m.includes(lista[i][0]) && m.includes(lista[k][0]))) iguais.push([lista[i][0], lista[k][0]]);
+  expect(iguais, "clubes diferentes com o mesmo escudo").toEqual([]);
+});

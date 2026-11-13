@@ -445,7 +445,7 @@ p { margin: 0; }
 .campo {
   position: relative;
   width: 100%;
-  aspect-ratio: 0.82;
+  aspect-ratio: 0.7;
   border-radius: 16px;
   background-color: #156b3a;
   background-image: repeating-linear-gradient(180deg, #17703f 0 10%, #15683a 10% 20%);
@@ -484,16 +484,55 @@ p { margin: 0; }
   max-width: 100%;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
+/* Campinho com as camisas (R133, modelo aprovado em nov/2026): a camisa oficial (ou a desenhada), o número branco sem
+   fundo com contorno escuro, a força num anel logo embaixo (verde, amarelo ou vermelho) e o nome por último. */
+.vaga { gap: 0; }
+.vaga .uniforme {
+  position: relative;
+  width: 52px; height: 45px;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.12s;
+}
+.vaga .uniforme img, .vaga .uniforme svg {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 2px rgb(0 0 0 / 45%));
+  pointer-events: none;
+}
+.vaga .uniforme .numero {
+  position: absolute; left: 50%; top: 46%;
+  transform: translate(-50%, -50%);
+  color: #fff; font-size: 11px; font-weight: 900; line-height: 1;
+  -webkit-text-stroke: 2.5px #10221a; paint-order: stroke fill;
+  font-variant-numeric: tabular-nums;
+}
+.vaga .uniforme + .camisa {
+  position: relative;
+  width: auto; height: auto; min-width: 30px;
+  margin-top: -8px; padding: 0 6px;
+  border-radius: 10px;
+  font-size: 0.74rem; line-height: 1.35;
+  background: #143826; color: #fff;
+  border: 2px solid #34b777;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 40%);
+}
+.vaga .uniforme + .camisa.verde { border-color: #34b777; }
+.vaga .uniforme + .camisa.amarelo { border-color: var(--dourado); }
+.vaga .uniforme + .camisa.vermelho { border-color: #ef6a5a; }
+.vaga .nome { margin-top: 3px; }
+.vaga .cansaco { margin-top: 2px; }
+.vaga.selecionada .uniforme, .vaga.alvo .uniforme { filter: drop-shadow(0 0 5px var(--dourado)); }
 .vaga.selecionada .camisa, .vaga.alvo .camisa { border-color: var(--dourado); box-shadow: 0 0 0 3px rgb(245 199 44 / 50%); }
 /* Tática: arrastar uma camisa até outra troca os dois (R48); embaixo do nome, a barrinha de energia (R49). */
 .vaga.arrastavel { touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 .vaga.arrastando { z-index: 5; }
 .vaga.arrastando .camisa { transform: scale(1.12); box-shadow: 0 8px 18px rgb(0 0 0 / 55%); }
+.vaga.arrastando .uniforme { transform: scale(1.12); }
 .vaga .cansaco { width: 40px; }
 .vaga .cansaco .barra { height: 4px; background: rgb(255 255 255 / 28%); }
 /* Braçadeira do capitão: canto de cima da camisa. */
 .vaga .capitao {
-  position: absolute; top: -4px; left: calc(50% + 10px);
+  position: absolute; top: -4px; left: calc(50% + 12px);
   min-width: 16px; height: 16px; border-radius: 4px;
   display: flex; align-items: center; justify-content: center;
   background: var(--dourado); color: #10221a; font-size: 0.62rem; font-weight: 800;

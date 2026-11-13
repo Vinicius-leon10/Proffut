@@ -1,4 +1,4 @@
-import { useRef, useState, type PointerEvent } from "react";
+import { useMemo, useRef, useState, type PointerEvent } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { ESTILOS } from "../../engine/constantes";
 import { FORMACOES, NOMES_POSICAO, calcularSetores, capitaoDoTime, corForca, disponivel, escalarAutomatico, forcaEfetiva, type Vaga } from "../../engine/forca";
@@ -37,15 +37,83 @@ export function LinhasDoCampo() {
 /** A braçadeira do capitão, sobre a camisa no campinho. */
 const Bracadeira = () => <span className="capitao" aria-label="Capitão" title="Capitão">C</span>;
 
+/** Os clubes (e seleções) com a camisa oficial em public/camisas (R133). */
+const CAMISAS = new Set(__CAMISAS__);
+const CAMISAS_QUE_FALHARAM = new Set<string>();
+const COR_GOLEIRO = "#f2cf3c";
+
+/** Camisa desenhada (goleiro, ou clube sem a camisa oficial): corpo e mangas na cor, gola e punhos na outra. */
+function CamisaDesenhada({ cor, detalhe }: { cor: string; detalhe: string }) {
+  return (
+    <svg className="camisa-desenhada" data-cor={cor} viewBox="0 0 40 36" aria-hidden="true">
+      <path d="M12 2l8 3 8-3 11 7-5 8-4-2v19H10V15l-4 2-5-8z" fill={cor} stroke="rgb(0 0 0 / 35%)" strokeWidth="1" strokeLinejoin="round" />
+      <path d="M15 3.2l5 2.4 5-2.4" fill="none" stroke={detalhe} strokeWidth="2" strokeLinecap="round" />
+      <path d="M2.2 10.8l3.6 5.4M37.8 10.8l-3.6 5.4" stroke={detalhe} strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+/** A camisa no campinho (R133): a oficial do clube, ou a desenhada nas cores dele; o goleiro de amarelo. O número vai por cima. */
+function Uniforme({ clube, numero, goleiro }: { clube: Clube; numero: number; goleiro: boolean }) {
+  const [, setFalhou] = useState(false);
+  const oficial = !goleiro && CAMISAS.has(clube.id) && !CAMISAS_QUE_FALHARAM.has(clube.id);
+  return (
+    <span className="uniforme">
+      {oficial ? (
+        <img src={`camisas/${clube.id}.png`} alt="" draggable={false} onError={() => { CAMISAS_QUE_FALHARAM.add(clube.id); setFalhou(true); }} />
+      ) : goleiro ? (
+        <CamisaDesenhada cor={COR_GOLEIRO} detalhe="#10221a" />
+      ) : (
+        <CamisaDesenhada cor={clube.cores.primaria} detalhe={clube.cores.secundaria} />
+      )}
+      <span className="numero">{numero}</span>
+    </span>
+  );
+}
+
+// Os números de sempre de cada posição; quem sobra fica com os outros, do 13 em diante.
+const NUMEROS_DA_POSICAO: Record<Posicao, number[]> = { G: [1, 12], L: [2, 6], Z: [3, 4], M: [5, 8, 10, 7], A: [9, 11] };
+
+/**
+ * O número da camisa de cada jogador do time (R133): os melhores de cada posição ficam com os números de sempre (o
+ * goleiro com o 1, os zagueiros com o 3 e o 4, o centroavante com o 9...); os outros, do 13 em diante, sem repetir.
+ * Só depende do elenco: o mesmo jogador tem o mesmo número em qualquer tela.
+ */
+export function numerosDoTime(jogadores: Jogador[]): Map<number, number> {
+  const numeros = new Map<number, number>();
+  const usados = new Set<number>();
+  const ordem = [...new Map(jogadores.map((j) => [j.id, j])).values()].sort((a, b) => b.forca - a.forca || a.id - b.id);
+  for (const pos of ["G", "Z", "L", "M", "A"] as Posicao[]) {
+    const livres = [...NUMEROS_DA_POSICAO[pos]];
+    for (const j of ordem.filter((j) => j.posicao === pos)) {
+      const n = livres.shift();
+      if (n == null) break;
+      numeros.set(j.id, n);
+      usados.add(n);
+    }
+  }
+  let proximo = 13;
+  for (const j of ordem) {
+    if (numeros.has(j.id)) continue;
+    while (usados.has(proximo)) proximo++;
+    numeros.set(j.id, proximo);
+    usados.add(proximo);
+  }
+  return numeros;
+}
+
 /** O time em campo só para ver (o titular do adversário antes do jogo): força na vaga, cor, nome e o capitão. */
-export function CampoDoTime({ atuacoes, jogadas, capitao }: { atuacoes: { jogador: Jogador; vaga: Vaga; energia: number }[]; jogadas: TaticaTipo["jogadas"]; capitao?: number }) {
+export function CampoDoTime({ clube, atuacoes, jogadas, capitao }: { clube: Clube; atuacoes: { jogador: Jogador; vaga: Vaga; energia: number }[]; jogadas: TaticaTipo["jogadas"]; capitao?: number }) {
+  const estado = useJogo();
+  const numeros = useMemo(() => numerosDoTime([...elencoDoTime(estado, clube.id), ...atuacoes.map((a) => a.jogador)]), [estado, clube.id, atuacoes]);
   return (
     <div className="campo">
       <LinhasDoCampo />
       {atuacoes.map(({ jogador: j, vaga: v, energia }) => {
         const ef = Math.round(forcaEfetiva(j, v, energia, jogadas));
         return (
-          <div key={j.id} className="vaga" style={{ left: `${v.x}%`, top: `${v.y}%` }}>
+          <div key={j.id} className="vaga" data-pos={v.pos} style={{ left: `${v.x}%`, top: `${v.y}%` }}>
+            <Uniforme clube={clube} numero={numeros.get(j.id) ?? 0} goleiro={v.pos === "G"} />
             <span className={`camisa ${corForca(ef, j.forca)}`}>{ef}</span>
             {j.id === capitao && <Bracadeira />}
             <span className="nome">{nomeCurto(j.nome)}</span>
@@ -108,7 +176,7 @@ export function FolhaDoTime({ lado, provavel, aoFechar }: { lado: LadoVivo; prov
   return (
     <Folha titulo={`${provavel ? "Provável time titular" : "Time titular"} ${comArtigo("do", clube)}`} aoFechar={aoFechar}>
       <p className="pequeno" style={{ marginBottom: 8 }}><ResumoDoTime lado={lado} /></p>
-      <CampoDoTime atuacoes={atuacoes} jogadas={lado.tatica.jogadas} capitao={capitaoDoTime(estado, lado.clubeId, lado.emCampo.map((a) => a.jogadorId))} />
+      <CampoDoTime clube={clube} atuacoes={atuacoes} jogadas={lado.tatica.jogadas} capitao={capitaoDoTime(estado, lado.clubeId, lado.emCampo.map((a) => a.jogadorId))} />
       <p className="mini muito-fraco" style={{ marginTop: 6 }}>
         {provavel ? "Os melhores disponíveis hoje; no dia do jogo pode mudar. " : ""}O número é a força que o jogador rende naquela vaga. Verde: rendimento cheio. Amarelo e vermelho: fora de posição ou cansado.
       </p>
@@ -139,6 +207,10 @@ export function CampoDaEscalacao({ clube, titulares, reservas, aoMudar }: {
   const semCliqueAte = useRef(0);
   const jog = (id: number | null | undefined): Jogador | undefined => (id != null ? estado.jogadores[id] : undefined);
   const capitao = capitaoDoTime(estado, clube.id, titulares);
+  const numeros = useMemo(
+    () => numerosDoTime([...elenco, ...titulares.flatMap((id) => (id != null ? [estado.jogadores[id]] : []))]),
+    [elenco, titulares, estado],
+  );
 
   const trocarVagas = (a: number, b: number) => {
     const novos = [...titulares];
@@ -205,6 +277,7 @@ export function CampoDaEscalacao({ clube, titulares, reservas, aoMudar }: {
             <button
               key={i}
               data-vaga={i}
+              data-pos={v.pos}
               className={classes}
               style={{ left: `${v.x}%`, top: `${v.y}%`, ...(arrastada ? { transform: `translate(calc(-50% + ${arrasto.dx}px), calc(-50% + ${arrasto.dy}px))` } : {}) }}
               onPointerDown={apertar(i)}
@@ -214,6 +287,7 @@ export function CampoDaEscalacao({ clube, titulares, reservas, aoMudar }: {
               onClick={() => { if (Date.now() > semCliqueAte.current) setVagaAberta(i); }}
               aria-label={`${NOMES_POSICAO[v.pos]}: ${j?.nome ?? "vazio"}`}
             >
+              {j && <Uniforme clube={clube} numero={numeros.get(j.id) ?? 0} goleiro={v.pos === "G"} />}
               <span className={`camisa ${cor}`}>{j ? ef : v.pos}</span>
               {j && j.id === capitao && <Bracadeira />}
               <span className="nome">{j ? nomeCurto(j.nome) : "—"}</span>

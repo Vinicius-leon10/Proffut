@@ -11,4 +11,20 @@ dela chegaram (pacote escudos-novos-148.zip). Depois entraram a Concacaf (Méxic
 Caribe) e as 3ª divisões; 202 dos 429 escudos chegaram (pacotes parciais escudos-novos-429 e escudos-lote1-pronto, nov/2026; 10 do lote 1
 vieram errados e continuam aqui: escudo de outro clube, faixa ou anúncio com texto, miniatura, branco sobre transparente ou com foto de fundo). Quando a lista de um campeonato muda, os clubes que entram aparecem aqui.
 
-Todos os clubes do jogo têm escudo.
+Total: 2 escudos (1 de clubes brasileiros e 1 de fora).
+
+## Brasil
+
+### Ceará (CE)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Tirol | Fortaleza | `tirol.png` |
+
+## Outros países da América: 1ª divisão de 2026
+
+### País de Gales (1 clube)
+
+| Clube | Cidade | Arquivo do escudo |
+|---|---|---|
+| Bala Town | Bala | `bala-town.png` |

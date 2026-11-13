@@ -4,3 +4,5 @@ declare const __VERSAO__: string;
 declare const __ESCUDOS__: string[];
 /** O nome do cache dos escudos no aparelho (muda quando algum escudo muda). */
 declare const __CACHE_ESCUDOS__: string;
+/** Os ids dos clubes (e seleções) com a camisa oficial em public/camisas (vite.config.ts, R133). */
+declare const __CAMISAS__: string[];

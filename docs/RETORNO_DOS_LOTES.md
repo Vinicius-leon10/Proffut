@@ -5,7 +5,10 @@ O Claude Code do Proffut confere cada lote que chega e escreve aqui o resultado.
 
 ## Refazer (prioridade)
 
-Nada. Lote 37: o escudo do Al-Nasr estava certo e entrou no jogo. Todos os clubes do jogo têm escudo.
+**Escudos:** `tirol.png` (Tirol, Fortaleza-CE; o do jogo era o do Decisão) e `bala-town.png` (Bala Town, País de Gales;
+o do jogo era o do Barry Town United). Os dois saíram do jogo e estão com o escudo desenhado até chegar o certo.
+
+Lote 37: o escudo do Al-Nasr estava certo e entrou no jogo.
 
 ## Jogadores
 
@@ -66,16 +69,16 @@ bandeiras. Nada a refazer.
 
 ## Camisas oficiais
 
-As camisas conferidas e preparadas (sem fundo, até 128 px, 256 cores) ficam em `data/camisas/<id>.png`; a fonte de cada
-uma em `docs/CAMISAS_FONTES.csv`. Entram na tela quando o campinho com camisas ficar pronto.
+As camisas conferidas e preparadas (sem fundo, até 128 px, 256 cores) ficam em `public/camisas/<id>.png`; a fonte de cada
+uma em `docs/CAMISAS_FONTES.csv`. Já aparecem no campinho do jogo.
 
 ### Refazer (camisas)
 
 Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As 6 do lote 01 foram refeitas certas.
 
 - **carlos-renaux:** a foto é num manequim (busto). Só mande se achar sem manequim.
-- **tirol:** obrigado pelo aviso: o escudo do Tirol no jogo era mesmo o do Decisão; vai ser trocado aqui. Por enquanto
-  o Tirol fica sem camisa.
+- **tirol:** obrigado pelo aviso: o escudo do Tirol no jogo era mesmo o do Decisão e saiu. Mande o **escudo** certo do
+  Tirol (Fortaleza-CE) e a camisa dele.
 - Os 32 de fora no lote 02: no `LEIA` ficou "ainda não olhei Instagram e site oficial". Se quiser, tente os passos 3 e 4
   (Instagram, Facebook, site e loja oficiais, fornecedor) só para eles; o que não achar fica sem camisa.
 - Pode seguir para os outros países (com a seleção de cada um).
