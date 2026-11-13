@@ -655,7 +655,8 @@ D (lista curta no Transfermarkt): abecat, crac, guapore, guarany-de-bage, primav
 
 **Camisas no campinho (guardado para depois, 12/nov/2026):** o usuário aprovou a prévia "Campinho com camisas"
 (artifact claude.ai/artifact/NwJwK2gbN7JeJS1BDSsD75, estilo **D · Faixa**): "Gostei dessa, guarde que usaremos outro
-momento". Não fazer sem ele pedir. Como ficou: no lugar da bolinha, a camisa do clube desenhada no jogo (SVG próprio, nada
+momento". **A imagem de referência que ele mandou ("Esse aqui"): `docs/previas/campinho-camisas-estilo-d.png`** (a prévia
+inteira em `docs/previas/campinho-com-camisas.html`). Não fazer sem ele pedir. Como ficou: no lugar da bolinha, a camisa do clube desenhada no jogo (SVG próprio, nada
 copiado: corpo, mangas e gola; modelos liso, listras horizontais, listras verticais, faixa diagonal e meio a meio, nas cores
 `Clube.cores`; o goleiro com outra cor) com o **número real da camisa** (das listas: Transfermarkt da Série B quase toda,
 súmulas da CBF, páginas da Wikipédia; sem número, um pela posição, sem repetir no clube); o **nome em cima** da camisa; e a
