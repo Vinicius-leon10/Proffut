@@ -1,6 +1,6 @@
 # Camisas – lote 02 (Brasil: refação e os que faltavam)
 
-Refação do lote 01 (Brasil), os 71 que tinham ficado de fora e a camisa da seleção brasileira (`sel-br.png`, no mesmo padrão minúsculo dos escudos `sel-br.png`).
+Refação do lote 01 (Brasil) e os 71 que tinham ficado de fora. A camisa da seleção brasileira foi para o lote `camisas-selecoes-01`.
 
 Cada camisa foi comparada com o escudo do jogo (`public/escudos/<id>.png`); as que não batiam ou não davam para confirmar ficaram de fora.
 
@@ -9,7 +9,7 @@ Cada camisa foi comparada com o escudo do jogo (`public/escudos/<id>.png`); as q
 - **`sao-paulo` e `santa-cruz`:** não achei com fundo transparente (as novas também tinham fundo branco); continuam as do lote 01.
 - **`fortaleza` e `londrina`** agora vieram (no lote 01 estavam de fora).
 
-Vieram **45** camisas; ficaram de fora **33**. PNG de 400 a 500 px de altura, fundo transparente quando deu (algumas ficaram com fundo branco liso, porque tirar o fundo apagaria parte da camisa). A fonte de cada uma está no csv.
+Vieram **44** camisas; ficaram de fora **33**. PNG de 400 a 500 px de altura, fundo transparente quando deu (algumas ficaram com fundo branco liso, porque tirar o fundo apagaria parte da camisa). A fonte de cada uma está no csv.
 
 ## Atenção
 
