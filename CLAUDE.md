@@ -661,7 +661,13 @@ copiado: corpo, mangas e gola; modelos liso, listras horizontais, listras vertic
 súmulas da CBF, páginas da Wikipédia; sem número, um pela posição, sem repetir no clube); o **nome em cima** da camisa; e a
 **força numa faixinha colorida embaixo** (verde bem, amarelo cansado/improvisado, vermelho muito cansado ou fora de posição);
 o "C" do capitão no canto esquerdo. Onde: campinho antes do jogo, escolha de quem entra e time titular do adversário.
-Falta saber o modelo de cada clube (listrada, faixa...): acertar à mão os conhecidos e escolher pelos tons nos outros.
+Falta saber o modelo de cada clube (listrada, faixa...): acertar à mão os conhecidos e escolher pelos tons nos outros. **Mudança de plano (13/nov/2026):** o usuário vai trazer as
+**camisas oficiais** de cada clube pelo Claude no Chrome do computador dele (busca no Google Imagens, como os escudos), em
+lotes na pasta `lotes/` da branch `claude/ecstatic-thompson-nw204h`: a imagem da camisa oficial (titular) no lugar da camisa
+desenhada, com o número real e a força na faixinha (estilo D). Conferir cada lote na prancha, como os escudos (os errados
+ficam de fora e o desenho vale para eles), preparar as imagens (fundo transparente, tamanho pequeno, cache como o dos
+escudos) e então aplicar o campinho com camisas, com teste antes. Combinar com ele o nome dos arquivos (o id do clube, como
+nos escudos) se o outro Claude perguntar.
 
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e
