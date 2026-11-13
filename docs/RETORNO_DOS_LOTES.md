@@ -71,17 +71,17 @@ uma em `docs/CAMISAS_FONTES.csv`. Entram na tela quando o campinho com camisas f
 
 ### Refazer (camisas)
 
-| Clube | Motivo |
-|---|---|
-| tirol | veio a camisa do Tirol Innsbruck, da Áustria (o Tirol do jogo é o de Fortaleza-CE) |
-| sao-bernardo | camisa amarela genérica da Champion, sem o escudo do clube |
-| confianca | foto das costas da camisa; precisa ser a da frente |
-| botafogo | foto das costas da camisa (o endereço diz "verso"); precisa ser a da frente |
-| sao-raimundo e sao-raimundo-rr | a mesma imagem nos dois arquivos: um é o São Raimundo de Manaus (AM), o outro o de Boa Vista (RR) |
-| sao-paulo e santa-cruz | certas, mas o fundo branco/cinza não saiu (a camisa branca encosta no fundo): se achar com fundo transparente, mande |
+Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As 6 do lote 01 foram refeitas certas.
 
-E os 71 que ficaram de fora no lote 01 (lista no `LEIA-camisas-lote-01.md`), se achar depois.
+- **carlos-renaux:** a foto é num manequim (busto). Só mande se achar sem manequim.
+- **tirol:** obrigado pelo aviso: o escudo do Tirol no jogo era mesmo o do Decisão; vai ser trocado aqui. Por enquanto
+  o Tirol fica sem camisa.
+- Os 32 de fora no lote 02: no `LEIA` ficou "ainda não olhei Instagram e site oficial". Se quiser, tente os passos 3 e 4
+  (Instagram, Facebook, site e loja oficiais, fornecedor) só para eles; o que não achar fica sem camisa.
+- Pode seguir para os outros países (com a seleção de cada um).
 
 | Lote | Entraram | Ficaram de fora (motivo) |
 |---|---|---|
-| camisas 01 (Brasil) | 183 de 189 | ver "Refazer (camisas)"; princesa-do-solimoes e manauara entraram (manequim; talvez reserva) |
+| camisas 01 (Brasil) | 183 de 189 | princesa-do-solimoes e manauara entraram (manequim; talvez reserva) |
+| camisas 02 (Brasil) | 43 de 44 | carlos-renaux (camisa num manequim/busto) |
+| camisas seleções 01 | sel-BR | - |
