@@ -101,6 +101,7 @@ Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As
 | camisas bolívia 01 | 14 de 14 (com sel-BO) | - |
 | camisas chile 01 | 24 de 25 (com sel-CL) | cobresal (camisa num manequim) |
 | camisas estados unidos 01–02, canadá 01, costa rica 01 | 61 de 64 (com sel-CR) | detroit-city (num manequim); sel-CA (foto torta); sel-US (veio a listrada vermelha e branca; confirmar se é a titular de 2026 ou mandar a branca) |
+| camisas grécia, holanda 01–02, hungria, ilhas faroé 01 | 84 de 86 (com sel-GR, NL, HU, FO) | volendam (marca do site); pas-giannina (recortada: a camisa ficou cortada nas pontas) |
 | camisas estônia, finlândia, frança 01–02, geórgia, gibraltar 01 | 81 de 87 (com sel-EE, FI, FR, GE, GI) | reims (as mangas brancas sumiram); ajaccio (num manequim); valenciennes (marca 24-25 na foto); nancy e nancy-lorraine (camisa branca em fundo cinza: some ao tirar o fundo); paris-fc (marca do site no canto) |
 | camisas espanha 01–02 | 66 de 71 | sel-ES (foto torta e talvez a de 2024); leganes, sevilla e tenerife (camisa branca em fundo branco: ao tirar o fundo some a camisa; mandar com fundo transparente); ourense (marca do site no canto) |
 | camisas eslovênia 01 | 9 de 9 (com sel-SI) | - |
