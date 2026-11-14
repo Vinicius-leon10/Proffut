@@ -13,4 +13,11 @@ Vieram **41** camisas; ficaram de fora **0**. PNG de 400 a 500 px de altura, fun
 - valladolid: confira: listrada roxa e branca da Kappa; o escudo não aparece bem na foto.
 - fc-andorra: confira: azul-marinho da Nike com gola amarela (MoraBanc); havia também uma azul mais clara.
 - sel-ES: confira: vermelha da adidas com ombros azul-marinho; não deu para ter certeza se é a de 2026 ou a de 2024.
+- levante: fundo branco liso (não deu para tirar sem apagar parte da camisa).
+- mallorca: fundo branco liso.
+- osasuna: fundo branco liso.
+- sevilla: fundo branco liso.
+- las-palmas: fundo branco liso.
+- leganes: fundo branco liso.
+- malaga: fundo branco liso.
 
