@@ -14,6 +14,7 @@ Vieram **12** camisas; ficaram de fora **3**. PNG de 400 a 500 px de altura, fun
 - maccabi-netanya: confira: amarela com listras pretas da Umbro; havia também uma amarela da Lotto.
 - maccabi-tel-aviv: confira: o jogo ainda não tem o escudo deste clube, então não deu para comparar; a camisa é a amarela e azul da Puma, com o escudo do Maccabi Tel Aviv.
 - sel-IL: confira: azul da Reebok; havia também uma branca, e não deu para ter certeza de qual é a titular.
+- maccabi-haifa: fundo cinza-claro liso (não deu para tirar sem apagar parte da camisa).
 
 ## Ficaram de fora
 
