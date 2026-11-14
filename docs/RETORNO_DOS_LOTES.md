@@ -82,9 +82,12 @@ Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As
 - Os 32 de fora no lote 02: no `LEIA` ficou "ainda não olhei Instagram e site oficial". Se quiser, tente os passos 3 e 4
   (Instagram, Facebook, site e loja oficiais, fornecedor) só para eles; o que não achar fica sem camisa.
 - Pode seguir para os outros países (com a seleção de cada um).
+- Argentina: refazer `tristan-suarez` (a titular) e `argentino-de-quilmes` (sem o círculo branco atrás).
 
 | Lote | Entraram | Ficaram de fora (motivo) |
 |---|---|---|
 | camisas 01 (Brasil) | 183 de 189 | princesa-do-solimoes e manauara entraram (manequim; talvez reserva) |
 | camisas 02 (Brasil) | 43 de 44 | carlos-renaux (camisa num manequim/busto) |
 | camisas seleções 01 | sel-BR | - |
+| camisas argentina 01–03 | 75 de 77 (com sel-AR) | tristan-suarez (parece a reserva, cinza); argentino-de-quilmes (a camisa vem sobre um círculo branco, que fica no campinho) |
+| camisas bolívia 01 | 14 de 14 (com sel-BO) | - |
