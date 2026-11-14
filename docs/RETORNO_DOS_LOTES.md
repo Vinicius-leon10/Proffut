@@ -84,7 +84,7 @@ Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As
 - Pode seguir para os outros países (com a seleção de cada um).
 - Chile: refazer `cobresal` (sem manequim).
 - EUA e Canadá: refazer `detroit-city` (sem manequim), `sel-CA` (de frente) e `sel-US` (a titular de 2026).
-- Belize e Cuba: os zips chegaram vazios de novo (o commit tem o arquivo, mas sem nada dentro); mandar de novo.
+- Suriname: refazer `sel-SR` (a camisa veio com o ombro apagado).
 - El Salvador e Panamá: refazer `sel-SV` e `sel-PA` (sem cabide).
 - Paraguai e Peru: refazer `sel-PE` (a titular branca com a faixa vermelha), `sel-PY` (com fundo transparente ou branco liso) e `deportivo-llacuabamba` (de frente).
 - Colômbia e Equador: refazer `inter-bogota` (sem manequim) e `ldu-quito` (de frente, aberta).
@@ -99,7 +99,8 @@ Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As
 | camisas bolívia 01 | 14 de 14 (com sel-BO) | - |
 | camisas chile 01 | 24 de 25 (com sel-CL) | cobresal (camisa num manequim) |
 | camisas estados unidos 01–02, canadá 01, costa rica 01 | 61 de 64 (com sel-CR) | detroit-city (num manequim); sel-CA (foto torta); sel-US (veio a listrada vermelha e branca; confirmar se é a titular de 2026 ou mandar a branca) |
-| camisas belize 01 e cuba 01 | o zip veio vazio (de novo) | mandar de novo |
+| camisas belize, cuba, anguila, antígua e barbuda, trinidad e tobago 01 | 0 (não acharam camisa) | - |
+| camisas suriname 01 | 0 de 1 | sel-SR (o ombro direito ficou apagado ao tirar o fundo) |
 | camisas curaçao, el salvador, guatemala, guiana, haiti, honduras, jamaica, nicarágua, panamá, rep. dominicana 01 | 31 de 33 (com sel-CW, GT, GY, HN, HT, JM) | sel-SV e sel-PA (no cabide) |
 | camisas méxico 01–02 | 29 de 29 (com sel-MX) | - |
 | camisas uruguai 01–02 e venezuela 01 | 23 de 23 (com sel-UY e sel-VE) | - |
