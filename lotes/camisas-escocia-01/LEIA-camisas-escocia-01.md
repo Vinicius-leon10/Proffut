@@ -9,7 +9,10 @@ Vieram **23** camisas; ficaram de fora **0**. PNG de 400 a 500 px de altura, fun
 - dundee-united: confira: manga comprida, com a etiqueta da loja pendurada (foto de loja, sem manequim); a de manga curta só aparecia com régua de medidas.
 - dundee: confira: azul-marinho da Macron (Crown); é a cor tradicional do clube.
 - falkirk: confira: preta da O'Neills (McEwan Fraser); havia também uma preta e branca.
-- livingston: confira: listrada amarela e preta da Joma; havia também uma amarela com faixa preta.
+- livingston: fundo branco liso (não deu para tirar sem apagar parte da camisa).
 - queen-s-park: confira: listrada preta e branca da adidas (city); o escudo na camisa é o redondo atual do clube, diferente do brasão antigo do jogo.
 - raith-rovers: confira: azul-marinho da Joma (Dean Park Hotel); havia também uma vermelha, que parece ser a reserva.
+- motherwell: fundo branco liso (não deu para tirar sem apagar parte da camisa).
+- rangers: fundo cinza-claro liso (não deu para tirar sem apagar parte da camisa).
+- ross-county: marca pequena do site no canto de cima e no de baixo.
 
