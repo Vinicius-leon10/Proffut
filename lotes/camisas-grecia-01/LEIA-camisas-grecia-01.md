@@ -14,7 +14,8 @@ Vieram **23** camisas; ficaram de fora **9**. PNG de 400 a 500 px de altura, fun
 - panserraikos: confira: vermelha da Macron (novibet); havia também uma listrada vermelha e branca da Erreà.
 - anagennisi-karditsa: confira: amarela da Erima (apical); havia também outra amarela parecida.
 - egaleo: confira: listrada azul e branca da Macron; havia também uma da Givova.
-- pas-giannina: confira: branca com faixa azul da Kappa; havia também uma azul da adidas.
+- pas-giannina: fundo cinza-claro liso.
+- kalamata: fundo cinza-claro liso (não deu para tirar sem apagar parte da camisa).
 
 ## Ficaram de fora
 
