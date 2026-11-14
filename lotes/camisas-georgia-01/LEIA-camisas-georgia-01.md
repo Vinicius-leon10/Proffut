@@ -9,7 +9,7 @@ Vieram **8** camisas; ficaram de fora **3**. PNG de 400 a 500 px de altura, fund
 - dila-gori: confira: vermelha da Nike (Stari); havia também uma preta da adidas.
 - dinamo-batumi: confira: azul da Macron (crocobet); havia também outra azul parecida.
 - dinamo-tbilisi: confira: azul listrada da Puma (adjarabet); havia também uma azul e branca da Jako.
-- torpedo-kutaisi: confira: preta da Macron (New Vision University); havia também uma preta da Puma.
+- torpedo-kutaisi: fundo branco liso (não deu para tirar sem apagar parte da camisa).
 - sel-GE: confira: branca com faixa vermelha da Macron; havia também uma vermelha.
 
 ## Ficaram de fora
