@@ -83,6 +83,7 @@ Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As
   (Instagram, Facebook, site e loja oficiais, fornecedor) só para eles; o que não achar fica sem camisa.
 - Pode seguir para os outros países (com a seleção de cada um).
 - Chile: refazer `cobresal` (sem manequim).
+- Paraguai e Peru: refazer `sel-PE` (a titular branca com a faixa vermelha), `sel-PY` (com fundo transparente ou branco liso) e `deportivo-llacuabamba` (de frente).
 - Colômbia e Equador: refazer `inter-bogota` (sem manequim) e `ldu-quito` (de frente, aberta).
 - Argentina: refazer `tristan-suarez` (a titular) e `argentino-de-quilmes` (sem o círculo branco atrás).
 
@@ -94,4 +95,5 @@ Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As
 | camisas argentina 01–03 | 75 de 77 (com sel-AR) | tristan-suarez (parece a reserva, cinza); argentino-de-quilmes (a camisa vem sobre um círculo branco, que fica no campinho) |
 | camisas bolívia 01 | 14 de 14 (com sel-BO) | - |
 | camisas chile 01 | 24 de 25 (com sel-CL) | cobresal (camisa num manequim) |
+| camisas paraguai 01 e peru 01–02 | 36 de 39 | sel-PE (veio a camisa preta, a reserva; a titular é branca com a faixa vermelha); sel-PY (fundo cinza que não sai); deportivo-llacuabamba (foto torta, de lado) |
 | camisas colômbia 01 e equador 01 | 37 de 39 (com sel-CO e sel-EC) | ldu-quito (foto de lado, dobrada); inter-bogota (num manequim) |
