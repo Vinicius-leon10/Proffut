@@ -17,6 +17,9 @@ Vieram **30** camisas; ficaram de fora **3**. PNG de 400 a 500 px de altura, fun
 - unionistas-de-salamanca: confira: metade branca, metade preta (Erreà, Don QR); havia também outra parecida (Telefurgo).
 - barakaldo: confira: amarela e preta da New Balance; a segunda busca só trouxe esta.
 - atletico-sanluqueno: confira: branca e verde da Macron; a outra opção era verde-água, que parece ser a reserva.
+- gimnastic: fundo branco liso (não deu para tirar sem apagar parte da camisa).
+- ourense: fundo branco liso e marca pequena do site no canto de cima.
+- tenerife: fundo branco liso.
 
 ## Ficaram de fora
 
