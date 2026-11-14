@@ -10,6 +10,7 @@ Vieram **10** camisas; ficaram de fora **1**. PNG de 400 a 500 px de altura, fun
 - drogheda-united: confira: grená da Macron (NoFo Brew Co); havia também uma quadriculada grená e azul-clara, que parece edição especial.
 - dundalk: confira: branca com faixa preta da Umbro (BetRegal); havia também outra branca (Zoma).
 - waterford: confira: azul listrada da Puma (WhiteBox); a outra opção (branca, SUIR) era do time de hurling de Waterford, não do clube de futebol.
+- galway-united: fundo branco liso (não deu para tirar sem apagar parte da camisa).
 
 ## Ficaram de fora
 
