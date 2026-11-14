@@ -8,9 +8,10 @@ Vieram **35** camisas; ficaram de fora **6**. PNG de 400 a 500 px de altura, fun
 
 - ajax: confira: vermelha e branca da adidas (Ziggo); a foto limpa de frente apareceu na busca do "afc-amsterdam" (é do site de uma loja); as outras do Ajax eram com jogador ou de costas.
 - feyenoord: confira: metade vermelha, metade branca da Castore (MediaMarkt), que parece ser a de 2024-25; a de 2025-26 (Prijsvrij) só aparecia sem o escudo visível.
-- volendam: confira: laranja (HSB); havia também uma laranja (BetCity).
+- volendam: fundo branco liso e marca pequena do site no canto de cima.
 - fortuna-sittard: confira: amarela da Robey (Hurkmans); havia também uma amarela (syNeo).
-- sel-NL: confira: laranja da Nike; não deu para ter certeza se é a de 2026 ou uma anterior.
+- sel-NL: fundo branco liso.
+- excelsior: fundo branco liso (não deu para tirar sem apagar parte da camisa).
 
 ## Ficaram de fora
 
