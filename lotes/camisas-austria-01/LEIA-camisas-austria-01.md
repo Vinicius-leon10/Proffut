@@ -12,6 +12,9 @@ Vieram **25** camisas; ficaram de fora **1**. PNG de 400 a 500 px de altura, fun
 - hertha-wels: confira: azul-clara com ombros amarelos (Hummel); havia também uma preta e branca.
 - schwarz-wei-bregenz: confira: branca com detalhes pretos (Macron); havia também a mesma em preto.
 - skn-st-polten: confira: azul-clara da Nike; havia também uma azul com faixa de arco-íris (Simacek), que parece edição especial.
+- austria-viena: fundo cinza-claro liso (não deu para tirar sem apagar parte da camisa).
+- grazer-ak: fundo branco liso (não deu para tirar sem apagar parte da camisa).
+- hartberg: fundo branco liso (não deu para tirar sem apagar parte da camisa).
 
 ## Ficaram de fora
 
