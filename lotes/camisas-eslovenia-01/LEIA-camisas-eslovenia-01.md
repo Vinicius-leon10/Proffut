@@ -10,6 +10,7 @@ Vieram **9** camisas; ficaram de fora **2**. PNG de 400 a 500 px de altura, fund
 - domzale: confira: amarela estampada da Joma; havia também uma amarela com riscos azuis.
 - maribor: confira: azul-marinho da adidas (Sava); havia também uma branca com azul.
 - olimpija-ljubljana: confira: verde da Libero (Merkur); havia também uma verde estampada da Puma, com outro escudo.
+- sel-SI: fundo branco liso (não deu para tirar sem apagar parte da camisa).
 
 ## Ficaram de fora
 
