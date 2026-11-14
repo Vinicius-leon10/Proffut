@@ -4,6 +4,10 @@ Albânia: todos os 10 clubes da lista (1ª divisão) e a seleção (`sel-AL.png`
 
 Vieram **10** camisas; ficaram de fora **1**. PNG de 400 a 500 px de altura, fundo transparente quando deu (algumas ficaram com fundo branco liso, porque tirar o fundo apagaria parte da camisa). A fonte de cada uma está no csv.
 
+## Atenção
+
+- sel-AL: fundo cinza-claro liso (não deu para tirar sem apagar parte da camisa).
+
 ## Ficaram de fora
 
 | Clube | Motivo e o que foi tentado |
