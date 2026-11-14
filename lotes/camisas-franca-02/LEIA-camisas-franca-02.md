@@ -6,7 +6,7 @@ Vieram **11** camisas; ficaram de fora **2**. PNG de 400 a 500 px de altura, fun
 
 ## Atenção
 
-- nancy-lorraine: confira: é o mesmo clube de "nancy" (lote 01), com o mesmo escudo; recebeu a mesma camisa.
+- nancy-lorraine: fundo cinza-claro liso.
 - valenciennes: confira: vermelha da Hummel (Toyota); a foto tem a marca "24-25" pequena no canto.
 
 ## Ficaram de fora
