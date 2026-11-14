@@ -6,13 +6,15 @@ Vieram **39** camisas; ficaram de fora **2**. PNG de 400 a 500 px de altura, fun
 
 ## Atenção
 
-- brest: confira: vermelha com mangas brancas da adidas (Quéguiner); as outras fotos da busca eram de costas.
+- brest: fundo branco liso (não deu para tirar sem apagar parte da camisa).
 - dunkerque: confira: azul da Macron (energia); havia também uma vermelha igual, e não deu para ter certeza de qual é a titular.
 - guingamp: confira: vermelha da Kappa (Celtigel); havia também uma vermelha da Umbro, edição de 110 anos.
 - lyon: confira: branca da adidas; havia também uma vermelha da adidas Originals, que parece ser edição especial.
-- nancy: confira: branca com faixa vermelha (FCGE); o jogo também tem "nancy-lorraine" com o mesmo escudo, e as duas receberam a mesma camisa.
+- nancy: fundo cinza-claro liso.
 - pau: confira: amarela da Joma (Holy); havia também uma azul-marinho igual, e não deu para ter certeza de qual é a titular.
-- reims: confira: vermelha com mangas brancas da Puma, sem patrocínio; havia também uma branca (Yasuda), que parece ser a reserva.
+- reims: recortada pelo fundo: as mangas brancas ficaram transparentes.
+- paris-fc: marca pequena do site no canto de cima.
+- paris-saint-germain: fundo branco liso.
 
 ## Ficaram de fora
 
