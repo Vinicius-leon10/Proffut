@@ -10,7 +10,7 @@ Vieram **11** camisas; ficaram de fora **2**. PNG de 400 a 500 px de altura, fun
 - kosice: confira: amarela com mangas azuis da adidas; havia também uma azul listrada.
 - ruzomberok: confira: laranja e preta da adidas; havia também uma preta com gola laranja.
 - zilina: confira: amarela com verde da Nike (Radoma); havia também uma amarela lisa.
-- sel-SK: confira: azul com estampa da Macron; havia também uma azul lisa com gola branca.
+- sel-SK: fundo cinza-claro liso (não deu para tirar sem apagar parte da camisa).
 
 ## Ficaram de fora
 
