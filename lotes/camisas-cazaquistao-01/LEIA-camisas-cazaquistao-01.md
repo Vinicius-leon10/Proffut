@@ -9,10 +9,10 @@ Vieram **12** camisas; ficaram de fora **3**. PNG de 400 a 500 px de altura, fun
 - astana: confira: amarela da adidas; havia também uma amarela da Nike.
 - atyrau: confira: verde da Macron; havia também uma verde e branca, parecida.
 - caspiy: confira: azul da adidas; havia também uma azul-escura da Hummel.
-- okzhetpes: confira: azul-clara da Puma; havia também uma listrada azul-clara e branca da Jako.
 - ordabasy: confira: azul-clara da Puma; havia também uma branca com faixa azul.
 - tobol: confira: branca da Macron com o escudo certo; não deu para ter certeza se é a titular (o clube costuma jogar de verde).
 - ulytau: confira: azul; havia também uma azul da Kelme, parecida.
+- okzhetpes: confira: listrada azul-clara e branca da Jako, com o escudo certo (a outra opção azul era do Ordabasy).
 
 ## Ficaram de fora
 
