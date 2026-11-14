@@ -1,8 +1,8 @@
 # Camisas oficiais — Bélgica (lote 01)
 
-Bélgica: 27 de 29 clubes da lista (1ª e 2ª divisão). Cada camisa foi comparada com o escudo do jogo. A seleção (`sel-BE.png`) ainda não veio: a única camisa limpa achada parece ser a de 2022, então refaço a busca e mando depois neste mesmo lote. Busca em inglês: "<clube> <cidade> home kit 2025-26 shirt".
+Bélgica: 27 de 29 clubes da lista (1ª e 2ª divisão) e a seleção (`sel-BE.png`, a titular de 2026). Cada camisa foi comparada com o escudo do jogo. Busca em inglês: "<clube> <cidade> home kit 2025-26 shirt"; para a seleção, "Belgium 2026 World Cup home shirt adidas" (a primeira busca só trazia a de 2022).
 
-Vieram **27** camisas; ficaram de fora **2**. PNG de 400 a 500 px de altura, fundo transparente quando deu (algumas ficaram com fundo branco liso, porque tirar o fundo apagaria parte da camisa). A fonte de cada uma está no csv.
+Vieram **28** camisas; ficaram de fora **2**. PNG de 400 a 500 px de altura, fundo transparente quando deu (algumas ficaram com fundo branco liso, porque tirar o fundo apagaria parte da camisa). A fonte de cada uma está no csv.
 
 ## Atenção
 
