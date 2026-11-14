@@ -8,4 +8,5 @@ Vieram **11** camisas; ficaram de fora **0**. PNG de 400 a 500 px de altura, fun
 
 - noah: confira: branca da adidas; havia também uma azul-clara com o mesmo escudo, e não deu para ter certeza de qual é a titular.
 - pyunik: confira: vermelha da Joma com gola amarela; havia também uma vermelha lisa da Joma, quase igual.
+- sel-AM: fundo cinza-claro liso (não deu para tirar sem apagar parte da camisa).
 
