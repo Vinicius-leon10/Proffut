@@ -11,7 +11,8 @@ Vieram **15** camisas; ficaram de fora **0**. PNG de 400 a 500 px de altura, fun
 - apollon-limassol: confira: azul-clara da Puma; havia também uma azul-escura.
 - krasava-eny-ypsonas: confira: amarela da Macron; havia também uma amarela listrada, parecida.
 - olympiakos-nicosia: confira: verde e preta da Erima; havia também uma azul.
-- omonia: confira: listrada verde e branca da Macron; havia também uma branca da adidas, e não deu para ter certeza de qual é a titular desta temporada.
+- omonia: fundo branco liso (não deu para tirar sem apagar parte da camisa).
 - omonia-aradippou: confira: azul da Capelli; havia também outra azul parecida.
 - sel-CY: tem a etiqueta da loja pendurada na gola (foto de loja, sem manequim).
+- apoel: fundo cinza-claro liso (não deu para tirar sem apagar parte da camisa).
 
