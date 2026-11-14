@@ -99,6 +99,7 @@ Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As
 | camisas bolívia 01 | 14 de 14 (com sel-BO) | - |
 | camisas chile 01 | 24 de 25 (com sel-CL) | cobresal (camisa num manequim) |
 | camisas estados unidos 01–02, canadá 01, costa rica 01 | 61 de 64 (com sel-CR) | detroit-city (num manequim); sel-CA (foto torta); sel-US (veio a listrada vermelha e branca; confirmar se é a titular de 2026 ou mandar a branca) |
+| camisas belarus, bélgica, bósnia, bulgária 01 | 65 de 65 (com sel-BY, BA, BG) | - |
 | camisas alemanha 01–02, armênia 01, áustria 01, azerbaijão 01 | 103 de 104 (com sel-DE, sel-AT, sel-AM, sel-AZ) | noah (a foto tem o lado esquerdo apagado) |
 | camisas albânia 01 e andorra 01 | 14 de 15 (com sel-AL e sel-AD) | atletic-club-d-escaldes (desenho de divulgação, não a camisa de verdade) |
 | camisas belize, cuba, anguila, antígua e barbuda, trinidad e tobago 01 | 0 (não acharam camisa) | - |
