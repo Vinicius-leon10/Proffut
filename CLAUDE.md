@@ -704,6 +704,16 @@ Campinho mais alto (`aspect-ratio: 0.7`). Novo lote: conferir, `preparar.py --qu
 `docs/CAMISAS_FONTES.csv`, retorno, verificar e publicar. Números reais das camisas ainda não (o jogador não guarda o número).
 Escudos trocados (R134): o Tirol estava com o do Decisão e o Bala Town com o do Barry Town; saíram (desenhados até chegar o certo).
 
+**Tela inicial nova (guardado para depois, 14/nov/2026):** pedido "Mande exemplos de como podemos melhorar essa tela
+inicial, otimizar as informações, tem muita coisa, temos que rolar muito pra baixo". Das seis prévias (A a F) ele escolheu a
+**C · Blocos**: "Gostei letra C, guarde a informação, utilizaremos depois". Imagem: `docs/previas/tela-inicial-opcao-c.png`
+(as três primeiras lado a lado em `tela-inicial-opcoes-abc.png`). Como é: tudo numa tela, sem rolar. Jogo de hoje numa linha
+(escudo do adversário, "HOJE · Série C · 2ª rodada", "x Caxias (10º)", "Em casa") com o botão "Jogar ▶" dourado ao lado;
+quatro blocos 2 × 2: Série C (posição grande, selo Encaminhado, meta), Confiança (barras de diretoria e torcida, reputação),
+Caixa (valor e folha) e Copas (resumo); Mensagens (a última e "9+ novas ›"); botões Troféus e Histórico. Não fazer sem ele
+pedir. Hoje o `Painel.tsx` tem os cartões Jogo de hoje, seleção, convites, estadual, Copas, Liga, Clube, Últimas mensagens e
+os botões de troféus e histórico (os da seleção, convites e estadual precisam de lugar no novo modelo).
+
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e
 segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
