@@ -95,6 +95,7 @@ Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As
 | camisas argentina 01–03 | 75 de 77 (com sel-AR) | tristan-suarez (parece a reserva, cinza); argentino-de-quilmes (a camisa vem sobre um círculo branco, que fica no campinho) |
 | camisas bolívia 01 | 14 de 14 (com sel-BO) | - |
 | camisas chile 01 | 24 de 25 (com sel-CL) | cobresal (camisa num manequim) |
+| camisas méxico 01–02 | 29 de 29 (com sel-MX) | - |
 | camisas uruguai 01–02 e venezuela 01 | 23 de 23 (com sel-UY e sel-VE) | - |
 | camisas paraguai 01 e peru 01–02 | 36 de 39 | sel-PE (veio a camisa preta, a reserva; a titular é branca com a faixa vermelha); sel-PY (fundo cinza que não sai); deportivo-llacuabamba (foto torta, de lado) |
 | camisas colômbia 01 e equador 01 | 37 de 39 (com sel-CO e sel-EC) | ldu-quito (foto de lado, dobrada); inter-bogota (num manequim) |
