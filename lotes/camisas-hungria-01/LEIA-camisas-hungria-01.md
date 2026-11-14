@@ -6,7 +6,7 @@ Vieram **10** camisas; ficaram de fora **3**. PNG de 400 a 500 px de altura, fun
 
 ## Atenção
 
-- debrecen: confira: vermelha da adidas (Tippmix); havia também outra vermelha (Tranzit-Food).
+- debrecen: fundo branco liso (não deu para tirar sem apagar parte da camisa).
 - kazincbarcika: confira: azul da Puma (Tippmix); havia também outra azul parecida.
 - kisvarda: confira: vermelha da adidas (Master Good); havia também outra vermelha parecida.
 - nyiregyhaza: confira: listrada azul-marinho e vermelha da Macron; havia também uma listrada azul e vermelha (Revesz).
