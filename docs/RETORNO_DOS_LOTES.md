@@ -82,6 +82,7 @@ Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As
 - Os 32 de fora no lote 02: no `LEIA` ficou "ainda não olhei Instagram e site oficial". Se quiser, tente os passos 3 e 4
   (Instagram, Facebook, site e loja oficiais, fornecedor) só para eles; o que não achar fica sem camisa.
 - Pode seguir para os outros países (com a seleção de cada um).
+- Espanha: refazer `sel-ES` (a de 2026, de frente) e, com fundo transparente, `leganes`, `sevilla`, `tenerife` e `ourense`. Obs.: o escudo do `almeria` no jogo é o da antiga AD Almería; mande também o escudo da UD Almería.
 - Chile: refazer `cobresal` (sem manequim).
 - EUA e Canadá: refazer `detroit-city` (sem manequim), `sel-CA` (de frente) e `sel-US` (a titular de 2026).
 - Suriname: refazer `sel-SR` (a camisa veio com o ombro apagado).
@@ -99,6 +100,7 @@ Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As
 | camisas bolívia 01 | 14 de 14 (com sel-BO) | - |
 | camisas chile 01 | 24 de 25 (com sel-CL) | cobresal (camisa num manequim) |
 | camisas estados unidos 01–02, canadá 01, costa rica 01 | 61 de 64 (com sel-CR) | detroit-city (num manequim); sel-CA (foto torta); sel-US (veio a listrada vermelha e branca; confirmar se é a titular de 2026 ou mandar a branca) |
+| camisas espanha 01–02 | 66 de 71 | sel-ES (foto torta e talvez a de 2024); leganes, sevilla e tenerife (camisa branca em fundo branco: ao tirar o fundo some a camisa; mandar com fundo transparente); ourense (marca do site no canto) |
 | camisas eslovênia 01 | 9 de 9 (com sel-SI) | - |
 | camisas dinamarca, escócia, eslováquia 01 | 52 de 54 (com sel-DK, XS, SK) | dundee-united (manga comprida com etiqueta, de lado); ross-county (pedaços de outras imagens nos cantos) |
 | camisas cazaquistão, chipre, croácia 01 e sel-BE | 43 de 44 (com sel-KZ, CY, HR, BE) | tobol (veio a branca; o Tobol joga de verde, mandar a verde) |
