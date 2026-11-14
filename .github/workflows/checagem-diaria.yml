@@ -22,6 +22,10 @@ jobs:
         env:
           BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
         run: npm run test:e2e
+      - name: Mostrar o que a página tinha nos primeiros testes que falharam
+        if: failure()
+        run: |
+          for f in $(ls -d tests/resultado/arquivos/*/ 2>/dev/null | head -3); do echo "=== $f"; head -c 3000 "$f/error-context.md" 2>/dev/null; echo; done
       - uses: actions/upload-artifact@v7
         if: always()
         with:
