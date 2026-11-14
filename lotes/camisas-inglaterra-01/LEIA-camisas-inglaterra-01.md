@@ -7,11 +7,15 @@ Vieram **40** camisas; ficaram de fora **1**. PNG de 400 a 500 px de altura, fun
 ## Atenção
 
 - aston-villa: confira: vinho da adidas (Betano); a foto pode ser da temporada 2024-25 (o desenho é parecido).
-- chelsea: confira: azul da Nike sem patrocínio; havia também a mesma com o selo de campeão do Mundial.
+- chelsea: fundo cinza-claro liso (não deu para tirar sem apagar parte da camisa).
 - arsenal: confira: vermelha da adidas (Emirates); a foto pode ser da temporada 2024-25 (o desenho é parecido).
 - middlesbrough: confira: vermelha com faixa branca da Castore (Unibet).
 - hull-city: confira: listrada laranja e preta da Kappa (Corendon).
 - norwich: confira: amarela da Joma (Blakely).
+- crystal-palace: fundo cinza-claro liso.
+- leeds: fundo branco liso.
+- ipswich: fundo branco liso.
+- portsmouth: tem um texto pequeno da loja embaixo da camisa ("Beebu Sleeve Patch additional £4").
 
 ## Ficaram de fora
 
