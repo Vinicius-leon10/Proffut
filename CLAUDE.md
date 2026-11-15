@@ -714,6 +714,16 @@ Caixa (valor e folha) e Copas (resumo); Mensagens (a última e "9+ novas ›"); 
 pedir. Hoje o `Painel.tsx` tem os cartões Jogo de hoje, seleção, convites, estadual, Copas, Liga, Clube, Últimas mensagens e
 os botões de troféus e histórico (os da seleção, convites e estadual precisam de lugar no novo modelo).
 
+**Ideia para o futuro: liga online privada (15/nov/2026, só anotado):** pedido "pensei em a gente futuramente criar um modo
+que seja online privado... eu crio uma liga com 20 jogadores, pegando times da série C, e eles vão jogando online junto com o
+campeonato brasileiro... todas quartas e domingo... se dois jogadores fossem se enfrentar, como é que ia funcionar essa
+partida? É algo pra gente pensar pro futuro". Não começar sem ele pedir. O que pensar quando vier: o jogo hoje roda só no
+aparelho (sem servidor); online precisa de um lugar comum para guardar a liga (servidor ou banco na nuvem) e de contas para os
+amigos. Jeitos de jogar o confronto entre dois jogadores: (a) prazo, cada um deixa escalação e tática até a hora da rodada e o
+jogo simula sozinho no horário (o mais simples, como as ligas de fantasy; o mesmo resultado para os dois pela semente igual);
+(b) ao vivo, os dois entram na hora marcada e mexem durante a partida (precisa dos dois online ao mesmo tempo); (c) misto,
+simula no horário e quem estiver online pode mexer. Recomendação inicial: (a), com (c) depois.
+
 **Esperando o usuário:** em aberto no PLANO.md §11: nome final
 ("Proffut" é provisório?). O 2D da partida começou (R60) e
 segue pelo que ele pedir. Se ele quiser os elencos de 2026 das Séries B e C, falta uma fonte livre que o GitHub alcance.
