@@ -22,6 +22,8 @@ Leia isto antes de mexer no projeto. Detalhes de design em [PLANO.md](PLANO.md);
 6. **Converse em português, com palavras simples** (o usuário não é programador). Ele testa no iPhone e manda listas
    curtas de ajustes. Quando não der para ver o problema, corrija pelo mais provável e peça uma captura de tela.
 
+7. **Pergunta ou ação, e qual modelo (skill `escolher-modelo`, nov/2026):** a cada pedido, dizer se é pergunta (responde direto, com o modelo mais barato que serve) ou ação (dizer em uma linha o modelo e o esforço e esperar o "ok"), para ele gastar o mínimo de crédito. Tabela em `.claude/skills/escolher-modelo/SKILL.md`.
+
 ## Endereços
 
 - **Oficial:** https://vinicius-leon10.github.io/Proffut/ (branch `main` → workflow → branch `gh-pages`).
