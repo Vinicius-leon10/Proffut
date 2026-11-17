@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
 import { ehSerie, nomeDaLigaDoClube, tabelaDoClube, temporadaEncerrada, torneioPrincipal } from "../../engine/competicoes";
@@ -10,7 +10,7 @@ import { copasDoClube, situacaoCurtaNaCopa } from "../../engine/copas";
 import { meuJogoHoje, meuTimeNaPartida, provavelTime, proximaDataComJogo, proximoJogoDoClube } from "../../engine/jogo";
 import { NOME_FASE_TORNEIO, posicaoNoTorneio, torneiosDoClube } from "../../engine/torneios";
 import { avancarJogo, simularFimDaTemporada } from "../acoes";
-import { Barra, Cartao, Escudo } from "../componentes";
+import { Cartao, Escudo } from "../componentes";
 import { rotuloPartida } from "../formatos";
 import { useJogo, useLoja } from "../store";
 import { MensagemItem } from "./Mensagens";
@@ -72,30 +72,38 @@ export function Painel() {
         ? `Na ${NOME_FASE_TORNEIO[estadual.fase].toLowerCase()}`
         : "Fora da disputa do título"
     : "";
-  // Texto curto do botão da linha do jogo; o nome completo (para quem usa leitor de tela e para os testes) fica no aria-label.
-  const textoBotao = encerrada ? "Encerrar ▶" : hoje ? "Jogar ▶" : "Avançar ▶";
+
+  // Meta curta: "Terminar na primeira metade (até 10º)" vira "meta: até 10º".
+  const meta = estado.objetivo.descricao.match(/\(([^)]+)\)/)?.[1];
+  const naoLidas = estado.mensagens.filter((m) => !m.lida).length;
+  const irParaTabelas = () => useLoja.getState().irParaAba("tabelas");
+  const ondeJoga = proximo ? (proximo.neutro ? "campo neutro" : proximo.mandante === meuNoJogo ? "em casa" : "fora de casa") : "";
 
   return (
     <>
-      <section className="cartao jogo-linha">
+      <section className="cartao placar-do-dia">
+        <div className="linha entre">
+          <h3>{hoje ? "Jogo de hoje" : "Próximo jogo"}</h3>
+          {proximo && <span className="mini fraco">{formatarData(proximo.data)}</span>}
+        </div>
         {proximo && adversario ? (
           <>
-            <button className="escudo-botao" onClick={() => setVerAdversario(true)} aria-label={`Ver o provável time titular ${comArtigo("do", adversario)}`}>
-              <Escudo clube={adversario} tamanho={52} />
-            </button>
-            <div className="jogo-texto">
-              <h3>{hoje ? "Jogo de hoje" : "Próximo jogo"}</h3>
-              <div className="jogo-adversario">{meuNoJogo !== meuId ? `${estado.clubes[meuNoJogo].nome} ` : ""}x {adversario.nome}{posAdversario ? <span className="fraco"> ({posAdversario}º)</span> : null}</div>
-              <div className="mini fraco">{rotuloPartida(proximo)}{hoje ? "" : ` · ${formatarData(proximo.data)}`} · {proximo.neutro ? "campo neutro" : proximo.mandante === meuNoJogo ? "em casa" : "fora de casa"}</div>
+            <div className="frente-a-frente">
+              <div className="time"><Escudo clube={estado.clubes[meuNoJogo]} tamanho={56} /><b>{estado.clubes[meuNoJogo].nome}</b></div>
+              <div className="versus">x</div>
+              <div className="time">
+                <button className="escudo-botao" onClick={() => setVerAdversario(true)} aria-label={`Ver o provável time titular ${comArtigo("do", adversario)}`}>
+                  <Escudo clube={adversario} tamanho={56} />
+                </button>
+                <b>{adversario.nome}{posAdversario ? <span className="fraco"> ({posAdversario}º)</span> : null}</b>
+              </div>
             </div>
+            <div className="mini fraco centro">{rotuloPartida(proximo)} · {ondeJoga}</div>
           </>
         ) : (
-          <div className="jogo-texto">
-            <h3>Próximo jogo</h3>
-            <p className="fraco pequeno">{encerrada ? "A temporada terminou." : minhaSerieAcabou ? `${nomeDaLiga} terminou para você. Os outros campeonatos ainda estão em andamento.` : "Sem jogos marcados."}</p>
-          </div>
+          <p className="fraco pequeno">{encerrada ? "A temporada terminou." : minhaSerieAcabou ? `${nomeDaLiga} terminou para você. Os outros campeonatos ainda estão em andamento.` : "Sem jogos marcados."}</p>
         )}
-        <button className="botao primario jogar" aria-label={rotuloBotao} onClick={avancarJogo}>{textoBotao}</button>
+        <button className="botao primario grande cheio" aria-label={rotuloBotao} onClick={avancarJogo}>{encerrada ? `Encerrar ${estado.temporada} ▶` : hoje ? "Jogar ▶" : "Avançar ▶"}</button>
       </section>
 
       {verAdversario && adversario && <FolhaDoTime lado={provavelTime(estado, adversario.id)} provavel aoFechar={() => setVerAdversario(false)} />}
@@ -112,61 +120,46 @@ export function Painel() {
         </Cartao>
       )}
 
-      <div className="blocos">
-        <Bloco titulo={`${nomeDaLiga} ${estado.temporada}`}>
-          {linha.j
-            ? <div className="posicao num">{linha.pos}º{principal?.grupos ? <span className="mini fraco"> no grupo</span> : null}</div>
-            : <div className="pequeno fraco">Ainda sem jogos</div>}
-          <div><span className={`chip ${SITUACAO[situacao].cor}`}>{SITUACAO[situacao].texto}</span></div>
-          <div className="mini fraco">{estado.objetivo.descricao}</div>
-          {linha.j > 0 && <div className="mini fraco">{linha.pts} pts · {linha.j} jogos</div>}
-        </Bloco>
-
-        <Bloco titulo="Confiança">
-          <div>
-            <div className="linha entre mini fraco"><span>Diretoria</span><span className="num">{Math.round(estado.tecnico.confiancaDiretoria)}</span></div>
-            <Barra valor={estado.tecnico.confiancaDiretoria} />
-          </div>
-          <div>
-            <div className="linha entre mini fraco"><span>Torcida</span><span className="num">{Math.round(estado.tecnico.confiancaTorcida)}</span></div>
-            <Barra valor={estado.tecnico.confiancaTorcida} />
-          </div>
-          <div className="linha entre mini fraco"><span>Reputação</span><span className="num negrito">{Math.round(reputacaoDoTecnico(estado))}</span></div>
-          {emRisco && <p className="mini vermelho">Cargo em risco: com {CARGO.demissao} de confiança você é demitido.</p>}
-        </Bloco>
-
-        <Bloco titulo="Caixa" acao={<button className="botao mini-botao" onClick={() => abrir({ tipo: "financas" })}>Finanças</button>}>
-          <div className={`valor num ${clube.caixa < 0 ? "vermelho" : ""}`}>{formatarDinheiro(clube.caixa)}</div>
-          <div className="mini fraco">folha {formatarDinheiro(folhaSalarial(estado, meuId))}</div>
-          <div className="mini fraco">estádio {clube.estadio.capacidade.toLocaleString("pt-BR")} · moral {Math.round(clube.moral)}</div>
-        </Bloco>
-
-        <Bloco titulo="Copas" acao={minhasCopas.length > 0 || estadual ? <button className="botao mini-botao" onClick={() => useLoja.getState().irParaAba("tabelas")}>Ver tabelas</button> : undefined}>
-          {estadual && (
-            <div className="par">
-              <h4 className="sub-titulo">{estadual.nome} {estado.temporada}</h4>
-              <span className="pequeno">{textoDoEstadual}</span>
-            </div>
-          )}
-          {minhasCopas.map((c) => {
-            const { copa, situacao } = situacaoCurtaNaCopa(estado, c.id, meuId);
-            return (
-              <div key={c.id} className="par">
-                <h4 className="sub-titulo">{copa}</h4>
-                <span className="pequeno">{situacao}</span>
-              </div>
-            );
-          })}
-          {minhasCopas.length === 0 && !estadual && <p className="pequeno fraco">Nenhuma copa agora.</p>}
-        </Bloco>
-      </div>
-
-      <section className="cartao mensagens-linha">
-        <div className="cabeca">
-          <h3>Mensagens</h3>
-          <button className="botao pequeno" onClick={() => abrir({ tipo: "mensagens" })}>Ver todas</button>
+      <section className="cartao faixa-status">
+        <div>
+          <h3>{nomeDaLiga}</h3>
+          <span className="numero num">{linha.j ? `${linha.pos}º` : "—"}</span>
+          <span className={`chip ${SITUACAO[situacao].cor}`}>{situacao === "abaixo" ? "Abaixo da meta" : SITUACAO[situacao].texto}</span>
+          {meta && <span className="mini fraco">meta: {meta}</span>}
         </div>
-        <p className="pequeno">{recente ? `${recente.lida ? "✉️" : "📩"} ${recente.titulo}` : "Nada novo."}</p>
+        <button className="coluna-botao" aria-label="Finanças" onClick={() => abrir({ tipo: "financas" })}>
+          <h3>Caixa</h3>
+          <span className={`numero num ${clube.caixa < 0 ? "vermelho" : ""}`}>{formatarDinheiro(clube.caixa).replace("R$ ", "")}</span>
+          <span className="mini fraco">folha {formatarDinheiro(folhaSalarial(estado, meuId)).replace("R$ ", "")}</span>
+          <span className="mini fraco">moral {Math.round(clube.moral)}</span>
+        </button>
+        <div>
+          <h3>Confiança</h3>
+          <span className="numero num">{Math.round(estado.tecnico.confiancaDiretoria)}</span>
+          <span className="mini fraco">torcida {Math.round(estado.tecnico.confiancaTorcida)}</span>
+          <span className="mini fraco">reputação {Math.round(reputacaoDoTecnico(estado))}</span>
+          {emRisco && <span className="chip vermelho">Cargo em risco</span>}
+        </div>
+      </section>
+
+      <section className="cartao lista-do-painel">
+        {estadual && (
+          <button className="linha-do-painel" onClick={irParaTabelas}>
+            <span>{estadual.nome}</span><span><b>{textoDoEstadual}</b><span className="seta">›</span></span>
+          </button>
+        )}
+        {minhasCopas.map((c) => {
+          const { copa, situacao: sit } = situacaoCurtaNaCopa(estado, c.id, meuId);
+          return (
+            <button key={c.id} className="linha-do-painel" onClick={irParaTabelas}>
+              <span>{copa}</span><span><b>{sit}</b><span className="seta">›</span></span>
+            </button>
+          );
+        })}
+        <button className="linha-do-painel" onClick={() => abrir({ tipo: "mensagens" })}>
+          <span className="cortar">{recente ? `${recente.lida ? "✉️" : "📩"} ${recente.titulo}` : "Mensagens"}</span>
+          <span className="mini fraco">{naoLidas ? `${naoLidas > 9 ? "9+" : naoLidas} ${naoLidas === 1 ? "nova" : "novas"}` : "ver todas"}<span className="seta">›</span></span>
+        </button>
       </section>
 
       <div className="botoes-duplos">
@@ -174,15 +167,5 @@ export function Painel() {
         <button className="botao" aria-label="Histórico e campeões" onClick={() => abrir({ tipo: "historico" })}>📜 Histórico</button>
       </div>
     </>
-  );
-}
-
-/** Um dos blocos 2 × 2 do painel: título em letras pequenas, uma ação opcional no canto e o conteúdo. */
-function Bloco({ titulo, acao, children }: { titulo: string; acao?: ReactNode; children: ReactNode }) {
-  return (
-    <section className="cartao bloco">
-      <div className="cabeca"><h3>{titulo}</h3>{acao}</div>
-      {children}
-    </section>
   );
 }

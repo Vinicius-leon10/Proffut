@@ -826,3 +826,24 @@ p { margin: 0; }
 .bloco { padding: 10px 12px; }
 .bloco .cabeca { min-height: 24px; }
 .jogo-linha { padding: 8px 14px; }
+
+/* Prévia D (placar do dia, faixa de status e lista). */
+.placar-do-dia { display: flex; flex-direction: column; gap: 10px; }
+.placar-do-dia h3, .faixa-status h3 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--texto); font-weight: 800; margin: 0; }
+.frente-a-frente { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; text-align: center; }
+.frente-a-frente .time { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.95rem; }
+.frente-a-frente .versus { font-size: 1.3rem; font-weight: 800; color: var(--texto-3); padding-top: 16px; }
+.faixa-status { display: grid; grid-template-columns: 1fr 1fr 1fr; padding: 12px 4px; }
+.faixa-status > * { padding: 0 10px; display: flex; flex-direction: column; gap: 4px; align-items: flex-start; min-width: 0; }
+.faixa-status > * + * { border-left: 1px solid var(--divisor); }
+.faixa-status h3 { overflow-wrap: anywhere; }
+.faixa-status .numero { font-size: 1.3rem; font-weight: 800; line-height: 1.1; }
+.coluna-botao { background: none; border: 0; border-left: 1px solid var(--divisor); font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.lista-do-painel { padding: 4px 14px; display: flex; flex-direction: column; }
+.linha-do-painel { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 0; border: 0; border-bottom: 1px solid var(--divisor); background: none; font: inherit; color: inherit; text-align: left; font-size: 0.92rem; }
+.linha-do-painel:last-child { border-bottom: 0; }
+.linha-do-painel b { font-weight: 700; }
+.linha-do-painel .seta { color: var(--texto-3); margin-left: 6px; }
+.linha-do-painel .cortar { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.linha-do-painel > span:last-child { flex-shrink: 0; }
+.faixa-status .chip { white-space: normal; max-width: 100%; line-height: 1.2; }
