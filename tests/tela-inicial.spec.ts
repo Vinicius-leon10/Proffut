@@ -49,3 +49,34 @@ test("R135 tela inicial em blocos: jogo de hoje numa linha com o botão, quatro 
   await botao(page, "Sala de troféus e recordes").click();
   await expect(page.locator(".tela-cheia .topo .titulo")).toHaveText("Sala de troféus");
 });
+
+test("R136 tela inicial compacta: as Copas em linhas curtas, sem esticar o Caixa, e tudo cabe na área do iPhone (pedido: \"A tela ficou desproporcional, me mande um exemplo de como vc vai corrigir\"; \"Faça\")", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  // O Bahia na Série A joga o estadual e entra na Libertadores: duas linhas no bloco das Copas.
+  await novoJogo(page, { serie: "Série A", clube: "Bahia" });
+  const principal = page.locator("main.conteudo");
+  const blocos = principal.locator(".blocos > .bloco");
+
+  // Copas: o nome e a situação em poucas palavras, não a frase inteira ("O Bahia está na fase de grupos da Copa do Nordeste.").
+  const copas = blocos.nth(3);
+  await expect(copas.getByRole("heading", { name: "Libertadores" })).toBeVisible();
+  await expect(copas).toContainText("Entra na 2ª fase");
+  await expect(copas).not.toContainText(/O Bahia (está|entra|não joga)/);
+  const textos = (await copas.locator(".par").allTextContents()).map((t) => t.length);
+  for (const n of textos) expect(n, "cada copa cabe em poucas palavras").toBeLessThan(45);
+
+  // Caixa e Copas, na mesma linha, ficam do mesmo tamanho (sem um vazio enorme no Caixa) e o Caixa mostra estádio e moral.
+  await expect(blocos.nth(2)).toContainText(/estádio [\d.]+ · moral \d+/);
+  const [caixa, copasCaixa] = await Promise.all([blocos.nth(2).boundingBox(), copas.boundingBox()]);
+  expect(Math.abs(caixa!.height - copasCaixa!.height), "Caixa e Copas com alturas parecidas").toBeLessThan(40);
+
+  // Antes do primeiro jogo, nada de traço grande no lugar da posição.
+  await expect(blocos.nth(0)).toContainText("Ainda sem jogos");
+
+  // Do primeiro cartão ao último botão: cabe na área livre do iPhone com o app instalado (cerca de 620 pt), com folga.
+  const altura = await principal.locator("> *").evaluateAll((els) => {
+    const r = els.map((e) => e.getBoundingClientRect());
+    return r[r.length - 1].bottom - r[0].top;
+  });
+  expect(altura, "altura do painel").toBeLessThan(600);
+});
