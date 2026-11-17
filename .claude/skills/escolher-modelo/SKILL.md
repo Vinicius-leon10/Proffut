@@ -1,6 +1,6 @@
 ---
 name: escolher-modelo
-description: Em todo pedido do usuário do Proffut, antes de executar, separa PERGUNTA de PEDIDO DE AÇÃO e diz em uma linha qual modelo (Haiku, Sonnet, Opus) e qual esforço (baixo, médio, alto) gastam menos crédito sem piorar o resultado. Pergunta: responde direto, sem esperar, e sugere o modelo mais barato. Ação: diz o modelo e o esforço e espera o usuário confirmar. Use SEMPRE, em qualquer pedido, no jogo, nos vídeos, nos escudos e camisas, nos dados, nos testes e na publicação.
+description: "Em todo pedido do usuário do Proffut, antes de executar, separa PERGUNTA de PEDIDO DE AÇÃO e diz em uma linha qual modelo (Haiku, Sonnet, Opus) e qual esforço (baixo, médio, alto) gastam menos crédito sem piorar o resultado. Pergunta: responde direto, sem esperar, e sugere o modelo mais barato. Ação: diz o modelo e o esforço e espera o usuário confirmar. Use SEMPRE, em qualquer pedido, no jogo, nos vídeos, nos escudos e camisas, nos dados, nos testes e na publicação."
 ---
 
 # Escolher o modelo e o esforço
