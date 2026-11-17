@@ -69,8 +69,8 @@ export function Painel() {
     ? estadual.fase === "liga" || estadual.fase === "grupos"
       ? `${posicaoNoTorneio(estado, estadual, meuId) || "–"}º ${estadual.grupos ? "no grupo" : "lugar"}`
       : estadual.semeados?.includes(meuId) && estado.partidas.some((p) => p.serie === estadual.id && !p.jogada && (p.mandante === meuId || p.visitante === meuId))
-        ? `na ${NOME_FASE_TORNEIO[estadual.fase].toLowerCase()}`
-        : "fora da disputa do título"
+        ? `Na ${NOME_FASE_TORNEIO[estadual.fase].toLowerCase()}`
+        : "Fora da disputa do título"
     : "";
   // Texto curto do botão da linha do jogo; o nome completo (para quem usa leitor de tela e para os testes) fica no aria-label.
   const textoBotao = encerrada ? "Encerrar ▶" : hoje ? "Jogar ▶" : "Avançar ▶";
@@ -85,7 +85,7 @@ export function Painel() {
             </button>
             <div className="jogo-texto">
               <h3>{hoje ? "Jogo de hoje" : "Próximo jogo"}</h3>
-              <div className="jogo-adversario">x {adversario.nome}{posAdversario ? <span className="fraco"> ({posAdversario}º)</span> : null}</div>
+              <div className="jogo-adversario">{meuNoJogo !== meuId ? `${estado.clubes[meuNoJogo].nome} ` : ""}x {adversario.nome}{posAdversario ? <span className="fraco"> ({posAdversario}º)</span> : null}</div>
               <div className="mini fraco">{rotuloPartida(proximo)} · {formatarData(proximo.data)} · {proximo.neutro ? "campo neutro" : proximo.mandante === meuNoJogo ? "em casa" : "fora de casa"}</div>
             </div>
           </>
@@ -139,7 +139,12 @@ export function Painel() {
         </Bloco>
 
         <Bloco titulo="Copas" acao={minhasCopas.length > 0 || estadual ? <button className="botao mini-botao" onClick={() => useLoja.getState().irParaAba("tabelas")}>Ver tabelas</button> : undefined}>
-          {estadual && <p className="pequeno"><span className="negrito">{estadual.nome.replace(/^Campeonato /, "")}:</span> {textoDoEstadual}</p>}
+          {estadual && (
+            <div className="coluna" style={{ gap: 2 }}>
+              <h4 className="sub-titulo">{estadual.nome} {estado.temporada}</h4>
+              <span className="pequeno">{textoDoEstadual}</span>
+            </div>
+          )}
           {minhasCopas.map((c) => <p key={c.id} className="pequeno">{situacaoNaCopaDeClubes(estado, c.id, meuId)}</p>)}
           {minhasCopas.length === 0 && !estadual && <p className="pequeno fraco">Nenhuma copa agora.</p>}
         </Bloco>
