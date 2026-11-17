@@ -8,8 +8,11 @@ Leia isto antes de mexer no projeto. Detalhes de design em [PLANO.md](PLANO.md);
    (R15, R16…), escrito **primeiro** em `tests/`. Rode e confirme que ele **falha** sem a correção; depois corrija e
    confirme que **passa**. Acrescente a linha dele em `tests/README.md` (o que garante e de onde veio o pedido, com a
    frase do usuário).
-2. **Antes de cada envio:** `npm run verificar` (testes do motor, verificação de tipos, build e testes de ponta a ponta)
+2. **Antes de publicar:** `npm run verificar` (testes do motor, verificação de tipos, build e testes de ponta a ponta)
    passando 100%. Nunca desligar, pular (`test.skip`, `test.only`, `retries`) ou apagar um teste para ficar verde.
+   Para ganhar tempo (pedido do usuário, nov/2026: "Vc num tinha feito um modo de acelerar isso?"), o envio para a
+   branch pode ir assim que o build passar, com a verificação daqui rodando ao mesmo tempo que o "Testes" do GitHub;
+   a `main` só recebe com as duas verdes.
 3. **Sem versão de teste.** O usuário decidiu não ter versão de teste separada ("Não precisa criar uma versão de teste")
    e escolheu que cada mudança vá **direto para a oficial, só se todos os testes passarem**. Fluxo:
    trabalhar na branch `claude/plano-do-jogo` → push → esperar o workflow "Testes" ficar verde nela no GitHub →
@@ -754,7 +757,9 @@ workflow só fica verde com as 6 verdes e a publicação (job `publicar`, com `n
 acabaram e o usuário o deixou público de novo): envio novo cancela a conferência em andamento da mesma branch
 (`concurrency`), envios só com `lotes/**` ou `.md` não rodam o "Testes" (`paths-ignore`), o navegador do Playwright fica em
 cache (`actions/cache`, chave pela versão) e o "Testes" pode ser rodado à mão (`workflow_dispatch`). Ideias que
-ficaram: o teste longo do motor num arquivo à parte e a gravação do save mais leve. Esperar a mudança no save com
+ficou: a gravação do save mais leve. Feito em 17/nov/2026: o `motor.test.ts` (2.800 linhas) virou 41 arquivos em
+`src/engine/testes/` (separados por `describe`, com os imports de cada um), rodando em paralelo (aqui 1.237 s → 420 s) e,
+no GitHub, em 3 máquinas (`--shard`, job `motor` com `matrix.parte`). Esperar a mudança no save com
 `esperarNoSave` ou lendo o resumo do espaço, nunca só `esperarSalvar` antes de recarregar (R36 e R84 falharam no GitHub
 por isso).
 
@@ -933,7 +938,7 @@ de força o ganho cai; potencial dos jovens criados `margem` 4–20; um 70 de 18
 ```bash
 npm install
 npm run verificar   # tudo o que tem de passar antes de cada envio (os quatro abaixo, na ordem)
-npm test            # testes do motor (vitest, src/engine/motor.test.ts)
+npm test            # testes do motor (vitest, src/engine/testes/: um arquivo por assunto, em paralelo)
 npm run build       # verificação de tipos (tsc) + site em dist/
 npm run test:e2e    # testes de ponta a ponta com tela de iPhone (Playwright, pasta tests/; precisa do build)
 npm run sim         # simula temporadas; use depois de mexer em constantes.ts
@@ -979,7 +984,7 @@ o GitHub (git, raw) funciona. Playwright 1.63 já vem com o Chromium (`/opt/pw-b
 | `temporada.ts` | Virada: acesso/rebaixamento, idade, evolução, aposentadoria, base, Série D (`serie-d-reserva.json`) |
 | `jogo.ts` | Orquestra: `novoJogo`, `avancar`, `prepararJogos`/`concluirJogos`, `provavelTime` (escalação do computador sem mudar o jogo), propostas de emprego, obras do dia |
 | `checagem.ts` | `checarEstado`, `repararEstado`, `testarPartida` (roda sozinha ao abrir um jogo) |
-| `motor.test.ts` | Testes do motor |
+| `testes/` | Testes do motor, um arquivo por assunto (`01-calendario.test.ts` a `41-...`), rodando em paralelo; no GitHub em 3 partes |
 | `src/save/` | `salvamento.ts`: IndexedDB (`proffut`/`saves`, chaves `jogo:auto`, `resumo:auto`...), exportar/importar `.json`. `aparelho.ts`: checagem do aparelho. `escudos.ts`: escudos importados pelo usuário, que trocam os do jogo só no aparelho (chave `escudos`, id do clube → imagem) |
 | `src/ui/` | React + Zustand. `store.ts` (estado, telas sobrepostas, salvamento 400 ms após cada mudança), `acoes.ts`, `componentes.tsx`, `estilo.css` (visual "opção 3": tokens no `:root`), `sons.ts` (apito, torcida, narrador), `telas/*.tsx` |
 | `tests/` | Testes de ponta a ponta R01…: `*.spec.ts`, passos comuns em `ajuda.ts`, relatório em português em `resumo.ts`, lista em `README.md` |

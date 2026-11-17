@@ -16,9 +16,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Os testes do motor ficam em src/engine/testes/, um arquivo por assunto, e rodam em 3 partes ao mesmo tempo (--shard);
+  # em cada máquina os arquivos ainda rodam em paralelo. Antes era um arquivo só e levava 13 a 16 minutos.
   motor:
-    name: Testes do motor
+    name: Testes do motor (parte ${{ matrix.parte }} de 3)
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        parte: [1, 2, 3]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -27,7 +33,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Testes do motor
-        run: npm test
+        run: npx vitest run --shard=${{ matrix.parte }}/3
 
   # Testes de tela em 5 partes ao mesmo tempo (--shard), como no workflow "Testes".
   tela:

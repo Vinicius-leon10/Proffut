@@ -1,7 +1,7 @@
 import type { Page } from "@playwright/test";
 import { botao, expect, irParaOMeuJogo, mexerNoSave, nomeDoAdversario, novoJogo, test, MINUTO_2X, andar } from "./ajuda";
 
-// As da tela do jogo: as do print do usuário (R58). Os chutes saíram da tela; o motor ainda confere (motor.test.ts).
+// As da tela do jogo: as do print do usuário (R58). Os chutes saíram da tela; o motor ainda confere (src/engine/testes/).
 const ESTATISTICAS = ["Ataques", "Ataques perigosos", "Posse de bola", "Escanteios", "Cartões amarelos", "Cartões vermelhos"];
 
 /** Os dois números de uma estatística na tela, na ordem do placar (mandante, visitante). */

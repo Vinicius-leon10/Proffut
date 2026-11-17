@@ -1,7 +1,7 @@
 name: Testes
 
-# Os testes do motor e os de tela rodam ao mesmo tempo, em máquinas separadas: os de tela em 5 partes (--shard),
-# cada uma com um quinto dos testes. Nenhum teste fica de fora: o workflow só fica verde com as 6 máquinas verdes.
+# Os testes do motor e os de tela rodam ao mesmo tempo, em máquinas separadas: os do motor em 3 partes e os de tela em 5 (--shard),
+# cada uma com um quinto dos testes. Nenhum teste fica de fora: o workflow só fica verde com as 8 máquinas verdes (3 do motor e 5 de tela).
 on:
   push:
     branches-ignore: [gh-pages, dados-elencos, dados-times, dados-segundas, dados-america]
@@ -19,9 +19,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Os testes do motor ficam em src/engine/testes/, um arquivo por assunto, e rodam em 3 partes ao mesmo tempo (--shard);
+  # em cada máquina os arquivos ainda rodam em paralelo. Antes era um arquivo só e levava 13 a 16 minutos.
   motor:
-    name: Testes do motor
+    name: Testes do motor (parte ${{ matrix.parte }} de 3)
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        parte: [1, 2, 3]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -30,7 +36,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Testes do motor
-        run: npm test
+        run: npx vitest run --shard=${{ matrix.parte }}/3
 
   tela:
     name: Testes de tela (parte ${{ matrix.parte }} de 5)
