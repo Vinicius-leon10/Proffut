@@ -3,38 +3,31 @@ import { botao, cartaoDoProximoJogo, expect, novoJogo, test } from "./ajuda";
 // Tela inicial em blocos (pedido: "Mande exemplos de como podemos melhorar essa tela inicial, otimizar as informações, tem
 // muita coisa, temos que rolar muito pra baixo"; ele escolheu a opção C: "Gostei letra C, guarde a informação, utilizaremos
 // depois"; depois: "Tela inicial" e "Pode começar").
-test("R135 tela inicial em blocos: jogo de hoje numa linha com o botão, quatro blocos (campeonato, confiança, caixa e copas), mensagens e os botões de troféus e histórico, tudo na tela do iPhone sem rolar", async ({ page }) => {
+test("R135 tela inicial (opção D desde o R137): o jogo com os dois escudos e o botão largo, a faixa com campeonato, caixa e confiança, a lista com as competições e a mensagem e os botões de troféus e histórico, tudo na tela do iPhone sem rolar", async ({ page }) => {
   // A tela do iPhone com o app instalado (a altura de 664 é a do Safari com as barras).
   await page.setViewportSize({ width: 390, height: 844 });
   await novoJogo(page);
   const principal = page.locator("main.conteudo");
   await expect(cartaoDoProximoJogo(page)).toBeVisible();
 
-  // O botão de avançar fica na linha do jogo (ao lado do adversário), não embaixo de um cartão grande.
+  // O botão de avançar fica dentro do cartão do jogo.
   const avancar = botao(page, /Avançar|Ir para o jogo/);
-  const linhaDoJogo = page.locator(".jogo-linha");
-  await expect(linhaDoJogo).toBeVisible();
-  await expect(linhaDoJogo.getByRole("button", { name: /Avançar|Ir para o jogo/ })).toBeVisible();
+  await expect(principal.locator(".placar-do-dia").getByRole("button", { name: /Avançar|Ir para o jogo/ })).toBeVisible();
 
-  // Os quatro blocos 2 × 2.
-  const blocos = principal.locator(".blocos > .bloco");
-  await expect(blocos).toHaveCount(4);
-  const titulos = (await blocos.locator("h3").allTextContents()).map((t) => t.trim());
-  expect(titulos[1]).toBe("Confiança");
-  expect(titulos[2]).toBe("Caixa");
-  expect(titulos[3]).toBe("Copas");
-  await expect(blocos.nth(1)).toContainText("Diretoria");
-  await expect(blocos.nth(1)).toContainText("Torcida");
-  await expect(blocos.nth(1)).toContainText("Reputação");
-  await expect(blocos.nth(2)).toContainText(/folha/i);
-  // Dois blocos por linha.
-  const caixas = await blocos.evaluateAll((els) => els.map((e) => e.getBoundingClientRect()));
-  expect(Math.abs(caixas[0].y - caixas[1].y), "campeonato e confiança na mesma linha").toBeLessThan(2);
-  expect(Math.abs(caixas[2].y - caixas[3].y), "caixa e copas na mesma linha").toBeLessThan(2);
-  expect(caixas[2].y, "a segunda linha fica abaixo da primeira").toBeGreaterThan(caixas[0].y + caixas[0].height - 1);
+  // A faixa com três colunas: o campeonato, o Caixa e a Confiança, lado a lado.
+  const colunas = principal.locator(".faixa-status > *");
+  await expect(colunas).toHaveCount(3);
+  const titulos = (await colunas.locator("h3").allTextContents()).map((t) => t.trim());
+  expect(titulos[1]).toBe("Caixa");
+  expect(titulos[2]).toBe("Confiança");
+  await expect(colunas.nth(1)).toContainText(/folha/);
+  await expect(colunas.nth(2)).toContainText(/torcida \d+/);
+  await expect(colunas.nth(2)).toContainText(/reputação \d+/);
+  const caixas = await colunas.evaluateAll((els) => els.map((e) => e.getBoundingClientRect()));
+  expect(Math.abs(caixas[0].y - caixas[1].y), "colunas na mesma linha").toBeLessThan(2);
+  expect(Math.abs(caixas[1].y - caixas[2].y), "colunas na mesma linha").toBeLessThan(2);
 
-  // Mensagens numa linha só e os dois botões embaixo; os cartões antigos saíram.
-  await expect(principal.getByRole("heading", { name: "Mensagens", exact: true })).toBeVisible();
+  // Os cartões antigos saíram.
   await expect(principal.getByRole("heading", { name: "Últimas mensagens" })).toHaveCount(0);
   await expect(principal.getByRole("heading", { name: "Clube", exact: true })).toHaveCount(0);
 
@@ -50,28 +43,24 @@ test("R135 tela inicial em blocos: jogo de hoje numa linha com o botão, quatro 
   await expect(page.locator(".tela-cheia .topo .titulo")).toHaveText("Sala de troféus");
 });
 
-test("R136 tela inicial compacta: as Copas em linhas curtas, sem esticar o Caixa, e tudo cabe na área do iPhone (pedido: \"A tela ficou desproporcional, me mande um exemplo de como vc vai corrigir\"; \"Faça\")", async ({ page }) => {
+test("R136 tela inicial compacta: as competições em linhas curtas e tudo cabe na área do iPhone (pedido: \"A tela ficou desproporcional, me mande um exemplo de como vc vai corrigir\"; \"Faça\")", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  // O Bahia na Série A joga o estadual e entra na Libertadores: duas linhas no bloco das Copas.
+  // O Bahia na Série A joga o estadual e entra na Libertadores.
   await novoJogo(page, { serie: "Série A", clube: "Bahia" });
   const principal = page.locator("main.conteudo");
-  const blocos = principal.locator(".blocos > .bloco");
+  const lista = principal.locator(".lista-do-painel");
 
   // Copas: o nome e a situação em poucas palavras, não a frase inteira ("O Bahia está na fase de grupos da Copa do Nordeste.").
-  const copas = blocos.nth(3);
-  await expect(copas.getByRole("heading", { name: "Libertadores" })).toBeVisible();
-  await expect(copas).toContainText("Entra na 2ª fase");
-  await expect(copas).not.toContainText(/O Bahia (está|entra|não joga)/);
-  const textos = (await copas.locator(".par").allTextContents()).map((t) => t.length);
-  for (const n of textos) expect(n, "cada copa cabe em poucas palavras").toBeLessThan(45);
+  const libertadores = lista.locator(".linha-do-painel", { hasText: "Libertadores" });
+  await expect(libertadores).toContainText("Entra na 2ª fase");
+  await expect(lista).not.toContainText(/O Bahia (está|entra|não joga)/);
+  for (const n of (await lista.locator(".linha-do-painel").allTextContents()).map((t) => t.length)) expect(n, "cada linha em poucas palavras").toBeLessThan(60);
 
-  // Caixa e Copas, na mesma linha, ficam do mesmo tamanho (sem um vazio enorme no Caixa) e o Caixa mostra estádio e moral.
-  await expect(blocos.nth(2)).toContainText(/estádio [\d.]+ · moral \d+/);
-  const [caixa, copasCaixa] = await Promise.all([blocos.nth(2).boundingBox(), copas.boundingBox()]);
-  expect(Math.abs(caixa!.height - copasCaixa!.height), "Caixa e Copas com alturas parecidas").toBeLessThan(40);
+  // O Caixa mostra a moral e abre Finanças.
+  await expect(principal.locator(".faixa-status")).toContainText(/moral \d+/);
 
-  // Antes do primeiro jogo, nada de traço grande no lugar da posição.
-  await expect(blocos.nth(0)).toContainText("Ainda sem jogos");
+  // Antes do primeiro jogo, um traço no lugar da posição (sem número inventado).
+  await expect(principal.locator(".faixa-status > *").first().locator(".numero")).toHaveText("—");
 
   // Do primeiro cartão ao último botão: cabe na área livre do iPhone com o app instalado (cerca de 620 pt), com folga.
   const altura = await principal.locator("> *").evaluateAll((els) => {
@@ -79,4 +68,35 @@ test("R136 tela inicial compacta: as Copas em linhas curtas, sem esticar o Caixa
     return r[r.length - 1].bottom - r[0].top;
   });
   expect(altura, "altura do painel").toBeLessThan(600);
+
+  await botao(page, "Finanças").click();
+  await expect(page.locator(".tela-cheia .topo .titulo")).toHaveText("Finanças");
+});
+
+test("R137 tela inicial opção D (pedido: \"Aplique a D em um cenário real pra ver como ficaria\"; \"Aplique\"): o jogo frente a frente com os dois escudos e os nomes, o escudo do adversário abre o time dele, e as linhas das competições e da mensagem levam às Tabelas e às Mensagens", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await novoJogo(page, { serie: "Série A", clube: "Bahia" });
+  const principal = page.locator("main.conteudo");
+  const placar = principal.locator(".placar-do-dia");
+
+  // Os dois times, cada um com o escudo e o nome, o Bahia e o adversário; embaixo, a competição e onde é o jogo.
+  await expect(placar.locator(".frente-a-frente .time")).toHaveCount(2);
+  await expect(placar.locator(".frente-a-frente .time").first()).toContainText("Bahia");
+  await expect(placar.locator(".frente-a-frente .escudo")).toHaveCount(2);
+  await expect(placar).toContainText(/(em casa|fora de casa|campo neutro)/);
+  // O botão largo, do tamanho do cartão.
+  const [cartao, avancar] = await Promise.all([placar.boundingBox(), placar.getByRole("button", { name: /Avançar|Ir para o jogo/ }).boundingBox()]);
+  expect(avancar!.width, "botão largo").toBeGreaterThan(cartao!.width * 0.8);
+
+  // O escudo do adversário mostra o provável time titular.
+  await page.getByRole("button", { name: /^Ver o provável time titular d[oa] / }).click();
+  await expect(page.getByRole("dialog").locator(".campo .vaga")).toHaveCount(11);
+  await page.getByRole("dialog").getByRole("button", { name: "Fechar" }).click();
+
+  // A linha da mensagem abre as Mensagens; a da Libertadores, as Tabelas.
+  await principal.locator(".linha-do-painel").last().click();
+  await expect(page.locator(".tela-cheia .topo .titulo")).toHaveText("Mensagens");
+  await page.getByRole("button", { name: "Voltar", exact: true }).click();
+  await principal.locator(".linha-do-painel", { hasText: "Libertadores" }).click();
+  await expect(page.getByRole("tab", { name: "Copas" })).toBeVisible();
 });

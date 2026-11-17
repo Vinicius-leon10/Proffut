@@ -122,7 +122,7 @@ export function Painel() {
 
       <section className="cartao faixa-status">
         <div>
-          <h3>{nomeDaLiga}</h3>
+          <h3>{nomeDaLiga} {estado.temporada}</h3>
           <span className="numero num">{linha.j ? `${linha.pos}º` : "—"}</span>
           <span className={`chip ${SITUACAO[situacao].cor}`}>{situacao === "abaixo" ? "Abaixo da meta" : SITUACAO[situacao].texto}</span>
           {meta && <span className="mini fraco">meta: {meta}</span>}
@@ -144,9 +144,9 @@ export function Painel() {
 
       <section className="cartao lista-do-painel">
         {estadual && (
-          <button className="linha-do-painel" onClick={irParaTabelas}>
-            <span>{estadual.nome}</span><span><b>{textoDoEstadual}</b><span className="seta">›</span></span>
-          </button>
+          <div className="linha-do-painel" onClick={irParaTabelas}>
+            <h4>{estadual.nome} {estado.temporada}</h4><span><b>{textoDoEstadual}</b><span className="seta">›</span></span>
+          </div>
         )}
         {minhasCopas.map((c) => {
           const { copa, situacao: sit } = situacaoCurtaNaCopa(estado, c.id, meuId);
