@@ -6,7 +6,7 @@ import { reputacaoDoTecnico } from "../../engine/carreira";
 import { CARGO } from "../../engine/constantes";
 import { situacaoDoObjetivo } from "../../engine/diretoria";
 import { folhaSalarial, formatarDinheiro } from "../../engine/financas";
-import { copasDoClube, situacaoNaCopaDeClubes } from "../../engine/copas";
+import { copasDoClube, situacaoCurtaNaCopa } from "../../engine/copas";
 import { meuJogoHoje, meuTimeNaPartida, provavelTime, proximaDataComJogo, proximoJogoDoClube } from "../../engine/jogo";
 import { NOME_FASE_TORNEIO, posicaoNoTorneio, torneiosDoClube } from "../../engine/torneios";
 import { avancarJogo, simularFimDaTemporada } from "../acoes";
@@ -86,7 +86,7 @@ export function Painel() {
             <div className="jogo-texto">
               <h3>{hoje ? "Jogo de hoje" : "Próximo jogo"}</h3>
               <div className="jogo-adversario">{meuNoJogo !== meuId ? `${estado.clubes[meuNoJogo].nome} ` : ""}x {adversario.nome}{posAdversario ? <span className="fraco"> ({posAdversario}º)</span> : null}</div>
-              <div className="mini fraco">{rotuloPartida(proximo)} · {formatarData(proximo.data)} · {proximo.neutro ? "campo neutro" : proximo.mandante === meuNoJogo ? "em casa" : "fora de casa"}</div>
+              <div className="mini fraco">{rotuloPartida(proximo)}{hoje ? "" : ` · ${formatarData(proximo.data)}`} · {proximo.neutro ? "campo neutro" : proximo.mandante === meuNoJogo ? "em casa" : "fora de casa"}</div>
             </div>
           </>
         ) : (
@@ -114,10 +114,12 @@ export function Painel() {
 
       <div className="blocos">
         <Bloco titulo={`${nomeDaLiga} ${estado.temporada}`}>
-          <div className="posicao num">{linha.j ? `${linha.pos}º` : "–"}{principal?.grupos && linha.j ? <span className="mini fraco"> no grupo</span> : null}</div>
+          {linha.j
+            ? <div className="posicao num">{linha.pos}º{principal?.grupos ? <span className="mini fraco"> no grupo</span> : null}</div>
+            : <div className="pequeno fraco">Ainda sem jogos</div>}
           <div><span className={`chip ${SITUACAO[situacao].cor}`}>{SITUACAO[situacao].texto}</span></div>
           <div className="mini fraco">{estado.objetivo.descricao}</div>
-          <div className="mini fraco">{linha.pts} pts · {linha.j} jogos</div>
+          {linha.j > 0 && <div className="mini fraco">{linha.pts} pts · {linha.j} jogos</div>}
         </Bloco>
 
         <Bloco titulo="Confiança">
@@ -136,16 +138,25 @@ export function Painel() {
         <Bloco titulo="Caixa" acao={<button className="botao mini-botao" onClick={() => abrir({ tipo: "financas" })}>Finanças</button>}>
           <div className={`valor num ${clube.caixa < 0 ? "vermelho" : ""}`}>{formatarDinheiro(clube.caixa)}</div>
           <div className="mini fraco">folha {formatarDinheiro(folhaSalarial(estado, meuId))}</div>
+          <div className="mini fraco">estádio {clube.estadio.capacidade.toLocaleString("pt-BR")} · moral {Math.round(clube.moral)}</div>
         </Bloco>
 
         <Bloco titulo="Copas" acao={minhasCopas.length > 0 || estadual ? <button className="botao mini-botao" onClick={() => useLoja.getState().irParaAba("tabelas")}>Ver tabelas</button> : undefined}>
           {estadual && (
-            <div className="coluna" style={{ gap: 2 }}>
+            <div className="par">
               <h4 className="sub-titulo">{estadual.nome} {estado.temporada}</h4>
               <span className="pequeno">{textoDoEstadual}</span>
             </div>
           )}
-          {minhasCopas.map((c) => <p key={c.id} className="pequeno">{situacaoNaCopaDeClubes(estado, c.id, meuId)}</p>)}
+          {minhasCopas.map((c) => {
+            const { copa, situacao } = situacaoCurtaNaCopa(estado, c.id, meuId);
+            return (
+              <div key={c.id} className="par">
+                <h4 className="sub-titulo">{copa}</h4>
+                <span className="pequeno">{situacao}</span>
+              </div>
+            );
+          })}
           {minhasCopas.length === 0 && !estadual && <p className="pequeno fraco">Nenhuma copa agora.</p>}
         </Bloco>
       </div>

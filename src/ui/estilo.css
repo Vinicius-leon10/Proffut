@@ -199,17 +199,19 @@ p { margin: 0; }
 .cartao .cabeca h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--texto); font-weight: 800; }
 
 /* Painel do clube em blocos (R135): o jogo numa linha com o botão, quatro blocos 2 × 2, mensagens e dois botões. */
-.jogo-linha { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 20px; }
+.jogo-linha { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 20px; }
 .jogo-linha .jogo-texto { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .jogo-linha h3 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--texto); font-weight: 800; }
 .jogo-adversario { font-size: 1.15rem; font-weight: 800; line-height: 1.2; overflow-wrap: anywhere; }
 .jogo-adversario .fraco { font-size: 0.8rem; font-weight: 600; }
 .botao.jogar { flex-shrink: 0; min-height: 48px; padding: 0 18px; font-size: 1.05rem; font-weight: 800; border-radius: 14px; }
 .blocos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.bloco { min-width: 0; display: flex; flex-direction: column; gap: 6px; padding: 12px; border-radius: 20px; }
+.bloco { min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: 12px; border-radius: 20px; }
 .bloco .cabeca { margin-bottom: 0; min-height: 26px; align-items: flex-start; gap: 6px; }
 .bloco .cabeca h3 { font-size: 0.7rem; letter-spacing: 0.1em; color: var(--texto); overflow-wrap: anywhere; }
-.bloco .sub-titulo { font-size: 0.85rem; font-weight: 800; line-height: 1.2; }
+.bloco .sub-titulo { margin: 0; font-size: 0.75rem; font-weight: 800; line-height: 1.2; }
+.bloco .par { display: flex; flex-direction: column; gap: 0; }
+.bloco .par + .par { margin-top: 4px; }
 .bloco .posicao { font-size: 1.8rem; font-weight: 800; line-height: 1; }
 .bloco .valor { font-size: 1.35rem; font-weight: 800; line-height: 1.1; }
 .botao.mini-botao { min-height: 26px; padding: 0 8px; font-size: 0.7rem; border-radius: 8px; flex-shrink: 0; }

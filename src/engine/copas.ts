@@ -1265,6 +1265,30 @@ export function situacaoNaCopaDeClubes(estado: EstadoJogo, copaId: IdCopa, clube
   return faseDoProximo ? `${nome} está ${naFase(faseDoProximo)} da ${def.nome}.` : `${nome} passou de fase na ${def.nome} e espera o sorteio da próxima.`;
 }
 
+/** O mesmo que `situacaoNaCopaDeClubes`, em poucas palavras para o painel: o nome da copa e a situação ("Fase de grupos", "Eliminado nas quartas"). */
+export function situacaoCurtaNaCopa(estado: EstadoJogo, copaId: IdCopa, clubeId: string): { copa: string; situacao: string } {
+  const copa = estado.copas?.[copaId];
+  const def = POR_ID.get(copaId);
+  if (!copa || !def) return { copa: "", situacao: "" };
+  const nome = def.nome;
+  const naFase = (f: FaseCopa) => `${["oitavas", "quartas"].some((x) => f.id.startsWith(x)) ? "nas" : "na"} ${f.nome.toLowerCase()}`;
+  if (copa.campeao === clubeId) return { copa: nome, situacao: "Campeão 🏆" };
+  if (copa.vice === clubeId) return { copa: nome, situacao: "Vice-campeão" };
+  if (!copa.clubes.includes(clubeId)) return { copa: nome, situacao: "Não joga" };
+  const jogos = estado.partidas.filter((p) => p.serie === copaId && (p.mandante === clubeId || p.visitante === clubeId));
+  const ultima = jogos.at(-1);
+  if (!ultima) {
+    const entrada = def.fases.find((f) => copa.entram[f.id]?.includes(clubeId) || f.grupos?.fixos?.some((g) => copa.entram[g]?.includes(clubeId)));
+    return { copa: nome, situacao: entrada ? `Entra ${naFase(entrada)}` : "Entra mais adiante" };
+  }
+  const fase = def.fases.find((f) => f.id === ultima.fase)!;
+  const r = resultadoDaFase(estado, def, copa, fase);
+  if (r?.eliminados.includes(clubeId)) return { copa: nome, situacao: `Eliminado ${naFase(fase)}` };
+  const proximo = jogos.find((p) => !p.jogada);
+  const faseDoProximo = proximo ? def.fases.find((f) => f.id === proximo.fase) : undefined;
+  return { copa: nome, situacao: faseDoProximo ? faseDoProximo.nome : "Espera o sorteio" };
+}
+
 registrarSemanasDasCopas();
 
 export { PAISES, divisaoDaLiga };
