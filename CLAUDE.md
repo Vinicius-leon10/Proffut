@@ -876,6 +876,10 @@ antes da estreia; a tela pede no máximo 26 e avisa com menos de 3 goleiros). Co
 dias (`DIAS_PARA_CORTE`) corta o jogador e entra o melhor da posição; depois da estreia ninguém muda (na volta da
 concentração entre fases a lista não é refeita). Modo Copa: "Listas dos 26" (`BotaoListas`) mostra os 26 de cada seleção.
 
+**Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
+pedir. (1) Ajustar o mercado de jogadores livres. (2) Ajustar a parte financeira: compra de jogador e renda. (3) Ficar mais
+difícil outros clubes chamarem o técnico (convites, `CONVITES` em constantes.ts e `carreira.ts`).
+
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).
 (2) a (5) feitos em 12/nov/2026 ("Pode aplicar o 4,5,6,7"): **partidas mais lentas** (R128: `INTERVALO_MS` em AoVivo.tsx,
