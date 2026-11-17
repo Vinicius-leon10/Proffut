@@ -818,3 +818,11 @@ p { margin: 0; }
 .mensagens-linha { padding: 10px 14px; border-radius: 20px; }
 .mensagens-linha .cabeca { margin-bottom: 4px; align-items: center; }
 .mensagens-linha p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Painel mais baixo (R136): os cinco itens ficam 4 px mais juntos e os dois botões de baixo um pouco menores. */
+.jogo-linha, .blocos, .mensagens-linha, .botoes-duplos { margin-block: -2px; }
+.botoes-duplos .botao { min-height: 44px; }
+.mensagens-linha { padding: 8px 14px; }
+.jogo-linha .jogo-texto { gap: 0; }
+.bloco { padding: 10px 12px; }
+.bloco .cabeca { min-height: 24px; }
+.jogo-linha { padding: 8px 14px; }
