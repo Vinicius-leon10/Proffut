@@ -3,10 +3,11 @@ import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
 import { contratosTerminando } from "../../engine/contratos";
 import { NOMES_CARACTERISTICA, NOMES_POSICAO } from "../../engine/forca";
-import { formatarDinheiro } from "../../engine/financas";
-import { salarioBase, valorMercado } from "../../engine/gerador";
+import { folhaSalarial, formatarDinheiro, limiteDaFolha, motivoDaDiretoria } from "../../engine/financas";
+import { ENCARGOS_FOLHA, LUVAS_MESES } from "../../engine/constantes";
+import { valorMercado } from "../../engine/gerador";
 import { motivoParaNaoPegar, pegarEmprestado, taxaDeEmprestimo } from "../../engine/emprestimos";
-import { elencoDe, fazerOferta, livres, podeSair, precoPedido, propostasPendentes } from "../../engine/mercado";
+import { elencoDe, fazerOferta, livres, luvasDoLivre, podeSair, precoPedido, propostasPendentes, salarioDoLivre, salarioDoReforco } from "../../engine/mercado";
 import type { Jogador, Posicao } from "../../engine/tipos";
 import { BandeiraJogador, Escudo, Folha, Opcoes, Pos, Segmentado } from "../componentes";
 import { NOMES_NACIONALIDADE } from "../formatos";
@@ -64,8 +65,9 @@ function FolhaOferta({ j, aoFechar }: { j: Jogador; aoFechar: () => void }) {
               <button key={f} className="opcao" onClick={() => setOferta(Math.round((pedido * f) / 10_000) * 10_000)}>{f === 1 ? "Pedido" : `${Math.round(f * 100)}%`}</button>
             ))}
           </div>
-          <p className="mini muito-fraco">Seu caixa: {formatarDinheiro(meu.caixa)}. O salário dele passa a ser {formatarDinheiro(Math.max(j.salario, Math.round(salarioBase(j.forca) * 1.1)))}/mês.</p>
-          <button className="botao primario cheio" disabled={!vende || oferta > meu.caixa} onClick={enviar}>
+          <p className="mini muito-fraco">Seu caixa: {formatarDinheiro(meu.caixa)}. O salário dele passa a ser {formatarDinheiro(salarioDoReforco(j))}/mês.</p>
+          <LimiteDaFolha salario={salarioDoReforco(j)} />
+          <button className="botao primario cheio" disabled={!vende || oferta > meu.caixa || !!motivoDaDiretoria(estado, meu, salarioDoReforco(j))} onClick={enviar}>
             {oferta > meu.caixa ? "Caixa insuficiente" : `Oferecer ${formatarDinheiro(oferta)}`}
           </button>
           <button className="botao cheio" disabled={!!naoEmpresta} onClick={pedirEmprestado}>
@@ -75,11 +77,28 @@ function FolhaOferta({ j, aoFechar }: { j: Jogador; aoFechar: () => void }) {
         </>
       ) : (
         <>
-          <p className="pequeno fraco">Jogador livre: não há custo de transferência. Ele pede {formatarDinheiro(Math.round(salarioBase(j.forca) * 1.15))}/mês.</p>
-          <button className="botao primario cheio" onClick={enviar}>Contratar</button>
+          <p className="pequeno fraco">Jogador livre: não há custo de transferência. Ele pede {formatarDinheiro(salarioDoLivre(j))}/mês (com os encargos de {Math.round(ENCARGOS_FOLHA * 100)}%, {formatarDinheiro(salarioDoLivre(j) * (1 + ENCARGOS_FOLHA))}/mês) e <b>Luvas de {formatarDinheiro(luvasDoLivre(j))}</b> para assinar ({LUVAS_MESES} salários).</p>
+          <LimiteDaFolha salario={salarioDoLivre(j)} />
+          <button className="botao primario cheio" disabled={!!motivoDaDiretoria(estado, meu, salarioDoLivre(j)) || meu.caixa < luvasDoLivre(j)} onClick={enviar}>
+            {meu.caixa < luvasDoLivre(j) ? "Contratar · caixa insuficiente para as luvas" : "Contratar"}
+          </button>
         </>
       )}
     </Folha>
+  );
+}
+
+/** O que a diretoria aprova de folha, e se ela aprova este salário (R138). */
+function LimiteDaFolha({ salario }: { salario: number }) {
+  const estado = useJogo();
+  const meu = estado.clubes[estado.tecnico.clubeId];
+  const recusa = motivoDaDiretoria(estado, meu, salario);
+  if (recusa) return <p className="chip vermelho" style={{ whiteSpace: "normal" }}>{recusa}</p>;
+  const folha = folhaSalarial(estado, meu.id) * (1 + ENCARGOS_FOLHA);
+  return (
+    <p className="mini muito-fraco">
+      A diretoria aprova uma folha de até {formatarDinheiro(limiteDaFolha(estado, meu))}/mês com os encargos; hoje ela está em {formatarDinheiro(folha)}/mês.
+    </p>
   );
 }
 
@@ -238,7 +257,7 @@ export function Mercado() {
               direita={
                 <div className="coluna" style={{ alignItems: "flex-end", gap: 2 }}>
                   {c ? <Escudo clube={c} tamanho={20} /> : null}
-                  <span className="mini fraco num">{vista === "livres" ? `${formatarDinheiro(Math.round(salarioBase(j.forca) * 1.15))}/mês` : formatarDinheiro(precoPedido(estado, j))}</span>
+                  <span className="mini fraco num">{vista === "livres" ? `${formatarDinheiro(salarioDoLivre(j))}/mês` : formatarDinheiro(precoPedido(estado, j))}</span>
                 </div>
               }
             />

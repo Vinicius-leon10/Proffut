@@ -1,10 +1,10 @@
 // Mercado de transferências: compra, venda, livres, propostas e as trocas entre clubes da IA.
 import { comArtigo } from "./artigos";
 import { dasSeries } from "./competicoes";
-import { ELENCO_MAXIMO, MINIMO_POSICAO } from "./constantes";
+import { ELENCO_MAXIMO, LUVAS_MESES, MINIMO_POSICAO } from "./constantes";
 import { contratoNovo, liberar } from "./contratos";
 import { escalarAutomatico, forcaDoTime } from "./forca";
-import { lancar } from "./financas";
+import { formatarDinheiro, lancar, motivoDaDiretoria } from "./financas";
 import { gerarLivre, salarioBase, valorMercado } from "./gerador";
 import { rngPara } from "./rng";
 import type { EstadoJogo, Jogador, Mensagem, Posicao } from "./tipos";
@@ -22,6 +22,21 @@ export function livres(estado: EstadoJogo): Jogador[] {
 function ehTitular(estado: EstadoJogo, j: Jogador): boolean {
   if (!j.clubeId) return false;
   return estado.clubes[j.clubeId].escalacao.titulares.includes(j.id);
+}
+
+/** O salário que o jogador livre pede para assinar. */
+export function salarioDoLivre(j: Jogador): number {
+  return Math.round(salarioBase(j.forca) * 1.15);
+}
+
+/** As luvas que o livre pede (meses do salário novo, pagos na assinatura; R138). */
+export function luvasDoLivre(j: Jogador): number {
+  return salarioDoLivre(j) * LUVAS_MESES;
+}
+
+/** O salário do jogador comprado de outro clube. */
+export function salarioDoReforco(j: Jogador): number {
+  return Math.max(j.salario, Math.round(salarioBase(j.forca) * 1.1));
 }
 
 /** Quanto o clube pede pelo jogador. Livres não têm custo de transferência. */
@@ -89,7 +104,7 @@ function transferir(estado: EstadoJogo, j: Jogador, destinoId: string, valor: nu
   tirarDaEscalacao(estado, j);
   j.clubeId = destinoId;
   j.aVenda = false;
-  j.salario = Math.max(j.salario, Math.round(salarioBase(j.forca) * 1.1));
+  j.salario = salarioDoReforco(j);
   contratoNovo(estado, j);
   if (origemId && origemId !== estado.tecnico.clubeId) reescalar(estado, origemId);
   if (destinoId !== estado.tecnico.clubeId) reescalar(estado, destinoId);
@@ -106,12 +121,19 @@ export function fazerOferta(estado: EstadoJogo, jogadorId: number, oferta: numbe
   if (j.emprestimo) return { ok: false, texto: `${j.nome} está emprestado: volta ${comArtigo("ao", estado.clubes[j.emprestimo.de])} no fim da temporada.` };
   if (elencoDe(estado, meu.id).length >= ELENCO_MAXIMO) return { ok: false, texto: `Seu elenco já tem ${ELENCO_MAXIMO} jogadores. Venda ou dispense alguém antes.` };
   if (!j.clubeId) {
-    const salario = Math.round(salarioBase(j.forca) * 1.15);
+    const salario = salarioDoLivre(j);
+    const recusa = motivoDaDiretoria(estado, meu, salario);
+    if (recusa) return { ok: false, texto: recusa };
+    const luvas = salario * LUVAS_MESES;
+    if (meu.caixa < luvas) return { ok: false, texto: `${j.nome} pede ${formatarDinheiro(luvas)} de luvas para assinar, e você não tem esse dinheiro em caixa.` };
+    lancar(meu, estado.data, "transferencia", `Luvas de ${j.nome}`, -luvas);
     transferir(estado, j, meu.id, 0, estado.data);
     j.salario = salario;
-    return { ok: true, texto: `${j.nome} assinou com ${comArtigo("o", meu)}. Salário: R$ ${salario.toLocaleString("pt-BR")}/mês.` };
+    return { ok: true, texto: `${j.nome} assinou com ${comArtigo("o", meu)}. Luvas: ${formatarDinheiro(luvas)}. Salário: R$ ${salario.toLocaleString("pt-BR")}/mês.` };
   }
   if (meu.caixa < oferta) return { ok: false, texto: "Você não tem dinheiro em caixa para essa oferta." };
+  const recusa = motivoDaDiretoria(estado, meu, salarioDoReforco(j));
+  if (recusa) return { ok: false, texto: recusa };
   const vendedor = estado.clubes[j.clubeId];
   if (!podeSair(estado, j)) return { ok: false, texto: `${comArtigo("O", vendedor)} não aceita vender: ficaria sem opções na posição.` };
   const pedido = precoPedido(estado, j);

@@ -165,6 +165,18 @@ export const PATROCINIO_MES: Record<SerieId, number> = { A: 1_200_000, B: 350_00
 /** Patrocínio da Série D, como fração do da Série C. */
 export const PATROCINIO_SERIE_D = 0.6;
 export const MANUTENCAO_POR_LUGAR = 4;
+/**
+ * Folha cara (R138, pedido do usuário, nov/2026: com livres bons um time da Série C ganhava tudo e juntava dinheiro).
+ * Encargos (impostos e direitos) sobre a folha do clube do usuário, todo mês: os clubes do computador ficam como antes.
+ */
+export const ENCARGOS_FOLHA = 0.3;
+/** Luvas do jogador livre: meses do salário novo pagos na assinatura. */
+export const LUVAS_MESES = 6;
+/** A diretoria só aprova contratar se a folha com os encargos couber nesta parte da receita do mês (estimada). */
+export const LIMITE_FOLHA_RECEITA = 0.75;
+/** Para a estimativa da receita do mês: rodadas de liga por mês e jogos em casa por mês. */
+export const RODADAS_POR_MES = 4;
+export const JOGOS_EM_CASA_POR_MES = 2;
 /** Público potencial por ponto de torcida (antes do preço e da capacidade). */
 export const PUBLICO_POR_TORCIDA = 550;
 /** Premiação por posição final (1º leva o primeiro valor, o último leva o último). */

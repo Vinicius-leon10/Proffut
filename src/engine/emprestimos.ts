@@ -4,7 +4,7 @@ import { comArtigo } from "./artigos";
 import { dasSeries } from "./competicoes";
 import { ELENCO_MAXIMO, EMPRESTIMOS } from "./constantes";
 import { forcaDoTime } from "./forca";
-import { lancar } from "./financas";
+import { lancar, motivoDaDiretoria } from "./financas";
 import { valorMercado } from "./gerador";
 import { elencoDe, podeSair, reescalar, tirarDaEscalacao, type ResultadoNegocio } from "./mercado";
 import type { EstadoJogo, Jogador } from "./tipos";
@@ -70,7 +70,7 @@ export function motivoParaNaoPegar(estado: EstadoJogo, j: Jogador): string | nul
   if (!podeSair(estado, j)) return `${comArtigo("O", dono)} ficaria sem opções na posição.`;
   if (elencoDe(estado, meu.id).length >= ELENCO_MAXIMO) return `Seu elenco já tem ${ELENCO_MAXIMO} jogadores.`;
   if (meu.caixa < taxaDeEmprestimo(j)) return "Você não tem caixa para a taxa do empréstimo.";
-  return null;
+  return motivoDaDiretoria(estado, meu, j.salario);
 }
 
 /** O usuário pega emprestado um reserva de outro clube, pagando a taxa ao dono. */

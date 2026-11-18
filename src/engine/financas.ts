@@ -1,4 +1,4 @@
-import { TV_EUROPA_MES, TV_PISO_SEGUNDA, COTA_TV_RODADA, MANUTENCAO_POR_LUGAR, PATROCINIO_MES, PATROCINIO_SERIE_D, PRECO_REFERENCIA, PREMIACAO, PUBLICO_POR_TORCIDA } from "./constantes";
+import { ENCARGOS_FOLHA, JOGOS_EM_CASA_POR_MES, LIMITE_FOLHA_RECEITA, RODADAS_POR_MES, TV_EUROPA_MES, TV_PISO_SEGUNDA, COTA_TV_RODADA, MANUTENCAO_POR_LUGAR, PATROCINIO_MES, PATROCINIO_SERIE_D, PRECO_REFERENCIA, PREMIACAO, PUBLICO_POR_TORCIDA } from "./constantes";
 import type { Rng } from "./rng";
 import type { Clube, EstadoJogo, SerieClube, SerieId, TipoLancamento } from "./tipos";
 
@@ -66,16 +66,58 @@ export function processarMes(estado: EstadoJogo, data: string) {
     // usuário, que pode treinar qualquer clube.
     const fora = clube.serie === "estadual" || clube.serie === "exterior";
     if ((fora && clube.id !== estado.tecnico.clubeId) || clube.serie === "selecao") continue;
-    // Série D, só do estadual e de fora: patrocínio menor que o da Série C.
-    const patrocinio = clube.serie === "D" || fora ? PATROCINIO_MES.C * PATROCINIO_SERIE_D : PATROCINIO_MES[clube.serie as SerieId];
-    lancar(clube, data, "patrocinio", "Patrocínio do mês", patrocinio * (0.6 + 0.8 * (clube.reputacao / 100)));
+    lancar(clube, data, "patrocinio", "Patrocínio do mês", patrocinioDoMes(clube));
     // Na Europa, os direitos de TV pagam a maior parte da folha (lá não há cota por rodada como nas séries).
-    const tvEuropa = clube.serie === "exterior" && clube.liga ? TV_EUROPA_MES[clube.liga] : undefined;
-    const piso = clube.liga && clube.liga.length > 2 ? TV_PISO_SEGUNDA : 0;
-    if (tvEuropa) lancar(clube, data, "tv", "Direitos de TV do mês", tvEuropa * Math.max(piso, (clube.reputacao / 100) ** 3));
-    lancar(clube, data, "salarios", "Folha salarial", -(folhas.get(clube.id) ?? 0));
+    const tv = tvDoMes(clube);
+    if (tv) lancar(clube, data, "tv", "Direitos de TV do mês", tv);
+    const folha = folhas.get(clube.id) ?? 0;
+    lancar(clube, data, "salarios", "Folha salarial", -folha);
+    // Encargos só no clube do usuário (R138): os do computador ficam como antes.
+    if (clube.id === estado.tecnico.clubeId && folha > 0) lancar(clube, data, "salarios", "Encargos sobre a folha", -folha * ENCARGOS_FOLHA);
     lancar(clube, data, "estadio", "Manutenção do estádio", -clube.estadio.capacidade * MANUTENCAO_POR_LUGAR);
   }
+}
+
+/** Patrocínio do mês. Série D, só do estadual e de fora: patrocínio menor que o da Série C. */
+export function patrocinioDoMes(clube: Clube): number {
+  const fora = clube.serie === "estadual" || clube.serie === "exterior";
+  const base = clube.serie === "D" || fora ? PATROCINIO_MES.C * PATROCINIO_SERIE_D : PATROCINIO_MES[clube.serie as SerieId];
+  return base * (0.6 + 0.8 * (clube.reputacao / 100));
+}
+
+/** Direitos de TV do mês (só os clubes de fora com liga na tabela; as séries recebem por rodada). */
+function tvDoMes(clube: Clube): number {
+  const tvEuropa = clube.serie === "exterior" && clube.liga ? TV_EUROPA_MES[clube.liga] : undefined;
+  if (!tvEuropa) return 0;
+  const piso = clube.liga && clube.liga.length > 2 ? TV_PISO_SEGUNDA : 0;
+  return tvEuropa * Math.max(piso, (clube.reputacao / 100) ** 3);
+}
+
+/**
+ * Quanto o clube arrecada num mês comum (estimativa, sem copas nem prêmios): patrocínio, TV (as séries pela cota de
+ * cada rodada) e a bilheteria dos jogos em casa com o público esperado.
+ */
+export function receitaDoMes(clube: Clube): number {
+  const serie = clube.serie;
+  const tvRodadas = serie === "A" || serie === "B" || serie === "C" ? COTA_TV_RODADA[serie] * RODADAS_POR_MES : 0;
+  const bilheteria = publicoEsperado(clube) * clube.precoIngresso * JOGOS_EM_CASA_POR_MES;
+  return patrocinioDoMes(clube) + tvDoMes(clube) + tvRodadas + bilheteria;
+}
+
+/** A maior folha com os encargos que a diretoria aprova (R138). */
+export function limiteDaFolha(_estado: EstadoJogo, clube: Clube): number {
+  return Math.round(receitaDoMes(clube) * LIMITE_FOLHA_RECEITA);
+}
+
+/**
+ * A diretoria aprova contratar alguém com este salário? Devolve o motivo da recusa, ou null. Só barra quando a folha
+ * cresce e passa do limite (quem já está acima pode trocar um jogador por outro mais barato).
+ */
+export function motivoDaDiretoria(estado: EstadoJogo, clube: Clube, salarioNovo: number): string | null {
+  const limite = limiteDaFolha(estado, clube);
+  const depois = (folhaSalarial(estado, clube.id) + salarioNovo) * (1 + ENCARGOS_FOLHA);
+  if (salarioNovo <= 0 || depois <= limite) return null;
+  return `A diretoria não aprova: com os encargos, a folha iria a ${formatarDinheiro(depois)}/mês, e ela aprova até ${formatarDinheiro(limite)}/mês (${Math.round(LIMITE_FOLHA_RECEITA * 100)}% do que o clube arrecada num mês). Venda ou dispense alguém antes.`;
 }
 
 export function cotaDeTv(serie: SerieId): number {

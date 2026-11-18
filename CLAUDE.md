@@ -899,8 +899,17 @@ antes da estreia; a tela pede no máximo 26 e avisa com menos de 3 goleiros). Co
 dias (`DIAS_PARA_CORTE`) corta o jogador e entra o melhor da posição; depois da estreia ninguém muda (na volta da
 concentração entre fases a lista não é refeita). Modo Copa: "Listas dos 26" (`BotaoListas`) mostra os 26 de cada seleção.
 
+**Folha cara (18/nov/2026, R138, `financas.ts`, `mercado.ts`):** pedido "consegui contratar muito jogador a nível acima no
+livre, subi para a Série B e meu caixa tá muito alto... a ideia é gerar essa dificuldade"; das 6 ideias ele escolheu 1, 3 e 4.
+(1) Encargos: o clube do usuário paga `ENCARGOS_FOLHA` (30%) sobre a folha todo mês ("Encargos sobre a folha", tipo salários);
+os do computador não (o mundo fica igual). (3) Luvas: o livre cobra `LUVAS_MESES` (6) salários na assinatura (`luvasDoLivre`).
+(4) Limite da diretoria: `motivoDaDiretoria` barra contratar (livre, compra e empréstimo) se a folha com encargos passar de
+`LIMITE_FOLHA_RECEITA` (75%) de `receitaDoMes` (patrocínio + TV, as séries com 4 rodadas + bilheteria de 2 jogos em casa com o
+público esperado; sem copas). O Confiança no começo arrecada ~865 mil/mês e tinha folha de ~330 mil: agora traz 1 ou 2 livres
+bons. Não escolhidas (podem vir depois): bicho por vitória, dívida com juros, prêmios das copas menores para os pequenos.
+
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
-pedir. (1) Ajustar o mercado de jogadores livres. (2) Ajustar a parte financeira: compra de jogador e renda. (3) Ficar mais
+pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais
 difícil outros clubes chamarem o técnico (convites, `CONVITES` em constantes.ts e `carreira.ts`).
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
