@@ -14,9 +14,12 @@ lotes; lote sem ele volta sem ser conferido:
    junto uma camisa branca), escreva "fundo liso" na linha do clube.
 3. **Motivo de verdade de quem ficou de fora:** nada de motivo genérico; diga o que aconteceu ("só achei no cabide",
    "só achei a camisa reserva", "imagem cortada", "só em miniatura", "nenhuma imagem do clube").
+4. **Só a titular, do clube certo:** confira se a fonte é a camisa titular (home) do próprio clube, de 2022 para cá. Reserva
+   (away), terceira, de aquecimento, infantil, de loja de camisas antigas ou de outro clube volta (nos lotes da Itália em
+   diante vieram várias assim).
 
-Os lotes da Itália em diante que já entraram no jogo vão ser conferidos de novo, um por um; o que estiver errado volta
-para "Refazer".
+Os lotes da Inglaterra à Ucrânia foram conferidos um por um em 18/nov/2026 (nenhum tinha entrado no jogo antes): o que estava
+errado está em "Refazer (camisas)".
 
 ## Refazer (prioridade)
 
@@ -107,6 +110,42 @@ Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As
 - Colômbia e Equador: refazer `inter-bogota` (sem manequim) e `ldu-quito` (de frente, aberta).
 - Argentina: refazer `tristan-suarez` (a titular) e `argentino-de-quilmes` (sem o círculo branco atrás).
 
+**Lotes da Inglaterra à Ucrânia (conferidos de novo um por um, 18/nov/2026; nenhum tinha entrado no jogo antes):** 588
+das 668 camisas entraram. As 80 abaixo voltam; mande cada uma de frente, sozinha (sem cabide, manequim, etiqueta, moldura,
+marca do site ou contorno), com fundo transparente quando a camisa for branca ou clara, e a **titular de 2025-26** (ou de 2026):
+reserva, terceira, de aquecimento, infantil e camisa antiga (antes de 2022) não servem. Conferi também a fonte de cada uma no csv:
+várias eram de outro clube ou a reserva. Os clubes que o LEIA deixou de fora (fiorentina, derby-county, shelbourne...) continuam
+pendentes: tente de novo, com o motivo de verdade se não achar.
+
+- inglaterra-01: `leeds` (camisa branca em fundo branco: ao tirar o fundo a camisa sumiu (mandar com fundo transparente)); `portsmouth` (texto da loja embaixo da camisa ("Beebu Sleeve Patch")).
+- inglaterra-02: `cardiff-city` (marca do site no canto de cima); `plymouth-argyle` (marca do site no canto de cima); `stockport-county` (parte branca da camisa em fundo branco: sumiu ao tirar o fundo (mandar com fundo transparente)); `swansea` (camisa branca em fundo branco: sumiu ao tirar o fundo (mandar com fundo transparente)); `west-bromwich` (listras brancas em fundo branco: sumiram ao tirar o fundo (mandar com fundo transparente)); `wigan-athletic` (listras brancas em fundo branco: as pontas sumiram ao tirar o fundo (mandar com fundo transparente)).
+- irlanda-do-norte-01: `ballymena-united` (etiqueta da loja pendurada no ombro).
+- israel-01: `hapoel-jerusalem` (veio uma camisa branca com riscas vermelhas; o Hapoel Jerusalém joga de vermelho e preto (mandar a titular de 2025-26)); `ashdod` (camisa antiga (2021-22)).
+- italia-01: `atalanta` (foto torta, a camisa está dobrada de lado); `bari` (veio a vermelha; o Bari joga de branco e vermelho (confirmar se é a titular de 2025-26 ou mandar a branca)); `monza` (aparece o suporte do manequim na gola); `padova` (veio a vermelha; o Padova joga de branco com o escudo vermelho (confirmar se é a titular de 2025-26 ou mandar a branca)); `venezia` (a fonte é a terceira camisa de 2025-26, não a titular).
+- italia-02: `catania` (marca do site no canto de cima); `dolomiti-bellunesi` (a fonte é a camisa reserva de 2025-26, não a titular).
+- italia-03: `ravenna` (veio uma camisa grená; o Ravenna joga de amarelo e vermelho (confirmar se é a titular de 2025-26)).
+- letonia-01: `daugavpils` (veio a mesma camisa do RFS (azul com "tonybet"), não é a do Daugavpils); `sel-LV` (marca do site no canto de cima).
+- lituania-01: `suduva` (foto torta e amassada, parece a camisa de costas).
+- luxemburgo-01: `sel-LU` (foto torta, de lado e amassada).
+- macedonia-do-norte-01: `sel-MK` (camisa no saco plástico, com etiqueta, de lado).
+- moldavia-01: `sheriff-tiraspol` (veio a preta; o Sheriff joga de amarelo e preto (confirmar se é a titular de 2025-26 ou mandar a amarela)); `spartanii-sportul` (veio a branca; o escudo é vermelho e amarelo (confirmar se é a titular de 2025-26)).
+- noruega-01: `ranheim-fotball` (aparece o cabide e as listras brancas sumiram ao tirar o fundo); `start` (aparece o suporte do manequim na gola); `il-h-dd` (camisa antiga (2020)); `str-mmen` (a fonte é a camisa reserva de 2020, não a titular).
+- polonia-01: `jagiellonia` (mancha branca do lado esquerdo da camisa (pedaço do fundo)); `korona-kielce` (sombra cinza embaixo da camisa); `lechia-gdansk` (aparece o manequim na gola e as listras brancas sumiram ao tirar o fundo); `legia-varsovia` (foto com a manga direita dobrada e sombra); `piast-gliwice` (fundo bege em volta da camisa que não sai); `sel-PL` (camisa branca em fundo branco: sumiu quase inteira ao tirar o fundo (mandar com fundo transparente)); `stal-mielec` (parte branca em fundo branco: as bordas sumiram ao tirar o fundo (mandar com fundo transparente)).
+- portugal-01: `caldas` (veio uma camisa branca e preta; o escudo do Caldas é vermelho e azul (confirmar se é a titular de 2025-26)); `sporting-cp` (foto amassada, a barra da camisa ficou irregular); `felgueiras` (camisa antiga (2020-21)).
+- romenia-01: `arges` (veio uma camisa branca; o Argeș joga de roxo (confirmar se é a titular de 2025-26)); `hermannstadt` (veio uma camisa branca; o Hermannstadt joga de vermelho e preto (confirmar se é a titular de 2025-26)); `sel-RO` (a fonte é a camisa de aquecimento (pre-match) infantil, não a de jogo).
+- romenia-02: `csm-olimpia-satu-mare` (veio uma camisa roxa e de lado; o Olimpia joga de amarelo e azul).
+- russia-01: `akhmat-grozny` (camisa no cabide, na frente de uma parede de tijolos); `sel-RU` (marca do site no canto de cima); `sochi` (foto torta e amassada); `zenit` (foto torta e amassada, com reflexo de luz; a barra ficou irregular); `dinamo-moscou` (a fonte é a camisa reserva de 2025-26, não a titular); `lokomotiv-moscou` (camisa antiga (foto de 2021)); `krylya-sovetov` (camisa antiga (2019-20)).
+- russia-02: `fc-ufa` (veio uma camisa roxa; o escudo do Ufa é verde e azul (confirmar se é a titular de 2025-26)).
+- servia-01: `cukaricki` (camisa branca lisa, sem escudo nem patrocínio (parece modelo sem personalização)); `partizan` (tem um desenho grande (círculo do escudo) atrás da camisa); `radnicki-kragujevac` (a fonte é a camisa do IMT 2025-26, não a do Radnički Kragujevac).
+- servia-02: `dubocica` (a fonte é a camisa do Jedinstvo Ub (a mesma imagem do jedinstvo-ub)); `vozdovac` (foto torta, com a borda esquerda apagada ao tirar o fundo); `rfk-graficar-beograd` (a fonte é a terceira camisa de 2023-24, não a titular); `trayal-krusevac` (a fonte é a camisa reserva de 2022-23, não a titular); `vrsac` (a fonte é a camisa reserva de 2025-26, não a titular).
+- suecia-01: `aik` (marca do site no canto de cima; e veio uma branca, o AIK joga de preto e amarelo (confirmar a titular de 2025-26)); `hammarby` (camisa branca em fundo branco: sumiu ao tirar o fundo (mandar com fundo transparente)).
+- suecia-02: `norrkoping` (foto amassada, com pedaços do fundo do lado direito); `varnamo` (a fonte é a camisa reserva de 2022, não a titular).
+- suica-01: `lugano` (veio de uma loja de camisas antigas e é amarela; o Lugano joga de preto e branco (mandar a titular de 2025-26)); `neuchatel-xamax-fcs` (veio de uma loja de camisas antigas (retro); mandar a titular de 2025-26); `vaduz` (foto torta, de lado); `young-boys` (contorno branco em volta da camisa).
+- tchequia-01: `hanacka-slavia-kromeriz` (camisa antiga (2011-12)); `karvina` (a fonte é a camisa reserva de 2024-25, não a titular); `viktoria-plzen` (foto de lado e cortada (sem as mangas)).
+- turquia-01: `sel-TR` (foto de lado); `samsunspor` (foto de lado, a camisa aparece torta).
+- ucrania-01: `epicentr` (a fonte é a camisa reserva de 2024-25, não a titular); `metalist-1925` (camisa num manequim de corpo inteiro (com calção e meias) e com fundo); `zorya` (moldura preta em volta da camisa).
+- ucrania-02: `feniks-mariupol` (camisa antiga (2018-19, ainda do FC Mariupol)); `metalurh-zaporizhzhia` (a fonte é a terceira camisa do Nyva Ternopil, não a do Metalurh); `prykarpattia-ivano-frankivsk` (camisa antiga (2021-22)); `ucsa-tarasivka` (a fonte é a camisa reserva de 2026-27, não a titular).
+
 | Lote | Entraram | Ficaram de fora (motivo) |
 |---|---|---|
 | camisas 01 (Brasil) | 183 de 189 | princesa-do-solimoes e manauara entraram (manequim; talvez reserva) |
@@ -132,3 +171,40 @@ Lotes 01 e 02 conferidos: 226 dos 260 clubes do Brasil têm a camisa oficial. As
 | camisas uruguai 01–02 e venezuela 01 | 23 de 23 (com sel-UY e sel-VE) | - |
 | camisas paraguai 01 e peru 01–02 | 36 de 39 | sel-PE (veio a camisa preta, a reserva; a titular é branca com a faixa vermelha); sel-PY (fundo cinza que não sai); deportivo-llacuabamba (foto torta, de lado) |
 | camisas colômbia 01 e equador 01 | 37 de 39 (com sel-CO e sel-EC) | ldu-quito (foto de lado, dobrada); inter-bogota (num manequim) |
+| camisas inglaterra 01 (conferido de novo, 18/nov) | 38 de 40 | leeds (camisa branca em fundo branco: ao tirar o fundo a camisa sumiu (mandar com fundo transparente)); portsmouth (texto da loja embaixo da camisa ("Beebu Sleeve Patch")) |
+| camisas inglaterra 02 (conferido de novo, 18/nov) | 22 de 28 | cardiff-city (marca do site no canto de cima); plymouth-argyle (marca do site no canto de cima); stockport-county (parte branca da camisa em fundo branco: sumiu ao tirar o fundo (mandar com fundo transparente)); swansea (camisa branca em fundo branco: sumiu ao tirar o fundo (mandar com fundo transparente)); west-bromwich (listras brancas em fundo branco: sumiram ao tirar o fundo (mandar com fundo transparente)); wigan-athletic (listras brancas em fundo branco: as pontas sumiram ao tirar o fundo (mandar com fundo transparente)) |
+| camisas irlanda 01 (conferido de novo, 18/nov) | 10 de 10 | - |
+| camisas irlanda do norte 01 (conferido de novo, 18/nov) | 12 de 13 | ballymena-united (etiqueta da loja pendurada no ombro) |
+| camisas islândia 01 (conferido de novo, 18/nov) | 9 de 9 | - |
+| camisas israel 01 (conferido de novo, 18/nov) | 10 de 12 | hapoel-jerusalem (veio uma camisa branca com riscas vermelhas; o Hapoel Jerusalém joga de vermelho e preto (mandar a titular de 2025-26)); ashdod (camisa antiga (2021-22)) |
+| camisas itália 01 (conferido de novo, 18/nov) | 35 de 40 | atalanta (foto torta, a camisa está dobrada de lado); bari (veio a vermelha; o Bari joga de branco e vermelho (confirmar se é a titular de 2025-26 ou mandar a branca)); monza (aparece o suporte do manequim na gola); padova (veio a vermelha; o Padova joga de branco com o escudo vermelho (confirmar se é a titular de 2025-26 ou mandar a branca)); venezia (a fonte é a terceira camisa de 2025-26, não a titular) |
+| camisas itália 02 (conferido de novo, 18/nov) | 34 de 36 | catania (marca do site no canto de cima); dolomiti-bellunesi (a fonte é a camisa reserva de 2025-26, não a titular) |
+| camisas itália 03 (conferido de novo, 18/nov) | 14 de 15 | ravenna (veio uma camisa grená; o Ravenna joga de amarelo e vermelho (confirmar se é a titular de 2025-26)) |
+| camisas kosovo 01 (conferido de novo, 18/nov) | 10 de 10 | - |
+| camisas letônia 01 (conferido de novo, 18/nov) | 7 de 9 | daugavpils (veio a mesma camisa do RFS (azul com "tonybet"), não é a do Daugavpils); sel-LV (marca do site no canto de cima) |
+| camisas lituânia 01 (conferido de novo, 18/nov) | 9 de 10 | suduva (foto torta e amassada, parece a camisa de costas) |
+| camisas luxemburgo 01 (conferido de novo, 18/nov) | 15 de 16 | sel-LU (foto torta, de lado e amassada) |
+| camisas macedônia do norte 01 (conferido de novo, 18/nov) | 12 de 13 | sel-MK (camisa no saco plástico, com etiqueta, de lado) |
+| camisas malta 01 (conferido de novo, 18/nov) | 12 de 12 | - |
+| camisas moldávia 01 (conferido de novo, 18/nov) | 4 de 6 | sheriff-tiraspol (veio a preta; o Sheriff joga de amarelo e preto (confirmar se é a titular de 2025-26 ou mandar a amarela)); spartanii-sportul (veio a branca; o escudo é vermelho e amarelo (confirmar se é a titular de 2025-26)) |
+| camisas montenegro 01 (conferido de novo, 18/nov) | 10 de 10 | - |
+| camisas noruega 01 (conferido de novo, 18/nov) | 24 de 28 | ranheim-fotball (aparece o cabide e as listras brancas sumiram ao tirar o fundo); start (aparece o suporte do manequim na gola); il-h-dd (camisa antiga (2020)); str-mmen (a fonte é a camisa reserva de 2020, não a titular) |
+| camisas país de gales 01 (conferido de novo, 18/nov) | 13 de 13 | - |
+| camisas polônia 01 (conferido de novo, 18/nov) | 30 de 37 | jagiellonia (mancha branca do lado esquerdo da camisa (pedaço do fundo)); korona-kielce (sombra cinza embaixo da camisa); lechia-gdansk (aparece o manequim na gola e as listras brancas sumiram ao tirar o fundo); legia-varsovia (foto com a manga direita dobrada e sombra); piast-gliwice (fundo bege em volta da camisa que não sai); sel-PL (camisa branca em fundo branco: sumiu quase inteira ao tirar o fundo (mandar com fundo transparente)); stal-mielec (parte branca em fundo branco: as bordas sumiram ao tirar o fundo (mandar com fundo transparente)) |
+| camisas portugal 01 (conferido de novo, 18/nov) | 34 de 37 | caldas (veio uma camisa branca e preta; o escudo do Caldas é vermelho e azul (confirmar se é a titular de 2025-26)); sporting-cp (foto amassada, a barra da camisa ficou irregular); felgueiras (camisa antiga (2020-21)) |
+| camisas portugal 02 (conferido de novo, 18/nov) | 13 de 13 | - |
+| camisas romênia 01 (conferido de novo, 18/nov) | 13 de 16 | arges (veio uma camisa branca; o Argeș joga de roxo (confirmar se é a titular de 2025-26)); hermannstadt (veio uma camisa branca; o Hermannstadt joga de vermelho e preto (confirmar se é a titular de 2025-26)); sel-RO (a fonte é a camisa de aquecimento (pre-match) infantil, não a de jogo) |
+| camisas romênia 02 (conferido de novo, 18/nov) | 18 de 19 | csm-olimpia-satu-mare (veio uma camisa roxa e de lado; o Olimpia joga de amarelo e azul) |
+| camisas rússia 01 (conferido de novo, 18/nov) | 10 de 17 | akhmat-grozny (camisa no cabide, na frente de uma parede de tijolos); sel-RU (marca do site no canto de cima); sochi (foto torta e amassada); zenit (foto torta e amassada, com reflexo de luz; a barra ficou irregular); dinamo-moscou (a fonte é a camisa reserva de 2025-26, não a titular); lokomotiv-moscou (camisa antiga (foto de 2021)); krylya-sovetov (camisa antiga (2019-20)) |
+| camisas rússia 02 (conferido de novo, 18/nov) | 16 de 17 | fc-ufa (veio uma camisa roxa; o escudo do Ufa é verde e azul (confirmar se é a titular de 2025-26)) |
+| camisas san marino 01 (conferido de novo, 18/nov) | 12 de 12 | - |
+| camisas sérvia 01 (conferido de novo, 18/nov) | 12 de 15 | cukaricki (camisa branca lisa, sem escudo nem patrocínio (parece modelo sem personalização)); partizan (tem um desenho grande (círculo do escudo) atrás da camisa); radnicki-kragujevac (a fonte é a camisa do IMT 2025-26, não a do Radnički Kragujevac) |
+| camisas sérvia 02 (conferido de novo, 18/nov) | 9 de 14 | dubocica (a fonte é a camisa do Jedinstvo Ub (a mesma imagem do jedinstvo-ub)); vozdovac (foto torta, com a borda esquerda apagada ao tirar o fundo); rfk-graficar-beograd (a fonte é a terceira camisa de 2023-24, não a titular); trayal-krusevac (a fonte é a camisa reserva de 2022-23, não a titular); vrsac (a fonte é a camisa reserva de 2025-26, não a titular) |
+| camisas suécia 01 (conferido de novo, 18/nov) | 15 de 17 | aik (marca do site no canto de cima; e veio uma branca, o AIK joga de preto e amarelo (confirmar a titular de 2025-26)); hammarby (camisa branca em fundo branco: sumiu ao tirar o fundo (mandar com fundo transparente)) |
+| camisas suécia 02 (conferido de novo, 18/nov) | 10 de 12 | norrkoping (foto amassada, com pedaços do fundo do lado direito); varnamo (a fonte é a camisa reserva de 2022, não a titular) |
+| camisas suíça 01 (conferido de novo, 18/nov) | 18 de 22 | lugano (veio de uma loja de camisas antigas e é amarela; o Lugano joga de preto e branco (mandar a titular de 2025-26)); neuchatel-xamax-fcs (veio de uma loja de camisas antigas (retro); mandar a titular de 2025-26); vaduz (foto torta, de lado); young-boys (contorno branco em volta da camisa) |
+| camisas tchéquia 01 (conferido de novo, 18/nov) | 25 de 28 | hanacka-slavia-kromeriz (camisa antiga (2011-12)); karvina (a fonte é a camisa reserva de 2024-25, não a titular); viktoria-plzen (foto de lado e cortada (sem as mangas)) |
+| camisas turquia 01 (conferido de novo, 18/nov) | 17 de 19 | sel-TR (foto de lado); samsunspor (foto de lado, a camisa aparece torta) |
+| camisas turquia 02 (conferido de novo, 18/nov) | 15 de 15 | - |
+| camisas ucrânia 01 (conferido de novo, 18/nov) | 13 de 16 | epicentr (a fonte é a camisa reserva de 2024-25, não a titular); metalist-1925 (camisa num manequim de corpo inteiro (com calção e meias) e com fundo); zorya (moldura preta em volta da camisa) |
+| camisas ucrânia 02 (conferido de novo, 18/nov) | 8 de 12 | feniks-mariupol (camisa antiga (2018-19, ainda do FC Mariupol)); metalurh-zaporizhzhia (a fonte é a terceira camisa do Nyva Ternopil, não a do Metalurh); prykarpattia-ivano-frankivsk (camisa antiga (2021-22)); ucsa-tarasivka (a fonte é a camisa reserva de 2026-27, não a titular) |

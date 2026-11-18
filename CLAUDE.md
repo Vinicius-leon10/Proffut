@@ -572,7 +572,7 @@ terminar a Europa** (numa conversa nova): (1) vagas nas copas da UEFA para os 31
 ligas; a Liga dos Campeões de verdade tem fases prévias com os campeões desses países); (2) 2ª divisão dos 31 países menores
 (com acesso e queda) e 3ª divisão dos 16 países médios, pelo robô (fase nova no `elencos.yml`, como a "europa-resto"); (3)
 copas nacionais dos 16 médios e dos 31 menores (hoje só as 7 grandes, `COPAS_DA_EUROPA`); (4) camisas da Europa que
-chegarem nos lotes `lotes/camisas-*` da branch `claude/ecstatic-thompson-nw204h` (último conferido: df6a0d2, hungria-01).
+chegarem nos lotes `lotes/camisas-*` da branch `claude/ecstatic-thompson-nw204h` (último conferido: 897c433, ucrania-02; da Inglaterra à Ucrânia, 588 de 668 entraram em 18/nov e 80 voltaram para refazer).
 **Onde parou (14/nov/2026, branch `claude/focused-wright-8ynop9`; publicado na `main`):** campinho com as camisas oficiais
 (R133) e escudos trocados do Tirol e do Bala Town (R134). Camisas no jogo: 545 (Brasil 226 de 260, Argentina, Bolívia, Chile,
 Colômbia, Equador, Paraguai, Peru, Uruguai, Venezuela, México, EUA, Canadá, Costa Rica, América Central e Caribe, com as
