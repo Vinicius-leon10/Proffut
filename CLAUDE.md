@@ -926,6 +926,9 @@ cobranças uma a uma, com dramatização (placar da disputa, a bola, comemoraç�
 pesquisar quantas janelas há em cada região do mundo e como funcionam (datas de abertura e fechamento, duração, janela extra,
 empréstimos e livres fora da janela): Brasil, América do Sul, Concacaf, Europa (por liga), Ásia, África e Oceania. O pedido da
 pesquisa faz parte desta tarefa; fazer quando ele pedir (pergunta, Sonnet médio basta; a mudança no jogo, Opus alto).
+(3) **Limite de jogadores estrangeiros (pedido de 18/nov/2026: "igual à realidade"):** cada país tem uma regra de quantos
+estrangeiros um clube pode ter no elenco ou em campo; pesquisar a regra de cada país (e das copas continentais) e aplicar no
+mercado e na escalação (hoje não há limite). Pesquisar junto com as janelas de transferência (item 2).
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).
