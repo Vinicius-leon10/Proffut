@@ -918,6 +918,15 @@ bons. Não escolhidas (podem vir depois): bicho por vitória, dívida com juros,
 pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais
 difícil outros clubes chamarem o técnico (convites, `CONVITES` em constantes.ts e `carreira.ts`).
 
+**Guardado para fazer no futuro (18/nov/2026, "Coisas para guardar para a gente fazer futuramente"; não começar sem ele pedir):**
+(1) **Disputa de pênaltis do usuário:** num jogo de mata-mata ou final que empatou e foi aos pênaltis, o usuário escolhe quem
+bate e a ordem das cobranças (hoje `cobradores` em `partida.ts` ordena sozinho, só com o `Clube.batedor` na frente) e vê as
+cobranças uma a uma, com dramatização (placar da disputa, a bola, comemoração e lamento; ligar com os sons e o campo 2D).
+(2) **Janela de transferências:** hoje o mercado funciona o ano todo; passar a ter janelas parecidas com as do mundo real. Antes,
+pesquisar quantas janelas há em cada região do mundo e como funcionam (datas de abertura e fechamento, duração, janela extra,
+empréstimos e livres fora da janela): Brasil, América do Sul, Concacaf, Europa (por liga), Ásia, África e Oceania. O pedido da
+pesquisa faz parte desta tarefa; fazer quando ele pedir (pergunta, Sonnet médio basta; a mudança no jogo, Opus alto).
+
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).
 (2) a (5) feitos em 12/nov/2026 ("Pode aplicar o 4,5,6,7"): **partidas mais lentas** (R128: `INTERVALO_MS` em AoVivo.tsx,
