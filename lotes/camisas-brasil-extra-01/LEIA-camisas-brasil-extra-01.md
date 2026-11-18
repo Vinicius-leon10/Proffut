@@ -1,0 +1,41 @@
+# Brasil: camisas que faltavam
+
+Brasil: 3 de 34 clubes da lista. Busca em inglês: "<clube> <cidade> home kit 2025-26 shirt". Parte das camisas foi escolhida automaticamente: foto do Football Kit Archive cujo nome de arquivo indica camisa titular do próprio clube, de 2024 em diante; as outras foram conferidas na prancha.
+
+Vieram **3** camisas; ficaram de fora **31**. PNG de 400 a 500 px de altura, fundo transparente quando deu (algumas ficaram com fundo branco liso, porque tirar o fundo apagaria parte da camisa). A fonte de cada uma está no csv.
+
+## Ficaram de fora
+
+| Clube | Motivo e o que foi tentado |
+|---|---|
+| agro | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| atletico-piauiense | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| atletico-de-alagoinhas | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| barcelona-de-ilheus | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| carlos-renaux | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| ceilandense | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| centro-oeste | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| costa-rica | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| coxim | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| cristal | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| guarany | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| itz | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| interporto | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| laguna | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| legiao | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| marcilio-dias | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| monsoon | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| naviraiense | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| nova-mutum | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| nova-venecia | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| pantanal | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| pombal | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| porto-ba | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| progresso | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| river-rr | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| santa-catarina | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| santos-ap | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| tirol | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| uniao | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| uniao-cacoalense | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
+| vila-nova | não achei foto boa da camisa titular com o escudo certo (a busca trazia outros clubes, só com jogador, com número ou de costas). Tentado: Google Imagens com "<clube> <cidade> home kit 2025-26 shirt"; comparado com o escudo do jogo |
