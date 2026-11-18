@@ -727,7 +727,7 @@ pela posição (os melhores com 1, 2/6, 3/4, 5/8/10/7, 9/11; os outros do 13 em 
 olham `.vaga .uniforme` (img ou `svg.camisa-desenhada`, `.numero`) e `.vaga .camisa` continua sendo a força (agora o anel).
 Campinho mais alto (`aspect-ratio: 0.7`). Novo lote: conferir, `preparar.py --quantizar` direto em `public/camisas`, fontes em
 `docs/CAMISAS_FONTES.csv`, retorno, verificar e publicar. Números reais das camisas ainda não (o jogador não guarda o número).
-Escudos trocados (R134): o Tirol estava com o do Decisão e o Bala Town com o do Barry Town; saíram (desenhados até chegar o certo).
+Camisa reserva (18/nov/2026, "Se não encontrar a camisa principal podemos usar as reservas, desde que seja atual"): vale a reserva de 2025-26 ou 2026 quando não houver a titular (regra 5 do "Padrão do LEIA"). Escudos trocados (R134): o Tirol estava com o do Decisão e o Bala Town com o do Barry Town; saíram (desenhados até chegar o certo).
 
 **Tela inicial nova (guardado para depois, 14/nov/2026):** pedido "Mande exemplos de como podemos melhorar essa tela
 inicial, otimizar as informações, tem muita coisa, temos que rolar muito pra baixo". Das seis prévias (A a F) ele escolheu a

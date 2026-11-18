@@ -14,6 +14,9 @@ lotes; lote sem ele volta sem ser conferido:
    junto uma camisa branca), escreva "fundo liso" na linha do clube.
 3. **Motivo de verdade de quem ficou de fora:** nada de motivo genérico; diga o que aconteceu ("só achei no cabide",
    "só achei a camisa reserva", "imagem cortada", "só em miniatura", "nenhuma imagem do clube").
+5. **Reserva só se não houver a titular (pedido do usuário, 18/nov/2026):** "Se não encontrar a camisa principal podemos usar
+   as reservas, desde que seja atual". Sem a titular, vale a reserva (ou a terceira) **de 2025-26 ou 2026**, do clube certo;
+   escreva no LEIA "reserva" e por que não achou a titular. Camisa antiga, de treino ou de aquecimento continua não valendo.
 4. **Só a titular, do clube certo:** confira se a fonte é a camisa titular (home) do próprio clube, de 2022 para cá. Reserva
    (away), terceira, de aquecimento, infantil, de loja de camisas antigas ou de outro clube volta (nos lotes da Itália em
    diante vieram várias assim).
