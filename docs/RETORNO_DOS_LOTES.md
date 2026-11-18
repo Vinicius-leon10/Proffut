@@ -146,7 +146,7 @@ pendentes: tente de novo, com o motivo de verdade se não achar.
 - ucrania-01: `epicentr` (a fonte é a camisa reserva de 2024-25, não a titular); `metalist-1925` (camisa num manequim de corpo inteiro (com calção e meias) e com fundo); `zorya` (moldura preta em volta da camisa).
 - ucrania-02: `feniks-mariupol` (camisa antiga (2018-19, ainda do FC Mariupol)); `metalurh-zaporizhzhia` (a fonte é a terceira camisa do Nyva Ternopil, não a do Metalurh); `prykarpattia-ivano-frankivsk` (camisa antiga (2021-22)); `ucsa-tarasivka` (a fonte é a camisa reserva de 2026-27, não a titular).
 
-**Lotes `camisas-<país>-extra-01` (18/nov/2026, conferidos um por um): 44 de 77 entraram.** Voltam:
+**Lotes `camisas-<país>-extra-01` (18/nov/2026, conferidos um por um): 43 de 77 entraram.** Voltam:
 
 - argentina-extra-01: `atletico-tucuman` (branco da camisa sumiu ao tirar o fundo (mandar com fundo transparente)); `chaco-for-ever` (foto torta e amassada); `comunicaciones-ar` (veio a camisa do Comunicaciones da Guatemala (Banrural), não a do Comunicaciones de Buenos Aires); `temperley` (camisa vestida por uma pessoa); `tristan-suarez` (foto torta, com sombra e pedaço do fundo); `union` (sombra cinza embaixo da camisa).
 - brasil-extra-01: `galo-maringa` (veio a branca e cortada nas mangas; o Galo Maringá joga de vinho); `maranguape` (duas camisas na mesma imagem); `sao-joseense` (camisa no cabide).
@@ -227,4 +227,4 @@ No próximo lote: o motivo de quem ficou de fora tem que ser o de verdade, clube
 | camisas turquia 02 (conferido de novo, 18/nov) | 15 de 15 | - |
 | camisas ucrânia 01 (conferido de novo, 18/nov) | 13 de 16 | epicentr (a fonte é a camisa reserva de 2024-25, não a titular); metalist-1925 (camisa num manequim de corpo inteiro (com calção e meias) e com fundo); zorya (moldura preta em volta da camisa) |
 | camisas ucrânia 02 (conferido de novo, 18/nov) | 8 de 12 | feniks-mariupol (camisa antiga (2018-19, ainda do FC Mariupol)); metalurh-zaporizhzhia (a fonte é a terceira camisa do Nyva Ternopil, não a do Metalurh); prykarpattia-ivano-frankivsk (camisa antiga (2021-22)); ucsa-tarasivka (a fonte é a camisa reserva de 2026-27, não a titular) |
-| camisas extra-01 (19 países da América) | 44 de 77 | ver "Refazer (camisas)" |
+| camisas extra-01 (19 países da América) | 43 de 77 | ver "Refazer (camisas)" |
