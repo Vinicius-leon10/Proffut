@@ -905,7 +905,9 @@ livre, subi para a Série B e meu caixa tá muito alto... a ideia é gerar essa 
 os do computador não (o mundo fica igual). (3) Luvas: o livre cobra `LUVAS_MESES` (6) salários na assinatura (`luvasDoLivre`).
 (4) Limite da diretoria: `motivoDaDiretoria` barra contratar (livre, compra e empréstimo) se a folha com encargos passar de
 `LIMITE_FOLHA_RECEITA` (75%) de `receitaDoMes` (patrocínio + TV, as séries com 4 rodadas + bilheteria de 2 jogos em casa com o
-público esperado; sem copas). O Confiança no começo arrecada ~865 mil/mês e tinha folha de ~330 mil: agora traz 1 ou 2 livres
+público esperado; sem copas) ou, se for maior, `Tecnico.folhaAprovada` (a folha com encargos de quando o técnico chegou, +10%,
+`FOLGA_FOLHA_INICIAL`; marcada no jogo novo e em `assumirClube`; save antigo marca na primeira consulta): sem isso o Flamengo e
+outros grandes, com folha acima da receita do mês, não contratariam ninguém. O R39 busca o goleiro emprestado na Série C. O Confiança no começo arrecada ~865 mil/mês e tinha folha de ~330 mil: agora traz 1 ou 2 livres
 bons. Não escolhidas (podem vir depois): bicho por vitória, dívida com juros, prêmios das copas menores para os pequenos.
 
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele

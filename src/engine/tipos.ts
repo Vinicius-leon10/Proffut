@@ -442,6 +442,8 @@ export interface RecordesClube {
 }
 
 export interface Tecnico {
+  /** Folha com encargos de quando o técnico chegou ao clube (R138): a diretoria aprova até 10% acima dela. */
+  folhaAprovada?: number;
   nome: string;
   clubeId: string;
   confiancaDiretoria: number;

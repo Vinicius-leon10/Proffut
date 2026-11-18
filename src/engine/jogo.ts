@@ -33,7 +33,7 @@ import { melhorEmCampo, notasDaPartida } from "./notas";
 import { registrarRecordes } from "./trofeus";
 import { atualizarConfianca, definirObjetivo } from "./diretoria";
 import { escalarAutomatico, forcaDoTime } from "./forca";
-import { lancar, precoDeReferencia, processarMes, publicoDoJogo } from "./financas";
+import { lancar, marcarFolhaAprovada, precoDeReferencia, processarMes, publicoDoJogo } from "./financas";
 import { elencoReal, gerarElenco, type JogadorReal } from "./gerador";
 import { completarLivres, elencoDe, gerarPropostas, reescalar, transferenciasDaIa } from "./mercado";
 import { enviarMensagem } from "./mensagens";
@@ -392,6 +392,7 @@ export function novoJogo(opcoes: { nomeTecnico: string; clubeId: string; semente
     titulo: `Bem-vindo ${comArtigo("ao", meu)}!`,
     texto: `A diretoria confia no seu trabalho. Objetivo para ${TEMPORADA_INICIAL}: ${estado.objetivo.descricao}. Caixa disponível: R$ ${meu.caixa.toLocaleString("pt-BR")}.`,
   });
+  marcarFolhaAprovada(estado);
   return estado;
 }
 

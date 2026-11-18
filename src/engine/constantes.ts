@@ -174,6 +174,8 @@ export const ENCARGOS_FOLHA = 0.3;
 export const LUVAS_MESES = 6;
 /** A diretoria só aprova contratar se a folha com os encargos couber nesta parte da receita do mês (estimada). */
 export const LIMITE_FOLHA_RECEITA = 0.75;
+/** Clube grande, com a folha acima da receita do mês: a diretoria aprova até esta folga sobre a folha de quando o técnico chegou. */
+export const FOLGA_FOLHA_INICIAL = 0.1;
 /** Para a estimativa da receita do mês: rodadas de liga por mês e jogos em casa por mês. */
 export const RODADAS_POR_MES = 4;
 export const JOGOS_EM_CASA_POR_MES = 2;

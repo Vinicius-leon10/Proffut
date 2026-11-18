@@ -56,6 +56,15 @@ describe("folha cara (R138)", () => {
     expect(folhaSalarial(estado, meu.id) * (1 + ENCARGOS_FOLHA)).toBeLessThanOrEqual(limite);
   });
 
+  it("clube grande (folha acima da receita do mês) ainda contrata: a diretoria aprova até 10% acima da folha de quando o técnico chegou", () => {
+    const estado = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 7 });
+    const meu = estado.clubes.flamengo;
+    const folha = folhaSalarial(estado, meu.id) * (1 + ENCARGOS_FOLHA);
+    expect(limiteDaFolha(estado, meu)).toBeGreaterThanOrEqual(Math.round(folha * 1.1) - 1);
+    const livre = livres(estado).sort((a, b) => b.forca - a.forca)[0];
+    expect(fazerOferta(estado, livre.id, 0).ok).toBe(true);
+  });
+
   it("limite da diretoria vale também para comprar de outro clube", () => {
     const estado = novoJogo({ nomeTecnico: "T", clubeId: "confianca", semente: 7 });
     const meu = estado.clubes.confianca;

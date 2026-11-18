@@ -7,6 +7,7 @@ import { CARGO, CONVITES, REPUTACAO } from "./constantes";
 import { definirObjetivo, situacaoDoObjetivo } from "./diretoria";
 import { forcaDoTime } from "./forca";
 import { limitar } from "./gerador";
+import { marcarFolhaAprovada } from "./financas";
 import { elencoDe } from "./mercado";
 import { enviarMensagem } from "./mensagens";
 import { rngPara } from "./rng";
@@ -42,6 +43,7 @@ export function assumirClube(estado: EstadoJogo, clubeId: string, { confianca = 
   if (anteriores[anteriores.length - 1] !== anterior.id) anteriores.push(anterior.id);
   t.clubeId = clubeId;
   garantirElenco(estado, clubeId);
+  marcarFolhaAprovada(estado);
   t.confiancaDiretoria = confianca;
   t.confiancaTorcida = 50;
   t.desde = estado.data;

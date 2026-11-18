@@ -1,4 +1,4 @@
-import { ENCARGOS_FOLHA, JOGOS_EM_CASA_POR_MES, LIMITE_FOLHA_RECEITA, RODADAS_POR_MES, TV_EUROPA_MES, TV_PISO_SEGUNDA, COTA_TV_RODADA, MANUTENCAO_POR_LUGAR, PATROCINIO_MES, PATROCINIO_SERIE_D, PRECO_REFERENCIA, PREMIACAO, PUBLICO_POR_TORCIDA } from "./constantes";
+import { ENCARGOS_FOLHA, FOLGA_FOLHA_INICIAL, JOGOS_EM_CASA_POR_MES, LIMITE_FOLHA_RECEITA, RODADAS_POR_MES, TV_EUROPA_MES, TV_PISO_SEGUNDA, COTA_TV_RODADA, MANUTENCAO_POR_LUGAR, PATROCINIO_MES, PATROCINIO_SERIE_D, PRECO_REFERENCIA, PREMIACAO, PUBLICO_POR_TORCIDA } from "./constantes";
 import type { Rng } from "./rng";
 import type { Clube, EstadoJogo, SerieClube, SerieId, TipoLancamento } from "./tipos";
 
@@ -104,9 +104,21 @@ export function receitaDoMes(clube: Clube): number {
   return patrocinioDoMes(clube) + tvDoMes(clube) + tvRodadas + bilheteria;
 }
 
-/** A maior folha com os encargos que a diretoria aprova (R138). */
-export function limiteDaFolha(_estado: EstadoJogo, clube: Clube): number {
-  return Math.round(receitaDoMes(clube) * LIMITE_FOLHA_RECEITA);
+/**
+ * A maior folha com os encargos que a diretoria aprova (R138): 75% do que o clube arrecada num mês ou, nos clubes grandes
+ * (folha acima disso), a folha de quando o técnico chegou mais 10%.
+ */
+export function limiteDaFolha(estado: EstadoJogo, clube: Clube): number {
+  const pelaReceita = Math.round(receitaDoMes(clube) * LIMITE_FOLHA_RECEITA);
+  if (clube.id !== estado.tecnico.clubeId) return pelaReceita;
+  if (estado.tecnico.folhaAprovada === undefined) marcarFolhaAprovada(estado); // save de antes do R138
+  return Math.max(pelaReceita, estado.tecnico.folhaAprovada ?? 0);
+}
+
+/** Guarda a folha (com encargos e a folga) do clube do técnico; chamada no jogo novo e quando ele assume um clube. */
+export function marcarFolhaAprovada(estado: EstadoJogo) {
+  const folha = folhaSalarial(estado, estado.tecnico.clubeId) * (1 + ENCARGOS_FOLHA);
+  estado.tecnico.folhaAprovada = Math.round(folha * (1 + FOLGA_FOLHA_INICIAL));
 }
 
 /**
@@ -117,7 +129,7 @@ export function motivoDaDiretoria(estado: EstadoJogo, clube: Clube, salarioNovo:
   const limite = limiteDaFolha(estado, clube);
   const depois = (folhaSalarial(estado, clube.id) + salarioNovo) * (1 + ENCARGOS_FOLHA);
   if (salarioNovo <= 0 || depois <= limite) return null;
-  return `A diretoria não aprova: com os encargos, a folha iria a ${formatarDinheiro(depois)}/mês, e ela aprova até ${formatarDinheiro(limite)}/mês (${Math.round(LIMITE_FOLHA_RECEITA * 100)}% do que o clube arrecada num mês). Venda ou dispense alguém antes.`;
+  return `A diretoria não aprova: com os encargos, a folha iria a ${formatarDinheiro(depois)}/mês, e ela aprova até ${formatarDinheiro(limite)}/mês (o que o clube arrecada num mês permite). Venda ou dispense alguém antes.`;
 }
 
 export function cotaDeTv(serie: SerieId): number {
