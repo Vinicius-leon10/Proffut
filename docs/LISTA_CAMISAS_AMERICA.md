@@ -2,57 +2,57 @@
 
 Mesmo padrão dos lotes anteriores (ver "Padrão do LEIA" em `docs/RETORNO_DOS_LOTES.md`): camisa **titular de 2025-26 ou 2026**, de frente, sozinha (sem cabide, manequim, etiqueta, moldura, marca do site), fundo transparente quando a camisa for branca ou clara; o nome do arquivo é o **id** da lista, em `<id>.png`. Se não achar, diga o motivo de verdade no LEIA. As seleções (`sel-XX`) não estão nesta lista.
 
-Faltam **434** clubes fora do Brasil e **34** do Brasil. Ordem sugerida: as 1ª divisões dos países grandes primeiro.
+Faltam **391** clubes fora do Brasil e **34** do Brasil. Ordem sugerida: as 1ª divisões dos países grandes primeiro.
 
 
 ## Chile (23)
 
-**1ª divisão** (8): `cobresal` (Cobresal), `colo-colo` (Colo-Colo), `coquimbo-unido` (Coquimbo Unido), `everton` (Everton), `universidad-catolica` (Universidad Católica), `universidad-de-concepcion` (Universidad de Concepción), `union-la-calera` (Unión La Calera), `nublense` (Ñublense)
+**1ª divisão** (4): `cobresal` (Cobresal), `colo-colo` (Colo-Colo), `coquimbo-unido` (Coquimbo Unido), `union-la-calera` (Unión La Calera)
 
-**2ª divisão** (4): `deportes-copiapo` (Deportes Copiapó), `deportes-recoleta` (Deportes Recoleta), `deportes-santa-cruz` (Deportes Santa Cruz), `magallanes` (Magallanes)
+**2ª divisão** (2): `deportes-copiapo` (Deportes Copiapó), `deportes-santa-cruz` (Deportes Santa Cruz)
 
-**3ª divisão** (11): `brujas-de-salamanca` (Brujas de Salamanca), `colchagua` (Colchagua), `concon-national` (Concón National), `deportes-colina` (Deportes Colina), `deportes-rengo` (Deportes Rengo), `general-velasquez` (General Velásquez), `provincial-ovalle` (Provincial Ovalle), `real-san-joaquin` (Real San Joaquín), `santiago-city` (Santiago City), `santiago-morning` (Santiago Morning), `trasandino` (Trasandino)
+**3ª divisão** (6): `concon-national` (Concón National), `deportes-colina` (Deportes Colina), `deportes-rengo` (Deportes Rengo), `real-san-joaquin` (Real San Joaquín), `santiago-city` (Santiago City), `santiago-morning` (Santiago Morning)
 
 
 ## Uruguai (39)
 
-**1ª divisão** (6): `albion` (Albion), `cerro` (Cerro), `cerro-largo` (Cerro Largo), `danubio` (Danubio), `liverpool` (Liverpool), `racing-de-montevideo` (Racing de Montevideo)
+**1ª divisão** (5): `cerro` (Cerro), `cerro-largo` (Cerro Largo), `danubio` (Danubio), `liverpool` (Liverpool), `racing-de-montevideo` (Racing de Montevideo)
 
-**2ª divisão** (11): `atenas` (Atenas), `cerrito` (Cerrito), `fenix` (Fénix), `huracan-uy` (Huracán), `la-luz` (La Luz), `oriental` (Oriental), `paysandu-uy` (Paysandú), `plaza-colonia` (Plaza Colonia), `river-plate-uy` (River Plate), `tacuarembo` (Tacuarembó), `uruguay-montevideo` (Uruguay Montevideo)
+**2ª divisão** (8): `atenas` (Atenas), `cerrito` (Cerrito), `fenix` (Fénix), `huracan-uy` (Huracán), `la-luz` (La Luz), `paysandu-uy` (Paysandú), `plaza-colonia` (Plaza Colonia), `uruguay-montevideo` (Uruguay Montevideo)
 
 **3ª divisão** (22): `alto-peru` (Alto Perú), `basanez` (Basáñez), `bella-italia` (Bella Italia), `bella-vista` (Bella Vista), `canadian-soccer-club` (Canadian Soccer Club), `centro-atletico-lito` (Centro Atlético Lito), `deportivo-colonia` (Deportivo Colonia), `durazno` (Durazno), `frontera-rivera-renegades` (Frontera Rivera Renegades), `halcones` (Halcones), `huracan-buceo` (Huracán Buceo), `italiano` (Italiano), `mar-de-fondo` (Mar de Fondo), `parque-del-plata` (Parque del Plata), `platense-uy` (Platense), `potencia` (Potencia), `rocha` (Rocha), `salto` (Salto), `salus` (Salus), `terremoto` (Terremoto), `villa-espanola` (Villa Española), `villa-teresa` (Villa Teresa)
 
 
 ## Equador (15)
 
-**1ª divisão** (6): `aucas` (Aucas), `ldu-quito` (LDU Quito), `leones` (Leones), `libertad` (Libertad), `orense` (Orense), `universidad-catolica-ec` (Universidad Católica)
+**1ª divisão** (3): `ldu-quito` (LDU Quito), `leones` (Leones), `universidad-catolica-ec` (Universidad Católica)
 
-**2ª divisão** (9): `22-de-julio` (22 de Julio), `9-de-octubre` (9 de Octubre), `atletico-rojiblanco` (Atlético Rojiblanco), `cuenca-juniors` (Cuenca Juniors), `el-nacional` (El Nacional), `independiente-juniors` (Independiente Juniors), `san-antonio` (San Antonio), `santo-domingo` (Santo Domingo), `vinotinto-ecuador` (Vinotinto Ecuador)
+**2ª divisão** (8): `22-de-julio` (22 de Julio), `atletico-rojiblanco` (Atlético Rojiblanco), `cuenca-juniors` (Cuenca Juniors), `el-nacional` (El Nacional), `independiente-juniors` (Independiente Juniors), `san-antonio` (San Antonio), `santo-domingo` (Santo Domingo), `vinotinto-ecuador` (Vinotinto Ecuador)
 
 
 ## Venezuela (16)
 
-**1ª divisão** (7): `anzoategui` (Anzoátegui), `carabobo` (Carabobo), `estudiantes-de-merida` (Estudiantes de Mérida), `guaira` (Guaira), `portuguesa-ve` (Portuguesa), `trujillanos` (Trujillanos), `universidad-central` (Universidad Central)
+**1ª divisão** (6): `anzoategui` (Anzoátegui), `carabobo` (Carabobo), `guaira` (Guaira), `portuguesa-ve` (Portuguesa), `trujillanos` (Trujillanos), `universidad-central` (Universidad Central)
 
-**2ª divisão** (9): `aragua` (Aragua), `atletico-el-vigia` (Atlético El Vigía), `deportivo-lara` (Deportivo Lara), `deportivo-miranda` (Deportivo Miranda), `dynamo-puerto` (Dynamo Puerto), `maritimo` (Marítimo), `real-frontera` (Real Frontera), `urena` (Ureña), `yaracuyanos` (Yaracuyanos)
+**2ª divisão** (8): `aragua` (Aragua), `atletico-el-vigia` (Atlético El Vigía), `deportivo-lara` (Deportivo Lara), `deportivo-miranda` (Deportivo Miranda), `dynamo-puerto` (Dynamo Puerto), `real-frontera` (Real Frontera), `urena` (Ureña), `yaracuyanos` (Yaracuyanos)
 
 
 ## Estados Unidos (26)
 
-**1ª divisão** (6): `chicago-fire` (Chicago Fire), `colorado-rapids` (Colorado Rapids), `minnesota-united` (Minnesota United), `nashville` (Nashville), `san-diego` (San Diego), `vancouver-whitecaps` (Vancouver Whitecaps)
+**1ª divisão** (3): `colorado-rapids` (Colorado Rapids), `minnesota-united` (Minnesota United), `vancouver-whitecaps` (Vancouver Whitecaps)
 
-**2ª divisão** (9): `colorado-springs-switchbacks` (Colorado Springs Switchbacks), `detroit-city` (Detroit City), `las-vegas-lights` (Las Vegas Lights), `loudoun-united` (Loudoun United), `miami` (Miami), `monterey-bay` (Monterey Bay), `oakland-roots` (Oakland Roots), `san-antonio-us` (San Antonio), `sporting-jax` (Sporting JAX)
+**2ª divisão** (8): `colorado-springs-switchbacks` (Colorado Springs Switchbacks), `detroit-city` (Detroit City), `las-vegas-lights` (Las Vegas Lights), `loudoun-united` (Loudoun United), `miami` (Miami), `monterey-bay` (Monterey Bay), `oakland-roots` (Oakland Roots), `sporting-jax` (Sporting JAX)
 
 **3ª divisão** (11): `av-alta` (AV Alta), `athletic-club-boise` (Athletic Club Boise), `charlotte-independence` (Charlotte Independence), `corpus-christi` (Corpus Christi), `fort-wayne` (Fort Wayne), `naples` (Naples), `new-york-cosmos` (New York Cosmos), `richmond-kickers` (Richmond Kickers), `sarasota-paradise` (Sarasota Paradise), `spokane-velocity` (Spokane Velocity), `sporting-cascades` (Sporting Cascades)
 
 
 ## Argentina (23)
 
-**1ª divisão** (4): `aldosivi` (Aldosivi), `atletico-tucuman` (Atlético Tucumán), `gimnasia-de-mendoza` (Gimnasia de Mendoza), `union` (Unión)
+**1ª divisão** (3): `atletico-tucuman` (Atlético Tucumán), `gimnasia-de-mendoza` (Gimnasia de Mendoza), `union` (Unión)
 
 **2ª divisão** (9): `acassuso` (Acassuso), `all-boys` (All Boys), `atlanta` (Atlanta), `chaco-for-ever` (Chaco For Ever), `ciudad-de-bolivar` (Ciudad de Bolívar), `colegiales` (Colegiales), `patronato` (Patronato), `temperley` (Temperley), `tristan-suarez` (Tristán Suárez)
 
-**3ª divisão** (10): `argentino-de-quilmes` (Argentino de Quilmes), `brown-adrogue` (Brown (Adrogué)), `comunicaciones-ar` (Comunicaciones), `deportivo-armenio` (Deportivo Armenio), `deportivo-merlo` (Deportivo Merlo), `excursionistas` (Excursionistas), `flandria` (Flandria), `liniers` (Liniers), `talleres-re` (Talleres (RE)), `uai-urquiza` (UAI Urquiza)
+**3ª divisão** (8): `brown-adrogue` (Brown (Adrogué), `comunicaciones-ar` (Comunicaciones), `deportivo-merlo` (Deportivo Merlo), `excursionistas` (Excursionistas), `flandria` (Flandria), `liniers` (Liniers), `talleres-re` (Talleres (RE), `uai-urquiza` (UAI Urquiza)
 
 
 ## Colômbia (13)
@@ -66,19 +66,18 @@ Faltam **434** clubes fora do Brasil e **34** do Brasil. Ordem sugerida: as 1ª 
 
 **1ª divisão** (3): `guarani-py` (Guarani), `nacional-py` (Nacional), `san-lorenzo-py` (San Lorenzo)
 
-**2ª divisão** (15): `12-de-junio` (12 de Junio), `3-de-noviembre` (3 de Noviembre), `benjamin-aceval` (Benjamín Aceval), `deportivo-capiata` (Deportivo Capiatá), `deportivo-santani` (Deportivo Santaní), `encarnacion` (Encarnación), `fernando-de-la-mora` (Fernando de la Mora), `guairena` (Guaireña), `independiente-de-campo-grande` (Independiente de Campo Grande), `paraguari` (Paraguarí), `resistencia` (Resistencia), `sol-de-america` (Sol de América), `sportivo-carapegua` (Sportivo Carapeguá), `tacuary` (Tacuary), `tembetary` (Tembetary)
+**2ª divisão** (13): `12-de-junio` (12 de Junio), `3-de-noviembre` (3 de Noviembre), `benjamin-aceval` (Benjamín Aceval), `encarnacion` (Encarnación), `fernando-de-la-mora` (Fernando de la Mora), `guairena` (Guaireña), `independiente-de-campo-grande` (Independiente de Campo Grande), `paraguari` (Paraguarí), `resistencia` (Resistencia), `sol-de-america` (Sol de América), `sportivo-carapegua` (Sportivo Carapeguá), `tacuary` (Tacuary), `tembetary` (Tembetary)
 
 
 ## Bolívia (17)
 
-**1ª divisão** (3): `abb` (ABB), `real-oruro` (Real Oruro), `san-antonio-bulo-bulo` (San Antonio Bulo Bulo)
+**1ª divisão** (2): `abb` (ABB), `real-oruro` (Real Oruro)
 
 **2ª divisão** (14): `chaco-petrolero` (Chaco Petrolero), `deportivo-fatic` (Deportivo FATIC), `empresa-minera-huanuni` (Empresa Minera Huanuni), `flamengo-de-sucre` (Flamengo de Sucre), `garcia-agreda` (García Agreda), `independiente-unificada` (Independiente Unificada), `oruro-royal-club` (Oruro Royal Club), `real-santa-cruz` (Real Santa Cruz), `royal-pari` (Royal Pari), `universitario-de-pando` (Universitario de Pando), `universitario-de-sucre` (Universitario de Sucre), `universitario-del-beni` (Universitario del Beni), `union-tarija` (Unión Tarija), `wilstermann-cooperativas` (Wilstermann Cooperativas)
 
 
 ## Peru (33)
 
-**1ª divisão** (1): `comerciantes-unidos` (Comerciantes Unidos)
 
 **2ª divisão** (11): `ada` (ADA), `ayacucho` (Ayacucho), `cesar-vallejo` (César Vallejo), `deportivo-llacuabamba` (Deportivo Llacuabamba), `estudiantil-cni` (Estudiantil CNI), `molinos-el-pirata` (Molinos El Pirata), `san-marcos-de-huari` (San Marcos de Huari), `santos-de-nasca` (Santos de Nasca), `universidad-san-martin` (Universidad San Martín), `union-comercio` (Unión Comercio), `union-minas` (Unión Minas)
 
@@ -106,26 +105,26 @@ Faltam **434** clubes fora do Brasil e **34** do Brasil. Ordem sugerida: as 1ª 
 
 ## Guatemala (16)
 
-**1ª divisão** (5): `achuapa` (Achuapa), `atletico-mictlan` (Atlético Mictlán), `aurora-gt` (Aurora), `marquense` (Marquense), `mixco` (Mixco)
+**1ª divisão** (4): `achuapa` (Achuapa), `aurora-gt` (Aurora), `marquense` (Marquense), `mixco` (Mixco)
 
 **2ª divisão** (11): `carcha` (Carchá), `chimaltenango` (Chimaltenango), `deportivo-san-pedro` (Deportivo San Pedro), `nueva` (Nueva), `puerto-san-jose` (Puerto San José), `sacachispas` (Sacachispas), `san-benito` (San Benito), `sanarate` (Sanarate), `solola` (Sololá), `suchi` (Suchi), `usac` (USAC)
 
 
 ## Jamaica (8)
 
-**1ª divisão** (8): `cavalier` (Cavalier), `chapelton-maroons` (Chapelton Maroons), `dunbeholden` (Dunbeholden), `harbour-view` (Harbour View), `humble-lions` (Humble Lions), `molynes-united` (Molynes United), `portmore-united` (Portmore United), `vere-united` (Vere United)
+**1ª divisão** (6): `cavalier` (Cavalier), `chapelton-maroons` (Chapelton Maroons), `dunbeholden` (Dunbeholden), `harbour-view` (Harbour View), `molynes-united` (Molynes United), `vere-united` (Vere United)
 
 
 ## Honduras (26)
 
-**1ª divisão** (9): `atracciones-espina` (Atracciones Espina), `choloma` (Choloma), `juticalpa` (Juticalpa), `marathon` (Marathón), `olancho` (Olancho), `platense-hn` (Platense), `policia-nacional` (Policía Nacional), `real-espana` (Real España), `universidad-pedagogica` (Universidad Pedagógica)
+**1ª divisão** (7): `atracciones-espina` (Atracciones Espina), `choloma` (Choloma), `juticalpa` (Juticalpa), `marathon` (Marathón), `platense-hn` (Platense), `real-espana` (Real España), `universidad-pedagogica` (Universidad Pedagógica)
 
 **2ª divisão** (17): `boca-juniors-de-tocoa` (Boca Juniors de Tocoa), `brasilia` (Brasilia), `c-d-social-sol` (C.D. Social Sol), `cruz-azul-opoa` (Cruz Azul Opoa), `deportes-savio` (Deportes Savio), `espartano` (Espartano), `gimnastico` (Gimnástico), `honduras-progreso` (Honduras Progreso), `meluca-campamento` (Meluca Campamento), `palestino-hn` (Palestino), `parrillas-one` (Parrillas One), `pirata` (Pirata), `pumas` (Pumas), `real-sociedad` (Real Sociedad), `santa-rosa-hn` (Santa Rosa), `tela` (Tela), `vida` (Vida)
 
 
 ## Panamá (22)
 
-**1ª divisão** (10): `alianza-pa` (Alianza), `independiente-pa` (Independiente), `plaza-amador` (Plaza Amador), `san-francisco` (San Francisco), `tauro` (Tauro), `umecit` (UMECIT), `universitario-pa` (Universitario), `union-cocle` (Unión Coclé), `veraguas-united` (Veraguas United), `arabe-unido` (Árabe Unido)
+**1ª divisão** (9): `alianza-pa` (Alianza), `plaza-amador` (Plaza Amador), `san-francisco` (San Francisco), `tauro` (Tauro), `umecit` (UMECIT), `universitario-pa` (Universitario), `union-cocle` (Unión Coclé), `veraguas-united` (Veraguas United), `arabe-unido` (Árabe Unido)
 
 **2ª divisão** (12): `alianza-futbol-club-ii` (Alianza Fútbol Club II), `atletico-chiriqui` (Atlético Chiriquí), `atletico-nacional-pa` (Atlético Nacional), `bocas-junior` (Bocas Junior), `champions-fc-academy` (Champions FC Academy), `colon-c-3` (Colón C-3), `costa-del-este` (Costa del Este), `mario-mendez` (Mario Méndez), `panama-city` (Panama City), `san-martin` (San Martín), `udelas` (UDELAS), `aguilas-de-la-universidad-de-panama` (Águilas de la Universidad de Panamá)
 
@@ -139,7 +138,7 @@ Faltam **434** clubes fora do Brasil e **34** do Brasil. Ordem sugerida: as 1ª 
 
 ## Nicarágua (8)
 
-**1ª divisão** (8): `diriangen` (Diriangén), `h-h-export-sebaco` (H&H Export Sébaco), `managua` (Managua), `matagalpa` (Matagalpa), `rancho-santana` (Rancho Santana), `real-madriz` (Real Madriz), `unan-managua` (UNAN Managua), `walter-ferretti` (Walter Ferretti)
+**1ª divisão** (4): `h-h-export-sebaco` (H&H Export Sébaco), `managua` (Managua), `matagalpa` (Matagalpa), `real-madriz` (Real Madriz)
 
 
 ## República Dominicana (10)
@@ -164,7 +163,7 @@ Faltam **434** clubes fora do Brasil e **34** do Brasil. Ordem sugerida: as 1ª 
 
 ## Trinidad e Tobago (9)
 
-**1ª divisão** (9): `ac-port-of-spain` (AC Port of Spain), `central-tt` (Central), `defence-force` (Defence Force), `la-horquetta-rangers` (La Horquetta Rangers), `morvant-caledonia-united` (Morvant Caledonia United), `point-fortin-civic` (Point Fortin Civic), `police` (Police), `san-juan-jabloteh` (San Juan Jabloteh), `sando` (Sando)
+**1ª divisão** (8): `ac-port-of-spain` (AC Port of Spain), `central-tt` (Central), `defence-force` (Defence Force), `la-horquetta-rangers` (La Horquetta Rangers), `point-fortin-civic` (Point Fortin Civic), `police` (Police), `san-juan-jabloteh` (San Juan Jabloteh), `sando` (Sando)
 
 
 ## Guiana (5)
