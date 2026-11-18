@@ -146,6 +146,25 @@ pendentes: tente de novo, com o motivo de verdade se não achar.
 - ucrania-01: `epicentr` (a fonte é a camisa reserva de 2024-25, não a titular); `metalist-1925` (camisa num manequim de corpo inteiro (com calção e meias) e com fundo); `zorya` (moldura preta em volta da camisa).
 - ucrania-02: `feniks-mariupol` (camisa antiga (2018-19, ainda do FC Mariupol)); `metalurh-zaporizhzhia` (a fonte é a terceira camisa do Nyva Ternopil, não a do Metalurh); `prykarpattia-ivano-frankivsk` (camisa antiga (2021-22)); `ucsa-tarasivka` (a fonte é a camisa reserva de 2026-27, não a titular).
 
+**Lotes `camisas-<país>-extra-01` (18/nov/2026, conferidos um por um): 44 de 77 entraram.** Voltam:
+
+- argentina-extra-01: `atletico-tucuman` (branco da camisa sumiu ao tirar o fundo (mandar com fundo transparente)); `chaco-for-ever` (foto torta e amassada); `comunicaciones-ar` (veio a camisa do Comunicaciones da Guatemala (Banrural), não a do Comunicaciones de Buenos Aires); `temperley` (camisa vestida por uma pessoa); `tristan-suarez` (foto torta, com sombra e pedaço do fundo); `union` (sombra cinza embaixo da camisa).
+- brasil-extra-01: `galo-maringa` (veio a branca e cortada nas mangas; o Galo Maringá joga de vinho); `maranguape` (duas camisas na mesma imagem); `sao-joseense` (camisa no cabide).
+- chile-extra-01: `colo-colo` (camisa é de 2026-27 numa loja de revenda; conferir se é a oficial (mandar de site oficial ou do Football Kit Archive)); `coquimbo-unido` (camisa amassada, de loja de revenda); `deportes-copiapo` (camisa comemorativa com faixa de texto embaixo); `union-la-calera` (camisa no cabide).
+- colombia-extra-01: `deportivo-pasto` (camisa no cabide); `independiente-valle-del-cauca` (veio a do Independiente del Valle (Equador), não a do Independiente Yumbo/Valle del Cauca); `inter-bogota` (veio a terceira camisa (dourada), não a titular).
+- el-salvador-extra-01: `c-d-platense` (veio a do Platense da Argentina, não a do C.D. Platense de El Salvador); `cacahuatique` (camisa no cabide).
+- equador-extra-01: `ldu-quito` (camisa de lado e com o branco apagado ao tirar o fundo); `vinotinto-ecuador` (foto torta, de lado).
+- estados-unidos-extra-01: `new-york-cosmos` (foto torta, de lado); `oakland-roots` (linha do fundo embaixo da camisa).
+- guatemala-extra-01: `aurora-gt` (camisa no cabide); `chimaltenango` (camisa vestida por uma pessoa).
+- honduras-extra-01: `platense-hn` (branco da camisa sumiu ao tirar o fundo (mandar com fundo transparente)).
+- mexico-extra-01: `cancun` (foto torta, de lado); `dorados-de-sinaloa` (camisa de treino, de costas e com cantos do fundo); `tampico-madero` (cantos do fundo que não saem).
+- panama-extra-01: `tauro` (foto torta, de lado); `veraguas-united` (camisa no cabide).
+- paraguai-extra-01: `independiente-de-campo-grande` (veio a do Independiente da Argentina, não a do Independiente de Campo Grande).
+- peru-extra-01: `ayacucho` (pedaços do fundo em volta da camisa); `universidad-san-martin` (camisa no cabide e de lado).
+- uruguai-extra-01: `danubio` (jogador no lugar da camisa).
+
+No próximo lote: o motivo de quem ficou de fora tem que ser o de verdade, clube por clube (neste veio o mesmo texto para todos), e confira se a camisa é do clube certo: vieram Platense da Argentina no lugar do de El Salvador, Independiente da Argentina no do Paraguai, Comunicaciones da Guatemala no da Argentina.
+
 | Lote | Entraram | Ficaram de fora (motivo) |
 |---|---|---|
 | camisas 01 (Brasil) | 183 de 189 | princesa-do-solimoes e manauara entraram (manequim; talvez reserva) |
@@ -208,3 +227,4 @@ pendentes: tente de novo, com o motivo de verdade se não achar.
 | camisas turquia 02 (conferido de novo, 18/nov) | 15 de 15 | - |
 | camisas ucrânia 01 (conferido de novo, 18/nov) | 13 de 16 | epicentr (a fonte é a camisa reserva de 2024-25, não a titular); metalist-1925 (camisa num manequim de corpo inteiro (com calção e meias) e com fundo); zorya (moldura preta em volta da camisa) |
 | camisas ucrânia 02 (conferido de novo, 18/nov) | 8 de 12 | feniks-mariupol (camisa antiga (2018-19, ainda do FC Mariupol)); metalurh-zaporizhzhia (a fonte é a terceira camisa do Nyva Ternopil, não a do Metalurh); prykarpattia-ivano-frankivsk (camisa antiga (2021-22)); ucsa-tarasivka (a fonte é a camisa reserva de 2026-27, não a titular) |
+| camisas extra-01 (19 países da América) | 44 de 77 | ver "Refazer (camisas)" |
