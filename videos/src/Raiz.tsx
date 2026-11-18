@@ -5,6 +5,7 @@ import { Episodio03, DURACAO_EP03 } from "./Episodio03";
 import { Episodio04, DURACAO_EP04 } from "./Episodio04";
 import { Episodio05, DURACAO_EP05 } from "./Episodio05";
 import { STORIES, Stories } from "./Stories";
+import { QUANTOS_STORIES_FOLHA, StoriesFolhaCara } from "./StoriesFolhaCara";
 import { Episodio06, DURACAO_EP06 } from "./Episodio06";
 import { DURACAO_COPA, ModoCopaVideo } from "./ModoCopaVideo";
 import { CarreiraEp01, DURACAO_CAR01 } from "./carreira/CarreiraEp01";
@@ -27,6 +28,7 @@ export const Raiz = () => (
     <Composition id="Episodio06" component={Episodio06} durationInFrames={DURACAO_EP06} {...tela} />
     <Composition id="ModoCopa" component={ModoCopaVideo} durationInFrames={DURACAO_COPA} {...tela} />
     <Composition id="Stories" component={Stories} durationInFrames={STORIES.length} {...tela} />
+    <Composition id="StoriesFolhaCara" component={StoriesFolhaCara} durationInFrames={QUANTOS_STORIES_FOLHA} {...tela} />
     <Composition id="Ep01-A-Mural" component={VersaoMural} durationInFrames={DURACAO} {...tela} />
     <Composition id="Ep01-B-Legendas" component={VersaoLegendas} durationInFrames={DURACAO} {...tela} />
     <Composition id="Ep01-D-Completo" component={VersaoCompleta} durationInFrames={DURACAO} {...tela} />
