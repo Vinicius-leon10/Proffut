@@ -3,6 +3,21 @@
 O Claude Code do Proffut confere cada lote que chega e escreve aqui o resultado. O Claude no computador lê este arquivo
 **antes de cada lote novo** e refaz primeiro o que está em "Refazer".
 
+## Padrão do LEIA (pedido do usuário, 18/nov/2026: vale para todo lote)
+
+Os lotes do modo rápido, da Itália em diante, chegaram com menos cuidado que os primeiros. Volte ao padrão dos primeiros
+lotes; lote sem ele volta sem ser conferido:
+
+1. **"Confira" em cada clube:** a linha de cada clube no LEIA diz com o que comparar (por exemplo "listras verticais
+   vermelhas e pretas, gola branca" ou "escudo com águia dourada"), para a conferência olhar o lugar certo.
+2. **Aviso de fundo liso:** quando a imagem tem fundo branco, cinza ou de uma cor só (o preparo apaga o fundo e pode apagar
+   junto uma camisa branca), escreva "fundo liso" na linha do clube.
+3. **Motivo de verdade de quem ficou de fora:** nada de motivo genérico; diga o que aconteceu ("só achei no cabide",
+   "só achei a camisa reserva", "imagem cortada", "só em miniatura", "nenhuma imagem do clube").
+
+Os lotes da Itália em diante que já entraram no jogo vão ser conferidos de novo, um por um; o que estiver errado volta
+para "Refazer".
+
 ## Refazer (prioridade)
 
 **Escudos:** `tirol.png` (Tirol, Fortaleza-CE; o do jogo era o do Decisão) e `bala-town.png` (Bala Town, País de Gales;
