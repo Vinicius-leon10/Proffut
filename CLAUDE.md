@@ -914,6 +914,13 @@ público esperado; sem copas) ou, se for maior, `Tecnico.folhaAprovada` (a folha
 outros grandes, com folha acima da receita do mês, não contratariam ninguém. O R39 busca o goleiro emprestado na Série C. O Confiança no começo arrecada ~865 mil/mês e tinha folha de ~330 mil: agora traz 1 ou 2 livres
 bons. Não escolhidas (podem vir depois): bicho por vitória, dívida com juros, prêmios das copas menores para os pequenos.
 
+**Plano das temporadas reais (19/nov/2026, só plano, nada mudado no jogo; `docs/PLANO_TEMPORADAS_REAIS.md`):** pedido "Em relação a
+data da temporada, a Europa e a América são diferentes". Hoje o jogo tem uma temporada só (janeiro a dezembro) e as ligas da
+Europa, Ásia e África foram encaixadas nela; o plano troca isso por dois ciclos ("ano": Brasil, América...; "agosto": Europa,
+Oriente Médio, boa parte da África e da Ásia) com virada própria (dezembro e junho), em 6 etapas. Esperando o usuário responder as
+4 perguntas do fim do documento antes de começar. As janelas de transferência da Europa (R139) estão ajustadas ao calendário do jogo
+e passam a ser as reais (julho–agosto e janeiro) na etapa 6.
+
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
 pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais
 difícil outros clubes chamarem o técnico (convites, `CONVITES` em constantes.ts e `carreira.ts`).
