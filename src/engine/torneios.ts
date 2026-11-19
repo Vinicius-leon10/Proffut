@@ -8,6 +8,7 @@
 //   quartas, semifinal e final. Mata-mata em jogo único na casa da melhor campanha, com pênaltis se empatar.
 // - Ligas de fora: pontos corridos, em turno e returno quando cabe nos domingos da temporada (até 18 clubes) e em
 //   turno único nas maiores; as da Europa sempre em turno e returno, de janeiro em diante. O campeão é o primeiro.
+import { semanaDaLigaNoJogo } from "./ciclos";
 import { comArtigo, concorda } from "./artigos";
 import { depoisDaCopa, inicioDaTemporada, rodadasForaDaCopa, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { chavesDaFase, classificacao, vencedorDaChave, type LinhaTabela } from "./competicoes";
@@ -376,12 +377,14 @@ export function criarTorneios(estado: EstadoJogo, { semEstaduais = false } = {})
       const ida = turnoUnico(clubes, rng);
       // As ligas da Europa são sempre em turno e returno (38 rodadas com 20 clubes) e começam em janeiro, com os
       // estaduais: os clubes de lá não jogam estadual e assim sobra o resto do ano para as copas da UEFA.
-      const europa = PAISES[divisaoDaLiga(id.slice(2)).pais]?.regiao === "europa";
+      const pais = divisaoDaLiga(id.slice(2)).pais;
+      const europa = PAISES[pais]?.regiao === "europa";
       // Na Europa, as divisões de mais de 24 clubes (a 3ª da Espanha e da Itália, que lá são em grupos) jogam turno único,
       // e as de mais de 30, duas rodadas por semana (domingo e quarta): tudo dentro do ano.
       const grande = europa && clubes.length > 24;
       const rodadas = (europa && !grande) || 2 * ida.length <= 35 ? [...ida, ...ida.map((jogos) => jogos.map(([a, b]) => [b, a] as Confronto))] : ida;
-      const inicio = europa ? SEMANA_ESTADUAIS : 0;
+      // Semana da abertura pela tabela do calendário do mundo (ciclos.ts; por enquanto as datas de sempre).
+      const inicio = semanaDaLigaNoJogo(pais);
       const data = (r: number) => (europa && clubes.length > MAXIMO_UMA_RODADA_POR_SEMANA ? somarDias(domingo(ano, inicio + Math.floor(r / 2)), r % 2 ? 3 : 0) : domingo(ano, inicio + r));
       // Num ano de Copa do Mundo, as rodadas da janela da Copa vão para o meio da semana depois dela (R115).
       estado.partidas.push(...partidasDasRodadas(ano, id, "liga", rodadas, rodadasForaDaCopa(rodadas.map((_, r) => data(r)))));

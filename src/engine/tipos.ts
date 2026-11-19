@@ -476,6 +476,7 @@ export interface Configuracoes {
 export interface EstadoJogo {
   versao: 1;
   semente: number;
+  /** Ano do ciclo "ano" (ano civil). As temporadas que cruzam o ano ("2026/27") saem de `anoDoCiclo` (ciclos.ts). */
   temporada: number;
   data: string;
   tecnico: Tecnico;

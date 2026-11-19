@@ -45,6 +45,7 @@ describe("empréstimos", () => {
 
   it("pegar emprestado: só reserva de outro clube, com caixa para a taxa, que vai para o dono; emprestado não se vende, dispensa nem renova", () => {
     const estado = fimDaTemporada(42);
+    estado.data = "2026-08-01"; // janela aberta no Brasil (R139): com a temporada no fim, em dezembro, está fechada
     const meu = estado.clubes["ponte-preta"];
     const flamengo = estado.clubes.flamengo;
     const titular = elencoDe(estado, "flamengo").find((j) => flamengo.escalacao.titulares.includes(j.id))!;
@@ -72,8 +73,11 @@ describe("empréstimos", () => {
     const meus = elencoDe(estado, "ponte-preta");
     const vai = meus.filter((x) => !motivoParaNaoEmprestar(estado, x)).find((x) => interessadosNoEmprestimo(estado, x).length)!;
     emprestar(estado, vai.id, interessadosNoEmprestimo(estado, vai)[0]);
+    const fimDoAno = estado.data;
+    estado.data = "2026-08-01"; // janela aberta no Brasil (R139)
     const vem = elencoDe(estado, "flamengo").find((j) => !motivoParaNaoPegar(estado, j))!;
     pegarEmprestado(estado, vem.id);
+    estado.data = fimDoAno;
     avancar(estado);
     expect(estado.temporada).toBe(2027);
     expect(vai.clubeId).toBe("ponte-preta");

@@ -727,7 +727,7 @@ pela posição (os melhores com 1, 2/6, 3/4, 5/8/10/7, 9/11; os outros do 13 em 
 olham `.vaga .uniforme` (img ou `svg.camisa-desenhada`, `.numero`) e `.vaga .camisa` continua sendo a força (agora o anel).
 Campinho mais alto (`aspect-ratio: 0.7`). Novo lote: conferir, `preparar.py --quantizar` direto em `public/camisas`, fontes em
 `docs/CAMISAS_FONTES.csv`, retorno, verificar e publicar. Números reais das camisas ainda não (o jogador não guarda o número).
-Escudos trocados (R134): o Tirol estava com o do Decisão e o Bala Town com o do Barry Town; saíram (desenhados até chegar o certo).
+Camisa reserva (18/nov/2026, "Se não encontrar a camisa principal podemos usar as reservas, desde que seja atual"): vale a reserva de 2025-26 ou 2026 quando não houver a titular (regra 5 do "Padrão do LEIA"). Escudos trocados (R134): o Tirol estava com o do Decisão e o Bala Town com o do Barry Town; saíram (desenhados até chegar o certo).
 
 **Tela inicial nova (guardado para depois, 14/nov/2026):** pedido "Mande exemplos de como podemos melhorar essa tela
 inicial, otimizar as informações, tem muita coisa, temos que rolar muito pra baixo". Das seis prévias (A a F) ele escolheu a
@@ -914,9 +914,40 @@ público esperado; sem copas) ou, se for maior, `Tecnico.folhaAprovada` (a folha
 outros grandes, com folha acima da receita do mês, não contratariam ninguém. O R39 busca o goleiro emprestado na Série C. O Confiança no começo arrecada ~865 mil/mês e tinha folha de ~330 mil: agora traz 1 ou 2 livres
 bons. Não escolhidas (podem vir depois): bicho por vitória, dívida com juros, prêmios das copas menores para os pequenos.
 
+**Princípio do jogo (19/nov/2026, "Eu quero criar o jogo com experiência mais real, mas de forma jogável e divertida"):** realismo só até onde o jogo continua jogável e divertido; na dúvida, simplificar e dizer ao usuário o que foi simplificado.
+
+**Plano das temporadas reais no mundo todo (19/nov/2026, só plano, nada mudado no jogo; `docs/PLANO_TEMPORADAS_REAIS.md`):** pedido "Em
+relação a data da temporada, a Europa e a América são diferentes" e "monte já no mundo todo... quando eu escolher o europeu, o jogo vai
+gerar com a pré-temporada e com a opção de pular para o início da temporada... já vai gerar uma simulação de todas as outras temporadas
+que começaram no início do ano... em qualquer região do mundo, em qualquer time que eu escolher". Hoje o jogo tem uma temporada só
+(janeiro a dezembro, início sempre em 3/jan/2026). O plano: tabela `CALENDARIO_DO_MUNDO` por país; dois ciclos ("ano" e "agosto", viradas em
+dezembro e junho); o jogo começa na pré-temporada do clube escolhido (Brasil 3/jan, Europa ~1º/jul, Austrália ~1º/set) com o botão "Pular para o
+início da temporada" e **pré-simulação do mundo** com barra de progresso; 6 etapas (8 a 10 conversas). Esperando o usuário responder as 3
+perguntas do fim do documento. As janelas de transferência da Europa (R139) estão ajustadas ao calendário do jogo e passam a ser as reais na
+etapa 6.
+**Execução (19/nov/2026, decidido pelo usuário: pré-simulação na criação do jogo; amistosos de pré-temporada depois; tabela de
+ciclos aprovada; idade em 1º de janeiro para todos). Etapa 1 feita (R140, `src/engine/ciclos.ts`):** `CALENDARIO_DO_MUNDO`
+(país → ciclo "ano" | "torneios" | "agosto" | "outubro", pré-temporada, abertura, fim, pausa, em "MM-DD"; `VIRADA_DO_CICLO`),
+`cicloDoPais`, `cicloDoClube`, `cicloDaCompeticao`, `rotuloDaTemporada` ("2026/27"), `anoDoCiclo`, `viradaDoCiclo`,
+`inicioDaPreTemporada`. `semanaNoJogo` guarda a semana em que a liga começa HOJE (Europa −12, o resto 0) e é o que
+`criarTorneios` lê (`semanaDaLigaNoJogo`): mesma impressão digital de uma temporada inteira. Na etapa 2 as ligas passam a
+usar abertura e fim reais. Simplificação: o Caribe (fora a Rep. Dominicana) fica no ano civil. Próximo: etapa 2.
+
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
 pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais
 difícil outros clubes chamarem o técnico (convites, `CONVITES` em constantes.ts e `carreira.ts`).
+
+**Guardado para fazer no futuro (18/nov/2026, "Coisas para guardar para a gente fazer futuramente"; não começar sem ele pedir):**
+(1) **Disputa de pênaltis do usuário:** num jogo de mata-mata ou final que empatou e foi aos pênaltis, o usuário escolhe quem
+bate e a ordem das cobranças (hoje `cobradores` em `partida.ts` ordena sozinho, só com o `Clube.batedor` na frente) e vê as
+cobranças uma a uma, com dramatização (placar da disputa, a bola, comemoração e lamento; ligar com os sons e o campo 2D).
+(2) e (3) **feitos em 19/nov/2026 (R139, `src/engine/regras.ts`, pesquisa em `docs/PESQUISA_JANELAS_E_ESTRANGEIROS.md`):** `JANELAS` por país/região (Brasil e América do Sul jan–mar e jul–2/set; Europa, África e Oceania jan–25/mar e 15/jun–15/jul, ajustadas ao calendário do jogo; México, América Central e Caribe jun–ago e dez–jan; MLS fev–abr e jul–ago); fora da janela `fazerOferta` e `motivoParaNaoPegar` recusam (livre assina sempre); `LIMITE_ESTRANGEIROS` no elenco (Espanha e França contam só os de fora da UE), para o usuário e para o mercado do computador (que já só roda em julho e na pré-temporada); limite em campo e a regra italiana (2 de fora da UE por janela) ficaram de fora. Mercado com `SeloDaJanela`. Os testes que pegam emprestado no fim da temporada usam uma data com a janela aberta. Texto original: (2) **Janela de transferências:** hoje o mercado funciona o ano todo; passar a ter janelas parecidas com as do mundo real. Antes,
+pesquisar quantas janelas há em cada região do mundo e como funcionam (datas de abertura e fechamento, duração, janela extra,
+empréstimos e livres fora da janela): Brasil, América do Sul, Concacaf, Europa (por liga), Ásia, África e Oceania. O pedido da
+pesquisa faz parte desta tarefa; fazer quando ele pedir (pergunta, Sonnet médio basta; a mudança no jogo, Opus alto).
+(3) **Limite de jogadores estrangeiros (pedido de 18/nov/2026: "igual à realidade"):** cada país tem uma regra de quantos
+estrangeiros um clube pode ter no elenco ou em campo; pesquisar a regra de cada país (e das copas continentais) e aplicar no
+mercado e na escalação (hoje não há limite). Pesquisar junto com as janelas de transferência (item 2).
 
 **Ajustes para mais tarde (lista à mão do usuário, 10/nov/2026, "Ajuste pra mais tarde"):** guardados, não começar sem
 ele pedir. (1) Terminar as seleções para a Copa do Mundo: feito em nov/2026 (abaixo).
