@@ -943,6 +943,14 @@ verdade, em `ordemDaLiga` de copas.ts), campeão no `historico` da temporada em 
 nova (`criarTorneios` com `so`). México e América Central: uma liga no ano com pausa de junho a julho (os dois torneios ficam
 para depois). Jogadores, contratos e técnico ainda viram só em dezembro (etapa 2b e 5). Próximo: etapa 2b (jogadores e
 contratos por ciclo).
+**Etapa 2b feita (R142):** `temporadaDoClube` (contratos.ts: ano civil, ou o ano em que a temporada de agosto a maio começou) manda em
+`ultimoAno`, `contratoNovo`, `renovarContrato`, `avisarContratos` (1º/set no ano civil, 1º/mar na Europa), nos empréstimos (`ate`
+pela temporada do clube dono) e no rótulo da tela ("Contrato até 2026/27"). `virarJogadores` (temporada.ts) é a virada dos jogadores
+por ciclo: em 31/12 (`encerrarTemporada`) para clubes "ano"/"torneios", livres e quem joga fora; em 1º de julho
+(`virarJogadoresDoCiclo`, chamada em `processarDias` antes de `viradaDasLigas`) para "agosto"/"outubro": evolução, aposentadoria,
+empréstimos, contratos, base, elenco mínimo, excedentes e livres. A idade sobe uma vez por ano para todos, só em dezembro
+(`evoluir(rng, j, false)` não envelhece). `Jogador.evoluiuEm`: quem mudou de ciclo não evolui de novo em menos de 270 dias.
+Save antigo: a Europa evolui mais uma vez em julho (aceito). Próximo: etapa 2c (México e América Central em dois torneios).
 
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
 pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais

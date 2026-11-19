@@ -1,6 +1,6 @@
 // Testes do motor (antes num arquivo só, src/engine/motor.test.ts; separados para rodarem em paralelo).
 import { describe, expect, it } from "vitest";
-import { anosMaximos, avisarContratos, contratosTerminando, pedidoDeRenovacao, renovarContrato } from "../contratos";
+import { anosMaximos, avisarContratos, cicloDoClubeId, contratosTerminando, pedidoDeRenovacao, renovarContrato } from "../contratos";
 import { avancar, novoJogo, simularRestoDaTemporada } from "../jogo";
 import { dispensar, elencoDe, fazerOferta, livres } from "../mercado";
 import { exportarTexto, importarTexto } from "../../save/salvamento";
@@ -78,13 +78,14 @@ describe("contratos", () => {
     const [fica, sai] = terminando;
     renovarContrato(estado, fica.id, 2);
     const salarioDoContrato = fica.salario;
-    const deOutros = Object.values(estado.jogadores).filter((j) => j.clubeId && j.clubeId !== "ponte-preta" && !estado.clubes[j.clubeId].elencoDaCopa && j.contratoAte === 2026);
+    const deOutros = Object.values(estado.jogadores).filter((j) => j.clubeId && j.clubeId !== "ponte-preta" && !estado.clubes[j.clubeId].elencoDaCopa && j.contratoAte === 2026 && cicloDoClubeId(estado, j.clubeId) === "ano");
     avancar(estado);
     expect(estado.temporada).toBe(2027);
     expect(fica.clubeId).toBe("ponte-preta");
     expect(fica.salario, "no clube do usuário vale o salário do contrato").toBe(salarioDoContrato);
     expect(estado.jogadores[sai.id]?.clubeId ?? null, "saiu de graça e não volta").not.toBe("ponte-preta");
     expect(estado.mensagens.find((m) => m.titulo === "Fim de contrato")!.texto).toContain(sai.nome);
+    // (Os clubes de agosto a maio, como os da Europa, renovam em 30 de junho: R142.)
     for (const j of deOutros) if (estado.jogadores[j.id]?.clubeId) expect(j.contratoAte, j.nome).toBeGreaterThanOrEqual(2027);
     for (const j of elencoDe(estado, "ponte-preta")) expect(j.contratoAte, j.nome).toBeGreaterThanOrEqual(2027);
   });

@@ -43,7 +43,7 @@ import {
 import { criarRng, rngPara } from "./rng";
 import { avancarCopa, criarCopa } from "./copa";
 import { concluirObras } from "./estadio";
-import { encerrarTemporada, inicioDaProximaTemporada } from "./temporada";
+import { encerrarTemporada, inicioDaProximaTemporada, virarJogadoresDoCiclo } from "./temporada";
 import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno, simulacaoRapida, viradaDasLigas } from "./torneios";
 import { jogarRapido } from "./rapida";
 import {
@@ -465,6 +465,7 @@ export function processarDias(estado: EstadoJogo, ate: string) {
     avisarContratos(estado, dia);
     // 1º de julho: viram as ligas de agosto a maio (campeão, acesso e queda, temporada nova).
     if (dia.endsWith("-07-01")) {
+      virarJogadoresDoCiclo(estado);
       const noticias = viradaDasLigas(estado);
       if (noticias.length) enviarMensagem(estado, { tipo: "temporada", titulo: "Fim da temporada da liga", texto: noticias.join(" ") });
     }

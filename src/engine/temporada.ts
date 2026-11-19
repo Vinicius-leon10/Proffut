@@ -2,9 +2,10 @@
 // jogadores, aposentadorias, base e preparação do ano seguinte.
 import { comArtigo, concorda } from "./artigos";
 import { demitir, gerarConvites, mudarReputacao, passouDaCarencia, reputacaoDoTecnico } from "./carreira";
-import { encerrarContratos, garantirContratos, liberar } from "./contratos";
+import { cicloDoClubeId, encerrarContratos, garantirContratos, liberar } from "./contratos";
+import type { Ciclo } from "./ciclos";
 import { encerrarEmprestimos } from "./emprestimos";
-import { inicioDaTemporada, somarDias } from "./calendario";
+import { diasEntre, inicioDaTemporada, somarDias } from "./calendario";
 import { NOME_SERIE, SERIES, criarTemporada, nomeDaLigaDoClube, posicaoNaLiga, tabelaDaLiga } from "./competicoes";
 import { criarCopa } from "./copa";
 import { criarCopasDeClubes, definicaoDaCopa, vagasDasCopas } from "./copas";
@@ -35,7 +36,7 @@ function artilheiro(estado: EstadoJogo, serie: SerieId): RegistroTemporada["arti
   return j ? { jogadorId: j.id, nome: j.nome, clubeId: j.clubeId ?? "", gols: melhor[1] } : null;
 }
 
-export function evoluir(rng: Rng, j: Jogador) {
+export function evoluir(rng: Rng, j: Jogador, envelhecer = true) {
   const jogou = j.temporada.jogos;
   let delta: number;
   // Mais devagar desde nov/2026 (R127): "um jogador comprou só jovens e em 5 anos eles estavam entre os melhores do mundo".
@@ -51,7 +52,7 @@ export function evoluir(rng: Rng, j: Jogador) {
   if (delta > 0) j.forca = Math.min(j.potencial, j.forca + delta);
   else j.forca = limitar(j.forca + delta, 1, 99);
   j.potencial = Math.max(j.potencial, j.forca);
-  j.idade++;
+  if (envelhecer) j.idade++;
 }
 
 function vaiSeAposentar(rng: Rng, j: Jogador): boolean {
@@ -82,6 +83,162 @@ function reputacaoDasCopas(campeoes: Partial<Record<IdCopa, { campeao: string }>
 /** "a Série A", "o Campeonato Argentino". */
 function comArtigoDaLiga(nome: string): string {
   return `${nome.startsWith("Série") ? "a" : "o"} ${nome}`;
+}
+
+/** Resultado da virada dos jogadores de um ciclo (para as mensagens do usuário). */
+interface ViradaDosJogadores {
+  aposentadosMeus: string[];
+  jovensMeus: string[];
+  emprestimos: { voltaram: Jogador[]; devolvidos: Jogador[] };
+  sairamDeGraca: Jogador[];
+}
+
+/**
+ * Virada dos jogadores de um ou mais ciclos (R142): evolução, idade, aposentadoria, empréstimos, contratos, base, elenco
+ * mínimo e excedentes dos clubes desses ciclos. `fim` é a temporada que acaba (para os contratos e empréstimos);
+ * `dezembro`: a virada do ano civil, que também envelhece todo mundo (a idade sobe uma vez por ano, para todos) e cuida
+ * dos livres e de quem joga fora, ligado à seleção.
+ */
+function virarJogadores(estado: EstadoJogo, ciclos: Ciclo[], fim: number, rng: Rng, dezembro: boolean): ViradaDosJogadores {
+  const meuId = estado.tecnico.clubeId;
+  const doGrupo = (clubeId: string | null | undefined) => (clubeId ? ciclos.includes(cicloDoClubeId(estado, clubeId)) : dezembro);
+  const aposentadosMeus: string[] = [];
+  // Quem evoluiu há menos de nove meses (mudou de ciclo) não evolui de novo.
+  const jaEvoluiu = (j: Jogador) => !!j.evoluiuEm && diasEntre(j.evoluiuEm, estado.data) < 270;
+  for (const j of Object.values(estado.jogadores)) {
+    if (!doGrupo(j.clubeId)) {
+      if (dezembro) j.idade++;
+      continue;
+    }
+    // Soma a temporada na carreira (as notas faltam nos saves antigos: contam como zero).
+    for (const k of Object.keys(j.temporada) as (keyof Jogador["carreira"])[]) j.carreira[k] = (j.carreira[k] ?? 0) + (j.temporada[k] ?? 0);
+    if (!jaEvoluiu(j)) {
+      evoluir(rng, j, false);
+      j.evoluiuEm = estado.data;
+    }
+    if (dezembro) j.idade++;
+    j.temporada = { jogos: 0, gols: 0, assistencias: 0, amarelos: 0, vermelhos: 0 };
+    j.energia = 100;
+    j.suspensaoJogos = 0;
+    j.amarelosAcumulados = 0;
+    j.lesaoDias = Math.max(0, j.lesaoDias - 60);
+    // No clube do usuário vale o salário do contrato (muda na renovação); nos outros, o de mercado.
+    if (j.clubeId !== meuId) j.salario = Math.round(salarioBase(j.forca) * (j.idade <= 20 ? 0.6 : 1));
+    if (vaiSeAposentar(rng, j)) {
+      if (j.clubeId === meuId) aposentadosMeus.push(j.nome);
+      delete estado.jogadores[j.id];
+    }
+  }
+
+  // ---- empréstimos: todos voltam aos clubes donos (antes dos contratos) ----
+  const emprestimos = encerrarEmprestimos(estado, fim, ciclos);
+
+  // ---- contratos: quem o usuário não renovou sai de graça; os clubes do computador renovam ----
+  garantirContratos(estado, fim + 1, ciclos);
+  const sairamDeGraca = encerrarContratos(estado, fim, ciclos);
+  const naoVoltam = new Set(sairamDeGraca.map((j) => j.id));
+
+  // ---- base, elenco mínimo e excesso (todos os clubes que jogam: séries, estaduais e ligas de fora) ----
+  const jovensMeus: string[] = [];
+  const elencos = new Map<string, Jogador[]>();
+  for (const j of Object.values(estado.jogadores)) if (j.clubeId) elencos.set(j.clubeId, [...(elencos.get(j.clubeId) ?? []), j]);
+  const livresPorPosicao = new Map<Posicao, Jogador[]>();
+  for (const j of livres(estado)) livresPorPosicao.set(j.posicao, [...(livresPorPosicao.get(j.posicao) ?? []), j]);
+  for (const lista of livresPorPosicao.values()) lista.sort((a, b) => b.forca - a.forca);
+  for (const clube of Object.values(estado.clubes)) {
+    if (!doGrupo(clube.id)) continue;
+    const elenco = elencos.get(clube.id) ?? [];
+    // Clube sem jogador nenhum não joga (Série D de um save antigo antes de abrir o jogo). As seleções renovam a base de
+    // fora delas no ano novo (`anoNovoDasSelecoes`).
+    if (!elenco.length || clube.serie === "selecao") continue;
+    const doPais = clube.pais ? PAISES[clube.pais]?.nacionalidade : undefined;
+    const entrar = (j: Jogador) => { j.clubeId = clube.id; estado.jogadores[j.id] = j; elenco.push(j); };
+    const quantos = elenco.length < 24 ? 3 : elenco.length < 28 ? 2 : 1;
+    for (let i = 0; i < quantos; i++) {
+      const jovem = gerarJovem(rng, clube, posicaoMaisCarente(elenco), estado.proximoIdJogador++, doPais);
+      entrar(jovem);
+      if (clube.id === meuId) jovensMeus.push(`${jovem.nome} (${jovem.posicao}, ${jovem.idade} anos)`);
+    }
+    // Garante o mínimo por posição com jogadores livres (ou da base, se não houver).
+    for (const pos of Object.keys(MINIMO_POSICAO) as Posicao[]) {
+      while (elenco.filter((j) => j.posicao === pos).length < MINIMO_POSICAO[pos]) {
+        const fila = livresPorPosicao.get(pos) ?? [];
+        const i = fila.findIndex((j) => !(clube.id === meuId && naoVoltam.has(j.id)));
+        const novo = i >= 0 ? fila.splice(i, 1)[0] : gerarJovem(rng, clube, pos, estado.proximoIdJogador++, doPais);
+        entrar(novo);
+      }
+    }
+    // Clubes da IA dispensam os excedentes mais fracos e mais velhos, um a um: a posição de quem sai precisa continuar
+    // com um a mais que o mínimo (antes, a conta era feita uma vez só, e quatro goleiros fracos saíam todos, R75).
+    if (clube.id !== meuId) {
+      let sobra = elenco.length - (ELENCO_MAXIMO - 3);
+      if (sobra > 0) {
+        const naPosicao = (pos: Posicao) => elenco.filter((x) => x.posicao === pos && x.clubeId === clube.id).length;
+        const porForca = [...elenco].sort((a, b) => a.forca - a.idade / 2 - (b.forca - b.idade / 2));
+        for (const j of porForca) {
+          if (sobra <= 0) break;
+          if (naPosicao(j.posicao) <= MINIMO_POSICAO[j.posicao] + 1) continue;
+          liberar(j);
+          sobra--;
+        }
+      }
+    }
+  }
+
+  // Livres: os mais fracos deixam o futebol; completa a lista.
+  const listaLivres = livres(estado).sort((a, b) => b.forca - a.forca);
+  for (const j of listaLivres.slice(70)) delete estado.jogadores[j.id];
+  completarLivres(estado, `${fim + 1}${dezembro ? "" : "-jul"}`);
+  // Quem subiu da base ou chegou para completar um elenco ganha contrato (pelo menos até o fim do ano seguinte).
+  garantirContratos(estado, fim + 2, ciclos);
+
+  // ---- clubes ----
+  for (const clube of Object.values(estado.clubes)) {
+    if (!doGrupo(clube.id)) continue;
+    // As seleções escalam os convocados a cada concentração.
+    if (clube.serie === "selecao") { clube.moral = 60; continue; }
+    // Quem se aposentou ou saiu do clube deixa a escalação.
+    const ficou = (id: number | null) => id != null && estado.jogadores[id]?.clubeId === clube.id;
+    clube.escalacao.titulares = clube.escalacao.titulares.map((id) => (ficou(id) ? id : null));
+    clube.escalacao.reservas = clube.escalacao.reservas.filter(ficou);
+    clube.resumoFinanceiro = {};
+    clube.moral = 60;
+    if (clube.id !== meuId) clube.precoIngresso = precoDeReferencia(clube.serie);
+  }
+
+  return { aposentadosMeus, jovensMeus, emprestimos, sairamDeGraca };
+}
+
+/**
+ * Virada dos jogadores dos clubes de agosto a maio (Europa, Oriente Médio, boa parte da África e da Ásia, Austrália e Nova
+ * Zelândia), em 1º de julho (R142): evolução, aposentadoria, empréstimos, contratos de 30 de junho, base e elenco. A
+ * idade não muda aqui (ela sobe em 31 de dezembro, para todos). Se o clube do usuário é de um desses ciclos, chegam as
+ * mesmas mensagens da virada de dezembro.
+ */
+export function virarJogadoresDoCiclo(estado: EstadoJogo) {
+  const ano = Number(estado.data.slice(0, 4));
+  const ciclos: Ciclo[] = ["agosto", "outubro"];
+  const meuId = estado.tecnico.clubeId;
+  const r = virarJogadores(estado, ciclos, ano - 1, rngPara(estado.semente, `virada-ciclo/${ano}`), false);
+  for (const clube of Object.values(estado.clubes)) {
+    if (!ciclos.includes(cicloDoClubeId(estado, clube.id)) || clube.serie === "selecao") continue;
+    if (clube.id === meuId) {
+      if (estado.config.escalacaoAutomatica) clube.escalacao = escalarAutomatico(elencoDe(estado, meuId), clube.tatica.formacao, clube.tatica.jogadas);
+      else reescalar(estado, meuId);
+    } else reescalar(estado, clube.id);
+  }
+  if (!ciclos.includes(cicloDoClubeId(estado, meuId))) return;
+  const { emprestimos, sairamDeGraca, aposentadosMeus, jovensMeus } = r;
+  if (emprestimos.voltaram.length || emprestimos.devolvidos.length) {
+    const partes = [
+      emprestimos.voltaram.length ? `Voltaram ao seu clube: ${emprestimos.voltaram.map((j) => j.nome).join(", ")}.` : "",
+      emprestimos.devolvidos.length ? `Voltaram aos clubes donos: ${emprestimos.devolvidos.map((j) => j.nome).join(", ")}.` : "",
+    ];
+    enviarMensagem(estado, { tipo: "mercado", titulo: "Fim dos empréstimos", texto: partes.filter(Boolean).join(" ") });
+  }
+  if (sairamDeGraca.length) enviarMensagem(estado, { tipo: "mercado", titulo: "Fim de contrato", texto: `Saíram de graça, sem renovar: ${sairamDeGraca.map((j) => j.nome).join(", ")}.` });
+  if (aposentadosMeus.length) enviarMensagem(estado, { tipo: "noticia", titulo: "Aposentadorias", texto: `Penduraram as chuteiras: ${aposentadosMeus.join(", ")}.` });
+  if (jovensMeus.length) enviarMensagem(estado, { tipo: "noticia", titulo: "Novos jogadores da base", texto: `Subiram para o profissional: ${jovensMeus.join(", ")}.` });
 }
 
 /** Dia em que começa a temporada seguinte: com estaduais, em janeiro, uma semana antes deles. */
@@ -171,98 +328,9 @@ export function encerrarTemporada(estado: EstadoJogo) {
   // Nos países da América do Sul: os últimos da primeira divisão descem e os primeiros da segunda sobem.
   const trocas = Object.values(trocarDivisoes(estado));
 
-  // ---- jogadores: evolução, idade, aposentadoria ----
-  const aposentadosMeus: string[] = [];
-  for (const j of Object.values(estado.jogadores)) {
-    // Soma a temporada na carreira (as notas faltam nos saves antigos: contam como zero).
-    for (const k of Object.keys(j.temporada) as (keyof Jogador["carreira"])[]) j.carreira[k] = (j.carreira[k] ?? 0) + (j.temporada[k] ?? 0);
-    evoluir(rng, j);
-    j.temporada = { jogos: 0, gols: 0, assistencias: 0, amarelos: 0, vermelhos: 0 };
-    j.energia = 100;
-    j.suspensaoJogos = 0;
-    j.amarelosAcumulados = 0;
-    j.lesaoDias = Math.max(0, j.lesaoDias - 60);
-    // No clube do usuário vale o salário do contrato (muda na renovação); nos outros, o de mercado.
-    if (j.clubeId !== meuId) j.salario = Math.round(salarioBase(j.forca) * (j.idade <= 20 ? 0.6 : 1));
-    if (vaiSeAposentar(rng, j)) {
-      if (j.clubeId === meuId) aposentadosMeus.push(j.nome);
-      delete estado.jogadores[j.id];
-    }
-  }
-
-  // ---- empréstimos: todos voltam aos clubes donos (antes dos contratos) ----
-  const emprestimos = encerrarEmprestimos(estado, ano);
-
-  // ---- contratos: quem o usuário não renovou sai de graça; os clubes do computador renovam ----
-  garantirContratos(estado, ano + 1);
-  const sairamDeGraca = encerrarContratos(estado, ano);
-  const naoVoltam = new Set(sairamDeGraca.map((j) => j.id));
-
-  // ---- base, elenco mínimo e excesso (todos os clubes que jogam: séries, estaduais e ligas de fora) ----
-  const jovensMeus: string[] = [];
-  const elencos = new Map<string, Jogador[]>();
-  for (const j of Object.values(estado.jogadores)) if (j.clubeId) elencos.set(j.clubeId, [...(elencos.get(j.clubeId) ?? []), j]);
-  const livresPorPosicao = new Map<Posicao, Jogador[]>();
-  for (const j of livres(estado)) livresPorPosicao.set(j.posicao, [...(livresPorPosicao.get(j.posicao) ?? []), j]);
-  for (const lista of livresPorPosicao.values()) lista.sort((a, b) => b.forca - a.forca);
-  for (const clube of Object.values(estado.clubes)) {
-    const elenco = elencos.get(clube.id) ?? [];
-    // Clube sem jogador nenhum não joga (Série D de um save antigo antes de abrir o jogo). As seleções renovam a base de
-    // fora delas no ano novo (`anoNovoDasSelecoes`).
-    if (!elenco.length || clube.serie === "selecao") continue;
-    const doPais = clube.pais ? PAISES[clube.pais]?.nacionalidade : undefined;
-    const entrar = (j: Jogador) => { j.clubeId = clube.id; estado.jogadores[j.id] = j; elenco.push(j); };
-    const quantos = elenco.length < 24 ? 3 : elenco.length < 28 ? 2 : 1;
-    for (let i = 0; i < quantos; i++) {
-      const jovem = gerarJovem(rng, clube, posicaoMaisCarente(elenco), estado.proximoIdJogador++, doPais);
-      entrar(jovem);
-      if (clube.id === meuId) jovensMeus.push(`${jovem.nome} (${jovem.posicao}, ${jovem.idade} anos)`);
-    }
-    // Garante o mínimo por posição com jogadores livres (ou da base, se não houver).
-    for (const pos of Object.keys(MINIMO_POSICAO) as Posicao[]) {
-      while (elenco.filter((j) => j.posicao === pos).length < MINIMO_POSICAO[pos]) {
-        const fila = livresPorPosicao.get(pos) ?? [];
-        const i = fila.findIndex((j) => !(clube.id === meuId && naoVoltam.has(j.id)));
-        const novo = i >= 0 ? fila.splice(i, 1)[0] : gerarJovem(rng, clube, pos, estado.proximoIdJogador++, doPais);
-        entrar(novo);
-      }
-    }
-    // Clubes da IA dispensam os excedentes mais fracos e mais velhos, um a um: a posição de quem sai precisa continuar
-    // com um a mais que o mínimo (antes, a conta era feita uma vez só, e quatro goleiros fracos saíam todos, R75).
-    if (clube.id !== meuId) {
-      let sobra = elenco.length - (ELENCO_MAXIMO - 3);
-      if (sobra > 0) {
-        const naPosicao = (pos: Posicao) => elenco.filter((x) => x.posicao === pos && x.clubeId === clube.id).length;
-        const porForca = [...elenco].sort((a, b) => a.forca - a.idade / 2 - (b.forca - b.idade / 2));
-        for (const j of porForca) {
-          if (sobra <= 0) break;
-          if (naPosicao(j.posicao) <= MINIMO_POSICAO[j.posicao] + 1) continue;
-          liberar(j);
-          sobra--;
-        }
-      }
-    }
-  }
-
-  // Livres: os mais fracos deixam o futebol; completa a lista.
-  const listaLivres = livres(estado).sort((a, b) => b.forca - a.forca);
-  for (const j of listaLivres.slice(70)) delete estado.jogadores[j.id];
-  completarLivres(estado, `${ano + 1}`);
-  // Quem subiu da base ou chegou para completar um elenco ganha contrato (pelo menos até o fim do ano seguinte).
-  garantirContratos(estado, ano + 2);
-
-  // ---- clubes ----
-  for (const clube of Object.values(estado.clubes)) {
-    // As seleções escalam os convocados a cada concentração.
-    if (clube.serie === "selecao") { clube.moral = 60; continue; }
-    // Quem se aposentou ou saiu do clube deixa a escalação.
-    const ficou = (id: number | null) => id != null && estado.jogadores[id]?.clubeId === clube.id;
-    clube.escalacao.titulares = clube.escalacao.titulares.map((id) => (ficou(id) ? id : null));
-    clube.escalacao.reservas = clube.escalacao.reservas.filter(ficou);
-    clube.resumoFinanceiro = {};
-    clube.moral = 60;
-    if (clube.id !== meuId) clube.precoIngresso = precoDeReferencia(clube.serie);
-  }
+  // ---- jogadores: evolução, idade, aposentadoria, empréstimos, contratos, base (clubes do ano civil; os de agosto a maio
+  // viram em 1º de julho, `virarJogadoresDoCiclo`) ----
+  const { aposentadosMeus, jovensMeus, emprestimos, sairamDeGraca } = virarJogadores(estado, ["ano", "torneios"], ano, rng, true);
 
   // ---- diretoria ----
   const t = estado.tecnico;

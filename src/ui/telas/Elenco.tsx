@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { comArtigo } from "../../engine/artigos";
-import { anosMaximos, pedidoDeRenovacao, renovarContrato, ultimoAno } from "../../engine/contratos";
+import { rotuloDaTemporada } from "../../engine/ciclos";
+import { anosMaximos, cicloDoClubeId, pedidoDeRenovacao, renovarContrato, ultimoAno } from "../../engine/contratos";
 import { emprestar, interessadosNoEmprestimo, motivoParaNaoEmprestar } from "../../engine/emprestimos";
 import { forcaDoTime } from "../../engine/forca";
 import { NOMES_CARACTERISTICA, NOMES_POSICAO, fatorEnergia } from "../../engine/forca";
@@ -162,14 +163,14 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
           // Joga fora dos clubes do jogo (Europa, Ásia...): só joga pela seleção.
           <span className="pequeno">{j.clubeFora.nome}{j.clubeFora.pais ? ` (${j.clubeFora.pais})` : ""} <span className="fraco">· fora dos clubes do jogo</span></span>
         ) : clube ? <><Escudo clube={clube} tamanho={22} /><span className="pequeno">{clube.nome}</span></> : <span className="chip">Sem clube</span>}
-        {clube && !j.clubeFora && j.contratoAte != null && <span className="pequeno fraco">· Contrato até {j.contratoAte}</span>}
+        {clube && !j.clubeFora && j.contratoAte != null && <span className="pequeno fraco">· Contrato até {rotuloDaTemporada(cicloDoClubeId(estado, j.clubeId), j.contratoAte)}</span>}
       </div>
       {j.selecao && (j.selecao.jogos > 0 || j.convocado) && (
         <p className="pequeno">Pela seleção: {j.selecao.jogos} {j.selecao.jogos === 1 ? "jogo" : "jogos"} e {j.selecao.gols} {j.selecao.gols === 1 ? "gol" : "gols"}.</p>
       )}
       {j.emprestimo && clube && (
         <p className="pequeno">
-          Emprestado {comArtigo("pelo", estado.clubes[j.emprestimo.de])} {comArtigo("ao", clube)} até o fim de {j.emprestimo.ate}. Na virada ele volta.
+          Emprestado {comArtigo("pelo", estado.clubes[j.emprestimo.de])} {comArtigo("ao", clube)} até o fim de {rotuloDaTemporada(cicloDoClubeId(estado, j.emprestimo.de), j.emprestimo.ate)}. Na virada ele volta.
         </p>
       )}
       {/* No último ano: renovar ou pôr à venda, lado a lado (R64). */}

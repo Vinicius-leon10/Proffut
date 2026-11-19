@@ -95,6 +95,8 @@ export interface Jogador {
    * do computador renovam). Livres não têm. Falta nos saves antigos: ganham ao abrir o jogo (`migrar`).
    */
   contratoAte?: number;
+  /** Data da última evolução de força (virada do ciclo do clube): evita evoluir duas vezes no mesmo ano ao mudar de ciclo. */
+  evoluiuEm?: string;
   /** Emprestado: joga no `clubeId` até a virada da temporada `ate` e então volta ao clube `de` (dono do contrato). */
   emprestimo?: { de: string; ate: number };
   /**
