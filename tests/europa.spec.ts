@@ -42,6 +42,8 @@ test("R98 jogo novo na Europa: o continente Europa com os 54 países (7 até o R
   await expect(page.getByRole("heading", { name: "Campeonato Inglês 2026" })).toBeVisible();
   await expect(cartaoDoProximoJogo(page)).toBeVisible();
   await expect(page.locator("main")).toContainText("Liga dos Campeões");
+  // O jogo começa na pré-temporada (R144): o botão pula para o início da temporada.
+  await expect(page.locator(".placar-do-dia").getByRole("button", { name: /Avançar|Ir para o jogo/ })).toContainText("Pular para o início da temporada");
 });
 
 test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 54 países (23 até o R113; a Inglaterra com 20 clubes); em Copas, o grupo Europa com a Liga dos Campeões, a Liga Europa e a Conference (a Supercopa fora, sem jogo em 2026)", async ({ page }) => {

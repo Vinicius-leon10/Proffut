@@ -34,7 +34,9 @@ describe("calendário do mundo (R140)", () => {
     expect(viradaDoCiclo("ano", 2026)).toBe("2026-12-31");
     expect(viradaDoCiclo("agosto", 2026)).toBe("2027-06-30");
     expect(inicioDaPreTemporada("BR", 2026)).toBe("2026-01-03");
-    expect(inicioDaPreTemporada("EN", 2026)).toBe("2026-07-01");
+    // Em ano de Copa do Mundo (2026) os clubes de agosto a maio só voltam depois da final (R144); nos outros anos, 1º de julho.
+    expect(inicioDaPreTemporada("EN", 2026)).toBe("2026-07-20");
+    expect(inicioDaPreTemporada("EN", 2027)).toBe("2027-07-01");
     expect(inicioDaPreTemporada("AU", 2026)).toBe("2026-09-01");
   });
 

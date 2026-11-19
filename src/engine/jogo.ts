@@ -22,6 +22,7 @@ import restoJogadoresJson from "../../data/europa-2026/jogadores-resto.json";
 import repetidosJson from "../../data/repetidos-removidos.json";
 import { comArtigo } from "./artigos";
 import { diasEntre, inicioDaTemporada, mesDe, somarDias } from "./calendario";
+import { inicioDaPreTemporada } from "./ciclos";
 import {
   FASE_LIGA, agregado, avancarFases, chaveDaPartida, criarTemporada, decidePorPenaltis, ehSerie, temporadaEncerrada,
 } from "./competicoes";
@@ -437,6 +438,66 @@ export function proximoJogoDoClube(estado: EstadoJogo, clubeId = estado.tecnico.
 
 export function proximaDataComJogo(estado: EstadoJogo): string | undefined {
   return estado.partidas.find((p) => !p.jogada && p.data > estado.data)?.data;
+}
+
+/**
+ * Dia em que o jogo começa para quem escolhe este clube: o começo da pré-temporada do país dele (ciclos.ts): 3 de janeiro no
+ * Brasil, 1º de julho na Europa, 1º de setembro na Austrália (R144). Nunca antes do dia em que o mundo é montado.
+ */
+export function dataDeInicioDoClube(clube: Clube): string {
+  return inicioDaPreTemporada(clube.pais ?? "BR", TEMPORADA_INICIAL);
+}
+
+/**
+ * Pré-simulação do mundo (R144): simula tudo o que já devia ter acontecido até `ate` (os campeonatos que começaram antes
+ * de o clube do usuário começar). Um passo por dia de jogos, devolvendo a fração feita (0 a 1), para a tela mostrar uma barra
+ * de progresso e deixar o iPhone respirar entre os passos. O clube do usuário fica como estava: não gasta nem recebe nada e
+ * as mensagens da pré-simulação não chegam. Quem começa no dia em que o mundo é montado (o Brasil) não simula nada.
+ */
+export function* preSimularMundo(estado: EstadoJogo, ate: string): Generator<number, void, void> {
+  if (estado.data >= ate) return;
+  const inicio = estado.data;
+  const total = diasEntre(inicio, ate);
+  const meu = estado.clubes[estado.tecnico.clubeId];
+  const t = estado.tecnico;
+  const antes = { caixa: meu.caixa, extrato: [...meu.extrato], resumo: { ...meu.resumoFinanceiro }, diretoria: t.confiancaDiretoria, torcida: t.confiancaTorcida, reputacao: t.reputacao };
+  const primeiraMensagem = estado.proximoIdMensagem;
+  for (let seguranca = 0; seguranca < 5000 && estado.data < ate; seguranca++) {
+    const proxima = proximaDataComJogo(estado);
+    if (proxima && proxima < ate) {
+      processarDias(estado, proxima);
+      simularDia(estado);
+    } else processarDias(estado, ate);
+    yield diasEntre(inicio, estado.data) / total;
+  }
+  meu.caixa = antes.caixa;
+  meu.extrato = antes.extrato;
+  meu.resumoFinanceiro = antes.resumo;
+  // Se o clube dele jogou (as copas da UEFA de janeiro a maio, por exemplo), os jogos foram com a escalação automática e não
+  // contam para a confiança nem para a reputação do técnico.
+  t.confiancaDiretoria = antes.diretoria;
+  t.confiancaTorcida = antes.torcida;
+  t.reputacao = antes.reputacao;
+  delete t.avisoDeRisco;
+  estado.mensagens = estado.mensagens.filter((m) => m.id < primeiraMensagem);
+  estado.tecnico.desde = estado.data;
+}
+
+/** Faz a pré-simulação de uma vez (testes e quem não precisa de barra de progresso). */
+export function prepararMundoAte(estado: EstadoJogo, ate: string) {
+  for (const _ of preSimularMundo(estado, ate)) void _;
+}
+
+/**
+ * Pré-temporada do clube do usuário: nenhum jogo dele nos últimos 30 dias e o próximo a pelo menos 4 dias. Vale no começo
+ * do jogo e em cada virada (Brasil em janeiro, Europa em julho). O botão "Pular para o início da temporada" é o Avançar.
+ */
+export function emPreTemporada(estado: EstadoJogo): boolean {
+  const meu = estado.tecnico.clubeId;
+  const proximo = proximoJogoDoClube(estado);
+  if (!proximo || diasEntre(estado.data, proximo.data) < 4) return false;
+  const limite = somarDias(estado.data, -30);
+  return !estado.partidas.some((p) => p.jogada && p.data >= limite && (p.mandante === meu || p.visitante === meu));
 }
 
 /** Passa os dias até `ate`: recuperação, lesões, virada de mês, propostas e janela de julho. */

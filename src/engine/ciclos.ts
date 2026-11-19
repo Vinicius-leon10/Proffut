@@ -4,6 +4,7 @@
 // virada). As ligas de fora do Brasil são marcadas por ela (`datasDaLiga` em torneios.ts, etapa 2): as de agosto a maio
 // atravessam o ano e viram em 30 de junho (`viradaDasLigas` em torneios.ts).
 
+import { janelaDaCopa, somarDias } from "./calendario";
 import type { Clube, Competicao } from "./tipos";
 
 /**
@@ -144,9 +145,15 @@ export function viradaDoCiclo(ciclo: Ciclo, ano: number): string {
   return `${cruzaOAno(ciclo) ? ano + 1 : ano}-${VIRADA_DO_CICLO[ciclo]}`;
 }
 
-/** Dia em que começa a pré-temporada do país na temporada que começa em `ano` ("AAAA-MM-DD"). */
+/**
+ * Dia em que começa a pré-temporada do país na temporada que começa em `ano` ("AAAA-MM-DD"). Em ano de Copa do Mundo, os
+ * clubes de agosto a maio só voltam depois da final (como no mundo real): 20 de julho de 2026, em vez de 1º de julho.
+ */
 export function inicioDaPreTemporada(pais: string | undefined, ano: number): string {
-  return `${ano}-${calendarioDoPais(pais).preTemporada}`;
+  const data = `${ano}-${calendarioDoPais(pais).preTemporada}`;
+  const copa = janelaDaCopa(ano);
+  if (copa && data >= copa.de && data <= copa.ate) return somarDias(copa.ate, 1);
+  return data;
 }
 
 /** Liga de fora ("L-EN", "L-AU2") cujo ciclo cruza o ano (de agosto ou outubro a maio). */

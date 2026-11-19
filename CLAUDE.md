@@ -953,7 +953,15 @@ empréstimos, contratos, base, elenco mínimo, excedentes e livres. A idade sobe
 Save antigo: a Europa evolui mais uma vez em julho (aceito). **Etapa 2c feita (R143):** México e América Central (ciclo "torneios", divisões em turno e returno com 6+ rodadas): `EstadoTorneio.rodadasPorTurno`
 e `turnos` ({nome "Clausura"|"Apertura", campeao, vice}); `criarTorneios` marca o Clausura de 10/jan a 24/mai e o Apertura de 11/jul a
 13/dez (`datasDaLiga` com `janela`); `tabelaDoTurno`; `avancarTorneios` grava cada campeão (`fasesCompletas` ganhou a chave
-`L-MX|liga|1`/`2`); histórico com `turnos`. Sem liguilha. Tela: Tabelas com Ano todo/Clausura/Apertura. Próximo: etapa 3.
+`L-MX|liga|1`/`2`); histórico com `turnos`. Sem liguilha. Tela: Tabelas com Ano todo/Clausura/Apertura.
+**Etapa 3 feita (R144):** `dataDeInicioDoClube` (jogo.ts, pela tabela de ciclos), `preSimularMundo(estado, ate)` (gerador que devolve a fração
+0–1 a cada dia de jogos; `prepararMundoAte` roda de uma vez) e `emPreTemporada` (nenhum jogo do clube nos últimos 30 dias e o próximo a 4+
+dias; o botão do painel mostra "Pular para o início da temporada", que é o Avançar). `novoJogo` continua montando o mundo em 3/jan e é a
+tela `NovoJogo.tsx` que roda o gerador em pedaços de 40 ms com "Preparando o mundo…" e a barra; a pré-simulação devolve o caixa, o extrato,
+a confiança e a reputação do clube do usuário e apaga as mensagens dela, e põe `Tecnico.desde` no dia de início. `competicoesDoUsuario` só
+inclui Séries A a C e a Copa do Brasil para quem treina clube do Brasil. Testes de tela: `playwright.config.ts` com 120 s por teste e
+`pularTutorial` esperando até 100 s (a pré-simulação de um clube da Europa leva de 15 s a ~1 min). As copas da UEFA ainda vão de janeiro
+a maio (etapa 4): o clube europeu pode ter jogado a de 2026 na pré-simulação com escalação automática. Próximo: etapa 4.
 
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
 pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais

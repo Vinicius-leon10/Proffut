@@ -107,7 +107,8 @@ export async function novoJogo(page: Page, { serie = "Série B", clube = "Ponte 
  */
 export async function pularTutorial(page: Page) {
   const pular = page.getByRole("dialog").getByRole("button", { name: "Pular" });
-  await pular.waitFor({ timeout: 20_000 });
+  // Quem começa na Europa, Ásia ou África espera antes a pré-simulação do mundo (R144).
+  await pular.waitFor({ timeout: 100_000 });
   const desde = await agora(page);
   await pular.click();
   await expect

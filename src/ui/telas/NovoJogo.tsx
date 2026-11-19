@@ -1,10 +1,11 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { comArtigo } from "../../engine/artigos";
-import { FICHAS, FICHAS_ESTADUAIS, FICHAS_EXTERIOR, PARTICIPANTES_ESTADUAIS, RESERVA, forcaEstimada, novoJogo, type FichaClube } from "../../engine/jogo";
+import { formatarData } from "../../engine/calendario";
+import { FICHAS, FICHAS_ESTADUAIS, FICHAS_EXTERIOR, PARTICIPANTES_ESTADUAIS, RESERVA, dataDeInicioDoClube, forcaEstimada, novoJogo, preSimularMundo, type FichaClube } from "../../engine/jogo";
 import { NOME_REGIAO, PAISES, divisaoDaLiga, type Regiao } from "../../engine/torneios";
 import { formatarDinheiro } from "../../engine/financas";
 import { espacoLivre, pedirArmazenamentoPersistente, podeTrocarOContinuar } from "../../save/salvamento";
-import { Bandeira, Escudo, Segmentado, Topo } from "../componentes";
+import { Bandeira, Barra, Escudo, Segmentado, Topo } from "../componentes";
 import { useLoja } from "../store";
 
 /** Países em que o técnico pode começar e as divisões de cada um (o técnico treina qualquer clube, nov/2026). */
@@ -51,6 +52,8 @@ export function NovoJogo() {
   const [divisao, setDivisao] = useState("A");
   const [escolhido, setEscolhido] = useState<string | null>(null);
   const [criando, setCriando] = useState(false);
+  // Pré-simulação do mundo (R144): quem começa depois de 3 de janeiro (a Europa, em julho) espera a tela "Preparando o mundo…".
+  const [preparando, setPreparando] = useState<{ ate: string; progresso: number } | null>(null);
 
   const divisoes = DIVISOES[pais];
   const atual = divisoes.find((d) => d.valor === divisao) ?? divisoes[0];
@@ -76,7 +79,33 @@ export function NovoJogo() {
         const estado = novoJogo({ nomeTecnico: nome || "Técnico", clubeId: selecionado.id });
         estado.tutorial = true;
         void pedirArmazenamentoPersistente();
-        iniciar(estado, espaco);
+        const ate = dataDeInicioDoClube(estado.clubes[selecionado.id]);
+        if (estado.data >= ate) {
+          iniciar(estado, espaco);
+          return;
+        }
+        // O mundo anda até o dia em que a pré-temporada do clube começa, em pedaços, com a barra de progresso.
+        setPreparando({ ate, progresso: 0 });
+        const passos = preSimularMundo(estado, ate);
+        const rodar = () => {
+          try {
+            const inicio = performance.now();
+            let r = passos.next();
+            while (!r.done && performance.now() - inicio < 40) r = passos.next();
+            if (r.done) {
+              setPreparando(null);
+              iniciar(estado, espaco);
+              return;
+            }
+            setPreparando({ ate, progresso: r.value });
+            setTimeout(rodar, 0);
+          } catch (e) {
+            avisar((e as Error).message);
+            setPreparando(null);
+            setCriando(false);
+          }
+        };
+        setTimeout(rodar, 0);
       } catch (e) {
         avisar((e as Error).message);
         setCriando(false);
@@ -87,6 +116,21 @@ export function NovoJogo() {
   const rodape = (conteudo: ReactNode) => (
     <div style={{ padding: "12px 16px calc(var(--base) + 12px)", borderTop: "1px solid var(--borda)", background: "var(--fundo-2)" }}>{conteudo}</div>
   );
+
+  if (preparando) {
+    return (
+      <div className="app">
+        <Topo titulo="Preparando o mundo…" sub={`Até ${formatarData(preparando.ate, true)}`} />
+        <div className="conteudo">
+          <div className="cartao">
+            <p>O mundo está jogando até a pré-temporada do seu clube: os campeonatos que já começaram estão sendo simulados.</p>
+            <Barra valor={preparando.progresso * 100} cor="var(--esmeralda)" />
+            <p className="mini fraco centro" aria-live="polite">{Math.round(preparando.progresso * 100)}%</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (passo === "nome") {
     return (

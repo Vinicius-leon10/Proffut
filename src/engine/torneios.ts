@@ -715,7 +715,10 @@ export function simulacaoRapida(estado: EstadoJogo, p: Partida, acompanha = comp
 /** Competições que o usuário acompanha: os dias só com jogos de outras passam sem parar (Série D dos outros, os outros estaduais e as ligas de fora). */
 export function competicoesDoUsuario(estado: EstadoJogo): Set<Competicao> {
   const meu = estado.tecnico.clubeId;
-  const lista = new Set<Competicao>(["A", "B", "C", "CB"]);
+  const lista = new Set<Competicao>();
+  // As Séries A a C e a Copa do Brasil só param o Avançar de quem treina um clube do Brasil: quem treina um clube de fora vê
+  // as competições do clube dele (a pré-temporada e a Série A dos outros passam sem parar, R144).
+  if (estado.clubes[meu]?.serie !== "exterior") for (const id of ["A", "B", "C", "CB"] as const) lista.add(id);
   for (const t of torneiosDoClube(estado, meu)) lista.add(t.id);
   // As copas de clubes que o clube do usuário joga (Libertadores, Copa do Nordeste...).
   for (const c of Object.values(estado.copas ?? {})) if (c?.clubes.includes(meu)) lista.add(c.id);
