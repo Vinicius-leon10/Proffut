@@ -22,11 +22,11 @@ import restoJogadoresJson from "../../data/europa-2026/jogadores-resto.json";
 import repetidosJson from "../../data/repetidos-removidos.json";
 import { comArtigo } from "./artigos";
 import { diasEntre, inicioDaTemporada, mesDe, somarDias } from "./calendario";
-import { inicioDaPreTemporada } from "./ciclos";
+import { inicioDaPreTemporada, ligaCruzaOAno } from "./ciclos";
 import {
   FASE_LIGA, agregado, avancarFases, chaveDaPartida, criarTemporada, decidePorPenaltis, ehSerie, temporadaEncerrada,
 } from "./competicoes";
-import { avancarCopasDeClubes, criarCopasDeClubes } from "./copas";
+import { avancarCopasDeClubes, criarCopasDeClubes, viradaDasCopasDoCiclo } from "./copas";
 import { COTA_TV_ESTADUAL, COTA_TV_RODADA, DIAS_LESAO, MINIMO_POSICAO, RECUPERACAO_POR_DIA, TEMPORADA_INICIAL } from "./constantes";
 import { depoisDoMeuJogo, expirarConvites } from "./carreira";
 import { avisarContratos, garantirContratos } from "./contratos";
@@ -527,7 +527,9 @@ export function processarDias(estado: EstadoJogo, ate: string) {
     // 1º de julho: viram as ligas de agosto a maio (campeão, acesso e queda, temporada nova).
     if (dia.endsWith("-07-01")) {
       virarJogadoresDoCiclo(estado);
+      const ligasAcabaram = Object.values(estado.torneios ?? {}).some((t) => !!t && ligaCruzaOAno(t.id) && t.fase === "encerrada");
       const noticias = viradaDasLigas(estado);
+      viradaDasCopasDoCiclo(estado, ligasAcabaram);
       if (noticias.length) enviarMensagem(estado, { tipo: "temporada", titulo: "Fim da temporada da liga", texto: noticias.join(" ") });
     }
     if (dia.endsWith("-07-01") || dia.endsWith("-07-15")) {
@@ -552,6 +554,9 @@ export type ResultadoAvanco =
  */
 export function avancar(estado: EstadoJogo): ResultadoAvanco {
   let andou = false;
+  // Com a temporada já encerrada ao tocar no botão (as ligas e copas de agosto a maio ainda têm jogos de dezembro), quem
+  // tocou já confirmou o "Encerrar a temporada": os jogos que sobram saem e a virada vem no mesmo toque (R145).
+  const jaEncerrada = temporadaEncerrada(estado);
   // Dia só com jogos que o usuário não acompanha (Série D dos outros, outros estaduais, ligas de fora): passa direto.
   for (let seguranca = 0; seguranca < 1000; seguranca++) {
     const pendentes = jogosPendentesHoje(estado);
@@ -572,7 +577,7 @@ export function avancar(estado: EstadoJogo): ResultadoAvanco {
       }
       // A virada só no botão "Encerrar a temporada" (ele pergunta antes quem sai de graça): se os últimos jogos do ano
       // eram de fora (a 2ª divisão da Argentina termina depois da final da Série C), este Avançar para aqui (R79).
-      if (andou) return { tipo: "fim-dos-jogos" };
+      if (andou && !jaEncerrada) return { tipo: "fim-dos-jogos" };
       encerrarTemporada(estado);
       return { tipo: "nova-temporada" };
     }

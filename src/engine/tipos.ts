@@ -357,6 +357,8 @@ export interface EstadoCopaClubes {
   grupos?: Record<string, string[][]>;
   /** Do mais forte ao mais fraco (potes do sorteio e mando quando a campanha empata). */
   ranking: string[];
+  /** A temporada (o ano do ciclo "ano" ou o ano em que ela começou) em que a copa foi montada: as semanas das fases saem dele. */
+  inicio?: number;
   campeao?: string;
   vice?: string;
 }
@@ -506,6 +508,8 @@ export interface EstadoJogo {
    * clubes chegam ao abrir o jogo e os torneios começam na temporada seguinte.
    */
   torneios?: Partial<Record<IdTorneio, EstadoTorneio>>;
+  /** O último campeão de cada copa que cruza o ano (Liga dos Campeões, Ásia, África...): o Mundial de Clubes de janeiro o usa. */
+  ultimosCampeoes?: Partial<Record<IdCopa, string>>;
   /**
    * Tabela final da última temporada encerrada das ligas que cruzam o ano ("EN" → clubes do 1º ao último), guardada na
    * virada de 1º de julho: as vagas das copas da virada de dezembro saem dela (a liga do ano está no meio).

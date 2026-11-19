@@ -257,7 +257,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
   const minhaSerie = estado.clubes[meuId].serie;
   const torneios = Object.values(estado.torneios ?? {}).filter((t) => !!t);
   // Quem joga as copas de clubes na temporada seguinte: pelas tabelas e pelos campeões deste ano (antes do acesso e da queda).
-  const vagas = vagasDasCopas(estado);
+  const vagas = vagasDasCopas(estado, "ano");
 
   // ---- histórico ----
   const tabelas = Object.fromEntries(SERIES.map((s) => [s, tabelaDaLiga(estado, s)])) as Record<SerieId, ReturnType<typeof tabelaDaLiga>>;
@@ -355,7 +355,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
   const continuam = guardarJogosQueContinuam(estado);
   criarTemporada(estado);
   criarCopa(estado);
-  criarCopasDeClubes(estado, vagas);
+  criarCopasDeClubes(estado, vagas, "ano");
   anoNovoDasSelecoes(estado, continuam);
   transferenciasDaIa(estado, `${ano + 1}-pre-1`);
   transferenciasDaIa(estado, `${ano + 1}-pre-2`);

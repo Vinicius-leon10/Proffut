@@ -1,6 +1,6 @@
 // Testes do motor (antes num arquivo só, src/engine/motor.test.ts; separados para rodarem em paralelo).
 import { describe, expect, it } from "vitest";
-import { ligaCruzaOAno } from "../ciclos";
+import { competicaoCruzaOAno } from "../copas";
 import { temporadaEncerrada } from "../competicoes";
 import { avancar, novoJogo, simularRestoDaTemporada } from "../jogo";
 import { elencoDe } from "../mercado";
@@ -52,7 +52,7 @@ describe("Copa do Brasil", () => {
       expect([final.mandante, final.visitante].sort()).toEqual([e.copa!.campeao, e.copa!.vice].sort());
       // A final é o último jogo do futebol brasileiro no ano (as finais da Libertadores e da Sul-Americana vêm depois).
       // (As ligas de agosto a maio, R141, seguem no ano seguinte.)
-      expect(final.data >= e.partidas.filter((p) => p.serie !== "CB" && !p.serie.startsWith("K-") && !ligaCruzaOAno(p.serie)).map((p) => p.data).sort().at(-1)!).toBe(true);
+      expect(final.data >= e.partidas.filter((p) => p.serie !== "CB" && !p.serie.startsWith("K-") && !competicaoCruzaOAno(p.serie)).map((p) => p.data).sort().at(-1)!).toBe(true);
     });
 
     it("empate em jogo único ou no agregado vai para os pênaltis", () => {

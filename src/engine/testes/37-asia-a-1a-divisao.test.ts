@@ -1,17 +1,26 @@
 // Testes do motor (antes num arquivo só, src/engine/motor.test.ts; separados para rodarem em paralelo).
 import { describe, expect, it } from "vitest";
 import { DEFINICOES, nomeDaCopa, vagasDasCopas } from "../copas";
-import { acertarParticipantes, novoJogo, simularRestoDaTemporada } from "../jogo";
+import { acertarParticipantes, avancar, novoJogo, simularDia } from "../jogo";
 import { checarEstado } from "../checagem";
 import { PAISES } from "../torneios";
 import { elencoDe } from "../mercado";
-import type { IdTorneio } from "../tipos";
+import type { EstadoJogo, IdTorneio } from "../tipos";
 import asiaClubesJson from "../../../data/asia-2026/clubes.json";
 import asiaJogadoresJson from "../../../data/asia-2026/jogadores.json";
 import mundoClubesJson from "../../../data/mundo-2026/clubes.json";
 import mundoJogadoresJson from "../../../data/mundo-2026/jogadores.json";
 import convocadosJson from "../../../data/selecoes-2026/convocados.json";
 
+
+/** Avança (jogando só o que o usuário acompanha e virando a temporada quando ela acaba) até a data `ate`. */
+function avancarAte(estado: EstadoJogo, ate: string) {
+  for (let i = 0; i < 4000 && estado.data < ate; i++) {
+    const r = avancar(estado);
+    if (r.tipo === "jogos-hoje") simularDia(estado);
+    else if (r.tipo === "nada") break;
+  }
+}
 
 describe("Ásia (projeto jogo completo, parte 2, nov/2026): a 1ª divisão do Japão, da Coreia do Sul, da Arábia Saudita e da Austrália", () => {
   const estado = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 21 });
@@ -61,17 +70,21 @@ describe("Ásia (projeto jogo completo, parte 2, nov/2026): a 1ª divisão do Ja
     expect(estado.copas?.["K-MUN"]).toBeUndefined();
     const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 23 });
     e.config.escalacaoAutomatica = true;
-    simularRestoDaTemporada(e);
+    // A Liga dos Campeões da Ásia vai de setembro a maio (R145): a edição 2026/27 acaba em maio de 2027.
+    avancarAte(e, "2027-06-10");
     expect(e.copas?.["K-AFC"]?.campeao).toBeTruthy();
     expect(e.partidas.filter((p) => p.serie === "K-AFC" && !p.jogada)).toHaveLength(0);
     expect(e.partidas.find((p) => p.serie === "K-AFC" && p.fase === "final")?.neutro).toBe(true);
+    const campeaoAsia = e.copas!["K-AFC"]!.campeao;
+    avancarAte(e, "2027-07-02");
     const vagas = vagasDasCopas(e);
-    // Desde a Liga dos Campeões da África: o campeão da Ásia joga o playoff (com o da África); os outros, a semifinal.
-    const campeoes = ["K-UCL", "K-LIB", "K-CONC"].map((id) => e.copas![id as `K-${string}`]!.campeao!);
-    expect(vagas["K-MUN"]?.semi?.sort()).toEqual([...new Set(campeoes)].sort());
-    expect(vagas["K-MUN"]?.playoff).toContain(e.copas!["K-AFC"]!.campeao);
+    // O campeão da Ásia joga o playoff do Mundial de Clubes (com o da África); a semifinal, o da Liga dos Campeões (o último que
+    // terminou, em maio) e os da Concacaf e da Libertadores já decididos na temporada.
+    const semifinalistas = [e.ultimosCampeoes!["K-UCL"], e.copas!["K-CONC"]!.campeao, e.copas!["K-LIB"]!.campeao].filter(Boolean);
+    expect(vagas["K-MUN"]?.semi?.slice().sort()).toEqual([...new Set(semifinalistas)].sort());
+    expect(vagas["K-MUN"]?.playoff).toContain(campeaoAsia);
     expect(vagas["K-AFC"]?.grupos).toHaveLength(16);
-  });
+  }, 400_000);
 
   it("África e o resto da Ásia: 25 ligas com os clubes das páginas, elencos de verdade onde a página tem e convocados no clube", () => {
     const ligas = mundoClubesJson.ligas as Record<string, string>;
@@ -118,14 +131,17 @@ describe("Ásia (projeto jogo completo, parte 2, nov/2026): a 1ª divisão do Ja
     expect(DEFINICOES.find((d) => d.id === "K-CAF")?.grupo).toBe("caf");
     const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 24 });
     e.config.escalacaoAutomatica = true;
-    simularRestoDaTemporada(e);
+    // A Liga dos Campeões da África também vai de setembro a maio (R145).
+    avancarAte(e, "2027-06-10");
     expect(e.copas?.["K-CAF"]?.campeao).toBeTruthy();
     expect(e.partidas.filter((p) => p.serie === "K-CAF" && !p.jogada)).toHaveLength(0);
     expect(e.partidas.find((p) => p.serie === "K-CAF" && p.fase === "final")?.neutro).toBe(true);
+    const campeaoAfrica = e.copas!["K-CAF"]!.campeao;
+    avancarAte(e, "2027-07-02");
     const vagas = vagasDasCopas(e);
-    expect(vagas["K-MUN"]?.playoff).toContain(e.copas!["K-CAF"]!.campeao);
+    expect(vagas["K-MUN"]?.playoff).toContain(campeaoAfrica);
     expect(vagas["K-CAF"]?.grupos).toHaveLength(16);
-  });
+  }, 400_000);
 
   it("save de antes da Ásia: abrir o jogo cria os clubes, que jogam a liga na temporada seguinte", () => {
     const antigo = novoJogo({ nomeTecnico: "T", clubeId: "bahia", semente: 22 });

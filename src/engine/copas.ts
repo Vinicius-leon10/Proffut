@@ -20,6 +20,7 @@
 import participantesJson from "../../data/copas-2026/participantes.json";
 import europaCopasJson from "../../data/europa-2026/copas.json";
 import { comArtigo, concorda } from "./artigos";
+import { cicloDoPais, cruzaOAno, rotuloDaTemporada, type Ciclo } from "./ciclos";
 import { SEMANAS_COM_COPAS, anoDeCopaDoMundo, inicioDaTemporada, naJanelaDaCopa, semanasForaDaCopa, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { chavesDaFase, classificacao, tabelaDaLiga, vencedorDaChave, type LinhaTabela } from "./competicoes";
 import { lancar } from "./financas";
@@ -375,8 +376,12 @@ function copaNacional(
 // (que jogam às terças e quintas das semanas -10 a 8) e fora das datas FIFA de março. Até 64 clubes das 3 divisões do
 // país, final em campo neutro. A supercopa junta o campeão da liga e o da copa no começo do ano seguinte.
 
-/** Semanas das rodadas das copas nacionais da Europa (a última é a da final). */
-const SEMANAS_EUROPA = [-8, -4, 0, 7, 12, 16];
+/**
+ * Semanas das rodadas das copas nacionais da Europa (a última é a da final), contadas do primeiro sábado de abril do ano em
+ * que a temporada começa (R145: de setembro a maio, como no mundo real). Fora das datas FIFA (semanas 21 e 22 de setembro,
+ * 26 e 27 de outubro, 31 e 32 de novembro e 50 e 51 de março) e às quartas, quando as copas da UEFA jogam às terças e quintas.
+ */
+const SEMANAS_EUROPA = [24, 29, 34, 38, 49, 59];
 const PREMIOS_COPA_EUROPA = { campeao: 4 * MILHAO, vice: 1.5 * MILHAO };
 
 const copaDaEuropa = (id: IdCopa, nome: string, pais: string) => copaNacional(id, nome, pais, { semanas: SEMANAS_EUROPA, premios: PREMIOS_COPA_EUROPA, soQuemFolgaNaQuarta: true });
@@ -385,7 +390,8 @@ const copaDaEuropa = (id: IdCopa, nome: string, pais: string) => copaNacional(id
 function supercopaDaEuropa(id: IdCopa, nome: string, pais: string, neutro: boolean): DefinicaoCopa {
   return {
     id, nome, grupo: "nacional", pais,
-    fases: [{ id: "final", nome: "Final", tipo: "mata", semanas: [-12], dia: "qua", neutro, pares: "chave" }],
+    // No começo da temporada (meados de agosto), entre o campeão da liga e o da copa da temporada que acabou.
+    fases: [{ id: "final", nome: "Final", tipo: "mata", semanas: [19], dia: "qua", neutro, pares: "chave" }],
     // Sem os campeões de 2025/26 da copa no jogo, a primeira supercopa é a de 2027.
     participantes: (_estado, vagas) => vagas?.[id],
     premios: { campeao: 1 * MILHAO, vice: 0.5 * MILHAO },
@@ -477,20 +483,20 @@ function daUefa(estado: EstadoJogo, id: IdCopa, vagas?: VagasDasCopas): Record<s
 function copaDaUefa(id: IdCopa, nome: string, grupos: 8 | 4, dia: Dia, premios: Record<string, number>): DefinicaoCopa {
   const mata: FaseCopa[] = grupos === 8
     ? [
-      { id: "oitavas", nome: "Oitavas de final", tipo: "mata", semanas: [1, 2], dia, pares: "primeiros-x-segundos" },
-      { id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [3, 4], dia, pares: "chave" },
+      { id: "oitavas", nome: "Oitavas de final", tipo: "mata", semanas: [45, 47], dia, pares: "primeiros-x-segundos" },
+      { id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [53, 54], dia, pares: "chave" },
     ]
-    : [{ id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [3, 4], dia, pares: "primeiros-x-segundos" }];
+    : [{ id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [46, 48], dia, pares: "primeiros-x-segundos" }];
   return {
     id, nome, grupo: "uefa",
     fases: [
       ...(id === "K-UCL"
-        ? [{ id: "playoff", nome: "Playoff", tipo: "mata", semanas: [-12, -11], dia, pares: "potes", nota: "Os campeões de 12 países em ida e volta; os 6 vencedores vão à fase de grupos." } satisfies FaseCopa]
+        ? [{ id: "playoff", nome: "Playoff", tipo: "mata", semanas: [19, 20], dia, pares: "potes", nota: "Os campeões de 12 países em ida e volta; os 6 vencedores vão à fase de grupos." } satisfies FaseCopa]
         : []),
-      { id: "grupos", nome: "Fase de grupos", tipo: "grupos", semanas: [-10, -9, -7, -6, -5, -3], dia, grupos: { quantos: grupos, passam: 2, turnos: 2 } },
+      { id: "grupos", nome: "Fase de grupos", tipo: "grupos", semanas: [23, 25, 28, 30, 33, 35], dia, grupos: { quantos: grupos, passam: 2, turnos: 2 } },
       ...mata,
-      { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [5, 6], dia, pares: "chave" },
-      { id: "final", nome: "Final", tipo: "mata", semanas: [8], dia: id === "K-UCL" ? "sab" : dia, neutro: true, pares: "chave" },
+      { id: "semi", nome: "Semifinal", tipo: "mata", semanas: id === "K-UCL" ? [57, 58] : [55, 56], dia, pares: "chave" },
+      { id: "final", nome: "Final", tipo: "mata", semanas: id === "K-UCL" ? [60] : [59], dia: id === "K-UCL" ? "sab" : dia, neutro: true, pares: "chave" },
     ],
     participantes: (estado, vagas) => daUefa(estado, id, vagas),
     premios,
@@ -507,7 +513,7 @@ const supercopaUefa: DefinicaoCopa = {
   id: "K-USC", nome: "Supercopa da UEFA", grupo: "uefa",
   // O campeão da Liga dos Campeões contra o da Liga Europa, em campo neutro, no começo do ano (sem lista em 2026: a base
   // não tem as finais de 2025/26).
-  fases: [{ id: "final", nome: "Final", tipo: "mata", semanas: [-11], dia: "qua", neutro: true, pares: "chave" }],
+  fases: [{ id: "final", nome: "Final", tipo: "mata", semanas: [20], dia: "qua", neutro: true, pares: "chave" }],
   participantes: (_estado, vagas) => vagas?.["K-USC"],
   premios: { campeao: 8 * MILHAO, vice: 4 * MILHAO },
 };
@@ -532,10 +538,10 @@ function vagasPorLiga(estado: EstadoJogo, vagas: Record<string, number>, pelaTab
 const campeoesDaAsia: DefinicaoCopa = {
   id: "K-AFC", nome: "Liga dos Campeões da Ásia", grupo: "afc",
   fases: [
-    { id: "grupos", nome: "Fase de grupos", tipo: "grupos", semanas: [1, 2, 3, 5, 6, 7], dia: "ter", grupos: { quantos: 4, passam: 2, turnos: 2 } },
-    { id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [14, 15], dia: "ter", pares: "primeiros-x-segundos" },
-    { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [18, 19], dia: "ter", pares: "chave" },
-    { id: "final", nome: "Final", tipo: "mata", semanas: [24], dia: "qua", neutro: true, pares: "chave" },
+    { id: "grupos", nome: "Fase de grupos", tipo: "grupos", semanas: [23, 25, 28, 30, 33, 35], dia: "ter", grupos: { quantos: 4, passam: 2, turnos: 2 } },
+    { id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [46, 48], dia: "ter", pares: "primeiros-x-segundos" },
+    { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [53, 55], dia: "ter", pares: "chave" },
+    { id: "final", nome: "Final", tipo: "mata", semanas: [58], dia: "qua", neutro: true, pares: "chave" },
   ],
   participantes(estado, vagas) {
     if (vagas?.["K-AFC"]) return vagas["K-AFC"];
@@ -550,10 +556,10 @@ const campeoesDaAsia: DefinicaoCopa = {
 const campeoesDaAfrica: DefinicaoCopa = {
   id: "K-CAF", nome: "Liga dos Campeões da África", grupo: "caf",
   fases: [
-    { id: "grupos", nome: "Fase de grupos", tipo: "grupos", semanas: [1, 2, 3, 5, 6, 7], dia: "qua", grupos: { quantos: 4, passam: 2, turnos: 2 } },
-    { id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [14, 15], dia: "qua", pares: "primeiros-x-segundos" },
-    { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [18, 19], dia: "qua", pares: "chave" },
-    { id: "final", nome: "Final", tipo: "mata", semanas: [24], dia: "qua", neutro: true, pares: "chave" },
+    { id: "grupos", nome: "Fase de grupos", tipo: "grupos", semanas: [23, 25, 28, 30, 33, 35], dia: "qua", grupos: { quantos: 4, passam: 2, turnos: 2 } },
+    { id: "quartas", nome: "Quartas de final", tipo: "mata", semanas: [46, 48], dia: "qua", pares: "primeiros-x-segundos" },
+    { id: "semi", nome: "Semifinal", tipo: "mata", semanas: [53, 55], dia: "qua", pares: "chave" },
+    { id: "final", nome: "Final", tipo: "mata", semanas: [58], dia: "qua", neutro: true, pares: "chave" },
   ],
   participantes(estado, vagas) {
     if (vagas?.["K-CAF"]) return vagas["K-CAF"];
@@ -593,6 +599,20 @@ export const DEFINICOES: DefinicaoCopa[] = [
 ];
 const POR_ID = new Map<string, DefinicaoCopa>(DEFINICOES.map((d) => [d.id, d]));
 export const definicaoDaCopa = (id: string) => POR_ID.get(id);
+
+/**
+ * Ciclo da copa (R145): a Europa (copas da UEFA, copas nacionais e supercopas), a Liga dos Campeões da Ásia e a da África
+ * vão de agosto a maio e viram em 1º de julho; o resto das copas (as da América, o Mundial de Clubes) segue o ano civil.
+ */
+export function cicloDaCopa(def: DefinicaoCopa): Ciclo {
+  if (def.grupo === "uefa" || def.grupo === "afc" || def.grupo === "caf") return "agosto";
+  if (def.grupo === "nacional" && def.pais) return cicloDoPais(def.pais);
+  return "ano";
+}
+export function cicloDaCopaId(id: string): Ciclo {
+  const def = POR_ID.get(id);
+  return def ? cicloDaCopa(def) : "ano";
+}
 
 /** "Libertadores", "Copa do Nordeste"... */
 export function nomeDaCopa(id: string): string {
@@ -689,10 +709,12 @@ function vagasDaConmebol(estado: EstadoJogo, pelaTabela: boolean): VagasDasCopas
  * Quem joga cada copa na temporada seguinte, pelas tabelas e pelos campeões da temporada que acaba (chamada no começo
  * da virada, antes do acesso e da queda). As copas nacionais e a Leagues Cup saem das ligas da temporada nova.
  */
-export function vagasDasCopas(estado: EstadoJogo): VagasDasCopas {
+export function vagasDasCopas(estado: EstadoJogo, parte: "ano" | "agosto" | "todas" = "todas"): VagasDasCopas {
+  if (parte === "agosto") return vagasDasCopasDeAgostoAMaio(estado);
   const vagas = vagasDaConmebol(estado, true);
   const nasConmebol = [...Object.values(vagas["K-LIB"] ?? {}).flat(), ...Object.values(vagas["K-SUL"] ?? {}).flat()];
-  const campeao = (id: IdCopa) => estado.copas?.[id]?.campeao;
+  // O campeão da edição que acabou; nas copas que cruzam o ano (a Liga dos Campeões), o da última que terminou (R145).
+  const campeao = (id: IdCopa) => campeaoDaCopa(estado, id);
   const vice = (id: IdCopa) => estado.copas?.[id]?.vice;
   // Recopa: o campeão da Libertadores (decide em casa) e o da Sul-Americana.
   const recopa = unicos([campeao("K-LIB"), campeao("K-SUL")]);
@@ -720,14 +742,31 @@ export function vagasDasCopas(estado: EstadoJogo): VagasDasCopas {
   if (oitavas.length + fase1.length >= 8) vagas["K-CONC"] = { oitavas, fase1: fase1.slice(0, 22) };
   vagas["K-CAM"] = { grupos: porPais(estado, VAGAS_CENTRO_AMERICANA, true) };
   vagas["K-CAR"] = { grupos: porPais(estado, VAGAS_CARIBE, true) };
-  // Europa: pelas tabelas das 7 ligas; a Supercopa da UEFA entre os campeões da Liga dos Campeões e da Liga Europa.
-  if (estado.torneios?.["L-EN"]) Object.assign(vagas, vagasDaUefa(estado, true), vagasDasSupercopasDaEuropa(estado));
-  if (estado.torneios?.["L-JP"]) vagas["K-AFC"] = { grupos: vagasPorLiga(estado, VAGAS_AFC, true) };
-  if (estado.torneios?.["L-EG"]) vagas["K-CAF"] = { grupos: vagasPorLiga(estado, VAGAS_CAF, true) };
-  // Mundial de Clubes: os campeões continentais do ano (sem repetir; com menos de 2, não se joga).
+  if (parte === "todas") Object.assign(vagas, vagasDasCopasDeAgostoAMaio(estado));
+  // Mundial de Clubes: os campeões continentais mais recentes (sem repetir; com menos de 2, não se joga). As copas de agosto a
+  // maio (Liga dos Campeões, Ásia e África) entram com o último campeão que terminou.
   const semi = unicos(["K-UCL", "K-LIB", "K-CONC"].map((id) => campeao(id as IdCopa)));
   const playoff = unicos(["K-AFC", "K-CAF"].map((id) => campeao(id as IdCopa))).filter((c) => !semi.includes(c));
   if (semi.length + playoff.length >= 2) vagas["K-MUN"] = { playoff, semi };
+  return vagas;
+}
+
+/** O campeão da edição que acabou ou, nas copas de agosto a maio ainda em andamento, o da última que terminou. */
+function campeaoDaCopa(estado: EstadoJogo, id: IdCopa): string | undefined {
+  return estado.copas?.[id]?.campeao ?? estado.ultimosCampeoes?.[id];
+}
+
+/**
+ * Vagas das copas de agosto a maio (Europa, Ásia e África), no fim da temporada deles (1º de julho): as tabelas finais das
+ * ligas (`ultimaTabela`) e os campeões das copas que acabaram (R145).
+ */
+function vagasDasCopasDeAgostoAMaio(estado: EstadoJogo): VagasDasCopas {
+  const vagas: VagasDasCopas = {};
+  const campeao = (id: IdCopa) => estado.copas?.[id]?.campeao;
+  // Europa: pelas tabelas das ligas; a Supercopa da UEFA entre os campeões da Liga dos Campeões e da Liga Europa.
+  if (estado.torneios?.["L-EN"]) Object.assign(vagas, vagasDaUefa(estado, true), vagasDasSupercopasDaEuropa(estado));
+  if (estado.torneios?.["L-JP"]) vagas["K-AFC"] = { grupos: vagasPorLiga(estado, VAGAS_AFC, true) };
+  if (estado.torneios?.["L-EG"]) vagas["K-CAF"] = { grupos: vagasPorLiga(estado, VAGAS_CAF, true) };
   const supercopa = unicos([campeao("K-UCL"), campeao("K-UEL")]);
   if (supercopa.length === 2) vagas["K-USC"] = { final: supercopa };
   return vagas;
@@ -753,22 +792,29 @@ function rankingDosClubes(estado: EstadoJogo, ids: string[]): string[] {
  * Monta as copas de clubes da temporada (depois da Copa do Brasil): quem joga e a primeira fase de cada uma.
  * `vagas`: quem classificou na temporada anterior (na virada); sem elas, as listas de 2026 e a reputação.
  */
-export function criarCopasDeClubes(estado: EstadoJogo, vagas?: VagasDasCopas) {
-  estado.copas = {};
+export function criarCopasDeClubes(estado: EstadoJogo, vagas?: VagasDasCopas, parte: "ano" | "agosto" | "todas" = "todas") {
+  // As copas da outra parte do ano ficam como estão (as de agosto a maio, em andamento, atravessam a virada de dezembro).
+  const doGrupo = (def: DefinicaoCopa) => parte === "todas" || (parte === "agosto") === cruzaOAno(cicloDaCopa(def));
+  const ficam = Object.fromEntries(Object.entries(estado.copas ?? {}).filter(([id]) => { const d = definicaoDaCopa(id); return d && !doGrupo(d); }));
+  const copas: NonNullable<EstadoJogo["copas"]> = (estado.copas = ficam as NonNullable<EstadoJogo["copas"]>);
+  // Os jogos antigos das copas que são montadas de novo saem (os da edição que acabou).
+  const novas = new Set(DEFINICOES.filter(doGrupo).map((d) => d.id as string));
+  estado.partidas = estado.partidas.filter((p) => !novas.has(p.serie));
   for (const def of DEFINICOES) {
+    if (!doGrupo(def)) continue;
     const lista = def.participantes(estado, vagas);
     if (!lista) continue;
     const entram: Record<string, string[]> = {};
     for (const [fase, ids] of Object.entries(lista)) entram[fase] = unicos(ids).filter((id) => estado.clubes[id]);
     const clubes = unicos(Object.values(entram).flat());
     if (clubes.length < 2) continue;
-    const copa: EstadoCopaClubes = { id: def.id, nome: def.nome, fase: def.fases[0].id, clubes, entram, ranking: rankingDosClubes(estado, clubes) };
-    estado.copas[def.id] = copa;
+    const copa: EstadoCopaClubes = { id: def.id, nome: def.nome, fase: def.fases[0].id, clubes, entram, ranking: rankingDosClubes(estado, clubes), inicio: estado.temporada };
+    copas[def.id] = copa;
   }
   // As primeiras fases depois de todas as copas criadas (os transferidos de uma vão para a outra).
   for (const def of DEFINICOES) {
-    const copa = estado.copas[def.id];
-    if (copa) iniciarFase(estado, def, copa, primeiraFase(def, copa), []);
+    const copa = copas[def.id];
+    if (copa && doGrupo(def)) iniciarFase(estado, def, copa, primeiraFase(def, copa), []);
   }
   estado.partidas.sort((x, y) => x.data.localeCompare(y.data) || x.serie.localeCompare(y.serie));
 }
@@ -798,8 +844,8 @@ function ocupacaoAtual(estado: EstadoJogo): Ocupacao {
  * A data do jogo entre `a` e `b` na semana `semana`: o dia da fase, ou outro dia da semana se um deles já joga um dia
  * antes, no dia ou um dia depois (sem isso, ao menos não no mesmo dia). Nunca antes de amanhã.
  */
-function escolherData(estado: EstadoJogo, ocupacao: Ocupacao, a: string, b: string, semana: number, dia: Dia, minimo: string): string {
-  const candidatas = [dia, ...OUTROS_DIAS[dia]].map((d) => diaDaSemana(estado.temporada, semana, d)).map((d) => (d < minimo ? minimo : d));
+function escolherData(ano: number, ocupacao: Ocupacao, a: string, b: string, semana: number, dia: Dia, minimo: string): string {
+  const candidatas = [dia, ...OUTROS_DIAS[dia]].map((d) => diaDaSemana(ano, semana, d)).map((d) => (d < minimo ? minimo : d));
   const livre = (id: string, d: string, folga: number) => {
     const s = ocupacao.get(id);
     if (!s) return true;
@@ -808,10 +854,10 @@ function escolherData(estado: EstadoJogo, ocupacao: Ocupacao, a: string, b: stri
   };
   // Num ano de Copa do Mundo as semanas depois dela ficam cheias (as rodadas e as fases que saíram da janela): sem dia livre
   // de terça a quinta, a segunda ou a sexta (R115; fora dos anos de Copa, nada muda).
-  const copa = anoDeCopaDoMundo(estado.temporada);
-  const extras = copa ? (["seg", "sex"] as Dia[]).map((d) => diaDaSemana(estado.temporada, semana, d)).filter((d) => d >= minimo && !naJanelaDaCopa(d)) : [];
+  const copa = anoDeCopaDoMundo(ano);
+  const extras = copa ? (["seg", "sex"] as Dia[]).map((d) => diaDaSemana(ano, semana, d)).filter((d) => d >= minimo && !naJanelaDaCopa(d)) : [];
   // E, sem nenhum dia livre na semana, a semana seguinte (até duas semanas depois).
-  const depois = copa ? [1, 2].flatMap((k) => ([dia, ...OUTROS_DIAS[dia], "seg", "sex"] as Dia[]).map((d) => diaDaSemana(estado.temporada, semana + k, d))).filter((d) => !naJanelaDaCopa(d)) : [];
+  const depois = copa ? [1, 2].flatMap((k) => ([dia, ...OUTROS_DIAS[dia], "seg", "sex"] as Dia[]).map((d) => diaDaSemana(ano, semana + k, d))).filter((d) => !naJanelaDaCopa(d)) : [];
   // Ainda sem dia: o primeiro dia livre para os dois a partir do mínimo, até 4 semanas depois.
   const dias = copa ? Array.from({ length: 28 }, (_, k) => somarDias(minimo, k)).filter((d) => !naJanelaDaCopa(d)) : [];
   const escolhida = [...candidatas, ...extras, ...depois].find((d) => d >= minimo && livre(a, d, 1) && livre(b, d, 1))
@@ -901,9 +947,13 @@ function rodadasCruzadas(a: string[], b: string[], rodadas: number): Confronto[]
 
 /** As semanas das fases de cada copa num ano de Copa do Mundo (`semanasForaDaCopa`, todas as fases em ordem). */
 function registrarSemanasDasCopas() {
+  // (As copas de agosto a maio, de setembro a maio, não disputam as semanas de junho e julho com as rodadas do Brasil.)
   // As semanas que as copas usam num ano de Copa (as mesmas em todos): as rodadas que saem da janela da Copa não vão
   // para elas (`rodadasForaDaCopa`).
-  for (const def of DEFINICOES) for (const semana of semanasForaDaCopa(2026, def.fases.flatMap((f) => f.semanas))) SEMANAS_COM_COPAS.add(semana);
+  for (const def of DEFINICOES) {
+    if (cruzaOAno(cicloDaCopa(def))) continue;
+    for (const semana of semanasForaDaCopa(2026, def.fases.flatMap((f) => f.semanas))) SEMANAS_COM_COPAS.add(semana);
+  }
 }
 
 const SEMANAS_NA_COPA = new Map<string, Map<string, number[]>>();
@@ -928,7 +978,8 @@ function semanasDaFase(ano: number, def: DefinicaoCopa, fase: FaseCopa): number[
 
 /** Monta os jogos de uma fase e paga a cota de quem entra nela. `vindos`: quem passou da fase anterior. */
 function iniciarFase(estado: EstadoJogo, def: DefinicaoCopa, copa: EstadoCopaClubes, fase: FaseCopa, vindos: string[]) {
-  const ano = estado.temporada;
+  // O ano em que a copa foi montada: as fases de uma copa de agosto a maio, que acontecem no ano seguinte, saem dele.
+  const ano = copa.inicio ?? estado.temporada;
   const semanas = semanasDaFase(ano, def, fase);
   const rng = rngPara(estado.semente, `copa-clubes/${ano}/${def.id}/${fase.id}`);
   const ocupacao = ocupacaoAtual(estado);
@@ -963,7 +1014,7 @@ function iniciarFase(estado: EstadoJogo, def: DefinicaoCopa, copa: EstadoCopaClu
         jogos.forEach(([mandante, visitante], i) => {
           novas.push({
             ...base, id: `${ano}-${def.id}-${fase.id}-g${grupo}-${r + 1}-${i}`, rodada: r + 1, ...(fase.tipo === "grupos" ? { grupo } : {}),
-            data: escolherData(estado, ocupacao, mandante, visitante, semana, fase.dia, amanha), mandante, visitante,
+            data: escolherData(ano, ocupacao, mandante, visitante, semana, fase.dia, amanha), mandante, visitante,
           });
         });
       });
@@ -980,15 +1031,15 @@ function iniciarFase(estado: EstadoJogo, def: DefinicaoCopa, copa: EstadoCopaClu
       const chave = i + 1;
       const [melhor, pior] = melhorDosDois(estado, copa, x, y);
       if (idaEVolta) {
-        const ida = escolherData(estado, ocupacao, pior, melhor, semanas[0], fase.dia, amanha);
-        const volta = escolherData(estado, ocupacao, melhor, pior, semanas[1], fase.dia, somarDias(ida, 3));
+        const ida = escolherData(ano, ocupacao, pior, melhor, semanas[0], fase.dia, amanha);
+        const volta = escolherData(ano, ocupacao, melhor, pior, semanas[1], fase.dia, somarDias(ida, 3));
         novas.push({ ...base, id: `${ano}-${def.id}-${fase.id}-${chave}-ida`, chave, rodada: 1, perna: 1, data: ida, mandante: pior, visitante: melhor });
         novas.push({ ...base, id: `${ano}-${def.id}-${fase.id}-${chave}-volta`, chave, rodada: 2, perna: 2, data: volta, mandante: melhor, visitante: pior });
       } else {
         const [mandante, visitante] = fase.casaDoPior && !fase.neutro ? [pior, melhor] : [melhor, pior];
         novas.push({
           ...base, id: `${ano}-${def.id}-${fase.id}-${chave}`, chave, rodada: 1, mandante, visitante,
-          data: escolherData(estado, ocupacao, mandante, visitante, semanas[0], fase.dia, amanha), ...(fase.neutro ? { neutro: true } : {}),
+          data: escolherData(ano, ocupacao, mandante, visitante, semanas[0], fase.dia, amanha), ...(fase.neutro ? { neutro: true } : {}),
         });
       }
     });
@@ -1213,7 +1264,7 @@ function encerrar(estado: EstadoJogo, def: DefinicaoCopa, copa: EstadoCopaClubes
   const meu = estado.tecnico.clubeId;
   // Notícia dos títulos que interessam: os do clube do usuário, as continentais e as do Brasil.
   if (copa.clubes.includes(meu) || def.grupo === "conmebol" || def.grupo === "brasil") {
-    noticias.push(`${campeao.nome} é ${concorda(campeao, "campeão", "campeã")} da ${def.nome} ${estado.temporada}!`);
+    noticias.push(`${campeao.nome} é ${concorda(campeao, "campeão", "campeã")} da ${def.nome} ${rotuloDaTemporada(cicloDaCopa(def), copa.inicio ?? estado.temporada)}!`);
   }
 }
 
@@ -1242,8 +1293,34 @@ export function copasDoClube(estado: EstadoJogo, clubeId: string): EstadoCopaClu
   return Object.values(estado.copas ?? {}).filter((c): c is EstadoCopaClubes => !!c && c.clubes.includes(clubeId));
 }
 
+/** A competição (liga ou copa) vai de agosto a maio e atravessa a virada de dezembro (R141, R145). */
+export function competicaoCruzaOAno(id: string): boolean {
+  return ligaCruzaOAno(id) || (id.startsWith("K-") && cruzaOAno(cicloDaCopaId(id)));
+}
+
+/**
+ * Virada das copas de agosto a maio, em 1º de julho (R145): as que acabaram guardam o campeão (Mundial de Clubes e história
+ * da temporada em que começaram), e a temporada nova delas é montada pelas tabelas finais das ligas e pelos campeões das
+ * copas nacionais. Sem copa de agosto a maio encerrada (o primeiro 1º de julho do jogo), nada muda.
+ */
+export function viradaDasCopasDoCiclo(estado: EstadoJogo, ligasAcabaram = false): void {
+  const deAgostoAMaio = Object.values(estado.copas ?? {}).filter((c): c is EstadoCopaClubes => !!c && cruzaOAno(cicloDaCopaId(c.id)));
+  const acabaram = deAgostoAMaio.filter((c) => c.fase === "encerrada");
+  // Save de antes das copas: sem nenhuma delas, a temporada nova de agosto a maio as cria (com as ligas da Europa no jogo).
+  const semCopas = deAgostoAMaio.length === 0 && ligasAcabaram && !!estado.torneios?.["L-EN"];
+  if (!acabaram.length && !semCopas) return;
+  const vagas = vagasDasCopas(estado, "agosto");
+  for (const c of acabaram) {
+    if (c.campeao) (estado.ultimosCampeoes ??= {})[c.id] = c.campeao;
+    const registro = estado.historico.find((h) => h.temporada === (c.inicio ?? estado.temporada - 1));
+    if (registro && c.campeao) (registro.copas ??= {})[c.id] = { campeao: c.campeao, ...(c.vice ? { vice: c.vice } : {}) };
+  }
+  criarCopasDeClubes(estado, vagas, "agosto");
+}
+
 export function copasEncerradas(estado: EstadoJogo): boolean {
-  return Object.values(estado.copas ?? {}).every((c) => !c || c.fase === "encerrada");
+  // As copas de agosto a maio (Liga dos Campeões, copas nacionais da Europa...) não contam: viram em 1º de julho.
+  return Object.values(estado.copas ?? {}).every((c) => !c || c.fase === "encerrada" || cruzaOAno(cicloDaCopaId(c.id)));
 }
 
 /** Situação do clube na copa, numa frase (para as telas). */

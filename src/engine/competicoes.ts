@@ -2,8 +2,8 @@
 import { concorda } from "./artigos";
 import { datasDaTemporada, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { hashTexto, rngPara } from "./rng";
-import { copaDecidePorPenaltis, copasEncerradas, ehCopaDeClubes, nomeDaCopa } from "./copas";
-import { ligaCruzaOAno } from "./ciclos";
+import { cicloDaCopaId, copaDecidePorPenaltis, copasEncerradas, ehCopaDeClubes, nomeDaCopa } from "./copas";
+import { cruzaOAno, ligaCruzaOAno } from "./ciclos";
 import { criarTorneios, ehTorneio, nomeDoTorneio, tabelaDoTorneio, torneioDecidePorPenaltis, torneiosEncerrados } from "./torneios";
 import { ehCompeticaoDeSelecoes, nomeDaCompeticaoDeSelecoes, selecoesDecidePorPenaltis, selecoesEncerradas } from "./selecoes";
 import type { Clube, Competicao, EstadoJogo, EstadoSerie, EstadoTorneio, IdTorneio, Partida, SerieClube, SerieId } from "./tipos";
@@ -70,7 +70,11 @@ export function criarTemporada(estado: EstadoJogo) {
   const ano = estado.temporada;
   const datas = datasDaTemporada(ano);
   // As ligas que cruzam o ano (agosto a maio) seguem na temporada nova com os jogos delas (`criarTorneios` as guarda).
-  const emAndamento = new Set(Object.values(estado.torneios ?? {}).filter((t) => !!t && ligaCruzaOAno(t.id) && t.fase !== "encerrada").map((t) => t!.id as string));
+  const emAndamento = new Set([
+    ...Object.values(estado.torneios ?? {}).filter((t) => !!t && ligaCruzaOAno(t.id) && t.fase !== "encerrada").map((t) => t!.id as string),
+    // E as copas de agosto a maio (Liga dos Campeões, copas nacionais da Europa...), com os jogos delas.
+    ...Object.values(estado.copas ?? {}).filter((c) => !!c && cruzaOAno(cicloDaCopaId(c.id)) && c.fase !== "encerrada").map((c) => c!.id as string),
+  ]);
   estado.partidas = estado.partidas.filter((p) => emAndamento.has(p.serie));
   for (const serie of SERIES) {
     const clubes = Object.values(estado.clubes).filter((c) => c.serie === serie).map((c) => c.id).sort();

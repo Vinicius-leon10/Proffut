@@ -2,8 +2,8 @@
 import { describe, expect, it } from "vitest";
 import { somarDias } from "../calendario";
 import { classificacao, tabelaDaLiga, temporadaEncerrada } from "../competicoes";
-import { DEFINICOES, situacaoNaCopaDeClubes } from "../copas";
-import { avancar, novoJogo, simularRestoDaTemporada } from "../jogo";
+import { DEFINICOES, competicaoCruzaOAno, situacaoNaCopaDeClubes } from "../copas";
+import { avancar, novoJogo, simularDia, simularRestoDaTemporada } from "../jogo";
 import type { Partida } from "../tipos";
 import { exportarTexto, importarTexto } from "../../save/salvamento";
 
@@ -36,7 +36,9 @@ describe("copas de clubes (Libertadores, Sul-Americana, Recopa, Concacaf, region
     // A Supercopa da UEFA, as 7 supercopas nacionais da Europa e o Mundial de Clubes só começam em 2027 (com os campeões do jogo).
     const so2027 = ["K-USC", "K-SEN", "K-SES", "K-SIT", "K-SDE", "K-SFR", "K-SPT", "K-SNL", "K-MUN"];
     expect(Object.keys(e.copas!).length).toBe(DEFINICOES.filter((d) => !so2027.includes(d.id)).length);
-    for (const c of Object.values(e.copas!)) {
+    // As copas da Europa, da Ásia e da África vão de agosto a maio (R145): em dezembro estão no meio, e a conferência delas, até
+    // a final e com os pênaltis, está nos testes 36 e 37 e no R145 (que anda até 10 de junho de 2027).
+    for (const c of Object.values(e.copas!).filter((x) => !competicaoCruzaOAno(x!.id))) {
       expect(c!.fase, c!.id).toBe("encerrada");
       expect(c!.campeao, c!.id).toBeTruthy();
       expect(c!.vice, c!.id).toBeTruthy();
@@ -88,7 +90,8 @@ describe("copas de clubes (Libertadores, Sul-Americana, Recopa, Concacaf, region
   it("empate no mata-mata vai para os pênaltis: no jogo único e no agregado da volta", () => {
     for (const def of DEFINICOES) {
       for (const f of def.fases.filter((x) => x.tipo === "mata")) {
-        for (const p of jogos(def.id, f.id)) {
+        // (As copas de agosto a maio ainda têm jogos por jogar em dezembro: R145.)
+        for (const p of jogos(def.id, f.id).filter((x) => x.jogada || !competicaoCruzaOAno(def.id))) {
           if (p.perna === 1) expect(p.penaltis, p.id).toBeUndefined();
           if (p.perna === undefined && p.gm === p.gv) expect(p.penaltis, p.id).toBeTruthy();
           if (p.perna === 2) {
@@ -140,8 +143,15 @@ describe("copas de clubes (Libertadores, Sul-Americana, Recopa, Concacaf, region
     expect(aberto.partidas.some((p) => p.serie.startsWith("K-"))).toBe(false);
     avancar(aberto);
     expect(aberto.temporada).toBe(2027);
+    expect(aberto.copas!["K-LIB"]!.clubes).toHaveLength(47);
+    // As copas de agosto a maio (Europa, Ásia e África) começam na virada de 1º de julho de 2027 (R145).
+    for (let i = 0; i < 4000 && aberto.data < "2027-07-02"; i++) {
+      const r = avancar(aberto);
+      if (r.tipo === "jogos-hoje") simularDia(aberto);
+      else if (r.tipo === "nada") break;
+    }
     // Sem copas em 2026, não há os campeões das copas nacionais da Europa: as 7 supercopas de lá ficam para 2028.
     expect(Object.keys(aberto.copas!).length).toBeGreaterThanOrEqual(DEFINICOES.length - 2 - 7 - 1);
-    expect(aberto.copas!["K-LIB"]!.clubes).toHaveLength(47);
-  });
+    expect(aberto.copas!["K-UCL"]!.inicio).toBe(2027);
+  }, 400_000);
 });

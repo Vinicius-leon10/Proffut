@@ -961,7 +961,19 @@ tela `NovoJogo.tsx` que roda o gerador em pedaços de 40 ms com "Preparando o mu
 a confiança e a reputação do clube do usuário e apaga as mensagens dela, e põe `Tecnico.desde` no dia de início. `competicoesDoUsuario` só
 inclui Séries A a C e a Copa do Brasil para quem treina clube do Brasil. Testes de tela: `playwright.config.ts` com 120 s por teste e
 `pularTutorial` esperando até 100 s (a pré-simulação de um clube da Europa leva de 15 s a ~1 min). As copas da UEFA ainda vão de janeiro
-a maio (etapa 4): o clube europeu pode ter jogado a de 2026 na pré-simulação com escalação automática. Próximo: etapa 4.
+a maio (etapa 4): o clube europeu pode ter jogado a de 2026 na pré-simulação com escalação automática. **Etapa 4 feita (R145; saiu junto com a 3 para o R98 e o R107 manterem a conferência inteira):** `cicloDaCopa`/`cicloDaCopaId`/`competicaoCruzaOAno`
+(copas.ts: UEFA, AFC, CAF e as copas nacionais e supercopas da Europa são "agosto"; as da América e o Mundial, o ano civil). As copas de
+agosto a maio usam semanas contadas do 1º sábado de abril do ano em que começam (`EstadoCopaClubes.inicio`; `iniciarFase` e `escolherData`
+usam esse ano, não `estado.temporada`): Liga dos Campeões playoff 19–20, grupos [23,25,28,30,33,35], oitavas [45,47], quartas [53,54],
+semi [57,58], final 60; Liga Europa e Conference grupos iguais, quartas [46,48], semi [55,56], final 59; Ásia e África grupos iguais,
+quartas [46,48], semi [53,55], final 58; copas nacionais da Europa `SEMANAS_EUROPA` [24,29,34,38,49,59]; supercopas na semana 19; Supercopa
+da UEFA na 20. `criarCopasDeClubes(estado, vagas, parte)` e `vagasDasCopas(estado, parte)` têm "ano" (virada de dezembro), "agosto" (1º de
+julho, `viradaDasCopasDoCiclo`) e "todas" (jogo novo); `criarTemporada` mantém as copas de agosto a maio em andamento e os jogos delas;
+`copasEncerradas`/`temporadaEncerrada` não as contam. `EstadoJogo.ultimosCampeoes` guarda o último campeão de cada copa de agosto a maio
+(o Mundial de Clubes de janeiro usa); o histórico da temporada em que a copa começou recebe o campeão em 1º de julho. Save sem copas: a
+temporada seguinte de agosto a maio as cria (só quando as ligas da Europa viram em 1º de julho). `avancar`: com a temporada já encerrada ao
+tocar no botão, os jogos que sobram são simulados e a virada vem no mesmo toque (`jaEncerrada`). As seleções não mudaram (o calendário
+internacional já é do ano civil). Próximo: etapa 5.
 
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
 pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais
