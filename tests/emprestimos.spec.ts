@@ -3,7 +3,11 @@ import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, montarSave, test } 
 test("R39 empréstimos: empresto um jogador meu e pego um emprestado até o fim da temporada; na virada os dois voltam para os seus clubes", async ({ page }) => {
   test.setTimeout(120_000);
   // Jogo montado pelo motor: a temporada de 2026 da Ponte Preta inteira jogada, logo antes da virada.
-  const save = montarSave("fim-da-temporada", "ponte-preta");
+  // A temporada termina em dezembro, com a janela de transferências do Brasil fechada (R139): o save fica em agosto, com
+  // a janela aberta, para pegar emprestado (o resto do teste não depende da data).
+  const montado = JSON.parse(montarSave("fim-da-temporada", "ponte-preta"));
+  montado.estado.data = "2026-08-01";
+  const save = JSON.stringify(montado);
   await abrirSite(page);
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(botao(page, "Encerrar a temporada 2026")).toBeVisible();

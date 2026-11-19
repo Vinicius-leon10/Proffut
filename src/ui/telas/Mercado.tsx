@@ -8,6 +8,7 @@ import { ENCARGOS_FOLHA, LUVAS_MESES } from "../../engine/constantes";
 import { valorMercado } from "../../engine/gerador";
 import { motivoParaNaoPegar, pegarEmprestado, taxaDeEmprestimo } from "../../engine/emprestimos";
 import { elencoDe, fazerOferta, livres, luvasDoLivre, podeSair, precoPedido, propostasPendentes, salarioDoLivre, salarioDoReforco } from "../../engine/mercado";
+import { estrangeirosNoElenco, fimDaJanela, limiteDeEstrangeiros, motivoDaJanela, motivoDosEstrangeiros, proximaAbertura } from "../../engine/regras";
 import type { Jogador, Posicao } from "../../engine/tipos";
 import { BandeiraJogador, Escudo, Folha, Opcoes, Pos, Segmentado } from "../componentes";
 import { NOMES_NACIONALIDADE } from "../formatos";
@@ -66,8 +67,8 @@ function FolhaOferta({ j, aoFechar }: { j: Jogador; aoFechar: () => void }) {
             ))}
           </div>
           <p className="mini muito-fraco">Seu caixa: {formatarDinheiro(meu.caixa)}. O salário dele passa a ser {formatarDinheiro(salarioDoReforco(j))}/mês.</p>
-          <LimiteDaFolha salario={salarioDoReforco(j)} />
-          <button className="botao primario cheio" disabled={!vende || oferta > meu.caixa || !!motivoDaDiretoria(estado, meu, salarioDoReforco(j))} onClick={enviar}>
+          <LimiteDaFolha salario={salarioDoReforco(j)} j={j} />
+          <button className="botao primario cheio" disabled={!vende || oferta > meu.caixa || !!motivoDeRegra(estado, j) || !!motivoDaDiretoria(estado, meu, salarioDoReforco(j))} onClick={enviar}>
             {oferta > meu.caixa ? "Caixa insuficiente" : `Oferecer ${formatarDinheiro(oferta)}`}
           </button>
           <button className="botao cheio" disabled={!!naoEmpresta} onClick={pedirEmprestado}>
@@ -78,8 +79,8 @@ function FolhaOferta({ j, aoFechar }: { j: Jogador; aoFechar: () => void }) {
       ) : (
         <>
           <p className="pequeno fraco">Jogador livre: não há custo de transferência. Ele pede {formatarDinheiro(salarioDoLivre(j))}/mês (com os encargos de {Math.round(ENCARGOS_FOLHA * 100)}%, {formatarDinheiro(salarioDoLivre(j) * (1 + ENCARGOS_FOLHA))}/mês) e <b>Luvas de {formatarDinheiro(luvasDoLivre(j))}</b> para assinar ({LUVAS_MESES} salários).</p>
-          <LimiteDaFolha salario={salarioDoLivre(j)} />
-          <button className="botao primario cheio" disabled={!!motivoDaDiretoria(estado, meu, salarioDoLivre(j)) || meu.caixa < luvasDoLivre(j)} onClick={enviar}>
+          <LimiteDaFolha salario={salarioDoLivre(j)} j={j} livre />
+          <button className="botao primario cheio" disabled={!!motivoDeRegra(estado, j, true) || !!motivoDaDiretoria(estado, meu, salarioDoLivre(j)) || meu.caixa < luvasDoLivre(j)} onClick={enviar}>
             {meu.caixa < luvasDoLivre(j) ? "Contratar · caixa insuficiente para as luvas" : "Contratar"}
           </button>
         </>
@@ -88,16 +89,38 @@ function FolhaOferta({ j, aoFechar }: { j: Jogador; aoFechar: () => void }) {
   );
 }
 
+/** Janela fechada (compra) ou limite de estrangeiros (R139): o motivo da recusa, ou null. */
+function motivoDeRegra(estado: ReturnType<typeof useJogo>, j: Jogador, livre?: boolean): string | null {
+  const meu = estado.clubes[estado.tecnico.clubeId];
+  return (livre ? null : motivoDaJanela(estado, meu)) ?? motivoDosEstrangeiros(estado, meu, j.nacionalidade);
+}
+
 /** O que a diretoria aprova de folha, e se ela aprova este salário (R138). */
-function LimiteDaFolha({ salario }: { salario: number }) {
+function LimiteDaFolha({ salario, j, livre }: { salario: number; j: Jogador; livre?: boolean }) {
   const estado = useJogo();
   const meu = estado.clubes[estado.tecnico.clubeId];
-  const recusa = motivoDaDiretoria(estado, meu, salario);
+  const recusa = motivoDeRegra(estado, j, livre) ?? motivoDaDiretoria(estado, meu, salario);
   if (recusa) return <p className="chip vermelho" style={{ whiteSpace: "normal" }}>{recusa}</p>;
   const folha = folhaSalarial(estado, meu.id) * (1 + ENCARGOS_FOLHA);
   return (
     <p className="mini muito-fraco">
       A diretoria aprova uma folha de até {formatarDinheiro(limiteDaFolha(estado, meu))}/mês com os encargos; hoje ela está em {formatarDinheiro(folha)}/mês.
+    </p>
+  );
+}
+
+/** Se a janela de transferências do clube está aberta, até quando, ou quando abre (R139). */
+function SeloDaJanela() {
+  const estado = useJogo();
+  const meu = estado.clubes[estado.tecnico.clubeId];
+  const limite = limiteDeEstrangeiros(meu);
+  const fim = fimDaJanela(estado.data, meu);
+  return (
+    <p className="pequeno janela-de-transferencias">
+      {fim
+        ? <span className="chip verde">Janela aberta até {formatarData(fim)}</span>
+        : <span className="chip vermelho">Janela fechada · abre em {formatarData(proximaAbertura(estado.data, meu))} · só livres</span>}
+      {limite !== undefined && <span className="fraco"> · Estrangeiros {estrangeirosNoElenco(estado, meu)}/{limite}</span>}
     </p>
   );
 }
@@ -162,6 +185,7 @@ export function Mercado() {
         <h2>Mercado</h2>
         <span className="pequeno fraco">Caixa <b className={meu.caixa < 0 ? "vermelho" : "verde"}>{formatarDinheiro(meu.caixa)}</b></span>
       </div>
+      <SeloDaJanela />
       <Segmentado
         opcoes={[
           { valor: "buscar", rotulo: "Buscar" },

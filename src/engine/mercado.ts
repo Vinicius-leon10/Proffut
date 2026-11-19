@@ -6,6 +6,7 @@ import { contratoNovo, liberar } from "./contratos";
 import { escalarAutomatico, forcaDoTime } from "./forca";
 import { formatarDinheiro, lancar, motivoDaDiretoria } from "./financas";
 import { gerarLivre, salarioBase, valorMercado } from "./gerador";
+import { contaComoEstrangeiro, motivoDaJanela, motivoDosEstrangeiros } from "./regras";
 import { rngPara } from "./rng";
 import type { EstadoJogo, Jogador, Mensagem, Posicao } from "./tipos";
 import { enviarMensagem } from "./mensagens";
@@ -122,7 +123,7 @@ export function fazerOferta(estado: EstadoJogo, jogadorId: number, oferta: numbe
   if (elencoDe(estado, meu.id).length >= ELENCO_MAXIMO) return { ok: false, texto: `Seu elenco já tem ${ELENCO_MAXIMO} jogadores. Venda ou dispense alguém antes.` };
   if (!j.clubeId) {
     const salario = salarioDoLivre(j);
-    const recusa = motivoDaDiretoria(estado, meu, salario);
+    const recusa = motivoDosEstrangeiros(estado, meu, j.nacionalidade) ?? motivoDaDiretoria(estado, meu, salario);
     if (recusa) return { ok: false, texto: recusa };
     const luvas = salario * LUVAS_MESES;
     if (meu.caixa < luvas) return { ok: false, texto: `${j.nome} pede ${formatarDinheiro(luvas)} de luvas para assinar, e você não tem esse dinheiro em caixa.` };
@@ -131,8 +132,10 @@ export function fazerOferta(estado: EstadoJogo, jogadorId: number, oferta: numbe
     j.salario = salario;
     return { ok: true, texto: `${j.nome} assinou com ${comArtigo("o", meu)}. Luvas: ${formatarDinheiro(luvas)}. Salário: R$ ${salario.toLocaleString("pt-BR")}/mês.` };
   }
+  const fechada = motivoDaJanela(estado, meu);
+  if (fechada) return { ok: false, texto: fechada };
   if (meu.caixa < oferta) return { ok: false, texto: "Você não tem dinheiro em caixa para essa oferta." };
-  const recusa = motivoDaDiretoria(estado, meu, salarioDoReforco(j));
+  const recusa = motivoDosEstrangeiros(estado, meu, j.nacionalidade) ?? motivoDaDiretoria(estado, meu, salarioDoReforco(j));
   if (recusa) return { ok: false, texto: recusa };
   const vendedor = estado.clubes[j.clubeId];
   if (!podeSair(estado, j)) return { ok: false, texto: `${comArtigo("O", vendedor)} não aceita vender: ficaria sem opções na posição.` };
@@ -273,6 +276,11 @@ export function transferenciasDaIa(estado: EstadoJogo, chave: string): string[] 
   const noticias: string[] = [];
   const clubes = rng.embaralhar(Object.values(estado.clubes).filter((c) => dasSeries(c) && c.id !== estado.tecnico.clubeId));
   const contagem = contarElencos(estado);
+  const estrangeiros = new Map<string, number>();
+  for (const j of Object.values(estado.jogadores)) {
+    const c = j.clubeId ? estado.clubes[j.clubeId] : undefined;
+    if (c && dasSeries(c) && contaComoEstrangeiro(c, j.nacionalidade)) estrangeiros.set(c.id, (estrangeiros.get(c.id) ?? 0) + 1);
+  }
   for (const clube of clubes) {
     if (!rng.chance(0.3)) continue;
     const elenco = elencoDe(estado, clube.id);
@@ -295,6 +303,7 @@ export function transferenciasDaIa(estado: EstadoJogo, chave: string): string[] 
       // Quem joga fora dos clubes do jogo (ligado à seleção) não está no mercado.
       if (j.clubeId?.startsWith("sel-")) return false;
       if (j.forca < forca - 3 || j.forca > forca + 8 || j.idade > 32) return false;
+      if (motivoDosEstrangeiros(estado, clube, j.nacionalidade, estrangeiros.get(clube.id) ?? 0)) return false;
       return precoPedido(estado, j) <= orcamento && podeSair(estado, j, contagem);
     });
     if (!alvos.length) continue;
@@ -303,6 +312,8 @@ export function transferenciasDaIa(estado: EstadoJogo, chave: string): string[] 
     const origem = alvo.clubeId ? estado.clubes[alvo.clubeId] : null;
     if (alvo.clubeId) mudarContagem(contagem, alvo.clubeId, alvo.posicao, -1);
     mudarContagem(contagem, clube.id, alvo.posicao, 1);
+    if (contaComoEstrangeiro(clube, alvo.nacionalidade)) estrangeiros.set(clube.id, (estrangeiros.get(clube.id) ?? 0) + 1);
+    if (origem && contaComoEstrangeiro(origem, alvo.nacionalidade) && estrangeiros.has(origem.id)) estrangeiros.set(origem.id, estrangeiros.get(origem.id)! - 1);
     transferir(estado, alvo, clube.id, valor, data);
     if (valor > 0 && origem) noticias.push(`${alvo.nome} troca ${comArtigo("o", origem)} ${comArtigo("pelo", clube)} (R$ ${(valor / 1_000_000).toFixed(1).replace(".", ",")} mi).`);
   }
