@@ -45,7 +45,7 @@ import { criarRng, rngPara } from "./rng";
 import { avancarCopa, criarCopa } from "./copa";
 import { concluirObras } from "./estadio";
 import { capturarResultadoDoTecnico, encerrarTemporada, fecharTemporadaDoTecnico, inicioDaProximaTemporada, virarJogadoresDoCiclo } from "./temporada";
-import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno, simulacaoRapida, viradaDasLigas } from "./torneios";
+import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno, simulacaoRapida, tabelaDoTorneio, viradaDasLigas } from "./torneios";
 import { jogarRapido } from "./rapida";
 import {
   aplicarJogoDeSelecoes, atualizarConcentracoes, avancarSelecoes, depoisDoJogoRapido, ehCompeticaoDeSelecoes, elencoDaSelecao,
@@ -605,6 +605,19 @@ export function avancar(estado: EstadoJogo): ResultadoAvanco {
     }
   }
   return { tipo: "nada" };
+}
+
+/**
+ * Save de antes das temporadas reais (R141–R146): as ligas e copas de agosto a maio ganham o ano em que começaram e a liga que já
+ * acabou guarda a tabela final (as vagas das copas da UEFA saem dela).
+ */
+export function acertarCiclos(estado: EstadoJogo) {
+  for (const t of Object.values(estado.torneios ?? {})) {
+    if (!t || !ligaCruzaOAno(t.id)) continue;
+    t.inicio ??= estado.temporada;
+    if (t.fase === "encerrada" && t.tipo === "liga") ((estado.ultimaTabela ??= {})[t.id.slice(2)] ??= tabelaDoTorneio(estado, t).map((l) => l.clubeId));
+  }
+  for (const c of Object.values(estado.copas ?? {})) if (c) c.inicio ??= estado.temporada;
 }
 
 /** A temporada do usuário acabou: só quem treina um clube do ano civil fecha a temporada em dezembro, com o botão "Encerrar". */

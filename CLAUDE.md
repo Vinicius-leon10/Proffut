@@ -980,7 +980,10 @@ mensagens dele; o histórico fica com `tecnico.emAndamento`), e o `avancar` vira
 `processarDias`: `capturarResultadoDoTecnico` (antes de as ligas virarem) e `fecharTemporadaDoTecnico` (depois: acesso/queda pelo nível da liga,
 confiança, reputação com as copas, demissão ou convites, `definirObjetivo`, mensagens "Fim da temporada 2026/27" e "Objetivo para 2027/28",
 `EstadoJogo.fimDeTemporadaPendente`, que faz o próximo `avancar` devolver `nova-temporada`). Convite de clube de outro ciclo: o técnico chega
-no meio da temporada do clube novo (não esperei a pré-temporada). Próximo: etapa 6.
+no meio da temporada do clube novo (não esperei a pré-temporada).
+**Etapa 6 (R147, R148):** `regras.ts` — janelas por ciclo (`JANELAS_DE_AGOSTO`: 1º/jul–31/ago e janeiro; `JANELAS_DE_OUTUBRO`: jul–set e janeiro; o ano civil
+não muda). `acertarCiclos` (jogo.ts, chamada em `migrar`): ligas e copas de agosto a maio de um save antigo ganham `inicio` e a liga que já
+acabou grava `ultimaTabela`. Falta: medir o desempenho (`npm run sim`, jogo novo na Europa no iPhone) e ajustar o equilíbrio se precisar.
 
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
 pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais

@@ -1,6 +1,6 @@
 // Salva o jogo no próprio celular (IndexedDB) e exporta/importa em arquivo.
 import { createStore, del, get, set, setMany } from "idb-keyval";
-import { acertarNacionalidades, acertarParticipantes, juntarAoSaveAntigo, tirarRepetidos } from "../engine/jogo";
+import { acertarCiclos, acertarNacionalidades, acertarParticipantes, juntarAoSaveAntigo, tirarRepetidos } from "../engine/jogo";
 import { garantirContratos } from "../engine/contratos";
 import { montarRecordes } from "../engine/trofeus";
 import { juntarSelecoes } from "../engine/selecoes";
@@ -154,6 +154,8 @@ function migrar(estado: EstadoJogo): EstadoJogo {
   tirarRepetidos(estado);
   // Seleções (nov/2026): depois de todos os clubes no save, para os convocados que jogam neles serem os jogadores deles.
   juntarSelecoes(estado);
+  // Temporadas reais (nov/2026): as ligas e copas de agosto a maio ganham o ano em que começaram.
+  acertarCiclos(estado);
   // Contratos chegaram em out/2026: no save de antes, ninguém sai de graça na temporada em andamento.
   garantirContratos(estado, estado.temporada + 1);
   // Sala de troféus (out/2026): os recordes começam pelos jogos já disputados na temporada em andamento.
