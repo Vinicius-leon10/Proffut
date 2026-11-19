@@ -916,12 +916,15 @@ bons. Não escolhidas (podem vir depois): bicho por vitória, dívida com juros,
 
 **Princípio do jogo (19/nov/2026, "Eu quero criar o jogo com experiência mais real, mas de forma jogável e divertida"):** realismo só até onde o jogo continua jogável e divertido; na dúvida, simplificar e dizer ao usuário o que foi simplificado.
 
-**Plano das temporadas reais (19/nov/2026, só plano, nada mudado no jogo; `docs/PLANO_TEMPORADAS_REAIS.md`):** pedido "Em relação a
-data da temporada, a Europa e a América são diferentes". Hoje o jogo tem uma temporada só (janeiro a dezembro) e as ligas da
-Europa, Ásia e África foram encaixadas nela; o plano troca isso por dois ciclos ("ano": Brasil, América...; "agosto": Europa,
-Oriente Médio, boa parte da África e da Ásia) com virada própria (dezembro e junho), em 6 etapas. Esperando o usuário responder as
-4 perguntas do fim do documento antes de começar. As janelas de transferência da Europa (R139) estão ajustadas ao calendário do jogo
-e passam a ser as reais (julho–agosto e janeiro) na etapa 6.
+**Plano das temporadas reais no mundo todo (19/nov/2026, só plano, nada mudado no jogo; `docs/PLANO_TEMPORADAS_REAIS.md`):** pedido "Em
+relação a data da temporada, a Europa e a América são diferentes" e "monte já no mundo todo... quando eu escolher o europeu, o jogo vai
+gerar com a pré-temporada e com a opção de pular para o início da temporada... já vai gerar uma simulação de todas as outras temporadas
+que começaram no início do ano... em qualquer região do mundo, em qualquer time que eu escolher". Hoje o jogo tem uma temporada só
+(janeiro a dezembro, início sempre em 3/jan/2026). O plano: tabela `CALENDARIO_DO_MUNDO` por país; dois ciclos ("ano" e "agosto", viradas em
+dezembro e junho); o jogo começa na pré-temporada do clube escolhido (Brasil 3/jan, Europa ~1º/jul, Austrália ~1º/set) com o botão "Pular para o
+início da temporada" e **pré-simulação do mundo** com barra de progresso; 6 etapas (8 a 10 conversas). Esperando o usuário responder as 3
+perguntas do fim do documento. As janelas de transferência da Europa (R139) estão ajustadas ao calendário do jogo e passam a ser as reais na
+etapa 6.
 
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
 pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais
