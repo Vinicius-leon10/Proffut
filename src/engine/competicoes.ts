@@ -122,8 +122,9 @@ function somar(linhas: Map<string, LinhaTabela>, p: Partida) {
  * Classificação de uma fase (ou de um grupo). Desempate: pontos, vitórias,
  * saldo, gols pró, confronto direto entre os empatados e sorteio.
  */
-export function classificacao(estado: EstadoJogo, serie: Competicao, fase: string, clubes: string[], grupo?: number): LinhaTabela[] {
-  const jogos = estado.partidas.filter((p) => p.serie === serie && p.fase === fase && p.jogada && (grupo == null || p.grupo === grupo));
+export function classificacao(estado: EstadoJogo, serie: Competicao, fase: string, clubes: string[], grupo?: number, rodadas?: [number, number]): LinhaTabela[] {
+  const jogos = estado.partidas.filter((p) => p.serie === serie && p.fase === fase && p.jogada && (grupo == null || p.grupo === grupo) &&
+    (!rodadas || (p.rodada >= rodadas[0] && p.rodada <= rodadas[1])));
   const linhas = new Map(clubes.map((c) => [c, linhaVazia(c)]));
   for (const p of jogos) somar(linhas, p);
   const lista = [...linhas.values()];

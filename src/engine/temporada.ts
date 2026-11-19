@@ -265,7 +265,7 @@ export function encerrarTemporada(estado: EstadoJogo) {
   // Na Série D, subir também cumpre o objetivo (a posição é a do grupo).
   const cumpriu = (minhaPosicao > 0 && minhaPosicao <= estado.objetivo.posicaoAlvo) || !!estado.torneios?.D?.promovidos?.includes(meuId);
   const campeoesDosTorneios: Partial<Record<IdTorneio, { campeao: string; vice?: string }>> = {};
-  for (const t of torneios) if (t.campeao) campeoesDosTorneios[t.id] = { campeao: t.campeao, ...(t.vice ? { vice: t.vice } : {}) };
+  for (const t of torneios) if (t.campeao) campeoesDosTorneios[t.id] = { campeao: t.campeao, ...(t.vice ? { vice: t.vice } : {}), ...(t.turnos ? { turnos: t.turnos } : {}) };
   const campeoesDasCopas: Partial<Record<IdCopa, { campeao: string; vice?: string }>> = {};
   for (const c of Object.values(estado.copas ?? {})) if (c?.campeao) campeoesDasCopas[c.id] = { campeao: c.campeao, ...(c.vice ? { vice: c.vice } : {}) };
   const dasSelecoes = resumoDasSelecoes(estado);

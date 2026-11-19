@@ -359,8 +359,11 @@ function diasFifa(anos: number[]): Set<string> {
  * clube da liga já joga (na véspera, no dia ou no dia seguinte); faltando domingos, entram quartas. Se nem assim couber,
  * a liga segue depois do fim (antes da pausa do fim de ano).
  */
-export function datasDaLiga(pais: string, ano: number, rodadas: number, ocupado: (dia: string) => boolean = () => false): string[] {
-  const { de, ate, pausa } = periodoDaLiga(pais, ano);
+export function datasDaLiga(pais: string, ano: number, rodadas: number, ocupado: (dia: string) => boolean = () => false, janela?: { de: string; ate: string }): string[] {
+  const periodo = periodoDaLiga(pais, ano);
+  // Com `janela` (um dos dois torneios do ano), vale ela e a pausa do país não conta.
+  const { de, ate } = janela ?? periodo;
+  const pausa = janela ? undefined : periodo.pausa;
   const fifa = diasFifa([ano, ano + 1]);
   const livre = (d: string) => !(pausa && d >= pausa.de && d <= pausa.ate) && !fifa.has(d) && !naJanelaDaCopa(d) && !ocupado(d);
   const dias = (ate2: string, quartas: boolean) => {
@@ -374,7 +377,7 @@ export function datasDaLiga(pais: string, ano: number, rodadas: number, ocupado:
   let candidatas = dias(ate, false);
   if (candidatas.length < rodadas) candidatas = dias(ate, true);
   // Não coube: estica até o limite do ciclo (meados de dezembro no ano civil; fim de junho nos que cruzam o ano).
-  if (candidatas.length < rodadas) candidatas = dias(cruzaOAno(cicloDoPais(pais)) ? `${ano + 1}-06-25` : `${ano}-12-18`, true);
+  if (candidatas.length < rodadas && !janela) candidatas = dias(cruzaOAno(cicloDoPais(pais)) ? `${ano + 1}-06-25` : `${ano}-12-18`, true);
   if (candidatas.length < rodadas) {
     // Último recurso: domingos seguidos depois do fim, sem olhar mais nada.
     let d = somarDias(candidatas[candidatas.length - 1] ?? de, 7 - diaDaSemanaDe(candidatas[candidatas.length - 1] ?? de) || 7);
@@ -455,7 +458,17 @@ export function criarTorneios(estado: EstadoJogo, { semEstaduais = false, so }: 
       const rodadas = (europa && !grande) || 2 * ida.length <= 35 ? [...ida, ...ida.map((jogos) => jogos.map(([a, b]) => [b, a] as Confronto))] : ida;
       // Datas pelo calendário do país (ciclos.ts): de agosto a maio na Europa, de fevereiro a novembro no ano civil...
       const doClube = clubes.map((c) => ocupados.get(c)).filter((d): d is Set<string> => !!d);
-      const datas = datasDaLiga(pais, ano, rodadas.length, (d) => doClube.some((dias) => dias.has(d)));
+      const ocupado = (d: string) => doClube.some((dias) => dias.has(d));
+      // México e América Central: dois torneios no ano, Clausura (de janeiro a maio) e Apertura (de julho a dezembro), cada
+      // um em turno único (a 2ª metade é a volta, com o mando trocado). Sem liguilha: o líder de cada torneio é o campeão.
+      const doisTorneios = cicloDoPais(pais) === "torneios" && rodadas.length === 2 * ida.length && ida.length >= 6;
+      const datas = doisTorneios
+        ? [
+          ...datasDaLiga(pais, ano, ida.length, ocupado, { de: `${ano}-01-10`, ate: `${ano}-05-24` }),
+          ...datasDaLiga(pais, ano, ida.length, ocupado, { de: `${ano}-07-11`, ate: `${ano}-12-13` }),
+        ]
+        : datasDaLiga(pais, ano, rodadas.length, ocupado);
+      if (doisTorneios) t.rodadasPorTurno = ida.length;
       estado.partidas.push(...partidasDasRodadas(ano, id, "liga", rodadas, datas));
       if (ligaCruzaOAno(id)) t.inicio = ano;
     }
@@ -467,6 +480,12 @@ export function criarTorneios(estado: EstadoJogo, { semEstaduais = false, so }: 
 }
 
 // ---- classificação --------------------------------------------------------------------------
+
+/** Tabela de um dos dois torneios do ano (1 = Clausura, 2 = Apertura) das ligas do México e da América Central. */
+export function tabelaDoTurno(estado: EstadoJogo, t: EstadoTorneio, turno: 1 | 2): LinhaTabela[] {
+  const n = t.rodadasPorTurno ?? 0;
+  return classificacao(estado, t.id, "liga", t.clubes, undefined, turno === 1 ? [1, n] : [n + 1, 2 * n]);
+}
 
 export function tabelaDoTorneio(estado: EstadoJogo, t: EstadoTorneio, grupo?: number): LinhaTabela[] {
   if (grupo != null && t.grupos) return classificacao(estado, t.id, "grupos", t.grupos[grupo - 1], grupo);
@@ -549,6 +568,12 @@ function fasesCompletas(estado: EstadoJogo): Set<string> {
     if (!ehTorneio(p.serie)) continue;
     const chave = `${p.serie}|${p.fase}`;
     tudoJogado.set(chave, (tudoJogado.get(chave) ?? true) && p.jogada);
+    // Ligas de dois torneios por ano: cada metade também conta como uma fase (`L-MX|liga|1`).
+    const meio = estado.torneios?.[p.serie as IdTorneio]?.rodadasPorTurno;
+    if (meio) {
+      const turno = `${chave}|${p.rodada <= meio ? 1 : 2}`;
+      tudoJogado.set(turno, (tudoJogado.get(turno) ?? true) && p.jogada);
+    }
   }
   return new Set([...tudoJogado].filter(([, ok]) => ok).map(([chave]) => chave));
 }
@@ -570,6 +595,19 @@ export function avancarTorneios(estado: EstadoJogo): string[] {
   // As fases completas no começo do dia (as fases novas que um torneio cria aqui só são vistas no dia seguinte, como antes).
   const completas = fasesCompletas(estado);
   for (const t of Object.values(estado.torneios ?? {})) {
+    // México e América Central: cada torneio do ano (Clausura e Apertura) tem o seu campeão, o líder do turno (R143).
+    if (t?.rodadasPorTurno && t.fase !== "encerrada") {
+      for (const turno of [1, 2] as const) {
+        if ((t.turnos?.length ?? 0) >= turno) continue;
+        if (!completas.has(`${t.id}|liga|${turno}`)) break;
+        const tab = tabelaDoTurno(estado, t, turno);
+        (t.turnos ??= []).push({ nome: turno === 1 ? "Clausura" : "Apertura", campeao: tab[0].clubeId, ...(tab[1] ? { vice: tab[1].clubeId } : {}) });
+        if (t.clubes.includes(meu)) {
+          const c = estado.clubes[tab[0].clubeId];
+          noticias.push(`${c.nome} é ${concorda(c, "campeão", "campeã")} do ${t.turnos.at(-1)!.nome} do ${t.nome}!`);
+        }
+      }
+    }
     if (!t || t.fase === "encerrada" || !completas.has(`${t.id}|${t.fase}`)) continue;
     const doUsuario = t.clubes.includes(meu);
     if (t.fase === "liga" || t.fase === "grupos") {

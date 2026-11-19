@@ -250,6 +250,13 @@ export type FaseSerie = "liga" | "playoff" | "quadrangulares" | "final" | "encer
  * Torneio da temporada fora das Séries A, B e C e da Copa: a Série D (grupos e mata-mata em ida e volta), um
  * estadual (no começo do ano: pontos corridos ou grupos, e mata-mata em jogo único) ou a liga de outro país.
  */
+/** Um dos dois torneios do ano (Clausura e Apertura do México e da América Central) e o seu campeão. */
+export interface TurnoDeTorneio {
+  nome: "Clausura" | "Apertura";
+  campeao: string;
+  vice?: string;
+}
+
 export interface EstadoTorneio {
   id: IdTorneio;
   tipo: "serie-d" | "estadual" | "liga";
@@ -259,6 +266,10 @@ export interface EstadoTorneio {
   grupos?: string[][];
   /** "liga", "grupos" ou a fase do mata-mata ("segunda", "terceira", "oitavas", "quartas", "semi", "final"). */
   fase: string;
+  /** Ligas de dois torneios por ano (México, América Central): quantas rodadas tem cada um (o Clausura é a 1ª metade). */
+  rodadasPorTurno?: number;
+  /** Os torneios já decididos: Clausura (janeiro a maio) e Apertura (julho a dezembro). */
+  turnos?: TurnoDeTorneio[];
   /** Quem foi para o mata-mata, da melhor campanha para a pior: decide os confrontos e o mando. */
   semeados?: string[];
   campeao?: string;
@@ -414,7 +425,7 @@ export interface RegistroTemporada {
   /** `competicao`: nome do campeonato do clube ("Série A", "Campeonato Argentino"; falta nas temporadas antigas). */
   tecnico: { clubeId: string; serie: SerieClube; competicao?: string; posicao: number; objetivo: string; cumpriu: boolean };
   /** Campeões e vices da Série D, dos estaduais e das ligas de fora (falta nas temporadas de antes deles). */
-  torneios?: Partial<Record<IdTorneio, { campeao: string; vice?: string }>>;
+  torneios?: Partial<Record<IdTorneio, { campeao: string; vice?: string; turnos?: TurnoDeTorneio[] }>>;
   /** Campeões e vices das copas de clubes (Libertadores, Sul-Americana...; falta nas temporadas de antes delas). */
   copas?: Partial<Record<IdCopa, { campeao: string; vice?: string }>>;
   /** Competições de seleções que acabaram no ano: campeão e vice (torneios) ou quem foi à Copa do Mundo (Eliminatórias). */

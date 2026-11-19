@@ -950,7 +950,10 @@ por ciclo: em 31/12 (`encerrarTemporada`) para clubes "ano"/"torneios", livres e
 (`virarJogadoresDoCiclo`, chamada em `processarDias` antes de `viradaDasLigas`) para "agosto"/"outubro": evolução, aposentadoria,
 empréstimos, contratos, base, elenco mínimo, excedentes e livres. A idade sobe uma vez por ano para todos, só em dezembro
 (`evoluir(rng, j, false)` não envelhece). `Jogador.evoluiuEm`: quem mudou de ciclo não evolui de novo em menos de 270 dias.
-Save antigo: a Europa evolui mais uma vez em julho (aceito). Próximo: etapa 2c (México e América Central em dois torneios).
+Save antigo: a Europa evolui mais uma vez em julho (aceito). **Etapa 2c feita (R143):** México e América Central (ciclo "torneios", divisões em turno e returno com 6+ rodadas): `EstadoTorneio.rodadasPorTurno`
+e `turnos` ({nome "Clausura"|"Apertura", campeao, vice}); `criarTorneios` marca o Clausura de 10/jan a 24/mai e o Apertura de 11/jul a
+13/dez (`datasDaLiga` com `janela`); `tabelaDoTurno`; `avancarTorneios` grava cada campeão (`fasesCompletas` ganhou a chave
+`L-MX|liga|1`/`2`); histórico com `turnos`. Sem liguilha. Tela: Tabelas com Ano todo/Clausura/Apertura. Próximo: etapa 3.
 
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
 pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais
