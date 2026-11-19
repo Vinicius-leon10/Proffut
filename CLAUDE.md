@@ -925,6 +925,13 @@ dezembro e junho); o jogo começa na pré-temporada do clube escolhido (Brasil 3
 início da temporada" e **pré-simulação do mundo** com barra de progresso; 6 etapas (8 a 10 conversas). Esperando o usuário responder as 3
 perguntas do fim do documento. As janelas de transferência da Europa (R139) estão ajustadas ao calendário do jogo e passam a ser as reais na
 etapa 6.
+**Execução (19/nov/2026, decidido pelo usuário: pré-simulação na criação do jogo; amistosos de pré-temporada depois; tabela de
+ciclos aprovada; idade em 1º de janeiro para todos). Etapa 1 feita (R140, `src/engine/ciclos.ts`):** `CALENDARIO_DO_MUNDO`
+(país → ciclo "ano" | "torneios" | "agosto" | "outubro", pré-temporada, abertura, fim, pausa, em "MM-DD"; `VIRADA_DO_CICLO`),
+`cicloDoPais`, `cicloDoClube`, `cicloDaCompeticao`, `rotuloDaTemporada` ("2026/27"), `anoDoCiclo`, `viradaDoCiclo`,
+`inicioDaPreTemporada`. `semanaNoJogo` guarda a semana em que a liga começa HOJE (Europa −12, o resto 0) e é o que
+`criarTorneios` lê (`semanaDaLigaNoJogo`): mesma impressão digital de uma temporada inteira. Na etapa 2 as ligas passam a
+usar abertura e fim reais. Simplificação: o Caribe (fora a Rep. Dominicana) fica no ano civil. Próximo: etapa 2.
 
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
 pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais
