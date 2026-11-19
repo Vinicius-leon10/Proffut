@@ -1,5 +1,6 @@
 // Testes do motor (antes num arquivo só, src/engine/motor.test.ts; separados para rodarem em paralelo).
 import { describe, expect, it } from "vitest";
+import { ligaCruzaOAno } from "../ciclos";
 import { SERIES, tabelaDaLiga, temporadaEncerrada } from "../competicoes";
 import { MINIMO_POSICAO } from "../constantes";
 import { avancar, novoJogo, simularRestoDaTemporada } from "../jogo";
@@ -29,7 +30,8 @@ describe("temporada completa", () => {
 
   it("todas as séries terminam com campeão, promovidos e rebaixados certos", () => {
     expect(temporadaEncerrada(estado)).toBe(true);
-    expect(estado.partidas.every((p) => p.jogada)).toBe(true);
+    // As ligas de agosto a maio (R141) seguem no ano seguinte.
+    expect(estado.partidas.every((p) => p.jogada || ligaCruzaOAno(p.serie))).toBe(true);
     for (const s of SERIES) expect(estado.series[s].campeao).toBeTruthy();
     expect(estado.series.A.rebaixados).toHaveLength(4);
     expect(estado.series.B.promovidos).toHaveLength(4);
@@ -43,9 +45,9 @@ describe("temporada completa", () => {
   });
 
   it("as ligas de fora saem pela simulação rápida: só os gols, com autores do próprio time, e números parecidos com os da simulação completa", () => {
-    const deFora = estado.partidas.filter((p) => p.serie.startsWith("L-"));
+    const deFora = estado.partidas.filter((p) => p.serie.startsWith("L-") && p.jogada);
     expect(deFora.length).toBeGreaterThan(3000);
-    expect(deFora.every((p) => p.jogada)).toBe(true);
+    expect(estado.partidas.filter((p) => p.serie.startsWith("L-") && !ligaCruzaOAno(p.serie)).every((p) => p.jogada)).toBe(true);
     // Só gols: sem cartões, lesões nem trocas (não há lance a lance).
     expect(deFora.flatMap((p) => p.eventos).every((e) => e.tipo === "gol")).toBe(true);
     for (const p of deFora.slice(0, 300)) expect(p.eventos.length, p.id).toBe(p.gm + p.gv);
@@ -65,7 +67,9 @@ describe("temporada completa", () => {
 
   it("a virada mantém 20 clubes por série e elencos válidos", () => {
     const campeaoA = estado.series.A.campeao;
-    const r = avancar(estado);
+    // Os jogos das ligas de agosto a maio que ainda faltam antes da pausa do fim de ano saem antes (R141).
+    let r = avancar(estado);
+    while (r.tipo === "fim-dos-jogos") r = avancar(estado);
     expect(r.tipo).toBe("nova-temporada");
     expect(estado.temporada).toBe(2027);
     expect(estado.historico).toHaveLength(1);
@@ -82,7 +86,8 @@ describe("temporada completa", () => {
       }
     }
     // Só ficam jogados os das competições de seleções que atravessam o ano (a Liga das Nações de 2026 acaba em junho de 2027).
-    expect(estado.partidas.every((p) => !p.jogada || p.serie.startsWith("S-"))).toBe(true);
+    // E as ligas de agosto a maio (R141), que seguem com os jogos delas.
+    expect(estado.partidas.every((p) => !p.jogada || p.serie.startsWith("S-") || ligaCruzaOAno(p.serie))).toBe(true);
     expect(livres(estado).length).toBeGreaterThan(0);
   });
 

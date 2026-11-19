@@ -261,6 +261,8 @@ export interface EstadoTorneio {
   semeados?: string[];
   campeao?: string;
   vice?: string;
+  /** Ligas que cruzam o ano (agosto a maio): o ano em que a temporada começou (2026 na 2026/27). */
+  inicio?: number;
   /** Série D: os que sobem para a Série C (os finalistas). */
   promovidos?: string[];
 }
@@ -491,6 +493,11 @@ export interface EstadoJogo {
    * clubes chegam ao abrir o jogo e os torneios começam na temporada seguinte.
    */
   torneios?: Partial<Record<IdTorneio, EstadoTorneio>>;
+  /**
+   * Tabela final da última temporada encerrada das ligas que cruzam o ano ("EN" → clubes do 1º ao último), guardada na
+   * virada de 1º de julho: as vagas das copas da virada de dezembro saem dela (a liga do ano está no meio).
+   */
+  ultimaTabela?: Record<string, string[]>;
   /**
    * Copas de clubes da temporada (Libertadores, Sul-Americana, Recopa, as da Concacaf, as regionais do Brasil e as
    * nacionais dos outros países). Falta nos saves de antes delas: começam na temporada seguinte.

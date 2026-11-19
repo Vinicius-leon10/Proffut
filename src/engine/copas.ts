@@ -25,6 +25,7 @@ import { chavesDaFase, classificacao, tabelaDaLiga, vencedorDaChave, type LinhaT
 import { lancar } from "./financas";
 import { enviarMensagem } from "./mensagens";
 import { hashTexto, rngPara, type Rng } from "./rng";
+import { ligaCruzaOAno } from "./ciclos";
 import { MAXIMO_UMA_RODADA_POR_SEMANA, PAISES, divisaoDaLiga, tabelaDoTorneio } from "./torneios";
 import type { EstadoCopaClubes, EstadoJogo, IdCopa, Partida } from "./tipos";
 
@@ -120,6 +121,13 @@ const paisDoClube = (estado: EstadoJogo, id: string) => estado.clubes[id]?.pais 
 /** Clubes de uma liga do jogo nesta temporada ("AR", "AR2", "MX"), pela tabela (com jogos) ou pela reputação. */
 function ordemDaLiga(estado: EstadoJogo, liga: string, pelaTabela: boolean): string[] {
   const t = estado.torneios?.[`L-${liga}`];
+  // Liga de agosto a maio no meio da temporada (virada de dezembro): vale a tabela final da última que acabou (a de
+  // 2025/26 de verdade, na Europa, antes da primeira jogada no jogo).
+  if (pelaTabela && t && ligaCruzaOAno(t.id) && t.fase !== "encerrada") {
+    const ultima = (estado.ultimaTabela?.[liga] ?? TABELAS_2025[liga])?.filter((c) => estado.clubes[c]);
+    if (ultima?.length) return ultima;
+    return [...t.clubes].sort((a, b) => estado.clubes[b].reputacao - estado.clubes[a].reputacao || a.localeCompare(b));
+  }
   if (pelaTabela && t) return tabelaDoTorneio(estado, t).map((l) => l.clubeId);
   const ids = t ? t.clubes : Object.values(estado.clubes).filter((c) => c.serie === "exterior" && c.liga === liga).map((c) => c.id);
   return [...ids].sort((a, b) => estado.clubes[b].reputacao - estado.clubes[a].reputacao || a.localeCompare(b));

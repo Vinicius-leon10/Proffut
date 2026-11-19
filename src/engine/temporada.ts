@@ -84,6 +84,13 @@ function comArtigoDaLiga(nome: string): string {
   return `${nome.startsWith("Série") ? "a" : "o"} ${nome}`;
 }
 
+/** Dia em que começa a temporada seguinte: com estaduais, em janeiro, uma semana antes deles. */
+export function inicioDaProximaTemporada(estado: EstadoJogo): string {
+  const ano = estado.temporada + 1;
+  const comEstaduais = Object.values(estado.clubes).some((c) => c.estadual);
+  return comEstaduais ? inicioDoAno(ano) : somarDias(inicioDaTemporada(ano), -7);
+}
+
 export function encerrarTemporada(estado: EstadoJogo) {
   const ano = estado.temporada;
   const data = estado.data;
@@ -274,9 +281,8 @@ export function encerrarTemporada(estado: EstadoJogo) {
   const demitido = !t.demissao && !cumpriu && t.confiancaDiretoria <= CARGO.demissao && passouDaCarencia(estado);
 
   // ---- nova temporada: com estaduais, começa em janeiro, uma semana antes deles ----
+  estado.data = inicioDaProximaTemporada(estado);
   estado.temporada = ano + 1;
-  const comEstaduais = Object.values(estado.clubes).some((c) => c.estadual);
-  estado.data = comEstaduais ? inicioDoAno(ano + 1) : somarDias(inicioDaTemporada(ano + 1), -7);
   // As Eliminatórias atravessam as temporadas: os jogos delas ficam (a tabela junta os anos).
   const continuam = guardarJogosQueContinuam(estado);
   criarTemporada(estado);

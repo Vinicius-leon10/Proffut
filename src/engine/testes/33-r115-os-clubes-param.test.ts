@@ -1,5 +1,6 @@
 // Testes do motor (antes num arquivo só, src/engine/motor.test.ts; separados para rodarem em paralelo).
 import { describe, expect, it } from "vitest";
+import { ligaCruzaOAno } from "../ciclos";
 import { datasDaTemporada } from "../calendario";
 import { novoJogo, simularRestoDaTemporada } from "../jogo";
 
@@ -13,7 +14,8 @@ describe("R115 os clubes param durante a Copa do Mundo (Modo Copa, nov/2026)", (
     expect(e.temporada).toBe(2026);
     const clubes = e.partidas.filter((p) => !p.serie.startsWith("S-"));
     expect(clubes.filter((p) => p.data >= "2026-06-11" && p.data <= "2026-07-19").map((p) => `${p.serie} ${p.fase} ${p.data}`)).toEqual([]);
-    expect(clubes.every((p) => p.jogada)).toBe(true);
+    // As ligas de agosto a maio (R141) seguem no ano seguinte.
+    expect(clubes.every((p) => p.jogada || ligaCruzaOAno(p.serie))).toBe(true);
     const a = clubes.filter((p) => p.serie === "A");
     expect(a).toHaveLength(380);
     // A Série A acaba no máximo três semanas depois do normal (14 de novembro): as rodadas da janela vão para quartas sem

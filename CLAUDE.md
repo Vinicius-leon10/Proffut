@@ -931,7 +931,18 @@ ciclos aprovada; idade em 1º de janeiro para todos). Etapa 1 feita (R140, `src/
 `cicloDoPais`, `cicloDoClube`, `cicloDaCompeticao`, `rotuloDaTemporada` ("2026/27"), `anoDoCiclo`, `viradaDoCiclo`,
 `inicioDaPreTemporada`. `semanaNoJogo` guarda a semana em que a liga começa HOJE (Europa −12, o resto 0) e é o que
 `criarTorneios` lê (`semanaDaLigaNoJogo`): mesma impressão digital de uma temporada inteira. Na etapa 2 as ligas passam a
-usar abertura e fim reais. Simplificação: o Caribe (fora a Rep. Dominicana) fica no ano civil. Próximo: etapa 2.
+usar abertura e fim reais. Simplificação: o Caribe (fora a Rep. Dominicana) fica no ano civil.
+**Etapa 2a feita (R141):** as ligas de fora saem de `datasDaLiga` (torneios.ts: domingos da abertura ao fim, espalhados, fora da
+pausa, das datas FIFA, da janela da Copa e dos dias em que um clube da liga já joga; quartas se faltar). `semanaNoJogo` saiu.
+Ligas que cruzam o ano (`ligaCruzaOAno`, ciclo agosto/outubro): `EstadoTorneio.inicio` = ano em que começaram; a virada de
+dezembro as guarda (`criarTorneios` sem `so` mantém as em andamento; `criarTemporada` mantém os jogos delas;
+`torneiosEncerrados` não as conta); o `avancar` com a temporada encerrada joga antes os jogos que faltam antes da temporada
+nova (`inicioDaProximaTemporada`, temporada.ts) e só então devolve `fim-dos-jogos`/vira. Em 1º de julho (`processarDias`),
+`viradaDasLigas`: tabela final em `EstadoJogo.ultimaTabela` (as vagas das copas da virada de dezembro saem dela, ou da 2025/26 de
+verdade, em `ordemDaLiga` de copas.ts), campeão no `historico` da temporada em que começou, `trocarDivisoes` e a temporada
+nova (`criarTorneios` com `so`). México e América Central: uma liga no ano com pausa de junho a julho (os dois torneios ficam
+para depois). Jogadores, contratos e técnico ainda viram só em dezembro (etapa 2b e 5). Próximo: etapa 2b (jogadores e
+contratos por ciclo).
 
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
 pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais

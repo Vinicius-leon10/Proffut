@@ -43,8 +43,8 @@ import {
 import { criarRng, rngPara } from "./rng";
 import { avancarCopa, criarCopa } from "./copa";
 import { concluirObras } from "./estadio";
-import { encerrarTemporada } from "./temporada";
-import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno, simulacaoRapida } from "./torneios";
+import { encerrarTemporada, inicioDaProximaTemporada } from "./temporada";
+import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno, simulacaoRapida, viradaDasLigas } from "./torneios";
 import { jogarRapido } from "./rapida";
 import {
   aplicarJogoDeSelecoes, atualizarConcentracoes, avancarSelecoes, depoisDoJogoRapido, ehCompeticaoDeSelecoes, elencoDaSelecao,
@@ -463,6 +463,11 @@ export function processarDias(estado: EstadoJogo, ate: string) {
     gerarPropostas(estado, dia);
     expirarConvites(estado, dia);
     avisarContratos(estado, dia);
+    // 1º de julho: viram as ligas de agosto a maio (campeão, acesso e queda, temporada nova).
+    if (dia.endsWith("-07-01")) {
+      const noticias = viradaDasLigas(estado);
+      if (noticias.length) enviarMensagem(estado, { tipo: "temporada", titulo: "Fim da temporada da liga", texto: noticias.join(" ") });
+    }
     if (dia.endsWith("-07-01") || dia.endsWith("-07-15")) {
       const noticias = transferenciasDaIa(estado, dia);
       if (noticias.length) {
@@ -496,6 +501,13 @@ export function avancar(estado: EstadoJogo): ResultadoAvanco {
       continue;
     }
     if (temporadaEncerrada(estado)) {
+      // As ligas que cruzam o ano (agosto a maio) ainda jogam até a pausa do fim de ano: os jogos de antes da temporada
+      // nova saem primeiro (senão a virada, que pula para janeiro, os deixaria para trás).
+      const resta = proximaDataComJogo(estado);
+      if (resta && resta < inicioDaProximaTemporada(estado)) {
+        processarDias(estado, resta);
+        continue;
+      }
       // A virada só no botão "Encerrar a temporada" (ele pergunta antes quem sai de graça): se os últimos jogos do ano
       // eram de fora (a 2ª divisão da Argentina termina depois da final da Série C), este Avançar para aqui (R79).
       if (andou) return { tipo: "fim-dos-jogos" };

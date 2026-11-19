@@ -5,10 +5,10 @@
 import { describe, expect, it } from "vitest";
 import {
   CALENDARIO_DO_MUNDO, anoDoCiclo, cicloDaCompeticao, cicloDoClube, cicloDoPais, inicioDaPreTemporada, rotuloDaTemporada,
-  semanaDaLigaNoJogo, viradaDoCiclo,
+  viradaDoCiclo,
 } from "../ciclos";
 import { novoJogo } from "../jogo";
-import { PAISES, domingo } from "../torneios";
+import { PAISES } from "../torneios";
 
 describe("calendário do mundo (R140)", () => {
   it("todo país do jogo tem ciclo na tabela", () => {
@@ -48,16 +48,5 @@ describe("calendário do mundo (R140)", () => {
     expect(cicloDaCompeticao("A")).toBe("ano");
     expect(cicloDaCompeticao("L-EN2")).toBe("agosto");
     expect(cicloDaCompeticao("L-AU")).toBe("outubro");
-  });
-
-  it("as ligas começam onde a tabela manda (por enquanto, as datas de sempre: Europa em janeiro, o resto em abril)", () => {
-    const estado = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 7 });
-    const ano = estado.temporada;
-    expect(semanaDaLigaNoJogo("EN")).toBe(-12);
-    expect(semanaDaLigaNoJogo("AR")).toBe(0);
-    for (const liga of ["EN", "AR", "JP", "MX"]) {
-      const primeira = estado.partidas.filter((p) => p.serie === `L-${liga}`).map((p) => p.data).sort()[0];
-      expect(primeira, liga).toBe(domingo(ano, semanaDaLigaNoJogo(liga)));
-    }
   });
 });

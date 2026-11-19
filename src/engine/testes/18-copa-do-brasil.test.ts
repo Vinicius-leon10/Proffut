@@ -1,5 +1,6 @@
 // Testes do motor (antes num arquivo só, src/engine/motor.test.ts; separados para rodarem em paralelo).
 import { describe, expect, it } from "vitest";
+import { ligaCruzaOAno } from "../ciclos";
 import { temporadaEncerrada } from "../competicoes";
 import { avancar, novoJogo, simularRestoDaTemporada } from "../jogo";
 import { elencoDe } from "../mercado";
@@ -50,7 +51,8 @@ describe("Copa do Brasil", () => {
       expect(final.neutro).toBe(true);
       expect([final.mandante, final.visitante].sort()).toEqual([e.copa!.campeao, e.copa!.vice].sort());
       // A final é o último jogo do futebol brasileiro no ano (as finais da Libertadores e da Sul-Americana vêm depois).
-      expect(final.data >= e.partidas.filter((p) => p.serie !== "CB" && !p.serie.startsWith("K-")).map((p) => p.data).sort().at(-1)!).toBe(true);
+      // (As ligas de agosto a maio, R141, seguem no ano seguinte.)
+      expect(final.data >= e.partidas.filter((p) => p.serie !== "CB" && !p.serie.startsWith("K-") && !ligaCruzaOAno(p.serie)).map((p) => p.data).sort().at(-1)!).toBe(true);
     });
 
     it("empate em jogo único ou no agregado vai para os pênaltis", () => {
@@ -106,7 +108,9 @@ describe("Copa do Brasil", () => {
     e.partidas = e.partidas.filter((p) => p.serie !== "CB");
     simularRestoDaTemporada(e);
     expect(temporadaEncerrada(e)).toBe(true);
-    expect(avancar(e).tipo).toBe("nova-temporada");
+    let r = avancar(e);
+    while (r.tipo === "fim-dos-jogos") r = avancar(e);
+    expect(r.tipo).toBe("nova-temporada");
     const copaDe = (x: EstadoJogo) => x.copa;
     expect(copaDe(e)?.fase).toBe("fase1");
   });
