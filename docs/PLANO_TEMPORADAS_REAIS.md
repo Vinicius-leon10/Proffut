@@ -3,6 +3,12 @@
 Pedido do usuário: "Em relação a data da temporada, a Europa e a América são diferentes" e "crie o plano das temporadas reais
 do mundo". **Só plano: nada foi mudado no jogo.** Ele decide as perguntas do fim antes de começar.
 
+## 0. Princípio (pedido do usuário, 19/nov/2026)
+
+"Eu quero criar o jogo com experiência mais real, mas de forma jogável e divertida." Na dúvida entre realidade e diversão, vale
+o que mantém o jogo **jogável**: sem tempo morto (o "Avançar" pula os dias sem jogo do técnico), sem tela nem regra que dê
+trabalho à toa, sem a temporada simulada ficar mais lenta, e cada etapa publicada só quando já dá para jogar.
+
 ## 1. Como é hoje
 
 - O jogo tem **uma temporada só para o mundo inteiro**: um ano (`estado.temporada`, usado em ~50 lugares) que vai de janeiro a

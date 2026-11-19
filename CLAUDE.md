@@ -914,6 +914,8 @@ público esperado; sem copas) ou, se for maior, `Tecnico.folhaAprovada` (a folha
 outros grandes, com folha acima da receita do mês, não contratariam ninguém. O R39 busca o goleiro emprestado na Série C. O Confiança no começo arrecada ~865 mil/mês e tinha folha de ~330 mil: agora traz 1 ou 2 livres
 bons. Não escolhidas (podem vir depois): bicho por vitória, dívida com juros, prêmios das copas menores para os pequenos.
 
+**Princípio do jogo (19/nov/2026, "Eu quero criar o jogo com experiência mais real, mas de forma jogável e divertida"):** realismo só até onde o jogo continua jogável e divertido; na dúvida, simplificar e dizer ao usuário o que foi simplificado.
+
 **Plano das temporadas reais (19/nov/2026, só plano, nada mudado no jogo; `docs/PLANO_TEMPORADAS_REAIS.md`):** pedido "Em relação a
 data da temporada, a Europa e a América são diferentes". Hoje o jogo tem uma temporada só (janeiro a dezembro) e as ligas da
 Europa, Ásia e África foram encaixadas nela; o plano troca isso por dois ciclos ("ano": Brasil, América...; "agosto": Europa,
