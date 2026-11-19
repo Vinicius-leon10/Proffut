@@ -57,8 +57,14 @@ export function Historico() {
                 <div className="linha" style={{ borderTop: "1px solid var(--borda)", paddingTop: 8 }}>
                   <Escudo clube={meu} tamanho={30} />
                   <div className="cresce">
-                    <div className="pequeno">Você: {r.tecnico.posicao}º · {r.tecnico.competicao ?? NOME_SERIE[r.tecnico.serie as SerieId]} com {comArtigo("o", meu)}</div>
-                    <div className={`mini ${r.tecnico.cumpriu ? "verde" : "vermelho"}`}>{r.tecnico.cumpriu ? "Objetivo cumprido" : "Objetivo não cumprido"}: {r.tecnico.objetivo}</div>
+                    {r.tecnico.emAndamento ? (
+                      <div className="pequeno">Você: {r.tecnico.competicao ?? NOME_SERIE[r.tecnico.serie as SerieId]} com {comArtigo("o", meu)} · a temporada dele termina em junho</div>
+                    ) : (
+                      <>
+                        <div className="pequeno">Você: {r.tecnico.posicao}º · {r.tecnico.competicao ?? NOME_SERIE[r.tecnico.serie as SerieId]} com {comArtigo("o", meu)}</div>
+                        <div className={`mini ${r.tecnico.cumpriu ? "verde" : "vermelho"}`}>{r.tecnico.cumpriu ? "Objetivo cumprido" : "Objetivo não cumprido"}: {r.tecnico.objetivo}</div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

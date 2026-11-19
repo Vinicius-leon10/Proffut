@@ -973,7 +973,14 @@ julho, `viradaDasCopasDoCiclo`) e "todas" (jogo novo); `criarTemporada` mantém 
 (o Mundial de Clubes de janeiro usa); o histórico da temporada em que a copa começou recebe o campeão em 1º de julho. Save sem copas: a
 temporada seguinte de agosto a maio as cria (só quando as ligas da Europa viram em 1º de julho). `avancar`: com a temporada já encerrada ao
 tocar no botão, os jogos que sobram são simulados e a virada vem no mesmo toque (`jaEncerrada`). As seleções não mudaram (o calendário
-internacional já é do ano civil). Próximo: etapa 5.
+internacional já é do ano civil).
+**Etapa 5 feita (R146):** `temporadaDoUsuarioEncerrada` (jogo.ts) manda no botão "Encerrar a temporada" (Painel e `avancarJogo`): só o clube do ano civil. Para o
+clube de agosto a maio, `encerrarTemporada` (dezembro) pula o técnico (`usuarioDoAno`: confiança, reputação, demissão, convites, objetivo e as
+mensagens dele; o histórico fica com `tecnico.emAndamento`), e o `avancar` vira o mundo sozinho (sem `nova-temporada`). Em 1º de julho,
+`processarDias`: `capturarResultadoDoTecnico` (antes de as ligas virarem) e `fecharTemporadaDoTecnico` (depois: acesso/queda pelo nível da liga,
+confiança, reputação com as copas, demissão ou convites, `definirObjetivo`, mensagens "Fim da temporada 2026/27" e "Objetivo para 2027/28",
+`EstadoJogo.fimDeTemporadaPendente`, que faz o próximo `avancar` devolver `nova-temporada`). Convite de clube de outro ciclo: o técnico chega
+no meio da temporada do clube novo (não esperei a pré-temporada). Próximo: etapa 6.
 
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
 pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais

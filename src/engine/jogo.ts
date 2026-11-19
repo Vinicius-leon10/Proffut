@@ -22,14 +22,14 @@ import restoJogadoresJson from "../../data/europa-2026/jogadores-resto.json";
 import repetidosJson from "../../data/repetidos-removidos.json";
 import { comArtigo } from "./artigos";
 import { diasEntre, inicioDaTemporada, mesDe, somarDias } from "./calendario";
-import { inicioDaPreTemporada, ligaCruzaOAno } from "./ciclos";
+import { cruzaOAno, inicioDaPreTemporada, ligaCruzaOAno } from "./ciclos";
 import {
   FASE_LIGA, agregado, avancarFases, chaveDaPartida, criarTemporada, decidePorPenaltis, ehSerie, temporadaEncerrada,
 } from "./competicoes";
 import { avancarCopasDeClubes, criarCopasDeClubes, viradaDasCopasDoCiclo } from "./copas";
 import { COTA_TV_ESTADUAL, COTA_TV_RODADA, DIAS_LESAO, MINIMO_POSICAO, RECUPERACAO_POR_DIA, TEMPORADA_INICIAL } from "./constantes";
 import { depoisDoMeuJogo, expirarConvites } from "./carreira";
-import { avisarContratos, garantirContratos } from "./contratos";
+import { avisarContratos, cicloDoClubeId, garantirContratos } from "./contratos";
 import { melhorEmCampo, notasDaPartida } from "./notas";
 import { registrarRecordes } from "./trofeus";
 import { atualizarConfianca, definirObjetivo } from "./diretoria";
@@ -44,7 +44,7 @@ import {
 import { criarRng, rngPara } from "./rng";
 import { avancarCopa, criarCopa } from "./copa";
 import { concluirObras } from "./estadio";
-import { encerrarTemporada, inicioDaProximaTemporada, virarJogadoresDoCiclo } from "./temporada";
+import { capturarResultadoDoTecnico, encerrarTemporada, fecharTemporadaDoTecnico, inicioDaProximaTemporada, virarJogadoresDoCiclo } from "./temporada";
 import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno, simulacaoRapida, viradaDasLigas } from "./torneios";
 import { jogarRapido } from "./rapida";
 import {
@@ -527,9 +527,12 @@ export function processarDias(estado: EstadoJogo, ate: string) {
     // 1º de julho: viram as ligas de agosto a maio (campeão, acesso e queda, temporada nova).
     if (dia.endsWith("-07-01")) {
       virarJogadoresDoCiclo(estado);
+      // O técnico de um clube de agosto a maio fecha a temporada dele agora (R146): o resultado sai antes de as ligas virarem.
+      const resultadoDoTecnico = capturarResultadoDoTecnico(estado);
       const ligasAcabaram = Object.values(estado.torneios ?? {}).some((t) => !!t && ligaCruzaOAno(t.id) && t.fase === "encerrada");
       const noticias = viradaDasLigas(estado);
       viradaDasCopasDoCiclo(estado, ligasAcabaram);
+      if (resultadoDoTecnico) fecharTemporadaDoTecnico(estado, resultadoDoTecnico);
       if (noticias.length) enviarMensagem(estado, { tipo: "temporada", titulo: "Fim da temporada da liga", texto: noticias.join(" ") });
     }
     if (dia.endsWith("-07-01") || dia.endsWith("-07-15")) {
@@ -568,6 +571,17 @@ export function avancar(estado: EstadoJogo): ResultadoAvanco {
       continue;
     }
     if (temporadaEncerrada(estado)) {
+      // O técnico de um clube de agosto a maio não encerra nada em dezembro: só o mundo do ano civil vira (R146).
+      if (cruzaOAno(cicloDoClubeId(estado, estado.tecnico.clubeId))) {
+        const resta = proximaDataComJogo(estado);
+        if (resta && resta < inicioDaProximaTemporada(estado)) {
+          processarDias(estado, resta);
+          continue;
+        }
+        encerrarTemporada(estado);
+        andou = true;
+        continue;
+      }
       // As ligas que cruzam o ano (agosto a maio) ainda jogam até a pausa do fim de ano: os jogos de antes da temporada
       // nova saem primeiro (senão a virada, que pula para janeiro, os deixaria para trás).
       const resta = proximaDataComJogo(estado);
@@ -584,8 +598,18 @@ export function avancar(estado: EstadoJogo): ResultadoAvanco {
     const proxima = proximaDataComJogo(estado);
     if (!proxima) return { tipo: "nada" };
     processarDias(estado, proxima);
+    // Em 1º de julho acabou a temporada do técnico de um clube de agosto a maio: abre a tela de fim da temporada.
+    if (estado.fimDeTemporadaPendente) {
+      delete estado.fimDeTemporadaPendente;
+      return { tipo: "nova-temporada" };
+    }
   }
   return { tipo: "nada" };
+}
+
+/** A temporada do usuário acabou: só quem treina um clube do ano civil fecha a temporada em dezembro, com o botão "Encerrar". */
+export function temporadaDoUsuarioEncerrada(estado: EstadoJogo): boolean {
+  return !cruzaOAno(cicloDoClubeId(estado, estado.tecnico.clubeId)) && temporadaEncerrada(estado);
 }
 
 // ---- dia de jogo -----------------------------------------------------------------------

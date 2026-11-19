@@ -425,7 +425,7 @@ export interface RegistroTemporada {
   promovidos: Record<SerieId, string[]>;
   rebaixados: Record<SerieId, string[]>;
   /** `competicao`: nome do campeonato do clube ("Série A", "Campeonato Argentino"; falta nas temporadas antigas). */
-  tecnico: { clubeId: string; serie: SerieClube; competicao?: string; posicao: number; objetivo: string; cumpriu: boolean };
+  tecnico: { clubeId: string; serie: SerieClube; competicao?: string; posicao: number; objetivo: string; cumpriu: boolean; emAndamento?: boolean };
   /** Campeões e vices da Série D, dos estaduais e das ligas de fora (falta nas temporadas de antes deles). */
   torneios?: Partial<Record<IdTorneio, { campeao: string; vice?: string; turnos?: TurnoDeTorneio[] }>>;
   /** Campeões e vices das copas de clubes (Libertadores, Sul-Americana...; falta nas temporadas de antes delas). */
@@ -508,6 +508,8 @@ export interface EstadoJogo {
    * clubes chegam ao abrir o jogo e os torneios começam na temporada seguinte.
    */
   torneios?: Partial<Record<IdTorneio, EstadoTorneio>>;
+  /** O clube do usuário é de um campeonato de agosto a maio e a temporada dele acabou em 1º de julho: o próximo Avançar abre o fim da temporada. */
+  fimDeTemporadaPendente?: boolean;
   /** O último campeão de cada copa que cruza o ano (Liga dos Campeões, Ásia, África...): o Mundial de Clubes de janeiro o usa. */
   ultimosCampeoes?: Partial<Record<IdCopa, string>>;
   /**

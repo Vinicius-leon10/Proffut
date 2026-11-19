@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
-import { ehSerie, nomeDaLigaDoClube, tabelaDoClube, temporadaEncerrada, torneioPrincipal } from "../../engine/competicoes";
+import { ehSerie, nomeDaLigaDoClube, tabelaDoClube, torneioPrincipal } from "../../engine/competicoes";
 import { reputacaoDoTecnico } from "../../engine/carreira";
 import { CARGO } from "../../engine/constantes";
 import { situacaoDoObjetivo } from "../../engine/diretoria";
 import { folhaSalarial, formatarDinheiro } from "../../engine/financas";
 import { copasDoClube, situacaoCurtaNaCopa } from "../../engine/copas";
-import { emPreTemporada, meuJogoHoje, meuTimeNaPartida, provavelTime, proximaDataComJogo, proximoJogoDoClube } from "../../engine/jogo";
+import { emPreTemporada, meuJogoHoje, meuTimeNaPartida, provavelTime, proximaDataComJogo, proximoJogoDoClube, temporadaDoUsuarioEncerrada } from "../../engine/jogo";
 import { NOME_FASE_TORNEIO, posicaoNoTorneio, torneiosDoClube } from "../../engine/torneios";
 import { avancarJogo, simularFimDaTemporada } from "../acoes";
 import { Cartao, Escudo } from "../componentes";
@@ -32,7 +32,7 @@ export function Painel() {
   const serie = clube.serie;
   const hoje = meuJogoHoje(estado);
   const proximo = hoje ?? proximoJogoDoClube(estado);
-  const encerrada = temporadaEncerrada(estado);
+  const encerrada = temporadaDoUsuarioEncerrada(estado);
   // Fora das Séries A, B e C (Série D, liga de fora, estadual): o campeonato acaba para o usuário quando ele não tem mais
   // jogos nele (nos de mata-mata, depois da fase de grupos).
   const principal = ehSerie(serie) ? undefined : torneioPrincipal(estado, clube);
