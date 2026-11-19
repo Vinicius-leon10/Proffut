@@ -5,9 +5,9 @@ import { AbsoluteFill, Img, staticFile, useCurrentFrame } from "remotion";
 import { COR, FONTE, Fundo, SERIFADA, useFontes } from "./estilo";
 import { Icone } from "./pecas";
 
-const ESCURO = "#10221a";
+export const ESCURO = "#10221a";
 
-function Celular({ tela, altura = 900, giro = -3, embaixo = false, largura = 540 }: { tela: string; altura?: number; giro?: number; embaixo?: boolean; largura?: number }) {
+export function Celular({ tela, altura = 900, giro = -3, embaixo = false, largura = 540 }: { tela: string; altura?: number; giro?: number; embaixo?: boolean; largura?: number }) {
   return (
     <div style={{ width: largura, borderRadius: 62, background: "#0b0b0b", padding: 14, boxShadow: "0 50px 120px rgba(0,0,0,0.7), 0 0 0 3px #2a2a2a", transform: `rotate(${giro}deg)` }}>
       <div style={{ borderRadius: 50, overflow: "hidden", height: altura }}>
@@ -17,15 +17,15 @@ function Celular({ tela, altura = 900, giro = -3, embaixo = false, largura = 540
   );
 }
 
-function Selo({ children }: { children: ReactNode }) {
+export function Selo({ children }: { children: ReactNode }) {
   return <span style={{ fontWeight: 800, fontSize: 38, letterSpacing: 3, color: ESCURO, background: COR.dourado, borderRadius: 999, padding: "12px 34px" }}>{children}</span>;
 }
 
-function Titulo({ children, tamanho = 80 }: { children: ReactNode; tamanho?: number }) {
+export function Titulo({ children, tamanho = 80 }: { children: ReactNode; tamanho?: number }) {
   return <div style={{ fontWeight: 900, fontSize: tamanho, lineHeight: 1.06, color: "white", textAlign: "center", letterSpacing: -1 }}>{children}</div>;
 }
 
-function Etiqueta({ children, cor = COR.dourado, texto = ESCURO, estilo }: { children: ReactNode; cor?: string; texto?: string; estilo?: React.CSSProperties }) {
+export function Etiqueta({ children, cor = COR.dourado, texto = ESCURO, estilo }: { children: ReactNode; cor?: string; texto?: string; estilo?: React.CSSProperties }) {
   return (
     <div style={{ position: "absolute", background: cor, color: texto, fontWeight: 900, borderRadius: 30, padding: "22px 34px", boxShadow: "0 24px 60px rgba(0,0,0,0.55)", textAlign: "center", ...estilo }}>
       {children}
@@ -33,7 +33,7 @@ function Etiqueta({ children, cor = COR.dourado, texto = ESCURO, estilo }: { chi
   );
 }
 
-function Cartao({ icone, titulo, texto }: { icone: string; titulo: string; texto: string }) {
+export function Cartao({ icone, titulo, texto }: { icone: string; titulo: string; texto: string }) {
   return (
     <div style={{ display: "flex", gap: 30, alignItems: "center", background: COR.cartao, border: "2px solid rgba(255,255,255,0.12)", borderRadius: 36, padding: "34px 40px", width: "100%" }}>
       <span style={{ fontSize: 86 }}>{icone}</span>
