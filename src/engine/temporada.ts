@@ -83,8 +83,9 @@ export function evoluir(rng: Rng, j: Jogador, envelhecer = true) {
   // De 90 em diante só sobe com temporada boa (até 94) ou excelente; de 95 a 99, só excelente, com mais chance para quem
   // emenda várias seguidas. Sem isso, não sobe (a idade ainda pode derrubar).
   const nivel = nivelDaTemporada(j);
-  j.excelentesSeguidas = nivel === 2 ? (j.excelentesSeguidas ?? 0) + 1 : 0;
-  if (!j.excelentesSeguidas) delete j.excelentesSeguidas;
+  // Sem `delete` (deixa o objeto lento no navegador) e sem criar o campo em quem nunca teve temporada excelente.
+  const seguidasAgora = nivel === 2 ? (j.excelentesSeguidas ?? 0) + 1 : 0;
+  if (seguidasAgora || j.excelentesSeguidas) j.excelentesSeguidas = seguidasAgora;
   if (j.forca >= 90 && delta >= 0 && j.idade <= e.idadeMaximaNoTopo) {
     const seguidas = j.excelentesSeguidas ?? 0;
     const chance = j.forca < 95
