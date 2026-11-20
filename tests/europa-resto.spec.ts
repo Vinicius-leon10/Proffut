@@ -20,7 +20,7 @@ function daLiga(liga: string): { clubes: Ficha[]; maior: Ficha } {
 async function escolherPais(page: Page, continente: RegExp, pais: RegExp) {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: continente }).click();
   await page.getByRole("group", { name: "País" }).getByRole("button", { name: pais }).click();

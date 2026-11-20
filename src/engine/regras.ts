@@ -1,15 +1,19 @@
 // Janelas de transferência e limite de estrangeiros por país (R139; pesquisa em docs/PESQUISA_JANELAS_E_ESTRANGEIROS.md).
 // Livres assinam a qualquer hora; compra e empréstimo só com a janela aberta do clube que recebe.
 import { formatarData } from "./calendario";
+import { cicloDoPais } from "./ciclos";
 import type { Clube, EstadoJogo } from "./tipos";
 import { PAISES } from "./torneios";
 
 /** Uma janela: do dia "MM-DD" ao dia "MM-DD" (pode virar o ano, como dezembro a janeiro). */
 type Janela = [inicio: string, fim: string];
 
-// O calendário do jogo começa em janeiro em todo lugar; na Europa e no resto do mundo a temporada do jogo vai de janeiro a
-// setembro, então a janela grande fica na pré-temporada (janeiro a março) e a curta no meio da temporada (junho e julho).
+// A janela segue o ciclo do país (R147): no ano civil (Brasil, América do Sul, Noruega, Suécia...), de janeiro a março e de julho ao
+// começo de setembro; nos campeonatos de agosto a maio (Inglaterra, Espanha, Japão, Arábia Saudita, Egito...), de 1º de julho a 31
+// de agosto e todo janeiro; na Austrália e na Nova Zelândia (de outubro a maio), de julho a setembro e em janeiro.
 const JANELAS_PADRAO: Janela[] = [["01-01", "03-31"], ["07-01", "09-02"]];
+const JANELAS_DE_AGOSTO: Janela[] = [["07-01", "08-31"], ["01-01", "01-31"]];
+const JANELAS_DE_OUTUBRO: Janela[] = [["07-01", "09-30"], ["01-01", "01-31"]];
 const JANELAS: Record<string, Janela[]> = {
   BR: JANELAS_PADRAO,
   sul: JANELAS_PADRAO,
@@ -18,10 +22,10 @@ const JANELAS: Record<string, Janela[]> = {
   caribe: [["06-01", "08-31"], ["12-01", "01-31"]],
   US: [["02-01", "04-30"], ["07-01", "08-31"]],
   CA: [["02-01", "04-30"], ["07-01", "08-31"]],
-  europa: [["01-01", "03-25"], ["06-15", "07-15"]],
+  europa: JANELAS_PADRAO,
   asia: JANELAS_PADRAO,
-  africa: [["01-01", "03-25"], ["06-15", "07-15"]],
-  oceania: [["01-01", "03-25"], ["06-15", "07-15"]],
+  africa: JANELAS_PADRAO,
+  oceania: JANELAS_DE_OUTUBRO,
 };
 
 /** Quantos estrangeiros cada país deixa um clube ter no elenco (os de fora da União Europeia, onde a regra é essa). */
@@ -48,7 +52,11 @@ export function paisDoClube(clube: Clube): string {
 
 function janelasDoClube(clube: Clube): Janela[] {
   const pais = paisDoClube(clube);
-  return JANELAS[pais] ?? JANELAS[PAISES[pais]?.regiao ?? "sul"] ?? JANELAS_PADRAO;
+  if (JANELAS[pais]) return JANELAS[pais];
+  const ciclo = cicloDoPais(pais);
+  if (ciclo === "agosto") return JANELAS_DE_AGOSTO;
+  if (ciclo === "outubro") return JANELAS_DE_OUTUBRO;
+  return JANELAS[PAISES[pais]?.regiao ?? "sul"] ?? JANELAS_PADRAO;
 }
 
 /** A janela de transferências do clube está aberta nesta data ("AAAA-MM-DD")? */

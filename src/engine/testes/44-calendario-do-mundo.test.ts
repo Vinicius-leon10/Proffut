@@ -5,10 +5,10 @@
 import { describe, expect, it } from "vitest";
 import {
   CALENDARIO_DO_MUNDO, anoDoCiclo, cicloDaCompeticao, cicloDoClube, cicloDoPais, inicioDaPreTemporada, rotuloDaTemporada,
-  semanaDaLigaNoJogo, viradaDoCiclo,
+  viradaDoCiclo,
 } from "../ciclos";
 import { novoJogo } from "../jogo";
-import { PAISES, domingo } from "../torneios";
+import { PAISES } from "../torneios";
 
 describe("calendário do mundo (R140)", () => {
   it("todo país do jogo tem ciclo na tabela", () => {
@@ -34,7 +34,9 @@ describe("calendário do mundo (R140)", () => {
     expect(viradaDoCiclo("ano", 2026)).toBe("2026-12-31");
     expect(viradaDoCiclo("agosto", 2026)).toBe("2027-06-30");
     expect(inicioDaPreTemporada("BR", 2026)).toBe("2026-01-03");
-    expect(inicioDaPreTemporada("EN", 2026)).toBe("2026-07-01");
+    // Em ano de Copa do Mundo (2026) os clubes de agosto a maio só voltam depois da final (R144); nos outros anos, 1º de julho.
+    expect(inicioDaPreTemporada("EN", 2026)).toBe("2026-07-20");
+    expect(inicioDaPreTemporada("EN", 2027)).toBe("2027-07-01");
     expect(inicioDaPreTemporada("AU", 2026)).toBe("2026-09-01");
   });
 
@@ -48,16 +50,5 @@ describe("calendário do mundo (R140)", () => {
     expect(cicloDaCompeticao("A")).toBe("ano");
     expect(cicloDaCompeticao("L-EN2")).toBe("agosto");
     expect(cicloDaCompeticao("L-AU")).toBe("outubro");
-  });
-
-  it("as ligas começam onde a tabela manda (por enquanto, as datas de sempre: Europa em janeiro, o resto em abril)", () => {
-    const estado = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 7 });
-    const ano = estado.temporada;
-    expect(semanaDaLigaNoJogo("EN")).toBe(-12);
-    expect(semanaDaLigaNoJogo("AR")).toBe(0);
-    for (const liga of ["EN", "AR", "JP", "MX"]) {
-      const primeira = estado.partidas.filter((p) => p.serie === `L-${liga}`).map((p) => p.data).sort()[0];
-      expect(primeira, liga).toBe(domingo(ano, semanaDaLigaNoJogo(liga)));
-    }
   });
 });

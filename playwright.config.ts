@@ -19,7 +19,8 @@ export default defineConfig({
   // Nada de repetir teste que falhou: teste instável se conserta, não se repete até passar.
   retries: 0,
   workers: process.env.CI ? 2 : undefined,
-  timeout: 60_000,
+  // Desde o R144 quem começa um jogo na Europa, Ásia ou África espera a pré-simulação do mundo (até ~1 min num computador lento).
+  timeout: 120_000,
   expect: { timeout: 10_000 },
   outputDir: "tests/resultado/arquivos",
   reporter: [

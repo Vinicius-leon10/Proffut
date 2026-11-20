@@ -7,7 +7,7 @@ import { folhaSalarial, formatarDinheiro, limiteDaFolha, motivoDaDiretoria } fro
 import { ENCARGOS_FOLHA, LUVAS_MESES } from "../../engine/constantes";
 import { valorMercado } from "../../engine/gerador";
 import { motivoParaNaoPegar, pegarEmprestado, taxaDeEmprestimo } from "../../engine/emprestimos";
-import { elencoDe, fazerOferta, livres, luvasDoLivre, podeSair, precoPedido, propostasPendentes, salarioDoLivre, salarioDoReforco } from "../../engine/mercado";
+import { elencoDe, fazerOferta, leiloar, livres, luvasDoLivre, podeSair, precoPedido, propostasPendentes, salarioDoLivre, salarioDoReforco } from "../../engine/mercado";
 import { estrangeirosNoElenco, fimDaJanela, limiteDeEstrangeiros, motivoDaJanela, motivoDosEstrangeiros, proximaAbertura } from "../../engine/regras";
 import type { Jogador, Posicao } from "../../engine/tipos";
 import { BandeiraJogador, Escudo, Folha, Opcoes, Pos, Segmentado } from "../componentes";
@@ -134,6 +134,7 @@ export function Mercado() {
   // Com proposta esperando resposta, o Mercado abre direto em Meus à venda (R63).
   const [vista, setVista] = useState<Vista>(() => (propostasPendentes(estado).length ? "venda" : "buscar"));
   const [posicao, setPosicao] = useState<Posicao | "todas">("todas");
+  // Faixa de força (R151): "Força" = todas; senão de N a N + 9 (40 a 49 ... 90 a 99). Nada abaixo de 40 (decisão do usuário).
   const [forcaMin, setForcaMin] = useState(0);
   const [idadeMax, setIdadeMax] = useState(40);
   // Onde o jogador joga: "todas", uma série (A a D), "estadual" (clubes só do estadual) ou "pais:AR" (clubes de outro
@@ -153,9 +154,10 @@ export function Mercado() {
   );
   const { atualizar, avisar } = useLoja();
   const colocarAVenda = (j: Jogador) => {
-    j.aVenda = true;
+    // Venda rápida (leilão, R154): o maior lance já vira proposta, aqui em Meus à venda.
+    const r = leiloar(estado, j.id);
     atualizar();
-    avisar(`${j.nome} foi colocado à venda. As propostas aparecem aqui.`);
+    avisar(r.texto);
   };
   const resultados = useMemo(() => {
     // Meus à venda: todos (os filtros não aparecem aqui), mais quem recebeu proposta sem estar à venda (R63); quem
@@ -174,7 +176,7 @@ export function Mercado() {
       return serie === "todas" || (serie.startsWith("pais:") ? c.pais === serie.slice(5) : c.serie === serie);
     });
     return base
-      .filter((j) => (posicao === "todas" || j.posicao === posicao) && j.forca >= forcaMin && j.idade <= idadeMax && (!termo || j.nome.toLowerCase().includes(termo)))
+      .filter((j) => (posicao === "todas" || j.posicao === posicao) && (!forcaMin || (j.forca >= forcaMin && j.forca <= forcaMin + 9)) && j.idade <= idadeMax && (!termo || j.nome.toLowerCase().includes(termo)))
       .sort((a, b) => b.forca - a.forca)
       .slice(0, 60);
   }, [estado, versao, vista, posicao, forcaMin, idadeMax, serie, busca, meuId, propostaPor]);
@@ -200,8 +202,8 @@ export function Mercado() {
           <input placeholder="Buscar por nome" value={busca} onChange={(e) => setBusca(e.target.value)} />
           <Opcoes opcoes={[{ valor: "todas", rotulo: "Todas" }, ...(["G", "L", "Z", "M", "A"] as Posicao[]).map((p) => ({ valor: p, rotulo: p }))]} valor={posicao} aoMudar={setPosicao} />
           <div className="linha">
-            <select value={forcaMin} onChange={(e) => setForcaMin(Number(e.target.value))} aria-label="Força mínima">
-              {[0, 40, 50, 60, 65, 70, 75, 80, 85].map((f) => <option key={f} value={f}>{f ? `Força ${f}+` : "Força"}</option>)}
+            <select value={forcaMin} onChange={(e) => setForcaMin(Number(e.target.value))} aria-label="Faixa de força">
+              {[0, 40, 50, 60, 70, 80, 90].map((f) => <option key={f} value={f}>{f ? `Força ${f} a ${f + 9}` : "Força"}</option>)}
             </select>
             <select value={idadeMax} onChange={(e) => setIdadeMax(Number(e.target.value))} aria-label="Idade máxima">
               {[40, 33, 30, 27, 24, 21].map((i) => <option key={i} value={i}>{i === 40 ? "Idade" : `Até ${i} anos`}</option>)}
@@ -243,6 +245,7 @@ export function Mercado() {
                     <Escudo clube={comprador} tamanho={18} />
                     <span>Proposta {comArtigo("do", comprador)}: <b>{formatarDinheiro(m.proposta!.valor)}</b> · vale até {formatarData(m.proposta!.validaAte)}</span>
                   </div>
+                  {m.proposta!.leilao && <span className="mini fraco">{m.texto}</span>}
                   {!j.aVenda && <span className="mini fraco">Ele não estava à venda.</span>}
                   <AcoesDaProposta m={m} />
                 </div>

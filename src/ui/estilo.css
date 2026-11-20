@@ -688,6 +688,24 @@ p { margin: 0; }
 }
 .marca { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 8px; }
 .marca img { width: 88px; height: 88px; border-radius: 22px; box-shadow: var(--sombra); }
+.rotulo-secao { margin: 0 4px; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800; color: var(--texto-2); }
+.jogos-salvos { padding: 4px 12px; }
+.jogos-salvos .item { gap: 8px; }
+.abrir-jogo { background: none; border: 0; padding: 6px 0; text-align: left; gap: 10px; color: inherit; min-width: 0; }
+.selo-continuar { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; background: #e3efe6; color: var(--floresta); font-size: 0.72rem; font-weight: 800; vertical-align: 2px; }
+.lixeira {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border: 0; border-radius: 10px;
+  background: var(--cartao-2); color: var(--vermelho);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.link-instagram {
+  margin-top: auto;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  color: var(--texto-2); font-size: 0.95rem; text-decoration: none;
+}
+.link-instagram b { color: var(--texto); }
+.link-instagram svg { color: var(--texto); flex-shrink: 0; }
 .marca h1 { font-family: inherit; font-weight: 800; font-size: 2.6rem; letter-spacing: -0.01em; color: var(--texto); }
 
 /* ---- sala de troféus ------------------------------------------------------------------------ */

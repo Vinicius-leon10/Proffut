@@ -79,7 +79,7 @@ test("R69 save de antes dos times novos: ao abrir, os clubes da Série D, dos es
 test("R80 jogo novo: o técnico escolhe o país pela bandeira, a divisão e o clube, de qualquer país ou série; com o Boca Juniors, o painel mostra o Campeonato Argentino", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: /América/ }).click();
   // Os países da América com clubes no jogo (o Brasil e os outros), numa lista só (R96), cada um com a bandeira; o Brasil
@@ -175,14 +175,14 @@ test("R94 jogo novo em três páginas: primeiro só o nome do técnico; depois s
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
   // 1ª página: só o nome.
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await expect(page.getByRole("group", { name: "País" })).toHaveCount(0);
   await expect(page.locator(".lista .item")).toHaveCount(0);
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   // Depois do continente (R96), só os países, sem nome nem clubes.
   await page.getByRole("button", { name: /América/ }).click();
   await expect(page.getByRole("group", { name: "País" })).toBeVisible();
-  await expect(page.getByPlaceholder("Ex.: Vinícius")).toHaveCount(0);
+  await expect(page.getByLabel("Nome do técnico")).toHaveCount(0);
   await expect(page.locator(".lista .item .forca")).toHaveCount(0);
   await page.getByRole("button", { name: /Argentina/ }).click();
   // 3ª página: as divisões e os clubes da Argentina.
@@ -204,7 +204,7 @@ test("R94 jogo novo em três páginas: primeiro só o nome do técnico; depois s
 test("R96 jogo novo: depois do nome, o continente (América) e então a lista completa dos países em ordem, sem divisão por região, com busca pelo nome", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   // O continente primeiro.
   await expect(page.getByRole("group", { name: "País" })).toHaveCount(0);

@@ -4,7 +4,7 @@ import { formatarData } from "../../engine/calendario";
 import { FASE_LIGA, SERIES, ZONAS, agregado, chavesDaFase, classificacao, tabelaDaLiga, type LinhaTabela } from "../../engine/competicoes";
 import { FASES_COPA, NOME_FASE_COPA, agregadoDoConfronto, faseDeEntrada, jogosDaCopa, situacaoNaCopa } from "../../engine/copa";
 import { DEFINICOES, definicaoDaCopa, regraDaFaseDaCopa, situacaoNaCopaDeClubes, tabelasDaCopa, type DefinicaoCopa } from "../../engine/copas";
-import { NOME_ESTADUAL, NOME_FASE_TORNEIO, NOME_REGIAO, PAISES, divisaoDaLiga, tabelaDoTorneio, vagasEntreDivisoes, type Regiao } from "../../engine/torneios";
+import { NOME_ESTADUAL, NOME_FASE_TORNEIO, NOME_REGIAO, PAISES, divisaoDaLiga, tabelaDoTorneio, tabelaDoTurno, vagasEntreDivisoes, type Regiao } from "../../engine/torneios";
 import { AMISTOSOS, NOME_FASE_SELECOES, confederacao, nomeDoGrupoDeSelecoes, nomeDoPais, paisDaSelecao, rankingDasSelecoes, tabelasDeSelecoes } from "../../engine/selecoes";
 import type { Competicao, EstadoCompeticaoSelecoes, EstadoTorneio, FaseCopa, IdCopa, Partida, SerieId } from "../../engine/tipos";
 import { letraDoGrupo } from "../formatos";
@@ -420,6 +420,8 @@ function Torneio({ t }: { t: EstadoTorneio }) {
   const fases = ORDEM_MATA_MATA.filter((f) => estado.partidas.some((p) => p.serie === t.id && p.fase === f));
   const [fase, setFase] = useState<string>(fases[fases.length - 1] ?? "");
   const [aberta, setAberta] = useState<Partida | null>(null);
+  // México e América Central: dois torneios por ano (0 = o ano todo, 1 = Clausura, 2 = Apertura).
+  const [turno, setTurno] = useState<0 | 1 | 2>(0);
   const primeira = t.grupos ? "grupos" : "liga";
   const passam = t.tipo === "liga" ? 0 : t.grupos ? 4 : t.clubes.length <= 6 ? 2 : 4;
   // Ligas de fora com divisões: os primeiros sobem para a de cima e os últimos caem para a de baixo.
@@ -459,7 +461,11 @@ function Torneio({ t }: { t: EstadoTorneio }) {
       )}
       {vista === "tabela" && (
         <>
-          {t.campeao && <p className="chip amarelo">Campeão: {estado.clubes[t.campeao].nome}</p>}
+          {t.turnos?.map((x) => <p key={x.nome} className="chip amarelo">Campeão do {x.nome}: {estado.clubes[x.campeao].nome}</p>)}
+          {t.campeao && !t.rodadasPorTurno && <p className="chip amarelo">Campeão: {estado.clubes[t.campeao].nome}</p>}
+          {t.rodadasPorTurno && (
+            <Opcoes opcoes={[{ valor: "0", rotulo: "Ano todo" }, { valor: "1", rotulo: "Clausura" }, { valor: "2", rotulo: "Apertura" }]} valor={String(turno)} aoMudar={(v) => setTurno(Number(v) as 0 | 1 | 2)} />
+          )}
           {fases.length > 0 && (
             <div className="cartao compacto">
               <Opcoes opcoes={fases.map((f) => ({ valor: f, rotulo: NOME_FASE_TORNEIO[f] }))} valor={fase} aoMudar={setFase} />
@@ -488,10 +494,10 @@ function Torneio({ t }: { t: EstadoTorneio }) {
             </div>
           )) : (
             <div className="cartao compacto">
-              <TabelaClassificacao linhas={tabelaDoTorneio(estado, t)} zona={zona} />
+              <TabelaClassificacao linhas={turno && t.rodadasPorTurno ? tabelaDoTurno(estado, t, turno) : tabelaDoTorneio(estado, t)} zona={turno ? () => "" : zona} />
             </div>
           )}
-          <p className="mini muito-fraco">{regra}</p>
+          <p className="mini muito-fraco">{regra}{t.rodadasPorTurno ? " Dois torneios no ano: Clausura (janeiro a maio) e Apertura (julho a dezembro), cada um em turno único; o líder de cada um é o campeão. A queda (se houver) vale pela soma dos dois." : ""}</p>
         </>
       )}
       {vista === "jogos" && <Jogos key={`${t.id}-${grupo}`} serie={t.id} fase={primeira} grupo={t.grupos && t.grupos.length > 2 ? grupo : undefined} />}

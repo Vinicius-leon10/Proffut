@@ -1,5 +1,6 @@
 // Testes do motor (antes num arquivo só, src/engine/motor.test.ts; separados para rodarem em paralelo).
 import { describe, expect, it } from "vitest";
+import { competicaoCruzaOAno } from "../copas";
 import { avancar, juntarAoSaveAntigo, novoJogo, simularRestoDaTemporada } from "../jogo";
 import { checarEstado } from "../checagem";
 import { divisaoDaLiga, inicioDoAno, tabelaDoTorneio } from "../torneios";
@@ -64,12 +65,14 @@ describe("estaduais e ligas de fora", () => {
       expect(datas.size, t.id).toBeLessThanOrEqual(11);
       expect([...datas].every((d) => d < inicioDasSeries())).toBe(true);
     }
-    for (const t of ligas) {
+    // As ligas de agosto a maio (R141) acabam no ano seguinte e entram no histórico na virada delas (1º de julho).
+    const doAno = ligas.filter((t) => !competicaoCruzaOAno(t.id));
+    for (const t of doAno) {
       expect(t.fase).toBe("encerrada");
       expect(t.campeao).toBe(tabelaDoTorneio(estado, t)[0].clubeId);
     }
-    avancar(estado);
-    expect(Object.keys(estado.historico[0].torneios!)).toHaveLength(torneios.length);
+    while (avancar(estado).tipo === "fim-dos-jogos");
+    expect(Object.keys(estado.historico[0].torneios!)).toHaveLength(torneios.filter((t) => !competicaoCruzaOAno(t.id)).length);
     // A temporada seguinte também começa em janeiro, com os estaduais.
     expect(estado.data).toBe(inicioDoAno(2027));
     expect(Object.keys(estado.torneios!).filter((id) => id.startsWith("E-"))).toHaveLength(27);

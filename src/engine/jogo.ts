@@ -22,19 +22,20 @@ import restoJogadoresJson from "../../data/europa-2026/jogadores-resto.json";
 import repetidosJson from "../../data/repetidos-removidos.json";
 import { comArtigo } from "./artigos";
 import { diasEntre, inicioDaTemporada, mesDe, somarDias } from "./calendario";
+import { cruzaOAno, inicioDaPreTemporada, ligaCruzaOAno } from "./ciclos";
 import {
   FASE_LIGA, agregado, avancarFases, chaveDaPartida, criarTemporada, decidePorPenaltis, ehSerie, temporadaEncerrada,
 } from "./competicoes";
-import { avancarCopasDeClubes, criarCopasDeClubes } from "./copas";
+import { avancarCopasDeClubes, criarCopasDeClubes, viradaDasCopasDoCiclo } from "./copas";
 import { COTA_TV_ESTADUAL, COTA_TV_RODADA, DIAS_LESAO, MINIMO_POSICAO, RECUPERACAO_POR_DIA, TEMPORADA_INICIAL } from "./constantes";
 import { depoisDoMeuJogo, expirarConvites } from "./carreira";
-import { avisarContratos, garantirContratos } from "./contratos";
+import { avisarContratos, cicloDoClubeId, garantirContratos } from "./contratos";
 import { melhorEmCampo, notasDaPartida } from "./notas";
 import { registrarRecordes } from "./trofeus";
 import { atualizarConfianca, definirObjetivo } from "./diretoria";
 import { escalarAutomatico, forcaDoTime } from "./forca";
 import { lancar, marcarFolhaAprovada, precoDeReferencia, processarMes, publicoDoJogo } from "./financas";
-import { elencoReal, gerarElenco, type JogadorReal } from "./gerador";
+import { anotarLesao, elencoReal, gerarElenco, type JogadorReal } from "./gerador";
 import { completarLivres, elencoDe, gerarPropostas, reescalar, transferenciasDaIa } from "./mercado";
 import { enviarMensagem } from "./mensagens";
 import {
@@ -43,8 +44,8 @@ import {
 import { criarRng, rngPara } from "./rng";
 import { avancarCopa, criarCopa } from "./copa";
 import { concluirObras } from "./estadio";
-import { encerrarTemporada } from "./temporada";
-import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno, simulacaoRapida } from "./torneios";
+import { capturarResultadoDoTecnico, encerrarTemporada, fecharTemporadaDoTecnico, inicioDaProximaTemporada, virarJogadoresDoCiclo } from "./temporada";
+import { PAISES, avancarTorneios, competicoesDoUsuario, criarTorneios, inicioDoAno, simulacaoRapida, tabelaDoTorneio, viradaDasLigas } from "./torneios";
 import { jogarRapido } from "./rapida";
 import {
   aplicarJogoDeSelecoes, atualizarConcentracoes, avancarSelecoes, depoisDoJogoRapido, ehCompeticaoDeSelecoes, elencoDaSelecao,
@@ -439,6 +440,66 @@ export function proximaDataComJogo(estado: EstadoJogo): string | undefined {
   return estado.partidas.find((p) => !p.jogada && p.data > estado.data)?.data;
 }
 
+/**
+ * Dia em que o jogo começa para quem escolhe este clube: o começo da pré-temporada do país dele (ciclos.ts): 3 de janeiro no
+ * Brasil, 1º de julho na Europa, 1º de setembro na Austrália (R144). Nunca antes do dia em que o mundo é montado.
+ */
+export function dataDeInicioDoClube(clube: Clube): string {
+  return inicioDaPreTemporada(clube.pais ?? "BR", TEMPORADA_INICIAL);
+}
+
+/**
+ * Pré-simulação do mundo (R144): simula tudo o que já devia ter acontecido até `ate` (os campeonatos que começaram antes
+ * de o clube do usuário começar). Um passo por dia de jogos, devolvendo a fração feita (0 a 1), para a tela mostrar uma barra
+ * de progresso e deixar o iPhone respirar entre os passos. O clube do usuário fica como estava: não gasta nem recebe nada e
+ * as mensagens da pré-simulação não chegam. Quem começa no dia em que o mundo é montado (o Brasil) não simula nada.
+ */
+export function* preSimularMundo(estado: EstadoJogo, ate: string): Generator<number, void, void> {
+  if (estado.data >= ate) return;
+  const inicio = estado.data;
+  const total = diasEntre(inicio, ate);
+  const meu = estado.clubes[estado.tecnico.clubeId];
+  const t = estado.tecnico;
+  const antes = { caixa: meu.caixa, extrato: [...meu.extrato], resumo: { ...meu.resumoFinanceiro }, diretoria: t.confiancaDiretoria, torcida: t.confiancaTorcida, reputacao: t.reputacao };
+  const primeiraMensagem = estado.proximoIdMensagem;
+  for (let seguranca = 0; seguranca < 5000 && estado.data < ate; seguranca++) {
+    const proxima = proximaDataComJogo(estado);
+    if (proxima && proxima < ate) {
+      processarDias(estado, proxima);
+      simularDia(estado);
+    } else processarDias(estado, ate);
+    yield diasEntre(inicio, estado.data) / total;
+  }
+  meu.caixa = antes.caixa;
+  meu.extrato = antes.extrato;
+  meu.resumoFinanceiro = antes.resumo;
+  // Se o clube dele jogou (as copas da UEFA de janeiro a maio, por exemplo), os jogos foram com a escalação automática e não
+  // contam para a confiança nem para a reputação do técnico.
+  t.confiancaDiretoria = antes.diretoria;
+  t.confiancaTorcida = antes.torcida;
+  t.reputacao = antes.reputacao;
+  delete t.avisoDeRisco;
+  estado.mensagens = estado.mensagens.filter((m) => m.id < primeiraMensagem);
+  estado.tecnico.desde = estado.data;
+}
+
+/** Faz a pré-simulação de uma vez (testes e quem não precisa de barra de progresso). */
+export function prepararMundoAte(estado: EstadoJogo, ate: string) {
+  for (const _ of preSimularMundo(estado, ate)) void _;
+}
+
+/**
+ * Pré-temporada do clube do usuário: nenhum jogo dele nos últimos 30 dias e o próximo a pelo menos 4 dias. Vale no começo
+ * do jogo e em cada virada (Brasil em janeiro, Europa em julho). O botão "Pular para o início da temporada" é o Avançar.
+ */
+export function emPreTemporada(estado: EstadoJogo): boolean {
+  const meu = estado.tecnico.clubeId;
+  const proximo = proximoJogoDoClube(estado);
+  if (!proximo || diasEntre(estado.data, proximo.data) < 4) return false;
+  const limite = somarDias(estado.data, -30);
+  return !estado.partidas.some((p) => p.jogada && p.data >= limite && (p.mandante === meu || p.visitante === meu));
+}
+
 /** Passa os dias até `ate`: recuperação, lesões, virada de mês, propostas e janela de julho. */
 export function processarDias(estado: EstadoJogo, ate: string) {
   const dias = diasEntre(estado.data, ate);
@@ -463,6 +524,17 @@ export function processarDias(estado: EstadoJogo, ate: string) {
     gerarPropostas(estado, dia);
     expirarConvites(estado, dia);
     avisarContratos(estado, dia);
+    // 1º de julho: viram as ligas de agosto a maio (campeão, acesso e queda, temporada nova).
+    if (dia.endsWith("-07-01")) {
+      virarJogadoresDoCiclo(estado);
+      // O técnico de um clube de agosto a maio fecha a temporada dele agora (R146): o resultado sai antes de as ligas virarem.
+      const resultadoDoTecnico = capturarResultadoDoTecnico(estado);
+      const ligasAcabaram = Object.values(estado.torneios ?? {}).some((t) => !!t && ligaCruzaOAno(t.id) && t.fase === "encerrada");
+      const noticias = viradaDasLigas(estado);
+      viradaDasCopasDoCiclo(estado, ligasAcabaram);
+      if (resultadoDoTecnico) fecharTemporadaDoTecnico(estado, resultadoDoTecnico);
+      if (noticias.length) enviarMensagem(estado, { tipo: "temporada", titulo: "Fim da temporada da liga", texto: noticias.join(" ") });
+    }
     if (dia.endsWith("-07-01") || dia.endsWith("-07-15")) {
       const noticias = transferenciasDaIa(estado, dia);
       if (noticias.length) {
@@ -485,6 +557,9 @@ export type ResultadoAvanco =
  */
 export function avancar(estado: EstadoJogo): ResultadoAvanco {
   let andou = false;
+  // Com a temporada já encerrada ao tocar no botão (as ligas e copas de agosto a maio ainda têm jogos de dezembro), quem
+  // tocou já confirmou o "Encerrar a temporada": os jogos que sobram saem e a virada vem no mesmo toque (R145).
+  const jaEncerrada = temporadaEncerrada(estado);
   // Dia só com jogos que o usuário não acompanha (Série D dos outros, outros estaduais, ligas de fora): passa direto.
   for (let seguranca = 0; seguranca < 1000; seguranca++) {
     const pendentes = jogosPendentesHoje(estado);
@@ -496,17 +571,58 @@ export function avancar(estado: EstadoJogo): ResultadoAvanco {
       continue;
     }
     if (temporadaEncerrada(estado)) {
+      // O técnico de um clube de agosto a maio não encerra nada em dezembro: só o mundo do ano civil vira (R146).
+      if (cruzaOAno(cicloDoClubeId(estado, estado.tecnico.clubeId))) {
+        const resta = proximaDataComJogo(estado);
+        if (resta && resta < inicioDaProximaTemporada(estado)) {
+          processarDias(estado, resta);
+          continue;
+        }
+        encerrarTemporada(estado);
+        andou = true;
+        continue;
+      }
+      // As ligas que cruzam o ano (agosto a maio) ainda jogam até a pausa do fim de ano: os jogos de antes da temporada
+      // nova saem primeiro (senão a virada, que pula para janeiro, os deixaria para trás).
+      const resta = proximaDataComJogo(estado);
+      if (resta && resta < inicioDaProximaTemporada(estado)) {
+        processarDias(estado, resta);
+        continue;
+      }
       // A virada só no botão "Encerrar a temporada" (ele pergunta antes quem sai de graça): se os últimos jogos do ano
       // eram de fora (a 2ª divisão da Argentina termina depois da final da Série C), este Avançar para aqui (R79).
-      if (andou) return { tipo: "fim-dos-jogos" };
+      if (andou && !jaEncerrada) return { tipo: "fim-dos-jogos" };
       encerrarTemporada(estado);
       return { tipo: "nova-temporada" };
     }
     const proxima = proximaDataComJogo(estado);
     if (!proxima) return { tipo: "nada" };
     processarDias(estado, proxima);
+    // Em 1º de julho acabou a temporada do técnico de um clube de agosto a maio: abre a tela de fim da temporada.
+    if (estado.fimDeTemporadaPendente) {
+      delete estado.fimDeTemporadaPendente;
+      return { tipo: "nova-temporada" };
+    }
   }
   return { tipo: "nada" };
+}
+
+/**
+ * Save de antes das temporadas reais (R141–R146): as ligas e copas de agosto a maio ganham o ano em que começaram e a liga que já
+ * acabou guarda a tabela final (as vagas das copas da UEFA saem dela).
+ */
+export function acertarCiclos(estado: EstadoJogo) {
+  for (const t of Object.values(estado.torneios ?? {})) {
+    if (!t || !ligaCruzaOAno(t.id)) continue;
+    t.inicio ??= estado.temporada;
+    if (t.fase === "encerrada" && t.tipo === "liga") ((estado.ultimaTabela ??= {})[t.id.slice(2)] ??= tabelaDoTorneio(estado, t).map((l) => l.clubeId));
+  }
+  for (const c of Object.values(estado.copas ?? {})) if (c) c.inicio ??= estado.temporada;
+}
+
+/** A temporada do usuário acabou: só quem treina um clube do ano civil fecha a temporada em dezembro, com o botão "Encerrar". */
+export function temporadaDoUsuarioEncerrada(estado: EstadoJogo): boolean {
+  return !cruzaOAno(cicloDoClubeId(estado, estado.tecnico.clubeId)) && temporadaEncerrada(estado);
 }
 
 // ---- dia de jogo -----------------------------------------------------------------------
@@ -604,15 +720,22 @@ function aplicarResultado(estado: EstadoJogo, pv: PartidaViva, elencos: Map<stri
   }
 
   // Jogadores: jogos, gols, cartões, suspensões, lesões e energia.
-  for (const lado of pv.lados) {
+  for (const [i, lado] of pv.lados.entries()) {
     for (const j of elencos.get(lado.clubeId) ?? []) {
       if (j.suspensaoJogos > 0 && !lado.jogaram.includes(j.id)) j.suspensaoJogos--;
     }
+    // R152: jogo sem sofrer gol de quem jogou na defesa e as defesas do goleiro (contra os chutes do outro lado).
+    const sofreu = i === 0 ? p.gv : p.gm;
+    let goleiro: Jogador | undefined;
     for (const id of lado.jogaram) {
       const j = estado.jogadores[id];
       j.temporada.jogos++;
       j.energia = Math.round(lado.energia[id] ?? j.energia);
+      if (sofreu === 0 && (j.posicao === "G" || j.posicao === "Z" || j.posicao === "L")) j.temporada.semSofrer = (j.temporada.semSofrer ?? 0) + 1;
+      if (j.posicao === "G") goleiro ??= j;
     }
+    const defesas = pv.narracao.filter((e) => e.tipo === "defesa" && e.lado !== i).length;
+    if (goleiro && defesas) goleiro.temporada.defesas = (goleiro.temporada.defesas ?? 0) + defesas;
     for (const [idTexto, n] of Object.entries(lado.amarelos)) {
       const j = estado.jogadores[Number(idTexto)];
       j.temporada.amarelos += n;
@@ -627,7 +750,9 @@ function aplicarResultado(estado: EstadoJogo, pv: PartidaViva, elencos: Map<stri
       j.suspensaoJogos = 1;
     }
     for (const id of lado.lesionados) {
-      estado.jogadores[id].lesaoDias = rng.int(DIAS_LESAO.min, DIAS_LESAO.max);
+      const j = estado.jogadores[id];
+      j.lesaoDias = rng.int(DIAS_LESAO.min, DIAS_LESAO.max);
+      anotarLesao(j);
     }
   }
   for (const e of p.eventos) {

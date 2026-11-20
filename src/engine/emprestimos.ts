@@ -2,7 +2,9 @@
 // jogos) ou pega emprestado o reserva de outro clube (paga uma taxa e o salário). Na virada, todos voltam.
 import { comArtigo } from "./artigos";
 import { dasSeries } from "./competicoes";
+import type { Ciclo } from "./ciclos";
 import { ELENCO_MAXIMO, EMPRESTIMOS } from "./constantes";
+import { cicloDoClubeId, temporadaDoClube } from "./contratos";
 import { forcaDoTime } from "./forca";
 import { lancar, motivoDaDiretoria } from "./financas";
 import { valorMercado } from "./gerador";
@@ -14,7 +16,7 @@ import type { EstadoJogo, Jogador } from "./tipos";
 export function motivoParaNaoEmprestar(estado: EstadoJogo, j: Jogador): string | null {
   if (j.clubeId !== estado.tecnico.clubeId) return "Esse jogador não é do seu clube.";
   if (j.emprestimo) return `${j.nome} já está emprestado.`;
-  if (j.contratoAte != null && j.contratoAte <= estado.temporada) return "Contrato no último ano: renove antes de emprestar.";
+  if (j.contratoAte != null && j.contratoAte <= temporadaDoClube(estado, j.clubeId)) return "Contrato no último ano: renove antes de emprestar.";
   if (!podeSair(estado, j)) return "O elenco ficaria abaixo do mínimo na posição.";
   return null;
 }
@@ -37,7 +39,7 @@ export function interessadosNoEmprestimo(estado: EstadoJogo, j: Jogador): string
 function mudarDeClube(estado: EstadoJogo, j: Jogador, destinoId: string) {
   const origemId = j.clubeId!;
   tirarDaEscalacao(estado, j);
-  j.emprestimo = { de: origemId, ate: estado.temporada };
+  j.emprestimo = { de: origemId, ate: temporadaDoClube(estado, origemId) };
   j.clubeId = destinoId;
   j.aVenda = false;
   if (origemId !== estado.tecnico.clubeId) reescalar(estado, origemId);
@@ -92,12 +94,14 @@ export function pegarEmprestado(estado: EstadoJogo, jogadorId: number): Resultad
 }
 
 /** Virada da temporada `ano`: os emprestados voltam aos clubes donos. Devolve os que eram do usuário ou estavam com ele. */
-export function encerrarEmprestimos(estado: EstadoJogo, ano: number): { voltaram: Jogador[]; devolvidos: Jogador[] } {
+export function encerrarEmprestimos(estado: EstadoJogo, ano: number, ciclos?: Ciclo[]): { voltaram: Jogador[]; devolvidos: Jogador[] } {
   const meu = estado.tecnico.clubeId;
   const voltaram: Jogador[] = [];
   const devolvidos: Jogador[] = [];
   for (const j of Object.values(estado.jogadores)) {
     if (!j.emprestimo || j.emprestimo.ate > ano) continue;
+    // O empréstimo acaba no ciclo do clube dono (o `ate` foi marcado pela temporada dele).
+    if (ciclos && !ciclos.includes(cicloDoClubeId(estado, j.emprestimo.de))) continue;
     if (j.emprestimo.de === meu) voltaram.push(j);
     else if (j.clubeId === meu) devolvidos.push(j);
     j.clubeId = j.emprestimo.de;

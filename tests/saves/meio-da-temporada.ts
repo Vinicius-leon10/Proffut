@@ -9,6 +9,8 @@ import { exportarTexto } from "../../src/save/salvamento";
 
 const clube = process.argv[2];
 const estado = novoJogo({ nomeTecnico: "Teste", clubeId: clube, semente: 7 });
+// O convite do meio da temporada só vem depois da primeira virada no clube (R153): o técnico está nele desde a anterior.
+estado.tecnico.desde = `${estado.temporada - 1}-01-03`;
 for (const j of Object.values(estado.jogadores)) if (j.clubeId === clube) j.forca = 90;
 const serie = estado.clubes[clube].serie as SerieId;
 const daLiga = (p: Partida) => p.serie === serie && p.fase === FASE_LIGA[serie] && (p.mandante === clube || p.visitante === clube);

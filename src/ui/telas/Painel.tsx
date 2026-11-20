@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
-import { ehSerie, nomeDaLigaDoClube, tabelaDoClube, temporadaEncerrada, torneioPrincipal } from "../../engine/competicoes";
+import { ehSerie, nomeDaLigaDoClube, tabelaDoClube, torneioPrincipal } from "../../engine/competicoes";
 import { reputacaoDoTecnico } from "../../engine/carreira";
 import { CARGO } from "../../engine/constantes";
 import { situacaoDoObjetivo } from "../../engine/diretoria";
 import { folhaSalarial, formatarDinheiro } from "../../engine/financas";
 import { copasDoClube, situacaoCurtaNaCopa } from "../../engine/copas";
-import { meuJogoHoje, meuTimeNaPartida, provavelTime, proximaDataComJogo, proximoJogoDoClube } from "../../engine/jogo";
+import { emPreTemporada, meuJogoHoje, meuTimeNaPartida, provavelTime, proximaDataComJogo, proximoJogoDoClube, temporadaDoUsuarioEncerrada } from "../../engine/jogo";
 import { NOME_FASE_TORNEIO, posicaoNoTorneio, torneiosDoClube } from "../../engine/torneios";
 import { avancarJogo, simularFimDaTemporada } from "../acoes";
 import { Cartao, Escudo } from "../componentes";
@@ -32,7 +32,7 @@ export function Painel() {
   const serie = clube.serie;
   const hoje = meuJogoHoje(estado);
   const proximo = hoje ?? proximoJogoDoClube(estado);
-  const encerrada = temporadaEncerrada(estado);
+  const encerrada = temporadaDoUsuarioEncerrada(estado);
   // Fora das Séries A, B e C (Série D, liga de fora, estadual): o campeonato acaba para o usuário quando ele não tem mais
   // jogos nele (nos de mata-mata, depois da fase de grupos).
   const principal = ehSerie(serie) ? undefined : torneioPrincipal(estado, clube);
@@ -50,6 +50,8 @@ export function Painel() {
   const minhasCopas = copasDoClube(estado, meuId).filter((c) => c.fase !== "encerrada" || c.campeao === meuId);
   const proximaData = proximaDataComJogo(estado);
 
+  // Pré-temporada (R144): o Avançar leva ao dia da abertura; o texto do botão diz isso.
+  const preTemporada = !encerrada && !hoje && emPreTemporada(estado);
   let rotuloBotao = "Avançar";
   if (encerrada) rotuloBotao = `Encerrar a temporada ${estado.temporada}`;
   else if (hoje) rotuloBotao = "Ir para o jogo";
@@ -103,7 +105,7 @@ export function Painel() {
         ) : (
           <p className="fraco pequeno">{encerrada ? "A temporada terminou." : minhaSerieAcabou ? `${nomeDaLiga} terminou para você. Os outros campeonatos ainda estão em andamento.` : "Sem jogos marcados."}</p>
         )}
-        <button className="botao primario grande cheio" aria-label={rotuloBotao} onClick={avancarJogo}>{encerrada ? `Encerrar ${estado.temporada} ▶` : hoje ? "Jogar ▶" : "Avançar ▶"}</button>
+        <button className="botao primario grande cheio" aria-label={rotuloBotao} onClick={avancarJogo}>{encerrada ? `Encerrar ${estado.temporada} ▶` : hoje ? "Jogar ▶" : preTemporada ? "Pular para o início da temporada ▶" : "Avançar ▶"}</button>
       </section>
 
       {verAdversario && adversario && <FolhaDoTime lado={provavelTime(estado, adversario.id)} provavel aoFechar={() => setVerAdversario(false)} />}

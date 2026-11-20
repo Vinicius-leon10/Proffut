@@ -7,10 +7,10 @@ on:
   workflow_dispatch:
     inputs:
       fase:
-        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa) · selecoes-europa: convocações das 55 seleções da UEFA (branch dados-selecoes-europa) · europa-segundas: segunda divisão das 7 ligas da Europa (branch dados-europa-segundas) · europa-terceiras: terceira divisão (branch dados-europa-terceiras) · europa-outros: outros países da Europa (branch dados-europa-outros) · selecoes-mundo: seleções da África, Ásia e Oceania (branch dados-selecoes-mundo) · asia-africa: clubes da África, da Ásia e da Nova Zelândia e as copas de lá (branch dados-asia-africa) · europa-resto: 2ª divisão dos 16 países da Europa, 1ª dos países da Europa que faltam e a da Nova Zelândia (branch dados-europa-resto)"
+        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa) · selecoes-europa: convocações das 55 seleções da UEFA (branch dados-selecoes-europa) · europa-segundas: segunda divisão das 7 ligas da Europa (branch dados-europa-segundas) · europa-terceiras: terceira divisão (branch dados-europa-terceiras) · europa-outros: outros países da Europa (branch dados-europa-outros) · selecoes-mundo: seleções da África, Ásia e Oceania (branch dados-selecoes-mundo) · asia-africa: clubes da África, da Ásia e da Nova Zelândia e as copas de lá (branch dados-asia-africa) · europa-resto: 2ª divisão dos 16 países da Europa, 1ª dos países da Europa que faltam e a da Nova Zelândia (branch dados-europa-resto) · uefa: vagas por país e fases prévias das copas da UEFA (branch dados-uefa)"
         type: choice
         default: elencos
-        options: [elencos, times, segundas, america, europa, selecoes-europa, europa-segundas, europa-terceiras, europa-outros, selecoes-mundo, asia-africa, europa-resto]
+        options: [elencos, times, segundas, america, europa, selecoes-europa, europa-segundas, europa-terceiras, europa-outros, selecoes-mundo, asia-africa, europa-resto, uefa]
 
 permissions:
   contents: write
@@ -393,3 +393,24 @@ jobs:
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -q -m "O resto da Europa e a Nova Zelândia (${GITHUB_SHA::7})"
           git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-europa-resto
+
+  # Copas da UEFA da temporada: as páginas da Wikipédia em inglês com as vagas por país, as fases prévias e as datas.
+  uefa:
+    if: inputs.fase == 'uefa'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - name: Wikipédia (páginas das copas da UEFA)
+        run: python3 tools/uefa/baixar.py dados 2026-27 | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Gravar na branch dados-uefa
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dados
+          echo "Baixados em $(date -u +%Y-%m-%dT%H:%MZ) da Wikipédia em inglês (CC BY-SA) pelo workflow elencos.yml (fase uefa)." > LEIAME.md
+          git init -q -b dados-uefa
+          git add -A
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -q -m "Copas da UEFA 2026/27 (${GITHUB_SHA::7})"
+          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-uefa

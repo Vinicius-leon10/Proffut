@@ -12,6 +12,7 @@
     "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
     "sim": "tsx tools/sim/simular.ts",
+    "medir-forca": "tsx tools/sim/medir-forca.ts",
     "icones": "node tools/icones/gerar.mjs",
     "capturas": "node tools/e2e/jogar.mjs",
     "verificar": "npm test && npm run build && npm run test:e2e"

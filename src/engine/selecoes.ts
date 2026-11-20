@@ -26,7 +26,7 @@ import { chavesDaFase, classificacao, vencedorDaChave, type LinhaTabela } from "
 import { diaDaSemana, sortearGrupos, type Dia } from "./copas";
 import { DIAS_LESAO, REPUTACAO } from "./constantes";
 import { escalarAutomatico, forcaDoTime } from "./forca";
-import { criarJogador, limitar } from "./gerador";
+import { anotarLesao, criarJogador, limitar } from "./gerador";
 import { enviarMensagem } from "./mensagens";
 import { melhorEmCampo, notasDaPartida } from "./notas";
 import { disputarPenaltis, eventosParaGuardar, type PartidaViva } from "./partida";
@@ -1022,16 +1022,35 @@ function registrarNaCopa(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes) {
   }
 }
 
+/** Vagas de cada continente na repescagem mundial (a Europa tem a repescagem dela). */
+const VAGAS_DA_REPESCAGEM: [Confederacao, number][] = [["conmebol", 1], ["concacaf", 2], ["caf", 1], ["afc", 1], ["ofc", 1]];
+
+/**
+ * Vaga que sobrou na repescagem mundial (R155): a sede também joga as Eliminatórias (simplificação do jogo) e, se ela foi a
+ * que ganhou a vaga, a vaga ficava vazia. Fica no mesmo continente, com a melhor seleção do ranking dele fora da Copa.
+ */
+function completarRepescagem(estado: EstadoJogo, ano: number, times: string[]): string[] {
+  const naCopa = new Set(estado.selecoes!.competicoes[`S-COPA-${ano}` as IdCompeticaoSelecoes]?.selecoes ?? []);
+  const lista = [...times];
+  for (const [conf, vagas] of VAGAS_DA_REPESCAGEM) {
+    const tem = lista.filter((x) => confederacao(paisDaSelecao(x)) === conf).length;
+    if (tem >= vagas) continue;
+    const doContinente = conf === "concacaf" ? concacaf(true) : daConfederacao(conf);
+    lista.push(...peloRanking(estado, doContinente).filter((x) => !naCopa.has(x) && !lista.includes(x)).slice(0, vagas - tem));
+  }
+  return lista;
+}
+
 /**
  * Repescagem mundial (março do ano da Copa, campo neutro): as 6 que vieram das Eliminatórias; as 2 melhores do ranking
  * esperam na final e as outras 4 jogam a semifinal (3ª x 6ª, 4ª x 5ª). Os 2 vencedores vão à Copa. Com a data de março
  * já passada (save antigo), vão as 2 melhores do ranking.
  */
-function criarRepescagemMundial(estado: EstadoJogo, ano: number, times: string[], semifinais?: [string, string][], esperam?: string[]) {
+export function criarRepescagemMundial(estado: EstadoJogo, ano: number, times: string[], semifinais?: [string, string][], esperam?: string[]) {
   const id: IdCompeticaoSelecoes = `S-INT-${ano}`;
   const sel = estado.selecoes!;
   if (sel.competicoes[id]) return;
-  const ordem = peloRanking(estado, times);
+  const ordem = peloRanking(estado, times.length < 6 && !semifinais ? completarRepescagem(estado, ano, times) : times);
   const [quinta] = datasDaJanela(ano, "mar");
   const comp: EstadoCompeticaoSelecoes = {
     id, tipo: "repescagem-mundial", nome: NOMES["repescagem-mundial"], ano, fase: "rep-semi", selecoes: ordem, repescagem: [...ordem],
@@ -1728,7 +1747,7 @@ function publicoDoJogoDeSelecoes(rng: Rng, estado: EstadoJogo, p: Partida): numb
 function desgaste(rng: Rng, jogadores: Jogador[]) {
   for (const j of jogadores) {
     j.energia = Math.max(30, j.energia - rng.int(15, 25));
-    if (rng.chance(0.012)) j.lesaoDias = Math.max(j.lesaoDias, rng.int(DIAS_LESAO.min, 20));
+    if (rng.chance(0.012)) { j.lesaoDias = Math.max(j.lesaoDias, rng.int(DIAS_LESAO.min, 20)); anotarLesao(j); }
   }
 }
 
@@ -1749,7 +1768,7 @@ export function aplicarJogoDeSelecoes(estado: EstadoJogo, pv: PartidaViva, p: Pa
       j.selecao = { jogos: (j.selecao?.jogos ?? 0) + 1, gols: j.selecao?.gols ?? 0 };
       j.energia = Math.round(lado.energia[id] ?? j.energia);
     }
-    for (const id of lado.lesionados) if (estado.jogadores[id]) estado.jogadores[id].lesaoDias = rng.int(DIAS_LESAO.min, DIAS_LESAO.max);
+    for (const id of lado.lesionados) if (estado.jogadores[id]) { estado.jogadores[id].lesaoDias = rng.int(DIAS_LESAO.min, DIAS_LESAO.max); anotarLesao(estado.jogadores[id]); }
   }
   for (const e of p.eventos) {
     const j = e.jogador != null ? estado.jogadores[e.jogador] : undefined;

@@ -85,7 +85,7 @@ export async function abrirSite(page: Page) {
 /** Jogo novo até a página dos clubes do país (R94 e R96: nome, continente, país e clube). */
 export async function escolherPaisNoJogoNovo(page: Page, pais: string | RegExp = "Brasil") {
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: /América/ }).click();
   await page.getByRole("group", { name: "País" }).getByRole("button", { name: pais }).click();
@@ -107,7 +107,8 @@ export async function novoJogo(page: Page, { serie = "Série B", clube = "Ponte 
  */
 export async function pularTutorial(page: Page) {
   const pular = page.getByRole("dialog").getByRole("button", { name: "Pular" });
-  await pular.waitFor({ timeout: 20_000 });
+  // Quem começa na Europa, Ásia ou África espera antes a pré-simulação do mundo (R144).
+  await pular.waitFor({ timeout: 100_000 });
   const desde = await agora(page);
   await pular.click();
   await expect

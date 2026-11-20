@@ -67,6 +67,12 @@ export interface EstatisticasJogador {
   /** Soma das notas e quantos jogos tiveram nota (a média é uma pela outra). Faltam nos saves antigos. */
   notas?: number;
   avaliados?: number;
+  /** Jogos sem sofrer gol de quem jogou na defesa (goleiro, zagueiro e lateral; R152). Faltam nos saves antigos. */
+  semSofrer?: number;
+  /** Defesas do goleiro (só nas partidas completas; R152). */
+  defesas?: number;
+  /** A lesão mais longa da temporada, em dias (R152: lesão longa atrapalha a evolução de quem já passou de 90). */
+  lesaoMaisLonga?: number;
 }
 
 export interface Jogador {
@@ -95,6 +101,10 @@ export interface Jogador {
    * do computador renovam). Livres não têm. Falta nos saves antigos: ganham ao abrir o jogo (`migrar`).
    */
   contratoAte?: number;
+  /** Temporadas excelentes seguidas (R152): quem já passou de 95 sobe mais fácil com elas. Falta = nenhuma. */
+  excelentesSeguidas?: number;
+  /** Data da última evolução de força (virada do ciclo do clube): evita evoluir duas vezes no mesmo ano ao mudar de ciclo. */
+  evoluiuEm?: string;
   /** Emprestado: joga no `clubeId` até a virada da temporada `ate` e então volta ao clube `de` (dono do contrato). */
   emprestimo?: { de: string; ate: number };
   /**
@@ -248,6 +258,13 @@ export type FaseSerie = "liga" | "playoff" | "quadrangulares" | "final" | "encer
  * Torneio da temporada fora das Séries A, B e C e da Copa: a Série D (grupos e mata-mata em ida e volta), um
  * estadual (no começo do ano: pontos corridos ou grupos, e mata-mata em jogo único) ou a liga de outro país.
  */
+/** Um dos dois torneios do ano (Clausura e Apertura do México e da América Central) e o seu campeão. */
+export interface TurnoDeTorneio {
+  nome: "Clausura" | "Apertura";
+  campeao: string;
+  vice?: string;
+}
+
 export interface EstadoTorneio {
   id: IdTorneio;
   tipo: "serie-d" | "estadual" | "liga";
@@ -257,10 +274,16 @@ export interface EstadoTorneio {
   grupos?: string[][];
   /** "liga", "grupos" ou a fase do mata-mata ("segunda", "terceira", "oitavas", "quartas", "semi", "final"). */
   fase: string;
+  /** Ligas de dois torneios por ano (México, América Central): quantas rodadas tem cada um (o Clausura é a 1ª metade). */
+  rodadasPorTurno?: number;
+  /** Os torneios já decididos: Clausura (janeiro a maio) e Apertura (julho a dezembro). */
+  turnos?: TurnoDeTorneio[];
   /** Quem foi para o mata-mata, da melhor campanha para a pior: decide os confrontos e o mando. */
   semeados?: string[];
   campeao?: string;
   vice?: string;
+  /** Ligas que cruzam o ano (agosto a maio): o ano em que a temporada começou (2026 na 2026/27). */
+  inicio?: number;
   /** Série D: os que sobem para a Série C (os finalistas). */
   promovidos?: string[];
 }
@@ -293,6 +316,8 @@ export interface Mensagem {
     valor: number;
     validaAte: string;
     resolvida?: "aceita" | "recusada" | "expirada" | "retirada";
+    /** Veio do leilão da venda rápida (R154): sai quando o jogador sai da venda. */
+    leilao?: boolean;
     /** Primeira oferta (guardada quando o usuário pede mais) e quantas vezes ele já pediu. */
     inicial?: number;
     pedidos?: number;
@@ -342,6 +367,8 @@ export interface EstadoCopaClubes {
   grupos?: Record<string, string[][]>;
   /** Do mais forte ao mais fraco (potes do sorteio e mando quando a campanha empata). */
   ranking: string[];
+  /** A temporada (o ano do ciclo "ano" ou o ano em que ela começou) em que a copa foi montada: as semanas das fases saem dele. */
+  inicio?: number;
   campeao?: string;
   vice?: string;
 }
@@ -408,9 +435,9 @@ export interface RegistroTemporada {
   promovidos: Record<SerieId, string[]>;
   rebaixados: Record<SerieId, string[]>;
   /** `competicao`: nome do campeonato do clube ("Série A", "Campeonato Argentino"; falta nas temporadas antigas). */
-  tecnico: { clubeId: string; serie: SerieClube; competicao?: string; posicao: number; objetivo: string; cumpriu: boolean };
+  tecnico: { clubeId: string; serie: SerieClube; competicao?: string; posicao: number; objetivo: string; cumpriu: boolean; emAndamento?: boolean };
   /** Campeões e vices da Série D, dos estaduais e das ligas de fora (falta nas temporadas de antes deles). */
-  torneios?: Partial<Record<IdTorneio, { campeao: string; vice?: string }>>;
+  torneios?: Partial<Record<IdTorneio, { campeao: string; vice?: string; turnos?: TurnoDeTorneio[] }>>;
   /** Campeões e vices das copas de clubes (Libertadores, Sul-Americana...; falta nas temporadas de antes delas). */
   copas?: Partial<Record<IdCopa, { campeao: string; vice?: string }>>;
   /** Competições de seleções que acabaram no ano: campeão e vice (torneios) ou quem foi à Copa do Mundo (Eliminatórias). */
@@ -491,6 +518,15 @@ export interface EstadoJogo {
    * clubes chegam ao abrir o jogo e os torneios começam na temporada seguinte.
    */
   torneios?: Partial<Record<IdTorneio, EstadoTorneio>>;
+  /** O clube do usuário é de um campeonato de agosto a maio e a temporada dele acabou em 1º de julho: o próximo Avançar abre o fim da temporada. */
+  fimDeTemporadaPendente?: boolean;
+  /** O último campeão de cada copa que cruza o ano (Liga dos Campeões, Ásia, África...): o Mundial de Clubes de janeiro o usa. */
+  ultimosCampeoes?: Partial<Record<IdCopa, string>>;
+  /**
+   * Tabela final da última temporada encerrada das ligas que cruzam o ano ("EN" → clubes do 1º ao último), guardada na
+   * virada de 1º de julho: as vagas das copas da virada de dezembro saem dela (a liga do ano está no meio).
+   */
+  ultimaTabela?: Record<string, string[]>;
   /**
    * Copas de clubes da temporada (Libertadores, Sul-Americana, Recopa, as da Concacaf, as regionais do Brasil e as
    * nacionais dos outros países). Falta nos saves de antes delas: começam na temporada seguinte.

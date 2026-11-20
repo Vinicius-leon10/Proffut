@@ -94,6 +94,13 @@ export function jogarRapido(
       eventos.push({ minuto, lado: lado as 0 | 1, ...(autor ? { jogador: autor.id } : {}), ...(passe ? { outro: passe.id } : {}) });
     }
   });
+  // R152: jogo sem sofrer gol de quem jogou na defesa (só pelo clube; sem sorteio: o placar não muda).
+  if (!selecao) {
+    ([gv, gm] as const).forEach((sofreu, lado) => {
+      if (sofreu > 0) return;
+      for (const j of times[lado]) if (j.posicao === "G" || j.posicao === "Z" || j.posicao === "L") j.temporada.semSofrer = (j.temporada.semSofrer ?? 0) + 1;
+    });
+  }
   eventos.sort((a, b) => a.minuto - b.minuto);
   p.gm = gm;
   p.gv = gv;

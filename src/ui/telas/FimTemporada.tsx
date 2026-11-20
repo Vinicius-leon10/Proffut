@@ -83,12 +83,12 @@ export function FimTemporada() {
             )}
             {/* Estaduais e ligas de fora (só a primeira divisão): só os nomes dos campeões. */}
             {(["E-", "L-"] as const).map((prefixo) => {
-              const lista = (Object.entries(r.torneios ?? {}) as [IdTorneio, { campeao: string }][]).filter(([id]) => id.startsWith(prefixo) && (prefixo === "E-" || divisaoDaLiga(id.slice(2)).nivel === 1));
+              const lista = (Object.entries(r.torneios ?? {}) as [IdTorneio, { campeao: string; turnos?: { nome: string; campeao: string }[] }][]).filter(([id]) => id.startsWith(prefixo) && (prefixo === "E-" || divisaoDaLiga(id.slice(2)).nivel === 1));
               if (!lista.length) return null;
               return (
                 <p key={prefixo} className="pequeno">
                   <span className="mini fraco">{prefixo === "E-" ? "Estaduais" : "América do Sul"}: </span>
-                  {lista.map(([id, t]) => `${nome(t.campeao)} (${prefixo === "E-" ? id.slice(2) : nomeDoTorneio(id).replace("Campeonato ", "")})`).join(", ")}
+                  {lista.map(([id, t]) => `${t.turnos?.length ? t.turnos.map((x) => `${nome(x.campeao)} (${x.nome})`).join(" e ") : nome(t.campeao)} (${prefixo === "E-" ? id.slice(2) : nomeDoTorneio(id).replace("Campeonato ", "")})`).join(", ")}
                 </p>
               );
             })}

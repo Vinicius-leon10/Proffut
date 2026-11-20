@@ -81,6 +81,23 @@ Ao escolher o clube, a **data de início do jogo é a da pré-temporada dele** (
 Estimativa: **8 a 10 conversas** (as etapas 2 e 3 podem ocupar duas cada). As etapas 1 a 3 já dão o essencial: clubes de
 qualquer região começando na hora certa.
 
+### Andamento (19/nov/2026)
+
+| Etapa | Estado | Teste |
+|---|---|---|
+| 1 Base (`ciclos.ts`) | feita e publicada | R140 |
+| 2a Ligas do mundo nas datas reais e virada de 1º de julho | feita e publicada | R141 |
+| 2b Jogadores e contratos por ciclo | feita e publicada | R142 |
+| 2c México e América Central em dois torneios | feita e publicada | R143 |
+| 3 Pré-temporada e pré-simulação do mundo | feita (publicada junto com a 4) | R144 |
+| 4 Copas da Europa, Ásia e África de agosto a maio | feita (publicada junto com a 3) | R145 |
+| 5 Técnico por ciclo | feita | R146 |
+| 6 Saves antigos, janelas reais da Europa, desempenho | janelas (R147) e saves antigos (R148) feitos; falta medir desempenho e o `npm run sim` | R147, R148 |
+
+Decisões que mudaram o plano durante a obra: em ano de Copa do Mundo os clubes de agosto a maio só começam depois da final (20 de julho
+de 2026, não 1º de julho); o clube do usuário não gasta nem recebe nada na pré-simulação; o México e a América Central não têm liguilha
+(o líder de cada torneio é o campeão); o convite de um clube de outro ciclo leva o técnico para o meio da temporada do clube novo.
+
 ## 4. Onde mexer
 
 `competicoes.ts` (`criarTemporada`, `temporadaEncerrada`), `torneios.ts` (`criarTorneios`, `inicioDoAno`, ligas de fora),

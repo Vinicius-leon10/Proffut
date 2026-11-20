@@ -1,11 +1,11 @@
 // Testes do motor (antes num arquivo só, src/engine/motor.test.ts; separados para rodarem em paralelo).
 import { describe, expect, it } from "vitest";
 import { DEFINICOES, VAGAS_UEFA, nomeDaCopa, vagasDasCopas } from "../copas";
-import { acertarParticipantes, juntarQuemJogavaFora, avancar, novoJogo, simularDia, simularRestoDaTemporada } from "../jogo";
+import { acertarParticipantes, juntarQuemJogavaFora, avancar, novoJogo, simularDia } from "../jogo";
 import { checarEstado } from "../checagem";
 import { PAISES, inicioDoAno, tabelaDoTorneio } from "../torneios";
 import { elencoDe } from "../mercado";
-import type { IdTorneio } from "../tipos";
+import type { EstadoJogo, IdTorneio } from "../tipos";
 import europaJson from "../../../data/europa-2026/jogadores.json";
 import europaClubesJson from "../../../data/europa-2026/clubes.json";
 import segundasJson from "../../../data/europa-2026/jogadores-segundas.json";
@@ -19,6 +19,15 @@ import { processarMes } from "../financas";
 import convocadosJson from "../../../data/selecoes-2026/convocados.json";
 import { nacionalidadeDoPais } from "../selecoes";
 
+
+/** Avança (jogando só o que o usuário acompanha e virando a temporada quando ela acaba) até a data `ate`. */
+function avancarAte(estado: EstadoJogo, ate: string) {
+  for (let i = 0; i < 4000 && estado.data < ate; i++) {
+    const r = avancar(estado);
+    if (r.tipo === "jogos-hoje") simularDia(estado);
+    else if (r.tipo === "nada") break;
+  }
+}
 
 describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", () => {
   const estado = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 7 });
@@ -59,15 +68,16 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
       // O melhor da segunda é mais fraco que a média da primeira.
       expect(segunda[0], pais).toBeLessThan(primeira.reduce((a, b) => a + b) / primeira.length);
     }
-    // Uma temporada: na virada, os 3 últimos da Premier League descem e os 3 primeiros do Championship sobem.
+    // Uma temporada: na virada de 1º de julho (R141: a liga inglesa vai de agosto a maio), os 3 últimos da Premier League
+    // descem e os 3 primeiros do Championship sobem.
     const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 71 });
-    for (let i = 0; i < 4000 && e.temporada === 2026; i++) {
+    for (let i = 0; i < 6000 && e.data < "2027-07-02"; i++) {
       const r = avancar(e);
       if (r.tipo === "jogos-hoje") simularDia(e);
       else if (r.tipo === "nada") break;
     }
     expect(e.temporada).toBe(2027);
-    const h = e.historico.at(-1)!;
+    const h = e.historico.find((x) => x.temporada === 2026)!;
     expect(h.torneios?.["L-EN2" as IdTorneio]?.campeao).toBeDefined();
     const ingleses = Object.values(e.clubes).filter((c) => c.pais === "EN");
     // R113: a 2ª divisão turca (parte 4): os 3 primeiros sobem e os 3 últimos da 1ª descem.
@@ -133,7 +143,7 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
     expect(checarEstado(estado).filter((p) => p.gravidade === "erro")).toEqual([]);
   });
 
-  it("3ª divisão das 7 ligas (nov/2026): clubes leves (sem jogadores até o técnico assumir), todos os jogos dentro do ano; a Serie C, com 57 clubes, joga duas rodadas por semana", () => {
+  it("3ª divisão das 7 ligas (nov/2026): clubes leves (sem jogadores até o técnico assumir), todos os jogos dentro da temporada de agosto a maio (R141); a Serie C, com 57 clubes, joga também às quartas", () => {
     const tamanhos: Record<string, number> = { EN3: 24, DE3: 20, FR3: 17, PT3: 20, NL3: 18 };
     for (const [liga, n] of Object.entries(tamanhos)) expect(estado.torneios?.[`L-${liga}` as IdTorneio]?.clubes.length, liga).toBe(n);
     const it3 = estado.torneios!["L-IT3" as IdTorneio]!;
@@ -144,7 +154,7 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
     }
     const jogos = estado.partidas.filter((p) => p.serie === "L-IT3" || p.serie === "L-ES3");
     expect(jogos.length).toBeGreaterThan(1500);
-    expect(jogos.every((p) => p.data <= "2026-12-20")).toBe(true);
+    expect(jogos.every((p) => p.data >= "2026-08-01" && p.data <= "2027-06-30")).toBe(true);
     // Ninguém joga duas vezes no mesmo dia.
     const dia = new Set<string>();
     for (const p of jogos) for (const c of [p.mandante, p.visitante]) {
@@ -153,11 +163,11 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
     }
   });
 
-  it("as ligas da Europa são em turno e returno (38 rodadas com 20 clubes) e começam em janeiro", () => {
+  it("as ligas da Europa são em turno e returno (38 rodadas com 20 clubes) e começam em agosto (R141)", () => {
     const jogos = estado.partidas.filter((p) => p.serie === "L-EN");
     expect(jogos).toHaveLength(380);
     expect(Math.max(...jogos.map((p) => p.rodada))).toBe(38);
-    expect(jogos.map((p) => p.data).sort()[0] < "2026-02-01").toBe(true);
+    expect(jogos.map((p) => p.data).sort()[0] >= "2026-08-01").toBe(true);
     // Cada clube recebe cada adversário uma vez.
     const mandos = new Set(jogos.map((p) => `${p.mandante}/${p.visitante}`));
     expect(mandos.size).toBe(380);
@@ -221,7 +231,8 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
   it("as copas da UEFA vão até a final (a Liga dos Campeões com o playoff); na virada, as vagas saem das tabelas do jogo e a Supercopa da UEFA junta os campeões", () => {
     const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 11 });
     e.config.escalacaoAutomatica = true;
-    simularRestoDaTemporada(e);
+    // As copas da UEFA vão de agosto a maio (R145): a edição 2026/27 acaba em maio de 2027, com a liga inglesa já encerrada.
+    avancarAte(e, "2027-06-10");
     for (const id of ["K-UCL", "K-UEL", "K-UECL"] as const) {
       const c = e.copas?.[id];
       expect(c?.campeao, id).toBeTruthy();
@@ -241,7 +252,7 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
     if (!tabelaEN.slice(0, 4).includes(faCup)) expect(vagas["K-UEL"]?.grupos).toContain(faCup);
     // Supercopa da Inglaterra: o campeão inglês contra o da FA Cup (ou o vice, se for o mesmo).
     expect(vagas["K-SEN"]?.final).toEqual([tabelaEN[0], faCup === tabelaEN[0] ? tabelaEN[1] : faCup]);
-  });
+  }, 400_000);
 
   it("copas nacionais da Europa (nov/2026): FA Cup, Copa do Rei, Copa da Itália, Copa da Alemanha, Copa da França, Taça de Portugal e Copa da Holanda com os clubes das divisões do país (sem a que joga também às quartas), mata-mata até a final em campo neutro; as supercopas começam em 2027", () => {
     const tamanhos: Record<string, number> = { "K-EN": 64, "K-ES": 32, "K-IT": 32, "K-DE": 32, "K-FR": 32, "K-PT": 32, "K-NL": 32 };
@@ -262,7 +273,7 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
     // Os jogos às quartas, sem bater com as copas da UEFA (terças e quintas) nem com a liga (domingo) do mesmo clube.
     const e = novoJogo({ nomeTecnico: "T", clubeId: "flamengo", semente: 5 });
     e.config.escalacaoAutomatica = true;
-    simularRestoDaTemporada(e);
+    avancarAte(e, "2027-06-10");
     for (const id of Object.keys(tamanhos)) {
       const c = e.copas?.[id as `K-${string}`];
       expect(c?.campeao, id).toBeTruthy();
@@ -272,7 +283,7 @@ describe("Europa (nov/2026): as 7 ligas principais, só a primeira divisão", ()
     const porClube = new Map<string, string[]>();
     for (const p of e.partidas) for (const c of [p.mandante, p.visitante]) if (e.clubes[c]?.pais === "EN") porClube.set(c, [...(porClube.get(c) ?? []), p.data]);
     for (const [c, datas] of porClube) expect(new Set(datas).size, c).toBe(datas.length);
-  });
+  }, 400_000);
 
   it("no jogo novo, os convocados (da América e da Europa) que jogam nos clubes da Europa estão só no clube (sem cópia jogando fora)", () => {
     const europeus = new Set((europaClubesJson.clubes as { id: string }[]).map((c) => c.id));

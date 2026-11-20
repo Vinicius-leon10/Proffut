@@ -25,6 +25,10 @@ Leia isto antes de mexer no projeto. Detalhes de design em [PLANO.md](PLANO.md);
 6. **Converse em português, com palavras simples** (o usuário não é programador). Ele testa no iPhone e manda listas
    curtas de ajustes. Quando não der para ver o problema, corrija pelo mais provável e peça uma captura de tela.
 
+8. **Publicar sem perguntar (pedido do usuário, 20/nov/2026: "Sempre que tudo estiver ok, ja é um ok pra publicar"):**
+   com o `npm run verificar` daqui 100% e o "Testes" do GitHub verde, levar para a `main` sem esperar outro "ok" e depois
+   avisar como testar no iPhone. Com qualquer teste vermelho, não publicar.
+
 7. **Pergunta ou ação, e qual modelo (skill `escolher-modelo`, nov/2026):** a cada pedido, dizer se é pergunta (responde direto, com o modelo mais barato que serve) ou ação (dizer em uma linha o modelo e o esforço e esperar o "ok"), para ele gastar o mínimo de crédito. Tabela em `.claude/skills/escolher-modelo/SKILL.md`.
 
 ## Endereços
@@ -557,6 +561,41 @@ do jogo rodando (Playwright, iPhone 13, capturas em alta resolução). **Música
 vídeo, sugerir músicas de jogos de futebol (trilhas de FIFA, músicas de estádio e de Copa), para ele pôr pela biblioteca do
 TikTok, bem baixinha sob a voz. Já usadas: episódio 1 com "Love Me Again" (John Newman, FIFA 14). Não repetir sem ele pedir. **Modelo visual escolhido (nov/2026): a Versão D do episódio 1** (`videos/src/variantes/VersaoCompleta.tsx`, composição `Ep01-D-Completo`): "o melhor das três (mural 3D no gancho, objetos flutuando, legenda palavra por palavra). Foi a melhor, ajuste para as próximas ficar nesse modelo". Os próximos vídeos seguem a Versão D (mural 3D na abertura, `Flutua`/`Cartao3D`/`Pilula` de `VersaoFlutuante.tsx`, `Legenda` palavra por palavra de `variantes/comum.tsx`) com as transições e os sons do padrão abaixo. Sem a voz daqui, a legenda palavra por palavra segue o texto da fala no ritmo de ~2,6 palavras por segundo, cena por cena (a voz do CapCut acompanha a cena; se ficar fora, ele usa as legendas automáticas do CapCut). **Padrão de todo vídeo (pedido do usuário, nov/2026: "sempre for gerar um vídeo, você vai gerar com essas animações, com essas transições, com esses sons, para não ter que ficar pedindo de novo"):** o modelo é `videos/src/Episodio04.tsx`: cenas com frases animadas (`Palavras`, `Selo`), troca de cena com impacto (`Troca`: zoom e desfoque na entrada, sai empurrada para cima) e flash branco no corte (`Flashes`), e efeitos sonoros de `videos/public/sfx` (`Sons`/`EFEITOS`: whoosh antes de cada corte, riser e boom nos números e revelações, tecla nos itens de lista, tique no relógio, apito, torcida nas conquistas, vaia nas derrotas), baixos (pico ~−2 dB, média ~−20 dB) para a voz ficar por cima. **Voz:** os créditos da ElevenLabs acabaram (nov/2026); o usuário põe a voz no CapCut ou grava a do app do Claude: entregar o vídeo sem voz e o texto da fala **puro, sem os segundos** (senão a voz lê os números), além da legenda e da música. Não mandar prévia: o vídeo final direto (pedido para gastar menos). **Sem legenda no vídeo (pedido do usuário, nov/2026, a partir do episódio 7):** "Os próximos vídeos você vai criar sem legenda, porque no CapCut eu estou tendo dificuldade de ajustar a fala com a legenda": não pôr a `Legenda` palavra por palavra nem o degradê escuro de baixo; ele põe a fala no CapCut e gera as legendas automáticas lá (é um teste; ver como fica no próximo vídeo). Deixar a parte de baixo da tela livre para a legenda do CapCut. **Ordem da entrega (pedido do usuário, nov/2026):** primeiro o vídeo pronto e a legenda do post (com a música); a narração **não** vai junto. Quando ele pedir "mande a narração", mandar **só a narração pura**, numa mensagem sem mais nada (sem título, explicação, segundos nem bloco de código): ele toca a mensagem com a voz do app, grava a tela e tira o som para o vídeo.
 
+**Tela de abertura enxuta e Instagram (20/nov/2026, R149–R150, `Inicio.tsx`):** pedido "Tem muita informação, duplica o save e o jogar" (opção 2 escolhida): "Novo jogo" em cima e uma lista só, "Seus jogos" (`.item` com `data-espaco` e, no do Continuar, `data-continuar`): o jogo do Continuar aparece uma vez, em primeiro, com o selo "Continuar" e o "Jogar" (ligado a um espaço, é a linha do espaço); os outros com "Abrir"; uma lixeira em cada linha (`window.confirm` antes, como antes). No rodapé, "Siga @proffut.jogo" com o botão "Abrir" (link para https://www.instagram.com/proffut.jogo, a conta do jogo). A caixa do nome do técnico no jogo novo ficou sem texto de exemplo; os testes acham o campo por `getByLabel("Nome do técnico")`. **Copas da UEFA no formato real (só pesquisado):** o robô `elencos.yml`, fase `uefa` (`tools/uefa/baixar.py`, branch `dados-uefa`), baixou as regras de vaga e o calendário de 2026/27; resumo em `docs/UEFA_2026_27.md`. A construção no jogo (fase de liga de 36, prévias com os 55 países) espera o pedido dele. Um teste de robô de camisas no Wikimedia Commons foi descartado (só desenhos de 38 × 59 sem mangas); a branch `dados-camisas` ficou no GitHub (o apagar daqui foi recusado).
+**Força máxima 99, evolução por temporadas, convites, filtro e leilão (20/nov/2026, R151–R154; publicado na `main`, commit 543057b):** pedidos de 20/nov (plano abaixo) mais a venda rápida. Prompt dos stories dessas novidades entregue ao usuário (para a conversa de vídeos e redes).
+(R151) Mercado: filtro "Faixa de força" com `Força`, `40 a 49` ... `90 a 99` (`Mercado.tsx`). (R152) `FORCA_MAXIMA` 99 e `EVOLUCAO` (constantes.ts);
+`evoluir` (temporada.ts): de 80 a 89 o ganho da idade × 0,8 (× 0,5 com menos de 20 jogos), parando em 90; de 90 a 94 sobe 1 com a chance da temporada
+boa (0,4) ou excelente (0,8); de 95 a 99 só excelente, 0,35 + 0,15 por excelente seguida (`Jogador.excelentesSeguidas`), até 29 anos.
+`nivelDaTemporada`: jogos (25+, 30+ conta), nota média, gols e passes (A e M), jogos sem sofrer gol (G, Z, L) e defesas (G); lesão de 25+ dias zera;
+sem nota (simulação rápida) pede menos pontos. `EstatisticasJogador` ganhou `semSofrer`, `defesas` e `lesaoMaisLonga` (opcionais; `anotarLesao`
+em gerador.ts; a lesão mais longa não soma na carreira). `migrar` desce força e potencial acima de 99. Nada de `delete` em jogador no laço da virada
+(deixou a temporada 20% mais lenta). Medição (`npm run medir-forca`, sementes 2 e 3, 10 anos): jovens de 75–82 que jogam muito chegam a 90 em 19%
+(antes 4%), em ~7 anos; 99 ninguém; ≥ 90 no mundo 105 → ~200 (ano 5) → ~110 (ano 10) (antes caía a ~47); ≥ 95 cai de 9 para 2 (os craques
+envelhecem). (R153) `primeiraTemporadaNoClube` (carreira.ts): o convite do meio da fase de liga só depois da primeira virada no clube.
+(R154) Venda rápida: `leiloar` (mercado.ts, `LEILAO`): pôr à venda (ficha do Elenco ou Mercado) faz o leilão na hora com até 4 clubes de qualquer
+país (com elenco, dinheiro, vaga e força parecida), lances de 80% a 115% do valor; o maior vira proposta em Meus à venda (Aceitar, Pedir mais,
+Recusar); sorteio pelo dia e pelo jogador (pôr de novo no mesmo dia dá o mesmo leilão). Não olha a janela de transferências (como as propostas de
+sempre). **Achado da medição, corrigido (R155):** na semente 1 o motor quebrava em março de 2030: o Marrocos (sede da Copa de 2030,
+já classificado) jogou as Eliminatórias da África e ganhou a vaga da repescagem mundial, que ficou com 5 seleções e uma
+semifinal contra "ninguém". `completarRepescagem` (selecoes.ts) dá a vaga que sobra à melhor do mesmo continente fora da Copa.
+Simplificação que ficou: as sedes jogam as Eliminatórias. Save que já tem a repescagem quebrada (criada em novembro do ano
+anterior com o código velho) não é consertado.
+**Onde parou (20/nov/2026, tarde; branch `claude/focused-wright-8ynop9`, publicado na `main` o commit 6727206: tela de abertura em lista só, @proffut.jogo com botão Abrir, nome do técnico em branco, R149–R150; o site oficial já tem essa versão):** pedidos novos do usuário, **ainda não feitos** (próximo teste: R151). Plano combinado por ele: **(1) só medir** (conversa com Sonnet, esforço alto, sem mudar o jogo), trazer os números; **(2) depois implementar** (ele escolheu Opus, esforço baixo, talvez em conversa nova).
+ (a) **Filtro de força do Mercado** (`Mercado.tsx` linha ~204, hoje `[0, 40, 50, 60, 65, 70, 75, 80, 85]` com "Força N+"): trocar por faixas fechadas "Força 40 a 49", "50 a 59", "60 a 69", "70 a 79", "80 a 89", "90 a 99" (e "Força" = todas); **nada abaixo de 40** (decisão dele). O filtro hoje é `j.forca >= forcaMin`; passa a ter mínimo e máximo.
+ (b) **Teto de 99 e chegar lá muito difícil:** ninguém passa de 99 (jogadores atuais, da base, criados e de saves antigos: quem estiver acima de 99 desce para 99, em `migrar`); até 90 a evolução continua como hoje; de 90 a 99 cada ponto custa muito mais; os últimos pontos (95 a 99) dependem da temporada do jogador: jogos, nota média, gols, e para goleiro as defesas e os jogos sem sofrer gol (**decisão dele: goleiro conta defesas e jogo sem tomar gol**), e sem lesão longa; um jovem de 80 aos 19 anos chega a ~90 mas só chega a 99 com várias temporadas excelentes. Os melhores jogadores reais de hoje, já perto do topo, ficam como estão. Hoje: `evoluir` em `src/engine/temporada.ts` (linhas 39–56: delta por idade, acima de 80 o ganho cai a 0,7 e acima de 86 a 0,4; `forca = min(potencial, forca + delta)`; `potencial` criado com `limitar(..., 99)` em `gerador.ts`, a base com teto 95).
+ (c) **Convites de clubes só depois da primeira virada:** no primeiro ano nenhum clube chama o técnico (ele recebeu, no meio da primeira temporada na Série C, um convite de um clube da Série B). Hoje `gerarConvites`/`CONVITES` em `carreira.ts` e `constantes.ts` mandam convite "no meio da fase de liga (jogo nº metade) para quem está encaminhado"; o do meio da temporada não deve sair na primeira temporada do técnico no clube (`Tecnico.desde`), só depois da primeira virada. Teste antes.
+ **A medição (passo 1):** com `tools/sim/simular.ts` como modelo (`novoJogo` + laço `avancar`/`simularDia` até `nova-temporada`; 1 temporada simulada leva ~10 s), escrever um script só de medida (fora do jogo, em `tools/sim/`) que simula ~8 a 10 temporadas e imprime, por temporada: quantos jogadores com força ≥ 85, ≥ 90, ≥ 95 e = 99; o maior; quantos têm `potencial` > força; e a trajetória dos jovens (até 21 anos, força 75–82 no começo): quantos chegam a 90 e a 99 em 5 e em 10 anos, separando quem joga muito (30+ jogos) de quem joga pouco. Trazer os números ao usuário e esperar o "ok" antes de mudar `evoluir`.
+ Também: robô da UEFA (fase `uefa`, `docs/UEFA_2026_27.md`) feito; a construção das copas da UEFA com tabela única de 36 espera pedido; branch `dados-camisas` sobrou no GitHub (o apagar daqui foi recusado); publicação dá, às vezes, teste do motor estourando 60 s no GitHub (o `08-rebaixado-para-a-serie`): rodar de novo só o que falhou (`rerun_failed_jobs`) resolveu.
+**Onde parou (19/nov/2026, noite; branch `claude/focused-wright-8ynop9`, tudo publicado na `main`, commit 8a7bebd):** as **temporadas
+reais do mundo todo** estão prontas (etapas 1 a 6, R140–R148; detalhes em "Plano das temporadas reais" abaixo e em
+`docs/PLANO_TEMPORADAS_REAIS.md`). **Esperando o usuário:** (1) dizer quanto tempo leva o "Preparando o mundo…" no iPhone dele num jogo
+novo na Europa (aqui 15–25 s; se passar de 1 min, acelerar a pré-simulação sem tirar nada, por exemplo com a simulação rápida nos jogos
+que ele não acompanha); (2) a checagem diária do site (opções 1, 2 ou 3, mais abaixo). **Simplificações das temporadas reais que ele
+pode querer mudar:** sem liguilha no México e na América Central; o Caribe (fora a Rep. Dominicana) no ano civil; convite de clube de
+outro ciclo leva o técnico ao meio da temporada; amistosos de pré-temporada ficaram para depois (decisão dele). **Próximo combinado
+(quando ele pedir):** terminar a Europa (vagas dos 31 países menores nas copas da UEFA, 2ª divisão dos 31 menores e 3ª dos 16 médios,
+copas nacionais deles, as 80 camisas da Europa para refazer). Guardados: convites mais difíceis (lista de 17/nov, item 3), disputa de
+pênaltis do usuário, parte 5 do "jogo completo", liga online.
 **Onde parou (18/nov/2026, tarde; branch `claude/focused-wright-8ynop9`, publicado na `main`, commit 292822c):** camisas da
 Europa (Inglaterra à Ucrânia, 588 de 668; 80 para refazer em `docs/RETORNO_DOS_LOTES.md`) e a folha cara (R138, abaixo). Os
 5 stories do Instagram sobre essas mudanças foram para uma conversa nova de vídeos e redes. Próximo no jogo: vagas dos 31
@@ -931,7 +970,59 @@ ciclos aprovada; idade em 1º de janeiro para todos). Etapa 1 feita (R140, `src/
 `cicloDoPais`, `cicloDoClube`, `cicloDaCompeticao`, `rotuloDaTemporada` ("2026/27"), `anoDoCiclo`, `viradaDoCiclo`,
 `inicioDaPreTemporada`. `semanaNoJogo` guarda a semana em que a liga começa HOJE (Europa −12, o resto 0) e é o que
 `criarTorneios` lê (`semanaDaLigaNoJogo`): mesma impressão digital de uma temporada inteira. Na etapa 2 as ligas passam a
-usar abertura e fim reais. Simplificação: o Caribe (fora a Rep. Dominicana) fica no ano civil. Próximo: etapa 2.
+usar abertura e fim reais. Simplificação: o Caribe (fora a Rep. Dominicana) fica no ano civil.
+**Etapa 2a feita (R141):** as ligas de fora saem de `datasDaLiga` (torneios.ts: domingos da abertura ao fim, espalhados, fora da
+pausa, das datas FIFA, da janela da Copa e dos dias em que um clube da liga já joga; quartas se faltar). `semanaNoJogo` saiu.
+Ligas que cruzam o ano (`ligaCruzaOAno`, ciclo agosto/outubro): `EstadoTorneio.inicio` = ano em que começaram; a virada de
+dezembro as guarda (`criarTorneios` sem `so` mantém as em andamento; `criarTemporada` mantém os jogos delas;
+`torneiosEncerrados` não as conta); o `avancar` com a temporada encerrada joga antes os jogos que faltam antes da temporada
+nova (`inicioDaProximaTemporada`, temporada.ts) e só então devolve `fim-dos-jogos`/vira. Em 1º de julho (`processarDias`),
+`viradaDasLigas`: tabela final em `EstadoJogo.ultimaTabela` (as vagas das copas da virada de dezembro saem dela, ou da 2025/26 de
+verdade, em `ordemDaLiga` de copas.ts), campeão no `historico` da temporada em que começou, `trocarDivisoes` e a temporada
+nova (`criarTorneios` com `so`). México e América Central: uma liga no ano com pausa de junho a julho (os dois torneios ficam
+para depois). Jogadores, contratos e técnico ainda viram só em dezembro (etapa 2b e 5). Próximo: etapa 2b (jogadores e
+contratos por ciclo).
+**Etapa 2b feita (R142):** `temporadaDoClube` (contratos.ts: ano civil, ou o ano em que a temporada de agosto a maio começou) manda em
+`ultimoAno`, `contratoNovo`, `renovarContrato`, `avisarContratos` (1º/set no ano civil, 1º/mar na Europa), nos empréstimos (`ate`
+pela temporada do clube dono) e no rótulo da tela ("Contrato até 2026/27"). `virarJogadores` (temporada.ts) é a virada dos jogadores
+por ciclo: em 31/12 (`encerrarTemporada`) para clubes "ano"/"torneios", livres e quem joga fora; em 1º de julho
+(`virarJogadoresDoCiclo`, chamada em `processarDias` antes de `viradaDasLigas`) para "agosto"/"outubro": evolução, aposentadoria,
+empréstimos, contratos, base, elenco mínimo, excedentes e livres. A idade sobe uma vez por ano para todos, só em dezembro
+(`evoluir(rng, j, false)` não envelhece). `Jogador.evoluiuEm`: quem mudou de ciclo não evolui de novo em menos de 270 dias.
+Save antigo: a Europa evolui mais uma vez em julho (aceito). **Etapa 2c feita (R143):** México e América Central (ciclo "torneios", divisões em turno e returno com 6+ rodadas): `EstadoTorneio.rodadasPorTurno`
+e `turnos` ({nome "Clausura"|"Apertura", campeao, vice}); `criarTorneios` marca o Clausura de 10/jan a 24/mai e o Apertura de 11/jul a
+13/dez (`datasDaLiga` com `janela`); `tabelaDoTurno`; `avancarTorneios` grava cada campeão (`fasesCompletas` ganhou a chave
+`L-MX|liga|1`/`2`); histórico com `turnos`. Sem liguilha. Tela: Tabelas com Ano todo/Clausura/Apertura.
+**Etapa 3 feita (R144):** `dataDeInicioDoClube` (jogo.ts, pela tabela de ciclos), `preSimularMundo(estado, ate)` (gerador que devolve a fração
+0–1 a cada dia de jogos; `prepararMundoAte` roda de uma vez) e `emPreTemporada` (nenhum jogo do clube nos últimos 30 dias e o próximo a 4+
+dias; o botão do painel mostra "Pular para o início da temporada", que é o Avançar). `novoJogo` continua montando o mundo em 3/jan e é a
+tela `NovoJogo.tsx` que roda o gerador em pedaços de 40 ms com "Preparando o mundo…" e a barra; a pré-simulação devolve o caixa, o extrato,
+a confiança e a reputação do clube do usuário e apaga as mensagens dela, e põe `Tecnico.desde` no dia de início. `competicoesDoUsuario` só
+inclui Séries A a C e a Copa do Brasil para quem treina clube do Brasil. Testes de tela: `playwright.config.ts` com 120 s por teste e
+`pularTutorial` esperando até 100 s (a pré-simulação de um clube da Europa leva de 15 s a ~1 min). As copas da UEFA ainda vão de janeiro
+a maio (etapa 4): o clube europeu pode ter jogado a de 2026 na pré-simulação com escalação automática. **Etapa 4 feita (R145; saiu junto com a 3 para o R98 e o R107 manterem a conferência inteira):** `cicloDaCopa`/`cicloDaCopaId`/`competicaoCruzaOAno`
+(copas.ts: UEFA, AFC, CAF e as copas nacionais e supercopas da Europa são "agosto"; as da América e o Mundial, o ano civil). As copas de
+agosto a maio usam semanas contadas do 1º sábado de abril do ano em que começam (`EstadoCopaClubes.inicio`; `iniciarFase` e `escolherData`
+usam esse ano, não `estado.temporada`): Liga dos Campeões playoff 19–20, grupos [23,25,28,30,33,35], oitavas [45,47], quartas [53,54],
+semi [57,58], final 60; Liga Europa e Conference grupos iguais, quartas [46,48], semi [55,56], final 59; Ásia e África grupos iguais,
+quartas [46,48], semi [53,55], final 58; copas nacionais da Europa `SEMANAS_EUROPA` [24,29,34,38,49,59]; supercopas na semana 19; Supercopa
+da UEFA na 20. `criarCopasDeClubes(estado, vagas, parte)` e `vagasDasCopas(estado, parte)` têm "ano" (virada de dezembro), "agosto" (1º de
+julho, `viradaDasCopasDoCiclo`) e "todas" (jogo novo); `criarTemporada` mantém as copas de agosto a maio em andamento e os jogos delas;
+`copasEncerradas`/`temporadaEncerrada` não as contam. `EstadoJogo.ultimosCampeoes` guarda o último campeão de cada copa de agosto a maio
+(o Mundial de Clubes de janeiro usa); o histórico da temporada em que a copa começou recebe o campeão em 1º de julho. Save sem copas: a
+temporada seguinte de agosto a maio as cria (só quando as ligas da Europa viram em 1º de julho). `avancar`: com a temporada já encerrada ao
+tocar no botão, os jogos que sobram são simulados e a virada vem no mesmo toque (`jaEncerrada`). As seleções não mudaram (o calendário
+internacional já é do ano civil).
+**Etapa 5 feita (R146):** `temporadaDoUsuarioEncerrada` (jogo.ts) manda no botão "Encerrar a temporada" (Painel e `avancarJogo`): só o clube do ano civil. Para o
+clube de agosto a maio, `encerrarTemporada` (dezembro) pula o técnico (`usuarioDoAno`: confiança, reputação, demissão, convites, objetivo e as
+mensagens dele; o histórico fica com `tecnico.emAndamento`), e o `avancar` vira o mundo sozinho (sem `nova-temporada`). Em 1º de julho,
+`processarDias`: `capturarResultadoDoTecnico` (antes de as ligas virarem) e `fecharTemporadaDoTecnico` (depois: acesso/queda pelo nível da liga,
+confiança, reputação com as copas, demissão ou convites, `definirObjetivo`, mensagens "Fim da temporada 2026/27" e "Objetivo para 2027/28",
+`EstadoJogo.fimDeTemporadaPendente`, que faz o próximo `avancar` devolver `nova-temporada`). Convite de clube de outro ciclo: o técnico chega
+no meio da temporada do clube novo (não esperei a pré-temporada).
+**Etapa 6 (R147, R148):** `regras.ts` — janelas por ciclo (`JANELAS_DE_AGOSTO`: 1º/jul–31/ago e janeiro; `JANELAS_DE_OUTUBRO`: jul–set e janeiro; o ano civil
+não muda). `acertarCiclos` (jogo.ts, chamada em `migrar`): ligas e copas de agosto a maio de um save antigo ganham `inicio` e a liga que já
+acabou grava `ultimaTabela`. Falta: medir o desempenho (`npm run sim`, jogo novo na Europa no iPhone) e ajustar o equilíbrio se precisar.
 
 **Ajustes para depois (segunda lista à mão do usuário, 17/nov/2026, "Guarde isso para depois"):** não começar sem ele
 pedir. (1) e (2) feitos em 18/nov (folha cara, acima). (3) Ficar mais

@@ -8,12 +8,12 @@
 //   quartas, semifinal e final. Mata-mata em jogo único na casa da melhor campanha, com pênaltis se empatar.
 // - Ligas de fora: pontos corridos, em turno e returno quando cabe nos domingos da temporada (até 18 clubes) e em
 //   turno único nas maiores; as da Europa sempre em turno e returno, de janeiro em diante. O campeão é o primeiro.
-import { semanaDaLigaNoJogo } from "./ciclos";
+import { cruzaOAno, cicloDoPais, ligaCruzaOAno, periodoDaLiga } from "./ciclos";
 import { comArtigo, concorda } from "./artigos";
-import { depoisDaCopa, inicioDaTemporada, rodadasForaDaCopa, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
+import { depoisDaCopa, inicioDaTemporada, naJanelaDaCopa, rodadasForaDaCopa, somarDias, turnoEReturno, turnoUnico, type Confronto } from "./calendario";
 import { chavesDaFase, classificacao, vencedorDaChave, type LinhaTabela } from "./competicoes";
 import { hashTexto, rngPara } from "./rng";
-import { competicoesDaSelecao } from "./selecoes";
+import { anoDeCopa, competicoesDaSelecao, datasDaJanela } from "./selecoes";
 import type { Clube, Competicao, EstadoJogo, EstadoTorneio, IdTorneio, Partida } from "./tipos";
 
 export const NOME_ESTADUAL: Record<string, string> = {
@@ -335,17 +335,91 @@ function dividir(ordem: string[], tamanho: number): string[][] {
   return grupos;
 }
 
+/** Dia da semana de uma data "AAAA-MM-DD" (0 = domingo, 3 = quarta). */
+function diaDaSemanaDe(iso: string): number {
+  return new Date(`${iso}T12:00:00Z`).getUTCDay();
+}
+
+/** As datas FIFA (de quinta a terça) dos anos dados: as ligas param nelas. */
+function diasFifa(anos: number[]): Set<string> {
+  const dias = new Set<string>();
+  for (const ano of anos) {
+    for (const janela of ["mar", "jun", "set", "out", "nov"] as const) {
+      if (janela === "jun" && anoDeCopa(ano)) continue;
+      const [quinta] = datasDaJanela(ano, janela);
+      for (let i = 0; i <= 5; i++) dias.add(somarDias(quinta, i));
+    }
+  }
+  return dias;
+}
+
+/**
+ * Datas das `rodadas` de uma liga de fora na temporada que começa em `ano`, pelo calendário do país (ciclos.ts): domingos da
+ * abertura ao fim, espalhados por igual, fora da pausa, das datas FIFA, da janela da Copa do Mundo e dos dias em que algum
+ * clube da liga já joga (na véspera, no dia ou no dia seguinte); faltando domingos, entram quartas. Se nem assim couber,
+ * a liga segue depois do fim (antes da pausa do fim de ano).
+ */
+export function datasDaLiga(pais: string, ano: number, rodadas: number, ocupado: (dia: string) => boolean = () => false, janela?: { de: string; ate: string }): string[] {
+  const periodo = periodoDaLiga(pais, ano);
+  // Com `janela` (um dos dois torneios do ano), vale ela e a pausa do país não conta.
+  const { de, ate } = janela ?? periodo;
+  const pausa = janela ? undefined : periodo.pausa;
+  const fifa = diasFifa([ano, ano + 1]);
+  const livre = (d: string) => !(pausa && d >= pausa.de && d <= pausa.ate) && !fifa.has(d) && !naJanelaDaCopa(d) && !ocupado(d);
+  const dias = (ate2: string, quartas: boolean) => {
+    const lista: string[] = [];
+    for (let d = de; d <= ate2; d = somarDias(d, 1)) {
+      const dia = diaDaSemanaDe(d);
+      if ((dia === 0 || (quartas && dia === 3)) && livre(d)) lista.push(d);
+    }
+    return lista;
+  };
+  let candidatas = dias(ate, false);
+  if (candidatas.length < rodadas) candidatas = dias(ate, true);
+  // Não coube: estica até o limite do ciclo (meados de dezembro no ano civil; fim de junho nos que cruzam o ano).
+  if (candidatas.length < rodadas && !janela) candidatas = dias(cruzaOAno(cicloDoPais(pais)) ? `${ano + 1}-06-25` : `${ano}-12-18`, true);
+  if (candidatas.length < rodadas) {
+    // Último recurso: domingos seguidos depois do fim, sem olhar mais nada.
+    let d = somarDias(candidatas[candidatas.length - 1] ?? de, 7 - diaDaSemanaDe(candidatas[candidatas.length - 1] ?? de) || 7);
+    while (candidatas.length < rodadas) { candidatas.push(d); d = somarDias(d, 7); }
+  }
+  if (rodadas <= 1) return candidatas.slice(0, rodadas);
+  // Espalhadas por igual da abertura ao fim.
+  return Array.from({ length: rodadas }, (_, r) => candidatas[Math.round((r * (candidatas.length - 1)) / (rodadas - 1))]);
+}
+
+/** Dias em que cada clube já joga (para não marcar a rodada na véspera, no dia ou no dia seguinte). */
+function diasOcupados(estado: EstadoJogo): Map<string, Set<string>> {
+  const ocupados = new Map<string, Set<string>>();
+  for (const p of estado.partidas) {
+    for (const id of [p.mandante, p.visitante]) {
+      let dias = ocupados.get(id);
+      if (!dias) ocupados.set(id, (dias = new Set()));
+      dias.add(somarDias(p.data, -1)).add(p.data).add(somarDias(p.data, 1));
+    }
+  }
+  return ocupados;
+}
+
 /**
  * Monta os torneios da temporada (Série D, estaduais e ligas de fora) e todos os jogos da primeira fase.
  * `semEstaduais`: num save antigo que ganha os torneios com a temporada já em março, os estaduais ficam para a próxima.
+ * `so`: monta só esses (os outros ficam como estão); sem ele, as ligas que cruzam o ano e estão em andamento ficam (os
+ * jogos delas também: `criarTemporada` os guarda) e o resto é montado de novo.
  */
-export function criarTorneios(estado: EstadoJogo, { semEstaduais = false } = {}) {
+export function criarTorneios(estado: EstadoJogo, { semEstaduais = false, so }: { semEstaduais?: boolean; so?: (id: IdTorneio) => boolean } = {}) {
   const ano = estado.temporada;
-  const torneios: Partial<Record<IdTorneio, EstadoTorneio>> = {};
+  const torneios: Partial<Record<IdTorneio, EstadoTorneio>> = so ? { ...(estado.torneios ?? {}) } : {};
+  if (!so) for (const t of Object.values(estado.torneios ?? {})) if (t && ligaCruzaOAno(t.id) && t.fase !== "encerrada") torneios[t.id] = t;
   const lista = participantes(estado);
   const reputacao = (id: string) => estado.clubes[id].reputacao;
+  const ocupados = diasOcupados(estado);
+  const novos = new Set<IdTorneio>();
   for (const id of Object.keys(lista) as IdTorneio[]) {
     if (semEstaduais && id.startsWith("E-")) continue;
+    if (so ? !so(id) : !!torneios[id]) continue;
+    novos.add(id);
+    if (so) estado.partidas = estado.partidas.filter((p) => p.serie !== id);
     const clubes = lista[id]!;
     const rng = rngPara(estado.semente, `torneio/${ano}/${id}`);
     const t: EstadoTorneio = { id, tipo: id === "D" ? "serie-d" : id.startsWith("E-") ? "estadual" : "liga", nome: nomeDoTorneio(id), clubes, fase: "liga" };
@@ -375,27 +449,43 @@ export function criarTorneios(estado: EstadoJogo, { semEstaduais = false } = {})
       }
     } else {
       const ida = turnoUnico(clubes, rng);
-      // As ligas da Europa são sempre em turno e returno (38 rodadas com 20 clubes) e começam em janeiro, com os
-      // estaduais: os clubes de lá não jogam estadual e assim sobra o resto do ano para as copas da UEFA.
+      // As ligas da Europa são sempre em turno e returno (38 rodadas com 20 clubes).
       const pais = divisaoDaLiga(id.slice(2)).pais;
       const europa = PAISES[pais]?.regiao === "europa";
       // Na Europa, as divisões de mais de 24 clubes (a 3ª da Espanha e da Itália, que lá são em grupos) jogam turno único,
-      // e as de mais de 30, duas rodadas por semana (domingo e quarta): tudo dentro do ano.
+      // e as de mais de 30 entram também às quartas (`datasDaLiga`).
       const grande = europa && clubes.length > 24;
       const rodadas = (europa && !grande) || 2 * ida.length <= 35 ? [...ida, ...ida.map((jogos) => jogos.map(([a, b]) => [b, a] as Confronto))] : ida;
-      // Semana da abertura pela tabela do calendário do mundo (ciclos.ts; por enquanto as datas de sempre).
-      const inicio = semanaDaLigaNoJogo(pais);
-      const data = (r: number) => (europa && clubes.length > MAXIMO_UMA_RODADA_POR_SEMANA ? somarDias(domingo(ano, inicio + Math.floor(r / 2)), r % 2 ? 3 : 0) : domingo(ano, inicio + r));
-      // Num ano de Copa do Mundo, as rodadas da janela da Copa vão para o meio da semana depois dela (R115).
-      estado.partidas.push(...partidasDasRodadas(ano, id, "liga", rodadas, rodadasForaDaCopa(rodadas.map((_, r) => data(r)))));
+      // Datas pelo calendário do país (ciclos.ts): de agosto a maio na Europa, de fevereiro a novembro no ano civil...
+      const doClube = clubes.map((c) => ocupados.get(c)).filter((d): d is Set<string> => !!d);
+      const ocupado = (d: string) => doClube.some((dias) => dias.has(d));
+      // México e América Central: dois torneios no ano, Clausura (de janeiro a maio) e Apertura (de julho a dezembro), cada
+      // um em turno único (a 2ª metade é a volta, com o mando trocado). Sem liguilha: o líder de cada torneio é o campeão.
+      const doisTorneios = cicloDoPais(pais) === "torneios" && rodadas.length === 2 * ida.length && ida.length >= 6;
+      const datas = doisTorneios
+        ? [
+          ...datasDaLiga(pais, ano, ida.length, ocupado, { de: `${ano}-01-10`, ate: `${ano}-05-24` }),
+          ...datasDaLiga(pais, ano, ida.length, ocupado, { de: `${ano}-07-11`, ate: `${ano}-12-13` }),
+        ]
+        : datasDaLiga(pais, ano, rodadas.length, ocupado);
+      if (doisTorneios) t.rodadasPorTurno = ida.length;
+      estado.partidas.push(...partidasDasRodadas(ano, id, "liga", rodadas, datas));
+      if (ligaCruzaOAno(id)) t.inicio = ano;
     }
     torneios[id] = t;
   }
   estado.torneios = torneios;
   estado.partidas.sort((x, y) => x.data.localeCompare(y.data) || x.serie.localeCompare(y.serie));
+  return novos;
 }
 
 // ---- classificação --------------------------------------------------------------------------
+
+/** Tabela de um dos dois torneios do ano (1 = Clausura, 2 = Apertura) das ligas do México e da América Central. */
+export function tabelaDoTurno(estado: EstadoJogo, t: EstadoTorneio, turno: 1 | 2): LinhaTabela[] {
+  const n = t.rodadasPorTurno ?? 0;
+  return classificacao(estado, t.id, "liga", t.clubes, undefined, turno === 1 ? [1, n] : [n + 1, 2 * n]);
+}
 
 export function tabelaDoTorneio(estado: EstadoJogo, t: EstadoTorneio, grupo?: number): LinhaTabela[] {
   if (grupo != null && t.grupos) return classificacao(estado, t.id, "grupos", t.grupos[grupo - 1], grupo);
@@ -478,6 +568,12 @@ function fasesCompletas(estado: EstadoJogo): Set<string> {
     if (!ehTorneio(p.serie)) continue;
     const chave = `${p.serie}|${p.fase}`;
     tudoJogado.set(chave, (tudoJogado.get(chave) ?? true) && p.jogada);
+    // Ligas de dois torneios por ano: cada metade também conta como uma fase (`L-MX|liga|1`).
+    const meio = estado.torneios?.[p.serie as IdTorneio]?.rodadasPorTurno;
+    if (meio) {
+      const turno = `${chave}|${p.rodada <= meio ? 1 : 2}`;
+      tudoJogado.set(turno, (tudoJogado.get(turno) ?? true) && p.jogada);
+    }
   }
   return new Set([...tudoJogado].filter(([, ok]) => ok).map(([chave]) => chave));
 }
@@ -499,6 +595,19 @@ export function avancarTorneios(estado: EstadoJogo): string[] {
   // As fases completas no começo do dia (as fases novas que um torneio cria aqui só são vistas no dia seguinte, como antes).
   const completas = fasesCompletas(estado);
   for (const t of Object.values(estado.torneios ?? {})) {
+    // México e América Central: cada torneio do ano (Clausura e Apertura) tem o seu campeão, o líder do turno (R143).
+    if (t?.rodadasPorTurno && t.fase !== "encerrada") {
+      for (const turno of [1, 2] as const) {
+        if ((t.turnos?.length ?? 0) >= turno) continue;
+        if (!completas.has(`${t.id}|liga|${turno}`)) break;
+        const tab = tabelaDoTurno(estado, t, turno);
+        (t.turnos ??= []).push({ nome: turno === 1 ? "Clausura" : "Apertura", campeao: tab[0].clubeId, ...(tab[1] ? { vice: tab[1].clubeId } : {}) });
+        if (t.clubes.includes(meu)) {
+          const c = estado.clubes[tab[0].clubeId];
+          noticias.push(`${c.nome} é ${concorda(c, "campeão", "campeã")} do ${t.turnos.at(-1)!.nome} do ${t.nome}!`);
+        }
+      }
+    }
     if (!t || t.fase === "encerrada" || !completas.has(`${t.id}|${t.fase}`)) continue;
     const doUsuario = t.clubes.includes(meu);
     if (t.fase === "liga" || t.fase === "grupos") {
@@ -553,8 +662,39 @@ export function avancarTorneios(estado: EstadoJogo): string[] {
   return noticias;
 }
 
+/** Os torneios do ano acabaram? As ligas que cruzam o ano (agosto a maio) não contam: viram em 30 de junho. */
 export function torneiosEncerrados(estado: EstadoJogo): boolean {
-  return Object.values(estado.torneios ?? {}).every((t) => !t || t.fase === "encerrada");
+  return Object.values(estado.torneios ?? {}).every((t) => !t || t.fase === "encerrada" || ligaCruzaOAno(t.id));
+}
+
+/**
+ * Virada das ligas que cruzam o ano (de agosto ou outubro a maio), no dia 1º de julho: as que acabaram guardam a tabela
+ * final (vagas das copas: `ultimaTabela`), põem o campeão no histórico da temporada em que começaram, fazem o acesso e a
+ * queda entre as divisões e começam a temporada nova (da abertura de agosto em diante). Devolve as notícias do usuário.
+ */
+export function viradaDasLigas(estado: EstadoJogo): string[] {
+  const ano = Number(estado.data.slice(0, 4));
+  const acabaram = Object.values(estado.torneios ?? {}).filter((t): t is EstadoTorneio => !!t && ligaCruzaOAno(t.id) && t.fase === "encerrada");
+  if (!acabaram.length) return [];
+  const meu = estado.tecnico.clubeId;
+  const noticias: string[] = [];
+  for (const t of acabaram) {
+    const liga = t.id.slice(2);
+    (estado.ultimaTabela ??= {})[liga] = tabelaDoTorneio(estado, t).map((l) => l.clubeId);
+    const registro = estado.historico.find((h) => h.temporada === (t.inicio ?? ano - 1));
+    if (registro && t.campeao) (registro.torneios ??= {})[t.id] = { campeao: t.campeao, ...(t.vice ? { vice: t.vice } : {}) };
+    if (t.campeao === meu) noticias.push(`${estado.clubes[meu].nome} é ${concorda(estado.clubes[meu], "campeão", "campeã")} do ${t.nome}!`);
+  }
+  const trocas = trocarDivisoes(estado);
+  for (const [liga, { sobem, caem }] of Object.entries(trocas)) {
+    const { pais, nivel } = divisaoDaLiga(liga);
+    if (sobem.includes(meu)) noticias.push(`Acesso! ${comArtigo("O", estado.clubes[meu])} sobe para a ${nivel === 1 ? "1ª" : `${nivel}ª`} divisão ${PAISES[pais] ? `(${PAISES[pais].pais})` : ""}.`.replace(" .", "."));
+    if (caem.includes(meu)) noticias.push(`${comArtigo("O", estado.clubes[meu])} foi ${concorda(estado.clubes[meu], "rebaixado", "rebaixada")} para a ${nivel + 1}ª divisão.`);
+  }
+  // As ligas que acabaram (e as do mesmo país, que mudaram de clubes) começam de novo, da abertura deste ano em diante.
+  const paises = new Set(acabaram.map((t) => divisaoDaLiga(t.id.slice(2)).pais));
+  criarTorneios(estado, { so: (id) => ligaCruzaOAno(id) && paises.has(divisaoDaLiga(id.slice(2)).pais) });
+  return noticias;
 }
 
 /**
@@ -575,7 +715,10 @@ export function simulacaoRapida(estado: EstadoJogo, p: Partida, acompanha = comp
 /** Competições que o usuário acompanha: os dias só com jogos de outras passam sem parar (Série D dos outros, os outros estaduais e as ligas de fora). */
 export function competicoesDoUsuario(estado: EstadoJogo): Set<Competicao> {
   const meu = estado.tecnico.clubeId;
-  const lista = new Set<Competicao>(["A", "B", "C", "CB"]);
+  const lista = new Set<Competicao>();
+  // As Séries A a C e a Copa do Brasil só param o Avançar de quem treina um clube do Brasil: quem treina um clube de fora vê
+  // as competições do clube dele (a pré-temporada e a Série A dos outros passam sem parar, R144).
+  if (estado.clubes[meu]?.serie !== "exterior") for (const id of ["A", "B", "C", "CB"] as const) lista.add(id);
   for (const t of torneiosDoClube(estado, meu)) lista.add(t.id);
   // As copas de clubes que o clube do usuário joga (Libertadores, Copa do Nordeste...).
   for (const c of Object.values(estado.copas ?? {})) if (c?.clubes.includes(meu)) lista.add(c.id);

@@ -1,9 +1,10 @@
 // Calendário do mundo (plano das temporadas reais, etapa 1, nov/2026; docs/PLANO_TEMPORADAS_REAIS.md).
 //
 // Uma tabela só diz, para cada país, em que ciclo a temporada dele corre e as datas reais (pré-temporada, abertura, fim e
-// virada). Nesta etapa o jogo ainda usa as datas de sempre (`semanaNoJogo`: todo o mundo dentro do ano civil); as datas
-// reais passam a valer na etapa 2. Nada aqui muda o jogo: é a base que as próximas etapas leem.
+// virada). As ligas de fora do Brasil são marcadas por ela (`datasDaLiga` em torneios.ts, etapa 2): as de agosto a maio
+// atravessam o ano e viram em 30 de junho (`viradaDasLigas` em torneios.ts).
 
+import { janelaDaCopa, somarDias } from "./calendario";
 import type { Clube, Competicao } from "./tipos";
 
 /**
@@ -24,21 +25,19 @@ export interface CalendarioDoPais {
   abertura: string;
   /** Última rodada da liga. */
   fim: string;
-  /** Pausa de inverno (só alguns países da Europa). */
-  pausa?: { de: string; ate: string };
   /**
-   * Semana da temporada do jogo em que a liga começa HOJE (contando do primeiro sábado de abril, como `domingo`): a Europa
-   * começa em janeiro, com os estaduais (−12); o resto em abril (0). Sai na etapa 2, quando valerem as datas reais.
+   * Pausa sem jogos da liga: a de inverno da Europa e, nos ciclos que cruzam o ano, a do fim de ano (do Natal até depois
+   * do Ano Novo, para a virada de 31/12 não pular jogos); no México e na América Central, entre os dois torneios.
    */
-  semanaNoJogo: number;
+  pausa?: { de: string; ate: string };
 }
 
 /** Datas típicas de cada ciclo; cada país pode trocar a abertura e o fim. */
-const PADRAO: Record<Ciclo, Omit<CalendarioDoPais, "ciclo" | "semanaNoJogo">> = {
+const PADRAO: Record<Ciclo, Omit<CalendarioDoPais, "ciclo">> = {
   ano: { preTemporada: "01-03", abertura: "02-01", fim: "11-30" },
-  torneios: { preTemporada: "01-03", abertura: "01-10", fim: "12-15" },
-  agosto: { preTemporada: "07-01", abertura: "08-15", fim: "05-25" },
-  outubro: { preTemporada: "09-01", abertura: "10-17", fim: "05-20" },
+  torneios: { preTemporada: "01-03", abertura: "01-10", fim: "12-13", pausa: { de: "05-25", ate: "07-10" } },
+  agosto: { preTemporada: "07-01", abertura: "08-15", fim: "05-25", pausa: { de: "12-21", ate: "01-08" } },
+  outubro: { preTemporada: "09-01", abertura: "10-17", fim: "05-20", pausa: { de: "12-21", ate: "01-08" } },
 };
 
 /** Dia em que cada ciclo vira (contratos, acesso e queda, evolução dos jogadores): "MM-DD". */
@@ -62,15 +61,8 @@ const CICLO_AGOSTO = [
   "EG", "MA", "DZ", "TN", "ZA", "NG", "GH", "TZ", "KE",
 ];
 
-/** Países com liga que começa em janeiro no jogo de hoje (a Europa; ver `semanaNoJogo`). */
-const EUROPA = new Set([
-  "EN", "ES", "IT", "DE", "FR", "PT", "NL", "AT", "BE", "CH", "DK", "GR", "HR", "NO", "PL", "RO", "RU", "XS", "SE", "RS", "TR",
-  "CZ", "UA", "AL", "AD", "AM", "AZ", "BY", "BA", "BG", "CY", "EE", "FO", "FI", "GE", "GI", "HU", "IS", "IE", "IL", "KZ", "XK",
-  "LV", "LT", "LU", "MT", "MD", "ME", "MK", "XN", "SM", "SK", "SI", "XW",
-]);
-
 /** Abertura e fim reais quando fogem do padrão do ciclo (aproximados, temporada 2026 ou 2026/27). */
-const DATAS_PROPRIAS: Record<string, Partial<Omit<CalendarioDoPais, "ciclo" | "semanaNoJogo">>> = {
+const DATAS_PROPRIAS: Record<string, Partial<Omit<CalendarioDoPais, "ciclo">>> = {
   BR: { abertura: "01-11", fim: "12-06" }, // estaduais em janeiro; Série A até dezembro
   AR: { abertura: "01-24", fim: "12-13" },
   US: { preTemporada: "01-20", abertura: "02-21", fim: "11-07" },
@@ -99,7 +91,7 @@ function montar(): Record<string, CalendarioDoPais> {
   const tabela: Record<string, CalendarioDoPais> = {};
   const juntar = (ciclo: Ciclo, paises: string[]) => {
     for (const pais of paises) {
-      tabela[pais] = { ciclo, ...PADRAO[ciclo], ...DATAS_PROPRIAS[pais], semanaNoJogo: EUROPA.has(pais) ? -12 : 0 };
+      tabela[pais] = { ciclo, ...PADRAO[ciclo], ...DATAS_PROPRIAS[pais] };
     }
   };
   juntar("ano", CICLO_ANO);
@@ -153,12 +145,29 @@ export function viradaDoCiclo(ciclo: Ciclo, ano: number): string {
   return `${cruzaOAno(ciclo) ? ano + 1 : ano}-${VIRADA_DO_CICLO[ciclo]}`;
 }
 
-/** Dia em que começa a pré-temporada do país na temporada que começa em `ano` ("AAAA-MM-DD"). */
+/**
+ * Dia em que começa a pré-temporada do país na temporada que começa em `ano` ("AAAA-MM-DD"). Em ano de Copa do Mundo, os
+ * clubes de agosto a maio só voltam depois da final (como no mundo real): 20 de julho de 2026, em vez de 1º de julho.
+ */
 export function inicioDaPreTemporada(pais: string | undefined, ano: number): string {
-  return `${ano}-${calendarioDoPais(pais).preTemporada}`;
+  const data = `${ano}-${calendarioDoPais(pais).preTemporada}`;
+  const copa = janelaDaCopa(ano);
+  if (copa && data >= copa.de && data <= copa.ate) return somarDias(copa.ate, 1);
+  return data;
 }
 
-/** Semana da temporada do jogo em que a liga do país começa hoje (ver `semanaNoJogo`). */
-export function semanaDaLigaNoJogo(pais: string): number {
-  return calendarioDoPais(pais).semanaNoJogo;
+/** Liga de fora ("L-EN", "L-AU2") cujo ciclo cruza o ano (de agosto ou outubro a maio). */
+export function ligaCruzaOAno(id: Competicao | string): boolean {
+  return id.startsWith("L-") && cruzaOAno(cicloDaCompeticao(id));
+}
+
+/**
+ * Período da liga do país na temporada que começa em `ano`: da abertura ao fim e a pausa, em datas "AAAA-MM-DD" (nos
+ * ciclos que cruzam o ano, o que vem antes de julho fica no ano seguinte).
+ */
+export function periodoDaLiga(pais: string, ano: number): { de: string; ate: string; pausa?: { de: string; ate: string } } {
+  const cal = calendarioDoPais(pais);
+  const cruza = cruzaOAno(cal.ciclo);
+  const noAno = (md: string) => `${cruza && md < "07-01" ? ano + 1 : ano}-${md}`;
+  return { de: noAno(cal.abertura), ate: noAno(cal.fim), ...(cal.pausa ? { pausa: { de: noAno(cal.pausa.de), ate: noAno(cal.pausa.ate) } } : {}) };
 }

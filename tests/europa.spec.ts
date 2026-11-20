@@ -13,7 +13,7 @@ const tabelas2025 = (JSON.parse(readFileSync("data/europa-2026/copas.json", "utf
 test("R98 jogo novo na Europa: o continente Europa com os 54 países (7 até o R106) (cada um com a bandeira, a Inglaterra com a dela), a Inglaterra com os 20 clubes da 1ª divisão; assumindo o Arsenal, o painel mostra o Campeonato Inglês e a Liga dos Campeões", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   // Dois continentes: América e Europa.
   await expect(page.getByRole("button", { name: /América/ })).toBeVisible();
@@ -42,12 +42,14 @@ test("R98 jogo novo na Europa: o continente Europa com os 54 países (7 até o R
   await expect(page.getByRole("heading", { name: "Campeonato Inglês 2026" })).toBeVisible();
   await expect(cartaoDoProximoJogo(page)).toBeVisible();
   await expect(page.locator("main")).toContainText("Liga dos Campeões");
+  // O jogo começa na pré-temporada (R144): o botão pula para o início da temporada.
+  await expect(page.locator(".placar-do-dia").getByRole("button", { name: /Avançar|Ir para o jogo/ })).toContainText("Pular para o início da temporada");
 });
 
 test("R99 Tabelas na Europa: em Outros países, o grupo Europa com os 54 países (23 até o R113; a Inglaterra com 20 clubes); em Copas, o grupo Europa com a Liga dos Campeões, a Liga Europa e a Conference (a Supercopa fora, sem jogo em 2026)", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: /Europa/ }).click();
   await page.getByRole("button", { name: /Espanha/ }).click();
@@ -82,7 +84,7 @@ test("R107 copas nacionais da Europa e os países novos nas copas da UEFA: com o
   const nomes = new Map([...europa, ...outros, ...segundas].map((c) => [c.id, c.nome]));
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: /Europa/ }).click();
   await page.getByRole("button", { name: /Espanha/ }).click();
@@ -114,7 +116,7 @@ test("R107 copas nacionais da Europa e os países novos nas copas da UEFA: com o
 test("R103 2ª e 3ª divisão da Europa: no jogo novo, a Inglaterra tem a 2ª divisão com os 24 clubes do Championship; assumindo o Leicester, o painel mostra o Campeonato Inglês – 2ª divisão; nas Tabelas, as duas divisões com a zona de queda na 1ª e a de acesso na 2ª", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: /Europa/ }).click();
   await page.getByRole("button", { name: /Inglaterra/ }).click();
@@ -146,7 +148,7 @@ test("R103 2ª e 3ª divisão da Europa: no jogo novo, a Inglaterra tem a 2ª di
 test("R106 Outros países da Europa: no jogo novo, a Escócia (com a bandeira dela) e a Turquia; assumindo o Galatasaray, o painel mostra o Campeonato Turco; nas Tabelas, a Turquia com 18 clubes", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: /Europa/ }).click();
   await expect(page.getByRole("button", { name: /Escócia/ }).locator(".bandeira")).toHaveAttribute("data-pais", "XS");
