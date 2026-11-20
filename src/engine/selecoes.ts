@@ -1022,16 +1022,35 @@ function registrarNaCopa(estado: EstadoJogo, comp: EstadoCompeticaoSelecoes) {
   }
 }
 
+/** Vagas de cada continente na repescagem mundial (a Europa tem a repescagem dela). */
+const VAGAS_DA_REPESCAGEM: [Confederacao, number][] = [["conmebol", 1], ["concacaf", 2], ["caf", 1], ["afc", 1], ["ofc", 1]];
+
+/**
+ * Vaga que sobrou na repescagem mundial (R155): a sede também joga as Eliminatórias (simplificação do jogo) e, se ela foi a
+ * que ganhou a vaga, a vaga ficava vazia. Fica no mesmo continente, com a melhor seleção do ranking dele fora da Copa.
+ */
+function completarRepescagem(estado: EstadoJogo, ano: number, times: string[]): string[] {
+  const naCopa = new Set(estado.selecoes!.competicoes[`S-COPA-${ano}` as IdCompeticaoSelecoes]?.selecoes ?? []);
+  const lista = [...times];
+  for (const [conf, vagas] of VAGAS_DA_REPESCAGEM) {
+    const tem = lista.filter((x) => confederacao(paisDaSelecao(x)) === conf).length;
+    if (tem >= vagas) continue;
+    const doContinente = conf === "concacaf" ? concacaf(true) : daConfederacao(conf);
+    lista.push(...peloRanking(estado, doContinente).filter((x) => !naCopa.has(x) && !lista.includes(x)).slice(0, vagas - tem));
+  }
+  return lista;
+}
+
 /**
  * Repescagem mundial (março do ano da Copa, campo neutro): as 6 que vieram das Eliminatórias; as 2 melhores do ranking
  * esperam na final e as outras 4 jogam a semifinal (3ª x 6ª, 4ª x 5ª). Os 2 vencedores vão à Copa. Com a data de março
  * já passada (save antigo), vão as 2 melhores do ranking.
  */
-function criarRepescagemMundial(estado: EstadoJogo, ano: number, times: string[], semifinais?: [string, string][], esperam?: string[]) {
+export function criarRepescagemMundial(estado: EstadoJogo, ano: number, times: string[], semifinais?: [string, string][], esperam?: string[]) {
   const id: IdCompeticaoSelecoes = `S-INT-${ano}`;
   const sel = estado.selecoes!;
   if (sel.competicoes[id]) return;
-  const ordem = peloRanking(estado, times);
+  const ordem = peloRanking(estado, times.length < 6 && !semifinais ? completarRepescagem(estado, ano, times) : times);
   const [quinta] = datasDaJanela(ano, "mar");
   const comp: EstadoCompeticaoSelecoes = {
     id, tipo: "repescagem-mundial", nome: NOMES["repescagem-mundial"], ano, fase: "rep-semi", selecoes: ordem, repescagem: [...ordem],
