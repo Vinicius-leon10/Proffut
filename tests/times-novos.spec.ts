@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { aba, abrirSite, botao, cartaoDoProximoJogo, dataNoTopo, esperarNoSave, expect, montarSave, novoJogo, pularTutorial, test } from "./ajuda";
+import { aba, abrirFiltros, abrirSite, fecharFiltros, botao, cartaoDoProximoJogo, dataNoTopo, esperarNoSave, expect, montarSave, novoJogo, pularTutorial, test } from "./ajuda";
 
 type Ficha = { nome: string; pais?: string; liga?: string };
 const ler = (arquivo: string) => JSON.parse(readFileSync(arquivo, "utf8")) as { clubes: Ficha[] };
@@ -35,10 +35,12 @@ test("R66 Tabelas: Séries (com a Série D em grupos), Copa, Estaduais (escolhen
 test("R67 Mercado: a busca acha jogadores da Série D, dos clubes só do estadual e de cada país da América do Sul", async ({ page }) => {
   await novoJogo(page);
   await aba(page, "Mercado");
-  const onde = page.getByRole("combobox", { name: "Série" });
   const ficha = page.getByRole("dialog");
   for (const [opcao, clubes] of [["Argentina", nomes(exterior.clubes, "AR")], ["Uruguai", nomes(exterior.clubes, "UY")], ["Série D", nomes(serieD.clubes)], ["Só estadual", nomes(estaduais.clubes)]] as const) {
-    await onde.selectOption({ label: opcao });
+    // Desde o R158 o "Onde joga" fica na folha dos filtros.
+    await abrirFiltros(page);
+    await page.getByLabel("Onde joga").selectOption({ label: opcao });
+    await fecharFiltros(page);
     await page.locator("main .lista .item").first().click();
     // A ficha do jogador diz o clube dele: é um dos clubes daquele lugar.
     const texto = (await ficha.locator(".linha.pequeno").first().textContent()) ?? "";
@@ -69,7 +71,9 @@ test("R69 save de antes dos times novos: ao abrir, os clubes da Série D, dos es
   await page.locator('input[type="file"]').setInputFiles({ name: "save.json", mimeType: "application/json", buffer: Buffer.from(save) });
   await expect(cartaoDoProximoJogo(page)).toBeVisible({ timeout: 20_000 });
   await aba(page, "Mercado");
-  await page.getByRole("combobox", { name: "Série" }).selectOption({ label: "Argentina" });
+  await abrirFiltros(page);
+  await page.getByLabel("Onde joga").selectOption({ label: "Argentina" });
+  await fecharFiltros(page);
   await expect(page.locator("main .lista .item").first()).toBeVisible();
   // Nesta temporada, ainda sem estaduais nem ligas de fora nas Tabelas.
   await aba(page, "Tabelas");
