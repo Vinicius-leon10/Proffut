@@ -10,7 +10,7 @@ const mundo = (JSON.parse(readFileSync("data/mundo-2026/clubes.json", "utf8")) a
 test("R108 Ásia no jogo novo: o continente Ásia com Arábia Saudita, Austrália, Coreia do Sul e Japão; o Japão com os 20 clubes da J1; assumindo o Urawa Reds, o painel mostra o Campeonato Japonês; nas Tabelas, Outros países com o grupo Ásia e o Japão com 20 clubes", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: /Ásia/ }).click();
   await expect(page.locator(".topo .titulo")).toHaveText("Escolha o país");
@@ -37,7 +37,7 @@ test("R108 Ásia no jogo novo: o continente Ásia com Arábia Saudita, Austráli
 test("R109 Liga dos Campeões da Ásia: com o Urawa Reds, Tabelas → Copas abre na Liga dos Campeões da Ásia (grupo Ásia), com 4 grupos de 4 e o Urawa num deles; o Mundial de Clubes só aparece a partir de 2027", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: /Ásia/ }).click();
   await page.getByRole("button", { name: /Japão/ }).click();
@@ -60,7 +60,7 @@ test("R109 Liga dos Campeões da Ásia: com o Urawa Reds, Tabelas → Copas abre
 test("R110 África e o resto da Ásia: no jogo novo, o continente África com o Egito (21 clubes), Marrocos e a África do Sul; assumindo o Al Ahly, o painel mostra o Campeonato Egípcio; nas Tabelas, Outros países com o grupo África e o Egito com 21 clubes; a Ásia ganha China, Catar, Irã e outros", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: /África/ }).click();
   const paises = (await page.locator(".lista .item").allTextContents()).join(" | ");
@@ -87,7 +87,7 @@ test("R110 África e o resto da Ásia: no jogo novo, o continente África com o 
 test("R111 Liga dos Campeões da África: com o Al Ahly, Tabelas → Copas abre na Liga dos Campeões da África (grupo África), com 4 grupos de 4 e o Al Ahly num deles", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: /África/ }).click();
   await page.getByRole("button", { name: /Egito/ }).click();

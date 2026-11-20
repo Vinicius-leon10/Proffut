@@ -66,6 +66,14 @@ export function Inicio() {
   const auto = saves?.find((s) => s.espaco === "auto");
   const espacos = saves?.filter((s) => s.espaco !== "auto") ?? [];
   const ficha = (id: string) => FICHAS.find((f) => f.id === id);
+  // Uma lista só (R149): o jogo do Continuar aparece uma vez, em primeiro. Ligado a um espaço, é a linha desse espaço;
+  // fora dos espaços, a linha do próprio Continuar.
+  const ligado = auto?.ligado && espacos.some((r) => r.espaco === auto.ligado) ? auto.ligado : undefined;
+  const linhas = [
+    ...(auto && !ligado ? [{ r: auto, continuar: true }] : []),
+    ...espacos.filter((r) => r.espaco === ligado).map((r) => ({ r, continuar: true })),
+    ...espacos.filter((r) => r.espaco !== ligado).map((r) => ({ r, continuar: false })),
+  ];
 
   return (
     <main className="inicio">
@@ -85,51 +93,51 @@ export function Inicio() {
         </Cartao>
       )}
 
-      {auto && (
-        <button className="cartao linha" onClick={() => abrir(auto)} style={{ textAlign: "left" }}>
-          {ficha(auto.clubeId) && <Escudo clube={ficha(auto.clubeId)!} tamanho={44} />}
-          <div className="cresce">
-            <div className="negrito">Continuar</div>
-            <div className="pequeno fraco corta">{auto.clube} · {auto.tecnico}</div>
-            <div className="mini muito-fraco">Temporada {auto.temporada} · {formatarData(auto.data)}</div>
-            <div className="mini muito-fraco">{auto.ligado ? `Espaço ${auto.ligado} · salva sozinho` : "Fora dos espaços"}</div>
-          </div>
-          <span className="botao primario pequeno">Jogar</span>
-        </button>
-      )}
-      {auto && (
-        <button className="botao pequeno" style={{ alignSelf: "flex-end" }} onClick={() => apagarSave(auto)} aria-label="Apagar o jogo do Continuar">
-          Apagar o Continuar
-        </button>
-      )}
-
-      <button className={`botao grande cheio ${auto ? "floresta" : "primario"}`} onClick={() => irParaTela("novo")}>
+      <button className="botao grande cheio primario" onClick={() => irParaTela("novo")}>
         Novo jogo
       </button>
 
-      {espacos.length > 0 && (
-        <Cartao titulo="Jogos salvos">
-          <div className="lista">
-            {espacos.map((r) => (
-              <div key={r.espaco} className="item">
-                <button className="linha cresce" onClick={() => abrir(r)} style={{ background: "none", border: 0, padding: 0, textAlign: "left", gap: 10, color: "inherit" }}>
-                  {ficha(r.clubeId) && <Escudo clube={ficha(r.clubeId)!} tamanho={30} />}
+      {linhas.length > 0 && (
+        <div className="coluna" style={{ gap: 6 }}>
+          <div className="rotulo-secao">Seus jogos</div>
+          <div className="cartao lista jogos-salvos">
+            {linhas.map(({ r, continuar }) => (
+              <div key={r.espaco} className="item" data-espaco={r.espaco} data-continuar={continuar ? "" : undefined}>
+                <button className="linha cresce abrir-jogo" onClick={() => abrir(r)}>
+                  {ficha(r.clubeId) && <Escudo clube={ficha(r.clubeId)!} tamanho={34} />}
                   <div className="cresce">
-                    <div className="negrito pequeno">Espaço {r.espaco}: {r.clube}</div>
+                    <div className="negrito"><span>{r.clube}</span>{continuar && <span className="selo-continuar">Continuar</span>}</div>
                     <div className="mini fraco">{r.tecnico} · {r.temporada} · {formatarData(r.data)}</div>
+                    <div className="mini muito-fraco">
+                      {r.espaco === "auto" ? "Fora dos espaços" : continuar ? `Espaço ${r.espaco} · salva sozinho` : `Espaço ${r.espaco}`}
+                    </div>
                   </div>
+                  <span className={`botao pequeno${continuar ? " primario" : ""}`}>{continuar ? "Jogar" : "Abrir"}</span>
                 </button>
-                <button className="botao pequeno" onClick={() => apagarSave(r)} aria-label={`Apagar o Espaço ${r.espaco}`}>Apagar</button>
+                <button className="lixeira" onClick={() => apagarSave(r)}
+                  aria-label={`Apagar ${r.clube} (${r.espaco === "auto" ? "Continuar" : `Espaço ${r.espaco}`})`}>
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6" />
+                  </svg>
+                </button>
               </div>
             ))}
           </div>
-        </Cartao>
+        </div>
       )}
 
       <button className="botao cheio" onClick={() => arquivo.current?.click()}>Importar save de arquivo</button>
       <input ref={arquivo} type="file" className="oculto" onChange={(e) => importar(e.target.files?.[0])} />
 
-      <p className="mini muito-fraco centro" style={{ marginTop: "auto" }}>
+      <a className="link-instagram" href="https://www.instagram.com/proffut.jogo" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+        </svg>
+        <span>Siga <b>@proffut.jogo</b></span>
+        <span className="botao pequeno">Abrir</span>
+      </a>
+
+      <p className="mini muito-fraco centro">
         Clubes e jogadores reais (força calculada pelo jogo). Os escudos pertencem aos clubes. Projeto pessoal, sem fins comerciais.
       </p>
     </main>

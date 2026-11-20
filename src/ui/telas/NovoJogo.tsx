@@ -139,7 +139,7 @@ export function NovoJogo() {
         <div className="conteudo">
           <label className="coluna" style={{ gap: 6 }}>
             <span className="pequeno fraco">Nome do técnico</span>
-            <input value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Ex.: Vinícius" maxLength={30} autoComplete="off"
+            <input value={nome} onChange={(e) => setNome(e.target.value)} maxLength={30} autoComplete="off"
               onKeyDown={(e) => { if (e.key === "Enter") setPasso("continente"); }} />
           </label>
         </div>

@@ -6,7 +6,7 @@ import { abrirSite, botao, cartaoDoProximoJogo, expect, novoJogo, pularTutorial,
 test("R144 jogo novo na Europa: tela 'Preparando o mundo…' com barra de progresso, o jogo começa em 1º de julho na pré-temporada e o botão pula para o início da temporada", async ({ page }) => {
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: /Europa/ }).click();
   await page.getByRole("group", { name: "País" }).getByRole("button", { name: /Inglaterra/ }).click();

@@ -19,7 +19,7 @@ test("R124 bandeiras em imagem (jogador e escolha do país) e o escudo de cada s
   // Escolha do país no jogo novo.
   await abrirSite(page);
   await botao(page, "Novo jogo").click();
-  await page.getByPlaceholder("Ex.: Vinícius").fill("Teste");
+  await page.getByLabel("Nome do técnico").fill("Teste");
   await page.getByRole("button", { name: "Próximo", exact: true }).click();
   await page.getByRole("button", { name: /América/ }).click();
   await conferirBandeira(page, page.getByRole("button", { name: /Argentina/ }).locator(".bandeira"), "AR");
