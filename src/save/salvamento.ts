@@ -1,5 +1,6 @@
 // Salva o jogo no próprio celular (IndexedDB) e exporta/importa em arquivo.
 import { createStore, del, get, set, setMany } from "idb-keyval";
+import { FORCA_MAXIMA } from "../engine/constantes";
 import { acertarCiclos, acertarNacionalidades, acertarParticipantes, juntarAoSaveAntigo, tirarRepetidos } from "../engine/jogo";
 import { garantirContratos } from "../engine/contratos";
 import { montarRecordes } from "../engine/trofeus";
@@ -160,6 +161,11 @@ function migrar(estado: EstadoJogo): EstadoJogo {
   garantirContratos(estado, estado.temporada + 1);
   // Sala de troféus (out/2026): os recordes começam pelos jogos já disputados na temporada em andamento.
   montarRecordes(estado);
+  // Força máxima 99 (R152, nov/2026): quem passou disso num save antigo desce para 99 (força e potencial).
+  for (const j of Object.values(estado.jogadores)) {
+    if (j.forca > FORCA_MAXIMA) j.forca = FORCA_MAXIMA;
+    if (j.potencial > FORCA_MAXIMA) j.potencial = FORCA_MAXIMA;
+  }
   return estado;
 }
 

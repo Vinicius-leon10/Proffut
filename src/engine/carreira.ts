@@ -2,6 +2,8 @@
 // depois da demissão e convites de clubes maiores (no meio da fase de liga e na virada da temporada).
 import { comArtigo } from "./artigos";
 import { diasEntre, formatarData, somarDias } from "./calendario";
+import { anoDoCiclo, cruzaOAno } from "./ciclos";
+import { cicloDoClubeId } from "./contratos";
 import { FASE_LIGA, NOME_SERIE, dasSeries, ehSerie } from "./competicoes";
 import { CARGO, CONVITES, REPUTACAO } from "./constantes";
 import { definirObjetivo, situacaoDoObjetivo } from "./diretoria";
@@ -83,7 +85,19 @@ export function depoisDoMeuJogo(estado: EstadoJogo, p: Partida) {
     });
   }
   // No meio da fase de liga, quem está cumprindo o objetivo chama a atenção de clubes maiores.
-  if (meioDaLiga(estado, p) && situacaoDoObjetivo(estado).situacao === "encaminhada") gerarConvites(estado, CONVITES.meioDaLiga);
+  // Só depois da primeira virada no clube (R153): na primeira temporada nenhum clube chama o técnico.
+  if (!primeiraTemporadaNoClube(estado) && meioDaLiga(estado, p) && situacaoDoObjetivo(estado).situacao === "encaminhada") {
+    gerarConvites(estado, CONVITES.meioDaLiga);
+  }
+}
+
+/** O técnico chegou ao clube nesta temporada (a do ciclo do clube: ano civil ou agosto a maio). */
+export function primeiraTemporadaNoClube(estado: EstadoJogo): boolean {
+  const t = estado.tecnico;
+  if (!t.desde) return true;
+  const ciclo = cicloDoClubeId(estado, t.clubeId);
+  if (cruzaOAno(ciclo)) return anoDoCiclo(ciclo, t.desde) === anoDoCiclo(ciclo, estado.data);
+  return Number(t.desde.slice(0, 4)) >= estado.temporada;
 }
 
 function meioDaLiga(estado: EstadoJogo, p: Partida): boolean {

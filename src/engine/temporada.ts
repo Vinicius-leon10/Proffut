@@ -9,7 +9,7 @@ import { diasEntre, inicioDaTemporada, somarDias } from "./calendario";
 import { NOME_SERIE, SERIES, criarTemporada, nomeDaLigaDoClube, posicaoNaLiga, tabelaDaLiga, torneioPrincipal } from "./competicoes";
 import { criarCopa } from "./copa";
 import { cicloDaCopaId, criarCopasDeClubes, definicaoDaCopa, vagasDasCopas } from "./copas";
-import { CARGO, CONVITES, ELENCO_MAXIMO, MINIMO_POSICAO, REPUTACAO } from "./constantes";
+import { CARGO, CONVITES, ELENCO_MAXIMO, EVOLUCAO, FORCA_MAXIMA, MINIMO_POSICAO, REPUTACAO } from "./constantes";
 import { definirObjetivo } from "./diretoria";
 import { escalarAutomatico } from "./forca";
 import { lancar, precoDeReferencia, premiacao } from "./financas";
@@ -36,8 +36,36 @@ function artilheiro(estado: EstadoJogo, serie: SerieId): RegistroTemporada["arti
   return j ? { jogadorId: j.id, nome: j.nome, clubeId: j.clubeId ?? "", gols: melhor[1] } : null;
 }
 
+/**
+ * Nível da temporada de um jogador (R152): 0 comum, 1 boa, 2 excelente. Pede muitos jogos e nenhuma lesão longa; conta a
+ * nota média (só nas partidas completas), os gols e passes de quem ataca e, para goleiro e defensores, os jogos sem sofrer
+ * gol (o goleiro também as defesas: decisão do usuário). Nos jogos pela simulação rápida não há nota nem defesas: vale o
+ * que existe.
+ */
+export function nivelDaTemporada(j: Jogador): 0 | 1 | 2 {
+  const t = j.temporada;
+  const n = EVOLUCAO.temporada;
+  if (t.jogos < n.jogosMinimos || (t.lesaoMaisLonga ?? 0) >= n.lesaoLonga) return 0;
+  let pontos = t.jogos >= n.jogosMuitos ? 1 : 0;
+  const nota = (t.avaliados ?? 0) >= n.avaliadosMinimos ? (t.notas ?? 0) / t.avaliados! : undefined;
+  if (nota !== undefined) pontos += nota >= n.notaExcelente ? 2 : nota >= n.notaBoa ? 1 : 0;
+  const porJogo = (x: number) => x / t.jogos;
+  if (j.posicao === "A" || j.posicao === "M") {
+    const producao = porJogo(t.gols + t.assistencias * (j.posicao === "A" ? 0.5 : 1));
+    const [boa, excelente] = j.posicao === "A" ? n.producaoAtacante : n.producaoMeia;
+    pontos += producao >= excelente ? 2 : producao >= boa ? 1 : 0;
+  } else {
+    const semSofrer = porJogo(t.semSofrer ?? 0);
+    pontos += semSofrer >= n.semSofrer[1] ? 2 : semSofrer >= n.semSofrer[0] ? 1 : 0;
+    if (j.posicao === "G" && porJogo(t.defesas ?? 0) >= n.defesasPorJogo) pontos += 1;
+  }
+  const pedido = nota === undefined ? n.semNota : n;
+  return pontos >= pedido.pontosExcelente ? 2 : pontos >= pedido.pontosBoa ? 1 : 0;
+}
+
 export function evoluir(rng: Rng, j: Jogador, envelhecer = true) {
   const jogou = j.temporada.jogos;
+  const e = EVOLUCAO;
   let delta: number;
   // Mais devagar desde nov/2026 (R127): "um jogador comprou só jovens e em 5 anos eles estavam entre os melhores do mundo".
   // Antes, até 21 anos subia de 3 a 6 por temporada jogando; um 70 de 18 anos chegava a ~90 aos 23.
@@ -47,11 +75,26 @@ export function evoluir(rng: Rng, j: Jogador, envelhecer = true) {
   else if (j.idade <= 31) delta = rng.int(-2, 0);
   else if (j.idade <= 33) delta = rng.int(-4, -1);
   else delta = rng.int(-6, -2);
-  // Perto do topo fica mais difícil: acima de 80, cada ponto a mais custa mais.
-  if (delta > 0 && j.forca >= 80) delta = Math.round(delta * (j.forca >= 86 ? 0.4 : 0.7));
-  if (delta > 0) j.forca = Math.min(j.potencial, j.forca + delta);
-  else j.forca = limitar(j.forca + delta, 1, 99);
-  j.potencial = Math.max(j.potencial, j.forca);
+  // R152: de 80 a 89 o ganho cai um pouco (e bem mais para quem joga pouco); 90 é o limite desse caminho. Antes (R127) o
+  // ganho caía a 0,7 acima de 80 e a 0,4 acima de 86: um 80 de 19 anos quase nunca chegava a 90 (medição de nov/2026).
+  if (delta > 0 && j.forca >= 80 && j.forca < 90) {
+    delta = Math.min(90 - j.forca, Math.round(delta * (jogou >= e.jogosParaEvoluir ? e.fator80 : e.fator80JogandoPouco)));
+  }
+  // De 90 em diante só sobe com temporada boa (até 94) ou excelente; de 95 a 99, só excelente, com mais chance para quem
+  // emenda várias seguidas. Sem isso, não sobe (a idade ainda pode derrubar).
+  const nivel = nivelDaTemporada(j);
+  j.excelentesSeguidas = nivel === 2 ? (j.excelentesSeguidas ?? 0) + 1 : 0;
+  if (!j.excelentesSeguidas) delete j.excelentesSeguidas;
+  if (j.forca >= 90 && delta >= 0 && j.idade <= e.idadeMaximaNoTopo) {
+    const seguidas = j.excelentesSeguidas ?? 0;
+    const chance = j.forca < 95
+      ? (nivel === 2 ? e.chance90Excelente : nivel === 1 ? e.chance90Boa : 0)
+      : (nivel === 2 ? Math.min(e.chance95Maxima, e.chance95 + e.chance95PorSeguida * (seguidas - 1)) : 0);
+    delta = rng.chance(chance) ? 1 : 0;
+  } else if (j.forca >= 90 && delta > 0) delta = 0;
+  if (delta > 0) j.forca = Math.min(j.potencial, FORCA_MAXIMA, j.forca + delta);
+  else j.forca = limitar(j.forca + delta, 1, FORCA_MAXIMA);
+  j.potencial = Math.min(FORCA_MAXIMA, Math.max(j.potencial, j.forca));
   if (envelhecer) j.idade++;
 }
 
@@ -111,7 +154,8 @@ function virarJogadores(estado: EstadoJogo, ciclos: Ciclo[], fim: number, rng: R
       continue;
     }
     // Soma a temporada na carreira (as notas faltam nos saves antigos: contam como zero).
-    for (const k of Object.keys(j.temporada) as (keyof Jogador["carreira"])[]) j.carreira[k] = (j.carreira[k] ?? 0) + (j.temporada[k] ?? 0);
+    // A lesão mais longa é só da temporada (R152): não soma na carreira.
+    for (const k of Object.keys(j.temporada) as (keyof Jogador["carreira"])[]) if (k !== "lesaoMaisLonga") j.carreira[k] = (j.carreira[k] ?? 0) + (j.temporada[k] ?? 0);
     if (!jaEvoluiu(j)) {
       evoluir(rng, j, false);
       j.evoluiuEm = estado.data;

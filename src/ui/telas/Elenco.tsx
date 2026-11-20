@@ -8,7 +8,7 @@ import { NOMES_CARACTERISTICA, NOMES_POSICAO, fatorEnergia } from "../../engine/
 import { formatarDinheiro } from "../../engine/financas";
 import { formatarNota, notaMedia } from "../../engine/notas";
 import { valorMercado } from "../../engine/gerador";
-import { dispensar, elencoDe, podeSair, precoPedido } from "../../engine/mercado";
+import { dispensar, elencoDe, leiloar, podeSair, precoPedido } from "../../engine/mercado";
 import type { Jogador, Posicao } from "../../engine/tipos";
 import { BandeiraJogador, Barra, Cartao, Escudo, Folha, Opcoes, Pos } from "../componentes";
 import { NOMES_NACIONALIDADE } from "../formatos";
@@ -146,9 +146,12 @@ export function FolhaJogador({ jogadorId, aoFechar }: { jogadorId: number; aoFec
   const naoEmpresta = meu && !j.emprestimo ? motivoParaNaoEmprestar(estado, j) : null;
   const terminando = meu && !j.emprestimo && ultimoAno(estado, j);
   const alternarVenda = () => {
-    j.aVenda = !j.aVenda;
+    // Pôr à venda faz o leilão na hora (venda rápida, R154): o maior lance aparece em Mercado → Meus à venda.
+    let texto: string;
+    if (j.aVenda) { j.aVenda = false; texto = `${j.nome} saiu da lista de venda.`; }
+    else texto = leiloar(estado, j.id).texto;
     atualizar();
-    avisar(j.aVenda ? `${j.nome} foi colocado à venda. As propostas aparecem no Mercado.` : `${j.nome} saiu da lista de venda.`);
+    avisar(texto);
   };
   return (
     <Folha titulo={j.nome} aoFechar={aoFechar}>

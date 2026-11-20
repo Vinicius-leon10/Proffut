@@ -67,6 +67,12 @@ export interface EstatisticasJogador {
   /** Soma das notas e quantos jogos tiveram nota (a média é uma pela outra). Faltam nos saves antigos. */
   notas?: number;
   avaliados?: number;
+  /** Jogos sem sofrer gol de quem jogou na defesa (goleiro, zagueiro e lateral; R152). Faltam nos saves antigos. */
+  semSofrer?: number;
+  /** Defesas do goleiro (só nas partidas completas; R152). */
+  defesas?: number;
+  /** A lesão mais longa da temporada, em dias (R152: lesão longa atrapalha a evolução de quem já passou de 90). */
+  lesaoMaisLonga?: number;
 }
 
 export interface Jogador {
@@ -95,6 +101,8 @@ export interface Jogador {
    * do computador renovam). Livres não têm. Falta nos saves antigos: ganham ao abrir o jogo (`migrar`).
    */
   contratoAte?: number;
+  /** Temporadas excelentes seguidas (R152): quem já passou de 95 sobe mais fácil com elas. Falta = nenhuma. */
+  excelentesSeguidas?: number;
   /** Data da última evolução de força (virada do ciclo do clube): evita evoluir duas vezes no mesmo ano ao mudar de ciclo. */
   evoluiuEm?: string;
   /** Emprestado: joga no `clubeId` até a virada da temporada `ate` e então volta ao clube `de` (dono do contrato). */

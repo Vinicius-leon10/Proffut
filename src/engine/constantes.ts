@@ -117,6 +117,35 @@ export const NOTAS = {
 export const RECUPERACAO_POR_DIA = 9;
 export const DIAS_LESAO = { min: 4, max: 35 };
 
+/** Venda rápida (leilão, R154): até `clubes` dão lance, cada um entre `minimo` e `maximo` do valor de mercado. */
+export const LEILAO = { clubes: 4, minimo: 0.8, maximo: 1.15 };
+
+// ---- evolução da força (R152) ---------------------------------------------------------------
+/** Ninguém passa disso (jogadores de verdade, criados, da base e de saves antigos). */
+export const FORCA_MAXIMA = 99;
+/**
+ * Evolução depois dos 80 (pedido do usuário, nov/2026: o 99 "muito difícil", os jovens chegando a 90 num meio-termo).
+ * De 80 a 89 o ganho da idade vale `fator80` (quem jogou menos de `jogosParaEvoluir`, `fator80JogandoPouco`). De 90 a 94
+ * sobe 1 ponto com a chance da temporada boa ou excelente; de 95 a 99, só com temporada excelente, `chance95` mais
+ * `chance95PorSeguida` por excelente seguida antes dela (até `chance95Maxima`). Acima de `idadeMaximaNoTopo` não sobe mais.
+ * `temporada`: o que faz a temporada ser boa ou excelente (`nivelDaTemporada`, temporada.ts). Sem nota (simulação rápida),
+ * a nota não entra e os pontos pedidos caem `semNota`.
+ */
+export const EVOLUCAO = {
+  jogosParaEvoluir: 20, fator80: 0.8, fator80JogandoPouco: 0.5,
+  chance90Boa: 0.4, chance90Excelente: 0.8, chance95: 0.35, chance95PorSeguida: 0.15, chance95Maxima: 0.8,
+  idadeMaximaNoTopo: 29,
+  temporada: {
+    jogosMinimos: 25, jogosMuitos: 30, lesaoLonga: 25, avaliadosMinimos: 10, notaBoa: 7.0, notaExcelente: 7.4,
+    /** Gols + meio passe por jogo (atacante) e gols + passes por jogo (meia): [boa, excelente]. */
+    producaoAtacante: [0.4, 0.55] as const, producaoMeia: [0.25, 0.45] as const,
+    /** Jogos sem sofrer gol por jogo (goleiro, zagueiro e lateral): [boa, excelente]. */
+    semSofrer: [0.3, 0.42] as const,
+    defesasPorJogo: 3,
+    pontosBoa: 3, pontosExcelente: 5, semNota: { pontosBoa: 2, pontosExcelente: 3 },
+  },
+};
+
 // ---- elenco -----------------------------------------------------------------
 export const ELENCO_MAXIMO = 32;
 /** Mínimo por posição: abaixo disso o clube não vende nem dispensa. */

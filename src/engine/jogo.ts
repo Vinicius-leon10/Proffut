@@ -35,7 +35,7 @@ import { registrarRecordes } from "./trofeus";
 import { atualizarConfianca, definirObjetivo } from "./diretoria";
 import { escalarAutomatico, forcaDoTime } from "./forca";
 import { lancar, marcarFolhaAprovada, precoDeReferencia, processarMes, publicoDoJogo } from "./financas";
-import { elencoReal, gerarElenco, type JogadorReal } from "./gerador";
+import { anotarLesao, elencoReal, gerarElenco, type JogadorReal } from "./gerador";
 import { completarLivres, elencoDe, gerarPropostas, reescalar, transferenciasDaIa } from "./mercado";
 import { enviarMensagem } from "./mensagens";
 import {
@@ -720,15 +720,22 @@ function aplicarResultado(estado: EstadoJogo, pv: PartidaViva, elencos: Map<stri
   }
 
   // Jogadores: jogos, gols, cartões, suspensões, lesões e energia.
-  for (const lado of pv.lados) {
+  for (const [i, lado] of pv.lados.entries()) {
     for (const j of elencos.get(lado.clubeId) ?? []) {
       if (j.suspensaoJogos > 0 && !lado.jogaram.includes(j.id)) j.suspensaoJogos--;
     }
+    // R152: jogo sem sofrer gol de quem jogou na defesa e as defesas do goleiro (contra os chutes do outro lado).
+    const sofreu = i === 0 ? p.gv : p.gm;
+    let goleiro: Jogador | undefined;
     for (const id of lado.jogaram) {
       const j = estado.jogadores[id];
       j.temporada.jogos++;
       j.energia = Math.round(lado.energia[id] ?? j.energia);
+      if (sofreu === 0 && (j.posicao === "G" || j.posicao === "Z" || j.posicao === "L")) j.temporada.semSofrer = (j.temporada.semSofrer ?? 0) + 1;
+      if (j.posicao === "G") goleiro ??= j;
     }
+    const defesas = pv.narracao.filter((e) => e.tipo === "defesa" && e.lado !== i).length;
+    if (goleiro && defesas) goleiro.temporada.defesas = (goleiro.temporada.defesas ?? 0) + defesas;
     for (const [idTexto, n] of Object.entries(lado.amarelos)) {
       const j = estado.jogadores[Number(idTexto)];
       j.temporada.amarelos += n;
@@ -743,7 +750,9 @@ function aplicarResultado(estado: EstadoJogo, pv: PartidaViva, elencos: Map<stri
       j.suspensaoJogos = 1;
     }
     for (const id of lado.lesionados) {
-      estado.jogadores[id].lesaoDias = rng.int(DIAS_LESAO.min, DIAS_LESAO.max);
+      const j = estado.jogadores[id];
+      j.lesaoDias = rng.int(DIAS_LESAO.min, DIAS_LESAO.max);
+      anotarLesao(j);
     }
   }
   for (const e of p.eventos) {

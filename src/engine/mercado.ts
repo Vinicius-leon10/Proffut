@@ -1,7 +1,7 @@
 // Mercado de transferências: compra, venda, livres, propostas e as trocas entre clubes da IA.
 import { comArtigo } from "./artigos";
 import { dasSeries } from "./competicoes";
-import { ELENCO_MAXIMO, LUVAS_MESES, MINIMO_POSICAO } from "./constantes";
+import { ELENCO_MAXIMO, LEILAO, LUVAS_MESES, MINIMO_POSICAO } from "./constantes";
 import { contratoNovo, liberar } from "./contratos";
 import { escalarAutomatico, forcaDoTime } from "./forca";
 import { formatarDinheiro, lancar, motivoDaDiretoria } from "./financas";
@@ -197,6 +197,55 @@ export function gerarPropostas(estado: EstadoJogo, data: string) {
   for (const m of estado.mensagens) {
     if (m.proposta && !m.proposta.resolvida && m.proposta.validaAte < data) m.proposta.resolvida = "expirada";
   }
+}
+
+/**
+ * Venda rápida (leilão, R154): ao pôr um jogador à venda, os clubes interessados dão lance na hora e o maior vira uma
+ * proposta que já está valendo (Aceitar, Pedir mais ou Recusar em Mercado → Meus à venda), sem esperar os dias. Dão lance
+ * os clubes com elenco (de qualquer país, menos as seleções e os clubes sem jogadores), com dinheiro, vaga no elenco e força
+ * parecida com a do jogador. O sorteio é pelo dia e pelo jogador: pôr à venda de novo no mesmo dia dá o mesmo leilão.
+ */
+export function leiloar(estado: EstadoJogo, jogadorId: number): ResultadoNegocio {
+  const meuId = estado.tecnico.clubeId;
+  const j = estado.jogadores[jogadorId];
+  if (!j || j.clubeId !== meuId) return { ok: false, texto: "Esse jogador não é do seu clube." };
+  if (j.emprestimo) return { ok: false, texto: `${j.nome} está emprestado: não dá para vender.` };
+  j.aVenda = true;
+  const pendente = estado.mensagens.find((m) => m.proposta?.jogadorId === j.id && !m.proposta.resolvida);
+  if (pendente) return { ok: true, texto: `${j.nome} foi colocado à venda. Já há uma proposta por ele em Meus à venda.` };
+  const rng = rngPara(estado.semente, `leilao/${estado.data}/${j.id}`);
+  const base = valorMercado(j);
+  // Os elencos numa passada só (nada de elencoDe dentro do laço dos clubes).
+  const elencos = new Map<string, Jogador[]>();
+  for (const x of Object.values(estado.jogadores)) {
+    if (!x.clubeId) continue;
+    const lista = elencos.get(x.clubeId);
+    if (lista) lista.push(x); else elencos.set(x.clubeId, [x]);
+  }
+  const candidatos = Object.values(estado.clubes).filter((c) => {
+    if (c.id === meuId || c.serie === "selecao" || c.leve || c.caixa < base * LEILAO.minimo * 1.1) return false;
+    const elenco = elencos.get(c.id) ?? [];
+    if (elenco.length < 11 || elenco.length >= ELENCO_MAXIMO - 1) return false;
+    const forca = forcaDoTime(elenco);
+    return j.forca >= forca - 6 && j.forca <= forca + 12;
+  }).sort((a, b) => (a.id < b.id ? -1 : 1));
+  const lances = rng.embaralhar(candidatos).slice(0, LEILAO.clubes).map((c) => ({
+    clube: c,
+    valor: Math.floor(Math.min(base * rng.real(LEILAO.minimo, LEILAO.maximo), c.caixa / 1.1) / 10_000) * 10_000,
+  })).filter((l) => l.valor > 0).sort((a, b) => b.valor - a.valor);
+  if (!lances.length) return { ok: true, texto: `${j.nome} foi colocado à venda. Nenhum clube deu lance agora; as propostas podem chegar nos próximos dias.` };
+  const { clube, valor } = lances[0];
+  const outros = lances.length - 1;
+  enviarMensagem(estado, {
+    tipo: "proposta",
+    titulo: `Leilão de ${j.nome}`,
+    texto: `Leilão: ${lances.length === 1 ? "um clube deu lance" : `${lances.length} clubes deram lance`}. ${comArtigo("O", clube)} deu o maior, ${formatarDinheiro(valor)} por ${j.nome}.`,
+    proposta: { jogadorId: j.id, clubeId: clube.id, valor, validaAte: somarDias(estado.data, 5) },
+  });
+  return {
+    ok: true,
+    texto: `${j.nome} foi colocado à venda. Leilão: ${comArtigo("o", clube)} deu o maior lance, ${formatarDinheiro(valor)}${outros ? ` (mais ${outros} ${outros === 1 ? "clube" : "clubes"} disputaram)` : ""}.`,
+  };
 }
 
 /** As propostas que estão valendo por jogadores que ainda são do usuário (o aviso no Mercado, R63). */

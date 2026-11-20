@@ -26,7 +26,7 @@ import { chavesDaFase, classificacao, vencedorDaChave, type LinhaTabela } from "
 import { diaDaSemana, sortearGrupos, type Dia } from "./copas";
 import { DIAS_LESAO, REPUTACAO } from "./constantes";
 import { escalarAutomatico, forcaDoTime } from "./forca";
-import { criarJogador, limitar } from "./gerador";
+import { anotarLesao, criarJogador, limitar } from "./gerador";
 import { enviarMensagem } from "./mensagens";
 import { melhorEmCampo, notasDaPartida } from "./notas";
 import { disputarPenaltis, eventosParaGuardar, type PartidaViva } from "./partida";
@@ -1728,7 +1728,7 @@ function publicoDoJogoDeSelecoes(rng: Rng, estado: EstadoJogo, p: Partida): numb
 function desgaste(rng: Rng, jogadores: Jogador[]) {
   for (const j of jogadores) {
     j.energia = Math.max(30, j.energia - rng.int(15, 25));
-    if (rng.chance(0.012)) j.lesaoDias = Math.max(j.lesaoDias, rng.int(DIAS_LESAO.min, 20));
+    if (rng.chance(0.012)) { j.lesaoDias = Math.max(j.lesaoDias, rng.int(DIAS_LESAO.min, 20)); anotarLesao(j); }
   }
 }
 
@@ -1749,7 +1749,7 @@ export function aplicarJogoDeSelecoes(estado: EstadoJogo, pv: PartidaViva, p: Pa
       j.selecao = { jogos: (j.selecao?.jogos ?? 0) + 1, gols: j.selecao?.gols ?? 0 };
       j.energia = Math.round(lado.energia[id] ?? j.energia);
     }
-    for (const id of lado.lesionados) if (estado.jogadores[id]) estado.jogadores[id].lesaoDias = rng.int(DIAS_LESAO.min, DIAS_LESAO.max);
+    for (const id of lado.lesionados) if (estado.jogadores[id]) { estado.jogadores[id].lesaoDias = rng.int(DIAS_LESAO.min, DIAS_LESAO.max); anotarLesao(estado.jogadores[id]); }
   }
   for (const e of p.eventos) {
     const j = e.jogador != null ? estado.jogadores[e.jogador] : undefined;

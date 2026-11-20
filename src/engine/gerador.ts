@@ -40,6 +40,11 @@ const IDADE_PAPEL: Record<Papel, [number, number]> = {
 
 const ESTRANGEIROS_POR_SERIE: Record<SerieClube, number> = { A: 0.12, B: 0.05, C: 0.02, D: 0.01, estadual: 0, exterior: 0, selecao: 0 };
 
+/** A lesão mais longa da temporada (R152), para a evolução de quem já passou de 90. */
+export function anotarLesao(j: Jogador) {
+  j.temporada.lesaoMaisLonga = Math.max(j.temporada.lesaoMaisLonga ?? 0, j.lesaoDias);
+}
+
 export function limitar(valor: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, valor));
 }
