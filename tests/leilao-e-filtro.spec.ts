@@ -1,4 +1,4 @@
-import { aba, esperarInteiroNaTela, expect, novoJogo, test } from "./ajuda";
+import { aba, abrirFiltros, esperarInteiroNaTela, expect, fecharFiltros, novoJogo, test } from "./ajuda";
 
 const exato = (nome: string) => new RegExp(`^${nome.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`);
 
@@ -7,12 +7,17 @@ test("R151 no Mercado, a força se filtra por faixas fechadas: Força, 40 a 49, 
   await novoJogo(page);
   await aba(page, "Mercado");
   await page.getByRole("tab", { name: "Buscar" }).click();
-  const filtro = page.getByLabel("Faixa de força");
-  expect((await filtro.locator("option").allTextContents()).map((t) => t.trim())).toEqual([
-    "Força", "Força 40 a 49", "Força 50 a 59", "Força 60 a 69", "Força 70 a 79", "Força 80 a 89", "Força 90 a 99",
+  // Desde o R158 as faixas ficam na folha dos filtros, em botões.
+  await abrirFiltros(page);
+  const faixas = page.getByRole("dialog").getByRole("group", { name: "Força" }).getByRole("button");
+  expect((await faixas.allTextContents()).map((t) => t.trim())).toEqual([
+    "Todas", "40 a 49", "50 a 59", "60 a 69", "70 a 79", "80 a 89", "90 a 99",
   ]);
-  for (const [faixa, min, max] of [["Força 70 a 79", 70, 79], ["Força 80 a 89", 80, 89]] as const) {
-    await filtro.selectOption({ label: faixa });
+  await fecharFiltros(page);
+  for (const [faixa, min, max] of [["70 a 79", 70, 79], ["80 a 89", 80, 89]] as const) {
+    await abrirFiltros(page);
+    await page.getByRole("dialog").getByRole("group", { name: "Força" }).getByRole("button", { name: faixa }).click();
+    await fecharFiltros(page);
     const forcas = page.locator("main .lista .item .forca");
     await expect(forcas.first()).toBeVisible();
     const valores = (await forcas.allTextContents()).map(Number);

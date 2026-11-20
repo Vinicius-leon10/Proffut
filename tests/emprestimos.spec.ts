@@ -1,4 +1,4 @@
-import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, montarSave, test } from "./ajuda";
+import { aba, abrirSite, botao, cartaoDoProximoJogo, expect, montarSave, test, abrirFiltros, fecharFiltros } from "./ajuda";
 
 test("R39 empréstimos: empresto um jogador meu e pego um emprestado até o fim da temporada; na virada os dois voltam para os seus clubes", async ({ page }) => {
   test.setTimeout(120_000);
@@ -50,7 +50,9 @@ test("R39 empréstimos: empresto um jogador meu e pego um emprestado até o fim 
   await aba(page, "Mercado");
   await page.locator("main").getByRole("button", { name: "G", exact: true }).click();
   // Da Série C: os goleiros reservas dos clubes grandes são caros demais para a diretoria da Ponte Preta aprovar (R138).
-  await page.getByLabel("Série").selectOption("C");
+  await abrirFiltros(page);
+  await page.getByLabel("Onde joga").selectOption("C");
+  await fecharFiltros(page);
   const goleiros = page.locator("main .lista .item");
   let chegou = "";
   for (let i = 0; i < Math.min(20, await goleiros.count()) && !chegou; i++) {

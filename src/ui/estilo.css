@@ -861,5 +861,17 @@ div.linha-do-painel { cursor: pointer; }
 .forca.anel.amarelo { border-color: var(--dourado); color: var(--texto); }
 .forca.anel.vermelho { border-color: var(--vermelho); color: var(--texto); }
 /* Filtros da busca do Mercado em duas colunas: com a Ordem (R156) os quatro numa linha cortavam os nomes. */
-.filtros-mercado { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.filtros-mercado select { width: 100%; min-width: 0; }
+/* (R156; os filtros foram para a folha no R158) */
+
+
+/* Mercado com botão de filtro (R158). */
+.busca-mercado { display: flex; gap: 8px; align-items: center; }
+.busca-mercado input { flex: 1; min-width: 0; }
+.botao-filtro { position: relative; flex: 0 0 auto; width: 46px; height: 46px; border-radius: 12px; border: 0; background: var(--floresta); color: #fff; display: grid; place-items: center; }
+.botao-filtro svg { width: 22px; height: 22px; }
+.selo-filtro { position: absolute; top: -6px; right: -6px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: var(--dourado); color: var(--texto); font-size: .72rem; font-weight: 800; display: grid; place-items: center; }
+.filtros-ligados { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip-filtro { border: 0; border-radius: 999px; padding: 5px 11px; background: var(--dourado); color: var(--texto); font-size: .8rem; font-weight: 700; }
+.grupo-filtro { display: flex; flex-direction: column; gap: 6px; }
+.paginas > span { text-align: left; }
+.paginas select { min-width: 92px; }

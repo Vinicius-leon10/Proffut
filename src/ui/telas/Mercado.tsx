@@ -142,6 +142,7 @@ export function Mercado() {
   // Páginas e ordem (R156): a lista mostra todos, de 50 em 50; "Do mais forte" (do 49 para baixo) ou "Do mais fraco".
   const [pagina, setPagina] = useState(1);
   const [crescente, setCrescente] = useState(false);
+  const [filtrosAbertos, setFiltrosAbertos] = useState(false);
   const [idadeMax, setIdadeMax] = useState(40);
   // Onde o jogador joga: "todas", uma série (A a D), "estadual" (clubes só do estadual) ou "pais:AR" (clubes de outro
   // país, das duas divisões).
@@ -179,6 +180,8 @@ export function Mercado() {
       const c = estado.clubes[j.clubeId];
       // Quem joga fora dos clubes do jogo (ligado à seleção) não está à venda.
       if (c.serie === "selecao") return false;
+      // "Brasil" (R158): os clubes das Séries A a D e os que só jogam o estadual.
+      if (serie === "pais:BR") return ["A", "B", "C", "D", "estadual"].includes(c.serie);
       return serie === "todas" || (serie.startsWith("pais:") ? c.pais === serie.slice(5) : c.serie === serie);
     });
     return base
@@ -192,14 +195,27 @@ export function Mercado() {
   const visiveis = vista === "venda" ? resultados : resultados.slice((paginaAtual - 1) * POR_PAGINA, paginaAtual * POR_PAGINA);
   const paginas = vista !== "venda" && resultados.length > 0 && (
     <div className="paginas linha entre">
-      <button className="botao pequeno" aria-label="Página anterior" disabled={paginaAtual <= 1} onClick={() => setPagina(paginaAtual - 1)}>‹</button>
-      <span className="pequeno fraco">Página {paginaAtual} de {totalPaginas} · {resultados.length.toLocaleString("pt-BR")} jogadores</span>
-      <select value={paginaAtual} onChange={(e) => setPagina(Number(e.target.value))} aria-label="Ir para a página">
-        {Array.from({ length: totalPaginas }, (_, i) => <option key={i + 1} value={i + 1}>{i + 1}</option>)}
-      </select>
-      <button className="botao pequeno" aria-label="Próxima página" disabled={paginaAtual >= totalPaginas} onClick={() => setPagina(paginaAtual + 1)}>›</button>
+      <span className="pequeno fraco">
+        {((paginaAtual - 1) * POR_PAGINA + 1).toLocaleString("pt-BR")}–{Math.min(paginaAtual * POR_PAGINA, resultados.length).toLocaleString("pt-BR")} de {resultados.length.toLocaleString("pt-BR")}
+      </span>
+      <div className="linha" style={{ gap: 6 }}>
+        <button className="botao pequeno" aria-label="Página anterior" disabled={paginaAtual <= 1} onClick={() => setPagina(paginaAtual - 1)}>‹</button>
+        <select value={paginaAtual} onChange={(e) => setPagina(Number(e.target.value))} aria-label="Ir para a página">
+          {Array.from({ length: totalPaginas }, (_, i) => <option key={i + 1} value={i + 1}>{i + 1} / {totalPaginas}</option>)}
+        </select>
+        <button className="botao pequeno" aria-label="Próxima página" disabled={paginaAtual >= totalPaginas} onClick={() => setPagina(paginaAtual + 1)}>›</button>
+      </div>
     </div>
   );
+  // Filtros ligados (R158): viram etiquetas com ✕ e o número no botão de filtro.
+  const nomeOnde = serie === "todas" ? "" : serie === "pais:BR" ? "Brasil" : serie.startsWith("pais:") ? PAISES[serie.slice(5)]?.pais ?? serie : serie === "estadual" ? "Só estadual" : `Série ${serie}`;
+  const ligados = [
+    ...(forcaMin ? [{ rotulo: `Força ${forcaMin} a ${forcaMin + 9}`, tirar: () => setForcaMin(0) }] : []),
+    ...(vista === "buscar" && serie !== "todas" ? [{ rotulo: nomeOnde, tirar: () => setSerie("todas") }] : []),
+    ...(idadeMax !== 40 ? [{ rotulo: `Até ${idadeMax} anos`, tirar: () => setIdadeMax(40) }] : []),
+    ...(crescente ? [{ rotulo: "Do mais fraco", tirar: () => setCrescente(false) }] : []),
+  ];
+  const limparFiltros = () => { setForcaMin(0); setSerie("todas"); setIdadeMax(40); setCrescente(false); };
 
   return (
     <>
@@ -219,22 +235,33 @@ export function Mercado() {
       />
       {vista !== "venda" && (
         <div className="coluna">
-          <input placeholder="Buscar por nome" value={busca} onChange={(e) => setBusca(e.target.value)} />
+          <div className="busca-mercado">
+            <input placeholder="Buscar por nome" value={busca} onChange={(e) => setBusca(e.target.value)} />
+            <button className="botao-filtro" aria-label={ligados.length ? `Filtros (${ligados.length} ${ligados.length === 1 ? "ligado" : "ligados"})` : "Filtros"} onClick={() => setFiltrosAbertos(true)}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4" /></svg>
+              {ligados.length > 0 && <span className="selo-filtro">{ligados.length}</span>}
+            </button>
+          </div>
           <Opcoes opcoes={[{ valor: "todas", rotulo: "Todas" }, ...(["G", "L", "Z", "M", "A"] as Posicao[]).map((p) => ({ valor: p, rotulo: p }))]} valor={posicao} aoMudar={setPosicao} />
-          <div className="filtros-mercado">
-            <select value={forcaMin} onChange={(e) => setForcaMin(Number(e.target.value))} aria-label="Faixa de força">
-              {[0, 40, 50, 60, 70, 80, 90].map((f) => <option key={f} value={f}>{f ? `Força ${f} a ${f + 9}` : "Força"}</option>)}
-            </select>
-            <select value={crescente ? "asc" : "desc"} onChange={(e) => setCrescente(e.target.value === "asc")} aria-label="Ordem">
-              <option value="desc">Do mais forte</option>
-              <option value="asc">Do mais fraco</option>
-            </select>
-            <select value={idadeMax} onChange={(e) => setIdadeMax(Number(e.target.value))} aria-label="Idade máxima">
-              {[40, 33, 30, 27, 24, 21].map((i) => <option key={i} value={i}>{i === 40 ? "Idade" : `Até ${i} anos`}</option>)}
-            </select>
-            {vista === "buscar" && (
-              <select value={serie} onChange={(e) => setSerie(e.target.value)} aria-label="Série">
-                <option value="todas">Onde joga</option>
+          {ligados.length > 0 && (
+            <div className="filtros-ligados">
+              {ligados.map((f) => <button key={f.rotulo} className="chip-filtro" onClick={f.tirar}>{f.rotulo} ✕</button>)}
+            </div>
+          )}
+        </div>
+      )}
+      {filtrosAbertos && vista !== "venda" && (
+        <Folha titulo="Filtros" aoFechar={() => setFiltrosAbertos(false)}>
+          <div className="grupo-filtro" role="group" aria-label="Força">
+            <div className="mini fraco">Força</div>
+            <Opcoes opcoes={[0, 40, 50, 60, 70, 80, 90].map((f) => ({ valor: String(f), rotulo: f ? `${f} a ${f + 9}` : "Todas" }))} valor={String(forcaMin)} aoMudar={(v) => setForcaMin(Number(v))} />
+          </div>
+          {vista === "buscar" && (
+            <label className="grupo-filtro">
+              <span className="mini fraco">Onde joga</span>
+              <select value={serie} onChange={(e) => setSerie(e.target.value)} aria-label="Onde joga">
+                <option value="todas">Mundo inteiro</option>
+                <option value="pais:BR">Brasil (Séries A a D)</option>
                 <option value="A">Série A</option>
                 <option value="B">Série B</option>
                 <option value="C">Série C</option>
@@ -250,9 +277,23 @@ export function Mercado() {
                   ) : null;
                 })}
               </select>
-            )}
+            </label>
+          )}
+          <div className="grupo-filtro" role="group" aria-label="Idade">
+            <div className="mini fraco">Idade</div>
+            <Opcoes opcoes={[40, 21, 24, 27, 30, 33].map((i) => ({ valor: String(i), rotulo: i === 40 ? "Todas" : `Até ${i}` }))} valor={String(idadeMax)} aoMudar={(v) => setIdadeMax(Number(v))} />
           </div>
-        </div>
+          <div className="grupo-filtro" role="group" aria-label="Ordem">
+            <div className="mini fraco">Ordem</div>
+            <Opcoes opcoes={[{ valor: "desc", rotulo: "Do mais forte" }, { valor: "asc", rotulo: "Do mais fraco" }]} valor={crescente ? "asc" : "desc"} aoMudar={(v) => setCrescente(v === "asc")} />
+          </div>
+          <div className="linha" style={{ gap: 8 }}>
+            <button className="botao cresce" onClick={limparFiltros}>Limpar</button>
+            <button className="botao primario cresce" onClick={() => setFiltrosAbertos(false)}>
+              Ver {resultados.length.toLocaleString("pt-BR")} {resultados.length === 1 ? "jogador" : "jogadores"}
+            </button>
+          </div>
+        </Folha>
       )}
       {vista === "venda" && <p className="mini muito-fraco">Coloque jogadores à venda pela tela do Elenco. As propostas aparecem aqui, embaixo de cada jogador, e também nas mensagens.</p>}
       {paginas}

@@ -440,3 +440,17 @@ export async function escutarSons(page: Page) {
   });
   return () => page.evaluate(() => (window as unknown as { __sons: Som[] }).__sons);
 }
+
+/** Mercado (R158): abre a folha dos filtros (botão de filtro ao lado da busca). */
+export async function abrirFiltros(page: Page) {
+  await page.getByRole("button", { name: /^Filtros/ }).click();
+  await expect(page.getByRole("dialog").getByRole("heading", { name: "Filtros" })).toBeVisible();
+}
+
+/** Fecha a folha dos filtros pelo botão "Ver N jogadores". */
+export async function fecharFiltros(page: Page) {
+  const ver = page.getByRole("dialog").getByRole("button", { name: /^Ver .*jogador/ });
+  await esperarInteiroNaTela(page, ver);
+  await ver.click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+}
