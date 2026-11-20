@@ -7,10 +7,10 @@ on:
   workflow_dispatch:
     inputs:
       fase:
-        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa) · selecoes-europa: convocações das 55 seleções da UEFA (branch dados-selecoes-europa) · europa-segundas: segunda divisão das 7 ligas da Europa (branch dados-europa-segundas) · europa-terceiras: terceira divisão (branch dados-europa-terceiras) · europa-outros: outros países da Europa (branch dados-europa-outros) · selecoes-mundo: seleções da África, Ásia e Oceania (branch dados-selecoes-mundo) · asia-africa: clubes da África, da Ásia e da Nova Zelândia e as copas de lá (branch dados-asia-africa) · europa-resto: 2ª divisão dos 16 países da Europa, 1ª dos países da Europa que faltam e a da Nova Zelândia (branch dados-europa-resto) · uefa: vagas por país e fases prévias das copas da UEFA (branch dados-uefa) · camisas: TESTE de busca de camisas no Wikimedia Commons (branch dados-camisas)"
+        description: "elencos: Séries A, B e C (branch dados-elencos) · times: Série D, estaduais e ligas da América do Sul (branch dados-times) · segundas: segunda divisão dos países da América do Sul (branch dados-segundas) · america: Concacaf, 3ª divisões, 2ª dos estaduais, copas e seleções (branch dados-america) · europa: 7 ligas da Europa e copas da UEFA (branch dados-europa) · selecoes-europa: convocações das 55 seleções da UEFA (branch dados-selecoes-europa) · europa-segundas: segunda divisão das 7 ligas da Europa (branch dados-europa-segundas) · europa-terceiras: terceira divisão (branch dados-europa-terceiras) · europa-outros: outros países da Europa (branch dados-europa-outros) · selecoes-mundo: seleções da África, Ásia e Oceania (branch dados-selecoes-mundo) · asia-africa: clubes da África, da Ásia e da Nova Zelândia e as copas de lá (branch dados-asia-africa) · europa-resto: 2ª divisão dos 16 países da Europa, 1ª dos países da Europa que faltam e a da Nova Zelândia (branch dados-europa-resto) · uefa: vagas por país e fases prévias das copas da UEFA (branch dados-uefa)"
         type: choice
         default: elencos
-        options: [elencos, times, segundas, america, europa, selecoes-europa, europa-segundas, europa-terceiras, europa-outros, selecoes-mundo, asia-africa, europa-resto, uefa, camisas]
+        options: [elencos, times, segundas, america, europa, selecoes-europa, europa-segundas, europa-terceiras, europa-outros, selecoes-mundo, asia-africa, europa-resto, uefa]
 
 permissions:
   contents: write
@@ -414,24 +414,3 @@ jobs:
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
             commit -q -m "Copas da UEFA 2026/27 (${GITHUB_SHA::7})"
           git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-uefa
-
-  # TESTE: procura camisas no Wikimedia Commons para alguns clubes e guarda as candidatas para conferência.
-  camisas:
-    if: inputs.fase == 'camisas'
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v7
-      - name: Wikimedia Commons (candidatas de camisa)
-        run: python3 tools/camisas/buscar.py tools/camisas/teste.json dados | tee -a "$GITHUB_STEP_SUMMARY"
-      - name: Gravar na branch dados-camisas
-        env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cd dados
-          echo "Teste de busca no Wikimedia Commons em $(date -u +%Y-%m-%dT%H:%MZ) (workflow elencos.yml, fase camisas)." > LEIAME.md
-          git init -q -b dados-camisas
-          git add -A
-          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-            commit -q -m "Teste: candidatas de camisa do Commons (${GITHUB_SHA::7})"
-          git push -f "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" dados-camisas
