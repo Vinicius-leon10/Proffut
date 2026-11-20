@@ -1,0 +1,12 @@
+{"clubes": [
+ {"id": "leeds", "nome": "Leeds United"},
+ {"id": "swansea", "nome": "Swansea City"},
+ {"id": "west-bromwich", "nome": "West Bromwich Albion"},
+ {"id": "wigan-athletic", "nome": "Wigan Athletic"},
+ {"id": "cardiff-city", "nome": "Cardiff City"},
+ {"id": "sevilla", "nome": "Sevilla FC"},
+ {"id": "leganes", "nome": "CD Leganés"},
+ {"id": "reims", "nome": "Stade de Reims"},
+ {"id": "tenerife", "nome": "CD Tenerife"},
+ {"id": "portsmouth", "nome": "Portsmouth"}
+]}
