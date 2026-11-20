@@ -840,3 +840,26 @@ div.linha-do-painel { cursor: pointer; }
 .linha-do-painel .cortar { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .linha-do-painel > span:last-child { flex-shrink: 0; }
 .faixa-status .chip { white-space: normal; max-width: 100%; line-height: 1.2; }
+
+/* Páginas da busca do Mercado (R156). */
+.paginas { gap: 8px; flex-wrap: nowrap; }
+.paginas > span { flex: 1; text-align: center; min-width: 0; }
+.paginas select { width: auto; min-width: 64px; flex: 0 0 auto; }
+.paginas .botao { min-width: 40px; }
+
+/* Elenco por setor (R157): resumo, filtros numa linha, cabeçalho de cada setor e a força num anel. */
+.resumo-elenco { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--cartao); border: 1px solid var(--borda); border-radius: 14px; flex-shrink: 0; }
+.resumo-elenco > div { display: flex; flex-direction: column; align-items: center; padding: 8px 4px; border-left: 1px solid var(--borda); text-align: center; }
+.resumo-elenco > div:first-child { border-left: 0; }
+.resumo-elenco b { font-size: 1.1rem; font-variant-numeric: tabular-nums; }
+.resumo-elenco span { font-size: .68rem; color: var(--texto-2); line-height: 1.2; }
+.filtro-posicao .opcoes { flex-wrap: nowrap; overflow-x: auto; }
+.filtro-posicao .opcao { flex-shrink: 0; }
+.grupo-elenco { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 4px 4px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--texto-2); }
+.grupo-elenco .vermelho { text-transform: none; letter-spacing: 0; color: var(--vermelho); }
+.forca.anel { width: 38px; height: 38px; border-radius: 50%; border: 3px solid var(--esmeralda); display: grid; place-items: center; font-size: 1rem; font-weight: 800; color: var(--texto); flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.forca.anel.amarelo { border-color: var(--dourado); color: var(--texto); }
+.forca.anel.vermelho { border-color: var(--vermelho); color: var(--texto); }
+/* Filtros da busca do Mercado em duas colunas: com a Ordem (R156) os quatro numa linha cortavam os nomes. */
+.filtros-mercado { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.filtros-mercado select { width: 100%; min-width: 0; }

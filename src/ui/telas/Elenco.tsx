@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { rotuloDaTemporada } from "../../engine/ciclos";
 import { anosMaximos, cicloDoClubeId, pedidoDeRenovacao, renovarContrato, ultimoAno } from "../../engine/contratos";
@@ -37,7 +37,9 @@ export function Situacao({ j, semAVenda }: { j: Jogador; semAVenda?: boolean }) 
   );
 }
 
-export function LinhaJogador({ j, aoTocar, direita, semAVenda }: { j: Jogador; aoTocar?: () => void; direita?: React.ReactNode; semAVenda?: boolean }) {
+export function LinhaJogador({ j, aoTocar, direita, semAVenda, anel }: { j: Jogador; aoTocar?: () => void; direita?: React.ReactNode; semAVenda?: boolean; anel?: boolean }) {
+  // No Elenco (R157), a força vai num anel como no campinho: verde, amarelo cansado e vermelho fora de combate.
+  const corDoAnel = j.lesaoDias > 0 || j.suspensaoJogos > 0 ? "vermelho" : j.energia < 70 ? "amarelo" : "verde";
   return (
     <button className="item" onClick={aoTocar}>
       <Pos pos={j.posicao} />
@@ -54,7 +56,7 @@ export function LinhaJogador({ j, aoTocar, direita, semAVenda }: { j: Jogador; a
         <div style={{ width: 70, marginTop: 4 }}><Barra valor={j.energia} /></div>
       </div>
       {direita}
-      <div className="forca" style={{ fontSize: "1.1rem" }}>{j.forca}</div>
+      {anel ? <div className={`forca anel ${corDoAnel}`}>{j.forca}</div> : <div className="forca" style={{ fontSize: "1.1rem" }}>{j.forca}</div>}
     </button>
   );
 }
@@ -240,31 +242,52 @@ export function Elenco() {
     () => elencoDe(estado, estado.tecnico.clubeId).sort((a, b) => ORDEM.indexOf(a.posicao) - ORDEM.indexOf(b.posicao) || b.forca - a.forca),
     [estado, versao],
   );
-  const lista = filtro === "todos" ? elenco : elenco.filter((j) => j.posicao === filtro);
-  const media = Math.round(elenco.reduce((s, j) => s + j.forca, 0) / Math.max(1, elenco.length));
-  const indisponiveis = elenco.filter((j) => j.lesaoDias > 0 || j.suspensaoJogos > 0).length;
+  const mediaDe = (js: Jogador[]) => Math.round(js.reduce((s, j) => s + j.forca, 0) / Math.max(1, js.length));
+  const media = mediaDe(elenco);
+  const idadeMedia = elenco.reduce((s, j) => s + j.idade, 0) / Math.max(1, elenco.length);
+  const lesionados = elenco.filter((j) => j.lesaoDias > 0).length;
   const terminando = elenco.filter((j) => !j.emprestimo && ultimoAno(estado, j)).length;
   const meuId = estado.tecnico.clubeId;
   const fora = useMemo(() => Object.values(estado.jogadores).filter((j) => j.emprestimo?.de === meuId), [estado, versao, meuId]);
+  // Setores (R157): cada posição com a média; o de menor média é o "setor mais fraco".
+  const setores = ORDEM.map((p) => ({ p, js: elenco.filter((j) => j.posicao === p) })).filter((s) => s.js.length);
+  const maisFraco = setores.length > 1 ? setores.reduce((a, b) => (mediaDe(b.js) < mediaDe(a.js) ? b : a)).p : undefined;
+  const mostrados = filtro === "todos" ? setores : setores.filter((s) => s.p === filtro);
 
   return (
     <>
       <div className="linha entre">
         <h2>Elenco</h2>
-        <span className="pequeno fraco">{elenco.length} jogadores · média {media}{indisponiveis ? ` · ${indisponiveis} fora` : ""}</span>
+        <span className="pequeno fraco">{elenco.length} jogadores</span>
       </div>
-      <Opcoes
-        opcoes={[{ valor: "todos", rotulo: "Todos" }, ...ORDEM.map((p) => ({ valor: p, rotulo: NOMES_POSICAO[p] + "s" }))]}
-        valor={filtro}
-        aoMudar={setFiltro}
-      />
+      <div className="resumo-elenco">
+        <div><b>{media}</b><span>força média</span></div>
+        <div><b>{idadeMedia.toFixed(1).replace(".", ",")}</b><span>idade média</span></div>
+        <div><b>{terminando}</b><span>contrato no fim</span></div>
+        <div><b>{lesionados}</b><span>lesionados</span></div>
+      </div>
+      <div className="filtro-posicao">
+        <Opcoes
+          opcoes={[{ valor: "todos", rotulo: "Todos" }, ...setores.map((s) => ({ valor: s.p, rotulo: `${s.p} ${s.js.length}` }))]}
+          valor={filtro}
+          aoMudar={setFiltro}
+        />
+      </div>
       {terminando > 0 && (
         <p className="mini fraco">
           {terminando === 1 ? "1 jogador está" : `${terminando} jogadores estão`} no último ano de contrato: toque no jogador para renovar ou pôr à venda, ou ele sai de graça no fim da temporada.
         </p>
       )}
       <div className="lista">
-        {lista.map((j) => <LinhaJogador key={j.id} j={j} aoTocar={() => setAberto(j.id)} />)}
+        {mostrados.map((s) => (
+          <Fragment key={s.p}>
+            <div className="grupo-elenco">
+              <span>{NOMES_POSICAO[s.p]}s · média {mediaDe(s.js)}</span>
+              {s.p === maisFraco && <span className="vermelho">setor mais fraco</span>}
+            </div>
+            {s.js.map((j) => <LinhaJogador key={j.id} j={j} anel aoTocar={() => setAberto(j.id)} />)}
+          </Fragment>
+        ))}
       </div>
       {fora.length > 0 && (
         <Cartao titulo="Emprestados a outros clubes">

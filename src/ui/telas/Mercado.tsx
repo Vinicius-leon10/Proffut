@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { comArtigo } from "../../engine/artigos";
 import { formatarData } from "../../engine/calendario";
 import { contratosTerminando } from "../../engine/contratos";
@@ -125,6 +125,9 @@ function SeloDaJanela() {
   );
 }
 
+/** Jogadores por página na busca do Mercado (R156). */
+const POR_PAGINA = 50;
+
 export function Mercado() {
   const estado = useJogo();
   const paisesComClube = new Set(Object.values(estado.clubes).flatMap((c) => (c.pais && c.serie !== "selecao" ? [c.pais] : [])));
@@ -136,6 +139,9 @@ export function Mercado() {
   const [posicao, setPosicao] = useState<Posicao | "todas">("todas");
   // Faixa de força (R151): "Força" = todas; senão de N a N + 9 (40 a 49 ... 90 a 99). Nada abaixo de 40 (decisão do usuário).
   const [forcaMin, setForcaMin] = useState(0);
+  // Páginas e ordem (R156): a lista mostra todos, de 50 em 50; "Do mais forte" (do 49 para baixo) ou "Do mais fraco".
+  const [pagina, setPagina] = useState(1);
+  const [crescente, setCrescente] = useState(false);
   const [idadeMax, setIdadeMax] = useState(40);
   // Onde o jogador joga: "todas", uma série (A a D), "estadual" (clubes só do estadual) ou "pais:AR" (clubes de outro
   // país, das duas divisões).
@@ -177,9 +183,23 @@ export function Mercado() {
     });
     return base
       .filter((j) => (posicao === "todas" || j.posicao === posicao) && (!forcaMin || (j.forca >= forcaMin && j.forca <= forcaMin + 9)) && j.idade <= idadeMax && (!termo || j.nome.toLowerCase().includes(termo)))
-      .sort((a, b) => b.forca - a.forca)
-      .slice(0, 60);
-  }, [estado, versao, vista, posicao, forcaMin, idadeMax, serie, busca, meuId, propostaPor]);
+      .sort((a, b) => (crescente ? a.forca - b.forca : b.forca - a.forca) || a.id - b.id);
+  }, [estado, versao, vista, posicao, forcaMin, idadeMax, serie, busca, meuId, propostaPor, crescente]);
+  const totalPaginas = Math.max(1, Math.ceil(resultados.length / POR_PAGINA));
+  // Filtro novo volta para a página 1; a página nunca passa da última.
+  useEffect(() => setPagina(1), [vista, posicao, forcaMin, idadeMax, serie, busca, crescente]);
+  const paginaAtual = Math.min(pagina, totalPaginas);
+  const visiveis = vista === "venda" ? resultados : resultados.slice((paginaAtual - 1) * POR_PAGINA, paginaAtual * POR_PAGINA);
+  const paginas = vista !== "venda" && resultados.length > 0 && (
+    <div className="paginas linha entre">
+      <button className="botao pequeno" aria-label="Página anterior" disabled={paginaAtual <= 1} onClick={() => setPagina(paginaAtual - 1)}>‹</button>
+      <span className="pequeno fraco">Página {paginaAtual} de {totalPaginas} · {resultados.length.toLocaleString("pt-BR")} jogadores</span>
+      <select value={paginaAtual} onChange={(e) => setPagina(Number(e.target.value))} aria-label="Ir para a página">
+        {Array.from({ length: totalPaginas }, (_, i) => <option key={i + 1} value={i + 1}>{i + 1}</option>)}
+      </select>
+      <button className="botao pequeno" aria-label="Próxima página" disabled={paginaAtual >= totalPaginas} onClick={() => setPagina(paginaAtual + 1)}>›</button>
+    </div>
+  );
 
   return (
     <>
@@ -201,9 +221,13 @@ export function Mercado() {
         <div className="coluna">
           <input placeholder="Buscar por nome" value={busca} onChange={(e) => setBusca(e.target.value)} />
           <Opcoes opcoes={[{ valor: "todas", rotulo: "Todas" }, ...(["G", "L", "Z", "M", "A"] as Posicao[]).map((p) => ({ valor: p, rotulo: p }))]} valor={posicao} aoMudar={setPosicao} />
-          <div className="linha">
+          <div className="filtros-mercado">
             <select value={forcaMin} onChange={(e) => setForcaMin(Number(e.target.value))} aria-label="Faixa de força">
               {[0, 40, 50, 60, 70, 80, 90].map((f) => <option key={f} value={f}>{f ? `Força ${f} a ${f + 9}` : "Força"}</option>)}
+            </select>
+            <select value={crescente ? "asc" : "desc"} onChange={(e) => setCrescente(e.target.value === "asc")} aria-label="Ordem">
+              <option value="desc">Do mais forte</option>
+              <option value="asc">Do mais fraco</option>
             </select>
             <select value={idadeMax} onChange={(e) => setIdadeMax(Number(e.target.value))} aria-label="Idade máxima">
               {[40, 33, 30, 27, 24, 21].map((i) => <option key={i} value={i}>{i === 40 ? "Idade" : `Até ${i} anos`}</option>)}
@@ -231,6 +255,7 @@ export function Mercado() {
         </div>
       )}
       {vista === "venda" && <p className="mini muito-fraco">Coloque jogadores à venda pela tela do Elenco. As propostas aparecem aqui, embaixo de cada jogador, e também nas mensagens.</p>}
+      {paginas}
       <div className="lista">
         {resultados.length === 0 && <p className="vazio">{vista === "venda" ? "Nenhum jogador seu à venda." : "Nenhum jogador encontrado."}</p>}
         {vista === "venda" && resultados.map((j) => {
@@ -274,7 +299,7 @@ export function Mercado() {
             ))}
           </div>
         )}
-        {vista !== "venda" && resultados.map((j) => {
+        {vista !== "venda" && visiveis.map((j) => {
           const c = j.clubeId ? estado.clubes[j.clubeId] : undefined;
           return (
             <LinhaJogador
@@ -291,6 +316,7 @@ export function Mercado() {
           );
         })}
       </div>
+      {paginas}
       {aberto && <FolhaOferta j={aberto} aoFechar={() => setAberto(null)} />}
       {ficha != null && <FolhaJogador jogadorId={ficha} aoFechar={() => setFicha(null)} />}
     </>

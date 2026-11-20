@@ -778,7 +778,7 @@ Caixa (valor e folha) e Copas (resumo); Mensagens (a última e "9+ novas ›"); 
 pedir. Hoje o `Painel.tsx` tem os cartões Jogo de hoje, seleção, convites, estadual, Copas, Liga, Clube, Últimas mensagens e
 os botões de troféus e histórico (os da seleção, convites e estadual precisam de lugar no novo modelo).
 
-**Elenco novo, opção A (guardado para depois, 20/nov/2026, "Guarde o elenco A"):** das prévias de Elenco e Mercado (artifact
+**Elenco novo, opção A (no jogo desde 20/nov/2026, R157; antes guardado):** das prévias de Elenco e Mercado (artifact
 claude.ai/artifact/FNFbwMYMENFvzkFRv72Cqo; o Mercado ainda sem escolha) ele guardou a **A · Por setor, com resumo**. Como é: no alto
 um resumo em 4 colunas (força média, idade média, contratos no fim, lesionados); chips de posição numa linha só com a contagem
 ("G 3", "L 4"...); a lista separada por setor (Goleiros, Laterais...) com a média de cada um no cabeçalho e o setor mais fraco
