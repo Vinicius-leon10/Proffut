@@ -4,7 +4,7 @@
 import { describe, expect, it } from "vitest";
 import { valorMercado } from "../gerador";
 import { novoJogo } from "../jogo";
-import { elencoDe, leiloar, propostasPendentes, responderProposta } from "../mercado";
+import { elencoDe, leiloar, propostasPendentes, responderProposta, tirarDaVenda } from "../mercado";
 
 describe("venda rápida: leilão (R154)", () => {
   it("pôr à venda faz o leilão na hora: o maior lance vira uma proposta que já está valendo, sem esperar nenhum dia", () => {
@@ -56,5 +56,22 @@ describe("venda rápida: leilão (R154)", () => {
     meu.emprestimo = { de: "flamengo", ate: e.temporada };
     expect(leiloar(e, meu.id).ok).toBe(false);
     expect(propostasPendentes(e)).toHaveLength(0);
+  }, 60_000);
+
+  it("tirar da venda cancela o lance do leilão (o jogador sai de Meus à venda); a proposta que chegou sem leilão fica", () => {
+    const e = novoJogo({ nomeTecnico: "T", clubeId: "ponte-preta", semente: 34 });
+    const [a, b] = elencoDe(e, "ponte-preta").filter((x) => x.posicao === "M").sort((x, y) => y.forca - x.forca);
+    leiloar(e, a.id);
+    const lance = propostasPendentes(e).find((m) => m.proposta!.jogadorId === a.id)!;
+    expect(lance.proposta!.leilao).toBe(true);
+    tirarDaVenda(e, a.id);
+    expect(a.aVenda).toBe(false);
+    expect(lance.proposta!.resolvida).toBe("retirada");
+    expect(propostasPendentes(e).some((m) => m.proposta!.jogadorId === a.id)).toBe(false);
+    // Proposta de sempre (sem leilão), por quem nem estava à venda: tirar da venda não mexe nela.
+    e.mensagens.unshift({ id: 9999, data: e.data, tipo: "proposta", lida: false, titulo: "Proposta", texto: "",
+      proposta: { jogadorId: b.id, clubeId: "flamengo", valor: 1_000_000, validaAte: "2026-12-31" } });
+    tirarDaVenda(e, b.id);
+    expect(e.mensagens[0].proposta!.resolvida).toBeUndefined();
   }, 60_000);
 });

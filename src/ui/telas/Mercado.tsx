@@ -245,7 +245,7 @@ export function Mercado() {
                     <Escudo clube={comprador} tamanho={18} />
                     <span>Proposta {comArtigo("do", comprador)}: <b>{formatarDinheiro(m.proposta!.valor)}</b> · vale até {formatarData(m.proposta!.validaAte)}</span>
                   </div>
-                  {m.titulo.startsWith("Leilão") && <span className="mini fraco">{m.texto}</span>}
+                  {m.proposta!.leilao && <span className="mini fraco">{m.texto}</span>}
                   {!j.aVenda && <span className="mini fraco">Ele não estava à venda.</span>}
                   <AcoesDaProposta m={m} />
                 </div>

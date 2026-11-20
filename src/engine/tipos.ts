@@ -316,6 +316,8 @@ export interface Mensagem {
     valor: number;
     validaAte: string;
     resolvida?: "aceita" | "recusada" | "expirada" | "retirada";
+    /** Veio do leilão da venda rápida (R154): sai quando o jogador sai da venda. */
+    leilao?: boolean;
     /** Primeira oferta (guardada quando o usuário pede mais) e quantas vezes ele já pediu. */
     inicial?: number;
     pedidos?: number;

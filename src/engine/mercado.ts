@@ -240,12 +240,20 @@ export function leiloar(estado: EstadoJogo, jogadorId: number): ResultadoNegocio
     tipo: "proposta",
     titulo: `Leilão de ${j.nome}`,
     texto: `Leilão: ${lances.length === 1 ? "um clube deu lance" : `${lances.length} clubes deram lance`}. ${comArtigo("O", clube)} deu o maior, ${formatarDinheiro(valor)} por ${j.nome}.`,
-    proposta: { jogadorId: j.id, clubeId: clube.id, valor, validaAte: somarDias(estado.data, 5) },
+    proposta: { jogadorId: j.id, clubeId: clube.id, valor, validaAte: somarDias(estado.data, 5), leilao: true },
   });
   return {
     ok: true,
     texto: `${j.nome} foi colocado à venda. Leilão: ${comArtigo("o", clube)} deu o maior lance, ${formatarDinheiro(valor)}${outros ? ` (mais ${outros} ${outros === 1 ? "clube" : "clubes"} disputaram)` : ""}.`,
   };
+}
+
+/** Tira o jogador da venda; o lance do leilão por ele (R154) sai junto. As propostas que chegaram sem leilão ficam. */
+export function tirarDaVenda(estado: EstadoJogo, jogadorId: number) {
+  const j = estado.jogadores[jogadorId];
+  if (!j) return;
+  j.aVenda = false;
+  for (const m of estado.mensagens) if (m.proposta?.jogadorId === j.id && m.proposta.leilao && !m.proposta.resolvida) m.proposta.resolvida = "retirada";
 }
 
 /** As propostas que estão valendo por jogadores que ainda são do usuário (o aviso no Mercado, R63). */
