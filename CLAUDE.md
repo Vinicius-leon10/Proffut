@@ -785,6 +785,14 @@ um resumo em 4 colunas (força média, idade média, contratos no fim, lesionado
 marcado ("setor mais fraco", vermelho); força num anel colorido como no campinho (verde, amarelo cansado, vermelho); selos "à
 venda", "contrato no fim" e "lesão" na linha; barrinha de energia pequena. Não fazer sem ele pedir.
 
+**unslop (skill instalada, 21/nov/2026; só ideia, nada aplicado ao jogo):** pedido "Veja isso" (reel do @igao.ia) e "instalar e pedir exemplos". A skill
+`heydamir/unslop` (CC BY 4.0, autor Damir Sokolovsky; manter o crédito) está em `.claude/skills/unslop` (SKILL.md, references/, scripts/ de captura; li antes de instalar: só
+roda Chrome local). Ela audita os "sinais de design de IA", propõe uma direção e refaz as telas em 9 passes (espaço, cor, ícones, texto, tipo, layout, detalhes,
+visual, movimento); com pouca "cara de IA" entra em modo de polimento (mantém paleta, fonte e ordem). Prévia do Painel e da Tática (hoje x depois):
+artifact claude.ai/artifact/X6BakUHMc941PPk81tz9Wd. Achados no Painel/Tática: emojis como ícones, títulos em caixa alta com letras espaçadas, "Bem-vindo à
+Ponte Preta!", negrito 700–800, cartões todos iguais, botão amarelo gigante, barras verdes grossas. **Pedido seguinte (numa conversa nova):** revisão completa do
+app com a unslop, só com exemplos, **sem aplicar nada**; ele escolhe o que aplicar depois.
+
 **Ideia para o futuro: liga online privada (15/nov/2026, só anotado):** pedido "pensei em a gente futuramente criar um modo
 que seja online privado... eu crio uma liga com 20 jogadores, pegando times da série C, e eles vão jogando online junto com o
 campeonato brasileiro... todas quartas e domingo... se dois jogadores fossem se enfrentar, como é que ia funcionar essa
